@@ -1,0 +1,22 @@
+@font-face {
+    font-family: 'IranSansFaNum';
+    font-style: normal;
+    font-weight: 400;
+    font-display: auto;
+    src: url('../../../fonts/IRANSansWebFaNum.eot');
+    src: url('../../../fonts/IRANSansWebFaNum.eot?#iefix') format('embedded-opentype'),
+    url('../../../fonts/IRANSansWebFaNum-1-2.woff2') format('woff2'),
+    url('../../../fonts/IRANSansWebFaNum.woff') format('woff'),
+    url('../../../fonts/IRANSansWebFaNum.ttf') format('truetype');
+}
+
+*
+{
+    font-family: 'IranSansFaNum';
+
+}
+
+.sidebar .logo
+{
+    background-color: #ddd;
+}
