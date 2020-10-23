@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>
-        Paper Dashboard 2 by Creative Tim
+        CRM Faracoach
     </title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
@@ -17,8 +17,9 @@
     <!-- CSS Files -->
     <link href={{asset("../dashboard/assets/css/bootstrap.min.css")}} rel="stylesheet" />
     <link href={{asset("../dashboard/assets/css/paper-dashboard.css?v=2.0.1")}} rel="stylesheet" />
-    <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link href={{asset("../dashboard/assets/demo/demo.css")}} rel="stylesheet" />
+
+    <link href="{{asset('css/kamadatepicker.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('css/timepicker.min.css')}}" rel="stylesheet" />
     <link href={{asset('../css/bootstrap-rtl.min.css')}} rel="stylesheet" />
     <link href="{{asset('../dashboard/assets/css/style.css')}}" rel="stylesheet" />
 </head>
@@ -27,14 +28,6 @@
 <div class="wrapper " >
     <div class="sidebar" data-color="white" data-active-color="danger" dir="rtl">
         <div class="logo">
-           <!--
-            <a href="/" class="simple-text logo-mini">
-                <div class="logo-image-small">
-                    <img src={{asset('../dashboard/assets/img/white-logo.png')}} />
-                </div>
-
-            </a>
-            -->
             <a href="/" class="simple-text logo-normal">
                 <div class="logo-image-big">
                   <img src={{asset('../dashboard/assets/img/white-logo.png')}} />
@@ -44,19 +37,19 @@
         <div class="sidebar-wrapper">
             <ul class="nav">
                 <li >
-                    <a href="/panel">
+                    <a href="/admin/panel">
                         <i class="nc-icon nc-bank"></i>
                         <p>صفحه اصلی</p>
                     </a>
                 </li>
                 <li class="active ">
-                    <a href="/panel/profile">
+                    <a href="/admin/users">
                         <i class="nc-icon nc-badge"></i>
-                        <p>اطلاعات شخصی</p>
+                        <p>کاربرها</p>
                     </a>
                 </li>
                 <li>
-                    <a href="/panel/messages/">
+                    <a href="/admin/panel/messages/">
                         <i class="nc-icon nc-send"></i>
                         <p>پیام ها</p>
                     </a>
@@ -195,11 +188,13 @@
 </div>
 <!--   Core JS Files   -->
 <script src={{asset("../dashboard/assets/js/core/jquery.min.js")}}></script>
+
 <script src={{asset("../dashboard/assets/js/core/popper.min.js")}}></script>
 <script src={{asset("../dashboard/assets/js/core/bootstrap.min.js")}}></script>
 <script src={{asset("../dashboard/assets/js/plugins/perfect-scrollbar.jquery.min.js")}}></script>
 
-
+<!--  Google Maps Plugin    -->
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> -->
 <!-- Chart JS -->
 <script src={{asset("../dashboard/assets/js/plugins/chartjs.min.js")}}></script>
 <!--  Notifications Plugin    -->
@@ -212,6 +207,30 @@
         demo.initChartsPages();
     });
 </script>
+
+<script src="{{asset('js/farsiType.js')}}"></script>
+<!--  DATE SHAMSI PICKER  --->
+<script src="{{asset('js/kamadatepicker.min.js')}}"></script>
+<script src="{{asset('js/kamadatepicker.holidays.js')}}"></script>
+<script>
+    kamaDatepicker('dateFollow',
+            {
+                markHolidays:true,
+                markToday:true,
+                twodigit:true,
+                closeAfterSelect:true,
+                nextButtonIcon: "fa fa-arrow-circle-right",
+                previousButtonIcon: "fa fa-arrow-circle-left"
+            });
+</script>
+<!-- ****************  -->
+
+<script src="{{asset('js/jquery-3.5.1.slim.min.js')}}"></script>
+<script src="{{asset('js/timepicker.js')}}"></script>
+<script>
+    $('#time_fa').timepicker();
+</script>
+
 </body>
 
 </html>

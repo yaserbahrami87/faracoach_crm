@@ -231,7 +231,7 @@
                         <div class="col-md-5 pl-1">
                             <div class="form-group">
                                 <label>کد ملی</label>
-                                <input type="text" class="form-control" readonly="readonly" placeholder="کد ملی را وارد کنید" value="{{$user->codemelli}}" name="codemelli" />
+                                <input type="text" class="form-control" readonly="readonly" placeholder="کد ملی را وارد کنید" value="{{$user->codemelli}}" name="codemelli" {{strlen($user->codemelli)===0?"": "disabled" }} />
                             </div>
                         </div>
                         <div class="col-md-3 px-1">
@@ -243,7 +243,7 @@
                         <div class="col-md-4 pr-1">
                             <div class="form-group">
                                 <label for="exampleInputEmail1">پست الکترونیکی</label>
-                                <input type="email" class="form-control" placeholder="پست الکترونیکی را وارد کنید" value="{{$user->email}}" name="email"  />
+                                <input type="email" class="form-control" placeholder="پست الکترونیکی را وارد کنید" value="{{$user->email}}" name="email"  {{strlen($user->email)===0?"": "disabled" }} />
                             </div>
                         </div>
                     </div>

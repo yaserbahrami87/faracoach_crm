@@ -20,3 +20,13 @@
 {
     background-color: #ddd;
 }
+
+#frmSearchUserAdmin button
+{
+    margin:0px;
+}
+
+#frmSearchUserAdmin tr a
+{
+    color: #000;
+}

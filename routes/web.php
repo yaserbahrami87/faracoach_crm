@@ -23,10 +23,26 @@ Route::get('/signup crm',function () {
     return view('signup');
 });
 
-Route::get('/panel/','UserController@panel')->name('panel')->middleware('auth');
-Route::get('/panel/profile','UserController@profile')->middleware('auth');
+Route::middleware('auth')->group(function () {
 
-Route::patch('/panel/profile/update/{user}','UserController@update');
+    // ROUTE USER
+    Route::get('/panel/','UserController@panel')->name('panel');
+    Route::get('/panel/profile','UserController@profile');
+    Route::patch('/panel/profile/update/{user}','UserController@update');
+});
+
+
+
+Route::middleware('can:isAdmin')->group(function () {
+    Route::get('/admin/panel/','UserController@create')->name('panelAdmin');
+    Route::get('/admin/users','UserController@index');
+    Route::get('/admin/user/{user}','UserController@show');
+    Route::patch('/admin/profile/update/{user}','UserController@update');
+    // Route Admin Followup
+    Route::post('/admin/followup/create/','FollowupController@store');
+});
+
+
 
 Auth::routes();
 
