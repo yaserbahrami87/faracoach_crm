@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Hekmatinasser\Verta\Verta;
+
 
 
 class UserController extends Controller
@@ -18,14 +20,21 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $dateNow = verta();
+        $this->dateNow = $dateNow->format('Y/m/d');
+    }
+
     public function index()
     {
         $users=User::whereNotIn('users.type',[2])
-            ->groupby('codemelli')
             ->orderby('id','desc')
             ->paginate(20);
 
-        return view('panelAdmin.users',compact('users'));
+        return view('panelAdmin.users')
+                    ->with('users',$users);
     }
 
     /**
@@ -35,15 +44,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $notFollowup=User::where('type','=','1')
-            ->count();
-        $follow=User::where('type','=','11')
-            ->count();
-        $cancel=User::where('type','=','12')
-            ->count();
-        $student=User::where('type','=','20')
-            ->count();
-        return view('panelAdmin.home',compact('notFollowup','follow','cancel','student'));
+
     }
 
     /**
@@ -173,7 +174,7 @@ class UserController extends Controller
         }
         else if(Gate::allows('isUser'))
         {
-            return view('panelUser/home');
+            return view('panelUser.home');
         }
         else
         {
@@ -209,21 +210,54 @@ class UserController extends Controller
                         //->join('followups','users.id','=','followups.insert_user_id')
                         ->join('problemfollowups','problemfollowups.id','=','followups.problemfollowup_id')
                         ->where('followups.user_id','=',$user)
+                        ->orderby('followups.id','asc')
                         ->get();
 
-        $problemFollowup=problemfollowup::orderby('problem')
+        $listIntroducedUser=User::where('introduced','=',$user)
                         ->get();
-        
+        foreach ($listIntroducedUser as $item)
+        {
+            if(strlen($item->personal_image)==0)
+            {
+                $item->personal_image="default-avatar.png";
+            }
+        }
+
+        foreach ($followUps as $item)
+        {
+            $admin_Followup=User::where('id','=',$item->insert_user_id)
+                                ->first();
+            $item->insert_user_id=$admin_Followup->fname." ".$admin_Followup->lname;
+        }
+
+
+        $problemFollowup=problemfollowup::orderby('problem')
+                        ->where('status','=','1')
+                        ->get();
+
         //مقدار یوزر با توجه به دستور زیر مقدار ورودی تابع با مقدار خروجی تقییر میکند
 
         $user=User::find($user);
+        if(strlen($user->personal_image)==0)
+        {
+            $user->personal_image="default-avatar.png";
+        }
+
+        $introduced=User::where('id','=',$user->introduced)
+                            ->first();
+        if(strlen($introduced)>0)
+        {
+            $user->introduced=$introduced->fname." ".$introduced->lname ." با کد ".$introduced->id;
+        }
+
+
 //        $countFollowups=user::join('followups','users.id','=','followups.user_id')
 //              ->count();
 
 //        $followUps=user::join('followups','users.id','=','followups.user_id')
 //            ->join('problemfollowups','problemfollowups.id','=','followups.problemfollowup_id')
 //            ->get();
-        return view('panelAdmin.profile',compact('user','countFollowups','followUps','problemFollowup','userAdmin'));
+        return view('panelAdmin.profile',compact('user','countFollowups','followUps','problemFollowup','userAdmin','listIntroducedUser'));
     }
 
     /**
@@ -246,6 +280,7 @@ class UserController extends Controller
      */
     public function update(Request $request,User $user)
     {
+
         $check=User::where('codemelli','=',$request['codemelli'])
             ->orwhere('email','=',$request['email'])
             ->count();
@@ -278,7 +313,7 @@ class UserController extends Controller
 
                 if ($request->has('personal_image') && $request->file('personal_image')->isValid()) {
                     $file = $request->file('personal_image');
-                    $personal_image = "personal-" . $request->codemelli . "." . $request->file('personal_image')->extension();
+                    $personal_image = "personal-" . $user->id . "." . $request->file('personal_image')->extension();
                     $path = public_path('/documents/users/');
                     $files = $request->file('personal_image')->move($path, $personal_image);
                     $request->personal_image = $personal_image;
@@ -286,7 +321,7 @@ class UserController extends Controller
 
                 if ($request->has('shenasnameh_image') && $request->file('shenasnameh_image')->isValid()) {
                     $file = $request->file('shenasnameh_image');
-                    $shenasnameh_image = "shenasnameh-" . $request->codemelli . "." . $request->file('shenasnameh_image')->extension();
+                    $shenasnameh_image = "shenasnameh-" . $user->id . "." . $request->file('shenasnameh_image')->extension();
                     $path = public_path('/documents/users/');
                     $files = $request->file('shenasnameh_image')->move($path, $shenasnameh_image);
                     $request->shenasnameh_image = $shenasnameh_image;
@@ -295,7 +330,7 @@ class UserController extends Controller
 
                 if ($request->has('cartmelli_image') && $request->file('cartmelli_image')->isValid()) {
                     $file = $request->file('cartmelli_image');
-                    $cartmelli_image = "cartmelli-" . $request->codemelli . "." . $request->file('cartmelli_image')->extension();
+                    $cartmelli_image = "cartmelli-" . $user->id . "." . $request->file('cartmelli_image')->extension();
                     $path = public_path('/documents/users/');
                     $files = $request->file('cartmelli_image')->move($path, $cartmelli_image);
                     $request->cartmelli_image = $cartmelli_image;
@@ -303,7 +338,7 @@ class UserController extends Controller
 
                 if ($request->has('education_image') && $request->file('education_image')->isValid()) {
                     $file = $request->file('education_image');
-                    $education_image = "education-" . $request->codemelli . "." . $request->file('education_image')->extension();
+                    $education_image = "education-" . $user->id . "." . $request->file('education_image')->extension();
                     $path = public_path('/documents/users/');
                     $files = $request->file('education_image')->move($path, $education_image);
                     $request->education_image = $education_image;
@@ -345,7 +380,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    
+
     public function destroy($id)
     {
         //

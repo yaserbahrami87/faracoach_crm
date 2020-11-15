@@ -34,53 +34,7 @@
                 </div>
             </a>
         </div>
-        <div class="sidebar-wrapper">
-            <ul class="nav">
-                <li >
-                    <a href="/admin/panel">
-                        <i class="nc-icon nc-bank"></i>
-                        <p>صفحه اصلی</p>
-                    </a>
-                </li>
-                <li class="active ">
-                    <a href="/admin/users">
-                        <i class="nc-icon nc-badge"></i>
-                        <p>کاربرها</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="/admin/panel/messages/">
-                        <i class="nc-icon nc-send"></i>
-                        <p>پیام ها</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="nc-icon nc-user-run"></i>
-                        <p>دوره ها</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="nc-icon nc-money-coins"></i>
-                        <p>مالی</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="nc-icon nc-tile-56"></i>
-                        <p>Table List</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="nc-icon nc-caps-small"></i>
-                        <p>Typography</p>
-                    </a>
-                </li>
-
-            </ul>
-        </div>
+        @include('panelAdmin.master.leftNavbar')
     </div>
     <div class="main-panel" >
         <!-- Navbar -->
@@ -123,25 +77,14 @@
                         </li>
                         <li class="nav-item btn-rotate dropdown">
                             <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="nc-icon nc-bell-55"></i>
+                                <i class="nc-icon nc-settings-gear-65"></i>
                                 <p>
                                     <span class="d-lg-none d-md-block">Some Actions</span>
                                 </p>
                             </a>
-                            <!--
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="#">Action</a>
-                                <a class="dropdown-item" href="#">Another action</a>
-                                <a class="dropdown-item" href="#">Something else here</a>
-                            </div>-->
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link btn-rotate" href="javascript:;">
-                                <i class="nc-icon nc-settings-gear-65"></i>
-                                <p>
-                                    <span class="d-lg-none d-md-block">Account</span>
-                                </p>
-                            </a>
+                                <a class="dropdown-item" href="{{ url('/logout') }}">خروج</a>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -222,6 +165,16 @@
                 nextButtonIcon: "fa fa-arrow-circle-right",
                 previousButtonIcon: "fa fa-arrow-circle-left"
             });
+
+    kamaDatepicker('nextfollowup_date_fa',
+        {
+            markHolidays:true,
+            markToday:true,
+            twodigit:true,
+            closeAfterSelect:true,
+            nextButtonIcon: "fa fa-arrow-circle-right",
+            previousButtonIcon: "fa fa-arrow-circle-left"
+        });
 </script>
 <!-- ****************  -->
 

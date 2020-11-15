@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('fname',20)->nullable();
             $table->string('lname',30)->nullable();
             $table->string('father',30)->nullable();
-            $table->string('codemelli',15)->unique();
+            $table->string('codemelli',15)->nullable()->unique();
             $table->boolean('sex')->nullable();
             $table->string('tel',20)->nullable();
             $table->string('shenasname',20)->nullable();
@@ -37,6 +37,10 @@ class CreateUsersTable extends Migration
             $table->string('education_image')->nullable();
             $table->boolean('married')->nullable();
             $table->tinyInteger('type')->default('0');
+            $table->string('resource',30)->nullable();
+            $table->string('detailsresource',50)->nullable();
+            $table->string('gettingknow',40)->nullable();
+            $table->string('introduced',40)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

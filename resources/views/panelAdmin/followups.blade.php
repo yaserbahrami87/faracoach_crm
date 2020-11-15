@@ -8,8 +8,8 @@
             {{method_field('PATCH')}}
             @foreach($followUps as $item)
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-md-4 pl-1">
+                    <div class="col-md-12 pl-1">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label>نوع پیگیری</label>
                                 <input type="text" class="form-control"  value="{{$item->problem}}" name="state" disabled="disabled"  />
@@ -24,22 +24,28 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4 pl-1">
+                    <div class="col-md-6 px-1">
                         <div class="form-group">
-                            <label>تاریخ ثبت</label>
+                            <label>تاریخ پیگیری</label>
                             <input type="text" class="form-control"  value="{{$item->datetime_fa}}" name="state" disabled="disabled" />
                         </div>
                     </div>
-                    <div class="col-md-4 px-1">
+                    <div class="col-md-6 px-1">
                         <div class="form-group">
                             <label>تاریخ ویرایش</label>
                             <input type="text" class="form-control" value="{{$item->updated_at}}" name="city" disabled="disabled"  />
                         </div>
                     </div>
-                    <div class="col-md-4 pr-1">
+                    <div class="col-md-6 px-1">
                         <div class="form-group">
                             <label>ثبت شده توسط</label>
-                            <input type="text" class="form-control" value="{{$item->updated_at}}" name="city" disabled="disabled" />
+                            <input type="text" class="form-control" value="{{$item->insert_user_id}}" name="city" disabled="disabled" />
+                        </div>
+                    </div>
+                    <div class="col-md-6 px-1">
+                        <div class="form-group">
+                            <label>تاریخ پیگیری بعد</label>
+                            <input type="text" class="form-control" value="{{$item->nextfollowup_date_fa}}" name="nextfollowup" disabled="disabled" />
                         </div>
                     </div>
                 </div>

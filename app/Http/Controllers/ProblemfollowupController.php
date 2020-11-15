@@ -35,7 +35,25 @@ class ProblemfollowupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate(request(),
+            [
+                'problem'  =>'required|string|min:4',
+                'status'   =>'required|numeric'
+            ]);
+        $status = problemfollowup::create($request->all());
+        if($status)
+        {
+            $msg="اطلاعات با موفقیت ذخیره شد";
+            $errorStatus='success';
+        }
+        else
+        {
+            $msg="خطا در ذخیره";
+            $errorStatus="danger";
+        }
+        return  back()
+            ->with('msg',$msg)
+            ->with('errorStatus',$errorStatus);
     }
 
     /**
@@ -57,7 +75,8 @@ class ProblemfollowupController extends Controller
      */
     public function edit(problemfollowup $problemfollowup)
     {
-        //
+        return view('panelAdmin/editProblemFollowup')
+                ->with('problemfollowup',$problemfollowup);
     }
 
     /**
@@ -69,7 +88,26 @@ class ProblemfollowupController extends Controller
      */
     public function update(Request $request, problemfollowup $problemfollowup)
     {
-        //
+        $this->validate(request(),
+            [
+                'problem'  =>'required|string|min:4',
+                'status'   =>'required|numeric'
+            ]);
+
+        $status=$problemfollowup->update($request->all());
+        if($status)
+        {
+            $msg="اطلاعات با موفقیت بروزرسانی  شد";
+            $errorStatus='success';
+        }
+        else
+        {
+            $msg="خطا در بروزرسانی";
+            $errorStatus="danger";
+        }
+        return  back()
+            ->with('msg',$msg)
+            ->with('errorStatus',$errorStatus);
     }
 
     /**
@@ -80,6 +118,19 @@ class ProblemfollowupController extends Controller
      */
     public function destroy(problemfollowup $problemfollowup)
     {
-        //
+        $status=$problemfollowup->delete();
+        if($status)
+        {
+            $msg="اطلاعات با موفقیت حذف شد";
+            $errorStatus="success";
+        }
+        else
+        {
+            $msg="خطا در ذخیره";
+            $errorStatus="danger";
+        }
+
+        return back()->with('msg',$msg)
+                     ->with('errorStatus',$errorStatus);
     }
 }

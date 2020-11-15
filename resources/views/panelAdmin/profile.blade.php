@@ -26,6 +26,7 @@
                         <p class="description text-success">دانشجو</p>
                     @endif
                     <p class="description text-dark"> پیگیری های انجام شده: {{$countFollowups}} عدد</p>
+                    <p class="d-inline"> تعداد افراد معرفی شده:</p><a href=""> 0 نفر</a>
                 </div>
                 <p class="description text-center">
                     "I like the way you work it <br>
@@ -40,6 +41,7 @@
         </div>
         @include('panelAdmin.boxMadarak')
         @include('panelAdmin.boxAmoozeshi')
+        @include('panelAdmin.listIntroducedUser')
     </div>
     <div class="col-md-8">
         <div class="card card-user">
@@ -72,13 +74,13 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6 pl-1">
+                        <div class="col-md-6 px-1">
                             <div class="form-group">
                                 <label>نام</label>
                                 <input type="text" class="form-control" placeholder="نام را وارد کنید" value="{{$user->fname}}" name="fname"   lang="fa" />
                             </div>
                         </div>
-                        <div class="col-md-6 pr-1">
+                        <div class="col-md-6 px-1">
                             <div class="form-group">
                                 <label>نام خانوادگی</label>
                                 <input type="text" class="form-control" placeholder="نام خانوادگی را وارد کنید" value="{{$user->lname}}" name="lname"  lang="fa" />
@@ -86,7 +88,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12 px-1">
                             <div class="form-group">
                                 <label>آدرس</label>
                                 <input type="text" class="form-control" placeholder="آدرس را وارد کنید" value="{{$user->address}}" name="address"  lang="fa" />
@@ -167,7 +169,36 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6 pl-1">
+                        <div class="col-md-6 px-1">
+                            <div class="form-group">
+                                <label>نحوه آشنایی</label>
+                                <input type="text" disabled="disabled" class="form-control" value="{{$user->gettingknow }}" name="gettingknow"   lang="fa"/>
+                            </div>
+                        </div>
+                        <div class="col-md-6 px-1">
+                            <div class="form-group">
+                                <label>معرف</label>
+                                <input type="text" disabled="disabled" class="form-control" value="{{$user->introduced }}" name="introduced"   lang="fa"/>
+                            </div>
+                        </div>
+                        <div class="col-md-6 px-1">
+                            <div class="form-group">
+                                <label>نحوه ورود به فراکوچ</label>
+                                <input type="text" class="form-control" disabled="disabled"  value="{{$user->resource}}" name="resource"  lang="fa" />
+                            </div>
+                        </div>
+                        <div class="col-md-6 px-1">
+                            <div class="form-group">
+                                <label>عنوان ورود</label>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" disabled="disabled" value="{{$user->detailsresource}}" name="detailsresource"   lang="fa"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 px-1">
                             <div class="form-group">
                                 <label>عکس پروفایل</label>
                                 <div class="custom-file">
@@ -176,7 +207,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 pr-1">
+                        <div class="col-md-6 px-1">
                             <div class="form-group">
                                 <label>عکس شناسنامه</label>
                                 <div class="custom-file">
@@ -185,7 +216,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 pl-1">
+                        <div class="col-md-6 px-1">
                             <div class="form-group">
                                 <label>عکس کارت ملی</label>
                                 <div class="custom-file">
@@ -194,7 +225,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 pr-1">
+                        <div class="col-md-6 px-1">
                             <div class="form-group">
                                 <label>عکس مدرک تحصیلی</label>
                                 <div class="custom-file">

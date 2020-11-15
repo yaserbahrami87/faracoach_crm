@@ -47,26 +47,30 @@ class FollowupController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate($request,[
-            'insert_user_id'    =>'required|numeric',
-            'user_id'           =>'required|numeric|',
-            'followup'          =>'required|numeric',
-            'status_followups'  =>'required|numeric',
-            'comment'           =>'required|string|min:3',
-            'date_fa'           =>'required|string',
-            'time_fa'           =>'required|string'
+            'insert_user_id'        =>'required|numeric',
+            'user_id'               =>'required|numeric|',
+            'followup'              =>'required|numeric',
+            'status_followups'      =>'required|numeric',
+            'comment'               =>'required|string|min:3',
+            'date_fa'               =>'required|string',
+            'time_fa'               =>'required|string',
+            'nextfollowup_date_fa'  =>'string|min:9|nullable'
 
         ]);
 
         $check=followup::create([
-            'user_id'           =>$request['user_id'],
-            'insert_user_id'    =>$request['insert_user_id'],
-            'comment'           =>$request['comment'],
-            'problemfollowup_id'=>$request['followup'],
-            'status_followups'  =>$request['status_followups'],
-            'date_fa'           =>$request['date_fa'],
-            'time_fa'           =>$request['time_fa'],
-            'datetime_fa'       =>$request['date_fa']." ".$request['time_fa']
+            'user_id'               =>$request['user_id'],
+            'insert_user_id'        =>$request['insert_user_id'],
+            'comment'               =>$request['comment'],
+            'problemfollowup_id'    =>$request['followup'],
+            'status_followups'      =>$request['status_followups'],
+            'date_fa'               =>$request['date_fa'],
+            'insert_user_id'        =>auth()->user()->id,
+            'nextfollowup_date_fa'  =>$request['nextfollowup_date_fa'],
+            'time_fa'               =>$request['time_fa'],
+            'datetime_fa'           =>$request['date_fa']." ".$request['time_fa']
         ]);
 
         $data=User::where('users.id','=',$request['user_id'])

@@ -34,10 +34,27 @@ Route::middleware('auth')->group(function () {
 
 
 Route::middleware('can:isAdmin')->group(function () {
-    Route::get('/admin/panel/','UserController@create')->name('panelAdmin');
+    Route::get('/admin/panel/','AdminController@index')->name('panelAdmin');
     Route::get('/admin/users','UserController@index');
     Route::get('/admin/user/{user}','UserController@show');
     Route::patch('/admin/profile/update/{user}','UserController@update');
+
+    //Route::post('/admin/users/search/','AdminController@searchUsers');
+    Route::get('/admin/users/search/','AdminController@searchUsers');
+
+    Route::get('/admin/users/category/','AdminController@showCategoryUsers');
+    Route::get('/admin/settings/','AdminController@showSettings');
+    Route::get('/admin/settings/problemfollowup/new',function()
+    {
+        return view('panelAdmin.insertProblemFollowup');
+    });
+
+    Route::post('/admin/settings/problemfollowup/store','problemFollowupController@store');
+    Route::get('/admin/settings/problemfollowup/delete/{problemfollowup}','problemFollowupController@destroy');
+    Route::get('/admin/settings/problemfollowup/edit/{problemfollowup}','problemFollowupController@edit');
+    Route::patch('/admin/settings/problemfollowup/update/{problemfollowup}','problemFollowupController@update');
+
+
     // Route Admin Followup
     Route::post('/admin/followup/create/','FollowupController@store');
 });
@@ -47,3 +64,5 @@ Route::middleware('can:isAdmin')->group(function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
+

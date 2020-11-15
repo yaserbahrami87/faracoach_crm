@@ -12,7 +12,7 @@
                 </div>
             </div>
         @endif
-        <form method="post" action="/admin/followup/create/" enctype="multipart/form-data">
+        <form method="POST" action="/admin/followup/create/" >
             {{csrf_field()}}
                 <div class="row">
                     <input type="hidden" name="insert_user_id" value="{{$userAdmin->id}}" />
@@ -33,9 +33,9 @@
                             <label>وضعیت پس از پیگیری</label>
                             <select class="form-control" id="exampleFormControlSelect1" name="status_followups" >
                                     <option disabled="disabled" selected >وضعیت را انتخاب کنید</option>
-                                    <option class="bg-primary" value="11" >در حال پیگیری</option>
-                                    <option class="bg-danger" value="12" >انصراف</option>
-                                    <option class="bg-success" value="20" >دانشجو</option>
+                                    <option class="primary_bg_admin" value="11" >در حال پیگیری</option>
+                                    <option class="danger_bg_admin" value="12" >انصراف</option>
+                                    <option class="success_bg_admin" value="20" >دانشجو</option>
                             </select>
                         </div>
                     </div>
@@ -60,7 +60,12 @@
                         <input type="text" class="form-control" value="" name="time_fa" id="time_fa" />
                     </div>
                 </div>
-
+                <div class="col-md-4 pl-1">
+                    <div class="form-group">
+                        <label>تاریخ پیگیری بعد</label>
+                        <input type="text" class="form-control"  value="" name="nextfollowup_date_fa" id="nextfollowup_date_fa" />
+                    </div>
+                </div>
             </div>
             <div class="row">
                 <div class="update m-auto m-auto">

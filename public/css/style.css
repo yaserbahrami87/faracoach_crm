@@ -4,10 +4,10 @@
 	font-weight: 400;
 	font-display: auto;
 	src: url('../fonts/IRANSansWebFaNum.eot');
-	src: url('../fonts//IRANSansWebFaNum.eot?#iefix') format('embedded-opentype'),
-		url('../fonts//IRANSansWebFaNum-1-2.woff2') format('woff2'),
-		url('../fonts//IRANSansWebFaNum.woff') format('woff'),
-		url('../fonts//IRANSansWebFaNum.ttf') format('truetype');
+	src: url('../fonts/IRANSansWebFaNum.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/IRANSansWebFaNum-1-2.woff2') format('woff2'),
+		url('../fonts/IRANSansWebFaNum.woff') format('woff'),
+		url('../fonts/IRANSansWebFaNum.ttf') format('truetype');
 }
 
 *
@@ -110,7 +110,7 @@ body
 {
     margin-top: 10px;
     font-weight: bolder;
-    
+
 }
 
 
@@ -156,7 +156,7 @@ body
 {
     font-size: 20px;
     font-weight: bold;
-    
+
 }
 
 #services div[role="tablist"]
@@ -229,7 +229,7 @@ body
     color: #ffff;
 }
 
-#listCoachsHome  .items-coachs 
+#listCoachsHome  .items-coachs
 {
     background-image: url('../images/BBack.jpg');
     background-repeat: no-repeat;
@@ -320,8 +320,8 @@ body
     display: inline-block !important;
 }
 
-#commentsHome .itemComments:nth-child(2) 
-{   
+#commentsHome .itemComments:nth-child(2)
+{
     text-align: center;
 }
 
@@ -337,7 +337,7 @@ body
     background-color: #00337D;
     width: 60%;
     padding:20px;
-    border-radius: 20px;    
+    border-radius: 20px;
     color: #fff;
     margin: auto;
 }
@@ -351,7 +351,7 @@ body
 
 #commentsHome .slick-dots button::before
 {
-  
+
     color: #3a3a3a;
     border-radius: 50%;
     font-size: 12px;
@@ -664,4 +664,11 @@ footer li a,footer li svg
     border-radius: 50px;
     padding:10px 0px;
     font-weight: 700;
+}
+
+/*     SIGNUP CRM       */
+
+#form_signup_crm
+{
+    padding-top:80px;
 }

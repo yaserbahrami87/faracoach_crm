@@ -1,44 +1,43 @@
 @extends('master.index')
 @section('row1')
-    <div class="container">
-
-            <div class="stepwizard">
-                <div class="stepwizard-row setup-panel">
-                    <div class="stepwizard-step col-xs-3">
-                        <a href="#step-1" type="button" class="btn btn-success btn-circle">1</a>
-                        <p class="mr-5"><small>توضیحات</small></p>
-                    </div>
-                    <div class="stepwizard-step col-xs-3">
-                        <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
-                        <p><small>اطلاعات شخصی</small></p>
-                    </div>
-                    <div class="stepwizard-step col-xs-3">
-                        <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
-                        <p><small>تحصیلات</small></p>
-                    </div>
-                    <div class="stepwizard-step col-xs-3">
-                        <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
-                        <p><small>سکونت</small></p>
-                    </div>
-                    <div class="stepwizard-step col-xs-3">
-                        <a href="#step-5" type="button" class="btn btn-default btn-circle" disabled="disabled">5</a>
-                        <p><small>مدارک</small></p>
-                    </div>
-                    <div class="stepwizard-step col-xs-3">
-                        <a href="#step-6" type="button" class="btn btn-default btn-circle" disabled="disabled">6</a>
-                        <p><small>اطلاعات کاربری</small></p>
-                    </div>
-                    <div class="stepwizard-step col-xs-3">
-                        <a href="#step-7" type="button" class="btn btn-default btn-circle" disabled="disabled">7</a>
-                        <p><small>قوانین</small></p>
-                    </div>
+    <div class="container" id="form_signup_crm">
+        <div class="stepwizard">
+            <div class="stepwizard-row setup-panel">
+                <div class="stepwizard-step col-xs-3">
+                    <a href="#step-1" type="button" class="btn btn-success btn-circle">1</a>
+                    <p class="mr-5"><small>توضیحات</small></p>
+                </div>
+                <div class="stepwizard-step col-xs-3">
+                    <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+                    <p><small>اطلاعات شخصی</small></p>
+                </div>
+                <div class="stepwizard-step col-xs-3">
+                    <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+                    <p><small>تحصیلات</small></p>
+                </div>
+                <div class="stepwizard-step col-xs-3">
+                    <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
+                    <p><small>سکونت</small></p>
+                </div>
+                <div class="stepwizard-step col-xs-3">
+                    <a href="#step-5" type="button" class="btn btn-default btn-circle" disabled="disabled">5</a>
+                    <p><small>مدارک</small></p>
+                </div>
+                <div class="stepwizard-step col-xs-3">
+                    <a href="#step-6" type="button" class="btn btn-default btn-circle" disabled="disabled">6</a>
+                    <p><small>اطلاعات کاربری</small></p>
+                </div>
+                <div class="stepwizard-step col-xs-3">
+                    <a href="#step-7" type="button" class="btn btn-default btn-circle" disabled="disabled">7</a>
+                    <p><small>قوانین</small></p>
                 </div>
             </div>
+        </div>
         <div class="col-sm-12 col-md-6 col-lg-6 col-lg-6">
             @if(session('msg') && (session('errorStatus')))
-                <div class="alert alert-{{session('errorStatus')}}">
+               <div class="alert alert-{{session('errorStatus')}}">
                     <p>{{session('msg')}}</p>
-                </div>
+               </div>
             @endif
             @if($errors->any())
                 @foreach($errors->all() as $item)
@@ -256,8 +255,6 @@
                         </div>
                     </div>
                 </div>
-
-
             </form>
         </div>
     </div>

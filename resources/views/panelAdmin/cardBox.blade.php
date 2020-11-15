@@ -18,7 +18,9 @@
         <div class="card-footer ">
             <hr>
             <div class="stats">
-                <i class="fa fa-refresh"></i>درحال بروزرسانی
+                <a href="/admin/users/category/?categoryUsers=notfollowup">
+                    <i class="fa fa-eye"></i>مشاهده لیست
+                </a>
             </div>
         </div>
     </div>
@@ -43,8 +45,10 @@
         <div class="card-footer ">
             <hr>
             <div class="stats">
-                <i class="fa fa-clock-o"></i>
-               در حال تست
+                <a href="/admin/users/category/?categoryUsers=continuefollowup">
+                    <i class="fa fa-eye"></i>
+                   مشاهده لیست
+                </a>
             </div>
         </div>
     </div>
@@ -69,8 +73,9 @@
         <div class="card-footer ">
             <hr>
             <div class="stats">
-                <i class="fa fa-refresh"></i>
-                        در حال بروزرسانی
+                <a href="/admin/users/category/?categoryUsers=cancelfollowup">
+                    <i class="fa fa-eye"></i>                        مشاهده لیست
+                </a>
             </div>
         </div>
     </div>
@@ -95,8 +100,65 @@
         <div class="card-footer ">
             <hr>
             <div class="stats">
-                <i class="fa fa-calendar-o"></i>
-                در حال بروزرسانی
+                <a href="/admin/users/category/?categoryUsers=students">
+                    <i class="fa fa-eye"></i>مشاهده لیست
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="card card-stats">
+        <div class="card-body ">
+            <div class="row">
+                <div class="col-5 col-md-4">
+                    <div class="icon-big text-center icon-warning">
+                        <i class="nc-icon nc-bell-55 text-success"></i>
+                    </div>
+                </div>
+                <div class="col-7 col-md-8">
+                    <div class="numbers">
+                        <p class="card-category">پیگیری امروز</p>
+                        <p class="card-title">{{$followupToday}} نفر<p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer ">
+            <hr>
+            <div class="stats">
+                <a href="admin/users/category/?categoryUsers=todayFollowup">
+                    <i class="fa fa-calendar-o"></i>                در حال بروزرسانی
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="card card-stats">
+        <div class="card-body ">
+            <div class="row">
+                <div class="col-5 col-md-4">
+                    <div class="icon-big text-center icon-warning">
+                        <i class="nc-icon nc-ambulance text-danger"></i>
+                    </div>
+                </div>
+                <div class="col-7 col-md-8">
+                    <div class="numbers">
+                        <p class="card-category">پیگیری تاریخ گذشته</p>
+                        <p class="card-title">{{$expirefollowupToday}} نفر<p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer ">
+            <hr>
+            <div class="stats">
+                <a href="/admin/users/category/?categoryUsers=expireFollowup">
+                    <i class="fa fa-eye"></i>                در حال بروزرسانی
+                </a>
             </div>
         </div>
     </div>

@@ -1,5 +1,7 @@
 @extends('master.index')
-
+@section('navbarTop')
+    @include('master.navbarTop')
+@endsection
 @section('row1')
         <!--************  VIDEOS*****************-->
         <div class="container" id="videosHome">
@@ -442,4 +444,8 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('footer')
+    @include('master.footer')
 @endsection
