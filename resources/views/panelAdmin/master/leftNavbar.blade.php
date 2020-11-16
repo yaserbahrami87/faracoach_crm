@@ -13,7 +13,7 @@
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="/admin/messages/">
                 <i class="nc-icon nc-send"></i>
                 <p>پیام ها</p>
             </a>

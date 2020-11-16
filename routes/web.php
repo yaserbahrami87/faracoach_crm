@@ -48,12 +48,19 @@ Route::middleware('can:isAdmin')->group(function () {
     {
         return view('panelAdmin.insertProblemFollowup');
     });
-
+    //  ROUTE SETTINGS
     Route::post('/admin/settings/problemfollowup/store','problemFollowupController@store');
     Route::get('/admin/settings/problemfollowup/delete/{problemfollowup}','problemFollowupController@destroy');
     Route::get('/admin/settings/problemfollowup/edit/{problemfollowup}','problemFollowupController@edit');
     Route::patch('/admin/settings/problemfollowup/update/{problemfollowup}','problemFollowupController@update');
 
+
+    //Route Messages
+    Route::get('/admin/messages/','MessageController@index');
+    Route::get('/admin/messages/show/{message}','MessageController@show');
+    Route::get('/admin/messages/new','MessageController@create');
+    Route::post('/admin/messages/send','MessageController@store');
+    Route::post('/admin/messages/reply','MessageController@reply');
 
     // Route Admin Followup
     Route::post('/admin/followup/create/','FollowupController@store');
