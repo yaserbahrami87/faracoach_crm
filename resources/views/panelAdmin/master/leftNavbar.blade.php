@@ -31,11 +31,18 @@
             </a>
         </li>
         <li>
+            <a href="/admin/filemanager">
+                <i class="nc-icon nc-album-2"></i>
+                <p>مدیریت فایلها</p>
+            </a>
+        </li>
+        <li>
             <a href="/admin/settings/">
                 <i class="nc-icon nc-settings"></i>
                 <p>تنظیمات</p>
             </a>
         </li>
+
 
     </ul>
 </div>

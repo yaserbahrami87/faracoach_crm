@@ -7,3 +7,24 @@
 {
     height: 300px;
 }
+
+#form_landing
+{
+    margin:auto;
+    margin-top: 100px;
+    padding: 20px;
+
+}
+
+#table_freepackagedownload
+{
+    margin-top: 200px;
+}
+
+@media only screen and (max-width:320px)
+{
+    #table_freepackagedownload
+    {
+        margin-top: 100px;
+    }
+}

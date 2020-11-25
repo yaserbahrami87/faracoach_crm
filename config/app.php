@@ -80,7 +80,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'fa',
 
     /*
     |--------------------------------------------------------------------------
@@ -162,6 +162,9 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Hekmatinasser\Verta\VertaServiceProvider::class,
+        Anetwork\Validation\PersianValidationServiceProvider::class,
+
+
 
 
         /*

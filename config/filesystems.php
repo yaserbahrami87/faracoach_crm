@@ -50,7 +50,8 @@ return [
 
         'public' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
+            //'root' => storage_path('app/public'),
+            'root' => public_path('documents'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
@@ -64,6 +65,10 @@ return [
             'url' => env('AWS_URL'),
             'endpoint' => env('AWS_ENDPOINT'),
         ],
+
+
+        //INa ro khodam ezafe kardam
+
 
     ],
 

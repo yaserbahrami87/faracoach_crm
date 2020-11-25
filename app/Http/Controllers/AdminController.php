@@ -143,7 +143,7 @@ class AdminController extends Controller
                             break;
             case 'expireFollowup': $users=User::join('followups','users.id','=','followups.user_id')
                             ->where('followups.nextfollowup_date_fa','<',$dateNow)
-                            ->wherenotIn('Users.type',[2,12])
+                            ->wherenotIn('users.type',[2,12])
                             ->select('users.*')
                             ->orderby('date_fa','desc')
                             ->paginate(20);

@@ -4,7 +4,7 @@
         <img src="{{asset('/images/white-logo.png')}}"  />
     </div>
     <div class="col-12">
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" >
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -32,7 +32,7 @@
 
 
 @section('row1')
-    <div class="container table-responsive">
+    <div class="container table-responsive" id="table_freepackagedownload">
         <table class="table  table-bordered table-hover text-center">
             <thead class="thead-dark">
             <tr>

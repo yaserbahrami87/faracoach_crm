@@ -2,10 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/panelAdmin/insertMessage.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/panelAdmin/messages.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/panelAdmin/showMessage.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/panelAdmin/fileManager.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/faracoach_crm.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/faracoach_crm.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bootstrap/cache/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/filesystems.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/filesystems.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/cardBox.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/cardBox.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/master/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/master/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/master/leftNavbar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/master/leftNavbar.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
@@ -146,6 +154,14 @@
       <path value="$PROJECT_DIR$/vendor/composer" />
       <path value="$PROJECT_DIR$/vendor/hekmatinasser/notowo" />
       <path value="$PROJECT_DIR$/vendor/hekmatinasser/verta" />
+      <path value="$PROJECT_DIR$/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/vendor/league/flysystem-cached-adapter" />
+      <path value="$PROJECT_DIR$/vendor/barryvdh/elfinder-flysystem-driver" />
+      <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-elfinder" />
+      <path value="$PROJECT_DIR$/vendor/intervention/image" />
+      <path value="$PROJECT_DIR$/vendor/studio-42/elfinder" />
+      <path value="$PROJECT_DIR$/vendor/alexusmai/laravel-file-manager" />
+      <path value="$PROJECT_DIR$/vendor/intervention/imagecache" />
     </include_path>
   </component>
   <component name="ProjectId" id="1jQZPkLojuzQbLLpfKUzyIIeJHa" />
@@ -235,7 +251,13 @@
       <workItem from="1605383087529" duration="11812000" />
       <workItem from="1605430643726" duration="3985000" />
       <workItem from="1605470619807" duration="6810000" />
-      <workItem from="1605518033539" duration="18709000" />
+      <workItem from="1605518033539" duration="19238000" />
+      <workItem from="1605557643187" duration="2110000" />
+      <workItem from="1605563587515" duration="5762000" />
+      <workItem from="1605569571545" duration="5056000" />
+      <workItem from="1605610121070" duration="1916000" />
+      <workItem from="1605626412415" duration="1558000" />
+      <workItem from="1605824973695" duration="25000" />
     </task>
     <servers />
   </component>
@@ -251,10 +273,10 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="275" y="22" key="#Deployment" timestamp="1604053409847">
+    <state x="275" y="22" key="#Deployment" timestamp="1605611185466">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="22" key="#Deployment/0.0.1366.728@0.0.1366.728" timestamp="1604053409847" />
+    <state x="275" y="22" key="#Deployment/0.0.1366.728@0.0.1366.728" timestamp="1605611185466" />
     <state x="360" y="45" key="#Options" timestamp="1604053035985">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

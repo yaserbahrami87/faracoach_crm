@@ -81,6 +81,11 @@ body
     height: 500px;
 }
 
+video[poster]
+{
+    object-fit:fill;
+}
+
 #videosHome
 {
     text-align: center;
@@ -229,7 +234,7 @@ body
     color: #ffff;
 }
 
-#listCoachsHome  .items-coachs
+#listCoachsHome  .items-coachs ,.listCoachsPage .items-coachs
 {
     background-image: url('../images/BBack.jpg');
     background-repeat: no-repeat;
@@ -239,12 +244,12 @@ body
     text-align: center;
 }
 
-#listCoachsHome  .items-coachs a
+#listCoachsHome  .items-coachs a,.listCoachsPage .items-coachs a
 {
     display: inline-block;
 }
 
-#listCoachsHome  .items-coachs img
+#listCoachsHome  .items-coachs img,.listCoachsPage .items-coachs img
 {
     display: inline;
     margin-top: 5px;
@@ -252,13 +257,13 @@ body
     border-radius: 50%;
 }
 
-#listCoachsHome  .items-coachs h2
+#listCoachsHome  .items-coachs h2,.listCoachsPage .items-coachs h2
 {
     font-size: 18px;
     font-weight: bold;
 }
 
-#listCoachsHome .profileCoach
+#listCoachsHome .profileCoach,.listCoachsPage .profileCoach
 {
     background-color:#FF6F00;
     font-size: 14px;
@@ -268,7 +273,7 @@ body
     border-radius: 30px;
 }
 
-#listCoachsHome .reserveCoach
+#listCoachsHome .reserveCoach,.listCoachsPage .reserveCoach
 {
     border: 1px solid;
     border-radius: 30px;
@@ -283,7 +288,7 @@ body
     background-image: url('../images/Pattern-01.png');
     background-size: contain;
     background-repeat: no-repeat;
-    height: 640px;
+    min-height: 640px;
     margin: 100px 0px;
 
 }
@@ -522,7 +527,7 @@ body
     font-weight: bold;
 }
 
-#productsHome .clsproductsHome .offProduct
+#productsHome .clsproductsHome .offProduct,.productBlogclass .offProduct
 {
     text-decoration: line-through;
     color: #808285;
@@ -530,7 +535,7 @@ body
     display: inline;
 }
 
-#productsHome .clsproductsHome .fiProduct
+#productsHome .clsproductsHome .fiProduct,.productBlogclass .fiProduct
 {
     color:#FF6F00 ;
     font-weight: bold;
@@ -539,7 +544,7 @@ body
     float: left;
 }
 
-#productsHome .clsproductsHome a[role='button']
+#productsHome .clsproductsHome a[role='button'],.productBlogclass a[role='button']
 {
     background-color: #FF6F00;
     border-radius: 50px;
@@ -666,9 +671,434 @@ footer li a,footer li svg
     font-weight: 700;
 }
 
-/*     SIGNUP CRM       */
-
-#form_signup_crm
+@media only screen and (max-width:576px)
 {
-    padding-top:80px;
+    #coachsHome > div:first-child
+    {
+        padding:80px 10px 0px 10px;
+    }
+    #commentsHome > .container > .row > div:first-child
+    {
+        padding-top: 10px;
+    }
+
+    #commentsHome .itemComments p:nth-child(3)
+    {
+        width: auto;
+    }
+    #articleHome
+    {
+        margin-top: 20px;
+    }
+
+    #eventsHome > div:nth-child(1) h3,#articleHome > div:nth-child(1) h3
+    {
+        font-size: 18px;
+    }
+
+    #achievementHome .achievement
+    {
+        padding-top: 20px;
+    }
+
+    footer
+    {
+        background-position: right;
+    }
+    footer #logoFooter
+    {
+        padding-top: 30px;
+    }
 }
+
+@media only screen and (min-width:577px) and (max-width: 768px)
+{
+    #coachsHome > div:first-child
+    {
+        padding: 30px 10px 0px 0px;
+    }
+
+
+    #commentsHome .itemComments p:nth-child(3)
+    {
+        width: auto;
+    }
+
+    #productsHome .clsproductsHome a[role='button'] h5
+    {
+        font-size: 14px;
+    }
+
+    footer #logoFooter
+    {
+        padding-top: 125px;
+    }
+}
+
+@media only screen and (min-width:769px) and (max-width: 992px)
+{
+    #coachsHome > div:first-child
+    {
+        padding:30px 30px 0px 0px;
+    }
+
+    footer #logoFooter
+    {
+        padding-top: 130px;
+    }
+
+    footer ul
+    {
+        padding-right: 0px;
+    }
+}
+
+@media only screen and (min-width:993px) and (max-width: 1200px)
+{
+
+}
+
+
+/*            single PAGE                     */
+
+#carouselBlogs
+{
+    margin: 50px 0px;
+}
+
+#carouselBlogs img
+{
+    height: 240px;
+    border-radius: 20px;
+}
+
+#contentBlog
+{
+    background-color:#ffffff;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,.14);
+    border-radius: 20px;
+    min-height: 500px;
+    padding-bottom: 20px;
+}
+
+#contentBlog h1
+{
+    font-size: 30px;
+    font-weight: bold;
+    color: #00337d;
+    margin-bottom: 30px;
+}
+
+#contentBlog h2
+{
+    color: #00a887;
+    line-height: 2;
+    font-weight: bold;
+}
+
+#contentBlog p,#contentBlog ul,#contentBlog li,#contentBlog a
+{
+    color: #7a7a7a;
+    font-size: 18px;
+    text-align: justify;
+    line-height: 2;
+}
+
+#contentBlog iframe
+{
+    border: none;
+    border-radius: 20px;
+}
+
+#contentBlog a
+{
+    color: #004dbe;
+}
+
+#contentBlog .accordion *
+{
+    border: none;
+}
+
+#contentBlog #accordionM > div.card > div:nth-child(2) *
+{
+    font-size: 13px;
+}
+
+
+#contentBlog .accordion .card-header
+{
+    border-radius: 20px;
+    margin: 2px 0px;
+}
+
+#contentBlog .accordion .card-header button
+{
+    text-decoration: none;
+    font-size: 18px;
+    color: #00337d;
+    font-weight: bold;
+}
+
+/*
+#contentBlog .accordion .statusaccordion
+{
+    display: inline;
+}*/
+
+#contentBlog img,#contentBlog video
+{
+    border-radius: 20px;
+}
+
+.breadcrumb
+{
+    background: transparent;
+}
+
+nav[aria-label='breadcrumb']
+{
+    margin-top: 20px;
+}
+
+#productBlog
+{
+    background-color:#ffffff;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,.14);
+    border-radius: 20px;
+    margin-top: 50px;
+    padding-bottom: 50px;
+    color: #7a7a7a;
+}
+
+#productBlog > div.container > div:first-child
+{
+    padding: 20px 0px;
+    border-bottom: 2px solid;
+    margin-bottom: 20px;
+}
+#productBlog > div.container > div:first-child *
+{
+
+    display: inline;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#productBlog > div.container > div:first-child h2
+{
+    color: #00337d;
+}
+#productBlog > div.container > div:first-child a
+{
+    float: left;
+}
+
+.productBlogclass
+{
+    border-radius: 20px;
+}
+
+.productBlogclass img
+{
+    border-radius: 20px 20px 0px 0px;
+}
+
+@media only screen and (max-width:576px)
+{
+    #productBlog > div.container > div:first-child *
+    {
+        font-size: 13px;
+    }
+
+    #contentBlog p, #contentBlog ul, #contentBlog li, #contentBlog a
+    {
+        font-size: 14px;
+    }
+
+    #contentBlog h2,#contentBlog .accordion .card-header button
+    {
+        font-size: 16px;
+    }
+
+
+}
+
+@media only screen and (min-width:577px) and (max-width: 768px)
+{
+    #productBlog > div.container > div:first-child *
+    {
+        font-size: 13px;
+    }
+
+    #contentBlog p, #contentBlog ul, #contentBlog li, #contentBlog a
+    {
+        font-size: 14px;
+    }
+
+    #contentBlog h2,#contentBlog .accordion .card-header button
+    {
+        font-size: 16px;
+    }
+}
+
+/*       COACHES PAGE     */
+
+.listCoachsPage .items-coachs
+{
+    background-size: cover;
+    min-height: 340px !important;
+    margin-bottom: 10px;
+}
+
+.listCoachsPage .items-coachs h2
+{
+    color: #ffffff !important;
+}
+.listCoachsPage .profileCoach
+{
+    width: 90%;
+    text-align: center !important;
+    color: #ffffff !important;
+}
+
+.listCoachsPage .items-coachs img
+{
+    border-radius: 50% !important;
+}
+
+.listCoachsPage .reserveCoach
+{
+    font-size: 14px !important;
+    color: #ffffff !important;
+    width: 90%;
+    text-align: center !important;
+}
+
+/* ********* INfo Coach page ************* 8*/
+
+#infoCoach
+{
+    margin-top: 30px;
+    background-image: linear-gradient(180deg,#fff 50%,#e8e8e8 100%);
+}
+
+#infoCoach > article:nth-child(2),#infoCoach > section:nth-child(3)
+{
+    padding-top: 20px;
+    border-left: 1px solid;
+}
+
+#infoCoach img
+{
+    border-radius: 50%;
+    border: 5px solid;
+    margin-right: 50px;
+}
+
+#infoCoach h2
+{
+    color: #00337d;
+}
+
+#infoCoach .greenColor
+{
+    color: #00b88b;
+
+}
+
+#infoCoach .greenColor span
+{
+    color: initial;
+}
+
+#infoCoach > section:nth-child(4)
+{
+    padding-top: 50px;
+}
+
+@media only screen and (max-width:576px)
+{
+    #infoCoach img
+    {
+        margin-right: 25px;
+    }
+
+    #infoCoach > section:nth-child(4)
+    {
+        padding-bottom: 50px;
+    }
+}
+
+/*                     Blog Page            */
+
+#blogs > div.row >div
+{
+    margin-bottom: 10px;
+}
+#blogs h5
+{
+    font-size: 18px;
+    font-weight: bold;
+    color: #00337d;
+}
+
+#blogs p
+{
+    font-size: 14px;
+}
+
+#blogs .card
+{
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,.14);
+}
+
+#blogs .card img
+{
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+/*              EVENTS PAGE                      */
+#eventsPage .importo
+{
+    font-size: 15px !important;
+}
+
+#eventsPage #timeline .timeline-badge.timeline-future-movement p
+{
+    left:18px !important;
+}
+
+@media only screen and (max-width:576px)
+{
+    #timeline .timeline-movement .timeline-item .timeline-panel.credits .timeline-panel-ul li.img-wraping a img,#timeline .timeline-movement .timeline-item .timeline-panel.debits .timeline-panel-ul li.img-wraping a img {
+        height: 80px !important;
+    }
+
+    #timeline .timeline-badge.timeline-future-movement {
+        width: 80px;
+        height: 80px;
+        top: -90px !important;
+        margin-left: -40px !important;
+    }
+
+    #eventsPage #timeline .timeline-badge.timeline-future-movement p
+    {
+        top: 28px;
+        left: 8px!important;
+    }
+}
+
+@media only screen and (min-width:577px) and (max-width: 768px)
+{
+    #timeline .timeline-movement .timeline-item .timeline-panel.debits .timeline-panel-ul li.img-wraping a img, #timeline .timeline-movement .timeline-item .timeline-panel.credits .timeline-panel-ul li.img-wraping a img
+    {
+        height: 80px;
+    }
+}
+
+
+
+
+

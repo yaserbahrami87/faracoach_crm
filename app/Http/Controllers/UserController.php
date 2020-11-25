@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\problemfollowup;
 use App\User;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-use Hekmatinasser\Verta\Verta;
+use Illuminate\Support\Str;
+
+
 
 
 
@@ -67,11 +68,10 @@ class UserController extends Controller
         else
         {
 
-
             $this->validate(request(),
             [
-                'fname'             =>'required|min:3',
-                'lname'             =>'required|min:3',
+                'fname'             =>'persian_alpha|required|min:3',
+                'lname'             =>'persian_alpha|required|min:3',
                 'codemelli'         =>'required|min:9',
                 'sex'               =>'required|boolean',
                 'tel'               =>'required|numeric',
@@ -113,7 +113,7 @@ class UserController extends Controller
                 $request->shenasnameh_image=$shenasnameh_image;
 
             }
-
+            /*
             if($request->has('cartmelli_image')&&$request->file('cartmelli_image')->isValid())
             {
                 $file=$request->file('cartmelli_image');
@@ -131,35 +131,61 @@ class UserController extends Controller
                 $files=$request->file('education_image')->move($path, $education_image);
                 $request->education_image=$education_image;
             }
+            */
             $type=1;
             $status = User::create([
-                'fname'             => $request['fname'],
-                'lname'             => $request['lname'],
-                'codemelli'         => $request['codemelli'],
-                'sex'               => $request['sex'],
-                'tel'               => $request['tel'],
-                'shenasname'        => $request['shenasname'],
-                'father'            => $request['father'],
-                'born'              => $request['born'],
-                'married'           => $request['married'],
-                'education'         => $request['education'],
-                'reshteh'           => $request['reshteh'],
-                'state'             => $request['state'],
-                'city'              => $request['city'],
-                'address'           => $request['address'],
-                'personal_image'    => $personal_image,
-                'shenasnameh_image' => $shenasnameh_image,
-                'cartmelli_image'   => $cartmelli_image,
-                'education_image'   => $education_image,
-                'email'             => $request['email'],
-                'password'          => Hash::make($request['password']),
-                'type'              => $type
+                'fname'                     => $request['fname'],
+                'lname'                     => $request['lname'],
+                'codemelli'                 => $request['codemelli'],
+                'sex'                       => $request['sex'],
+                'tel'                       => $request['tel'],
+                'shenasname'                => $request['shenasname'],
+                'father'                    => $request['father'],
+                'born'                      => $request['born'],
+                'married'                   => $request['married'],
+                'education'                 => $request['education'],
+                'reshteh'                   => $request['reshteh'],
+                'state'                     => $request['state'],
+                'city'                      => $request['city'],
+                'address'                   => $request['address'],
+                'personal_image'            => $personal_image,
+                'shenasnameh_image'         => $shenasnameh_image,
+                'cartmelli_image'           => $cartmelli_image,
+                'education_image'           => $education_image,
+                'email'                     => $request['email'],
+                'password'                  => Hash::make($request['password']),
+                'type'                      => $type,
+                'email_verification_token'  => Str::random(32)
             ]);
 
             if($status)
             {
                 $msg="اطلاعات ما با موفقیت در سیستم ثبت شد";
                 $errorStatus="success";
+
+                // Send SMS
+                $url = "https://ippanel.com/services.jspd";
+                $rcpt_nm = array($request['tel']);
+                $param = array
+                            (
+                                'uname'=>'09154665888',
+                                'pass'=>'qSo9e_o2S3',
+                                'from'=>'10003816',
+                                'message'=>$msg ." به زودی کارشناسان ما با شما تماس خواهند گرفت",
+                                'to'=>json_encode($rcpt_nm),
+                                'op'=>'send'
+                            );
+
+                $handler = curl_init($url);
+                curl_setopt($handler, CURLOPT_CUSTOMREQUEST, "POST");
+                curl_setopt($handler, CURLOPT_POSTFIELDS, $param);
+                curl_setopt($handler, CURLOPT_RETURNTRANSFER, true);
+                $response2 = curl_exec($handler);
+
+                $response2 = json_decode($response2);
+                $res_code = $response2[0];
+                $res_data = $response2[1];
+
             }
         }
         return back()->with('msg',$msg)->with('errorStatus',$errorStatus);

@@ -4,6 +4,7 @@
 
 <head>
     <meta charset="utf-8" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -14,9 +15,13 @@
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
     <!-- CSS Files -->
     <link href={{asset("../dashboard/assets/css/bootstrap.min.css")}} rel="stylesheet" />
     <link href={{asset("../dashboard/assets/css/paper-dashboard.css?v=2.0.1")}} rel="stylesheet" />
+    <!-- FILE MANAGER -->
+    <link rel="stylesheet" href="{{ asset('vendor/file-manager/css/file-manager.css') }}">
+
 
     <link href="{{asset('css/kamadatepicker.min.css')}}" rel="stylesheet" />
     <link href="{{asset('css/timepicker.min.css')}}" rel="stylesheet" />
@@ -183,6 +188,7 @@
 <script>
     $('#time_fa').timepicker();
 </script>
+<script src="{{ asset('vendor/file-manager/js/file-manager.js') }}"></script>
 
 </body>
 

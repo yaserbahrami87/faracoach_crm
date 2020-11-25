@@ -128,7 +128,7 @@
         <div class="card-footer ">
             <hr>
             <div class="stats">
-                <a href="admin/users/category/?categoryUsers=todayFollowup">
+                <a href="/admin/users/category/?categoryUsers=todayFollowup">
                     <i class="fa fa-calendar-o"></i>                در حال بروزرسانی
                 </a>
             </div>
