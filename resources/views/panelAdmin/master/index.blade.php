@@ -161,7 +161,19 @@
 <script src="{{asset('js/kamadatepicker.min.js')}}"></script>
 <script src="{{asset('js/kamadatepicker.holidays.js')}}"></script>
 <script>
-    kamaDatepicker('dateFollow',
+    $(document).ready(function()
+    {
+        kamaDatepicker('dateFollow',
+                {
+                    markHolidays:true,
+                    markToday:true,
+                    twodigit:true,
+                    closeAfterSelect:true,
+                    nextButtonIcon: "fa fa-arrow-circle-right",
+                    previousButtonIcon: "fa fa-arrow-circle-left"
+                });
+
+        kamaDatepicker('nextfollowup_date_fa',
             {
                 markHolidays:true,
                 markToday:true,
@@ -170,23 +182,17 @@
                 nextButtonIcon: "fa fa-arrow-circle-right",
                 previousButtonIcon: "fa fa-arrow-circle-left"
             });
-
-    kamaDatepicker('nextfollowup_date_fa',
-        {
-            markHolidays:true,
-            markToday:true,
-            twodigit:true,
-            closeAfterSelect:true,
-            nextButtonIcon: "fa fa-arrow-circle-right",
-            previousButtonIcon: "fa fa-arrow-circle-left"
-        });
+    });
 </script>
 <!-- ****************  -->
 
 <script src="{{asset('js/jquery-3.5.1.slim.min.js')}}"></script>
 <script src="{{asset('js/timepicker.js')}}"></script>
 <script>
-    $('#time_fa').timepicker();
+    $(document).ready(function()
+    {
+        $('#time_fa').timepicker();
+    });
 </script>
 <script src="{{ asset('vendor/file-manager/js/file-manager.js') }}"></script>
 

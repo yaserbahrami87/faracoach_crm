@@ -14,7 +14,7 @@ use Illuminate\Support\Str;
 
 
 
-class UserController extends Controller
+class UserController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -26,6 +26,7 @@ class UserController extends Controller
     {
         $dateNow = verta();
         $this->dateNow = $dateNow->format('Y/m/d');
+        $this->timeNow = $dateNow->format('H:i:s');
     }
 
     public function index()
@@ -204,7 +205,7 @@ class UserController extends Controller
         }
         else
         {
-            return back();
+            return redirect('/login');
         }
 
     }
@@ -220,27 +221,80 @@ class UserController extends Controller
     public function profile(User $user)
     {
         $user=(Auth::user());
+        if(strlen($user->personal_image)==0)
+            {
+                $user->personal_image="default-avatar.png";
+            }
+
+        //تعداد افراد دعوت شده
+        $countIntroducedUser=User::where('introduced','=',$user->tel)
+                        ->count();
+
+        //یوزر توسط چه کسی معرفی شده است
+        $resourceIntroduce=User::where('tel','=',$user->introduced)
+                        ->first();
+
+        $states=$this->states();
         return view ('panelUser.profile')
-                    ->with('user',$user);
+                    ->with('user',$user)
+                    ->with('countIntroducedUser',$countIntroducedUser)
+                    ->with('resourceIntroduce',$resourceIntroduce)
+                    ->with('states',$states);
     }
 
     public function show($user)
     {
-
         $userAdmin=Auth::user();
+        //تعداد پیگیری های انجام شده
         $countFollowups=User::join('followups','users.id','=','followups.user_id')
                             ->where('users.id','=',$user)
                             ->count();
 
+
+        //لیست پیگیری های انجام شده
         $followUps=User::join('followups','users.id','=','followups.user_id')
                         //->join('followups','users.id','=','followups.insert_user_id')
                         ->join('problemfollowups','problemfollowups.id','=','followups.problemfollowup_id')
                         ->where('followups.user_id','=',$user)
                         ->orderby('followups.id','asc')
                         ->get();
+        foreach ($followUps as $item)
+        {
+            $admin_Followup=User::where('id','=',$item->insert_user_id)
+                                ->first();
+            $item->insert_user_id=$admin_Followup->fname." ".$admin_Followup->lname;
+        }
 
-        $listIntroducedUser=User::where('introduced','=',$user)
+        //دسته بندی های لیست پیگیری
+        $problemFollowup=problemfollowup::orderby('problem')
+                        ->where('status','=','1')
                         ->get();
+
+        //مقدار یوزر با توجه به دستور زیر مقدار ورودی تابع با مقدار خروجی تقییر میکند
+        $user=User::find($user);
+        if(strlen($user->personal_image)==0)
+        {
+            $user->personal_image="default-avatar.png";
+        }
+
+        //یوزر توسط چه کسی معرفی شده است
+        $resourceIntroduce=User::where('tel','=',$user->introduced)
+                        ->first();
+        if($resourceIntroduce==null)
+        {
+            //$resourceIntroduce=['id'=>''];
+        }
+
+
+        //تعداد افراد معرفی کرده
+        $countIntroducedUser=User::where('introduced','=',$user->tel)
+                        ->count();
+
+        //لیست افراد معرفی کرده
+        $listIntroducedUser=User::where('introduced','=',$user->tel)
+                        ->get();
+
+        //چک کردن وضعیت عکس کاربرها برای عکسهایی که وجود ندارد از آواتر استفاده شود
         foreach ($listIntroducedUser as $item)
         {
             if(strlen($item->personal_image)==0)
@@ -249,25 +303,6 @@ class UserController extends Controller
             }
         }
 
-        foreach ($followUps as $item)
-        {
-            $admin_Followup=User::where('id','=',$item->insert_user_id)
-                                ->first();
-            $item->insert_user_id=$admin_Followup->fname." ".$admin_Followup->lname;
-        }
-
-
-        $problemFollowup=problemfollowup::orderby('problem')
-                        ->where('status','=','1')
-                        ->get();
-
-        //مقدار یوزر با توجه به دستور زیر مقدار ورودی تابع با مقدار خروجی تقییر میکند
-
-        $user=User::find($user);
-        if(strlen($user->personal_image)==0)
-        {
-            $user->personal_image="default-avatar.png";
-        }
 
         $introduced=User::where('id','=',$user->introduced)
                             ->first();
@@ -283,7 +318,7 @@ class UserController extends Controller
 //        $followUps=user::join('followups','users.id','=','followups.user_id')
 //            ->join('problemfollowups','problemfollowups.id','=','followups.problemfollowup_id')
 //            ->get();
-        return view('panelAdmin.profile',compact('user','countFollowups','followUps','problemFollowup','userAdmin','listIntroducedUser'));
+        return view('panelAdmin.profile',compact('user','countFollowups','followUps','problemFollowup','userAdmin','listIntroducedUser','countIntroducedUser','resourceIntroduce'));
     }
 
     /**
@@ -410,5 +445,236 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    // select User introduced and showAjax
+    public function introducedUserAjax($user)
+    {
+        $user=User::where ('id','=',$user)
+                ->first();
+
+        if(strlen($user->personal_image)==0)
+        {
+            $user->personal_image="default-avatar.png";
+
+        }
+        $user->type=$this->userType($user->type);
+        return view('panelUser.introducedProfileAjax')
+                ->with('user',$user);
+    }
+
+    public function showCategoryUsersAdmin(Request $request)
+    {
+        $dateNow=$this->dateNow;
+        switch ($request['categoryUsers'])
+        {
+            case '0': return redirect('/admin/users/');
+                      break;
+            case 'notfollowup': $users=User::where('type','=','1')
+                            ->orderby('id','desc')
+                            ->paginate(20);
+                            break;
+            case 'continuefollowup': $users=User::where('type','=','11')
+                            ->orderby('id','desc')
+                            ->paginate(20);
+                            break;
+            case 'cancelfollowup': $users=User::where('type','=','12')
+                            ->orderby('id','desc')
+                            ->paginate(20);
+                            break;
+            case 'students': $users=User::where('type','=','20')
+                            ->orderby('id','desc')
+                            ->paginate(20);
+                            break;
+            case 'todayFollowup': $users=User::join('followups','users.id','=','followups.user_id')
+                            ->where('followups.nextfollowup_date_fa','=',$dateNow)
+                            ->select('users.*')
+                            ->orderby('date_fa','desc')
+                            ->paginate(20);
+                            break;
+            case 'expireFollowup': $users=User::join('followups','users.id','=','followups.user_id')
+                            ->where('followups.nextfollowup_date_fa','<',$dateNow)
+                            ->wherenotIn('users.type',[2,12])
+                            ->select('users.*')
+                            ->orderby('date_fa','desc')
+                            ->paginate(20);
+                            break;
+
+            default:return redirect('/admin/users/');
+                    break;
+        }
+
+        $users->appends(['categoryUsers'=>$request['categoryUsers']]);
+        return view('panelAdmin.users')
+            ->with('users',$users);
+    }
+
+
+    public function listIntroducedUser(Request $request)
+    {
+        $user=Auth::user();
+        if($request->has('category'))
+        {
+            //نمایش براساس دسته بندی افراد دعوت شده توسط کاربر
+            switch ($request['category'])
+            {
+                case '0': return redirect('/panel/introduced');
+                                break;
+                case 'notfollowup': $listIntroducedUser=User::where('type','=','1')
+                                ->where('introduced','=',$user->tel)
+                                ->orderby('id','desc')
+                                ->paginate(20);
+                                break;
+                case 'continuefollowup': $listIntroducedUser=User::where('type','=','11')
+                                ->where('introduced','=',$user->tel)
+                                ->orderby('id','desc')
+                                ->paginate(20);
+                                break;
+                case 'cancelfollowup': $listIntroducedUser=User::where('type','=','12')
+                                ->where('introduced','=',$user->tel)
+                                ->orderby('id','desc')
+                                ->paginate(20);
+                                break;
+                case 'students': $listIntroducedUser=User::where('type','=','20')
+                                ->where('introduced','=',$user->tel)
+                                ->orderby('id','desc')
+                                ->paginate(20);
+                                break;
+                default:return back();
+                        break;
+            }
+        }
+        else
+        {
+             //لیست همه افراد معرفی کرده
+            $listIntroducedUser=User::where('introduced','=',$user->tel)
+                        ->paginate(20);
+        }
+
+        foreach($listIntroducedUser as $item)
+        {
+            if(strlen($item->personal_image)==0)
+            {
+                $item->personal_image="default-avatar.png";
+            }
+        }
+
+        //تعداد افراد دعوت شده
+        $countIntroducedUser=User::where('introduced','=',$user->tel)
+                        ->count();
+
+        $listIntroducedUser->appends(['category'=>$request['category']]);
+        return view('panelUser.listIntroducedUser')
+                        ->with('listIntroducedUser',$listIntroducedUser)
+                        ->with('countIntroducedUser',$countIntroducedUser);
+    }
+
+    public function searchUsers(Request $request)
+    {
+
+        $this->validate(request(),
+            [
+                'q'     =>'required|min:2|string'
+            ],
+            [
+                'q.required'=>'برای جستجو یک مقدار وارد کنید'
+            ]);
+
+        $users=User::orwhere('fname','like','%'.$request['q'].'%')
+                    ->orwhere('lname','like','%'.$request['q'].'%')
+                    ->orwhere('tel','like','%'.$request['q'].'%')
+                    ->orwhere('email','like','%'.$request['q'].'%')
+                    ->orderby('id','desc')
+                    ->paginate(20);
+        $users->appends(['q' => $request['q']]);
+
+        return view('panelAdmin.users')
+                    ->with('users',$users);
+    }
+
+    public function searchUsersIntroduced(Request $request)
+    {
+        $user=Auth::user();
+        $this->validate(request(),
+            [
+                'q'     =>'required|min:2|string'
+            ],
+            [
+                'q.required'=>'برای جستجو یک مقدار وارد کنید'
+            ]);
+
+        $parent=$request['q'];
+        $listIntroducedUser=User::where('introduced','=',$user->tel)
+                    ->where(function ($query) use ($parent)
+                    {
+                        $query  ->orwhere('fname','like','%'.$parent.'%')
+                                ->orwhere('lname','like','%'.$parent.'%')
+                                ->orwhere('tel','like','%'.$parent.'%')
+                                ->orwhere('email','like','%'.$parent.'%');
+
+                    })
+                    ->orderby('id','desc')
+                    ->paginate(20);
+
+        foreach($listIntroducedUser as $item)
+        {
+            if(strlen($item->personal_image)==0)
+            {
+                $item->personal_image="default-avatar.png";
+            }
+        }
+
+
+        //تعداد افراد دعوت شده
+        $countIntroducedUser=User::where('introduced','=',$user->tel)
+                        ->count();
+
+        $listIntroducedUser->appends(['q' => $request['q']]);
+        return view('panelUser.listIntroducedUser')
+                    ->with('listIntroducedUser',$listIntroducedUser)
+                    ->with('countIntroducedUser',$countIntroducedUser);
+    }
+
+    public function addIntroducedUser(Request $request)
+    {
+        $this->validate(request(),
+        [
+            'tel'     =>'required|numeric|iran_mobile'
+        ]);
+
+        $check=user::where('tel','=',$request['tel'])
+                    ->count();
+
+        if($check==0)
+        {
+            //ثبت تلفن دعوت شده به همراه تلفن دعوت کننده و تاریخ
+            $status=User::create($request->all() +
+                [
+                    'introduced'  =>Auth::user()->tel,
+                    'date_fa'       =>$this->dateNow,
+                    'time_fa'       =>$this->timeNow
+                ]);
+
+            if($status)
+            {
+                $this->sensSms($request['tel'],'به فراکوچ خوشو آمدید/ شما توسط یکی از آشنایان به فراکوچ دعوت شدید');
+                $msg="تلفن با موفقیت در سیستم فراکوچ ثبت شد";
+                $errorStatus="success";
+            }
+            else
+            {
+                $msg="خطا در ثبت";
+                $errorStatus="danger";
+            }
+        }
+        else
+        {
+            $msg="تلفن مورد نظر در گذشته توسط شما و یا شخص دیگر دعوت شده است";
+            $errorStatus="danger";
+        }
+
+        return back()
+                ->with('msg',$msg)
+                ->with('errorStatus',$errorStatus);
     }
 }

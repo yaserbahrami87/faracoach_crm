@@ -7,7 +7,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Hekmatinasser\Verta\Verta;
-
+use Illuminate\Support\Facades\Gate;
 
 class MessageController extends Controller
 {
@@ -27,18 +27,35 @@ class MessageController extends Controller
      */
     public function index()
     {
-        $messages=message::where('message_id_answer','=',NULL)
-                        ->where(function ($query)
-                        {
-                            $query  ->orwhere('user_id_send','=',Auth::user()->id)
-                                    ->orwhere('user_id_recieve','=',Auth::user()->id);
+        if(Gate::allows('isAdmin'))
+        {
+            $messages=message::where('message_id_answer','=',NULL)
+                            ->where(function ($query)
+                            {
+                                $query  ->orwhere('user_id_send','=',Auth::user()->id)
+                                        ->orwhere('user_id_recieve','=',Auth::user()->id);
 
-                        })
-
-                        ->get();
-
-        return view('panelAdmin.messages')
+                            })
+                            ->get();
+            return view('panelAdmin.messages')
                     ->with('messages',$messages);
+        }
+        else if(Gate::allows('isUser'))
+        {
+            $messages=message::where('message_id_answer','=',NULL)
+                            ->where(function ($query)
+                            {
+                                $query  ->orwhere('user_id_send','=',Auth::user()->id)
+                                        ->orwhere('user_id_recieve','=',Auth::user()->id);
+
+                            })
+                            ->get();
+            return view('panelUser.messages')
+                    ->with('messages',$messages);
+        }
+
+
+
 
     }
 
@@ -49,12 +66,33 @@ class MessageController extends Controller
      */
     public function create()
     {
-        $introduced=User::where('id','=',Auth::user()->introduced)
-                ->select('users.id','users.fname','users.lname')
+        //یوزر توسط چه کسی معرفی شده است
+        $resourceIntroduce=User::where('tel','=',Auth::user()->introduced)
+                ->select('users.id','users.fname','users.lname','users.tel')
                 ->first();
 
-        return view('panelAdmin/insertMessage')
-                    ->with('introduced',$introduced);
+        //لیست افراد معرفی شده
+        $listIntroducedUser=User::where('introduced','=',Auth::user()->tel)
+                ->select('users.id','users.fname','users.lname','users.tel')
+                ->get();
+
+        //سطح دسترسی ها
+        if(Gate::allows('isAdmin'))
+        {
+            return view('panelAdmin.insertMessage')
+                    ->with('resourceIntroduce',$resourceIntroduce)
+                    ->with('listIntroducedUser',$listIntroducedUser);
+        }else if(Gate::allows('isUser'))
+        {
+            return view('panelUser.insertMessage')
+                    ->with('resourceIntroduce',$resourceIntroduce)
+                    ->with('listIntroducedUser',$listIntroducedUser);
+        }
+        else
+        {
+            return back();
+        }
+
     }
 
     /**
@@ -72,10 +110,6 @@ class MessageController extends Controller
             'user_id_recieve'   =>'required|numeric',
             'comment'           =>'required|string|min:3'
         ]);
-//        $request->appends(['user_id_send'=>Auth::user()->id]);
-
-//        $request->appends(['date_fa'=>$this->dateNow]);
-//        $request->appends(['time_fa'=>$this->timeNow]);
 
         $status=message::create($request->all() +
             [
@@ -106,16 +140,34 @@ class MessageController extends Controller
      */
     public function show(message $message)
     {
-        $messages=message::leftjoin('users','messages.user_id_send','=','users.id')
+        if(($message->user_id_send== Auth::user()->id)||(($message->user_id_recieve== Auth::user()->id)))
+        {
+
+            $messages=message::leftjoin('users','messages.user_id_send','=','users.id')
                 ->orwhere('messages.id','=',$message->id)
                 ->orwhere('messages.message_id_answer','=',$message->id)
                 ->orderby('messages.id','desc')
                 ->select('messages.*','users.fname','users.lname')
                 ->get();
+            if(Gate::allows('isAdmin'))
+            {
+                return view('panelAdmin/showMessage')
+                        ->with('messages',$messages)
+                        ->with('message',$message);
+            }
+            else if(Gate::allows('isUser'))
+            {
+                return view('panelUser/showMessage')
+                        ->with('messages',$messages)
+                        ->with('message',$message);
+            }
 
-        return view('panelAdmin/showMessage')
-                    ->with('messages',$messages)
-                    ->with('message',$message);
+
+        }
+        else
+        {
+            return redirect('/panel/messages/');
+        }
     }
 
     /**

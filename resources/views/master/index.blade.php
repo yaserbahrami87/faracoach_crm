@@ -14,7 +14,7 @@
     <link href="slick-1.8.1/slick-1.8.1/slick/slick.css" rel="stylesheet" type="text/css" />
     <link href="slick-1.8.1/slick-1.8.1/slick/slick-theme.css" rel="stylesheet" type="text/css" />
 
-    <title>Hello, world!</title>
+    <title>فراکوچ | دانلود رایگان دوره آموزش کوچینگ</title>
   </head>
   <body>
     @yield('navbarTop')

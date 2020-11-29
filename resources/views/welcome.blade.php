@@ -2,6 +2,10 @@
 @section('navbarTop')
     @include('master.navbarTop')
 @endsection
+@section('header')
+    @include('master.header')
+@endsection
+
 @section('row1')
         <!--************  VIDEOS*****************-->
         <div class="container" id="videosHome">

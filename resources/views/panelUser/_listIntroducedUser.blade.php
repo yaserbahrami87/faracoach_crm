@@ -13,7 +13,7 @@
                             <img src={{asset("/documents/users/".$item->personal_image)}} class="img-circle img-no-padding img-responsive" />
                         </div>
                     </div>
-                    <div class="col-md-7 col-7">{{$item->fname}} {{$item->lname}}
+                    <div class="col-md-7 col-7">{{$item->fname}} {{$item->lname}}-{{$item->tel}}
                         <br />
                         @switch($item->type)
                             @case('1')
@@ -34,12 +34,40 @@
                     </div>
 
                     <div class="col-md-3 col-3 text-right">
-                        <a href="/admin/user/{{$item->id}}" class="btn btn-sm btn-outline-success btn-round btn-icon text-success" ><i class="fa fa-group"></i></a>
+                        <a href="{{$item->id}}" class="btn-modal-introduced btn btn-sm btn-outline-success btn-round btn-icon text-success" data-toggle="modal" data-target="#modal_introduced_profile" ><i class="fa fa-group"></i></a>
                     </div>
 
                 </div>
             </li>
             @endforeach
         </ul>
+
+        <!-- Button trigger modal -->
+
+        <!-- ************* Modal User introduced -->
+        <!-- Modal -->
+        <div class="modal fade" id="modal_introduced_profile" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" dir="rtl">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">مشخصات دوستان</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-12 text-center">
+                        <div class="spinner-border text-primary text-center" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            </div>
+        </div>
+
+
+
     </div>
 </div>

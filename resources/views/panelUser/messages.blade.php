@@ -1,6 +1,5 @@
-@extends('panelAdmin.master.index')
+@extends('panelUser.master.index')
 @section('rowcontent')
-
     <div class="col-12">
         <div class="card card-chart">
             <div class="card-header">
@@ -19,12 +18,12 @@
                     @foreach($messages as $item)
                         <a class="">
                             <td>
-                                <a href="/admin/messages/show/{{$item->id}}">
+                                <a href="/panel/messages/show/{{$item->id}}">
                                     {{$item->id}}
                                 </a>
                             </td>
                             <td>
-                                <a href="/admin/messages/show/{{$item->id}}">
+                                <a href="/panel/messages/show/{{$item->id}}">
                                     {{$item->subject}}
                                 </a>
                             </td>
@@ -51,7 +50,7 @@
             <div class="card-footer">
                 <hr />
                 <div class="card-stats">
-                    <a class="btn btn-primary" href="/admin/messages/new" role="button">پیام جدید</a>
+                    <a class="btn btn-primary" href="/panel/messages/new" role="button">پیام جدید</a>
                 </div>
             </div>
         </div>

@@ -7,8 +7,9 @@
     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>
-        Paper Dashboard 2 by Creative Tim
+        فراکوچ | پنل کاربری
     </title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
@@ -41,53 +42,8 @@
                 </div>
             </a>
         </div>
-        <div class="sidebar-wrapper">
-            <ul class="nav">
-                <li >
-                    <a href="/panel">
-                        <i class="nc-icon nc-bank"></i>
-                        <p>صفحه اصلی</p>
-                    </a>
-                </li>
-                <li class="active ">
-                    <a href="/panel/profile">
-                        <i class="nc-icon nc-badge"></i>
-                        <p>اطلاعات شخصی</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="/panel/messages/">
-                        <i class="nc-icon nc-send"></i>
-                        <p>پیام ها</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="nc-icon nc-user-run"></i>
-                        <p>دوره ها</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="nc-icon nc-money-coins"></i>
-                        <p>مالی</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="nc-icon nc-tile-56"></i>
-                        <p>Table List</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="nc-icon nc-caps-small"></i>
-                        <p>Typography</p>
-                    </a>
-                </li>
+        @include('panelUser.master.leftNavbar')
 
-            </ul>
-        </div>
     </div>
     <div class="main-panel" >
         <!-- Navbar -->
@@ -101,7 +57,7 @@
                             <span class="navbar-toggler-bar bar3"></span>
                         </button>
                     </div>
-                    <a class="navbar-brand" href="javascript:;">صفحه پروفایل</a>
+                    <a class="navbar-brand" href="#">صفحه کاربری</a>
                 </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -184,6 +140,45 @@
 </div>
 <!--   Core JS Files   -->
 <script src={{asset("../dashboard/assets/js/core/jquery.min.js")}}></script>
+<script>
+    $(document).ready(function()
+    {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $("#state").change(function()
+        {
+            var state=$(this).val();
+            $.ajax({
+                type:'GET',
+                url:"/panel/state/"+state,
+                success:function(data)
+                {
+                   $("#city").html(data);
+                }
+            });
+        });
+
+        $(".btn-modal-introduced").click(function()
+        {
+            var loading='<div class="col-12 text-center"><div class="spinner-border text-primary text-center" role="status"><span class="sr-only">Loading...</span></div></div>';
+            $("#modal_introduced_profile .modal-body").html(loading);
+            var user=$(this).attr('href');
+            $.ajax({
+                type:'GET',
+                url:"/panel/userAjax/"+user,
+                success:function(data)
+                {
+                   $("#modal_introduced_profile .modal-body").html(data);
+                }
+            });
+        });
+    });
+
+</script>
 <script src={{asset("../dashboard/assets/js/core/popper.min.js")}}></script>
 <script src={{asset("../dashboard/assets/js/core/bootstrap.min.js")}}></script>
 <script src={{asset("../dashboard/assets/js/plugins/perfect-scrollbar.jquery.min.js")}}></script>
@@ -201,6 +196,8 @@
         demo.initChartsPages();
     });
 </script>
+
+
 </body>
 
 </html>

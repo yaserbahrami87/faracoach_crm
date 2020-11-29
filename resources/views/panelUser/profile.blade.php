@@ -16,9 +16,10 @@
                         @endif
                         <h5 class="title">{{$user->fname}} {{$user->lname}}</h5>
                     </a>
-                    <p class="description">
-                        {{$user->fname}} {{$user->lname}}
-                    </p>
+                    <p class="d-inline"> تعداد افراد دعوت شده:</p><b> {{$countIntroducedUser}} نفر</b>
+                    @if ($resourceIntroduce!=null)
+                        <p> دعوت شده توسط <a class="btn-modal-introduced" href="{{$resourceIntroduce->id}}" data-toggle="modal" data-target="#modal_introduced_profile" > {{$resourceIntroduce->fname}} {{$resourceIntroduce->lname}}</a></p>
+                    @endif
                 </div>
                 <p class="description text-center">
                     "I like the way you work it <br>
@@ -32,191 +33,30 @@
             </div>
         </div>
 
-        <!-- *********** Groohaye Amoozeshi -->
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">گروه های آموزشی</h4>
+        <!-- ************* Modal User introduced -->
+        <!-- Modal -->
+        <div class="modal fade" id="modal_introduced_profile" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" dir="rtl">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">مشخصات دوستان</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-12 text-center">
+                        <div class="spinner-border text-primary text-center" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                <ul class="list-unstyled team-members">
-                    <li>
-                        <div class="row">
-                            <div class="col-md-2 col-2">
-                                <div class="avatar">
-                                    <img src={{asset("../dashboard/assets/img/default-avatar.png")}} alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                                </div>
-                            </div>
-                            <div class="col-md-7 col-7">گروه 1
-                                <br />
-                                <span class="text-warning"><small>در حال انجام</small></span>
-                            </div>
-                            <div class="col-md-3 col-3 text-right">
-                                <btn class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-group"></i></btn>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="row">
-                            <div class="col-md-2 col-2">
-                                <div class="avatar">
-                                    <img src={{asset("../dashboard/assets/img/default-avatar.png")}}  class="img-circle img-no-padding img-responsive" />
-                                </div>
-                            </div>
-                            <div class="col-md-7 col-7">گروه 2
-                                <br />
-                                <span class="text-danger"><small>کنسل شده</small></span>
-                            </div>
-                            <div class="col-md-3 col-3 text-right">
-                                <btn class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-group"></i></btn>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="row">
-                            <div class="col-md-2 col-2">
-                                <div class="avatar">
-                                    <img src={{asset("../dashboard/assets/img/default-avatar.png")}} alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                                </div>
-                            </div>
-                            <div class="col-ms-7 col-7">گروه 3
-                                <br />
-                                <span class="text-success"><small>تمام شده</small></span>
-                            </div>
-                            <div class="col-md-3 col-3 text-right">
-                                <btn class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-group"></i></btn>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
             </div>
         </div>
 
-        <!--  *********** Madarek ********************-->
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">مدارک</h4>
-            </div>
-            <div class="card-body">
-                <ul class="list-unstyled team-members">
-                    <li>
-                        <div class="row">
-                            <div class="col-md-2 col-2">
-                                <btn class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-group"></i></btn>
-                            </div>
-                            <div class="col-md-7 col-7">عکس
-                                <br />
-                                @if(is_null($user->personal_image))
-                                    <span class="text-danger"><small>موجود نیست</small></span>
-                                @else
-                                    <span class="text-success"><small>موجود است</small></span>
-                                @endif
-                            </div>
-                            <div class="col-md-3 col-3 text-right">
-                                @if(is_null($user->personal_image))
-                                    <a class="btn btn-sm btn-danger" role="button">
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-dash-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                            <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
-                                        </svg>
-                                    </a>
-                                @else
-                                    <a class="btn btn-sm btn-primary" href="{{asset('/documents/users/'.$user->personal_image)}}" target="_blank" role="button" title="دانلود">
-                                        <i class="fa fa-download"></i>
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="row">
-                            <div class="col-md-2 col-2">
-                                <btn class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-group"></i></btn>
-                            </div>
-                            <div class="col-md-7 col-7">شناسنامه
-                                <br />
-                                @if(is_null($user->shenasnameh_image))
-                                    <span class="text-danger"><small>موجود نیست</small></span>
-                                @else
-                                    <span class="text-success"><small>موجود است</small></span>
-                                @endif
-                            </div>
-                            <div class="col-md-3 col-3 text-right">
-                                @if(is_null($user->shenasnameh_image))
-                                    <a class="btn btn-sm btn-danger"  role="button">
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-dash-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                            <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
-                                        </svg>
-                                    </a>
-                                @else
-                                    <a class="btn btn-sm btn-primary" href="{{asset('/documents/users/'.$user->shenasnameh_image)}}" target="_blank" role="button"  title="دانلود">
-                                        <i class="fa fa-download"></i>
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="row">
-                            <div class="col-md-2 col-2">
-                                <btn class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-group"></i></btn>
-                            </div>
-                            <div class="col-md-7 col-7">کارت ملی
-                                <br />
-                                @if(is_null($user->cartmelli_image))
-                                    <span class="text-danger"><small>موجود نیست</small></span>
-                                @else
-                                    <span class="text-success"><small>موجود است</small></span>
-                                @endif
-                            </div>
-                            <div class="col-md-3 col-3 text-right">
-                                @if(is_null($user->cartmelli_image))
-                                    <a class="btn btn-sm btn-danger"  role="button">
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-dash-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                            <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
-                                        </svg>
-                                    </a>
-                                @else
-                                    <a class="btn btn-sm btn-primary" href="{{asset('/documents/users/'.$user->cartmelli_image)}}" target="_blank" role="button"  title="دانلود">
-                                        <i class="fa fa-download"></i>
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="row">
-                            <div class="col-md-2 col-2">
-                                <btn class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-group"></i></btn>
-                            </div>
-                            <div class="col-md-7 col-7">مدرک تحصیلی
-                                <br />
-                                @if(is_null($user->education_image))
-                                    <span class="text-danger"><small>موجود نیست</small></span>
-                                @else
-                                    <span class="text-success"><small>موجود است</small></span>
-                                @endif
-                            </div>
-                            <div class="col-md-3 col-3 text-right">
-                                @if(is_null($user->education_image))
-                                    <a class="btn btn-sm btn-danger"  role="button">
-                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-dash-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                            <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
-                                        </svg>
-                                    </a>
-                                @else
-                                    <a class="btn btn-sm btn-primary" href="{{asset('/documents/users/'.$user->education_image)}}" target="_blank" role="button"  title="دانلود">
-                                        <i class="fa fa-download"></i>
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        @include('panelUser.boxMadarak')
+        @include('panelUser.boxAmoozeshi')
     </div>
     <div class="col-md-8">
         <div class="card card-user">
@@ -280,7 +120,7 @@
                             <div class="form-group">
                                 <label for="exampleFormControlSelect1">جنسیت</label>
                                 <div class="form-group">
-                                    <select class="form-control" id="exampleFormControlSelect1" name="sex" >
+                                    <select class="form-control p-0" id="exampleFormControlSelect1" name="sex" >
                                         <option value="0"  {{ $user->sex =="0" ? 'selected='.'"'.'selected'.'"' : '' }}>زن</option>
                                         <option value="1" {{ $user->sex =="1" ? 'selected='.'"'.'selected'.'"' : '' }}>مرد</option>
                                     </select>
@@ -298,20 +138,26 @@
                         <div class="col-md-4 pl-1">
                             <div class="form-group">
                                 <label>استان</label>
-                                <input type="text" class="form-control" placeholder="استان را وارد کنید" value="{{$user->state}}" name="state"  />
+                                <select class="form-control p-0" name="state"  id="state" >
+                                    @foreach ($states as $item)
+                                        <option value="{{$item->id}}">{{$item->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-4 px-1">
                             <div class="form-group">
                                 <label>شهر</label>
-                                <input type="text" class="form-control" placeholder="شهر را وارد کنید" value="{{$user->city}}" name="city"  />
+                                <select class="form-control p-0" name="city"  id="city" >
+
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-4 pr-1">
                             <div class="form-group">
                                 <label>تاهل</label>
                                 <div class="form-group">
-                                    <select class="form-control" id="exampleFormControlSelect1" name="married" >
+                                    <select class="form-control p-0" id="exampleFormControlSelect1" name="married" >
                                         <option value="0" {{ $user->married =="0" ? 'selected='.'"'.'selected'.'"' : '' }}>مجرد</option>
                                         <option value="1" {{ $user->married =="1" ? 'selected='.'"'.'selected'.'"' : '' }}>متاهل</option>
                                     </select>
@@ -353,20 +199,6 @@
                             <div class="form-group">
                                 <label>معرف</label>
                                 <input type="text" disabled="disabled" class="form-control" value="{{$user->introduced }}" name="introduced"   lang="fa"/>
-                            </div>
-                        </div>
-                        <div class="col-md-6 px-1">
-                            <div class="form-group">
-                                <label>نحوه ورود به فراکوچ</label>
-                                <input type="text" class="form-control" disabled="disabled"  value="{{$user->resource}}" name="resource"  lang="fa" />
-                            </div>
-                        </div>
-                        <div class="col-md-6 px-1">
-                            <div class="form-group">
-                                <label>عنوان ورود</label>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" disabled="disabled" value="{{$user->detailsresource}}" name="detailsresource"   lang="fa"/>
-                                </div>
                             </div>
                         </div>
                     </div>

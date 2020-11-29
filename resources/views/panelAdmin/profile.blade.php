@@ -25,8 +25,11 @@
                     @elseif($user->type==20)
                         <p class="description text-success">دانشجو</p>
                     @endif
-                    <p class="description text-dark"> پیگیری های انجام شده: {{$countFollowups}} عدد</p>
-                    <p class="d-inline"> تعداد افراد معرفی شده:</p><a href=""> 0 نفر</a>
+                    @if ($resourceIntroduce!=null)
+                        <p> معرفی شده توسط <a href="/admin/user/{{$resourceIntroduce->id}}"> {{$resourceIntroduce->fname}} {{$resourceIntroduce->lname}}</a></p>
+                    @endif
+                    <p class="description text-dark"> پیگیری های انجام شده: <b> {{$countFollowups}} </b> نوبت</p>
+                    <p class="d-inline"> تعداد افراد معرفی شده:</p><b> {{$countIntroducedUser}} نفر</b>
                 </div>
                 <p class="description text-center">
                     "I like the way you work it <br>
@@ -40,8 +43,9 @@
             </div>
         </div>
         @include('panelAdmin.boxMadarak')
-        @include('panelAdmin.boxAmoozeshi')
         @include('panelAdmin.listIntroducedUser')
+        @include('panelAdmin.boxAmoozeshi')
+
     </div>
     <div class="col-md-8">
         <div class="card card-user">

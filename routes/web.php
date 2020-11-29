@@ -23,15 +23,30 @@ Route::get('/signup crm',function () {
     return view('signup');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware('can:isUser')->group(function () {
 
     // ROUTE USER
-    Route::get('/panel/','UserController@panel')->name('panel');
+
     Route::get('/panel/profile','UserController@profile');
     Route::patch('/panel/profile/update/{user}','UserController@update');
+    Route::get('/panel/userAjax/{user}','UserController@introducedUserAjax');
+
+    //messages
+    Route::get('/panel/messages/','MessageController@index');
+    Route::get('/panel/messages/show/{message}','MessageController@show');
+    Route::get('/panel/messages/new','MessageController@create');
+    Route::post('/panel/messages/send','MessageController@store');
+    Route::post('/panel/messages/reply','MessageController@reply');
+
+
+    //Introduced
+    Route::get('/panel/introduced','UserController@listIntroducedUser');
+    Route::get('/panel/introduced/search','UserController@searchUsersIntroduced');
+    Route::post('/panel/introduced/add','UserController@addIntroducedUser');
 });
 
-
+Route::get('/panel','UserController@panel')->name('panel');
+Route::get('/panel/state/{state}','BaseController@citiesAjax');
 
 Route::middleware('can:isAdmin')->group(function () {
     Route::get('/admin/panel/','AdminController@index')->name('panelAdmin');
@@ -39,10 +54,9 @@ Route::middleware('can:isAdmin')->group(function () {
     Route::get('/admin/user/{user}','UserController@show');
     Route::patch('/admin/profile/update/{user}','UserController@update');
 
-    //Route::post('/admin/users/search/','AdminController@searchUsers');
-    Route::get('/admin/users/search/','AdminController@searchUsers');
+    Route::get('/admin/users/search/','UserController@searchUsers');
 
-    Route::get('/admin/users/category/','AdminController@showCategoryUsers');
+    Route::get('/admin/users/category/','UserController@showCategoryUsersAdmin');
     Route::get('/admin/settings/','AdminController@showSettings');
     Route::get('/admin/settings/problemfollowup/new',function()
     {
@@ -80,6 +94,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 // Landing Page
-Route::get('/landingPage/','landingController@index');
+Route::get('/landingPage','landingController@index');
 Route::post('/landing/store','landingController@store');
 Route::get('/showPackageDownload', 'landingController@showPackageDownload')->name('freePackageLanding');
