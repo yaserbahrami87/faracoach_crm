@@ -36,7 +36,7 @@ class MessageController extends Controller
                                         ->orwhere('user_id_recieve','=',Auth::user()->id);
 
                             })
-                            ->get();
+                            ->paginate(20);
             return view('panelAdmin.messages')
                     ->with('messages',$messages);
         }
@@ -49,14 +49,10 @@ class MessageController extends Controller
                                         ->orwhere('user_id_recieve','=',Auth::user()->id);
 
                             })
-                            ->get();
+                            ->paginate(20);
             return view('panelUser.messages')
                     ->with('messages',$messages);
         }
-
-
-
-
     }
 
     /**

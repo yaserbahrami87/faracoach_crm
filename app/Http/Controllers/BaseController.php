@@ -50,11 +50,12 @@ class BaseController extends Controller
     public function citiesAjax($state)
     {
         $cities=city::where('state_id','=',$state)
+                    ->groupby('name')
                     ->orderby('name','asc')
                     ->get();
         foreach($cities as $item)
         {
-            echo "<option>".$item->name."</option>";
+            echo "<option value='{{$item->id}}'>".$item->name."</option>";
         }
     }
 

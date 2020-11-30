@@ -1,6 +1,6 @@
 @extends('panelUser.master.index')
 @section('rowcontent')
-    <div class="col-12">
+    <div class="col-xs-12 col-md-6 col-lg-6 col-xl-6">
         <div class="card card-chart">
             <div class="card-header">
                 <h5 class="card-title">پیام ها</h5>
@@ -18,12 +18,12 @@
                     @foreach($messages as $item)
                         <a class="">
                             <td>
-                                <a href="/panel/messages/show/{{$item->id}}">
+                                <a href="{{$item->id}}" class="showDetailsMessage">
                                     {{$item->id}}
                                 </a>
                             </td>
                             <td>
-                                <a href="/panel/messages/show/{{$item->id}}">
+                                <a href="{{$item->id}}" class="showDetailsMessage">
                                     {{$item->subject}}
                                 </a>
                             </td>
@@ -45,17 +45,19 @@
 
                     </tbody>
                 </table>
+                {{$messages->links()}}
             </div>
 
             <div class="card-footer">
                 <hr />
                 <div class="card-stats">
-                    <a class="btn btn-primary" href="/panel/messages/new" role="button">پیام جدید</a>
+                    <a class="showDetailsMessage btn btn-primary" href="new" role="button" >پیام جدید</a>
                 </div>
             </div>
         </div>
     </div>
-
+    <div class="col-xs-12 col-md-6 col-lg-6 col-xl-6" id="showDetailsMessage">
+    </div>
 
 
 

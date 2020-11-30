@@ -311,6 +311,7 @@ class UserController extends BaseController
             $user->introduced=$introduced->fname." ".$introduced->lname ." با کد ".$introduced->id;
         }
 
+        $states=$this->states();
 
 //        $countFollowups=user::join('followups','users.id','=','followups.user_id')
 //              ->count();
@@ -318,7 +319,7 @@ class UserController extends BaseController
 //        $followUps=user::join('followups','users.id','=','followups.user_id')
 //            ->join('problemfollowups','problemfollowups.id','=','followups.problemfollowup_id')
 //            ->get();
-        return view('panelAdmin.profile',compact('user','countFollowups','followUps','problemFollowup','userAdmin','listIntroducedUser','countIntroducedUser','resourceIntroduce'));
+        return view('panelAdmin.profile',compact('user','countFollowups','followUps','problemFollowup','userAdmin','listIntroducedUser','countIntroducedUser','resourceIntroduce','states'));
     }
 
     /**

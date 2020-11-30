@@ -4,10 +4,10 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>
         CRM Faracoach
     </title>
@@ -121,7 +121,6 @@
         <footer class="footer footer-black  footer-white ">
             <div class="container-fluid">
                 <div class="row">
-
                     <div class="credits ml-auto">
                       <span class="copyright">
                         © <script>
@@ -136,13 +135,12 @@
 </div>
 <!--   Core JS Files   -->
 <script src={{asset("../dashboard/assets/js/core/jquery.min.js")}}></script>
-
+<script src={{asset("../dashboard/assets/js/java.js")}}></script>
 <script src={{asset("../dashboard/assets/js/core/popper.min.js")}}></script>
 <script src={{asset("../dashboard/assets/js/core/bootstrap.min.js")}}></script>
 <script src={{asset("../dashboard/assets/js/plugins/perfect-scrollbar.jquery.min.js")}}></script>
 
-<!--  Google Maps Plugin    -->
-<!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> -->
+
 <!-- Chart JS -->
 <script src={{asset("../dashboard/assets/js/plugins/chartjs.min.js")}}></script>
 <!--  Notifications Plugin    -->
@@ -191,8 +189,11 @@
 <script>
     $(document).ready(function()
     {
-        $('#time_fa').timepicker();
+        jQuery.noConflict();
+        jQuery('#time_fa').timepicker();
     });
+
+
 </script>
 <script src="{{ asset('vendor/file-manager/js/file-manager.js') }}"></script>
 

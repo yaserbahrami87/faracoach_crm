@@ -20,7 +20,7 @@
                     <div class="col-md-4 pl-1">
                         <div class="form-group">
                             <label>نتیجه پیگیری</label>
-                            <select class="form-control" id="exampleFormControlSelect1" name="followup" >
+                            <select class="form-control p-0" id="exampleFormControlSelect1" name="followup" >
                                 <option disabled="disabled" selected >نتیجه را مشخص کنید</option>
                                 @foreach($problemFollowup as $item)
                                     <option value="{{$item->id}}" >{{$item->problem}}</option>
@@ -31,7 +31,7 @@
                     <div class="col-md-4 pl-1">
                         <div class="form-group">
                             <label>وضعیت پس از پیگیری</label>
-                            <select class="form-control" id="exampleFormControlSelect1" name="status_followups" >
+                            <select class="form-control p-0" id="exampleFormControlSelect1" name="status_followups" >
                                     <option disabled="disabled" selected >وضعیت را انتخاب کنید</option>
                                     <option class="primary_bg_admin" value="11" >در حال پیگیری</option>
                                     <option class="danger_bg_admin" value="12" >انصراف</option>

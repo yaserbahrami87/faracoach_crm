@@ -75,7 +75,7 @@
                 </div>
                 <div class="info">
                     <div class="title">
-                        <a target="_blank" href="https://scripteden.com/">{{$item->fname}} {{$item->lname}}</a>
+                        <a class="btn-modal-introduced" href="{{$item->id}}"  data-toggle="modal" data-target="#modal_introduced_profile"   >{{$item->fname}} {{$item->lname}}</a>
                     </div>
                     <div class="desc">{{$item->tel}}</div>
                     <!--

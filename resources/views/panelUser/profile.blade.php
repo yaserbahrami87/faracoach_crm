@@ -59,61 +59,105 @@
         @include('panelUser.boxAmoozeshi')
     </div>
     <div class="col-md-8">
-        <div class="card card-user">
-            <div class="card-header">
-                <h5 class="card-title">اطلاعات پروفایل</h5>
-            </div>
-            <div class="card-body">
-                <form method="post" action="/panel/profile/update/{{$user->id}}" enctype="multipart/form-data">
-                    {{csrf_field()}}
-                    {{method_field('PATCH')}}
+        <form method="post" action="/admin/profile/update/{{$user->id}}" enctype="multipart/form-data">
+            {{csrf_field()}}
+            {{method_field('PATCH')}}
+            <div class="card card-user">
+                <div class="card-header">
+                    <h5 class="card-title">اطلاعات شخصی</h5>
+                </div>
+                <div class="card-body" id="infoProfile">
                     <div class="row">
-                        <div class="col-md-5 pl-1">
+                        <div class="col-md-6 px-1">
                             <div class="form-group">
-                                <label>کد ملی</label>
-                                <input type="text" class="form-control" readonly="readonly" placeholder="کد ملی را وارد کنید" value="{{$user->codemelli}}" name="codemelli" {{strlen($user->codemelli)===0?"": "disabled" }} />
+                                <label>نام</label>
+                                <input type="text" class="form-control" placeholder="نام را وارد کنید" value="{{$user->fname}}" name="fname"   lang="fa" />
                             </div>
                         </div>
-                        <div class="col-md-3 px-1">
+                        <div class="col-md-6 px-1">
+                            <div class="form-group">
+                                <label>نام خانوادگی</label>
+                                <input type="text" class="form-control" placeholder="نام خانوادگی را وارد کنید" value="{{$user->lname}}" name="lname"  lang="fa" />
+                            </div>
+                        </div>
+                        <div class="col-md-6 px-1">
+                            <div class="form-group">
+                                <label for="codemelli">کد ملی</label>
+                                <input type="text" class="form-control" placeholder="کد ملی را وارد کنید" value="{{$user->codemelli}}" id="codemelli" name="codemelli" {{strlen($user->codemelli)===0?"": "disabled" }} />
+                            </div>
+                        </div>
+                        <div class="col-md-6 px-1">
+                            <div class="form-group">
+                                <label>شماره شناسنامه</label>
+                                <input type="text" class="form-control" placeholder="شماره شناسنامه را وارد کنید" value="{{$user->shenasname}}" name="shenasname"  />
+                            </div>
+                        </div>
+                        <div class="col-md-6 px-1">
+                            <div class="form-group">
+                                <label>عکس پروفایل</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="inputpersonal_image" aria-describedby="inputpersonal_image" name="personal_image"/> >
+                                    <label class="custom-file-label" for="inputpersonal_image">Choose file</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card card-user">
+                <div class="card-header">
+                    <h5 class="card-title">اطلاعات تماس</h5>
+                </div>
+                <div class="card-body" id="infoProfile">
+                    <div class="row">
+                        <div class="col-md-6 px-1">
                             <div class="form-group">
                                 <label>تلفن تماس</label>
                                 <input type="text" class="form-control" placeholder="تلفن تماس را وارد کنید" value="{{$user->tel}}" name="tel"  />
                             </div>
                         </div>
-                        <div class="col-md-4 pr-1">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">پست الکترونیکی</label>
-                                <input type="email" class="form-control" placeholder="پست الکترونیکی را وارد کنید" value="{{$user->email}}" name="email"  {{strlen($user->email)===0?"": "disabled" }} />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 pl-1">
-                            <div class="form-group">
-                                <label>نام</label>
-                                <input type="text" class="form-control" placeholder="نام را وارد کنید" value="{{$user->fname}}" name="fname"  />
-                            </div>
-                        </div>
                         <div class="col-md-6 pr-1">
                             <div class="form-group">
-                                <label>نام خانوادگی</label>
-                                <input type="text" class="form-control" placeholder="نام خانوادگی را وارد کنید" value="{{$user->lname}}" name="lname"  />
+                                <label for="email">پست الکترونیکی</label>
+                                <input type="email" class="form-control" placeholder="پست الکترونیکی را وارد کنید" value="{{$user->email}}" name="email"  id="email"   {{strlen($user->email)===0?"": "disabled" }} />
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6 pl-1">
+                            <div class="form-group">
+                                <label>استان</label>
+                                <input type="text" class="form-control" placeholder="استان را وارد کنید" value="{{$user->state}}" name="state"  />
+                            </div>
+                        </div>
+                        <div class="col-md-6 px-1">
+                            <div class="form-group">
+                                <label>شهر</label>
+                                <input type="text" class="form-control" placeholder="شهر را وارد کنید" value="{{$user->city}}" name="city"  />
+                            </div>
+                        </div>
+                        <div class="col-md-12 px-1">
                             <div class="form-group">
                                 <label>آدرس</label>
-                                <input type="text" class="form-control" placeholder="آدرس را وارد کنید" value="{{$user->address}}" name="address"  />
+                                <input type="text" class="form-control" placeholder="آدرس را وارد کنید" value="{{$user->address}}" name="address"  lang="fa" />
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="card card-user">
+                <div class="card-header">
+                    <h5 class="card-title">اطلاعات قرارداد</h5>
+                </div>
+                <div class="card-body" id="infoProfile">
                     <div class="row">
+                        <div class="col-12">
+                            <div class="alert alert-warning" role="alert">
+                                <small>این اطلاعات صرفاجهت عقد قراردادهای آموزشی و ارائه خدمات کوچینگ مورد نیاز است</small>
+                            </div>
+                        </div>
                         <div class="col-md-4 pl-1">
                             <div class="form-group">
                                 <label>نام پدر</label>
-                                <input type="text" class="form-control" placeholder=" نام پدر را وارد کنید" value="{{$user->father}}" name="father"  />
+                                <input type="text" class="form-control" placeholder=" نام پدر را وارد کنید" value="{{$user->father}}" name="father"  lang="fa" />
                             </div>
                         </div>
                         <div class="col-md-4 px-1">
@@ -125,32 +169,6 @@
                                         <option value="1" {{ $user->sex =="1" ? 'selected='.'"'.'selected'.'"' : '' }}>مرد</option>
                                     </select>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 pr-1">
-                            <div class="form-group">
-                                <label>شماره شناسنامه</label>
-                                <input type="text" class="form-control" placeholder="شماره شناسنامه را وارد کنید" value="{{$user->shenasname}}" name="shenasname"  />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4 pl-1">
-                            <div class="form-group">
-                                <label>استان</label>
-                                <select class="form-control p-0" name="state"  id="state" >
-                                    @foreach ($states as $item)
-                                        <option value="{{$item->id}}">{{$item->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-4 px-1">
-                            <div class="form-group">
-                                <label>شهر</label>
-                                <select class="form-control p-0" name="city"  id="city" >
-
-                                </select>
                             </div>
                         </div>
                         <div class="col-md-4 pr-1">
@@ -168,8 +186,8 @@
                     <div class="row">
                         <div class="col-md-4 pl-1">
                             <div class="form-group">
-                                <label>متولد</label>
-                                <input type="text" class="form-control" placeholder="شهر تولد را وارد کنید" value="{{$user->born}}" name="born"  />
+                                <label>شهر تولد</label>
+                                <input type="text" class="form-control" placeholder="شهر تولد را وارد کنید" value="{{$user->born}}" name="born"   lang="fa"/>
                             </div>
                         </div>
                         <div class="col-md-4 px-1">
@@ -182,37 +200,13 @@
                             <div class="form-group">
                                 <label>رشته</label>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="رشته را وارد کنید" value="{{$user->reshteh}}" name="reshteh"  />
+                                    <input type="text" class="form-control" placeholder="رشته را وارد کنید" value="{{$user->reshteh}}" name="reshteh"   lang="fa"/>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6 px-1">
-                            <div class="form-group">
-                                <label>نحوه آشنایی</label>
-                                <input type="text" disabled="disabled" class="form-control" value="{{$user->gettingknow }}" name="gettingknow"   lang="fa"/>
-                            </div>
-                        </div>
-                        <div class="col-md-6 px-1">
-                            <div class="form-group">
-                                <label>معرف</label>
-                                <input type="text" disabled="disabled" class="form-control" value="{{$user->introduced }}" name="introduced"   lang="fa"/>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6 px-1">
-                            <div class="form-group">
-                                <label>عکس پروفایل</label>
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="inputpersonal_image" aria-describedby="inputpersonal_image" name="personal_image"/> >
-                                    <label class="custom-file-label" for="inputpersonal_image">Choose file</label>
-                                </div>
-                            </div>
-                        </div>
                         <div class="col-md-6 px-1">
                             <div class="form-group">
                                 <label>عکس شناسنامه</label>
@@ -242,14 +236,50 @@
                         </div>
 
                     </div>
-
+                </div>
+            </div>
+            <div class="card card-user">
+                <div class="card-header">
+                    <h5 class="card-title">آشنایی</h5>
+                </div>
+                <div class="card-body" id="infoProfile">
+                    <div class="row">
+                        <div class="col-md-6 px-1">
+                            <div class="form-group">
+                                <label>نحوه آشنایی</label>
+                                <input type="text" disabled="disabled" class="form-control" value="{{$user->gettingknow }}" name="gettingknow"   lang="fa"/>
+                            </div>
+                        </div>
+                        <div class="col-md-6 px-1">
+                            <div class="form-group">
+                                <label>معرف</label>
+                                <input type="text" disabled="disabled" class="form-control" value="{{$user->introduced }}" name="introduced"   lang="fa"/>
+                            </div>
+                        </div>
+                        <div class="col-md-6 px-1">
+                            <div class="form-group">
+                                <label>نحوه ورود به فراکوچ</label>
+                                <input type="text" class="form-control" disabled="disabled"  value="{{$user->resource}}" name="resource"  lang="fa" />
+                            </div>
+                        </div>
+                        <div class="col-md-6 px-1">
+                            <div class="form-group">
+                                <label>عنوان ورود</label>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" disabled="disabled" value="{{$user->detailsresource}}" name="detailsresource"   lang="fa"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="update m-auto m-auto">
                             <button type="submit" class="btn btn-primary btn-round">بروزرسانی اطلاعات</button>
                         </div>
                     </div>
-                </form>
+
+                </div>
+
             </div>
-        </div>
+        </form>
     </div>
 @endsection

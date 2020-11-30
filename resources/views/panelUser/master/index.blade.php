@@ -140,45 +140,7 @@
 </div>
 <!--   Core JS Files   -->
 <script src={{asset("../dashboard/assets/js/core/jquery.min.js")}}></script>
-<script>
-    $(document).ready(function()
-    {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        $("#state").change(function()
-        {
-            var state=$(this).val();
-            $.ajax({
-                type:'GET',
-                url:"/panel/state/"+state,
-                success:function(data)
-                {
-                   $("#city").html(data);
-                }
-            });
-        });
-
-        $(".btn-modal-introduced").click(function()
-        {
-            var loading='<div class="col-12 text-center"><div class="spinner-border text-primary text-center" role="status"><span class="sr-only">Loading...</span></div></div>';
-            $("#modal_introduced_profile .modal-body").html(loading);
-            var user=$(this).attr('href');
-            $.ajax({
-                type:'GET',
-                url:"/panel/userAjax/"+user,
-                success:function(data)
-                {
-                   $("#modal_introduced_profile .modal-body").html(data);
-                }
-            });
-        });
-    });
-
-</script>
+<script src={{asset("../dashboard/assets/js/java.js")}}></script>
 <script src={{asset("../dashboard/assets/js/core/popper.min.js")}}></script>
 <script src={{asset("../dashboard/assets/js/core/bootstrap.min.js")}}></script>
 <script src={{asset("../dashboard/assets/js/plugins/perfect-scrollbar.jquery.min.js")}}></script>

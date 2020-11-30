@@ -1,5 +1,4 @@
-@extends('panelUser.master.index')
-@section('rowcontent')
+
     <div class="col-12">
         <div class="card card-chart">
             <div class="card-header">
@@ -49,4 +48,3 @@
         </div>
     </div>
 
-@endsection
