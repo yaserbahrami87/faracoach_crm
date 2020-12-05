@@ -4,15 +4,12 @@ namespace App\Http\Controllers;
 
 use App\problemfollowup;
 use App\User;
+use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-
-
-
-
 
 class UserController extends BaseController
 {
@@ -201,7 +198,9 @@ class UserController extends BaseController
         }
         else if(Gate::allows('isUser'))
         {
-            return view('panelUser.home');
+            $contents_api=$this->get_data_api();
+            return view('panelUser.home')
+                        ->with('contents_api',$contents_api);
         }
         else
         {
@@ -490,6 +489,7 @@ class UserController extends BaseController
             case 'todayFollowup': $users=User::join('followups','users.id','=','followups.user_id')
                             ->where('followups.nextfollowup_date_fa','=',$dateNow)
                             ->select('users.*')
+                            ->groupby('users.id')
                             ->orderby('date_fa','desc')
                             ->paginate(20);
                             break;
@@ -497,6 +497,7 @@ class UserController extends BaseController
                             ->where('followups.nextfollowup_date_fa','<',$dateNow)
                             ->wherenotIn('users.type',[2,12])
                             ->select('users.*')
+                            ->groupby('users.id')
                             ->orderby('date_fa','desc')
                             ->paginate(20);
                             break;

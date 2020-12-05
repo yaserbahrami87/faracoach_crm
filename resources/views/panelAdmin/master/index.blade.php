@@ -116,6 +116,7 @@
                     </div>
                 @endif
                 @yield('rowcontent')
+
             </div>
         </div>
         <footer class="footer footer-black  footer-white ">

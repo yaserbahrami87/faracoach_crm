@@ -43,6 +43,9 @@ Route::middleware('can:isUser')->group(function () {
     Route::get('/panel/introduced','UserController@listIntroducedUser');
     Route::get('/panel/introduced/search','UserController@searchUsersIntroduced');
     Route::post('/panel/introduced/add','UserController@addIntroducedUser');
+
+    //Products
+    Route::get('/panel/products','AdminController@showProducts');
 });
 
 Route::get('/panel','UserController@panel')->name('panel');
@@ -97,3 +100,4 @@ Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/landingPage','landingController@index');
 Route::post('/landing/store','landingController@store');
 Route::get('/showPackageDownload', 'landingController@showPackageDownload')->name('freePackageLanding');
+

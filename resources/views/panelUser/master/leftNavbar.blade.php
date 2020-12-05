@@ -37,9 +37,9 @@
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="/panel/products">
                 <i class="nc-icon nc-caps-small"></i>
-                <p>Typography</p>
+                <p>محصولات</p>
             </a>
         </li>
 

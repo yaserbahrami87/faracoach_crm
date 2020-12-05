@@ -7,8 +7,10 @@ use App\problemfollowup;
 use App\User;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
+use GuzzleHttp\Client;
 
-class AdminController extends Controller
+
+class AdminController extends BaseController
 {
 
     public function __construct()
@@ -37,10 +39,12 @@ class AdminController extends Controller
         $followupToday=User::join('followups','users.id','=','followups.user_id')
             ->where('nextfollowup_date_fa','=',$dateNow)
             ->wherenotIn('users.type',[2,12])
+            ->groupby('users.id')
             ->count();
         $expirefollowupToday=User::join('followups','users.id','=','followups.user_id')
             ->where('nextfollowup_date_fa','<',$dateNow)
             ->wherenotIn('users.type',[2,12])
+            ->groupby('users.id')
             ->count();
 
         return view('panelAdmin.home',compact('notFollowup','follow','cancel','student','dateNow','followupToday','expirefollowupToday'));
@@ -130,4 +134,8 @@ class AdminController extends Controller
                     ->with('problemfollowup',$problemfollowup);
     }
 
+    public function showProducts()
+    {
+        return $this->get_data_api();
+    }
 }

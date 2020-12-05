@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\city;
 use App\state;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
 class BaseController extends Controller
@@ -73,6 +74,27 @@ class BaseController extends Controller
                         break;
             default:return "خطا";
         }
+    }
+
+    public function get_data_api()
+    {
+        $client = new Client([
+            // Base URI is used with relative requests
+            'base_uri' => 'https://faracoach.com/',
+            // You can set any number of default request options.
+            'timeout'  => 60.0,
+        ]);
+
+        $response = $client->request('GET', 'wp-json/wc/store/products/');
+        $contents_api=(json_decode($response->getBody()->getContents()));
+        foreach ($contents_api as $item)
+        {
+            $item->name=str_replace('&#8221;','"',$item->name);
+            $item->name=str_replace('&#8220;','"',$item->name);
+            $item->name=str_replace('&#8211;','-',$item->name);
+
+        }
+        return $contents_api;
     }
 
 
