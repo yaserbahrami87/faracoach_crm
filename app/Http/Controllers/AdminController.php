@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\followup;
+use App\message;
 use App\problemfollowup;
 use App\User;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 
 class AdminController extends BaseController
@@ -26,28 +29,74 @@ class AdminController extends BaseController
      */
     public function index()
     {
-        $notFollowup=User::where('type','=','1')
-            ->count();
-        $follow=User::where('type','=','11')
-            ->count();
-        $cancel=User::where('type','=','12')
-            ->count();
-        $student=User::where('type','=','20')
-            ->count();
-        $dateNow=$this->dateNow;
+        if(Gate::allows('isAdmin'))
+        {
+            $notFollowup=User::where('type','=','1')
+                ->count();
+            $follow=User::where('type','=','11')
+                ->count();
+            $cancel=User::where('type','=','12')
+                ->count();
+            $student=User::where('type','=','20')
+                ->count();
+            $dateNow=$this->dateNow;
 
-        $followupToday=User::join('followups','users.id','=','followups.user_id')
-            ->where('nextfollowup_date_fa','=',$dateNow)
-            ->wherenotIn('users.type',[2,12])
-            ->groupby('users.id')
-            ->count();
-        $expirefollowupToday=User::join('followups','users.id','=','followups.user_id')
-            ->where('nextfollowup_date_fa','<',$dateNow)
-            ->wherenotIn('users.type',[2,12])
-            ->groupby('users.id')
-            ->count();
+            $followupToday=User::join('followups','users.id','=','followups.user_id')
+                ->where('nextfollowup_date_fa','=',$dateNow)
+                ->wherenotIn('users.type',[2,12])
+                ->groupby('users.id')
+                ->count();
+            $expirefollowupToday=User::join('followups','users.id','=','followups.user_id')
+                ->where('nextfollowup_date_fa','<',$dateNow)
+                ->wherenotIn('users.type',[2,12])
+                ->groupby('users.id')
+                ->count();
 
-        return view('panelAdmin.home',compact('notFollowup','follow','cancel','student','dateNow','followupToday','expirefollowupToday'));
+            return view('panelAdmin.home',compact('notFollowup','follow','cancel','student','dateNow','followupToday','expirefollowupToday'));
+            //return redirect()->route('panelAdmin');
+        }
+        else if(Gate::allows('isUser'))
+        {
+            $user=(Auth::user());
+            if(strlen($user->personal_image)==0)
+            {
+                $user->personal_image="default-avatar.png";
+            }
+
+            //تعداد افراد دعوت شده
+            $countIntroducedUser=User::where('introduced','=',$user->tel)
+                ->count();
+
+            //یوزر توسط چه کسی معرفی شده است
+            $resourceIntroduce=User::where('tel','=',$user->introduced)
+                ->first();
+            //تعداد پیام های خوانده نشده
+            $unreadMessage=message::where('user_id_recieve','=',$user->id)
+                    ->where('status','=',1)
+                    ->count();
+            //کسب امتیازات
+            $score=$countIntroducedUser*5;
+            $scoreSuccess=User::where('introduced','=',$user->tel)
+                    ->where('type','=',20)
+                    ->count();
+            $scoreSuccess=$scoreSuccess*10;
+            $score=$score+$scoreSuccess;
+
+
+            return view('panelUser.home')
+                ->with('user',$user)
+                ->with('countIntroducedUser',$countIntroducedUser)
+                ->with('resourceIntroduce',$resourceIntroduce)
+                ->with('unreadMessage',$unreadMessage)
+                ->with('score',$score);
+        }
+        else
+        {
+            return redirect('/login');
+        }
+
+
+
     }
 
     /**
@@ -136,6 +185,8 @@ class AdminController extends BaseController
 
     public function showProducts()
     {
-        return $this->get_data_api();
+        $contents_api=$this->get_data_api();
+        return view('panelUser.products')
+                    ->with('contents_api',$contents_api);
     }
 }

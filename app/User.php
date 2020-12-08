@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'fname', 'lname', 'codemelli','sex','tel','shenasname','father','born','married','education','reshteh','state','city','address','personal_image','shenasnameh_image','cartmelli_image','education_image','email','password','resource','detailsresource','introduced','gettingknow'
+        'fname', 'lname', 'codemelli','sex','tel','shenasname','father','born','married','education','reshteh','state','city','address','personal_image','shenasnameh_image','cartmelli_image','education_image','email','password','resource','detailsresource','introduced','gettingknow','followby_id'
     ];
 
     /**
@@ -39,6 +39,6 @@ class User extends Authenticatable
 
 //    public function getRouteKeyName()
 //    {
-//        //return 'codemelli';
+//        return 'tel';
 //    }
 }

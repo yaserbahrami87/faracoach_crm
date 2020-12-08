@@ -13,6 +13,7 @@
 *
 {
     font-family: 'IranSansFaNum';
+    font-size:14px;
 
 }
 
@@ -319,4 +320,9 @@
 .box-products h5
 {
     font-size:16px;
+}
+
+.card_home_user .card-title
+{
+    font-size: 18px;
 }

@@ -96,5 +96,17 @@ $(document).ready(function()
         }
     });
 
+    $('#addFormIntroduce').click(function(e)
+    {
+
+        console.log("ADD");
+    });
+
 });
+
+function lengthComment(nod)
+{
+    var str=($("#"+nod).val());
+    $("#lengthComment").text( str.length);
+}
 

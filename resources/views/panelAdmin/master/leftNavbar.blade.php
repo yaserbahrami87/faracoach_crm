@@ -1,7 +1,7 @@
 <div class="sidebar-wrapper">
     <ul class="nav">
         <li class="active ">
-            <a href="/admin/panel">
+            <a href="/panel">
                 <i class="nc-icon nc-bank"></i>
                 <p>صفحه اصلی</p>
             </a>

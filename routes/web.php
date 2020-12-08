@@ -46,13 +46,17 @@ Route::middleware('can:isUser')->group(function () {
 
     //Products
     Route::get('/panel/products','AdminController@showProducts');
+
+    //followup
+    Route::get('/panel/followup/{followup}','UserController@showFollowupIntroduced');
+    Route::post('/panel/followup/create','FollowupController@store');
 });
 
-Route::get('/panel','UserController@panel')->name('panel');
+Route::get('/panel','AdminController@index')->name('panel');
 Route::get('/panel/state/{state}','BaseController@citiesAjax');
 
 Route::middleware('can:isAdmin')->group(function () {
-    Route::get('/admin/panel/','AdminController@index')->name('panelAdmin');
+    //Route::get('/admin/panel/','AdminController@index')->name('panelAdmin');
     Route::get('/admin/users','UserController@index');
     Route::get('/admin/user/{user}','UserController@show');
     Route::patch('/admin/profile/update/{user}','UserController@update');

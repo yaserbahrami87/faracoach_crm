@@ -18,8 +18,8 @@
     <!-- CSS Files -->
     <link href={{asset("../dashboard/assets/css/bootstrap.min.css")}} rel="stylesheet" />
     <link href={{asset("../dashboard/assets/css/paper-dashboard.css?v=2.0.1")}} rel="stylesheet" />
-    <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link href={{asset("../dashboard/assets/demo/demo.css")}} rel="stylesheet" />
+    <link href="{{asset('css/kamadatepicker.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('css/timepicker.min.css')}}" rel="stylesheet" />
     <link href={{asset('../css/bootstrap-rtl.min.css')}} rel="stylesheet" />
     <link href="{{asset('../dashboard/assets/css/style.css')}}" rel="stylesheet" />
 </head>
@@ -144,7 +144,7 @@
 <script src={{asset("../dashboard/assets/js/core/popper.min.js")}}></script>
 <script src={{asset("../dashboard/assets/js/core/bootstrap.min.js")}}></script>
 <script src={{asset("../dashboard/assets/js/plugins/perfect-scrollbar.jquery.min.js")}}></script>
-
+<script src="{{asset('../js/farsiType.js')}}"></script>
 
 <!-- Chart JS -->
 <script src={{asset("../dashboard/assets/js/plugins/chartjs.min.js")}}></script>
@@ -158,7 +158,46 @@
         demo.initChartsPages();
     });
 </script>
+<!--  DATE SHAMSI PICKER  --->
+<script src="{{asset('js/kamadatepicker.min.js')}}"></script>
+<script src="{{asset('js/kamadatepicker.holidays.js')}}"></script>
+<script>
+    $(document).ready(function()
+    {
+        kamaDatepicker('dateFollow',
+            {
+                markHolidays:true,
+                markToday:true,
+                twodigit:true,
+                closeAfterSelect:true,
+                nextButtonIcon: "fa fa-arrow-circle-right",
+                previousButtonIcon: "fa fa-arrow-circle-left"
+            });
 
+        kamaDatepicker('nextfollowup_date_fa',
+            {
+                markHolidays:true,
+                markToday:true,
+                twodigit:true,
+                closeAfterSelect:true,
+                nextButtonIcon: "fa fa-arrow-circle-right",
+                previousButtonIcon: "fa fa-arrow-circle-left"
+            });
+    });
+</script>
+<!-- ****************  -->
+
+<script src="{{asset('js/jquery-3.5.1.slim.min.js')}}"></script>
+<script src="{{asset('js/timepicker.js')}}"></script>
+<script>
+    $(document).ready(function()
+    {
+        jQuery.noConflict();
+        jQuery('#time_fa').timepicker();
+    });
+
+
+</script>
 
 </body>
 

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\city;
+use App\followbyCategory;
+use App\problemfollowup;
 use App\state;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -94,7 +96,21 @@ class BaseController extends Controller
             $item->name=str_replace('&#8211;','-',$item->name);
 
         }
+//        dd($contents_api);
         return $contents_api;
+    }
+
+    public function getFollowbyCategory()
+    {
+        return followbyCategory::where('status','=',1)
+                        ->get();
+    }
+
+    public function getproblemfollowup()
+    {
+        return problemfollowup::orderby('problem')
+                ->where('status','=','1')
+                ->get();
     }
 
 

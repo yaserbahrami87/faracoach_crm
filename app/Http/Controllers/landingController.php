@@ -63,29 +63,42 @@ class landingController extends BaseController
         if($check==1)
         {
             $user=User::where('tel','=',$request['tel'])
-                ->first();
-            if($user->fname!=$request['fname'])
+                        ->orwhere('email','=',$request['email'])
+                        ->first();
+
+            if(!is_null($user) )
             {
-                $user->fname=$request['fname'];
+                if ($user->fname != $request['fname']) {
+                    $user->fname = $request['fname'];
+                }
+
+                if($user->lname!=$request['lname'])
+                {
+                    $user->lname=$request['lname'];
+                }
+
+
+                if($user->email!=$request['email'])
+                {
+                    $user->email=$request['email'];
+                }
+
+                if($user->tel!=$request['tel'])
+                {
+                    $user->tel!=$request['tel'];
+                }
+                $status=$user->update();
+            }
+            else
+            {
+                $status=User::create($request->all() +
+                    [
+                        'date_fa'       =>$this->dateNow,
+                        'time_fa'       =>$this->timeNow
+                    ]);
+
             }
 
-            if($user->lname!=$request['lname'])
-            {
-                $user->lname=$request['lname'];
-            }
-
-
-            if($user->email!=$request['email'])
-            {
-                $user->email=$request['email'];
-            }
-
-            if($user->tel!=$request['tel'])
-            {
-                $user->tel!=$request['tel'];
-            }
-
-            $status=$user->update();
             if($status)
             {
                 $msg = "پروفایل با موفقیت به روزرسانی شد";

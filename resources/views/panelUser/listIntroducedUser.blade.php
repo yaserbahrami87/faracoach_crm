@@ -1,6 +1,62 @@
 @extends('panelUser.master.index')
 @section('rowcontent')
-<div class="col-12 border-bottom">
+
+@if($countIntroducedUser<50)
+    <div class="col-12 border-bottom">
+        <form method="post" action="/panel/introduced/add">
+            <small>مشخصات دوستان خود را جهت دعوت به فراکوچ وارد کنید</small>
+            <div class="row" id="formAddIntroduce">
+                {{csrf_field()}}
+                <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 ">
+                    <small>نام:*</small>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="نام وارد کنید" name="fname" lang="fa"/>
+                        <div class="input-group-prepend">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 ">
+                    <small>نام خانوادگی:*</small>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="نام خانوادگی وارد کنید" name="lname" lang="fa" />
+                        <div class="input-group-prepend">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 ">
+                    <small>تلفن همراه:*</small>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="شماره همراه وارد کنید" name="tel"/>
+                        <div class="input-group-prepend">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 ">
+                    <small>پیگیری توسط:*</small>
+                    <div class="input-group mb-3">
+                        <select class="custom-select" name="followby_id">
+                            <option disabled="disabled" selected="selected">انتخاب کنید</option>
+                            @foreach($getFollowbyCategory as $item)
+                                <option value="{{$item->id}}">{{$item->followby}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="input-group">
+                        <!-- <button type="button" class="btn btn-primary" id="addFormIntroduce" title="اضافه کردن فرم جدید">+</button>-->
+                        <button type="submit" class="btn btn-primary">ارسال دعوتنامه</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+@endif
+<div class="col-12 ">
     <div class="row">
         <div class="col-xs-12 col-md-4 col-lg-4 col-xl-4 ">
             <small>نمایش دسته ها:</small>
@@ -42,27 +98,13 @@
         </div>
     </div>
 </div>
-<div class="col-xs-12 col-md-4 col-lg-4 col-xl-4">
-    <small>شماره دوستان خود را جهت دعوت به فراکوچ وارد کنید</small>
-    <form method="post" action="/panel/introduced/add">
-        {{csrf_field()}}
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="شماره همراه وارد کنید" name="tel" />
-            <div class="input-group-prepend">
-                <button class="btn btn-outline-secondary bg-dark text-light m-0" type="submit">
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-plus-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm7.5-3a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </form>
-</div>
+
+
 
 <div class="col-12">
     <div class="row">
         <div class="col-12 border-bottom">
-            <small>تعداد دوستان دعوت شده: <b>{{$countIntroducedUser}} نفر</b></small>
+            <small data-bs-toggle="tooltip" data-bs-placement="top" title="در صورت تبدیل حداقل 5 نفر از دعوت شدگان شما به دانشجو امکان ثبت بیشتر از 50 نفر فعال خواهد شد">تعداد دوستان دعوت شده: <b>{{$countIntroducedUser}}  نفر </b> از 50 نفر </small>
         </div>
         @foreach ($listIntroducedUser as $item)
         <div class="col-lg-3 col-sm-6" id="listFriends">
@@ -102,6 +144,9 @@
                     </a>
                     <a class="btn-modal-introduced btn btn-primary btn-sm" href="{{$item->id}}" title="نمایش" data-toggle="modal" data-target="#modal_introduced_profile">
                         <i class="fa fa-eye"></i>
+                    </a>
+                    <a class="btn-modal-introduced btn btn-primary btn-sm" href="/panel/followup/{{$item->id}}" title="پیگیری ها" >
+                        <i class="fas fa-stamp"></i>
                     </a>
                 </div>
             </div>

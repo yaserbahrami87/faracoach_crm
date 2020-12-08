@@ -88,6 +88,7 @@ return array(
     'App\\categoryfollowup' => $baseDir . '/app/categoryfollowup.php',
     'App\\city' => $baseDir . '/app/city.php',
     'App\\document' => $baseDir . '/app/document.php',
+    'App\\followbyCategory' => $baseDir . '/app/followbyCategory.php',
     'App\\followup' => $baseDir . '/app/followup.php',
     'App\\message' => $baseDir . '/app/message.php',
     'App\\problemfollowup' => $baseDir . '/app/problemfollowup.php',

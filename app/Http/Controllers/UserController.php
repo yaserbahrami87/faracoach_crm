@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\problemfollowup;
 use App\User;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Gate;
@@ -192,20 +191,7 @@ class UserController extends BaseController
 
     public function panel()
     {
-        if(Gate::allows('isAdmin'))
-        {
-            return redirect()->route('panelAdmin');
-        }
-        else if(Gate::allows('isUser'))
-        {
-            $contents_api=$this->get_data_api();
-            return view('panelUser.home')
-                        ->with('contents_api',$contents_api);
-        }
-        else
-        {
-            return redirect('/login');
-        }
+
 
     }
 
@@ -265,9 +251,7 @@ class UserController extends BaseController
         }
 
         //دسته بندی های لیست پیگیری
-        $problemFollowup=problemfollowup::orderby('problem')
-                        ->where('status','=','1')
-                        ->get();
+        $problemFollowup=$this->getproblemfollowup();
 
         //مقدار یوزر با توجه به دستور زیر مقدار ورودی تابع با مقدار خروجی تقییر میکند
         $user=User::find($user);
@@ -346,8 +330,6 @@ class UserController extends BaseController
             ->orwhere('email','=',$request['email'])
             ->count();
             try {
-
-
                 $this->validate(request(),
                     [
                         'fname' => 'nullable|min:3',
@@ -566,9 +548,11 @@ class UserController extends BaseController
                         ->count();
 
         $listIntroducedUser->appends(['category'=>$request['category']]);
+        $getFollowbyCategory=$this->getFollowbyCategory();
         return view('panelUser.listIntroducedUser')
                         ->with('listIntroducedUser',$listIntroducedUser)
-                        ->with('countIntroducedUser',$countIntroducedUser);
+                        ->with('countIntroducedUser',$countIntroducedUser)
+                        ->with('getFollowbyCategory',$getFollowbyCategory);
     }
 
     public function searchUsers(Request $request)
@@ -641,8 +625,13 @@ class UserController extends BaseController
     {
         $this->validate(request(),
         [
-            'tel'     =>'required|numeric|iran_mobile'
+            'fname'         =>'required|persian_alpha|min:3|max:15',
+            'lname'         =>'required|persian_alpha|min:3|max:15',
+            'tel'           =>'required|numeric|iran_mobile',
+            'followby_id'   =>'required|numeric'
         ]);
+
+
 
         $check=user::where('tel','=',$request['tel'])
                     ->count();
@@ -659,7 +648,7 @@ class UserController extends BaseController
 
             if($status)
             {
-                $this->sensSms($request['tel'],'به فراکوچ خوشو آمدید/ شما توسط یکی از آشنایان به فراکوچ دعوت شدید');
+                $this->sensSms($request['tel'],"به فراکوچ خوش آمدید/ شما توسط ".Auth::user()->tel." به فراکوچ دعوت شدید");
                 $msg="تلفن با موفقیت در سیستم فراکوچ ثبت شد";
                 $errorStatus="success";
             }
@@ -671,12 +660,45 @@ class UserController extends BaseController
         }
         else
         {
-            $msg="تلفن مورد نظر در گذشته توسط شما و یا شخص دیگر دعوت شده است";
+            $msg="شخص مورد نظر در گذشته توسط شما و یا شخص دیگر دعوت شده است";
             $errorStatus="danger";
         }
 
         return back()
                 ->with('msg',$msg)
                 ->with('errorStatus',$errorStatus);
+    }
+    // نمایش سابقه پیگیری هر دعوت شده توسط خود یوزر
+    public function showFollowupIntroduced($followup)
+    {
+        if(User::where('id','=',$followup)->count()==1) {
+            $user = User::find($followup);
+            $userInsert = Auth::user();
+            if ($user->introduced == $userInsert->tel) {
+                //لیست پیگیری های انجام شده
+                $followUps = User::join('followups', 'users.id', '=', 'followups.user_id')
+                    ->join('problemfollowups', 'problemfollowups.id', '=', 'followups.problemfollowup_id')
+                    ->where('followups.user_id', '=', $followup)
+                    ->where('followups.insert_user_id', '=', Auth::user()->id)
+                    ->orderby('followups.id', 'asc')
+                    ->get();
+
+                $problemFollowup = $problemFollowup = $this->getproblemfollowup();
+
+
+                return view('panelUser.followupsIntroduced')
+                    ->with('followUps', $followUps)
+                    ->with('userInsert', $userInsert)
+                    ->with('user', $user)
+                    ->with('problemFollowup', $problemFollowup);
+            } else {
+                return redirect('/panel/introduced');
+            }
+        }
+        else
+        {
+            return redirect('/panel/introduced');
+        }
+
     }
 }

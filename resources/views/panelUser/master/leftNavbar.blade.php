@@ -33,7 +33,7 @@
         <li>
             <a href="/panel/introduced">
                 <i class="nc-icon nc-circle-10"></i>
-                <p>معرفی شدگان</p>
+                <p>سیستم پیگیری</p>
             </a>
         </li>
         <li>

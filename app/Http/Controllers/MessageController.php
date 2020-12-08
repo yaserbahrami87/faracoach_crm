@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Support\Facades\Gate;
 
-class MessageController extends Controller
+class MessageController extends BaseController
 {
 
     public function __construct()
@@ -104,14 +104,27 @@ class MessageController extends Controller
         [
             'subject'           =>'required|min:3|string',
             'user_id_recieve'   =>'required|numeric',
-            'comment'           =>'required|string|min:3'
+            'comment'           =>'required|string|min:3|max:250',
+            'attach'            =>'nullable|mimes:jpeg,jpg,pdf|max:600',
         ]);
-
-        $status=message::create($request->all() +
+        if(isset($request['attach'])) {
+            $filename = time() . "-" . Auth::user()->tel . "." . $request->file('attach')->extension();
+            $files = $request->file('attach')->move(public_path('/documents/messages/'), $filename);
+            $request['attach'] = $filename;
+        }
+        else
+        {
+            $filename=NULL;
+        }
+        $status=message::create(
             [
-                'user_id_send'  =>Auth::user()->id,
-                'date_fa'       =>$this->dateNow,
-                'time_fa'       =>$this->timeNow
+                'subject'           =>$request['subject'],
+                'user_id_recieve'   =>$request['user_id_recieve'],
+                'comment'           =>$request['comment'],
+                'user_id_send'      =>Auth::user()->id,
+                'attach'            =>$filename,
+                'date_fa'           =>$this->dateNow,
+                'time_fa'           =>$this->timeNow
             ]);
         if($status)
         {
@@ -145,6 +158,18 @@ class MessageController extends Controller
                 ->orderby('messages.id','desc')
                 ->select('messages.*','users.fname','users.lname')
                 ->get();
+            foreach ($messages as $item)
+            {
+                if($item->user_id_recieve==Auth::user()->id)
+                {
+                   $item['status']=0;
+                   message::where('id','=',$item->id)
+                        ->update([
+                            'status'    =>$item[0]
+                        ]);
+                }
+            }
+
             if(Gate::allows('isAdmin'))
             {
                 return view('panelAdmin/showMessage')
@@ -206,14 +231,27 @@ class MessageController extends Controller
         [
             'comment'   =>'required|string|min:3'
         ]);
+        if(isset($request['attach'])) {
+            $filename = time() . "-" . Auth::user()->tel . "." . $request->file('attach')->extension();
+            $files = $request->file('attach')->move(public_path('/documents/messages/'), $filename);
+            $request['attach'] = $filename;
+        }
+        else
+        {
+            $filename=NULL;
+        }
 
-
-        $status=message::create($request->all() +
+        $status=message::create(
             [
-                'user_id_send'  =>Auth::user()->id,
+                'user_id_recieve'   =>$request['user_id_recieve'],
+                'comment'           =>$request['comment'],
+                'message_id_answer' =>$request['message_id_answer'],
+                'user_id_send'      =>Auth::user()->id,
+                'attach'            =>$filename,
                 'date_fa'       =>$this->dateNow,
                 'time_fa'       =>$this->timeNow
             ]);
+
         if($status)
         {
             $msg="پیام با موفقیت ارسال شد";
