@@ -19,9 +19,14 @@ Route::get('/', function () {
 
 Route::post('/crm/user/insert','UserController@store');
 
-Route::get('/signup crm',function () {
-    return view('signup');
-});
+Route::get('/signup crm','BaseController@signupForm');
+
+
+Route::get('/panel','AdminController@index')->name('panel');
+Route::get('/panel/state/{state}','BaseController@citiesAjax');
+Route::get('/active/mobile/{tel}', 'VerifyController@store');
+Route::get('/active/mobile/verify/{code}','VerifyController@checkCode');
+
 
 Route::middleware('can:isUser')->group(function () {
 
@@ -52,8 +57,8 @@ Route::middleware('can:isUser')->group(function () {
     Route::post('/panel/followup/create','FollowupController@store');
 });
 
-Route::get('/panel','AdminController@index')->name('panel');
-Route::get('/panel/state/{state}','BaseController@citiesAjax');
+
+
 
 Route::middleware('can:isAdmin')->group(function () {
     //Route::get('/admin/panel/','AdminController@index')->name('panelAdmin');

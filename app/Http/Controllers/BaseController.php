@@ -6,7 +6,9 @@ use App\city;
 use App\followbyCategory;
 use App\problemfollowup;
 use App\state;
+use App\User;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 
 class BaseController extends Controller
@@ -16,6 +18,19 @@ class BaseController extends Controller
         $this->dateNow = $dateNow->format('Y/m/d');
         $this->timeNow = $dateNow->format('H:i:s');
     }
+
+    public function signupForm()
+    {
+        if(Gate::allows('isUser')||Gate::allows('isAdmin'))
+        {
+            return redirect('/panel');
+        }
+        else
+        {
+            return view('signup');
+        }
+    }
+
 
     public function sensSms($tel,$msg)
     {
@@ -76,6 +91,13 @@ class BaseController extends Controller
                         break;
             default:return "خطا";
         }
+    }
+
+    //کاربر براساس شماره تلفن برمیگرداند
+    public function get_user($tel)
+    {
+        $user=User::where('tel','=',$tel)->first();
+        return  $user;
     }
 
     public function get_data_api()

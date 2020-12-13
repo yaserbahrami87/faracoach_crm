@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" />
-    <link href="css/bootstrap-rtl.min.css" rel="stylesheet" />
-    <link href="css/style.css" rel="stylesheet" />
-    <link href="css/landing.css" rel="stylesheet" />
-    <link href="css/stepwizard.css" rel="stylesheet" />
-    <link href="slick-1.8.1/slick-1.8.1/slick/slick.css" rel="stylesheet" type="text/css" />
-    <link href="slick-1.8.1/slick-1.8.1/slick/slick-theme.css" rel="stylesheet" type="text/css" />
+    <link href={{asset("css/bootstrap.min.css")}} rel="stylesheet" />
+    <link href={{asset("css/bootstrap-rtl.min.css")}} rel="stylesheet" />
+    <link href={{asset("css/style.css")}} rel="stylesheet" />
+    <link href={{asset("css/landing.css")}} rel="stylesheet" />
+    <link href={{asset("css/stepwizard.css")}} rel="stylesheet" />
+    <link href={{asset("slick-1.8.1/slick-1.8.1/slick/slick.css")}} rel="stylesheet" type="text/css" />
+    <link href={{asset("slick-1.8.1/slick-1.8.1/slick/slick-theme.css")}} rel="stylesheet" type="text/css" />
 
     <title>فراکوچ | دانلود رایگان دوره آموزش کوچینگ</title>
   </head>
@@ -47,13 +47,14 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="js/jquery-3.5.1.slim.min.js" ></script>
-    <script src="js/popper.min.js" ></script>
-    <script src="js/bootstrap.min.js" ></script>
-    <script src="js/farsiType.js"></script>
-    <script type="text/javascript" src="slick-1.8.1/slick-1.8.1/slick/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="slick-1.8.1/slick-1.8.1/slick/jquery-migrate-1.2.1.min.js"></script>
-    <script type="text/javascript" src="slick-1.8.1/slick-1.8.1/slick/slick.min.js"></script>
+    <script src={{asset("js/jquery-3.5.1.slim.min.js")}} ></script>
+    <script src={{asset("js/popper.min.js")}} ></script>
+    <script src={{asset("js/bootstrap.min.js")}} ></script>
+    <script src={{asset("js/farsiType.js")}}></script>
+    <script type="text/javascript" src={{asset("slick-1.8.1/slick-1.8.1/slick/jquery-1.11.0.min.js")}}></script>
+    <script type="text/javascript" src={{asset("slick-1.8.1/slick-1.8.1/slick/jquery-migrate-1.2.1.min.js")}}></script>
+    <script type="text/javascript" src={{asset("slick-1.8.1/slick-1.8.1/slick/slick.min.js")}}></script>
+    <script src="{{asset('js/java.js')}}"></script>
     <script>
       $(document).ready(function()
       {

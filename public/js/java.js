@@ -41,4 +41,27 @@ $(document).ready(function () {
     $('div.setup-panel div a.btn-success').trigger('click');
 
 
+    //َAjax Confirm Mobile
+    $("#activeMobile").click(function()
+    {
+        var loading='<div class="col-12 text-center"><div class="spinner-border text-primary text-center" role="status"><span class="sr-only">Loading...</span></div></div>';
+        $("#modal_body").html(loading);
+        var data=$("#tel").val();
+        if(data.length>0)
+        {
+            $.ajax({
+                type:'GET',
+                url:"/active/mobile/"+data,
+                success:function(data)
+                {
+                    $("#modal_body").html(data);
+                }
+            });
+        }
+        else
+        {
+            var loading='<p>لطفا تلفن همراه را جهت تایید وارد کنید</p>';
+            $("#modal_body").html(loading);
+        }
+    });
 });

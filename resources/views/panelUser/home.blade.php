@@ -8,6 +8,4 @@
             @include('panelUser.cardBox')
         </div>
     </div>
-
-
 @endsection

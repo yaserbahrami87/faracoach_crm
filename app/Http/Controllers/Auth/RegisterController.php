@@ -29,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = "/panel";//$redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -50,9 +50,13 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'fname'         => ['persian_alpha','required', 'string', 'max:30'],
+            'lname'         => ['persian_alpha','required', 'string', 'max:30'],
+            'email'         => ['required', 'string', 'email', 'max:150', 'unique:users'],
+            'tel'           => ['required','numeric','unique:users','regex:/^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}$/'],
+            'password'      => ['required', 'string', 'min:8', 'confirmed'],
+            'tel_verified'  => ['required','boolean']
+
         ]);
     }
 
@@ -65,9 +69,12 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'fname'         => $data['fname'],
+            'lname'         => $data['lname'],
+            'email'         => $data['email'],
+            'tel'           =>$data['tel'],
+            'tel_verified'  =>$data['tel_verified'],
+            'password'      => Hash::make($data['password']),
         ]);
     }
 }

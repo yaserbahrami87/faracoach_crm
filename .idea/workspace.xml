@@ -2,36 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/panelUser/boxProfile.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/panelUser/followups.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/panelUser/followupsIntroduced.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/panelUser/insertFollowUp.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/panelUser/products.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MessageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MessageController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/landingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/landingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/message.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/message.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/dashboard/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/dashboard/assets/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/dashboard/assets/js/java.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/dashboard/assets/js/java.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/java.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/java.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/master/leftNavbar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/master/leftNavbar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/cardBox.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/cardBox.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/insertMessage.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/insertMessage.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/listIntroducedUser.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/listIntroducedUser.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/master/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/master/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/master/leftNavbar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/master/leftNavbar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/messages.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/messages.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/profile.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/showMessage.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/showMessage.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_files.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_files.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -292,7 +263,8 @@
       <workItem from="1607275591273" duration="14578000" />
       <workItem from="1607329980596" duration="7463000" />
       <workItem from="1607364350709" duration="15799000" />
-      <workItem from="1607417551377" duration="22975000" />
+      <workItem from="1607417551377" duration="25008000" />
+      <workItem from="1607542256496" duration="611000" />
     </task>
     <servers />
   </component>
