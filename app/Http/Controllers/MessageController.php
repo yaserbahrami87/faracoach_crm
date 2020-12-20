@@ -17,7 +17,6 @@ class MessageController extends BaseController
         $dateNow = verta();
         $this->dateNow = $dateNow->format('Y/m/d');
         $this->timeNow = $dateNow->format('H:i:s');
-
     }
 
     /**

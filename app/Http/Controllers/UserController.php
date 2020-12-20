@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Throwable;
 
 class UserController extends BaseController
 {
@@ -203,29 +204,39 @@ class UserController extends BaseController
      * @return \Illuminate\Http\Response
      */
 
+
+     // نمایش اطلاعات پروفایل خود کاربر
     public function profile(User $user)
     {
         $user=(Auth::user());
-        if(strlen($user->personal_image)==0)
-            {
-                $user->personal_image="default-avatar.png";
-            }
 
-        //تعداد افراد دعوت شده
-        $countIntroducedUser=User::where('introduced','=',$user->tel)
-                        ->count();
+            if(strlen($user->personal_image)==0)
+                {
+                    $user->personal_image="default-avatar.png";
+                }
 
-        //یوزر توسط چه کسی معرفی شده است
-        $resourceIntroduce=User::where('tel','=',$user->introduced)
-                        ->first();
+            //تعداد افراد دعوت شده
+            $countIntroducedUser=User::where('introduced','=',$user->tel)
+                            ->count();
 
-        $states=$this->states();
-        return view ('panelUser.profile')
-                    ->with('user',$user)
-                    ->with('countIntroducedUser',$countIntroducedUser)
-                    ->with('resourceIntroduce',$resourceIntroduce)
-                    ->with('states',$states);
+            //یوزر توسط چه کسی معرفی شده است
+            $resourceIntroduce=User::where('tel','=',$user->introduced)
+                            ->first();
+
+            $states=$this->states();
+
+            //انتخاب شهر براساس کد
+            $city=$this->city($user->city);
+            return view ('panelUser.profile')
+                        ->with('user',$user)
+                        ->with('countIntroducedUser',$countIntroducedUser)
+                        ->with('resourceIntroduce',$resourceIntroduce)
+                        ->with('states',$states)
+                        ->with('city',$city);
+
     }
+
+
 
     public function show($user)
     {
@@ -326,37 +337,38 @@ class UserController extends BaseController
     public function update(Request $request,User $user)
     {
 
-        $check=User::where('codemelli','=',$request['codemelli'])
+        $status=User::where('codemelli','=',$request['codemelli'])
             ->orwhere('email','=',$request['email'])
+            ->orwhere('tel','=',$request['tel'])
             ->count();
-            try {
+
                 $this->validate(request(),
                     [
-                        'fname' => 'nullable|min:3',
-                        'lname' => 'nullable|min:3',
-                        'codemelli' => 'nullable:codemelli|min:9|unique:users',
-                        'sex' => 'nullable|boolean',
-                        'tel' => 'nullable|numeric',
-                        'shenasname' => 'nullable|numeric',
-                        'father' => 'nullable|min:3|',
-                        'born' => 'nullable|min:3',
-                        'married' => 'nullable|boolean',
-                        'education' => 'nullable|min:4',
-                        'reshteh' => 'nullable|min:4',
-                        'state' => 'nullable|min:4',
-                        'city' => 'nullable|min:4',
-                        'address' => 'nullable|min:4',
-                        'personal_image' => 'nullable|mimes:jpeg,jpg,pdf|max:600',
+                        'fname'             => 'nullable|min:3|persian_alpha',
+                        'lname'             => 'nullable|min:3|persian_alpha',
+                        'codemelli'         => 'min:9|melli_code',
+                        'sex'               => 'nullable|boolean',
+                        'tel'               => 'required|iran_mobile|',
+                        'shenasname'        => 'nullable|numeric',
+                        'father'            => 'nullable|min:3|persian_alpha',
+                        'born'              => 'nullable|min:3|persian_alpha',
+                        'married'           => 'nullable|boolean',
+                        'education'         => 'nullable|min:4|persian_alpha',
+                        'reshteh'           => 'nullable|min:4|persian_alpha',
+                        'state'             => 'nullable|numeric',
+                        'city'              => 'nullable|numeric',
+                        'address'           => 'nullable|min:4|',
+                        'personal_image'    => 'nullable|mimes:jpeg,jpg,pdf|max:600',
                         'shenasnameh_image' => 'nullable|mimes:jpeg,jpg,pdf|max:600',
-                        'cartmelli_image' => 'nullable|mimes:jpeg,jpg,pdf|max:600',
-                        'education_image' => 'nullable|mimes:jpeg,jpg,pdf|max:600',
-                        'email' => 'nullable|email|unique:users',
+                        'cartmelli_image'   => 'nullable|mimes:jpeg,jpg,pdf|max:600',
+                        'education_image'   => 'nullable|mimes:jpeg,jpg,pdf|max:600',
+                        'email'             => 'nullable|email|unique:users',
                     ]);
 
 
                 if ($request->has('personal_image') && $request->file('personal_image')->isValid()) {
                     $file = $request->file('personal_image');
-                    $personal_image = "personal-" . $user->id . "." . $request->file('personal_image')->extension();
+                    $personal_image = "personal-" . $user->tel . "." . $request->file('personal_image')->extension();
                     $path = public_path('/documents/users/');
                     $files = $request->file('personal_image')->move($path, $personal_image);
                     $request->personal_image = $personal_image;
@@ -364,7 +376,7 @@ class UserController extends BaseController
 
                 if ($request->has('shenasnameh_image') && $request->file('shenasnameh_image')->isValid()) {
                     $file = $request->file('shenasnameh_image');
-                    $shenasnameh_image = "shenasnameh-" . $user->id . "." . $request->file('shenasnameh_image')->extension();
+                    $shenasnameh_image = "shenasnameh-" . $user->tel . "." . $request->file('shenasnameh_image')->extension();
                     $path = public_path('/documents/users/');
                     $files = $request->file('shenasnameh_image')->move($path, $shenasnameh_image);
                     $request->shenasnameh_image = $shenasnameh_image;
@@ -373,7 +385,7 @@ class UserController extends BaseController
 
                 if ($request->has('cartmelli_image') && $request->file('cartmelli_image')->isValid()) {
                     $file = $request->file('cartmelli_image');
-                    $cartmelli_image = "cartmelli-" . $user->id . "." . $request->file('cartmelli_image')->extension();
+                    $cartmelli_image = "cartmelli-" . $user->tel . "." . $request->file('cartmelli_image')->extension();
                     $path = public_path('/documents/users/');
                     $files = $request->file('cartmelli_image')->move($path, $cartmelli_image);
                     $request->cartmelli_image = $cartmelli_image;
@@ -381,13 +393,24 @@ class UserController extends BaseController
 
                 if ($request->has('education_image') && $request->file('education_image')->isValid()) {
                     $file = $request->file('education_image');
-                    $education_image = "education-" . $user->id . "." . $request->file('education_image')->extension();
+                    $education_image = "education-" . $user->tel . "." . $request->file('education_image')->extension();
                     $path = public_path('/documents/users/');
                     $files = $request->file('education_image')->move($path, $education_image);
                     $request->education_image = $education_image;
                 }
-
+            try
+            {
                 $user->update($request->all());
+            }
+            catch(Throwable $e)
+            {
+
+               $msg = $e->errorInfo[2];
+               $errorStatus = "danger";
+               return back()->with('msg',$msg)
+                            ->with('errorStatus',$errorStatus);
+
+            }
                 if (isset($personal_image)) {
                     $user->personal_image = $personal_image;
                 }
@@ -403,18 +426,14 @@ class UserController extends BaseController
                 if (isset($education_image)) {
                     $user->education_image = $education_image;
                 }
-
+                $user->tel_verified=0;
                 $user->save();
                 $msg = "پروفایل با موفقیت به روزرسانی شد";
                 $errorStatus = "success";
-            }catch (\Illuminate\Database\QueryException $e)
-            {
 
-            }
+                return back()->with('msg',$msg)
+                            ->with('errorStatus',$errorStatus);
 
-
-        return back()->with('msg',$msg)
-                    ->with('errorStatus',$errorStatus);
     }
 
     /**
@@ -623,11 +642,12 @@ class UserController extends BaseController
 
     public function addIntroducedUser(Request $request)
     {
+
         $this->validate(request(),
         [
             'fname'         =>'required|persian_alpha|min:3|max:15',
             'lname'         =>'required|persian_alpha|min:3|max:15',
-            'tel'           =>'required|numeric|iran_mobile',
+            'tel'           =>'required|numeric|iran_mobile|',
             'followby_id'   =>'required|numeric'
         ]);
 

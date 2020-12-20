@@ -10,6 +10,7 @@ use App\User;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BaseController extends Controller
 {
@@ -58,6 +59,8 @@ class BaseController extends Controller
         $res_data = $response2[1];
     }
 
+
+    //نمایش استان ها از بانک اطلاعاتی
     public function states()
     {
         $states=state::orderby('name','asc')
@@ -65,15 +68,25 @@ class BaseController extends Controller
         return $states;
     }
 
+    public function city($code)
+    {
+        return city::where('id','=',$code)
+                    ->select('cities.name')
+                    ->first();
+    }
+
+
+    // انتخاب شهر بر اساس ورودی کد استان مورد نظر به صورت ایجکس برای فرم ها
     public function citiesAjax($state)
     {
+        $user=Auth::user();
         $cities=city::where('state_id','=',$state)
                     ->groupby('name')
                     ->orderby('name','asc')
                     ->get();
         foreach($cities as $item)
         {
-            echo "<option value='{{$item->id}}'>".$item->name."</option>";
+            echo "<option value='$item->id' @if($item->id==$user->city) selected @endif>".$item->name."</option>";
         }
     }
 
@@ -134,6 +147,4 @@ class BaseController extends Controller
                 ->where('status','=','1')
                 ->get();
     }
-
-
 }

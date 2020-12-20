@@ -12,7 +12,7 @@
                 </div>
             </div>
         @endif
-        <form method="POST" action="/panel/followup/create/" >
+        <form method="POST" action="/panel/followup/create" >
             {{csrf_field()}}
                 <div class="row">
                     <input type="hidden" name="insert_user_id" value="{{$userInsert->id}}" />

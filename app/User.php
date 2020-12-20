@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'fname', 'lname', 'codemelli','sex','tel','shenasname','father','born','married','education','reshteh','state','city','address','personal_image','shenasnameh_image','cartmelli_image','education_image','email','password','resource','detailsresource','introduced','gettingknow','followby_id','tel_verified'
+        'fname', 'lname', 'codemelli','sex','tel','shenasname','father','born','married','education','reshteh','state','city','address','personal_image','shenasnameh_image','cartmelli_image','education_image','email','password','resource','detailsresource','introduced','gettingknow','followby_id','tel_verified','last_login_at'
     ];
 
     /**
@@ -41,4 +41,11 @@ class User extends Authenticatable
 //    {
 //        return 'tel';
 //    }
+
+        protected $rules = [
+            'email'     => 'sometimes|required|email|unique:users',
+            'tel'       => 'sometimes|required|iran_mobile|unique:users',
+            'codemelli' => 'sometimes|required|melli_code|unique:users',
+        ];
+
 }

@@ -7,7 +7,7 @@
         @include('panelUser.boxAmoozeshi')
     </div>
     <div class="col-md-8">
-        <form method="post" action="/admin/profile/update/{{$user->id}}" enctype="multipart/form-data">
+        <form method="post" action="/panel/profile/update/{{$user->id}}" enctype="multipart/form-data">
             {{csrf_field()}}
             {{method_field('PATCH')}}
             <div class="card card-user">
@@ -73,13 +73,19 @@
                         <div class="col-md-6 pl-1">
                             <div class="form-group">
                                 <label>استان</label>
-                                <input type="text" class="form-control" placeholder="استان را وارد کنید" value="{{$user->state}}" name="state"  />
+                                <select class="custom-select" name="state" id="state">
+                                     @foreach ($states as $item)
+                                         <option value="{{$item->id}}" @if($item->id==$user->state) selected @endif>{{$item->name}}</option>
+                                     @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-6 px-1">
                             <div class="form-group">
                                 <label>شهر</label>
-                                <input type="text" class="form-control" placeholder="شهر را وارد کنید" value="{{$user->city}}" name="city"  />
+                                <select class="custom-select" name="city" id="city">
+                                    <option value="{{$user->city}}">@if(!is_null($city))  {{$city->name}}  @endif </option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-12 px-1">
@@ -113,6 +119,7 @@
                                 <label for="exampleFormControlSelect1">جنسیت</label>
                                 <div class="form-group">
                                     <select class="form-control p-0" id="exampleFormControlSelect1" name="sex" >
+                                        <option selected disabled>انتخاب کنید</option>
                                         <option value="0"  {{ $user->sex =="0" ? 'selected='.'"'.'selected'.'"' : '' }}>زن</option>
                                         <option value="1" {{ $user->sex =="1" ? 'selected='.'"'.'selected'.'"' : '' }}>مرد</option>
                                     </select>
@@ -124,6 +131,7 @@
                                 <label>تاهل</label>
                                 <div class="form-group">
                                     <select class="form-control p-0" id="exampleFormControlSelect1" name="married" >
+                                        <option selected disabled>انتخاب کنید</option>
                                         <option value="0" {{ $user->married =="0" ? 'selected='.'"'.'selected'.'"' : '' }}>مجرد</option>
                                         <option value="1" {{ $user->married =="1" ? 'selected='.'"'.'selected'.'"' : '' }}>متاهل</option>
                                     </select>
@@ -141,7 +149,15 @@
                         <div class="col-md-4 px-1">
                             <div class="form-group">
                                 <label>تحصیلات</label>
-                                <input type="text" class="form-control" placeholder="تحصیلات را وارد کنید" value="{{$user->education}}" name="education"  />
+                                <select class="custom-select" name="education" id="education">
+                                    <option selected disabled>انتخاب کنید</option>
+                                    <option @if($user->education=='سیکل') selected   @endif>سیکل</option>
+                                    <option @if($user->education=='دیپلم') selected   @endif>دیپلم</option>
+                                    <option @if($user->education=='فوق دیپلم') selected   @endif>فوق دیپلم</option>
+                                    <option @if($user->education=='لیسانس') selected   @endif>لیسانس</option>
+                                    <option @if($user->education=='فوق لیسانس') selected   @endif>فوق لیسانس</option>
+                                    <option @if($user->education=='دکتری و بالاتر') selected   @endif>دکتری و بالاتر</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-4 pr-1">
@@ -186,6 +202,7 @@
                     </div>
                 </div>
             </div>
+            <button type="submit" class="btn btn-outline-success">بروزرسانی</button>
 
         </form>
     </div>

@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-12 text-center">
-        <img class="avatar border-gray" src="{{asset('/documents/users/'.$user->personal_image)}}" />
+        <img class="avatar border-gray rounded-circle" src="{{asset('/documents/users/'.$user->personal_image)}}" />
     </div>
     <div class="col-md-6 pl-1">
         <div class="form-group">
@@ -30,6 +30,12 @@
         <div class="form-group">
             <label>وضعیت</label>
             <input type="text" class="form-control" disabled="disabled" value="{{$user->type}}"  />
+        </div>
+    </div>
+    <div class="col-md-6 px-1">
+        <div class="form-group">
+            <label>آخرین ورود</label>
+            <input type="text" class="form-control" disabled="disabled" value="{{$user->last_login_at}}"  />
         </div>
     </div>
 </div>

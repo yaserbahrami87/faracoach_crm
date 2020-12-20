@@ -48,6 +48,7 @@ class FollowupController extends Controller
     public function store(Request $request)
     {
 
+
         $this->validate($request,[
             'insert_user_id'        =>'required|numeric',
             'user_id'               =>'required|numeric|',
@@ -72,7 +73,6 @@ class FollowupController extends Controller
             'time_fa'               =>$request['time_fa'],
             'datetime_fa'           =>$request['date_fa']." ".$request['time_fa']
         ]);
-
         $data=User::where('users.id','=',$request['user_id'])
                         ->first();
 

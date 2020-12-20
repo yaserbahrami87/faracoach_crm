@@ -6,6 +6,8 @@ use App\followup;
 use App\message;
 use App\problemfollowup;
 use App\User;
+use App\verify;
+use Carbon\Carbon;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
@@ -58,37 +60,58 @@ class AdminController extends BaseController
         else if(Gate::allows('isUser'))
         {
             $user=(Auth::user());
-            if(strlen($user->personal_image)==0)
-            {
-                $user->personal_image="default-avatar.png";
-            }
 
-            //تعداد افراد دعوت شده
-            $countIntroducedUser=User::where('introduced','=',$user->tel)
-                ->count();
+                if(strlen($user->personal_image)==0)
+                {
+                    $user->personal_image="default-avatar.png";
+                }
 
-            //یوزر توسط چه کسی معرفی شده است
-            $resourceIntroduce=User::where('tel','=',$user->introduced)
-                ->first();
-            //تعداد پیام های خوانده نشده
-            $unreadMessage=message::where('user_id_recieve','=',$user->id)
-                    ->where('status','=',1)
+                //تعداد افراد دعوت شده
+                $countIntroducedUser=User::where('introduced','=',$user->tel)
                     ->count();
-            //کسب امتیازات
-            $score=$countIntroducedUser*5;
-            $scoreSuccess=User::where('introduced','=',$user->tel)
-                    ->where('type','=',20)
-                    ->count();
-            $scoreSuccess=$scoreSuccess*10;
-            $score=$score+$scoreSuccess;
 
+                //یوزر توسط چه کسی معرفی شده است
+                $resourceIntroduce=User::where('tel','=',$user->introduced)
+                    ->first();
+                //تعداد پیام های خوانده نشده
+                $unreadMessage=message::where('user_id_recieve','=',$user->id)
+                        ->where('status','=',1)
+                        ->count();
+                //کسب امتیازات
+                $score=$countIntroducedUser*5;
+                if($user->tel_verified==1)
+                {
+                    $score=$score+5;
+                }
+                $scoreSuccess=User::where('introduced','=',$user->tel)
+                        ->where('type','=',20)
+                        ->count();
+                $scoreSuccess=$scoreSuccess*10;
+                $score=$score+$scoreSuccess;
 
-            return view('panelUser.home')
-                ->with('user',$user)
-                ->with('countIntroducedUser',$countIntroducedUser)
-                ->with('resourceIntroduce',$resourceIntroduce)
-                ->with('unreadMessage',$unreadMessage)
-                ->with('score',$score);
+                $checkTimeCode=verify::where('tel','=',$user['tel'])
+                                ->where('verify','=',0)
+                                ->latest()
+                                ->first();
+                $verifyStatus=false;
+                if(!is_null( $checkTimeCode))
+                {
+                    $date=($checkTimeCode['created_at']);
+                    $checkDays=$date->addMinutes(10);
+                    if($checkDays>Carbon::now())
+                    {
+                        $verifyStatus=true;
+                    }
+                }
+
+                return view('panelUser.home')
+                    ->with('user',$user)
+                    ->with('countIntroducedUser',$countIntroducedUser)
+                    ->with('resourceIntroduce',$resourceIntroduce)
+                    ->with('unreadMessage',$unreadMessage)
+                    ->with('score',$score)
+                    ->with('verifyStatus',$verifyStatus);
+
         }
         else
         {

@@ -55,6 +55,10 @@ Route::middleware('can:isUser')->group(function () {
     //followup
     Route::get('/panel/followup/{followup}','UserController@showFollowupIntroduced');
     Route::post('/panel/followup/create','FollowupController@store');
+
+    //Tel verify
+    Route::get('/panel/active/mobile/','VerifyController@verifyTelPanel');
+    Route::post('/panel/active/mobile/code','VerifyController@checkVerifyTelPanel');
 });
 
 

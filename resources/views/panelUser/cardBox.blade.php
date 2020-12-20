@@ -1,3 +1,35 @@
+@if($user->tel_verified==0)
+    <div class="col-12">
+        <div class="alert alert-warning">
+            برای ادامه فعالیت باید تلفن همراه خود را در سیستم فراکوچ ثبت کنید
+        </div>
+        @if ($verifyStatus==false)
+            <form method="get" action="/panel/active/mobile/">
+                <div class="input-group">
+                    <input id="tel" type="text" class="form-control @error('tel') is-invalid @enderror" name="tel" value="{{ old('tel') }}" required autocomplete="tel">
+                    <div class="input-group-prepend ">
+                        <button class="btn btn-outline-secondary btn-info text-light m-0" type="submit" id="activeMobile" data-toggle="modal" data-target="#ModalMobile">ارسال کد فعال سازی</button>
+                    </div>
+                </div>
+            </form>
+        @else
+            <div class="alert alert-warning">
+                جهت فعال سازی کد ارسال شده به تلفن همراه را وارد کنید
+            </div>
+            <form method="post" action="/panel/active/mobile/code">
+                {{csrf_field()}}
+                <div class="input-group">
+                    <input id="tel" type="text" class="form-control @error('tel') is-invalid @enderror" name="tel" value="{{ old('tel') }}" required autocomplete="tel">
+                    <div class="input-group-prepend ">
+                        <button class="btn btn-outline-secondary btn-info text-light m-0" type="submit" id="activeMobile" data-toggle="modal" data-target="#ModalMobile">فعال سازی</button>
+                    </div>
+                </div>
+            </form>
+        @endif
+
+    </div>
+
+@endif
 <div class="col-lg-4 col-md-6 col-sm-6 card_home_user">
     <div class="card card-stats">
         <div class="card-body ">

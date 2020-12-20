@@ -98,9 +98,12 @@ $(document).ready(function()
 
     $('#addFormIntroduce').click(function(e)
     {
-
+        var data='<div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 "><small>نام:*</small><div class="input-group mb-3"><input type="text" class="form-control" placeholder="نام وارد کنید" name="fname[]" lang="fa"/><div class="input-group-prepend"></div></div></div><div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 "><small>نام خانوادگی:*</small><div class="input-group mb-3"><input type="text" class="form-control" placeholder="نام خانوادگی وارد کنید" name="lname[]" lang="fa" /><div class="input-group-prepend"></div></div></div><div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 "><small>تلفن همراه:*</small><div class="input-group mb-3"><input type="text" class="form-control" placeholder="شماره همراه وارد کنید" name="tel[]"/><div class="input-group-prepend"></div></div></div><div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 "><small>پیگیری توسط:*</small><div class="input-group mb-3"><select class="custom-select" name="followby_id[]"><option disabled="disabled" selected="selected">انتخاب کنید</option><option value="1">آموزش</option><option value="2">خودم</option></select></div></div>';
+        $("#formAddIntroduce").append(data);
         console.log("ADD");
     });
+
+
 
 });
 
