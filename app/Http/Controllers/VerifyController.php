@@ -322,25 +322,40 @@ class VerifyController extends BaseController
                 'tel'           =>'required|numeric|iran_mobile|',
             ]);
             $six_digit_random_number = mt_rand(100000, 999999);
-            $status=verify::create(
-                [
-                    'tel'           =>$request['tel'],
-                    'code'          =>$six_digit_random_number,
-                    'date_fa'       =>$this->dateNow,
-                    'time_fa'       =>$this->timeNow
-                ]);
-            if($status)
+            $verify=verify::where('tel','=',$request['tel'])
+                        ->latest()
+                        ->first();
+            $created_at=($verify['created_at']);
+            $created_at_add=$created_at->addMinutes(10);
+
+            if($created_at_add<Carbon::now())
             {
-                $message="رمز یکبار مصرف شما در سیستم فراکوچ : " . $six_digit_random_number ;
-                $this->sensSms($request['tel'],$message);
-                return back()->with('msg','رمز یکبار مصرف شما به شماره '.$request['tel'].' ارسال شد')
-                             ->with('errorStatus','success')
-                             ->with('status',true);
+                $status=verify::create(
+                    [
+                        'tel'           =>$request['tel'],
+                        'code'          =>$six_digit_random_number,
+                        'date_fa'       =>$this->dateNow,
+                        'time_fa'       =>$this->timeNow
+                    ]);
+                if($status)
+                {
+                    $message="رمز یکبار مصرف شما در سیستم فراکوچ : " . $six_digit_random_number ;
+                    $this->sensSms($request['tel'],$message);
+                    return back()->with('msg','رمز یکبار مصرف شما به شماره '.$request['tel'].' ارسال شد')
+                                ->with('errorStatus','success')
+                                ->with('status',true);
+                }
+                else
+                {
+                    return back()->with('msg','خطا در ارسال رمز یکبار مصرف')
+                                ->with('errorStatus','danger');
+                }
             }
             else
             {
-                return back()->with('msg','خطا در ارسال رمز یکبار مصرف')
-                             ->with('errorStatus','danger');
+                return back()->with('msg','رمز یکبار مصرف کمتر از 10 دقیقه به شماره '.$request['tel']." ارسال شده است")
+                                ->with('errorStatus','success')
+                                ->with('status',true);
             }
 
         }
@@ -352,6 +367,7 @@ class VerifyController extends BaseController
 
     }
 
+    //چک کردن کد ارسال شده به موبایل برای لاگین
     public function checkCodewithoutPass(Request $request)
     {
         $status=verify::where('code','=',$request['code'])
@@ -362,10 +378,29 @@ class VerifyController extends BaseController
             $user=verify::where('code','=',$request['code'])
                     ->where('verify','=',0)
                     ->first();
+            $created_at=($user['created_at']);
+            $created_at_add=$created_at->addMinutes(10);
+            if($created_at_add>Carbon::now())
+            {
+                $user=$this->get_user($user->tel);
+                if(!is_null($user))
+                {
+                    $user=$this->get_user($user->tel);
+                    Auth::login($user);
+                    return redirect('/panel');
+                }
+                else
+                {
+                    return back()->with('msg','کاربری با چنین تلفن همراه موجود نیست')
+                         ->with('errorStatus','danger');
+                }
 
-            $user=$this->get_user($user->tel);
-            Auth::login($user);
-            return redirect('/panel');
+            }
+            else
+            {
+                return back()->with('msg','رمز یکبار مصرف منقضی شده است')
+                         ->with('errorStatus','danger');
+            }
         }
         else
         {
