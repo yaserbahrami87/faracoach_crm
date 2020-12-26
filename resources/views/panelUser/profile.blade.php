@@ -31,7 +31,7 @@
                         <div class="col-md-6 px-1">
                             <div class="form-group">
                                 <label for="codemelli">کد ملی</label>
-                                <input type="text" class="form-control" placeholder="کد ملی را وارد کنید" value="{{$user->codemelli}}" id="codemelli" name="codemelli" {{strlen($user->codemelli)===0?"": "disabled" }} />
+                                <input type="text" class="form-control" placeholder="کد ملی را وارد کنید" value="{{$user->codemelli}}" id="codemelli" name="codemelli" />
                             </div>
                         </div>
                         <div class="col-md-6 px-1">
@@ -67,13 +67,14 @@
                         <div class="col-md-6 pr-1">
                             <div class="form-group">
                                 <label for="email">پست الکترونیکی</label>
-                                <input type="email" class="form-control" placeholder="پست الکترونیکی را وارد کنید" value="{{$user->email}}" name="email"  id="email"   {{strlen($user->email)===0?"": "disabled" }} />
+                                <input type="email" class="form-control" placeholder="پست الکترونیکی را وارد کنید" value="{{$user->email}}" name="email"  id="email"  />
                             </div>
                         </div>
                         <div class="col-md-6 pl-1">
                             <div class="form-group">
                                 <label>استان</label>
                                 <select class="custom-select" name="state" id="state">
+                                     <option selected disabled>استان را انتخاب کنید</option>
                                      @foreach ($states as $item)
                                          <option value="{{$item->id}}" @if($item->id==$user->state) selected @endif>{{$item->name}}</option>
                                      @endforeach

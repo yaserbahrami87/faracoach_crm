@@ -30,11 +30,12 @@
                     </div>
                     <div class="col-md-4 pl-1">
                         <div class="form-group">
-                            <label>وضعیت پس از پیگیری</label>
+                            <label>کیفیت سنجی مشتری</label>
                             <select class="form-control p-0" id="exampleFormControlSelect1" name="status_followups" >
                                     <option disabled="disabled" selected >وضعیت را انتخاب کنید</option>
-                                    <option class="primary_bg_admin" value="11" >در حال پیگیری</option>
-                                    <option class="danger_bg_admin" value="12" >انصراف</option>
+                                    <option class="primary_bg_admin" value="11" >در حال مذاکره</option>
+                                    <option class="danger_bg_admin" value="12" >کنسل شد</option>
+                                    <option class="bg-info text-light" value="13">در انتظار تصمیم</option>
                                     <option class="success_bg_admin" value="20" >دانشجو</option>
                             </select>
                         </div>

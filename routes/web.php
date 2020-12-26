@@ -26,7 +26,9 @@ Route::get('/panel','AdminController@index')->name('panel');
 Route::get('/panel/state/{state}','BaseController@citiesAjax');
 Route::get('/active/mobile/{tel}', 'VerifyController@store');
 Route::get('/active/mobile/verify/{code}','VerifyController@checkCode');
-
+Route::get('/loginSMS','AdminController@loginSMS');
+Route::post('/panel/storeCodewithoutPass','VerifyController@storeCodewithoutPass');
+Route::post('/panel/checkCodewithoutPass','VerifyController@checkCodewithoutPass');
 
 Route::middleware('can:isUser')->group(function () {
 
@@ -59,6 +61,9 @@ Route::middleware('can:isUser')->group(function () {
     //Tel verify
     Route::get('/panel/active/mobile/','VerifyController@verifyTelPanel');
     Route::post('/panel/active/mobile/code','VerifyController@checkVerifyTelPanel');
+
+    //Packages
+    Route::get('/panel/freepackages','AdminController@showFreePackages');
 });
 
 

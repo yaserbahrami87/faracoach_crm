@@ -1,13 +1,17 @@
 <div class="card card-user">
-    <div class="card-header">
+    <div class="card-header border-bottom">
         <h5 class="card-title">پیگیری ها</h5>
     </div>
     <div class="card-body">
         <form method="post" action="" enctype="multipart/form-data">
             {{csrf_field()}}
             {{method_field('PATCH')}}
+            <?php $i=1; ?>
             @foreach($followUps as $item)
                 <div class="row">
+                    <div class="col-12 text-center">
+                        <h6>پیگیری {{$i++}}</h6>
+                    </div>
                     <div class="col-md-12 pl-1">
                         <div class="col-md-4">
                             <div class="form-group">

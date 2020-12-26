@@ -36,7 +36,7 @@
                 </div>
                 <div class="col-7 col-md-8">
                     <div class="numbers">
-                        <p class="card-category">در حال پیگیری</p>
+                        <p class="card-category">در حال مذاکره</p>
                         <p class="card-title">{{$follow}} نفر<p>
                     </div>
                 </div>
@@ -46,6 +46,34 @@
             <hr>
             <div class="stats">
                 <a href="/admin/users/category/?categoryUsers=continuefollowup">
+                    <i class="fa fa-eye"></i>
+                   مشاهده لیست
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="card card-stats">
+        <div class="card-body ">
+            <div class="row">
+                <div class="col-5 col-md-4">
+                    <div class="icon-big text-center icon-warning">
+                        <i class="nc-icon nc-watch-time text-info"></i>
+                    </div>
+                </div>
+                <div class="col-7 col-md-8">
+                    <div class="numbers">
+                        <p class="card-category">در انتظار تصمیم</p>
+                        <p class="card-title">{{$waiting}} نفر<p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer ">
+            <hr>
+            <div class="stats">
+                <a href="/admin/users/category/?categoryUsers=waiting">
                     <i class="fa fa-eye"></i>
                    مشاهده لیست
                 </a>
@@ -74,7 +102,7 @@
             <hr>
             <div class="stats">
                 <a href="/admin/users/category/?categoryUsers=cancelfollowup">
-                    <i class="fa fa-eye"></i>                        مشاهده لیست
+                    <i class="fa fa-eye"></i>مشاهده لیست
                 </a>
             </div>
         </div>
@@ -91,7 +119,7 @@
                 </div>
                 <div class="col-7 col-md-8">
                     <div class="numbers">
-                        <p class="card-category">دانشجو</p>
+                        <p class="card-category">مشتری / دانشجو</p>
                         <p class="card-title">{{$student}} نفر<p>
                     </div>
                 </div>

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Hekmatinasser\Verta\Verta;
 use Throwable;
 
 class UserController extends BaseController
@@ -29,8 +30,10 @@ class UserController extends BaseController
     public function index()
     {
         $users=User::whereNotIn('users.type',[2])
-            ->orderby('id','desc')
-            ->paginate(20);
+                    ->where('users.followby_id','=',1)
+                    ->orwhere('users.followby_id','=',NULL)
+                    ->orderby('id','desc')
+                    ->paginate(20);
 
         return view('panelAdmin.users')
                     ->with('users',$users);
@@ -70,9 +73,9 @@ class UserController extends BaseController
             [
                 'fname'             =>'persian_alpha|required|min:3',
                 'lname'             =>'persian_alpha|required|min:3',
-                'codemelli'         =>'required|min:9',
-                'sex'               =>'required|boolean',
-                'tel'               =>'required|numeric',
+                'codemelli'         =>'nullable|melli_code',
+                'sex'               =>'nullable|boolean',
+                'tel'               =>'required|numeric|iran_mobile',
                 'shenasname'        =>'nullable|numeric',
                 'father'            =>'nullable|min:3|',
                 'born'              =>'nullable|min:3',
@@ -237,7 +240,7 @@ class UserController extends BaseController
     }
 
 
-
+    // نمایش پروفایل کاربر توسط ادمین
     public function show($user)
     {
         $userAdmin=Auth::user();
@@ -272,20 +275,16 @@ class UserController extends BaseController
         }
 
         //یوزر توسط چه کسی معرفی شده است
-        $resourceIntroduce=User::where('tel','=',$user->introduced)
+        $resourceIntroduce=User::where('id','=',$user->introduced)
                         ->first();
-        if($resourceIntroduce==null)
-        {
-            //$resourceIntroduce=['id'=>''];
-        }
 
 
         //تعداد افراد معرفی کرده
-        $countIntroducedUser=User::where('introduced','=',$user->tel)
+        $countIntroducedUser=User::where('introduced','=',$user->id)
                         ->count();
 
         //لیست افراد معرفی کرده
-        $listIntroducedUser=User::where('introduced','=',$user->tel)
+        $listIntroducedUser=User::where('introduced','=',$user->id)
                         ->get();
 
         //چک کردن وضعیت عکس کاربرها برای عکسهایی که وجود ندارد از آواتر استفاده شود
@@ -307,13 +306,20 @@ class UserController extends BaseController
 
         $states=$this->states();
 
+        $city=NULL;
+        if(strlen($user->city)>0)
+        {
+            //انتخاب شهر براساس کد
+            $city=$this->city($user->city);
+        }
+
 //        $countFollowups=user::join('followups','users.id','=','followups.user_id')
 //              ->count();
 
 //        $followUps=user::join('followups','users.id','=','followups.user_id')
 //            ->join('problemfollowups','problemfollowups.id','=','followups.problemfollowup_id')
 //            ->get();
-        return view('panelAdmin.profile',compact('user','countFollowups','followUps','problemFollowup','userAdmin','listIntroducedUser','countIntroducedUser','resourceIntroduce','states'));
+        return view('panelAdmin.profile',compact('user','countFollowups','followUps','problemFollowup','userAdmin','listIntroducedUser','countIntroducedUser','resourceIntroduce','states','city'));
     }
 
     /**
@@ -346,7 +352,7 @@ class UserController extends BaseController
                     [
                         'fname'             => 'nullable|min:3|persian_alpha',
                         'lname'             => 'nullable|min:3|persian_alpha',
-                        'codemelli'         => 'min:9|melli_code',
+                        'codemelli'         => 'nullable|melli_code',
                         'sex'               => 'nullable|boolean',
                         'tel'               => 'required|iran_mobile|',
                         'shenasname'        => 'nullable|numeric',
@@ -460,10 +466,16 @@ class UserController extends BaseController
 
         }
         $user->type=$this->userType($user->type);
+        if(!is_null($user->last_login_at))
+        {
+            $last_login=new verta($user->last_login_at);
+            $user->last_login_at=($last_login->hour.":".$last_login->minute."  ".$last_login->year."/".$last_login->month."/".$last_login->day);
+        }
         return view('panelUser.introducedProfileAjax')
                 ->with('user',$user);
     }
 
+    // نمایش اعضای سایت براساس دسته بندی برای ادمین
     public function showCategoryUsersAdmin(Request $request)
     {
         $dateNow=$this->dateNow;
@@ -480,6 +492,10 @@ class UserController extends BaseController
                             ->paginate(20);
                             break;
             case 'cancelfollowup': $users=User::where('type','=','12')
+                            ->orderby('id','desc')
+                            ->paginate(20);
+                            break;
+            case 'waiting' :$users=User::where('type','=','13')
                             ->orderby('id','desc')
                             ->paginate(20);
                             break;
@@ -512,7 +528,7 @@ class UserController extends BaseController
             ->with('users',$users);
     }
 
-
+    //نمایش لیست دعوت شده ها
     public function listIntroducedUser(Request $request)
     {
         $user=Auth::user();
@@ -524,22 +540,22 @@ class UserController extends BaseController
                 case '0': return redirect('/panel/introduced');
                                 break;
                 case 'notfollowup': $listIntroducedUser=User::where('type','=','1')
-                                ->where('introduced','=',$user->tel)
+                                ->where('introduced','=',$user->id)
                                 ->orderby('id','desc')
                                 ->paginate(20);
                                 break;
                 case 'continuefollowup': $listIntroducedUser=User::where('type','=','11')
-                                ->where('introduced','=',$user->tel)
+                                ->where('introduced','=',$user->id)
                                 ->orderby('id','desc')
                                 ->paginate(20);
                                 break;
                 case 'cancelfollowup': $listIntroducedUser=User::where('type','=','12')
-                                ->where('introduced','=',$user->tel)
+                                ->where('introduced','=',$user->id)
                                 ->orderby('id','desc')
                                 ->paginate(20);
                                 break;
                 case 'students': $listIntroducedUser=User::where('type','=','20')
-                                ->where('introduced','=',$user->tel)
+                                ->where('introduced','=',$user->id)
                                 ->orderby('id','desc')
                                 ->paginate(20);
                                 break;
@@ -550,7 +566,7 @@ class UserController extends BaseController
         else
         {
              //لیست همه افراد معرفی کرده
-            $listIntroducedUser=User::where('introduced','=',$user->tel)
+            $listIntroducedUser=User::where('introduced','=',$user->id)
                         ->paginate(20);
         }
 
@@ -563,7 +579,7 @@ class UserController extends BaseController
         }
 
         //تعداد افراد دعوت شده
-        $countIntroducedUser=User::where('introduced','=',$user->tel)
+        $countIntroducedUser=User::where('introduced','=',$user->id)
                         ->count();
 
         $listIntroducedUser->appends(['category'=>$request['category']]);
@@ -642,59 +658,78 @@ class UserController extends BaseController
 
     public function addIntroducedUser(Request $request)
     {
-
-        $this->validate(request(),
-        [
-            'fname'         =>'required|persian_alpha|min:3|max:15',
-            'lname'         =>'required|persian_alpha|min:3|max:15',
-            'tel'           =>'required|numeric|iran_mobile|',
-            'followby_id'   =>'required|numeric'
-        ]);
-
-
-
-        $check=user::where('tel','=',$request['tel'])
-                    ->count();
-
-        if($check==0)
+        if(preg_match('/^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}$/',$request['tel']))
         {
-            //ثبت تلفن دعوت شده به همراه تلفن دعوت کننده و تاریخ
-            $status=User::create($request->all() +
-                [
-                    'introduced'  =>Auth::user()->tel,
-                    'date_fa'       =>$this->dateNow,
-                    'time_fa'       =>$this->timeNow
-                ]);
+            $this->validate(request(),
+            [
+                'fname'         =>'required|persian_alpha|min:3|max:15',
+                'lname'         =>'required|persian_alpha|min:3|max:15',
+                'tel'           =>'required|numeric|iran_mobile|',
+                'followby_id'   =>'required|numeric'
+            ]);
 
-            if($status)
+            $check=user::where('tel','=',$request['tel'])
+                        ->count();
+
+            if($check==0)
             {
-                $this->sensSms($request['tel'],"به فراکوچ خوش آمدید/ شما توسط ".Auth::user()->tel." به فراکوچ دعوت شدید");
-                $msg="تلفن با موفقیت در سیستم فراکوچ ثبت شد";
-                $errorStatus="success";
+                //ثبت تلفن دعوت شده به همراه تلفن دعوت کننده و تاریخ
+                $status=User::create($request->all() +
+                    [
+                        'introduced'  =>Auth::user()->id,
+                        'date_fa'       =>$this->dateNow,
+                        'time_fa'       =>$this->timeNow
+                    ]);
+
+                if($status)
+                {
+                    if(is_null(Auth::user()->fname) ||(is_null(Auth::user()->lname)) )
+                    {
+                        $this->sensSms($request['tel'],"به فراکوچ خوش آمدید/ شما توسط ".Auth::user()->tel." به فراکوچ دعوت شدید");
+                        $msg="تلفن با موفقیت در سیستم فراکوچ ثبت شد";
+                        $errorStatus="success";
+                    }
+                    else
+                    {
+                        $this->sensSms($request['tel'],"به فراکوچ خوش آمدید/ شما توسط ".Auth::user()->fname.Auth::user()->lname ." به فراکوچ دعوت شدید");
+                        $msg="تلفن با موفقیت در سیستم فراکوچ ثبت شد";
+                        $errorStatus="success";
+                    }
+                }
+                else
+                {
+                    $msg="خطا در ثبت";
+                    $errorStatus="danger";
+                }
             }
             else
             {
-                $msg="خطا در ثبت";
+                $msg="شخص مورد نظر در گذشته توسط شما و یا شخص دیگر دعوت شده است";
                 $errorStatus="danger";
             }
+
+            return back()
+                    ->with('msg',$msg)
+                    ->with('errorStatus',$errorStatus);
         }
         else
         {
-            $msg="شخص مورد نظر در گذشته توسط شما و یا شخص دیگر دعوت شده است";
+            $msg="شماره همراه وارد شده نادرست است";
             $errorStatus="danger";
+            return back()
+                    ->with('msg',$msg)
+                    ->with('errorStatus',$errorStatus);
         }
-
-        return back()
-                ->with('msg',$msg)
-                ->with('errorStatus',$errorStatus);
     }
+
     // نمایش سابقه پیگیری هر دعوت شده توسط خود یوزر
     public function showFollowupIntroduced($followup)
     {
         if(User::where('id','=',$followup)->count()==1) {
+
             $user = User::find($followup);
             $userInsert = Auth::user();
-            if ($user->introduced == $userInsert->tel) {
+            if ($user->introduced == $userInsert->id) {
                 //لیست پیگیری های انجام شده
                 $followUps = User::join('followups', 'users.id', '=', 'followups.user_id')
                     ->join('problemfollowups', 'problemfollowups.id', '=', 'followups.problemfollowup_id')
@@ -719,6 +754,11 @@ class UserController extends BaseController
         {
             return redirect('/panel/introduced');
         }
+
+    }
+
+    public function loginWithoutPassword()
+    {
 
     }
 }

@@ -94,18 +94,13 @@ class VerifyController extends BaseController
         if(isset($request))
         {
             $six_digit_random_number = mt_rand(100000, 999999);
-            if(preg_match('/^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}$/',$request['tel']))
-            {
-                $time2=new verta('2020-12-17 01:51:40');
+            // if(preg_match('/^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}$/',$request['tel']))
+            // {
                 $now= Verta::now();
-
-
-                $status=verify::where('tel','=',$request['tel'])
-                                ->where('verify','=',1)
-                                ->count();
-                if($status==0)
+                $user= Auth::user();
+                if($user->tel_verified==0)
                 {
-                    $status=verify::where('tel','=',$request['tel'])
+                    $status=verify::where('tel','=',$user->tel)
                             ->where('verify','=',0)
                             ->latest()
                             ->count();
@@ -113,7 +108,7 @@ class VerifyController extends BaseController
                     {
                         $status=verify::create(
                             [
-                                'tel'           =>$request['tel'],
+                                'tel'           =>$user->tel,
                                 'code'          =>$six_digit_random_number,
                                 'date_fa'       =>$this->dateNow,
                                 'time_fa'       =>$this->timeNow
@@ -122,8 +117,8 @@ class VerifyController extends BaseController
                             if($status)
                             {
                                 $message="کد فعالی سازی شما در سیستم فراکوچ : " . $six_digit_random_number ;
-                                $this->sensSms($request['tel'],$message);
-                                $msg=" کد فعال سازی به شماره ".$request['tel']." ارسال شد ";
+                                $this->sensSms($user->tel,$message);
+                                $msg=" کد فعال سازی به شماره ".$user->tel." ارسال شد ";
                                 $errorStatus="warning";
                             }
                             else
@@ -134,7 +129,7 @@ class VerifyController extends BaseController
                     }
                     else
                     {
-                        $checkTimeCode=verify::where('tel','=',$request['tel'])
+                        $checkTimeCode=verify::where('tel','=',$user->tel)
                                     ->where('verify','=',0)
                                     ->latest()
                                     ->first();
@@ -145,7 +140,7 @@ class VerifyController extends BaseController
 
                             $status=verify::create(
                             [
-                                'tel'           =>$request['tel'],
+                                'tel'           =>$user->tel,
                                 'code'          =>$six_digit_random_number,
                                 'date_fa'       =>$this->dateNow,
                                 'time_fa'       =>$this->timeNow
@@ -153,8 +148,8 @@ class VerifyController extends BaseController
                             if($status)
                             {
                                 $message="کد فعالی سازی شما در سیستم فراکوچ : " . $six_digit_random_number ;
-                                $this->sensSms($request['tel'],$message);
-                                $msg=" کد فعال سازی به شماره ".$request['tel']." ارسال شد ";
+                                $this->sensSms($user->tel,$message);
+                                $msg=" کد فعال سازی به شماره ".$user->tel." ارسال شد ";
                                 $errorStatus="warning";
                             }
                             else
@@ -181,13 +176,13 @@ class VerifyController extends BaseController
                         ->with('msg',$msg)
                         ->with('errorStatus',$errorStatus);
                 }
-            }
-            else
-            {
-                return back()
-                        ->with('msg',"تلفن همراه وارد شده اشتباه است")
-                        ->with('errorStatus',"danger");
-            }
+            // }
+            // else
+            // {
+            //     return back()
+            //             ->with('msg',"تلفن همراه وارد شده اشتباه است")
+            //             ->with('errorStatus',"danger");
+            // }
         }
     }
 
@@ -314,6 +309,68 @@ class VerifyController extends BaseController
         else
         {
             return '<div  class="alert alert-danger">لطفا کد را درست وارد کنید</div>';
+        }
+    }
+
+    //ارسال کد فعالی سازی بدون رمز عبور
+    public function storeCodewithoutPass(Request $request)
+    {
+        if(preg_match('/^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}$/',$request['tel']))
+        {
+            $this->validate(request(),
+            [
+                'tel'           =>'required|numeric|iran_mobile|',
+            ]);
+            $six_digit_random_number = mt_rand(100000, 999999);
+            $status=verify::create(
+                [
+                    'tel'           =>$request['tel'],
+                    'code'          =>$six_digit_random_number,
+                    'date_fa'       =>$this->dateNow,
+                    'time_fa'       =>$this->timeNow
+                ]);
+            if($status)
+            {
+                $message="رمز یکبار مصرف شما در سیستم فراکوچ : " . $six_digit_random_number ;
+                $this->sensSms($request['tel'],$message);
+                return back()->with('msg','رمز یکبار مصرف شما به شماره '.$request['tel'].' ارسال شد')
+                             ->with('errorStatus','success')
+                             ->with('status',true);
+            }
+            else
+            {
+                return back()->with('msg','خطا در ارسال رمز یکبار مصرف')
+                             ->with('errorStatus','danger');
+            }
+
+        }
+        else
+        {
+            return back()->with('msg','تلفن همراه وارد شده معتبر نمی باشد')
+                         ->with('errorStatus','danger');
+        }
+
+    }
+
+    public function checkCodewithoutPass(Request $request)
+    {
+        $status=verify::where('code','=',$request['code'])
+                    ->where('verify','=',0)
+                    ->count();
+        if($status==1)
+        {
+            $user=verify::where('code','=',$request['code'])
+                    ->where('verify','=',0)
+                    ->first();
+
+            $user=$this->get_user($user->tel);
+            Auth::login($user);
+            return redirect('/panel');
+        }
+        else
+        {
+            return back()->with('msg','رمز یکبار مصرف اشتباه است')
+                         ->with('errorStatus','danger');
         }
     }
 }

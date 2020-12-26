@@ -102,7 +102,7 @@
                         <div class="col-md-6 px-1">
                             <div class="form-group">
                                 <label>تلفن تماس</label>
-                                <input type="text" class="form-control" placeholder="تلفن تماس را وارد کنید" value="{{$user->tel}}" name="tel"  />
+                                <input type="text" class="form-control" placeholder="تلفن تماس را وارد کنید" value="{{$user->tel}}" name="tel"    />
                             </div>
                         </div>
                         <div class="col-md-6 pr-1">
@@ -115,19 +115,21 @@
                             <div class="form-group">
                                 <label>استان</label>
                                 <select class="custom-select"  name="state"  id="state">
-                                    <option selected>استان را انتخاب کنید</option>
+                                    <option selected disabled>استان را انتخاب کنید</option>
                                     @foreach($states as $item)
-                                        <option value="{{$item->id}}">{{$item->name}}</option>
+                                        <option value="{{$item->id}}" @if($item->id==$user->state) selected @endif  >{{$item->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-6 px-1">
                             <div class="form-group">
-                                <label>استان</label>
-                                <select class="custom-select"  name="city"  id="city">
-                                    <option selected>شهر را انتخاب کنید</option>
+                                <label>شهر</label>
 
+                                <select class="custom-select"  name="city"  id="city">
+                                    @if (!is_null($city))
+                                        <option value="{{$city->id}}">@if(!is_null($city))  {{$city->name}}  @endif </option>
+                                    @endif
                                 </select>
                             </div>
                         </div>

@@ -27,13 +27,14 @@
                     <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4" >
                         <form method="GET" action="/admin/users/category/">
                             <div class="input-group mb-3">
-                                <select class="form-control" name="categoryUsers">
+                                <select class="form-control p-0" name="categoryUsers">
                                     <option disabled="disabled" selected="selected">انتخاب کنید</option>
                                     <option value="0">نمایش همه</option>
                                     <option value="notfollowup">پیگیری نشده</option>
-                                    <option value="continuefollowup">در حال پیگیری</option>
+                                    <option value="continuefollowup">در حال مذاکره</option>
+                                    <option value="waiting">در انتظار تصمیم</option>
                                     <option value="cancelfollowup">انصراف</option>
-                                    <option value="students">دانشجو</option>
+                                    <option value="students">رضایت کامل / مشتری</option>
                                     <option value="todayFollowup">پیگیری امروز</option>
                                     <option value="expireFollowup">پیگیری تاریخ گذشته</option>
                                 </select>
@@ -92,13 +93,16 @@
                                                     <p>بررسی نشده</p>
                                                     @break
                                                 @case(11)
-                                                    <p>در حال پیگیری</p>
+                                                    <p>در حال مذاکره</p>
                                                     @break
                                                 @case(12)
                                                     <p>انصراف</p>
                                                     @break
+                                                @case(13)
+                                                    <p>در انتظار تصمیم</p>
+                                                    @break
                                                 @case(20)
-                                                    <p>دانشجو</p>
+                                                    <p>رضایت کامل/مشتری</p>
                                                     @break
                                                 @default
                                                     <p>خطا</p>

@@ -6,7 +6,6 @@
         @if ($verifyStatus==false)
             <form method="get" action="/panel/active/mobile/">
                 <div class="input-group">
-                    <input id="tel" type="text" class="form-control @error('tel') is-invalid @enderror" name="tel" value="{{ old('tel') }}" required autocomplete="tel">
                     <div class="input-group-prepend ">
                         <button class="btn btn-outline-secondary btn-info text-light m-0" type="submit" id="activeMobile" data-toggle="modal" data-target="#ModalMobile">ارسال کد فعال سازی</button>
                     </div>
@@ -141,8 +140,66 @@
             <hr>
             <div class="stats">
                 <i class="fa fa-eye"></i>
-                <a href="#">مشاهده</a>
+                <a href="#" data-toggle="modal" data-target="#ScoreModal">مشاهده</a>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Modal Scores-->
+<div class="modal fade" id="ScoreModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">گزارش امتیازات</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+              <div class="col-12 mr-3">
+                <ul class="list-group p-0 border-0">
+
+                    <li class="list-group-item">
+                        <div class="row border pt-2">
+                            <div class="col-md-6 col-2">
+                                <p> افراد دعوت شده {{$countIntroducedUser}} نفر</p>
+                            </div>
+                            <div class="col-md-6 col-3 text-right">
+                                <p>{{$countIntroducedUser*5}} امتیاز</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row border pt-2">
+                            <div class="col-md-6 col-2">
+                                <p> ثبت شماره همراه</p>
+                            </div>
+                            <div class="col-md-6 col-3 text-right">
+                                <p>{{$verifyScore*5}} امتیاز</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row border pt-2">
+                            <div class="col-md-6 col-2">
+                                <p>دانشجوی معرفی شده {{$scoreSuccess}} نفر</p>
+                            </div>
+                            <div class="col-md-6 col-3 text-right">
+                                <p>{{$scoreSuccess*10}} امتیاز</p>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+
+        </div>
+      </div>
+    </div>
+  </div>

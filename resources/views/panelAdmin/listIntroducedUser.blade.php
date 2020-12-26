@@ -34,7 +34,7 @@
                     </div>
 
                     <div class="col-md-3 col-3 text-right">
-                        <a href="/admin/user/{{$item->id}}" class="btn btn-sm btn-outline-success btn-round btn-icon text-success" ><i class="fa fa-group"></i></a>
+                        <a href="/admin/user/{{$item->id}}" class="btn btn-sm btn-outline-success btn-round btn-icon te  xt-success" ><i class="fa fa-group"></i></a>
                     </div>
 
                 </div>

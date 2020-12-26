@@ -15,7 +15,7 @@
                     <form method="POST" action="{{ route('login') }}">
                         {{csrf_field()}}
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('پست الکترونیکی') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('پست الکترونیکی / شماره همراه') }}</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -42,6 +42,19 @@
                             </div>
                         </div>
 
+                        <div class="form-group row m-0 p-0">
+                            <div class="col-md-6 offset-md-4">
+                                <a class="btn btn-link" href="/register">
+                                    {{ __('ثبت نام') }}
+                                </a>
+                                @if (Route::has('password.request'))
+                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                        {{ __('رمز را فراموش کردید؟') }}
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group row">
                             <div class="col-md-6 offset-md-4">
                                 <div class="form-check">
@@ -59,15 +72,9 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('ورود') }}
                                 </button>
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('رمز را فراموش کردید؟') }}
-                                    </a>
-                                @endif
-                                <a class="btn btn-link" href="/register">
-                                    {{ __('ثبت نام') }}
+                                <a class="btn btn-link" href="/loginSMS">
+                                    {{ __('ورود بدون رمز') }}
                                 </a>
-
                             </div>
                         </div>
                     </form>

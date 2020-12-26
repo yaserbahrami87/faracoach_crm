@@ -39,6 +39,8 @@ class AdminController extends BaseController
                 ->count();
             $cancel=User::where('type','=','12')
                 ->count();
+            $waiting=User::where('type','=','13')
+                ->count();
             $student=User::where('type','=','20')
                 ->count();
             $dateNow=$this->dateNow;
@@ -54,7 +56,7 @@ class AdminController extends BaseController
                 ->groupby('users.id')
                 ->count();
 
-            return view('panelAdmin.home',compact('notFollowup','follow','cancel','student','dateNow','followupToday','expirefollowupToday'));
+            return view('panelAdmin.home',compact('notFollowup','follow','cancel','waiting','student','dateNow','followupToday','expirefollowupToday'));
             //return redirect()->route('panelAdmin');
         }
         else if(Gate::allows('isUser'))
@@ -67,11 +69,11 @@ class AdminController extends BaseController
                 }
 
                 //تعداد افراد دعوت شده
-                $countIntroducedUser=User::where('introduced','=',$user->tel)
+                $countIntroducedUser=User::where('introduced','=',$user->id)
                     ->count();
 
                 //یوزر توسط چه کسی معرفی شده است
-                $resourceIntroduce=User::where('tel','=',$user->introduced)
+                $resourceIntroduce=User::where('id','=',$user->introduced)
                     ->first();
                 //تعداد پیام های خوانده نشده
                 $unreadMessage=message::where('user_id_recieve','=',$user->id)
@@ -79,11 +81,12 @@ class AdminController extends BaseController
                         ->count();
                 //کسب امتیازات
                 $score=$countIntroducedUser*5;
-                if($user->tel_verified==1)
+                $verifyScore=$user->tel_verified;
+                if($verifyScore==1)
                 {
                     $score=$score+5;
                 }
-                $scoreSuccess=User::where('introduced','=',$user->tel)
+                $scoreSuccess=User::where('introduced','=',$user->id)
                         ->where('type','=',20)
                         ->count();
                 $scoreSuccess=$scoreSuccess*10;
@@ -110,6 +113,8 @@ class AdminController extends BaseController
                     ->with('resourceIntroduce',$resourceIntroduce)
                     ->with('unreadMessage',$unreadMessage)
                     ->with('score',$score)
+                    ->with('verifyScore',$verifyScore)
+                    ->with('scoreSuccess',$scoreSuccess)
                     ->with('verifyStatus',$verifyStatus);
 
         }
@@ -212,4 +217,25 @@ class AdminController extends BaseController
         return view('panelUser.products')
                     ->with('contents_api',$contents_api);
     }
+
+    public function showFreePackages()
+    {
+        return  redirect()
+            ->route('freePackageLanding')
+            ->with('status',true);
+    }
+
+    public function loginSMS()
+    {
+        if (Auth::check())
+        {
+            return back();
+        }
+        else
+        {
+            return view('loginSMS');
+        }
+    }
+
+
 }

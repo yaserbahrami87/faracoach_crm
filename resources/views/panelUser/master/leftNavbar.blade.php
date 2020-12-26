@@ -22,13 +22,13 @@
             <li>
                 <a href="#">
                     <i class="nc-icon nc-user-run"></i>
-                    <p>دوره ها</p>
+                    <p>دوره ها (به زودی)</p>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="#" >
                     <i class="nc-icon nc-money-coins"></i>
-                    <p>مالی</p>
+                    <p>مالی (به زودی)</p>
                 </a>
             </li>
             <li>
@@ -41,6 +41,12 @@
                 <a href="/panel/products">
                     <i class="nc-icon nc-caps-small"></i>
                     <p>محصولات</p>
+                </a>
+            </li>
+            <li>
+                <a href="/panel/freepackages">
+                    <i class="nc-icon nc-caps-small"></i>
+                    <p>پکیج رایگان</p>
                 </a>
             </li>
         @endif

@@ -49,6 +49,7 @@ class MessageController extends BaseController
 
                             })
                             ->paginate(20);
+
             return view('panelUser.messages')
                     ->with('messages',$messages);
         }
@@ -62,12 +63,12 @@ class MessageController extends BaseController
     public function create()
     {
         //یوزر توسط چه کسی معرفی شده است
-        $resourceIntroduce=User::where('tel','=',Auth::user()->introduced)
+        $resourceIntroduce=User::where('id','=',Auth::user()->introduced)
                 ->select('users.id','users.fname','users.lname','users.tel')
                 ->first();
 
         //لیست افراد معرفی شده
-        $listIntroducedUser=User::where('introduced','=',Auth::user()->tel)
+        $listIntroducedUser=User::where('introduced','=',Auth::user()->id)
                 ->select('users.id','users.fname','users.lname','users.tel')
                 ->get();
 
