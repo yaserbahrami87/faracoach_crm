@@ -230,13 +230,13 @@ class UserController extends BaseController
 
             //انتخاب شهر براساس کد
             $city=$this->city($user->city);
+
             return view ('panelUser.profile')
                         ->with('user',$user)
                         ->with('countIntroducedUser',$countIntroducedUser)
                         ->with('resourceIntroduce',$resourceIntroduce)
                         ->with('states',$states)
                         ->with('city',$city);
-
     }
 
 
@@ -263,6 +263,23 @@ class UserController extends BaseController
                                 ->first();
             $item->insert_user_id=$admin_Followup->fname." ".$admin_Followup->lname;
         }
+
+        //تبدیل کدهای پیگیری
+       foreach ($followUps as $item)
+       {
+           $tmp=array();
+           //تبدیل رشته به آرایه
+           $arrayTags=explode(',',$item->tags);
+           //حلقه تبدیل آدید تگ ها به رشته
+           for ($i=0;$i<count($arrayTags);$i++)
+           {
+               $temp=$this->get_tag_byID($arrayTags[$i]);
+               $tagName=$temp['tag'];
+               array_push($tmp, "$tagName");
+           }
+           //اضافه کردن آرایه تگها بجای آرایه آدی ها
+           $item->tags=$tmp;
+       }
 
         //دسته بندی های لیست پیگیری
         $problemFollowup=$this->getproblemfollowup();
@@ -313,13 +330,31 @@ class UserController extends BaseController
             $city=$this->city($user->city);
         }
 
-//        $countFollowups=user::join('followups','users.id','=','followups.user_id')
-//              ->count();
+        //تگ ها
+        $tags=$this->get_tags();
 
-//        $followUps=user::join('followups','users.id','=','followups.user_id')
-//            ->join('problemfollowups','problemfollowups.id','=','followups.problemfollowup_id')
-//            ->get();
-        return view('panelAdmin.profile',compact('user','countFollowups','followUps','problemFollowup','userAdmin','listIntroducedUser','countIntroducedUser','resourceIntroduce','states','city'));
+        //کسب امتیازات
+        $score=$countIntroducedUser*5;
+        //امتیاز تایید شماره همراه
+        $verifyScore=$user->tel_verified;
+        if($verifyScore==1)
+        {
+            $score=$score+5;
+            $verifyScore=5;
+        }
+        //امتیاز تعداد دعوت شده
+        $scoreSuccess=User::where('introduced','=',$user->id)
+                ->where('type','=',20)
+                ->count();
+        $scoreSuccess=$scoreSuccess*10;
+        $score=$score+$scoreSuccess;
+
+        $today=$this->dateNow;
+        $timeNow=$this->timeNow;
+        $v=verta('+2 day');
+        $v=$v->format('Y/m/d');
+        $nextDayFollow=$v;
+        return view('panelAdmin.profile',compact('user','countFollowups','followUps','problemFollowup','userAdmin','listIntroducedUser','countIntroducedUser','resourceIntroduce','states','city','score','verifyScore','scoreSuccess','verifyStatus','tags','today','nextDayFollow','timeNow'));
     }
 
     /**
@@ -348,97 +383,103 @@ class UserController extends BaseController
             ->orwhere('tel','=',$request['tel'])
             ->count();
 
-                $this->validate(request(),
-                    [
-                        'fname'             => 'nullable|min:3|persian_alpha',
-                        'lname'             => 'nullable|min:3|persian_alpha',
-                        'codemelli'         => 'nullable|melli_code',
-                        'sex'               => 'nullable|boolean',
-                        'tel'               => 'required|iran_mobile|',
-                        'shenasname'        => 'nullable|numeric',
-                        'father'            => 'nullable|min:3|persian_alpha',
-                        'born'              => 'nullable|min:3|persian_alpha',
-                        'married'           => 'nullable|boolean',
-                        'education'         => 'nullable|min:4|persian_alpha',
-                        'reshteh'           => 'nullable|min:4|persian_alpha',
-                        'state'             => 'nullable|numeric',
-                        'city'              => 'nullable|numeric',
-                        'address'           => 'nullable|min:4|',
-                        'personal_image'    => 'nullable|mimes:jpeg,jpg,pdf|max:600',
-                        'shenasnameh_image' => 'nullable|mimes:jpeg,jpg,pdf|max:600',
-                        'cartmelli_image'   => 'nullable|mimes:jpeg,jpg,pdf|max:600',
-                        'education_image'   => 'nullable|mimes:jpeg,jpg,pdf|max:600',
-                        'email'             => 'nullable|email|unique:users',
-                    ]);
+        if($status==0) {
+            $this->validate(request(),
+                [
+                    'fname' => 'nullable|min:3|persian_alpha',
+                    'lname' => 'nullable|min:3|persian_alpha',
+                    'codemelli' => 'nullable|melli_code',
+                    'sex' => 'nullable|boolean',
+                    'tel' => 'required|iran_mobile|',
+                    'shenasname' => 'nullable|numeric',
+                    'father' => 'nullable|min:3|persian_alpha',
+                    'born' => 'nullable|min:3|persian_alpha',
+                    'married' => 'nullable|boolean',
+                    'education' => 'nullable|min:4|persian_alpha',
+                    'reshteh' => 'nullable|min:4|persian_alpha',
+                    'state' => 'nullable|numeric',
+                    'city' => 'nullable|numeric',
+                    'address' => 'nullable|min:4|',
+                    'personal_image' => 'nullable|mimes:jpeg,jpg,pdf|max:600',
+                    'shenasnameh_image' => 'nullable|mimes:jpeg,jpg,pdf|max:600',
+                    'cartmelli_image' => 'nullable|mimes:jpeg,jpg,pdf|max:600',
+                    'education_image' => 'nullable|mimes:jpeg,jpg,pdf|max:600',
+                    'email' => 'nullable|email|',
+                ]);
 
 
-                if ($request->has('personal_image') && $request->file('personal_image')->isValid()) {
-                    $file = $request->file('personal_image');
-                    $personal_image = "personal-" . $user->tel . "." . $request->file('personal_image')->extension();
-                    $path = public_path('/documents/users/');
-                    $files = $request->file('personal_image')->move($path, $personal_image);
-                    $request->personal_image = $personal_image;
-                }
+            if ($request->has('personal_image') && $request->file('personal_image')->isValid()) {
+                $file = $request->file('personal_image');
+                $personal_image = "personal-" . $user->tel . "." . $request->file('personal_image')->extension();
+                $path = public_path('/documents/users/');
+                $files = $request->file('personal_image')->move($path, $personal_image);
+                $request->personal_image = $personal_image;
+            }
 
-                if ($request->has('shenasnameh_image') && $request->file('shenasnameh_image')->isValid()) {
-                    $file = $request->file('shenasnameh_image');
-                    $shenasnameh_image = "shenasnameh-" . $user->tel . "." . $request->file('shenasnameh_image')->extension();
-                    $path = public_path('/documents/users/');
-                    $files = $request->file('shenasnameh_image')->move($path, $shenasnameh_image);
-                    $request->shenasnameh_image = $shenasnameh_image;
+            if ($request->has('shenasnameh_image') && $request->file('shenasnameh_image')->isValid()) {
+                $file = $request->file('shenasnameh_image');
+                $shenasnameh_image = "shenasnameh-" . $user->tel . "." . $request->file('shenasnameh_image')->extension();
+                $path = public_path('/documents/users/');
+                $files = $request->file('shenasnameh_image')->move($path, $shenasnameh_image);
+                $request->shenasnameh_image = $shenasnameh_image;
 
-                }
+            }
 
-                if ($request->has('cartmelli_image') && $request->file('cartmelli_image')->isValid()) {
-                    $file = $request->file('cartmelli_image');
-                    $cartmelli_image = "cartmelli-" . $user->tel . "." . $request->file('cartmelli_image')->extension();
-                    $path = public_path('/documents/users/');
-                    $files = $request->file('cartmelli_image')->move($path, $cartmelli_image);
-                    $request->cartmelli_image = $cartmelli_image;
-                }
+            if ($request->has('cartmelli_image') && $request->file('cartmelli_image')->isValid()) {
+                $file = $request->file('cartmelli_image');
+                $cartmelli_image = "cartmelli-" . $user->tel . "." . $request->file('cartmelli_image')->extension();
+                $path = public_path('/documents/users/');
+                $files = $request->file('cartmelli_image')->move($path, $cartmelli_image);
+                $request->cartmelli_image = $cartmelli_image;
+            }
 
-                if ($request->has('education_image') && $request->file('education_image')->isValid()) {
-                    $file = $request->file('education_image');
-                    $education_image = "education-" . $user->tel . "." . $request->file('education_image')->extension();
-                    $path = public_path('/documents/users/');
-                    $files = $request->file('education_image')->move($path, $education_image);
-                    $request->education_image = $education_image;
-                }
-            try
-            {
+            if ($request->has('education_image') && $request->file('education_image')->isValid()) {
+                $file = $request->file('education_image');
+                $education_image = "education-" . $user->tel . "." . $request->file('education_image')->extension();
+                $path = public_path('/documents/users/');
+                $files = $request->file('education_image')->move($path, $education_image);
+                $request->education_image = $education_image;
+            }
+            try {
                 $user->update($request->all());
-            }
-            catch(Throwable $e)
-            {
+            } catch (Throwable $e) {
 
-               $msg = $e->errorInfo[2];
-               $errorStatus = "danger";
-               return back()->with('msg',$msg)
-                            ->with('errorStatus',$errorStatus);
+                $msg = $e->errorInfo[2];
+                $errorStatus = "danger";
+                return back()->with('msg', $msg)
+                    ->with('errorStatus', $errorStatus);
 
             }
-                if (isset($personal_image)) {
-                    $user->personal_image = $personal_image;
-                }
+            if (isset($personal_image)) {
+                $user->personal_image = $personal_image;
+            }
 
-                if (isset($shenasnameh_image)) {
-                    $user->shenasnameh_image = $shenasnameh_image;
-                }
+            if (isset($shenasnameh_image)) {
+                $user->shenasnameh_image = $shenasnameh_image;
+            }
 
-                if (isset($cartmelli_image)) {
-                    $user->cartmelli_image = $cartmelli_image;
-                }
+            if (isset($cartmelli_image)) {
+                $user->cartmelli_image = $cartmelli_image;
+            }
 
-                if (isset($education_image)) {
-                    $user->education_image = $education_image;
-                }
-                $user->tel_verified=0;
-                $user->save();
-                $msg = "پروفایل با موفقیت به روزرسانی شد";
-                $errorStatus = "success";
+            if (isset($education_image)) {
+                $user->education_image = $education_image;
+            }
+            $user->tel_verified = 0;
+            $user->save();
+            $msg = "پروفایل با موفقیت به روزرسانی شد";
+            $errorStatus = "success";
 
-                return back()->with('msg',$msg)
-                            ->with('errorStatus',$errorStatus);
+            return back()->with('msg', $msg)
+                ->with('errorStatus', $errorStatus);
+        }
+        else
+        {
+            $msg = "اطلاعات وارد شده تکراری می باشد";
+            $errorStatus = "danger";
+            return back()->with('msg', $msg)
+                ->with('errorStatus', $errorStatus);
+        }
 
     }
 
@@ -757,8 +798,42 @@ class UserController extends BaseController
 
     }
 
-    public function loginWithoutPassword()
+    public function updatePassword(Request $request,$tel)
     {
-
+        $user=$this->get_user($tel);
+        if(is_null($user))
+        {
+            $msg="کاربری با چنین مشخصاتی وجود ندارد";
+            $errorStatus="danger";
+            return redirect("/admin/users")
+                ->with('msg',$msg)
+                ->with('errorStatus',$errorStatus);
+        }
+        else
+        {
+            $this->validate(request(),
+                [
+                    'password'      => ['required', 'string', 'min:8', 'confirmed'],
+                ]);
+            $request['password']= Hash::make($request['password']);
+            $user->password=$request['password'];
+            $status=$user->save();
+            if($status)
+            {
+                $msg="رمز با موفقیت تغییر کرد";
+                $errorStatus="success";
+                return redirect("/admin/users")
+                    ->with('msg',$msg)
+                    ->with('errorStatus',$errorStatus);
+            }
+            else
+            {
+                $msg="خطا در تغییر رمز عبور";
+                $errorStatus="danger";
+                return redirect("/admin/users")
+                    ->with('msg',$msg)
+                    ->with('errorStatus',$errorStatus);
+            }
+        }
     }
 }

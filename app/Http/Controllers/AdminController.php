@@ -237,5 +237,22 @@ class AdminController extends BaseController
         }
     }
 
+    public function changePasswordView($tel)
+    {
+        $user=$this->get_user($tel);
+        if(is_null($user))
+        {
+            $msg="کاربری با چنین مشخصاتی وجود ندارد";
+            $errorStatus="danger";
+            return redirect("/admin/users")
+                    ->with('msg',$msg)
+                    ->with('errorStatus',$errorStatus);
+        }
+        else
+        {
+            return view('panelAdmin.changePassword')
+                    ->with('tel',$tel);
+        }
+    }
 
 }

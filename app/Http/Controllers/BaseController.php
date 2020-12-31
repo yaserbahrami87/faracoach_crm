@@ -6,6 +6,7 @@ use App\city;
 use App\followbyCategory;
 use App\problemfollowup;
 use App\state;
+use App\tag;
 use App\User;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Gate;
@@ -146,5 +147,17 @@ class BaseController extends Controller
         return problemfollowup::orderby('problem')
                 ->where('status','=','1')
                 ->get();
+    }
+
+    public function get_tags()
+    {
+        return tag::where('status','=',1)
+                ->get();
+    }
+
+    public function get_tag_byID($id)
+    {
+        return tag::where('id','=',$id)
+                ->first();
     }
 }

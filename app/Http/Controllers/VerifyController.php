@@ -325,37 +325,40 @@ class VerifyController extends BaseController
             $verify=verify::where('tel','=',$request['tel'])
                         ->latest()
                         ->first();
-            $created_at=($verify['created_at']);
-            $created_at_add=$created_at->addMinutes(10);
-
-            if($created_at_add<Carbon::now())
+            if(is_null($verify))
             {
-                $status=verify::create(
-                    [
-                        'tel'           =>$request['tel'],
-                        'code'          =>$six_digit_random_number,
-                        'date_fa'       =>$this->dateNow,
-                        'time_fa'       =>$this->timeNow
-                    ]);
-                if($status)
-                {
-                    $message="رمز یکبار مصرف شما در سیستم فراکوچ : " . $six_digit_random_number ;
-                    $this->sensSms($request['tel'],$message);
-                    return back()->with('msg','رمز یکبار مصرف شما به شماره '.$request['tel'].' ارسال شد')
-                                ->with('errorStatus','success')
-                                ->with('status',true);
-                }
-                else
-                {
-                    return back()->with('msg','خطا در ارسال رمز یکبار مصرف')
-                                ->with('errorStatus','danger');
-                }
+                return back()->with('msg','شماره وارد شده در سیستم موجود نمی باشد')
+                    ->with('errorStatus','danger');
             }
             else
             {
-                return back()->with('msg','رمز یکبار مصرف کمتر از 10 دقیقه به شماره '.$request['tel']." ارسال شده است")
-                                ->with('errorStatus','success')
-                                ->with('status',true);
+                $created_at = ($verify['created_at']);
+
+                $created_at_add = $created_at->addMinutes(10);
+
+                if ($created_at_add < Carbon::now()) {
+                    $status = verify::create(
+                        [
+                            'tel' => $request['tel'],
+                            'code' => $six_digit_random_number,
+                            'date_fa' => $this->dateNow,
+                            'time_fa' => $this->timeNow
+                        ]);
+                    if ($status) {
+                        $message = "رمز یکبار مصرف شما در سیستم فراکوچ : " . $six_digit_random_number;
+                        $this->sensSms($request['tel'], $message);
+                        return back()->with('msg', 'رمز یکبار مصرف شما به شماره ' . $request['tel'] . ' ارسال شد')
+                            ->with('errorStatus', 'success')
+                            ->with('status', true);
+                    } else {
+                        return back()->with('msg', 'خطا در ارسال رمز یکبار مصرف')
+                            ->with('errorStatus', 'danger');
+                    }
+                } else {
+                    return back()->with('msg', 'رمز یکبار مصرف کمتر از 10 دقیقه به شماره ' . $request['tel'] . " ارسال شده است")
+                        ->with('errorStatus', 'success')
+                        ->with('status', true);
+                }
             }
 
         }

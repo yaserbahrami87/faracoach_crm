@@ -20,6 +20,7 @@ class CreateFollowupsTable extends Migration
             $table->integer('problemfollowup_id')->nullable();
             $table->integer('categoryfollowup_id')->nullable();
             $table->tinyInteger('status_followups')->default(1);
+            $table->string('tags',50)->nullable();
             $table->string('date_fa',20)->nullable();
             $table->string('time_fa',20)->nullable();
             $table->string('datetime_fa',30)->nullable();

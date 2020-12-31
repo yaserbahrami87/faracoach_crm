@@ -67,6 +67,10 @@ Route::middleware('can:isUser')->group(function () {
 });
 
 
+Route::middleware('can:isEducation')->group(function () {
+
+});
+
 
 
 Route::middleware('can:isAdmin')->group(function () {
@@ -83,6 +87,9 @@ Route::middleware('can:isAdmin')->group(function () {
     {
         return view('panelAdmin.insertProblemFollowup');
     });
+
+    Route::get('/admin/user/{tel}/password','AdminController@changePasswordView');
+    Route::patch('/admin/user/{tel}/updatePassword','UserController@updatePassword');
     //  ROUTE SETTINGS
     Route::post('/admin/settings/problemfollowup/store','ProblemfollowupController@store');
     Route::get('/admin/settings/problemfollowup/delete/{problemfollowup}','ProblemfollowupController@destroy');

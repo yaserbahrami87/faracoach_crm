@@ -22,6 +22,16 @@
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
+                            <label>تگ ها</label>
+                                <ul class="list-group list-group-horizontal">
+                                    @foreach($item->tags as $tag)
+                                        <li class="list-group-item">{{$tag}}</li>
+                                    @endforeach
+                                </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
                             <label>توضیحات</label>
                             <textarea class="form-control textarea" disabled="disabled">{{$item->comment}}</textarea>
                         </div>

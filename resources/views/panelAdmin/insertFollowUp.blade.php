@@ -20,6 +20,20 @@
                     <div class="col-md-4 pl-1">
                         <div class="form-group">
                             <label>نتیجه پیگیری</label>
+                            <select class="form-control p-0" id="exampleFormControlSelect1" name="status_followups" >
+                                <option disabled="disabled" selected >وضعیت را انتخاب کنید</option>
+                                <option class="primary_bg_admin" value="11" >در حال مذاکره</option>
+                                <option class="danger_bg_admin" value="12" >کنسل شد</option>
+                                <option class="bg-info text-light" value="13">در انتظار تصمیم</option>
+                                <option class="success_bg_admin" value="20" >مشتری</option>
+                            </select>
+
+
+                        </div>
+                    </div>
+                    <div class="col-md-4 pl-1">
+                        <div class="form-group">
+                            <label>کیفیت سنجی مشتری</label>
                             <select class="form-control p-0" id="exampleFormControlSelect1" name="followup" >
                                 <option disabled="disabled" selected >نتیجه را مشخص کنید</option>
                                 @foreach($problemFollowup as $item)
@@ -28,23 +42,22 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-4 pl-1">
-                        <div class="form-group">
-                            <label>کیفیت سنجی مشتری</label>
-                            <select class="form-control p-0" id="exampleFormControlSelect1" name="status_followups" >
-                                    <option disabled="disabled" selected >وضعیت را انتخاب کنید</option>
-                                    <option class="primary_bg_admin" value="11" >در حال مذاکره</option>
-                                    <option class="danger_bg_admin" value="12" >کنسل شد</option>
-                                    <option class="bg-info text-light" value="13">در انتظار تصمیم</option>
-                                    <option class="success_bg_admin" value="20" >دانشجو</option>
-                            </select>
-                        </div>
+
+
+                    <div class="col-12">
+                        <p >انتخاب تگ ها</p>
+                        @foreach($tags as $item)
+                            <div class="form-group form-check-inline">
+                                <input type="checkbox" class="form-check-input text-dark m-0" name="tags[]" id="tag{{$item->id}}" value="{{$item->id}}">
+                                <label class="form-check-label text-dark p-1 m-0" for="tag{{$item->id}}">{{$item->tag}}</label>
+                            </div>
+                        @endforeach
                     </div>
 
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>توضیحات</label>
-                            <textarea class="form-control textarea"  lang="fa" name="comment"></textarea>
+                            <textarea class="form-control textarea"  lang="fa" name="comment">{{old('comment')}}</textarea>
                         </div>
                     </div>
                 </div>
@@ -52,19 +65,19 @@
                 <div class="col-md-4 pl-1">
                     <div class="form-group">
                         <label>تاریخ پیگیری</label>
-                        <input type="text" class="form-control"  id="dateFollow"  name="date_fa" />
+                        <input type="text" class="form-control"  id="dateFollow"  name="date_fa" value="{{$today}}" />
                     </div>
                 </div>
                 <div class="col-md-4 px-1">
                     <div class="form-group">
                         <label>ساعت پیگیری</label>
-                        <input type="text" class="form-control" value="" name="time_fa" id="time_fa" />
+                        <input type="text" class="form-control" value="{{$timeNow}}" name="time_fa" id="time_fa" />
                     </div>
                 </div>
                 <div class="col-md-4 pl-1">
                     <div class="form-group">
                         <label>تاریخ پیگیری بعد</label>
-                        <input type="text" class="form-control"  value="" name="nextfollowup_date_fa" id="nextfollowup_date_fa" />
+                        <input type="text" class="form-control"  value="{{$nextDayFollow}}" name="nextfollowup_date_fa" id="nextfollowup_date_fa" />
                     </div>
                 </div>
             </div>

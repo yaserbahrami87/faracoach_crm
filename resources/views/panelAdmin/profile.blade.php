@@ -38,8 +38,8 @@
                 </p>
             </div>
             <div class="card-footer">
+                <a href="/admin/user/{{$user->tel}}/password" class="btn btn-primary d-block text-center">تغییر رمز عبور</a>
                 <hr>
-
             </div>
         </div>
         @include('panelAdmin.boxMadarak')
@@ -108,7 +108,7 @@
                         <div class="col-md-6 pr-1">
                             <div class="form-group">
                                 <label for="email">پست الکترونیکی</label>
-                                <input type="email" class="form-control" placeholder="پست الکترونیکی را وارد کنید" value="{{$user->email}}" name="email"  id="email"   {{strlen($user->email)===0?"": "disabled" }} />
+                                <input type="email" class="form-control" placeholder="پست الکترونیکی را وارد کنید" value="{{$user->email}}" name="email"  id="email"   />
                             </div>
                         </div>
                         <div class="col-md-6 pl-1">
