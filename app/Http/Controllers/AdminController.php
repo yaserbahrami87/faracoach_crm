@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\followup;
 use App\message;
 use App\problemfollowup;
+use App\tag;
 use App\User;
 use App\verify;
 use Carbon\Carbon;
@@ -193,6 +194,8 @@ class AdminController extends BaseController
         //
     }
 
+
+    //نمایش صفحه تنظیمات ادمین
     public function showSettings()
     {
         $problemfollowup=problemfollowup::get();
@@ -207,8 +210,22 @@ class AdminController extends BaseController
                 $item->status="عدم نمایش";
             }
         }
+
+        $tags=tag::get();
+        foreach ($tags as $item)
+        {
+            if($item->status==1)
+            {
+                $item->status="نمایش";
+            }
+            elseif ($item->status==0)
+            {
+                $item->status="عدم نمایش";
+            }
+        }
         return view('panelAdmin.settings')
-                    ->with('problemfollowup',$problemfollowup);
+                    ->with('problemfollowup',$problemfollowup)
+                    ->with('tags',$tags);
     }
 
     public function showProducts()

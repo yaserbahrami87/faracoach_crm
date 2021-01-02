@@ -82,20 +82,29 @@ Route::middleware('can:isAdmin')->group(function () {
     Route::get('/admin/users/search/','UserController@searchUsers');
 
     Route::get('/admin/users/category/','UserController@showCategoryUsersAdmin');
-    Route::get('/admin/settings/','AdminController@showSettings');
-    Route::get('/admin/settings/problemfollowup/new',function()
-    {
-        return view('panelAdmin.insertProblemFollowup');
-    });
+
 
     Route::get('/admin/user/{tel}/password','AdminController@changePasswordView');
     Route::patch('/admin/user/{tel}/updatePassword','UserController@updatePassword');
+
     //  ROUTE SETTINGS
     Route::post('/admin/settings/problemfollowup/store','ProblemfollowupController@store');
     Route::get('/admin/settings/problemfollowup/delete/{problemfollowup}','ProblemfollowupController@destroy');
     Route::get('/admin/settings/problemfollowup/edit/{problemfollowup}','ProblemfollowupController@edit');
     Route::patch('/admin/settings/problemfollowup/update/{problemfollowup}','ProblemfollowupController@update');
-
+    Route::get('/admin/settings/','AdminController@showSettings');
+    Route::get('/admin/settings/problemfollowup/new',function()
+    {
+        return view('panelAdmin.insertProblemFollowup');
+    });
+    Route::get('/admin/settings/tags/new',function()
+    {
+        return view('panelAdmin.insertTags');
+    });
+    Route::post('/admin/settings/tags/store','TagController@store');
+    Route::get('/admin/settings/tags/delete/{tag}','TagController@destroy');
+    Route::get('/admin/settings/tags/edit/{tag}','TagController@edit');
+    Route::patch('/admin/settings/tags/update/{tag}','TagController@update');
 
     //Route Messages
     Route::get('/admin/messages/','MessageController@index');

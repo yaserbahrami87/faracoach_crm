@@ -35,7 +35,25 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate(request(),
+            [
+                'tag'  =>'required|string|min:3|persian_alpha',
+                'status'   =>'required|numeric'
+            ]);
+        $status = tag::create($request->all());
+        if($status)
+        {
+            $msg="اطلاعات با موفقیت ذخیره شد";
+            $errorStatus='success';
+        }
+        else
+        {
+            $msg="خطا در ذخیره";
+            $errorStatus="danger";
+        }
+        return  back()
+            ->with('msg',$msg)
+            ->with('errorStatus',$errorStatus);
     }
 
     /**
@@ -57,7 +75,8 @@ class TagController extends Controller
      */
     public function edit(tag $tag)
     {
-        //
+        return view('panelAdmin/editTags')
+            ->with('tag',$tag);
     }
 
     /**
@@ -69,7 +88,26 @@ class TagController extends Controller
      */
     public function update(Request $request, tag $tag)
     {
-        //
+        $this->validate(request(),
+            [
+                'tag'  =>'required|string|min:3|persian_alpha',
+                'status'   =>'required|numeric'
+            ]);
+
+        $status=$tag->update($request->all());
+        if($status)
+        {
+            $msg="اطلاعات با موفقیت بروزرسانی  شد";
+            $errorStatus='success';
+        }
+        else
+        {
+            $msg="خطا در بروزرسانی";
+            $errorStatus="danger";
+        }
+        return  back()
+            ->with('msg',$msg)
+            ->with('errorStatus',$errorStatus);
     }
 
     /**
@@ -80,6 +118,19 @@ class TagController extends Controller
      */
     public function destroy(tag $tag)
     {
-        //
+        $status=$tag->delete();
+        if($status)
+        {
+            $msg="اطلاعات با موفقیت حذف شد";
+            $errorStatus="success";
+        }
+        else
+        {
+            $msg="خطا در ذخیره";
+            $errorStatus="danger";
+        }
+
+        return back()->with('msg',$msg)
+            ->with('errorStatus',$errorStatus);
     }
 }
