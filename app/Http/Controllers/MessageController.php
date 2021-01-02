@@ -24,18 +24,37 @@ class MessageController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request  $request)
     {
         if(Gate::allows('isAdmin'))
         {
-            $messages=message::where('message_id_answer','=',NULL)
-                            ->where(function ($query)
-                            {
-                                $query  ->orwhere('user_id_send','=',Auth::user()->id)
-                                        ->orwhere('user_id_recieve','=',Auth::user()->id);
+            if(isset($request['q']))
+            {
+                $this->validate(request(),
+                    [
+                        'q'     =>'required|numeric'
+                    ],
+                    [
+                        'q.required'=>'شماره تیکت به عدد وارد کنید'
+                    ]);
+                $messages = message::where('message_id_answer', '=', NULL)
+                    ->where('id','=',$request['q'])
+                    ->where(function ($query) {
+                        $query->orwhere('user_id_send', '=', Auth::user()->id)
+                            ->orwhere('user_id_recieve', '=', Auth::user()->id);
 
-                            })
-                            ->paginate(20);
+                    })
+                    ->get();
+            }
+            else {
+                $messages = message::where('message_id_answer', '=', NULL)
+                    ->where(function ($query) {
+                        $query->orwhere('user_id_send', '=', Auth::user()->id)
+                            ->orwhere('user_id_recieve', '=', Auth::user()->id);
+
+                    })
+                    ->paginate(20);
+            }
             return view('panelAdmin.messages')
                     ->with('messages',$messages);
         }

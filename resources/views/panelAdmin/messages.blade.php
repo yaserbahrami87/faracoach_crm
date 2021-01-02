@@ -7,6 +7,19 @@
                 <h5 class="card-title">پیام ها</h5>
             </div>
             <div class="card-body">
+                <div class="input-group mb-3">
+                    <form method="get" action="/admin/messages/" class="form-inline">
+                        <input type="text" class="form-control " placeholder="شماره تیکت را وارد کنید" name="q" />
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary m-0" type="submit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
                 <table class="table">
                     <thead class="text-dark">
                         <th>شماره تیکت </th>

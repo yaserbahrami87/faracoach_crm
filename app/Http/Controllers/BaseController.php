@@ -9,6 +9,7 @@ use App\state;
 use App\tag;
 use App\User;
 use GuzzleHttp\Client;
+use Hekmatinasser\Verta\Verta;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -159,5 +160,11 @@ class BaseController extends Controller
     {
         return tag::where('id','=',$id)
                 ->first();
+    }
+
+    public function changeTimestampToShamsi($date)
+    {
+        $dateMiladi=new verta($date);
+        return ($dateMiladi->hour.":".$dateMiladi->minute."  ".$dateMiladi->year."/".$dateMiladi->month."/".$dateMiladi->day);
     }
 }

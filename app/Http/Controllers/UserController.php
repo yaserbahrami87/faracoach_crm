@@ -34,7 +34,14 @@ class UserController extends BaseController
                     ->orwhere('users.followby_id','=',NULL)
                     ->orderby('id','desc')
                     ->paginate(20);
-
+        foreach ($users as $item)
+        {
+            $item->created_at=$this->changeTimestampToShamsi($item->created_at);
+            if(!is_null($item->last_login_at))
+            {
+                    $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
+            }
+        }
         return view('panelAdmin.users')
                     ->with('users',$users);
     }
@@ -633,7 +640,6 @@ class UserController extends BaseController
 
     public function searchUsers(Request $request)
     {
-
         $this->validate(request(),
             [
                 'q'     =>'required|min:2|string'

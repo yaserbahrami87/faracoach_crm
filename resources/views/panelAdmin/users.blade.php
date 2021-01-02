@@ -61,6 +61,8 @@
                         <th>نام خانوادگی </th>
                         <th>کد ملی </th>
                         <th>پست الکترونیکی </th>
+                        <th>تاریخ ورود</th>
+                        <th>آخرین ورود</th>
                         <th>وضعیت</th>
                         <th>نمایش </th>
                         </thead>
@@ -76,18 +78,37 @@
                                     <tr class="success_bg_admin">
                                 @endif
                                         <td>
-                                            {{$item->fname}}
+                                            <a href="/admin/user/{{$item->id}}">
+                                                {{$item->fname}}
+                                            </a>
                                         </td>
                                         <td>
-                                            {{$item->lname}}
+                                            <a href="/admin/user/{{$item->id}}">
+                                                {{$item->lname}}
+                                            </a>
                                         </td>
                                         <td>
-                                            {{$item->codemelli}}
+                                            <a href="/admin/user/{{$item->id}}">
+                                                 {{$item->codemelli}}
+                                            </a>
                                         </td>
                                         <td >
-                                            {{$item->email}}
+                                            <a href="/admin/user/{{$item->id}}">
+                                                 {{$item->email}}
+                                            </a>
                                         </td>
                                         <td>
+                                            <a href="/admin/user/{{$item->id}}">
+                                                {{$item->created_at}}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="/admin/user/{{$item->id}}">
+                                                {{$item->last_login_at}}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="/admin/user/{{$item->id}}">
                                             @switch($item->type)
                                                 @case(1)
                                                     <p>بررسی نشده</p>
@@ -109,6 +130,7 @@
                                                     @break
 
                                             @endswitch
+                                            </a>
                                         </td>
                                         <td>
                                             <a href="/admin/user/{{$item->id}}">
