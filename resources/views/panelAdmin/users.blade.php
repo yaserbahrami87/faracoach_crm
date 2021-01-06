@@ -34,6 +34,7 @@
                                     <option value="continuefollowup">در حال مذاکره</option>
                                     <option value="waiting">در انتظار تصمیم</option>
                                     <option value="cancelfollowup">انصراف</option>
+                                    <option value="noanswering">عدم پاسخگویی</option>
                                     <option value="students">رضایت کامل / مشتری</option>
                                     <option value="todayFollowup">پیگیری امروز</option>
                                     <option value="expireFollowup">پیگیری تاریخ گذشته</option>
@@ -56,7 +57,14 @@
                             </svg>
                         </a>
                     </div>
-
+                    <div class="col-12">
+                        <label>دسترسی سریع</label>
+                        <ul class="list-group list-group-horizontal">
+                            <a href="/admin/users/category/?categoryUsers=0" class="list-group-item">نمایش همه</a>
+                            <a href="/admin/users/category/?categoryUsers=notfollowup" class="list-group-item">پیگیری نشده</a>
+                            <a href="/admin/users/category/?categoryUsers=myfollowup" class="list-group-item">پیگیری های خودم</a>
+                        </ul>
+                    </div>
                 </div>
 
 
@@ -71,7 +79,6 @@
                         <th>کد ملی </th>
                         <th>پست الکترونیکی </th>
                         <th>تاریخ ورود</th>
-                        <th>آخرین ورود</th>
                         <th>وضعیت</th>
                         <th>نمایش </th>
                         </thead>
@@ -83,6 +90,10 @@
                                     <tr class="primary_bg_admin">
                                 @elseif($item->type==12)
                                     <tr class="danger_bg_admin">
+                                @elseif($item->type==13)
+                                    <tr class="bg-info text-light">
+                                @elseif($item->type==14)
+                                    <tr class="bg-secondary text-light">
                                 @elseif($item->type==20)
                                     <tr class="success_bg_admin">
                                 @endif
@@ -109,11 +120,6 @@
                                         <td>
                                             <a href="/admin/user/{{$item->id}}">
                                                 {{$item->created_at}}
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a href="/admin/user/{{$item->id}}">
-                                                {{$item->last_login_at}}
                                             </a>
                                         </td>
                                         <td>

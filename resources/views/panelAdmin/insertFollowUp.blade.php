@@ -35,6 +35,7 @@
                                 <option class="primary_bg_admin" value="11" >در حال مذاکره</option>
                                 <option class="danger_bg_admin" value="12" >کنسل شد</option>
                                 <option class="bg-info text-light" value="13">در انتظار تصمیم</option>
+                                <option class="bg-secondary text-light" value="14">عدم پاسخگویی</option>
                                 <option class="success_bg_admin" value="20" >مشتری</option>
                             </select>
 

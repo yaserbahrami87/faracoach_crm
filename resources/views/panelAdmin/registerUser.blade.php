@@ -9,7 +9,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('ثبت نام کاربر جدید') }}</div>
+                    <div class="card-header border-bottom pb-3 bg-light">{{ __('ثبت نام کاربر جدید') }}</div>
 
                     <div class="card-body">
                         <form method="POST" action="/admin/register">
@@ -94,8 +94,6 @@
                             <div class="form-group row mb-0">
                                 <label for="sendSMS" class="col-md-4 col-form-label text-md-right">ارسال پیامک</label>
                                 <div class="col-md-6 mr-5">
-                                    <input class="form-control" type="checkbox" value="" id="sendSMS" name="sendSMS">
-
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="sendsms" id="sendsms1" value="0" checked>
                                         <label class="form-check-label" for="sendsms1">

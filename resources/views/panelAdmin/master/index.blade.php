@@ -179,7 +179,7 @@
 
 </script>
 
-<script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+
 <script src="{{asset('../dashboard/assets/js/plugins/jquery.canvasjs.min.js')}}"></script>
 
 <script>

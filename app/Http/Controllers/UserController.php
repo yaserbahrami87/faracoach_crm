@@ -224,7 +224,6 @@ class UserController extends BaseController
 
         if($status)
         {
-
             if($request['sendsms']!="0")
             {
                 $this->sendSms($request['tel'],$request['sendsms']);
@@ -574,6 +573,10 @@ class UserController extends BaseController
                             ->orderby('id','desc')
                             ->paginate(20);
                             break;
+            case 'noanswering':$users=User::where('type','=','14')
+                            ->orderby('id','desc')
+                            ->paginate(20);
+                            break;
             case 'students': $users=User::where('type','=','20')
                             ->orderby('id','desc')
                             ->paginate(20);
@@ -592,6 +595,13 @@ class UserController extends BaseController
                             ->groupby('users.id')
                             ->orderby('date_fa','desc')
                             ->paginate(20);
+                            break;
+                            case 'myfollowup': $users=User::join('followups','users.id','=','followups.user_id')
+                                ->where('followups.insert_user_id','=',Auth::user()->id)
+                                ->select('users.*')
+                                ->groupby('users.id')
+                                ->orderby('date_fa','desc')
+                                ->paginate(20);
                             break;
 
             default:return redirect('/admin/users/');
