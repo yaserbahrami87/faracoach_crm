@@ -4,7 +4,8 @@
 <div class="col-xs-12 col-md-6 col-xl-6 col-lg-6">
     <div class="card card-chart">
         <div class="card-header">
-            <h5 class="card-title">نتایج پیگیری</h5>
+
+            <h5 class="card-title border-bottom pb-2">نتایج پیگیری</h5>
         </div>
         <div class="card-body">
             <table class="table">

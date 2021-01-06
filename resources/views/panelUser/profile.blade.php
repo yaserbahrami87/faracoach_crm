@@ -31,7 +31,7 @@
                         <div class="col-md-6 px-1">
                             <div class="form-group">
                                 <label for="codemelli">کد ملی</label>
-                                <input type="text" class="form-control" placeholder="کد ملی را وارد کنید" value="{{$user->codemelli}}" id="codemelli" name="codemelli" />
+                                <input type="text" class="form-control" placeholder="کد ملی را وارد کنید" @if(strlen($user->codemelli)>0) value="{{$user->codemelli}}" disabled @endif id="codemelli" name="codemelli" />
                             </div>
                         </div>
                         <div class="col-md-6 px-1">
@@ -61,13 +61,13 @@
                         <div class="col-md-6 px-1">
                             <div class="form-group">
                                 <label>تلفن تماس</label>
-                                <input type="text" class="form-control" placeholder="تلفن تماس را وارد کنید" value="{{$user->tel}}" name="tel"  />
+                                <input type="text" class="form-control" placeholder="تلفن تماس را وارد کنید" @if(strlen($user->tel)>0) value="{{$user->tel}}" disabled @endif name="tel"  />
                             </div>
                         </div>
                         <div class="col-md-6 pr-1">
                             <div class="form-group">
                                 <label for="email">پست الکترونیکی</label>
-                                <input type="email" class="form-control" placeholder="پست الکترونیکی را وارد کنید" value="{{$user->email}}" name="email"  id="email"  />
+                                <input type="email" class="form-control" placeholder="پست الکترونیکی را وارد کنید" @if(strlen($user->email)>0) value="{{$user->email}}" disabled @endif name="email"  id="email"  />
                             </div>
                         </div>
                         <div class="col-md-6 pl-1">

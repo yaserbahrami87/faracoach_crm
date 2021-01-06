@@ -199,11 +199,51 @@ class UserController extends BaseController
         return back()->with('msg',$msg)->with('errorStatus',$errorStatus);
     }
 
-
-    public function panel()
+    //Register User by Admin
+    public function register(Request $request)
     {
 
+        $this->validate($request, [
+            'fname'         => ['nullable','persian_alpha', 'string', 'max:30'],
+            'lname'         => ['nullable','persian_alpha', 'string', 'max:30'],
+            'email'         => ['required', 'string', 'email', 'max:150', 'unique:users'],
+            'tel'           => ['required','numeric','unique:users','regex:/^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}$/'],
+            'password'      => ['required', 'string', 'min:8', 'confirmed'],
+            'tel_verified'  => ['required','boolean']
 
+        ]);
+
+        $status=User::create([
+            'fname'         => $request['fname'],
+            'lname'         => $request['lname'],
+            'email'         => $request['email'],
+            'tel'           => $request['tel'],
+            'tel_verified'  => $request['tel_verified'],
+            'password'      => Hash::make($request['password']),
+        ]);
+
+        if($status)
+        {
+
+            if($request['sendsms']!="0")
+            {
+                $this->sendSms($request['tel'],$request['sendsms']);
+            }
+
+            $msg="کاربر با موفقیت در سیستم ثبت شد";
+            $errorStatus="success";
+            return back()
+                    ->with('msg',$msg)
+                    ->with('errorStatus',$errorStatus);
+        }
+        else
+        {
+            $msg="خطا در ثبت کاربر";
+            $errorStatus="danger";
+            return back()
+                ->with('msg',$msg)
+                ->with('errorStatus',$errorStatus);
+        }
     }
 
 
@@ -385,19 +425,13 @@ class UserController extends BaseController
     public function update(Request $request,User $user)
     {
 
-        $status=User::where('codemelli','=',$request['codemelli'])
-            ->orwhere('email','=',$request['email'])
-            ->orwhere('tel','=',$request['tel'])
-            ->count();
-
-        if($status==0) {
             $this->validate(request(),
                 [
                     'fname' => 'nullable|min:3|persian_alpha',
                     'lname' => 'nullable|min:3|persian_alpha',
                     'codemelli' => 'nullable|melli_code',
                     'sex' => 'nullable|boolean',
-                    'tel' => 'required|iran_mobile|',
+                    'tel' => 'nullable|iran_mobile',
                     'shenasname' => 'nullable|numeric',
                     'father' => 'nullable|min:3|persian_alpha',
                     'born' => 'nullable|min:3|persian_alpha',
@@ -479,14 +513,7 @@ class UserController extends BaseController
 
             return back()->with('msg', $msg)
                 ->with('errorStatus', $errorStatus);
-        }
-        else
-        {
-            $msg = "اطلاعات وارد شده تکراری می باشد";
-            $errorStatus = "danger";
-            return back()->with('msg', $msg)
-                ->with('errorStatus', $errorStatus);
-        }
+
 
     }
 
@@ -732,13 +759,13 @@ class UserController extends BaseController
                 {
                     if(is_null(Auth::user()->fname) ||(is_null(Auth::user()->lname)) )
                     {
-                        $this->sensSms($request['tel'],"به فراکوچ خوش آمدید/ شما توسط ".Auth::user()->tel." به فراکوچ دعوت شدید");
+                        $this->sendSms($request['tel'],"به فراکوچ خوش آمدید/ شما توسط ".Auth::user()->tel." به فراکوچ دعوت شدید");
                         $msg="تلفن با موفقیت در سیستم فراکوچ ثبت شد";
                         $errorStatus="success";
                     }
                     else
                     {
-                        $this->sensSms($request['tel'],"به فراکوچ خوش آمدید/ شما توسط ".Auth::user()->fname.Auth::user()->lname ." به فراکوچ دعوت شدید");
+                        $this->sendSms($request['tel'],"به فراکوچ خوش آمدید/ شما توسط ".Auth::user()->fname.Auth::user()->lname ." به فراکوچ دعوت شدید");
                         $msg="تلفن با موفقیت در سیستم فراکوچ ثبت شد";
                         $errorStatus="success";
                     }
@@ -840,6 +867,46 @@ class UserController extends BaseController
                     ->with('msg',$msg)
                     ->with('errorStatus',$errorStatus);
             }
+        }
+    }
+
+    public function changeType(Request $request,$id)
+    {
+        $this->validate(request(),
+        [
+            'type'=>'required|numeric'
+        ]);
+        $user=User::where('id','=',$id)
+                ->first();
+        if(is_null($user))
+        {
+            $msg="کاربری با این اطلاعات موجود نمی باشد";
+            $errorStatus="danger";
+            return back()
+                ->with('msg',$msg)
+                ->with('errorStatus',$errorStatus);
+        }
+        else
+        {
+            $user['type']=$request['type'];
+            $status=$user->save();
+            if($status)
+            {
+                $msg="سطح دسترسی کاربر تغییر کرد";
+                $errorStatus="success";
+                return back()
+                    ->with('msg',$msg)
+                    ->with('errorStatus',$errorStatus);
+            }
+            else
+            {
+                $msg="خطا در تغییر سطح دسترسی";
+                $errorStatus="danger";
+                return back()
+                    ->with('msg',$msg)
+                    ->with('errorStatus',$errorStatus);
+            }
+
         }
     }
 }

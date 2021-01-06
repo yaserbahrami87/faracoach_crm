@@ -35,7 +35,7 @@ class BaseController extends Controller
     }
 
 
-    public function sensSms($tel,$msg)
+    public function sendSms($tel,$msg)
     {
         // Send SMS
         $url = "https://ippanel.com/services.jspd";

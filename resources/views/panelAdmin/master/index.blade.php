@@ -118,6 +118,9 @@
 <!--   Core JS Files   -->
 <script src={{asset("../dashboard/assets/js/core/jquery.min.js")}}></script>
 <script src={{asset("../dashboard/assets/js/java.js")}}></script>
+
+<script src="{{ asset('vendor/file-manager/js/file-manager.js') }}"></script>
+
 <script src={{asset("../dashboard/assets/js/core/popper.min.js")}}></script>
 <script src={{asset("../dashboard/assets/js/core/bootstrap.min.js")}}></script>
 <script src={{asset("../dashboard/assets/js/plugins/perfect-scrollbar.jquery.min.js")}}></script>
@@ -129,12 +132,7 @@
 <script src={{asset("../dashboard/assets/js/plugins/bootstrap-notify.js")}}></script>
 <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
 
-<script src={{asset("../dashboard/assets/demo/demo.js")}}></script>
-<script>
-    $(document).ready(function() {
-        demo.initChartsPages();
-    });
-</script>
+
 
 <script src="{{asset('js/farsiType.js')}}"></script>
 <!--  DATE SHAMSI PICKER  --->
@@ -180,7 +178,79 @@
 
 
 </script>
-<script src="{{ asset('vendor/file-manager/js/file-manager.js') }}"></script>
+
+<script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script src="{{asset('../dashboard/assets/js/plugins/jquery.canvasjs.min.js')}}"></script>
+
+<script>
+    window.onload = function () {
+
+        var options = {
+            animationEnabled: true,
+            theme: "light2",
+            title:{
+                text: "آمار سایت"
+            },
+            axisX:{
+                valueFormatString: "DD MMM"
+            },
+            axisY: {
+                title: "Number of Sales",
+                suffix: "نفر",
+                minimum: 0
+            },
+            toolTip:{
+                shared:true
+            },
+            legend:{
+                cursor:"pointer",
+                verticalAlign: "bottom",
+                horizontalAlign: "left",
+                dockInsidePlotArea: true,
+                itemclick: toogleDataSeries
+            },
+            data: [{
+                type: "line",
+                showInLegend: true,
+                name: "ثبت نام شده",
+                markerType: "square",
+                xValueFormatString: "DD MMM, YYYY",
+                color: "#F08080",
+                yValueFormatString: "#,##0نفر",
+                dataPoints: [
+                    { x: new Date(1399, 10, 1), y: 63 },
+                    { x: new Date(1399, 11, 2), y: 69 },
+                    { x: new Date(1400, 11, 2), y: 65 },
+                    { x: new Date(1401, 11, 2), y: 70 },
+                ]
+            },
+                {
+                    type: "line",
+                    showInLegend: true,
+                    name: "انصراف",
+                    lineDashType: "dash",
+                    yValueFormatString: "#,##0نفر",
+                    dataPoints: [
+                        { x: new Date(1399, 10, 1), y: 83 },
+                        { x: new Date(1399, 11, 2), y: 99 },
+                        { x: new Date(1400, 11, 2), y: 15 },
+                        { x: new Date(1401, 11, 2), y: 20 },
+                    ]
+                }]
+        };
+        $("#chartContainer").CanvasJSChart(options);
+
+        function toogleDataSeries(e){
+            if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                e.dataSeries.visible = false;
+            } else{
+                e.dataSeries.visible = true;
+            }
+            e.chart.render();
+        }
+
+    }
+</script>
 
 </body>
 

@@ -52,8 +52,8 @@ class FollowupController extends Controller
             'user_id'               =>'required|numeric|',
             'followup'              =>'required|numeric',
             'status_followups'      =>'required|numeric',
-            'comment'               =>'required|string|min:3',
-            'tags'                  =>'|array',
+            'comment'               =>'nullable|string|min:3',
+            'tags'                  =>'required|array',
             'date_fa'               =>'required|string',
             'time_fa'               =>'required|string',
             'nextfollowup_date_fa'  =>'string|min:9|nullable'

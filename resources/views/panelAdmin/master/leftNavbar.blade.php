@@ -42,6 +42,12 @@
                 <p>تنظیمات</p>
             </a>
         </li>
+        <li>
+            <a href="/admin/reports/">
+                <i class="nc-icon nc-settings"></i>
+                <p>گزارش گیری</p>
+            </a>
+        </li>
 
 
     </ul>

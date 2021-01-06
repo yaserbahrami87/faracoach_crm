@@ -74,12 +74,18 @@ Route::middleware('can:isEducation')->group(function () {
 
 
 Route::middleware('can:isAdmin')->group(function () {
+    // user
     //Route::get('/admin/panel/','AdminController@index')->name('panelAdmin');
     Route::get('/admin/users','UserController@index');
     Route::get('/admin/user/{user}','UserController@show');
     Route::patch('/admin/profile/update/{user}','UserController@update');
-
+    Route::patch('/admin/user/{id}/changeType','UserController@changeType');
     Route::get('/admin/users/search/','UserController@searchUsers');
+    Route::get('/admin/add',function()
+    {
+        return view('panelAdmin.registerUser');
+    });
+    Route::post('/admin/register','UserController@register');
 
     Route::get('/admin/users/category/','UserController@showCategoryUsersAdmin');
 
@@ -120,6 +126,12 @@ Route::middleware('can:isAdmin')->group(function () {
     Route::get('/admin/filemanager',function()
     {
         return view('panelAdmin/fileManager');
+    });
+
+    //Route reports
+    Route::get('/admin/reports/',function()
+    {
+        return view('panelAdmin.reports');
     });
 });
 
