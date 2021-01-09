@@ -32,7 +32,7 @@ class AdminController extends BaseController
      */
     public function index()
     {
-        if(Gate::allows('isAdmin'))
+        if(Gate::allows('isAdmin')||Gate::allows('isEducation'))
         {
             $notFollowup=User::where('type','=','1')
                 ->count();

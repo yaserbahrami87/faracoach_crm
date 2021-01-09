@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\followup;
-use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class FollowupController extends Controller
+class FollowupController extends BaseController
 {
 
 
@@ -47,6 +46,7 @@ class FollowupController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate($request,[
             'insert_user_id'        =>'required|numeric',
             'user_id'               =>'required|numeric|',
@@ -56,9 +56,10 @@ class FollowupController extends Controller
             'tags'                  =>'required|array',
             'date_fa'               =>'required|string',
             'time_fa'               =>'required|string',
-            'nextfollowup_date_fa'  =>'string|min:9|nullable'
-
+            'nextfollowup_date_fa'  =>'string|min:9|nullable',
+            'followby_expert'       =>'required|numeric|'
         ]);
+
         $request['tags']=implode(',',$request['tags']);
 
         $check=followup::create([
@@ -75,10 +76,10 @@ class FollowupController extends Controller
             'datetime_fa'           =>$request['date_fa']." ".$request['time_fa']
         ]);
 
-        $data=User::where('users.id','=',$request['user_id'])
-                        ->first();
+        $data=$this->get_user_byID($request['user_id']);
 
         $data->type=$request['status_followups'];
+        $data->followby_expert=$request['followby_expert'];
         $data->save();
 
         if($check)

@@ -29,10 +29,20 @@ class UserController extends BaseController
 
     public function index()
     {
-        $users=User::whereNotIn('users.type',[2])
-                    ->where('users.followby_id','=',1)
-                    ->orwhere('users.followby_id','=',NULL)
-                    ->orderby('id','desc')
+        $users=User::where(function($query)
+                    {
+                        $query->orwhere('followby_expert','=',Auth::user()->id)
+                              ->orwhere('followby_expert','=',NULL);
+                    })
+                    ->whereNotIn('users.type',[2,3])
+//                    leftjoin('followups','users.id','=','followups.user_id')
+//                    ->where('users.type','=','1')
+//                    ->where('users.followby_id','=',1)
+//                    ->where('followups.insert_user_id','=',Auth::user()->id)
+                    //->whereNotIn('users.type',[2])
+//                    ->orwhere('users.followby_id','=',NULL)
+                    ->orderby('users.id','desc')
+                    ->groupby('users.id')
                     ->paginate(20);
         foreach ($users as $item)
         {
@@ -206,7 +216,7 @@ class UserController extends BaseController
         $this->validate($request, [
             'fname'         => ['nullable','persian_alpha', 'string', 'max:30'],
             'lname'         => ['nullable','persian_alpha', 'string', 'max:30'],
-            'email'         => ['required', 'string', 'email', 'max:150', 'unique:users'],
+            'email'         => ['nullable', 'string', 'email', 'max:150', 'unique:users'],
             'tel'           => ['required','numeric','unique:users','regex:/^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}$/'],
             'password'      => ['required', 'string', 'min:8', 'confirmed'],
             'tel_verified'  => ['required','boolean']
@@ -310,7 +320,7 @@ class UserController extends BaseController
             $item->insert_user_id=$admin_Followup->fname." ".$admin_Followup->lname;
         }
 
-        //تبدیل کدهای پیگیری
+        //تبدیل تگهای پیگیری
        foreach ($followUps as $item)
        {
            $tmp=array();
@@ -340,6 +350,15 @@ class UserController extends BaseController
         //یوزر توسط چه کسی معرفی شده است
         $resourceIntroduce=User::where('id','=',$user->introduced)
                         ->first();
+
+        // دریافت لیست مسئولین پیگیری
+        $expert_followup=user::where(function($query)
+                        {
+                            $query->orwhere('type','=',2)
+                                  ->orwhere('type','=',3);
+                        })
+                        //->where('id','<>',Auth::user()->id)
+                        ->get();
 
 
         //تعداد افراد معرفی کرده
@@ -400,7 +419,7 @@ class UserController extends BaseController
         $v=verta('+2 day');
         $v=$v->format('Y/m/d');
         $nextDayFollow=$v;
-        return view('panelAdmin.profile',compact('user','countFollowups','followUps','problemFollowup','userAdmin','listIntroducedUser','countIntroducedUser','resourceIntroduce','states','city','score','verifyScore','scoreSuccess','verifyStatus','tags','today','nextDayFollow','timeNow'));
+        return view('panelAdmin.profile',compact('user','countFollowups','followUps','problemFollowup','userAdmin','listIntroducedUser','countIntroducedUser','resourceIntroduce','states','city','score','verifyScore','scoreSuccess','verifyStatus','tags','today','nextDayFollow','timeNow','expert_followup'));
     }
 
     /**
@@ -557,8 +576,10 @@ class UserController extends BaseController
         {
             case '0': return redirect('/admin/users/');
                       break;
-            case 'notfollowup': $users=User::where('type','=','1')
-                            ->orderby('id','desc')
+            case 'notfollowup': $users=User:: rightjoin('followups','users.id','=','followups.user_id')
+                            ->where('users.type','=','1')
+                            ->orwhere('followups.insert_user_id','=',Auth::user()->id)
+                            ->orderby('users.id','desc')
                             ->paginate(20);
                             break;
             case 'continuefollowup': $users=User::where('type','=','11')

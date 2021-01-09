@@ -46,7 +46,7 @@
                                 <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('پست الکترونیکی:') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email">
 
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -101,15 +101,21 @@
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="sendsms" id="sendsms2"  value="دوست عزیز سلام , ورود شما به فراکوچ تبریک می گوییم">
+                                        <input class="form-check-input" type="radio" name="sendsms" id="sendsms2"  value="                                            خانم/آقای ....محترم  ممنون از تماس شما.مشخصات شما در باشگاه مشتریان فراکوچ ثبت شد.به زودی باشما تماس خواهیم گرفت.">
                                         <label class="form-check-label" for="sendsms2">
-                                            دوست عزیز سلام,ورود شما به فراکوچ تبریک می گوییم
+                                            خانم/آقای ....محترم  ممنون از تماس شما.مشخصات شما در باشگاه مشتریان فراکوچ ثبت شد.به زودی باشما تماس خواهیم گرفت.
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="sendsms" id="sendsms3" value="سلام دوست عزیز و به دنیای کوچینگ خوش آمدید">
+                                        <input class="form-check-input" type="radio" name="sendsms" id="sendsms3" value="خانم/آقای ... محترم شما توسط ... به باشگاه مشتریان فراکوچ دعوت شدید">
                                         <label class="form-check-label" for="sendsms3">
-                                            سلام دوست عزیز و به دنیای کوچینگ خوش آمدید
+                                           خانم/آقای ... محترم شما توسط ... به باشگاه مشتریان فراکوچ دعوت شدید
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="sendsms" id="sendsms3" value="جناب آقای / خانم ... موسسه فراکوچ مقدم شما را گرامی می دارد">
+                                        <label class="form-check-label" for="sendsms3">
+                                            جناب آقای / خانم ... موسسه فراکوچ مقدم شما را گرامی می دارد
                                         </label>
                                     </div>
                                 </div>

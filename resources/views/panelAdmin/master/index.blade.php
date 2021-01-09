@@ -184,7 +184,6 @@
 
 <script>
     window.onload = function () {
-
         var options = {
             animationEnabled: true,
             theme: "light2",

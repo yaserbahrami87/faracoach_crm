@@ -115,6 +115,11 @@ class BaseController extends Controller
         return  $user;
     }
 
+    public function get_user_byID($id)
+    {
+        return user::where('id','=',$id)
+                 ->first();
+    }
     public function get_data_api()
     {
         $client = new Client([

@@ -65,7 +65,7 @@ class VerifyController extends BaseController
                     if($status)
                     {
                         $message="کد فعالی سازی شما در سیستم فراکوچ : " . $six_digit_random_number ;
-                        $this->sensSms($request,$message);
+                        $this->sendSms($request,$message);
                         return view('verifyAjax')
                                 ->with('tel',$request);
                     }

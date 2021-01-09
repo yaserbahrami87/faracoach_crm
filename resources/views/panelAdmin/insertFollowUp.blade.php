@@ -53,6 +53,17 @@
                             </select>
                         </div>
                     </div>
+                    <div class="col-md-4 px-1">
+                        <div class="form-group">
+                            <label>مسئول پیگیری</label>
+                            <select class="form-control p-0"  name="followby_expert" >
+                                <option disabled="disabled" selected >نتیجه را مشخص کنید</option>
+                                @foreach($expert_followup as $item)
+                                    <option value="{{$item->id}}" @if($item->id==Auth::user()->id) selected @endif >@if((strlen($item->fname))||(strlen($item->lname))>0) {{$item->fname}} {{$item->lname}}@else{{$item->tel}}@endif</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
 
 
                     <div class="col-12">

@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('email')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
+            $table->boolean('tel_verified')->default(0);
             $table->string('password');
             $table->string('fname',20)->nullable();
             $table->string('lname',30)->nullable();
@@ -41,7 +42,10 @@ class CreateUsersTable extends Migration
             $table->string('detailsresource',50)->nullable();
             $table->string('gettingknow',40)->nullable();
             $table->string('introduced',40)->nullable();
+            $table->integer('followby_id')->nullable();
+            $table->integer('followby_expert')->nullable();
             $table->rememberToken();
+            $table->timestamp('last_login_at')->nullable();
             $table->timestamps();
         });
     }
