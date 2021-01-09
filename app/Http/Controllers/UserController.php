@@ -52,8 +52,11 @@ class UserController extends BaseController
                     $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
             }
         }
+        $tags=$this->get_tags();
+
         return view('panelAdmin.users')
-                    ->with('users',$users);
+                    ->with('users',$users)
+                    ->with('tags',$tags);
     }
 
     /**
@@ -217,7 +220,8 @@ class UserController extends BaseController
             'fname'         => ['nullable','persian_alpha', 'string', 'max:30'],
             'lname'         => ['nullable','persian_alpha', 'string', 'max:30'],
             'email'         => ['nullable', 'string', 'email', 'max:150', 'unique:users'],
-            'tel'           => ['required','numeric','unique:users','regex:/^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}$/'],
+            //'tel'           => ['required','numeric','unique:users','regex:/^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}$/'],
+            'tel'           => ['required','iran_mobile'],
             'password'      => ['required', 'string', 'min:8', 'confirmed'],
             'tel_verified'  => ['required','boolean']
 

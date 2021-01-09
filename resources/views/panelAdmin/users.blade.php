@@ -63,6 +63,9 @@
                             <a href="/admin/users/category/?categoryUsers=0" class="list-group-item">نمایش همه</a>
                             <a href="/admin/users/category/?categoryUsers=notfollowup" class="list-group-item">پیگیری نشده</a>
                             <a href="/admin/users/category/?categoryUsers=myfollowup" class="list-group-item">پیگیری های خودم</a>
+                            @foreach($tags as $item)
+                                <a href="/admin/users/category/?categoryUsers={{$item->id}}" class="list-group-item">{{$item->tag}}</a>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
