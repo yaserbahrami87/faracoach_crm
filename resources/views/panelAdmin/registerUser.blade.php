@@ -94,7 +94,7 @@
                                 <label for="gettingknow" class="col-md-4 col-form-label text-md-right">{{ __('نحوه آشنایی با فراکوچ:') }}</label>
 
                                 <div class="col-md-6">
-                                    <select id="gettingknow" class="form-control" @error('gettingknow') is-invalid @enderror" name="gettingknow">
+                                    <select id="gettingknow" name="gettingknow"   class="form-control" @error('gettingknow') is-invalid @enderror >
                                     <option selected disabled>انتخاب کنید</option>
                                     <option>اینستاگرام</option>
                                     <option>تلگرام</option>

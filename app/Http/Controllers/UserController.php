@@ -221,7 +221,7 @@ class UserController extends BaseController
             'lname'         => ['nullable','persian_alpha', 'string', 'max:30'],
             'email'         => ['nullable', 'string', 'email', 'max:150', 'unique:users'],
             //'tel'           => ['required','numeric','unique:users','regex:/^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}$/'],
-            'tel'           => ['required','iran_mobile'],
+            'tel'           => ['required','iran_mobile','unique:users'],
             'password'      => ['required', 'string', 'min:8', 'confirmed'],
             'tel_verified'  => ['required','boolean'],
             'introduced'  =>   ['nullable','numeric'],
@@ -229,14 +229,14 @@ class UserController extends BaseController
 
         ]);
 
-        if(!isset($data['gettingknow']))
+        if(!isset($request['gettingknow']))
         {
-            $data['gettingknow']=NULL;
+            $request['gettingknow']=NULL;
         }
 
-        if(!isset($data['introduced']))
+        if(!isset($request['introduced']))
         {
-            $data['introduced']=NULL;
+            $request['introduced']=NULL;
         }
 
         $status=User::create([
@@ -246,8 +246,8 @@ class UserController extends BaseController
             'tel'           => $request['tel'],
             'tel_verified'  => $request['tel_verified'],
             'password'      => Hash::make($request['password']),
-            'introduced'    =>$data['introduced'],
-            'gettingknow'   =>$data['gettingknow']
+            'introduced'    => $request['introduced'],
+            'gettingknow'   => $request['gettingknow']
         ]);
 
         if($status)

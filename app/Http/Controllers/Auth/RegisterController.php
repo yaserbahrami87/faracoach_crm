@@ -79,6 +79,8 @@ class RegisterController extends Controller
         {
             $data['introduced']=NULL;
         }
+
+
         return User::create([
             'fname'         => $data['fname'],
             'lname'         => $data['lname'],
