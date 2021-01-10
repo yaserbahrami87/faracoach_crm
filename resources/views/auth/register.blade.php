@@ -107,6 +107,7 @@
                                     <option>تبلیغات فضای مجازی</option>
                                     <option>پکیج رایگان</option>
                                     <option>واتساپ</option>
+                                    <option>موتورهای جستجو</option>
                                 </select>
                                 @error('gettingknow')
                                 <span class="invalid-feedback" role="alert">

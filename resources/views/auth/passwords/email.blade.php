@@ -20,6 +20,7 @@
                     @endif
 
 
+                    <!--
                     <form method="POST" action="{{ route('password.email') }}">
                         {{csrf_field()}}
                         <div class="form-group row">
@@ -44,9 +45,26 @@
                             </div>
                         </div>
                     </form>
+                    -->
 
-                    <!--
-                    <form method="POST" action="/">
+                    @if($errors->any())
+                        <div class="col-12">
+                            <div class="alert alert-danger" role="alert">
+                                @foreach($errors->all() as $error)
+                                    <li>{{$error}}</li>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
+                    @if(session('msg') && (session('errorStatus')))
+                        <div class="col-12">
+                            <div class="alert alert-{{session('errorStatus')}}">
+                                <p>{{session('msg')}}</p>
+                            </div>
+                        </div>
+                    @endif
+                    <form method="GET" action="/password/sendcode">
+                        {{csrf_field()}}
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('تلفن همراه:') }}</label>
 
@@ -64,12 +82,12 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('ارسال رمز عبور جدید') }}
+                                    {{ __('ارسال کد') }}
                                 </button>
                             </div>
                         </div>
                     </form>
-                    -->
+
                 </div>
             </div>
         </div>

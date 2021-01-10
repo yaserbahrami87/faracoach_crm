@@ -57,8 +57,8 @@ class RegisterController extends Controller
             'tel'           => ['required','numeric','unique:users','regex:/^09(1[0-9]|3[0-9]|2[0-9])-?[0-9]{3}-?[0-9]{4}$/'],
             'password'      => ['required', 'string', 'min:8', 'confirmed'],
             'tel_verified'  => ['required','boolean'],
-            'introduced'  =>   ['nullable','numeric'],
-            'gettingknow'  =>  ['nullable','persian_alpha'],
+            'introduced'    => ['nullable','numeric'],
+            'gettingknow'   => ['nullable','persian_alpha'],
         ]);
     }
 

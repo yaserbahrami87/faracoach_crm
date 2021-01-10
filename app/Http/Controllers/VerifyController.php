@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class VerifyController extends BaseController
 {
@@ -410,5 +411,176 @@ class VerifyController extends BaseController
             return back()->with('msg','رمز یکبار مصرف اشتباه است')
                          ->with('errorStatus','danger');
         }
+    }
+
+    public function sendResetCode(request $request)
+    {
+
+        $six_digit_random_number = mt_rand(100000, 999999);
+        $now= Verta::now();
+        $user=$this->get_user($request['tel']);
+        if(!is_null($user))
+        {
+            $status=verify::where('tel','=',$user->tel)
+                ->where('verify','=',0)
+                ->where('type','=',1)
+                ->latest()
+                ->count();
+
+            if($status==0)
+            {
+                $status=verify::create(
+                    [
+                        'tel'           =>$user->tel,
+                        'code'          =>$six_digit_random_number,
+                        'type'          =>1,
+                        'date_fa'       =>$this->dateNow,
+                        'time_fa'       =>$this->timeNow
+                    ]);
+
+                if($status)
+                {
+                    $message="کد بازیابی شما در سیستم فراکوچ : " . $six_digit_random_number ;
+//                    $this->sendSms($user->tel,$message);
+                    $msg=" کد بازیابی به شماره ".$user->tel." ارسال شد ";
+                    $errorStatus="warning";
+                    return view('resetPasswordbySMS')
+                                ->with('msg',$msg)
+                                ->with('errorStatus',$errorStatus);
+                }
+                else
+                {
+
+                    $msg="خطا";
+                    $errorStatus="danger";
+                    return back()
+                            ->with('msg',$msg)
+                            ->with('errorStatus',$errorStatus);
+                }
+            }
+            else
+            {
+
+                $checkTimeCode=verify::where('tel','=',$user->tel)
+                    ->where('verify','=',0)
+                    ->latest()
+                    ->first();
+                $date=($checkTimeCode['created_at']);
+                $checkDays=$date->addMinutes(10);
+                if($checkDays<Carbon::now())
+                {
+                    $status=verify::create(
+                        [
+                            'tel'           =>$user->tel,
+                            'type'          =>1,
+                            'code'          =>$six_digit_random_number,
+                            'date_fa'       =>$this->dateNow,
+                            'time_fa'       =>$this->timeNow
+                        ]);
+
+                    if($status)
+                    {
+                        $message="کد بازیابی شما در سیستم فراکوچ : " . $six_digit_random_number ;
+//                        $this->sendSms($user->tel,$message);
+                        $msg=" کد بازیابی به شماره ".$user->tel." ارسال شد ";
+                        $errorStatus="warning";
+
+                        return view('resetPasswordbySMS')
+                            ->with('msg',$msg)
+                            ->with('errorStatus',$errorStatus);
+                    }
+                    else
+                    {
+                        $msg="خطا";
+                        $errorStatus="danger";
+                        return back()
+                            ->with('msg',$msg)
+                            ->with('errorStatus',$errorStatus);
+                    }
+                }
+                else
+                {
+                    $msg="کد بازیابی مجدد هر 10 دقیقه ارسال خواهد شد";
+                    $errorStatus="danger";
+                    return view('resetPasswordbySMS')
+                                ->with('msg', $msg)
+                                ->with('errorStatus', $errorStatus);
+                }
+            }
+            return back()
+                ->with('msg',$msg)
+                ->with('errorStatus',$errorStatus);
+        }
+        else
+        {
+            $msg="شماره همراه وارد شده در سیستم موجود نمی باشد";
+            $errorStatus="danger";
+            return back()
+                ->with('msg',$msg)
+                ->with('errorStatus',$errorStatus);
+        }
+    }
+
+    public function checkResetCode(request $request)
+    {
+        if (is_null($request))
+        {
+            return back();
+        }
+        else
+        {
+
+            $this->validate($request,[
+                'password'      => ['required', 'string', 'min:8', 'confirmed'],
+                'code'          =>['required','numeric','min:6']
+            ]);
+            $verify=verify::where('code','=',$request['code'])
+                    //->where('type','=',1)
+                    ->where('verify','=',0)
+                    ->latest()
+                    ->first();
+
+            if(is_null($verify))
+            {
+                return view('resetPasswordbySMS')
+                            ->with('msg',"کد وارد شده اشتباه است")
+                            ->with('errorStatus','danger');
+            }
+            else {
+                $date = ($verify['created_at']);
+
+                $checkDays = $date->addMinutes(10);
+
+                if ($checkDays < Carbon::now()) {
+                    $user = $this->get_user($verify->tel);
+                    $user['password'] = Hash::make($request['password']);
+                    $status = $user->save();
+                    if ($status)
+                    {
+                        $msg = "رمز با موفقیت تغییر کرد";
+                        $errorStatus = "success";
+                        return redirect('/password/reset')
+                                ->with('msg', $msg)
+                                ->with('errorStatus', $errorStatus);
+                    }
+                    else
+                    {
+                        $msg = "خطا در تغییر رمز عبور";
+                        $errorStatus = "danger";
+                        return view('resetPasswordbySMS')
+                            ->with('msg', $msg)
+                            ->with('errorStatus', $errorStatus);
+                    }
+
+                } else {
+                    $msg = "کد بازیابی شما منقضی شده است";
+                    $errorStatus = "danger";
+                    return view('resetPasswordbySMS')
+                        ->with('msg', $msg)
+                        ->with('errorStatus', $errorStatus);
+                }
+            }
+        }
+
     }
 }

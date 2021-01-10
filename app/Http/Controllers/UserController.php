@@ -659,29 +659,33 @@ class UserController extends BaseController
 
     public function showCategoryTagsAdmin(Request $request)
     {
-        if(!isset($request['tags']))
+        if(is_null($request))
         {
-            $msg = "حداقل یک گزینه برای اعمال فیلترها انتخاب کنید";
-            $errorStatus = "danger";
-            return back()->with('msg', $msg)
-                        ->with('errorStatus', $errorStatus);
+
         }
         else {
-            $tags = implode(',', $request['tags']);
-            $users = user::join('followups', 'users.id', '=', 'followups.user_id')
-                ->where('followups.tags', 'like', '%' . $tags . '%')
-                ->where('followups.insert_user_id', '=', Auth::user()->id)
-                ->select('users.*')
-                ->groupby('users.id')
-                ->orderby('date_fa', 'desc')
-                ->paginate(20);
+            if (!isset($request['tags'])) {
+                $msg = "حداقل یک گزینه برای اعمال فیلترها انتخاب کنید";
+                $errorStatus = "danger";
+                return back()->with('msg', $msg)
+                    ->with('errorStatus', $errorStatus);
+            } else {
+                $tags = implode(',', $request['tags']);
+                $users = user::join('followups', 'users.id', '=', 'followups.user_id')
+                    ->where('followups.tags', 'like', '%' . $tags . '%')
+                    ->where('followups.insert_user_id', '=', Auth::user()->id)
+                    ->select('users.*')
+                    ->groupby('users.id')
+                    ->orderby('date_fa', 'desc')
+                    ->paginate(20);
 
-            $users->appends(['tags' => $request['tags']]);
+                $users->appends(['tags' => $request['tags']]);
 
-            $tags = $this->get_tags();
-            return view('panelAdmin.users')
-                ->with('tags', $tags)
-                ->with('users', $users);
+                $tags = $this->get_tags();
+                return view('panelAdmin.users')
+                    ->with('tags', $tags)
+                    ->with('users', $users);
+            }
         }
     }
 
