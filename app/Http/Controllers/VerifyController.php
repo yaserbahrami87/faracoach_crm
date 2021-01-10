@@ -441,7 +441,7 @@ class VerifyController extends BaseController
                 if($status)
                 {
                     $message="کد بازیابی شما در سیستم فراکوچ : " . $six_digit_random_number ;
-//                    $this->sendSms($user->tel,$message);
+                    $this->sendSms($user->tel,$message);
                     $msg=" کد بازیابی به شماره ".$user->tel." ارسال شد ";
                     $errorStatus="warning";
                     return view('resetPasswordbySMS')
@@ -481,7 +481,7 @@ class VerifyController extends BaseController
                     if($status)
                     {
                         $message="کد بازیابی شما در سیستم فراکوچ : " . $six_digit_random_number ;
-//                        $this->sendSms($user->tel,$message);
+                        $this->sendSms($user->tel,$message);
                         $msg=" کد بازیابی به شماره ".$user->tel." ارسال شد ";
                         $errorStatus="warning";
 
