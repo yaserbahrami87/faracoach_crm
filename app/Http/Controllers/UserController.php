@@ -223,9 +223,21 @@ class UserController extends BaseController
             //'tel'           => ['required','numeric','unique:users','regex:/^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}$/'],
             'tel'           => ['required','iran_mobile'],
             'password'      => ['required', 'string', 'min:8', 'confirmed'],
-            'tel_verified'  => ['required','boolean']
+            'tel_verified'  => ['required','boolean'],
+            'introduced'  =>   ['nullable','numeric'],
+            'gettingknow'  =>  ['nullable','persian_alpha'],
 
         ]);
+
+        if(!isset($data['gettingknow']))
+        {
+            $data['gettingknow']=NULL;
+        }
+
+        if(!isset($data['introduced']))
+        {
+            $data['introduced']=NULL;
+        }
 
         $status=User::create([
             'fname'         => $request['fname'],
@@ -234,6 +246,8 @@ class UserController extends BaseController
             'tel'           => $request['tel'],
             'tel_verified'  => $request['tel_verified'],
             'password'      => Hash::make($request['password']),
+            'introduced'    =>$data['introduced'],
+            'gettingknow'   =>$data['gettingknow']
         ]);
 
         if($status)
@@ -575,6 +589,7 @@ class UserController extends BaseController
     // نمایش اعضای سایت براساس دسته بندی برای ادمین
     public function showCategoryUsersAdmin(Request $request)
     {
+        dd($request);
         $dateNow=$this->dateNow;
         switch ($request['categoryUsers'])
         {
@@ -942,6 +957,33 @@ class UserController extends BaseController
                     ->with('errorStatus',$errorStatus);
             }
 
+        }
+    }
+
+    public function checkUserAjax($id)
+    {
+        if(strlen($id)>0)
+        {
+            if (preg_match('/^09(1[0-9]|3[0-9]|2[0-9])-?[0-9]{3}-?[0-9]{4}$/', $id)) {
+                $user = user::where('tel', '=', $id)
+                    ->first();
+                if (is_null($user)) {
+                    return "<input type='hidden' value='" . $id . "' name='introduced' />";
+                } else {
+                    if ((strlen($user->fname) > 0) || (strlen($user->lname) > 0)) {
+                        return "<span>معرف شما " . $user->fname . " " . $user->lname . "</span><input type='hidden' value='" . $user->id . "' name='introduced' />";
+
+                    } else {
+                        return "<span>معرف شما "  . $user->tel . "</span><input type='hidden' value='" . $user->id . "' name='introduced' />";
+                    }
+                }
+            } else {
+                return "<div class=''>فرمت شماره همراه صحیح نمی باشد</div>";
+            }
+        }
+        else
+        {
+            return "<input type='hidden' value='' />";
         }
     }
 }

@@ -70,6 +70,48 @@
                             </div>
 
                             <div class="form-group row">
+                                <label for="tel" class="col-md-4 col-form-label text-md-right">{{ __('معرف:') }}</label>
+                                <div class="col-md-6">
+                                    <div class="input-group">
+                                        <input id="introduced_registerAdmin" type="text" class="form-control @error('introduced') is-invalid @enderror" value="{{ old('introduced') }}" autocomplete="introduced">
+
+                                        @error('introduced')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="tel" class="col-md-4 col-form-label text-md-right"></label>
+                                <div class="col-md-6">
+                                    <span id="feedback_introduced" ></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="gettingknow" class="col-md-4 col-form-label text-md-right">{{ __('نحوه آشنایی با فراکوچ:') }}</label>
+
+                                <div class="col-md-6">
+                                    <select id="gettingknow" class="form-control" @error('gettingknow') is-invalid @enderror" name="gettingknow">
+                                    <option selected disabled>انتخاب کنید</option>
+                                    <option>اینستاگرام</option>
+                                    <option>تلگرام</option>
+                                    <option>تبلیغاتی محیطی</option>
+                                    <option>تبلیغات فضای مجازی</option>
+                                    <option>پکیج رایگان</option>
+                                    <option>واتساپ</option>
+                                    </select>
+                                    @error('gettingknow')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('رمز عبور:') }}</label>
 
                                 <div class="col-md-6">

@@ -64,4 +64,28 @@ $(document).ready(function () {
             $("#modal_body").html(loading);
         }
     });
+
+    $("#introduced").focusout(function()
+    {
+        var loading='<div class="col-12 text-center"><div class="spinner-border text-primary text-center" role="status"><span class="sr-only">Loading...</span></div></div>';
+        $("#feedback_introduced").html(loading);
+        var data=$(this).val();
+        if(data.length>0)
+        {
+            $.ajax({
+                type:'GET',
+                url:"/check/user/"+data,
+                success:function(data)
+                {
+                    $("#feedback_introduced").html(data);
+                }
+            });
+        }
+        else
+        {
+            data="<input type='hidden' value='' name='introduced'/>";
+            $("#feedback_introduced").html(data);
+        }
+
+    });
 });

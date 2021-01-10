@@ -49,14 +49,16 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+
         return Validator::make($data, [
             'fname'         => ['persian_alpha','required', 'string', 'max:30'],
             'lname'         => ['persian_alpha','required', 'string', 'max:30'],
             'email'         => ['required', 'string', 'email', 'max:150', 'unique:users'],
-            'tel'           => ['required','numeric','unique:users','regex:/^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}$/'],
+            'tel'           => ['required','numeric','unique:users','regex:/^09(1[0-9]|3[0-9]|2[0-9])-?[0-9]{3}-?[0-9]{4}$/'],
             'password'      => ['required', 'string', 'min:8', 'confirmed'],
-            'tel_verified'  => ['required','boolean']
-
+            'tel_verified'  => ['required','boolean'],
+            'introduced'  =>   ['nullable','numeric'],
+            'gettingknow'  =>  ['nullable','persian_alpha'],
         ]);
     }
 
@@ -68,6 +70,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        if(!isset($data['gettingknow']))
+        {
+            $data['gettingknow']=NULL;
+        }
+
+        if(!isset($data['introduced']))
+        {
+            $data['introduced']=NULL;
+        }
         return User::create([
             'fname'         => $data['fname'],
             'lname'         => $data['lname'],
@@ -75,6 +86,8 @@ class RegisterController extends Controller
             'tel'           =>$data['tel'],
             'tel_verified'  =>$data['tel_verified'],
             'password'      => Hash::make($data['password']),
+            'introduced'    =>$data['introduced'],
+            'gettingknow'   =>$data['gettingknow']
         ]);
     }
 }
