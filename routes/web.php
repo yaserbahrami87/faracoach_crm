@@ -88,7 +88,7 @@ Route::middleware('can:isAdmin')->group(function () {
     Route::post('/admin/register','UserController@register');
 
     Route::get('/admin/users/category/','UserController@showCategoryUsersAdmin');
-
+    Route::get('/admin/users/categoryTags/','UserController@showCategoryTagsAdmin');
 
     Route::get('/admin/user/{tel}/password','AdminController@changePasswordView');
     Route::patch('/admin/user/{tel}/updatePassword','UserController@updatePassword');

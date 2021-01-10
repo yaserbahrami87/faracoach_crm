@@ -117,7 +117,7 @@ class VerifyController extends BaseController
                             if($status)
                             {
                                 $message="کد فعالی سازی شما در سیستم فراکوچ : " . $six_digit_random_number ;
-                                $this->sensSms($user->tel,$message);
+                                $this->sendSms($user->tel,$message);
                                 $msg=" کد فعال سازی به شماره ".$user->tel." ارسال شد ";
                                 $errorStatus="warning";
                             }
@@ -148,7 +148,7 @@ class VerifyController extends BaseController
                             if($status)
                             {
                                 $message="کد فعالی سازی شما در سیستم فراکوچ : " . $six_digit_random_number ;
-                                $this->sensSms($user->tel,$message);
+                                $this->sendSms($user->tel,$message);
                                 $msg=" کد فعال سازی به شماره ".$user->tel." ارسال شد ";
                                 $errorStatus="warning";
                             }

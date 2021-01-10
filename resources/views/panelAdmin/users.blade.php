@@ -61,24 +61,29 @@
                         </a>
                     </div>
                     <div class="col-12">
-                        <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4" >
-                            <label>انتخاب بر اساس تگ</label>
-                            <form method="GET" action="/admin/users/category/">
-                                <div class="input-group mb-3">
-                                    <select class="form-control p-0" name="categoryUsers[]" multiple>
+                        <p>
+                            <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                فیلترها
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-funnel-fill" viewBox="0 0 16 16">
+                                    <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2z"/>
+                                </svg>
+                            </a>
+                        </p>
+                        <div class="collapse" id="collapseExample">
+                            <div class="card card-body">
+                                <form method="GET" action="/admin/users/categoryTags/">
+                                    {{csrf_field()}}
+                                    <ul class="list-group list-group-horizontal-sm">
                                         @foreach($tags as $item)
-                                            <option value="{{$item->id}}">{{$item->tag}}</option>
+                                            <div class="form-check-inline">
+                                                <label class="form-check-label pr-0" for="tag{{$item->id}}">{{$item->tag}}</label>
+                                                <input class="form-check-input text-dark mr-2" type="checkbox" value="{{$item->id}}" id="tag{{$item->id}}" name="tags[]">
+                                            </div>
                                         @endforeach
-                                    </select>
-                                    <div class="input-group">
-                                        <button class="btn btn-outline-secondary text-light bg-secondary btn-block" type="button">
-                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-binoculars-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M4.5 1A1.5 1.5 0 0 0 3 2.5V3h4v-.5A1.5 1.5 0 0 0 5.5 1h-1zM7 4v1h2V4h4v.882a.5.5 0 0 0 .276.447l.895.447A1.5 1.5 0 0 1 15 7.118V13H9v-1.5a.5.5 0 0 1 .146-.354l.854-.853V9.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v.793l.854.853A.5.5 0 0 1 7 11.5V13H1V7.118a1.5 1.5 0 0 1 .83-1.342l.894-.447A.5.5 0 0 0 3 4.882V4h4zM1 14v.5A1.5 1.5 0 0 0 2.5 16h3A1.5 1.5 0 0 0 7 14.5V14H1zm8 0v.5a1.5 1.5 0 0 0 1.5 1.5h3a1.5 1.5 0 0 0 1.5-1.5V14H9zm4-11H9v-.5A1.5 1.5 0 0 1 10.5 1h1A1.5 1.5 0 0 1 13 2.5V3z"/>
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
+                                    </ul>
+                                    <input type="submit" class="btn btn-primary" value="اعمال فیلتر" >
+                                </form>
+                            </div>
                         </div>
                     </div>
                     <div class="col-12">
