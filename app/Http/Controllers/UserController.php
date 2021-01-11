@@ -858,11 +858,18 @@ class UserController extends BaseController
                     ->orwhere('email','like','%'.$request['q'].'%')
                     ->orderby('id','desc')
                     ->paginate(20);
+        $countList =User::orwhere('fname','like','%'.$request['q'].'%')
+                    ->orwhere('lname','like','%'.$request['q'].'%')
+                    ->orwhere('tel','like','%'.$request['q'].'%')
+                    ->orwhere('email','like','%'.$request['q'].'%')
+                    ->orderby('id','desc')
+                    ->count();
         $users->appends(['q' => $request['q']]);
         $tags=$this->get_tags();
         return view('panelAdmin.users')
                     ->with('users',$users)
-                    ->with('tags',$tags);
+                    ->with('tags',$tags)
+                    ->with('countList',$countList );
     }
 
     public function searchUsersIntroduced(Request $request)
