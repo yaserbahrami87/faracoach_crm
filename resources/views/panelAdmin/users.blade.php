@@ -87,11 +87,13 @@
                         </div>
                     </div>
                     <div class="col-12">
-                        <label>دسترسی سریع</label>
-                        <ul class="list-group list-group-horizontal">
+                        <label class="text-dark">دسترسی سریع</label>
+                        <ul class="list-group list-group-horizontal" id="users_tags">
                             <a href="/admin/users/category/?categoryUsers=0" class="list-group-item">نمایش همه</a>
                             <a href="/admin/users/category/?categoryUsers=notfollowup" class="list-group-item">پیگیری نشده</a>
                             <a href="/admin/users/category/?categoryUsers=myfollowup" class="list-group-item">پیگیری های خودم</a>
+                            <a href="/admin/users/category/?categoryUsers=todayFollowup" class="list-group-item">پیگیری های امروز</a>
+                            <a href="/admin/users/category/?categoryUsers=followedToday" class="list-group-item">پیگیری شده های امروز</a>
                         </ul>
                     </div>
                 </div>
@@ -100,7 +102,7 @@
 
 
                 <div class="table-responsive overflow-auto">
-
+                    <label class="text-dark"> تعداد{{$countList }} نفر </label>
                     <table class="table">
                         <thead class=" text-dark">
                         <th>نام </th>

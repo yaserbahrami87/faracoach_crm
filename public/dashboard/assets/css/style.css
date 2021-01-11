@@ -332,4 +332,7 @@
     font-size: 18px;
 }
 
-
+#users_tags a
+{
+    font-size: 12px;
+}

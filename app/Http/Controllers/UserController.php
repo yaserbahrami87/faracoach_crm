@@ -44,6 +44,16 @@ class UserController extends BaseController
                     ->orderby('users.id','desc')
                     ->groupby('users.id')
                     ->paginate(20);
+        $countList=User::where(function($query)
+                    {
+                        $query->orwhere('followby_expert','=',Auth::user()->id)
+                            ->orwhere('followby_expert','=',NULL);
+                    })
+                    ->whereNotIn('users.type',[2,3])
+                    ->orderby('users.id','desc')
+                    ->groupby('users.id')
+                    ->count();
+
         foreach ($users as $item)
         {
             $item->created_at=$this->changeTimestampToShamsi($item->created_at);
@@ -56,7 +66,8 @@ class UserController extends BaseController
 
         return view('panelAdmin.users')
                     ->with('users',$users)
-                    ->with('tags',$tags);
+                    ->with('tags',$tags)
+                    ->with('countList',$countList);
     }
 
     /**
@@ -596,42 +607,71 @@ class UserController extends BaseController
             case '0': return redirect('/admin/users/');
                       break;
             case 'notfollowup': $users=User:: leftjoin('followups','users.id','=','followups.user_id')
-                            ->where('users.type','=','1')
+                                ->where('users.type','=','1')
 //                            ->where(function ($query)
 //                            {
 //                                $query->orwhere('followups.insert_user_id','=',Auth::user()->id)
 //                                      ->orwhere('followups.insert_user_id','=',NULL)
 //                                      ->orwhere('users.followby_expert','=',Auth::user()->id);
 //                            })
-                            ->orderby('users.id','desc')
-                            ->select('users.*')
-                            ->groupby('users.id')
-                            ->paginate(20);
+                                ->orderby('users.id','desc')
+                                ->select('users.*')
+                                ->groupby('users.id')
+                                ->paginate(20);
+                            $countList=User:: leftjoin('followups','users.id','=','followups.user_id')
+                                ->where('users.type','=','1')
+                                ->orderby('users.id','desc')
+                                ->select('users.*')
+                                ->groupby('users.id')
+                                ->count();
                             break;
             case 'continuefollowup': $users=User::where('type','=','11')
-                            ->where('followby_expert','=',Auth::user()->id)
-                            ->orderby('id','desc')
-                            ->paginate(20);
+                                ->where('followby_expert','=',Auth::user()->id)
+                                ->orderby('id','desc')
+                                ->groupby('id')
+                                ->paginate(20);
+                            $countList=User::where('type','=','11')
+                                ->where('followby_expert','=',Auth::user()->id)
+                                ->orderby('id','desc')
+                                ->count();
                             break;
             case 'cancelfollowup': $users=User::where('type','=','12')
-                            ->where('followby_expert','=',Auth::user()->id)
-                            ->orderby('id','desc')
-                            ->paginate(20);
+                                ->where('followby_expert','=',Auth::user()->id)
+                                ->orderby('id','desc')
+                                ->groupby('id')
+                                ->paginate(20);
+                            $countList=User::where('type','=','12')
+                                ->where('followby_expert','=',Auth::user()->id)
+                                ->groupby('id')
+                                ->orderby('id','desc')
+                                ->count();
                             break;
             case 'waiting' :$users=User::where('type','=','13')
-                            ->where('followby_expert','=',Auth::user()->id)
-                            ->orderby('id','desc')
-                            ->paginate(20);
+                                ->where('followby_expert','=',Auth::user()->id)
+                                ->orderby('id','desc')
+                                ->paginate(20);
+                            $countList=User::where('type','=','13')
+                                ->where('followby_expert','=',Auth::user()->id)
+                                ->orderby('id','desc')
+                                ->count();
                             break;
             case 'noanswering':$users=User::where('type','=','14')
-                            ->where('followby_expert','=',Auth::user()->id)
-                            ->orderby('id','desc')
-                            ->paginate(20);
+                                ->where('followby_expert','=',Auth::user()->id)
+                                ->orderby('id','desc')
+                                ->paginate(20);
+                            $countList=User::where('type','=','14')
+                                ->where('followby_expert','=',Auth::user()->id)
+                                ->orderby('id','desc')
+                                ->count();
                             break;
             case 'students': $users=User::where('type','=','20')
                             ->where('followby_expert','=',Auth::user()->id)
                             ->orderby('id','desc')
                             ->paginate(20);
+                            $countList=User::where('type','=','20')
+                                ->where('followby_expert','=',Auth::user()->id)
+                                ->orderby('id','desc')
+                                ->paginate(20);
                             break;
             case 'todayFollowup': $users=User::join('followups','users.id','=','followups.user_id')
                             ->where('followups.nextfollowup_date_fa','=',$dateNow)
@@ -640,24 +680,59 @@ class UserController extends BaseController
                             ->groupby('users.id')
                             ->orderby('date_fa','desc')
                             ->paginate(20);
+                             $countList=User::join('followups','users.id','=','followups.user_id')
+                                ->where('followups.nextfollowup_date_fa','=',$dateNow)
+                                ->where('followby_expert','=',Auth::user()->id)
+                                ->select('users.*')
+                                ->groupby('users.id')
+                                ->orderby('date_fa','desc')
+                                ->count();
                             break;
             case 'expireFollowup': $users=User::join('followups','users.id','=','followups.user_id')
-                            ->where('followups.nextfollowup_date_fa','<',$dateNow)
-                            ->where('followby_expert','=',Auth::user()->id)
-                            ->wherenotIn('users.type',[2,12])
-                            ->select('users.*')
-                            ->groupby('users.id')
-                            ->orderby('date_fa','desc')
-                            ->paginate(20);
+                                    ->where('followups.nextfollowup_date_fa','<',$dateNow)
+                                    ->where('followby_expert','=',Auth::user()->id)
+                                    ->wherenotIn('users.type',[2,12])
+                                    ->select('users.*')
+                                    ->groupby('users.id')
+                                    ->orderby('date_fa','desc')
+                                    ->paginate(20);
+                            $countList=User::join('followups','users.id','=','followups.user_id')
+                                    ->where('followups.nextfollowup_date_fa','<',$dateNow)
+                                    ->where('followby_expert','=',Auth::user()->id)
+                                    ->wherenotIn('users.type',[2,12])
+                                    ->select('users.*')
+                                    ->groupby('users.id')
+                                    ->orderby('date_fa','desc')
+                                    ->count();
                             break;
-                            case 'myfollowup': $users=User::join('followups','users.id','=','followups.user_id')
-                                ->where('followups.insert_user_id','=',Auth::user()->id)
+            case 'myfollowup': $users=User::join('followups','users.id','=','followups.user_id')
+                            ->where('followups.insert_user_id','=',Auth::user()->id)
                                 ->select('users.*')
                                 ->groupby('users.id')
                                 ->orderby('date_fa','desc')
                                 ->paginate(20);
+                             $countList=user::join('followups','users.id','=','followups.user_id')
+                                ->where('followups.insert_user_id','=',Auth::user()->id)
+                                ->select('users.*')
+                                ->groupby('users.id')
+                                ->orderby('date_fa','desc')
+                                ->count();
                             break;
-
+            case 'followedToday': $users=User::join('followups','users.id','=','followups.user_id')
+                            ->where('followups.insert_user_id','=',Auth::user()->id)
+                            ->where('date_fa','=',$dateNow)
+                            ->select('users.*')
+                            ->groupby('users.id')
+                            ->orderby('date_fa','desc')
+                            ->paginate(20);
+                            $countList=User::join('followups','users.id','=','followups.user_id')
+                                ->where('followups.insert_user_id','=',Auth::user()->id)
+                                ->where('date_fa','=',$dateNow)
+                                ->select('users.*')
+                                ->groupby('users.id')
+                                ->orderby('date_fa','desc')
+                                ->count();
+                            break;
             default:return redirect('/admin/users/');
                     break;
         }
@@ -667,7 +742,8 @@ class UserController extends BaseController
 
         return view('panelAdmin.users')
                     ->with('tags',$tags)
-                    ->with('users',$users);
+                    ->with('users',$users)
+                    ->with('countList',$countList);
     }
 
 
