@@ -338,7 +338,7 @@ class UserController extends BaseController
         //لیست پیگیری های انجام شده
         $followUps=User::join('followups','users.id','=','followups.user_id')
                         //->join('followups','users.id','=','followups.insert_user_id')
-                        ->join('problemfollowups','problemfollowups.id','=','followups.problemfollowup_id')
+                        ->leftjoin('problemfollowups','problemfollowups.id','=','followups.problemfollowup_id')
                         ->where('followups.user_id','=',$user)
                         ->orderby('followups.id','asc')
                         ->get();
