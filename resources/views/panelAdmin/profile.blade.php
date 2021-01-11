@@ -68,9 +68,11 @@
             {{method_field('PATCH')}}
             <div class="card card-user">
                 <div class="card-header">
-                    <h5 class="card-title">اطلاعات شخصی</h5>
+                    <a type="button" data-toggle="collapse" data-target="#infoProfile" aria-expanded="false" aria-controls="infoProfile">
+                        <h6 class="card-title">اطلاعات شخصی</h6>
+                    </a>
                 </div>
-                <div class="card-body" id="infoProfile">
+                <div class="card-body collapse" id="infoProfile">
                     <div class="row">
                         <div class="col-md-6 px-1">
                             <div class="form-group">
@@ -110,9 +112,11 @@
             </div>
             <div class="card card-user">
                 <div class="card-header">
-                    <h5 class="card-title">اطلاعات تماس</h5>
+                    <a type="button" data-toggle="collapse" data-target="#infoContact" aria-expanded="false" aria-controls="infoContact">
+                        <h6 class="card-title">اطلاعات تماس</h6>
+                    </a>
                 </div>
-                <div class="card-body" id="infoProfile">
+                <div class="card-body collapse" id="infoContact">
                     <div class="row">
                         <div class="col-md-6 px-1">
                             <div class="form-group">
@@ -159,9 +163,11 @@
             </div>
             <div class="card card-user">
                 <div class="card-header">
-                    <h5 class="card-title">اطلاعات قرارداد</h5>
+                    <a type="button" data-toggle="collapse" data-target="#infoConstract" aria-expanded="false" aria-controls="infoConstract">
+                        <h6 class="card-title">اطلاعات قرارداد</h6>
+                    </a>
                 </div>
-                <div class="card-body" id="infoProfile">
+                <div class="card-body collapse" id="infoConstract">
                     <div class="row">
                         <div class="col-12">
                             <div class="alert alert-warning" role="alert">
@@ -254,9 +260,11 @@
             </div>
             <div class="card card-user">
                 <div class="card-header">
-                    <h5 class="card-title">آشنایی</h5>
+                    <a type="button" data-toggle="collapse" data-target="#infogettingKnow" aria-expanded="false" aria-controls="infogettingKnow">
+                        <h6 class="card-title">آشنایی</h6>
+                    </a>
                 </div>
-                <div class="card-body" id="infoProfile">
+                <div class="card-body collapse " id="infogettingKnow">
                     <div class="row">
                         <div class="col-md-6 px-1">
                             <div class="form-group">
