@@ -146,6 +146,6 @@ Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('/landingPage','landingController@index');
 Route::post('/landing/store','landingController@store');
 Route::get('/showPackageDownload', 'landingController@showPackageDownload')->name('freePackageLanding');
-Route::get('/password/sendcode','verifyController@sendResetCode');
-Route::post('/password/reset/update','verifyController@checkResetCode');
+Route::get('/password/sendcode','VerifyController@sendResetCode');
+Route::post('/password/reset/update','VerifyController@checkResetCode');
 
