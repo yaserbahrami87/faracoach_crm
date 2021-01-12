@@ -4,10 +4,11 @@
 <div class="col-xs-12 col-md-6 col-xl-6 col-lg-6">
     <div class="card card-chart">
         <div class="card-header">
-
-            <h5 class="card-title border-bottom pb-2">نتایج پیگیری</h5>
+            <a type="button" data-toggle="collapse" data-target="#settings_followup" aria-expanded="false" aria-controls="settings_followup">
+                <h5 class="card-title border-bottom pb-2">نتایج پیگیری</h5>
+            </a>
         </div>
-        <div class="card-body">
+        <div class="card-body collapse" id="settings_followup">
             <table class="table">
                 <thead class=" text-dark">
                     <th>ردیف </th>
@@ -64,5 +65,5 @@
 </div>
 
 @include('panelAdmin.settingsTags')
-
+@include('panelAdmin.settingsCategoryTag')
 @endsection

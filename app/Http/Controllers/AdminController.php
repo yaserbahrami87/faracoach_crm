@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\categoryTag;
 use App\followup;
 use App\message;
 use App\problemfollowup;
@@ -223,9 +224,24 @@ class AdminController extends BaseController
                 $item->status="عدم نمایش";
             }
         }
+
+        $categoryTags=categoryTag::get();
+        foreach ($categoryTags as $item)
+        {
+            if($item->status==1)
+            {
+                $item->status="نمایش";
+            }
+            elseif ($item->status==0)
+            {
+                $item->status="عدم نمایش";
+            }
+        }
+
         return view('panelAdmin.settings')
                     ->with('problemfollowup',$problemfollowup)
-                    ->with('tags',$tags);
+                    ->with('tags',$tags)
+                    ->with('categoryTags',$categoryTags);
     }
 
     public function showProducts()

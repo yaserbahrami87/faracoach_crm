@@ -20,6 +20,7 @@ class CreateMessagesTable extends Migration
             $table->text('comment')->nullable();
             $table->integer('user_id_recieve')->nullable();
             $table->integer('message_id_answer')->nullable();
+            $table->string('attach',250)->nullable();
             $table->string('date_fa')->nullable();
             $table->string('time_fa')->nullable();
             $table->tinyInteger('type')->default(1);

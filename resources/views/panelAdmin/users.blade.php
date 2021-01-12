@@ -12,7 +12,7 @@
                         <form method="GET" action="/admin/users/search/">
                             {{csrf_field()}}
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="جستجو..." name="q"/>
+                                <input type="text" class="form-control" placeholder="جستجو..." name="q" lang="fa"/>
                                 <div class="input-group-prepend">
                                     <button class="btn btn-outline-secondary text-light bg-secondary" type="submit">
                                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -70,17 +70,19 @@
                             </a>
                         </p>
                         <div class="collapse" id="collapseExample">
-                            <div class="card card-body">
+                            <li class="card card-body">
                                 <form method="GET" action="/admin/users/categoryTags/">
                                     {{csrf_field()}}
-                                    <ul class="list-group list-group-horizontal-sm">
+
                                         @foreach($tags as $item)
-                                            <div class="form-check-inline">
-                                                <label class="form-check-label pr-0" for="tag{{$item->id}}">{{$item->tag}}</label>
-                                                <input class="form-check-input text-dark mr-2" type="checkbox" value="{{$item->id}}" id="tag{{$item->id}}" name="tags[]">
-                                            </div>
+
+                                                <div class="form-check-inline">
+                                                    <label class="form-check-label m-0 pr-0" for="tag{{$item->id}}">{{$item->tag}}</label>
+                                                    <input class="form-check-input text-dark mr-2" type="checkbox" value="{{$item->id}}" id="tag{{$item->id}}" name="tags[]">
+                                                </div>
+
                                         @endforeach
-                                    </ul>
+
                                     <input type="submit" class="btn btn-primary" value="اعمال فیلتر" >
                                 </form>
                             </div>
@@ -128,32 +130,32 @@
                                     <tr class="success_bg_admin">
                                 @endif
                                         <td>
-                                            <a href="/admin/user/{{$item->id}}">
+                                            <a href="/admin/user/{{$item->id}}" class="text-dark">
                                                 {{$item->fname}}
                                             </a>
                                         </td>
                                         <td>
-                                            <a href="/admin/user/{{$item->id}}">
+                                            <a href="/admin/user/{{$item->id}}" class="text-dark">
                                                 {{$item->lname}}
                                             </a>
                                         </td>
                                         <td>
-                                            <a href="/admin/user/{{$item->id}}">
+                                            <a href="/admin/user/{{$item->id}}" class="text-dark">
                                                  {{$item->tel}}
                                             </a>
                                         </td>
                                         <td >
-                                            <a href="/admin/user/{{$item->id}}">
+                                            <a href="/admin/user/{{$item->id}}" class="text-dark">
                                                  {{$item->email}}
                                             </a>
                                         </td>
                                         <td>
-                                            <a href="/admin/user/{{$item->id}}">
+                                            <a href="/admin/user/{{$item->id}}" class="text-dark">
                                                 {{$item->created_at}}
                                             </a>
                                         </td>
                                         <td>
-                                            <a href="/admin/user/{{$item->id}}">
+                                            <a href="/admin/user/{{$item->id}}" class="text-dark">
                                             @switch($item->type)
                                                 @case(1)
                                                     <p>بررسی نشده</p>

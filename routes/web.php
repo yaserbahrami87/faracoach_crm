@@ -107,11 +107,20 @@ Route::middleware('can:isAdmin')->group(function () {
     {
         return view('panelAdmin.insertTags');
     });
+
+    Route::get('/admin/settings/categorytags/new',function()
+    {
+        return view('panelAdmin.insertCategoryTags');
+    });
     Route::post('/admin/settings/tags/store','TagController@store');
+    Route::post('/admin/settings/categorytags/store','CategoryTagController@store');
+
     Route::get('/admin/settings/tags/delete/{tag}','TagController@destroy');
     Route::get('/admin/settings/tags/edit/{tag}','TagController@edit');
     Route::patch('/admin/settings/tags/update/{tag}','TagController@update');
-
+    Route::get('/admin/settings/categorytags/edit/{categoryTag}','CategoryTagController@edit');
+    Route::patch('/admin/settings/categorytags/update/{categoryTag}','CategoryTagController@update');
+    Route::get('/admin/settings/categorytags/delete/{categoryTag}','CategoryTagController@destroy');
     //Route Messages
     Route::get('/admin/messages/','MessageController@index');
     Route::get('/admin/messages/show/{message}','MessageController@show');

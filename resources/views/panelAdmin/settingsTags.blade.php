@@ -2,9 +2,11 @@
 <div class="col-xs-12 col-md-6 col-xl-6 col-lg-6">
     <div class="card card-chart">
         <div class="card-header">
-            <h5 class="card-title border-bottom pb-2">تگ ها</h5>
+            <a type="button" data-toggle="collapse" href="#setting_tags" role="button" aria-expanded="false" aria-controls="setting_tags">
+                <h5 class="card-title border-bottom pb-2 text-dark">تگ ها</h5>
+            </a>
         </div>
-        <div class="card-body">
+        <div class="card-body collapse" id="setting_tags">
             <table class="table">
                 <thead class=" text-dark">
                 <th>ردیف </th>
