@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\categoryTag;
 use App\city;
 use App\followbyCategory;
 use App\problemfollowup;
@@ -171,5 +172,11 @@ class BaseController extends Controller
     {
         $dateMiladi=new verta($date);
         return ($dateMiladi->hour.":".$dateMiladi->minute."  ".$dateMiladi->year."/".$dateMiladi->month."/".$dateMiladi->day);
+    }
+
+    public function categoryTags()
+    {
+        return categoryTag::where('status','=',1)
+                            ->get();
     }
 }

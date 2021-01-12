@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\tag;
 use Illuminate\Http\Request;
 
-class TagController extends Controller
+class TagController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -24,7 +24,9 @@ class TagController extends Controller
      */
     public function create()
     {
-        //
+        $categoryTags=$this->categoryTags();
+        return view('panelAdmin.insertTags')
+                ->with('categoryTags',$categoryTags);
     }
 
     /**
@@ -37,8 +39,9 @@ class TagController extends Controller
     {
         $this->validate(request(),
             [
-                'tag'  =>'required|string|min:3|persian_alpha',
-                'status'   =>'required|numeric'
+                'tag'               =>'required|string|min:3|persian_alpha',
+                'category_tags_id'  =>'required|numeric',
+                'status'            =>'required|numeric'
             ]);
         $status = tag::create($request->all());
         if($status)
@@ -75,8 +78,10 @@ class TagController extends Controller
      */
     public function edit(tag $tag)
     {
+        $categoryTags=$this->categoryTags();
         return view('panelAdmin/editTags')
-            ->with('tag',$tag);
+            ->with('tag',$tag)
+            ->with('categoryTags',$categoryTags);
     }
 
     /**

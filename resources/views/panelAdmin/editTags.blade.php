@@ -9,6 +9,15 @@
                 <input type="text" class="form-control" id="tag" lang="fa" name="tag"  value="{{$tag->tag}}"/>
             </div>
             <div class="form-group">
+                <label for="category_tags_id" >دسته بندی</label>
+                <select class="form-control  p-0" id="category_tags_id" name="category_tags_id">
+                    <option disabled="disabled  p-0" selected>انتخاب کنید</option>
+                    @foreach($categoryTags as $item)
+                        <option value="{{$item->id}}"  @if($item->id==$tag->category_tags_id) selected @endif >{{$item->category}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
                 <label for="statusProblem" >وضعیت</label>
                 <select class="form-control p-0" id="statusProblem" name="status">
                     <option disabled="disabled" selected>انتخاب کنید</option>

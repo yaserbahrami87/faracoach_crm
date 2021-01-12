@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class tag extends Model
 {
     protected $fillable = [
-        'tag', 'status'
+        'tag', 'status','category_tags_id'
     ];
 }
