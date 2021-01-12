@@ -1,3 +1,4 @@
+@if(count($followUps)>0)
 <div class="card card-user">
     <div class="card-header border-bottom">
         <h5 class="card-title">پیگیری ها</h5>
@@ -68,3 +69,5 @@
         </form>
     </div>
 </div>
+@endif
+

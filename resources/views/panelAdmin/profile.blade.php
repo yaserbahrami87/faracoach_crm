@@ -1,7 +1,7 @@
 @extends('panelAdmin.master.index')
 @section('rowcontent')
 
-    <div class="col-md-4">
+    <div class="col-md-4 ">
         <div class="card card-user">
             <div class="image">
                 <img src={{asset('../dashboard/assets/img/damir-bosnjak.jpg')}} alt="...">
@@ -57,20 +57,24 @@
                 <hr>
             </div>
         </div>
-        @include('panelAdmin.boxMadarak')
-        @include('panelAdmin.listIntroducedUser')
-        @include('panelAdmin.boxAmoozeshi')
 
-    </div>
-    <div class="col-md-8">
         <form method="post" action="/admin/profile/update/{{$user->id}}" enctype="multipart/form-data">
             {{csrf_field()}}
             {{method_field('PATCH')}}
             <div class="card card-user">
                 <div class="card-header">
-                    <a type="button" data-toggle="collapse" data-target="#infoProfile" aria-expanded="false" aria-controls="infoProfile">
-                        <h6 class="card-title">اطلاعات شخصی</h6>
-                    </a>
+
+                        <a type="button" class="row" data-toggle="collapse" data-target="#infoProfile" aria-expanded="false" aria-controls="infoProfile">
+                            <div class="col-md-8">
+                                <h6 class="card-title m-0 mb-2">اطلاعات شخصی</h6>
+                            </div>
+                            <div class="col-md-4 ">
+                                <svg class="float-left text-muted" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+                                    <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"/>
+                                </svg>
+                            </div>
+                        </a>
+
                 </div>
                 <div class="card-body collapse" id="infoProfile">
                     <div class="row">
@@ -98,7 +102,7 @@
                                 <input type="text" class="form-control" placeholder="شماره شناسنامه را وارد کنید" value="{{$user->shenasname}}" name="shenasname"  />
                             </div>
                         </div>
-                        <div class="col-md-6 px-1">
+                        <div class="col-md-12 px-1">
                             <div class="form-group">
                                 <label>عکس پروفایل</label>
                                 <div class="custom-file">
@@ -112,8 +116,15 @@
             </div>
             <div class="card card-user">
                 <div class="card-header">
-                    <a type="button" data-toggle="collapse" data-target="#infoContact" aria-expanded="false" aria-controls="infoContact">
-                        <h6 class="card-title">اطلاعات تماس</h6>
+                    <a type="button" class="row" data-toggle="collapse" data-target="#infoContact" aria-expanded="false" aria-controls="infoContact">
+                        <div class="col-md-8">
+                            <h6 class="card-title m-0 mb-3">اطلاعات تماس</h6>
+                        </div>
+                        <div class="col-md-4">
+                            <svg class="float-left text-muted" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+                            </svg>
+                        </div>
                     </a>
                 </div>
                 <div class="card-body collapse" id="infoContact">
@@ -163,8 +174,15 @@
             </div>
             <div class="card card-user">
                 <div class="card-header">
-                    <a type="button" data-toggle="collapse" data-target="#infoConstract" aria-expanded="false" aria-controls="infoConstract">
-                        <h6 class="card-title">اطلاعات قرارداد</h6>
+                    <a class="row" type="button" data-toggle="collapse" data-target="#infoConstract" aria-expanded="false" aria-controls="infoConstract">
+                        <div class="col-md-8">
+                            <h6 class="card-title m-0 mb-3">اطلاعات قرارداد</h6>
+                        </div>
+                        <div class="col-md-4">
+                            <svg class="float-left text-muted" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-text-fill" viewBox="0 0 16 16">
+                                <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM5 4h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zM5 8h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1zm0 2h3a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1z"/>
+                            </svg>
+                        </div>
                     </a>
                 </div>
                 <div class="card-body collapse" id="infoConstract">
@@ -260,8 +278,16 @@
             </div>
             <div class="card card-user">
                 <div class="card-header">
-                    <a type="button" data-toggle="collapse" data-target="#infogettingKnow" aria-expanded="false" aria-controls="infogettingKnow">
-                        <h6 class="card-title">آشنایی</h6>
+                    <a class="row" type="button" data-toggle="collapse" data-target="#infogettingKnow" aria-expanded="false" aria-controls="infogettingKnow">
+                        <div class="col-8">
+                            <h6 class="card-title">آشنایی</h6>
+                        </div>
+                        <div class="col-4">
+                            <svg class="float-left text-muted" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-person" viewBox="0 0 16 16">
+                                <path d="M12 1a1 1 0 0 1 1 1v10.755S12 11 8 11s-5 1.755-5 1.755V2a1 1 0 0 1 1-1h8zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4z"/>
+                                <path d="M8 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                            </svg>
+                        </div>
                     </a>
                 </div>
                 <div class="card-body collapse " id="infogettingKnow">
@@ -293,17 +319,21 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="update m-auto m-auto">
-                            <button type="submit" class="btn btn-primary btn-round">بروزرسانی اطلاعات</button>
-                        </div>
-                    </div>
-
                 </div>
 
             </div>
+            <div class="row">
+                <div class="update m-auto m-auto">
+                    <button type="submit" class="btn btn-primary btn-round">بروزرسانی اطلاعات</button>
+                </div>
+            </div>
         </form>
+        @include('panelAdmin.boxMadarak')
+        @include('panelAdmin.listIntroducedUser')
+        @include('panelAdmin.boxAmoozeshi')
 
+    </div>
+    <div class="col-md-8">
         @include('panelAdmin.followups')
         <hr/>
         @include('panelAdmin.insertFollowUp')

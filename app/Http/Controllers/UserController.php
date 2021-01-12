@@ -471,7 +471,6 @@ class UserController extends BaseController
      */
     public function update(Request $request,User $user)
     {
-
             $this->validate(request(),
                 [
                     'fname' => 'nullable|min:3|persian_alpha',
@@ -618,6 +617,14 @@ class UserController extends BaseController
                                 ->select('users.*')
                                 ->groupby('users.id')
                                 ->paginate(20);
+                            foreach ($users as $item)
+                            {
+                                $item->created_at=$this->changeTimestampToShamsi($item->created_at);
+                                if(!is_null($item->last_login_at))
+                                {
+                                    $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
+                                }
+                            }
                             $countList=User:: leftjoin('followups','users.id','=','followups.user_id')
                                 ->where('users.type','=','1')
                                 ->orderby('users.id','desc')
@@ -630,6 +637,14 @@ class UserController extends BaseController
                                 ->orderby('id','desc')
                                 ->groupby('id')
                                 ->paginate(20);
+                            foreach ($users as $item)
+                            {
+                                $item->created_at=$this->changeTimestampToShamsi($item->created_at);
+                                if(!is_null($item->last_login_at))
+                                {
+                                    $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
+                                }
+                            }
                             $countList=User::where('type','=','11')
                                 ->where('followby_expert','=',Auth::user()->id)
                                 ->orderby('id','desc')
@@ -640,6 +655,14 @@ class UserController extends BaseController
                                 ->orderby('id','desc')
                                 ->groupby('id')
                                 ->paginate(20);
+                            foreach ($users as $item)
+                            {
+                                $item->created_at=$this->changeTimestampToShamsi($item->created_at);
+                                if(!is_null($item->last_login_at))
+                                {
+                                    $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
+                                }
+                            }
                             $countList=User::where('type','=','12')
                                 ->where('followby_expert','=',Auth::user()->id)
                                 ->groupby('id')
@@ -650,6 +673,14 @@ class UserController extends BaseController
                                 ->where('followby_expert','=',Auth::user()->id)
                                 ->orderby('id','desc')
                                 ->paginate(20);
+                            foreach ($users as $item)
+                            {
+                                $item->created_at=$this->changeTimestampToShamsi($item->created_at);
+                                if(!is_null($item->last_login_at))
+                                {
+                                    $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
+                                }
+                            }
                             $countList=User::where('type','=','13')
                                 ->where('followby_expert','=',Auth::user()->id)
                                 ->orderby('id','desc')
@@ -659,6 +690,14 @@ class UserController extends BaseController
                                 ->where('followby_expert','=',Auth::user()->id)
                                 ->orderby('id','desc')
                                 ->paginate(20);
+                            foreach ($users as $item)
+                            {
+                                $item->created_at=$this->changeTimestampToShamsi($item->created_at);
+                                if(!is_null($item->last_login_at))
+                                {
+                                    $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
+                                }
+                            }
                             $countList=User::where('type','=','14')
                                 ->where('followby_expert','=',Auth::user()->id)
                                 ->orderby('id','desc')
@@ -668,6 +707,14 @@ class UserController extends BaseController
                             ->where('followby_expert','=',Auth::user()->id)
                             ->orderby('id','desc')
                             ->paginate(20);
+                            foreach ($users as $item)
+                            {
+                                $item->created_at=$this->changeTimestampToShamsi($item->created_at);
+                                if(!is_null($item->last_login_at))
+                                {
+                                    $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
+                                }
+                            }
                             $countList=User::where('type','=','20')
                                 ->where('followby_expert','=',Auth::user()->id)
                                 ->orderby('id','desc')
@@ -680,6 +727,14 @@ class UserController extends BaseController
                             ->groupby('users.id')
                             ->orderby('date_fa','desc')
                             ->paginate(20);
+                            foreach ($users as $item)
+                            {
+                                $item->created_at=$this->changeTimestampToShamsi($item->created_at);
+                                if(!is_null($item->last_login_at))
+                                {
+                                    $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
+                                }
+                            }
                              $countList=User::join('followups','users.id','=','followups.user_id')
                                 ->where('followups.nextfollowup_date_fa','=',$dateNow)
                                 ->where('followby_expert','=',Auth::user()->id)
@@ -696,6 +751,14 @@ class UserController extends BaseController
                                     ->groupby('users.id')
                                     ->orderby('date_fa','desc')
                                     ->paginate(20);
+                            foreach ($users as $item)
+                            {
+                                $item->created_at=$this->changeTimestampToShamsi($item->created_at);
+                                if(!is_null($item->last_login_at))
+                                {
+                                    $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
+                                }
+                            }
                             $countList=User::join('followups','users.id','=','followups.user_id')
                                     ->where('followups.nextfollowup_date_fa','<',$dateNow)
                                     ->where('followby_expert','=',Auth::user()->id)
@@ -711,6 +774,14 @@ class UserController extends BaseController
                                 ->groupby('users.id')
                                 ->orderby('date_fa','desc')
                                 ->paginate(20);
+                            foreach ($users as $item)
+                            {
+                                $item->created_at=$this->changeTimestampToShamsi($item->created_at);
+                                if(!is_null($item->last_login_at))
+                                {
+                                    $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
+                                }
+                            }
                              $countList=user::join('followups','users.id','=','followups.user_id')
                                 ->where('followups.insert_user_id','=',Auth::user()->id)
                                 ->select('users.*')
@@ -725,6 +796,14 @@ class UserController extends BaseController
                             ->groupby('users.id')
                             ->orderby('date_fa','desc')
                             ->paginate(20);
+                            foreach ($users as $item)
+                            {
+                                $item->created_at=$this->changeTimestampToShamsi($item->created_at);
+                                if(!is_null($item->last_login_at))
+                                {
+                                    $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
+                                }
+                            }
                             $countList=User::join('followups','users.id','=','followups.user_id')
                                 ->where('followups.insert_user_id','=',Auth::user()->id)
                                 ->where('date_fa','=',$dateNow)

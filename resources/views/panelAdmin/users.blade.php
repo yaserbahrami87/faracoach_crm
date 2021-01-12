@@ -110,7 +110,7 @@
                         <th>نام </th>
                         <th>نام خانوادگی </th>
                         <th>شماره همراه</th>
-                        <th>پست الکترونیکی </th>
+                        <th>اخرین ورود </th>
                         <th>تاریخ ورود</th>
                         <th>وضعیت</th>
                         </thead>
@@ -146,7 +146,7 @@
                                         </td>
                                         <td >
                                             <a href="/admin/user/{{$item->id}}" class="text-dark">
-                                                 {{$item->email}}
+                                                 {{$item->last_login_at}}
                                             </a>
                                         </td>
                                         <td>
