@@ -137,27 +137,31 @@ $("#introduced_registerAdmin").focusout(function()
 
 $("#category_tags_id").change(function()
 {
-    var data=$(this).val();
-    if(data.length>0)
+    var data= $(this).val();
+    if(data==0)
     {
-        $.ajax({
-            type:'GET',
-            url:"/admin/settings/subcategorytags/"+data,
-            success:function(data)
-            {
-                $("#sub_category_tags").html(data);
-            }
-        });
+        $("#sub_category_tags").html("<option disabled  selected>انتخاب کنید</option><option  value='0'>بدون دسته</option>");
     }
-    else
-    {
-        data="<input type='hidden' value='' name='introduced'/>";
-        $("#feedback_introduced").html(data);
+    else {
+        if (data.length > 0) {
+            $.ajax({
+                type: 'GET',
+                url: "/admin/settings/subcategorytags/" + data,
+                success: function (data) {
+                    $("#sub_category_tags").html(data);
+                }
+            });
+        } else {
+            data = "<input type='hidden' value='' name='introduced'/>";
+            $("#feedback_introduced").html(data);
+        }
     }
 });
 
 $("#sub_category_tags").change(function()
 {
+    var loading='<div class="col-12 text-center"><div class="spinner-border text-primary text-center" role="status"><span class="sr-only">Loading...</span></div></div>';
+    $("#settings_subtags").html(loading);
     var data=$(this).val();
     if(data.length>0)
     {
@@ -172,7 +176,7 @@ $("#sub_category_tags").change(function()
     }
     else
     {
-        data="<input type='hidden' value='' name='introduced'/>";
+        data="";
         $("#settings_subtags").html(data);
     }
 });

@@ -146,7 +146,7 @@ class CategoryTagController extends BaseController
     {
         $subCategory=categorytag::where('parent_id','=',$data)
                                 ->get();
-        $tmp="<option value='0'>انتخاب کنید</option>";
+        $tmp="<option disabled selected >انتخاب کنید</option>";
         foreach ($subCategory as $item)
         {
            $tmp=$tmp."<option value='$item->id'>".$item->category."</option>";
