@@ -17,6 +17,7 @@ class CreateCategoryTagsTable extends Migration
             $table->id();
             $table->string('category',20)->nullable();
             $table->integer('status')->default(1);
+            $table->integer('parent_id')->nullable();
             $table->timestamps();
         });
     }

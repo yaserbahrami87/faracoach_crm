@@ -1,7 +1,7 @@
 <!-- *********** List moarefi shodeha -->
 <div class="card">
-    <div class="card-header">
-        <a class="row" type="button" data-toggle="collapse" data-target="#scoreAdmin" aria-expanded="false" aria-controls="scoreAdmin">
+    <div class="card-header  bg-light">
+        <a class="row border-bottom" type="button" data-toggle="collapse" data-target="#scoreAdmin" aria-expanded="false" aria-controls="scoreAdmin">
             <div class="col-8">
                 <h6 class="card-title m-0 mb-3">امتیازات</h6>
             </div>

@@ -1,7 +1,7 @@
 <!-- *********** Groohaye Amoozeshi -->
 <div class="card">
-    <div class="card-header">
-        <a class="row" type="button" data-toggle="collapse" data-target="#amoozeshAdmin" aria-expanded="false" aria-controls="amoozeshAdmin">
+    <div class="card-header  bg-light">
+        <a class="row border-bottom" type="button" data-toggle="collapse" data-target="#amoozeshAdmin" aria-expanded="false" aria-controls="amoozeshAdmin">
             <div class="col-8">
                 <h6 class="card-title m-0 mb-3">گروه های آموزشی</h6>
             </div>

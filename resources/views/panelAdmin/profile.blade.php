@@ -62,19 +62,17 @@
             {{csrf_field()}}
             {{method_field('PATCH')}}
             <div class="card card-user">
-                <div class="card-header">
-
-                        <a type="button" class="row" data-toggle="collapse" data-target="#infoProfile" aria-expanded="false" aria-controls="infoProfile">
-                            <div class="col-md-8">
-                                <h6 class="card-title m-0 mb-2">اطلاعات شخصی</h6>
-                            </div>
-                            <div class="col-md-4 ">
-                                <svg class="float-left text-muted" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
-                                    <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"/>
-                                </svg>
-                            </div>
-                        </a>
-
+                <div class="card-header bg-light">
+                    <a type="button" class="row border-bottom" data-toggle="collapse" data-target="#infoProfile" aria-expanded="false" aria-controls="infoProfile">
+                        <div class="col-md-8">
+                            <h6 class="card-title m-0 mb-3">اطلاعات شخصی</h6>
+                        </div>
+                        <div class="col-md-4 ">
+                            <svg class="float-left text-muted" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+                                <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"/>
+                            </svg>
+                        </div>
+                    </a>
                 </div>
                 <div class="card-body collapse" id="infoProfile">
                     <div class="row">
@@ -115,8 +113,8 @@
                 </div>
             </div>
             <div class="card card-user">
-                <div class="card-header">
-                    <a type="button" class="row" data-toggle="collapse" data-target="#infoContact" aria-expanded="false" aria-controls="infoContact">
+                <div class="card-header bg-light">
+                    <a type="button" class="row  border-bottom" data-toggle="collapse" data-target="#infoContact" aria-expanded="false" aria-controls="infoContact">
                         <div class="col-md-8">
                             <h6 class="card-title m-0 mb-3">اطلاعات تماس</h6>
                         </div>
@@ -173,8 +171,8 @@
                 </div>
             </div>
             <div class="card card-user">
-                <div class="card-header">
-                    <a class="row" type="button" data-toggle="collapse" data-target="#infoConstract" aria-expanded="false" aria-controls="infoConstract">
+                <div class="card-header bg-light">
+                    <a class="row border-bottom" type="button" data-toggle="collapse" data-target="#infoConstract" aria-expanded="false" aria-controls="infoConstract">
                         <div class="col-md-8">
                             <h6 class="card-title m-0 mb-3">اطلاعات قرارداد</h6>
                         </div>
@@ -277,10 +275,10 @@
                 </div>
             </div>
             <div class="card card-user">
-                <div class="card-header">
-                    <a class="row" type="button" data-toggle="collapse" data-target="#infogettingKnow" aria-expanded="false" aria-controls="infogettingKnow">
+                <div class="card-header bg-light">
+                    <a class="row border-bottom" type="button" data-toggle="collapse" data-target="#infogettingKnow" aria-expanded="false" aria-controls="infogettingKnow">
                         <div class="col-8">
-                            <h6 class="card-title">آشنایی</h6>
+                            <h6 class="card-title m-0 mb-3">آشنایی</h6>
                         </div>
                         <div class="col-4">
                             <svg class="float-left text-muted" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-person" viewBox="0 0 16 16">

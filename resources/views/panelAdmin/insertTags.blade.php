@@ -9,11 +9,17 @@
             </div>
             <div class="form-group">
                 <label for="category_tags_id" >دسته بندی</label>
-                <select class="form-control  p-0" id="category_tags_id" name="category_tags_id">
+                <select class="form-control  p-0" id="category_tags_id">
                     <option disabled="disabled  p-0" selected>انتخاب کنید</option>
                     @foreach($categoryTags as $item)
                         <option value="{{$item->id}}">{{$item->category}}</option>
                     @endforeach
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="category_tags_id" >زیرمجموعه</label>
+                <select class="form-control  p-0" id="sub_category_tags" name="category_tags_id">
+                    <option disabled="disabled" selected>انتخاب کنید</option>
                 </select>
             </div>
             <div class="form-group">

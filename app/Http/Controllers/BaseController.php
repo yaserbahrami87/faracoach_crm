@@ -179,4 +179,11 @@ class BaseController extends Controller
         return categoryTag::where('status','=',1)
                             ->get();
     }
+
+    public function get_parentCategory()
+    {
+        return categoryTag::where('status','=',1)
+                            ->where('parent_id','=',0)
+                            ->get();
+    }
 }

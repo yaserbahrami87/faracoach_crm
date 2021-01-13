@@ -1,7 +1,7 @@
 <!--  *********** Madarek ********************-->
 <div class="card">
-    <div class="card-header">
-        <a class="row" type="button" data-toggle="collapse" data-target="#madarekAdmin" aria-expanded="false" aria-controls="madarekAdmin">
+    <div class="card-header  bg-light">
+        <a class="row border-bottom" type="button" data-toggle="collapse" data-target="#madarekAdmin" aria-expanded="false" aria-controls="madarekAdmin">
             <div class="col-8">
                 <h6 class="card-title m-0 mb-3">مدارک</h6>
             </div>

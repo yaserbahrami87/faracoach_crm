@@ -212,8 +212,8 @@ class AdminController extends BaseController
             }
         }
 
-        $tags=tag::get();
-        foreach ($tags as $item)
+        $parentCategory=$this->get_parentCategory();
+        foreach ($parentCategory as $item)
         {
             if($item->status==1)
             {
@@ -240,7 +240,7 @@ class AdminController extends BaseController
 
         return view('panelAdmin.settings')
                     ->with('problemfollowup',$problemfollowup)
-                    ->with('tags',$tags)
+                    ->with('parentCategory',$parentCategory)
                     ->with('categoryTags',$categoryTags);
     }
 

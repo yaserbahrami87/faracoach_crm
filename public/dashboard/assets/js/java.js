@@ -135,3 +135,44 @@ $("#introduced_registerAdmin").focusout(function()
 
 });
 
+$("#category_tags_id").change(function()
+{
+    var data=$(this).val();
+    if(data.length>0)
+    {
+        $.ajax({
+            type:'GET',
+            url:"/admin/settings/subcategorytags/"+data,
+            success:function(data)
+            {
+                $("#sub_category_tags").html(data);
+            }
+        });
+    }
+    else
+    {
+        data="<input type='hidden' value='' name='introduced'/>";
+        $("#feedback_introduced").html(data);
+    }
+});
+
+$("#sub_category_tags").change(function()
+{
+    var data=$(this).val();
+    if(data.length>0)
+    {
+        $.ajax({
+            type:'GET',
+            url:"/admin/settings/settingtags/"+data,
+            success:function(data)
+            {
+                $("#settings_subtags").html(data);
+            }
+        });
+    }
+    else
+    {
+        data="<input type='hidden' value='' name='introduced'/>";
+        $("#settings_subtags").html(data);
+    }
+});

@@ -28,18 +28,19 @@ class AuthServiceProvider extends ServiceProvider
 
         $gate->define('isUser',function($user)
         {
-            return $user->type <>'2' || $user->type <>'3';
-        });
-
-        $gate->define('isAdmin',function($user)
-        {
-            return $user->type=="2";
+            return $user->type <>2 || $user->type <>3;
         });
 
         $gate->define('isEducation',function($user)
         {
-            return $user->type=='3';
+            return $user->type==3;
         });
+        $gate->define('isAdmin',function($user)
+        {
+            return $user->type==2;
+        });
+
+
 
 
 

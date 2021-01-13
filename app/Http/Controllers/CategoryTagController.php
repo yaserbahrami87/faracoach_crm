@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\categoryTag;
 use Illuminate\Http\Request;
 
-class CategoryTagController extends Controller
+class CategoryTagController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,9 @@ class CategoryTagController extends Controller
      */
     public function index()
     {
-
+       $categoryTags=$this->categoryTags();
+        return view('panelAdmin.insertCategoryTags')
+                        ->with('categoryTags',$categoryTags);
     }
 
     /**
@@ -38,8 +40,9 @@ class CategoryTagController extends Controller
 
         $this->validate($request,
         [
-            'category'  =>'required|persian_alpha|min:3',
-            'status'    =>'required|numeric'
+            'category'   =>'required|persian_alpha|min:3',
+            'parent_id'  =>'required|',
+            'status'     =>'required|numeric'
         ]);
 
         $status = categoryTag::create($request->all());
@@ -77,8 +80,10 @@ class CategoryTagController extends Controller
      */
     public function edit(categoryTag $categoryTag)
     {
+        $category=$this->categoryTags();
         return view('panelAdmin.editCategoryTags')
-                    ->with('categoryTag', $categoryTag);
+                    ->with('categoryTag', $categoryTag)
+                    ->with('category',$category);
     }
 
     /**
@@ -135,5 +140,18 @@ class CategoryTagController extends Controller
 
         return back()->with('msg',$msg)
             ->with('errorStatus',$errorStatus);
+    }
+
+    public function ajaxsubcategory($data)
+    {
+        $subCategory=categorytag::where('parent_id','=',$data)
+                                ->get();
+        $tmp="<option value='0'>انتخاب کنید</option>";
+        foreach ($subCategory as $item)
+        {
+           $tmp=$tmp."<option value='$item->id'>".$item->category."</option>";
+        }
+        return $tmp;
+
     }
 }

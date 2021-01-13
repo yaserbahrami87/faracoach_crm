@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class categoryTag extends Model
 {
     protected $fillable = [
-        'category', 'status'
+        'category', 'status','parent_id'
     ];
 
     public function getRouteKeyName()

@@ -65,14 +65,14 @@ var FarsiType = {
 	Type: true,
 	counter: 0,
 	ShowChangeLangButton: 0,	// 0: Hidden / 1: Visible
-	KeyBoardError: 1,			// 0: Disable FarsiType / 1: Show Error
+	KeyBoardError: 0,			// 0: Disable FarsiType / 1: Show Error
 	ChangeDir: 0,			// 0: No Action / 1: Do Rtl-Ltr / 2: Rtl-Ltr button
 	UnSupportedAction: 0		//0: Disable FarsiType / 1: Low Support
 }
 
 FarsiType.enable_disable = function(Dis) {
 	var invis, obj;
-	
+
 	if (!Dis.checked)  {
 		FarsiType.Type = true;
 		disable = false;
@@ -83,7 +83,7 @@ FarsiType.enable_disable = function(Dis) {
 		color = '#ECE9D8';
 	}
 
-	if (FarsiType.ShowChangeLangButton == 1) { 
+	if (FarsiType.ShowChangeLangButton == 1) {
 		for (var i=1; i<= FarsiType.counter; i++) {
 			obj = document.getElementById('FarsiType_button_' + i);
 			obj.disabled = disable;
@@ -99,7 +99,7 @@ FarsiType.Disable = function() {
 		Dis.checked = true;
 	}
 
-	if (FarsiType.ShowChangeLangButton == 1) { 
+	if (FarsiType.ShowChangeLangButton == 1) {
 		for (var i=1; i<= FarsiType.counter; i++) {
 			obj = document.getElementById('FarsiType_button_' + i);
 			obj.disabled = true;
@@ -125,7 +125,7 @@ FarsiType.init = function() {
 			new FarsiType.KeyObject(Areas[i], FarsiType.counter);
 		}
 	}
-	
+
 	var Dis = document.getElementById('disableFarsiType')
 	if (Dis != null) {
 		FarsiType.enable_disable (Dis);
@@ -144,12 +144,12 @@ FarsiType.KeyObject = function(z,x) {
 	}
 	z.insertAdjacentHTML("afterEnd", GenerateStr);
 
-	if (FarsiType.ShowChangeLangButton == 1) { 
+	if (FarsiType.ShowChangeLangButton == 1) {
 		z.bottelm = document.getElementById ('FarsiType_button_' + x);
 		z.bottelm.title = 'Change lang to english';
 	}
 	if (FarsiType.ChangeDir == 2) {
-		z.Direlm = document.getElementById ('FarsiType_ChangeDir_' + x); 
+		z.Direlm = document.getElementById ('FarsiType_ChangeDir_' + x);
 	}
 
 	z.farsi = true;
@@ -188,7 +188,7 @@ FarsiType.KeyObject = function(z,x) {
 		if (FarsiType.Type) {
 			if (z.farsi) {
 				z.farsi = false;
-				if (FarsiType.ShowChangeLangButton == 1) { 
+				if (FarsiType.ShowChangeLangButton == 1) {
 					z.bottelm.value = "EN";
 					z.bottelm.title = 'Change lang to persian';
 				}
@@ -198,7 +198,7 @@ FarsiType.KeyObject = function(z,x) {
 				}
 			} else {
 				z.farsi = true;
-				if (FarsiType.ShowChangeLangButton == 1) { 
+				if (FarsiType.ShowChangeLangButton == 1) {
 					z.bottelm.value = "FA";
 					z.bottelm.title = 'Change lang to english';
 				}
@@ -209,7 +209,7 @@ FarsiType.KeyObject = function(z,x) {
 			}
 			z.focus();
 		}
-		
+
 		if (e.preventDefault) e.preventDefault();
 		e.returnValue = false;
 		return false;
@@ -264,20 +264,20 @@ FarsiType.KeyObject = function(z,x) {
 
 				// to farsi
 				try {
-				
+
 					var docSelection = document.selection;
 					var selectionStart = eElement.selectionStart;
 					var selectionEnd = eElement.selectionEnd;
 
-					if (typeof selectionStart == 'number') { 
+					if (typeof selectionStart == 'number') {
 						//FOR W3C STANDARD BROWSERS
 						var nScrollTop = eElement.scrollTop;
 						var nScrollLeft = eElement.scrollLeft;
 						var nScrollWidth = eElement.scrollWidth;
-	
+
 						eElement.value = eElement.value.substring(0, selectionStart) + key + eElement.value.substring(selectionEnd);
 						setSelectionRange(eElement, selectionStart + key.length, selectionStart + key.length);
-		
+
 						var nW = eElement.scrollWidth - nScrollWidth;
 						if (eElement.scrollTop == 0) { eElement.scrollTop = nScrollTop }
 					} else if (docSelection) {
@@ -286,7 +286,7 @@ FarsiType.KeyObject = function(z,x) {
 						nRange.setEndPoint('StartToEnd', nRange);
 						nRange.select();
 					}
-	
+
 				} catch(error) {
 					try {
 						// IE
@@ -306,7 +306,7 @@ FarsiType.KeyObject = function(z,x) {
 								}
 								return false;
 							} else {
-								eElement.value += key;					
+								eElement.value += key;
 							}
 						}
 					}

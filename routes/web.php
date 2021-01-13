@@ -74,6 +74,8 @@ Route::middleware('can:isEducation')->group(function () {
 
 
 Route::middleware('can:isAdmin')->group(function () {
+//Route::group(['middleware' => ['can:isEducation','can:isAdmin']], function() {
+
     // user
     //Route::get('/admin/panel/','AdminController@index')->name('panelAdmin');
     Route::get('/admin/users','UserController@index');
@@ -112,16 +114,15 @@ Route::middleware('can:isAdmin')->group(function () {
     Route::get('/admin/settings/tags/delete/{tag}','TagController@destroy');
     Route::get('/admin/settings/tags/edit/{tag}','TagController@edit');
     Route::patch('/admin/settings/tags/update/{tag}','TagController@update');
-
+    Route::get('/admin/settings/settingtags/{data}','TagController@ajaxsettingstag');
     //*** Category Tags Settings
-    Route::get('/admin/settings/categorytags/new',function()
-    {
-        return view('panelAdmin.insertCategoryTags');
-    });
+    Route::get('/admin/settings/categorytags/new','CategoryTagController@index');
     Route::post('/admin/settings/categorytags/store','CategoryTagController@store');
     Route::get('/admin/settings/categorytags/edit/{categoryTag}','CategoryTagController@edit');
     Route::patch('/admin/settings/categorytags/update/{categoryTag}','CategoryTagController@update');
     Route::get('/admin/settings/categorytags/delete/{categoryTag}','CategoryTagController@destroy');
+    Route::get('/admin/settings/subcategorytags/{data}','CategoryTagController@ajaxsubcategory');
+
     //Route Messages
     Route::get('/admin/messages/','MessageController@index');
     Route::get('/admin/messages/show/{message}','MessageController@show');
@@ -158,4 +159,8 @@ Route::post('/landing/store','landingController@store');
 Route::get('/showPackageDownload', 'landingController@showPackageDownload')->name('freePackageLanding');
 Route::get('/password/sendcode','VerifyController@sendResetCode');
 Route::post('/password/reset/update','VerifyController@checkResetCode');
+
+
+
+
 
