@@ -143,10 +143,18 @@ class TagController extends BaseController
 
     public function ajaxsettingstag($data)
     {
+        if($data==0)
+        {
+            $tags=tag::where('category_tags_id','=',$data)
+                ->orwhere('category_tags_id','=',NULL)
+                ->get();
+        }
+        else
+        {
+            $tags=tag::where('category_tags_id','=',$data)
+                ->get();
+        }
 
-        $tags=tag::where('category_tags_id','=',$data)
-                    ->orwhere('category_tags_id','=',NULL)
-                    ->get();
 
         $tmp="";
         $i=1;
