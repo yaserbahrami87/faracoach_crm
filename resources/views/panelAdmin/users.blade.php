@@ -61,32 +61,37 @@
                         </a>
                     </div>
                     <div class="col-12">
-                        <p>
-                            <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                فیلترها
+                        <p >انتخاب تگ ها</p>
+                        <form method="GET" action="/admin/users/categoryTags/">
+                            {{csrf_field()}}
+                            @foreach($parentCategory as $item)
+                                <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample{{$item->id}}" role="button" aria-expanded="false" aria-controls="collapseExample{{$item->id}}">
+                                    {{$item->category}}
+
+                                </a>
+                                <div class="collapse" id="collapseExample{{$item->id}}">
+                                    <div class="card card-body">
+                                        {{csrf_field()}}
+                                        <div class="form-check-inline">
+                                            @foreach($tags as $tag)
+                                                @if($tag->category_tags_id==$item->id)
+
+                                                    <label class="form-check-label m-0 pr-0" for="tag{{$tag->id}}">{{$tag->tag}}</label>
+                                                    <input class="form-check-input text-dark mr-2" type="checkbox" value="{{$tag->id}}" id="tag{{$tag->id}}" name="tags[]">
+
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                            <button type="submit" class="btn btn-primary">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-funnel-fill" viewBox="0 0 16 16">
                                     <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2z"/>
                                 </svg>
-                            </a>
-                        </p>
-                        <div class="collapse" id="collapseExample">
-                            <li class="card card-body">
-                                <form method="GET" action="/admin/users/categoryTags/">
-                                    {{csrf_field()}}
+                            </button>
+                        </form>
 
-                                        @foreach($tags as $item)
-
-                                                <div class="form-check-inline">
-                                                    <label class="form-check-label m-0 pr-0" for="tag{{$item->id}}">{{$item->tag}}</label>
-                                                    <input class="form-check-input text-dark mr-2" type="checkbox" value="{{$item->id}}" id="tag{{$item->id}}" name="tags[]">
-                                                </div>
-
-                                        @endforeach
-
-                                    <input type="submit" class="btn btn-primary" value="اعمال فیلتر" >
-                                </form>
-                            </div>
-                        </div>
                     </div>
                     <div class="col-12">
                         <label class="text-dark">دسترسی سریع</label>

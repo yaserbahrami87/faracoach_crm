@@ -63,11 +63,12 @@ class UserController extends BaseController
             }
         }
         $tags=$this->get_tags();
-
+        $parentCategory=$this->get_category('پیگیری');
         return view('panelAdmin.users')
                     ->with('users',$users)
                     ->with('tags',$tags)
-                    ->with('countList',$countList);
+                    ->with('countList',$countList)
+                    ->with('parentCategory',$parentCategory);
     }
 
     /**
@@ -426,6 +427,8 @@ class UserController extends BaseController
 
         //تگ ها
         $tags=$this->get_tags();
+        $parentCategory=$this->get_category('پیگیری');
+
 
         //کسب امتیازات
         $score=$countIntroducedUser*5;
@@ -448,7 +451,7 @@ class UserController extends BaseController
         $v=verta('+2 day');
         $v=$v->format('Y/m/d');
         $nextDayFollow=$v;
-        return view('panelAdmin.profile',compact('user','countFollowups','followUps','problemFollowup','userAdmin','listIntroducedUser','countIntroducedUser','resourceIntroduce','states','city','score','verifyScore','scoreSuccess','verifyStatus','tags','today','nextDayFollow','timeNow','expert_followup'));
+        return view('panelAdmin.profile',compact('user','countFollowups','followUps','problemFollowup','userAdmin','listIntroducedUser','countIntroducedUser','resourceIntroduce','states','city','score','verifyScore','scoreSuccess','verifyStatus','tags','today','nextDayFollow','timeNow','expert_followup','parentCategory'));
     }
 
     /**
@@ -818,11 +821,12 @@ class UserController extends BaseController
 
         $users->appends(['categoryUsers'=>$request['categoryUsers']]);
         $tags=$this->get_tags();
-
+        $parentCategory=$this->get_category('پیگیری');
         return view('panelAdmin.users')
                     ->with('tags',$tags)
                     ->with('users',$users)
-                    ->with('countList',$countList);
+                    ->with('countList',$countList)
+                    ->with('parentCategory',$parentCategory);
     }
 
 
@@ -847,13 +851,23 @@ class UserController extends BaseController
                     ->groupby('users.id')
                     ->orderby('date_fa', 'desc')
                     ->paginate(20);
+                $countList  = user::join('followups', 'users.id', '=', 'followups.user_id')
+                    ->where('followups.tags', 'like', '%' . $tags . '%')
+                    ->where('followups.insert_user_id', '=', Auth::user()->id)
+                    ->select('users.*')
+                    ->groupby('users.id')
+                    ->orderby('date_fa', 'desc')
+                    ->count();
 
                 $users->appends(['tags' => $request['tags']]);
 
                 $tags = $this->get_tags();
+                $parentCategory=$this->get_category('پیگیری');
                 return view('panelAdmin.users')
                     ->with('tags', $tags)
-                    ->with('users', $users);
+                    ->with('users', $users)
+                    ->with('countList',$countList )
+                    ->with('parentCategory',$parentCategory);
             }
         }
     }

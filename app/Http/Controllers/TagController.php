@@ -183,7 +183,13 @@ class TagController extends BaseController
                                 </a>
                             </td></tr>";
         }
+
         return $tmp;
+    }
+
+    public function updateAllTags(Request $request)
+    {
+        dd($request);
     }
 
 

@@ -23,19 +23,23 @@
                     <option disabled="disabled" selected>انتخاب کنید</option>
                 </select>
             </div>
-            <table class="table" ></table>
-            <table class="table">
-                <thead class=" text-dark">
-                <th>ردیف </th>
-                <th>نتیجه پیگیری </th>
-                <th>وضعیت </th>
-                <th>ویرایش </th>
-                <th>حذف </th>
-                </thead>
-                <tbody id="settings_subtags">
+            <form method='post' action='/admin/settings/updatetags'>
+                {{csrf_field()}}
+                {{method_field('PATCH')}}
+                <table class="table">
+                    <thead class=" text-dark">
+                    <th>ردیف </th>
+                    <th>نتیجه پیگیری </th>
+                    <th>وضعیت </th>
+                    <th>ویرایش </th>
+                    <th>حذف </th>
+                    </thead>
+                    <tbody id="settings_subtags">
 
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+                <!-- <input type="submit" class="btn btn-primary" value="بروزرسانی" > -->
+            </form>
         </div>
         <div class="card-footer">
             <hr />

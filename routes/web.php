@@ -115,6 +115,7 @@ Route::middleware('can:isAdmin')->group(function () {
     Route::get('/admin/settings/tags/edit/{tag}','TagController@edit');
     Route::patch('/admin/settings/tags/update/{tag}','TagController@update');
     Route::get('/admin/settings/settingtags/{data}','TagController@ajaxsettingstag');
+    Route::patch('/admin/settings/updatetags','TagController@updateAllTags');
     //*** Category Tags Settings
     Route::get('/admin/settings/categorytags/new','CategoryTagController@index');
     Route::post('/admin/settings/categorytags/store','CategoryTagController@store');

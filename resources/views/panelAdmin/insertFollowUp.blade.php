@@ -68,10 +68,30 @@
 
                     <div class="col-12">
                         <p >انتخاب تگ ها</p>
-                        @foreach($tags as $item)
-                            <div class="form-group form-check-inline">
-                                <input type="checkbox" class="form-check-input text-dark m-0" name="tags[]" id="tag{{$item->id}}" value="{{$item->id}}">
-                                <label class="form-check-label text-dark p-1 m-0" for="tag{{$item->id}}">{{$item->tag}}</label>
+                        @foreach($parentCategory as $item)
+                            <p>
+                                <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample{{$item->id}}" role="button" aria-expanded="false" aria-controls="collapseExample{{$item->id}}">
+                                    {{$item->category}}
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-funnel-fill" viewBox="0 0 16 16">
+                                        <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2z"/>
+                                    </svg>
+                                </a>
+                            </p>
+
+                            <div class="collapse" id="collapseExample{{$item->id}}">
+                                <div class="card card-body">
+                                    {{csrf_field()}}
+                                    <div class="form-check-inline">
+                                    @foreach($tags as $tag)
+                                        @if($tag->category_tags_id==$item->id)
+
+                                                <label class="form-check-label m-0 pr-0" for="tag{{$tag->id}}">{{$tag->tag}}</label>
+                                                <input class="form-check-input text-dark mr-2" type="checkbox" value="{{$tag->id}}" id="tag{{$tag->id}}" name="tags[]">
+
+                                        @endif
+                                    @endforeach
+                                    </div>
+                                </div>
                             </div>
                         @endforeach
                     </div>

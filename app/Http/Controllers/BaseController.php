@@ -186,4 +186,11 @@ class BaseController extends Controller
                             ->where('parent_id','=',0)
                             ->get();
     }
+
+    public function get_category($request)
+    {
+        $categoryTag=categoryTag::where('category','=',$request)
+                                ->first();
+        return categoryTag::where('parent_id','=',$categoryTag->id)->get();
+    }
 }
