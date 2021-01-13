@@ -29,46 +29,73 @@ class UserController extends BaseController
 
     public function index()
     {
-        $users=User::where(function($query)
-                    {
-                        $query->orwhere('followby_expert','=',Auth::user()->id)
-                              ->orwhere('followby_expert','=',NULL);
-                    })
-                    ->whereNotIn('users.type',[2,3])
-//                    leftjoin('followups','users.id','=','followups.user_id')
-//                    ->where('users.type','=','1')
-//                    ->where('users.followby_id','=',1)
-//                    ->where('followups.insert_user_id','=',Auth::user()->id)
-                    //->whereNotIn('users.type',[2])
-//                    ->orwhere('users.followby_id','=',NULL)
-                    ->orderby('users.id','desc')
+        if(Auth::user()->type==2)
+        {
+            $users=User::orderby('users.id','desc')
                     ->groupby('users.id')
                     ->paginate(20);
-        $countList=User::where(function($query)
-                    {
-                        $query->orwhere('followby_expert','=',Auth::user()->id)
-                            ->orwhere('followby_expert','=',NULL);
-                    })
-                    ->whereNotIn('users.type',[2,3])
-                    ->orderby('users.id','desc')
-                    ->groupby('users.id')
+            $countList=User::orderby('users.id','desc')
                     ->count();
 
-        foreach ($users as $item)
-        {
-            $item->created_at=$this->changeTimestampToShamsi($item->created_at);
-            if(!is_null($item->last_login_at))
+            foreach ($users as $item)
             {
+                $item->created_at=$this->changeTimestampToShamsi($item->created_at);
+                if(!is_null($item->last_login_at))
+                {
                     $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
+                }
             }
+            $tags=$this->get_tags();
+            $parentCategory=$this->get_category('پیگیری');
+            return view('panelAdmin.users')
+                ->with('users',$users)
+                ->with('tags',$tags)
+                ->with('countList',$countList)
+                ->with('parentCategory',$parentCategory);
         }
-        $tags=$this->get_tags();
-        $parentCategory=$this->get_category('پیگیری');
-        return view('panelAdmin.users')
-                    ->with('users',$users)
-                    ->with('tags',$tags)
-                    ->with('countList',$countList)
-                    ->with('parentCategory',$parentCategory);
+        else
+        {
+            $users=User::where(function($query)
+                        {
+                            $query->orwhere('followby_expert','=',Auth::user()->id)
+                                  ->orwhere('followby_expert','=',NULL);
+                        })
+                        ->whereNotIn('users.type',[2,3])
+    //                    leftjoin('followups','users.id','=','followups.user_id')
+    //                    ->where('users.type','=','1')
+    //                    ->where('users.followby_id','=',1)
+    //                    ->where('followups.insert_user_id','=',Auth::user()->id)
+                        //->whereNotIn('users.type',[2])
+    //                    ->orwhere('users.followby_id','=',NULL)
+                        ->orderby('users.id','desc')
+                        ->groupby('users.id')
+                        ->paginate(20);
+            $countList=User::where(function($query)
+                        {
+                            $query->orwhere('followby_expert','=',Auth::user()->id)
+                                ->orwhere('followby_expert','=',NULL);
+                        })
+                        ->whereNotIn('users.type',[2,3])
+                        ->orderby('users.id','desc')
+                        ->groupby('users.id')
+                        ->count();
+
+            foreach ($users as $item)
+            {
+                $item->created_at=$this->changeTimestampToShamsi($item->created_at);
+                if(!is_null($item->last_login_at))
+                {
+                        $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
+                }
+            }
+            $tags=$this->get_tags();
+            $parentCategory=$this->get_category('پیگیری');
+            return view('panelAdmin.users')
+                        ->with('users',$users)
+                        ->with('tags',$tags)
+                        ->with('countList',$countList)
+                        ->with('parentCategory',$parentCategory);
+        }
     }
 
     /**
@@ -632,7 +659,6 @@ class UserController extends BaseController
                                 ->where('users.type','=','1')
                                 ->orderby('users.id','desc')
                                 ->select('users.*')
-                                ->groupby('users.id')
                                 ->count();
                             break;
             case 'continuefollowup': $users=User::where('type','=','11')
@@ -658,54 +684,53 @@ class UserController extends BaseController
                                 ->orderby('id','desc')
                                 ->groupby('id')
                                 ->paginate(20);
-                            foreach ($users as $item)
-                            {
-                                $item->created_at=$this->changeTimestampToShamsi($item->created_at);
-                                if(!is_null($item->last_login_at))
+                                foreach ($users as $item)
                                 {
-                                    $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
+                                    $item->created_at=$this->changeTimestampToShamsi($item->created_at);
+                                    if(!is_null($item->last_login_at))
+                                    {
+                                        $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
+                                    }
                                 }
-                            }
-                            $countList=User::where('type','=','12')
-                                ->where('followby_expert','=',Auth::user()->id)
-                                ->groupby('id')
-                                ->orderby('id','desc')
-                                ->count();
-                            break;
+                                $countList=User::where('type','=','12')
+                                    ->where('followby_expert','=',Auth::user()->id)
+                                    ->orderby('id','desc')
+                                    ->count();
+                                break;
             case 'waiting' :$users=User::where('type','=','13')
                                 ->where('followby_expert','=',Auth::user()->id)
                                 ->orderby('id','desc')
                                 ->paginate(20);
-                            foreach ($users as $item)
-                            {
-                                $item->created_at=$this->changeTimestampToShamsi($item->created_at);
-                                if(!is_null($item->last_login_at))
+                                foreach ($users as $item)
                                 {
-                                    $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
+                                    $item->created_at=$this->changeTimestampToShamsi($item->created_at);
+                                    if(!is_null($item->last_login_at))
+                                    {
+                                        $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
+                                    }
                                 }
-                            }
-                            $countList=User::where('type','=','13')
-                                ->where('followby_expert','=',Auth::user()->id)
-                                ->orderby('id','desc')
-                                ->count();
-                            break;
+                                $countList=User::where('type','=','13')
+                                    ->where('followby_expert','=',Auth::user()->id)
+                                    ->orderby('id','desc')
+                                    ->count();
+                                break;
             case 'noanswering':$users=User::where('type','=','14')
                                 ->where('followby_expert','=',Auth::user()->id)
                                 ->orderby('id','desc')
                                 ->paginate(20);
-                            foreach ($users as $item)
-                            {
-                                $item->created_at=$this->changeTimestampToShamsi($item->created_at);
-                                if(!is_null($item->last_login_at))
+                                foreach ($users as $item)
                                 {
-                                    $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
+                                    $item->created_at=$this->changeTimestampToShamsi($item->created_at);
+                                    if(!is_null($item->last_login_at))
+                                    {
+                                        $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
+                                    }
                                 }
-                            }
-                            $countList=User::where('type','=','14')
-                                ->where('followby_expert','=',Auth::user()->id)
-                                ->orderby('id','desc')
-                                ->count();
-                            break;
+                                $countList=User::where('type','=','14')
+                                    ->where('followby_expert','=',Auth::user()->id)
+                                    ->orderby('id','desc')
+                                    ->count();
+                                break;
             case 'students': $users=User::where('type','=','20')
                             ->where('followby_expert','=',Auth::user()->id)
                             ->orderby('id','desc')
@@ -742,7 +767,6 @@ class UserController extends BaseController
                                 ->where('followups.nextfollowup_date_fa','=',$dateNow)
                                 ->where('followby_expert','=',Auth::user()->id)
                                 ->select('users.*')
-                                ->groupby('users.id')
                                 ->orderby('date_fa','desc')
                                 ->count();
                             break;
@@ -754,23 +778,22 @@ class UserController extends BaseController
                                     ->groupby('users.id')
                                     ->orderby('date_fa','desc')
                                     ->paginate(20);
-                            foreach ($users as $item)
-                            {
-                                $item->created_at=$this->changeTimestampToShamsi($item->created_at);
-                                if(!is_null($item->last_login_at))
-                                {
-                                    $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
-                                }
-                            }
-                            $countList=User::join('followups','users.id','=','followups.user_id')
-                                    ->where('followups.nextfollowup_date_fa','<',$dateNow)
-                                    ->where('followby_expert','=',Auth::user()->id)
-                                    ->wherenotIn('users.type',[2,12])
-                                    ->select('users.*')
-                                    ->groupby('users.id')
-                                    ->orderby('date_fa','desc')
-                                    ->count();
-                            break;
+                                    foreach ($users as $item)
+                                    {
+                                        $item->created_at=$this->changeTimestampToShamsi($item->created_at);
+                                        if(!is_null($item->last_login_at))
+                                        {
+                                            $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
+                                        }
+                                    }
+                                    $countList=User::join('followups','users.id','=','followups.user_id')
+                                            ->where('followups.nextfollowup_date_fa','<',$dateNow)
+                                            ->where('followby_expert','=',Auth::user()->id)
+                                            ->wherenotIn('users.type',[2,12])
+                                            ->select('users.*')
+                                            ->orderby('date_fa','desc')
+                                            ->count();
+                                    break;
             case 'myfollowup': $users=User::join('followups','users.id','=','followups.user_id')
                             ->where('followups.insert_user_id','=',Auth::user()->id)
                                 ->select('users.*')
@@ -788,7 +811,6 @@ class UserController extends BaseController
                              $countList=user::join('followups','users.id','=','followups.user_id')
                                 ->where('followups.insert_user_id','=',Auth::user()->id)
                                 ->select('users.*')
-                                ->groupby('users.id')
                                 ->orderby('date_fa','desc')
                                 ->count();
                             break;
@@ -811,7 +833,6 @@ class UserController extends BaseController
                                 ->where('followups.insert_user_id','=',Auth::user()->id)
                                 ->where('date_fa','=',$dateNow)
                                 ->select('users.*')
-                                ->groupby('users.id')
                                 ->orderby('date_fa','desc')
                                 ->count();
                             break;
@@ -959,10 +980,12 @@ class UserController extends BaseController
                     ->count();
         $users->appends(['q' => $request['q']]);
         $tags=$this->get_tags();
+        $parentCategory=$this->get_category('پیگیری');
         return view('panelAdmin.users')
                     ->with('users',$users)
                     ->with('tags',$tags)
-                    ->with('countList',$countList );
+                    ->with('countList',$countList )
+                    ->with('parentCategory',$parentCategory);
     }
 
     public function searchUsersIntroduced(Request $request)

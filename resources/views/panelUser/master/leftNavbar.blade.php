@@ -26,15 +26,15 @@
                 </a>
             </li>
             <li>
-                <a href="#" >
+                <a href="#" class="text-muted">
                     <i class="nc-icon nc-money-coins"></i>
                     <p>مالی (به زودی)</p>
                 </a>
             </li>
             <li>
-                <a href="/panel/introduced">
+                <a href="/panel/introduced" >
                     <i class="nc-icon nc-circle-10"></i>
-                    <p>سیستم پیگیری</p>
+                    <p>سفیر کوچینگ</p>
                 </a>
             </li>
             <li>
