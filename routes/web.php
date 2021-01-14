@@ -91,6 +91,7 @@ Route::middleware('can:isAdmin')->group(function () {
 
     Route::get('/admin/users/category/','UserController@showCategoryUsersAdmin');
     Route::get('/admin/users/categoryTags/','UserController@showCategoryTagsAdmin');
+    Route::get('/admin/users/categorybyAdmin/','UserController@categorybyAdmin');
 
     Route::get('/admin/user/{tel}/password','AdminController@changePasswordView');
     Route::patch('/admin/user/{tel}/updatePassword','UserController@updatePassword');

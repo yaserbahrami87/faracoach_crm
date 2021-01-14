@@ -26,7 +26,9 @@
                             <label>تگ ها</label>
                                 <ul class="list-group list-group-horizontal">
                                     @foreach($item->tags as $tag)
-                                        <li class="list-group-item p-2">{{$tag}}</li>
+                                        <li class="list-group-item p-2">
+                                            <small class="text-dark">{{$tag}}</small>
+                                        </li>
                                     @endforeach
                                 </ul>
                         </div>
@@ -39,25 +41,25 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6 px-1">
+                    <div class="col-md-3 px-1">
                         <div class="form-group">
                             <label>تاریخ پیگیری</label>
                             <input type="text" class="form-control"  value="{{$item->datetime_fa}}" name="state" disabled="disabled" />
                         </div>
                     </div>
-                    <div class="col-md-6 px-1">
+                    <div class="col-md-3 px-1">
                         <div class="form-group">
                             <label>تاریخ ویرایش</label>
                             <input type="text" class="form-control" value="{{$item->updated_at}}" name="city" disabled="disabled"  />
                         </div>
                     </div>
-                    <div class="col-md-6 px-1">
+                    <div class="col-md-3 px-1">
                         <div class="form-group">
                             <label>ثبت شده توسط</label>
                             <input type="text" class="form-control" value="{{$item->insert_user_id}}" name="city" disabled="disabled" />
                         </div>
                     </div>
-                    <div class="col-md-6 px-1">
+                    <div class="col-md-3 px-1">
                         <div class="form-group">
                             <label>تاریخ پیگیری بعد</label>
                             <input type="text" class="form-control" value="{{$item->nextfollowup_date_fa}}" name="nextfollowup" disabled="disabled" />

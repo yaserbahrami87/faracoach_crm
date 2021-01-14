@@ -7,7 +7,7 @@
             </div>
             <div class="card-body" id="frmSearchUserAdmin">
                 <div class="row">
-                    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4" >
+                    <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3" >
                         <label>جستجو اعضا</label>
                         <form method="GET" action="/admin/users/search/">
                             {{csrf_field()}}
@@ -24,7 +24,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4" >
+                    <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3" >
                         <label>نمایش براساس دسته بندی</label>
                         <form method="GET" action="/admin/users/category/">
                             <div class="input-group mb-3">
@@ -50,8 +50,29 @@
                             </div>
                         </form>
                     </div>
-
-                    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4" >
+                    @if(Auth::user()->type==2)
+                        <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3" >
+                            <label>نمایش براساس کاربر</label>
+                            <form method="GET" action="/admin/users/categorybyAdmin/">
+                                <div class="input-group mb-3">
+                                    <select class="form-control p-0" name="user">
+                                        <option disabled="disabled" selected="selected">انتخاب کنید</option>
+                                        @foreach($usersAdmin  as $item)
+                                            <option value="{{$item->id}}">{{$item->fname}} {{$item->lname}}</option>
+                                        @endforeach
+                                    </select>
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-outline-secondary text-light bg-secondary" type="submit">
+                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-binoculars-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M4.5 1A1.5 1.5 0 0 0 3 2.5V3h4v-.5A1.5 1.5 0 0 0 5.5 1h-1zM7 4v1h2V4h4v.882a.5.5 0 0 0 .276.447l.895.447A1.5 1.5 0 0 1 15 7.118V13H9v-1.5a.5.5 0 0 1 .146-.354l.854-.853V9.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v.793l.854.853A.5.5 0 0 1 7 11.5V13H1V7.118a1.5 1.5 0 0 1 .83-1.342l.894-.447A.5.5 0 0 0 3 4.882V4h4zM1 14v.5A1.5 1.5 0 0 0 2.5 16h3A1.5 1.5 0 0 0 7 14.5V14H1zm8 0v.5a1.5 1.5 0 0 0 1.5 1.5h3a1.5 1.5 0 0 0 1.5-1.5V14H9zm4-11H9v-.5A1.5 1.5 0 0 1 10.5 1h1A1.5 1.5 0 0 1 13 2.5V3z"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    @endif
+                    <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3" >
                         <label class="d-block">عضو جدید</label>
                         <a href="/admin/add" class="btn btn-primary m-0">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
@@ -117,6 +138,9 @@
                         <th>شماره همراه</th>
                         <th>اخرین ورود </th>
                         <th>تاریخ ورود</th>
+                        @if(Auth::user()->type==2)
+                            <th>مسئول پیگیری</th>
+                        @endif
                         <th>وضعیت</th>
                         </thead>
                         <tbody>
@@ -159,6 +183,11 @@
                                                 {{$item->created_at}}
                                             </a>
                                         </td>
+                                        @if(Auth::user()->type==2)
+                                            <td>
+                                                {{$item->followby_expert}}
+                                            </td>
+                                        @endif
                                         <td>
                                             <a href="/admin/user/{{$item->id}}" class="text-dark">
                                             @switch($item->type)
