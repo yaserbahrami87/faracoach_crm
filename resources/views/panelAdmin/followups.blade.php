@@ -32,7 +32,7 @@
                                 </ul>
                             </div>
                         </div>
-                    </di
+                    </div>
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>توضیحات</label>
