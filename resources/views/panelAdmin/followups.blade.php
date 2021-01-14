@@ -26,7 +26,7 @@
                             <label>تگ ها</label>
                                 <ul class="list-group list-group-horizontal">
                                     @foreach($item->tags as $tag)
-                                        <li class="list-group-item">{{$tag}}</li>
+                                        <li class="list-group-item p-2">{{$tag}}</li>
                                     @endforeach
                                 </ul>
                         </div>

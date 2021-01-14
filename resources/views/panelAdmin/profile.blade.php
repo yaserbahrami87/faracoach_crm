@@ -42,17 +42,20 @@
                 <form method="post" action="/admin/user/{{$user->id}}/changeType">
                     {{csrf_field()}}
                     {{method_field('PATCH')}}
-                    <div class="input-group mb-3 mt-3 ">
-                        <div class="input-group-prepend">
-                            <button class="btn btn-outline-secondary" type="submit" id="button-addon1">تغییر وضعیت</button>
+                    @if(Auth::user()->type==2)
+                        <div class="input-group mb-3 mt-3 ">
+                            <div class="input-group-prepend">
+                                <button class="btn btn-outline-secondary" type="submit" id="button-addon1">تغییر وضعیت</button>
+                            </div>
+
+                            <select class="form-control p-0" name="type" >
+                                <option selected disabled>یک گزینه را انتخاب کنید</option>
+                                <option value="2" {{$user->type===2 ? "selected":""  }} >مدیر</option>
+                                <option value="3" {{$user->type===3 ? "selected":""  }}>آموزش</option>
+                                <option value="1" {{$user->type===1 ? "selected":""  }}>کاربر ساده</option>
+                            </select>
                         </div>
-                        <select class="form-control p-0" name="type" >
-                            <option selected disabled>یک گزینه را انتخاب کنید</option>
-                            <option value="2" {{$user->type===2 ? "selected":""  }} >مدیر</option>
-                            <option value="3" {{$user->type===3 ? "selected":""  }}>آموزش</option>
-                            <option value="1" {{$user->type===1 ? "selected":""  }}>کاربر ساده</option>
-                        </select>
-                    </div>
+                    @endif
                 </form>
                 <hr>
             </div>

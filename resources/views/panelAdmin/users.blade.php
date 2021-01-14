@@ -58,27 +58,27 @@
                                 <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                                 <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
                             </svg>
+                            ثبت عضو جدید
                         </a>
                     </div>
                     <div class="col-12">
-                        <p >انتخاب تگ ها</p>
+                        <small class="m-0">انتخاب تگ ها</small>
                         <form method="GET" action="/admin/users/categoryTags/">
                             {{csrf_field()}}
                             @foreach($parentCategory as $item)
                                 <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample{{$item->id}}" role="button" aria-expanded="false" aria-controls="collapseExample{{$item->id}}">
                                     {{$item->category}}
-
                                 </a>
                                 <div class="collapse" id="collapseExample{{$item->id}}">
                                     <div class="card card-body">
                                         {{csrf_field()}}
-                                        <div class="form-check-inline">
+                                        <div class="form row">
                                             @foreach($tags as $tag)
                                                 @if($tag->category_tags_id==$item->id)
-
-                                                    <label class="form-check-label m-0 pr-0" for="tag{{$tag->id}}">{{$tag->tag}}</label>
-                                                    <input class="form-check-input text-dark mr-2" type="checkbox" value="{{$tag->id}}" id="tag{{$tag->id}}" name="tags[]">
-
+                                                   <div class="col-xs-6 col-md-3 col-lg-3 col-xl-3">
+                                                        <label class="form-check-label m-0 pr-0" for="tag{{$tag->id}}">{{$tag->tag}}</label>
+                                                        <input class="form-check-input text-dark mr-2" type="checkbox" value="{{$tag->id}}" id="tag{{$tag->id}}" name="tags[]">
+                                                   </div>
                                                 @endif
                                             @endforeach
                                         </div>
@@ -109,7 +109,7 @@
 
 
                 <div class="table-responsive overflow-auto">
-                    <label class="text-dark"> تعداد{{$countList }} نفر </label>
+                    <label class="text-dark"> تعداد <b>{{$countList }}</b> نفر </label>
                     <table class="table">
                         <thead class=" text-dark">
                         <th>نام </th>

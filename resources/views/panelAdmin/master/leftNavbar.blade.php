@@ -36,12 +36,14 @@
                 <p>مدیریت فایلها</p>
             </a>
         </li>
-        <li>
-            <a href="/admin/settings/">
-                <i class="nc-icon nc-settings"></i>
-                <p>تنظیمات</p>
-            </a>
-        </li>
+        @if(Auth::user()->type==2)
+            <li>
+                <a href="/admin/settings/">
+                    <i class="nc-icon nc-settings"></i>
+                    <p>تنظیمات</p>
+                </a>
+            </li>
+        @endif
         <li>
             <a href="/admin/reports/">
                 <i class="nc-icon nc-settings"></i>
