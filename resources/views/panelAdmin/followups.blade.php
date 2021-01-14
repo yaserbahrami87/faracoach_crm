@@ -13,17 +13,16 @@
                     <div class="col-12 text-center">
                         <h6>پیگیری {{$i++}}</h6>
                     </div>
-                    <div class="col-md-12 pl-1">
+                    <div class="row px-1">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>نوع پیگیری</label>
                                 <input type="text" class="form-control"  value="{{$item->problem}}" name="state" disabled="disabled"  />
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label>تگ ها</label>
+                        <div class="col-md-8 ">
+                            <div class="form-group">
+                                <label>تگ ها</label>
                                 <ul class="list-group list-group-horizontal">
                                     @foreach($item->tags as $tag)
                                         <li class="list-group-item p-2">
@@ -31,8 +30,9 @@
                                         </li>
                                     @endforeach
                                 </ul>
+                            </div>
                         </div>
-                    </div>
+                    </di
                     <div class="col-md-12">
                         <div class="form-group">
                             <label>توضیحات</label>

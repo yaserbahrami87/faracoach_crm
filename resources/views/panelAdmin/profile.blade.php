@@ -335,8 +335,9 @@
 
     </div>
     <div class="col-md-8">
-        @include('panelAdmin.followups')
-        <hr/>
+
         @include('panelAdmin.insertFollowUp')
+        <hr/>
+        @include('panelAdmin.followups')
     </div>
 @endsection
