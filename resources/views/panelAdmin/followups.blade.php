@@ -9,18 +9,21 @@
             {{method_field('PATCH')}}
             <?php $i=1; ?>
             @foreach($followUps as $item)
-                <div class="row">
+                <div class="row  border-success border border-bottom-0 rounded-lg">
                     <div class="col-12 text-center">
-                        <h6>پیگیری {{$i++}}</h6>
+
                     </div>
                     <div class="row px-1">
-                        <div class="col-md-4">
+                        <div class="col-md-2 p-0 pt-4 text-center">
+                            <h6>پیگیری {{$i++}}</h6>
+                        </div>
+                        <div class="col-md-3 p-0">
                             <div class="form-group">
                                 <label>نوع پیگیری</label>
                                 <input type="text" class="form-control"  value="{{$item->problem}}" name="state" disabled="disabled"  />
                             </div>
                         </div>
-                        <div class="col-md-8 ">
+                        <div class="col-md-12 ">
                             <div class="form-group">
                                 <label>تگ ها</label>
                                 <ul class="list-group list-group-horizontal">
@@ -40,7 +43,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row border-success border rounded-lg border-top-0">
                     <div class="col-md-3 px-1">
                         <div class="form-group">
                             <label>تاریخ پیگیری</label>

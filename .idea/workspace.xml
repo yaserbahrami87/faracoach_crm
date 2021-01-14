@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/dashboard/assets/js/java.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/dashboard/assets/js/java.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/followups.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/followups.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/settings.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/settings.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/settingsCategoryTag.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/settingsCategoryTag.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -287,7 +292,7 @@
       <workItem from="1610428311999" duration="19811000" />
       <workItem from="1610515552246" duration="26127000" />
       <workItem from="1610559870630" duration="13175000" />
-      <workItem from="1610599161828" duration="13119000" />
+      <workItem from="1610599161828" duration="15975000" />
     </task>
     <servers />
   </component>
@@ -341,10 +346,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1610612753441" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1610612785441">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1610615125001">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1610574245405" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1610612785441" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1610615125001" />
   </component>
 </project>

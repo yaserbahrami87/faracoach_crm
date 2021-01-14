@@ -379,7 +379,7 @@ class UserController extends BaseController
                         //->join('followups','users.id','=','followups.insert_user_id')
                         ->leftjoin('problemfollowups','problemfollowups.id','=','followups.problemfollowup_id')
                         ->where('followups.user_id','=',$user)
-                        ->orderby('followups.id','asc')
+                        ->orderby('followups.id','desc')
                         ->get();
         foreach ($followUps as $item)
         {
@@ -1128,6 +1128,11 @@ class UserController extends BaseController
             return redirect('/panel');
         }
         else {
+            $this->validate($request,
+                [
+                    'tags'  =>'numeric|required'
+                ]);
+
             if (!isset($request['tags'])) {
                 $msg = "حداقل یک گزینه برای اعمال فیلترها انتخاب کنید";
                 $errorStatus = "danger";

@@ -6,8 +6,6 @@ $.ajaxSetup({
 
 $(document).ready(function()
 {
-
-
     $("#state").change(function()
     {
         var state=$(this).val();
@@ -178,5 +176,13 @@ $("#sub_category_tags").change(function()
     {
         data="";
         $("#settings_subtags").html(data);
+    }
+});
+
+$(".del").click(function(e) {
+    e.preventDefault();
+    if (window.confirm('آیا از حذف اطلاعات اطمینان دارید؟'))
+    {
+        window.location=$(this).attr('href');
     }
 });
