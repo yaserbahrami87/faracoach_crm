@@ -1,5 +1,15 @@
 <?php
 
+
+
+
+
+
+
+
+
+
+
 namespace Composer;
 
 use Composer\Semver\VersionParser;
@@ -19,7 +29,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '67292f66118fca649642308e4d930356cbc1f686',
+    'reference' => '02d9136a9d981d8cb2f694e3925f074e3b97f59e',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -491,6 +501,15 @@ private static $installed = array (
         0 => '*',
       ),
     ),
+    'laravel-lang/lang' => 
+    array (
+      'pretty_version' => '7.0.9',
+      'version' => '7.0.9.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '679a65755db37b35acd36a5e0ca51e055815a00a',
+    ),
     'laravel/framework' => 
     array (
       'pretty_version' => 'v7.28.4',
@@ -507,7 +526,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '67292f66118fca649642308e4d930356cbc1f686',
+      'reference' => '02d9136a9d981d8cb2f694e3925f074e3b97f59e',
     ),
     'laravel/tinker' => 
     array (

@@ -59,6 +59,7 @@ return array(
     'App\\Http\\Controllers\\Auth\\ResetPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ResetPasswordController.php',
     'App\\Http\\Controllers\\Auth\\VerificationController' => $baseDir . '/app/Http/Controllers/Auth/VerificationController.php',
     'App\\Http\\Controllers\\BaseController' => $baseDir . '/app/Http/Controllers/BaseController.php',
+    'App\\Http\\Controllers\\CategoryTagController' => $baseDir . '/app/Http/Controllers/CategoryTagController.php',
     'App\\Http\\Controllers\\CategoryfollowupController' => $baseDir . '/app/Http/Controllers/CategoryfollowupController.php',
     'App\\Http\\Controllers\\CityController' => $baseDir . '/app/Http/Controllers/CityController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',

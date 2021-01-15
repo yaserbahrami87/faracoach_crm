@@ -414,7 +414,7 @@ class UserController extends BaseController
 
         //مقدار یوزر با توجه به دستور زیر مقدار ورودی تابع با مقدار خروجی تقییر میکند
         $user=User::find($user);
-        if($user->followby_expert==Auth::user()->id) {
+        if(($user->followby_expert==Auth::user()->id)||($user->followby_expert==NULL)) {
             if (strlen($user->personal_image) == 0) {
                 $user->personal_image = "default-avatar.png";
             }
@@ -944,7 +944,8 @@ class UserController extends BaseController
                     break;
                 case 'continuefollowup':
                     $users = User::where('type', '=', '11')
-                        ->where('followby_expert', '=', Auth::user()->id)
+                        ->orwhere('followby_expert', '=', Auth::user()->id)
+                        ->orwhere('followby_expert', '=', NULL)
                         ->orderby('id', 'desc')
                         ->groupby('id')
                         ->paginate(20);
@@ -955,13 +956,15 @@ class UserController extends BaseController
                         }
                     }
                     $countList = User::where('type', '=', '11')
-                        ->where('followby_expert', '=', Auth::user()->id)
+                        ->orwhere('followby_expert', '=', Auth::user()->id)
+                        ->orwhere('followby_expert', '=', NULL)
                         ->orderby('id', 'desc')
                         ->count();
                     break;
                 case 'cancelfollowup':
                     $users = User::where('type', '=', '12')
-                        ->where('followby_expert', '=', Auth::user()->id)
+                        ->orwhere('followby_expert', '=', Auth::user()->id)
+                        ->orwhere('followby_expert', '=', NULL)
                         ->orderby('id', 'desc')
                         ->groupby('id')
                         ->paginate(20);
@@ -978,7 +981,8 @@ class UserController extends BaseController
                     break;
                 case 'waiting' :
                     $users = User::where('type', '=', '13')
-                        ->where('followby_expert', '=', Auth::user()->id)
+                        ->orwhere('followby_expert', '=', Auth::user()->id)
+                        ->orwhere('followby_expert', '=', NULL)
                         ->orderby('id', 'desc')
                         ->paginate(20);
                     foreach ($users as $item) {
@@ -994,7 +998,8 @@ class UserController extends BaseController
                     break;
                 case 'noanswering':
                     $users = User::where('type', '=', '14')
-                        ->where('followby_expert', '=', Auth::user()->id)
+                        ->orwhere('followby_expert', '=', Auth::user()->id)
+                        ->orwhere('followby_expert', '=', NULL)
                         ->orderby('id', 'desc')
                         ->paginate(20);
                     foreach ($users as $item) {
@@ -1010,7 +1015,8 @@ class UserController extends BaseController
                     break;
                 case 'students':
                     $users = User::where('type', '=', '20')
-                        ->where('followby_expert', '=', Auth::user()->id)
+                        ->orwhere('followby_expert', '=', Auth::user()->id)
+                        ->orwhere('followby_expert', '=', NULL)
                         ->orderby('id', 'desc')
                         ->paginate(20);
                     foreach ($users as $item) {
@@ -1027,7 +1033,8 @@ class UserController extends BaseController
                 case 'todayFollowup':
                     $users = User::join('followups', 'users.id', '=', 'followups.user_id')
                         ->where('followups.nextfollowup_date_fa', '=', $dateNow)
-                        ->where('followby_expert', '=', Auth::user()->id)
+                        ->orwhere('followby_expert', '=', Auth::user()->id)
+                        ->orwhere('followby_expert', '=', NULL)
                         ->select('users.*')
                         ->groupby('users.id')
                         ->orderby('date_fa', 'desc')
@@ -1266,6 +1273,11 @@ class UserController extends BaseController
         foreach ($users as $item)
         {
             $item->type=$this->userType($item->type);
+            $expert=$this->get_user_byID($item->followby_expert);
+            if(!is_null($expert))
+            {
+                $item->followby_expert=$expert->fname." ".$expert->lname;
+            }
         }
         $countList =User::orwhere('fname','like','%'.$request['q'].'%')
                     ->orwhere('lname','like','%'.$request['q'].'%')
