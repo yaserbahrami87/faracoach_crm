@@ -51,6 +51,7 @@ class UserController extends BaseController
                     $item->followby_expert=$expert->fname." ".$expert->lname;
                 }
 
+                $item->type=$this->userType($item->type);
             }
             $tags=$this->get_tags();
             $parentCategory=$this->get_category('پیگیری');
@@ -98,6 +99,7 @@ class UserController extends BaseController
                 {
                         $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
                 }
+                $item->type=$this->userType($item->type);
             }
             $tags=$this->get_tags();
             $parentCategory=$this->get_category('پیگیری');
@@ -367,6 +369,7 @@ class UserController extends BaseController
     // نمایش پروفایل کاربر توسط ادمین
     public function show($user)
     {
+
         $userAdmin=Auth::user();
         //تعداد پیگیری های انجام شده
         $countFollowups=User::join('followups','users.id','=','followups.user_id')
@@ -386,6 +389,7 @@ class UserController extends BaseController
             $admin_Followup=User::where('id','=',$item->insert_user_id)
                                 ->first();
             $item->insert_user_id=$admin_Followup->fname." ".$admin_Followup->lname;
+            $item->type=$this->userType($item->type);
         }
 
         //تبدیل تگهای پیگیری
@@ -410,86 +414,88 @@ class UserController extends BaseController
 
         //مقدار یوزر با توجه به دستور زیر مقدار ورودی تابع با مقدار خروجی تقییر میکند
         $user=User::find($user);
-        if(strlen($user->personal_image)==0)
-        {
-            $user->personal_image="default-avatar.png";
-        }
-
-        //یوزر توسط چه کسی معرفی شده است
-        $resourceIntroduce=User::where('id','=',$user->introduced)
-                        ->first();
-
-        // دریافت لیست مسئولین پیگیری
-        $expert_followup=user::where(function($query)
-                        {
-                            $query->orwhere('type','=',2)
-                                  ->orwhere('type','=',3);
-                        })
-                        //->where('id','<>',Auth::user()->id)
-                        ->get();
-
-
-        //تعداد افراد معرفی کرده
-        $countIntroducedUser=User::where('introduced','=',$user->id)
-                        ->count();
-
-        //لیست افراد معرفی کرده
-        $listIntroducedUser=User::where('introduced','=',$user->id)
-                        ->get();
-
-        //چک کردن وضعیت عکس کاربرها برای عکسهایی که وجود ندارد از آواتر استفاده شود
-        foreach ($listIntroducedUser as $item)
-        {
-            if(strlen($item->personal_image)==0)
-            {
-                $item->personal_image="default-avatar.png";
+        if($user->followby_expert==Auth::user()->id) {
+            if (strlen($user->personal_image) == 0) {
+                $user->personal_image = "default-avatar.png";
             }
-        }
+
+            //یوزر توسط چه کسی معرفی شده است
+            $resourceIntroduce = User::where('id', '=', $user->introduced)
+                ->first();
+
+            // دریافت لیست مسئولین پیگیری
+            $expert_followup = user::where(function ($query) {
+                $query->orwhere('type', '=', 2)
+                    ->orwhere('type', '=', 3);
+            })
+                //->where('id','<>',Auth::user()->id)
+                ->get();
 
 
-        $introduced=User::where('id','=',$user->introduced)
-                            ->first();
-        if(strlen($introduced)>0)
-        {
-            $user->introduced=$introduced->fname." ".$introduced->lname ." با کد ".$introduced->id;
-        }
-
-        $states=$this->states();
-
-        $city=NULL;
-        if(strlen($user->city)>0)
-        {
-            //انتخاب شهر براساس کد
-            $city=$this->city($user->city);
-        }
-
-        //تگ ها
-        $tags=$this->get_tags();
-        $parentCategory=$this->get_category('پیگیری');
-
-
-        //کسب امتیازات
-        $score=$countIntroducedUser*5;
-        //امتیاز تایید شماره همراه
-        $verifyScore=$user->tel_verified;
-        if($verifyScore==1)
-        {
-            $score=$score+5;
-            $verifyScore=5;
-        }
-        //امتیاز تعداد دعوت شده
-        $scoreSuccess=User::where('introduced','=',$user->id)
-                ->where('type','=',20)
+            //تعداد افراد معرفی کرده
+            $countIntroducedUser = User::where('introduced', '=', $user->id)
                 ->count();
-        $scoreSuccess=$scoreSuccess*10;
-        $score=$score+$scoreSuccess;
 
-        $today=$this->dateNow;
-        $timeNow=$this->timeNow;
-        $v=verta('+2 day');
-        $v=$v->format('Y/m/d');
-        $nextDayFollow=$v;
-        return view('panelAdmin.profile',compact('user','countFollowups','followUps','problemFollowup','userAdmin','listIntroducedUser','countIntroducedUser','resourceIntroduce','states','city','score','verifyScore','scoreSuccess','verifyStatus','tags','today','nextDayFollow','timeNow','expert_followup','parentCategory'));
+            //لیست افراد معرفی کرده
+            $listIntroducedUser = User::where('introduced', '=', $user->id)
+                ->get();
+
+            //چک کردن وضعیت عکس کاربرها برای عکسهایی که وجود ندارد از آواتر استفاده شود
+            foreach ($listIntroducedUser as $item) {
+                if (strlen($item->personal_image) == 0) {
+                    $item->personal_image = "default-avatar.png";
+                }
+            }
+
+
+            $introduced = User::where('id', '=', $user->introduced)
+                ->first();
+            if (strlen($introduced) > 0) {
+                $user->introduced = $introduced->fname . " " . $introduced->lname . " با کد " . $introduced->id;
+            }
+
+            $states = $this->states();
+
+            $city = NULL;
+            if (strlen($user->city) > 0) {
+                //انتخاب شهر براساس کد
+                $city = $this->city($user->city);
+            }
+
+            //تگ ها
+            $tags = $this->get_tags();
+            $parentCategory = $this->get_category('پیگیری');
+
+
+            //کسب امتیازات
+            $score = $countIntroducedUser * 5;
+            //امتیاز تایید شماره همراه
+            $verifyScore = $user->tel_verified;
+            if ($verifyScore == 1) {
+                $score = $score + 5;
+                $verifyScore = 5;
+            }
+            //امتیاز تعداد دعوت شده
+            $scoreSuccess = User::where('introduced', '=', $user->id)
+                ->where('type', '=', 20)
+                ->count();
+            $scoreSuccess = $scoreSuccess * 10;
+            $score = $score + $scoreSuccess;
+
+            $today = $this->dateNow;
+            $timeNow = $this->timeNow;
+            $v = verta('+2 day');
+            $v = $v->format('Y/m/d');
+            $nextDayFollow = $v;
+            return view('panelAdmin.profile', compact('user', 'countFollowups', 'followUps', 'problemFollowup', 'userAdmin', 'listIntroducedUser', 'countIntroducedUser', 'resourceIntroduce', 'states', 'city', 'score', 'verifyScore', 'scoreSuccess', 'verifyStatus', 'tags', 'today', 'nextDayFollow', 'timeNow', 'expert_followup', 'parentCategory'));
+        }else
+        {
+            $msg = "شما مجاز به دسترسی ندارید";
+            $errorStatus = "warning";
+
+            return back()->with('msg', $msg)
+                ->with('errorStatus', $errorStatus);
+        }
     }
 
     /**
@@ -653,6 +659,8 @@ class UserController extends BaseController
                     {
                         $item->followby_expert=$expert->fname." ".$expert->lname;
                     }
+
+                    $item->type=$this->userType($item->type);
                 }
                 $users->appends(['user' => $request['user']]);
                 $tags = $this->get_tags();
@@ -1105,6 +1113,11 @@ class UserController extends BaseController
                     break;
             }
         }
+
+        foreach ($users as $item)
+        {
+            $item->type=$this->userType($item->type);
+        }
         $usersAdmin=user::orwhere('type','=','2')
                         ->orwhere('type','=',3)
                         ->get();
@@ -1130,7 +1143,7 @@ class UserController extends BaseController
         else {
             $this->validate($request,
                 [
-                    'tags'  =>'numeric|required'
+                    'tags'  =>'array|required'
                 ]);
 
             if (!isset($request['tags'])) {
@@ -1154,7 +1167,10 @@ class UserController extends BaseController
                     ->groupby('users.id')
                     ->orderby('date_fa', 'desc')
                     ->count();
-
+                foreach ($users as $item)
+                {
+                    $item->type=$this->userType($item->type);
+                }
                 $users->appends(['tags' => $request['tags']]);
 
                 $tags = $this->get_tags();
@@ -1247,6 +1263,10 @@ class UserController extends BaseController
                     ->orwhere('email','like','%'.$request['q'].'%')
                     ->orderby('id','desc')
                     ->paginate(20);
+        foreach ($users as $item)
+        {
+            $item->type=$this->userType($item->type);
+        }
         $countList =User::orwhere('fname','like','%'.$request['q'].'%')
                     ->orwhere('lname','like','%'.$request['q'].'%')
                     ->orwhere('tel','like','%'.$request['q'].'%')
@@ -1256,11 +1276,15 @@ class UserController extends BaseController
         $users->appends(['q' => $request['q']]);
         $tags=$this->get_tags();
         $parentCategory=$this->get_category('پیگیری');
+        $usersAdmin=user::orwhere('type','=',2)
+                        ->orwhere('type','=',3)
+                        ->get();
         return view('panelAdmin.users')
                     ->with('users',$users)
                     ->with('tags',$tags)
                     ->with('countList',$countList )
-                    ->with('parentCategory',$parentCategory);
+                    ->with('parentCategory',$parentCategory)
+                    ->with('usersAdmin',$usersAdmin);
     }
 
     public function searchUsersIntroduced(Request $request)

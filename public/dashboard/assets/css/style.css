@@ -19,22 +19,22 @@
 
 .success_bg_admin
 {
-    background-color: #99ff99;
+    background-color: #99ff99 !important;
 }
 
 .warning_bg_admin
 {
-    background-color:  #ffff99;
+    background-color:  #ffff99 !important;
 }
 
 .danger_bg_admin
 {
-    background-color: #ff8080;
+    background-color: #ff8080 !important;
 }
 
 .primary_bg_admin
 {
-    background-color: #b3c6ff;
+    background-color: #b3c6ff !important;
 }
 
 .info_bg_admin

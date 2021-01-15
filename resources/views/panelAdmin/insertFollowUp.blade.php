@@ -3,15 +3,6 @@
         <h5 class="card-title">پیگیری جدید</h5>
     </div>
     <div class="card-body">
-        @if($errors->any())
-            <div class="col-12">
-                <div class="alert alert-danger" role="alert">
-                    @foreach($errors->all() as $error)
-                        <li>{{$error}}</li>
-                    @endforeach
-                </div>
-            </div>
-        @endif
         <form method="POST" action="/admin/followup/create" >
             {{csrf_field()}}
                 <div class="row">

@@ -92,7 +92,7 @@
                 @if(session('msg') && (session('errorStatus')))
                     <div class="col-12">
                         <div class="alert alert-{{session('errorStatus')}}">
-                            <p>{{session('msg')}}</p>
+                            <p class="p-0 m-0">{{session('msg')}}</p>
                         </div>
                     </div>
                 @endif

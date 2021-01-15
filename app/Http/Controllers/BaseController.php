@@ -95,19 +95,31 @@ class BaseController extends Controller
 
     public function userType($status)
     {
+
         switch($status)
         {
             case "1": return "پیگیری نشده";
+                        break;
+            case "2":return "مدیر";
+                        break;
+            case "3":return "آموزش";
                         break;
             case "11": return "در حال پیگیری";
                         break;
             case "12":return "انصراف";
                         break;
-            case "20":return "دانشجو";
+            case "13":return "در انتظار تصمیم";
                         break;
+            case "14":return "عدم پاسخگویی";
+                        break;
+            case "20":return "مشتری";
+                        break;
+
             default:return "خطا";
         }
     }
+
+
 
     //کاربر براساس شماره تلفن برمیگرداند
     public function get_user($tel)
@@ -147,6 +159,11 @@ class BaseController extends Controller
     {
         return followbyCategory::where('status','=',1)
                         ->get();
+    }
+
+    public function getProblemFollowup_byID($id)
+    {
+        return problemfollowup::where('id','=',$id)->first();
     }
 
     public function getproblemfollowup()

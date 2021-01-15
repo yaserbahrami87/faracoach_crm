@@ -118,16 +118,13 @@
                         <label class="text-dark">دسترسی سریع</label>
                         <ul class="list-group list-group-horizontal" id="users_tags">
                             <a href="/admin/users/category/?categoryUsers=0" class="list-group-item">نمایش همه</a>
-                            <a href="/admin/users/category/?categoryUsers=notfollowup" class="list-group-item">پیگیری نشده</a>
+                            <a href="/admin/users/category/?categoryUsers=notfollowup" class="list-group-item ">پیگیری نشده</a>
                             <a href="/admin/users/category/?categoryUsers=myfollowup" class="list-group-item">پیگیری های خودم</a>
                             <a href="/admin/users/category/?categoryUsers=todayFollowup" class="list-group-item">پیگیری های امروز</a>
                             <a href="/admin/users/category/?categoryUsers=followedToday" class="list-group-item">پیگیری شده های امروز</a>
                         </ul>
                     </div>
                 </div>
-
-
-
 
                 <div class="table-responsive overflow-auto">
                     <label class="text-dark"> تعداد <b>{{$countList }}</b> نفر </label>
@@ -145,17 +142,17 @@
                         </thead>
                         <tbody>
                             @foreach($users as $item)
-                                @if($item->type==1)
+                                @if($item->type=="پیگیری نشده")
                                     <tr class="warning_bg_admin">
-                                @elseif($item->type==11)
+                                @elseif($item->type=="در حال پیگیری")
                                     <tr class="primary_bg_admin">
-                                @elseif($item->type==12)
+                                @elseif($item->type=="انصراف")
                                     <tr class="danger_bg_admin">
-                                @elseif($item->type==13)
+                                @elseif($item->type=="در انتظار تصمیم")
                                     <tr class="bg-info text-light">
-                                @elseif($item->type==14)
+                                @elseif($item->type=="عدم پاسخگویی")
                                     <tr class="bg-secondary text-light">
-                                @elseif($item->type==20)
+                                @elseif($item->type=='مشتری')
                                     <tr class="success_bg_admin">
                                 @endif
                                         <td>
@@ -190,27 +187,7 @@
                                         @endif
                                         <td>
                                             <a href="/admin/user/{{$item->id}}" class="text-dark">
-                                            @switch($item->type)
-                                                @case(1)
-                                                    <p>بررسی نشده</p>
-                                                    @break
-                                                @case(11)
-                                                    <p>در حال مذاکره</p>
-                                                    @break
-                                                @case(12)
-                                                    <p>انصراف</p>
-                                                    @break
-                                                @case(13)
-                                                    <p>در انتظار تصمیم</p>
-                                                    @break
-                                                @case(20)
-                                                    <p>رضایت کامل/مشتری</p>
-                                                    @break
-                                                @default
-                                                    <p>خطا</p>
-                                                    @break
-
-                                            @endswitch
+                                                {{$item->type}}
                                             </a>
                                         </td>
 
