@@ -944,8 +944,14 @@ class UserController extends BaseController
                     break;
                 case 'continuefollowup':
                     $users = User::where('type', '=', '11')
-                        ->orwhere('followby_expert', '=', Auth::user()->id)
-                        ->orwhere('followby_expert', '=', NULL)
+                        ->where('followby_expert', '=', Auth::user()->id)
+                        ->orwhere(function ($query)
+                        {
+                            $query  ->where('followby_expert','=',NULL)
+                                    ->where('type','=',11);
+
+
+                        })
                         ->orderby('id', 'desc')
                         ->groupby('id')
                         ->paginate(20);
@@ -963,8 +969,14 @@ class UserController extends BaseController
                     break;
                 case 'cancelfollowup':
                     $users = User::where('type', '=', '12')
-                        ->orwhere('followby_expert', '=', Auth::user()->id)
-                        ->orwhere('followby_expert', '=', NULL)
+                        ->where('followby_expert', '=', Auth::user()->id)
+                        ->orwhere(function ($query)
+                        {
+                            $query  ->where('followby_expert','=',NULL)
+                                ->where('type','=',12);
+
+
+                        })
                         ->orderby('id', 'desc')
                         ->groupby('id')
                         ->paginate(20);
@@ -981,8 +993,14 @@ class UserController extends BaseController
                     break;
                 case 'waiting' :
                     $users = User::where('type', '=', '13')
-                        ->orwhere('followby_expert', '=', Auth::user()->id)
-                        ->orwhere('followby_expert', '=', NULL)
+                        ->where('followby_expert', '=', Auth::user()->id)
+                        ->orwhere(function ($query)
+                        {
+                            $query  ->where('followby_expert','=',NULL)
+                                ->where('type','=',13);
+
+
+                        })
                         ->orderby('id', 'desc')
                         ->paginate(20);
                     foreach ($users as $item) {
@@ -998,8 +1016,14 @@ class UserController extends BaseController
                     break;
                 case 'noanswering':
                     $users = User::where('type', '=', '14')
-                        ->orwhere('followby_expert', '=', Auth::user()->id)
-                        ->orwhere('followby_expert', '=', NULL)
+                        ->where('followby_expert', '=', Auth::user()->id)
+                        ->orwhere(function ($query)
+                        {
+                            $query  ->where('followby_expert','=',NULL)
+                                ->where('type','=',14);
+
+
+                        })
                         ->orderby('id', 'desc')
                         ->paginate(20);
                     foreach ($users as $item) {
@@ -1015,8 +1039,14 @@ class UserController extends BaseController
                     break;
                 case 'students':
                     $users = User::where('type', '=', '20')
-                        ->orwhere('followby_expert', '=', Auth::user()->id)
-                        ->orwhere('followby_expert', '=', NULL)
+                        ->where('followby_expert', '=', Auth::user()->id)
+                        ->orwhere(function ($query)
+                        {
+                            $query  ->where('followby_expert','=',NULL)
+                                ->where('type','=',20);
+
+
+                        })
                         ->orderby('id', 'desc')
                         ->paginate(20);
                     foreach ($users as $item) {
@@ -1033,8 +1063,7 @@ class UserController extends BaseController
                 case 'todayFollowup':
                     $users = User::join('followups', 'users.id', '=', 'followups.user_id')
                         ->where('followups.nextfollowup_date_fa', '=', $dateNow)
-                        ->orwhere('followby_expert', '=', Auth::user()->id)
-                        ->orwhere('followby_expert', '=', NULL)
+                        ->where('followby_expert', '=', Auth::user()->id)
                         ->select('users.*')
                         ->groupby('users.id')
                         ->orderby('date_fa', 'desc')
