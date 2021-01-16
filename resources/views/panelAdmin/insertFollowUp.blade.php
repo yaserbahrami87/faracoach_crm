@@ -30,6 +30,12 @@
                             </div>
                         @endforeach
                     </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>توضیحات</label>
+                            <textarea class="form-control textarea"  lang="fa" name="comment">{{old('comment')}}</textarea>
+                        </div>
+                    </div>
                     <div class="col-md-4 px-1">
                         <div class="form-group">
                             <label>نتیجه پیگیری</label>
@@ -84,12 +90,6 @@
                         <div class="form-group">
                             <label>تاریخ پیگیری بعد</label>
                             <input type="text" class="form-control"  value="{{$nextDayFollow}}" name="nextfollowup_date_fa" id="nextfollowup_date_fa" />
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label>توضیحات</label>
-                            <textarea class="form-control textarea"  lang="fa" name="comment">{{old('comment')}}</textarea>
                         </div>
                     </div>
                 </div>

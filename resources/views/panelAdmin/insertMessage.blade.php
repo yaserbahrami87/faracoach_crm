@@ -17,9 +17,9 @@
                         @if(strlen($resourceIntroduce)>0)
                             <option value="{{$resourceIntroduce->id}}">معرف شما - {{$resourceIntroduce->fname}} {{$introduced->lname}}</option>
                         @endif
-                        <option value="3">مالی</option>
-                        <option value="4">آموزش</option>
-                        <option value="2">مدیریت</option>
+                        @foreach($followby_expert as $item)
+                            <option value="{{$item->id}}">{{$item->type}} - {{$item->fname}} {{$item->lname}}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="form-group">

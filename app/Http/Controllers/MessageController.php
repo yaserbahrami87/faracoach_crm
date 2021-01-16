@@ -47,6 +47,7 @@ class MessageController extends BaseController
                     ->get();
             }
             else {
+
                 $messages = message::where('message_id_answer', '=', NULL)
                     ->where(function ($query) {
                         $query->orwhere('user_id_send', '=', Auth::user()->id)
@@ -54,6 +55,13 @@ class MessageController extends BaseController
 
                     })
                     ->paginate(20);
+
+            }
+
+            foreach ($messages as $item)
+            {
+                $item->user_id_recieve=$this->get_user_byID($item->user_id_recieve)->fname." ".$this->get_user_byID($item->user_id_recieve)->lname;
+                $item->user_id_send=$this->get_user_byID($item->user_id_send)->fname." ".$this->get_user_byID($item->user_id_send)->lname;
             }
             return view('panelAdmin.messages')
                     ->with('messages',$messages);
@@ -68,7 +76,18 @@ class MessageController extends BaseController
 
                             })
                             ->paginate(20);
+            foreach ($messages as $item)
+            {
+                if(Auth::user()->id!=$item->user_id_recieve)
+                {
+                    $item->user_id_recieve=$this->get_user_byID($item->user_id_recieve)->fname.$this->get_user_byID($item->user_id_recieve)->lname;
+                }
+                else if($item->user_id_send!=Auth::user()->id)
+                {
+                    $item->user_id_send=$this->get_user_byID($item->user_id_send)->fname.$this->get_user_byID($item->user_id_send)->lname;
 
+                }
+            }
             return view('panelUser.messages')
                     ->with('messages',$messages);
         }
@@ -91,17 +110,26 @@ class MessageController extends BaseController
                 ->select('users.id','users.fname','users.lname','users.tel')
                 ->get();
 
+        $followby_expert=user::orwhere('type','=',2)
+                            ->orwhere('type','=',3)
+                            ->get();
+        foreach ($followby_expert as $item)
+        {
+            $item->type=$this->userType($item->type);
+        }
         //سطح دسترسی ها
         if(Gate::allows('isAdmin'))
         {
             return view('panelAdmin.insertMessage')
                     ->with('resourceIntroduce',$resourceIntroduce)
-                    ->with('listIntroducedUser',$listIntroducedUser);
+                    ->with('listIntroducedUser',$listIntroducedUser)
+                    ->with('followby_expert',$followby_expert);
         }else if(Gate::allows('isUser'))
         {
             return view('panelUser.insertMessage')
                     ->with('resourceIntroduce',$resourceIntroduce)
-                    ->with('listIntroducedUser',$listIntroducedUser);
+                    ->with('listIntroducedUser',$listIntroducedUser)
+                    ->with('followby_expert',$followby_expert);
         }
         else
         {

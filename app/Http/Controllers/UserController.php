@@ -415,7 +415,7 @@ class UserController extends BaseController
 
         //مقدار یوزر با توجه به دستور زیر مقدار ورودی تابع با مقدار خروجی تقییر میکند
         $user=User::find($user);
-        if(($user->followby_expert==Auth::user()->id)||($user->followby_expert==NULL)) {
+        if(($user->followby_expert==Auth::user()->id)||($user->followby_expert==NULL)||(Auth::user()->type==2)) {
             if (strlen($user->personal_image) == 0) {
                 $user->personal_image = "default-avatar.png";
             }

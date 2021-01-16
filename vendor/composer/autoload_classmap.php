@@ -93,6 +93,7 @@ return array(
     'App\\categoryTag' => $baseDir . '/app/categoryTag.php',
     'App\\categoryfollowup' => $baseDir . '/app/categoryfollowup.php',
     'App\\city' => $baseDir . '/app/city.php',
+    'App\\course' => $baseDir . '/app/course.php',
     'App\\document' => $baseDir . '/app/document.php',
     'App\\followbyCategory' => $baseDir . '/app/followbyCategory.php',
     'App\\followup' => $baseDir . '/app/followup.php',

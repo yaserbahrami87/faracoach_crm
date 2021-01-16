@@ -644,6 +644,7 @@ class ComposerStaticInitf54d8edf51459297346cdb00d8423a68
         'App\\categoryTag' => __DIR__ . '/../..' . '/app/categoryTag.php',
         'App\\categoryfollowup' => __DIR__ . '/../..' . '/app/categoryfollowup.php',
         'App\\city' => __DIR__ . '/../..' . '/app/city.php',
+        'App\\course' => __DIR__ . '/../..' . '/app/course.php',
         'App\\document' => __DIR__ . '/../..' . '/app/document.php',
         'App\\followbyCategory' => __DIR__ . '/../..' . '/app/followbyCategory.php',
         'App\\followup' => __DIR__ . '/../..' . '/app/followup.php',

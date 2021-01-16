@@ -24,6 +24,7 @@
                     <thead class="text-dark">
                         <th>شماره تیکت </th>
                         <th>موضوع پیغام </th>
+                        <th>مخاطب</th>
                         <th>وضعیت </th>
                         <th>زمان ثبت </th>
                     </thead>
@@ -40,7 +41,13 @@
                                     {{$item->subject}}
                                 </a>
                             </td>
-
+                            <td>
+                                @if($item->user_id_recieve!=(Auth::user()->fname." ".Auth::user()->lname))
+                                    {{$item->user_id_recieve}}
+                                @else
+                                    {{$item->user_id_send}}
+                                @endif
+                            </td>
                             <td>
                                 @if($item->status==1)
                                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-envelope-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

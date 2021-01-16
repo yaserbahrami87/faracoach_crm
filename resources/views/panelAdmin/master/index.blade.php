@@ -69,8 +69,10 @@
                                 </p>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="#">{{Auth::user()->fname}} {{Auth::user()->lname}}</a>
                                 <a class="dropdown-item" href="{{ url('/logout') }}">خروج</a>
                             </div>
+
                         </li>
                     </ul>
                 </div>
