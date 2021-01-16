@@ -104,7 +104,7 @@ class BaseController extends Controller
                         break;
             case "3":return "آموزش";
                         break;
-            case "11": return "در حال پیگیری";
+            case "11": return "تور پیگیری";
                         break;
             case "12":return "انصراف";
                         break;
