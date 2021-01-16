@@ -186,3 +186,10 @@ $(".del").click(function(e) {
         window.location=$(this).attr('href');
     }
 });
+
+
+$("#goBack").click(function(e)
+{
+    e.preventDefault();
+    window.history.back();
+});
