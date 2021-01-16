@@ -9,6 +9,10 @@
                 <input type="text" class="form-control" id="problem" lang="fa" name="problem"  value="{{$problemfollowup->problem}}"/>
             </div>
             <div class="form-group">
+                <label for="color">رنگبندی</label>
+                <input type="color" class="form-control" id="color" lang="fa" name="color"  value="{{$problemfollowup->color}}"/>
+            </div>
+            <div class="form-group">
                 <label for="statusProblem" >وضعیت</label>
                 <select class="form-control" id="statusProblem" name="status">
                     <option disabled="disabled" selected>انتخاب کنید</option>

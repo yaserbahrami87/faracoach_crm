@@ -142,19 +142,7 @@
                         </thead>
                         <tbody>
                             @foreach($users as $item)
-                                @if($item->type=="پیگیری نشده")
-                                    <tr class="warning_bg_admin">
-                                @elseif($item->type=="در حال پیگیری")
-                                    <tr class="primary_bg_admin">
-                                @elseif($item->type=="انصراف")
-                                    <tr class="danger_bg_admin">
-                                @elseif($item->type=="در انتظار تصمیم")
-                                    <tr class="bg-info text-light">
-                                @elseif($item->type=="عدم پاسخگویی")
-                                    <tr class="bg-secondary text-light">
-                                @elseif($item->type=='مشتری')
-                                    <tr class="success_bg_admin">
-                                @endif
+                                <tr>
                                         <td>
                                             <a href="/admin/user/{{$item->id}}" class="text-dark">
                                                 {{$item->fname}}

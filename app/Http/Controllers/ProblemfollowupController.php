@@ -38,6 +38,7 @@ class ProblemfollowupController extends Controller
         $this->validate(request(),
             [
                 'problem'  =>'required|string|min:4',
+                'color'    =>'required|string' ,
                 'status'   =>'required|numeric'
             ]);
         $status = problemfollowup::create($request->all());

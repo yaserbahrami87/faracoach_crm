@@ -13,6 +13,7 @@
                 <thead class=" text-dark">
                     <th>ردیف </th>
                     <th>نتیجه پیگیری ها</th>
+                    <th>رنگ </th>
                     <th>وضعیت </th>
                     <th>ویرایش </th>
                     <th>حذف </th>
@@ -29,6 +30,9 @@
                                 <td>
 
                                     {{$item->problem}}
+                                </td>
+                                <td style="background-color:  {{$item->color}}" class="rounded-circle">
+
                                 </td>
                                 <td>
                                     {{$item->status}}

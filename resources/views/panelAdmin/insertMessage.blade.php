@@ -15,7 +15,20 @@
                     <select class="form-control p-0" id="listMessage" name="user_id_recieve">
                         <option disabled selected>انتخاب کنید</option>
                         @if(strlen($resourceIntroduce)>0)
-                            <option value="{{$resourceIntroduce->id}}">معرف شما - {{$resourceIntroduce->fname}} {{$resourceIntroduce->lname}}</option>
+                            @if((is_null($resourceIntroduce->fname))||(is_null($resourceIntroduce->lname)))
+                                <option value="{{$resourceIntroduce->id}}">معرف شما - {{$resourceIntroduce->fname}} {{$resourceIntroduce->lname}}</option>
+                            @elseif((!is_null($resourceIntroduce->fname))||(!is_null($resourceIntroduce->lname)))
+                                <option value="{{$resourceIntroduce->id}}">معرف شما -
+                                    @if(!is_null($resourceIntroduce->fname))
+                                        {{$resourceIntroduce->fname}}
+                                    @endif
+                                    @if(!is_null($resourceIntroduce->lname))
+                                        {{$resourceIntroduce->lname}}
+                                    @endif
+                                </option>
+                            @else
+                                <option value="{{$resourceIntroduce->id}}">معرف شما - {{$resourceIntroduce->tel}}</option>
+                            @endif
                         @endif
                         @foreach($followby_expert as $item)
                             <option value="{{$item->id}}">{{$item->type}} - {{$item->fname}} {{$item->lname}}</option>

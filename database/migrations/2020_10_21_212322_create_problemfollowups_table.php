@@ -16,6 +16,7 @@ class CreateProblemfollowupsTable extends Migration
         Schema::create('problemfollowups', function (Blueprint $table) {
             $table->id();
             $table->string('problem',50);
+            $table->string('color',50);
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
