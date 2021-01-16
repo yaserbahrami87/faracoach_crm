@@ -306,6 +306,7 @@ class UserController extends BaseController
         {
             if($request['sendsms']!="0")
             {
+                $request['sendsms']=(str_replace('...','',$request['sendsms']));
                 $this->sendSms($request['tel'],$request['sendsms']);
             }
 
