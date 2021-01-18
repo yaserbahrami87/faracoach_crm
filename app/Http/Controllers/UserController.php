@@ -864,10 +864,12 @@ class UserController extends BaseController
                     break;
                 case 'myfollowup':
                     $users = User::join('followups', 'users.id', '=', 'followups.user_id')
+                        ->where('nextfollowup_date_fa','=',$this->dateNow)
                         ->select('users.*')
                         ->groupby('users.id')
                         ->orderby('date_fa', 'desc')
                         ->paginate(20);
+
                     foreach ($users as $item) {
                         $item->created_at = $this->changeTimestampToShamsi($item->created_at);
                         if (!is_null($item->last_login_at)) {
@@ -1108,6 +1110,7 @@ class UserController extends BaseController
                 case 'myfollowup':
                     $users = User::join('followups', 'users.id', '=', 'followups.user_id')
                         ->where('followups.insert_user_id', '=', Auth::user()->id)
+                        ->where('nextfollowup_date_fa','=',$this->dateNow)
                         ->select('users.*')
                         ->groupby('users.id')
                         ->orderby('date_fa', 'desc')

@@ -59,9 +59,12 @@ class MessageController extends BaseController
 
             foreach ($messages as $item)
             {
+
                 $item->user_id_recieve=$this->get_user_byID($item->user_id_recieve)->fname." ".$this->get_user_byID($item->user_id_recieve)->lname;
+
                 $item->user_id_send=$this->get_user_byID($item->user_id_send)->fname." ".$this->get_user_byID($item->user_id_send)->lname;
             }
+
 
             $countUnreadMessages=$this->countUnreadMessages();
             return view('panelAdmin.messages')

@@ -10,26 +10,20 @@
                     <input type="hidden" name="user_id" value="{{$user->id}}"/>
                     <div class="col-12">
                         @foreach($parentCategory as $item)
-                            <div class="row">
-                                <div class="col-xs-12 col-md-2 col-lg-2 col-xl-2 pt-5">
-                                    <a class="d-inline" data-toggle="collaps"  role="button" aria-expanded="false" aria-controls="collapseExample{{$item->id}}">
-                                        {{$item->category}}
-                                    </a>
-                                </div>
-                                <div class="col-xs-12 col-md-10 col-lg-10 col-xl-10 pr-0">
-                                    <div id="collapseExample{{$item->id}}">
-                                        <div class="card card-body">
-                                            <div class="form row">
-                                                @foreach($tags as $tag)
-                                                    @if($tag->category_tags_id==$item->id)
-                                                        <div class="col-3 text-right">
-                                                            <label class="form-check-label m-0 pr-0 mr-3 ml-2 float-right" for="tag{{$tag->id}}">{{$tag->tag}}</label>
-                                                            <input class="form-check-input text-dark mr-2 " type="checkbox" value="{{$tag->id}}" id="tag{{$tag->id}}" name="tags[]" @if(is_array(old('tags')) && in_array($tag->id, old('tags'))) checked @endif  >
-                                                        </div>
-                                                    @endif
-                                                @endforeach
-                                            </div>
-                                        </div>
+                            <a class="d-inline" data-toggle="collaps"  role="button" aria-expanded="false" aria-controls="collapseExample{{$item->id}}">
+                                {{$item->category}}
+                            </a>
+                            <div id="collapseExample{{$item->id}}">
+                                <div class="card card-body">
+                                    <div class="form row">
+                                        @foreach($tags as $tag)
+                                            @if($tag->category_tags_id==$item->id)
+                                                <div class="col-3 text-right">
+                                                    <label class="form-check-label m-0 pr-0 mr-3 ml-2 float-right" for="tag{{$tag->id}}">{{$tag->tag}}</label>
+                                                    <input class="form-check-input text-dark mr-2 " type="checkbox" value="{{$tag->id}}" id="tag{{$tag->id}}" name="tags[]" @if(is_array(old('tags')) && in_array($tag->id, old('tags'))) checked @endif  >
+                                                </div>
+                                            @endif
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
