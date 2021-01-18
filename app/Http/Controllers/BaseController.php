@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\categoryTag;
 use App\city;
 use App\followbyCategory;
+use App\message;
 use App\problemfollowup;
 use App\state;
 use App\tag;
@@ -209,5 +210,12 @@ class BaseController extends Controller
         $categoryTag=categoryTag::where('category','=',$request)
                                 ->first();
         return categoryTag::where('parent_id','=',$categoryTag->id)->get();
+    }
+
+    public function countUnreadMessages()
+    {
+        return message::where('status','=',1)
+            ->where('user_id_recieve', '=', Auth::user()->id)
+            ->count();
     }
 }

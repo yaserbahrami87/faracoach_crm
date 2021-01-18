@@ -77,7 +77,6 @@ class FollowupController extends BaseController
         ]);
 
         $data=$this->get_user_byID($request['user_id']);
-
         $data->type=$request['status_followups'];
         $data->followby_expert=$request['followby_expert'];
         $data->save();
@@ -93,8 +92,18 @@ class FollowupController extends BaseController
             $errorStatus="danger";
         }
 
-        return back()->with('msg',$msg)
-                    ->with('errorStatus',$errorStatus);
+
+        if($request['followby_expert']==Auth::user()->id)
+        {
+            return back()->with('msg',$msg)
+                ->with('errorStatus',$errorStatus);
+        }
+        else
+        {
+            return redirect('/admin/users')->with('msg',$msg)
+                ->with('errorStatus',$errorStatus);
+        }
+
     }
 
     /**

@@ -51,34 +51,35 @@ class VerifyController extends BaseController
             $six_digit_random_number = mt_rand(100000, 999999);
             if(preg_match('/^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}$/',$request))
             {
-                $status=verify::where('tel','=',$request)
-                                ->where('verify','=',1)
-                                ->count();
-                if($status==0)
-                {
-                    $status=verify::create(
-                    [
-                        'tel'           =>$request,
-                        'code'          =>$six_digit_random_number,
-                        'date_fa'       =>$this->dateNow,
-                        'time_fa'       =>$this->timeNow
-                    ]);
-                    if($status)
-                    {
-                        $message="کد فعالی سازی شما در سیستم فراکوچ : " . $six_digit_random_number ;
-                        $this->sendSms($request,$message);
-                        return view('verifyAjax')
-                                ->with('tel',$request);
-                    }
-                    else
-                    {
-                        echo ('<div  class="alert alert-danger">خطا</div>');
+                $user=$this->get_user($request);
+                if(is_null($user)) {
+                    $status = verify::where('tel', '=', $request)
+                        ->where('verify', '=', 1)
+                        ->count();
+                    if ($status == 0) {
+                        $status = verify::create(
+                            [
+                                'tel' => $request,
+                                'code' => $six_digit_random_number,
+                                'date_fa' => $this->dateNow,
+                                'time_fa' => $this->timeNow
+                            ]);
+                        if ($status) {
+                            $message = "کد فعالی سازی شما در سیستم فراکوچ : " . $six_digit_random_number;
+                            $this->sendSms($request, $message);
+                            return view('verifyAjax')
+                                ->with('tel', $request);
+                        } else {
+                            echo('<div  class="alert alert-danger">خطا</div>');
+                        }
+                    } else {
+
+                        echo('<div  class="alert alert-danger">شماره همراه قبلا ثبت و تایید شده است</div>');
                     }
                 }
                 else
                 {
-
-                    echo ('<div  class="alert alert-danger">شماره همراه قبلا ثبت و تایید شده است</div>');
+                    echo('<div  class="alert alert-danger">شماره وارد شده قبلا در سیستم ثبت شده است</div>');
                 }
             }
             else
@@ -347,7 +348,7 @@ class VerifyController extends BaseController
                         ]);
                     if ($status) {
                         $message = "رمز یکبار مصرف شما در سیستم فراکوچ : " . $six_digit_random_number;
-                        $this->sensSms($request['tel'], $message);
+                        $this->sendSms($request['tel'], $message);
                         return back()->with('msg', 'رمز یکبار مصرف شما به شماره ' . $request['tel'] . ' ارسال شد')
                             ->with('errorStatus', 'success')
                             ->with('status', true);

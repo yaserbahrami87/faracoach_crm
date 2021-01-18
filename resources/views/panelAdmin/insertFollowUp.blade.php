@@ -9,22 +9,27 @@
                     <input type="hidden" name="insert_user_id" value="{{$userAdmin->id}}" />
                     <input type="hidden" name="user_id" value="{{$user->id}}"/>
                     <div class="col-12">
-                        <small>انتخاب تگ ها</small>
                         @foreach($parentCategory as $item)
-                            <a class="d-block" data-toggle="collaps" href="#collapseExample{{$item->id}}" role="button" aria-expanded="false" aria-controls="collapseExample{{$item->id}}">
-                                {{$item->category}}
-                            </a>
-                            <div id="collapseExample{{$item->id}}">
-                                <div class="card card-body">
-                                    <div class="form row">
-                                        @foreach($tags as $tag)
-                                            @if($tag->category_tags_id==$item->id)
-                                                <div class="col-3 text-right">
-                                                    <label class="form-check-label m-0 pr-0 mr-3 ml-2 float-right" for="tag{{$tag->id}}">{{$tag->tag}}</label>
-                                                    <input class="form-check-input text-dark mr-2 " type="checkbox" value="{{$tag->id}}" id="tag{{$tag->id}}" name="tags[]">
-                                                </div>
-                                            @endif
-                                        @endforeach
+                            <div class="row">
+                                <div class="col-xs-12 col-md-2 col-lg-2 col-xl-2 pt-5">
+                                    <a class="d-inline" data-toggle="collaps"  role="button" aria-expanded="false" aria-controls="collapseExample{{$item->id}}">
+                                        {{$item->category}}
+                                    </a>
+                                </div>
+                                <div class="col-xs-12 col-md-10 col-lg-10 col-xl-10 pr-0">
+                                    <div id="collapseExample{{$item->id}}">
+                                        <div class="card card-body">
+                                            <div class="form row">
+                                                @foreach($tags as $tag)
+                                                    @if($tag->category_tags_id==$item->id)
+                                                        <div class="col-3 text-right">
+                                                            <label class="form-check-label m-0 pr-0 mr-3 ml-2 float-right" for="tag{{$tag->id}}">{{$tag->tag}}</label>
+                                                            <input class="form-check-input text-dark mr-2 " type="checkbox" value="{{$tag->id}}" id="tag{{$tag->id}}" name="tags[]" @if(is_array(old('tags')) && in_array($tag->id, old('tags'))) checked @endif  >
+                                                        </div>
+                                                    @endif
+                                                @endforeach
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -41,11 +46,11 @@
                             <label>نتیجه پیگیری</label>
                             <select class="form-control p-0" id="exampleFormControlSelect1" name="status_followups" >
                                 <option disabled="disabled" selected >وضعیت را انتخاب کنید</option>
-                                <option  value="11" >تور پیگیری</option>
-                                <option  value="12" >کنسل شد</option>
-                                <option  value="13">در انتظار تصمیم</option>
-                                <option  value="14">عدم پاسخگویی</option>
-                                <option  value="20" >مشتری</option>
+                                <option  value="11" @if (old('status_followups') == '11') selected @endif>تور پیگیری</option>
+                                <option  value="12" @if (old('status_followups') == '12') selected @endif> کنسل شد</option>
+                                <option  value="13" @if (old('status_followups') == '13') selected @endif>در انتظار تصمیم</option>
+                                <option  value="14" @if (old('status_followups') == '14') selected @endif>عدم پاسخگویی</option>
+                                <option  value="20" @if (old('status_followups') == '15') selected @endif>مشتری</option>
                             </select>
                         </div>
                     </div>
@@ -55,7 +60,7 @@
                             <select class="form-control p-0" id="exampleFormControlSelect1" name="followup" >
                                 <option disabled="disabled" selected >نتیجه را مشخص کنید</option>
                                 @foreach($problemFollowup as $item)
-                                    <option value="{{$item->id}}" >{{$item->problem}}</option>
+                                    <option value="{{$item->id}}"  @if (old('followup') == $item->id) selected @endif >{{$item->problem}}</option>
                                 @endforeach
                             </select>
                         </div>

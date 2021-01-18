@@ -4,6 +4,34 @@
             <div class="row">
                 <div class="col-5 col-md-4">
                     <div class="icon-big text-center icon-warning">
+                        <i class="nc-icon nc-chat-33 text-primary"></i>
+                    </div>
+                </div>
+                <div class="col-7 col-md-8">
+                    <div class="numbers">
+                        <p class="card-category">خوانده نشده</p>
+                        <p class="card-title">{{$countUnreadMessages}} پیام<p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer ">
+            <hr>
+            <div class="stats">
+                <a href="/admin/messages/">
+                    <i class="fa fa-eye"></i>مشاهده پیام ها
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="card card-stats">
+        <div class="card-body ">
+            <div class="row">
+                <div class="col-5 col-md-4">
+                    <div class="icon-big text-center icon-warning">
                         <i class="nc-icon nc-alert-circle-i text-warning"></i>
                     </div>
                 </div>
@@ -157,7 +185,7 @@
             <hr>
             <div class="stats">
                 <a href="/admin/users/category/?categoryUsers=todayFollowup">
-                    <i class="fa fa-calendar-o"></i>                در حال بروزرسانی
+                    <i class="fa fa-calendar-o"></i>مشاهده لیست
                 </a>
             </div>
         </div>
@@ -185,7 +213,7 @@
             <hr>
             <div class="stats">
                 <a href="/admin/users/category/?categoryUsers=expireFollowup">
-                    <i class="fa fa-eye"></i>                در حال بروزرسانی
+                    <i class="fa fa-eye"></i>مشاهده لیست
                 </a>
             </div>
         </div>
