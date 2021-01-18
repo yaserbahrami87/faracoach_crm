@@ -83,6 +83,7 @@ Route::middleware('can:isAdmin')->group(function () {
     Route::patch('/admin/profile/update/{user}','UserController@update');
     Route::patch('/admin/user/{id}/changeType','UserController@changeType');
     Route::get('/admin/users/search/','UserController@searchUsers');
+    Route::get('/admin/users/search/advance','UserController@advanceSearchUsers');
     Route::get('/admin/add',function()
     {
         return view('panelAdmin.registerUser');

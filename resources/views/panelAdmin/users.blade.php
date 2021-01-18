@@ -112,8 +112,53 @@
                                 </svg>
                             </button>
                         </form>
-
                     </div>
+
+                    @if(Auth::user()->type==2)
+                        <!-- Advance Search -->
+                        <div class="col-12">
+                            <form method="get" action="/admin/users/search/advance">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-3 col-lg-2 col-xl-2" >
+                                        <label>انتخاب کاربر</label>
+                                        <div class="form-group mb-3">
+                                            <select class="form-control p-0" name="user">
+                                                <option disabled="disabled" selected="selected">انتخاب کنید</option>
+                                                @foreach($usersAdmin  as $item)
+                                                    <option value="{{$item->id}}">{{$item->fname}} {{$item->lname}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2" >
+                                        <label>نمایش براساس دسته بندی</label>
+                                        <div class="form-group mb-3">
+                                            <select class="form-control p-0" name="categoryUsers">
+                                                <option disabled="disabled" selected="selected">انتخاب کنید</option>
+                                                <option value="0">نمایش همه</option>
+                                                <option value="notfollowup">پیگیری نشده</option>
+                                                <option value="continuefollowup">در حال مذاکره</option>
+                                                <option value="waiting">در انتظار تصمیم</option>
+                                                <option value="cancelfollowup">انصراف</option>
+                                                <option value="noanswering">عدم پاسخگویی</option>
+                                                <option value="students">رضایت کامل / مشتری</option>
+                                                <option value="todayFollowup">پیگیری امروز</option>
+                                                <option value="expireFollowup">پیگیری تاریخ گذشته</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-1 col-lg-1 col-xl-1" >
+                                        <label>جستجو</label>
+                                        <button class="btn btn-primary m-0 d-block" type="submit">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    @endif
                     <div class="col-12">
                         <label class="text-dark">دسترسی سریع</label>
                         <ul class="list-group list-group-horizontal" id="users_tags">
