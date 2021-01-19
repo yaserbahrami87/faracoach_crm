@@ -22,11 +22,12 @@
     <!-- FILE MANAGER -->
     <link rel="stylesheet" href="{{ asset('vendor/file-manager/css/file-manager.css') }}">
 
-
+    <link href="{{asset('../dashboard/assets/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
     <link href="{{asset('css/kamadatepicker.min.css')}}" rel="stylesheet" />
     <link href="{{asset('css/timepicker.min.css')}}" rel="stylesheet" />
     <link href={{asset('../css/bootstrap-rtl.min.css')}} rel="stylesheet" />
     <link href="{{asset('../dashboard/assets/css/style.css')}}" rel="stylesheet" />
+
 </head>
 
 <body class="">
@@ -188,8 +189,8 @@
 </script>
 
 
-<script src="{{asset('../dashboard/assets/js/plugins/jquery.canvasjs.min.js')}}"></script>
-
+<script src="{{asset('../dashboard/assets/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('../dashboard/assets/js/dataTables.bootstrap4.min.js')}}"></script>
 <script>
     window.onload = function () {
         var options = {

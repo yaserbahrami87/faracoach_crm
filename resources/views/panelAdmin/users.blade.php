@@ -173,65 +173,73 @@
 
                 <div class="table-responsive overflow-auto">
                     <label class="text-dark"> تعداد <b>{{$countList }}</b> نفر </label>
-                    <table class="table">
-                        <thead class=" text-dark">
-                        <th>نام </th>
-                        <th>نام خانوادگی </th>
-                        <th>شماره همراه</th>
-                        <th>اخرین ورود </th>
-                        <th>تاریخ ورود</th>
-                        @if(Auth::user()->type==2)
-                            <th>مسئول پیگیری</th>
-                        @endif
-                        <th>وضعیت</th>
+                    <table id="userTable" class="table table-striped table-bordered" style="width:100%">
+                        <thead>
+                        <tr>
+                            <th>نام</th>
+                            <th>نام خانوادگی</th>
+                            <th>شماره همراه	</th>
+                            <th>اخرین ورود</th>
+                            <th>تاریخ ثبت	</th>
+                            <th>وضعیت</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            @foreach($users as $item)
-                                <tr>
-                                        <td>
-                                            <a href="/admin/user/{{$item->id}}" class="text-dark">
-                                                {{$item->fname}}
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a href="/admin/user/{{$item->id}}" class="text-dark">
-                                                {{$item->lname}}
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a href="/admin/user/{{$item->id}}" class="text-dark">
-                                                 {{$item->tel}}
-                                            </a>
-                                        </td>
-                                        <td >
-                                            <a href="/admin/user/{{$item->id}}" class="text-dark">
-                                                 {{$item->last_login_at}}
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a href="/admin/user/{{$item->id}}" class="text-dark">
-                                                {{$item->created_at}}
-                                            </a>
-                                        </td>
-                                        @if(Auth::user()->type==2)
-                                            <td>
-                                                {{$item->followby_expert}}
-                                            </td>
-                                        @endif
-                                        <td>
-                                            <a href="/admin/user/{{$item->id}}" class="text-dark">
-                                                {{$item->type}}
-                                            </a>
-                                        </td>
+                        @foreach($users as $item)
+                            <tr>
+                                <td>
+                                    <a href="/admin/user/{{$item->id}}" class="text-dark">
+                                        {{$item->fname}}
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="/admin/user/{{$item->id}}" class="text-dark">
+                                        {{$item->lname}}
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="/admin/user/{{$item->id}}" class="text-dark">
+                                        {{$item->tel}}
+                                    </a>
+                                </td>
+                                <td >
+                                    <a href="/admin/user/{{$item->id}}" class="text-dark">
+                                        {{$item->last_login_at}}
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="/admin/user/{{$item->id}}" class="text-dark">
+                                        {{$item->created_at}}
+                                    </a>
+                                </td>
+                                @if(Auth::user()->type==2)
+                                    <td>
+                                        {{$item->followby_expert}}
+                                    </td>
+                                @endif
+                                <td>
+                                    <a href="/admin/user/{{$item->id}}" class="text-dark">
+                                        {{$item->type}}
+                                    </a>
+                                </td>
 
-                                    </tr>
-                            @endforeach
-
+                            </tr>
+                        @endforeach
                         </tbody>
+                        <tfoot>
+                        <tr>
+                            <th>نام</th>
+                            <th>نام خانوادگی</th>
+                            <th>شماره همراه	</th>
+                            <th>اخرین ورود</th>
+                            <th>تاریخ ثبت	</th>
+                            <th>وضعیت</th>
+                        </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>
-            {{$users->links()}}
+
         </div>
     </div>
 @endsection

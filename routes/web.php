@@ -73,37 +73,37 @@ Route::middleware('can:isEducation')->group(function () {
 
 
 
-Route::middleware('can:isAdmin')->group(function () {
+Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
 //Route::group(['middleware' => ['can:isEducation','can:isAdmin']], function() {
 
     // user
     //Route::get('/admin/panel/','AdminController@index')->name('panelAdmin');
-    Route::get('/admin/users','UserController@index');
-    Route::get('/admin/user/{user}','UserController@show');
-    Route::patch('/admin/profile/update/{user}','UserController@update');
-    Route::patch('/admin/user/{id}/changeType','UserController@changeType');
-    Route::get('/admin/users/search/','UserController@searchUsers');
-    Route::get('/admin/users/search/advance','UserController@advanceSearchUsers');
-    Route::get('/admin/add',function()
+    Route::get('/users','UserController@index');
+    Route::get('/user/{user}','UserController@show');
+    Route::patch('/profile/update/{user}','UserController@update');
+    Route::patch('/user/{id}/changeType','UserController@changeType');
+    Route::get('/users/search/','UserController@searchUsers');
+    Route::get('/users/search/advance','UserController@advanceSearchUsers');
+    Route::get('/add',function()
     {
         return view('panelAdmin.registerUser');
     });
-    Route::post('/admin/register','UserController@register');
+    Route::post('/register','UserController@register');
 
-    Route::get('/admin/users/category/','UserController@showCategoryUsersAdmin');
-    Route::get('/admin/users/categoryTags/','UserController@showCategoryTagsAdmin');
-    Route::get('/admin/users/categorybyAdmin/','UserController@categorybyAdmin');
+    Route::get('/users/category/','UserController@showCategoryUsersAdmin');
+    Route::get('/users/categoryTags/','UserController@showCategoryTagsAdmin');
+    Route::get('/users/categorybyAdmin/','UserController@categorybyAdmin');
 
-    Route::get('/admin/user/{tel}/password','AdminController@changePasswordView');
-    Route::patch('/admin/user/{tel}/updatePassword','UserController@updatePassword');
+    Route::get('/user/{tel}/password','AdminController@changePasswordView');
+    Route::patch('/user/{tel}/updatePassword','UserController@updatePassword');
 
     //  ROUTE SETTINGS
-    Route::post('/admin/settings/problemfollowup/store','ProblemfollowupController@store');
-    Route::get('/admin/settings/problemfollowup/delete/{problemfollowup}','ProblemfollowupController@destroy');
-    Route::get('/admin/settings/problemfollowup/edit/{problemfollowup}','ProblemfollowupController@edit');
-    Route::patch('/admin/settings/problemfollowup/update/{problemfollowup}','ProblemfollowupController@update');
-    Route::get('/admin/settings/','AdminController@showSettings');
-    Route::get('/admin/settings/problemfollowup/new',function()
+    Route::post('/settings/problemfollowup/store','ProblemfollowupController@store');
+    Route::get('/settings/problemfollowup/delete/{problemfollowup}','ProblemfollowupController@destroy');
+    Route::get('/settings/problemfollowup/edit/{problemfollowup}','ProblemfollowupController@edit');
+    Route::patch('/settings/problemfollowup/update/{problemfollowup}','ProblemfollowupController@update');
+    Route::get('/settings/','AdminController@showSettings');
+    Route::get('/settings/problemfollowup/new',function()
     {
         return view('panelAdmin.insertProblemFollowup');
     });
@@ -111,39 +111,39 @@ Route::middleware('can:isAdmin')->group(function () {
 
 
     // *** Tags Setting
-    Route::get('/admin/settings/tags/new','TagController@create');
-    Route::post('/admin/settings/tags/store','TagController@store');
-    Route::get('/admin/settings/tags/delete/{tag}','TagController@destroy');
-    Route::get('/admin/settings/tags/edit/{tag}','TagController@edit');
-    Route::patch('/admin/settings/tags/update/{tag}','TagController@update');
-    Route::get('/admin/settings/settingtags/{data}','TagController@ajaxsettingstag');
-    Route::patch('/admin/settings/updatetags','TagController@updateAllTags');
+    Route::get('/settings/tags/new','TagController@create');
+    Route::post('/settings/tags/store','TagController@store');
+    Route::get('/settings/tags/delete/{tag}','TagController@destroy');
+    Route::get('/settings/tags/edit/{tag}','TagController@edit');
+    Route::patch('/settings/tags/update/{tag}','TagController@update');
+    Route::get('/settings/settingtags/{data}','TagController@ajaxsettingstag');
+    Route::patch('/settings/updatetags','TagController@updateAllTags');
     //*** Category Tags Settings
-    Route::get('/admin/settings/categorytags/new','CategoryTagController@index');
-    Route::post('/admin/settings/categorytags/store','CategoryTagController@store');
-    Route::get('/admin/settings/categorytags/edit/{categoryTag}','CategoryTagController@edit');
-    Route::patch('/admin/settings/categorytags/update/{categoryTag}','CategoryTagController@update');
-    Route::get('/admin/settings/categorytags/delete/{categoryTag}','CategoryTagController@destroy');
-    Route::get('/admin/settings/subcategorytags/{data}','CategoryTagController@ajaxsubcategory');
+    Route::get('/settings/categorytags/new','CategoryTagController@index');
+    Route::post('/settings/categorytags/store','CategoryTagController@store');
+    Route::get('/settings/categorytags/edit/{categoryTag}','CategoryTagController@edit');
+    Route::patch('/settings/categorytags/update/{categoryTag}','CategoryTagController@update');
+    Route::get('/settings/categorytags/delete/{categoryTag}','CategoryTagController@destroy');
+    Route::get('/settings/subcategorytags/{data}','CategoryTagController@ajaxsubcategory');
 
     //Route Messages
-    Route::get('/admin/messages/','MessageController@index');
-    Route::get('/admin/messages/show/{message}','MessageController@show');
-    Route::get('/admin/messages/new','MessageController@create');
-    Route::post('/admin/messages/send','MessageController@store');
-    Route::post('/admin/messages/reply','MessageController@reply');
+    Route::get('/messages/','MessageController@index');
+    Route::get('/messages/show/{message}','MessageController@show');
+    Route::get('/messages/new','MessageController@create');
+    Route::post('/messages/send','MessageController@store');
+    Route::post('/messages/reply','MessageController@reply');
 
     // Route Admin Followup
-    Route::post('/admin/followup/create','FollowupController@store');
+    Route::post('/followup/create','FollowupController@store');
 
     // File Manager
-    Route::get('/admin/filemanager',function()
+    Route::get('/filemanager',function()
     {
         return view('panelAdmin/fileManager');
     });
 
     //Route reports
-    Route::get('/admin/reports/',function()
+    Route::get('/reports/',function()
     {
         return view('panelAdmin.reports');
     });
