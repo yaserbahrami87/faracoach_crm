@@ -341,3 +341,9 @@
 {
     min-height: 100px !important;
 }
+
+#users_tags a
+{
+    text-decoration: underline;
+    color: #000000;
+}
