@@ -160,6 +160,7 @@
                             <th>شماره همراه	</th>
                             <th>اخرین ورود</th>
                             <th>تاریخ ثبت	</th>
+                            <th>تعداد پیگیری</th>
                             <th>وضعیت</th>
                         </tr>
                         </thead>
@@ -196,6 +197,9 @@
                                         {{$item->followby_expert}}
                                     </td>
                                 @endif
+                                <td>
+                                    {{$item->countFollowup}}
+                                </td>
                                 <td>
                                     <a href="/admin/user/{{$item->id}}" class="text-dark">
                                         {{$item->type}}

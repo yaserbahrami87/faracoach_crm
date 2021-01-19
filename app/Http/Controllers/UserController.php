@@ -25,7 +25,6 @@ class UserController extends BaseController
         $dateNow = verta();
         $this->dateNow = $dateNow->format('Y/m/d');
         $this->timeNow = $dateNow->format('H:i:s');
-
     }
 
     public function index()
@@ -34,9 +33,8 @@ class UserController extends BaseController
         {
             $users=User::orderby('users.id','desc')
                     ->groupby('users.id')
-                    ->paginate(20);
-            $countList=User::orderby('users.id','desc')
-                    ->count();
+                    ->get();
+
 
             foreach ($users as $item)
             {
@@ -53,6 +51,7 @@ class UserController extends BaseController
                 }
 
                 $item->type=$this->userType($item->type);
+                $item->countFollowup=$this->get_countFollowup($item->id);
             }
             $tags=$this->get_tags();
             $parentCategory=$this->get_category('پیگیری');
@@ -63,7 +62,6 @@ class UserController extends BaseController
             return view('panelAdmin.users')
                 ->with('users',$users)
                 ->with('tags',$tags)
-                ->with('countList',$countList)
                 ->with('parentCategory',$parentCategory)
                 ->with('usersAdmin',$usersAdmin);
         }
@@ -166,6 +164,7 @@ class UserController extends BaseController
                         $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
                 }
                 $item->type=$this->userType($item->type);
+                $item->countFollowup=$this->get_countFollowup($item->id);
             }
             $tags=$this->get_tags();
             $parentCategory=$this->get_category('پیگیری');
@@ -772,101 +771,33 @@ class UserController extends BaseController
                         ->select('users.*')
                         ->groupby('users.id')
                         ->get();
-                    foreach ($users as $item) {
-                        $item->created_at = $this->changeTimestampToShamsi($item->created_at);
-                        if (!is_null($item->last_login_at)) {
-                            $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
-                        }
-                        $expert=$this->get_user_byID($item->followby_expert);
-                        if(!is_null($expert))
-                        {
-                            $item->followby_expert=$expert->fname." ".$expert->lname;
-                        }
-                    }
                     break;
                 case 'continuefollowup':
                     $users = User::where('type', '=', '11')
                         ->orderby('id', 'desc')
                         ->groupby('id')
                         ->get();
-                    foreach ($users as $item) {
-                        $item->created_at = $this->changeTimestampToShamsi($item->created_at);
-                        if (!is_null($item->last_login_at)) {
-                            $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
-                        }
-                        $expert=$this->get_user_byID($item->followby_expert);
-                        if(!is_null($expert))
-                        {
-                            $item->followby_expert=$expert->fname." ".$expert->lname;
-                        }
-                    }
-
                     break;
                 case 'cancelfollowup':
                     $users = User::where('type', '=', '12')
                         ->orderby('id', 'desc')
                         ->groupby('id')
                         ->get();
-                    foreach ($users as $item) {
-                        $item->created_at = $this->changeTimestampToShamsi($item->created_at);
-                        if (!is_null($item->last_login_at)) {
-                            $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
-                        }
-                        $expert=$this->get_user_byID($item->followby_expert);
-                        if(!is_null($expert))
-                        {
-                            $item->followby_expert=$expert->fname." ".$expert->lname;
-                        }
-                    }
-
                     break;
                 case 'waiting' :
                     $users = User::where('type', '=', '13')
                         ->orderby('id', 'desc')
                         ->get();
-                    foreach ($users as $item) {
-                        $item->created_at = $this->changeTimestampToShamsi($item->created_at);
-                        if (!is_null($item->last_login_at)) {
-                            $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
-                        }
-                        $expert=$this->get_user_byID($item->followby_expert);
-                        if(!is_null($expert))
-                        {
-                            $item->followby_expert=$expert->fname." ".$expert->lname;
-                        }
-                    }
                     break;
                 case 'noanswering':
                     $users = User::where('type', '=', '14')
                         ->orderby('id', 'desc')
                         ->get();
-                    foreach ($users as $item) {
-                        $item->created_at = $this->changeTimestampToShamsi($item->created_at);
-                        if (!is_null($item->last_login_at)) {
-                            $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
-                        }
-                        $expert=$this->get_user_byID($item->followby_expert);
-                        if(!is_null($expert))
-                        {
-                            $item->followby_expert=$expert->fname." ".$expert->lname;
-                        }
-                    }
                     break;
                 case 'students':
                     $users = User::where('type', '=', '20')
                         ->orderby('id', 'desc')
                         ->get();
-                    foreach ($users as $item) {
-                        $item->created_at = $this->changeTimestampToShamsi($item->created_at);
-                        if (!is_null($item->last_login_at)) {
-                            $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
-                        }
-                        $expert=$this->get_user_byID($item->followby_expert);
-                        if(!is_null($expert))
-                        {
-                            $item->followby_expert=$expert->fname." ".$expert->lname;
-                        }
-                    }
                     break;
                 case 'todayFollowup':
                     $users = User::join('followups', 'users.id', '=', 'followups.user_id')
@@ -875,17 +806,6 @@ class UserController extends BaseController
                         ->groupby('users.id')
                         ->orderby('date_fa', 'desc')
                         ->get();
-                    foreach ($users as $item) {
-                        $item->created_at = $this->changeTimestampToShamsi($item->created_at);
-                        if (!is_null($item->last_login_at)) {
-                            $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
-                        }
-                        $expert=$this->get_user_byID($item->followby_expert);
-                        if(!is_null($expert))
-                        {
-                            $item->followby_expert=$expert->fname." ".$expert->lname;
-                        }
-                    }
                     break;
                 case 'expireFollowup':
                     $users = User::join('followups', 'users.id', '=', 'followups.user_id')
@@ -895,18 +815,6 @@ class UserController extends BaseController
                         ->groupby('users.id')
                         ->orderby('date_fa', 'desc')
                         ->get();
-                    foreach ($users as $item) {
-                        $item->created_at = $this->changeTimestampToShamsi($item->created_at);
-                        if (!is_null($item->last_login_at)) {
-                            $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
-                        }
-                        $expert=$this->get_user_byID($item->followby_expert);
-                        if(!is_null($expert))
-                        {
-                            $item->followby_expert=$expert->fname." ".$expert->lname;
-                        }
-                    }
-
                     break;
                 case 'myfollowup':
                     $users = User::join('followups', 'users.id', '=', 'followups.user_id')
@@ -914,18 +822,6 @@ class UserController extends BaseController
                         ->select('users.*')
                         ->orderby('date_fa', 'desc')
                         ->get();
-
-                    foreach ($users as $item) {
-                        $item->created_at = $this->changeTimestampToShamsi($item->created_at);
-                        if (!is_null($item->last_login_at)) {
-                            $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
-                        }
-                        $expert=$this->get_user_byID($item->followby_expert);
-                        if(!is_null($expert))
-                        {
-                            $item->followby_expert=$expert->fname." ".$expert->lname;
-                        }
-                    }
                     break;
 
                 case 'followedToday':
@@ -936,21 +832,22 @@ class UserController extends BaseController
                         ->groupby('users.id')
                         ->orderby('date_fa', 'desc')
                         ->get();
-                    foreach ($users as $item) {
-                        $item->created_at = $this->changeTimestampToShamsi($item->created_at);
-                        if (!is_null($item->last_login_at)) {
-                            $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
-                        }
-                        $expert=$this->get_user_byID($item->followby_expert);
-                        if(!is_null($expert))
-                        {
-                            $item->followby_expert=$expert->fname." ".$expert->lname;
-                        }
-                    }
                     break;
                 default:
                     return redirect('/admin/users/');
                     break;
+            }
+            foreach ($users as $item) {
+                $item->created_at = $this->changeTimestampToShamsi($item->created_at);
+                if (!is_null($item->last_login_at)) {
+                    $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
+                }
+                $expert=$this->get_user_byID($item->followby_expert);
+                if(!is_null($expert))
+                {
+                    $item->followby_expert=$expert->fname." ".$expert->lname;
+                }
+                $item->countFollowup=$this->get_countFollowup($item->id);
             }
         }
         else {
@@ -966,12 +863,6 @@ class UserController extends BaseController
                         ->select('users.*')
                         ->groupby('users.id')
                         ->get();
-                    foreach ($users as $item) {
-                        $item->created_at = $this->changeTimestampToShamsi($item->created_at);
-                        if (!is_null($item->last_login_at)) {
-                            $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
-                        }
-                    }
                     break;
                 case 'continuefollowup':
                     $users = User::where('type', '=', '11')
@@ -986,12 +877,6 @@ class UserController extends BaseController
                         ->orderby('id', 'desc')
                         ->groupby('id')
                         ->get();
-                    foreach ($users as $item) {
-                        $item->created_at = $this->changeTimestampToShamsi($item->created_at);
-                        if (!is_null($item->last_login_at)) {
-                            $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
-                        }
-                    }
                     break;
                 case 'cancelfollowup':
                     $users = User::where('type', '=', '12')
@@ -1006,12 +891,6 @@ class UserController extends BaseController
                         ->orderby('id', 'desc')
                         ->groupby('id')
                         ->get();
-                    foreach ($users as $item) {
-                        $item->created_at = $this->changeTimestampToShamsi($item->created_at);
-                        if (!is_null($item->last_login_at)) {
-                            $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
-                        }
-                    }
                     break;
                 case 'waiting' :
                     $users = User::where('type', '=', '13')
@@ -1025,12 +904,6 @@ class UserController extends BaseController
                         })
                         ->orderby('id', 'desc')
                         ->get();
-                    foreach ($users as $item) {
-                        $item->created_at = $this->changeTimestampToShamsi($item->created_at);
-                        if (!is_null($item->last_login_at)) {
-                            $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
-                        }
-                    }
                     break;
                 case 'noanswering':
                     $users = User::where('type', '=', '14')
@@ -1044,12 +917,6 @@ class UserController extends BaseController
                         })
                         ->orderby('id', 'desc')
                         ->get();
-                    foreach ($users as $item) {
-                        $item->created_at = $this->changeTimestampToShamsi($item->created_at);
-                        if (!is_null($item->last_login_at)) {
-                            $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
-                        }
-                    }
                     break;
                 case 'students':
                     $users = User::where('type', '=', '20')
@@ -1061,12 +928,6 @@ class UserController extends BaseController
                         })
                         ->orderby('id', 'desc')
                         ->get();
-                    foreach ($users as $item) {
-                        $item->created_at = $this->changeTimestampToShamsi($item->created_at);
-                        if (!is_null($item->last_login_at)) {
-                            $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
-                        }
-                    }
                     break;
                 case 'todayFollowup':
                     $users = User::join('followups', 'users.id', '=', 'followups.user_id')
@@ -1076,12 +937,6 @@ class UserController extends BaseController
                         ->groupby('users.id')
                         ->orderby('date_fa', 'desc')
                         ->get();
-                    foreach ($users as $item) {
-                        $item->created_at = $this->changeTimestampToShamsi($item->created_at);
-                        if (!is_null($item->last_login_at)) {
-                            $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
-                        }
-                    }
                     break;
                 case 'expireFollowup':
                     $users = User::join('followups', 'users.id', '=', 'followups.user_id')
@@ -1092,12 +947,6 @@ class UserController extends BaseController
                         ->groupby('users.id')
                         ->orderby('date_fa', 'desc')
                         ->get();
-                    foreach ($users as $item) {
-                        $item->created_at = $this->changeTimestampToShamsi($item->created_at);
-                        if (!is_null($item->last_login_at)) {
-                            $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
-                        }
-                    }
                     break;
                 case 'myfollowup':
                     $users = User::join('followups', 'users.id', '=', 'followups.user_id')
@@ -1105,13 +954,6 @@ class UserController extends BaseController
                         ->select('users.*')
                         ->orderby('date_fa', 'desc')
                         ->get();
-
-                    foreach ($users as $item) {
-                        $item->created_at = $this->changeTimestampToShamsi($item->created_at);
-                        if (!is_null($item->last_login_at)) {
-                            $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
-                        }
-                    }
                     break;
                 case 'followedToday':
                     $users = User::join('followups', 'users.id', '=', 'followups.user_id')
@@ -1121,12 +963,6 @@ class UserController extends BaseController
                             ->groupby('users.id')
                             ->orderby('date_fa', 'desc')
                             ->get();
-                    foreach ($users as $item) {
-                        $item->created_at = $this->changeTimestampToShamsi($item->created_at);
-                        if (!is_null($item->last_login_at)) {
-                            $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
-                        }
-                    }
                     break;
                 default:
                     return redirect('/admin/users/');
@@ -1137,6 +973,12 @@ class UserController extends BaseController
         foreach ($users as $item)
         {
             $item->type=$this->userType($item->type);
+            $item->created_at = $this->changeTimestampToShamsi($item->created_at);
+            if (!is_null($item->last_login_at)) {
+                $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
+            }
+            $item->countFollowup=$this->get_countFollowup($item->id);
+
         }
         $usersAdmin=user::orwhere('type','=','2')
                         ->orwhere('type','=',3)

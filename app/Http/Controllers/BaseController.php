@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\categoryTag;
 use App\city;
 use App\followbyCategory;
+use App\followup;
 use App\message;
 use App\problemfollowup;
 use App\state;
@@ -121,8 +122,6 @@ class BaseController extends Controller
         }
     }
 
-
-
     //کاربر براساس شماره تلفن برمیگرداند
     public function get_user($tel)
     {
@@ -218,5 +217,10 @@ class BaseController extends Controller
         return message::where('status','=',1)
             ->where('user_id_recieve', '=', Auth::user()->id)
             ->count();
+    }
+
+    public function get_countFollowup($id)
+    {
+        return followup::where('user_id','=',$id)->count();
     }
 }
