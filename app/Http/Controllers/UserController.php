@@ -91,8 +91,6 @@ class UserController extends BaseController
                 {
                     $query  ->where('followby_expert','=',NULL)
                         ->where('type','=',11);
-
-
                 })
                 ->count();
 
@@ -102,8 +100,6 @@ class UserController extends BaseController
                 {
                     $query  ->where('followby_expert','=',NULL)
                         ->where('type','=',12);
-
-
                 })
                 ->count();
 
@@ -114,8 +110,6 @@ class UserController extends BaseController
                 {
                     $query  ->where('followby_expert','=',NULL)
                         ->where('type','=',13);
-
-
                 })
                 ->count();
 
@@ -126,8 +120,6 @@ class UserController extends BaseController
                 {
                     $query  ->where('followby_expert','=',NULL)
                         ->where('type','=',14);
-
-
                 })
                 ->count();
 
@@ -138,8 +130,6 @@ class UserController extends BaseController
                 {
                     $query  ->where('followby_expert','=',NULL)
                         ->where('type','=',20);
-
-
                 })
                 ->count();
 
@@ -165,7 +155,6 @@ class UserController extends BaseController
                 ->where('followups.insert_user_id', '=', Auth::user()->id)
                 ->where('date_fa', '=', $this->dateNow)
                 ->select('users.*')
-                ->groupby('users.id')
                 ->orderby('date_fa', 'desc')
                 ->count();
 
@@ -794,7 +783,6 @@ class UserController extends BaseController
                             $item->followby_expert=$expert->fname." ".$expert->lname;
                         }
                     }
-
                     break;
                 case 'continuefollowup':
                     $users = User::where('type', '=', '11')
@@ -847,7 +835,7 @@ class UserController extends BaseController
                             $item->followby_expert=$expert->fname." ".$expert->lname;
                         }
                     }
-
+                    break;
                 case 'noanswering':
                     $users = User::where('type', '=', '14')
                         ->orderby('id', 'desc')
@@ -863,7 +851,7 @@ class UserController extends BaseController
                             $item->followby_expert=$expert->fname." ".$expert->lname;
                         }
                     }
-
+                    break;
                 case 'students':
                     $users = User::where('type', '=', '20')
                         ->orderby('id', 'desc')
@@ -879,7 +867,7 @@ class UserController extends BaseController
                             $item->followby_expert=$expert->fname." ".$expert->lname;
                         }
                     }
-
+                    break;
                 case 'todayFollowup':
                     $users = User::join('followups', 'users.id', '=', 'followups.user_id')
                         ->where('followups.nextfollowup_date_fa', '=', $dateNow)
@@ -898,7 +886,7 @@ class UserController extends BaseController
                             $item->followby_expert=$expert->fname." ".$expert->lname;
                         }
                     }
-
+                    break;
                 case 'expireFollowup':
                     $users = User::join('followups', 'users.id', '=', 'followups.user_id')
                         ->where('followups.nextfollowup_date_fa', '<', $dateNow)
@@ -921,7 +909,11 @@ class UserController extends BaseController
 
                     break;
                 case 'myfollowup':
-
+                    $users = User::join('followups', 'users.id', '=', 'followups.user_id')
+                        ->where('followups.insert_user_id', '=', Auth::user()->id)
+                        ->select('users.*')
+                        ->orderby('date_fa', 'desc')
+                        ->get();
 
                     foreach ($users as $item) {
                         $item->created_at = $this->changeTimestampToShamsi($item->created_at);
@@ -934,9 +926,16 @@ class UserController extends BaseController
                             $item->followby_expert=$expert->fname." ".$expert->lname;
                         }
                     }
+                    break;
 
                 case 'followedToday':
-
+                    $users = User::join('followups', 'users.id', '=', 'followups.user_id')
+                        ->where('followups.insert_user_id', '=', Auth::user()->id)
+                        ->where('date_fa', '=', $dateNow)
+                        ->select('users.*')
+                        ->groupby('users.id')
+                        ->orderby('date_fa', 'desc')
+                        ->get();
                     foreach ($users as $item) {
                         $item->created_at = $this->changeTimestampToShamsi($item->created_at);
                         if (!is_null($item->last_login_at)) {
@@ -948,7 +947,7 @@ class UserController extends BaseController
                             $item->followby_expert=$expert->fname." ".$expert->lname;
                         }
                     }
-
+                    break;
                 default:
                     return redirect('/admin/users/');
                     break;
