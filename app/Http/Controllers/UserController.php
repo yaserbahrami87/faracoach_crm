@@ -955,6 +955,7 @@ class UserController extends BaseController
             }
         }
         else {
+
             switch ($request['categoryUsers']) {
                 case '0':
                     return redirect('/admin/users/');
@@ -972,7 +973,7 @@ class UserController extends BaseController
                             $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
                         }
                     }
-
+                    break;
                 case 'continuefollowup':
                     $users = User::where('type', '=', '11')
                         ->where('followby_expert', '=', Auth::user()->id)
@@ -992,7 +993,7 @@ class UserController extends BaseController
                             $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
                         }
                     }
-
+                    break;
                 case 'cancelfollowup':
                     $users = User::where('type', '=', '12')
                         ->where('followby_expert', '=', Auth::user()->id)
@@ -1012,7 +1013,7 @@ class UserController extends BaseController
                             $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
                         }
                     }
-
+                    break;
                 case 'waiting' :
                     $users = User::where('type', '=', '13')
                         ->where('followby_expert', '=', Auth::user()->id)
@@ -1031,7 +1032,7 @@ class UserController extends BaseController
                             $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
                         }
                     }
-
+                    break;
                 case 'noanswering':
                     $users = User::where('type', '=', '14')
                         ->where('followby_expert', '=', Auth::user()->id)
@@ -1050,7 +1051,7 @@ class UserController extends BaseController
                             $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
                         }
                     }
-
+                    break;
                 case 'students':
                     $users = User::where('type', '=', '20')
                         ->where('followby_expert', '=', Auth::user()->id)
@@ -1067,7 +1068,7 @@ class UserController extends BaseController
                             $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
                         }
                     }
-
+                    break;
                 case 'todayFollowup':
                     $users = User::join('followups', 'users.id', '=', 'followups.user_id')
                         ->where('followups.nextfollowup_date_fa', '=', $dateNow)
@@ -1082,7 +1083,7 @@ class UserController extends BaseController
                             $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
                         }
                     }
-
+                    break;
                 case 'expireFollowup':
                     $users = User::join('followups', 'users.id', '=', 'followups.user_id')
                         ->where('followups.nextfollowup_date_fa', '<', $dateNow)
@@ -1098,7 +1099,7 @@ class UserController extends BaseController
                             $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
                         }
                     }
-
+                    break;
                 case 'myfollowup':
                     $users = User::join('followups', 'users.id', '=', 'followups.user_id')
                         ->where('followups.insert_user_id', '=', Auth::user()->id)
@@ -1112,22 +1113,22 @@ class UserController extends BaseController
                             $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
                         }
                     }
-
+                    break;
                 case 'followedToday':
                     $users = User::join('followups', 'users.id', '=', 'followups.user_id')
-                        ->where('followups.insert_user_id', '=', Auth::user()->id)
-                        ->where('date_fa', '=', $dateNow)
-                        ->select('users.*')
-                        ->groupby('users.id')
-                        ->orderby('date_fa', 'desc')
-                        ->get();
+                            ->where('followups.insert_user_id', '=', Auth::user()->id)
+                            ->where('date_fa', '=', $dateNow)
+                            ->select('users.*')
+                            ->groupby('users.id')
+                            ->orderby('date_fa', 'desc')
+                            ->get();
                     foreach ($users as $item) {
                         $item->created_at = $this->changeTimestampToShamsi($item->created_at);
                         if (!is_null($item->last_login_at)) {
                             $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
                         }
                     }
-
+                    break;
                 default:
                     return redirect('/admin/users/');
                     break;
@@ -1232,7 +1233,6 @@ class UserController extends BaseController
             ->where('followups.insert_user_id', '=', Auth::user()->id)
             ->where('date_fa', '=', $this->dateNow)
             ->select('users.*')
-            ->groupby('users.id')
             ->orderby('date_fa', 'desc')
             ->count();
 
@@ -1240,7 +1240,6 @@ class UserController extends BaseController
         return view('panelAdmin.users')
                     ->with('tags',$tags)
                     ->with('users',$users)
-                    ->with('countList',$countList)
                     ->with('parentCategory',$parentCategory)
                     ->with('usersAdmin',$usersAdmin)
                     ->with('followedToday',$followedToday)
