@@ -164,12 +164,13 @@
                                 <th>مسئول پیگیری</th>
                             @endif
                             <th>تعداد پیگیری</th>
+                            <th>کیفیت</th>
                             <th>وضعیت</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($users as $item)
-                            <tr>
+                            <tr style="background-color: {{$item->quality_color}}">
                                 <td>
                                     <a href="/admin/user/{{$item->id}}" class="text-dark">
                                         {{$item->fname}}
@@ -204,6 +205,9 @@
                                     {{$item->countFollowup}}
                                 </td>
                                 <td>
+                                    {{$item->quality}}
+                                </td>
+                                <td>
                                     <a href="/admin/user/{{$item->id}}" class="text-dark">
                                         {{$item->type}}
                                     </a>
@@ -219,6 +223,11 @@
                             <th>شماره همراه	</th>
                             <th>اخرین ورود</th>
                             <th>تاریخ ثبت	</th>
+                            @if(Auth::user()->type==2)
+                                <th>مسئول پیگیری</th>
+                            @endif
+                            <th>تعداد پیگیری</th>
+                            <th>کیفیت</th>
                             <th>وضعیت</th>
                         </tr>
                         </tfoot>

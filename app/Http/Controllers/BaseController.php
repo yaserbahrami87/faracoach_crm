@@ -223,4 +223,12 @@ class BaseController extends Controller
     {
         return followup::where('user_id','=',$id)->count();
     }
+
+    public function get_lastFollowupUser($id)
+    {
+        return followup::join('problemfollowups','followups.problemfollowup_id','=','problemfollowups.id')
+                    ->where('user_id','=',$id)
+                    ->orderby('followups.id','desc')
+                    ->first();
+    }
 }

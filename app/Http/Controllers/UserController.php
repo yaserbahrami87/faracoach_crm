@@ -253,6 +253,8 @@ class UserController extends BaseController
                 }
                 $item->type=$this->userType($item->type);
                 $item->countFollowup=$this->get_countFollowup($item->id);
+                $item->quality=$this->get_lastFollowupUser($item->id)['problem'];
+                $item->quality_color=$this->get_lastFollowupUser($item->id)['color'];
             }
             $tags=$this->get_tags();
             $parentCategory=$this->get_category('پیگیری');
@@ -823,8 +825,10 @@ class UserController extends BaseController
                     }
 
                     $item->type=$this->userType($item->type);
+                    $item->quality=$this->get_lastFollowupUser($item->id)['problem'];
+                    $item->quality_color=$this->get_lastFollowupUser($item->id)['color'];
                 }
-                $users->appends(['user' => $request['user']]);
+                //$users->appends(['user' => $request['user']]);
                 $tags = $this->get_tags();
                 $parentCategory = $this->get_category('پیگیری');
                 $usersAdmin = user::orwhere('type', '=', 2)
@@ -1055,6 +1059,8 @@ class UserController extends BaseController
                 $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
             }
             $item->countFollowup=$this->get_countFollowup($item->id);
+            $item->quality=$this->get_lastFollowupUser($item->id)['problem'];
+            $item->quality_color=$this->get_lastFollowupUser($item->id)['color'];
         }
         $usersAdmin=user::orwhere('type','=','2')
                         ->orwhere('type','=',3)
