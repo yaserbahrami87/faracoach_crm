@@ -1909,6 +1909,9 @@ class UserController extends BaseController
                 $item->followby_expert=$expert->fname." ".$expert->lname;
             }
 
+            $item->quality=$this->get_lastFollowupUser($item->id)['problem'];
+            $item->quality_color=$this->get_lastFollowupUser($item->id)['color'];
+
         }
 
         //$users->appends(['user' => $request['user'],'categoryUsers'=>$request['categoryUsers']]);
