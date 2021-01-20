@@ -1054,6 +1054,7 @@ class UserController extends BaseController
         foreach ($users as $item)
         {
             $item->type=$this->userType($item->type);
+
             $item->created_at = $this->changeTimestampToShamsi($item->created_at);
             if (!is_null($item->last_login_at)) {
                 $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
@@ -1061,6 +1062,11 @@ class UserController extends BaseController
             $item->countFollowup=$this->get_countFollowup($item->id);
             $item->quality=$this->get_lastFollowupUser($item->id)['problem'];
             $item->quality_color=$this->get_lastFollowupUser($item->id)['color'];
+            $expert=$this->get_user_byID($item->followby_expert);
+            if(!is_null($expert))
+            {
+                $item->followby_expert=$expert->fname." ".$expert->lname;
+            }
         }
         $usersAdmin=user::orwhere('type','=','2')
                         ->orwhere('type','=',3)
@@ -1203,13 +1209,7 @@ class UserController extends BaseController
                     ->groupby('users.id')
                     ->orderby('date_fa', 'desc')
                     ->paginate(20);
-                $countList  = user::join('followups', 'users.id', '=', 'followups.user_id')
-                    ->where('followups.tags', 'like', '%' . $tags . '%')
-                    ->where('followups.insert_user_id', '=', Auth::user()->id)
-                    ->select('users.*')
-                    ->groupby('users.id')
-                    ->orderby('date_fa', 'desc')
-                    ->count();
+
                 foreach ($users as $item)
                 {
                     $item->type=$this->userType($item->type);
@@ -1221,7 +1221,6 @@ class UserController extends BaseController
                 return view('panelAdmin.users')
                     ->with('tags', $tags)
                     ->with('users', $users)
-                    ->with('countList',$countList )
                     ->with('parentCategory',$parentCategory);
             }
         }
