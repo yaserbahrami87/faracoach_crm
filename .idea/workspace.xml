@@ -4,7 +4,7 @@
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/followups.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/followups.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/users.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/users.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -299,7 +299,7 @@
       <workItem from="1610883471162" duration="1532000" />
       <workItem from="1610948094558" duration="19205000" />
       <workItem from="1611034179776" duration="23216000" />
-      <workItem from="1611121362716" duration="7388000" />
+      <workItem from="1611121362716" duration="8412000" />
     </task>
     <servers />
   </component>

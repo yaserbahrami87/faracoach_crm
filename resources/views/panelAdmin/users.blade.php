@@ -164,6 +164,7 @@
                                 <th>مسئول پیگیری</th>
                             @endif
                             <th>تعداد پیگیری</th>
+                            <th>آخرین پیگیری</th>
                             <th>کیفیت</th>
                             <th>وضعیت</th>
                         </tr>
@@ -205,6 +206,11 @@
                                     {{$item->countFollowup}}
                                 </td>
                                 <td>
+                                    <a href="/admin/user/{{$item->id}}" class="text-dark">
+                                        {{$item->lastDateFollowup}}
+                                    </a>
+                                </td>
+                                <td>
                                     {{$item->quality}}
                                 </td>
                                 <td>
@@ -227,6 +233,7 @@
                                 <th>مسئول پیگیری</th>
                             @endif
                             <th>تعداد پیگیری</th>
+                            <th>آخرین پیگیری</th>
                             <th>کیفیت</th>
                             <th>وضعیت</th>
                         </tr>
