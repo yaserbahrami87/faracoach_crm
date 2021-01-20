@@ -143,7 +143,7 @@
 
 
 
-<script src="{{asset('js/farsiType.js')}}"></script>
+
 <!--  DATE SHAMSI PICKER  --->
 <script src="{{asset('js/kamadatepicker.min.js')}}"></script>
 <script src="{{asset('js/kamadatepicker.holidays.js')}}"></script>
