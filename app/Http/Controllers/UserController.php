@@ -1345,8 +1345,6 @@ class UserController extends BaseController
             {
                 $query  ->where('followby_expert','=',NULL)
                     ->where('type','=',12);
-
-
             })
             ->count();
 

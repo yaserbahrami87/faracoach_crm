@@ -35,12 +35,6 @@
                             <div class="col-md-2 p-0 pt-4 text-center">
                                 <h6>پیگیری {{$i++}}</h6>
                             </div>
-                            <div class="col-md-3 p-0">
-                                <div class="form-group">
-                                    <label>نتیجه پیگیری</label>
-                                    <input type="text" class="form-control"  value="{{$item->problem}}" name="state" disabled="disabled"  />
-                                </div>
-                            </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>وضعیت</label>
@@ -61,6 +55,12 @@
                                         <input type="text" class="form-control success_bg_admin"  value="{{$item->type}}" name="state" disabled="disabled"  />
                                             @break
                                     @endswitch
+                                </div>
+                            </div>
+                            <div class="col-md-3 p-0">
+                                <div class="form-group">
+                                    <label>کیفیت پیگیری</label>
+                                    <input type="text" class="form-control"  value="{{$item->problem}}" name="state" disabled="disabled"  style="background-color: {{$item->color}}"/>
                                 </div>
                             </div>
                             <div class="col-md-12 ">
