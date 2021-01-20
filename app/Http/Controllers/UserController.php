@@ -828,6 +828,7 @@ class UserController extends BaseController
                     $item->type=$this->userType($item->type);
                     $item->quality=$this->get_lastFollowupUser($item->id)['problem'];
                     $item->quality_color=$this->get_lastFollowupUser($item->id)['color'];
+                    $item->lastDateFollowup=$this->get_lastFollowupUser($item->id)['date_fa'];
                 }
                 //$users->appends(['user' => $request['user']]);
                 $tags = $this->get_tags();
@@ -1068,6 +1069,7 @@ class UserController extends BaseController
             {
                 $item->followby_expert=$expert->fname." ".$expert->lname;
             }
+            $item->lastDateFollowup=$this->get_lastFollowupUser($item->id)['date_fa'];
         }
         $usersAdmin=user::orwhere('type','=','2')
                         ->orwhere('type','=',3)
@@ -1315,6 +1317,7 @@ class UserController extends BaseController
                 $item->followby_expert=$expert->fname." ".$expert->lname;
             }
             $item->countFollowup=$this->get_countFollowup($item->id);
+            $item->lastDateFollowup=$this->get_lastFollowupUser($item->id)['date_fa'];
         }
 
         $users->appends(['q' => $request['q']]);
@@ -1909,7 +1912,7 @@ class UserController extends BaseController
 
             $item->quality=$this->get_lastFollowupUser($item->id)['problem'];
             $item->quality_color=$this->get_lastFollowupUser($item->id)['color'];
-
+            $item->lastDateFollowup=$this->get_lastFollowupUser($item->id)['date_fa'];
         }
 
         //$users->appends(['user' => $request['user'],'categoryUsers'=>$request['categoryUsers']]);
