@@ -1,4 +1,4 @@
-@if($user->tel_verified==0)
+@if($user->tel_verified==3)
     <div class="col-12">
         <div class="alert alert-warning">
             برای ادامه فعالیت باید تلفن همراه خود را در سیستم فراکوچ ثبت کنید

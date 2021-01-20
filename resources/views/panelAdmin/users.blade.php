@@ -158,7 +158,7 @@
                             <th>نام</th>
                             <th>نام خانوادگی</th>
                             <th>شماره همراه	</th>
-                            <th>اخرین ورود</th>
+
                             <th>تاریخ ثبت	</th>
                             @if(Auth::user()->type==2)
                                 <th>مسئول پیگیری</th>
@@ -167,6 +167,7 @@
                             <th>آخرین پیگیری</th>
                             <th>کیفیت</th>
                             <th>وضعیت</th>
+                            <th>اخرین ورود</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -187,11 +188,7 @@
                                         {{$item->tel}}
                                     </a>
                                 </td>
-                                <td >
-                                    <a href="/admin/user/{{$item->id}}" class="text-dark">
-                                        {{$item->last_login_at}}
-                                    </a>
-                                </td>
+
                                 <td>
                                     <a href="/admin/user/{{$item->id}}" class="text-dark">
                                         {{$item->created_at}}
@@ -218,7 +215,11 @@
                                         {{$item->type}}
                                     </a>
                                 </td>
-
+                                <td >
+                                    <a href="/admin/user/{{$item->id}}" class="text-dark">
+                                        {{$item->last_login_at}}
+                                    </a>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>

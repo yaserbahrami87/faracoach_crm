@@ -41,6 +41,26 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('جنسیت:') }}</label>
+
+                            <div class="col-md-6">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="gender1" name="sex" class="custom-control-input"  value="1">
+                                    <label class="custom-control-label" for="gender1" >مرد</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="gender2" name="sex" class="custom-control-input" value="0">
+                                    <label class="custom-control-label" for="gender2" >زن</label>
+                                </div>
+
+                                @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('پست الکترونیکی:') }}</label>
