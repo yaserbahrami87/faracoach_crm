@@ -9,27 +9,7 @@
             {{method_field('PATCH')}}
             <?php $i=1; ?>
             @foreach($followUps as $item)
-                @switch($item->type)
-                    @case ("در حال پیگیری")
-                                <div class="row  border-primary border border-bottom-0 rounded-lg">
-                                @break
-                    @case ("انصراف")
-                                <div class="row  border-danger border border-bottom-0 rounded-lg">
-                                @break
-                    @case("در انتظار تصمیم")
-                                <div class="row  border-info border border-bottom-0 rounded-lg">
-                                @break
-                    @case("عدم پاسخگویی")
-                                <div class="row  border-secondary border border-bottom-0 rounded-lg">
-                                @break
-                    @case("مشتری")
-                                <div class="row  border-success border border-bottom-0 rounded-lg">
-                                @break
-                    @default
-                                <div class="row  border border-bottom-0 rounded-lg">
-                                @break
-                @endswitch
-
+                <div class="row" style="border-radius: 20px 20px 0px 0px;border:2px solid {{$item->color}};border-bottom:0px;">
                     <div class="col-12">
                         <div class="row px-1">
                             <div class="col-md-2 p-0 pt-4 text-center">
@@ -38,23 +18,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>وضعیت</label>
-                                    @switch($item->type)
-                                        @case ("در حال پیگیری")
-                                            <input type="text" class="form-control primary_bg_admin"  value="{{$item->type}}" name="state" disabled="disabled"  />
-                                            @break
-                                        @case ("انصراف")
-                                            <input type="text" class="form-control danger_bg_admin text-light"  value="{{$item->type}}" name="state" disabled="disabled"  />
-                                            @break
-                                        @case("در انتظار تصمیم")
-                                            <input type="text" class="form-control bg-info text-light"  value="{{$item->type}}" name="state" disabled="disabled"  />
-                                            @break
-                                        @case("عدم پاسخگویی")
-                                            <input type="text" class="form-control bg-secondary text-light"  value="{{$item->type}}" name="state" disabled="disabled"  />
-                                            @break
-                                        @case("مشتری")
-                                        <input type="text" class="form-control success_bg_admin"  value="{{$item->type}}" name="state" disabled="disabled"  />
-                                            @break
-                                    @endswitch
+                                    <input type="text" class="form-control "  value="{{$item->type}}" name="state" disabled="disabled"  />
                                 </div>
                             </div>
                             <div class="col-md-3 p-0">
@@ -85,25 +49,9 @@
                     </div>
                 </div>
 
-                @switch($item->type)
-                    @case ("در حال پیگیری")
-                            <div class="row  border-primary border rounded-lg border-top-0">
-                            @break
-                    @case ("انصراف")
-                            <div class="row  border-danger border rounded-lg border-top-0">
-                            @break
-                    @case("در انتظار تصمیم")
-                           <div class="row  border-info border rounded-lg border-top-0">
-                           @break
-                    @case("عدم پاسخگویی")
-                           <div class="row  border-secondary border rounded-lg border-top-0">
-                           @break
-                    @case("مشتری")
-                           <div class="row  border-success border rounded-lg border-top-0">
-                           @break
-                    @default
-                           <div class="row border rounded-lg border-top-0">
-                    @endswitch
+
+                <div class="row" style="border-radius: 0px 0px 20px 20px;border:2px solid {{$item->color}};border-top:0px;">
+
 
                     <div class="col-md-3 px-1">
                         <div class="form-group">
