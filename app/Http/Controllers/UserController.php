@@ -57,83 +57,16 @@ class UserController extends BaseController
             $parentCategory=$this->get_category('پیگیری');
 
             //لیست تعداد کاربرها
-
-            $notfollowup = User:: leftjoin('followups', 'users.id', '=', 'followups.user_id')
-                ->where('users.type', '=', '1')
-                ->count();
-
-            $continuefollowup = User::where('type', '=', '11')
-                ->where('followby_expert', '=', Auth::user()->id)
-                ->orwhere(function ($query)
-                {
-                    $query  ->where('followby_expert','=',NULL)
-                        ->where('type','=',11);
-                })
-                ->count();
-
-            $cancelfollowup = User::where('type', '=', '12')
-                ->where('followby_expert', '=', Auth::user()->id)
-                ->orwhere(function ($query)
-                {
-                    $query  ->where('followby_expert','=',NULL)
-                        ->where('type','=',12);
-                })
-                ->count();
-
-
-            $waiting = User::where('type', '=', '13')
-                ->where('followby_expert', '=', Auth::user()->id)
-                ->orwhere(function ($query)
-                {
-                    $query  ->where('followby_expert','=',NULL)
-                        ->where('type','=',13);
-                })
-                ->count();
-
-
-            $noanswering = User::where('type', '=', '14')
-                ->where('followby_expert', '=', Auth::user()->id)
-                ->orwhere(function ($query)
-                {
-                    $query  ->where('followby_expert','=',NULL)
-                        ->where('type','=',14);
-                })
-                ->count();
-
-
-            $students = User::where('type', '=', '20')
-                ->where('followby_expert', '=', Auth::user()->id)
-                ->orwhere(function ($query)
-                {
-                    $query  ->where('followby_expert','=',NULL)
-                        ->where('type','=',20);
-                })
-                ->count();
-
-
-            $todayFollowup = User::join('followups', 'users.id', '=', 'followups.user_id')
-                ->where('followups.nextfollowup_date_fa', '=', $this->dateNow)
-                ->where('followby_expert', '=', Auth::user()->id)
-                ->count();
-
-
-            $expireFollowup = User::join('followups', 'users.id', '=', 'followups.user_id')
-                ->where('followups.nextfollowup_date_fa', '<', $this->dateNow)
-                ->where('followby_expert', '=', Auth::user()->id)
-                ->wherenotIn('users.type', [2, 12])
-                ->count();
-
-
-            $myfollowup = User::join('followups', 'users.id', '=', 'followups.user_id')
-                ->where('followups.insert_user_id', '=', Auth::user()->id)
-                ->count();
-
-            $followedToday = User::join('followups', 'users.id', '=', 'followups.user_id')
-                ->where('followups.insert_user_id', '=', Auth::user()->id)
-                ->where('date_fa', '=', $this->dateNow)
-                ->select('users.*')
-                ->orderby('date_fa', 'desc')
-                ->count();
+            $notfollowup=count($this->get_notfollowup());
+            $continuefollowup=count($this->get_continuefollowup());
+            $cancelfollowup=count($this->get_cancelfollowup());
+            $waiting=count($this->get_waiting());
+            $noanswering=count($this->get_noanswering());
+            $students =count($this->get_students());
+            $todayFollowup = count($this->get_todayFollowup());
+            $expireFollowup = $this->get_expireFollowup();
+            $myfollowup=count($this->get_myfollowup());
+            $followedToday = count($this->get_followedToday());
 
             $usersAdmin=user::orwhere('type','=',2)
                             ->orwhere('type','=',3)
@@ -166,83 +99,16 @@ class UserController extends BaseController
                         ->get();
 
             //لیست تعداد کاربرها
-
-            $notfollowup = User:: leftjoin('followups', 'users.id', '=', 'followups.user_id')
-                ->where('users.type', '=', '1')
-                ->count();
-
-            $continuefollowup = User::where('type', '=', '11')
-                ->where('followby_expert', '=', Auth::user()->id)
-                ->orwhere(function ($query)
-                {
-                    $query  ->where('followby_expert','=',NULL)
-                        ->where('type','=',11);
-                })
-                ->count();
-
-            $cancelfollowup = User::where('type', '=', '12')
-                ->where('followby_expert', '=', Auth::user()->id)
-                ->orwhere(function ($query)
-                {
-                    $query  ->where('followby_expert','=',NULL)
-                        ->where('type','=',12);
-                })
-                ->count();
-
-
-            $waiting = User::where('type', '=', '13')
-                ->where('followby_expert', '=', Auth::user()->id)
-                ->orwhere(function ($query)
-                {
-                    $query  ->where('followby_expert','=',NULL)
-                        ->where('type','=',13);
-                })
-                ->count();
-
-
-            $noanswering = User::where('type', '=', '14')
-                ->where('followby_expert', '=', Auth::user()->id)
-                ->orwhere(function ($query)
-                {
-                    $query  ->where('followby_expert','=',NULL)
-                        ->where('type','=',14);
-                })
-                ->count();
-
-
-            $students = User::where('type', '=', '20')
-                ->where('followby_expert', '=', Auth::user()->id)
-                ->orwhere(function ($query)
-                {
-                    $query  ->where('followby_expert','=',NULL)
-                        ->where('type','=',20);
-                })
-                ->count();
-
-
-            $todayFollowup = User::join('followups', 'users.id', '=', 'followups.user_id')
-                ->where('followups.nextfollowup_date_fa', '=', $this->dateNow)
-                ->where('followby_expert', '=', Auth::user()->id)
-                ->count();
-
-
-            $expireFollowup = User::join('followups', 'users.id', '=', 'followups.user_id')
-                ->where('followups.nextfollowup_date_fa', '<', $this->dateNow)
-                ->where('followby_expert', '=', Auth::user()->id)
-                ->wherenotIn('users.type', [2, 12])
-                ->count();
-
-
-            $myfollowup = User::join('followups', 'users.id', '=', 'followups.user_id')
-                ->where('followups.insert_user_id', '=', Auth::user()->id)
-                ->count();
-
-            $followedToday = User::join('followups', 'users.id', '=', 'followups.user_id')
-                ->where('followups.insert_user_id', '=', Auth::user()->id)
-                ->where('date_fa', '=', $this->dateNow)
-                ->select('users.*')
-                ->orderby('date_fa', 'desc')
-                ->count();
+            $notfollowup=count($this->get_notfollowup());
+            $continuefollowup=count($this->get_continuefollowup());
+            $cancelfollowup=count($this->get_cancelfollowup());
+            $waiting=count($this->get_waiting());
+            $noanswering=count($this->get_noanswering());
+            $students =count($this->get_students());
+            $todayFollowup = count($this->get_todayFollowup());
+            $expireFollowup = $this->get_expireFollowup();
+            $myfollowup=count($this->get_myfollowup());
+            $followedToday = count($this->get_followedToday());
 
             foreach ($users as $item)
             {
@@ -916,6 +782,7 @@ class UserController extends BaseController
                         ->where('followups.insert_user_id', '=', Auth::user()->id)
                         ->select('users.*')
                         ->orderby('date_fa', 'desc')
+                        ->groupby('users.id')
                         ->get();
                     break;
 
@@ -1036,6 +903,7 @@ class UserController extends BaseController
                         ->where('followups.insert_user_id', '=', Auth::user()->id)
                         ->select('users.*')
                         ->orderby('date_fa', 'desc')
+                        ->groupby('users.id')
                         ->get();
                     break;
                 case 'followedToday':
@@ -1080,94 +948,16 @@ class UserController extends BaseController
         $parentCategory=$this->get_category('پیگیری');
 
         //لیست تعداد کاربرها
-
-        $notfollowup = User:: leftjoin('followups', 'users.id', '=', 'followups.user_id')
-            ->where('users.type', '=', '1')
-            ->count();
-
-        $continuefollowup = User::where('type', '=', '11')
-            ->where('followby_expert', '=', Auth::user()->id)
-            ->orwhere(function ($query)
-            {
-                $query  ->where('followby_expert','=',NULL)
-                    ->where('type','=',11);
-
-
-            })
-            ->count();
-
-        $cancelfollowup = User::where('type', '=', '12')
-            ->where('followby_expert', '=', Auth::user()->id)
-            ->orwhere(function ($query)
-            {
-                $query  ->where('followby_expert','=',NULL)
-                    ->where('type','=',12);
-
-
-            })
-            ->count();
-
-
-        $waiting = User::where('type', '=', '13')
-            ->where('followby_expert', '=', Auth::user()->id)
-            ->orwhere(function ($query)
-            {
-                $query  ->where('followby_expert','=',NULL)
-                    ->where('type','=',13);
-
-
-            })
-            ->count();
-
-
-        $noanswering = User::where('type', '=', '14')
-            ->where('followby_expert', '=', Auth::user()->id)
-            ->orwhere(function ($query)
-            {
-                $query  ->where('followby_expert','=',NULL)
-                    ->where('type','=',14);
-
-
-            })
-            ->count();
-
-
-        $students = User::where('type', '=', '20')
-            ->where('followby_expert', '=', Auth::user()->id)
-            ->orwhere(function ($query)
-            {
-                $query  ->where('followby_expert','=',NULL)
-                    ->where('type','=',20);
-
-
-            })
-            ->count();
-
-
-        $todayFollowup = User::join('followups', 'users.id', '=', 'followups.user_id')
-            ->where('followups.nextfollowup_date_fa', '=', $this->dateNow)
-            ->where('followby_expert', '=', Auth::user()->id)
-            ->count();
-
-
-        $expireFollowup = User::join('followups', 'users.id', '=', 'followups.user_id')
-            ->where('followups.nextfollowup_date_fa', '<', $this->dateNow)
-            ->where('followby_expert', '=', Auth::user()->id)
-            ->wherenotIn('users.type', [2, 12])
-            ->count();
-
-
-        $myfollowup = User::join('followups', 'users.id', '=', 'followups.user_id')
-            ->where('followups.insert_user_id', '=', Auth::user()->id)
-            ->count();
-
-        $followedToday = User::join('followups', 'users.id', '=', 'followups.user_id')
-            ->where('followups.insert_user_id', '=', Auth::user()->id)
-            ->where('date_fa', '=', $this->dateNow)
-            ->select('users.*')
-            ->orderby('date_fa', 'desc')
-            ->count();
-
+        $notfollowup=count($this->get_notfollowup());
+        $continuefollowup=count($this->get_continuefollowup());
+        $cancelfollowup=count($this->get_cancelfollowup());
+        $waiting=count($this->get_waiting());
+        $noanswering=count($this->get_noanswering());
+        $students =count($this->get_students());
+        $todayFollowup = count($this->get_todayFollowup());
+        $expireFollowup = $this->get_expireFollowup();
+        $myfollowup=count($this->get_myfollowup());
+        $followedToday = count($this->get_followedToday());
 
         return view('panelAdmin.users')
                     ->with('tags',$tags)

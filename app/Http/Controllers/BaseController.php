@@ -231,4 +231,125 @@ class BaseController extends Controller
                     ->orderby('followups.id','desc')
                     ->first();
     }
+
+    public function get_notfollowup()
+    {
+        return User:: leftjoin('followups', 'users.id', '=', 'followups.user_id')
+            ->where('users.type', '=', '1')
+            ->groupby('users.id')
+            ->get();
+    }
+
+    public function get_continuefollowup()
+    {
+         return User::where('type', '=', '11')
+            ->where('followby_expert', '=', Auth::user()->id)
+            ->where(function ($query)
+            {
+                $query  ->where('followby_expert','=',NULL)
+                    ->where('type','=',11);
+
+
+            })
+            ->groupby('users.id')
+            ->get();
+    }
+
+    public function get_cancelfollowup()
+    {
+         return User::where('type', '=', '12')
+            ->where('followby_expert', '=', Auth::user()->id)
+            ->where(function ($query)
+            {
+                $query  ->where('followby_expert','=',NULL)
+                    ->where('type','=',12);
+
+
+            })
+            ->groupby('users.id')
+            ->get();
+    }
+
+    public function get_waiting()
+    {
+        return User::where('type', '=', '13')
+            ->where('followby_expert', '=', Auth::user()->id)
+            ->where(function ($query)
+            {
+                $query  ->where('followby_expert','=',NULL)
+                    ->where('type','=',13);
+
+
+            })
+            ->groupby('users.id')
+            ->get();
+    }
+
+    public function get_noanswering()
+    {
+         return User::where('type', '=', '14')
+            ->where('followby_expert', '=', Auth::user()->id)
+            ->where(function ($query)
+            {
+                $query  ->where('followby_expert','=',NULL)
+                    ->where('type','=',14);
+
+
+            })
+             ->groupby('users.id')
+             ->get();
+    }
+
+    public function get_students()
+    {
+        return User::where('type', '=', '20')
+            ->where('followby_expert', '=', Auth::user()->id)
+            ->where(function ($query)
+            {
+                $query  ->where('followby_expert','=',NULL)
+                    ->where('type','=',20);
+
+
+            })
+            ->groupby('users.id')
+            ->get();
+    }
+
+    public function get_todayFollowup()
+    {
+        return User::join('followups', 'users.id', '=', 'followups.user_id')
+            ->where('followups.nextfollowup_date_fa', '=', $this->dateNow)
+            ->where('followby_expert', '=', Auth::user()->id)
+            ->groupby('users.id')
+            ->get();
+    }
+
+    public function get_expireFollowup()
+    {
+        return User::join('followups', 'users.id', '=', 'followups.user_id')
+            ->where('followups.nextfollowup_date_fa', '<', $this->dateNow)
+            ->where('followby_expert', '=', Auth::user()->id)
+            ->wherenotIn('users.type', [2, 12])
+            ->groupby('users.id')
+            ->get();
+    }
+
+    public function get_myfollowup()
+    {
+        return User::join('followups', 'users.id', '=', 'followups.user_id')
+            ->where('followups.insert_user_id', '=', Auth::user()->id)
+            ->groupby('users.id')
+            ->get();
+    }
+
+    public function get_followedToday()
+    {
+        return User::join('followups', 'users.id', '=', 'followups.user_id')
+            ->where('followups.insert_user_id', '=', Auth::user()->id)
+            ->where('date_fa', '=', $this->dateNow)
+            ->select('users.*')
+            ->orderby('date_fa', 'desc')
+            ->groupby('users.id')
+            ->get();
+    }
 }
