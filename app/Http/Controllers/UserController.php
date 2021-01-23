@@ -337,7 +337,7 @@ class UserController extends BaseController
         {
             if($request['sendsms']!="0")
             {
-                $request['sendsms']= $request['sendsms']." نام کاربری:".$request['tel']." رمز عبور:".$request['password']. " https://www.crm.faracoach.com";
+                $request['sendsms']=$request['sendsms']."\n  نام کاربری:".$request['tel']."\n رمز عبور:".$request['password']. "\n https://www.crm.faracoach.com";
                 $request['sendsms']=(str_replace('...','',$request['sendsms']));
                 $this->sendSms($request['tel'],$request['sendsms']);
             }
