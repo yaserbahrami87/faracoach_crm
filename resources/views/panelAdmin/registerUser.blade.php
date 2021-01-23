@@ -41,7 +41,26 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label for="email" class="col-md-4 col-form-label text-md-right text-dark">{{ __('جنسیت:') }}</label>
 
+                                <div class="col-md-6">
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="gender1" name="sex" class="custom-control-input"  value="1">
+                                        <label class="custom-control-label  text-dark" for="gender1" >مرد</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="gender2" name="sex" class="custom-control-input" value="0">
+                                        <label class="custom-control-label  text-dark" for="gender2" >زن</label>
+                                    </div>
+
+                                    @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
                             <div class="form-group row">
                                 <label for="email" class="col-md-4 col-form-label text-md-right  text-dark">{{ __('پست الکترونیکی:') }}</label>
 
@@ -94,7 +113,7 @@
                                 <label for="gettingknow" class="col-md-4 col-form-label text-md-right  text-dark">{{ __('نحوه آشنایی با فراکوچ:') }}</label>
 
                                 <div class="col-md-6">
-                                    <select id="gettingknow" name="gettingknow"   class="form-control" @error('gettingknow') is-invalid @enderror >
+                                    <select id="gettingknow" name="gettingknow"   class="form-control p-0" @error('gettingknow') is-invalid @enderror >
                                     <option selected disabled>انتخاب کنید</option>
                                     <option>اینستاگرام</option>
                                     <option>تلگرام</option>
@@ -102,6 +121,8 @@
                                     <option>تبلیغات فضای مجازی</option>
                                     <option>پکیج رایگان</option>
                                     <option>واتساپ</option>
+                                    <option>دوستان</option>
+
                                     </select>
                                     @error('gettingknow')
                                     <span class="invalid-feedback" role="alert">

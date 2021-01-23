@@ -302,7 +302,7 @@ class UserController extends BaseController
             'fname'         => ['nullable','persian_alpha', 'string', 'max:30'],
             'lname'         => ['nullable','persian_alpha', 'string', 'max:30'],
             'email'         => ['nullable', 'string', 'email', 'max:150', 'unique:users'],
-            //'tel'           => ['required','numeric','unique:users','regex:/^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}$/'],
+            'sex'           => ['required','numeric'],
             'tel'           => ['required','iran_mobile','unique:users'],
             'password'      => ['required', 'string', 'min:8', 'confirmed'],
             'tel_verified'  => ['required','boolean'],
@@ -324,6 +324,7 @@ class UserController extends BaseController
         $status=User::create([
             'fname'         => $request['fname'],
             'lname'         => $request['lname'],
+            'sex'           => $request['sex'],
             'email'         => $request['email'],
             'tel'           => $request['tel'],
             'tel_verified'  => $request['tel_verified'],
@@ -336,6 +337,7 @@ class UserController extends BaseController
         {
             if($request['sendsms']!="0")
             {
+                $request['sendsms']= $request['sendsms']." نام کاربری:".$request['tel']." رمز عبور:".$request['password']. " https://www.crm.faracoach.com";
                 $request['sendsms']=(str_replace('...','',$request['sendsms']));
                 $this->sendSms($request['tel'],$request['sendsms']);
             }
