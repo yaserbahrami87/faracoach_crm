@@ -235,7 +235,14 @@ class BaseController extends Controller
     public function get_notfollowup()
     {
         return User:: leftjoin('followups', 'users.id', '=', 'followups.user_id')
-            ->where('users.type', '=', '1')
+            ->where(function ($query)
+            {
+                $query  ->where('users.type', '=', '1')
+                    ->orwhere('followby_expert','=',NULL);
+
+            })
+            ->select('users.*')
+            ->orderby('users.id', 'desc')
             ->groupby('users.id')
             ->get();
     }
@@ -244,14 +251,10 @@ class BaseController extends Controller
     {
          return User::where('type', '=', '11')
             ->where('followby_expert', '=', Auth::user()->id)
-            ->where(function ($query)
-            {
-                $query  ->where('followby_expert','=',NULL)
-                    ->where('type','=',11);
-
-
-            })
+            ->where('type','=',11)
+            ->select('users.*')
             ->groupby('users.id')
+            ->orderby('users.id', 'desc')
             ->get();
     }
 
@@ -259,14 +262,10 @@ class BaseController extends Controller
     {
          return User::where('type', '=', '12')
             ->where('followby_expert', '=', Auth::user()->id)
-            ->where(function ($query)
-            {
-                $query  ->where('followby_expert','=',NULL)
-                    ->where('type','=',12);
-
-
-            })
+            ->where('type','=',12)
+            ->select('users.*')
             ->groupby('users.id')
+            ->orderby('users.id', 'desc')
             ->get();
     }
 
@@ -274,14 +273,10 @@ class BaseController extends Controller
     {
         return User::where('type', '=', '13')
             ->where('followby_expert', '=', Auth::user()->id)
-            ->where(function ($query)
-            {
-                $query  ->where('followby_expert','=',NULL)
-                    ->where('type','=',13);
-
-
-            })
+            ->where('type','=',13)
+            ->select('users.*')
             ->groupby('users.id')
+            ->orderby('users.id', 'desc')
             ->get();
     }
 
@@ -289,29 +284,21 @@ class BaseController extends Controller
     {
          return User::where('type', '=', '14')
             ->where('followby_expert', '=', Auth::user()->id)
-            ->where(function ($query)
-            {
-                $query  ->where('followby_expert','=',NULL)
-                    ->where('type','=',14);
-
-
-            })
-             ->groupby('users.id')
-             ->get();
+            ->where('type','=',14)
+            ->select('users.*')
+            ->groupby('users.id')
+            ->orderby('users.id', 'desc')
+            ->get();
     }
 
     public function get_students()
     {
         return User::where('type', '=', '20')
             ->where('followby_expert', '=', Auth::user()->id)
-            ->where(function ($query)
-            {
-                $query  ->where('followby_expert','=',NULL)
-                    ->where('type','=',20);
-
-
-            })
+            ->where('type','=',20)
+            ->select('users.*')
             ->groupby('users.id')
+            ->orderby('users.id', 'desc')
             ->get();
     }
 
@@ -320,7 +307,9 @@ class BaseController extends Controller
         return User::join('followups', 'users.id', '=', 'followups.user_id')
             ->where('followups.nextfollowup_date_fa', '=', $this->dateNow)
             ->where('followby_expert', '=', Auth::user()->id)
+            ->select('users.*')
             ->groupby('users.id')
+            ->orderby('users.id', 'desc')
             ->get();
     }
 
@@ -331,6 +320,8 @@ class BaseController extends Controller
             ->where('followby_expert', '=', Auth::user()->id)
             ->wherenotIn('users.type', [2, 12])
             ->groupby('users.id')
+            ->select('users.*')
+            ->orderby('users.id', 'desc')
             ->get();
     }
 
@@ -338,7 +329,9 @@ class BaseController extends Controller
     {
         return User::join('followups', 'users.id', '=', 'followups.user_id')
             ->where('followups.insert_user_id', '=', Auth::user()->id)
+            ->select('users.*')
             ->groupby('users.id')
+            ->orderby('users.id', 'desc')
             ->get();
     }
 
@@ -348,7 +341,7 @@ class BaseController extends Controller
             ->where('followups.insert_user_id', '=', Auth::user()->id)
             ->where('date_fa', '=', $this->dateNow)
             ->select('users.*')
-            ->orderby('date_fa', 'desc')
+            ->orderby('users.id', 'desc')
             ->groupby('users.id')
             ->get();
     }

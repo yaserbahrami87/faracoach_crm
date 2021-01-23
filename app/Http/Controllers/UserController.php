@@ -807,113 +807,34 @@ class UserController extends BaseController
                     return redirect('/admin/users/');
                     break;
                 case 'notfollowup':
-                    $users = User:: leftjoin('followups', 'users.id', '=', 'followups.user_id')
-                        ->where('users.type', '=', '1')
-                        ->orderby('users.id', 'desc')
-                        ->select('users.*')
-                        ->groupby('users.id')
-                        ->get();
+                    $users = $this->get_notfollowup();
                     break;
                 case 'continuefollowup':
-                    $users = User::where('type', '=', '11')
-                        ->where('followby_expert', '=', Auth::user()->id)
-                        ->orwhere(function ($query)
-                        {
-                            $query  ->where('followby_expert','=',NULL)
-                                    ->where('type','=',11);
-
-
-                        })
-                        ->orderby('id', 'desc')
-                        ->groupby('id')
-                        ->get();
+                    $users = $this->get_continuefollowup();
                     break;
                 case 'cancelfollowup':
-                    $users = User::where('type', '=', '12')
-                        ->where('followby_expert', '=', Auth::user()->id)
-                        ->orwhere(function ($query)
-                        {
-                            $query  ->where('followby_expert','=',NULL)
-                                ->where('type','=',12);
-
-
-                        })
-                        ->orderby('id', 'desc')
-                        ->groupby('id')
-                        ->get();
+                    $users = $this->get_cancelfollowup();
                     break;
                 case 'waiting' :
-                    $users = User::where('type', '=', '13')
-                        ->where('followby_expert', '=', Auth::user()->id)
-                        ->orwhere(function ($query)
-                        {
-                            $query  ->where('followby_expert','=',NULL)
-                                ->where('type','=',13);
-
-
-                        })
-                        ->orderby('id', 'desc')
-                        ->get();
+                    $users = $this->get_waiting();
                     break;
                 case 'noanswering':
-                    $users = User::where('type', '=', '14')
-                        ->where('followby_expert', '=', Auth::user()->id)
-                        ->orwhere(function ($query)
-                        {
-                            $query  ->where('followby_expert','=',NULL)
-                                ->where('type','=',14);
-
-
-                        })
-                        ->orderby('id', 'desc')
-                        ->get();
+                    $users = $this->get_noanswering();
                     break;
                 case 'students':
-                    $users = User::where('type', '=', '20')
-                        ->where('followby_expert', '=', Auth::user()->id)
-                        ->orwhere(function ($query)
-                        {
-                            $query  ->where('followby_expert','=',NULL)
-                                ->where('type','=',20);
-                        })
-                        ->orderby('id', 'desc')
-                        ->get();
+                    $users = $this->get_students();
                     break;
                 case 'todayFollowup':
-                    $users = User::join('followups', 'users.id', '=', 'followups.user_id')
-                        ->where('followups.nextfollowup_date_fa', '=', $dateNow)
-                        ->where('followby_expert', '=', Auth::user()->id)
-                        ->select('users.*')
-                        ->groupby('users.id')
-                        ->orderby('date_fa', 'desc')
-                        ->get();
+                    $users = $this->get_todayFollowup();
                     break;
                 case 'expireFollowup':
-                    $users = User::join('followups', 'users.id', '=', 'followups.user_id')
-                        ->where('followups.nextfollowup_date_fa', '<', $dateNow)
-                        ->where('followby_expert', '=', Auth::user()->id)
-                        ->wherenotIn('users.type', [2, 12])
-                        ->select('users.*')
-                        ->groupby('users.id')
-                        ->orderby('date_fa', 'desc')
-                        ->get();
+                    $users = $this->get_expireFollowup();
                     break;
                 case 'myfollowup':
-                    $users = User::join('followups', 'users.id', '=', 'followups.user_id')
-                        ->where('followups.insert_user_id', '=', Auth::user()->id)
-                        ->select('users.*')
-                        ->orderby('date_fa', 'desc')
-                        ->groupby('users.id')
-                        ->get();
+                    $users =$this->get_myfollowup();
                     break;
                 case 'followedToday':
-                    $users = User::join('followups', 'users.id', '=', 'followups.user_id')
-                            ->where('followups.insert_user_id', '=', Auth::user()->id)
-                            ->where('date_fa', '=', $dateNow)
-                            ->select('users.*')
-                            ->groupby('users.id')
-                            ->orderby('date_fa', 'desc')
-                            ->get();
+                    $users = $this->get_followedToday();
                     break;
                 default:
                     return redirect('/admin/users/');
