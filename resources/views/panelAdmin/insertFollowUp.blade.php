@@ -93,6 +93,41 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-12 px-1">
+                        <div class="form-group">
+                            <div class="form-group row mb-0">
+                                <label for="sendSMS" class="col-md-4 col-form-label text-md-right  text-dark">ارسال پیامک</label>
+                                <div class="col-md-6 mr-5">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="sms" id="sendsms1" value="0" checked>
+                                        <label class="form-check-label  text-dark" for="sendsms1">
+                                            ارسال نشود
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+
+                                        <input class="form-check-input" type="radio" name="sms" id="sendsms2" value="@if($user->sex==1)جناب آقای@elseif($user->sex==0)سرکارخانم@elseجناب آقای/سرکارخانم@endif <br> فایل آموزشی درخواستی شما در سایت در دسترس شما قرار گرفت.جهت پیگیری در تاریخ {nextDate} منتظر تماس ما باشید  <br> مشاور اختصاصی شما:{{Auth::user()->fname }}{{Auth::user()->lname}} <br> باشگاه مشتریان فراکوچ" >
+                                        <label class="form-check-label  text-dark" for="sendsms2">
+                                            @if($user->type==1)
+                                                جناب آقای
+                                            @elseif($user->type==0)
+                                                سرکارخانم
+                                            @else
+                                                جناب آقای/سرکارخانم
+                                            @endif
+                                            <br/>
+                                            فایل آموزشی درخواستی شما در سایت در دسترس شما قرار گرفت.
+                                            جهت پیگیری در تاریخ {nextDate} منتظر تماس ما باشید<br/>
+                                            مشاور اختصاصی شما:{{Auth::user()->fname }}{{Auth::user()->lname}}<br/>
+                                            باشگاه مشتریان فراکوچ
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="update m-auto m-auto">
                         <button type="submit" class="btn btn-primary btn-round">ثبت پیگیری</button>
                     </div>

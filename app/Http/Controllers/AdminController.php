@@ -59,7 +59,16 @@ class AdminController extends BaseController
                 ->count();
 
             $countUnreadMessages=$this->countUnreadMessages();
-            return view('panelAdmin.home',compact('notFollowup','follow','cancel','waiting','student','dateNow','followupToday','expirefollowupToday','countUnreadMessages'));
+            return view('panelAdmin.home')
+                        ->with('notFollowup',$notFollowup)
+                        ->with('follow',$follow)
+                        ->with('cancel',$cancel)
+                        ->with('waiting',$waiting)
+                        ->with('student',$student)
+                        ->with('dateNow',$dateNow)
+                        ->with('followupToday',$followupToday)
+                        ->with('expirefollowupToday',$expirefollowupToday)
+                        ->with('countUnreadMessages',$countUnreadMessages);
             //return redirect()->route('panelAdmin');
         }
         else if(Gate::allows('isUser'))

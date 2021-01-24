@@ -16,11 +16,14 @@ class CreateFollowupsTable extends Migration
         Schema::create('followups', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
+            $table->integer('insert_user_id');
             $table->text('comment')->nullable();
             $table->integer('problemfollowup_id')->nullable();
             $table->integer('categoryfollowup_id')->nullable();
             $table->tinyInteger('status_followups')->default(1);
             $table->string('tags',50)->nullable();
+            $table->string('nextfollowup_date_fa',20)->nullable();
+            $table->text('sms')->nullable();
             $table->string('date_fa',20)->nullable();
             $table->string('time_fa',20)->nullable();
             $table->string('datetime_fa',30)->nullable();

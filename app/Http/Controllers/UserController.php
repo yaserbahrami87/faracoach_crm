@@ -520,7 +520,27 @@ class UserController extends BaseController
             $v = verta('+2 day');
             $v = $v->format('Y/m/d');
             $nextDayFollow = $v;
-            return view('panelAdmin.profile', compact('user', 'countFollowups', 'followUps', 'problemFollowup', 'userAdmin', 'listIntroducedUser', 'countIntroducedUser', 'resourceIntroduce', 'states', 'city', 'score', 'verifyScore', 'scoreSuccess', 'verifyStatus', 'tags', 'today', 'nextDayFollow', 'timeNow', 'expert_followup', 'parentCategory'));
+            return view('panelAdmin.profile')
+                        ->with('user',$user)
+                        ->with('countFollowups',$countFollowups)
+                        ->with('followUps',$followUps)
+                        ->with('problemFollowup',$problemFollowup)
+                        ->with('userAdmin',$userAdmin)
+                        ->with('listIntroducedUser',$listIntroducedUser)
+                        ->with('countIntroducedUser',$countIntroducedUser)
+                        ->with('resourceIntroduce',$resourceIntroduce)
+                        ->with('states',$states)
+                        ->with('city',$city)
+                        ->with('score',$score)
+                        ->with('verifyScore',$verifyScore)
+                        ->with('scoreSuccess',$scoreSuccess)
+                        //->with('verifyStatus',$verifyStatus)
+                        ->with('tags',$tags)
+                        ->with('today',$today)
+                        ->with('nextDayFollow',$nextDayFollow)
+                        ->with('timeNow',$timeNow)
+                        ->with('expert_followup',$expert_followup)
+                        ->with('parentCategory',$parentCategory);
         }else
         {
             $msg = "شما مجاز به دسترسی ندارید";

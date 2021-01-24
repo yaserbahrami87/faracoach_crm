@@ -3,7 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FollowupController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FollowupController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/followup.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/followup.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_10_21_092830_create_followups_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_10_21_092830_create_followups_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/insertFollowUp.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/insertFollowUp.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -300,7 +305,11 @@
       <workItem from="1611034179776" duration="23216000" />
       <workItem from="1611121362716" duration="15978000" />
       <workItem from="1611207910231" duration="8621000" />
-      <workItem from="1611393451535" duration="5045000" />
+      <workItem from="1611393451535" duration="12616000" />
+      <workItem from="1611427440410" duration="655000" />
+      <workItem from="1611465438642" duration="105000" />
+      <workItem from="1611468510443" duration="9000" />
+      <workItem from="1611468965392" duration="590000" />
     </task>
     <servers />
   </component>
@@ -350,14 +359,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="550" y="255" key="publish.login/0.0.1366.728@0.0.1366.728" timestamp="1604052866381" />
-    <state x="339" y="162" key="run.anything.popup" timestamp="1611059511930">
+    <state x="339" y="162" key="run.anything.popup" timestamp="1611407823190">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1611059511930" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1611396677025">
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1611407823190" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1611406232463">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1610574245405" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1611396677025" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1611406232463" />
   </component>
 </project>

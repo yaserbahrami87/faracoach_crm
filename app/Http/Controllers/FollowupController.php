@@ -14,7 +14,9 @@ class FollowupController extends BaseController
     public function showForm($id)
     {
         $userAdmin=Auth::user();
-        return view('panelAdmin.insertFollowUp',compact('id','userAdmin'));
+        return view('panelAdmin.insertFollowUp')
+                ->with('id',$id)
+                ->with('userAdmin',$userAdmin);
     }
 
     /**
@@ -72,6 +74,7 @@ class FollowupController extends BaseController
             'date_fa'               =>$request['date_fa'],
             'insert_user_id'        =>auth()->user()->id,
             'nextfollowup_date_fa'  =>$request['nextfollowup_date_fa'],
+            'sms'                   =>$request['sms'],
             'time_fa'               =>$request['time_fa'],
             'datetime_fa'           =>$request['date_fa']." ".$request['time_fa']
         ]);
@@ -80,7 +83,14 @@ class FollowupController extends BaseController
         $data->type=$request['status_followups'];
         $data->followby_expert=$request['followby_expert'];
         $data->save();
+        if($request['sms']!="0")
+        {
 
+            $request['sms']=str_replace('{nextDate}',$request['nextfollowup_date_fa'],$request['sms']);
+            $request['sms']=str_replace("<br>",'n\\',$request['sms']);
+
+            $this->sendSms($data['tel'],$request['sms']);
+        }
         if($check)
         {
             $msg="پیگیری با موفقیت ثبت شد";
