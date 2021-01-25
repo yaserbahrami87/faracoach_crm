@@ -3,12 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FollowupController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FollowupController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/followup.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/followup.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_10_21_092830_create_followups_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_10_21_092830_create_followups_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/insertFollowUp.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/insertFollowUp.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/profile.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/users.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/users.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -183,11 +181,11 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\laravel\faracoach_crm\resources\views\panelUser" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\laravel\faracoach_crm\resources\views\panelAdmin" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\laravel\faracoach_crm\resources\views\panelUser" />
     </key>
   </component>
   <component name="RunManager">
@@ -309,7 +307,13 @@
       <workItem from="1611427440410" duration="655000" />
       <workItem from="1611465438642" duration="105000" />
       <workItem from="1611468510443" duration="9000" />
-      <workItem from="1611468965392" duration="590000" />
+      <workItem from="1611468965392" duration="1385000" />
+      <workItem from="1611479034841" duration="1041000" />
+      <workItem from="1611480712357" duration="22000" />
+      <workItem from="1611490540433" duration="2737000" />
+      <workItem from="1611554788078" duration="9455000" />
+      <workItem from="1611565153799" duration="6000" />
+      <workItem from="1611567468538" duration="1155000" />
     </task>
     <servers />
   </component>
@@ -363,10 +367,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1611407823190" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1611406232463">
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1611559184961">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1610574245405" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1611406232463" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1611559184961" />
   </component>
 </project>

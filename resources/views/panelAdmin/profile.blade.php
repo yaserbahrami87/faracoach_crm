@@ -32,9 +32,7 @@
                     <p class="d-inline"> تعداد افراد معرفی شده:</p><b> {{$countIntroducedUser}} نفر</b>
                 </div>
                 <p class="description text-center">
-                    "I like the way you work it <br>
-                    No diggity <br>
-                    I wanna bag it up"
+
                 </p>
             </div>
             <div class="card-footer">
@@ -335,9 +333,10 @@
 
     </div>
     <div class="col-md-8">
-
-        @include('panelAdmin.insertFollowUp')
-        <hr/>
+        @if(Auth::user()->id==$user->followby_expert)
+            @include('panelAdmin.insertFollowUp')
+            <hr/>
+        @endif
         @include('panelAdmin.followups')
     </div>
 @endsection

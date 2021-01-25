@@ -52,25 +52,56 @@ class UserController extends BaseController
 
                 $item->type=$this->userType($item->type);
                 $item->countFollowup=$this->get_countFollowup($item->id);
+
+                $item->quality=$this->get_lastFollowupUser($item->id)['problem'];
+                $item->quality_color=$this->get_lastFollowupUser($item->id)['color'];
+                $item->lastDateFollowup=$this->get_lastFollowupUser($item->id)['date_fa'];
             }
             $tags=$this->get_tags();
             $parentCategory=$this->get_category('پیگیری');
 
-            //لیست تعداد کاربرها
-            $notfollowup=count($this->get_notfollowup());
-            $continuefollowup=count($this->get_continuefollowup());
-            $cancelfollowup=count($this->get_cancelfollowup());
-            $waiting=count($this->get_waiting());
-            $noanswering=count($this->get_noanswering());
-            $students =count($this->get_students());
-            $todayFollowup = count($this->get_todayFollowup());
-            $expireFollowup = $this->get_expireFollowup();
-            $myfollowup=count($this->get_myfollowup());
-            $followedToday = count($this->get_followedToday());
+            if(isset($request['user']))
+            {
+                //لیست تعداد کاربرها
+                $notfollowup = count($this->get_notfollowup());
+                $continuefollowup = count($this->get_continuefollowup());
+                $cancelfollowup = count($this->get_cancelfollowup());
+                $waiting = count($this->get_waiting());
+                $noanswering = count($this->get_noanswering());
+                $students = count($this->get_students());
+                $todayFollowup = count($this->get_todayFollowup());
+                $expireFollowup = $this->get_expireFollowup();
+                $myfollowup = count($this->get_myfollowup());
+                $followedToday = count($this->get_followedToday());
+            }
+            else
+            {
+                //لیست تعداد کاربرها
+                $notfollowup = count($this->get_notfollowup());
+                $continuefollowup = count($this->getAll_continuefollowup());
+                $cancelfollowup = count($this->getAll_cancelfollowup());
+                $waiting = count($this->getAll_waiting());
+                $noanswering = count($this->getAll_noanswering());
+                $students = count($this->getAll_students());
+                $todayFollowup = count($this->getAll_todayFollowup());
+                $expireFollowup = count($this->getAll_expireFollowup());
+                $myfollowup = count($this->getAll_myfollowup());
+                $followedToday = count($this->getAll_followedToday());
+            }
 
             $usersAdmin=user::orwhere('type','=',2)
                             ->orwhere('type','=',3)
                             ->get();
+
+            if(isset($request['user']))
+            {
+                $user=$request['user'];
+            }
+            else
+            {
+                $user="";
+            }
+
             return view('panelAdmin.users')
                 ->with('users',$users)
                 ->with('tags',$tags)
@@ -84,7 +115,8 @@ class UserController extends BaseController
                 ->with('waiting',$waiting)
                 ->with('cancelfollowup',$cancelfollowup)
                 ->with('continuefollowup',$continuefollowup)
-                ->with('notfollowup',$notfollowup);
+                ->with('notfollowup',$notfollowup)
+                ->with('user',$user);
         }
         else
         {
@@ -372,25 +404,25 @@ class UserController extends BaseController
     {
         $user=(Auth::user());
 
-            if(strlen($user->personal_image)==0)
-                {
-                    $user->personal_image="default-avatar.png";
-                }
+        if(strlen($user->personal_image)==0)
+            {
+                $user->personal_image="default-avatar.png";
+            }
 
-            //تعداد افراد دعوت شده
-            $countIntroducedUser=User::where('introduced','=',$user->tel)
-                            ->count();
+        //تعداد افراد دعوت شده
+        $countIntroducedUser=User::where('introduced','=',$user->tel)
+                        ->count();
 
-            //یوزر توسط چه کسی معرفی شده است
-            $resourceIntroduce=User::where('tel','=',$user->introduced)
-                            ->first();
+        //یوزر توسط چه کسی معرفی شده است
+        $resourceIntroduce=User::where('tel','=',$user->introduced)
+                        ->first();
 
-            $states=$this->states();
+        $states=$this->states();
 
-            //انتخاب شهر براساس کد
-            $city=$this->city($user->city);
+        //انتخاب شهر براساس کد
+        $city=$this->city($user->city);
 
-            return view ('panelUser.profile')
+        return view ('panelUser.profile')
                         ->with('user',$user)
                         ->with('countIntroducedUser',$countIntroducedUser)
                         ->with('resourceIntroduce',$resourceIntroduce)
@@ -447,108 +479,101 @@ class UserController extends BaseController
 
         //مقدار یوزر با توجه به دستور زیر مقدار ورودی تابع با مقدار خروجی تقییر میکند
         $user=User::find($user);
-        if(($user->followby_expert==Auth::user()->id)||($user->followby_expert==NULL)||(Auth::user()->type==2)) {
-            if (strlen($user->personal_image) == 0) {
-                $user->personal_image = "default-avatar.png";
-            }
 
-            //یوزر توسط چه کسی معرفی شده است
-            $resourceIntroduce = User::where('id', '=', $user->introduced)
-                ->first();
-
-            // دریافت لیست مسئولین پیگیری
-            $expert_followup = user::where(function ($query) {
-                $query->orwhere('type', '=', 2)
-                    ->orwhere('type', '=', 3);
-            })
-                //->where('id','<>',Auth::user()->id)
-                ->get();
-
-
-            //تعداد افراد معرفی کرده
-            $countIntroducedUser = User::where('introduced', '=', $user->id)
-                ->count();
-
-            //لیست افراد معرفی کرده
-            $listIntroducedUser = User::where('introduced', '=', $user->id)
-                ->get();
-
-            //چک کردن وضعیت عکس کاربرها برای عکسهایی که وجود ندارد از آواتر استفاده شود
-            foreach ($listIntroducedUser as $item) {
-                if (strlen($item->personal_image) == 0) {
-                    $item->personal_image = "default-avatar.png";
-                }
-            }
-
-
-            $introduced = User::where('id', '=', $user->introduced)
-                ->first();
-            if (strlen($introduced) > 0) {
-                $user->introduced = $introduced->fname . " " . $introduced->lname . " با کد " . $introduced->id;
-            }
-
-            $states = $this->states();
-
-            $city = NULL;
-            if (strlen($user->city) > 0) {
-                //انتخاب شهر براساس کد
-                $city = $this->city($user->city);
-            }
-
-            //تگ ها
-            $tags = $this->get_tags();
-            $parentCategory = $this->get_category('پیگیری');
-
-
-            //کسب امتیازات
-            $score = $countIntroducedUser * 5;
-            //امتیاز تایید شماره همراه
-            $verifyScore = $user->tel_verified;
-            if ($verifyScore == 1) {
-                $score = $score + 5;
-                $verifyScore = 5;
-            }
-            //امتیاز تعداد دعوت شده
-            $scoreSuccess = User::where('introduced', '=', $user->id)
-                ->where('type', '=', 20)
-                ->count();
-            $scoreSuccess = $scoreSuccess * 10;
-            $score = $score + $scoreSuccess;
-
-            $today = $this->dateNow;
-            $timeNow = $this->timeNow;
-            $v = verta('+2 day');
-            $v = $v->format('Y/m/d');
-            $nextDayFollow = $v;
-            return view('panelAdmin.profile')
-                        ->with('user',$user)
-                        ->with('countFollowups',$countFollowups)
-                        ->with('followUps',$followUps)
-                        ->with('problemFollowup',$problemFollowup)
-                        ->with('userAdmin',$userAdmin)
-                        ->with('listIntroducedUser',$listIntroducedUser)
-                        ->with('countIntroducedUser',$countIntroducedUser)
-                        ->with('resourceIntroduce',$resourceIntroduce)
-                        ->with('states',$states)
-                        ->with('city',$city)
-                        ->with('score',$score)
-                        ->with('verifyScore',$verifyScore)
-                        ->with('scoreSuccess',$scoreSuccess)
-                        //->with('verifyStatus',$verifyStatus)
-                        ->with('tags',$tags)
-                        ->with('today',$today)
-                        ->with('nextDayFollow',$nextDayFollow)
-                        ->with('timeNow',$timeNow)
-                        ->with('expert_followup',$expert_followup)
-                        ->with('parentCategory',$parentCategory);
-        }else
-        {
-            $msg = "شما مجاز به دسترسی ندارید";
-            $errorStatus = "warning";
-
-            return back()->with('msg', $msg)
-                ->with('errorStatus', $errorStatus);
+        if (strlen($user->personal_image) == 0) {
+            $user->personal_image = "default-avatar.png";
         }
+
+        //یوزر توسط چه کسی معرفی شده است
+        $resourceIntroduce = User::where('id', '=', $user->introduced)
+            ->first();
+
+        // دریافت لیست مسئولین پیگیری
+        $expert_followup = user::where(function ($query) {
+            $query->orwhere('type', '=', 2)
+                ->orwhere('type', '=', 3);
+        })
+            //->where('id','<>',Auth::user()->id)
+            ->get();
+
+
+        //تعداد افراد معرفی کرده
+        $countIntroducedUser = User::where('introduced', '=', $user->id)
+            ->count();
+
+        //لیست افراد معرفی کرده
+        $listIntroducedUser = User::where('introduced', '=', $user->id)
+            ->get();
+
+        //چک کردن وضعیت عکس کاربرها برای عکسهایی که وجود ندارد از آواتر استفاده شود
+        foreach ($listIntroducedUser as $item) {
+            if (strlen($item->personal_image) == 0) {
+                $item->personal_image = "default-avatar.png";
+            }
+        }
+
+
+        $introduced = User::where('id', '=', $user->introduced)
+            ->first();
+        if (strlen($introduced) > 0) {
+            $user->introduced = $introduced->fname . " " . $introduced->lname . " با کد " . $introduced->id;
+        }
+
+        $states = $this->states();
+
+        $city = NULL;
+        if (strlen($user->city) > 0) {
+            //انتخاب شهر براساس کد
+            $city = $this->city($user->city);
+        }
+
+        //تگ ها
+        $tags = $this->get_tags();
+        $parentCategory = $this->get_category('پیگیری');
+
+
+        //کسب امتیازات
+        $score = $countIntroducedUser * 5;
+        //امتیاز تایید شماره همراه
+        $verifyScore = $user->tel_verified;
+        if ($verifyScore == 1) {
+            $score = $score + 5;
+            $verifyScore = 5;
+        }
+        //امتیاز تعداد دعوت شده
+        $scoreSuccess = User::where('introduced', '=', $user->id)
+            ->where('type', '=', 20)
+            ->count();
+        $scoreSuccess = $scoreSuccess * 10;
+        $score = $score + $scoreSuccess;
+
+        $today = $this->dateNow;
+        $timeNow = $this->timeNow;
+        $v = verta('+2 day');
+        $v = $v->format('Y/m/d');
+        $nextDayFollow = $v;
+        return view('panelAdmin.profile')
+                    ->with('user',$user)
+                    ->with('countFollowups',$countFollowups)
+                    ->with('followUps',$followUps)
+                    ->with('problemFollowup',$problemFollowup)
+                    ->with('userAdmin',$userAdmin)
+                    ->with('listIntroducedUser',$listIntroducedUser)
+                    ->with('countIntroducedUser',$countIntroducedUser)
+                    ->with('resourceIntroduce',$resourceIntroduce)
+                    ->with('states',$states)
+                    ->with('city',$city)
+                    ->with('score',$score)
+                    ->with('verifyScore',$verifyScore)
+                    ->with('scoreSuccess',$scoreSuccess)
+                    //->with('verifyStatus',$verifyStatus)
+                    ->with('tags',$tags)
+                    ->with('today',$today)
+                    ->with('nextDayFollow',$nextDayFollow)
+                    ->with('timeNow',$timeNow)
+                    ->with('expert_followup',$expert_followup)
+                    ->with('parentCategory',$parentCategory);
+
     }
 
     /**
@@ -698,13 +723,13 @@ class UserController extends BaseController
 
     public function categorybyAdmin(Request $request)
     {
-        if(Auth::user()->type==2) {
-            if (!is_null($request)) {
 
+        if(Auth::user()->type==2) {
+            if (!is_null($request) &&(strlen($request['user'])>0)) {
                 $users = user::where('followby_expert', '=', $request['user'])
                         ->get();
                 $countList = user::where('followby_expert', '=', $request['user'])
-                    ->count();
+                        ->count();
                 foreach ($users as $item)
                 {
                     $expert=$this->get_user_byID($item->followby_expert);
@@ -724,12 +749,35 @@ class UserController extends BaseController
                 $usersAdmin = user::orwhere('type', '=', 2)
                     ->orwhere('type', '=', 3)
                     ->get();
+
+                //لیست تعداد کاربرهای هر شخص
+                $notfollowup=count($this->get_notfollowup());
+                $continuefollowup=count($this->get_continuefollowupbyID($request['user']));
+                $cancelfollowup=count($this->get_cancelfollowupbyID($request['user']));
+                $waiting=count($this->get_waitingbyID($request['user']));
+                $noanswering=count($this->get_noansweringbyID($request['user']));
+                $students =count($this->get_studentsbyID($request['user']));
+                $todayFollowup = count($this->get_todayFollowupbyID($request['user']));
+                $expireFollowup = $this->get_expireFollowupbyID($request['user']);
+                $myfollowup=count($this->get_myfollowupbyID($request['user']));
+                $followedToday = count($this->get_followedTodaybyID($request['user']));
+
                 return view('panelAdmin.users')
                     ->with('tags', $tags)
                     ->with('users', $users)
                     ->with('countList', $countList)
                     ->with('parentCategory', $parentCategory)
-                    ->with('usersAdmin', $usersAdmin);
+                    ->with('usersAdmin', $usersAdmin)
+                    ->with('followedToday',$followedToday)
+                    ->with('myfollowup',$myfollowup)
+                    ->with('todayFollowup',$todayFollowup)
+                    ->with('students',$students)
+                    ->with('noanswering',$noanswering)
+                    ->with('waiting',$waiting)
+                    ->with('cancelfollowup',$cancelfollowup)
+                    ->with('continuefollowup',$continuefollowup)
+                    ->with('notfollowup',$notfollowup)
+                    ->with('user',$request['user']);
             } else {
                 return redirect('/admin/users');
             }
@@ -742,84 +790,197 @@ class UserController extends BaseController
         $dateNow=$this->dateNow;
         if(Auth::user()->type==2)
         {
+            if (!is_null($request) &&(strlen($request['user'])>0)) {
+                switch ($request['categoryUsers']) {
+                    case '0':
+                        return redirect('/admin/users/');
+                        break;
+                    case 'notfollowup':
+                        $users = User:: leftjoin('followups', 'users.id', '=', 'followups.user_id')
+                            ->where('users.type', '=', '1')
+                            ->orderby('users.id', 'desc')
+                            ->select('users.*')
+                            ->groupby('users.id')
+                            ->get();
+                        break;
+                    case 'continuefollowup':
+                        $users = User::where('type', '=', '11')
+                            ->where('followby_expert', '=', $request['user'])
+                            ->orderby('id', 'desc')
+                            ->groupby('id')
+                            ->get();
+                        break;
+                    case 'cancelfollowup':
+                        $users = User::where('type', '=', '12')
+                            ->where('followby_expert', '=', $request['user'])
+                            ->orderby('id', 'desc')
+                            ->groupby('id')
+                            ->get();
+                        break;
+                    case 'waiting' :
+                        $users = User::where('type', '=', '13')
+                            ->where('followby_expert', '=', $request['user'])
+                            ->orderby('id', 'desc')
+                            ->get();
+                        break;
+                    case 'noanswering':
+                        $users = User::where('type', '=', '14')
+                            ->where('followby_expert', '=', $request['user'])
+                            ->orderby('id', 'desc')
+                            ->get();
+                        break;
+                    case 'students':
+                        $users = User::where('type', '=', '20')
+                            ->where('followby_expert', '=', $request['user'])
+                            ->orderby('id', 'desc')
+                            ->get();
+                        break;
+                    case 'todayFollowup':
+                        $users = User::join('followups', 'users.id', '=', 'followups.user_id')
+                            ->where('followups.nextfollowup_date_fa', '=', $this->dateNow)
+                            ->where('followby_expert', '=', $request['user'])
+                            ->select('users.*')
+                            ->groupby('users.id')
+                            ->orderby('date_fa', 'desc')
+                            ->get();
+                        break;
+                    case 'expireFollowup':
+                        $users = User::join('followups', 'users.id', '=', 'followups.user_id')
+                            ->where('followups.nextfollowup_date_fa', '<', $dateNow)
+                            ->where('followby_expert', '=', $request['user'])
+                            ->wherenotIn('users.type', [2, 12])
+                            ->select('users.*')
+                            ->groupby('users.id')
+                            ->orderby('date_fa', 'desc')
+                            ->get();
+                        break;
+                    case 'myfollowup':
+                        $users = User::join('followups', 'users.id', '=', 'followups.user_id')
+                            ->where('followups.insert_user_id', '=', Auth::user()->id)
+                            ->where('followby_expert', '=', $request['user'])
+                            ->select('users.*')
+                            ->orderby('date_fa', 'desc')
+                            ->groupby('users.id')
+                            ->get();
+                        break;
 
-            switch ($request['categoryUsers']) {
-                case '0':
-                    return redirect('/admin/users/');
-                    break;
-                case 'notfollowup':
-                    $users = User:: leftjoin('followups', 'users.id', '=', 'followups.user_id')
-                        ->where('users.type', '=', '1')
-                        ->orderby('users.id', 'desc')
-                        ->select('users.*')
-                        ->groupby('users.id')
-                        ->get();
-                    break;
-                case 'continuefollowup':
-                    $users = User::where('type', '=', '11')
-                        ->orderby('id', 'desc')
-                        ->groupby('id')
-                        ->get();
-                    break;
-                case 'cancelfollowup':
-                    $users = User::where('type', '=', '12')
-                        ->orderby('id', 'desc')
-                        ->groupby('id')
-                        ->get();
-                    break;
-                case 'waiting' :
-                    $users = User::where('type', '=', '13')
-                        ->orderby('id', 'desc')
-                        ->get();
-                    break;
-                case 'noanswering':
-                    $users = User::where('type', '=', '14')
-                        ->orderby('id', 'desc')
-                        ->get();
-                    break;
-                case 'students':
-                    $users = User::where('type', '=', '20')
-                        ->orderby('id', 'desc')
-                        ->get();
-                    break;
-                case 'todayFollowup':
-                    $users = User::join('followups', 'users.id', '=', 'followups.user_id')
-                        ->where('followups.nextfollowup_date_fa', '=', $this->dateNow)
-                        ->select('users.*')
-                        ->groupby('users.id')
-                        ->orderby('date_fa', 'desc')
-                        ->get();
-                    break;
-                case 'expireFollowup':
-                    $users = User::join('followups', 'users.id', '=', 'followups.user_id')
-                        ->where('followups.nextfollowup_date_fa', '<', $dateNow)
-                        ->wherenotIn('users.type', [2, 12])
-                        ->select('users.*')
-                        ->groupby('users.id')
-                        ->orderby('date_fa', 'desc')
-                        ->get();
-                    break;
-                case 'myfollowup':
-                    $users = User::join('followups', 'users.id', '=', 'followups.user_id')
-                        ->where('followups.insert_user_id', '=', Auth::user()->id)
-                        ->select('users.*')
-                        ->orderby('date_fa', 'desc')
-                        ->groupby('users.id')
-                        ->get();
-                    break;
+                    case 'followedToday':
+                        $users = User::join('followups', 'users.id', '=', 'followups.user_id')
+                            ->where('followups.insert_user_id', '=', Auth::user()->id)
+                            ->where('date_fa', '=', $dateNow)
+                            ->where('followby_expert', '=', $request['user'])
+                            ->select('users.*')
+                            ->groupby('users.id')
+                            ->orderby('date_fa', 'desc')
+                            ->get();
+                        break;
+                    default:
+                        return redirect('/admin/users/');
+                        break;
+                }
+                //لیست تعداد کاربرها
+                $notfollowup = count($this->get_notfollowup());
+                $continuefollowup = count($this->get_continuefollowupbyID($request['user']));
+                $cancelfollowup = count($this->get_cancelfollowupbyID($request['user']));
+                $waiting = count($this->get_waitingbyID($request['user']));
+                $noanswering = count($this->get_noansweringbyID($request['user']));
+                $students = count($this->get_studentsbyID($request['user']));
+                $todayFollowup = count($this->get_todayFollowupbyID($request['user']));
+                $expireFollowup = $this->get_expireFollowupbyID($request['user']);
+                $myfollowup = count($this->get_myfollowupbyID($request['user']));
+                $followedToday = count($this->get_followedTodaybyID($request['user']));
+            }
+            else
+            {
+                switch ($request['categoryUsers']) {
+                    case '0':
+                        return redirect('/admin/users/');
+                        break;
+                    case 'notfollowup':
+                        $users = User:: leftjoin('followups', 'users.id', '=', 'followups.user_id')
+                            ->where('users.type', '=', '1')
+                            ->orderby('users.id', 'desc')
+                            ->select('users.*')
+                            ->groupby('users.id')
+                            ->get();
+                        break;
+                    case 'continuefollowup':
+                        $users = User::where('type', '=', '11')
+                            ->orderby('id', 'desc')
+                            ->groupby('id')
+                            ->get();
+                        break;
+                    case 'cancelfollowup':
+                        $users = User::where('type', '=', '12')
+                            ->orderby('id', 'desc')
+                            ->groupby('id')
+                            ->get();
+                        break;
+                    case 'waiting' :
+                        $users = User::where('type', '=', '13')
+                            ->orderby('id', 'desc')
+                            ->get();
+                        break;
+                    case 'noanswering':
+                        $users = User::where('type', '=', '14')
+                            ->orderby('id', 'desc')
+                            ->get();
+                        break;
+                    case 'students':
+                        $users = User::where('type', '=', '20')
+                            ->orderby('id', 'desc')
+                            ->get();
+                        break;
+                    case 'todayFollowup':
+                        $users = User::join('followups', 'users.id', '=', 'followups.user_id')
+                            ->where('followups.nextfollowup_date_fa', '=', $this->dateNow)
+                            ->select('users.*')
+                            ->groupby('users.id')
+                            ->orderby('date_fa', 'desc')
+                            ->get();
+                        break;
+                    case 'expireFollowup':
+                        $users = User::join('followups', 'users.id', '=', 'followups.user_id')
+                            ->where('followups.nextfollowup_date_fa', '<', $dateNow)
+                            ->wherenotIn('users.type', [2, 12])
+                            ->select('users.*')
+                            ->groupby('users.id')
+                            ->orderby('date_fa', 'desc')
+                            ->get();
+                        break;
+                    case 'myfollowup':
+                        $users = User::join('followups', 'users.id', '=', 'followups.user_id')
+                            ->where('followups.insert_user_id', '=', Auth::user()->id)
+                            ->select('users.*')
+                            ->orderby('date_fa', 'desc')
+                            ->groupby('users.id')
+                            ->get();
+                        break;
 
-                case 'followedToday':
-                    $users = User::join('followups', 'users.id', '=', 'followups.user_id')
-                        ->where('followups.insert_user_id', '=', Auth::user()->id)
-                        ->where('date_fa', '=', $dateNow)
-                        ->select('users.*')
-                        ->groupby('users.id')
-                        ->orderby('date_fa', 'desc')
-                        ->get();
-                    break;
-                default:
-                    return redirect('/admin/users/');
-                    break;
+                    case 'followedToday':
+                        $users = User::join('followups', 'users.id', '=', 'followups.user_id')
+                            ->where('date_fa', '=', $dateNow)
+                            ->where('followby_expert', '=', $request['user'])
+                            ->select('users.*')
+                            ->groupby('users.id')
+                            ->orderby('date_fa', 'desc')
+                            ->get();
+                        break;
+                    default:
+                        return redirect('/admin/users/');
+                        break;
+                }
+                //لیست تعداد کاربرها
+                $notfollowup = count($this->get_notfollowup());
+                $continuefollowup = count($this->getAll_continuefollowup());
+                $cancelfollowup = count($this->getAll_cancelfollowup());
+                $waiting = count($this->getAll_waiting());
+                $noanswering = count($this->getAll_noanswering());
+                $students = count($this->getAll_students());
+                $todayFollowup = count($this->getAll_todayFollowup());
+                $expireFollowup = count($this->getAll_expireFollowup());
+                $myfollowup = count($this->getAll_myfollowup());
+                $followedToday = count($this->getAll_followedToday());
             }
         }
         else {
@@ -862,6 +1023,17 @@ class UserController extends BaseController
                     return redirect('/admin/users/');
                     break;
             }
+            //لیست تعداد کاربرها
+            $notfollowup=count($this->get_notfollowup());
+            $continuefollowup=count($this->get_continuefollowup());
+            $cancelfollowup=count($this->get_cancelfollowup());
+            $waiting=count($this->get_waiting());
+            $noanswering=count($this->get_noanswering());
+            $students =count($this->get_students());
+            $todayFollowup = count($this->get_todayFollowup());
+            $expireFollowup = $this->get_expireFollowup();
+            $myfollowup=count($this->get_myfollowup());
+            $followedToday = count($this->get_followedToday());
         }
 
         foreach ($users as $item)
@@ -890,18 +1062,15 @@ class UserController extends BaseController
         $tags=$this->get_tags();
         $parentCategory=$this->get_category('پیگیری');
 
-        //لیست تعداد کاربرها
-        $notfollowup=count($this->get_notfollowup());
-        $continuefollowup=count($this->get_continuefollowup());
-        $cancelfollowup=count($this->get_cancelfollowup());
-        $waiting=count($this->get_waiting());
-        $noanswering=count($this->get_noanswering());
-        $students =count($this->get_students());
-        $todayFollowup = count($this->get_todayFollowup());
-        $expireFollowup = $this->get_expireFollowup();
-        $myfollowup=count($this->get_myfollowup());
-        $followedToday = count($this->get_followedToday());
 
+        if(isset($request['user']))
+        {
+            $user=$request['user'];
+        }
+        else
+        {
+            $user="";
+        }
         return view('panelAdmin.users')
                     ->with('tags',$tags)
                     ->with('users',$users)
@@ -915,7 +1084,8 @@ class UserController extends BaseController
                     ->with('waiting',$waiting)
                     ->with('cancelfollowup',$cancelfollowup)
                     ->with('continuefollowup',$continuefollowup)
-                    ->with('notfollowup',$notfollowup);
+                    ->with('notfollowup',$notfollowup)
+                    ->with('user',$user);
     }
 
 
