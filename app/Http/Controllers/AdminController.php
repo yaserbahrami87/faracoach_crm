@@ -63,7 +63,15 @@ class AdminController extends BaseController
             foreach ($usersEducation as $item)
             {
                 $item->cancelfollowup=count($this->get_cancelfollowupbyID($item->id));
+                $item->allFollowups=count($this->get_myfollowupbyID($item->id));
+                $item->todayFollowups=count($this->get_todayFollowupbyID($item->id));
+                $item->followedTodaybyID=count($this->get_followedTodaybyID($item->id));
+                $item->continuefollowup=count($this->get_continuefollowupbyID($item->id));
+                $item->waiting=count($this->get_waitingbyID($item->id));
+                $item->students=count($this->get_studentsbyID($item->id));
+                $item->noanswering=count($this->get_noansweringbyID($item->id));
             }
+
 
 
             $countUnreadMessages=$this->countUnreadMessages();

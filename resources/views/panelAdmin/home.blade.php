@@ -1,26 +1,43 @@
 @extends('panelAdmin.master.index')
 @section('rowcontent')
-    @include('panelAdmin.cardBox')
-    <div class="col-12 table-responsive">
-        <table class="table table-striped table-bordered table-hover">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($usersEducation as $item)
+    @if(Auth::user()->type==2)
+        <div class="col-12 table-responsive">
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
                 <tr>
-                    <th scope="row">1</th>
-                    <td>{{$item->fname}}</td>
-                    <td>{{$item['cancelfollowup']}}</td>
-                    <td>@mdo</td>
+                    <th scope="col">#</th>
+                    <th scope="col">نام و نام خانوادگی</th>
+                    <th scope="col">کل مشتریان</th>
+                    <th scope="col">پیگیری های امروز </th>
+                    <th scope="col">پیگیری های انجام شده امروز </th>
+                    <th scope="col">تور پیگیری</th>
+                    <th scope="col">در انتظار تصمیم</th>
+                    <th scope="col">مشتری</th>
+                    <th scope="col">عدم پاسخ</th>
+                    <th scope="col">انصرافی ها</th>
                 </tr>
-            @endforeach
-            </tbody>
-        </table>
-    </div>
+                </thead>
+                <tbody>
+                @foreach($usersEducation as $item)
+                    <tr>
+                        <th scope="row">1</th>
+                        <td scope="row">{{$item->fname}} {{$item->lname}}</td>
+                        <td scope="row">{{$item->allFollowups}}</td>
+                        <td scope="row">{{$item->todayFollowups}}</td>
+                        <td scope="row">{{$item->followedTodaybyID}}</td>
+                        <td scope="row">{{$item->continuefollowup}}</td>
+                        <td scope="row">{{$item->waiting}}</td>
+                        <td scope="row">{{$item->students}}</td>
+                        <td scope="row">{{$item->noanswering}}</td>
+                        <td scope="row">{{$item->cancelfollowup}}</td>
+
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
+    @endif
+    @include('panelAdmin.cardBox')
+
+
 @endsection
