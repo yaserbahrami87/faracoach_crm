@@ -333,7 +333,7 @@
 
     </div>
     <div class="col-md-8">
-        @if(Auth::user()->id==$user->followby_expert)
+        @if((Auth::user()->id==$user->followby_expert)||(is_null($user->followby_expert)))
             @include('panelAdmin.insertFollowUp')
             <hr/>
         @endif

@@ -58,6 +58,14 @@ class AdminController extends BaseController
                 ->groupby('users.id')
                 ->count();
 
+            $usersEducation=user::where('type','=',3)
+                        ->get();
+            foreach ($usersEducation as $item)
+            {
+                $item->cancelfollowup=count($this->get_cancelfollowupbyID($item->id));
+            }
+
+
             $countUnreadMessages=$this->countUnreadMessages();
             return view('panelAdmin.home')
                         ->with('notFollowup',$notFollowup)
@@ -68,7 +76,8 @@ class AdminController extends BaseController
                         ->with('dateNow',$dateNow)
                         ->with('followupToday',$followupToday)
                         ->with('expirefollowupToday',$expirefollowupToday)
-                        ->with('countUnreadMessages',$countUnreadMessages);
+                        ->with('countUnreadMessages',$countUnreadMessages)
+                        ->with('usersEducation',$usersEducation);
             //return redirect()->route('panelAdmin');
         }
         else if(Gate::allows('isUser'))
