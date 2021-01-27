@@ -1,5 +1,6 @@
 @extends('panelAdmin.master.index')
 @section('rowcontent')
+    
     @if(Auth::user()->type==2)
         <div class="col-12 table-responsive">
             <table class="table table-striped table-bordered table-hover">
@@ -15,12 +16,14 @@
                     <th scope="col">مشتری</th>
                     <th scope="col">عدم پاسخ</th>
                     <th scope="col">انصرافی ها</th>
+                    <th scope="col">آخرین ورودی</th>
                 </tr>
                 </thead>
                 <tbody>
+                <?php $i=1;  ?>
                 @foreach($usersEducation as $item)
                     <tr>
-                        <th scope="row">1</th>
+                        <th scope="row">{{$i++}}</th>
                         <td scope="row">{{$item->fname}} {{$item->lname}}</td>
                         <td scope="row">{{$item->allFollowups}}</td>
                         <td scope="row">{{$item->todayFollowups}}</td>
@@ -30,6 +33,7 @@
                         <td scope="row">{{$item->students}}</td>
                         <td scope="row">{{$item->noanswering}}</td>
                         <td scope="row">{{$item->cancelfollowup}}</td>
+                        <td scope="row">{{$item->last_login_at}}</td>
 
                     </tr>
                 @endforeach

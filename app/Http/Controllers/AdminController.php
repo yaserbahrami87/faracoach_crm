@@ -70,6 +70,11 @@ class AdminController extends BaseController
                 $item->waiting=count($this->get_waitingbyID($item->id));
                 $item->students=count($this->get_studentsbyID($item->id));
                 $item->noanswering=count($this->get_noansweringbyID($item->id));
+                if(!is_null($item->last_login_at))
+                {
+                    $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
+                }
+
             }
 
 
