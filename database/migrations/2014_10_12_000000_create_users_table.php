@@ -44,6 +44,7 @@ class CreateUsersTable extends Migration
             $table->string('introduced',40)->nullable();
             $table->integer('followby_id')->nullable();
             $table->integer('followby_expert')->nullable();
+            $table->integer('insert_user_id')->nullable();
             $table->rememberToken();
             $table->timestamp('last_login_at')->nullable();
             $table->timestamps();

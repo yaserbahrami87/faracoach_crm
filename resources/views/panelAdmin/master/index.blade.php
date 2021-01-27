@@ -116,7 +116,7 @@
                       <span class="copyright">
                         © <script>
                               document.write(new Date().getFullYear())
-                          </script> طراحی شده توسط<i class="fa fa-heart heart"></i> یاسر بهرامی
+                          </script> طراحی شده توسط<i class="fa fa-heart heart"></i><a href="" target="_blank"> یاسر بهرامی</a>
                       </span>
                     </div>
                 </div>

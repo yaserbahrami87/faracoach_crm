@@ -354,15 +354,16 @@ class UserController extends BaseController
         }
 
         $status=User::create([
-            'fname'         => $request['fname'],
-            'lname'         => $request['lname'],
-            'sex'           => $request['sex'],
-            'email'         => $request['email'],
-            'tel'           => $request['tel'],
-            'tel_verified'  => $request['tel_verified'],
-            'password'      => Hash::make($request['password']),
-            'introduced'    => $request['introduced'],
-            'gettingknow'   => $request['gettingknow']
+            'fname'             => $request['fname'],
+            'lname'             => $request['lname'],
+            'sex'               => $request['sex'],
+            'email'             => $request['email'],
+            'tel'               => $request['tel'],
+            'tel_verified'      => $request['tel_verified'],
+            'password'          => Hash::make($request['password']),
+            'introduced'        => $request['introduced'],
+            'gettingknow'       => $request['gettingknow'],
+            'insert_user_id'    =>Auth::user()->id,
         ]);
 
         if($status)
