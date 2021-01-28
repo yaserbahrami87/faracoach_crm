@@ -85,9 +85,9 @@ class FollowupController extends BaseController
         $data->save();
         if($request['sms']!="0")
         {
-
+            $request['sms']=$request['sms']."\n https://crm.faracoach.com";
             $request['sms']=str_replace('{nextDate}',$request['nextfollowup_date_fa'],$request['sms']);
-            $request['sms']=str_replace("<br>",'n\\',$request['sms']);
+            $request['sms']=str_replace("<br>","\n",$request['sms']);
 
             $this->sendSms($data['tel'],$request['sms']);
         }

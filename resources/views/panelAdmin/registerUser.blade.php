@@ -114,14 +114,14 @@
 
                                 <div class="col-md-6">
                                     <select id="gettingknow" name="gettingknow"   class="form-control p-0" @error('gettingknow') is-invalid @enderror >
-                                    <option selected disabled>انتخاب کنید</option>
-                                    <option>اینستاگرام</option>
-                                    <option>تلگرام</option>
-                                    <option>تبلیغاتی محیطی</option>
-                                    <option>تبلیغات فضای مجازی</option>
-                                    <option>پکیج رایگان</option>
-                                    <option>واتساپ</option>
-                                    <option>دوستان</option>
+                                        <option selected disabled>انتخاب کنید</option>
+                                        <option>اینستاگرام</option>
+                                        <option>تلگرام</option>
+                                        <option>تبلیغاتی محیطی</option>
+                                        <option>تبلیغات فضای مجازی</option>
+                                        <option>پکیج رایگان</option>
+                                        <option>واتساپ</option>
+                                        <option>دوستان</option>
 
                                     </select>
                                     @error('gettingknow')

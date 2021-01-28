@@ -27,6 +27,12 @@
         </li>
         <li>
             <a href="#">
+                <i class="nc-icon nc-user-run"></i>
+                <p>اساتید</p>
+            </a>
+        </li>
+        <li>
+            <a href="#">
                 <i class="nc-icon nc-money-coins"></i>
                 <p>مالی</p>
             </a>
