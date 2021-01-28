@@ -601,7 +601,7 @@ class UserController extends BaseController
                 [
                     'fname' => 'nullable|min:3|persian_alpha',
                     'lname' => 'nullable|min:3|persian_alpha',
-                    'codemelli' => 'nullable|melli_code',
+                    'codemelli' => 'nullable|numeric',
                     'sex' => 'nullable|boolean',
                     'tel' => 'nullable|iran_mobile',
                     'shenasname' => 'nullable|numeric',
