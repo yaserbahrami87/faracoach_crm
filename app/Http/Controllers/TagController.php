@@ -133,7 +133,7 @@ class TagController extends BaseController
         }
         else
         {
-            $msg="خطا در ذخیره";
+            $msg="خطا در حذف اطلاعات";
             $errorStatus="danger";
         }
 

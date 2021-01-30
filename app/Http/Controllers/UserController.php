@@ -72,7 +72,8 @@ class UserController extends BaseController
                 $todayFollowup = count($this->get_todayFollowup());
                 $expireFollowup = $this->get_expireFollowup();
                 $myfollowup = count($this->get_myfollowup());
-                $followedToday = count($this->get_followedToday());                
+                $followedToday = count($this->get_followedToday());
+                $trashuser=count($this->getAll_trashuser());                
             }
             else
             {
@@ -87,6 +88,7 @@ class UserController extends BaseController
                 $expireFollowup = count($this->getAll_expireFollowup());
                 $myfollowup = count($this->getAll_myfollowup());
                 $followedToday = count($this->getAll_followedToday());
+                $trashuser=count($this->getAll_trashuser()); 
             }
 
             $usersAdmin=user::orwhere('type','=',2)
@@ -116,7 +118,8 @@ class UserController extends BaseController
                 ->with('cancelfollowup',$cancelfollowup)
                 ->with('continuefollowup',$continuefollowup)
                 ->with('notfollowup',$notfollowup)
-                ->with('user',$user);
+                ->with('user',$user)
+                ->with('trashuser',$trashuser);
         }
         else
         {            
@@ -125,7 +128,7 @@ class UserController extends BaseController
                             $query->orwhere('followby_expert','=',Auth::user()->id)
                                   ->orwhere('followby_expert','=',NULL);
                         })
-                        ->whereNotIn('users.type',[2,3])
+                        ->whereNotIn('users.type',[2,3,0])
                         ->orderby('users.id','desc')
                         ->groupby('users.id')
                         ->get();
@@ -699,9 +702,42 @@ class UserController extends BaseController
      * @return \Illuminate\Http\Response
      */
 
-    public function destroy($id)
-    {
-        //
+    public function destroy(user $user)
+    {        
+        if(isset($user))
+        {
+                        
+            if($user->id!=Auth::user()->id)
+            {
+                //$status=$user->delete();
+                $user->type=0;
+                $status=$user->save();
+                if($status)
+                {
+                    $msg="اطلاعات با موفقیت حذف شد";
+                    $errorStatus="success";
+                }
+                else
+                {
+                    $msg="خطا در حذف کاربر";
+                    $errorStatus="danger";
+                }        
+                return back()->with('msg',$msg)
+                    ->with('errorStatus',$errorStatus);  
+            }
+            else
+            {
+                $msg = "شما در حال حذف کاربری خود میباشید و امکان آن وجود ندارد";
+                $errorStatus = "danger";
+                return redirect('/admin/users')
+                        ->with('msg',$msg)
+                        ->with('errorStatus',$errorStatus); 
+            }
+        }
+        else
+        {
+            return redirect('/admin/users');
+        }
     }
 
     // select User introduced and showAjax
@@ -726,8 +762,7 @@ class UserController extends BaseController
     }
 
     public function categorybyAdmin(Request $request)
-    {
-
+    {          
         if(Auth::user()->type==2) {
             if (!is_null($request) &&(strlen($request['user'])>0)) {
                 $users = user::where('followby_expert', '=', $request['user'])
@@ -753,7 +788,9 @@ class UserController extends BaseController
                 $usersAdmin = user::orwhere('type', '=', 2)
                     ->orwhere('type', '=', 3)
                     ->get();
-
+                
+                    
+                
                 //لیست تعداد کاربرهای هر شخص
                 $notfollowup=count($this->get_notfollowup());
                 $continuefollowup=count($this->get_continuefollowupbyID($request['user']));
@@ -765,6 +802,7 @@ class UserController extends BaseController
                 $expireFollowup = $this->get_expireFollowupbyID($request['user']);
                 $myfollowup=count($this->get_myfollowupbyID($request['user']));
                 $followedToday = count($this->get_followedTodaybyID($request['user']));
+                $trashuser=count($this->getAll_trashuser());
 
                 return view('panelAdmin.users')
                     ->with('tags', $tags)
@@ -781,7 +819,8 @@ class UserController extends BaseController
                     ->with('cancelfollowup',$cancelfollowup)
                     ->with('continuefollowup',$continuefollowup)
                     ->with('notfollowup',$notfollowup)
-                    ->with('user',$request['user']);
+                    ->with('user',$request['user'])
+                    ->with('trashuser',$trashuser);
             } else {
                 return redirect('/admin/users');
             }
@@ -790,11 +829,12 @@ class UserController extends BaseController
     // نمایش اعضای سایت براساس دسته بندی برای ادمین
     public function showCategoryUsersAdmin(Request $request)
     {
-
+        
         $dateNow=$this->dateNow;
         if(Auth::user()->type==2)
         {
-            if (!is_null($request) &&(strlen($request['user'])>0)) {
+           
+            if (!is_null($request)&&(strlen($request['user'])>0)) {                   
                 switch ($request['categoryUsers']) {
                     case '0':
                         return redirect('/admin/users/');
@@ -878,10 +918,19 @@ class UserController extends BaseController
                             ->orderby('date_fa', 'desc')
                             ->get();
                         break;
+                    case 'trashuser':       
+                        $users=User::join('followups', 'users.id', '=', 'followups.user_id')                                                        
+                            ->where('type', '=', 0)
+                            ->select('users.*')
+                            ->groupby('users.id')
+                            ->orderby('date_fa', 'desc')
+                            ->get();  
+                            break; 
                     default:
                         return redirect('/admin/users/');
                         break;
                 }
+                
                 //لیست تعداد کاربرها
                 $notfollowup = count($this->get_notfollowup());
                 $continuefollowup = count($this->get_continuefollowupbyID($request['user']));
@@ -893,6 +942,7 @@ class UserController extends BaseController
                 $expireFollowup = $this->get_expireFollowupbyID($request['user']);
                 $myfollowup = count($this->get_myfollowupbyID($request['user']));
                 $followedToday = count($this->get_followedTodaybyID($request['user']));
+                $trashUser=count($this->getAll_trashuser());
             }
             else
             {
@@ -970,6 +1020,13 @@ class UserController extends BaseController
                             ->orderby('date_fa', 'desc')
                             ->get();
                         break;
+                    case 'trashuser':       
+                        $users=User::where('type', '=', 0)
+                            ->select('users.*')
+                            ->groupby('users.id')
+                            ->orderby('id', 'desc')
+                            ->get();  
+                            break;     
                     default:
                         return redirect('/admin/users/');
                         break;
@@ -985,6 +1042,8 @@ class UserController extends BaseController
                 $expireFollowup = count($this->getAll_expireFollowup());
                 $myfollowup = count($this->getAll_myfollowup());
                 $followedToday = count($this->getAll_followedToday());
+                $trashUser=count($this->getAll_trashuser());
+                
             }
         }
         else {
@@ -1038,6 +1097,7 @@ class UserController extends BaseController
             $expireFollowup = $this->get_expireFollowup();
             $myfollowup=count($this->get_myfollowup());
             $followedToday = count($this->get_followedToday());
+            $trashUser=count($this->getAll_trashuser());            
         }
 
         foreach ($users as $item)
@@ -1089,7 +1149,8 @@ class UserController extends BaseController
                     ->with('cancelfollowup',$cancelfollowup)
                     ->with('continuefollowup',$continuefollowup)
                     ->with('notfollowup',$notfollowup)
-                    ->with('user',$user);
+                    ->with('user',$user)
+                    ->with('trashuser',$trashUser);
     }
 
 

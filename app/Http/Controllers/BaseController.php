@@ -553,4 +553,44 @@ class BaseController extends Controller
             ->groupby('users.id')
             ->get();
     }
+
+    public function getAll_insertuser()
+    {
+        return User::join('followups', 'users.id', '=', 'followups.user_id')
+            ->where('insert_user_id', '=', Auth::user()->id)
+            ->select('users.*')
+            ->orderby('users.id', 'desc')
+            ->groupby('users.id')
+            ->get();
+    }
+
+    public function get_trashuserToday()
+    {
+        return User::where('date_fa', '=', $this->dateNow)
+            ->where('type','=',0)
+            ->select('users.*')
+            ->orderby('users.id', 'desc')
+            ->groupby('users.id')
+            ->get();
+    }
+
+    public function get_trashuserbyID($id)
+    {   
+        
+        return User::where('insert_user_id', '=',$id)      
+            ->where('type','=',0)      
+            ->select('users.*')
+            ->orderby('users.id', 'desc')
+            ->groupby('users.id')
+            ->get();
+    }
+
+    public function getAll_trashuser()
+    {
+        return User::where('type', '=', 0)
+            ->select('users.*')
+            ->orderby('users.id', 'desc')
+            ->groupby('users.id')
+            ->get();
+    }
 }

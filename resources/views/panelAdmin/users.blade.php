@@ -150,6 +150,7 @@
                                 <a href="/admin/users/category/?categoryUsers=noanswering&user={{$user}}" class="list-group-item p-0 border-0 mr-3 p-1">عدم پاسخ<span class="text-danger"> {{$noanswering}} </span></a>
                                 <a href="/admin/users/category/?categoryUsers=myfollowup&user={{$user}}" class="list-group-item  p-0 border-0 mr-3 p-1"> پیگیری های خودم<span class="text-danger"> {{$myfollowup}} </span></a>
                                 <a href="/admin/users/category/?categoryUsers=followedToday&user={{$user}}" class="list-group-item  p-0 border-0 mr-3 p-1"> پیگیری شده های امروز<span class="text-danger"> {{$followedToday}} </span></a>
+                                <a href="/admin/users/category/?categoryUsers=trashuser&user={{$user}}" class="list-group-item  p-0 border-0 mr-3 p-1">سطل زباله<span class="text-danger"> {{$trashuser}} </span></a>
                             </ul>
                         </div>
                     @else
@@ -190,6 +191,9 @@
                             <th>کیفیت</th>
                             <th>وضعیت</th>
                             <th>اخرین ورود</th>
+                            @if(Auth::user()->type==2)
+                                <th>حذف</th>
+                            @endif
                         </tr>
                         </thead>
                         <tbody>
@@ -237,11 +241,20 @@
                                         {{$item->type}}
                                     </a>
                                 </td>
-                                <td >
+                                <td>
                                     <a href="/admin/user/{{$item->id}}" class="text-dark">
                                         {{$item->last_login_at}}
                                     </a>
                                 </td>
+                                @if(Auth::user()->type==2)
+                                    <td>
+                                        <a href="/admin/user/{{$item->id}}/delete" class="text-dark del">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                                            </svg>
+                                        </a>       
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
                         </tbody>
