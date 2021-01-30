@@ -29,7 +29,13 @@
                             </div>
                         @endforeach
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-4 px-1">
+                        <div class="form-group">
+                            <label>مدت تماس (دقیقه)</label>                            
+                            <input type="number" class="form-control"  id="talktime"  name="talktime" value="{{old('talktime')}}" />                            
+                        </div>
+                    </div>
+                    <div class="col-md-8 px-1">
                         <div class="form-group">
                             <label>توضیحات</label>
                             <textarea class="form-control textarea"  lang="fa" name="comment">{{old('comment')}}</textarea>

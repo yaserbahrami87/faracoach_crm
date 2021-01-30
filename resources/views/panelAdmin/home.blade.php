@@ -8,6 +8,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">نام و نام خانوادگی</th>
+                    <th scope="col">ثبت نام ها</th>
                     <th scope="col">کل مشتریان</th>
                     <th scope="col">پیگیری های امروز </th>
                     <th scope="col">پیگیری های انجام شده امروز </th>
@@ -25,6 +26,7 @@
                     <tr>
                         <th scope="row">{{$i++}}</th>
                         <td scope="row">{{$item->fname}} {{$item->lname}}</td>
+                        <td scope="row">{{$item->insertuser}}</td>
                         <td scope="row">{{$item->allFollowups}}</td>
                         <td scope="row">{{$item->todayFollowups}}</td>
                         <td scope="row">{{$item->followedTodaybyID}}</td>

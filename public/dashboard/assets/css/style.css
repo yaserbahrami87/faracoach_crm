@@ -347,3 +347,8 @@
     text-decoration: underline;
     color: #000000;
 }
+
+.table > thead > tr > th
+{
+    font-size: 12px;
+}

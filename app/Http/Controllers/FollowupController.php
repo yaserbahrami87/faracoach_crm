@@ -59,7 +59,8 @@ class FollowupController extends BaseController
             'date_fa'               =>'required|string',
             'time_fa'               =>'required|string',
             'nextfollowup_date_fa'  =>'string|min:9|nullable',
-            'followby_expert'       =>'required|numeric|'
+            'followby_expert'       =>'required|numeric|',
+            'talktime'              =>'required|numeric|',
         ]);
 
         $request['tags']=implode(',',$request['tags']);
@@ -68,6 +69,7 @@ class FollowupController extends BaseController
             'user_id'               =>$request['user_id'],
             'insert_user_id'        =>$request['insert_user_id'],
             'comment'               =>$request['comment'],
+            'talktime'              =>$request['talktime'],
             'problemfollowup_id'    =>$request['followup'],
             'status_followups'      =>$request['status_followups'],
             'tags'                  =>$request['tags'],

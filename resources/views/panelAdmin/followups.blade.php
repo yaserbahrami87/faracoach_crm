@@ -7,13 +7,13 @@
         <form method="post" action="" enctype="multipart/form-data">
             {{csrf_field()}}
             {{method_field('PATCH')}}
-            <?php $i=1; ?>
+            <?php $i=count($followUps); ?>            
             @foreach($followUps as $item)
-                <div class="row" style="border-radius: 20px 20px 0px 0px;border:2px solid {{$item->color}};border-bottom:0px;">
+                <div class="row" style="border-radius: 20px 20px 0px 0px;border:5px solid {{$item->color}};border-bottom:0px;">
                     <div class="col-12">
                         <div class="row px-1">
                             <div class="col-md-2 p-0 pt-4 text-center">
-                                <h6>پیگیری {{$i++}}</h6>
+                                <h6>پیگیری {{$i--}}</h6>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -25,6 +25,12 @@
                                 <div class="form-group">
                                     <label>کیفیت پیگیری</label>
                                     <input type="text" class="form-control"  value="{{$item->problem}}" name="state" disabled="disabled"  style="background-color: {{$item->color}}"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>مدت مکالمه (دقیقه)</label>
+                                    <input type="text" class="form-control"  value="{{$item->talktime}}" name="state" disabled="disabled"  />
                                 </div>
                             </div>
                             <div class="col-md-12 ">
@@ -50,7 +56,7 @@
                 </div>
 
 
-                <div class="row" style="border-radius: 0px 0px 20px 20px;border:2px solid {{$item->color}};border-top:0px;">
+                <div class="row" style="border-radius: 0px 0px 20px 20px;border:5px solid {{$item->color}};border-top:0px;">
 
 
                     <div class="col-md-3 px-1">

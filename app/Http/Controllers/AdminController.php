@@ -74,6 +74,8 @@ class AdminController extends BaseController
                 {
                     $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
                 }
+                $item->insertuser=count($this->get_insertuserbyID($item->id));    
+
 
             }
 

@@ -29,6 +29,8 @@ class CreateUsersTable extends Migration
             $table->string('born',30)->nullable();
             $table->string('education',20)->nullable();
             $table->string('reshteh',20)->nullable();
+            $table->string('organization',100)->nullable();
+            $table->string('jobside',30)->nullable();
             $table->string('state',20)->nullable();
             $table->string('city',20)->nullable();
             $table->string('address')->nullable();

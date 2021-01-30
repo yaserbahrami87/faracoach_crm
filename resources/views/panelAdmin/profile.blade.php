@@ -294,14 +294,23 @@
                     <div class="row">
                         <div class="col-md-6 px-1">
                             <div class="form-group">
-                                <label>نحوه آشنایی</label>
-                                <input type="text" disabled="disabled" class="form-control" value="{{$user->gettingknow }}" name="gettingknow"   lang="fa"/>
+                                <label>نحوه آشنایی</label>                                
+                                <select id="gettingknow" class="form-control p-0" @error('gettingknow') is-invalid @enderror" name="gettingknow">
+                                    <option selected disabled>انتخاب کنید</option>
+                                    <option {{ $user->gettingknow =="اینستاگرام" ? 'selected='.'"'.'selected'.'"' : '' }}>اینستاگرام</option>
+                                    <option {{ $user->gettingknow =="تلگرام" ? 'selected='.'"'.'selected'.'"' : '' }}>تلگرام</option>
+                                    <option {{ $user->gettingknow =="تبلیغاتی محیطی" ? 'selected='.'"'.'selected'.'"' : '' }}>تبلیغاتی محیطی</option>
+                                    <option {{ $user->gettingknow =="تبلیغات فضای مجازی" ? 'selected='.'"'.'selected'.'"' : '' }}>تبلیغات فضای مجازی</option>
+                                    <option {{ $user->gettingknow =="پکیج رایگان" ? 'selected='.'"'.'selected'.'"' : '' }}>پکیج رایگان</option>
+                                    <option {{ $user->gettingknow =="واتساپ" ? 'selected='.'"'.'selected'.'"' : '' }}>واتساپ</option>
+                                    <option {{ $user->gettingknow =="موتورهای جستجو" ? 'selected='.'"'.'selected'.'"' : '' }}>موتورهای جستجو</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-6 px-1">
                             <div class="form-group">
                                 <label>معرف</label>
-                                <input type="text" disabled="disabled" class="form-control" value="{{$user->introduced }}" name="introduced"   lang="fa"/>
+                                <input type="text" class="form-control" value="{{$user->introduced }}" name="introduced"   lang="fa"/>
                             </div>
                         </div>
                         <div class="col-md-6 px-1">

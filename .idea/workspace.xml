@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FollowupController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FollowupController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/master/leftNavbar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/master/leftNavbar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/registerUser.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/registerUser.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -180,11 +177,11 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\laravel\faracoach_crm\resources\views\panelAdmin" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\laravel\faracoach_crm\resources\views\panelUser" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\laravel\faracoach_crm\resources\views\panelAdmin" />
     </key>
   </component>
   <component name="RunManager">
@@ -315,7 +312,11 @@
       <workItem from="1611567468538" duration="5354000" />
       <workItem from="1611640079281" duration="7194000" />
       <workItem from="1611735751279" duration="9059000" />
-      <workItem from="1611823080192" duration="6171000" />
+      <workItem from="1611823080192" duration="6865000" />
+      <workItem from="1611988222589" duration="7000" />
+      <workItem from="1611988328472" duration="39000" />
+      <workItem from="1611988406124" duration="16000" />
+      <workItem from="1611988571130" duration="192000" />
     </task>
     <servers />
   </component>
@@ -369,10 +370,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1611407823190" />
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1611829147139">
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1611988669577">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1610574245405" />
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1611829147139" />
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1611988669577" />
   </component>
 </project>

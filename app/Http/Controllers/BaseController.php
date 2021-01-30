@@ -534,4 +534,23 @@ class BaseController extends Controller
             ->groupby('users.id')
             ->get();
     }
+
+    public function get_insertuserToday()
+    {
+        return User::where('users.insert_user_id', '=', Auth::user()->id)
+            ->where('date_fa', '=', $this->dateNow)
+            ->select('users.*')
+            ->orderby('users.id', 'desc')
+            ->groupby('users.id')
+            ->get();
+    }
+
+    public function get_insertuserbyID($id)
+    {        
+        return User::where('insert_user_id', '=',$id)            
+            ->select('users.*')
+            ->orderby('users.id', 'desc')
+            ->groupby('users.id')
+            ->get();
+    }
 }

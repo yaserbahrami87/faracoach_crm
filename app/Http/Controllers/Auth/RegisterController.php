@@ -59,6 +59,8 @@ class RegisterController extends Controller
             'tel_verified'  => ['required','boolean'],
             'introduced'    => ['nullable','numeric'],
             'gettingknow'   => ['nullable','persian_alpha'],
+            'organization'  => ['nullable','persian_alpha'],
+            'jobside'       => ['nullable','persian_alpha']
         ]);
     }
 
@@ -90,7 +92,9 @@ class RegisterController extends Controller
             'tel_verified'  =>$data['tel_verified'],
             'password'      => Hash::make($data['password']),
             'introduced'    =>$data['introduced'],
-            'gettingknow'   =>$data['gettingknow']
+            'gettingknow'   =>$data['gettingknow'],
+            'organization'  =>$data['organization'],
+            'jobside'       =>$data['jobside'],
         ]);
     }
 }

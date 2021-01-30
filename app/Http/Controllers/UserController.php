@@ -59,7 +59,7 @@ class UserController extends BaseController
             }
             $tags=$this->get_tags();
             $parentCategory=$this->get_category('پیگیری');
-
+                
             if(isset($request['user']))
             {
                 //لیست تعداد کاربرها
@@ -72,7 +72,7 @@ class UserController extends BaseController
                 $todayFollowup = count($this->get_todayFollowup());
                 $expireFollowup = $this->get_expireFollowup();
                 $myfollowup = count($this->get_myfollowup());
-                $followedToday = count($this->get_followedToday());
+                $followedToday = count($this->get_followedToday());                
             }
             else
             {
@@ -119,7 +119,7 @@ class UserController extends BaseController
                 ->with('user',$user);
         }
         else
-        {
+        {            
             $users=User::where(function($query)
                         {
                             $query->orwhere('followby_expert','=',Auth::user()->id)
@@ -338,9 +338,10 @@ class UserController extends BaseController
             'tel'           => ['required','iran_mobile','unique:users'],
             'password'      => ['required', 'string', 'min:8', 'confirmed'],
             'tel_verified'  => ['required','boolean'],
-            'introduced'  =>   ['nullable','numeric'],
-            'gettingknow'  =>  ['nullable','persian_alpha'],
-
+            'introduced'    => ['nullable','numeric'],
+            'gettingknow'   => ['nullable','persian_alpha'],
+            'organization'  => ['nullable','persian_alpha'],
+            'jobside'       => ['nullable','persian_alpha']
         ]);
 
         if(!isset($request['gettingknow']))
@@ -364,6 +365,8 @@ class UserController extends BaseController
             'introduced'        => $request['introduced'],
             'gettingknow'       => $request['gettingknow'],
             'insert_user_id'    =>Auth::user()->id,
+            'organization'      => $request['organization'],
+            'jobside'           => $request['jobside'],
         ]);
 
         if($status)
