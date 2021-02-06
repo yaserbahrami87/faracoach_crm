@@ -70,7 +70,7 @@
                         </div>
 
                         <div class="col-md-4 ">
-                            <svg class="float-left @if((strlen($user->fname)>0)&&(strlen($user->lname)>0)&&(strlen($user->codemelli)>0)&&(strlen($user->shenasname)>0)&& (strlen($user->personal_image)>0)) text-muted @else  text-danger  @endif" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+                            <svg class="float-left @if((strlen($user->fname)>0)&&(strlen($user->lname)>0)&&(strlen($user->codemelli)>0)&&(strlen($user->shenasname)>0)&& (strlen($user->personal_image)>0)&& (strlen($user->datebirth)>0)) text-muted @else  text-danger  @endif" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
                                 <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"/>
                             </svg>
                         </div>
@@ -102,7 +102,13 @@
                                 <input type="text" class="form-control" placeholder="شماره شناسنامه را وارد کنید" value="{{$user->shenasname}}" name="shenasname"  />
                             </div>
                         </div>
-                        <div class="col-md-12 px-1">
+                        <div class="col-md-6 px-1">
+                            <div class="form-group">
+                                <label>تاریخ تولد</label>
+                                <input type="text" class="form-control" placeholder="تاریخ تولد را وارد کنید" value="{{$user->datebirth}}" name="datebirth" id="datebirth" />
+                            </div>
+                        </div>
+                        <div class="col-md-6 px-1">
                             <div class="form-group">
                                 <label>عکس پروفایل</label>
                                 <div class="custom-file">
@@ -179,7 +185,7 @@
                             <h6 class="card-title m-0 mb-3">اطلاعات قرارداد</h6>
                         </div>
                         <div class="col-md-4">
-                            <svg class="float-left @if((strlen($user->father)>0)&&(strlen($user->sex)>0)&&(strlen($user->married)>0)&&(strlen($user->born)>0)&& (strlen($user->education)>0)&& (strlen($user->reshteh)>0)&& (strlen($user->shenasnameh_image)>0)&& (strlen($user->cartmelli_image)>0)&& (strlen($user->education_image)>0)) text-muted @else  text-danger  @endif" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-text-fill" viewBox="0 0 16 16">
+                            <svg class="float-left @if((strlen($user->father)>0)&&(strlen($user->sex)>0)&&(strlen($user->married)>0)&&(strlen($user->born)>0)&& (strlen($user->education)>0)&& (strlen($user->reshteh)>0)&& (strlen($user->shenasnameh_image)>0)&& (strlen($user->cartmelli_image)>0)&& (strlen($user->education_image)>0)&& (strlen($user->job)>0)) text-muted @else  text-danger  @endif" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-text-fill" viewBox="0 0 16 16">
                                 <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM5 4h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zM5 8h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1zm0 2h3a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1z"/>
                             </svg>
                         </div>
@@ -222,13 +228,13 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4 pl-1">
+                        <div class="col-md-6 pl-1">
                             <div class="form-group">
                                 <label>شهر تولد</label>
                                 <input type="text" class="form-control" placeholder="شهر تولد را وارد کنید" value="{{$user->born}}" name="born"   lang="fa"/>
                             </div>
                         </div>
-                        <div class="col-md-4 px-1">
+                        <div class="col-md-6 px-1">
                             <div class="form-group">
                                 <label>تحصیلات</label>
                                 <select id="education" class="form-control p-0 @error('education') is-invalid @enderror" name="education">
@@ -242,11 +248,19 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-4 pr-1">
+                        <div class="col-md-6 pr-1">
                             <div class="form-group">
                                 <label>رشته</label>
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="رشته را وارد کنید" value="{{$user->reshteh}}" name="reshteh"   lang="fa"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 pr-1">
+                            <div class="form-group">
+                                <label>شغل</label>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="شغل را وارد کنید" value="{{$user->job}}" name="job" />
                                 </div>
                             </div>
                         </div>

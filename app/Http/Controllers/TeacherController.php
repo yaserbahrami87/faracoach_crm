@@ -131,7 +131,7 @@ class TeacherController extends Controller
             'education'     => ['required','persian_alpha', 'string', 'max:30'],
             'type'          => ['required','persian_alpha', 'string', 'max:30'],
             'city'          => ['required','persian_alpha', 'string', 'max:30'],
-            'image'         => ['nullable','mimes:jpeg,jpg,pdf','max:600'],
+            'image'         => ['nullable','mimes:jpeg,jpg,png','max:600'],
             'biography'     => ['required', 'string'],
         ]);
         if ($request->has('image') && $request->file('image')->isValid()) {

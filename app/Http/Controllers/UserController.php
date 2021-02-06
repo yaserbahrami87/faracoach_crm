@@ -323,11 +323,9 @@ class UserController extends BaseController
                 curl_setopt($handler, CURLOPT_POSTFIELDS, $param);
                 curl_setopt($handler, CURLOPT_RETURNTRANSFER, true);
                 $response2 = curl_exec($handler);
-
                 $response2 = json_decode($response2);
                 $res_code = $response2[0];
                 $res_data = $response2[1];
-
             }
         }
         return back()->with('msg',$msg)->with('errorStatus',$errorStatus);
@@ -469,7 +467,6 @@ class UserController extends BaseController
             {
                 $item->course_id=$this->get_coursesByID($item->course_id)->course;
             }
-
         }
 
         //تبدیل تگهای پیگیری
@@ -624,11 +621,13 @@ class UserController extends BaseController
                     'sex' => 'nullable|boolean',
                     'tel' => 'nullable|iran_mobile',
                     'shenasname' => 'nullable|numeric',
+                    'datebirth'  =>'nullable|max:11|string',
                     'father' => 'nullable|min:3|persian_alpha',
                     'born' => 'nullable|min:3|persian_alpha',
                     'married' => 'nullable|boolean',
                     'education' => 'nullable|min:4|persian_alpha',
                     'reshteh' => 'nullable|min:4|persian_alpha',
+                    'job' => 'nullable|min:4|persian_alpha',
                     'state' => 'nullable|numeric',
                     'city' => 'nullable|numeric',
                     'address' => 'nullable|min:4|',
