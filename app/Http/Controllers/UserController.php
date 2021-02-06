@@ -2082,4 +2082,40 @@ class UserController extends BaseController
             ->with('notfollowup',$notfollowup);
     }
 
+    public function createExcel()
+    {
+        return view('panelAdmin.excelImport');
+    }
+
+    public function storeExcel(Request $request)
+    {
+        $this->validate($request, [
+                'excel'     =>['required','mimes:xlsx,csv'],
+            ]);
+
+        $collection = fastexcel()->import($request->file('excel'));
+        $i=0;
+        foreach ($collection as $item)
+        {
+            $count=user::where('tel','=',$item['tel'])
+                         ->orwhere('email','=',$item['email'])
+                         ->count();
+            if($count==0)
+            {
+                $status=user::create($item);
+                if($status)
+                {
+                    $i++;
+                }
+
+            }
+        }
+        $msg = "تعداد".$i."نفر وارد بانک اطلاعاتی شدند";
+        $errorStatus = "success";
+        return back()->with('msg', $msg)
+            ->with('errorStatus', $errorStatus);
+
+
+    }
+
 }

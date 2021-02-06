@@ -96,6 +96,8 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
 
     Route::get('/user/{tel}/password','AdminController@changePasswordView');
     Route::patch('/user/{tel}/updatePassword','UserController@updatePassword');
+    Route::get('/users/excel','UserController@createExcel');
+    Route::post('/users/storeExcel','UserController@storeExcel');
 
     //  ROUTE SETTINGS
     Route::post('/settings/problemfollowup/store','ProblemfollowupController@store');
@@ -107,7 +109,6 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     {
         return view('panelAdmin.insertProblemFollowup');
     });
-
 
 
     // *** Tags Setting

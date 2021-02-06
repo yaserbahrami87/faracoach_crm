@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '02d9136a9d981d8cb2f694e3925f074e3b97f59e',
+    'reference' => 'd24af5688af0074bcb893568e92afcde28e58098',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -55,6 +55,15 @@
       array (
       ),
       'reference' => 'd3bc80dfa61d7bf8e76747ea26615b3f51bc0780',
+    ),
+    'box/spout' => 
+    array (
+      'pretty_version' => 'v2.7.3',
+      'version' => '2.7.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '3681a3421a868ab9a65da156c554f756541f452b',
     ),
     'brick/math' => 
     array (
@@ -503,7 +512,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '02d9136a9d981d8cb2f694e3925f074e3b97f59e',
+      'reference' => 'd24af5688af0074bcb893568e92afcde28e58098',
     ),
     'laravel/tinker' => 
     array (
@@ -886,6 +895,15 @@
       array (
       ),
       'reference' => 'cd4032040a750077205918c86049aa0f43d22947',
+    ),
+    'rap2hpoutre/fast-excel' => 
+    array (
+      'pretty_version' => 'v2.3.0',
+      'version' => '2.3.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '50af6a474f95463219a93b137d9b0344c13bd267',
     ),
     'rhumsaa/uuid' => 
     array (

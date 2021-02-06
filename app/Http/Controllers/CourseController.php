@@ -216,7 +216,7 @@ class CourseController extends BaseController
         {
             {
                 $msg = "خطا در بروزرسانی";
-                $errorStatus = "success";
+                $errorStatus = "danger";
             }
         }
 

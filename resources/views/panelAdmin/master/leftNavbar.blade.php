@@ -122,6 +122,14 @@
                                 <p>همه کاربرها</p>
                             </a>
                         </li>
+                        @if(Auth::user()->type==2)
+                            <li class="nav-item">
+                                <a href="/admin/users/excel" class="nav-link @if(request()->is('admin/users')) active  @endif">
+                                    <i class="fas fa-users nav-icon"></i>
+                                    <p>اضافه کردن کاربر از طریق فایل</p>
+                                </a>
+                            </li>
+                        @endif
                     </ul>
                 </li>
 
