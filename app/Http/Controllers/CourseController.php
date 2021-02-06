@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\course;
 use Illuminate\Http\Request;
+use Throwable;
 
-class CourseController extends Controller
+class CourseController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,16 @@ class CourseController extends Controller
      */
     public function index()
     {
-        //
+
+        $courses=course::orderby('id','desc')
+                    ->get();
+        foreach ($courses as $item)
+        {
+            $item->teacher_id=$this->get_teachersById($item->teacher_id)->fname." ".$this->get_teachersById($item->teacher_id)->lname;
+
+        }
+        return view('panelAdmin.courses')
+                    ->with('courses',$courses);
     }
 
     /**
@@ -24,7 +34,12 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
+        $teachers=$this->get_teachers();
+        $courseType=$this->get_courseType();
+        return view('panelAdmin.insertCourse')
+                    ->with('teachers',$teachers)
+                    ->with('courseType',$courseType);
+
     }
 
     /**
@@ -35,7 +50,71 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $this->validate($request, [
+            'course'                => ['required','string','max:250'],
+            'shortlink'             => ['required','string','max:250','unique:courses'],
+            'teacher'               => ['required', 'numeric'],
+            'image'                 => ['required','mimes:jpeg,jpg,png','max:600'],
+            'type'                  => ['required', 'numeric'],
+            'duration'              => ['required', 'numeric'],
+            'duration_date'         => ['required', 'string','max:20'],
+            'count_students'        => ['required', 'numeric'],
+            'coaches'               => ['required', 'numeric'],
+            'coachingbycoach'       => ['required', 'numeric'],
+            'coachingbyreference'   => ['required', 'numeric'],
+            'intership'             => ['required', 'numeric'],
+            'start'                 => ['required', 'min:9'],
+            'end'                   => ['required', 'min:9'],
+            'course_days'           => ['required', 'string'],
+            'course_times'          => ['required', 'string'],
+            'exam'                  => ['required', 'string','min:9'],
+            'certificate'           => ['required', 'string'],
+            'fi'                    => ['required', 'numeric'],
+            'fi_off'                => ['required', 'numeric'],
+            'type_peymant_id'       => ['required','numeric'],
+            'infocourse'            => ['required', 'string'],
+
+        ]);
+        $file=$request->file('image');
+        $image="course-".time().".".$request->file('image')->extension();
+        $path=public_path('/documents/');
+        $files=$request->file('image')->move($path, $image);
+
+        $status = course::create([
+                'course'                     => $request['course'],
+                'shortlink'                  => $request['shortlink'],
+                'teacher_id'                 => $request['teacher'],
+                'image'                      => $image,
+                'type'                       => $request['type'],
+                'duration'                   => $request['duration'],
+                'duration_date'              => $request['duration_date'],
+                'count_students'             => $request['count_students'],
+                'coaches'                    => $request['coaches'],
+                'coachingbycoach'            => $request['coachingbycoach'],
+                'coachingbyreference'        => $request['coachingbyreference'],
+                'intership'                  => $request['intership'],
+                'start'                      => $request['start'],
+                'end'                        => $request['end'],
+                'course_days'                => $request['course_days'],
+                'exam'                       => $request['exam'],
+                'certificate'                => $request['certificate'],
+                'fi'                         => $request['fi'],
+                'fi_off'                     => $request['fi_off'],
+                'type_peymant_id'            => $request['type_peymant_id'],
+                'infocourse'                 => $request['infocourse'],
+            ]);
+        if($status) {
+            $msg = "دوره ما با موفقیت ثبت شد";
+            $errorStatus = "success";
+        }
+        else
+        {
+            $msg = "خطا در ثبت دوره";
+            $errorStatus = "success";
+        }
+        return back()->with('msg',$msg)
+                     ->with('errorStatus',$errorStatus);
     }
 
     /**
@@ -57,7 +136,12 @@ class CourseController extends Controller
      */
     public function edit(course $course)
     {
-        //
+        $teachers=$this->get_teachers();
+        $courseType=$this->get_courseType();
+        return view('panelAdmin.editCourse')
+                    ->with('course',$course)
+                    ->with('teachers',$teachers)
+                    ->with('courseType',$courseType);
     }
 
     /**
@@ -69,7 +153,76 @@ class CourseController extends Controller
      */
     public function update(Request $request, course $course)
     {
-        //
+        $this->validate($request, [
+            'course'                => ['required','string','max:250'],
+            'shortlink'             => ['required','string','max:250'],
+            'teacher'               => ['required', 'numeric'],
+            'image'                 => ['nullable','mimes:jpeg,jpg,png','max:600'],
+            'type'                  => ['required', 'numeric'],
+            'duration'              => ['required', 'numeric'],
+            'duration_date'         => ['required', 'string','max:20'],
+            'count_students'        => ['required', 'numeric'],
+            'coaches'               => ['required', 'numeric'],
+            'coachingbycoach'       => ['required', 'numeric'],
+            'coachingbyreference'   => ['required', 'numeric'],
+            'intership'             => ['required', 'numeric'],
+            'start'                 => ['required', 'min:9'],
+            'end'                   => ['required', 'min:9'],
+            'course_days'           => ['required', 'string'],
+            'course_times'          => ['required', 'string'],
+            'exam'                  => ['required', 'string','min:9'],
+            'certificate'           => ['required', 'string'],
+            'fi'                    => ['required', 'numeric'],
+            'fi_off'                => ['required', 'numeric'],
+            'type_peymant_id'       => ['required','numeric'],
+            'infocourse'            => ['required', 'string'],
+        ]);
+
+
+        if ($request->has('image') && $request->file('image')->isValid()) {
+            $file = $request->file('image');
+            $image = "course-" . time() . "." . $request->file('image')->extension();
+            $path = public_path('/documents/');
+            $files = $request->file('image')->move($path, $image);
+        }
+
+
+        try {
+            $status=$course->update($request->all());
+        } catch (Throwable $e) {
+            $msg = "شورتکد تکراری می باشد";
+            $errorStatus = "danger";
+            return back()->with('msg', $msg)
+                ->with('errorStatus', $errorStatus);
+        }
+
+        if($status)
+        {
+            if (isset($image)) {
+                $course->image = $image;
+            }
+            $status=$course->save();
+            if($status) {
+                $msg = "دوره با موفقیت به روزرسانی شد";
+                $errorStatus = "success";
+            }
+            else
+            {
+                $msg = "خطا در بروزرسانی";
+                $errorStatus = "success";
+            }
+        }
+        else
+        {
+            {
+                $msg = "خطا در بروزرسانی";
+                $errorStatus = "success";
+            }
+        }
+
+        return back()->with('msg', $msg)
+            ->with('errorStatus', $errorStatus);
+
     }
 
     /**

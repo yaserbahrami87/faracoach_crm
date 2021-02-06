@@ -89,7 +89,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
         return view('panelAdmin.registerUser');
     });
     Route::post('/register','UserController@register');
-    Route::get('/user/{user}/delete','UserController@destroy');    
+    Route::get('/user/{user}/delete','UserController@destroy');
     Route::get('/users/category/','UserController@showCategoryUsersAdmin');
     Route::get('/users/categoryTags/','UserController@showCategoryTagsAdmin');
     Route::get('/users/categorybyAdmin/','UserController@categorybyAdmin');
@@ -147,6 +147,15 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     {
         return view('panelAdmin.reports');
     });
+
+    //Teachers
+    Route::resource('teachers','TeacherController');
+
+    //Courses
+    Route::resource('courses','CourseController');
+
+    //CourseType
+    Route::resource('coursetype','CoursetypeController');
 });
 
 

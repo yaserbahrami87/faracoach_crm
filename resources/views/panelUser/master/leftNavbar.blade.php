@@ -45,7 +45,7 @@
         <li>
             <a href="/panel/freepackages">
                 <i class="nc-icon nc-caps-small"></i>
-                <p>پکیج رایگان</p>
+                <p>دوره رایگان آموزش کوچینگ</p>
             </a>
         </li>
 

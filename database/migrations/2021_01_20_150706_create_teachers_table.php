@@ -17,10 +17,15 @@ class CreateTeachersTable extends Migration
             $table->id();
             $table->string('fname',20)->nullable();
             $table->string('lname',20)->nullable();
-            $table->string('type',10)->nullable();
+            $table->string('email',100)->nullable();
+            $table->string('tel',20)->nullable();
+            $table->boolean('sex')->nullable();
+            $table->string('type',50)->nullable();
             $table->string('education',20)->nullable();
             $table->string('city',20)->nullable();
             $table->string('image',250)->nullable();
+            $table->text('biography')->nullable();
+            $table->string('shortlink',50)->unique();
             $table->timestamps();
         });
     }

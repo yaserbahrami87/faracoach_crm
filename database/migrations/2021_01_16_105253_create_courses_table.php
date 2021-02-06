@@ -16,7 +16,8 @@ class CreateCoursesTable extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->string('course',250);
-            $table->integer('teacher')->default(0);
+            $table->string('image',250);
+            $table->integer('teacher_id')->default(0);
             $table->tinyInteger('type')->default(1);
             $table->tinyInteger('duration')->default(0);
             $table->string('duration_date',20)->nullable();
@@ -27,12 +28,16 @@ class CreateCoursesTable extends Migration
             $table->tinyInteger('intership')->default(0);
             $table->string('start',20)->nullable();
             $table->string('end',20)->nullable();
-            $table->string('infocourse',250)->nullable();
+            $table->string('course_days',250)->nullable();
+            $table->string('course_times',10)->nullable();
+            $table->text('infocourse')->nullable();
             $table->string('exam',100)->nullable();
             $table->string('certificate',100)->nullable();
-            $table->string('fi',10)->nullable();
+            $table->string('fi',15)->nullable();
+            $table->string('fi_off',15)->nullable();
             $table->tinyInteger('type_peymant_id')->nullable();
             $table->string('images',250)->nullable();
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }

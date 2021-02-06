@@ -1,12 +1,7 @@
 @extends('master.index')
 
-@section('navbarTop')
-    @include('master.navbarTop')
-@endsection
-
-
 @section('row1')
-<div class="container">
+<div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">

@@ -8,6 +8,18 @@
                 <div class="row">
                     <input type="hidden" name="insert_user_id" value="{{$userAdmin->id}}" />
                     <input type="hidden" name="user_id" value="{{$user->id}}"/>
+                    <div class="col-md-4 px-1">
+                        <div class="form-group">
+                            <label>محصول در حال پیگیری</label>
+                            <select class="form-control p-0" id="course_id" name="course_id" >
+                                <option disabled="disabled" selected >وضعیت را انتخاب کنید</option>
+                                @foreach($courses as $item)
+                                    <option  value="{{$item->id}}" @if (old('course_id') == $item->id) selected @endif>
+                                        {{$item->course}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                     <div class="col-12">
                         @foreach($parentCategory as $item)
                             <a class="d-inline" data-toggle="collaps"  role="button" aria-expanded="false" aria-controls="collapseExample{{$item->id}}">
@@ -31,8 +43,8 @@
                     </div>
                     <div class="col-md-4 px-1">
                         <div class="form-group">
-                            <label>مدت تماس (دقیقه)</label>                            
-                            <input type="number" class="form-control"  id="talktime"  name="talktime" value="{{old('talktime')}}" />                            
+                            <label>مدت تماس (دقیقه)</label>
+                            <input type="number" class="form-control"  id="talktime"  name="talktime" value="{{old('talktime')}}" />
                         </div>
                     </div>
                     <div class="col-md-8 px-1">

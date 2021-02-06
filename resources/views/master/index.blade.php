@@ -14,7 +14,7 @@
     <link href={{asset("slick-1.8.1/slick-1.8.1/slick/slick.css")}} rel="stylesheet" type="text/css" />
     <link href={{asset("slick-1.8.1/slick-1.8.1/slick/slick-theme.css")}} rel="stylesheet" type="text/css" />
 
-    <title>فراکوچ | دانلود رایگان دوره آموزش کوچینگ</title>
+    <title>فراکوچ | آموزش کوچینگ</title>
   </head>
   <body>
     @yield('navbarTop')

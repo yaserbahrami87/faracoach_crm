@@ -4,7 +4,7 @@
     <div class="col-md-4 ">
         <div class="card card-user">
             <div class="image">
-                <img src={{asset('../dashboard/assets/img/damir-bosnjak.jpg')}} alt="...">
+
             </div>
             <div class="card-body">
                 <div class="author">
@@ -106,7 +106,7 @@
                             <div class="form-group">
                                 <label>عکس پروفایل</label>
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="inputpersonal_image" aria-describedby="inputpersonal_image" name="personal_image"/> >
+                                    <input type="file" class="custom-file-input" id="inputpersonal_image" aria-describedby="inputpersonal_image" name="personal_image"/>
                                     <label class="custom-file-label" for="inputpersonal_image">Choose file</label>
                                 </div>
                             </div>
@@ -231,7 +231,15 @@
                         <div class="col-md-4 px-1">
                             <div class="form-group">
                                 <label>تحصیلات</label>
-                                <input type="text" class="form-control" placeholder="تحصیلات را وارد کنید" value="{{$user->education}}" name="education"  />
+                                <select id="education" class="form-control p-0 @error('education') is-invalid @enderror" name="education">
+                                    <option selected disabled>انتخاب کنید</option>
+                                    <option {{ $user->gettingknow =="زیردیپلم" ? 'selected='.'"'.'selected'.'"' : '' }}>زیردیپلم</option>
+                                    <option {{ $user->gettingknow =="دیپلم" ? 'selected='.'"'.'selected'.'"' : '' }}>دیپلم</option>
+                                    <option {{ $user->gettingknow =="فوق دیپلم" ? 'selected='.'"'.'selected'.'"' : '' }}>فوق دیپلم</option>
+                                    <option {{ $user->gettingknow =="لیسانس" ? 'selected='.'"'.'selected'.'"' : '' }}>لیسانس</option>
+                                    <option {{ $user->gettingknow =="فوق لیسانس" ? 'selected='.'"'.'selected'.'"' : '' }}>فوق لیسانس</option>
+                                    <option {{ $user->gettingknow =="دکتری و بالاتر" ? 'selected='.'"'.'selected'.'"' : '' }}>دکتری و بالاتر</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-4 pr-1">
@@ -294,8 +302,8 @@
                     <div class="row">
                         <div class="col-md-6 px-1">
                             <div class="form-group">
-                                <label>نحوه آشنایی</label>                                
-                                <select id="gettingknow" class="form-control p-0" @error('gettingknow') is-invalid @enderror" name="gettingknow">
+                                <label>نحوه آشنایی</label>
+                                <select id="gettingknow" class="form-control p-0 @error('gettingknow') is-invalid @enderror" name="gettingknow">
                                     <option selected disabled>انتخاب کنید</option>
                                     <option {{ $user->gettingknow =="اینستاگرام" ? 'selected='.'"'.'selected'.'"' : '' }}>اینستاگرام</option>
                                     <option {{ $user->gettingknow =="تلگرام" ? 'selected='.'"'.'selected'.'"' : '' }}>تلگرام</option>

@@ -51,6 +51,7 @@ class FollowupController extends BaseController
 
         $this->validate($request,[
             'insert_user_id'        =>'required|numeric',
+            'course_id'             =>'required|numeric',
             'user_id'               =>'required|numeric|',
             'followup'              =>'required|numeric',
             'status_followups'      =>'required|numeric',
@@ -68,6 +69,7 @@ class FollowupController extends BaseController
         $check=followup::create([
             'user_id'               =>$request['user_id'],
             'insert_user_id'        =>$request['insert_user_id'],
+            'course_id'             =>$request['course_id'],
             'comment'               =>$request['comment'],
             'talktime'              =>$request['talktime'],
             'problemfollowup_id'    =>$request['followup'],

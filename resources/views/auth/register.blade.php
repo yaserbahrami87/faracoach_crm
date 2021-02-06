@@ -1,11 +1,8 @@
 @extends('master.index')
 
-@section('navbarTop')
-    @include('master.navbarTop')
-@endsection
 
 @section('row1')
-<div class="container">
+<div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -116,7 +113,7 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-md-4 col-form-label text-right" >
-                                <a class="btn btn-primary" data-toggle="collapse" href="#Organization" role="button" class="text-md-right  text-dark">{{ __('اطلاعات سازمان:') }}</a>                                   
+                                <a class="btn btn-primary" data-toggle="collapse" href="#Organization" role="button" class="text-md-right  text-dark">{{ __('اطلاعات سازمان:') }}</a>
                             </div>
                             <div class="col-md-6">
                                 <div class="collapse" id="Organization">
@@ -124,7 +121,7 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="organization">ارگان</label>
-                                                <input id="organization" type="text" name="organization" class="form-control @error('organization') is-invalid @enderror" value="{{ old('organization') }}" autocomplete="organization">            
+                                                <input id="organization" type="text" name="organization" class="form-control @error('organization') is-invalid @enderror" value="{{ old('organization') }}" autocomplete="organization">
                                                 @error('organization')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -133,7 +130,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="jobside">سمت</label>
-                                                <input id="jobside" type="text"  name="jobside" class="form-control @error('jobside') is-invalid @enderror" value="{{ old('jobside') }}" autocomplete="jobside">            
+                                                <input id="jobside" type="text"  name="jobside" class="form-control @error('jobside') is-invalid @enderror" value="{{ old('jobside') }}" autocomplete="jobside">
                                                 @error('jobside')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -144,7 +141,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>    
+                        </div>
                         <div class="form-group row">
                             <label for="gettingknow" class="col-md-4 col-form-label text-md-right">{{ __('نحوه آشنایی با فراکوچ:') }}</label>
 

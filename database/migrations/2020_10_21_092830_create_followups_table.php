@@ -17,6 +17,7 @@ class CreateFollowupsTable extends Migration
             $table->id();
             $table->integer('user_id');
             $table->integer('insert_user_id');
+            $table->integer('course_id')->nullable();
             $table->text('comment')->nullable();
             $table->smallInteger('talktime')->nullable();
             $table->integer('problemfollowup_id')->nullable();
