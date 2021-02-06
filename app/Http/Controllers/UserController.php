@@ -623,7 +623,7 @@ class UserController extends BaseController
                     'shenasname' => 'nullable|numeric',
                     'datebirth'  =>'nullable|max:11|string',
                     'father' => 'nullable|min:3|persian_alpha',
-                    'born' => 'nullable|min:3|persian_alpha',
+                    'born' => 'nullable|persian_alpha',
                     'married' => 'nullable|boolean',
                     'education' => 'nullable|min:4|persian_alpha',
                     'reshteh' => 'nullable|min:4|persian_alpha',
