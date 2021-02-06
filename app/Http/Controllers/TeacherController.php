@@ -40,13 +40,13 @@ class TeacherController extends Controller
         $this->validate($request, [
             'fname'         => ['required','persian_alpha', 'string', 'max:30'],
             'lname'         => ['required','persian_alpha', 'string', 'max:30'],
-            'email'         => ['required', 'string', 'email', 'max:150', 'unique:teachers'],
+            'email'         => ['nullable', 'string', 'email', 'max:150', 'unique:teachers'],
             'sex'           => ['required','numeric'],
-            'tel'           => ['required','iran_mobile','unique:teachers'],
+            'tel'           => ['nullable','iran_mobile','unique:teachers'],
             'education'     => ['required','persian_alpha', 'string', 'max:30'],
             'type'          => ['required','persian_alpha', 'string', 'max:30'],
             'city'          => ['required','persian_alpha', 'string', 'max:30'],
-            'image'         => ['required','mimes:jpeg,jpg,pdf','max:600'],
+            'image'         => ['required','mimes:jpeg,jpg,png','max:600'],
             'biography'     => ['required', 'string'],
             'shortlink'     => ['required','persian_alpha','max:50','unique:teachers']
         ]);

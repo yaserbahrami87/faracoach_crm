@@ -2,70 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/coach.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/panelAdmin/courses.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/panelAdmin/coursetype.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/panelAdmin/editCourse.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/panelAdmin/editCourseType.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/panelAdmin/editTeachers.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/panelAdmin/insertCourse.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/panelAdmin/insertCourseType.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/panelAdmin/insertTeacher.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/panelAdmin/teachers.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CourseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CourseController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FollowupController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FollowupController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TeacherController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TeacherController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/course.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/course.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/followup.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/followup.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/teacher.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/teacher.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_10_21_092830_create_followups_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_10_21_092830_create_followups_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_16_105253_create_courses_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_16_105253_create_courses_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_20_150706_create_teachers_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_20_150706_create_teachers_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/dashboard/CHANGELOG.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/dashboard/ISSUE_TEMPLATE.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/dashboard/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/public/dashboard/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/dashboard/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/public/dashboard/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/dashboard/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/dashboard/assets/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/dashboard/docs/documentation.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/dashboard/examples/dashboard - Copy.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/dashboard/examples/dashboard.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/dashboard/examples/icons.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/dashboard/examples/map.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/dashboard/examples/notifications.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/dashboard/examples/tables.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/dashboard/examples/typography.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/dashboard/examples/upgrade.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/dashboard/examples/user.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/dashboard/gulpfile.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/dashboard/nucleo-icons.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/dashboard/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/dashboard/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/dashboard/template.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/passwords/confirm.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/passwords/confirm.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/passwords/email.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/passwords/email.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/passwords/reset.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/passwords/reset.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/register.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/freePackageLanding.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/freePackageLanding.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/loginSMS.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/loginSMS.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/master/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/master/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/cardBox.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/cardBox.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/followups.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/followups.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/insertFollowUp.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/insertFollowUp.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/master/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/master/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/master/leftNavbar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/master/leftNavbar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/profile.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/users.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/users.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/master/leftNavbar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/master/leftNavbar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/resetPasswordbySMS.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/resetPasswordbySMS.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -398,7 +336,7 @@
       <workItem from="1612524632144" duration="1571000" />
       <workItem from="1612528702489" duration="5932000" />
       <workItem from="1612543966027" duration="5541000" />
-      <workItem from="1612591165222" duration="3008000" />
+      <workItem from="1612591165222" duration="4673000" />
     </task>
     <servers />
   </component>
