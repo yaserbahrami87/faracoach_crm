@@ -82,19 +82,33 @@ class RegisterController extends Controller
             $data['introduced']=NULL;
         }
 
+        if(!isset($data['organization']))
+        {
+            $data['organization']=NULL;
+        }
+
+        if(!isset($data['jobside']))
+        {
+            $data['jobside']=NULL;
+        }
+
+        $data['resource']='کمپین';
+        $data['detailsresource']='تو به یک کوچ نیاز داری';
 
         return User::create([
-            'fname'         => $data['fname'],
-            'lname'         => $data['lname'],
-            'sex'           =>$data['sex'],
-            'email'         => $data['email'],
-            'tel'           =>$data['tel'],
-            'tel_verified'  =>$data['tel_verified'],
-            'password'      => Hash::make($data['password']),
-            'introduced'    =>$data['introduced'],
-            'gettingknow'   =>$data['gettingknow'],
-            'organization'  =>$data['organization'],
-            'jobside'       =>$data['jobside'],
+            'fname'             => $data['fname'],
+            'lname'             => $data['lname'],
+            'sex'               =>$data['sex'],
+            'email'             => $data['email'],
+            'tel'               =>$data['tel'],
+            'tel_verified'      =>$data['tel_verified'],
+            'password'          => Hash::make($data['password']),
+            'introduced'        =>$data['introduced'],
+            'gettingknow'       =>$data['gettingknow'],
+            'organization'      =>$data['organization'],
+            'jobside'           =>$data['jobside'],
+            'resource'          =>$data['resource'],
+            'detailsresource'   =>$data['detailsresource']
         ]);
     }
 }

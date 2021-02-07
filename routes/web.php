@@ -174,6 +174,12 @@ Route::get('/password/sendcode','VerifyController@sendResetCode');
 Route::post('/password/reset/update','VerifyController@checkResetCode');
 
 
+Route::get('/register2',function()
+{
+    return view('register_landingPage');
+});
+
+
 
 
 
