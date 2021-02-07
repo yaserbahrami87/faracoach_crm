@@ -5,7 +5,7 @@
             <h5 class="card-title">ویرایش اطلاعات استاد</h5>
         </div>
         <div class="card-body">
-            <form method="post" action="/admin/teachers/{{$teacher->id}}" enctype="multipart/form-data">
+            <form method="post" action="/admin/teachers/{{$teacher->shortlink}}" enctype="multipart/form-data">
                 {{csrf_field()}}
                 {{method_field('PATCH')}}
                 <div class="form-group">
