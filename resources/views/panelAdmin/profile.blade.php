@@ -239,12 +239,12 @@
                                 <label>تحصیلات</label>
                                 <select id="education" class="form-control p-0 @error('education') is-invalid @enderror" name="education">
                                     <option selected disabled>انتخاب کنید</option>
-                                    <option {{ $user->gettingknow =="زیردیپلم" ? 'selected='.'"'.'selected'.'"' : '' }}>زیردیپلم</option>
-                                    <option {{ $user->gettingknow =="دیپلم" ? 'selected='.'"'.'selected'.'"' : '' }}>دیپلم</option>
-                                    <option {{ $user->gettingknow =="فوق دیپلم" ? 'selected='.'"'.'selected'.'"' : '' }}>فوق دیپلم</option>
-                                    <option {{ $user->gettingknow =="لیسانس" ? 'selected='.'"'.'selected'.'"' : '' }}>لیسانس</option>
-                                    <option {{ $user->gettingknow =="فوق لیسانس" ? 'selected='.'"'.'selected'.'"' : '' }}>فوق لیسانس</option>
-                                    <option {{ $user->gettingknow =="دکتری و بالاتر" ? 'selected='.'"'.'selected'.'"' : '' }}>دکتری و بالاتر</option>
+                                    <option {{ $user->education =="زیردیپلم" ? 'selected='.'"'.'selected'.'"' : '' }}>زیردیپلم</option>
+                                    <option {{ $user->education =="دیپلم" ? 'selected='.'"'.'selected'.'"' : '' }}>دیپلم</option>
+                                    <option {{ $user->education =="فوق دیپلم" ? 'selected='.'"'.'selected'.'"' : '' }}>فوق دیپلم</option>
+                                    <option {{ $user->education =="لیسانس" ? 'selected='.'"'.'selected'.'"' : '' }}>لیسانس</option>
+                                    <option {{ $user->education =="فوق لیسانس" ? 'selected='.'"'.'selected'.'"' : '' }}>فوق لیسانس</option>
+                                    <option {{ $user->education =="دکتری و بالاتر" ? 'selected='.'"'.'selected'.'"' : '' }}>دکتری و بالاتر</option>
                                 </select>
                             </div>
                         </div>
