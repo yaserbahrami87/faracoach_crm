@@ -163,6 +163,8 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Hekmatinasser\Verta\VertaServiceProvider::class,
         Anetwork\Validation\PersianValidationServiceProvider::class,
+        Kavenegar\Laravel\ServiceProvider::class,
+
 
 
 
@@ -233,6 +235,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Verta' => Hekmatinasser\Verta\Verta::class,
         'FastExcel' => Rap2hpoutre\FastExcel\Facades\FastExcel::class,
+        'Kavenegar' => Kavenegar\Laravel\Facade::class,
     ],
 
 ];

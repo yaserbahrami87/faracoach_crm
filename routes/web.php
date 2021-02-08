@@ -157,6 +157,9 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
 
     //CourseType
     Route::resource('coursetype','CoursetypeController');
+
+    //SMS
+    Route::resource('sms','SmsController');
 });
 
 

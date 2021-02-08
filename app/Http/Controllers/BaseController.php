@@ -740,4 +740,12 @@ class BaseController extends Controller
         return coursetype::orderby('id','desc')
                 ->get();
     }
+
+    public function get_detailsResource()
+    {
+        return user::whereNotNull('detailsresource')
+                ->groupby('detailsresource')
+                ->get();
+
+    }
 }

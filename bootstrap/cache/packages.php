@@ -67,6 +67,17 @@
       'Image' => 'Intervention\\Image\\Facades\\Image',
     ),
   ),
+  'kavenegar/laravel' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Kavenegar\\Laravel\\ServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Kavenegar' => 'Kavenegar\\Laravel\\Facade',
+    ),
+  ),
   'laravel/tinker' => 
   array (
     'providers' => 

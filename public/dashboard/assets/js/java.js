@@ -197,3 +197,10 @@ $("#goBack").click(function(e)
 $(document).ready(function() {
     $('#userTable').DataTable();
 } );
+
+$("#btn_fileds").click(function()
+{
+  var b=$("#filters").html();
+  //var a="<div class='form-group'><label for='problem'>فیلد</label><input type='text' class='form-control' id='problem'  name='ategory' /><small class='text-muted'>به عنوان مثال: 09121234567,09151234567</small></div><div id='add_fileds'></div>";
+  $("#add_fileds").append(b);
+});

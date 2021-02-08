@@ -158,7 +158,7 @@ class TeacherController extends Controller
         $msg = "پروفایل با موفقیت به روزرسانی شد";
         $errorStatus = "success";
 
-        return back()->with('msg', $msg)
+        return redirect('/admin/teachers')->with('msg', $msg)
             ->with('errorStatus', $errorStatus);
     }
 
