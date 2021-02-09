@@ -272,6 +272,12 @@
                                     <p>ارسال پیامک</p>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="/admin/sms/" class="nav-link @if(request()->is('admin/sms')) active  @endif">
+                                    <i class="fas fa-chart-pie"></i>
+                                    <p>گزارش پیامک</p>
+                                </a>
+                            </li>
                         </ul>
                     </li>
 

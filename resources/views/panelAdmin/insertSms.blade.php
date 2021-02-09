@@ -1,7 +1,7 @@
 @extends('panelAdmin.master.index')
 @section('rowcontent')
     <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-        <form method="post" action="/admin/sms/">
+        <form method="post" action="/admin/sms">
             {{csrf_field()}}
             <div class="form-group">
                 <label for="tel_recieves">شماره تلفن ها</label>

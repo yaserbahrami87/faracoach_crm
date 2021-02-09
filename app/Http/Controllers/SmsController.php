@@ -17,7 +17,14 @@ class SmsController extends BaseController
      */
     public function index()
     {
-
+        $sms=sms::orderby('id','desc')
+                ->paginate(50);
+        foreach ($sms as $item)
+        {
+            $item->insert_user_id=$this->get_user_byID($item->insert_user_id)->fname." ".$this->get_user_byID($item->insert_user_id)->lname;
+        }
+        return view ('panelAdmin.sms')
+                    ->with('sms',$sms);
     }
 
     /**
@@ -92,7 +99,7 @@ class SmsController extends BaseController
                         'type' => $status,
                         'code' => $messageid,
                     ]);
-                    $msg = "پیامک با مشخصات " . $messageid . " متن" . $message . " با وضعیت" . $status . " می باشد";
+                    $msg = "پیامک با مشخصات " . $messageid . "  متن " . $message . " با وضعیت " . $status . " می باشد";
                     $errorStatus = "success";
                     return back()->with('msg', $msg)
                         ->with('errorStatus', $errorStatus);
