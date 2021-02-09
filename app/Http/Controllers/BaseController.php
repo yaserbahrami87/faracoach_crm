@@ -752,7 +752,14 @@ class BaseController extends Controller
     public function get_talktimeByID($id)
     {
         return followup::where('insert_user_id','=',$id)
-                ->sum('followups.talktime');
+                    ->sum('followups.talktime');
+    }
+
+    public function get_talktimeTodayByID($id)
+    {
+        return followup::where('insert_user_id','=',$id)
+                    ->where('date_fa','=',$this->dateNow)
+                    ->sum('followups.talktime');
     }
 
 }

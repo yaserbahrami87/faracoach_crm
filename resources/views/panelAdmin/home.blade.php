@@ -36,7 +36,7 @@
                         <td scope="row">{{$item->students}}</td>
                         <td scope="row">{{$item->noanswering}}</td>
                         <td scope="row">{{$item->cancelfollowup}}</td>
-                        <td scope="row"></td>
+                        <td scope="row">{{$item->talktimeToday}}</td>
                         <td scope="row">{{$item->talktime}}</td>
 
                     </tr>

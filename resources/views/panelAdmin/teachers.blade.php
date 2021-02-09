@@ -32,7 +32,7 @@
                     </a>
                 </td>
                 <td>
-                    <form method="post" action="/admin/teachers/{{$item->shortlink}}">
+                    <form method="post" action="/admin/teachers/{{$item->shortlink}}" onsubmit="return confirm('آیا از حذف استاد اطمینان دارید؟(در صورت حذف تمام سوابق دوره های استاد و اطلاعات آن از بانک حذف می شود)');">
                         {{ method_field('DELETE') }}
                         {{ csrf_field() }}
                         <button  class="btn btn-danger" type="submit">
