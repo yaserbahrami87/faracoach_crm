@@ -204,3 +204,27 @@ $("#btn_fileds").click(function()
   //var a="<div class='form-group'><label for='problem'>فیلد</label><input type='text' class='form-control' id='problem'  name='ategory' /><small class='text-muted'>به عنوان مثال: 09121234567,09151234567</small></div><div id='add_fileds'></div>";
   $("#add_fileds").append(b);
 });
+
+$("#btn_showCount").click(function()
+{
+  var loading='<div class="col-12 text-center"><div class="spinner-border text-primary text-center" role="status"><span class="sr-only">Loading...</span></div></div>';
+  $("#showCount").html(loading);
+  var data=$("#sendSMS").serialize();
+  if(data.length>0)
+  {
+    $.ajax({
+      type:'POST',
+      data:data,
+      url:"/admin/sms/createajax/",
+      success:function(data)
+      {
+        $("#showCount").html(data);
+      }
+    });
+  }
+  else
+  {
+    data="";
+    $("#showCount").html(data);
+  }
+});

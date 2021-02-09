@@ -1,7 +1,7 @@
 @extends('panelAdmin.master.index')
 @section('rowcontent')
     <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-        <form method="post" action="/admin/sms">
+        <form method="post" action="/admin/sms" id="sendSMS" onsubmit="return confirm('آیا از ارسال پیامک اطمینان دارید?(لطفا قبل از ارسال از گزینه محاسبه از تعداد افراد مطمئن شوید');">
             {{csrf_field()}}
             <div class="form-group">
                 <label for="tel_recieves">شماره تلفن ها</label>
@@ -56,8 +56,10 @@
                 <label for="comment" >متن پیامک</label>
                 <textarea class="form-control" id="comment" rows="3" name="comment"></textarea>
             </div>
+            <div class="form-group" id="showCount">0</div>
+            <button type="button" class="btn btn-warning" id="btn_showCount">محاسبه</button>
             <button type="submit" class="btn btn-primary">ارسال پیامک</button>
-
         </form>
     </div>
+
 @endsection

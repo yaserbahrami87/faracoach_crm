@@ -160,6 +160,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
 
     //SMS
     Route::resource('sms','SmsController');
+    Route::post('/sms/createajax/','SmsController@createAjax');
 });
 
 

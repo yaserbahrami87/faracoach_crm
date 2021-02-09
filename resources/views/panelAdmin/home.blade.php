@@ -1,6 +1,6 @@
 @extends('panelAdmin.master.index')
 @section('rowcontent')
-    
+
     @if(Auth::user()->type==2)
         <div class="col-12 table-responsive">
             <table class="table table-striped table-bordered table-hover">
@@ -17,7 +17,8 @@
                     <th scope="col">مشتری</th>
                     <th scope="col">عدم پاسخ</th>
                     <th scope="col">انصرافی ها</th>
-                    <th scope="col">آخرین ورودی</th>
+                    <th scope="col">مدت مکالمه روز</th>
+                    <th scope="col">مدت مکالمه</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -35,7 +36,8 @@
                         <td scope="row">{{$item->students}}</td>
                         <td scope="row">{{$item->noanswering}}</td>
                         <td scope="row">{{$item->cancelfollowup}}</td>
-                        <td scope="row">{{$item->last_login_at}}</td>
+                        <td scope="row"></td>
+                        <td scope="row">{{$item->talktime}}</td>
 
                     </tr>
                 @endforeach

@@ -172,4 +172,32 @@ class SmsController extends BaseController
     {
         //
     }
+
+    public function createAjax(request $request)
+    {
+        $temp='';
+        $user=user::query();
+        if(isset($request->categories)) {
+            for ($i = 0; $i < count($request->categories); $i++) {
+                $user = $user->orwhere('resource', '=', $request['categories'][$i]);
+            }
+        }
+        if(isset($request->fields)) {
+            for ($i = 0; $i < count($request->fields); $i++) {
+                $user = $user->where($request['fields'][$i], $request['comparison'][$i], $request['values'][$i]);
+            }
+        }
+        $user=$user->groupby('id')->get();
+
+        if((count($user)>0)||(isset($request['tel_recieves']))) {
+            echo "تعداد افراد فیلترشده ".count($user)." نفر می باشد";
+        }
+        else
+        {
+            $msg = "تعداد افراد فیلترشده 0 نفر می باشد";
+            $errorStatus = "danger";
+            return back()->with('msg', $msg)
+                ->with('errorStatus', $errorStatus);
+        }
+    }
 }

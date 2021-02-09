@@ -748,4 +748,11 @@ class BaseController extends Controller
                 ->get();
 
     }
+
+    public function get_talktimeByID($id)
+    {
+        return followup::where('insert_user_id','=',$id)
+                ->sum('followups.talktime');
+    }
+
 }
