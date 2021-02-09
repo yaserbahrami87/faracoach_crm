@@ -48,11 +48,16 @@ class SmsController extends BaseController
     public function store(Request $request)
     {
 
+        $this->validate($request,[
+            'comment'   =>'required'
+        ]);
         $temp='';
         $user=user::query();
+
         if(isset($request->categories)) {
             for ($i = 0; $i < count($request->categories); $i++) {
                 $user = $user->orwhere('resource', '=', $request['categories'][$i]);
+                $user = $user->orwhere('detailsresource', '=', $request['categories'][$i]);
             }
         }
         if(isset($request->fields)) {
@@ -175,11 +180,13 @@ class SmsController extends BaseController
 
     public function createAjax(request $request)
     {
+
         $temp='';
         $user=user::query();
         if(isset($request->categories)) {
             for ($i = 0; $i < count($request->categories); $i++) {
                 $user = $user->orwhere('resource', '=', $request['categories'][$i]);
+                $user = $user->orwhere('detailsresource', '=', $request['categories'][$i]);
             }
         }
         if(isset($request->fields)) {

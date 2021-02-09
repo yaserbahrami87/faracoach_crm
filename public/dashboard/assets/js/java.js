@@ -215,7 +215,7 @@ $("#btn_showCount").click(function()
     $.ajax({
       type:'POST',
       data:data,
-      url:"/admin/sms/createajax/",
+      url:"/admin/sms/createajax",
       success:function(data)
       {
         $("#showCount").html(data);
