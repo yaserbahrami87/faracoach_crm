@@ -10,10 +10,13 @@ use App\followbyCategory;
 use App\followup;
 use App\message;
 use App\problemfollowup;
+use App\settingsms;
+use App\sms;
 use App\state;
 use App\tag;
 use App\teacher;
 use App\User;
+use Kavenegar;
 use GuzzleHttp\Client;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Support\Facades\Gate;
@@ -44,28 +47,70 @@ class BaseController extends Controller
 
     public function sendSms($tel,$msg)
     {
-        // Send SMS
-        $url = "https://ippanel.com/services.jspd";
-        $rcpt_nm = array($tel);
-        $param = array
-                    (
-                        'uname'=>'09154665888',
-                        'pass'=>'qSo9e_o2S3',
-                        'from'=>'3000505',
-                        'message'=>$msg,
-                        'to'=>json_encode($rcpt_nm),
-                        'op'=>'send'
-                    );
+        try {
+            $sender = "10004346";
+            $message = $msg;
+            $receptor = array($tel);
+            $result = Kavenegar::Send($sender, $tel, $message);
+            if ($result) {
+                foreach ($result as $r) {
+                    $messageid = $r->messageid;
+                    $message = $r->message;
+                    $status = $r->status;
+                    $statustext = $r->statustext;
+                    $sender = $r->sender;
+                    $receptor = $r->receptor;
+                    $date = $r->date;
+                    $cost = $r->cost;
+                }
 
-        $handler = curl_init($url);
-        curl_setopt($handler, CURLOPT_CUSTOMREQUEST, "POST");
-        curl_setopt($handler, CURLOPT_POSTFIELDS, $param);
-        curl_setopt($handler, CURLOPT_RETURNTRANSFER, true);
-        $response2 = curl_exec($handler);
+                sms::create([
+                    'insert_user_id' => Auth::user()->id,
+                    'recieve_user' => $tel,
+                    'comment' => $message,
+                    'date_fa' => $this->dateNow,
+                    'time_fa' => $this->timeNow,
+                    'type' => $status,
+                    'code' => $messageid,
+                ]);
+                $msg=[];
+                $msg['msg']= "پیامک با مشخصات " . $messageid . "  متن '" . $message . "' با وضعیت " . $status . " می باشد";
+                $msg['status']=true;
+                return $msg;
+            }
 
-        $response2 = json_decode($response2);
-        $res_code = $response2[0];
-        $res_data = $response2[1];
+        } catch (\Kavenegar\Exceptions\ApiException $e) {
+            // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
+            $msg=[];
+            $msg['msg'] = $e->errorMessage();
+            $msg['status']=false;
+            sms::create([
+                'insert_user_id' => Auth::user()->id,
+                'recieve_user' => $tel,
+                'comment' => $message,
+                'date_fa' => $this->dateNow,
+                'time_fa' => $this->timeNow,
+                'type' => $msg['status'],
+                'code' =>  $msg['msg'],
+            ]);
+            return $msg;
+
+        } catch (\Kavenegar\Exceptions\HttpException $e) {
+            // در زمانی که مشکلی در برقرای ارتباط با وب سرویس وجود داشته باشد این خطا رخ می دهد
+            $msg=[];
+            $msg['msg'] = $e->errorMessage();
+            $msg['status'] =false;
+            sms::create([
+                'insert_user_id' => Auth::user()->id,
+                'recieve_user' => $tel,
+                'comment' => $message,
+                'date_fa' => $this->dateNow,
+                'time_fa' => $this->timeNow,
+                'type' => $msg['status'],
+                'code' =>  $msg['msg'],
+            ]);
+            return $msg;
+        }
     }
 
 
@@ -760,6 +805,13 @@ class BaseController extends Controller
         return followup::where('insert_user_id','=',$id)
                     ->where('date_fa','=',$this->dateNow)
                     ->sum('followups.talktime');
+    }
+
+    public function get_settingsmsByType($type)
+    {
+        return settingsms::where('type',$type)
+                    ->where('status','=',1)
+                    ->get();
     }
 
 }

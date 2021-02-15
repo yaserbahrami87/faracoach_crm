@@ -331,6 +331,13 @@ class UserController extends BaseController
         return back()->with('msg',$msg)->with('errorStatus',$errorStatus);
     }
 
+    public function showRegister()
+    {
+        $settingsms=$this->get_settingsmsByType(2);
+        return view('panelAdmin.registerUser')
+                    ->with('settingsms',$settingsms);
+
+    }
     //Register User by Admin
     public function register(Request $request)
     {
@@ -377,7 +384,25 @@ class UserController extends BaseController
         {
             if($request['sendsms']!="0")
             {
-                $request['sendsms']=$request['sendsms']."\n  نام کاربری:".$request['tel']."\n رمز عبور:".$request['password']. "\n https://www.crm.faracoach.com";
+                if($request['sex']==1)
+                {
+                    $request['sex']="آقای ";
+                }
+                else if($request['sex']==0)
+                {
+                    $request['sex']="خانم ";
+                }
+                else
+                {
+                    $request['sex']="خانم/آقای ";
+                }
+                $request['sendsms']=str_replace("{tel}",$request['tel'],$request['sendsms']);
+                $request['sendsms']=str_replace("{fname}",$request['fname'],$request['sendsms']);
+                $request['sendsms']=str_replace("{lname}",$request['lname'],$request['sendsms']);
+                $request['sendsms']=str_replace("{datebirth}",$request['datebirth'],$request['sendsms']);
+                $request['sendsms']=str_replace("{sex}",$request['sex'],$request['sendsms']);
+
+                $request['sendsms']=$request['sendsms']."\n  نام کاربری:".$request['tel']."\n رمز عبور:".$request['password']. "\n ";
                 $request['sendsms']=(str_replace('...','',$request['sendsms']));
                 $this->sendSms($request['tel'],$request['sendsms']);
             }
@@ -568,6 +593,28 @@ class UserController extends BaseController
 
         //لیست دوره ها
         $courses=$this->get_courses();
+
+        //لیست پیامکها
+        $settingsms=$this->get_settingsmsByType(1);
+        foreach ($settingsms as $item)
+        {
+           $item->comment=str_replace("\r\n","<br>",$item->comment);
+           $item->comment=str_replace('{tel}',$user->tel,$item->comment);
+           $item->comment=str_replace('{fname}',$user->fname,$item->comment);
+           $item->comment=str_replace('{lname}',$user->lname,$item->comment);
+           $item->comment=str_replace('{datebirth}',$user->datebirth,$item->comment);
+           if($user->sex==0)
+           {
+               $item->comment=str_replace('{sex}','سرکارخانم ',$item->comment);
+           }
+           else if($user->sex==1)
+           {
+               $item->comment=str_replace('{sex}','جناب آقای ',$item->comment);
+           }
+        }
+
+
+
         return view('panelAdmin.profile')
                     ->with('user',$user)
                     ->with('countFollowups',$countFollowups)
@@ -582,7 +629,7 @@ class UserController extends BaseController
                     ->with('score',$score)
                     ->with('verifyScore',$verifyScore)
                     ->with('scoreSuccess',$scoreSuccess)
-                    //->with('verifyStatus',$verifyStatus)
+                    ->with('settingsms',$settingsms)
                     ->with('tags',$tags)
                     ->with('today',$today)
                     ->with('nextDayFollow',$nextDayFollow)

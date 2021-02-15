@@ -35,7 +35,7 @@ class SmsController extends BaseController
     public function create()
     {
         $categories=($this->get_detailsResource());
-        return view('panelAdmin.insertSms')
+        return view('panelAdmin.sendSms')
                     ->with('categories',$categories);
     }
 
@@ -54,7 +54,8 @@ class SmsController extends BaseController
         $temp='';
         $user=user::query();
 
-        if(isset($request->categories)) {
+        if(isset($request->categories))
+        {
             for ($i = 0; $i < count($request->categories); $i++) {
                 $user = $user->orwhere('resource', '=', $request['categories'][$i]);
                 $user = $user->orwhere('detailsresource', '=', $request['categories'][$i]);
@@ -78,50 +79,69 @@ class SmsController extends BaseController
                 $tel=$tel.",".$request['tel_recieves'];
             }
 
-            try {
-                $sender = "10004346";
-                $message = $request['comment'];
-                $receptor = array($tel);
-                $result = Kavenegar::Send($sender, $receptor, $message);
-                if ($result) {
-                    foreach ($result as $r) {
-                        $messageid = $r->messageid;
-                        $message = $r->message;
-                        $status = $r->status;
-                        $statustext = $r->statustext;
-                        $sender = $r->sender;
-                        $receptor = $r->receptor;
-                        $date = $r->date;
-                        $cost = $r->cost;
+            foreach ($user as $item) {
+                if($item->sex==1)
+                {
+                    $item->sex="آقای ";
+                }
+                else if($item->sex==0)
+                {
+                    $item->sex="خانم ";
+                }
+                else
+                {
+                    $item->sex="خانم/آقای ";
+                }
+                $request['comment']=str_replace("{tel}",$item->tel,$request['comment']);
+                $request['comment']=str_replace("{fname}",$item->fname,$request['comment']);
+                $request['comment']=str_replace("{lname}",$item->lname,$request['comment']);
+                $request['comment']=str_replace("{datebirth}",$item->datebirth,$request['comment']);
+                $request['comment']=str_replace("{sex}",$item->sex,$request['comment']);
+
+                try {
+                    $sender = "10004346";
+                    $message = $request['comment'];
+                    $receptor = array($tel);
+                    $result = Kavenegar::Send($sender, $item->tel, $message);
+                    if ($result) {
+                        foreach ($result as $r) {
+                            $messageid = $r->messageid;
+                            $message = $r->message;
+                            $status = $r->status;
+                            $statustext = $r->statustext;
+                            $sender = $r->sender;
+                            $receptor = $r->receptor;
+                            $date = $r->date;
+                            $cost = $r->cost;
+                        }
+                        sms::create([
+                            'insert_user_id' => Auth::user()->id,
+                            'recieve_user' => $tel,
+                            'comment' => $request['comment'],
+                            'date_fa' => $this->dateNow,
+                            'time_fa' => $this->timeNow,
+                            'type' => $status,
+                            'code' => $messageid,
+                        ]);
+                        $msg = "پیامک با مشخصات " . $messageid . "  متن '" . $message . "' با وضعیت " . $status . " می باشد";
+                        $errorStatus = "success";
+                        return back()->with('msg', $msg)
+                            ->with('errorStatus', $errorStatus);
                     }
 
-                    sms::create([
-                        'insert_user_id' => Auth::user()->id,
-                        'recieve_user' => $tel,
-                        'comment' => $request['comment'],
-                        'date_fa' => $this->dateNow,
-                        'time_fa' => $this->timeNow,
-                        'type' => $status,
-                        'code' => $messageid,
-                    ]);
-                    $msg = "پیامک با مشخصات " . $messageid . "  متن " . $message . " با وضعیت " . $status . " می باشد";
-                    $errorStatus = "success";
+                } catch (\Kavenegar\Exceptions\ApiException $e) {
+                    // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
+                    $msg = $e->errorMessage();
+                    $errorStatus = "danger";
+                    return back()->with('msg', $msg)
+                        ->with('errorStatus', $errorStatus);
+                } catch (\Kavenegar\Exceptions\HttpException $e) {
+                    // در زمانی که مشکلی در برقرای ارتباط با وب سرویس وجود داشته باشد این خطا رخ می دهد
+                    $msg = $e->errorMessage();
+                    $errorStatus = "danger";
                     return back()->with('msg', $msg)
                         ->with('errorStatus', $errorStatus);
                 }
-
-            } catch (\Kavenegar\Exceptions\ApiException $e) {
-                // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
-                $msg = $e->errorMessage();
-                $errorStatus = "danger";
-                return back()->with('msg', $msg)
-                    ->with('errorStatus', $errorStatus);
-            } catch (\Kavenegar\Exceptions\HttpException $e) {
-                // در زمانی که مشکلی در برقرای ارتباط با وب سرویس وجود داشته باشد این خطا رخ می دهد
-                $msg = $e->errorMessage();
-                $errorStatus = "danger";
-                return back()->with('msg', $msg)
-                    ->with('errorStatus', $errorStatus);
             }
         }
         else

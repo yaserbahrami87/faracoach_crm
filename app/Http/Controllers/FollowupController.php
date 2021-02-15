@@ -9,8 +9,6 @@ use Illuminate\Support\Facades\Auth;
 class FollowupController extends BaseController
 {
 
-
-
     public function showForm($id)
     {
         $userAdmin=Auth::user();
@@ -87,12 +85,13 @@ class FollowupController extends BaseController
         $data->type=$request['status_followups'];
         $data->followby_expert=$request['followby_expert'];
         $data->save();
+        $request['followby_expert']=$this->get_user_byID($request['followby_expert'])->fname." ".$this->get_user_byID($request['followby_expert'])->lname;
         if($request['sms']!="0")
         {
-            $request['sms']=$request['sms']."\n https://crm.faracoach.com";
+            //$request['sms']=$request['sms']."\n https://crm.faracoach.com";
             $request['sms']=str_replace('{nextDate}',$request['nextfollowup_date_fa'],$request['sms']);
-            $request['sms']=str_replace("<br>","\n",$request['sms']);
-
+            $request['sms']=str_replace('{followby_expert}',$request['followby_expert'],$request['sms']);
+            $request['sms']=str_replace("<br>","\r\n",$request['sms']);
             $this->sendSms($data['tel'],$request['sms']);
         }
         if($check)

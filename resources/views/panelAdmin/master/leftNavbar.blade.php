@@ -257,8 +257,8 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item has-treeview @if(request()->is('admin/sms')) menu-open  @endif">
-                        <a href="#" class="nav-link @if(request()->is('admin/sms*')) active  @endif">
+                    <li class="nav-item has-treeview @if(request()->is('admin/settingsms')) menu-open  @endif">
+                        <a href="#" class="nav-link @if(request()->is('admin/settingsms*')) active  @endif">
                             <i class="fas fa-sms"></i>
                             <p>
                                 پیامک
@@ -270,6 +270,12 @@
                                 <a href="/admin/sms/create" class="nav-link @if(request()->is('admin/sms/create')) active  @endif">
                                     <i class="fas fa-paper-plane"></i>
                                     <p>ارسال پیامک</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/admin/settingsms" class="nav-link @if(request()->is('admin/settingsms')) active  @endif">
+                                    <i class="fas fa-tools"></i>
+                                    <p>تنظیمات </p>
                                 </a>
                             </li>
                             <li class="nav-item">

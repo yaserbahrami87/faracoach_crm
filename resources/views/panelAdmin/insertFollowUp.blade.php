@@ -80,7 +80,7 @@
 
                     <div class="col-md-4 px-1">
                         <div class="form-group">
-                            <label>مسئول پیگیری</label>
+                            <label>ارجاع پیگیری</label>
                             <select class="form-control p-0"  name="followby_expert" >
                                 <option disabled="disabled" selected >نتیجه را مشخص کنید</option>
                                 @foreach($expert_followup as $item)
@@ -123,22 +123,10 @@
                                         </label>
                                     </div>
                                     <div class="form-check">
-
-                                        <input class="form-check-input" type="radio" name="sms" id="sendsms2" value="@if($user->sex==1)جناب آقای@elseif($user->sex==0)سرکارخانم@elseجناب آقای/سرکارخانم@endif <br> فایل آموزشی درخواستی شما در سایت در دسترس شما قرار گرفت.جهت پیگیری در تاریخ {nextDate} منتظر تماس ما باشید  <br> مشاور اختصاصی شما:{{Auth::user()->fname }}{{Auth::user()->lname}} <br> باشگاه مشتریان فراکوچ" >
-                                        <label class="form-check-label  text-dark" for="sendsms2">
-                                            @if($user->type==1)
-                                                جناب آقای
-                                            @elseif($user->type==0)
-                                                سرکارخانم
-                                            @else
-                                                جناب آقای/سرکارخانم
-                                            @endif
-                                            <br/>
-                                            فایل آموزشی درخواستی شما در سایت در دسترس شما قرار گرفت.
-                                            جهت پیگیری در تاریخ {nextDate} منتظر تماس ما باشید<br/>
-                                            مشاور اختصاصی شما:{{Auth::user()->fname }} {{Auth::user()->lname}}<br/>
-                                            باشگاه مشتریان فراکوچ
-                                        </label>
+                                        @foreach($settingsms as $item)
+                                            <input class="form-check-input" type="radio" name="sms" id="sendsms{{$item->id}}" value="{{$item->comment}}" >
+                                            <label class="form-check-label  text-dark" for="sendsms{{$item->id}}">{!! $item->comment !!}</label>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>

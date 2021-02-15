@@ -2,10 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/views/panelAdmin/editSms.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/panelAdmin/sendSms.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/panelAdmin/settingsSms.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FollowupController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FollowupController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SmsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SmsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/dashboard/assets/js/java.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/dashboard/assets/js/java.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/freePackageLanding.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/freePackageLanding.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/insertFollowUp.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/insertFollowUp.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/insertSms.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/insertSms.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/master/leftNavbar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/master/leftNavbar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/registerUser.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/registerUser.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,12 +195,12 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\laravel\faracoach_crm\resources\views\panelUser" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\xampp\htdocs\faracoach_crm\resources\views\panelAdmin" />
       <recent name="C:\xampp\htdocs\laravel\faracoach_crm\resources\views\panelAdmin" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\laravel\faracoach_crm\resources\views\panelUser" />
     </key>
   </component>
   <component name="RunManager">
@@ -344,7 +357,14 @@
       <workItem from="1612591165222" duration="21461000" />
       <workItem from="1612677104791" duration="15114000" />
       <workItem from="1612765462921" duration="20868000" />
-      <workItem from="1612850806402" duration="16967000" />
+      <workItem from="1612850806402" duration="19935000" />
+      <workItem from="1613026542316" duration="4412000" />
+      <workItem from="1613128556883" duration="985000" />
+      <workItem from="1613161245963" duration="535000" />
+      <workItem from="1613196230142" duration="3544000" />
+      <workItem from="1613204956579" duration="14390000" />
+      <workItem from="1613293599904" duration="8149000" />
+      <workItem from="1613372774608" duration="14532000" />
     </task>
     <servers />
   </component>
@@ -364,11 +384,11 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="275" y="22" key="#Deployment/0.0.1366.728@0.0.1366.728" timestamp="1605611185466" />
-    <state x="413" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1612427463148">
+    <state x="413" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1613381342845">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="413" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1607375390214" />
-    <state x="413" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1612427463148" />
+    <state x="413" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1613381342845" />
     <state x="404" y="105" width="540" height="524" key="StructurePopup" timestamp="1610172588165">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -385,14 +405,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="549" y="230" width="250" height="278" key="jetbrains.javascript.buildTools.run-task-popup/0.0.1366.728@0.0.1366.728" timestamp="1604908977921" />
-    <state x="339" y="162" key="run.anything.popup" timestamp="1612346909521">
+    <state x="339" y="162" key="run.anything.popup" timestamp="1613374415680">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1612346909521" />
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1612872593622">
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1613374415680" />
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1613387066035">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1610574245405" />
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1612872593622" />
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1613387066035" />
   </component>
 </project>

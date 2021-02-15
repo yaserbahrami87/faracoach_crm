@@ -110,7 +110,7 @@
                             </div>
                             <div class="form-group row">
                                 <div class="col-md-4 col-form-label text-right" >
-                                    <a class="btn btn-primary" data-toggle="collapse" href="#Organization" role="button" class="text-md-right  text-dark">{{ __('اطلاعات سازمان:') }}</a>                                   
+                                    <a class="btn btn-primary" data-toggle="collapse" href="#Organization" role="button" class="text-md-right  text-dark">{{ __('اطلاعات سازمان:') }}</a>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="collapse" id="Organization">
@@ -118,7 +118,7 @@
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <label for="organization">ارگان</label>
-                                                    <input id="organization" type="text" name="organization" class="form-control @error('organization') is-invalid @enderror" value="{{ old('organization') }}" autocomplete="organization">            
+                                                    <input id="organization" type="text" name="organization" class="form-control @error('organization') is-invalid @enderror" value="{{ old('organization') }}" autocomplete="organization">
                                                     @error('organization')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -127,7 +127,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="jobside">سمت</label>
-                                                    <input id="jobside" type="text"  name="jobside" class="form-control @error('jobside') is-invalid @enderror" value="{{ old('jobside') }}" autocomplete="jobside">            
+                                                    <input id="jobside" type="text"  name="jobside" class="form-control @error('jobside') is-invalid @enderror" value="{{ old('jobside') }}" autocomplete="jobside">
                                                     @error('jobside')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -193,24 +193,14 @@
                                             ارسال نشود
                                         </label>
                                     </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="sendsms" id="sendsms2"  value="                                            خانم/آقای ....محترم  ممنون از تماس شما.مشخصات شما در باشگاه مشتریان فراکوچ ثبت شد.به زودی باشما تماس خواهیم گرفت.">
-                                        <label class="form-check-label  text-dark" for="sendsms2">
-                                            خانم/آقای ....محترم  ممنون از تماس شما.مشخصات شما در باشگاه مشتریان فراکوچ ثبت شد.به زودی باشما تماس خواهیم گرفت.
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="sendsms" id="sendsms3" value="خانم/آقای ... محترم شما توسط ... به باشگاه مشتریان فراکوچ دعوت شدید">
-                                        <label class="form-check-label  text-dark" for="sendsms3">
-                                           خانم/آقای ... محترم شما توسط ... به باشگاه مشتریان فراکوچ دعوت شدید
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="sendsms" id="sendsms3" value="جناب آقای / خانم ... موسسه فراکوچ مقدم شما را گرامی می دارد">
-                                        <label class="form-check-label  text-dark" for="sendsms3">
-                                            جناب آقای / خانم ... موسسه فراکوچ مقدم شما را گرامی می دارد
-                                        </label>
-                                    </div>
+                                    @foreach($settingsms as $item)
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="sendsms" id="sendsms{{$item->id}}"  value="{{$item->comment}}">
+                                            <label class="form-check-label  text-dark" for="sendsms{{$item->id}}">
+                                                {{$item->comment}}
+                                            </label>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
 

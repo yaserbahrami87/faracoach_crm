@@ -84,10 +84,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::patch('/user/{id}/changeType','UserController@changeType');
     Route::get('/users/search/','UserController@searchUsers');
     Route::get('/users/search/advance','UserController@advanceSearchUsers');
-    Route::get('/add',function()
-    {
-        return view('panelAdmin.registerUser');
-    });
+    Route::get('/add','UserController@showRegister');
     Route::post('/register','UserController@register');
     Route::get('/user/{user}/delete','UserController@destroy');
     Route::get('/users/category/','UserController@showCategoryUsersAdmin');
@@ -161,6 +158,10 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     //SMS
     Route::resource('sms','SmsController');
     Route::post('/sms/createajax','SmsController@createAjax');
+
+    //Setting SMS
+    Route::resource('settingsms','SettingsmsController');
+
 });
 
 

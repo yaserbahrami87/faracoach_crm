@@ -228,3 +228,11 @@ $("#btn_showCount").click(function()
     $("#showCount").html(data);
   }
 });
+
+function add_parametersSMS(parameter)
+{
+  var a=$("#commentSMS").val();
+
+  $("#commentSMS").val(a+parameter);
+  console.log(a+parameter);
+}
