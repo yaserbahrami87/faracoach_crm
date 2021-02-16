@@ -56,6 +56,10 @@ class UserController extends BaseController
                 $item->lastDateFollowup=$this->get_lastFollowupUser($item->id)['date_fa'];
                 $item->lastFollowupCourse=$this->get_lastFollowupUser($item->id)['course_id'];
                 $item->lastFollowupCourse=$this->get_coursesByID($item->lastFollowupCourse)['course'];
+                if(is_null($item->personal_image))
+                {
+                    $item->personal_image="default-avatar.png";
+                }
             }
             $tags=$this->get_tags();
             $parentCategory=$this->get_category('پیگیری');
@@ -160,6 +164,10 @@ class UserController extends BaseController
                 $item->lastDateFollowup=$this->get_lastFollowupUser($item->id)['date_fa'];
                 $item->lastFollowupCourse=$this->get_lastFollowupUser($item->id)['course_id'];
                 $item->lastFollowupCourse=$this->get_coursesByID($item->lastFollowupCourse)['course'];
+                if(is_null($item->personal_image))
+                {
+                    $item->personal_image="default-avatar.png";
+                }
             }
             $tags=$this->get_tags();
             $parentCategory=$this->get_category('پیگیری');
@@ -567,7 +575,6 @@ class UserController extends BaseController
         $tags = $this->get_tags();
         $parentCategory = $this->get_category('پیگیری');
 
-
         //کسب امتیازات
         $score = $countIntroducedUser * 5;
         //امتیاز تایید شماره همراه
@@ -841,6 +848,10 @@ class UserController extends BaseController
                     $item->lastDateFollowup=$this->get_lastFollowupUser($item->id)['date_fa'];
                     $item->lastFollowupCourse=$this->get_lastFollowupUser($item->id)['course_id'];
                     $item->lastFollowupCourse=$this->get_coursesByID($item->lastFollowupCourse)['course'];
+                    if(is_null($item->personal_image))
+                    {
+                        $item->personal_image="default-avatar.png";
+                    }
                 }
                 $users->appends(['user' => $request['user']]);
                 $tags = $this->get_tags();
@@ -1178,6 +1189,10 @@ class UserController extends BaseController
             $item->lastDateFollowup=$this->get_lastFollowupUser($item->id)['date_fa'];
             $item->lastFollowupCourse=$this->get_lastFollowupUser($item->id)['course_id'];
             $item->lastFollowupCourse=$this->get_coursesByID($item->lastFollowupCourse)['course'];
+            if(is_null($item->personal_image))
+            {
+                $item->personal_image="default-avatar.png";
+            }
         }
         $usersAdmin=user::orwhere('type','=','2')
                         ->orwhere('type','=',3)
@@ -1262,6 +1277,10 @@ class UserController extends BaseController
                     $item->lastDateFollowup=$this->get_lastFollowupUser($item->id)['date_fa'];
                     $item->lastFollowupCourse=$this->get_lastFollowupUser($item->id)['course_id'];
                     $item->lastFollowupCourse=$this->get_coursesByID($item->lastFollowupCourse)['course'];
+                    if(is_null($item->personal_image))
+                    {
+                        $item->personal_image="default-avatar.png";
+                    }
                 }
 
                 $users->appends(['tags' => $request['tags']]);
@@ -1407,6 +1426,10 @@ class UserController extends BaseController
             $item->quality_color=$this->get_lastFollowupUser($item->id)['color'];
             $item->lastFollowupCourse=$this->get_lastFollowupUser($item->id)['course_id'];
             $item->lastFollowupCourse=$this->get_coursesByID($item->lastFollowupCourse)['course'];
+            if(is_null($item->personal_image))
+            {
+                $item->personal_image="default-avatar.png";
+            }
         }
 
         $users->appends(['q' => $request['q']]);

@@ -179,6 +179,7 @@
                     <table id="usersTable" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                         <tr>
+                            <th></th>
                             <th>نام</th>
                             <th>نام خانوادگی</th>
                             <th>شماره همراه	</th>
@@ -200,6 +201,9 @@
                         <tbody>
                         @foreach($users as $item)
                             <tr style="background-color: {{$item->quality_color}}">
+                                <td>
+                                    <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="img-fluid img-circle"  width="50px"/>
+                                </td>
                                 <td>
                                     <a href="/admin/user/{{$item->id}}" class="text-dark">
                                         {{$item->fname}}
@@ -264,6 +268,7 @@
                         </tbody>
                         <tfoot>
                         <tr>
+                            <th></th>
                             <th>نام</th>
                             <th>نام خانوادگی</th>
                             <th>شماره همراه	</th>

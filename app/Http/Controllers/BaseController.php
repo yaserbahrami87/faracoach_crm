@@ -143,7 +143,19 @@ class BaseController extends Controller
             echo "<option value='$item->id' @if($item->id==$user->city) selected @endif>".$item->name."</option>";
         }
     }
-
+    public function get_userTypes()
+    {
+        $types=['1' =>'پیگیری نشده',
+                '2' =>'مدیر',
+                '3' =>'آموزش',
+                '11'=>"تور پیگیری",
+                '12'=>"انصراف",
+                '13'=>"در انتظار تصمیم",
+                '14'=>"عدم پاسخگویی",
+                '20'=>"مشتری"
+        ];
+        return $types;
+    }
     public function userType($status)
     {
 

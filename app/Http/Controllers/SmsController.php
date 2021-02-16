@@ -39,11 +39,14 @@ class SmsController extends BaseController
         //تگ ها
         $tags = $this->get_tags();
         $parentCategory = $this->get_category('پیگیری');
-
+        $problem=$this->getproblemfollowup();
+        $types=$this->get_userTypes();
         return view('panelAdmin.sendSms')
                     ->with('categories',$categories)
                     ->with('parentCategory',$parentCategory )
-                    ->with('tags',$tags);
+                    ->with('tags',$tags)
+                    ->with('problem',$problem)
+                    ->with('types',$types);
     }
 
     /**
@@ -78,7 +81,19 @@ class SmsController extends BaseController
                 $user = $user->where($request['fields'][$i], $request['comparison'][$i], $request['values'][$i]);
             }
         }
+        if(isset($request->problem)) {
+            for ($i = 0; $i < count($request->problem); $i++) {
+                $user = $user->where('followups.problemfollowup_id', '=', $request['problem'][$i]);
+            }
+        }
+        if(isset($request->types)) {
+            for ($i = 0; $i < count($request->types); $i++) {
+                $user = $user->where('users.type', '=', $request['types'][$i]);
+            }
+        }
+
         $user=$user->groupby('users.id')->get();
+
         if((count($user)>0)||(isset($request['tel_recieves']))) {
             $tel_array = [];
             foreach ($user as $item) {
@@ -232,6 +247,16 @@ class SmsController extends BaseController
             }
         }
 
+        if(isset($request->problem)) {
+            for ($i = 0; $i < count($request->problem); $i++) {
+                $user = $user->where('followups.problemfollowup_id', '=', $request['problem'][$i]);
+            }
+        }
+        if(isset($request->types)) {
+            for ($i = 0; $i < count($request->types); $i++) {
+                $user = $user->where('users.type', '=', $request['types'][$i]);
+            }
+        }
         $user=$user->groupby('users.id')->get();
 
         if((count($user)>0)||(isset($request['tel_recieves']))) {

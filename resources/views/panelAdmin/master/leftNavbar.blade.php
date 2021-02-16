@@ -247,7 +247,6 @@
                         </ul>
                     </li>
 
-
                     <li class="nav-item has-treeview ">
                         <a href="/admin/settings/" class="nav-link @if(request()->is('admin/setting*')) active  @endif">
                             <i class="nav-icon fas fa-cogs"></i>
