@@ -202,7 +202,7 @@
                         @foreach($users as $item)
                             <tr style="background-color: {{$item->quality_color}}">
                                 <td>
-                                    <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="img-fluid img-circle"  width="50px" height="50px"/>
+                                    <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="img-circle"  width="50px" height="50px"/>
                                 </td>
                                 <td>
                                     <a href="/admin/user/{{$item->id}}" class="text-dark">
