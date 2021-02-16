@@ -74,7 +74,6 @@
                     </div>
                 @endforeach
             </div>
-
             <div class="form-group mt-3" >
                 <label for="comment" >متن پیامک</label>
                 <button type="button" class="btn btn-primary btn-sm" id="tel_btn" onclick="add_parametersSMS('{tel}')" >تلفن همراه</button>

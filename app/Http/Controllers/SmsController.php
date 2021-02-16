@@ -59,7 +59,7 @@ class SmsController extends BaseController
         ]);
         $temp='';
         $user=user::query();
-        $user->join('followups','users.id','=','followups.user_id');
+        $user->leftjoin('followups','users.id','=','followups.user_id');
         if(isset($request->categories))
         {
             for ($i = 0; $i < count($request->categories); $i++) {
@@ -213,7 +213,7 @@ class SmsController extends BaseController
     {
 
         $user=user::query();
-        $user->join('followups','users.id','=','followups.user_id');
+        $user->leftjoin('followups','users.id','=','followups.user_id');
         if(isset($request->categories)) {
             for ($i = 0; $i < count($request->categories); $i++) {
                 $user = $user->orwhere('resource', '=', $request['categories'][$i]);
