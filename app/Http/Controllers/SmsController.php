@@ -35,8 +35,15 @@ class SmsController extends BaseController
     public function create()
     {
         $categories=($this->get_detailsResource());
+
+        //تگ ها
+        $tags = $this->get_tags();
+        $parentCategory = $this->get_category('پیگیری');
+
         return view('panelAdmin.sendSms')
-                    ->with('categories',$categories);
+                    ->with('categories',$categories)
+                    ->with('parentCategory',$parentCategory )
+                    ->with('tags',$tags);
     }
 
     /**
@@ -47,13 +54,12 @@ class SmsController extends BaseController
      */
     public function store(Request $request)
     {
-
         $this->validate($request,[
             'comment'   =>'required'
         ]);
         $temp='';
         $user=user::query();
-
+        $user->join('followups','users.id','=','followups.user_id');
         if(isset($request->categories))
         {
             for ($i = 0; $i < count($request->categories); $i++) {
@@ -61,13 +67,18 @@ class SmsController extends BaseController
                 $user = $user->orwhere('detailsresource', '=', $request['categories'][$i]);
             }
         }
+        if(isset($request->tags))
+        {
+            for ($i = 0; $i < count($request->tags); $i++) {
+                $user = $user->where('followups.tags', 'like', "%".$request['tags'][$i]."%");
+            }
+        }
         if(isset($request->fields)) {
             for ($i = 0; $i < count($request->fields); $i++) {
                 $user = $user->where($request['fields'][$i], $request['comparison'][$i], $request['values'][$i]);
             }
         }
-        $user=$user->groupby('id')->get();
-
+        $user=$user->groupby('users.id')->get();
         if((count($user)>0)||(isset($request['tel_recieves']))) {
             $tel_array = [];
             foreach ($user as $item) {
@@ -201,12 +212,18 @@ class SmsController extends BaseController
     public function createAjax(request $request)
     {
 
-        $temp='';
         $user=user::query();
+        $user->join('followups','users.id','=','followups.user_id');
         if(isset($request->categories)) {
             for ($i = 0; $i < count($request->categories); $i++) {
                 $user = $user->orwhere('resource', '=', $request['categories'][$i]);
                 $user = $user->orwhere('detailsresource', '=', $request['categories'][$i]);
+            }
+        }
+        if(isset($request->tags))
+        {
+            for ($i = 0; $i < count($request->tags); $i++) {
+                $user = $user->where('followups.tags', 'like', "%".$request['tags'][$i]."%");
             }
         }
         if(isset($request->fields)) {
@@ -214,7 +231,8 @@ class SmsController extends BaseController
                 $user = $user->where($request['fields'][$i], $request['comparison'][$i], $request['values'][$i]);
             }
         }
-        $user=$user->groupby('id')->get();
+
+        $user=$user->groupby('users.id')->get();
 
         if((count($user)>0)||(isset($request['tel_recieves']))) {
             echo "تعداد افراد فیلترشده ".count($user)." نفر می باشد";

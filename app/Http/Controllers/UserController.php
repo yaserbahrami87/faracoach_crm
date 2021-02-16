@@ -401,7 +401,6 @@ class UserController extends BaseController
                 $request['sendsms']=str_replace("{lname}",$request['lname'],$request['sendsms']);
                 $request['sendsms']=str_replace("{datebirth}",$request['datebirth'],$request['sendsms']);
                 $request['sendsms']=str_replace("{sex}",$request['sex'],$request['sendsms']);
-
                 $request['sendsms']=$request['sendsms']."\n  نام کاربری:".$request['tel']."\n رمز عبور:".$request['password']. "\n ";
                 $request['sendsms']=(str_replace('...','',$request['sendsms']));
                 $this->sendSms($request['tel'],$request['sendsms']);
