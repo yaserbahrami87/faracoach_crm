@@ -202,7 +202,9 @@
                         @foreach($users as $item)
                             <tr style="background-color: {{$item->quality_color}}">
                                 <td>
-                                    <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="img-circle"  width="50px" height="50px"/>
+                                    <a href="/admin/user/{{$item->id}}">
+                                        <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="img-circle"  width="50px" height="50px"/>
+                                    </a>
                                 </td>
                                 <td>
                                     <a href="/admin/user/{{$item->id}}" class="text-dark">
@@ -246,7 +248,7 @@
                                 </td>
                                 <td>
                                     <a href="/admin/user/{{$item->id}}" class="text-dark">
-                                        {{$item->type}}
+                                        {{$item->status_followups}}
                                     </a>
                                 </td>
                                 <td>

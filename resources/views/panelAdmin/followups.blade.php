@@ -24,7 +24,7 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label>وضعیت</label>
-                                    <input type="text" class="form-control "  value="{{$item->type}}" name="state" disabled="disabled"  />
+                                    <input type="text" class="form-control "  value="{{$item->status_followups}}" name="state" disabled="disabled"  />
                                 </div>
                             </div>
                             <div class="col-md-3 p-0">
