@@ -207,23 +207,23 @@
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="/admin/user/{{$item->id}}" class="text-dark">
+                                    <a href="/admin/user/{{$item->id}}" class="text-dark d-block">
                                         {{$item->fname}}
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="/admin/user/{{$item->id}}" class="text-dark">
+                                    <a href="/admin/user/{{$item->id}}" class="text-dark d-block">
                                         {{$item->lname}}
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="/admin/user/{{$item->id}}" class="text-dark">
+                                    <a href="/admin/user/{{$item->id}}" class="text-dark d-block">
                                         {{$item->tel}}
                                     </a>
                                 </td>
 
                                 <td>
-                                    <a href="/admin/user/{{$item->id}}" class="text-dark">
+                                    <a href="/admin/user/{{$item->id}}" class="text-dark d-block">
                                         {{$item->created_at}}
                                     </a>
                                 </td>
@@ -239,7 +239,7 @@
                                     {{$item->lastFollowupCourse}}
                                 </td>
                                 <td>
-                                    <a href="/admin/user/{{$item->id}}" class="text-dark">
+                                    <a href="/admin/user/{{$item->id}}" class="text-dark d-block">
                                         {{$item->lastDateFollowup}}
                                     </a>
                                 </td>
@@ -247,12 +247,12 @@
                                     {{$item->quality}}
                                 </td>
                                 <td>
-                                    <a href="/admin/user/{{$item->id}}" class="text-dark">
+                                    <a href="/admin/user/{{$item->id}}" class="text-dark d-block">
                                         {{$item->status_followups}}
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="/admin/user/{{$item->id}}" class="text-dark">
+                                    <a href="/admin/user/{{$item->id}}" class="text-dark d-block">
                                         {{$item->last_login_at}}
                                     </a>
                                 </td>
