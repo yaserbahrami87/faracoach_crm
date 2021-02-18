@@ -83,12 +83,23 @@ class SmsController extends BaseController
         }
         if(isset($request->problem)) {
             for ($i = 0; $i < count($request->problem); $i++) {
-                $user = $user->where('followups.problemfollowup_id', '=', $request['problem'][$i]);
+                $user = $user->orwhere('followups.problemfollowup_id', '=', $request['problem'][$i]);
             }
         }
         if(isset($request->types)) {
             for ($i = 0; $i < count($request->types); $i++) {
-                $user = $user->where('users.type', '=', $request['types'][$i]);
+                if($request['types'][$i]==1)
+                {
+                    $user = $user->orwhere('users.type', '=', '1');
+                }
+                else if($request['types'][$i]==2)
+                {
+                    $user = $user->orwhere('users.type', '=', '2');
+                }
+                else
+                {
+                    $user = $user->orwhere('followups.status_followups', '=', $request['types'][$i]);
+                }
             }
         }
 
@@ -105,6 +116,12 @@ class SmsController extends BaseController
                 $tel=$tel.",".$request['tel_recieves'];
             }
 
+
+            // این قسمت مججد باید ویرایش بشه
+            if(isset($request['tel_recieves']))
+            {
+                $this->sendSms($item->tel,$request['comment']);
+            }
             foreach ($user as $item) {
                 if($item->sex==1)
                 {
@@ -123,51 +140,7 @@ class SmsController extends BaseController
                 $request['comment']=str_replace("{lname}",$item->lname,$request['comment']);
                 $request['comment']=str_replace("{datebirth}",$item->datebirth,$request['comment']);
                 $request['comment']=str_replace("{sex}",$item->sex,$request['comment']);
-
-                try {
-                    $sender = "10004346";
-                    $message = $request['comment'];
-                    $receptor = array($tel);
-                    $result = Kavenegar::Send($sender, $item->tel, $message);
-                    if ($result) {
-                        foreach ($result as $r) {
-                            $messageid = $r->messageid;
-                            $message = $r->message;
-                            $status = $r->status;
-                            $statustext = $r->statustext;
-                            $sender = $r->sender;
-                            $receptor = $r->receptor;
-                            $date = $r->date;
-                            $cost = $r->cost;
-                        }
-                        sms::create([
-                            'insert_user_id' => Auth::user()->id,
-                            'recieve_user' => $tel,
-                            'comment' => $request['comment'],
-                            'date_fa' => $this->dateNow,
-                            'time_fa' => $this->timeNow,
-                            'type' => $status,
-                            'code' => $messageid,
-                        ]);
-                        $msg = "پیامک با مشخصات " . $messageid . "  متن '" . $message . "' با وضعیت " . $status . " می باشد";
-                        $errorStatus = "success";
-                        return back()->with('msg', $msg)
-                            ->with('errorStatus', $errorStatus);
-                    }
-
-                } catch (\Kavenegar\Exceptions\ApiException $e) {
-                    // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
-                    $msg = $e->errorMessage();
-                    $errorStatus = "danger";
-                    return back()->with('msg', $msg)
-                        ->with('errorStatus', $errorStatus);
-                } catch (\Kavenegar\Exceptions\HttpException $e) {
-                    // در زمانی که مشکلی در برقرای ارتباط با وب سرویس وجود داشته باشد این خطا رخ می دهد
-                    $msg = $e->errorMessage();
-                    $errorStatus = "danger";
-                    return back()->with('msg', $msg)
-                        ->with('errorStatus', $errorStatus);
-                }
+                $this->sendSms($item->tel,$request['comment']);
             }
         }
         else
@@ -249,12 +222,19 @@ class SmsController extends BaseController
 
         if(isset($request->problem)) {
             for ($i = 0; $i < count($request->problem); $i++) {
-                $user = $user->where('followups.problemfollowup_id', '=', $request['problem'][$i]);
+                $user = $user->orwhere('followups.problemfollowup_id', '=', $request['problem'][$i]);
             }
         }
+
         if(isset($request->types)) {
             for ($i = 0; $i < count($request->types); $i++) {
-                $user = $user->where('users.type', '=', $request['types'][$i]);
+                if ($request['types'][$i] == 1) {
+                    $user = $user->orwhere('users.type', '=', '1');
+                } else if ($request['types'][$i] == 2) {
+                    $user = $user->orwhere('users.type', '=', '2');
+                } else {
+                    $user = $user->orwhere('followups.status_followups', '=', $request['types'][$i]);
+                }
             }
         }
         $user=$user->groupby('users.id')->get();

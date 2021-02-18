@@ -40,6 +40,7 @@ class CreateUsersTable extends Migration
             $table->string('shenasnameh_image')->nullable();
             $table->string('cartmelli_image')->nullable();
             $table->string('education_image')->nullable();
+            $table->string('resume')->nullable();
             $table->boolean('married')->nullable();
             $table->tinyInteger('type')->default('0');
             $table->string('resource',30)->nullable();
@@ -49,8 +50,11 @@ class CreateUsersTable extends Migration
             $table->integer('followby_id')->nullable();
             $table->integer('followby_expert')->nullable();
             $table->integer('insert_user_id')->nullable();
-            $table->rememberToken();
+            $table->string('telegram',50)->nullable();
+            $table->string('instagram',50)->nullable();
+            $table->string('linkedin',250)->nullable();
             $table->timestamp('last_login_at')->nullable();
+            $table->rememberToken();
             $table->timestamps();
         });
     }

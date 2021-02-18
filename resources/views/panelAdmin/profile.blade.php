@@ -175,6 +175,24 @@
                                 <input type="text" class="form-control" placeholder="آدرس را وارد کنید" value="{{$user->address}}" name="address"  lang="fa" />
                             </div>
                         </div>
+                        <div class="col-md-6 px-1">
+                            <div class="form-group">
+                                <label>اینستاگرام</label>
+                                <input type="text" class="form-control" placeholder="صفحه اینستاگرام خود را وارد کنید" value="{{$user->instagram}}" name="instagram"  />
+                            </div>
+                        </div>
+                        <div class="col-md-6 px-1">
+                            <div class="form-group">
+                                <label>تلگرام</label>
+                                <input type="text" class="form-control" placeholder="آیدی تلگرام خود را وارد کنید" value="{{$user->telegram}}" name="telegram"  />
+                            </div>
+                        </div>
+                        <div class="col-md-6 px-1">
+                            <div class="form-group">
+                                <label>لینکدین</label>
+                                <input type="text" class="form-control" placeholder="آیدی لینکدین خود را وارد کنید" value="{{$user->linkedin}}" name="linkedin"  />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -294,6 +312,15 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-6 px-1">
+                            <div class="form-group">
+                                <label>رزومه</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="resume" aria-describedby="resume" name="resume" />
+                                    <label class="custom-file-label" for="resume">Choose file</label>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
@@ -332,7 +359,8 @@
                         <div class="col-md-6 px-1">
                             <div class="form-group">
                                 <label>معرف</label>
-                                <input type="text" class="form-control" value="{{$user->introduced }}" name="introduced"   lang="fa"/>
+                                <input type="text" class="form-control" value="{{$user->introduced }}"  id="introduced" />
+                                <span id="feedback_introduced" ></span>
                             </div>
                         </div>
                         <div class="col-md-6 px-1">

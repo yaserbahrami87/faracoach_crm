@@ -95,6 +95,55 @@
                                 <input type="text" class="form-control" placeholder="آدرس را وارد کنید" value="{{$user->address}}" name="address"  lang="fa" />
                             </div>
                         </div>
+                        <div class="col-md-4 px-1">
+                            <div class="form-group">
+                                <label>اینستاگرام</label>
+                                <input type="text" class="form-control" placeholder="صفحه اینستاگرام خود را وارد کنید" value="{{$user->instagram}}" name="instagram"  />
+                            </div>
+                        </div>
+                        <div class="col-md-4 px-1">
+                            <div class="form-group">
+                                <label>تلگرام</label>
+                                <input type="text" class="form-control" placeholder="آیدی تلگرام خود را وارد کنید" value="{{$user->telegram}}" name="telegram"  />
+                            </div>
+                        </div>
+                        <div class="col-md-4 px-1">
+                            <div class="form-group">
+                                <label>لینکدین</label>
+                                <input type="text" class="form-control" placeholder="آیدی لینکدین خود را وارد کنید" value="{{$user->linkedin}}" name="linkedin"  />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card card-user" id="infogettingKnow">
+                <div class="card-header">
+                    <h5 class="card-title">نحوه آشنایی</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 px-1">
+                            <div class="form-group">
+                                <label>نحوه آشنایی</label>
+                                <select id="gettingknow" class="form-control p-0 @error('gettingknow') is-invalid @enderror" name="gettingknow">
+                                    <option selected disabled>انتخاب کنید</option>
+                                    <option {{ $user->gettingknow =="اینستاگرام" ? 'selected='.'"'.'selected'.'"' : '' }}>اینستاگرام</option>
+                                    <option {{ $user->gettingknow =="تلگرام" ? 'selected='.'"'.'selected'.'"' : '' }}>تلگرام</option>
+                                    <option {{ $user->gettingknow =="تبلیغاتی محیطی" ? 'selected='.'"'.'selected'.'"' : '' }}>تبلیغاتی محیطی</option>
+                                    <option {{ $user->gettingknow =="تبلیغات فضای مجازی" ? 'selected='.'"'.'selected'.'"' : '' }}>تبلیغات فضای مجازی</option>
+                                    <option {{ $user->gettingknow =="پکیج رایگان" ? 'selected='.'"'.'selected'.'"' : '' }}>پکیج رایگان</option>
+                                    <option {{ $user->gettingknow =="واتساپ" ? 'selected='.'"'.'selected'.'"' : '' }}>واتساپ</option>
+                                    <option {{ $user->gettingknow =="موتورهای جستجو" ? 'selected='.'"'.'selected'.'"' : '' }}>موتورهای جستجو</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 px-1">
+                            <div class="form-group">
+                                <label>معرف</label>
+                                <input type="text" class="form-control" value="{{$user->introduced }}"  id="introduced" />
+                                <span id="feedback_introduced" ></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -196,6 +245,15 @@
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" id="inputeducation_image" aria-describedby="inputeducation_image" name="education_image" />
                                     <label class="custom-file-label" for="inputeducation_image">Choose file</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 px-1">
+                            <div class="form-group">
+                                <label>رزومه</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="resume" aria-describedby="resume" name="resume" />
+                                    <label class="custom-file-label" for="resume">Choose file</label>
                                 </div>
                             </div>
                         </div>

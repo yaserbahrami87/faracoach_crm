@@ -673,27 +673,33 @@ class UserController extends BaseController
     {
             $this->validate(request(),
                 [
-                    'fname' => 'nullable|min:3|persian_alpha',
-                    'lname' => 'nullable|min:3|persian_alpha',
-                    'codemelli' => 'nullable|numeric',
-                    'sex' => 'nullable|boolean',
-                    'tel' => 'nullable|iran_mobile',
-                    'shenasname' => 'nullable|numeric',
-                    'datebirth'  =>'nullable|max:11|string',
-                    'father' => 'nullable|min:3|persian_alpha',
-                    'born' => 'nullable|persian_alpha',
-                    'married' => 'nullable|boolean',
-                    'education' => 'nullable|min:4|persian_alpha',
-                    'reshteh' => 'nullable|min:4|persian_alpha',
-                    'job' => 'nullable|min:4|persian_alpha',
-                    'state' => 'nullable|numeric',
-                    'city' => 'nullable|numeric',
-                    'address' => 'nullable|min:4|',
-                    'personal_image' => 'nullable|mimes:jpeg,jpg,pdf|max:600',
-                    'shenasnameh_image' => 'nullable|mimes:jpeg,jpg,pdf|max:600',
-                    'cartmelli_image' => 'nullable|mimes:jpeg,jpg,pdf|max:600',
-                    'education_image' => 'nullable|mimes:jpeg,jpg,pdf|max:600',
-                    'email' => 'nullable|email|',
+                    'fname'             => 'nullable|min:3|persian_alpha',
+                    'lname'             => 'nullable|min:3|persian_alpha',
+                    'codemelli'         => 'nullable|numeric',
+                    'sex'               => 'nullable|boolean',
+                    'tel'               => 'nullable|iran_mobile',
+                    'shenasname'        => 'nullable|numeric',
+                    'datebirth'         =>'nullable|max:11|string',
+                    'father'            => 'nullable|persian_alpha',
+                    'born'              => 'nullable|persian_alpha',
+                    'married'           => 'nullable|boolean',
+                    'education'         => 'nullable|persian_alpha',
+                    'reshteh'           => 'nullable|persian_alpha',
+                    'job'               => 'nullable|persian_alpha',
+                    'state'             => 'nullable|numeric',
+                    'city'              => 'nullable|numeric',
+                    'address'           => 'nullable|min:4|',
+                    'personal_image'    => 'nullable|mimes:jpeg,jpg,|max:600',
+                    'shenasnameh_image' => 'nullable|mimes:jpeg,jpg,|max:600',
+                    'cartmelli_image'   => 'nullable|mimes:jpeg,jpg,|max:600',
+                    'education_image'   => 'nullable|mimes:jpeg,jpg,|max:600',
+                    'resume'            => 'nullable|mimes:docx,doc,pdf|max:1024',
+                    'email'             => 'nullable|email|',
+                    'gettingknow'       =>'nullable|string',
+                    'introduced'        =>'nullable|numeric',
+                    'telegram'          =>'nullable|string',
+                    'instagram'         =>'nullable|string',
+                    'linkedin'          =>'nullable|string',
                 ]);
 
 
@@ -729,6 +735,14 @@ class UserController extends BaseController
                 $files = $request->file('education_image')->move($path, $education_image);
                 $request->education_image = $education_image;
             }
+
+            if ($request->has('resume') && $request->file('resume')->isValid()) {
+                $file = $request->file('resume');
+                $resume = "resume-" . $user->tel . "." . $request->file('resume')->extension();
+                $path = public_path('/documents/users/');
+                $files = $request->file('resume')->move($path, $resume);
+                $request->resume = $resume;
+            }
             try {
                 $user->update($request->all());
             } catch (Throwable $e) {
@@ -754,6 +768,11 @@ class UserController extends BaseController
             if (isset($education_image)) {
                 $user->education_image = $education_image;
             }
+
+            if (isset($resume)) {
+                $user->resume = $resume;
+            }
+
             $user->tel_verified = 0;
             $user->save();
             $msg = "پروفایل با موفقیت به روزرسانی شد";

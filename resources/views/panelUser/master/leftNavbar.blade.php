@@ -18,36 +18,37 @@
                 <p>پیام ها</p>
             </a>
         </li>
-        <li>
-            <a href="#">
-                <i class="nc-icon nc-user-run"></i>
-                <p>دوره ها (به زودی)</p>
-            </a>
-        </li>
-        <li>
-            <a href="#" class="text-muted">
-                <i class="nc-icon nc-money-coins"></i>
-                <p>مالی (به زودی)</p>
-            </a>
-        </li>
-        <li>
-            <a href="/panel/introduced" >
-                <i class="nc-icon nc-circle-10"></i>
-                <p>سفیر کوچینگ</p>
-            </a>
-        </li>
-        <li>
-            <a href="/panel/products">
-                <i class="nc-icon nc-caps-small"></i>
-                <p>محصولات</p>
-            </a>
-        </li>
-        <li>
-            <a href="/panel/freepackages">
-                <i class="nc-icon nc-caps-small"></i>
-                <p>دوره رایگان آموزش کوچینگ</p>
-            </a>
-        </li>
-
+        @if(Auth::user()->tel_verified==1)
+            <li>
+                <a href="#">
+                    <i class="nc-icon nc-user-run"></i>
+                    <p>دوره ها (به زودی)</p>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="text-muted">
+                    <i class="nc-icon nc-money-coins"></i>
+                    <p>مالی (به زودی)</p>
+                </a>
+            </li>
+            <li>
+                <a href="/panel/introduced" >
+                    <i class="nc-icon nc-circle-10"></i>
+                    <p>سفیر کوچینگ</p>
+                </a>
+            </li>
+            <li>
+                <a href="/panel/products">
+                    <i class="nc-icon nc-caps-small"></i>
+                    <p>محصولات</p>
+                </a>
+            </li>
+            <li>
+                <a href="/panel/freepackages">
+                    <i class="nc-icon nc-caps-small"></i>
+                    <p>دوره رایگان آموزش کوچینگ</p>
+                </a>
+            </li>
+        @endif
     </ul>
 </div>
