@@ -30,40 +30,53 @@ Route::get('/loginSMS','AdminController@loginSMS');
 Route::post('/panel/storeCodewithoutPass','VerifyController@storeCodewithoutPass');
 Route::post('/panel/checkCodewithoutPass','VerifyController@checkCodewithoutPass');
 
-Route::middleware('can:isUser')->group(function () {
+Route::middleware('can:isUser')->prefix('panel')->group(function () {
 
     // ROUTE USER
 
-    Route::get('/panel/profile','UserController@profile');
-    Route::patch('/panel/profile/update/{user}','UserController@update');
-    Route::get('/panel/userAjax/{user}','UserController@introducedUserAjax');
+    Route::get('/profile','UserController@profile');
+    Route::patch('/profile/update/{user}','UserController@update');
+    Route::get('/userAjax/{user}','UserController@introducedUserAjax');
 
     //messages
-    Route::get('/panel/messages/','MessageController@index');
-    Route::get('/panel/messages/show/{message}','MessageController@show');
-    Route::get('/panel/messages/new','MessageController@create');
-    Route::post('/panel/messages/send','MessageController@store');
-    Route::post('/panel/messages/reply','MessageController@reply');
+    Route::get('/messages/','MessageController@index');
+    Route::get('/messages/show/{message}','MessageController@show');
+    Route::get('/messages/new','MessageController@create');
+    Route::post('/messages/send','MessageController@store');
+    Route::post('/messages/reply','MessageController@reply');
 
 
     //Introduced
-    Route::get('/panel/introduced','UserController@listIntroducedUser');
-    Route::get('/panel/introduced/search','UserController@searchUsersIntroduced');
-    Route::post('/panel/introduced/add','UserController@addIntroducedUser');
+    Route::get('/introduced','UserController@listIntroducedUser');
+    Route::get('/introduced/search','UserController@searchUsersIntroduced');
+    Route::post('/introduced/add','UserController@addIntroducedUser');
 
     //Products
-    Route::get('/panel/products','AdminController@showProducts');
+    Route::get('/products','AdminController@showProducts');
 
     //followup
-    Route::get('/panel/followup/{followup}','UserController@showFollowupIntroduced');
-    Route::post('/panel/followup/create','FollowupController@store');
+    Route::get('/followup/{followup}','UserController@showFollowupIntroduced');
+    Route::post('/followup/create','FollowupController@store');
 
     //Tel verify
-    Route::get('/panel/active/mobile/','VerifyController@verifyTelPanel');
-    Route::post('/panel/active/mobile/code','VerifyController@checkVerifyTelPanel');
+    Route::get('/active/mobile/','VerifyController@verifyTelPanel');
+    Route::post('/active/mobile/code','VerifyController@checkVerifyTelPanel');
 
     //Packages
-    Route::get('/panel/freepackages','AdminController@showFreePackages');
+    Route::get('/freepackages','AdminController@showFreePackages');
+
+    //Post
+    //Route::resource('post','PostController');
+    Route::get('/post','PostController@index');
+    Route::post('/post','PostController@store');
+    Route::get('/post/create','PostController@create');
+    Route::get('/post/{username}/{shortlink}/edit','PostController@edit');
+    Route::patch('/post/{username}/{shortlink}/update','PostController@update');
+    Route::delete('/post/{username}/{shortlink}/delete','PostController@destroy');
+
+    //documents
+    Route::get('/documents','DocumentController@indexUser');
+    Route::get('/documents/{document}','DocumentController@showUser');
 });
 
 
@@ -162,6 +175,13 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     //Setting SMS
     Route::resource('settingsms','SettingsmsController');
 
+    //score
+    Route::resource('settingscore','SettingscoreController');
+
+    //documents
+
+    Route::resource('documents','DocumentController');
+
 });
 
 
@@ -184,7 +204,8 @@ Route::get('/register2',function()
     return view('register_landingPage');
 });
 
-
-
+//blog
+Route::get('/{username}','PostController@blogHomePage');
+Route::get('/{username}/post/{post}','PostController@show');
 
 

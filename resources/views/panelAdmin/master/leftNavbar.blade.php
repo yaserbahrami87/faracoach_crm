@@ -164,7 +164,13 @@
                         <li class="nav-item">
                             <a href="/admin/filemanager" class="nav-link @if(request()->is('admin/filemanager')) active  @endif">
                                 <i class="fas fa-file nav-icon"></i>
-                                <p>مشاهده فایلها</p>
+                                <p>مشاهده همه فایلها</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/admin/documents" class="nav-link @if(request()->is('admin/documents')) active  @endif">
+                                <i class="fas fa-file nav-icon"></i>
+                                <p>لیست فایل های آموزشی</p>
                             </a>
                         </li>
                     </ul>
@@ -255,6 +261,20 @@
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/admin/settings/" class="nav-link @if(request()->is('admin/setting*')) active  @endif">
+                                    <i class="nav-icon fas fa-cogs"></i>
+                                    <p>تنظیمات کلی</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/admin/settingscore" class="nav-link @if(request()->is('admin/score')) active  @endif">
+                                    <i class="fas fa-medal"></i>
+                                    <p>امتیازات </p>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="nav-item has-treeview @if(request()->is('admin/settingsms')) menu-open  @endif">
                         <a href="#" class="nav-link @if(request()->is('admin/settingsms*')) active  @endif">

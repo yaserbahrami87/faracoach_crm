@@ -594,13 +594,7 @@ video[poster]
     filter:grayscale(0%);
 }
 
-footer
-{
-    background-image: url('../images/Footer-1.png');
-    background-size: cover;
-    background-position: top center ;
-    background-repeat: no-repeat;
-}
+
 
 footer a
 {

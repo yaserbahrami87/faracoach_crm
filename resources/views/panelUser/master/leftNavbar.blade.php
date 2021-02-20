@@ -44,9 +44,21 @@
                 </a>
             </li>
             <li>
+                <a href="/panel/documents">
+                    <i class="fas fa-file"></i>
+                    <p>فایل ها</p>
+                </a>
+            </li>
+            <li>
                 <a href="/panel/freepackages">
                     <i class="nc-icon nc-caps-small"></i>
                     <p>دوره رایگان آموزش کوچینگ</p>
+                </a>
+            </li>
+            <li>
+                <a href="/panel/post">
+                    <i class="fas fa-blog"></i>
+                    <p>بلاگ</p>
                 </a>
             </li>
         @endif

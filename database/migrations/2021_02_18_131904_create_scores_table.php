@@ -15,11 +15,6 @@ class CreateScoresTable extends Migration
     {
         Schema::create('scores', function (Blueprint $table) {
             $table->id();
-            $table->integer('signup')->default(0);
-            $table->integer('partsprofile')->default(0);
-            $table->integer('introduced')->default(0);
-            $table->integer('loginintroduced')->default(0);
-            $table->integer('changeintroduced')->default(0);
             $table->timestamps();
         });
     }

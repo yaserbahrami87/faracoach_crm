@@ -49,6 +49,13 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-12 px-1">
+                            <div class="form-group">
+                                <label>نام کاربری</label>
+                                <input type="text" class="form-control" placeholder="نام کاربری خود را وارد کنید" value="{{$user->username}}" name="username" @if(strlen($user->username)>0) disabled @endif/>
+                                <small class="text-muted float-left " dir="ltr">crm.faracoach.com/blog/نام کاربری شما</small>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

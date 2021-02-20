@@ -35,8 +35,7 @@ class AdminController extends BaseController
     {
         if(Gate::allows('isAdmin')||Gate::allows('isEducation'))
         {
-            $notFollowup=User::where('type','=','1')
-                ->count();
+            $notFollowup=count($this->get_notfollowup_withoutPaginate());
             $follow=User::where('type','=','11')
                 ->count();
             $cancel=User::where('type','=','12')
@@ -62,14 +61,14 @@ class AdminController extends BaseController
                         ->get();
             foreach ($usersEducation as $item)
             {
-                $item->cancelfollowup=count($this->get_cancelfollowupbyID($item->id));
-                $item->allFollowups=count($this->get_myfollowupbyID($item->id));
-                $item->todayFollowups=count($this->get_todayFollowupbyID($item->id));
-                $item->followedTodaybyID=count($this->get_followedTodaybyID($item->id));
-                $item->continuefollowup=count($this->get_continuefollowupbyID($item->id));
-                $item->waiting=count($this->get_waitingbyID($item->id));
-                $item->students=count($this->get_studentsbyID($item->id));
-                $item->noanswering=count($this->get_noansweringbyID($item->id));
+                $item->cancelfollowup=count($this->get_cancelfollowupbyID_withoutPaginate($item->id));
+                $item->allFollowups=count($this->get_myfollowupbyID_withoutPaginate($item->id));
+                $item->todayFollowups=count($this->get_todayFollowupbyID_withoutPaginate($item->id));
+                $item->followedTodaybyID=count($this->get_followedTodaybyID_withoutPaginate($item->id));
+                $item->continuefollowup=count($this->get_continuefollowupbyID_withoutPaginate($item->id));
+                $item->waiting=count($this->get_waitingbyID_withoutPaginate($item->id));
+                $item->students=count($this->get_studentsbyID_withoutPaginate($item->id));
+                $item->noanswering=count($this->get_noansweringbyID_withoutPaginate($item->id));
                 if(!is_null($item->last_login_at))
                 {
                     $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);

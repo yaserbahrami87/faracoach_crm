@@ -673,19 +673,20 @@ class UserController extends BaseController
     {
             $this->validate(request(),
                 [
-                    'fname'             => 'nullable|min:3|persian_alpha',
-                    'lname'             => 'nullable|min:3|persian_alpha',
-                    'codemelli'         => 'nullable|numeric',
+                    'username'          => 'nullable|max:200|regex:/(^([a-zA-Z]+)(\d+)?$)/u',
+                    'fname'             => 'nullable|max:100|persian_alpha',
+                    'lname'             => 'nullable|max:100|persian_alpha',
+                    'codemelli'         => 'nullable|numeric|max:15',
                     'sex'               => 'nullable|boolean',
                     'tel'               => 'nullable|iran_mobile',
-                    'shenasname'        => 'nullable|numeric',
+                    'shenasname'        => 'nullable|numeric|max:20',
                     'datebirth'         =>'nullable|max:11|string',
-                    'father'            => 'nullable|persian_alpha',
-                    'born'              => 'nullable|persian_alpha',
+                    'father'            => 'nullable|persian_alpha|max:30',
+                    'born'              => 'nullable|persian_alpha|max:30',
                     'married'           => 'nullable|boolean',
-                    'education'         => 'nullable|persian_alpha',
-                    'reshteh'           => 'nullable|persian_alpha',
-                    'job'               => 'nullable|persian_alpha',
+                    'education'         => 'nullable|persian_alpha|max:20',
+                    'reshteh'           => 'nullable|persian_alpha|max:20',
+                    'job'               => 'nullable|persian_alpha|max:50',
                     'state'             => 'nullable|numeric',
                     'city'              => 'nullable|numeric',
                     'address'           => 'nullable|min:4|',
@@ -697,9 +698,9 @@ class UserController extends BaseController
                     'email'             => 'nullable|email|',
                     'gettingknow'       =>'nullable|string',
                     'introduced'        =>'nullable|numeric',
-                    'telegram'          =>'nullable|string',
-                    'instagram'         =>'nullable|string',
-                    'linkedin'          =>'nullable|string',
+                    'telegram'          =>'nullable|string|max:50',
+                    'instagram'         =>'nullable|string|max:50',
+                    'linkedin'          =>'nullable|string|max:250',
                 ]);
 
 
@@ -1090,17 +1091,17 @@ class UserController extends BaseController
                 }
 
                 //لیست تعداد کاربرها
-                $notfollowup = count($this->get_notfollowup());
-                $continuefollowup = count($this->getAll_continuefollowup());
-                $cancelfollowup = count($this->getAll_cancelfollowup());
-                $waiting = count($this->getAll_waiting());
-                $noanswering = count($this->getAll_noanswering());
-                $students = count($this->getAll_students());
-                $todayFollowup = count($this->getAll_todayFollowup());
+                $notfollowup = count($this->get_notfollowup_withoutPaginate());
+                $continuefollowup = count($this->getAll_continuefollowup_withoutPaginate());
+                $cancelfollowup = count($this->getAll_cancelfollowup_withoutPaginate());
+                $waiting = count($this->getAll_waiting_withoutPaginate());
+                $noanswering = count($this->getAll_noanswering_withoutPaginate());
+                $students = count($this->getAll_students_withoutPaginate());
+                $todayFollowup = count($this->getAll_todayFollowup_withoutPaginate());
                 $expireFollowup = count($this->getAll_expireFollowup());
-                $myfollowup = count($this->getAll_myfollowup());
-                $followedToday = count($this->getAll_followedToday());
-                $trashUser=count($this->getAll_trashuser());
+                $myfollowup = count($this->getAll_myfollowup_withoutPaginate());
+                $followedToday = count($this->getAll_followedToday_withoutPaginate());
+                $trashUser=count($this->getAll_trashuser_withoutPaginate());
 
             }
         }

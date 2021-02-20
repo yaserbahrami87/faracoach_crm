@@ -191,6 +191,13 @@ class BaseController extends Controller
         return user::where('id','=',$id)
                  ->first();
     }
+
+    public function get_user_byUserName($user)
+    {
+        return user::where('username','=',$user)
+                    ->first();
+    }
+
     public function get_data_api()
     {
         $client = new Client([
@@ -320,6 +327,7 @@ class BaseController extends Controller
             ->get();
     }
 
+
     public function get_continuefollowup()
     {
          return User::join('followups','users.id','=','followups.user_id')
@@ -354,6 +362,17 @@ class BaseController extends Controller
             ->paginate($this->countPage());
     }
 
+    public function get_continuefollowupbyID_withoutPaginate($id)
+    {
+        return User::join('followups','users.id','=','followups.user_id')
+            ->where('followby_expert', '=', $id)
+            ->where('status_followups','=',11)
+            ->select('users.*')
+            ->groupby('users.id')
+            ->orderby('users.id', 'desc')
+            ->get();
+    }
+
     public function getAll_continuefollowup()
     {
         return User::join('followups','users.id','=','followups.user_id')
@@ -362,6 +381,16 @@ class BaseController extends Controller
             ->groupby('users.id')
             ->orderby('users.id', 'desc')
             ->paginate($this->countPage());
+    }
+
+    public function getAll_continuefollowup_withoutPaginate()
+    {
+        return User::join('followups','users.id','=','followups.user_id')
+            ->where('status_followups', '=', '11')
+            ->select('users.*')
+            ->groupby('users.id')
+            ->orderby('users.id', 'desc')
+            ->get();
     }
 
     public function get_cancelfollowup()
@@ -398,6 +427,17 @@ class BaseController extends Controller
             ->paginate($this->countPage());
     }
 
+    public function get_cancelfollowupbyID_withoutPaginate($id)
+    {
+        return User::join('followups','users.id','=','followups.user_id')
+            ->where('followby_expert', '=', $id)
+            ->where('status_followups','=',12)
+            ->select('users.*')
+            ->groupby('users.id')
+            ->orderby('users.id', 'desc')
+            ->get();
+    }
+
     public function getAll_cancelfollowup()
     {
         return User::join('followups','users.id','=','followups.user_id')
@@ -406,6 +446,16 @@ class BaseController extends Controller
             ->groupby('users.id')
             ->orderby('users.id', 'desc')
             ->paginate($this->countPage());
+    }
+
+    public function getAll_cancelfollowup_withoutPaginate()
+    {
+        return User::join('followups','users.id','=','followups.user_id')
+            ->where('status_followups','=',12)
+            ->select('users.*')
+            ->groupby('users.id')
+            ->orderby('users.id', 'desc')
+            ->get();
     }
 
     public function get_waiting()
@@ -441,6 +491,17 @@ class BaseController extends Controller
             ->paginate($this->countPage());
     }
 
+    public function get_waitingbyID_withoutPaginate($id)
+    {
+        return User::join('followups','users.id','=','followups.user_id')
+            ->where('status_followups', '=', '13')
+            ->where('followby_expert', '=', $id)
+            ->select('users.*')
+            ->groupby('users.id')
+            ->orderby('users.id', 'desc')
+            ->get();
+    }
+
     public function getAll_waiting()
     {
         return User::join('followups','users.id','=','followups.user_id')
@@ -449,6 +510,16 @@ class BaseController extends Controller
             ->groupby('users.id')
             ->orderby('users.id', 'desc')
             ->paginate($this->countPage());
+    }
+
+    public function getAll_waiting_withoutPaginate()
+    {
+        return User::join('followups','users.id','=','followups.user_id')
+            ->where('status_followups','=',13)
+            ->select('users.*')
+            ->groupby('users.id')
+            ->orderby('users.id', 'desc')
+            ->get();
     }
 
     public function get_noanswering()
@@ -484,6 +555,17 @@ class BaseController extends Controller
             ->paginate($this->countPage());
     }
 
+    public function get_noansweringbyID_withoutPaginate($id)
+    {
+        return User::join('followups','users.id','=','followups.user_id')
+            ->where('status_followups', '=', '14')
+            ->where('followby_expert', '=', $id)
+            ->select('users.*')
+            ->groupby('users.id')
+            ->orderby('users.id', 'desc')
+            ->get();
+    }
+
     public function getAll_noanswering()
     {
         return User::join('followups','users.id','=','followups.user_id')
@@ -492,6 +574,16 @@ class BaseController extends Controller
             ->groupby('users.id')
             ->orderby('users.id', 'desc')
             ->paginate($this->countPage());
+    }
+
+    public function getAll_noanswering_withoutPaginate()
+    {
+        return User::join('followups','users.id','=','followups.user_id')
+            ->where('status_followups','=',14)
+            ->select('users.*')
+            ->groupby('users.id')
+            ->orderby('users.id', 'desc')
+            ->get();
     }
 
     public function get_students()
@@ -527,6 +619,17 @@ class BaseController extends Controller
             ->paginate($this->countPage());
     }
 
+    public function get_studentsbyID_withoutPaginate($id)
+    {
+        return User::join('followups','users.id','=','followups.user_id')
+            ->where('status_followups', '=', '20')
+            ->where('followby_expert', '=', $id)
+            ->select('users.*')
+            ->groupby('users.id')
+            ->orderby('users.id', 'desc')
+            ->get();
+    }
+
     public function getAll_students()
     {
         return User::join('followups','users.id','=','followups.user_id')
@@ -535,6 +638,16 @@ class BaseController extends Controller
             ->groupby('users.id')
             ->orderby('users.id', 'desc')
             ->paginate($this->countPage());
+    }
+
+    public function getAll_students_withoutPaginate()
+    {
+        return User::join('followups','users.id','=','followups.user_id')
+            ->where('status_followups','=',20)
+            ->select('users.*')
+            ->groupby('users.id')
+            ->orderby('users.id', 'desc')
+            ->get();
     }
 
     public function get_todayFollowup()
@@ -571,6 +684,17 @@ class BaseController extends Controller
             ->paginate($this->countPage());
     }
 
+    public function get_todayFollowupbyID_withoutPaginate($id)
+    {
+        return User::join('followups', 'users.id', '=', 'followups.user_id')
+            ->where('followups.nextfollowup_date_fa', '=', $this->dateNow)
+            ->where('followby_expert', '=', $id)
+            ->select('users.*')
+            ->groupby('users.id')
+            ->orderby('users.id', 'desc')
+            ->paginate($this->countPage());
+    }
+
     public function getAll_todayFollowup()
     {
         return User::join('followups', 'users.id', '=', 'followups.user_id')
@@ -579,6 +703,16 @@ class BaseController extends Controller
             ->groupby('users.id')
             ->orderby('users.id', 'desc')
             ->paginate($this->countPage());
+    }
+
+    public function getAll_todayFollowup_withoutPaginate()
+    {
+        return User::join('followups', 'users.id', '=', 'followups.user_id')
+            ->where('followups.nextfollowup_date_fa', '=', $this->dateNow)
+            ->select('users.*')
+            ->groupby('users.id')
+            ->orderby('users.id', 'desc')
+            ->get();
     }
 
     public function get_expireFollowup()
@@ -628,6 +762,17 @@ class BaseController extends Controller
             ->paginate($this->countPage());
     }
 
+    public function getAll_expireFollowup_withoutPaginate()
+    {
+        return User::join('followups', 'users.id', '=', 'followups.user_id')
+            ->where('followups.nextfollowup_date_fa', '<', $this->dateNow)
+            ->wherenotIn('users.type', [2, 12])
+            ->groupby('users.id')
+            ->select('users.*')
+            ->orderby('users.id', 'desc')
+            ->get();
+    }
+
     public function get_myfollowup()
     {
         return User::join('followups', 'users.id', '=', 'followups.user_id')
@@ -658,13 +803,34 @@ class BaseController extends Controller
             ->paginate($this->countPage());
     }
 
+    public function get_myfollowupbyID_withoutPaginate($id)
+    {
+        return User::join('followups', 'users.id', '=', 'followups.user_id')
+            ->where('followups.insert_user_id', '=',$id)
+            ->select('users.*')
+            ->groupby('users.id')
+            ->orderby('users.id', 'desc')
+            ->get();
+    }
+
     public function getAll_myfollowup()
     {
         return User::join('followups', 'users.id', '=', 'followups.user_id')
+            ->where('followups.user_id','=',Auth::user()->id)
             ->select('users.*')
             ->groupby('users.id')
             ->orderby('users.id', 'desc')
             ->paginate($this->countPage());
+    }
+
+    public function getAll_myfollowup_withoutPaginate()
+    {
+        return User::join('followups', 'users.id', '=', 'followups.user_id')
+            ->where('followups.insert_user_id', '=', Auth::user()->id)
+            ->select('users.*')
+            ->groupby('users.id')
+            ->orderby('users.id', 'desc')
+            ->get();
     }
 
     public function get_followedToday()
@@ -700,6 +866,19 @@ class BaseController extends Controller
             ->paginate($this->countPage());
     }
 
+    public function get_followedTodaybyID_withoutPaginate($id)
+    {
+        return User::join('followups', 'users.id', '=', 'followups.user_id')
+            ->where('followups.insert_user_id', '=', $id)
+            ->where('date_fa', '=', $this->dateNow)
+            ->select('users.*')
+            ->orderby('users.id', 'desc')
+            ->groupby('users.id')
+            ->get();
+    }
+
+
+
     public function getAll_followedToday()
     {
         return User::join('followups', 'users.id', '=', 'followups.user_id')
@@ -708,6 +887,16 @@ class BaseController extends Controller
             ->orderby('users.id', 'desc')
             ->groupby('users.id')
             ->paginate($this->countPage());
+    }
+
+    public function getAll_followedToday_withoutPaginate()
+    {
+        return User::join('followups', 'users.id', '=', 'followups.user_id')
+            ->where('date_fa', '=', $this->dateNow)
+            ->select('users.*')
+            ->orderby('users.id', 'desc')
+            ->groupby('users.id')
+            ->get();
     }
 
     public function get_insertuserToday()

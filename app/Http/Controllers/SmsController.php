@@ -232,7 +232,10 @@ class SmsController extends BaseController
                     $user = $user->orwhere('users.type', '=', '1');
                 } else if ($request['types'][$i] == 2) {
                     $user = $user->orwhere('users.type', '=', '2');
-                } else {
+                }else if($request['types'][$i] == 3) {
+                    $user = $user->orwhere('users.type', '=', '3');
+                }
+                else {
                     $user = $user->orwhere('followups.status_followups', '=', $request['types'][$i]);
                 }
             }
