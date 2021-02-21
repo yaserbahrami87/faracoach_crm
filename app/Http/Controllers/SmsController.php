@@ -121,21 +121,21 @@ class SmsController extends BaseController
                 $tel=$tel.",".$request['tel_recieves'];
             }
 
-
             foreach ($user as $item) {
                 $comment=$request['comment'];
                 if($item->sex==1)
                 {
                     $item->sex="آقای ";
                 }
+                else if(is_null($item->sex))
+                {
+                    $item->sex="کاربر ";
+                }
                 else if($item->sex==0)
                 {
                     $item->sex="خانم ";
                 }
-                else
-                {
-                    $item->sex="خانم/آقای ";
-                }
+
                 $comment=str_replace("{tel}",$item->tel,$comment);
                 $comment=str_replace("{fname}",$item->fname,$comment);
                 $comment=str_replace("{lname}",$item->lname,$comment);

@@ -51,6 +51,7 @@ class BaseController extends Controller
             $message = $msg;
             $receptor = array($tel);
             $result = Kavenegar::Send($sender, $tel, $message);
+
             if ($result) {
                 foreach ($result as $r) {
                     $messageid = $r->messageid;
@@ -64,7 +65,7 @@ class BaseController extends Controller
                 }
 
                 sms::create([
-                    'insert_user_id' => Auth::user()->id,
+                    //'insert_user_id' => Auth::user()->id,
                     'recieve_user' => $tel,
                     'comment' => $message,
                     'date_fa' => $this->dateNow,
@@ -73,8 +74,8 @@ class BaseController extends Controller
                     'code' => $messageid,
                 ]);
                 $msg=[];
-                $msg['msg']= "پیامک با مشخصات " . $messageid . "  متن '" . $message . "' با وضعیت " . $status . " می باشد";
-                $msg['status']=true;
+//                $msg['msg']= "پیامک با مشخصات " . $messageid . "  متن '" . $message . "' با وضعیت " . $status . " می باشد";
+//                $msg['status']=true;
                 return $msg;
             }
 

@@ -234,6 +234,7 @@
                                 <label for="exampleFormControlSelect1">جنسیت</label>
                                 <div class="form-group">
                                     <select class="form-control p-0" id="exampleFormControlSelect1" name="sex" >
+                                        <option selected disabled>انتخاب کنید</option>
                                         <option value="0"  {{ $user->sex =="0" ? 'selected='.'"'.'selected'.'"' : '' }}>زن</option>
                                         <option value="1" {{ $user->sex =="1" ? 'selected='.'"'.'selected'.'"' : '' }}>مرد</option>
                                     </select>
@@ -245,6 +246,7 @@
                                 <label>تاهل</label>
                                 <div class="form-group">
                                     <select class="form-control p-0" id="exampleFormControlSelect1" name="married" >
+                                        <option selected disabled>انتخاب کنید</option>
                                         <option value="0" {{ $user->married =="0" ? 'selected='.'"'.'selected'.'"' : '' }}>مجرد</option>
                                         <option value="1" {{ $user->married =="1" ? 'selected='.'"'.'selected'.'"' : '' }}>متاهل</option>
                                     </select>
