@@ -775,7 +775,12 @@ class UserController extends BaseController
                 $user->resume = $resume;
             }
 
-            $user->tel_verified = 0;
+            dd($user->tel);
+            if($request['tel']!=$user->tel)
+            {
+                $user->tel_verified = 0;
+            }
+
             $user->save();
             $msg = "پروفایل با موفقیت به روزرسانی شد";
             $errorStatus = "success";

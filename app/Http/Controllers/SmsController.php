@@ -60,16 +60,16 @@ class SmsController extends BaseController
         $this->validate($request,[
             'comment'   =>'required'
         ]);
-        $temp='';
         $user=user::query();
         $user->leftjoin('followups','users.id','=','followups.user_id');
-        if(isset($request->categories))
-        {
+
+        if(isset($request->categories)) {
             for ($i = 0; $i < count($request->categories); $i++) {
                 $user = $user->orwhere('resource', '=', $request['categories'][$i]);
                 $user = $user->orwhere('detailsresource', '=', $request['categories'][$i]);
             }
         }
+
         if(isset($request->tags))
         {
             for ($i = 0; $i < count($request->tags); $i++) {
@@ -81,29 +81,31 @@ class SmsController extends BaseController
                 $user = $user->where($request['fields'][$i], $request['comparison'][$i], $request['values'][$i]);
             }
         }
+
         if(isset($request->problem)) {
             for ($i = 0; $i < count($request->problem); $i++) {
                 $user = $user->orwhere('followups.problemfollowup_id', '=', $request['problem'][$i]);
             }
         }
+
         if(isset($request->types)) {
             for ($i = 0; $i < count($request->types); $i++) {
-                if($request['types'][$i]==1)
-                {
+                if ($request['types'][$i] == 1) {
                     $user = $user->orwhere('users.type', '=', '1');
-                }
-                else if($request['types'][$i]==2)
-                {
+                } else if ($request['types'][$i] == 2) {
                     $user = $user->orwhere('users.type', '=', '2');
+                }else if($request['types'][$i] == 3) {
+                    $user = $user->orwhere('users.type', '=', '3');
                 }
-                else
-                {
+                else {
                     $user = $user->orwhere('followups.status_followups', '=', $request['types'][$i]);
                 }
             }
         }
 
-        $user=$user->groupby('users.id')->get();
+
+        $user=$user->get();
+
 
         if((count($user)>0)||(isset($request['tel_recieves']))) {
             $tel_array = [];
@@ -117,11 +119,6 @@ class SmsController extends BaseController
             }
 
 
-            // این قسمت مججد باید ویرایش بشه
-            if(isset($request['tel_recieves']))
-            {
-                $this->sendSms($item->tel,$request['comment']);
-            }
             foreach ($user as $item) {
                 if($item->sex==1)
                 {
@@ -199,7 +196,6 @@ class SmsController extends BaseController
 
     public function createAjax(request $request)
     {
-
         $user=user::query();
         $user->leftjoin('followups','users.id','=','followups.user_id');
         if(isset($request->categories)) {
@@ -240,8 +236,7 @@ class SmsController extends BaseController
                 }
             }
         }
-        $user=$user->groupby('users.id')->get();
-
+        $user=$user->get();
         if((count($user)>0)||(isset($request['tel_recieves']))) {
             echo "تعداد افراد فیلترشده ".count($user)." نفر می باشد";
         }
