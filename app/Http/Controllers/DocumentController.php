@@ -52,7 +52,15 @@ class DocumentController extends BaseController
             $request['file']=$image;
             $request['date_fa']=$this->dateNow;
             $request['time_fa']=$this->timeNow;
-            $status=document::create($request->all());
+            $status = document::create([
+                'title'                     => $request['title'],
+                'shortlink'                 => $request['shortlink'],
+                'content'                   => $request['content'],
+                'permission'                => $request['permission'],
+                'file'                      => $image,
+                'date_fa'                   => $request['date_fa'],
+                'time_fa'                   => $request['time_fa'],
+            ]);
             if($status)
             {
                 $msg="فایل با موفقیت در سیستم ثبت شد";
@@ -135,6 +143,8 @@ class DocumentController extends BaseController
         }
         try {
             $document->update($request->all());
+            $document['file']=$request->file('file')->getClientOriginalName();
+            $document->update();
         } catch (Throwable $e) {
 
             $msg = $e->errorInfo[2];

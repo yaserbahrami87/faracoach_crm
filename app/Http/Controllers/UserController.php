@@ -1394,15 +1394,16 @@ class UserController extends BaseController
                 'q.required'=>'برای جستجو یک مقدار وارد کنید'
             ]);
 
-        $users=User::join('followups','users.id','=','followups.user_id')
+        $users=User::leftjoin('followups','users.id','=','followups.user_id')
                     ->orwhere('fname','like','%'.$request['q'].'%')
                     ->orwhere('lname','like','%'.$request['q'].'%')
                     ->orwhere('tel','like','%'.$request['q'].'%')
                     ->orwhere('email','like','%'.$request['q'].'%')
                     ->select('users.*')
                     ->groupby('users.id')
-                    ->orderby('followups.id','desc')
+                    ->orderby('users.id','desc')
                     ->paginate($this->countPage());
+
         foreach ($users as $item)
         {
             $item->status_followups=$this->userType($this->get_lastFollowupUser($item->id)['status_followups']);
