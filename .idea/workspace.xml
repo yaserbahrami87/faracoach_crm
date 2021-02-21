@@ -5,7 +5,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SmsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SmsController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/showDocument.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/showDocument.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -359,7 +358,7 @@
       <workItem from="1613723421325" duration="18389000" />
       <workItem from="1613758382544" duration="12895000" />
       <workItem from="1613801261066" duration="28454000" />
-      <workItem from="1613890668200" duration="12435000" />
+      <workItem from="1613890668200" duration="15170000" />
     </task>
     <servers />
   </component>
@@ -404,10 +403,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1613743248349" />
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1613905659467">
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1613910029961">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1610574245405" />
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1613905659467" />
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1613910029961" />
   </component>
 </project>

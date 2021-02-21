@@ -21,7 +21,10 @@ class SmsController extends BaseController
                 ->paginate(50);
         foreach ($sms as $item)
         {
-            $item->insert_user_id=$this->get_user_byID($item->insert_user_id)->fname." ".$this->get_user_byID($item->insert_user_id)->lname;
+            if(!is_null($item->insert_user_id))
+            {
+                $item->insert_user_id=$this->get_user_byID($item->insert_user_id)->fname." ".$this->get_user_byID($item->insert_user_id)->lname;
+            }
         }
         return view ('panelAdmin.sms')
                     ->with('sms',$sms);
@@ -120,6 +123,7 @@ class SmsController extends BaseController
 
 
             foreach ($user as $item) {
+                $comment=$request['comment'];
                 if($item->sex==1)
                 {
                     $item->sex="آقای ";
@@ -132,13 +136,17 @@ class SmsController extends BaseController
                 {
                     $item->sex="خانم/آقای ";
                 }
-                $request['comment']=str_replace("{tel}",$item->tel,$request['comment']);
-                $request['comment']=str_replace("{fname}",$item->fname,$request['comment']);
-                $request['comment']=str_replace("{lname}",$item->lname,$request['comment']);
-                $request['comment']=str_replace("{datebirth}",$item->datebirth,$request['comment']);
-                $request['comment']=str_replace("{sex}",$item->sex,$request['comment']);
-                $this->sendSms($item->tel,$request['comment']);
+                $comment=str_replace("{tel}",$item->tel,$comment);
+                $comment=str_replace("{fname}",$item->fname,$comment);
+                $comment=str_replace("{lname}",$item->lname,$comment);
+                $comment=str_replace("{datebirth}",$item->datebirth,$comment);
+                $comment=str_replace("{sex}",$item->sex,$comment);
+                $this->sendSms($item->tel,$comment);
             }
+            $msg = "پیام با موفقیت به تعداد " .count($user) . " ارسال شد";
+            $errorStatus = "success";
+            return back()->with('msg', $msg)
+                ->with('errorStatus', $errorStatus);
         }
         else
         {

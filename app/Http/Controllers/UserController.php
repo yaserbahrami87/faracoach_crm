@@ -359,7 +359,7 @@ class UserController extends BaseController
             'email'         => ['nullable', 'string', 'email', 'max:150', 'unique:users'],
             'sex'           => ['required','numeric'],
             'tel'           => ['required','iran_mobile','unique:users'],
-            'password'      => ['required', 'string', 'min:8', 'confirmed'],
+            'password'      => ['required', 'string', 'confirmed'],
             'tel_verified'  => ['required','boolean'],
             'introduced'    => ['nullable','numeric'],
             'gettingknow'   => ['nullable','persian_alpha'],
@@ -775,7 +775,6 @@ class UserController extends BaseController
                 $user->resume = $resume;
             }
 
-            dd($user->tel);
             if($request['tel']!=$user->tel)
             {
                 $user->tel_verified = 0;
