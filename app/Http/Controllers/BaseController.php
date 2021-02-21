@@ -157,6 +157,7 @@ class BaseController extends Controller
     }
     public function userType($status)
     {
+
         switch($status)
         {
             case "1": return "پیگیری نشده";

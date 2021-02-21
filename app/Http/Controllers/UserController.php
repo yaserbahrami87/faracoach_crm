@@ -495,15 +495,16 @@ class UserController extends BaseController
                         ->get();
         foreach ($followUps as $item)
         {
+
             $admin_Followup=User::where('id','=',$item->insert_user_id)
                                 ->first();
             $item->insert_user_id=$admin_Followup->fname." ".$admin_Followup->lname;
-            $item->status_followups=$this->userType($this->get_lastFollowupUser($item->id)['status_followups']);
-
+            $item->status_followups=$this->userType($item->status_followups);
             if(!is_null($item->course_id))
             {
                 $item->course_id=$this->get_coursesByID($item->course_id)->course;
             }
+
         }
 
         //تبدیل تگهای پیگیری
