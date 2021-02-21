@@ -679,7 +679,7 @@ class UserController extends BaseController
                     'codemelli'         => 'nullable|numeric|max:15',
                     'sex'               => 'nullable|boolean',
                     'tel'               => 'nullable|iran_mobile',
-                    'shenasname'        => 'nullable|numeric|max:20',
+                    'shenasname'        => 'nullable|numeric|',
                     'datebirth'         =>'nullable|max:11|string',
                     'father'            => 'nullable|persian_alpha|max:30',
                     'born'              => 'nullable|persian_alpha|max:30',
