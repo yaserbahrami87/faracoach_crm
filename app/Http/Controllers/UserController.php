@@ -1368,7 +1368,7 @@ class UserController extends BaseController
         {
             $options=$this->get_options();
 
-            return view('panelUser.introducedVerified')
+            return view('panelUser.IntroducedVerified')
                     ->with('options',$options);
         }
         else {
