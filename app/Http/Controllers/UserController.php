@@ -698,6 +698,7 @@ class UserController extends BaseController
      */
     public function update(Request $request,User $user)
     {
+
             $this->validate(request(),
                 [
                     'username'          => 'nullable|max:200|regex:/(^([a-zA-Z]+)(\d+)?$)/u',
@@ -799,11 +800,6 @@ class UserController extends BaseController
 
             if (isset($resume)) {
                 $user->resume = $resume;
-            }
-
-            if($request['tel']!=$user->tel)
-            {
-                $user->tel_verified = 0;
             }
 
             $user->save();
@@ -1367,63 +1363,75 @@ class UserController extends BaseController
     public function listIntroducedUser(Request $request)
     {
         $user=Auth::user();
-        if($request->has('category'))
+        //چک کردن کاربر که آیا توافقنامه را تایید کردند
+        if($user->introduced_verified==0)
         {
-            //نمایش براساس دسته بندی افراد دعوت شده توسط کاربر
-            switch ($request['category'])
-            {
-                case '0': return redirect('/panel/introduced');
-                                break;
-                case 'notfollowup': $listIntroducedUser=User::where('type','=','1')
-                                ->where('introduced','=',$user->id)
-                                ->orderby('id','desc')
-                                ->groupby('id')
-                                ->paginate($this->countPage());
-                                break;
-                case 'continuefollowup': $listIntroducedUser=User::where('type','=','11')
-                                ->where('introduced','=',$user->id)
-                                ->orderby('id','desc')
-                                ->paginate($this->countPage());
-                                break;
-                case 'cancelfollowup': $listIntroducedUser=User::where('type','=','12')
-                                ->where('introduced','=',$user->id)
-                                ->orderby('id','desc')
-                                ->paginate($this->countPage());
-                                break;
-                case 'students': $listIntroducedUser=User::where('type','=','20')
-                                ->where('introduced','=',$user->id)
-                                ->orderby('id','desc')
-                                ->paginate($this->countPage());
-                                break;
-                default:return back();
+            $options=$this->get_options();
+
+            return view('panelUser.introducedVerified')
+                    ->with('options',$options);
+        }
+        else {
+
+            if ($request->has('category')) {
+                //نمایش براساس دسته بندی افراد دعوت شده توسط کاربر
+                switch ($request['category']) {
+                    case '0':
+                        return redirect('/panel/introduced');
                         break;
+                    case 'notfollowup':
+                        $listIntroducedUser = User::where('type', '=', '1')
+                            ->where('introduced', '=', $user->id)
+                            ->orderby('id', 'desc')
+                            ->groupby('id')
+                            ->paginate($this->countPage());
+                        break;
+                    case 'continuefollowup':
+                        $listIntroducedUser = User::where('type', '=', '11')
+                            ->where('introduced', '=', $user->id)
+                            ->orderby('id', 'desc')
+                            ->paginate($this->countPage());
+                        break;
+                    case 'cancelfollowup':
+                        $listIntroducedUser = User::where('type', '=', '12')
+                            ->where('introduced', '=', $user->id)
+                            ->orderby('id', 'desc')
+                            ->paginate($this->countPage());
+                        break;
+                    case 'students':
+                        $listIntroducedUser = User::where('type', '=', '20')
+                            ->where('introduced', '=', $user->id)
+                            ->orderby('id', 'desc')
+                            ->paginate($this->countPage());
+                        break;
+                    default:
+                        return back();
+                        break;
+                }
+            } else {
+                //لیست همه افراد معرفی کرده
+                $listIntroducedUser = User::where('introduced', '=', $user->id)
+                    ->paginate(20);
             }
-        }
-        else
-        {
-             //لیست همه افراد معرفی کرده
-            $listIntroducedUser=User::where('introduced','=',$user->id)
-                        ->paginate(20);
-        }
 
-        foreach($listIntroducedUser as $item)
-        {
-            if(strlen($item->personal_image)==0)
-            {
-                $item->personal_image="default-avatar.png";
+            foreach ($listIntroducedUser as $item) {
+                if (strlen($item->personal_image) == 0) {
+                    $item->personal_image = "default-avatar.png";
+                }
             }
+
+            //تعداد افراد دعوت شده
+            $countIntroducedUser = User::where('introduced', '=', $user->id)
+                ->count();
+
+            $listIntroducedUser->appends(['category' => $request['category']]);
+            $getFollowbyCategory = $this->getFollowbyCategory();
+
+            return view('panelUser.listIntroducedUser')
+                ->with('listIntroducedUser', $listIntroducedUser)
+                ->with('countIntroducedUser', $countIntroducedUser)
+                ->with('getFollowbyCategory', $getFollowbyCategory);
         }
-
-        //تعداد افراد دعوت شده
-        $countIntroducedUser=User::where('introduced','=',$user->id)
-                        ->count();
-
-        $listIntroducedUser->appends(['category'=>$request['category']]);
-        $getFollowbyCategory=$this->getFollowbyCategory();
-        return view('panelUser.listIntroducedUser')
-                        ->with('listIntroducedUser',$listIntroducedUser)
-                        ->with('countIntroducedUser',$countIntroducedUser)
-                        ->with('getFollowbyCategory',$getFollowbyCategory);
     }
 
     public function searchUsers(Request $request)
@@ -2167,6 +2175,33 @@ class UserController extends BaseController
         $errorStatus = "success";
         return back()->with('msg', $msg)
             ->with('errorStatus', $errorStatus);
+
+
+    }
+
+    public function introducedVerified(Request $request)
+    {
+        $this->validate($request,[
+            'introduced_verified'   =>'required|boolean'
+        ]);
+
+        $user=Auth::user();
+        $user->introduced_verified=1;
+        $status=$user->save();
+        if($status)
+        {
+            $msg="کد ملی / پست الکترونیکی تکراری است";
+            $errorStatus="danger";
+            return redirect('/panel/introduced');
+        }
+        else
+        {
+            $msg="کد ملی / پست الکترونیکی تکراری است";
+            $errorStatus="danger";
+            return back()
+                        ->with('msg',$msg)
+                        ->with('errorStatus',$errorStatus);
+        }
 
 
     }

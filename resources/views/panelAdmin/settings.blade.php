@@ -1,6 +1,31 @@
 @extends('panelAdmin.master.index')
 @section('rowcontent')
 
+    <div class="col-xs-12 col-md-6 col-xl-6 col-lg-6">
+        <div class="card card-chart">
+            <div class="card-header">
+                <a type="button" data-toggle="collapse" data-target="#option_IntroducedVerify" aria-expanded="false" aria-controls="option_IntroducedVerify">
+                    <h5 class="card-title border-bottom pb-2">متن توافقنامه دعوتنامه</h5>
+                </a>
+            </div>
+            <div class="card-body collapse" id="option_IntroducedVerify">
+                <form method="post" action="/admin/options/introduced_verify">
+                    {{csrf_field()}}
+                    {{method_field('PATCH')}}
+                    <textarea id="ckeditor" name="introduced_verify">{{$options['introduced_verify']}}</textarea>
+                    <button type="submit" class="btn btn-primary" >بروزرسانی</button>
+                </form>
+            </div>
+            <div class="card-footer">
+                <hr />
+                <div class="card-stats">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 <div class="col-xs-12 col-md-6 col-xl-6 col-lg-6">
     <div class="card card-chart">
         <div class="card-header">

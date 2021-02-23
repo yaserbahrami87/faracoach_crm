@@ -41,7 +41,10 @@ class PostController extends BaseController
     {
         if(strlen(Auth::user()->username)==0)
         {
-            return back();
+            $msg = "لطفا از قسمت اطلاعات شخصی نام کاربری خود را مشخص کنید";
+            $errorStatus = "danger";
+            return redirect('/panel/profile')->with('msg', $msg)
+                ->with('errorStatus', $errorStatus);
         }
         else
         {
@@ -63,6 +66,11 @@ class PostController extends BaseController
         if(strlen(Auth::user()->username)==0)
         {
             return back();
+            $msg = "لطفا از قسمت اطلاعات شخصی نام کاربری خود را مشخص کنید";
+            $errorStatus = "danger";
+            return redirect('/panel/profile')
+                ->with('msg', $msg)
+                ->with('errorStatus', $errorStatus);
         }
         else {
             return view('panelUser.insertPost');

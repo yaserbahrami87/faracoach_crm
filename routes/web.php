@@ -47,6 +47,7 @@ Route::middleware('can:isUser')->prefix('panel')->group(function () {
 
 
     //Introduced
+    Route::post('/introduced/introduced_verified','UserController@introducedVerified');
     Route::get('/introduced','UserController@listIntroducedUser');
     Route::get('/introduced/search','UserController@searchUsersIntroduced');
     Route::post('/introduced/add','UserController@addIntroducedUser');
@@ -179,8 +180,10 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::resource('settingscore','SettingscoreController');
 
     //documents
-
     Route::resource('documents','DocumentController');
+
+    //documents
+    Route::resource('options','OptionController');
 
 });
 

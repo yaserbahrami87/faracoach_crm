@@ -271,10 +271,20 @@ class AdminController extends BaseController
             }
         }
 
+
+        $options=$this->get_options();
+
+        foreach ($options as $item)
+        {
+            $options[$item->option_name]=$item->option_value;
+
+        }
+
         return view('panelAdmin.settings')
                     ->with('problemfollowup',$problemfollowup)
                     ->with('parentCategory',$parentCategory)
-                    ->with('categoryTags',$categoryTags);
+                    ->with('categoryTags',$categoryTags)
+                    ->with('options',$options);
     }
 
     public function showProducts()

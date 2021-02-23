@@ -9,6 +9,7 @@ use App\coursetype;
 use App\followbyCategory;
 use App\followup;
 use App\message;
+use App\option;
 use App\problemfollowup;
 use App\settingsms;
 use App\sms;
@@ -1034,4 +1035,8 @@ class BaseController extends Controller
         return $count;
     }
 
+    public function get_options()
+    {
+        return option::get();
+    }
 }
