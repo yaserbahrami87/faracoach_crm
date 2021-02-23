@@ -1428,6 +1428,11 @@ class UserController extends BaseController
 
     public function searchUsers(Request $request)
     {
+        if(is_null($request->orderby)&&is_null($request->parameter))
+        {
+            $request['orderby']='id';
+            $request['parameter']='desc';
+        }
         $this->validate(request(),
             [
                 'q'     =>'required|min:2|string'
@@ -1467,6 +1472,11 @@ class UserController extends BaseController
         }
 
         $users->appends(['q' => $request['q']]);
+        if(!is_null($request->orderby)&&(!is_null($request->parameter))) {
+            $users->appends(['orderby'=>$request['orderby']]);
+            $users->appends(['parameter'=>$request['parameter']]);
+        }
+
         $tags=$this->get_tags();
         $parentCategory=$this->get_category('پیگیری');
         $usersAdmin=user::orwhere('type','=',2)
@@ -1510,7 +1520,8 @@ class UserController extends BaseController
                     ->with('continuefollowup',$continuefollowup)
                     ->with('notfollowup',$notfollowup)
                     ->with('user',$user)
-                    ->with('trashuser',$trashuser);
+                    ->with('trashuser',$trashuser)
+                    ->with('parameter',$request['parameter']);
     }
 
     public function searchUsersIntroduced(Request $request)
