@@ -27,14 +27,21 @@ class UserController extends BaseController
         $this->timeNow = $dateNow->format('H:i:s');
     }
 
-    public function index()
+    public function index(Request $request)
     {
         if(Auth::user()->type==2)
         {
-            $users=User::orderby('users.id','desc')
+            if(is_null($request->orderby)&&is_null($request->parameter))
+            {
+                $request['orderby']='id';
+                $request['parameter']='desc';
+            }
+
+            $users=User::orderby($request['orderby'],$request['parameter'])
                     ->select('users.*')
                     ->groupby('users.id')
                     ->paginate($this->countPage());
+
 
             foreach ($users as $item)
             {
@@ -108,7 +115,11 @@ class UserController extends BaseController
             {
                 $user="";
             }
-            //$users->appends(['user' => $request['user']]);
+
+            if(!is_null($request->orderby)&&(!is_null($request->parameter))) {
+                $users->appends(['orderby'=>$request['orderby']]);
+                $users->appends(['parameter'=>$request['parameter']]);
+            }
             return view('panelAdmin.users')
                 ->with('users',$users)
                 ->with('tags',$tags)
@@ -124,10 +135,16 @@ class UserController extends BaseController
                 ->with('continuefollowup',$continuefollowup)
                 ->with('notfollowup',$notfollowup)
                 ->with('user',$user)
-                ->with('trashuser',$trashuser);
+                ->with('trashuser',$trashuser)
+                ->with('parameter',$request['parameter']);
         }
         else
         {
+            if(is_null($request->orderby)&&is_null($request->parameter))
+            {
+                $request['orderby']='id';
+                $request['parameter']='desc';
+            }
             $users=User::leftjoin('followups','users.id','=','followups.user_id')
                         ->where(function($query)
                         {
@@ -136,9 +153,10 @@ class UserController extends BaseController
                         })
                         ->whereNotIn('users.type',[2,3,0])
                         ->select('users.*')
-                        ->orderby('users.id','desc')
+                        ->orderby($request['orderby'],$request['parameter'])
                         ->groupby('users.id')
                         ->paginate($this->countPage());
+
 
             //لیست تعداد کاربرها
             $notfollowup = count($this->get_notfollowup_withoutPaginate());
@@ -152,6 +170,8 @@ class UserController extends BaseController
             $myfollowup = count($this->get_myfollowup_withoutPaginate());
             $followedToday = count($this->get_followedToday_withoutPaginate());
             $trashuser=count($this->getAll_trashuser_withoutPaginate());
+
+
 
             foreach ($users as $item)
             {
@@ -176,6 +196,11 @@ class UserController extends BaseController
             $tags=$this->get_tags();
             $parentCategory=$this->get_category('پیگیری');
 
+            if(!is_null($request->orderby)&&(!is_null($request->parameter))) {
+                $users->appends(['orderby'=>$request['orderby']]);
+                $users->appends(['parameter'=>$request['parameter']]);
+            }
+
             return view('panelAdmin.users')
                         ->with('users',$users)
                         ->with('tags',$tags)
@@ -188,7 +213,8 @@ class UserController extends BaseController
                         ->with('waiting',$waiting)
                         ->with('cancelfollowup',$cancelfollowup)
                         ->with('continuefollowup',$continuefollowup)
-                        ->with('notfollowup',$notfollowup);
+                        ->with('notfollowup',$notfollowup)
+                        ->with('parameter',$request['parameter']);
         }
     }
 
@@ -930,6 +956,11 @@ class UserController extends BaseController
     // نمایش اعضای سایت براساس دسته بندی برای ادمین
     public function showCategoryUsersAdmin(Request $request)
     {
+        if(is_null($request->orderby)&&is_null($request->parameter))
+        {
+            $request['orderby']='id';
+            $request['parameter']='desc';
+        }
         $dateNow=$this->dateNow;
         if(Auth::user()->type==2)
         {
@@ -940,7 +971,7 @@ class UserController extends BaseController
                         return redirect('/admin/users/');
                         break;
                     case 'notfollowup':
-                        $users = $this->get_notfollowup();
+                        $users = $this->get_notfollowup($request['orderby'],$request['parameter']);
                         break;
                     case 'continuefollowup':
                         $users = User::join('followups','users.id','=','followups.user_id')
@@ -1192,6 +1223,10 @@ class UserController extends BaseController
                         ->get();
 
         $users->appends(['categoryUsers'=>$request['categoryUsers']]);
+        if(!is_null($request->orderby)&&(!is_null($request->parameter))) {
+            $users->appends(['orderby'=>$request['orderby']]);
+            $users->appends(['parameter'=>$request['parameter']]);
+        }
 
         $tags=$this->get_tags();
         $parentCategory=$this->get_category('پیگیری');
@@ -1220,7 +1255,9 @@ class UserController extends BaseController
                     ->with('continuefollowup',$continuefollowup)
                     ->with('notfollowup',$notfollowup)
                     ->with('user',$user)
-                    ->with('trashuser',$trashUser);
+                    ->with('trashuser',$trashUser)
+                    ->with('parameter',$request['parameter'])
+                    ->with('categoryUsers',$request['categoryUsers']);
     }
 
 

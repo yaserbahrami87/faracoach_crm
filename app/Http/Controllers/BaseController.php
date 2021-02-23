@@ -298,7 +298,7 @@ class BaseController extends Controller
                     ->first();
     }
 
-    public function get_notfollowup()
+    public function get_notfollowup($order="users.id",$parameter="asc")
     {
         return User:: leftjoin('followups', 'users.id', '=', 'followups.user_id')
             ->where(function ($query)
@@ -309,7 +309,7 @@ class BaseController extends Controller
             })
             ->groupby('users.id')
             ->select('users.*')
-            ->orderby('users.id', 'desc')
+            ->orderby($order, $parameter)
             ->groupby('users.id')
             ->paginate($this->countPage());
     }

@@ -194,7 +194,7 @@ class DocumentController extends BaseController
     {
         $documents=document::orderby('id','desc')
                 ->get();
-        return view('paneluser.documents')
+        return view('panelUser.documents')
             ->with('documents',$documents);
     }
 
@@ -202,7 +202,7 @@ class DocumentController extends BaseController
     {
         $document=document::where('shortlink','=',$document)
             ->first();
-        return view('paneluser.showDocument')
+        return view('panelUser.showDocument')
             ->with('document',$document);
     }
 }
