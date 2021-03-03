@@ -191,7 +191,7 @@ class PostController extends BaseController
             }
 
             $categoryposts=$this->get_categoryPostByUserId(Auth::user()->id);
-            $item->category=$this->get_categoryPostById($item->categorypost_id);
+
 
 
             return view('single')
