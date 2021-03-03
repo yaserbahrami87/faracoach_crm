@@ -218,7 +218,7 @@ class PostController extends BaseController
         if(Auth::user()->id==$post->user_id) {
             $categoryposts=$this->get_categoryPostByUserId(Auth::user()->id);
 
-            return view('paneluser.editPost')
+            return view('panelUser.editPost')
                 ->with('post', $post)
                 ->with('categoryposts',$categoryposts);
         }
