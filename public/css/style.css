@@ -30,7 +30,6 @@ a:hover
 
 body
 {
-    background-image: url('../images/Background-1.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: top;
@@ -1330,6 +1329,54 @@ nav[aria-label='breadcrumb']
 {
     border-radius: 0.25rem;
 }
+
+#blog_home h5
+{
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#blog_home h1
+{
+    font-size: 24px;
+}
+
+#blog_home h2
+{
+    font-size: 18px;
+}
+
+#blog_home .card-footer *
+{
+    font-size:12px;
+}
+
+
+
+#show_comments_blog .widget
+{
+    width: 100%;
+}
+#show_comments_blog .widget .panel-body { padding:0px; }
+#show_comments_blog .widget .list-group { margin-bottom: 0; }
+#show_comments_blog .widget .panel-title { display:inline }
+#show_comments_blog .widget .label-info { float: right; }
+#show_comments_blog .widget li.list-group-item {border-radius: 0;border: 0;border-top: 1px solid #ddd;}
+#show_comments_blog .widget li.list-group-item:hover { background-color: rgba(86,61,124,.1); }
+#show_comments_blog .widget .mic-info { color: #666666;font-size: 11px; }
+#show_comments_blog .widget .action { margin-top:5px; }
+#show_comments_blog .widget .comment-text { font-size: 12px; }
+#show_comments_blog .widget .btn-block { border-top-left-radius:0px;border-top-right-radius:0px; }
+#show_comments_blog .widget .list-group-item > .row > div:nth-child(2){padding-right:45px;}
+#show_comments_blog img
+{
+    width:50px;
+    border-radius: 50%;
+    border:2px solid #0e84b5;
+}
+
+
+
 
 
 

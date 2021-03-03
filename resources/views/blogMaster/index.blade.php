@@ -47,10 +47,11 @@
             </ul>
             <div class="ml-auto my-2 my-lg-0">
                 <div class="section" id="b-section-navbar-search-form" name="Navbar: search form"><div class="widget BlogSearch" data-version="2" id="BlogSearch1">
-                        <form action="" class="form-inline">
-                            <input aria-label="Search this blog" class="form-control mr-sm-2" name="q" placeholder="جسجتجو در بلاگ" type="text">
+                        <!--
+                        <form method="/{{$user->username}}"  action="/{{$user->username}}" class="form-inline">
+                            <input aria-label="Search this blog" class="form-control mr-sm-2" name="q" placeholder="جستجو در بلاگ" type="text">
                             <button class="btn btn-success my-2 my-sm-0" type="submit">جستجو</button>
-                        </form>
+                        </form>-->
                     </div></div>
             </div>
         </div>
@@ -64,11 +65,11 @@
 <!-- Page Content -->
 <div class="container mt-5" dir="rtl">
 
-    <div class="row">
+    <div class="row" id="blog_home">
 
         <!-- Blog Entries Column -->
         <div class="col-md-9">
-            <h1 class="my-4">
+            <h1 class="my-4 border-bottom pb-3">
                 <small>دلنوشته های {{$user->fname}} {{$user->lname}} در فراکوچ</small>
             </h1>
 
@@ -97,7 +98,7 @@
             <div class="card my-4 ">
                 <h5 class="card-header ">درباره من</h5>
                 <div class="card-body">
-                    You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
+                    {{$user->aboutme}}
                 </div>
             </div>
 
@@ -108,22 +109,18 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <ul class="list-unstyled mb-0">
-                                <li>
-                                    <a href="#">دسته 1</a>
-                                </li>
-                                <li>
-                                    <a href="#">دسته 2</a>
-                                </li>
-                                <li>
-                                    <a href="#">دسته 3</a>
-                                </li>
+                                @foreach($categoryposts as $item)
+                                    <li>
+                                        <a href="/{{$user->username}}/category/{{$item->category}}">{{$item->category}}</a>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Categories Widget -->
+            <!-- Categories Widget
             <div class="card my-3">
                 <h5 class="card-header">آرشیوها</h5>
                 <div class="card-body">
@@ -143,7 +140,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>-->
 
 
             <!-- Side Widget

@@ -4,7 +4,7 @@
     <div class="col-md-4">
         @include('panelUser.boxProfile')
         @include('panelUser.boxMadarak')
-        @include('panelUser.boxAmoozeshi')
+
     </div>
     <div class="col-md-8">
         <form method="post" action="/panel/profile/update/{{$user->id}}" enctype="multipart/form-data">
@@ -42,9 +42,15 @@
                         </div>
                         <div class="col-md-6 px-1">
                             <div class="form-group">
+                                <label>تاریخ تولد</label>
+                                <input type="text" class="form-control" placeholder="تاریخ تولد را وارد کنید" value="{{$user->datebirth}}" name="datebirth" id="datebirth" />
+                            </div>
+                        </div>
+                        <div class="col-md-6 px-1">
+                            <div class="form-group">
                                 <label>عکس پروفایل</label>
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="inputpersonal_image" aria-describedby="inputpersonal_image" name="personal_image"/> >
+                                    <input type="file" class="custom-file-input" id="inputpersonal_image" aria-describedby="inputpersonal_image" name="personal_image"/>
                                     <label class="custom-file-label" for="inputpersonal_image">Choose file</label>
                                 </div>
                             </div>
@@ -54,6 +60,13 @@
                                 <label>نام کاربری</label>
                                 <input type="text" class="form-control" placeholder="نام کاربری خود را وارد کنید" value="{{$user->username}}" name="username" @if(strlen($user->username)>0) disabled @endif/>
                                 <small class="text-muted float-left " dir="ltr">crm.faracoach.com/blog/نام کاربری شما</small>
+                            </div>
+                        </div>
+                        <div class="col-md-12 px-1">
+                            <div class="form-group">
+                                <label>درباره من</label>
+                                <textarea class="form-control" id="aboutme" name="aboutme" rows="3">{{$user->aboutme}}</textarea>
+
                             </div>
                         </div>
                     </div>
@@ -147,7 +160,7 @@
                         <div class="col-md-6 px-1">
                             <div class="form-group">
                                 <label>معرف</label>
-                                <input type="text" class="form-control" value="{{$user->introduced }}"  id="introduced" />
+                                <input type="text" class="form-control" value="{{$user->introduced}}"  id="introduced" @if(strlen($user->introduced)>0) disabled @endif />
                                 <span id="feedback_introduced" ></span>
                             </div>
                         </div>
@@ -222,6 +235,14 @@
                                 <label>رشته</label>
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="رشته را وارد کنید" value="{{$user->reshteh}}" name="reshteh"   lang="fa"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 px-1">
+                            <div class="form-group">
+                                <label>شغل</label>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="شغل را وارد کنید" value="{{$user->job}}" name="job" />
                                 </div>
                             </div>
                         </div>

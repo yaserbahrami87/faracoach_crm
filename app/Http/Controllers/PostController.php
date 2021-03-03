@@ -50,9 +50,19 @@ class PostController extends BaseController
         {
             $posts=post::where('user_id','=',Auth::user()->id)
                         ->orderby('id','desc')
-                        ->get();
+                        ->paginate($this->countPage());
+            foreach ($posts as $item)
+            {
+                $item->comments=count($this->get_commentByPostId_withoutPaginate($item->id));
+            }
+
+            $categoryposts=$this->get_categoryPostByUserId(Auth::user()->id);
+
+
+
             return view('panelUser.posts')
-                    ->with('posts',$posts);
+                    ->with('posts',$posts)
+                    ->with('categoryposts',$categoryposts);
         }
     }
 
@@ -73,7 +83,9 @@ class PostController extends BaseController
                 ->with('errorStatus', $errorStatus);
         }
         else {
-            return view('panelUser.insertPost');
+            $categoryposts=$this->get_categoryPostByUserId(Auth::user()->id);
+            return view('panelUser.insertPost')
+                        ->with('categoryposts',$categoryposts);
         }
     }
 
@@ -85,7 +97,6 @@ class PostController extends BaseController
      */
     public function store(Request $request)
     {
-
         $this->validate($request,
             [
                 'title'         =>'required|string|min:2|max:200',
@@ -95,21 +106,31 @@ class PostController extends BaseController
                 'status_comment'=>'required|boolean',
                 'image'         =>'required|string'
             ]);
-        $request['user_id']=Auth::user()->id;
-        $request['date_fa']=$this->dateNow;
-        $request['time_fa']=$this->timeNow;
+        $check=post::where('user_id','=',Auth::user()->id)
+                    ->where('shortlink','=',$request['shortlink'])
+                    ->get();
 
-        $status=post::create($request->all());
-        if($status)
-        {
-            $msg = "پست با موفقیت ذخیره شد";
-            $errorStatus = "success";
-            return back()->with('msg', $msg)
-                ->with('errorStatus', $errorStatus);
+        if(count($check)==0) {
+            $request['user_id'] = Auth::user()->id;
+            $request['date_fa'] = $this->dateNow;
+            $request['time_fa'] = $this->timeNow;
+
+            $status = post::create($request->all());
+            if ($status) {
+                $msg = "پست با موفقیت ذخیره شد";
+                $errorStatus = "success";
+                return back()->with('msg', $msg)
+                    ->with('errorStatus', $errorStatus);
+            } else {
+                $msg = "خطا در ذخیره";
+                $errorStatus = "danger";
+                return back()->with('msg', $msg)
+                    ->with('errorStatus', $errorStatus);
+            }
         }
         else
         {
-            $msg = "خطا در ذخیره";
+            $msg = "لینک اختصاصی شما تکراری است";
             $errorStatus = "danger";
             return back()->with('msg', $msg)
                 ->with('errorStatus', $errorStatus);
@@ -125,20 +146,51 @@ class PostController extends BaseController
     public function show($username,$post)
     {
         $user=$this->get_user_byUserName($username);
-        if(!(is_null($user)))
+        $post=post::where('user_id','=',$user->id)
+            ->where('shortlink','=',$post)
+            ->first();
+        if(!(is_null($user))&&(!is_null($post)))
         {
-            $post=post::where('user_id','=',$user->id)
-                ->where('shortlink','=',$post)
-                ->first();
-            if(!is_null($post))
+            $comments=$this->get_commentByPostId($post->id,1);
+
+            foreach ($comments as $item)
             {
-                return view('single')
-                    ->with('posts',$post)
-                    ->with('user',$user);
+                $item->user=$this->get_user_byID($item->user_id);
+                if(!is_null($item->user->username))
+                {
+                    $item->username=$item->user->username;
+                }
+
+                if(!is_null($item->user->fname)||!is_null($item->user->lname))
+                {
+                    $item->user=$item->user->fname.' '.$item->user->lname;
+                }
+                else if(!is_null($item->user->username))
+                {
+                    $item->user=$item->user->username;
+                }
+
+                if(is_null($this->get_user_byID($item->user_id)->personal_image))
+                {
+                    $item->personal_image="default-avatar.png";
+                }
+                else
+                {
+                    $item->personal_image=$this->get_user_byID($item->user_id)->personal_image;
+                }
             }
+
+            $categoryposts=$this->get_categoryPostByUserId(Auth::user()->id);
+
+
+            return view('single')
+                ->with('posts',$post)
+                ->with('user',$user)
+                ->with('comments',$comments)
+                ->with('categoryposts',$categoryposts);
+
         }
-        $msg = "صفحه ای با چنین مشخصاتی پیدا نشد";
-        $errorStatus = "danger";
+
         return abort(404);
 
     }
@@ -149,21 +201,21 @@ class PostController extends BaseController
      * @param  \App\post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit($username, $post)
+    public function edit(post $post)
     {
-        $user=$this->get_user_byUserName($username);
-        if(!is_null($user))
-        {
-            $post=post::where('user_id','=',Auth::user()->id)
-                ->where('shortlink','=',$post)
-                ->first();
-            if(!is_null($post))
-            {
-                return view('paneluser.editPost')
-                        ->with('post',$post);
-            }
+        //چک می شود که پست آیا متعلق به خود کاربر است
+        if(Auth::user()->id==$post->user_id) {
+            $categoryposts=$this->get_categoryPostByUserId(Auth::user()->id);
+
+            return view('paneluser.editPost')
+                ->with('post', $post)
+                ->with('categoryposts',$categoryposts);
         }
-        return abort('404');
+        else
+        {
+            return abort(403);
+        }
+
     }
 
     /**
@@ -173,47 +225,63 @@ class PostController extends BaseController
      * @param  \App\post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$username, $post)
+    public function update(Request $request,post $post)
     {
-        $user=$this->get_user_byUserName($username);
-        if(!is_null($user))
+        //چک می شود که پست آیا متعلق به خود کاربر است
+        if(Auth::user()->id==$post->user_id)
         {
-            $post=post::where('user_id','=',Auth::user()->id)
-                ->where('shortlink','=',$post)
-                ->first();
-            if(!is_null($post))
+            $check=post::where('user_id','=',Auth::user()->id)
+                ->where('shortlink','=',$request['shortlink'])
+                ->get();
+
+            if(count($check)==1)
             {
-                $this->validate($request,
-                    [
-                        'title'         =>'required|string|min:2|max:200',
-                        'shortlink'     =>'required|string|max:250',
-                        'content'       =>'required|string',
-                        'status'        =>'required|boolean',
-                        'status_comment'=>'required|boolean',
-                        'image'         =>'required|string'
-                    ]);
-                $status=$post->update($request->all());
-
-                if($status)
+                if($post->shortlink==$request['shortlink'])
                 {
+                    $status = $post->update($request->all());
+                    if ($status) {
+                        $msg = "پست با موفقیت بروزرسانی شد";
+                        $errorStatus = "success";
 
-                    $msg = "پست با موفقیت بروزرسانی شد";
-                    $errorStatus = "success";
-                    return redirect('/panel/post')
-                        ->with('msg', $msg)
-                        ->with('errorStatus', $errorStatus);
+                    } else {
+                        $msg = "خطا در بروزرسانی";
+                        $errorStatus = "danger";
+                    }
                 }
                 else
                 {
+                    $msg = "لینک اختصاصی قبلا استفاده شده است";
+                    $errorStatus = "danger";
+
+                }
+
+            }
+            else if(count($check)==0)
+            {
+
+                $status = $post->update($request->all());
+                if ($status) {
+                    $msg = "دسته با موفقیت بروزرسانی شد";
+                    $errorStatus = "success";
+
+                } else {
                     $msg = "خطا در بروزرسانی";
                     $errorStatus = "danger";
-                    return redirect('/panel/post')
-                        ->with('msg', $msg)
-                        ->with('errorStatus', $errorStatus);
                 }
             }
+            else
+            {
+                return abort('403');
+            }
         }
-        return abort('404');
+        else
+        {
+            return abort('403');
+        }
+
+        return redirect('/panel/post')
+            ->with('msg', $msg)
+            ->with('errorStatus', $errorStatus);
     }
 
     /**
@@ -222,41 +290,38 @@ class PostController extends BaseController
      * @param  \App\post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy($username,$post)
+    public function destroy(post $post)
     {
-        $user=$this->get_user_byUserName($username);
-        if(!is_null($user))
+        if(Auth::user()->id==$post->user_id)
         {
-            $post=post::where('user_id','=',Auth::user()->id)
-                ->where('shortlink','=',$post)
-                ->first();
-            if(!is_null($post))
+            $status=$post->delete();
+            if($status)
             {
-                dd($post);
-                $status=$post->delete();
-                if($status)
-                {
-                    $msg = "پست با موفقیت بروزرسانی شد";
-                    $errorStatus = "success";
-                    return redirect('/panel/post')
-                        ->with('msg', $msg)
-                        ->with('errorStatus', $errorStatus);
-                }
-                else
-                {
-                    $msg = "خطا در بروزرسانی";
-                    $errorStatus = "danger";
-                    return redirect('/panel/post')
-                        ->with('msg', $msg)
-                        ->with('errorStatus', $errorStatus);
-                }
+                $msg = "پست با موفقیت بروزرسانی شد";
+                $errorStatus = "success";
+                return redirect('/panel/post')
+                    ->with('msg', $msg)
+                    ->with('errorStatus', $errorStatus);
+            }
+            else
+            {
+                $msg = "خطا در بروزرسانی";
+                $errorStatus = "danger";
+                return redirect('/panel/post')
+                    ->with('msg', $msg)
+                    ->with('errorStatus', $errorStatus);
             }
         }
-        return abort('404');
+        else
+        {
+            return abort(403);
+        }
+
     }
 
-    public function blogHomePage($user)
+    public function blogHomePage(Request  $request,$user)
     {
+
         $user=$this->get_user_byUserName($user);
         if(is_null($user))
         {
@@ -264,13 +329,77 @@ class PostController extends BaseController
         }
         else
         {
-
-            $posts=post::where('user_id','=',$user->id)
-                        ->orderby('id','desc')
+            $posts = post::where('user_id', '=', $user->id)
+                        ->where('status', '=', 1)
+                        ->orderby('id', 'desc')
                         ->paginate(5);
+            foreach ($posts as $item)
+            {
+                $item->comment=count($this->get_commentByPostId($item->id,1));
+                $item->category=$this->get_categoryPostById($item->categorypost_id);
+                if(is_null($item->category))
+                {
+                    $item->category='دسته بندی نشده';
+                }
+                else
+                {
+                    $item->category=$item->category->category;
+                }
+            }
+
+            $categoryposts=$this->get_categoryPostByUserId($user->id);
+
             return view('blog')
                         ->with('posts',$posts)
-                        ->with('user',$user);
+                        ->with('user',$user)
+                        ->with('categoryposts',$categoryposts);
+        }
+    }
+
+    public function categoryBlog($user,$category)
+    {
+        $user=$this->get_user_byUserName($user);
+        if(!is_null($user))
+        {
+            $category=$this->get_categoryPost_ByUserId_ByCategory($user->id,$category);
+            if(!is_null($category))
+            {
+                $posts=post::where('user_id','=',$user->id)
+                    ->where('categorypost_id','=',$category->id)
+                    ->where('status','=',1)
+                    ->orderby('id','desc')
+                    ->paginate(5);
+
+                foreach ($posts as $item)
+                {
+                    $item->comment=count($this->get_commentByPostId($item->id,1));
+                    $item->category=$this->get_categoryPostById($item->categorypost_id);
+                    if(is_null($item->category))
+                    {
+                        $item->category='دسته بندی نشده';
+                    }
+                    else
+                    {
+                        $item->category=$item->category->category;
+                    }
+                }
+
+                $categoryposts=$this->get_categoryPostByUserId($user->id);
+
+                return view('blog')
+                    ->with('posts',$posts)
+                    ->with('user',$user)
+                    ->with('categoryposts',$categoryposts);
+            }
+            else
+            {
+                return abort(404);
+            }
+
+        }
+        else
+        {
+            return abort(404);
         }
     }
 }

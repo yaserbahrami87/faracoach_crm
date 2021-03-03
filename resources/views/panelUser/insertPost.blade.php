@@ -20,6 +20,16 @@
                     <input type="text" class="form-control @error('shortlink') is-invalid @enderror" id="shortlink" name="shortlink" />
                 </div>
                 <div class="form-group">
+                    <label for="categorypost_id">دسته بندی</label>
+                    <select id="categorypost_id" class="form-control p-0 @error('categorypost_id') is-invalid @enderror" name="categorypost_id">
+                        <option selected disabled>انتخاب کنید</option>
+                        @foreach($categoryposts as $item)
+                            <option value="{{$item->id}}">{{$item->category}}</option>
+                        @endforeach
+
+                    </select>
+                </div>
+                <div class="form-group">
                     <label for="ckeditor">مطلب</label>
                     <textarea id="ckeditor" name="content" class="@error('content') is-invalid @enderror"></textarea>
                 </div>

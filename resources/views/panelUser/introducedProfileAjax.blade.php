@@ -1,6 +1,9 @@
 <div class="row">
     <div class="col-12 text-center">
         <img class="avatar border-gray rounded-circle" src="{{asset('/documents/users/'.$user->personal_image)}}" />
+        @if(!is_null($user->username))
+            <a href="{{"/".$user->username}}" target="_blank">صفحه وبلاگ</a>
+        @endif
     </div>
     <div class="col-md-6 pl-1">
         <div class="form-group">

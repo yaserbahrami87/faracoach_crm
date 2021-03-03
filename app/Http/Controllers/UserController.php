@@ -729,6 +729,7 @@ class UserController extends BaseController
                     'telegram'          =>'nullable|string|max:50',
                     'instagram'         =>'nullable|string|max:50',
                     'linkedin'          =>'nullable|string|max:250',
+                    'aboutme'           =>'nullable|string|max:250',
                 ]);
 
 

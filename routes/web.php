@@ -66,18 +66,23 @@ Route::middleware('can:isUser')->prefix('panel')->group(function () {
     //Packages
     Route::get('/freepackages','AdminController@showFreePackages');
 
-    //Post
-    //Route::resource('post','PostController');
-    Route::get('/post','PostController@index');
-    Route::post('/post','PostController@store');
-    Route::get('/post/create','PostController@create');
-    Route::get('/post/{username}/{shortlink}/edit','PostController@edit');
-    Route::patch('/post/{username}/{shortlink}/update','PostController@update');
-    Route::delete('/post/{username}/{shortlink}/delete','PostController@destroy');
+
+
 
     //documents
     Route::get('/documents','DocumentController@indexUser');
     Route::get('/documents/{document}','DocumentController@showUser');
+
+    //POSTS
+    Route::resource('post','PostController');
+
+    //comments
+    Route::resource('comments','CommentController');
+
+
+    //category post
+    Route::resource('categoryposts','CategoryPostController');
+
 });
 
 
@@ -182,7 +187,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     //documents
     Route::resource('documents','DocumentController');
 
-    //documents
+    //options
     Route::resource('options','OptionController');
 
 });
@@ -210,5 +215,10 @@ Route::get('/register2',function()
 //blog
 Route::get('/{username}','PostController@blogHomePage');
 Route::get('/{username}/post/{post}','PostController@show');
+Route::get('/{username}/category/{category}','PostController@categoryBlog');
 
+
+
+//comments
+Route::post('/post/addcomment/{post}','CommentController@store');
 

@@ -92,8 +92,8 @@ class RegisterController extends Controller
             $data['jobside']=NULL;
         }
 
-        $data['resource']='کمپین';
-        $data['detailsresource']='تو به یک کوچ نیاز داری';
+        $data['resource']=NULL;
+        $data['detailsresource']=NULL;
 
         return User::create([
             'fname'             => $data['fname'],

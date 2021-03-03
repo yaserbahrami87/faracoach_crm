@@ -55,6 +55,7 @@ class CreateUsersTable extends Migration
             $table->string('telegram',50)->nullable();
             $table->string('instagram',50)->nullable();
             $table->string('linkedin',250)->nullable();
+            $table->string('aboutme',250)->nullable();
             $table->timestamp('last_login_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

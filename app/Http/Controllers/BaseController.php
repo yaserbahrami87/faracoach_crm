@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\category_post;
 use App\categoryTag;
 use App\city;
+use App\comment;
 use App\course;
 use App\coursetype;
 use App\followbyCategory;
 use App\followup;
 use App\message;
 use App\option;
+use App\post;
 use App\problemfollowup;
 use App\settingsms;
 use App\sms;
@@ -1038,5 +1041,45 @@ class BaseController extends Controller
     public function get_options()
     {
         return option::get();
+    }
+
+    public function get_postById($post)
+    {
+        return post::where('id','=',$post)
+            ->first();
+    }
+
+    public function get_commentByPostId($id,$status=1)
+    {
+        return comment::where('post_id','=',$id)
+                ->where('status','=',$status)
+                ->orderby('id','desc')
+                ->paginate($this->countPage());
+    }
+
+    public function get_commentByPostId_withoutPaginate($id)
+    {
+        return comment::where('post_id','=',$id)
+            ->orderby('id','desc')
+            ->get();
+    }
+
+    public function get_categoryPostByUserId($id)
+    {
+        return category_post::where('user_id','=',$id)
+                        ->get();
+    }
+
+    public function get_categoryPost_ByUserId_ByCategory($id,$category)
+    {
+        return category_post::where('user_id','=',$id)
+                        ->where('category','=',$category)
+                        ->first();
+    }
+
+    public function get_categoryPostById($id)
+    {
+        return category_post::where('id','=',$id)
+                ->first();
     }
 }

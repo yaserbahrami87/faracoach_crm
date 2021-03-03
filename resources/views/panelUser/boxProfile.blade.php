@@ -1,11 +1,11 @@
 
     <div class="card card-user">
         <div class="image">
-            <img src={{asset('../dashboard/assets/img/damir-bosnjak.jpg')}} alt="...">
+
         </div>
         <div class="card-body">
             <div class="author">
-                <a href="#">
+                <a href="{{asset('/panel/profile')}}">
                     @if(is_null($user->personal_image))
                         <img class="avatar border-gray" src={{asset("/images/default-avatar.jpg")}} alt="..." />
                     @else

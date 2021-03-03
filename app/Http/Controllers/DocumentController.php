@@ -44,7 +44,7 @@ class DocumentController extends BaseController
                 'shortlink'     => ['required','string','max:250','unique:documents'],
                 'content'       => ['required','string'],
                 'permission'    => ['required','numeric'],
-                'file'          => ['required','max:3000'],
+                'file'          => ['required','max:40000'],
             ]);
             $image = $request->file('file')->getClientOriginalName();
             $path = public_path('/documents/files/');
@@ -52,6 +52,7 @@ class DocumentController extends BaseController
             $request['file']=$image;
             $request['date_fa']=$this->dateNow;
             $request['time_fa']=$this->timeNow;
+
             $status = document::create([
                 'title'                     => $request['title'],
                 'shortlink'                 => $request['shortlink'],

@@ -5,7 +5,7 @@
             <h5 class="card-title">ویرایش پست</h5>
         </div>
         <div class="card-body">
-            <form method="post" action="/panel/post/{{Auth::user()->username}}/{{$post->shortlink}}/update" >
+            <form method="post" action="/panel/post/{{$post->id}}" >
                 {{csrf_field()}}
                 {{method_field('PATCH')}}
                 <div class="form-group">
@@ -19,6 +19,16 @@
                 <div class="form-group">
                     <label for="shortlink">لینک اختصاصی</label>
                     <input type="text" class="form-control @error('shortlink') is-invalid @enderror" id="shortlink" name="shortlink" value="{{$post->shortlink}}"/>
+                </div>
+                <div class="form-group">
+                    <label for="categorypost_id">دسته بندی</label>
+                    <select id="categorypost_id" class="form-control p-0 @error('categorypost_id') is-invalid @enderror" name="categorypost_id">
+                        <option selected disabled>انتخاب کنید</option>
+                        @foreach($categoryposts as $item)
+                            <option value="{{$item->id}}" @if($post->categorypost_id==$item->id) selected @endif>{{$item->category}}</option>
+                        @endforeach
+
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="ckeditor">مطلب</label>
