@@ -4,7 +4,7 @@
         <img class="card-img-top" src="{{$posts->image}}" alt="Card image cap">
         <div class="card-body">
             <h2 class="card-title">{{$posts->title}}</h2>
-            <small class="text-muted">دسته بندی: اجتماعی</small>
+            <small class="text-muted">دسته بندی: {{$posts->category}}</small>
             <p class="card-text">{!!  $posts->content !!}</p>
         </div>
         <div class="card-footer text-muted">نوشته شده در ساعت {{$posts->time_fa}} در تاریخ {{$posts->date_fa}}

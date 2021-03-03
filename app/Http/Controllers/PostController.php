@@ -151,6 +151,16 @@ class PostController extends BaseController
             ->first();
         if(!(is_null($user))&&(!is_null($post)))
         {
+            $post->category=$this->get_categoryPostById($post->categorypost_id);
+            if(is_null($post->category))
+            {
+                $post->category='دسته بندی نشده';
+            }
+            else
+            {
+                $post->category=$post->category->category;
+            }
+
             $comments=$this->get_commentByPostId($post->id,1);
 
             foreach ($comments as $item)
@@ -181,6 +191,7 @@ class PostController extends BaseController
             }
 
             $categoryposts=$this->get_categoryPostByUserId(Auth::user()->id);
+            $item->category=$this->get_categoryPostById($item->categorypost_id);
 
 
             return view('single')
