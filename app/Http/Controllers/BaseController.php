@@ -14,6 +14,7 @@ use App\message;
 use App\option;
 use App\post;
 use App\problemfollowup;
+use App\settingscore;
 use App\settingsms;
 use App\sms;
 use App\state;
@@ -1081,5 +1082,10 @@ class BaseController extends Controller
     {
         return category_post::where('id','=',$id)
                 ->first();
+    }
+
+    public function get_scores()
+    {
+        return settingscore::first();
     }
 }

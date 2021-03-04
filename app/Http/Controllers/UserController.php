@@ -608,19 +608,29 @@ class UserController extends BaseController
         $parentCategory = $this->get_category('پیگیری');
 
         //کسب امتیازات
-        $score = $countIntroducedUser * 5;
-        //امتیاز تایید شماره همراه
-        $verifyScore = $user->tel_verified;
-        if ($verifyScore == 1) {
-            $score = $score + 5;
-            $verifyScore = 5;
+        $score=0;
+        $scoreIntroducedUser=$countIntroducedUser* ($this->get_scores()->introduced);
+        $score=$score+$scoreIntroducedUser;
+
+
+        $verifyScore=$user->tel_verified;
+        if($verifyScore==1)
+        {
+            $scoreTelverify=$this->get_scores()->tel_verified;
+            $score=$score+$scoreTelverify;
         }
-        //امتیاز تعداد دعوت شده
-        $scoreSuccess = User::where('introduced', '=', $user->id)
-            ->where('type', '=', 20)
+        else
+        {
+            $scoreTelverify=0;
+        }
+        $SuccessIntroduced=User::where('introduced','=',$user->id)
+            ->where('type','=',20)
             ->count();
-        $scoreSuccess = $scoreSuccess * 10;
-        $score = $score + $scoreSuccess;
+
+
+
+        $scoreSuccess=$SuccessIntroduced*($this->get_scores()->changeintroduced);
+        $score=$score+$scoreSuccess;
 
         $today = $this->dateNow;
         $timeNow = $this->timeNow;
@@ -674,7 +684,10 @@ class UserController extends BaseController
                     ->with('timeNow',$timeNow)
                     ->with('expert_followup',$expert_followup)
                     ->with('parentCategory',$parentCategory)
-                    ->with('courses',$courses);
+                    ->with('courses',$courses)
+                    ->with('scoreIntroducedUser',$scoreIntroducedUser)
+                    ->with('SuccessIntroduced',$SuccessIntroduced)
+                    ->with('scoreTelverify',$scoreTelverify);
 
     }
 

@@ -115,16 +115,24 @@ class AdminController extends BaseController
                         ->where('status','=',1)
                         ->count();
                 //کسب امتیازات
-                $score=$countIntroducedUser*5;
+                $score=0;
+                $scoreIntroducedUser=$countIntroducedUser* ($this->get_scores()->introduced);
+                $score=$score+$scoreIntroducedUser;
+
+
                 $verifyScore=$user->tel_verified;
                 if($verifyScore==1)
                 {
-                    $score=$score+5;
+                    $scoreTelverify=$this->get_scores()->tel_verified;
+                    $score=$score+$scoreTelverify;
                 }
-                $scoreSuccess=User::where('introduced','=',$user->id)
+                $SuccessIntroduced=User::where('introduced','=',$user->id)
                         ->where('type','=',20)
                         ->count();
-                $scoreSuccess=$scoreSuccess*10;
+
+
+
+                $scoreSuccess=$SuccessIntroduced*($this->get_scores()->changeintroduced);
                 $score=$score+$scoreSuccess;
 
                 $checkTimeCode=verify::where('tel','=',$user['tel'])
@@ -150,7 +158,10 @@ class AdminController extends BaseController
                     ->with('score',$score)
                     ->with('verifyScore',$verifyScore)
                     ->with('scoreSuccess',$scoreSuccess)
-                    ->with('verifyStatus',$verifyStatus);
+                    ->with('verifyStatus',$verifyStatus)
+                    ->with('scoreIntroducedUser',$scoreIntroducedUser)
+                    ->with('SuccessIntroduced',$SuccessIntroduced)
+                    ->with('scoreTelverify',$scoreTelverify);
 
         }
         else

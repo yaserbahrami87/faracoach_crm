@@ -95,7 +95,7 @@
                                 <p> افراد دعوت شده {{$countIntroducedUser}} نفر</p>
                             </div>
                             <div class="col-md-6 col-3 text-right">
-                                <p>{{$countIntroducedUser*5}} امتیاز</p>
+                                <p>{{$scoreIntroducedUser}} امتیاز</p>
                             </div>
                         </div>
                     </li>
@@ -105,17 +105,17 @@
                                 <p> ثبت شماره همراه</p>
                             </div>
                             <div class="col-md-6 col-3 text-right">
-                                <p>{{$verifyScore*5}} امتیاز</p>
+                                <p>{{$scoreTelverify}} امتیاز</p>
                             </div>
                         </div>
                     </li>
                     <li class="list-group-item">
                         <div class="row border pt-2">
                             <div class="col-md-6 col-2">
-                                <p>دانشجوی معرفی شده {{$scoreSuccess}} نفر</p>
+                                <p>دانشجوی معرفی شده {{$SuccessIntroduced}} نفر</p>
                             </div>
                             <div class="col-md-6 col-3 text-right">
-                                <p>{{$scoreSuccess*10}} امتیاز</p>
+                                <p>{{$scoreSuccess}} امتیاز</p>
                             </div>
                         </div>
                     </li>
