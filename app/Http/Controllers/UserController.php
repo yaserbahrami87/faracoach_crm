@@ -1730,6 +1730,46 @@ class UserController extends BaseController
         }
     }
 
+
+    public function updatePasswordUser(Request $request)
+    {
+        $user=Auth::user();
+        if(is_null($user))
+        {
+            $msg="کاربری با چنین مشخصاتی وجود ندارد";
+            $errorStatus="danger";
+            return redirect("/panel/profile")
+                ->with('msg',$msg)
+                ->with('errorStatus',$errorStatus);
+        }
+        else
+        {
+            $this->validate(request(),
+                [
+                    'password'      => ['required', 'string', 'min:8', 'confirmed'],
+                ]);
+            $request['password']= Hash::make($request['password']);
+            $user->password=$request['password'];
+            $status=$user->save();
+            if($status)
+            {
+                $msg="رمز با موفقیت تغییر کرد";
+                $errorStatus="success";
+                return redirect("/panel/profile")
+                    ->with('msg',$msg)
+                    ->with('errorStatus',$errorStatus);
+            }
+            else
+            {
+                $msg="خطا در تغییر رمز عبور";
+                $errorStatus="danger";
+                return redirect("/panel/profile")
+                    ->with('msg',$msg)
+                    ->with('errorStatus',$errorStatus);
+            }
+        }
+    }
+
     public function changeType(Request $request,$id)
     {
         $this->validate(request(),

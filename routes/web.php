@@ -37,6 +37,8 @@ Route::middleware('can:isUser')->prefix('panel')->group(function () {
     Route::get('/profile','UserController@profile');
     Route::patch('/profile/update/{user}','UserController@update');
     Route::get('/userAjax/{user}','UserController@introducedUserAjax');
+    Route::get('/user/password','AdminController@changePasswordViewUser');
+    Route::patch('/user/updatePassword','UserController@updatePasswordUser');
 
     //messages
     Route::get('/messages/','MessageController@index');

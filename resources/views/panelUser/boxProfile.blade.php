@@ -26,7 +26,7 @@
         </div>
         <div class="card-footer">
             <hr>
-
+            <a href="/panel/user/password" class="btn btn-primary d-block text-center">تغییر رمز عبور</a>
         </div>
     </div>
 

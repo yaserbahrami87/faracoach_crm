@@ -342,4 +342,12 @@ class AdminController extends BaseController
         }
     }
 
+    public function changePasswordViewUser()
+    {
+        $user=Auth::user();
+        return view('panelUser.changePassword')
+                ->with('user',$user);
+
+    }
+
 }
