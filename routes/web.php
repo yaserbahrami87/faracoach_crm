@@ -68,14 +68,12 @@ Route::middleware('can:isUser')->prefix('panel')->group(function () {
     //Packages
     Route::get('/freepackages','AdminController@showFreePackages');
 
-
-
-
     //documents
     Route::get('/documents','DocumentController@indexUser');
     Route::get('/documents/{document}','DocumentController@showUser');
 
     //POSTS
+
     Route::resource('post','PostController');
 
     //comments
@@ -84,6 +82,10 @@ Route::middleware('can:isUser')->prefix('panel')->group(function () {
 
     //category post
     Route::resource('categoryposts','CategoryPostController');
+
+    //teachers
+    Route::get('/teachers','TeacherController@listTeachers');
+    Route::get('/teacher/{teacher}','TeacherController@show');
 
 });
 
@@ -215,9 +217,11 @@ Route::get('/register2',function()
 });
 
 //blog
+
 Route::get('/{username}','PostController@blogHomePage');
 Route::get('/{username}/post/{post}','PostController@show');
 Route::get('/{username}/category/{category}','PostController@categoryBlog');
+//Route::get('/blogs/all','PostController@blogs');
 
 
 

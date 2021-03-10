@@ -260,3 +260,4 @@ $("#introduced").focusout(function()
   }
 
 });
+

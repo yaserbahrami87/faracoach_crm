@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\teacher;
 use Illuminate\Http\Request;
 
-class TeacherController extends Controller
+class TeacherController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -186,5 +186,12 @@ class TeacherController extends Controller
                 ->with('errorStatus', $errorStatus);
         }
 
+    }
+
+    public function listTeachers()
+    {
+        $teachers=teacher::paginate($this->countPage());
+        return view('panelUser.teachers')
+                    ->with('coaches',$teachers);
     }
 }

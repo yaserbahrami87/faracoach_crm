@@ -2,11 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/panelUser/changePassword.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/blogs.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/panelUser/teachers.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PostController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PostController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TeacherController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TeacherController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/boxProfile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/boxProfile.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/dashboard/assets/js/java.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/dashboard/assets/js/java.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/profile.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/master/leftNavbar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/master/leftNavbar.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -376,7 +382,13 @@
       <workItem from="1614664492614" duration="8778000" />
       <workItem from="1614689549605" duration="8219000" />
       <workItem from="1614759635641" duration="20387000" />
-      <workItem from="1614839554627" duration="7551000" />
+      <workItem from="1614839554627" duration="8621000" />
+      <workItem from="1615012126191" duration="3444000" />
+      <workItem from="1615022018811" duration="7808000" />
+      <workItem from="1615097370354" duration="17737000" />
+      <workItem from="1615272945851" duration="305000" />
+      <workItem from="1615273278978" duration="8659000" />
+      <workItem from="1615355338041" duration="5002000" />
     </task>
     <servers />
   </component>
@@ -401,10 +413,10 @@
     </state>
     <state x="413" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1607375390214" />
     <state x="413" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1614725756178" />
-    <state width="254" height="198" key="ShowFilterAction_Filter_Popup" timestamp="1614845145503">
+    <state width="254" height="198" key="ShowFilterAction_Filter_Popup" timestamp="1615021820040">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="254" height="198" key="ShowFilterAction_Filter_Popup/0.0.1366.728@0.0.1366.728" timestamp="1614845145503" />
+    <state width="254" height="198" key="ShowFilterAction_Filter_Popup/0.0.1366.728@0.0.1366.728" timestamp="1615021820040" />
     <state x="404" y="105" width="540" height="524" key="StructurePopup" timestamp="1610172588165">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -421,10 +433,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1614842780947" />
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1614848811510">
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1615116646442">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728/1366.0.1920.1040@0.0.1366.728" timestamp="1610574245405" />
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1614848811510" />
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1615116646442" />
   </component>
 </project>

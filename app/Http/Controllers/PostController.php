@@ -217,7 +217,6 @@ class PostController extends BaseController
         //چک می شود که پست آیا متعلق به خود کاربر است
         if(Auth::user()->id==$post->user_id) {
             $categoryposts=$this->get_categoryPostByUserId(Auth::user()->id);
-
             return view('panelUser.editPost')
                 ->with('post', $post)
                 ->with('categoryposts',$categoryposts);
@@ -412,5 +411,16 @@ class PostController extends BaseController
         {
             return abort(404);
         }
+    }
+
+    public function blogs()
+    {
+        $posts=post::join('users','posts.user_id','=','users.id')
+                ->where('status','=',1)
+                ->orderby('posts.id','desc')
+                ->select('posts.*','users.*','posts.id as id_post')
+                ->limit(10)
+                ->get();
+        return view('blogs');
     }
 }

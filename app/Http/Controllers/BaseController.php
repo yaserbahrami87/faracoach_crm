@@ -182,7 +182,7 @@ class BaseController extends Controller
                         break;
             case "20":return "مشتری";
                         break;
-            default:return "خطا";
+            default:return "";
         }
     }
 
@@ -337,13 +337,46 @@ class BaseController extends Controller
 
     public function get_continuefollowup()
     {
-         return User::join('followups','users.id','=','followups.user_id')
+        return User::join('followups','users.id','=','followups.user_id')
             ->where('followby_expert', '=', Auth::user()->id)
             ->where('status_followups','=',11)
+            ->groupby('followups.user_id')
+            ->orderby('followups.id', 'desc')
             ->select('users.*')
-            ->groupby('users.id')
-            ->orderby('users.id', 'desc')
             ->paginate($this->countPage());
+
+
+
+
+
+//        $followups=followup::orderby('id','desc')
+//                        ->where('user_i','=',2174)
+//                        ->groupby('user_id')
+//                        ->get();
+//
+//        dd(($followups));
+//        $followups=$followups->where('status_followups','=',11)
+//                             ->where('user_id','=',2174);
+
+
+
+//        foreach ($followups as $item)
+//        {
+//            $user=user::where('id','=',$item->user_id)
+//                        ->first();
+//            $item->append([$user]);
+//            dd($item->lname);
+//        }
+
+
+//        return User::join('followups','users.id','=','followups.user_id')
+//            ->where('followby_expert', '=', Auth::user()->id)
+//            ->where('status_followups','=',11)
+//            ->select('users.*')
+//            ->groupby('users.id')
+//            ->orderby('users.id', 'desc')
+//            ->paginate($this->countPage());
+
     }
 
     public function get_continuefollowup_withoutPaginate()

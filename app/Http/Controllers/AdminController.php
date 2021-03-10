@@ -126,6 +126,10 @@ class AdminController extends BaseController
                     $scoreTelverify=$this->get_scores()->tel_verified;
                     $score=$score+$scoreTelverify;
                 }
+                else
+                {
+                    $scoreTelverify=0;
+                }
                 $SuccessIntroduced=User::where('introduced','=',$user->id)
                         ->where('type','=',20)
                         ->count();

@@ -69,8 +69,14 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/panel/documents" class="nav-link @if(request()->is('panel/documents*')) active  @endif">
+                        <a href="/panel/teachers" class="nav-link @if(request()->is('panel/teachers*')) active  @endif">
                             <i class="fas fa-chalkboard-teacher"></i>
+                            <p>اساتید</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/panel/documents" class="nav-link @if(request()->is('panel/documents*')) active  @endif">
+                            <i class="fas fa-photo-video"></i>
                             <p>فایلها</p>
                         </a>
                     </li>

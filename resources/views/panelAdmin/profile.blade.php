@@ -145,13 +145,14 @@
                         <div class="col-md-6 px-1">
                             <div class="form-group">
                                 <label>تلفن تماس</label>
-                                <input type="text" class="form-control" placeholder="تلفن تماس را وارد کنید" value="{{$user->tel}}" name="tel"    />
+                                <input type="text" class="form-control" placeholder="تلفن تماس را وارد کنید" value="{{$user->tel}}" name="tel" @if(strlen($user->tel)>0 ) disabled  @endif  />
                             </div>
                         </div>
                         <div class="col-md-6 pr-1">
                             <div class="form-group">
                                 <label for="email">پست الکترونیکی</label>
-                                <input type="email" class="form-control" placeholder="پست الکترونیکی را وارد کنید" value="{{$user->email}}" name="email"  id="email"   />
+
+                                <input type="email" class="form-control" placeholder="پست الکترونیکی را وارد کنید" value="{{$user->email}}" name="email"  id="email"  @if(strlen($user->email)>0) disabled  @endif />
                             </div>
                         </div>
                         <div class="col-md-6 pl-1">
