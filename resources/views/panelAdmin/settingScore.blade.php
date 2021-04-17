@@ -17,6 +17,10 @@
                     <input type="text" class="form-control" id="tel_verified" name="tel_verified" value="{{$settingscore->tel_verified}}"/>
                 </div>
                 <div class="form-group">
+                    <label for="tel_verified">امتیاز تایید ایمیل</label>
+                    <input type="text" class="form-control" id="tel_verified" name="email_verified" value="{{$settingscore->email_verified}}"/>
+                </div>
+                <div class="form-group">
                     <label for="partsprofile">امتیاز تکمیل هر بخش اطلاعات شخصی</label>
                     <input type="text" class="form-control" id="partsprofile" name="partsprofile" value="{{$settingscore->partsprofile}}"/>
                 </div>

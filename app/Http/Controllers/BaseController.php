@@ -27,6 +27,8 @@ use Hekmatinasser\Verta\Verta;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 class BaseController extends Controller
 {
@@ -297,6 +299,7 @@ class BaseController extends Controller
 
     public function get_lastFollowupUser($id)
     {
+
         return followup::join('problemfollowups','followups.problemfollowup_id','=','problemfollowups.id')
                     ->where('user_id','=',$id)
                     ->orderby('followups.id','desc')
@@ -337,58 +340,54 @@ class BaseController extends Controller
 
     public function get_continuefollowup()
     {
-        return User::join('followups','users.id','=','followups.user_id')
+
+
+        $users = DB::table('users')
+            ->select(DB::raw('distinct(user_id)  ,users.*,followups.status_followups,followups.user_id'))
+            ->join('followups','users.id','=','followups.user_id')
             ->where('followby_expert', '=', Auth::user()->id)
-            ->where('status_followups','=',11)
-            ->groupby('followups.user_id')
-            ->orderby('followups.id', 'desc')
-            ->select('users.*')
-            ->paginate($this->countPage());
-
-
-
-
-
-//        $followups=followup::orderby('id','desc')
-//                        ->where('user_i','=',2174)
-//                        ->groupby('user_id')
-//                        ->get();
+//            ->where(function($query)
+//            {
 //
-//        dd(($followups));
-//        $followups=$followups->where('status_followups','=',11)
-//                             ->where('user_id','=',2174);
-
-
-
-//        foreach ($followups as $item)
-//        {
-//            $user=user::where('id','=',$item->user_id)
-//                        ->first();
-//            $item->append([$user]);
-//            dd($item->lname);
-//        }
-
+//            })
+            ->orderby('followups.id','desc')
+            ->get();
+        dd($users);
+        $users=$users->where('status_followups','=',11);
+        return $users;
 
 //        return User::join('followups','users.id','=','followups.user_id')
 //            ->where('followby_expert', '=', Auth::user()->id)
 //            ->where('status_followups','=',11)
-//            ->select('users.*')
-//            ->groupby('users.id')
-//            ->orderby('users.id', 'desc')
+//            ->orderby('followups.id', 'desc')
+//            ->groupby('followups.user_id')
+//            ->select('users.*','destinct(followups)')
 //            ->paginate($this->countPage());
 
     }
 
     public function get_continuefollowup_withoutPaginate()
     {
-        return User::join('followups','users.id','=','followups.user_id')
-            ->where('status_followups', '=', '11')
+        $users = DB::table('users')
+            ->join('followups','users.id','=','followups.user_id')
             ->where('followby_expert', '=', Auth::user()->id)
-            ->where('status_followups','=',11)
-            ->groupby('users.id')
-            ->select('users.*')
-            ->orderby('users.id', 'desc')
+
+            ->orderby('followups.id', 'desc')
+            ->distinct('followups.user_id')
             ->get();
+
+        $users=$users->where('status_followups','=',11);
+
+        return $users;
+
+//        return User::join('followups','users.id','=','followups.user_id')
+//            ->where('status_followups', '=', '11')
+//            ->where('followby_expert', '=', Auth::user()->id)
+//            ->where('status_followups','=',11)
+//            ->groupby('users.id')
+//            ->select('users.*')
+//            ->orderby('users.id', 'desc')
+//            ->get();
     }
 
     public function get_continuefollowupbyID($id)

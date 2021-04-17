@@ -112,6 +112,16 @@
                     <li class="list-group-item">
                         <div class="row border pt-2">
                             <div class="col-md-6 col-2">
+                                <p> ثبت پست الکترونیکی</p>
+                            </div>
+                            <div class="col-md-6 col-3 text-right">
+                                <p>{{$scoreEmailverify}} امتیاز</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row border pt-2">
+                            <div class="col-md-6 col-2">
                                 <p>دانشجوی معرفی شده {{$SuccessIntroduced}} نفر</p>
                             </div>
                             <div class="col-md-6 col-3 text-right">

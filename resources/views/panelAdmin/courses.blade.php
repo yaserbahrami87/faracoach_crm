@@ -34,7 +34,7 @@
                     </a>
                 </td>
                 <td>
-                    <form method="post" action="/admin/teachers/{{$item->shortlink}}" onsubmit="return confirm('آیا از حذف دوره اطمینان دارید؟(در صورت حذف تمام اطلاعات مربوط به آن از بانک حذف می شود)');">
+                    <form method="post" action="/admin/teachers/{{$item->shortlink}}" onsubmit="return confirm('آیا از حذف دوره اطمینان دارید؟(در صورت حذف تمام اطلاعات مربوط به آن از بانک حذف می شود)')">
                         {{ method_field('DELETE') }}
                         {{ csrf_field() }}
                         <button  class="btn btn-danger" type="submit">

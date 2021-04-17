@@ -24,6 +24,11 @@
     <link href="{{asset('../css/timepicker.min.css')}}" rel="stylesheet" />
     <link href={{asset('../css/bootstrap-rtl.min.css')}} rel="stylesheet" />
     <link href="{{asset('../dashboard/dist/css/style.css')}}" rel="stylesheet" />
+
+
+    <script src="{{asset('/js/app.js')}}"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed sidebar-collapse">
 <div class="wrapper">
@@ -153,15 +158,16 @@
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
-                    <div class="col-sm-6">
+                    <!-- <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-left">
                             <li class="breadcrumb-item active">داشبورد</li>
                             <li class="breadcrumb-item"><a href="#">صفحه اصلی</a></li>
 
                         </ol>
-                    </div><!-- /.col -->
+                    </div>-->
+                    <!-- /.col -->
                     <div class="col-sm-6 text-right">
-                        <h1 class="m-0 text-dark">پنل مدیریت فراکوچ</h1>
+                        <!-- <h1 class="m-0 text-dark">پنل مدیریت فراکوچ</h1> -->
                     </div><!-- /.col -->
 
                 </div><!-- /.row -->
@@ -210,6 +216,9 @@
     </footer>
 </div>
 <!-- ./wrapper -->
+
+@include('sweet::alert')
+
 
 <!--   Core JS Files   -->
 <script src="{{asset('dashboard/assets/js/core/jquery.min.js')}}"></script>

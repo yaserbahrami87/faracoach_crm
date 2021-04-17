@@ -74,6 +74,7 @@ class SettingscoreController extends Controller
         $this->validate($request, [
             'signup'               => ['required','numeric'],
             'tel_verified'         => ['required','numeric'],
+            'email_verified'         => ['required','numeric'],
             'partsprofile'         => ['required','numeric'],
             'introduced'           => ['required','numeric'],
             'loginintroduced'      => ['required','numeric'],

@@ -410,3 +410,88 @@
         @include('panelAdmin.followups')
     </div>
 @endsection
+
+@section('scriptfooter')
+    <!--  DATE SHAMSI PICKER  --->
+    <script src="{{asset('js/kamadatepicker.min.js')}}"></script>
+    <script src="{{asset('js/kamadatepicker.holidays.js')}}"></script>
+    <script>
+
+        var customOptions={
+            gotoToday: true,
+            markHolidays:true,
+            markToday:true,
+            twodigit:true,
+            closeAfterSelect:true,
+            highlightSelectedDay:true,
+            nextButtonIcon: "fa fa-arrow-circle-right",
+            previousButtonIcon: "fa fa-arrow-circle-left",
+            sync:true,
+        }
+        kamaDatepicker('dateFollow',customOptions);
+
+        kamaDatepicker('nextfollowup_date_fa',
+            {
+                markHolidays:true,
+                markToday:true,
+                twodigit:true,
+                closeAfterSelect:true,
+                nextButtonIcon: "fa fa-arrow-circle-right",
+                previousButtonIcon: "fa fa-arrow-circle-left"
+            });
+
+        kamaDatepicker('start',
+            {
+                gotoToday: true,
+                markHolidays:true,
+                markToday:true,
+                twodigit:true,
+                closeAfterSelect:true,
+                highlightSelectedDay:true,
+                nextButtonIcon: "fa fa-arrow-circle-right",
+                previousButtonIcon: "fa fa-arrow-circle-left",
+                sync:true,
+            });
+        kamaDatepicker('end',
+            {
+                gotoToday: true,
+                markHolidays:true,
+                markToday:true,
+                twodigit:true,
+                closeAfterSelect:true,
+                highlightSelectedDay:true,
+                nextButtonIcon: "fa fa-arrow-circle-right",
+                previousButtonIcon: "fa fa-arrow-circle-left",
+                sync:true,
+            });
+        kamaDatepicker('exam',
+            {
+                gotoToday: true,
+                markHolidays:true,
+                markToday:true,
+                twodigit:true,
+                closeAfterSelect:true,
+                highlightSelectedDay:true,
+                nextButtonIcon: "fa fa-arrow-circle-right",
+                previousButtonIcon: "fa fa-arrow-circle-left",
+                sync:true,
+            });
+        kamaDatepicker('datebirth',
+            {
+                twodigit:true,
+                closeAfterSelect:true,
+                highlightSelectedDay:true,
+                nextButtonIcon: "fa fa-arrow-circle-right",
+                previousButtonIcon: "fa fa-arrow-circle-left",
+            });
+    </script>
+    <!-- ****************  -->
+    <script src="{{asset('js/timepicker.js')}}"></script>
+    <script>
+        $(document).ready(function()
+        {
+            jQuery.noConflict();
+            jQuery('#time_fa').timepicker();
+        });
+    </script>
+@endsection

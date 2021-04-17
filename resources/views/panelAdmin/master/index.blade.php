@@ -8,25 +8,14 @@
 
     <title>پنل کاربری فراکوچ</title>
 
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="{{asset('dashboard/plugins/fontawesome-free/css/all.min.css')}}">
-    <!-- overlayScrollbars -->
-    <link rel="stylesheet" href="{{asset('dashboard/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="{{asset('dashboard/dist/css/adminlte.min.css')}}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-    <!-- FILE MANAGER -->
-    <link rel="stylesheet" href="{{ asset('vendor/file-manager/css/file-manager.css') }}">
+    <link href="{{asset('css/app.css')}}" rel="stylesheet" />
 
-    <link href="{{asset('../dashboard/dist/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
-    <link href="{{asset('../css/kamadatepicker.min.css')}}" rel="stylesheet" />
-    <link href="{{asset('../css/timepicker.min.css')}}" rel="stylesheet" />
-    <link href={{asset('../css/bootstrap-rtl.min.css')}} rel="stylesheet" />
-    <link href="{{asset('../dashboard/dist/css/style.css')}}" rel="stylesheet" />
 </head>
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed sidebar-collapse">
 <div class="wrapper">
+    @include('sweet::alert')
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
         <!-- Left navbar links -->
@@ -151,14 +140,15 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
+                        <!--
                         <ol class="breadcrumb float-sm-left">
                             <li class="breadcrumb-item active">داشبورد</li>
                             <li class="breadcrumb-item"><a href="#">صفحه اصلی</a></li>
 
-                        </ol>
+                        </ol>-->
                     </div><!-- /.col -->
                     <div class="col-sm-6 text-right">
-                        <h1 class="m-0 text-dark">پنل مدیریت فراکوچ</h1>
+                        <!-- <h1 class="m-0 text-dark">پنل مدیریت فراکوچ</h1> -->
                     </div><!-- /.col -->
 
                 </div><!-- /.row -->
@@ -208,10 +198,11 @@
 </div>
 <!-- ./wrapper -->
 
+
 <!--   Core JS Files   -->
 <script src="{{asset('dashboard/assets/js/core/jquery.min.js')}}"></script>
-<script src="{{asset('dashboard/assets/js/java.js')}}"></script>
 
+<script src="{{asset('dashboard/assets/js/java.js')}}"></script>
 <script src="{{asset('vendor/file-manager/js/file-manager.js')}}"></script>
 
 <script src="{{asset('dashboard/assets/js/core/popper.min.js')}}"></script>
@@ -219,189 +210,17 @@
 <script src="{{asset('dashboard/assets/js/plugins/perfect-scrollbar.jquery.min.js')}}"></script>
 
 
-<!-- Chart JS -->
-<script src="{{asset('dashboard/assets/js/plugins/chartjs.min.js')}}"></script>
-<!--  Notifications Plugin    -->
-<script src="{{asset('dashboard/assets/js/plugins/bootstrap-notify.js')}}"></script>
-<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
 
 
-
-
-<!--  DATE SHAMSI PICKER  --->
-<script src="{{asset('js/kamadatepicker.min.js')}}"></script>
-<script src="{{asset('js/kamadatepicker.holidays.js')}}"></script>
-<script>
-
-    var customOptions={
-        gotoToday: true,
-        markHolidays:true,
-        markToday:true,
-        twodigit:true,
-        closeAfterSelect:true,
-        highlightSelectedDay:true,
-        nextButtonIcon: "fa fa-arrow-circle-right",
-        previousButtonIcon: "fa fa-arrow-circle-left",
-        sync:true,
-    }
-    kamaDatepicker('dateFollow',customOptions);
-
-    kamaDatepicker('nextfollowup_date_fa',
-        {
-            markHolidays:true,
-            markToday:true,
-            twodigit:true,
-            closeAfterSelect:true,
-            nextButtonIcon: "fa fa-arrow-circle-right",
-            previousButtonIcon: "fa fa-arrow-circle-left"
-        });
-
-    kamaDatepicker('start',
-        {
-            gotoToday: true,
-            markHolidays:true,
-            markToday:true,
-            twodigit:true,
-            closeAfterSelect:true,
-            highlightSelectedDay:true,
-            nextButtonIcon: "fa fa-arrow-circle-right",
-            previousButtonIcon: "fa fa-arrow-circle-left",
-            sync:true,
-        });
-    kamaDatepicker('end',
-        {
-            gotoToday: true,
-            markHolidays:true,
-            markToday:true,
-            twodigit:true,
-            closeAfterSelect:true,
-            highlightSelectedDay:true,
-            nextButtonIcon: "fa fa-arrow-circle-right",
-            previousButtonIcon: "fa fa-arrow-circle-left",
-            sync:true,
-        });
-    kamaDatepicker('exam',
-        {
-            gotoToday: true,
-            markHolidays:true,
-            markToday:true,
-            twodigit:true,
-            closeAfterSelect:true,
-            highlightSelectedDay:true,
-            nextButtonIcon: "fa fa-arrow-circle-right",
-            previousButtonIcon: "fa fa-arrow-circle-left",
-            sync:true,
-        });
-    kamaDatepicker('datebirth',
-        {
-            twodigit:true,
-            closeAfterSelect:true,
-            highlightSelectedDay:true,
-            nextButtonIcon: "fa fa-arrow-circle-right",
-            previousButtonIcon: "fa fa-arrow-circle-left",
-        });
-</script>
-<!-- ****************  -->
 
 <script src="{{asset('dashboard/plugins/jquery/jquery.min.js')}}"></script>
-<script src="{{asset('js/timepicker.js')}}"></script>
-<script>
-    $(document).ready(function()
-    {
-        jQuery.noConflict();
-        jQuery('#time_fa').timepicker();
-    });
-
-
-</script>
-
-
-<script src="{{asset('dashboard/assets/js/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('dashboard/assets/js/dataTables.bootstrap4.min.js')}}"></script>
-<script>
-    window.onload = function () {
-        var options = {
-            animationEnabled: true,
-            theme: "light2",
-            title:{
-                text: "آمار سایت"
-            },
-            axisX:{
-                valueFormatString: "DD MMM"
-            },
-            axisY: {
-                title: "Number of Sales",
-                suffix: "نفر",
-                minimum: 0
-            },
-            toolTip:{
-                shared:true
-            },
-            legend:{
-                cursor:"pointer",
-                verticalAlign: "bottom",
-                horizontalAlign: "left",
-                dockInsidePlotArea: true,
-                itemclick: toogleDataSeries
-            },
-            data: [{
-                type: "line",
-                showInLegend: true,
-                name: "ثبت نام شده",
-                markerType: "square",
-                xValueFormatString: "DD MMM, YYYY",
-                color: "#F08080",
-                yValueFormatString: "#,##0نفر",
-                dataPoints: [
-                    { x: new Date(1399, 10, 1), y: 63 },
-                    { x: new Date(1399, 11, 2), y: 69 },
-                    { x: new Date(1400, 11, 2), y: 65 },
-                    { x: new Date(1401, 11, 2), y: 70 },
-                ]
-            },
-                {
-                    type: "line",
-                    showInLegend: true,
-                    name: "انصراف",
-                    lineDashType: "dash",
-                    yValueFormatString: "#,##0نفر",
-                    dataPoints: [
-                        { x: new Date(1399, 10, 1), y: 83 },
-                        { x: new Date(1399, 11, 2), y: 99 },
-                        { x: new Date(1400, 11, 2), y: 15 },
-                        { x: new Date(1401, 11, 2), y: 20 },
-                    ]
-                }]
-        };
-        $("#chartContainer").CanvasJSChart(options);
-
-        function toogleDataSeries(e){
-            if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-                e.dataSeries.visible = false;
-            } else{
-                e.dataSeries.visible = true;
-            }
-            e.chart.render();
-        }
-
-    }
-</script>
-
 
 <script src="{{asset('dashboard/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('dashboard/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 <script src="{{asset('dashboard/dist/js/adminlte.js')}}"></script>
-<!-- jQuery Mapael -->
-<script src="{{asset('dashboard/plugins/jquery-mousewheel/jquery.mousewheel.js')}}"></script>
-<script src="{{asset('dashboard/plugins/raphael/raphael.min.js')}}"></script>
-<script src="{{asset('dashboard/plugins/jquery-mapael/jquery.mapael.min.js')}}"></script>
-<script src="{{asset('dashboard/plugins/jquery-mapael/maps/usa_states.min.js')}}"></script>
 
-<script src="{{asset('dashboard/dist/js/pages/dashboard2.js')}}"></script>
-<script src="{{asset('ckeditor/ckeditor.js')}}"></script>
-<script>
-    CKEDITOR.replace( 'ckeditor' );
-</script>
+<!-- <script src="{{asset('dashboard/dist/js/pages/dashboard2.js')}}"></script> -->
+
 
 </body>
 </html>

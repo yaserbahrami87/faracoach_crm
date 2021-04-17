@@ -1,4 +1,10 @@
 @extends('panelAdmin.master.index')
+
+@section('scripthead')
+    <link href="{{asset('../css/kamadatepicker.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('../css/timepicker.min.css')}}" rel="stylesheet" />
+@endsection
+
 @section('rowcontent')
     <div class="col-xs-12 col-md-8 col-lg-8 col-xl-8">
         <div class="card-header">
@@ -125,4 +131,11 @@
     <div class="col-xs-12 col-md-4 col-lg-4 col-xl-4">
 
     </div>
+@endsection
+
+@section('scriptfooter')
+    <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
+    <script>
+        CKEDITOR.replace( 'ckeditor' );
+    </script>
 @endsection

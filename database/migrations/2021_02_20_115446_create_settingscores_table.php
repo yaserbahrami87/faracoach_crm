@@ -17,6 +17,7 @@ class CreateSettingscoresTable extends Migration
             $table->id();
             $table->integer('signup')->default(1);
             $table->integer('tel_verified')->default(1);
+            $table->integer('email_verified')->default(1);
             $table->integer('partsprofile')->default(1);
             $table->integer('introduced')->default(1);
             $table->integer('loginintroduced')->default(1);

@@ -1,8 +1,6 @@
 
     <div class="card card-user">
-        <div class="image">
-
-        </div>
+        <div class="image"></div>
         <div class="card-body">
             <div class="author">
                 <a href="{{asset('/panel/profile')}}">

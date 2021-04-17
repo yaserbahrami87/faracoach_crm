@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Hekmatinasser\Verta\Verta;
 use Throwable;
+use SweetAlert;
 
 class UserController extends BaseController
 {
@@ -242,8 +243,9 @@ class UserController extends BaseController
 
         if($check>0)
         {
-            $msg="کد ملی / پست الکترونیکی تکراری است";
-            $errorStatus="danger";
+            alert()->error("کد ملی / پست الکترونیکی تکراری است",'خطا')->persistent('بستن');
+//            $msg="کد ملی / پست الکترونیکی تکراری است";
+//            $errorStatus="danger";
         }
         else
         {
@@ -341,7 +343,8 @@ class UserController extends BaseController
             if($status)
             {
                 $msg="اطلاعات ما با موفقیت در سیستم ثبت شد";
-                $errorStatus="success";
+//                $errorStatus="success";
+                alert()->success("اطلاعات ما با موفقیت در سیستم ثبت شد",'پیام')->persistent('بستن');
 
                 // Send SMS
                 $url = "https://ippanel.com/services.jspd";
@@ -366,7 +369,8 @@ class UserController extends BaseController
                 $res_data = $response2[1];
             }
         }
-        return back()->with('msg',$msg)->with('errorStatus',$errorStatus);
+        return back();
+//        ->with('msg',$msg)->with('errorStatus',$errorStatus);
     }
 
     public function showRegister()
@@ -444,19 +448,21 @@ class UserController extends BaseController
                 $this->sendSms($request['tel'],$request['sendsms']);
             }
 
-            $msg="کاربر با موفقیت در سیستم ثبت شد";
-            $errorStatus="success";
-            return back()
-                    ->with('msg',$msg)
-                    ->with('errorStatus',$errorStatus);
+//            $msg="کاربر با موفقیت در سیستم ثبت شد";
+//            $errorStatus="success";
+            alert()->success("کاربر با موفقیت در سیستم ثبت شد",'پیام')->persistent('بستن');
+            return back();
+//                    ->with('msg',$msg)
+//                    ->with('errorStatus',$errorStatus);
         }
         else
         {
-            $msg="خطا در ثبت کاربر";
-            $errorStatus="danger";
-            return back()
-                ->with('msg',$msg)
-                ->with('errorStatus',$errorStatus);
+//            $msg="خطا در ثبت کاربر";
+//            $errorStatus="danger";
+            alert()->error("خطا در ثبت کاربر",'خطا')->persistent('بستن');
+            return back();
+//                ->with('msg',$msg)
+//                ->with('errorStatus',$errorStatus);
         }
     }
 
@@ -790,10 +796,12 @@ class UserController extends BaseController
                 $user->update($request->all());
             } catch (Throwable $e) {
 
-                $msg = $e->errorInfo[2];
-                $errorStatus = "danger";
-                return back()->with('msg', $msg)
-                    ->with('errorStatus', $errorStatus);
+//                $msg = $e->errorInfo[2];
+//                $errorStatus = "danger";
+                alert()->error($e->errorInfo[2],'خطا')->persistent('بستن');
+                return back();
+//                    ->with('msg', $msg)
+//                    ->with('errorStatus', $errorStatus);
             }
 
             if (isset($personal_image)) {
@@ -817,11 +825,13 @@ class UserController extends BaseController
             }
 
             $user->save();
-            $msg = "پروفایل با موفقیت به روزرسانی شد";
-            $errorStatus = "success";
 
-            return back()->with('msg', $msg)
-                ->with('errorStatus', $errorStatus);
+//            $msg = "پروفایل با موفقیت به روزرسانی شد";
+//            $errorStatus = "success";
+            alert()->success('پروفایل با موفقیت به روزرسانی شد','پیام')->persistent('بستن');
+            return back();
+//            ->with('msg', $msg)
+//                ->with('errorStatus', $errorStatus);
 
 
     }
@@ -845,24 +855,28 @@ class UserController extends BaseController
                 $status=$user->save();
                 if($status)
                 {
-                    $msg="اطلاعات با موفقیت حذف شد";
-                    $errorStatus="success";
+                    alert()->success("اطلاعات با موفقیت حذف شد",'پیام')->persistent('بستن');
+//                    $msg="اطلاعات با موفقیت حذف شد";
+//                    $errorStatus="success";
                 }
                 else
                 {
-                    $msg="خطا در حذف کاربر";
-                    $errorStatus="danger";
+                    alert()->error("خطا در حذف کاربر",'خطا')->persistent('بستن');
+//                    $msg="خطا در حذف کاربر";
+//                    $errorStatus="danger";
                 }
-                return back()->with('msg',$msg)
-                    ->with('errorStatus',$errorStatus);
+                return back();
+//                ->with('msg',$msg)
+//                    ->with('errorStatus',$errorStatus);
             }
             else
             {
-                $msg = "شما در حال حذف کاربری خود میباشید و امکان آن وجود ندارد";
-                $errorStatus = "danger";
-                return redirect('/admin/users')
-                        ->with('msg',$msg)
-                        ->with('errorStatus',$errorStatus);
+//                $msg = "شما در حال حذف کاربری خود میباشید و امکان آن وجود ندارد";
+//                $errorStatus = "danger";
+                alert()->error("شما در حال حذف کاربری خود میباشید و امکان آن وجود ندارد",'خطا')->persistent('بستن');
+                return redirect('/admin/users');
+//                        ->with('msg',$msg)
+//                        ->with('errorStatus',$errorStatus);
             }
         }
         else
@@ -1304,10 +1318,12 @@ class UserController extends BaseController
                 ]);
 
             if (!isset($request['tags'])) {
-                $msg = "حداقل یک گزینه برای اعمال فیلترها انتخاب کنید";
-                $errorStatus = "danger";
-                return back()->with('msg', $msg)
-                    ->with('errorStatus', $errorStatus);
+//                $msg = "حداقل یک گزینه برای اعمال فیلترها انتخاب کنید";
+//                $errorStatus = "danger";
+                alert()->error("حداقل یک گزینه برای اعمال فیلترها انتخاب کنید",'خطا')->persistent('بستن');
+                return back();
+//                ->with('msg', $msg)
+//                    ->with('errorStatus', $errorStatus);
             } else {
                 $tags = implode(',', $request['tags']);
                 $users = user::join('followups', 'users.id', '=', 'followups.user_id')
@@ -1614,6 +1630,7 @@ class UserController extends BaseController
 
     public function addIntroducedUser(Request $request)
     {
+
         if(preg_match('/^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}$/',$request['tel']))
         {
             $this->validate(request(),
@@ -1621,6 +1638,7 @@ class UserController extends BaseController
                 'fname'         =>'required|persian_alpha|min:3|max:15',
                 'lname'         =>'required|persian_alpha|min:3|max:15',
                 'tel'           =>'required|numeric|iran_mobile|',
+                'sex'           =>'required|boolean',
                 'followby_id'   =>'required|numeric'
             ]);
 
@@ -1632,49 +1650,58 @@ class UserController extends BaseController
                 //ثبت تلفن دعوت شده به همراه تلفن دعوت کننده و تاریخ
                 $status=User::create($request->all() +
                     [
-                        'introduced'  =>Auth::user()->id,
+                        'password'      =>Hash::make('1234'),
+                        'introduced'    =>Auth::user()->id,
                         'date_fa'       =>$this->dateNow,
                         'time_fa'       =>$this->timeNow
                     ]);
 
                 if($status)
                 {
-                    if(is_null(Auth::user()->fname) ||(is_null(Auth::user()->lname)) )
-                    {
-                        $this->sendSms($request['tel'],"به فراکوچ خوش آمدید/ شما توسط ".Auth::user()->tel." به فراکوچ دعوت شدید");
-                        $msg="تلفن با موفقیت در سیستم فراکوچ ثبت شد";
-                        $errorStatus="success";
+                    if($request['sms']==1) {
+                        if (is_null(Auth::user()->fname) || (is_null(Auth::user()->lname))) {
+                            $this->sendSms($request['tel'], "به فراکوچ خوش آمدید/ شما توسط " . Auth::user()->tel . " به فراکوچ دعوت شدید");
+//                        $msg="تلفن با موفقیت در سیستم فراکوچ ثبت شد";
+//                        $errorStatus="success";
+                            alert()->success("تلفن با موفقیت در سیستم فراکوچ ثبت شد", 'پیام')->persistent('بستن');
+                        } else {
+                            $this->sendSms($request['tel'], "به فراکوچ خوش آمدید/ شما توسط " . Auth::user()->fname . Auth::user()->lname . " به فراکوچ دعوت شدید");
+//                        $msg="تلفن با موفقیت در سیستم فراکوچ ثبت شد";
+//                        $errorStatus="success";
+                            alert()->success("تلفن با موفقیت در سیستم فراکوچ ثبت شد", 'پیام')->persistent('بستن');
+                        }
                     }
                     else
                     {
-                        $this->sendSms($request['tel'],"به فراکوچ خوش آمدید/ شما توسط ".Auth::user()->fname.Auth::user()->lname ." به فراکوچ دعوت شدید");
-                        $msg="تلفن با موفقیت در سیستم فراکوچ ثبت شد";
-                        $errorStatus="success";
+                        alert()->success("تلفن با موفقیت در سیستم فراکوچ ثبت شد", 'پیام')->persistent('بستن');
                     }
                 }
                 else
                 {
-                    $msg="خطا در ثبت";
-                    $errorStatus="danger";
+//                    $msg="خطا در ثبت";
+//                    $errorStatus="danger";
+                    alert()->error("خطا در ثبت",'خطا')->persistent('بستن');
                 }
             }
             else
             {
-                $msg="شخص مورد نظر در گذشته توسط شما و یا شخص دیگر دعوت شده است";
-                $errorStatus="danger";
+                alert()->error('شخص مورد نظر در گذشته توسط شما و یا شخص دیگر دعوت شده است','خطا')->persistent('بستن');
+//                $msg="شخص مورد نظر در گذشته توسط شما و یا شخص دیگر دعوت شده است";
+//                $errorStatus="danger";
             }
 
-            return back()
-                    ->with('msg',$msg)
-                    ->with('errorStatus',$errorStatus);
+            return back();
+//                    ->with('msg',$msg)
+//                    ->with('errorStatus',$errorStatus);
         }
         else
         {
-            $msg="شماره همراه وارد شده نادرست است";
-            $errorStatus="danger";
-            return back()
-                    ->with('msg',$msg)
-                    ->with('errorStatus',$errorStatus);
+//            $msg="شماره همراه وارد شده نادرست است";
+//            $errorStatus="danger";
+            alert()->error('شماره همراه وارد شده نادرست است','خطا')->persistent('بستن');
+            return back();
+//                    ->with('msg',$msg)
+//                    ->with('errorStatus',$errorStatus);
         }
     }
 
@@ -1718,11 +1745,12 @@ class UserController extends BaseController
         $user=$this->get_user($tel);
         if(is_null($user))
         {
-            $msg="کاربری با چنین مشخصاتی وجود ندارد";
-            $errorStatus="danger";
-            return redirect("/admin/users")
-                ->with('msg',$msg)
-                ->with('errorStatus',$errorStatus);
+//            $msg="کاربری با چنین مشخصاتی وجود ندارد";
+//            $errorStatus="danger";
+            alert()->error('کاربری با چنین مشخصاتی وجود ندارد','خطا')->persistent('بستن');
+            return redirect("/admin/users");
+//                ->with('msg',$msg)
+//                ->with('errorStatus',$errorStatus);
         }
         else
         {
@@ -1735,19 +1763,21 @@ class UserController extends BaseController
             $status=$user->save();
             if($status)
             {
-                $msg="رمز با موفقیت تغییر کرد";
-                $errorStatus="success";
-                return redirect("/admin/users")
-                    ->with('msg',$msg)
-                    ->with('errorStatus',$errorStatus);
+//                $msg="رمز با موفقیت تغییر کرد";
+//                $errorStatus="success";
+                alert()->success('رمز با موفقیت تغییر کرد','پیام')->persistent('بستن');
+                return redirect("/admin/users");
+//                    ->with('msg',$msg)
+//                    ->with('errorStatus',$errorStatus);
             }
             else
             {
-                $msg="خطا در تغییر رمز عبور";
-                $errorStatus="danger";
-                return redirect("/admin/users")
-                    ->with('msg',$msg)
-                    ->with('errorStatus',$errorStatus);
+//                $msg="خطا در تغییر رمز عبور";
+//                $errorStatus="danger";
+                alert()->error('خطا در تغییر رمز عبور','خطا')->persistent('بستن');
+                return redirect("/admin/users");
+//                    ->with('msg',$msg)
+//                    ->with('errorStatus',$errorStatus);
             }
         }
     }
@@ -1758,11 +1788,12 @@ class UserController extends BaseController
         $user=Auth::user();
         if(is_null($user))
         {
-            $msg="کاربری با چنین مشخصاتی وجود ندارد";
-            $errorStatus="danger";
-            return redirect("/panel/profile")
-                ->with('msg',$msg)
-                ->with('errorStatus',$errorStatus);
+//            $msg="کاربری با چنین مشخصاتی وجود ندارد";
+//            $errorStatus="danger";
+            alert()->error('کاربری با چنین مشخصاتی وجود ندارد','خطا')->persistent('بستن');
+            return redirect("/panel/profile");
+//                ->with('msg',$msg)
+//                ->with('errorStatus',$errorStatus);
         }
         else
         {
@@ -1775,19 +1806,21 @@ class UserController extends BaseController
             $status=$user->save();
             if($status)
             {
-                $msg="رمز با موفقیت تغییر کرد";
-                $errorStatus="success";
-                return redirect("/panel/profile")
-                    ->with('msg',$msg)
-                    ->with('errorStatus',$errorStatus);
+//                $msg="رمز با موفقیت تغییر کرد";
+//                $errorStatus="success";
+                alert()->success('رمز با موفقیت تغییر کرد','پیام')->persistent('بستن');
+                return redirect("/panel/profile");
+//                    ->with('msg',$msg)
+//                    ->with('errorStatus',$errorStatus);
             }
             else
             {
-                $msg="خطا در تغییر رمز عبور";
-                $errorStatus="danger";
-                return redirect("/panel/profile")
-                    ->with('msg',$msg)
-                    ->with('errorStatus',$errorStatus);
+//                $msg="خطا در تغییر رمز عبور";
+//                $errorStatus="danger";
+                alert()->error('خطا در تغییر رمز عبور','خطا')->persistent('بستن');
+                return redirect("/panel/profile");
+//                    ->with('msg',$msg)
+//                    ->with('errorStatus',$errorStatus);
             }
         }
     }
@@ -1802,11 +1835,12 @@ class UserController extends BaseController
                 ->first();
         if(is_null($user))
         {
-            $msg="کاربری با این اطلاعات موجود نمی باشد";
-            $errorStatus="danger";
-            return back()
-                ->with('msg',$msg)
-                ->with('errorStatus',$errorStatus);
+//            $msg="کاربری با این اطلاعات موجود نمی باشد";
+//            $errorStatus="danger";
+            alert()->error('کاربری با این اطلاعات موجود نمی باشد','خطا')->persistent('بستن');
+            return back();
+//                ->with('msg',$msg)
+//                ->with('errorStatus',$errorStatus);
         }
         else
         {
@@ -1814,19 +1848,21 @@ class UserController extends BaseController
             $status=$user->save();
             if($status)
             {
-                $msg="سطح دسترسی کاربر تغییر کرد";
-                $errorStatus="success";
-                return back()
-                    ->with('msg',$msg)
-                    ->with('errorStatus',$errorStatus);
+//                $msg="سطح دسترسی کاربر تغییر کرد";
+//                $errorStatus="success";
+                alert()->success('سطح دسترسی کاربر تغییر کرد','پیام')->persistent('بستن');
+                return back();
+//                    ->with('msg',$msg)
+//                    ->with('errorStatus',$errorStatus);
             }
             else
             {
-                $msg="خطا در تغییر سطح دسترسی";
-                $errorStatus="danger";
-                return back()
-                    ->with('msg',$msg)
-                    ->with('errorStatus',$errorStatus);
+//                $msg="خطا در تغییر سطح دسترسی";
+//                $errorStatus="danger";
+                alert()->error('خطا در تغییر سطح دسترسی','خطا')->persistent('بستن');
+                return back();
+//                    ->with('msg',$msg)
+//                    ->with('errorStatus',$errorStatus);
             }
 
         }
@@ -2247,10 +2283,12 @@ class UserController extends BaseController
 
             }
         }
-        $msg = "تعداد".$i."نفر وارد بانک اطلاعاتی شدند";
-        $errorStatus = "success";
-        return back()->with('msg', $msg)
-            ->with('errorStatus', $errorStatus);
+//        $msg = "تعداد".$i."نفر وارد بانک اطلاعاتی شدند";
+//        $errorStatus = "success";
+        alert()->success("تعداد".$i."نفر وارد بانک اطلاعاتی شدند",'پیام')->persistent('بستن');
+        return back();
+//        ->with('msg', $msg)
+//            ->with('errorStatus', $errorStatus);
 
 
     }
@@ -2266,20 +2304,20 @@ class UserController extends BaseController
         $status=$user->save();
         if($status)
         {
-            $msg="کد ملی / پست الکترونیکی تکراری است";
-            $errorStatus="danger";
+//            $msg="کد ملی / پست الکترونیکی تکراری است";
+//            $errorStatus="danger";
+            alert()->success("شرایط و ضوابط بطور کامل توسط شما پذیرفته شد",'پیام')->persistent('بستن');
             return redirect('/panel/introduced');
         }
         else
         {
-            $msg="کد ملی / پست الکترونیکی تکراری است";
-            $errorStatus="danger";
-            return back()
-                        ->with('msg',$msg)
-                        ->with('errorStatus',$errorStatus);
+//            $msg="کد ملی / پست الکترونیکی تکراری است";
+//            $errorStatus="danger";
+            alert()->error("خطا در پذیرفتن شرایط و ضوابط ",'خطا')->persistent('بستن');
+            return back();
+//                        ->with('msg',$msg)
+//                        ->with('errorStatus',$errorStatus);
         }
-
-
     }
 
 }

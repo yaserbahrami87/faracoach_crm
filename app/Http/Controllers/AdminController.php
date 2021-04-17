@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use SweetAlert;
 
 
 class AdminController extends BaseController
@@ -59,23 +60,45 @@ class AdminController extends BaseController
 
             $usersEducation=user::where('type','=',3)
                         ->get();
+            $sumcancelfollowup=0;
+            $sumallFollowups=0;
+            $sumtodayFollowups=0;
+            $sumfollowedTodaybyID=0;
+            $sumcontinuefollowup=0;
+            $sumwaiting=0;
+            $sumstudents=0;
+            $sumnoanswering=0;
+            $suminsertuser=0;
+            $sumtalktimeToday=0;
+            $sumtalktime=0;
             foreach ($usersEducation as $item)
             {
                 $item->cancelfollowup=count($this->get_cancelfollowupbyID_withoutPaginate($item->id));
+                $sumcancelfollowup=$sumcancelfollowup+$item->cancelfollowup;
                 $item->allFollowups=count($this->get_myfollowupbyID_withoutPaginate($item->id));
+                $sumallFollowups=$sumallFollowups+$item->allFollowups;
                 $item->todayFollowups=count($this->get_todayFollowupbyID_withoutPaginate($item->id));
+                $sumtodayFollowups=$sumtodayFollowups+$item->todayFollowups;
                 $item->followedTodaybyID=count($this->get_followedTodaybyID_withoutPaginate($item->id));
+                $sumfollowedTodaybyID=$sumfollowedTodaybyID+$item->followedTodaybyID;
                 $item->continuefollowup=count($this->get_continuefollowupbyID_withoutPaginate($item->id));
+                $sumcontinuefollowup=$sumcontinuefollowup+$item->continuefollowup;
                 $item->waiting=count($this->get_waitingbyID_withoutPaginate($item->id));
+                $sumwaiting=$sumwaiting+$item->waiting;
                 $item->students=count($this->get_studentsbyID_withoutPaginate($item->id));
+                $sumstudents=$sumstudents+$item->students;
                 $item->noanswering=count($this->get_noansweringbyID_withoutPaginate($item->id));
+                $sumnoanswering=$sumnoanswering+$item->noanswering;
                 if(!is_null($item->last_login_at))
                 {
                     $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
                 }
                 $item->insertuser=count($this->get_insertuserbyID($item->id));
+                $suminsertuser=$suminsertuser+$item->insertuser;
                 $item->talktimeToday=$this->get_talktimeTodayByID($item->id);
+                $sumtalktimeToday=$sumtalktimeToday+$item->talktimeToday;
                 $item->talktime=$this->get_talktimeByID($item->id);
+                $sumtalktime=$sumtalktime+$item->talktime;
             }
 
 
@@ -86,12 +109,23 @@ class AdminController extends BaseController
                         ->with('follow',$follow)
                         ->with('cancel',$cancel)
                         ->with('waiting',$waiting)
+                        ->with('sumstudents',$sumstudents)
                         ->with('student',$student)
                         ->with('dateNow',$dateNow)
                         ->with('followupToday',$followupToday)
                         ->with('expirefollowupToday',$expirefollowupToday)
                         ->with('countUnreadMessages',$countUnreadMessages)
-                        ->with('usersEducation',$usersEducation);
+                        ->with('usersEducation',$usersEducation)
+                        ->with('sumcancelfollowup',$sumcancelfollowup)
+                        ->with('sumallFollowups',$sumallFollowups)
+                        ->with('sumtodayFollowups',$sumtodayFollowups)
+                        ->with('sumfollowedTodaybyID',$sumfollowedTodaybyID)
+                        ->with('sumcontinuefollowup',$sumcontinuefollowup)
+                        ->with('sumwaiting',$sumwaiting)
+                        ->with('sumnoanswering',$sumnoanswering)
+                        ->with('suminsertuser',$suminsertuser)
+                        ->with('sumtalktimeToday',$sumtalktimeToday)
+                        ->with('sumtalktime',$sumtalktime);
             //return redirect()->route('panelAdmin');
         }
         else if(Gate::allows('isUser'))
@@ -130,6 +164,22 @@ class AdminController extends BaseController
                 {
                     $scoreTelverify=0;
                 }
+
+
+
+                $verifyScore=$user->email_verified_at;
+
+                if(!is_null($verifyScore))
+                {
+                    $scoreEmailverify=$this->get_scores()->email_verified;
+                    $score=$score+$scoreEmailverify;
+                }
+                else
+                {
+                    $scoreEmailverify=0;
+                }
+
+
                 $SuccessIntroduced=User::where('introduced','=',$user->id)
                         ->where('type','=',20)
                         ->count();
@@ -165,7 +215,8 @@ class AdminController extends BaseController
                     ->with('verifyStatus',$verifyStatus)
                     ->with('scoreIntroducedUser',$scoreIntroducedUser)
                     ->with('SuccessIntroduced',$SuccessIntroduced)
-                    ->with('scoreTelverify',$scoreTelverify);
+                    ->with('scoreTelverify',$scoreTelverify)
+                    ->with('scoreEmailverify',$scoreEmailverify);
 
         }
         else
@@ -333,11 +384,12 @@ class AdminController extends BaseController
         $user=$this->get_user($tel);
         if(is_null($user))
         {
-            $msg="کاربری با چنین مشخصاتی وجود ندارد";
-            $errorStatus="danger";
-            return redirect("/admin/users")
-                    ->with('msg',$msg)
-                    ->with('errorStatus',$errorStatus);
+            alert()->error('کاربری با چنین مشخصاتی وجود ندارد', 'خطا')->persistent('close');
+//            $msg="کاربری با چنین مشخصاتی وجود ندارد";
+//            $errorStatus="danger";
+            return redirect("/admin/users");
+//                    ->with('msg',$msg)
+//                    ->with('errorStatus',$errorStatus);
         }
         else
         {

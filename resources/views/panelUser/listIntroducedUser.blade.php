@@ -7,7 +7,7 @@
             <small>مشخصات دوستان خود را جهت دعوت به فراکوچ وارد کنید</small>
             <div class="row" id="formAddIntroduce">
                 {{csrf_field()}}
-                <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 ">
+                <div class="col-xs-12 col-md-2 col-lg-2 col-xl-2 ">
                     <small>نام:*</small>
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="نام وارد کنید" name="fname" lang="fa"/>
@@ -16,7 +16,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 ">
+                <div class="col-xs-12 col-md-2 col-lg-2 col-xl-2 ">
                     <small>نام خانوادگی:*</small>
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="نام خانوادگی وارد کنید" name="lname" lang="fa" />
@@ -25,7 +25,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 ">
+                <div class="col-xs-12 col-md-2 col-lg-2 col-xl-2 ">
                     <small>تلفن همراه:*</small>
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="شماره همراه وارد کنید" name="tel"/>
@@ -33,15 +33,40 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 ">
+                <div class="col-xs-12 col-md-2 col-lg-2 col-xl-2">
+                    <small>جنسیت:*</small>
+                    <div class="input-group mb-3">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="sex1" name="sex" class="custom-control-input" value="1">
+                            <label class="custom-control-label" for="sex1">آقا</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="sex0" name="sex" class="custom-control-input" value="0">
+                            <label class="custom-control-label" for="sex0">خانم</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-2 col-lg-2 col-xl-2 ">
                     <small>پیگیری توسط:*</small>
                     <div class="input-group mb-3">
-                        <select class="custom-select" name="followby_id">
-                            <option disabled="disabled" selected="selected">انتخاب کنید</option>
-                            @foreach($getFollowbyCategory as $item)
-                                <option value="{{$item->id}}">{{$item->followby}}</option>
-                            @endforeach
-                        </select>
+                        @foreach($getFollowbyCategory as $item)
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio{{$item->id}}" name="followby_id" class="custom-control-input" value="{{$item->id}}">
+                                <label class="custom-control-label" for="customRadio{{$item->id}}">{{$item->followby}}</label>
+                            </div>
+                        @endforeach
+                    </div>
+                </div><div class="col-xs-12 col-md-2 col-lg-2 col-xl-2 ">
+                    <small> پیامک اطلاع رسانی</small>
+                    <div class="input-group mb-3">
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="sms0" name="sms" class="custom-control-input" value="0">
+                            <label class="custom-control-label" for="sms0">ارسال شود</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                            <input type="radio" id="sms1" name="sms" class="custom-control-input" value="1">
+                            <label class="custom-control-label" for="sms1">ارسال نشود</label>
+                        </div>
                     </div>
                 </div>
             </div>

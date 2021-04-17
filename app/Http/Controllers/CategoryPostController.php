@@ -65,26 +65,29 @@ class CategoryPostController extends BaseController
 
             $status = category_post::create($request->all());
             if ($status) {
-                $msg = "دسته بندی با موفقیت ذخیره شد";
-                $errorStatus = "success";
-                return redirect('/panel/categoryposts')
-                    ->with('msg', $msg)
-                    ->with('errorStatus', $errorStatus);
+//                $msg = "دسته بندی با موفقیت ذخیره شد";
+//                $errorStatus = "success";
+                alert()->success("دسته بندی با موفقیت ذخیره شد",'پیام')->persistent('بستن');
+                return redirect('/panel/categoryposts');
+//                    ->with('msg', $msg)
+//                    ->with('errorStatus', $errorStatus);
             } else {
-                $msg = "خطا در ذخیره";
-                $errorStatus = "danger";
-                return back()
-                    ->with('msg', $msg)
-                    ->with('errorStatus', $errorStatus);
+//                $msg = "خطا در ذخیره";
+//                $errorStatus = "danger";
+                alert()->error("خطا در ذخیره",'خطا')->persistent('بستن');
+                return back();
+//                    ->with('msg', $msg)
+//                    ->with('errorStatus', $errorStatus);
             }
         }
         else
         {
-            $msg = "لینک اختصاصی شما تکراری است";
-            $errorStatus = "danger";
-            return back()
-                    ->with('msg', $msg)
-                    ->with('errorStatus', $errorStatus);
+//            $msg = "لینک اختصاصی شما تکراری است";
+//            $errorStatus = "danger";
+            alert()->error("لینک اختصاصی شما تکراری است",'خطا')->persistent('بستن');
+            return back();
+//                    ->with('msg', $msg)
+//                    ->with('errorStatus', $errorStatus);
         }
 
     }
@@ -144,28 +147,34 @@ class CategoryPostController extends BaseController
                 if ($categorypost->shortlink == $request['shortlink']) {
                     $status = $categorypost->update($request->all());
                     if ($status) {
-                        $msg = "پست با موفقیت بروزرسانی شد";
-                        $errorStatus = "success";
+//                        $msg = "پست با موفقیت بروزرسانی شد";
+//                        $errorStatus = "success";
+                        alert()->success("پست با موفقیت بروزرسانی شد",'پیام')->persistent('بستن');
+
 
                     } else {
-                        $msg = "خطا در بروزرسانی";
-                        $errorStatus = "danger";
+//                        $msg = "خطا در بروزرسانی";
+//                        $errorStatus = "danger";
+                        alert()->error("خطا در بروزرسانی",'خطا')->persistent('بستن');
                     }
                 } else {
-                    $msg = "لینک اختصاصی قبلا استفاده شده است";
-                    $errorStatus = "danger";
+//                    $msg = "لینک اختصاصی قبلا استفاده شده است";
+//                    $errorStatus = "danger";
+                    alert()->error("لینک اختصاصی قبلا استفاده شده است",'خطا')->persistent('بستن');
 
                 }
 
             } else if (count($check) == 0) {
                 $status = $categorypost->update($request->all());
                 if ($status) {
-                    $msg = "دسته با موفقیت بروزرسانی شد";
-                    $errorStatus = "success";
+//                    $msg = "دسته با موفقیت بروزرسانی شد";
+//                    $errorStatus = "success";
+                    alert()->success("دسته با موفقیت بروزرسانی شد",'پیام')->persistent('بستن');
 
                 } else {
-                    $msg = "خطا در بروزرسانی";
-                    $errorStatus = "danger";
+//                    $msg = "خطا در بروزرسانی";
+//                    $errorStatus = "danger";
+                    alert()->error("خطا در بروزرسانی",'خطا')->persistent('بستن');
                 }
             } else {
                 return abort('403');
@@ -174,9 +183,9 @@ class CategoryPostController extends BaseController
             return abort('403');
         }
 
-        return back()
-            ->with('msg', $msg)
-            ->with('errorStatus', $errorStatus);
+        return back();
+//            ->with('msg', $msg)
+//            ->with('errorStatus', $errorStatus);
 
     }
 
@@ -194,19 +203,21 @@ class CategoryPostController extends BaseController
             $status=$categorypost->delete();
             if($status)
             {
-                $msg = "دسته با موفقیت بروزرسانی شد";
-                $errorStatus = "success";
-                return redirect('/panel/categoryposts')
-                    ->with('msg', $msg)
-                    ->with('errorStatus', $errorStatus);
+//                $msg = "دسته با موفقیت بروزرسانی شد";
+//                $errorStatus = "success";
+                alert()->success("دسته با موفقیت بروزرسانی شد",'پیام')->persistent('بستن');
+                return redirect('/panel/categoryposts');
+//                    ->with('msg', $msg)
+//                    ->with('errorStatus', $errorStatus);
             }
             else
             {
-                $msg = "خطا در بروزرسانی";
-                $errorStatus = "danger";
-                return redirect('/panel/categoryposts')
-                    ->with('msg', $msg)
-                    ->with('errorStatus', $errorStatus);
+//                $msg = "خطا در بروزرسانی";
+//                $errorStatus = "danger";
+                alert()->success("خطا در بروزرسانی",'خطا')->persistent('بستن');
+                return redirect('/panel/categoryposts');
+//                    ->with('msg', $msg)
+//                    ->with('errorStatus', $errorStatus);
             }
         }
         else

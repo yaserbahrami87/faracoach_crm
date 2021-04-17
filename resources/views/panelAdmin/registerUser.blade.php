@@ -42,7 +42,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="email" class="col-md-4 col-form-label text-md-right text-dark">{{ __('جنسیت:') }}</label>
+                                <label for="email" class="col-md-4 col-form-label text-md-right text-dark">{{ __('جنسیت: *') }}</label>
 
                                 <div class="col-md-6">
                                     <div class="custom-control custom-radio custom-control-inline">
@@ -76,7 +76,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="tel" class="col-md-4 col-form-label text-md-right  text-dark">{{ __('تلفن همراه:') }}</label>
+                                <label for="tel" class="col-md-4 col-form-label text-md-right  text-dark">{{ __('تلفن همراه: *') }}</label>
                                 <div class="col-md-6">
                                     <input id="tel" type="text" class="form-control @error('tel') is-invalid @enderror" name="tel" value="{{ old('tel') }}" required autocomplete="tel">
 
@@ -163,7 +163,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right  text-dark">{{ __('رمز عبور:') }}</label>
+                                <label for="password" class="col-md-4 col-form-label text-md-right  text-dark">{{ __('رمز عبور: *') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" value="12345678">
@@ -177,7 +177,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right  text-dark">{{ __('تکرار رمز عبور:') }}</label>
+                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right  text-dark">{{ __('تکرار رمز عبور: *') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" value="12345678">

@@ -30,14 +30,14 @@ Route::get('/loginSMS','AdminController@loginSMS');
 Route::post('/panel/storeCodewithoutPass','VerifyController@storeCodewithoutPass');
 Route::post('/panel/checkCodewithoutPass','VerifyController@checkCodewithoutPass');
 
-Route::middleware('can:isUser')->prefix('panel')->group(function () {
+Route::middleware(['can:isUser','verified'])->prefix('panel')->group(function () {
 
     // ROUTE USER
 
     Route::get('/profile','UserController@profile');
     Route::patch('/profile/update/{user}','UserController@update');
     Route::get('/userAjax/{user}','UserController@introducedUserAjax');
-    Route::get('/user/password','AdminController@changePasswordViewUser');
+    Route::get('/user/password','AdminController@changePasswordViewUser')->middleware('password.confirm');
     Route::patch('/user/updatePassword','UserController@updatePasswordUser');
 
     //messages
@@ -198,7 +198,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
 
 
 
-Auth::routes();
+Auth::routes(['verify'=>true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');

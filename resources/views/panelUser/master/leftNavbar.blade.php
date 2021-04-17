@@ -94,6 +94,12 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
+                                <a href="/{{Auth::user()->username}}" class="nav-link" target="_blank">
+                                    <i class="fas fa-blog"></i>
+                                    <p>نمایش وبلاگ</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="/panel/post" class="nav-link @if(request()->is('panel/post*')) active  @endif">
                                     <i class="fas fa-blog"></i>
                                     <p>پست ها</p>

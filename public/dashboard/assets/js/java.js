@@ -194,10 +194,6 @@ $("#goBack").click(function(e)
     window.history.back();
 });
 
-$(document).ready(function() {
-    $('#userTable').DataTable();
-} );
-
 $("#btn_fileds").click(function()
 {
   var b=$("#filters").html();
@@ -261,3 +257,6 @@ $("#introduced").focusout(function()
 
 });
 
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})

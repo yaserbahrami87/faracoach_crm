@@ -164,6 +164,7 @@ return [
         Hekmatinasser\Verta\VertaServiceProvider::class,
         Anetwork\Validation\PersianValidationServiceProvider::class,
         Kavenegar\Laravel\ServiceProvider::class,
+        UxWeb\SweetAlert\SweetAlertServiceProvider::class,
 
 
 
@@ -236,6 +237,7 @@ return [
         'Verta' => Hekmatinasser\Verta\Verta::class,
         'FastExcel' => Rap2hpoutre\FastExcel\Facades\FastExcel::class,
         'Kavenegar' => Kavenegar\Laravel\Facade::class,
+        'Alert' => UxWeb\SweetAlert\SweetAlert::class,
     ],
 
 ];

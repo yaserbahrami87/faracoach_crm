@@ -113,4 +113,15 @@
       0 => 'Rap2hpoutre\\FastExcel\\Providers\\FastExcelServiceProvider',
     ),
   ),
+  'uxweb/sweet-alert' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'UxWeb\\SweetAlert\\SweetAlertServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Alert' => 'UxWeb\\SweetAlert\\SweetAlert',
+    ),
+  ),
 );

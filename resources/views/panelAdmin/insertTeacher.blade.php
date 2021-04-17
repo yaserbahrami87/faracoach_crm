@@ -85,3 +85,10 @@
 
     </div>
 @endsection
+
+@section('scriptfooter')
+    <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
+    <script>
+        CKEDITOR.replace( 'ckeditor' );
+    </script>
+@endsection
