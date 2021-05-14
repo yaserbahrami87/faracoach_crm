@@ -12,6 +12,9 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <link href="{{asset('css/app.css')}}" rel="stylesheet" />
 
+    <script src="{{asset('/js/app.js')}}"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed sidebar-collapse">
 <div class="wrapper">
@@ -178,6 +181,7 @@
                         </div>
                     @endif
                     @yield('rowcontent')
+
                 </div>
                 <!-- /.row -->
             </div><!--/. container-fluid -->
@@ -221,6 +225,9 @@
 
 <!-- <script src="{{asset('dashboard/dist/js/pages/dashboard2.js')}}"></script> -->
 
+
+
+@yield('footerScript')
 
 </body>
 </html>

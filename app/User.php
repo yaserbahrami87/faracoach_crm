@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\followup;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -16,7 +17,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'username','fname', 'lname', 'codemelli','sex','tel','shenasname','datebirth','father','born','married','education','reshteh','job','organization','jobside','state','city','address','personal_image','shenasnameh_image','cartmelli_image','education_image','email','password','resource','detailsresource','introduced','gettingknow','followby_id','tel_verified','last_login_at','insert_user_id','telegram','instagram','linkedin','aboutme'
+        'username','fname', 'lname', 'codemelli','sex','tel','shenasname','datebirth','father','born','married','education','reshteh','job','organization','jobside','state','city','address','personal_image','shenasnameh_image','cartmelli_image','education_image','email','password','resource','detailsresource','introduced','gettingknow','followby_id','tel_verified','last_login_at','insert_user_id','telegram','instagram','linkedin','aboutme','status_coach'
     ];
 
     /**
@@ -47,5 +48,13 @@ class User extends Authenticatable implements MustVerifyEmail
             'tel'       => 'sometimes|required|iran_mobile|unique:users',
             'codemelli' => 'sometimes|required|melli_code|unique:users',
         ];
+
+
+        public function followups()
+        {
+            return $this->hasMany('App\followup');
+        }
+
+
 
 }

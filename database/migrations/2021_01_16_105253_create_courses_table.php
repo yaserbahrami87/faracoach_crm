@@ -16,6 +16,7 @@ class CreateCoursesTable extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->string('course',250);
+            $table->string('shortlink',250)->unique();
             $table->string('image',250);
             $table->integer('teacher_id')->default(0);
             $table->tinyInteger('type')->default(1);

@@ -17,19 +17,6 @@ Route::get('/', function () {
     return redirect("/login");
 });
 
-Route::post('/crm/user/insert','UserController@store');
-
-Route::get('/signup crm','BaseController@signupForm');
-Route::get('/check/user/{id}','UserController@checkUserAjax');
-
-Route::get('/panel','AdminController@index')->name('panel');
-Route::get('/panel/state/{state}','BaseController@citiesAjax');
-Route::get('/active/mobile/{tel}', 'VerifyController@store');
-Route::get('/active/mobile/verify/{code}','VerifyController@checkCode');
-Route::get('/loginSMS','AdminController@loginSMS');
-Route::post('/panel/storeCodewithoutPass','VerifyController@storeCodewithoutPass');
-Route::post('/panel/checkCodewithoutPass','VerifyController@checkCodewithoutPass');
-
 Route::middleware(['can:isUser','verified'])->prefix('panel')->group(function () {
 
     // ROUTE USER
@@ -86,6 +73,24 @@ Route::middleware(['can:isUser','verified'])->prefix('panel')->group(function ()
     //teachers
     Route::get('/teachers','TeacherController@listTeachers');
     Route::get('/teacher/{teacher}','TeacherController@show');
+
+    //coaches
+    Route::resource('coach','CoachController');
+
+    //booking
+    Route::get('/booking/accept','BookingController@acceptReserve');
+    Route::get('/booking/accept_reserve_user','BookingController@accept_reserve_user');
+    Route::resource('booking','BookingController');
+
+    //coupon
+    Route::resource('coupon','CouponController');
+
+    //Reserves
+    Route::patch('/reserve/{reserve}/update','ReserveController@result_coach');
+    Route::get('/reserve/{reserve}','ReserveController@show');
+
+    //feedback Coach
+    Route::resource('feedbackcoach','FeedbackCoachingController');
 
 });
 
@@ -172,6 +177,10 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     //Teachers
     Route::resource('teachers','TeacherController');
 
+    //coaches
+    Route::get('/coach/request','CoachController@coach_request');
+    Route::resource('coach','CoachController');
+
     //Courses
     Route::resource('courses','CourseController');
 
@@ -192,13 +201,39 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::resource('documents','DocumentController');
 
     //options
+    Route::get('/settingreserve','OptionController@settingReserve');
+    Route::patch('/settingreserve/update','OptionController@updateSettingReserve');
     Route::resource('options','OptionController');
+
+    //booking
+    Route::resource('booking','BookingController');
+
+    //reserve
+    Route::get('/reserve/waiting','ReserveController@waiting');
+
+    //feedback Coach
+    Route::resource('feedbackcoach','FeedbackCoachingController');
 
 });
 
 
 
 Auth::routes(['verify'=>true]);
+
+
+
+Route::post('/crm/user/insert','UserController@store');
+
+Route::get('/signup crm','BaseController@signupForm');
+Route::get('/check/user/{id}','UserController@checkUserAjax');
+
+Route::get('/panel','AdminController@index')->name('panel');
+Route::get('/panel/state/{state}','BaseController@citiesAjax');
+Route::get('/active/mobile/{tel}', 'VerifyController@store');
+Route::get('/active/mobile/verify/{code}','VerifyController@checkCode');
+Route::get('/loginSMS','AdminController@loginSMS');
+Route::post('/panel/storeCodewithoutPass','VerifyController@storeCodewithoutPass');
+Route::post('/panel/checkCodewithoutPass','VerifyController@checkCodewithoutPass');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
@@ -217,14 +252,33 @@ Route::get('/register2',function()
 });
 
 //blog
-
 Route::get('/{username}','PostController@blogHomePage');
 Route::get('/{username}/post/{post}','PostController@show');
 Route::get('/{username}/category/{category}','PostController@categoryBlog');
-//Route::get('/blogs/all','PostController@blogs');
+Route::get('/blogs/newposts','PostController@newPosts');
 
 
 
 //comments
 Route::post('/post/addcomment/{post}','CommentController@store');
+
+//booking
+Route::get('/booking/createajax','BookingController@createAjax');
+Route::get('/booking/showformreserve','BookingController@showFormReserve');
+Route::post('/booking/mohasebe','ReserveController@mohasebe');
+Route::resource('booking','BookingController');
+
+//reserve
+
+Route::post('/reserve/insert', 'ReserveController@insert');
+Route::resource('reserve','ReserveController');
+
+
+//coaches
+Route::get('/coaches/all','CoachController@viewAllCoaches');
+Route::get('/coach/{coach}','CoachController@show');
+
+//Coupon
+Route::post('/coupon/check','CouponController@check');
+
 

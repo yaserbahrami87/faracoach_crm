@@ -1,6 +1,25 @@
 @extends('panelAdmin.master.index')
 @section('rowcontent')
+    <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 mb-3" id="app">
+        <form method="GET" action="/panel">
+            <div class="form-group">
+                <label for="start_date">بازه نمایش را وارد کنید</label>
+                <date-picker
+                    type="date"
+                    v-model="dates"
+                    range
+                    format="jYYYY-jMM-jDD"
+                    display-format="jYYYY/jMM/jDD"
+                    name="start_date"
+                    max="{{$dateNow}}"
+                    id="start_date"
+                ></date-picker>
+                <button type="submit" class="btn btn-success btn-sm" name="range">نمایش بده</button>
+            </div>
+        </form>
+    </div>
     @if(Auth::user()->type==2)
+
         <div class="col-12 table-responsive">
             <table class="table table-striped table-bordered table-hover">
                 <thead>
@@ -64,4 +83,29 @@
     @include('panelAdmin.cardBox')
 
 
+@endsection
+
+
+@section('footerScript')
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment-jalaali@0.7.4/build/moment-jalaali.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-persian-datetime-picker/dist/vue-persian-datetime-picker-browser.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            components: {
+                DatePicker: VuePersianDatetimePicker
+            },
+            data: {
+                time:"{{old('time')}}",
+                dates: [],
+                message:'asdasdasd'
+            }
+
+        });
+
+
+    </script>
 @endsection

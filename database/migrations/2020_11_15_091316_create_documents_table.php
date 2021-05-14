@@ -21,6 +21,8 @@ class CreateDocumentsTable extends Migration
             $table->string('file',250)->nullable();
             $table->string('permission',250)->nullable();
             $table->integer('clicks')->default(0);
+            $table->string('date_fa',10)->nullable();
+            $table->string('time_fa',10)->nullable();
             $table->timestamps();
         });
     }

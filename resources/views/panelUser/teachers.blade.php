@@ -1,4 +1,4 @@
-@extends('panelUser.master.index')
+ @extends('panelUser.master.index')
 @section('rowcontent')
     <div class="col-12">
         <div class="row">
@@ -13,6 +13,7 @@
                             <p class="text-bold">{{$item->fname}} {{$item->lname}}</p>
                             <p class="text-bold">{{$item->type}}</p>
                             <a href="/panel/teacher/{{$item->shortlink}}" class="btn btn-primary btn-sm" target="_blank">مشاهده رزومه</a>
+                            <a href="/panel/teacher/{{$item->shortlink}}#reserve" class="btn btn-primary btn-sm" target="_blank">رزرو جلسه</a>
                         </div>
                     </div>
                 </div>

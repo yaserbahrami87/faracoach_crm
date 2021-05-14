@@ -21,8 +21,8 @@ class CreateMessagesTable extends Migration
             $table->integer('user_id_recieve')->nullable();
             $table->integer('message_id_answer')->nullable();
             $table->string('attach',250)->nullable();
-            $table->string('date_fa')->nullable();
-            $table->string('time_fa')->nullable();
+            $table->string('date_fa',11)->nullable();
+            $table->string('time_fa',11)->nullable();
             $table->tinyInteger('type')->default(1);
             $table->tinyInteger('status')->default(1);
             $table->timestamps();

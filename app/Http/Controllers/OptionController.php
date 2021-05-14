@@ -107,4 +107,86 @@ class OptionController extends Controller
     {
         //
     }
+
+    public function settingReserve()
+    {
+        $setting=option::orwhere('option_name','=','count_meeting')
+                        ->orwhere('option_name','=','customer_satisfaction')
+                        ->orwhere('option_name','=','change_customer')
+                        ->orwhere('option_name','=','count_recommendation')
+                        ->get();
+
+        return view('panelAdmin.settingReserve')
+                    ->with('setting',$setting);
+
+    }
+
+    public function updateSettingReserve(Request $request)
+    {
+        $this->validate($request,[
+            'count_meeting'         =>'required|numeric',
+            'change_customer'       =>'required|numeric',
+            'customer_satisfaction' =>'required|numeric',
+            'count_recommendation'  =>'required|numeric',
+        ]);
+
+        $setting=option::where('option_name','=','count_meeting')
+                    ->first();
+        $setting->option_value=$request['count_meeting'];
+        $status=$setting->save();
+        if($status)
+        {
+            $setting=option::where('option_name','=','change_customer')
+                ->first();
+            $setting->option_value=$request['change_customer'];
+            $status=$setting->save();
+            if($status)
+            {
+                $setting=option::where('option_name','=','customer_satisfaction')
+                    ->first();
+                $setting->option_value=$request['customer_satisfaction'];
+                $status=$setting->save();
+                if($status)
+                {
+                    $setting=option::where('option_name','=','count_recommendation')
+                        ->first();
+                    $setting->option_value=$request['count_recommendation'];
+                    $status=$setting->save();
+                    if($status)
+                    {
+                        alert()->success('اطلاعات با موفقیت بروزرسانی شد','پیام')->persistent('بستن');
+                    }
+                    else
+                    {
+                        alert()->error('خطا در بزرورسانی قیمت هر توصیه نامه','خطا')->persistent('بستن');
+                    }
+                }
+                else
+                {
+                    alert()->error('خطا در بزرورسانی قیمت هر تبدیل مشتری','خطا')->persistent('بستن');
+                }
+
+
+            }
+            else
+            {
+                alert()->error('خطا در بزرورسانی قیمت هر تبدیل مشتری','خطا')->persistent('بستن');
+            }
+
+        }
+        else
+        {
+            alert()->error('خطا در بزرورسانی قیمت هر ساعت جلسه','خطا')->persistent('بستن');
+        }
+        return back();
+
+//        $setting=option::orwhere('option_name','=','count_meeting')
+//            ->orwhere('option_name','=','customer_satisfaction')
+//            ->orwhere('option_name','=','change_customer')
+//            ->orwhere('option_name','=','count_recommendation')
+//            ->get();
+
+
+
+    }
 }

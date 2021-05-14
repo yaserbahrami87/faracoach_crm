@@ -342,43 +342,51 @@ class BaseController extends Controller
     {
 
 
-        $users = DB::table('users')
-            ->select(DB::raw('distinct(user_id)  ,users.*,followups.status_followups,followups.user_id'))
-            ->join('followups','users.id','=','followups.user_id')
-            ->where('followby_expert', '=', Auth::user()->id)
+//        $users = DB::table('users')
+//            ->select(DB::raw('distinct(followups.user_id)  ,users.*,followups.status_followups,followups.user_id'))
+//            ->join('followups','users.id','=','followups.user_id')
+//            ->where('followby_expert', '=', Auth::user()->id)
+//            ->where('status_followups','=',11)
+//            ->groupBy('followups.user_id')
+//            ->latest('followups')
+//            ->orderby('followups.id','desc')
+//            ->paginate(30);
+
 //            ->where(function($query)
 //            {
 //
 //            })
-            ->orderby('followups.id','desc')
-            ->get();
-        dd($users);
-        $users=$users->where('status_followups','=',11);
-        return $users;
 
-//        return User::join('followups','users.id','=','followups.user_id')
-//            ->where('followby_expert', '=', Auth::user()->id)
+
+
+
+        return User::join('followups','users.id','=','followups.user_id')
+            ->where('followby_expert', '=', Auth::user()->id)
 //            ->where('status_followups','=',11)
-//            ->orderby('followups.id', 'desc')
-//            ->groupby('followups.user_id')
-//            ->select('users.*','destinct(followups)')
-//            ->paginate($this->countPage());
+            ->where('users.type','=',11)
+            ->orderby('followups.id', 'desc')
+            ->groupby('followups.user_id')
+            ->select('users.*')
+            ->paginate($this->countPage());
+        return $users;
 
     }
 
     public function get_continuefollowup_withoutPaginate()
     {
-        $users = DB::table('users')
+        $users =DB::table('users')
             ->join('followups','users.id','=','followups.user_id')
             ->where('followby_expert', '=', Auth::user()->id)
-
+            ->where('users.type','=',11)
             ->orderby('followups.id', 'desc')
             ->distinct('followups.user_id')
             ->get();
-
-        $users=$users->where('status_followups','=',11);
-
         return $users;
+
+//        $users=$users->where('status_followups','=',11);
+//        $users=$users->where('users.type','=',11);
+
+
 
 //        return User::join('followups','users.id','=','followups.user_id')
 //            ->where('status_followups', '=', '11')
@@ -405,7 +413,7 @@ class BaseController extends Controller
     {
         return User::join('followups','users.id','=','followups.user_id')
             ->where('followby_expert', '=', $id)
-            ->where('status_followups','=',11)
+            ->where('users.type','=',11)
             ->select('users.*')
             ->groupby('users.id')
             ->orderby('users.id', 'desc')
@@ -436,7 +444,8 @@ class BaseController extends Controller
     {
          return User::join('followups','users.id','=','followups.user_id')
             ->where('followby_expert', '=', Auth::user()->id)
-            ->where('status_followups','=',12)
+//            ->where('status_followups','=',12)
+            ->where('users.type','=',12)
             ->select('users.*')
             ->groupby('users.id')
             ->orderby('users.id', 'desc')
@@ -501,7 +510,8 @@ class BaseController extends Controller
     {
         return User::join('followups','users.id','=','followups.user_id')
             ->where('followby_expert', '=', Auth::user()->id)
-            ->where('status_followups','=',13)
+//            ->where('status_followups','=',13)
+            ->where('users.type','=',13)
             ->select('users.*')
             ->groupby('users.id')
             ->orderby('users.id', 'desc')
@@ -629,7 +639,8 @@ class BaseController extends Controller
     {
         return User::join('followups','users.id','=','followups.user_id')
             ->where('followby_expert', '=', Auth::user()->id)
-            ->where('status_followups','=',20)
+            //->where('status_followups','=',20)
+            ->where('users.type','=',20)
             ->orderby('users.id', 'desc')
             ->groupby('users.id')
             ->select('users.*')
@@ -1120,4 +1131,6 @@ class BaseController extends Controller
     {
         return settingscore::first();
     }
+
+
 }

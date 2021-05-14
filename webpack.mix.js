@@ -37,3 +37,4 @@ mix.combine([
     'public/dashboard/dist/js/adminlte.js',
 
 ],'public/js/app.js');
+

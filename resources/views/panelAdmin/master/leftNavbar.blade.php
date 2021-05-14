@@ -1,74 +1,3 @@
-<div class="sidebar-wrapper">
-
-    <ul class="nav">
-        <li @if(request()->is('panel*')) class="active"  @endif>
-            <a href="/panel">
-                <i class="nc-icon nc-bank"></i>
-                <p>صفحه اصلی</p>
-            </a>
-        </li>
-        <li @if(request()->is('admin/user*')) class="active"  @endif>
-            <a href="/admin/users">
-                <i class="nc-icon nc-badge"></i>
-                <p>کاربرها</p>
-            </a>
-        </li>
-        <li @if(request()->is('admin/message*')) class="active"  @endif>
-            <a href="/admin/messages/">
-                <i class="nc-icon nc-send"></i>
-                <p>پیام ها</p>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class="nc-icon nc-user-run"></i>
-                <p>دوره ها</p>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class="nc-icon nc-user-run"></i>
-                <p>اساتید</p>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class="nc-icon nc-money-coins"></i>
-                <p>مالی</p>
-            </a>
-        </li>
-        <li @if(request()->is('admin/filemanager*')) class="active"  @endif>
-            <a href="/admin/filemanager">
-                <i class="nc-icon nc-album-2"></i>
-                <p>مدیریت فایلها</p>
-            </a>
-        </li>
-        @if(Auth::user()->type==2)
-            <li @if(request()->is('admin/setting*')) class="active"  @endif>
-                <a href="/admin/settings/">
-                    <i class="nc-icon nc-settings"></i>
-                    <p>تنظیمات</p>
-                </a>
-            </li>
-        @endif
-        <li @if(request()->is('admin/report*')) class="active"  @endif>
-            <a href="/admin/reports/">
-                <i class="nc-icon nc-settings"></i>
-                <p>گزارش گیری</p>
-            </a>
-        </li>
-
-
-    </ul>
-</div>
-
-
-
-
-
-
-
-
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
@@ -217,6 +146,29 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-item has-treeview @if(request()->is('admin/coach')) menu-open  @endif">
+                        <a href="#" class="nav-link @if(request()->is('admin/coach*')) active  @endif">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            <p>
+                                کوچ ها
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/admin/coach" class="nav-link @if(request()->is('admin/coach')) active  @endif">
+                                    <i class="fas fa-chalkboard-teacher"></i>
+                                    <p>همه کوچ ها</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/admin/coach/request" class="nav-link @if(request()->is('admin/teachers/create')) active  @endif">
+                                    <i class="fas fa-chalkboard-teacher"></i>
+                                    <p>درخواست های همکاری</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="nav-item has-treeview @if(request()->is('admin/courses')) menu-open  @endif">
                         <a href="#" class="nav-link @if(request()->is('admin/course*')) active  @endif">
                             <i class="fas fa-chalkboard"></i>
@@ -252,6 +204,31 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-item has-treeview ">
+                        <a href="/admin/settings/" class="nav-link @if(request()->is('admin/setting*')) active  @endif">
+                            <i class="fas fa-clipboard-list"></i>
+                            <p>
+                                جلسات
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/admin/booking/" class="nav-link @if(request()->is('admin/booking*')) active  @endif">
+                                    <i class="fas fa-user-cog"></i>
+                                    <p> لیست جلسات</p>
+                                </a>
+                                <a href="/admin/reserve/waiting" class="nav-link @if(request()->is('admin/booking/waiting*')) active  @endif">
+                                    <i class="fas fa-user-cog"></i>
+                                    <p>رزرو های ناقص</p>
+                                </a>
+                                <a href="/admin/settings/" class="nav-link @if(request()->is('admin/setting*')) active  @endif">
+                                    <i class="fas fa-user-cog"></i>
+                                    <p>تنظیمات جلسات</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
 
                     <li class="nav-item has-treeview ">
                         <a href="/admin/settings/" class="nav-link @if(request()->is('admin/setting*')) active  @endif">
@@ -272,6 +249,12 @@
                                 <a href="/admin/settingscore" class="nav-link @if(request()->is('admin/score')) active  @endif">
                                     <i class="fas fa-medal"></i>
                                     <p>امتیازات </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/admin/settingreserve" class="nav-link @if(request()->is('admin/settingreserve')) active  @endif">
+                                    <i class="fas fa-medal"></i>
+                                    <p>قیمت جلسات </p>
                                 </a>
                             </li>
                         </ul>

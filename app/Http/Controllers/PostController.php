@@ -413,14 +413,18 @@ class PostController extends BaseController
         }
     }
 
-    public function blogs()
+    public function newPosts()
     {
         $posts=post::join('users','posts.user_id','=','users.id')
                 ->where('status','=',1)
                 ->orderby('posts.id','desc')
                 ->select('posts.*','users.*','posts.id as id_post')
-                ->limit(10)
+                ->limit(12)
                 ->get();
-        return view('blogs');
+        $user=Auth::user();
+        return view('blog_newPosts')
+                ->with('posts',$posts);
     }
+
+
 }

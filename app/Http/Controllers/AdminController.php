@@ -13,9 +13,12 @@ use Carbon\Carbon;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use Illuminate\Queue\RedisQueue;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use SweetAlert;
+
+
 
 
 class AdminController extends BaseController
@@ -32,8 +35,12 @@ class AdminController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if(isset($_GET['range']))
+        {
+            dd($request);
+        }
         if(Gate::allows('isAdmin')||Gate::allows('isEducation'))
         {
             $notFollowup=count($this->get_notfollowup_withoutPaginate());
@@ -43,6 +50,7 @@ class AdminController extends BaseController
                 ->count();
             $waiting=User::where('type','=','13')
                 ->count();
+
             $student=User::where('type','=','20')
                 ->count();
             $dateNow=$this->dateNow;
@@ -405,5 +413,7 @@ class AdminController extends BaseController
                 ->with('user',$user);
 
     }
+
+
 
 }

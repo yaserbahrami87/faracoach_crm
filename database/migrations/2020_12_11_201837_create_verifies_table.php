@@ -18,6 +18,7 @@ class CreateVerifiesTable extends Migration
             $table->string('tel',15);
             $table->string('code',10);
             $table->boolean('verify');
+            $table->tinyInteger('type')->nullable();
             $table->string('date_fa',10);
             $table->string('time_fa',10);
             $table->timestamps();

@@ -1653,7 +1653,8 @@ class UserController extends BaseController
                         'password'      =>Hash::make('1234'),
                         'introduced'    =>Auth::user()->id,
                         'date_fa'       =>$this->dateNow,
-                        'time_fa'       =>$this->timeNow
+                        'time_fa'       =>$this->timeNow,
+                        'password'      =>Hash::make('123456789'),
                     ]);
 
                 if($status)
@@ -2319,5 +2320,7 @@ class UserController extends BaseController
 //                        ->with('errorStatus',$errorStatus);
         }
     }
+
+
 
 }

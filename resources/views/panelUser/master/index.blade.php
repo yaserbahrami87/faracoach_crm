@@ -328,76 +328,6 @@
 </script>
 
 
-<script src="{{asset('dashboard/assets/js/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('dashboard/assets/js/dataTables.bootstrap4.min.js')}}"></script>
-<script>
-    window.onload = function () {
-        var options = {
-            animationEnabled: true,
-            theme: "light2",
-            title:{
-                text: "آمار سایت"
-            },
-            axisX:{
-                valueFormatString: "DD MMM"
-            },
-            axisY: {
-                title: "Number of Sales",
-                suffix: "نفر",
-                minimum: 0
-            },
-            toolTip:{
-                shared:true
-            },
-            legend:{
-                cursor:"pointer",
-                verticalAlign: "bottom",
-                horizontalAlign: "left",
-                dockInsidePlotArea: true,
-                itemclick: toogleDataSeries
-            },
-            data: [{
-                type: "line",
-                showInLegend: true,
-                name: "ثبت نام شده",
-                markerType: "square",
-                xValueFormatString: "DD MMM, YYYY",
-                color: "#F08080",
-                yValueFormatString: "#,##0نفر",
-                dataPoints: [
-                    { x: new Date(1399, 10, 1), y: 63 },
-                    { x: new Date(1399, 11, 2), y: 69 },
-                    { x: new Date(1400, 11, 2), y: 65 },
-                    { x: new Date(1401, 11, 2), y: 70 },
-                ]
-            },
-                {
-                    type: "line",
-                    showInLegend: true,
-                    name: "انصراف",
-                    lineDashType: "dash",
-                    yValueFormatString: "#,##0نفر",
-                    dataPoints: [
-                        { x: new Date(1399, 10, 1), y: 83 },
-                        { x: new Date(1399, 11, 2), y: 99 },
-                        { x: new Date(1400, 11, 2), y: 15 },
-                        { x: new Date(1401, 11, 2), y: 20 },
-                    ]
-                }]
-        };
-        $("#chartContainer").CanvasJSChart(options);
-
-        function toogleDataSeries(e){
-            if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-                e.dataSeries.visible = false;
-            } else{
-                e.dataSeries.visible = true;
-            }
-            e.chart.render();
-        }
-
-    }
-</script>
 
 
 <script src="{{asset('dashboard/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
@@ -415,5 +345,7 @@
     CKEDITOR.replace( 'ckeditor' );
 </script>
 
+
+@yield('footerScript')
 </body>
 </html>

@@ -75,7 +75,6 @@
 
             <!-- Blog Post -->
             @yield('rowcontent')
-
         </div>
 
         <!-- Sidebar Widgets Column -->
@@ -96,7 +95,7 @@
 
             <!-- Side Widget -->
             <div class="card my-4 ">
-                <h5 class="card-header ">درباره من</h5>
+                <h5 class="card-header bg-dark text-light ">درباره من</h5>
                 <div class="card-body">
                     {{$user->aboutme}}
                 </div>
@@ -104,7 +103,7 @@
 
             <!-- Categories Widget -->
             <div class="card my-3">
-                <h5 class="card-header">دسته بندی مطالب</h5>
+                <h5 class="card-header  bg-dark text-light">دسته بندی مطالب</h5>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-6">
@@ -161,7 +160,7 @@
 <!-- /.container -->
 
 <!--footer-->
-<footer class="border pt-3" dir="rtl">
+<footer class="pt-3" dir="rtl">
     <!-- Top Footer Area Start
     <div class="foo_top_header_one section_padding_100_70">
         <div class="container">

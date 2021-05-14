@@ -16,11 +16,11 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('username',250)->unique();
-            $table->string('email')->unique()->nullable();
+            $table->string('email',250)->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->boolean('tel_verified')->default(0);
             $table->boolean('introduced_verified')->default(0);
-            $table->string('password');
+            $table->string('password',250);
             $table->string('fname',100)->nullable();
             $table->string('lname',100)->nullable();
             $table->string('datebirth',11)->nullable();
@@ -37,12 +37,12 @@ class CreateUsersTable extends Migration
             $table->string('jobside',30)->nullable();
             $table->string('state',20)->nullable();
             $table->string('city',20)->nullable();
-            $table->string('address')->nullable();
-            $table->string('personal_image')->nullable();
-            $table->string('shenasnameh_image')->nullable();
-            $table->string('cartmelli_image')->nullable();
-            $table->string('education_image')->nullable();
-            $table->string('resume')->nullable();
+            $table->string('address',250)->nullable();
+            $table->string('personal_image',250)->nullable();
+            $table->string('shenasnameh_image',250)->nullable();
+            $table->string('cartmelli_image',250)->nullable();
+            $table->string('education_image',250)->nullable();
+            $table->string('resume',250)->nullable();
             $table->boolean('married')->nullable();
             $table->tinyInteger('type')->default('0');
             $table->string('resource',30)->nullable();
@@ -57,6 +57,7 @@ class CreateUsersTable extends Migration
             $table->string('linkedin',250)->nullable();
             $table->string('aboutme',250)->nullable();
             $table->timestamp('last_login_at')->nullable();
+            $table->tinyInteger('status_coach')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

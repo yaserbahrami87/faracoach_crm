@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\teacher;
 use Illuminate\Http\Request;
+use Hekmatinasser\Verta\Verta;
+use Illuminate\Support\Facades\Auth;
+
 
 class TeacherController extends BaseController
 {
@@ -97,8 +100,26 @@ class TeacherController extends BaseController
      */
     public function show(teacher $teacher)
     {
-        return view('coach')
-                    ->with('coach',$teacher);
+        if(Auth::check()) {
+            $teacher = teacher::join('users', 'teachers.user_id', '=', 'users.id')
+                ->where('users.id', '=', $teacher->user_id)
+                ->first();
+            $dateNow = verta();
+            $dateShamsi = $dateNow->format('Y-m-d');
+            $date_Miladi = Verta::getGregorian($dateNow->format('Y'), $dateNow->format('m'), $dateNow->format('d'));
+
+            $date_Miladi = $date_Miladi[0] . '-' . $date_Miladi[1] . '-' . $date_Miladi[2];
+
+            return view('coach')
+                ->with('coach', $teacher)
+                ->with('dateNow', $dateShamsi)
+                ->with('date_Miladi', $date_Miladi);
+        }
+        else
+        {
+            alert()->error('برای ادامه باید وارد سایت شوید','خطا')->persistent('بستن');
+            return redirect('/login');
+        }
     }
 
     /**
