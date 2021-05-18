@@ -1183,19 +1183,22 @@ class UserController extends BaseController
                     $users = $this->get_notfollowup();
                     break;
                 case 'continuefollowup':
-                    $users = $this->get_continuefollowup();
+                    $users = $this->get_usersByType(11,Auth::user()->id,true);
                     break;
                 case 'cancelfollowup':
-                    $users = $this->get_cancelfollowup();
+//                    $users = $this->get_cancelfollowup();
+                    $users = $this->get_usersByType(12,Auth::user()->id,true);
                     break;
                 case 'waiting' :
-                    $users = $this->get_waiting();
+                    $users = $this->get_usersByType(13,Auth::user()->id,true);
                     break;
                 case 'noanswering':
-                    $users = $this->get_noanswering();
+//                    $users = $this->get_noanswering();
+                    $users = $this->get_usersByType(14,Auth::user()->id,true);
                     break;
                 case 'students':
-                    $users = $this->get_students();
+//                    $users = $this->get_students();
+                    $users = $this->get_usersByType(20,Auth::user()->id,true);
                     break;
                 case 'todayFollowup':
                     $users = $this->get_todayFollowup();
@@ -1204,7 +1207,8 @@ class UserController extends BaseController
                     $users = $this->get_expireFollowup();
                     break;
                 case 'myfollowup':
-                    $users =$this->get_myfollowup();
+//                    $users =$this->get_myfollowup();
+                    $users =$this->get_usersByType(NULL,Auth::user()->id,true);
                     break;
                 case 'followedToday':
                     $users = $this->get_followedToday();
@@ -1216,14 +1220,19 @@ class UserController extends BaseController
 
             //لیست تعداد کاربرها
             $notfollowup = count($this->get_notfollowup_withoutPaginate());
-            $continuefollowup = count($this->get_continuefollowup_withoutPaginate());
-            $cancelfollowup = count($this->get_cancelfollowup_withoutPaginate());
-            $waiting = count($this->get_waiting_withoutPaginate());
-            $noanswering = count($this->get_noanswering_withoutPaginate());
-            $students = count($this->get_students_withoutPaginate());
+//            $continuefollowup = count($this->get_continuefollowup_withoutPaginate());
+            $continuefollowup = count($this->get_usersByType(11,Auth::user()->id));
+//            $cancelfollowup = count($this->get_cancelfollowup_withoutPaginate());
+            $cancelfollowup = count($this->get_usersByType(12,Auth::user()->id));
+//            $waiting = count($this->get_waiting_withoutPaginate());
+            $waiting = count($this->get_usersByType(13,Auth::user()->id));
+//            $noanswering = count($this->get_noanswering_withoutPaginate());
+            $noanswering = count($this->get_usersByType(14,Auth::user()->id));
+//            $students = count($this->get_students_withoutPaginate());
+            $students = count($this->get_usersByType(20,Auth::user()->id));
             $todayFollowup = count($this->get_todayFollowup_withoutPaginate());
             $expireFollowup = $this->get_expireFollowup_withoutPaginate();
-            $myfollowup = count($this->get_myfollowup_withoutPaginate());
+            $myfollowup = count($this->get_usersByType(NULL,Auth::user()->id));
             $followedToday = count($this->get_followedToday_withoutPaginate());
             $trashUser=count($this->getAll_trashuser_withoutPaginate());
         }

@@ -54,7 +54,7 @@ class BaseController extends Controller
     public function sendSms($tel,$msg)
     {
         try {
-            $sender = "10004346";
+            $sender = "10004002002020";
             $message = $msg;
             $receptor = array($tel);
             $result = Kavenegar::Send($sender, $tel, $message);
@@ -247,24 +247,29 @@ class BaseController extends Controller
                 ->get();
     }
 
+    // تگ های فعال را برمی گرداند
     public function get_tags()
     {
         return tag::where('status','=',1)
                 ->get();
     }
 
+
+    //تگ ها را براساس آیدی برمی گرداند
     public function get_tag_byID($id)
     {
         return tag::where('id','=',$id)
                 ->first();
     }
 
+    //تبدیل تاریخ میلادی به شمسی
     public function changeTimestampToShamsi($date)
     {
         $dateMiladi=new verta($date);
         return ($dateMiladi->hour.":".$dateMiladi->minute."  ".$dateMiladi->year."/".$dateMiladi->month."/".$dateMiladi->day);
     }
 
+    //دسته بندی تگ ها را برمیگرداند
     public function categoryTags()
     {
         return categoryTag::where('status','=',1)
@@ -297,6 +302,7 @@ class BaseController extends Controller
         return followup::where('user_id','=',$id)->count();
     }
 
+    //آخرین پیگیری کاربر را براساس آیدی آن بر میگرداند
     public function get_lastFollowupUser($id)
     {
 
@@ -305,6 +311,7 @@ class BaseController extends Controller
                     ->orderby('followups.id','desc')
                     ->first();
     }
+
 
     public function get_notfollowup($order="users.id",$parameter="asc")
     {
@@ -338,36 +345,24 @@ class BaseController extends Controller
     }
 
 
-    public function get_continuefollowup()
+    public function get_continuefollowup($type=NULL,$id=NULL,$paginate=NULL)
     {
+        $users= User::join('followups','users.id','=','followups.user_id')
 
-
-//        $users = DB::table('users')
-//            ->select(DB::raw('distinct(followups.user_id)  ,users.*,followups.status_followups,followups.user_id'))
-//            ->join('followups','users.id','=','followups.user_id')
-//            ->where('followby_expert', '=', Auth::user()->id)
-//            ->where('status_followups','=',11)
-//            ->groupBy('followups.user_id')
-//            ->latest('followups')
-//            ->orderby('followups.id','desc')
-//            ->paginate(30);
-
-//            ->where(function($query)
-//            {
-//
-//            })
-
-
-
-
-        return User::join('followups','users.id','=','followups.user_id')
-            ->where('followby_expert', '=', Auth::user()->id)
-//            ->where('status_followups','=',11)
-            ->where('users.type','=',11)
+            ->when($id, function ($query) {
+                return $query->where('followby_expert', '=', Auth::user()->id);
+            })
+            ->when($type,function($query,$type){
+                return $query->where('users.type','=',$type);
+            })
             ->orderby('followups.id', 'desc')
             ->groupby('followups.user_id')
             ->select('users.*')
-            ->paginate($this->countPage());
+            ->when($paginate,function($query){
+                    return $query->paginate($this->countPage());
+            },function($query){
+                    return $query->get();
+            });
         return $users;
 
     }
@@ -383,19 +378,6 @@ class BaseController extends Controller
             ->get();
         return $users;
 
-//        $users=$users->where('status_followups','=',11);
-//        $users=$users->where('users.type','=',11);
-
-
-
-//        return User::join('followups','users.id','=','followups.user_id')
-//            ->where('status_followups', '=', '11')
-//            ->where('followby_expert', '=', Auth::user()->id)
-//            ->where('status_followups','=',11)
-//            ->groupby('users.id')
-//            ->select('users.*')
-//            ->orderby('users.id', 'desc')
-//            ->get();
     }
 
     public function get_continuefollowupbyID($id)
@@ -409,11 +391,15 @@ class BaseController extends Controller
             ->paginate($this->countPage());
     }
 
-    public function get_continuefollowupbyID_withoutPaginate($id)
+    public function get_continuefollowupbyID_withoutPaginate($id=NULL)
     {
+
         return User::join('followups','users.id','=','followups.user_id')
-            ->where('followby_expert', '=', $id)
             ->where('users.type','=',11)
+
+            ->when($id, function ($query, $id) {
+                return $query->where('followby_expert', $id);
+            })
             ->select('users.*')
             ->groupby('users.id')
             ->orderby('users.id', 'desc')
@@ -607,7 +593,7 @@ class BaseController extends Controller
     public function get_noansweringbyID_withoutPaginate($id)
     {
         return User::join('followups','users.id','=','followups.user_id')
-            ->where('status_followups', '=', '14')
+            ->where('users.type', '=', '14')
             ->where('followby_expert', '=', $id)
             ->select('users.*')
             ->groupby('users.id')
@@ -1087,6 +1073,12 @@ class BaseController extends Controller
         return option::get();
     }
 
+    public function get_optionByName($value)
+    {
+        return option::where('option_name','=',$value)
+                    ->first();
+    }
+
     public function get_postById($post)
     {
         return post::where('id','=',$post)
@@ -1130,6 +1122,33 @@ class BaseController extends Controller
     public function get_scores()
     {
         return settingscore::first();
+    }
+
+
+    public function get_usersByType($type=NULL,$id=NULL,$paginate=NULL)
+    {
+        $users= User::join('followups','users.id','=','followups.user_id')
+            ->when($id, function ($query,$id) {
+                return $query->where('followby_expert', '=', $id);
+            })
+            ->when($type,function($query,$type){
+                return $query->where('users.type','=',$type);
+            })
+            ->orderby('followups.id', 'desc')
+            ->groupby('followups.user_id')
+            ->select('users.*')
+            ->when($paginate,function($query){
+                return $query->paginate($this->countPage());
+            },function($query){
+                return $query->get();
+            });
+
+        return $users;
+
+
+
+
+
     }
 
 

@@ -1,12 +1,15 @@
-@if($status==true)
-    <div class="alert alert-success">کوپن تخفیف اعمال شد</div>
-@else
-    <div class="alert alert-danger">خطا در اعمال کوپن تخفیف</div>
+
+@if(isset($msg) && (isset($errorStatus)))
+    <div class="col-12">
+        <div class="alert alert-{{$errorStatus}}">
+            <p class="p-0 m-0">{{$msg}}</p>
+        </div>
+    </div>
 @endif
 
 
     <span class="float-right">قیمت </span>
-    <span class="float-left">100 هزارتومان</span>
+    <span class="float-left">{{number_format($reserve->fi) }} تومان</span>
     <br/>
     <span class="float-right">کوپن تخفیف </span>
     <span class="float-left">{{$reserve->coupon}} </span>

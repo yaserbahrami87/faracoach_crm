@@ -208,6 +208,9 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     //booking
     Route::resource('booking','BookingController');
 
+    //coupon
+    Route::resource('coupon','CouponController');
+
     //reserve
     Route::get('/reserve/waiting','ReserveController@waiting');
 

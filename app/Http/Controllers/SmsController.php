@@ -101,7 +101,7 @@ class SmsController extends BaseController
                     $user = $user->orwhere('users.type', '=', '3');
                 }
                 else {
-                    $user = $user->orwhere('followups.status_followups', '=', $request['types'][$i]);
+                    $user = $user->orwhere('users.type', '=', $request['types'][$i]);
                 }
             }
         }
@@ -141,7 +141,7 @@ class SmsController extends BaseController
                 $comment=str_replace("{lname}",$item->lname,$comment);
                 $comment=str_replace("{datebirth}",$item->datebirth,$comment);
                 $comment=str_replace("{sex}",$item->sex,$comment);
-                $this->sendSms($item->tel,$comment);
+                //$this->sendSms($item->tel,$comment);
             }
             $msg = "پیام با موفقیت به تعداد " .count($user) . " ارسال شد";
             $errorStatus = "success";
@@ -240,7 +240,7 @@ class SmsController extends BaseController
                     $user = $user->orwhere('users.type', '=', '3');
                 }
                 else {
-                    $user = $user->orwhere('followups.status_followups', '=', $request['types'][$i]);
+                    $user = $user->orwhere('users.type', '=', $request['types'][$i]);
                 }
             }
         }

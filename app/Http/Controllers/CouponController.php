@@ -20,9 +20,17 @@ class CouponController extends BaseController
     {
         $coupons=coupon::where('user_id','=',Auth::user()->id)
                 ->paginate($this->countPage());
+        if(Auth::user()->type==2)
+        {
+            return view('panelAdmin.coupon')
+                ->with('coupons',$coupons);
+        }
+        else
+        {
+            return view('panelUser.coupon')
+                ->with('coupons',$coupons);
+        }
 
-        return view('panelUser.coupon')
-                    ->with('coupons',$coupons);
     }
 
     /**
@@ -33,8 +41,17 @@ class CouponController extends BaseController
     public function create()
     {
         $dateNow=$this->dateNow;
-        return view('panelUser.insertCoupon')
-                        ->with('dateNow',$dateNow);
+        if(Auth::user()->type==2)
+        {
+            return view('panelAdmin.insertCoupon')
+                ->with('dateNow',$dateNow);
+        }
+        else
+        {
+            return view('panelUser.insertCoupon')
+                ->with('dateNow',$dateNow);
+        }
+
     }
 
     /**
@@ -104,9 +121,19 @@ class CouponController extends BaseController
         if($coupon->user_id==Auth::user()->id)
         {
             $dateNow=$this->dateNow;
-            return view('panelUser.editCoupon')
-                        ->with('coupon',$coupon)
-                        ->with('dateNow',$dateNow);
+            if(Auth::user()->type==2)
+            {
+                return view('panelAdmin.editCoupon')
+                    ->with('coupon',$coupon)
+                    ->with('dateNow',$dateNow);
+            }
+            else
+            {
+                return view('panelUser.editCoupon')
+                    ->with('coupon',$coupon)
+                    ->with('dateNow',$dateNow);
+            }
+
         }
         else
         {
@@ -180,27 +207,163 @@ class CouponController extends BaseController
         return redirect('/panel/coupon');
     }
 
+
     public function check(Request $request)
     {
         $this->validate($request,[
-            'coupon'=>'required|string'
+            'coupon'=>'nullable|string'
         ]);
+
+        $users=booking::join('users','bookings.user_id','=','users.id')
+                ->where('bookings.id','=',$request['booking_id'])
+                ->first();
         $coupon=coupon::where('coupon','=',$request['coupon'])
-                ->get();
-        if((count($coupon)==0)||(is_null($coupon)))
+                ->where('user_id','=',$users->id)
+                ->first();
+
+
+        //اگر کوپن وجود نداشت
+        if(is_null($coupon))
         {
-            return '<div class="alert alert-danger">کوپن تخفیف موجود نیست</div>';
+            $this->validate($request,
+                [
+                    'booking_id'    =>'required|numeric',
+                    'subject'       =>'required|string',
+                    'type_booking'  =>'required|numeric',
+                    'details'       =>'nullable|string',
+                ]
+            );
+            $reserve=reserve::where('booking_id','=',$request['booking_id'])
+                        ->first();
+
+            $count_meeting_fi=$this->get_optionByName('count_meeting');
+            $count_meeting_fi=$count_meeting_fi->option_value;
+
+            $customer_satisfaction_fi=$this->get_optionByName('customer_satisfaction');
+            $customer_satisfaction_fi=$customer_satisfaction_fi->option_value;
+
+            $change_customer_fi=$this->get_optionByName('change_customer');
+            $change_customer_fi=$change_customer_fi->option_value;
+
+            $count_recommendation_fi=$this->get_optionByName('count_recommendation');
+            $count_recommendation_fi=$count_recommendation_fi->option_value;
+
+            $user=booking::join('users','bookings.user_id','=','users.id')
+                ->join('coaches','users.id','=','coaches.user_id')
+                ->where('bookings.id','=',$request['booking_id'])
+                ->first();
+            $count_meeting=$user->count_meeting;
+            $customer_satisfaction=$user->customer_satisfaction;
+            $change_customer=$user->change_customer;
+            $count_recommendation=$user->count_recommendation;
+
+            $fi=($count_meeting_fi*$count_meeting)+($customer_satisfaction_fi*$customer_satisfaction)+($change_customer_fi*$change_customer)+($count_recommendation_fi*$count_recommendation);
+            $off=0;
+            $final_off=$fi-$off;
+            $request['coupon']=NULL;
+
+
+            if(is_null($reserve)) {
+                $status = reserve::create($request->all()+
+                    [
+                        'user_id'   => Auth::user()->id,
+                        'final_off' =>$final_off,
+                        'fi'        =>$fi,
+                    ]);
+            }
+            else
+            {
+                $status=$reserve->update($request->all()+
+                    [
+                        'user_id' => Auth::user()->id,
+                        'final_off' =>$final_off,
+                        'fi'        =>$fi,
+                        'off'       =>NULL
+                    ]);
+            }
+
+            $msg='کوپن تخفیف موجود نیست';
+            $errorStatus='danger';
+
+            return view('reserveFi')
+                ->with('msg',$msg)
+                ->with('errorStatus',$errorStatus)
+                ->with('reserve',$reserve);
+        }
+        // اگر تعداد کوپن تمام شده بود
+        else if($coupon->count==0)
+        {
+            $this->validate($request,
+                [
+                    'booking_id'    =>'required|numeric',
+                    'subject'       =>'required|string',
+                    'type_booking'  =>'required|numeric',
+                    'details'       =>'nullable|string',
+                ]
+            );
+            $reserve=reserve::where('booking_id','=',$request['booking_id'])
+                ->first();
+
+            $count_meeting_fi=$this->get_optionByName('count_meeting');
+            $count_meeting_fi=$count_meeting_fi->option_value;
+
+            $customer_satisfaction_fi=$this->get_optionByName('customer_satisfaction');
+            $customer_satisfaction_fi=$customer_satisfaction_fi->option_value;
+
+            $change_customer_fi=$this->get_optionByName('change_customer');
+            $change_customer_fi=$change_customer_fi->option_value;
+
+            $count_recommendation_fi=$this->get_optionByName('count_recommendation');
+            $count_recommendation_fi=$count_recommendation_fi->option_value;
+
+            $user=booking::join('users','bookings.user_id','=','users.id')
+                ->join('coaches','users.id','=','coaches.user_id')
+                ->where('bookings.id','=',$request['booking_id'])
+                ->first();
+            $count_meeting=$user->count_meeting;
+            $customer_satisfaction=$user->customer_satisfaction;
+            $change_customer=$user->change_customer;
+            $count_recommendation=$user->count_recommendation;
+
+            $fi=($count_meeting_fi*$count_meeting)+($customer_satisfaction_fi*$customer_satisfaction)+($change_customer_fi*$change_customer)+($count_recommendation_fi*$count_recommendation);
+            $off=0;
+            $final_off=$fi-$off;
+            $request['coupon']=NULL;
+
+            if(is_null($reserve)) {
+                reserve::create($request->all()+
+                    [
+                        'user_id'   => Auth::user()->id,
+                        'final_off' =>$final_off,
+                        'fi'        =>$fi,
+                    ]);
+            }
+            else
+            {
+                $reserve->update($request->all()+
+                    [
+                        'user_id' => Auth::user()->id,
+                        'final_off' =>$final_off,
+                        'fi'        =>$fi,
+                        'off'       =>NULL
+                    ]);
+            }
+
+            $msg='تعداد کوپن تمام شده است';
+            $errorStatus='danger';
+
+            return view('reserveFi')
+                ->with('msg',$msg)
+                ->with('errorStatus',$errorStatus)
+                ->with('reserve',$reserve);
+            //return ('<div class="alert alert-danger">تعداد کوپن مورد نظر استفاده شده است</div>');
         }
         else
         {
 
-            $users=booking::join('users','bookings.user_id','=','users.id')
-                        ->where('bookings.id','=',$request['booking_id'])
-                        ->first();
-
-
             $coupon=coupon::join('users','coupons.user_id','=','users.id')
                     ->where('coupon','=',$request['coupon'])
+                    ->where('user_id','=',$users->id)
                     ->first();
             if($coupon->user_id==$users->id)
             {
@@ -216,12 +379,36 @@ class CouponController extends BaseController
                 $reserve=reserve::where('booking_id','=',$request['booking_id'])
                         ->first();
 
-                $fi=100000;
+
+                $count_meeting_fi=$this->get_optionByName('count_meeting');
+                $count_meeting_fi=$count_meeting_fi->option_value;
+
+                $customer_satisfaction_fi=$this->get_optionByName('customer_satisfaction');
+                $customer_satisfaction_fi=$customer_satisfaction_fi->option_value;
+
+                $change_customer_fi=$this->get_optionByName('change_customer');
+                $change_customer_fi=$change_customer_fi->option_value;
+
+                $count_recommendation_fi=$this->get_optionByName('count_recommendation');
+                $count_recommendation_fi=$count_recommendation_fi->option_value;
+
+                $user=booking::join('users','bookings.user_id','=','users.id')
+                    ->join('coaches','users.id','=','coaches.user_id')
+                    ->where('bookings.id','=',$request['booking_id'])
+                    ->first();
+                $count_meeting=$user->count_meeting;
+                $customer_satisfaction=$user->customer_satisfaction;
+                $change_customer=$user->change_customer;
+                $count_recommendation=$user->count_recommendation;
+
+                $fi=($count_meeting_fi*$count_meeting)+($customer_satisfaction_fi*$customer_satisfaction)+($change_customer_fi*$change_customer)+($count_recommendation_fi*$count_recommendation);
                 $off=($fi*$coupon->discount)/100;
                 $final_off=$fi-$off;
 
-                if(is_null($reserve)) {
-                    $status = reserve::create($request->all()+
+
+                if(is_null($reserve))
+                {
+                    $reserve = reserve::create($request->all()+
                         [
                             'user_id'   => Auth::user()->id,
                             'off'       =>$coupon->discount,
@@ -231,7 +418,7 @@ class CouponController extends BaseController
                 }
                 else
                 {
-                    $status=$reserve->update($request->all()+
+                    $reserve->update($request->all()+
                         [
                             'user_id' => Auth::user()->id,
                             'off'       =>$coupon->discount,
@@ -240,24 +427,18 @@ class CouponController extends BaseController
                         ]);
                 }
 
-                if($status)
-                {
-                   $status=true;
-                }
-                else
-                {
-                    $status=false;
-                }
+                $msg='کوپن اعمال شد';
+                $errorStatus='success';
 
                 return view('reserveFi')
-                            ->with('status',$status)
-                            ->with('reserve',$reserve);
+                    ->with('msg',$msg)
+                    ->with('errorStatus',$errorStatus)
+                    ->with('reserve',$reserve);
             }
             else
             {
                 return '<div class="alert alert-danger">کد تخفیف مربوط به این محصول نمیباشد</div>';
             }
-
         }
 
     }

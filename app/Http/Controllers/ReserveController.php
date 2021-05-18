@@ -53,7 +53,7 @@ class ReserveController extends BaseController
 
         $reserve=reserve::join('bookings','bookings.id','=','reserves.booking_id')
                     ->where('reserves.id','=',$reserve['id'])
-                    ->select('reserves.*','bookings.*','reserves.id as id_reserve')
+                    ->select('reserves.*','bookings.*','reserves.id as id_reserve','reserves.status as status_reserve')
                     ->first();
 
         switch($reserve->type_booking)
@@ -135,15 +135,35 @@ class ReserveController extends BaseController
         $reserve=reserve::where('booking_id','=',$request['booking_id'])
                             ->where('user_id','=',Auth::user()->id)
                             ->first();
+        $count_meeting_fi=$this->get_optionByName('count_meeting');
+        $count_meeting_fi=$count_meeting_fi->option_value;
 
-        $fi=100000;
+        $customer_satisfaction_fi=$this->get_optionByName('customer_satisfaction');
+        $customer_satisfaction_fi=$customer_satisfaction_fi->option_value;
+
+        $change_customer_fi=$this->get_optionByName('change_customer');
+        $change_customer_fi=$change_customer_fi->option_value;
+
+        $count_recommendation_fi=$this->get_optionByName('count_recommendation');
+        $count_recommendation_fi=$count_recommendation_fi->option_value;
+
+        $user=booking::join('users','bookings.user_id','=','users.id')
+                ->join('coaches','users.id','=','coaches.user_id')
+                ->where('bookings.id','=',$request['booking_id'])
+                ->first();
+        $count_meeting=$user->count_meeting;
+        $customer_satisfaction=$user->customer_satisfaction;
+        $change_customer=$user->change_customer;
+        $count_recommendation=$user->count_recommendation;
+
+        $fi=($count_meeting_fi*$count_meeting)+($customer_satisfaction_fi*$customer_satisfaction)+($change_customer_fi*$change_customer)+($count_recommendation_fi*$count_recommendation);
         $off=0;
         $final_off=$fi-$off;
 
         if(is_null($reserve)) {
             $reserve = reserve::create($request->all()+
                 [
-                    'user_id'       => Auth::user()->id,
+                    'user_id'   => Auth::user()->id,
                     'final_off' =>$final_off,
                     'fi'        =>$fi,
                 ]);
@@ -153,7 +173,7 @@ class ReserveController extends BaseController
         else
         {
             $status=$reserve->update($request->all()+[
-                'user_id'       => Auth::user()->id,
+                'user_id'   => Auth::user()->id,
                 'final_off' =>$final_off,
                 'fi'        =>$fi,
             ]);
@@ -163,8 +183,8 @@ class ReserveController extends BaseController
         if($status)
         {
             return view('formReserveBills')
-                ->with('reserve',$reserve);
-
+                ->with('reserve',$reserve)
+                ->with('status',NULL);
         }
         else
         {
@@ -186,12 +206,13 @@ class ReserveController extends BaseController
             ]
         );
 
-
         $reserve=reserve::where('booking_id','=',$request['booking_id'])
                         ->first();
 
-        if(is_null($reserve)) {
 
+
+
+        if(is_null($reserve)) {
             $status = reserve::create($request->all()+
                 [
                     'user_id'       => Auth::user()->id,
@@ -202,27 +223,53 @@ class ReserveController extends BaseController
         {
             if($reserve->status==0)
             {
-
                 if(!is_null($request['coupon']))
                 {
+                    $users=booking::join('users','bookings.user_id','=','users.id')
+                            ->where('bookings.id','=',$request['booking_id'])
+                            ->first();
                     $coupon =coupon::where('coupon','=',$request['coupon'])
-                    ->first();
-                    if($coupon->count==0)
+                                            ->where('user_id','=',$users->id)
+                                            ->first();
+                    if(!is_null($coupon))
                     {
-                        return ('<div class="alert alert-danger">تعداد کوپن مورد نظر استفاده شده است</div>');
-                    }
 
-                    if($coupon->count!='-1')
-                    {
-                        $coupon->count--;
-                        $coupon->save();
+                        if ($coupon->count == 0) {
+                            return ('<div class="alert alert-danger">تعداد کوپن مورد نظر استفاده شده است</div>');
+                        }
+
+                        if ($coupon->count != '-1') {
+                            $coupon->count--;
+                            $coupon->save();
+                        }
                     }
                 }
 
 
-                $fi=100000;
                 if(isset($coupon))
                 {
+                    $count_meeting_fi=$this->get_optionByName('count_meeting');
+                    $count_meeting_fi=$count_meeting_fi->option_value;
+
+                    $customer_satisfaction_fi=$this->get_optionByName('customer_satisfaction');
+                    $customer_satisfaction_fi=$customer_satisfaction_fi->option_value;
+
+                    $change_customer_fi=$this->get_optionByName('change_customer');
+                    $change_customer_fi=$change_customer_fi->option_value;
+
+                    $count_recommendation_fi=$this->get_optionByName('count_recommendation');
+                    $count_recommendation_fi=$count_recommendation_fi->option_value;
+
+                    $user=booking::join('users','bookings.user_id','=','users.id')
+                        ->join('coaches','users.id','=','coaches.user_id')
+                        ->where('bookings.id','=',$request['booking_id'])
+                        ->first();
+                    $count_meeting=$user->count_meeting;
+                    $customer_satisfaction=$user->customer_satisfaction;
+                    $change_customer=$user->change_customer;
+                    $count_recommendation=$user->count_recommendation;
+
+                    $fi=($count_meeting_fi*$count_meeting)+($customer_satisfaction_fi*$customer_satisfaction)+($change_customer_fi*$change_customer)+($count_recommendation_fi*$count_recommendation);
                     $off=($fi*$coupon->discount)/100;
                     $final_off=$fi-$off;
                     $status=$reserve->update($request->all()+
@@ -235,8 +282,31 @@ class ReserveController extends BaseController
                 }
                 else
                 {
+                    $count_meeting_fi=$this->get_optionByName('count_meeting');
+                    $count_meeting_fi=$count_meeting_fi->option_value;
+
+                    $customer_satisfaction_fi=$this->get_optionByName('customer_satisfaction');
+                    $customer_satisfaction_fi=$customer_satisfaction_fi->option_value;
+
+                    $change_customer_fi=$this->get_optionByName('change_customer');
+                    $change_customer_fi=$change_customer_fi->option_value;
+
+                    $count_recommendation_fi=$this->get_optionByName('count_recommendation');
+                    $count_recommendation_fi=$count_recommendation_fi->option_value;
+
+                    $user=booking::join('users','bookings.user_id','=','users.id')
+                        ->join('coaches','users.id','=','coaches.user_id')
+                        ->where('bookings.id','=',$request['booking_id'])
+                        ->first();
+                    $count_meeting=$user->count_meeting;
+                    $customer_satisfaction=$user->customer_satisfaction;
+                    $change_customer=$user->change_customer;
+                    $count_recommendation=$user->count_recommendation;
+
+                    $fi=($count_meeting_fi*$count_meeting)+($customer_satisfaction_fi*$customer_satisfaction)+($change_customer_fi*$change_customer)+($count_recommendation_fi*$count_recommendation);
                     $off=0;
                     $final_off=$fi-$off;
+
                     $status=$reserve->update($request->all()+
                     [
                         'status'    =>1,
@@ -276,19 +346,33 @@ class ReserveController extends BaseController
     }
 
 
+    //ثبت نتیجه جلسه توسط خود کوچ
     public function result_coach (Request $request,Reserve $reserve)
     {
+
         $this->validate($request,[
             'result_coach'  =>'required|string|persian_alpha',
-            'score'         =>'required|numeric|between:1,5'
+            'score'         =>'required|numeric|between:1,5',
+            'status'        =>'required|numeric|between:1,4'
+
         ],[
             'result_coach.required'         =>'نتیجه جلسه الزامی است',
             'result_coach.string'           =>'نتیجه جلسه را درست وارد کنید',
             'score.required'                =>'امتیاز  جلسه را وارد کنید',
             'score.numeric'                 =>'امتیاز جلسه باید عدد باشد',
-            'score.between'                 =>'امتیاز جلسه باید بین 1 تا 5 باشد'
+            'score.between'                 =>'وضعیت باید بین 1 تا 5 باشد',
+            'status.required'               =>'وضعیت  جلسه را وارد کنید',
+            'status.numeric'                =>'وضعیت جلسه باید عدد باشد',
+            'status.between'                =>'وضعیت جلسه باید بین 1 تا 5 باشد'
         ]);
+
         $status=$reserve->update($request->all());
+
+        $booking=booking::where('id','=',$reserve->booking_id)
+                ->first();
+        $booking->status=$request->status;
+        $booking->save();
+
         if($status)
         {
             alert()->success('گزارش جلسه با موفقیت ثبت شد','پیام')->persistent('بستن');
@@ -301,6 +385,8 @@ class ReserveController extends BaseController
         return back();
     }
 
+
+    //نمایش دوره های ثبت نام ناقص
     public function waiting()
     {
         $reserve=reserve::join('bookings','reserves.booking_id','=','bookings.id')

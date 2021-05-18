@@ -34,7 +34,7 @@ class CoachController extends BaseController
      */
     public function create()
     {
-        if(Auth::user()->status_coach==0)
+        if((Auth::user()->status_coach==0)||((Auth::user()->type==2)))
         {
             $user=Auth::user();
             if(strlen($user->username)>0)

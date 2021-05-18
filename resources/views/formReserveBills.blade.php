@@ -7,9 +7,18 @@
 <small class="text-muted">در صورت داشتن کد تخفیف آن را وارد کنید</small>
 
 <div class="card">
+
+    @if(session('msg') && (session('errorStatus')))
+        <div class="col-12">
+            <div class="alert alert-{{session('errorStatus')}}">
+                <p class="p-0 m-0">{{session('msg')}}</p>
+            </div>
+        </div>
+    @endif
+
     <div class="card-body" id="div_show_fi">
         <span class="float-right">قیمت </span>
-        <span class="float-left">100 هزارتومان</span>
+        <span class="float-left">{{number_format($reserve->fi) }} تومان</span>
         <br/>
         <span class="float-right">کوپن تخفیف </span>
         <span class="float-left">{{$reserve->coupon}} </span>

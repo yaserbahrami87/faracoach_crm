@@ -44,27 +44,22 @@ class AdminController extends BaseController
         if(Gate::allows('isAdmin')||Gate::allows('isEducation'))
         {
             $notFollowup=count($this->get_notfollowup_withoutPaginate());
-            $follow=User::where('type','=','11')
-                ->count();
-            $cancel=User::where('type','=','12')
-                ->count();
-            $waiting=User::where('type','=','13')
-                ->count();
-
-            $student=User::where('type','=','20')
-                ->count();
+            $follow=$this->get_usersByType(11,Auth::user()->id)->count();
+            $cancel=$this->get_usersByType(12,Auth::user()->id)->count();
+            $waiting=$this->get_usersByType(13,Auth::user()->id)->count();
+            $student=$this->get_usersByType(20,Auth::user()->id)->count();
             $dateNow=$this->dateNow;
 
             $followupToday=User::join('followups','users.id','=','followups.user_id')
-                ->where('nextfollowup_date_fa','=',$dateNow)
-                ->wherenotIn('users.type',[2,12])
-                ->groupby('users.id')
-                ->count();
+                    ->where('nextfollowup_date_fa','=',$dateNow)
+                    ->wherenotIn('users.type',[2,12])
+                    ->groupby('users.id')
+                    ->count();
             $expirefollowupToday=User::join('followups','users.id','=','followups.user_id')
-                ->where('nextfollowup_date_fa','<',$dateNow)
-                ->wherenotIn('users.type',[2,12])
-                ->groupby('users.id')
-                ->count();
+                    ->where('nextfollowup_date_fa','<',$dateNow)
+                    ->wherenotIn('users.type',[2,12])
+                    ->groupby('users.id')
+                    ->count();
 
             $usersEducation=user::where('type','=',3)
                         ->get();
@@ -81,7 +76,7 @@ class AdminController extends BaseController
             $sumtalktime=0;
             foreach ($usersEducation as $item)
             {
-                $item->cancelfollowup=count($this->get_cancelfollowupbyID_withoutPaginate($item->id));
+                $item->cancelfollowup=$this->get_usersByType(12,$item->id)->count();
                 $sumcancelfollowup=$sumcancelfollowup+$item->cancelfollowup;
                 $item->allFollowups=count($this->get_myfollowupbyID_withoutPaginate($item->id));
                 $sumallFollowups=$sumallFollowups+$item->allFollowups;
@@ -89,26 +84,25 @@ class AdminController extends BaseController
                 $sumtodayFollowups=$sumtodayFollowups+$item->todayFollowups;
                 $item->followedTodaybyID=count($this->get_followedTodaybyID_withoutPaginate($item->id));
                 $sumfollowedTodaybyID=$sumfollowedTodaybyID+$item->followedTodaybyID;
-                $item->continuefollowup=count($this->get_continuefollowupbyID_withoutPaginate($item->id));
+                $item->continuefollowup=$this->get_usersByType(11,$item->id)->count();
                 $sumcontinuefollowup=$sumcontinuefollowup+$item->continuefollowup;
-                $item->waiting=count($this->get_waitingbyID_withoutPaginate($item->id));
+                $item->waiting=$this->get_usersByType(13,$item->id)->count();
                 $sumwaiting=$sumwaiting+$item->waiting;
-                $item->students=count($this->get_studentsbyID_withoutPaginate($item->id));
+                $item->students=$this->get_usersByType(20,$item->id)->count();
                 $sumstudents=$sumstudents+$item->students;
-                $item->noanswering=count($this->get_noansweringbyID_withoutPaginate($item->id));
+                $item->noanswering=$this->get_usersByType(11,$item->id)->count();
                 $sumnoanswering=$sumnoanswering+$item->noanswering;
                 if(!is_null($item->last_login_at))
                 {
                     $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
                 }
-                $item->insertuser=count($this->get_insertuserbyID($item->id));
+                $item->insertuser=$this->get_usersByType(NULL,$item->id)->count();
                 $suminsertuser=$suminsertuser+$item->insertuser;
                 $item->talktimeToday=$this->get_talktimeTodayByID($item->id);
                 $sumtalktimeToday=$sumtalktimeToday+$item->talktimeToday;
                 $item->talktime=$this->get_talktimeByID($item->id);
                 $sumtalktime=$sumtalktime+$item->talktime;
             }
-
 
 
             $countUnreadMessages=$this->countUnreadMessages();

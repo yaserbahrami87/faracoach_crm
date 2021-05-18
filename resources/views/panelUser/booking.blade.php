@@ -56,6 +56,7 @@
                     <th scope="col">حذف</th>
                 @endif
             </tr>
+
             @foreach($booking as $item)
 
                 @switch($item['status'])
@@ -63,7 +64,7 @@
                                 @break
                     @case('0')   <tr class="table-success">
                                 @break
-                    @case('3')   <tr class="table-danger">
+                    @case('4')   <tr class="table-danger">
                                 @break
                     @default    <tr>
                                 @break
@@ -71,8 +72,9 @@
 
                     <td>#</td>
                     <td>
-                        @if(Auth::user()->status_coach==1)
-                            @if($item->status==1)
+                        @if(Auth::user()->status_coach==1 )
+
+                            @if($item->status==1  || ($item->caption_status=='باطل شده'))
                                 {{$item->start_date}}
                             @else
                                 <a href="/panel/booking/{{$item->id}}">{{$item->start_date}}</a>
@@ -84,14 +86,9 @@
                     <td>{{$item->start_time}}</td>
                     <td>{{$item->end_time}}</td>
                     <td>{{$item->duration_booking}}</td>
-                    @if($item->status==0)
-                        <td>
-                           <a href="/panel/booking/{{$item->id}}"> {{$item->caption_status}}</a>
-                        </td>
-                    @else
-                        <td>{{$item->caption_status}}</td>
-                    @endif
-                    @if(Auth::user()->status_coach==1 && ($item['status'])!=0)
+                    <td>{{$item->caption_status}}</td>
+
+                    @if((Auth::user()->status_coach==1 && ($item['status'])!=0))
                         <td>
                             <form method="post" action="/panel/booking/{{$item->id}}" onsubmit="return confirm('آیا از حذف زمان رزرو اطمینان دارید؟');">
                                 {{ method_field('DELETE') }}

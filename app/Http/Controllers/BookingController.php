@@ -22,12 +22,13 @@ class BookingController extends BaseController
     public function index()
     {
         if(Auth::user()->type==2) {
+
             $booking = booking::where('user_id', '=', Auth::user()->id)
                 ->orderby('start_date', 'desc')
                 ->orderby('start_time', 'desc')
                 ->paginate($this->countPage());
-            foreach ($booking as $item) {
 
+            foreach ($booking as $item) {
                 switch ($item->status) {
                     case '1':
                         $item->caption_status = 'آماده رزرو';
@@ -36,10 +37,10 @@ class BookingController extends BaseController
                         $item->caption_status = 'رزرو شده';
                         break;
                 }
-
                 //تعیین وضعیت رزروهایی که تاریخ گذشته و رزرو نشده
+
                 if (($item->status == 1) && ($item->start_date < $this->dateNow)) {
-                    $item->status = 3;
+//                    $item->status = 3;
                     $item->caption_status = 'باطل شده';
                 }
 
@@ -51,8 +52,6 @@ class BookingController extends BaseController
                         $item->duration_booking = 'کوچینگ 60 دقیقه ای';
                         break;
                 }
-
-
             }
             return view('panelAdmin.booking')
                 ->with('booking', $booking)
@@ -64,6 +63,7 @@ class BookingController extends BaseController
                 ->orderby('start_date', 'desc')
                 ->orderby('start_time', 'desc')
                 ->paginate($this->countPage());
+
             foreach ($booking as $item) {
                 switch ($item->status) {
                     case '1':
@@ -72,10 +72,17 @@ class BookingController extends BaseController
                     case '0':
                         $item->caption_status = 'رزرو شده';
                         break;
+                    case '3':
+                        $item->caption_status = 'برگزارشده';
+                        break;
+                    case '4':
+                        $item->caption_status = 'کنسل شده';
+                        break;
+
                 }
                 //تعیین وضعیت رزروهایی که تاریخ گذشته و رزرو نشده
                 if (($item->status == 1) && ($item->start_date < $this->dateNow)) {
-                    $item->status = 3;
+                    $item->status = -1;
                     $item->caption_status = 'باطل شده';
                 }
 
@@ -305,6 +312,7 @@ class BookingController extends BaseController
         }
     }
 
+    //جستجوی تاریخ برای رزروها
     public function createAjax(Request $request)
     {
         $this->validate($request, [
@@ -317,13 +325,22 @@ class BookingController extends BaseController
             ->where('status', '=',1)
             ->orderby('start_time', 'asc')
             ->get();
+
+        $user=reserve::join('bookings','reserves.booking_id','=','bookings.id')
+                    ->join('users','reserves.user_id','users.id')
+                    ->where('reserves.user_id','=',Auth::user()->id)
+                    ->where('bookings.duration_booking','=','1')
+                    ->count();
+
         if (count($booking) == 0) {
             return '<div class="alert alert-warning" role="alert">برای این تاریخ ساعت رزرو یافت نشد</div>';
         } else {
             return view('reserveCoaching')
-                ->with('booking', $booking);
+                ->with('booking', $booking)
+                ->with('user',$user);
         }
     }
+
 
     public function showFormReserve(Request $request)
     {
@@ -336,6 +353,7 @@ class BookingController extends BaseController
                     ->with('booking',$booking);
 
     }
+
 
     public function acceptReserve()
     {
@@ -360,12 +378,17 @@ class BookingController extends BaseController
                 ->with('dateNow', $this->dateNow);
     }
 
+
+    //جلسات رزرو شده کاربر ساده
     public function accept_reserve_user()
     {
         $booking=booking::join('reserves','bookings.id','=','reserves.booking_id')
-                ->where('bookings.status','=',0)
-                ->where('reserves.status','=',1)
-                ->select('bookings.*','reserves.id as id_reserves')
+                ->where(function($query){
+                      $query->orwhere('reserves.status','=',1)
+                            ->orwhere('reserves.status','=',3)
+                            ->orwhere('reserves.status','=',4);
+                })
+                ->select('bookings.*','reserves.*','reserves.id as id_reserves')
                 ->orderby('reserves.id','desc')
                 ->paginate($this->countPage());
 
@@ -380,13 +403,25 @@ class BookingController extends BaseController
                     $item->duration_booking = 'کوچینگ 60 دقیقه ای';
                     break;
             }
+
+            switch ($item->status)
+            {
+                case '1':
+                    $item->caption_status = 'رزرو شده';
+                    break;
+                case '3':
+                    $item->caption_status = 'برگزار شد';
+                    break;
+                case '4':
+                    $item->caption_status = 'لغو شد';
+                    break;
+            }
+
+
         }
         return view('panelUser.booking')
             ->with('booking', $booking)
             ->with('dateNow', $this->dateNow);
     }
-
-
-
 
 }

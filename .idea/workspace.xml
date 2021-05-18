@@ -20,60 +20,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/allCoaches.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/formReserve.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/formReserveBills.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/panelAdmin/booking.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/panelAdmin/coaches.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/panelAdmin/editCoach.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/panelAdmin/insertCoach.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/panelAdmin/reserves.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/panelAdmin/settingReserve.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/panelUser/booking.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/panelUser/coupon.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/panelUser/editCoupon.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/panelUser/insertCoach.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/panelUser/insertCoupon.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/panelUser/showReserveUser.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/reserveCoaching.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/reserveFi.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/panelAdmin/coupon.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/panelAdmin/editCoupon.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/panelAdmin/insertCoupon.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OptionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OptionController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PostController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PostController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TeacherController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TeacherController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BookingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BookingController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CoachController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CoachController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CouponController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CouponController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReserveController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReserveController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SmsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SmsController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/followup.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/followup.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/teacher.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/teacher.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_15_091316_create_documents_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_11_15_091316_create_documents_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_15_222827_create_messages_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_11_15_222827_create_messages_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_11_201837_create_verifies_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_12_11_201837_create_verifies_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_16_105253_create_courses_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_16_105253_create_courses_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_01_20_150706_create_teachers_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_01_20_150706_create_teachers_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_26_154655_create_comments_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_26_154655_create_comments_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/java.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/java.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/web.config" beforeDir="false" afterPath="$PROJECT_DIR$/public/web.config" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/blog.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/blog.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/blogMaster/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/blogMaster/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/blogs.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/blog_newPosts.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/coach.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/coach.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/master/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/master/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/master/navbarTop.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/master/navbarTop.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/allCoaches.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/allCoaches.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/formReserveBills.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/formReserveBills.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/booking.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/booking.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/master/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/master/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/master/leftNavbar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/master/leftNavbar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/reserves.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/reserves.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/InfoReserve.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/InfoReserve.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/behavior.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/_behavior.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/booking.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/booking.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/panelUser/cardBox.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/cardBox.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/master/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/master/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/master/leftNavbar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/master/leftNavbar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/teachers.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/teachers.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/showReserveUser.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/showReserveUser.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/reserveCoaching.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/reserveCoaching.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/reserveFi.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/reserveFi.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.mix.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -238,7 +210,7 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/panelAdmin" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -256,6 +228,7 @@
       <recent name="C:\xampp\htdocs\laravel\faracoach_crm\resources\views\panelAdmin" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\faracoach_crm\resources\views\panelAdmin" />
       <recent name="C:\wamp64\www\faracoach_crm\resources\views\panelUser" />
       <recent name="C:\xampp\htdocs\laravel\faracoach_crm\resources\views\panelUser" />
     </key>
@@ -530,7 +503,12 @@
       <workItem from="1620933767554" duration="8404000" />
       <workItem from="1620979225107" duration="2689000" />
       <workItem from="1620999038899" duration="3697000" />
-      <workItem from="1621007533312" duration="2684000" />
+      <workItem from="1621007533312" duration="11738000" />
+      <workItem from="1621055665952" duration="19256000" />
+      <workItem from="1621146393840" duration="13732000" />
+      <workItem from="1621228543804" duration="14652000" />
+      <workItem from="1621309146337" duration="21851000" />
+      <workItem from="1621360045257" duration="5432000" />
     </task>
     <servers />
   </component>
@@ -582,13 +560,13 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="289" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.728@0.0.1366.728" timestamp="1612869129518" />
-    <state x="339" y="162" key="run.anything.popup" timestamp="1619419090285">
+    <state x="339" y="162" key="run.anything.popup" timestamp="1621149335602">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1619419090285" />
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1620983965105">
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1621149335602" />
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1621363881642">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1620983965105" />
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1621363881642" />
   </component>
 </project>

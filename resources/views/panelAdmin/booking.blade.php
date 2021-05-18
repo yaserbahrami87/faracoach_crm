@@ -51,31 +51,56 @@
                 <th scope="col">ساعت پایان</th>
                 <th scope="col">مدت جلسه</th>
                 <th scope="col">وضعیت</th>
-                <th scope="col">ویرایش</th>
                 <th scope="col">حذف</th>
             </tr>
             @foreach($booking as $item)
 
-                @switch($item['status'])
+                @switch($item->status)
                     @case('1')   <tr class="table-warning">
-                                @break
-                    @case('2')   <tr class="table-success">
-                                @break
+                        @break
+                    @case('0')   <tr class="table-success">
+                        @break
                     @case('3')   <tr class="table-danger">
-                                @break
+                        @break
                     @default    <tr>
-                                @break
+                        @break
                 @endswitch
 
                     <td>#</td>
-                    <td>{{$item->start_date}}</td>
+                    <td>
+                        @if(Auth::user()->status_coach==1)
+                            @if($item->status==0)
+                                <a href="/panel/booking/{{$item->id}}">{{$item->start_date}}</a>
+                            @else
+                                {{$item->start_date}}
+                            @endif
+                        @else
+                            <a href="/panel/reserve/{{$item->id_reserves}}">{{$item->start_date}}</a>
+                        @endif
+                    </td>
                     <td>{{$item->start_time}}</td>
                     <td>{{$item->end_date}}</td>
                     <td>{{$item->end_time}}</td>
                     <td>{{$item->duration_booking}}</td>
-                    <td>{{$item->caption_status}}</td>
-                    <td></td>
-                    <td></td>
+                    @if($item->status==0)
+                        <td>
+                            <a href="/panel/booking/{{$item->id}}"> {{$item->caption_status}}</a>
+                        </td>
+                    @else
+                            <td>{{$item->caption_status}}</td>
+                    @endif
+
+                    @if((Auth::user()->status_coach==1 && ($item['status'])!=0)||)
+                        <td>
+                            <form method="post" action="/panel/booking/{{$item->id}}" onsubmit="return confirm('آیا از حذف زمان رزرو اطمینان دارید؟');">
+                                {{ method_field('DELETE') }}
+                                {{ csrf_field() }}
+                                <button  class="btn btn-danger" type="submit">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                    @endif
                 </tr>
             @endforeach
         </table>

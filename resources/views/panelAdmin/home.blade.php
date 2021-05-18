@@ -1,22 +1,26 @@
 @extends('panelAdmin.master.index')
 @section('rowcontent')
-    <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 mb-3" id="app">
-        <form method="GET" action="/panel">
-            <div class="form-group">
-                <label for="start_date">بازه نمایش را وارد کنید</label>
-                <date-picker
-                    type="date"
-                    v-model="dates"
-                    range
-                    format="jYYYY-jMM-jDD"
-                    display-format="jYYYY/jMM/jDD"
-                    name="start_date"
-                    max="{{$dateNow}}"
-                    id="start_date"
-                ></date-picker>
-                <button type="submit" class="btn btn-success btn-sm" name="range">نمایش بده</button>
+    <div class="col-12">
+        <div class="row">
+            <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 mb-3" id="app">
+                <form method="GET" action="/panel">
+                    <div class="form-group">
+                        <label for="start_date">بازه نمایش را وارد کنید</label>
+                        <date-picker
+                            type="date"
+                            v-model="dates"
+                            range
+                            format="jYYYY-jMM-jDD"
+                            display-format="jYYYY/jMM/jDD"
+                            name="start_date"
+                            max="{{$dateNow}}"
+                            id="start_date"
+                        ></date-picker>
+                        <button type="submit" class="btn btn-success btn-sm" name="range">نمایش بده</button>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
     </div>
     @if(Auth::user()->type==2)
 

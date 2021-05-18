@@ -7,7 +7,7 @@
                 <h5 class="card-title">بازخورد جلسه</h5>
             </div>
             <div class="card-body" >
-                @if($reserve->start_date<$dateNow)
+                @if(($reserve->start_date<$dateNow)&&($reserve->status_reserve==3))
                     <p>دانشپذیر گرامی</p>
                     <p class="text-justify">یکی از مهم ترین مهارت های یک کوچ ارائه بازخورد سازنده است که توام با صداقت، صراحت و صمیمیت است.</p>
                     <p class="text-justify">لذا از اینکه با نظرات ارزشمند خودتان ما را در ارائه با کیفیت تر خدمات یاری می نمایید، بی نهایت سپاسگزاریم.</p>
@@ -226,6 +226,8 @@
                             </div>
                         @endif
                     </form>
+                @elseif(($reserve->start_date<$dateNow)&&($reserve->status_reserve==4))
+                    <div class="alert alert-warning">جلسه کوچینگ شما لغو شده است</div>
                 @else
                     <div class="alert alert-warning">جلسه کوچینک هنوز انجام نشده است</div>
                 @endif
@@ -286,7 +288,7 @@
                         <div class="card">
                             <div class="card-body" id="div_show_fi">
                                 <span class="float-right">قیمت </span>
-                                <span class="float-left">100 هزارتومان</span>
+                                <span class="float-left">{{number_format($reserve->fi)}} تومان</span>
                                 <br/>
                                 <span class="float-right">کوپن تخفیف </span>
                                 <span class="float-left">{{$reserve->coupon}} </span>

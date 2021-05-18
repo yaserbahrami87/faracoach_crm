@@ -48,7 +48,7 @@
                         <div class="card">
                             <div class="card-body" id="div_show_fi">
                                 <span class="float-right">قیمت </span>
-                                <span class="float-left">100 هزارتومان</span>
+                                <span class="float-left">{{number_format($booking->fi)}} تومان</span>
                                 <br/>
                                 <span class="float-right">کوپن تخفیف </span>
                                 <span class="float-left">{{$booking->coupon}} </span>
@@ -70,17 +70,25 @@
                 <h5 class="card-title">گزارش  جلسه</h5>
             </div>
             <div class="card-body" >
-                @if($booking->start_date<$dateNow)
+                @if(($booking->start_date<$dateNow))
                     <form method="post" action="/panel/reserve/{{$booking->id}}/update" >
                         {{csrf_field()}}
                         {{method_field('PATCH')}}
                         <div class="form-group">
-                            <label>نتیجه جلسه</label>
+                            <label for="status">وضعیت جلسه *</label>
+                            <select class="form-control" id="status" name="status" @if(!is_null($user->result_coach)) disabled  @endif>
+                                <option disabled selected>انتخاب کنید</option>
+                                <option value="3" @if($user->status==3) selected  @endif >برگزار شد</option>
+                                <option value="4" @if($user->status==4) selected  @endif >کنسل شد</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>نتیجه جلسه *</label>
                             <textarea class="form-control"rows="5" name="result_coach" @if(!is_null($user->result_coach)) disabled @endif >{{$user->result_coach}}</textarea>
                             <small class="text-muted">این گزارش فقط برای خود کوچ جهت ثبت سوابق جلسات ثبت می شود</small>
                         </div>
                         <div class="form-group">
-                            <label>به جلسه کوچینگ خود امتیاز دهید</label>
+                            <label>به جلسه کوچینگ خود امتیاز دهید *</label>
                             @if(is_null($user->score))
                                 @for($i=1;$i<=5;$i++)
                                     <input name="score" type="radio" class="star-demo" value="{{$i}}" />
