@@ -1,6 +1,11 @@
 @extends('panelAdmin.master.index')
-@section('rowcontent')
 
+@section('headerScript')
+    <link href="{{asset('/css/kamadatepicker.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('/css/timepicker.min.css')}}" rel="stylesheet" />
+@endsection
+
+@section('rowcontent')
     <div class="col-md-4 ">
         <div class="card card-user">
             <div class="image">
@@ -411,7 +416,7 @@
     </div>
 @endsection
 
-@section('scriptfooter')
+@section('footerScript')
     <!--  DATE SHAMSI PICKER  --->
     <script src="{{asset('js/kamadatepicker.min.js')}}"></script>
     <script src="{{asset('js/kamadatepicker.holidays.js')}}"></script>

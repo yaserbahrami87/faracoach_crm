@@ -9,10 +9,18 @@
     <title>پنل کاربری فراکوچ</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-    <link href="{{asset('css/app.css')}}" rel="stylesheet" />
 
-    <script src="{{asset('/js/app.js')}}"></script>
+    <!-- <link href="{{asset('css/app.css')}}" rel="stylesheet" />  -->
+    <link href="{{asset('/dashboard/plugins/fontawesome-free/css/all.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('/dashboard/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('/dashboard/dist/css/adminlte.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('/vendor/file-manager/css/file-manager.css')}}" rel="stylesheet" />
+    <link href="{{asset('/css/bootstrap-rtl.min.css')}}" rel="stylesheet" />
+
+    <link href="{{asset('/dashboard/dist/css/style.css')}}" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <!-- <script src="{{asset('/js/app.js')}}"></script> -->
+    @yield('headerScript')
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </head>
@@ -201,6 +209,7 @@
     </footer>
 </div>
 <!-- ./wrapper -->
+
 
 
 <!--   Core JS Files   -->

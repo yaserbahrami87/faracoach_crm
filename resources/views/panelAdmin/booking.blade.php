@@ -90,7 +90,7 @@
                             <td>{{$item->caption_status}}</td>
                     @endif
 
-                    @if((Auth::user()->status_coach==1 && ($item['status'])!=0)||)
+                    @if((Auth::user()->status_coach==1 && ($item['status'])!=0))
                         <td>
                             <form method="post" action="/panel/booking/{{$item->id}}" onsubmit="return confirm('آیا از حذف زمان رزرو اطمینان دارید؟');">
                                 {{ method_field('DELETE') }}

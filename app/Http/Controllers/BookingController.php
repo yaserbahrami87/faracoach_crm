@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\booking;
-use App\Reserve;
+use App\reserve;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
@@ -245,7 +245,7 @@ class BookingController extends BaseController
            $dateNow=$this->dateNow;
            $timeNow=$this->timeNow;
 
-           return view('panelUser.infoReserve')
+           return view('panelUser.InfoReserve')
                         ->with('user',$reserve)
                         ->with('booking',$booking)
                         ->with('states',$states)
@@ -330,6 +330,7 @@ class BookingController extends BaseController
                     ->join('users','reserves.user_id','users.id')
                     ->where('reserves.user_id','=',Auth::user()->id)
                     ->where('bookings.duration_booking','=','1')
+                    ->where('bookings.status','=','0')
                     ->count();
 
         if (count($booking) == 0) {

@@ -6,7 +6,7 @@ use App\reserve;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\booking;
-use App\Coupon;
+use App\coupon;
 use SweetAlert;
 
 class ReserveController extends BaseController
