@@ -1010,7 +1010,6 @@ class UserController extends BaseController
         }
         $dateNow=$this->dateNow;
 
-
         if(Auth::user()->type==2)
         {
             if (!is_null($request)&&(strlen($request['user'])>0)) {
@@ -1277,6 +1276,22 @@ class UserController extends BaseController
             {
                 $item->personal_image="default-avatar.png";
             }
+
+            if(is_null($this->get_user($item->introduced))) {
+                if(is_null($this->get_user_byID($item->introduced))) {
+                    $item->introduced = $item->introduced;
+                }
+                else
+                {
+                    $item->introduced=$this->get_user_byID($item->introduced)['fname']." ".$this->get_user_byID($item->introduced)['lname'];
+                }
+            }
+            else
+            {
+                $item->introduced=$this->get_user($item->introduced)['fname']." ".$this->get_user($item->introduced)['lname'];
+            }
+
+
         }
         $usersAdmin=user::orwhere('type','=',2)
                         ->orwhere('type','=',3)
