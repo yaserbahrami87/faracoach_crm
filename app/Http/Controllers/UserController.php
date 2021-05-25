@@ -189,6 +189,21 @@ class UserController extends BaseController
                 $item->lastDateFollowup=$this->get_lastFollowupUser($item->id)['date_fa'];
                 $item->lastFollowupCourse=$this->get_lastFollowupUser($item->id)['course_id'];
                 $item->lastFollowupCourse=$this->get_coursesByID($item->lastFollowupCourse)['course'];
+                if(is_null($this->get_user($item->introduced))) {
+                    if(is_null($this->get_user_byID($item->introduced))) {
+                        $item->introduced = $item->introduced;
+                    }
+                    else
+                    {
+                        $item->introduced=$this->get_user_byID($item->introduced)['fname']." ".$this->get_user_byID($item->introduced)['lname'];
+                    }
+                }
+                else
+                {
+                    $item->introduced=$this->get_user($item->introduced)['fname']." ".$this->get_user($item->introduced)['lname'];
+                }
+
+
                 if(is_null($item->personal_image))
                 {
                     $item->personal_image="default-avatar.png";
@@ -994,6 +1009,8 @@ class UserController extends BaseController
             $request['parameter']='desc';
         }
         $dateNow=$this->dateNow;
+
+
         if(Auth::user()->type==2)
         {
             if (!is_null($request)&&(strlen($request['user'])>0)) {
@@ -1005,12 +1022,8 @@ class UserController extends BaseController
                         $users = $this->get_notfollowup($request['orderby'],$request['parameter']);
                         break;
                     case 'continuefollowup':
-                        $users = User::join('followups','users.id','=','followups.user_id')
-                            ->where('status_followups', '=', 11)
-                            ->where('followby_expert', '=', $request['user'])
-                            ->orderby('users.id', 'desc')
-                            ->groupby('users.id')
-                            ->paginate($this->countPage());
+                        $users =$this->get_usersByType(11,$request['user'],true);
+
                         break;
                     case 'cancelfollowup':
                         $users = User::join('followups','users.id','=','followups.user_id')
@@ -1117,19 +1130,19 @@ class UserController extends BaseController
                         $users = $this->get_notfollowup();
                         break;
                     case 'continuefollowup':
-                        $users = $this->get_continuefollowup();
+                        $users = $this->get_usersByType(11,Auth::user()->id,true);
                         break;
                     case 'cancelfollowup':
-                        $users = $this->get_cancelfollowup();
+                        $users = $this->get_usersByType(12,Auth::user()->id,true);
                         break;
                     case 'waiting' :
-                        $users = $this->get_waiting();
+                        $users =$users = $this->get_usersByType(13,Auth::user()->id,true);
                         break;
                     case 'noanswering':
-                        $users = $this->get_noanswering();
+                        $users = $this->get_usersByType(14,Auth::user()->id,true);
                         break;
                     case 'students':
-                        $users = $this->get_students();
+                        $users = $this->get_usersByType(20,Auth::user()->id,true);
                         break;
                     case 'todayFollowup':
                         $users = $this->get_todayFollowup();
@@ -1138,7 +1151,7 @@ class UserController extends BaseController
                         $users = $this->get_expireFollowup();
                         break;
                     case 'myfollowup':
-                        $users = $this->get_myfollowup();
+                        $users = $this->get_usersByType(NULL,Auth::user()->id);
                         break;
 
                     case 'followedToday':
@@ -1160,7 +1173,7 @@ class UserController extends BaseController
 
                 //لیست تعداد کاربرها
                 $notfollowup = count($this->get_notfollowup_withoutPaginate());
-                $continuefollowup = count($this->getAll_continuefollowup_withoutPaginate());
+                $continuefollowup = $this->get_usersByType(NULL,Auth::user()->id)->count();
                 $cancelfollowup = count($this->getAll_cancelfollowup_withoutPaginate());
                 $waiting = count($this->getAll_waiting_withoutPaginate());
                 $noanswering = count($this->getAll_noanswering_withoutPaginate());

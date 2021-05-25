@@ -1134,6 +1134,7 @@ class BaseController extends Controller
             ->when($type,function($query,$type){
                 return $query->where('users.type','=',$type);
             })
+
             ->orderby('followups.id', 'desc')
             ->groupby('followups.user_id')
             ->select('users.*')

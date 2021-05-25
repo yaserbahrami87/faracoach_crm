@@ -234,6 +234,11 @@
                                     <i class="fas fa-arrows-alt-v float-left"></i>
                                 </a>
                             </th>
+                            <th>معرف
+                                <a href="?orderby=last_login_at&parameter=@if($parameter=='desc')asc @elseif($parameter=='asc')desc @endif">
+                                    <i class="fas fa-arrows-alt-v float-left"></i>
+                                </a>
+                            </th>
                             @if(Auth::user()->type==2)
                                 <th>حذف</th>
                             @endif
@@ -284,6 +289,7 @@
                                         {{$item->lastDateFollowup}}
                                     </a>
                                 </td>
+
                                 <td>
                                     {{$item->quality}}
                                 </td>
@@ -297,6 +303,7 @@
                                         {{$item->last_login_at}}
                                     </a>
                                 </td>
+                                <td>{{$item->introduced}}</td>
                                 @if(Auth::user()->type==2)
                                     <td>
                                         <a href="/admin/user/{{$item->id}}/delete" class="text-dark del">
@@ -325,6 +332,7 @@
                             <th>کیفیت</th>
                             <th>وضعیت</th>
                             <th>اخرین ورود</th>
+                            <th>معرف</th>
                             @if(Auth::user()->type==2)
                                 <th>حذف</th>
                             @endif
