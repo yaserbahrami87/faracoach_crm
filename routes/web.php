@@ -46,7 +46,7 @@ Route::middleware(['can:isUser','verified'])->prefix('panel')->group(function ()
 
     //followup
     Route::get('/followup/{followup}','UserController@showFollowupIntroduced');
-    Route::post('/followup/create','FollowupController@store');
+    Route::post('/followup/create','FollowupController@store_user');
 
     //Tel verify
     Route::get('/active/mobile/','VerifyController@verifyTelPanel');

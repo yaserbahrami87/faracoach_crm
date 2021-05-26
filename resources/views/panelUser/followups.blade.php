@@ -1,5 +1,5 @@
 <div class="card card-user">
-    <div class="card-header">
+    <div class="card-header bg-info">
         <h5 class="card-title">پیگیری ها</h5>
     </div>
     <div class="card-body">
@@ -8,15 +8,31 @@
             {{method_field('PATCH')}}
             @foreach($followUps as $item)
                 <div class="row">
-                    <div class="col-md-12 pl-1">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label>نوع پیگیری</label>
-                                <input type="text" class="form-control"  value="{{$item->problem}}" name="state" disabled="disabled"  />
-                            </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>دوره پیگیری شده</label>
+                            <input type="text" class="form-control "  value="{{$item->course_id}}" name="course_id" disabled="disabled"  />
                         </div>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>وضعیت</label>
+                            <input type="text" class="form-control "  value="{{$item->status_followups}}" name="state" disabled="disabled"  />
+                        </div>
+                    </div>
+                    <div class="col-md-4 p-0">
+                        <div class="form-group">
+                            <label>کیفیت پیگیری</label>
+                            <input type="text" class="form-control"  value="{{$item->problem}}" name="state" disabled="disabled"  style="background-color: {{$item->color}}"/>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label>مکالمه(دقیقه)</label>
+                            <input type="text" class="form-control"  value="{{$item->talktime}}" name="state" disabled="disabled"  />
+                        </div>
+                    </div>
+                    <div class="col-md-10">
                         <div class="form-group">
                             <label>توضیحات</label>
                             <textarea class="form-control textarea" disabled="disabled">{{$item->comment}}</textarea>

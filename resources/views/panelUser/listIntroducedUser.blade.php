@@ -60,11 +60,11 @@
                     <small> پیامک اطلاع رسانی</small>
                     <div class="input-group mb-3">
                         <div class="custom-control custom-radio">
-                            <input type="radio" id="sms0" name="sms" class="custom-control-input" value="0">
+                            <input type="radio" id="sms0" name="sms" class="custom-control-input" value="1">
                             <label class="custom-control-label" for="sms0">ارسال شود</label>
                         </div>
                         <div class="custom-control custom-radio">
-                            <input type="radio" id="sms1" name="sms" class="custom-control-input" value="1">
+                            <input type="radio" id="sms1" name="sms" class="custom-control-input" value="0">
                             <label class="custom-control-label" for="sms1">ارسال نشود</label>
                         </div>
                     </div>

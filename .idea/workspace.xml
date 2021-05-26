@@ -21,7 +21,13 @@
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FollowupController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FollowupController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/followups.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/followups.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/insertFollowUp.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/insertFollowUp.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/listIntroducedUser.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/listIntroducedUser.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -491,7 +497,8 @@
       <workItem from="1621487356448" duration="99000" />
       <workItem from="1621487485073" duration="5342000" />
       <workItem from="1621669910048" duration="22000" />
-      <workItem from="1621923530377" duration="3400000" />
+      <workItem from="1621923530377" duration="5186000" />
+      <workItem from="1622005664823" duration="15625000" />
     </task>
     <servers />
   </component>
@@ -539,17 +546,13 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="254" height="198" key="ShowFilterAction_Filter_Popup/0.0.1366.728@0.0.1366.728" timestamp="1615021820040" />
-    <state x="289" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1612869129518">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="289" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.728@0.0.1366.728" timestamp="1612869129518" />
     <state x="339" y="162" key="run.anything.popup" timestamp="1621149335602">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1621149335602" />
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1621489260340">
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1622026347901">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1621489260340" />
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1622026347901" />
   </component>
 </project>

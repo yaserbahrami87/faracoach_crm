@@ -847,8 +847,6 @@ class UserController extends BaseController
             return back();
 //            ->with('msg', $msg)
 //                ->with('errorStatus', $errorStatus);
-
-
     }
 
     /**
@@ -1668,15 +1666,27 @@ class UserController extends BaseController
     public function addIntroducedUser(Request $request)
     {
 
-        if(preg_match('/^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}$/',$request['tel']))
-        {
+//        if(preg_match('/^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}$/',$request['tel']))
+//        {
             $this->validate(request(),
             [
                 'fname'         =>'required|persian_alpha|min:3|max:15',
                 'lname'         =>'required|persian_alpha|min:3|max:15',
-                'tel'           =>'required|numeric|iran_mobile|',
+                'tel'           =>'required,iran_mobile,unique:users',
                 'sex'           =>'required|boolean',
                 'followby_id'   =>'required|numeric'
+            ],
+            [
+                'fname.required'    =>'نام اجباری است',
+                'fname.min'         =>'نام باید بیشتر از 3 حرف باشد',
+                'fname.max'         =>'نام باید کمتر از 15 حرف باشد',
+                'lname.required'    =>'نام خانوادگی اجباری است',
+                'lname.min'         =>'نام خانوادگی باید بیشتر از 3 حرف باشد',
+                'lname.max'         =>'نام خانوادگی باید کمتر از 15 حرف باشد',
+                'tel.required'      =>'تلفن اجباریست',
+                'tel.numeric'       =>'تلفن باید عدد باشد',
+                'sex.required'      =>'جنسیت اجباریست',
+                'sex.boolean'      =>'جنسیت را درست وارد کنید',
             ]);
 
             $check=user::where('tel','=',$request['tel'])
@@ -1687,11 +1697,10 @@ class UserController extends BaseController
                 //ثبت تلفن دعوت شده به همراه تلفن دعوت کننده و تاریخ
                 $status=User::create($request->all() +
                     [
-                        'password'      =>Hash::make('1234'),
                         'introduced'    =>Auth::user()->id,
                         'date_fa'       =>$this->dateNow,
                         'time_fa'       =>$this->timeNow,
-                        'password'      =>Hash::make('123456789'),
+                        'password'      =>Hash::make('1234'),
                     ]);
 
                 if($status)
@@ -1731,16 +1740,16 @@ class UserController extends BaseController
             return back();
 //                    ->with('msg',$msg)
 //                    ->with('errorStatus',$errorStatus);
-        }
-        else
-        {
-//            $msg="شماره همراه وارد شده نادرست است";
-//            $errorStatus="danger";
-            alert()->error('شماره همراه وارد شده نادرست است','خطا')->persistent('بستن');
-            return back();
-//                    ->with('msg',$msg)
-//                    ->with('errorStatus',$errorStatus);
-        }
+//        }
+//        else
+//        {
+////            $msg="شماره همراه وارد شده نادرست است";
+////            $errorStatus="danger";
+//            alert()->error('شماره همراه وارد شده نادرست است','خطا')->persistent('بستن');
+//            return back();
+////                    ->with('msg',$msg)
+////                    ->with('errorStatus',$errorStatus);
+//        }
     }
 
     // نمایش سابقه پیگیری هر دعوت شده توسط خود یوزر
@@ -1758,15 +1767,22 @@ class UserController extends BaseController
                     ->where('followups.insert_user_id', '=', Auth::user()->id)
                     ->orderby('followups.id', 'asc')
                     ->get();
+                foreach ($followUps as $item)
+                {
+                    $item->status_followups=$this->userType($item->status_followups);
+                    $item->course_id=$this->get_coursesByID($item->course_id)->course;
+                }
 
                 $problemFollowup = $problemFollowup = $this->getproblemfollowup();
 
+                $courses=$this->get_courses();
 
                 return view('panelUser.followupsIntroduced')
                     ->with('followUps', $followUps)
                     ->with('userInsert', $userInsert)
                     ->with('user', $user)
-                    ->with('problemFollowup', $problemFollowup);
+                    ->with('problemFollowup', $problemFollowup)
+                    ->with('courses', $courses);
             } else {
                 return redirect('/panel/introduced');
             }

@@ -39,6 +39,11 @@ class AdminController extends BaseController
     {
         if(isset($_GET['range']))
         {
+
+            $this->validate($request,[
+                'start_date'    =>'required|string',
+            ]);
+            $request['start_date']=explode(' ~ ',$request['start_date']);
             dd($request);
         }
         if(Gate::allows('isAdmin')||Gate::allows('isEducation'))

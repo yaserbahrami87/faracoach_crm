@@ -163,4 +163,59 @@ class FollowupController extends BaseController
     {
         //
     }
+
+
+    public function store_user(Request $request)
+    {
+
+        $this->validate($request,[
+            'insert_user_id'        =>'required|numeric',
+            'course_id'             =>'required|numeric',
+            'user_id'               =>'required|numeric|',
+            'followup'              =>'required|numeric',
+            'status_followups'      =>'required|numeric',
+            'comment'               =>'nullable|string|min:3',
+            'date_fa'               =>'required|string',
+            'time_fa'               =>'required|string',
+            'nextfollowup_date_fa'  =>'string|min:9|nullable',
+            'talktime'              =>'required|numeric|',
+        ]);
+
+
+
+        $check=followup::create([
+            'user_id'               =>$request['user_id'],
+            'insert_user_id'        =>$request['insert_user_id'],
+            'course_id'             =>$request['course_id'],
+            'comment'               =>$request['comment'],
+            'talktime'              =>$request['talktime'],
+            'problemfollowup_id'    =>$request['followup'],
+            'status_followups'      =>$request['status_followups'],
+            'tags'                  =>$request['tags'],
+            'date_fa'               =>$request['date_fa'],
+            'insert_user_id'        =>auth()->user()->id,
+            'nextfollowup_date_fa'  =>$request['nextfollowup_date_fa'],
+            'sms'                   =>$request['sms'],
+            'time_fa'               =>$request['time_fa'],
+            'datetime_fa'           =>$request['date_fa']." ".$request['time_fa'],
+        ]);
+
+        $data=$this->get_user_byID($request['user_id']);
+        $data->type=$request['status_followups'];
+        $data->followby_expert=Auth::user()->id;
+        $data->save();
+
+        if($check)
+        {
+
+            alert()->success("پیگیری با موفقیت ثبت شد",'پیام')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error("خطا در ثبت",'خطا')->persistent('بستن');
+        }
+
+        return back();
+
+    }
 }
