@@ -252,6 +252,7 @@ class UserController extends BaseController
      */
     public function store(Request $request,User $user)
     {
+
         $check=User::where('codemelli','=',$request['codemelli'])
                     ->orwhere('email','=',$request['email'])
                     ->count();
@@ -271,7 +272,7 @@ class UserController extends BaseController
                 'lname'             =>'persian_alpha|required|min:3',
                 'codemelli'         =>'nullable|melli_code',
                 'sex'               =>'nullable|boolean',
-                'tel'               =>'required|numeric|iran_mobile',
+                'tel'               =>'required|iran_mobileiran_mobile',
                 'shenasname'        =>'nullable|numeric',
                 'father'            =>'nullable|min:3|',
                 'born'              =>'nullable|min:3',
@@ -398,6 +399,7 @@ class UserController extends BaseController
     //Register User by Admin
     public function register(Request $request)
     {
+
         $this->validate($request, [
             'fname'         => ['nullable','persian_alpha', 'string', 'max:30'],
             'lname'         => ['nullable','persian_alpha', 'string', 'max:30'],

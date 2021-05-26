@@ -54,7 +54,7 @@ class RegisterController extends Controller
             'lname'         => ['persian_alpha','required', 'string', 'max:30'],
             'sex'           => ['required','boolean'],
             'email'         => ['required', 'string', 'email', 'max:150', 'unique:users'],
-            'tel'           => ['required','numeric','unique:users','regex:/^09(1[0-9]|3[0-9]|2[0-9])-?[0-9]{3}-?[0-9]{4}$/'],
+            'tel'           => ['required','unique:users','iran_mobile'],
             'password'      => ['required', 'string', 'min:8', 'confirmed'],
             'tel_verified'  => ['required','boolean'],
             'introduced'    => ['nullable','numeric'],
