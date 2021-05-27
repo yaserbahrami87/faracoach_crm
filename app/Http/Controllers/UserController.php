@@ -1674,7 +1674,7 @@ class UserController extends BaseController
             [
                 'fname'         =>'required|persian_alpha|min:3|max:15',
                 'lname'         =>'required|persian_alpha|min:3|max:15',
-                'tel'           =>'required,iran_mobile,unique:users',
+                'tel'           =>'required|iran_mobile|unique:users',
                 'sex'           =>'required|boolean',
                 'followby_id'   =>'required|numeric'
             ],
