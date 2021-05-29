@@ -196,7 +196,7 @@
                                     <i class="fas fa-arrows-alt-v float-left"></i>
                                 </a>
                             </th>
-                            <th>تاریخ ثبت
+                            <th>نحوه آشنایی
                                 <a href="?orderby=created_at&parameter=@if($parameter=='desc')asc @elseif($parameter=='asc')desc @endif">
                                     <i class="fas fa-arrows-alt-v float-left"></i>
                                 </a>
@@ -270,7 +270,7 @@
 
                                 <td>
                                     <a href="/admin/user/{{$item->id}}" class="text-dark d-block">
-                                        {{$item->created_at}}
+                                        {{$item->resource}}
                                     </a>
                                 </td>
                                 @if(Auth::user()->type==2)
@@ -322,7 +322,7 @@
                             <th>نام</th>
                             <th>نام خانوادگی</th>
                             <th>شماره همراه	</th>
-                            <th>تاریخ ثبت	</th>
+                            <th>نحوه آشنایی</th>
                             @if(Auth::user()->type==2)
                                 <th>مسئول پیگیری</th>
                             @endif

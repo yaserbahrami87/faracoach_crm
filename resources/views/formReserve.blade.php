@@ -27,7 +27,7 @@
         <button type="button" class="btn btn-primary btn-lg btn-block " id="mohasebe">محاسبه هزینه</button>
         <div class="card" >
             <div class="card-body" id="div_mohasebe">
-                This is some text within a card body.
+
             </div>
         </div>
     </form>

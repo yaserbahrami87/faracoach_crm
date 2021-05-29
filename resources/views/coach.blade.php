@@ -162,7 +162,7 @@
             </div>
             <div class=" col-xs-12 col-md-4 col-lg-4 col-xl-4 mt-5" id="coach_profile">
                 <div class="card shadow">
-                    <div class="card-header">
+                    <div class="card-header  bg-info text-light">
                         رزرو جلسه کوچینگ
                     </div>
                     <div class="card-body">
@@ -208,26 +208,24 @@
                     </div>
                 @endif
                 @if(Auth::check())
-
-                        <form method="post" action="/post/addcomment/{{'asd'}}"class="mb-5">
-                            {{csrf_field()}}
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    @if(is_null(Auth::user()->personal_image))
-                                        <img src="{{asset('/documents/users/default-avatar.png')}}"  width="50px" height="50px" />
-                                    @else
-                                        <img src="{{asset('/documents/users/'.Auth::user()->personal_image)}}" width="50px" height="50px"/>
-                                    @endif
-                                    <span>{{Auth::user()->fname}} {{Auth::user()->lname}}</span>
-                                </div>
-                                <div class="form-group col-md-12">
-                                    <label for="comment">ارسال دیدگاه:</label>
-                                    <textarea class="form-control" id="comment" name="comment" rows="5"></textarea>
-                                </div>
-                                <button class="btn btn-success">ارسال</button>
+                    <form method="post" action="/post/addcomment/{{$coach->id}}"class="mb-5">
+                        {{csrf_field()}}
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                @if(is_null(Auth::user()->personal_image))
+                                    <img src="{{asset('/documents/users/default-avatar.png')}}"  width="50px" height="50px" />
+                                @else
+                                    <img src="{{asset('/documents/users/'.Auth::user()->personal_image)}}" width="50px" height="50px"/>
+                                @endif
+                                <span>{{Auth::user()->fname}} {{Auth::user()->lname}}</span>
                             </div>
-                        </form>
-
+                            <div class="form-group col-md-12">
+                                <label for="comment">ارسال دیدگاه:</label>
+                                <textarea class="form-control" id="comment" name="comment" rows="5"></textarea>
+                            </div>
+                            <button class="btn btn-success">ارسال</button>
+                        </div>
+                    </form>
                 @else
                     <div class="alert alert-warning" role="alert">
                         برای ارسال دیدگاه لطفا <a href="/login">وارد</a> شوید

@@ -599,6 +599,18 @@ class UserController extends BaseController
         //تعداد افراد معرفی کرده
         $countIntroducedUser = User::where('introduced', '=', $user->id)
             ->count();
+        $introducedUser = User::where('introduced', '=', $user->id)
+            ->get();
+
+        $introducedTree=[];
+//        dd(gettype($introducedTree));
+        foreach ($introducedUser as $item)
+        {
+            $introducedTree=array_push($introducedTree,User::where('introduced', '=', $item->id)->get());
+        }
+
+//        dd($introducedTree);
+
 
         //لیست افراد معرفی کرده
         $listIntroducedUser = User::where('introduced', '=', $user->id)
@@ -1621,6 +1633,8 @@ class UserController extends BaseController
                     ->with('parameter',$request['parameter']);
     }
 
+
+    //جستجوی کاربرهای دعوت شده توسط خود سفیر
     public function searchUsersIntroduced(Request $request)
     {
         $user=Auth::user();
@@ -1665,6 +1679,8 @@ class UserController extends BaseController
                     ->with('countIntroducedUser',$countIntroducedUser);
     }
 
+
+    //اضافه کردن یوزر توسط سفیر
     public function addIntroducedUser(Request $request)
     {
 
@@ -1687,8 +1703,9 @@ class UserController extends BaseController
                 'lname.max'         =>'نام خانوادگی باید کمتر از 15 حرف باشد',
                 'tel.required'      =>'تلفن اجباریست',
                 'tel.numeric'       =>'تلفن باید عدد باشد',
+                'tel.unique'        =>'تلفن قبلا ثبت شده است',
                 'sex.required'      =>'جنسیت اجباریست',
-                'sex.boolean'      =>'جنسیت را درست وارد کنید',
+                'sex.boolean'       =>'جنسیت را درست وارد کنید',
             ]);
 
             $check=user::where('tel','=',$request['tel'])
@@ -1727,31 +1744,15 @@ class UserController extends BaseController
                 }
                 else
                 {
-//                    $msg="خطا در ثبت";
-//                    $errorStatus="danger";
                     alert()->error("خطا در ثبت",'خطا')->persistent('بستن');
                 }
             }
             else
             {
                 alert()->error('شخص مورد نظر در گذشته توسط شما و یا شخص دیگر دعوت شده است','خطا')->persistent('بستن');
-//                $msg="شخص مورد نظر در گذشته توسط شما و یا شخص دیگر دعوت شده است";
-//                $errorStatus="danger";
             }
 
             return back();
-//                    ->with('msg',$msg)
-//                    ->with('errorStatus',$errorStatus);
-//        }
-//        else
-//        {
-////            $msg="شماره همراه وارد شده نادرست است";
-////            $errorStatus="danger";
-//            alert()->error('شماره همراه وارد شده نادرست است','خطا')->persistent('بستن');
-//            return back();
-////                    ->with('msg',$msg)
-////                    ->with('errorStatus',$errorStatus);
-//        }
     }
 
     // نمایش سابقه پیگیری هر دعوت شده توسط خود یوزر

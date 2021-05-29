@@ -56,18 +56,20 @@
                 </div>
             </div>
             <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9">
-                @foreach($coaches as $item)
-                    <div class="col-xs-12 col-sm-4 col-lg-3 col-xl-3  box-products ">
-                        <div class="card p-1 text-center d-block shadow">
-                            <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="img-circle" alt="..." width="150px">
-                            <div class="card-body  text-center">
-                                <p class="text-bold">{{$item->fname}} {{$item->lname}}</p>
-                                <a href="/coach/{{$item->username}}" class="btn btn-primary btn-sm" >مشاهده رزومه</a>
-                                <a href="/coach/{{$item->username}}" class="btn btn-primary btn-sm" >رزرو جلسه</a>
+                <div class="row">
+                    @foreach($coaches as $item)
+                        <div class="col-xs-12 col-sm-4 col-lg-3 col-xl-3  box-products ">
+                            <div class="card p-1 text-center d-block shadow">
+                                <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="img-circle" alt="..." width="150px">
+                                <div class="card-body  text-center">
+                                    <p class="text-bold">{{$item->fname}} {{$item->lname}}</p>
+                                    <a href="/coach/{{$item->username}}" class="btn btn-primary btn-sm" >مشاهده رزومه</a>
+                                    <a href="/coach/{{$item->username}}" class="btn btn-primary btn-sm" >رزرو جلسه</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>

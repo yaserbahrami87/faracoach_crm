@@ -58,10 +58,11 @@ class CommentController extends BaseController
      */
     public function store(Request $request,$post)
     {
+
         $post=$this->get_postById($post);
+        dd($post);
         if(!is_null($post))
         {
-
             $this->validate($request,
             [
                 'comment'   =>'required|string|min:5',
