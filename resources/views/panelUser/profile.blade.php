@@ -65,7 +65,7 @@
                                     </svg>
                                 </label>
                                 <input type="text" class="form-control @if(strlen($user->username)==0) is-invalid @endif" placeholder="نام کاربری خود را وارد کنید" value="{{$user->username}}" name="username" @if(strlen($user->username)>0) disabled @endif/>
-                                <small class="text-muted float-left " dir="ltr">crm.faracoach.com/blog/نام کاربری شما</small>
+                                <small class="text-muted float-left " dir="ltr">crm.faracoach.com/نام کاربری شما</small>
                             </div>
                         </div>
                         <div class="col-md-12 px-1">

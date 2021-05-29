@@ -14,54 +14,27 @@
     </div>
     <div class="card-body collapse" id="amoozeshAdmin">
         <ul class="list-unstyled team-members">
-            <li>
-                <div class="row">
-                    <div class="col-md-2 col-2">
-                        <div class="avatar">
-                            <img src={{asset("../dashboard/assets/img/default-avatar.png")}} alt="Circle Image" class="img-circle img-no-padding img-responsive">
+            @foreach($followUps as $item)
+
+                @if($item->status_followups=='مشتری')
+                    <li>
+                        <div class="row">
+                            <div class="col-md-2 col-2">
+                                <btn class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-group"></i></btn>
+                            </div>
+                            <div class="col-md-7 col-7">{{$item->course_id}}
+                                <br />
+
+                            </div>
+                            <div class="col-md-3 col-3 text-right">
+                                <a class="btn btn-sm btn-primary"  target="_blank" role="button" title="دانلود">
+                                    <i class="fa fa-download"></i>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-7 col-7">گروه 1
-                        <br />
-                        <span class="text-warning"><small>در حال انجام</small></span>
-                    </div>
-                    <div class="col-md-3 col-3 text-right">
-                        <btn class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-group"></i></btn>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="row">
-                    <div class="col-md-2 col-2">
-                        <div class="avatar">
-                            <img src={{asset("../dashboard/assets/img/default-avatar.png")}}  class="img-circle img-no-padding img-responsive" />
-                        </div>
-                    </div>
-                    <div class="col-md-7 col-7">گروه 2
-                        <br />
-                        <span class="text-danger"><small>کنسل شده</small></span>
-                    </div>
-                    <div class="col-md-3 col-3 text-right">
-                        <btn class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-group"></i></btn>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="row">
-                    <div class="col-md-2 col-2">
-                        <div class="avatar">
-                            <img src={{asset("../dashboard/assets/img/default-avatar.png")}} alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                        </div>
-                    </div>
-                    <div class="col-ms-7 col-7">گروه 3
-                        <br />
-                        <span class="text-success"><small>تمام شده</small></span>
-                    </div>
-                    <div class="col-md-3 col-3 text-right">
-                        <btn class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-group"></i></btn>
-                    </div>
-                </div>
-            </li>
+                    </li>
+                @endif
+            @endforeach
         </ul>
     </div>
 </div>

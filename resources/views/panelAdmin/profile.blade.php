@@ -75,7 +75,7 @@
                         </div>
 
                         <div class="col-md-4 ">
-                            <svg class="float-left @if((strlen($user->fname)>0)&&(strlen($user->lname)>0)&&(strlen($user->codemelli)>0)&&(strlen($user->shenasname)>0)&& (strlen($user->personal_image)>0)&& (strlen($user->datebirth)>0)) text-muted @else  text-danger  @endif" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+                            <svg class="float-left @if((strlen($user->fname)>0)&&(strlen($user->lname)>0)&&(strlen($user->codemelli)>0)&&(strlen($user->shenasname)>0)&& (strlen($user->personal_image)>0)&& (strlen($user->datebirth)>0)&&(strlen($user->sex)>0)) text-muted @else  text-danger  @endif" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
                                 <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"/>
                             </svg>
                         </div>
@@ -93,6 +93,18 @@
                             <div class="form-group">
                                 <label>نام خانوادگی</label>
                                 <input type="text" class="form-control" placeholder="نام خانوادگی را وارد کنید" value="{{$user->lname}}" name="lname"  lang="fa" />
+                            </div>
+                        </div>
+                        <div class="col-md-6 px-1">
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect1">جنسیت</label>
+                                <div class="form-group">
+                                    <select class="form-control p-0" id="exampleFormControlSelect1" name="sex" >
+                                        <option selected disabled>انتخاب کنید</option>
+                                        <option value="0"  {{ $user->sex =="0" ? 'selected='.'"'.'selected'.'"' : '' }}>زن</option>
+                                        <option value="1" {{ $user->sex =="1" ? 'selected='.'"'.'selected'.'"' : '' }}>مرد</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-6 px-1">
@@ -126,7 +138,7 @@
                             <div class="form-group">
                                 <label>نام کاربری</label>
                                 <input type="text" class="form-control" placeholder="نام کاربری خود را وارد کنید" value="{{$user->username}}" name="username" @if(strlen($user->username)>0) disabled @endif/>
-                                <small class="text-muted  float-left" dir="ltr">crm.faracoach.com/blog/نام کاربری شما</small>
+                                <small class="text-muted  float-left" dir="ltr">crm.faracoach.com/نام کاربری شما</small>
                             </div>
                         </div>
                     </div>
@@ -216,7 +228,7 @@
                             <h6 class="card-title m-0 mb-3">اطلاعات قرارداد</h6>
                         </div>
                         <div class="col-md-4">
-                            <svg class="float-left @if((strlen($user->father)>0)&&(strlen($user->sex)>0)&&(strlen($user->married)>0)&&(strlen($user->born)>0)&& (strlen($user->education)>0)&& (strlen($user->reshteh)>0)&& (strlen($user->shenasnameh_image)>0)&& (strlen($user->cartmelli_image)>0)&& (strlen($user->education_image)>0)&& (strlen($user->job)>0)) text-muted @else  text-danger  @endif" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-text-fill" viewBox="0 0 16 16">
+                            <svg class="float-left @if((strlen($user->father)>0)&&(strlen($user->married)>0)&&(strlen($user->born)>0)&& (strlen($user->education)>0)&& (strlen($user->reshteh)>0)&& (strlen($user->shenasnameh_image)>0)&& (strlen($user->cartmelli_image)>0)&& (strlen($user->education_image)>0)&& (strlen($user->job)>0)) text-muted @else  text-danger  @endif" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-text-fill" viewBox="0 0 16 16">
                                 <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM5 4h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zM5 8h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1zm0 2h3a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1z"/>
                             </svg>
                         </div>
@@ -229,25 +241,14 @@
                                 <small>این اطلاعات صرفاجهت عقد قراردادهای آموزشی و ارائه خدمات کوچینگ مورد نیاز است</small>
                             </div>
                         </div>
-                        <div class="col-md-4 pl-1">
+                        <div class="col-md-6 px-1">
                             <div class="form-group">
                                 <label>نام پدر</label>
                                 <input type="text" class="form-control" placeholder=" نام پدر را وارد کنید" value="{{$user->father}}" name="father"  lang="fa" />
                             </div>
                         </div>
-                        <div class="col-md-4 px-1">
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect1">جنسیت</label>
-                                <div class="form-group">
-                                    <select class="form-control p-0" id="exampleFormControlSelect1" name="sex" >
-                                        <option selected disabled>انتخاب کنید</option>
-                                        <option value="0"  {{ $user->sex =="0" ? 'selected='.'"'.'selected'.'"' : '' }}>زن</option>
-                                        <option value="1" {{ $user->sex =="1" ? 'selected='.'"'.'selected'.'"' : '' }}>مرد</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 pr-1">
+
+                        <div class="col-md-6 px-1">
                             <div class="form-group">
                                 <label>تاهل</label>
                                 <div class="form-group">
@@ -481,13 +482,16 @@
                 previousButtonIcon: "fa fa-arrow-circle-left",
                 sync:true,
             });
+
+
         kamaDatepicker('datebirth',
             {
+                markHolidays:true,
+                markToday:true,
                 twodigit:true,
                 closeAfterSelect:true,
-                highlightSelectedDay:true,
                 nextButtonIcon: "fa fa-arrow-circle-right",
-                previousButtonIcon: "fa fa-arrow-circle-left",
+                previousButtonIcon: "fa fa-arrow-circle-left"
             });
     </script>
     <!-- ****************  -->

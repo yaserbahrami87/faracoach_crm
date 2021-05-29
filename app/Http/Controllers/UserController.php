@@ -604,10 +604,10 @@ class UserController extends BaseController
 
         $introducedTree=[];
 //        dd(gettype($introducedTree));
-        foreach ($introducedUser as $item)
-        {
-            $introducedTree=array_push($introducedTree,User::where('introduced', '=', $item->id)->get());
-        }
+//        foreach ($introducedUser as $item)
+//        {
+//            $introducedTree=array_push($introducedTree,User::where('introduced', '=', $item->id)->get());
+//        }
 
 //        dd($introducedTree);
 
@@ -672,6 +672,8 @@ class UserController extends BaseController
         $v = verta('+2 day');
         $v = $v->format('Y/m/d');
         $nextDayFollow = $v;
+
+
 
 
         //لیست دوره ها

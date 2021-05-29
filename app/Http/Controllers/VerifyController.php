@@ -552,7 +552,7 @@ class VerifyController extends BaseController
 
                 $checkDays = $date->addMinutes(10);
 
-                if ($checkDays < Carbon::now()) {
+                if($checkDays>Carbon::now()){
                     $user = $this->get_user($verify->tel);
                     $user['password'] = Hash::make($request['password']);
                     $status = $user->save();

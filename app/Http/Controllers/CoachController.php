@@ -95,7 +95,8 @@ class CoachController extends BaseController
             ]);
 
             if ($status) {
-
+                $this->sendSms(Auth::user()->tel,'درخواست همکاری شما در سیستم فراکوچ ثبت شد');
+                $this->sendSms('09153159020',Auth::user()->fname.''.Auth::user()->lname.' درخواست همکاری به عنوان کوچ در سیستم ثبت کرد');
                 alert()->success('درخواست همکاری شما با موفقیت ثبت شد', 'پیام')->persistent('بستن');
             } else {
                 alert()->error('خطا در ثبت', 'خطا')->persistent('بستن');
