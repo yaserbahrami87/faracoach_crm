@@ -305,7 +305,7 @@
                                                         <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="img-circle img-responsive" width="50px" height="50px" /></div>
                                                     <div class="col-xs-10 col-md-11">
                                                         <div>
-                                                            <a href="#">#</a>
+                                                            <a href="#">{{$item->fname}} {{$item->lname}}</a>
                                                             <div class="mic-info mb-2">
                                                                 @if($item->satisfaction==1)
                                                                     <strong class="text-success">

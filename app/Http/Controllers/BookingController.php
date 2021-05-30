@@ -24,6 +24,7 @@ class BookingController extends BaseController
         if(Auth::user()->type==2) {
 
             $booking = booking::where('user_id', '=', Auth::user()->id)
+                ->where('start_date','>=',$this->dateNow)
                 ->orderby('start_date', 'desc')
                 ->orderby('start_time', 'desc')
                 ->paginate($this->countPage());
@@ -39,10 +40,10 @@ class BookingController extends BaseController
                 }
                 //تعیین وضعیت رزروهایی که تاریخ گذشته و رزرو نشده
 
-                if (($item->status == 1) && ($item->start_date < $this->dateNow)) {
-//                    $item->status = 3;
-                    $item->caption_status = 'باطل شده';
-                }
+//                if (($item->status == 1) && ($item->start_date < $this->dateNow)) {
+////                    $item->status = 3;
+//                    $item->caption_status = 'باطل شده';
+//                }
 
                 switch ($item->duration_booking) {
                     case '1':
@@ -60,6 +61,8 @@ class BookingController extends BaseController
         else
         {
             $booking = booking::where('user_id', '=', Auth::user()->id)
+                ->orwhere('start_date','>',$this->dateNow)
+                ->orwhere('status','<>',1)
                 ->orderby('start_date', 'desc')
                 ->orderby('start_time', 'desc')
                 ->paginate($this->countPage());
@@ -81,10 +84,10 @@ class BookingController extends BaseController
 
                 }
                 //تعیین وضعیت رزروهایی که تاریخ گذشته و رزرو نشده
-                if (($item->status == 1) && ($item->start_date < $this->dateNow)) {
-                    $item->status = -1;
-                    $item->caption_status = 'باطل شده';
-                }
+//                if (($item->status == 1) && ($item->start_date < $this->dateNow)) {
+//                    $item->status = -1;
+//                    $item->caption_status = 'باطل شده';
+//                }
 
                 switch ($item->duration_booking) {
                     case '1':
@@ -242,6 +245,12 @@ class BookingController extends BaseController
                 default:$reserve->type_booking='خطا';
                         break;
             }
+
+            $feedback=booking::join('feedback_coachings','bookings.id','=','feedback_coachings.booking_id')
+                ->where('booking_id','=',$booking['booking_id'])
+                ->first();
+
+
            $dateNow=$this->dateNow;
            $timeNow=$this->timeNow;
 
@@ -249,6 +258,7 @@ class BookingController extends BaseController
                         ->with('user',$reserve)
                         ->with('booking',$booking)
                         ->with('states',$states)
+                        ->with('feedback',$feedback)
                         ->with('dateNow',$dateNow);
 
         }

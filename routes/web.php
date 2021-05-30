@@ -206,6 +206,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::resource('options','OptionController');
 
     //booking
+    Route::get('/booking/accept','BookingController@acceptReserve');
     Route::resource('booking','BookingController');
 
     //coupon

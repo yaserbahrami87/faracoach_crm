@@ -105,7 +105,220 @@
                             </div>
                         @endif
                     </form>
-                @else
+
+
+
+
+
+                    <p>کوچ گرامی</p>
+                    <p class="text-justify">یکی از مهم ترین مهارت های یک کوچ ارائه بازخورد سازنده است که توام با صداقت، صراحت و صمیمیت است.</p>
+                    <p class="text-justify">فرم نظرسنجی شما توسط مراجعه کننده به شکل زیر پر شده است .</p>
+
+
+                    <div class="form-group border-bottom">
+                        <label>حس شما از شرکت در جلسه:*</label>
+                        @if(is_null($feedback))
+                            @for($i=1;$i<=5;$i++)
+                                <input name="sense" type="radio" class="star-demo" value="{{$i}}" disabled @if(old('sense')==$i) checked @endif />
+                            @endfor
+                        @else
+                            @for($i=1;$i<=5;$i++)
+                                <input name="sense" type="radio" class="star-demo" value="{{$i}}" disabled @if($i==$feedback->sense) checked @endif disabled/>
+                            @endfor
+                        @endif
+                    </div>
+                    <div class="form-group border-bottom">
+                        <label>میزان برآورده شدن انتظارات شما و اثر بخشی جلسه:*</label>
+                        @if(is_null($feedback))
+                            @for($i=1;$i<=5;$i++)
+                                <input name="expectations" type="radio" class="star-demo" value="{{$i}}" disabled @if(old('expectations')==$i) checked @endif  />
+                            @endfor
+                        @else
+                            @for($i=1;$i<=5;$i++)
+                                <input name="expectations" type="radio" class="star-demo" value="{{$i}}" disabled @if($i==$feedback->expectations) checked @endif disabled/>
+                            @endfor
+                        @endif
+                    </div>
+                    <div class="form-group border-bottom">
+                        <label>ایجاد اعتماد و فضای امن و مثبت توسط کوچ:*</label>
+                        @if(is_null($feedback))
+                            @for($i=1;$i<=5;$i++)
+                                <input name="trust" type="radio" class="star-demo" value="{{$i}}" disabled  @if(old('trust')==$i) checked @endif />
+                            @endfor
+                        @else
+                            @for($i=1;$i<=5;$i++)
+                                <input name="trust" type="radio" class="star-demo" value="{{$i}}" disabled @if($i==$feedback->trust) checked @endif disabled/>
+                            @endfor
+                        @endif
+                    </div>
+                    <div class="form-group border-bottom">
+                        <label>گوش دادن موثر کوچ:*</label>
+                        @if(is_null($feedback))
+                            @for($i=1;$i<=5;$i++)
+                                <input name="listen" type="radio" class="star-demo" value="{{$i}}"  disabled @if(old('listen')==$i) checked @endif />
+                            @endfor
+                        @else
+                            @for($i=1;$i<=5;$i++)
+                                <input name="listen" type="radio" class="star-demo" value="{{$i}}" disabled @if($i==$feedback->listen) checked @endif disabled/>
+                            @endfor
+                        @endif
+                    </div>
+                    <div class="form-group border-bottom">
+                        <label>درک احساسات و همدلی مناسب کوچ با شما:*</label>
+                        @if(is_null($feedback))
+                            @for($i=1;$i<=5;$i++)
+                                <input name="emotions" type="radio" class="star-demo" value="{{$i}}" disabled  @if(old('emotions')==$i) checked @endif />
+                            @endfor
+                        @else
+                            @for($i=1;$i<=5;$i++)
+                                <input name="emotions" type="radio" class="star-demo" value="{{$i}}" disabled @if($i==$feedback->emotions) checked @endif disabled/>
+                            @endfor
+                        @endif
+                    </div>
+                    <div class="form-group border-bottom">
+                        <label>عدم ارائه راهکارهای مستقیم به شما:*</label>
+                        @if(is_null($feedback))
+                            @for($i=1;$i<=5;$i++)
+                                <input name="failure_provide" type="radio" class="star-demo" value="{{$i}}" disabled @if(old('failure_provide')==$i) checked @endif  />
+                            @endfor
+                        @else
+                            @for($i=1;$i<=5;$i++)
+                                <input name="failure_provide" type="radio" class="star-demo" value="{{$i}}" disabled @if($i==$feedback->failure_provide) checked @endif disabled/>
+                            @endfor
+                        @endif
+                    </div>
+                    <div class="form-group border-bottom">
+                        <label>مدیریت زمان جلسه توسط کوچ (شروع و پایان به موقع):*</label>
+                        @if(is_null($feedback))
+                            @for($i=1;$i<=5;$i++)
+                                <input name="time_management" type="radio" class="star-demo" value="{{$i}}" disabled @if(old('time_management')==$i) checked @endif />
+                            @endfor
+                        @else
+                            @for($i=1;$i<=5;$i++)
+                                <input name="time_management" type="radio" class="star-demo" value="{{$i}}" disabled @if($i==$feedback->time_management) checked @endif disabled/>
+                            @endfor
+                        @endif
+                    </div>
+                    <div class="form-group border-bottom">
+                        <label>جمع بندی و ارائه بازخوردهای مناسب به شما:*</label>
+                        @if(is_null($feedback))
+                            @for($i=1;$i<=5;$i++)
+                                <input name="proper_feedback" type="radio" class="star-demo" value="{{$i}}" disabled @if(old('proper_feedback')==$i) checked @endif />
+                            @endfor
+                        @else
+                            @for($i=1;$i<=5;$i++)
+                                <input name="proper_feedback" type="radio" class="star-demo" value="{{$i}}" disabled @if($i==$feedback->proper_feedback) checked @endif disabled/>
+                            @endfor
+                        @endif
+                    </div>
+                    <div class="form-group border-bottom">
+                        <label>کمک به ترسیم اهداف کلی شما:*</label>
+                        @if(is_null($feedback))
+                            @for($i=1;$i<=5;$i++)
+                                <input name="drawing_goals" type="radio" class="star-demo" value="{{$i}}" disabled @if(old('drawing_goals')==$i) checked @endif />
+                            @endfor
+                        @else
+                            @for($i=1;$i<=5;$i++)
+                                <input name="drawing_goals" type="radio" class="star-demo" value="{{$i}}" disabled @if($i==$feedback->drawing_goals) checked @endif disabled/>
+                            @endfor
+                        @endif
+                    </div>
+                    <div class="form-group border-bottom">
+                        <label>کمک به بررسی ابعاد مختلف موضوع:*</label>
+                        @if(is_null($feedback))
+                            @for($i=1;$i<=5;$i++)
+                                <input name="check_dimensions" type="radio" class="star-demo" value="{{$i}}" disabled  @if(old('check_dimensions')==$i) checked @endif />
+                            @endfor
+                        @else
+                            @for($i=1;$i<=5;$i++)
+                                <input name="check_dimensions" type="radio" class="star-demo" value="{{$i}}" disabled @if($i==$feedback->check_dimensions) checked @endif disabled/>
+                            @endfor
+                        @endif
+                    </div>
+                    <div class="form-group border-bottom">
+                        <label>کمک به ارزیابی راهکارهای موجود و یافته شده:*</label>
+                        @if(is_null($feedback))
+                            @for($i=1;$i<=5;$i++)
+                                <input name="solution_evaluation" type="radio" class="star-demo" value="{{$i}}" disabled @if(old('solution_evaluation')==$i) checked @endif />
+                            @endfor
+                        @else
+                            @for($i=1;$i<=5;$i++)
+                                <input name="solution_evaluation" type="radio" class="star-demo" value="{{$i}}" disabled @if($i==$feedback->solution_evaluation) checked @endif disabled/>
+                            @endfor
+                        @endif
+                    </div>
+                    <div class="form-group border-bottom">
+                        <label>ارائه تکلیف و تمرین به شما:*</label>
+                        @if(is_null($feedback))
+                            @for($i=1;$i<=5;$i++)
+                                <input name="homework" type="radio" class="star-demo" value="{{$i}}" disabled  @if(old('homework')==$i) checked @endif />
+                            @endfor
+                        @else
+                            @for($i=1;$i<=5;$i++)
+                                <input name="homework" type="radio" class="star-demo" value="{{$i}}" disabled @if($i==$feedback->homework) checked @endif disabled/>
+                            @endfor
+                        @endif
+                    </div>
+                    <div class="form-group border-bottom">
+                        <label>جمع بندی نظرات شما در یک جمله:*</label>
+                        @if(is_null($feedback))
+                            @for($i=1;$i<=5;$i++)
+                                <input name="summary_comments" type="radio" class="star-demo" value="{{$i}}" disabled @if(old('summary_comments')==$i) checked @endif  />
+                            @endfor
+                        @else
+                            @for($i=1;$i<=5;$i++)
+                                <input name="summary_comments" type="radio" class="star-demo" value="{{$i}}" disabled @if($i==$feedback->summary_comments) checked @endif disabled/>
+                            @endfor
+                        @endif
+                    </div>
+                    <div class="form-group border-bottom">
+                        <label for="best_offer">بهترین پیشنهاد شما:</label>
+                        <textarea class="form-control" id="best_offer" rows="3" name="best_offer" disabled >@if(old('best_offer')) {{old('best_offer')}} @elseif(!is_null($feedback)){{$feedback->best_offer}} @endif</textarea>
+                    </div>
+                    <div class="form-group border-bottom">
+                        <label for="effective_criticism">موثر ترین انتقاد شما؟</label>
+                        <textarea class="form-control" id="effective_criticism" rows="3" name="effective_criticism" disabled >@if(old('effective_criticism')) {{old('effective_criticism')}} @elseif(!is_null($feedback)){{$feedback->effective_criticism}} @endif</textarea>
+                    </div>
+                    <div class="form-group border-bottom">
+                        <label for="achievement">از آخرین جلسه کوچینگ چه دستاوردی در راستای هدف خود به دست آورده اید؟</label>
+                        <textarea class="form-control" id="achievement" rows="3" name="achievement"  disabled >@if(old('achievement')) {{old('achievement')}} @elseif(!is_null($feedback)){{$feedback->achievement}} @endif</textarea>
+                    </div>
+                    <div class="form-group border-bottom">
+                        <label for="self_awareness">از آخرین جلسه کوچینگ چه آگاهی نسبت به خود پیدا کرده اید؟</label>
+                        <textarea class="form-control" id="self_awareness" rows="3" name="self_awareness" disabled >@if(old('self_awareness')) {{old('self_awareness')}} @elseif(!is_null($feedback)){{$feedback->self_awareness}} @endif</textarea>
+                    </div>
+                    <div class="form-group border-bottom">
+                        <label for="challenges">در حال حاضر با چه چالش ها و مشکلاتی رو به رو هستید؟</label>
+                        <textarea class="form-control" id="challenges" rows="3" name="challenges" disabled >@if(old('challenges')) {{old('challenges')}} @elseif(!is_null($feedback)){{$feedback->challenges}} @endif</textarea>
+                    </div>
+                    <div class="form-group border-bottom">
+                        <label for="opportunities_you">در حال حاضر چه فرصت هایی برای شما فراهم است؟</label>
+                        <textarea class="form-control" id="opportunities_you" rows="3" name="opportunities_you" disabled >@if(old('opportunities_you')) {{old('opportunities_you')}} @elseif(!is_null($feedback)){{$feedback->opportunities_you}} @endif</textarea>
+                    </div>
+                    <div class="form-group border-bottom">
+                        <label for="future_expectations">در جلسه آینده از کوچ خود چه انتظاراتی دارید؟</label>
+                        <textarea class="form-control" id="future_expectations" rows="3" name="future_expectations" disabled >@if(old('future_expectations')) {{old('future_expectations')}} @elseif(!is_null($feedback)){{$feedback->future_expectations}} @endif</textarea>
+                    </div>
+                    <div class="form-group border-bottom">
+                        <label for="suggestions_progress">چه پیشنهادهایی برای پیشرفت جلسات کوچینگ خود دارید؟</label>
+                        <textarea class="form-control" id="suggestions_progress" rows="3" name="suggestions_progress" disabled >@if(old('suggestions_progress')) {{old('suggestions_progress')}} @elseif(!is_null($feedback)){{$feedback->suggestions_progress}} @endif</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="satisfaction">پیشنهاد این کوچ به دیگران *</label>
+
+                        <select class="form-control" name="satisfaction" id="satisfaction" disabled>
+                            <option disabled selected>انتخاب کنید</option>
+                            <option class="bg-success" value="1" @if(old('satisfaction')==1) selected @elseif(!is_null($feedback)&&($feedback->satisfaction==1)) selected @endif>این کوچ را توصیه میکنم</option>
+                            <option class="bg-danger" value="0" @if(!is_null($feedback)&&($feedback->satisfaction==0)) selected @endif>این کوچ را توصیه نمیکنم</option>
+                        </select>
+                        <small class="text-muted">این نظر در سوابق کوچ نمایش داده می شود</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="comment">نظر / پیشنهاد درباره کوچ یا جلسه</label>
+                        <textarea class="form-control" id="comment" rows="3" name="comment" disabled >@if(old('comment')) {{old('comment')}} @elseif(!is_null($feedback)){{$feedback->comment}} @endif</textarea>
+                        <small class="text-muted">این نظر در سوابق کوچ نمایش داده می شود</small>
+                    </div>
+                    @else
                     <div class="alert alert-warning">جلسه کوچینک هنوز انجام نشده است</div>
                 @endif
             </div>
