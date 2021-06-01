@@ -152,6 +152,7 @@
                                         <option>پکیج رایگان</option>
                                         <option>واتساپ</option>
                                         <option>دوستان</option>
+                                        <option>موتورهای جستجو</option>
 
                                     </select>
                                     @error('gettingknow')

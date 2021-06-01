@@ -175,8 +175,26 @@ class CoachController extends BaseController
      */
     public function edit(coach $coach)
     {
-        return view('panelAdmin.editCoach')
+        if((Auth::user()->type==2) ||(Auth::user()->type==3))
+        {
+            return view('panelAdmin.editCoach')
+                ->with('coach',$coach);
+        }
+        else
+        {
+
+            if(Auth::user()->id==$coach->user_id)
+            {
+                return view('panelUser.editCoach')
                     ->with('coach',$coach);
+            }
+            else{
+                alert()->error('شما سطح دسترسی به این بخش را ندارید','خطا')->persistent('بستن');
+                return back();
+            }
+
+        }
+
     }
 
     /**
@@ -250,5 +268,36 @@ class CoachController extends BaseController
 
         return view('allCoaches')
             ->with('coaches',$users);
+    }
+
+    public function newrequest (Request $request, coach $coach)
+    {
+        $this->validate($request,[
+            'education_background'  =>'required|string',
+            'certificates'          =>'required|string',
+            'experience'            =>'required|string',
+            'skills'                =>'required|string',
+            'researches'            =>'nullable|string',
+            'count_meeting'         =>'required|numeric|between:0,10000',
+            'customer_satisfaction' =>'required|numeric|between:0,1000',
+            'change_customer'       =>'required|numeric|between:0,1000',
+
+        ]);
+
+        $status=$coach->update($request->all());
+        if($status)
+        {
+            $user = User::where('id', '=', $coach->user_id)
+                    ->first();
+            $user->status_coach = -1;
+            $user->save();
+
+            alert()->success('اطلاعات با موفقیت بروزرسانی شد','پیام')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در بروزرسانی','خطا ')->persistent('بستن');
+        }
+        return redirect('/panel');
     }
 }

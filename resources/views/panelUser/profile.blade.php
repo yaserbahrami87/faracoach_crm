@@ -11,7 +11,7 @@
             {{csrf_field()}}
             {{method_field('PATCH')}}
             <div class="card card-user">
-                <div class="card-header">
+                <div class="card-header bg-info">
                     <h5 class="card-title">اطلاعات شخصی</h5>
                 </div>
                 <div class="card-body" id="infoProfile">
@@ -19,13 +19,13 @@
                         <div class="col-md-6 px-1">
                             <div class="form-group">
                                 <label>نام</label>
-                                <input type="text" class="form-control @if(strlen($user->fname)==0) is-invalid @endif" placeholder="نام را وارد کنید" value="{{$user->fname}}" name="fname"   lang="fa"  />
+                                <input type="text" class="form-control @if(strlen($user->fname)==0) is-invalid @endif" placeholder="نام را وارد کنید" @if(old('fname')) value='{{old('fname')}}' @else value="{{$user->fname}}" @endif name="fname"   lang="fa"  />
                             </div>
                         </div>
                         <div class="col-md-6 px-1">
                             <div class="form-group">
                                 <label>نام خانوادگی</label>
-                                <input type="text" class="form-control @if(strlen($user->lname)==0) is-invalid @endif" placeholder="نام خانوادگی را وارد کنید" value="{{$user->lname}}" name="lname"  lang="fa" />
+                                <input type="text" class="form-control @if(strlen($user->lname)==0) is-invalid @endif" placeholder="نام خانوادگی را وارد کنید" @if(old('lname')) value='{{old('lname')}}' @else value="{{$user->lname}}" @endif name="lname"  lang="fa" />
                             </div>
                         </div>
                         <div class="col-md-6 px-1">
@@ -37,13 +37,13 @@
                         <div class="col-md-6 px-1">
                             <div class="form-group">
                                 <label>شماره شناسنامه</label>
-                                <input type="text" class="form-control  @if(strlen($user->shenasname)==0) is-invalid @endif" placeholder="شماره شناسنامه را وارد کنید" value="{{$user->shenasname}}" name="shenasname"  />
+                                <input type="text" class="form-control  @if(strlen($user->shenasname)==0) is-invalid @endif" placeholder="شماره شناسنامه را وارد کنید" @if(old('shenasname')) value='{{old('shenasname')}}' @else value="{{$user->shenasname}}" @endif name="shenasname"  />
                             </div>
                         </div>
                         <div class="col-md-6 px-1">
                             <div class="form-group">
                                 <label>تاریخ تولد</label>
-                                <input type="text" class="form-control @if(strlen($user->datebirth)==0) is-invalid @endif" placeholder="تاریخ تولد را وارد کنید" value="{{$user->datebirth}}" name="datebirth" id="datebirth" />
+                                <input type="text" class="form-control @if(strlen($user->datebirth)==0) is-invalid @endif" placeholder="تاریخ تولد را وارد کنید" @if(old('datebirth')) value='{{old('datebirth')}}' @else value="{{$user->datebirth}}" @endif name="datebirth" id="datebirth" />
                             </div>
                         </div>
                         <div class="col-md-6 px-1">
@@ -64,21 +64,21 @@
                                         <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
                                     </svg>
                                 </label>
-                                <input type="text" class="form-control @if(strlen($user->username)==0) is-invalid @endif" placeholder="نام کاربری خود را وارد کنید" value="{{$user->username}}" name="username" @if(strlen($user->username)>0) disabled @endif/>
+                                <input type="text" class="form-control @if(strlen($user->username)==0) is-invalid @endif" placeholder="نام کاربری خود را وارد کنید" @if(old('username')) value='{{old('username')}}' @else value="{{$user->username}}" @endif name="username" @if(strlen($user->username)>0) disabled @endif/>
                                 <small class="text-muted float-left " dir="ltr">crm.faracoach.com/نام کاربری شما</small>
                             </div>
                         </div>
                         <div class="col-md-12 px-1">
                             <div class="form-group">
                                 <label>درباره من</label>
-                                <textarea class="form-control @if(strlen($user->aboutme)==0) is-invalid @endif" id="aboutme" name="aboutme" rows="3">{{$user->aboutme}}</textarea>
+                                <textarea class="form-control @if(strlen($user->aboutme)==0) is-invalid @endif" id="aboutme" name="aboutme" rows="3">@if(old('aboutme')) {{old('aboutme')}} @else {{$user->aboutme}} @endif</textarea>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="card card-user">
-                <div class="card-header">
+                <div class="card-header bg-info">
                     <h5 class="card-title">اطلاعات تماس</h5>
                 </div>
                 <div class="card-body" id="infoProfile">
@@ -117,32 +117,32 @@
                         <div class="col-md-12 px-1">
                             <div class="form-group">
                                 <label>آدرس</label>
-                                <input type="text" class="form-control @if(strlen($user->address)==0) is-invalid @endif" placeholder="آدرس را وارد کنید" value="{{$user->address}}" name="address"  lang="fa" />
+                                <input type="text" class="form-control @if(strlen($user->address)==0) is-invalid @endif" placeholder="آدرس را وارد کنید"  @if(old('address')) value='{{old('address')}}' @else value="{{$user->address}}" @endif name="address"  lang="fa" />
                             </div>
                         </div>
                         <div class="col-md-4 px-1">
                             <div class="form-group">
                                 <label>اینستاگرام</label>
-                                <input type="text" class="form-control @if(strlen($user->instagram)==0) is-invalid @endif" placeholder="صفحه اینستاگرام خود را وارد کنید" value="{{$user->instagram}}" name="instagram"  />
+                                <input type="text" class="form-control @if(strlen($user->instagram)==0) is-invalid @endif" placeholder="صفحه اینستاگرام خود را وارد کنید" @if(old('instagram')) value='{{old('instagram')}}' @else value="{{$user->instagram}}" @endif name="instagram"  />
                             </div>
                         </div>
                         <div class="col-md-4 px-1">
                             <div class="form-group">
                                 <label>تلگرام</label>
-                                <input type="text" class="form-control @if(strlen($user->telegram)==0) is-invalid @endif" placeholder="آیدی تلگرام خود را وارد کنید" value="{{$user->telegram}}" name="telegram"  />
+                                <input type="text" class="form-control @if(strlen($user->telegram)==0) is-invalid @endif" placeholder="آیدی تلگرام خود را وارد کنید" @if(old('telegram')) value='{{old('telegram')}}' @else value="{{$user->telegram}}" @endif name="telegram"  />
                             </div>
                         </div>
                         <div class="col-md-4 px-1">
                             <div class="form-group">
                                 <label>لینکدین</label>
-                                <input type="text" class="form-control @if(strlen($user->linkedin)==0) is-invalid @endif" placeholder="آیدی لینکدین خود را وارد کنید" value="{{$user->linkedin}}" name="linkedin"  />
+                                <input type="text" class="form-control @if(strlen($user->linkedin)==0) is-invalid @endif" placeholder="آیدی لینکدین خود را وارد کنید" @if(old('linkedin')) value='{{old('linkedin')}}' @else value="{{$user->linkedin}}" @endif name="linkedin"  />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="card card-user" id="infogettingKnow">
-                <div class="card-header">
+            <div class="card card-user " id="infogettingKnow">
+                <div class="card-header bg-info">
                     <h5 class="card-title">نحوه آشنایی</h5>
                 </div>
                 <div class="card-body">
@@ -165,7 +165,7 @@
                         <div class="col-md-6 px-1">
                             <div class="form-group">
                                 <label>معرف</label>
-                                <input type="text" class="form-control @if(strlen($user->introduced)==0) is-invalid @endif" value="{{$user->introduced}}"  id="introduced" @if(strlen($user->introduced)>0) disabled @endif />
+                                <input type="text" class="form-control @if(strlen($user->introduced)==0) is-invalid @endif" @if(old('introduced')) value='{{old('introduced')}}' @else value="{{$user->introduced}}" @endif id="introduced" @if(strlen($user->introduced)>0) disabled @endif />
                                 <span id="feedback_introduced" ></span>
                             </div>
                         </div>
@@ -173,7 +173,7 @@
                 </div>
             </div>
             <div class="card card-user">
-                <div class="card-header">
+                <div class="card-header bg-info">
                     <h5 class="card-title">اطلاعات قرارداد</h5>
                 </div>
                 <div class="card-body" id="infoProfile">
@@ -186,7 +186,7 @@
                         <div class="col-md-4 pl-1">
                             <div class="form-group">
                                 <label>نام پدر</label>
-                                <input type="text" class="form-control @if(strlen($user->father)==0) is-invalid @endif" placeholder=" نام پدر را وارد کنید" value="{{$user->father}}" name="father"  lang="fa" />
+                                <input type="text" class="form-control @if(strlen($user->father)==0) is-invalid @endif" placeholder=" نام پدر را وارد کنید" @if(old('father')) value='{{old('father')}}' @else value="{{$user->father}}" @endif name="father"  lang="fa" />
                             </div>
                         </div>
                         <div class="col-md-4 px-1">
@@ -218,7 +218,7 @@
                         <div class="col-md-4 pl-1">
                             <div class="form-group">
                                 <label>شهر تولد</label>
-                                <input type="text" class="form-control @if(strlen($user->born)==0) is-invalid @endif" placeholder="شهر تولد را وارد کنید" value="{{$user->born}}" name="born"   lang="fa"/>
+                                <input type="text" class="form-control @if(strlen($user->born)==0) is-invalid @endif" placeholder="شهر تولد را وارد کنید" @if(old('born')) value='{{old('born')}}' @else value="{{$user->born}}" @endif name="born"   lang="fa"/>
                             </div>
                         </div>
                         <div class="col-md-4 px-1">
@@ -239,7 +239,7 @@
                             <div class="form-group">
                                 <label>رشته</label>
                                 <div class="form-group">
-                                    <input type="text" class="form-control @if(strlen($user->reshteh)==0) is-invalid @endif" placeholder="رشته را وارد کنید" value="{{$user->reshteh}}" name="reshteh"   lang="fa"/>
+                                    <input type="text" class="form-control @if(strlen($user->reshteh)==0) is-invalid @endif" placeholder="رشته را وارد کنید" @if(old('reshteh')) value='{{old('reshteh')}}' @else value="{{$user->reshteh}}" @endif name="reshteh"   lang="fa"/>
                                 </div>
                             </div>
                         </div>
@@ -247,7 +247,7 @@
                             <div class="form-group">
                                 <label>شغل</label>
                                 <div class="form-group">
-                                    <input type="text" class="form-control @if(strlen($user->job)==0) is-invalid @endif" placeholder="شغل را وارد کنید" value="{{$user->job}}" name="job" />
+                                    <input type="text" class="form-control @if(strlen($user->job)==0) is-invalid @endif" placeholder="شغل را وارد کنید" @if(old('job')) value='{{old('job')}}' @else value="{{$user->job}}" @endif name="job" />
                                 </div>
                             </div>
                         </div>

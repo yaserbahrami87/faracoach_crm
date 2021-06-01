@@ -64,7 +64,8 @@ class SmsController extends BaseController
             'comment'   =>'required'
         ]);
         $user=user::query();
-        $user->leftjoin('followups','users.id','=','followups.user_id');
+        $user->leftjoin('followups','users.id','=','followups.user_id')
+                ->distinct('followups.user_id');
 
         if(isset($request->categories)) {
             for ($i = 0; $i < count($request->categories); $i++) {
@@ -141,7 +142,7 @@ class SmsController extends BaseController
                 $comment=str_replace("{lname}",$item->lname,$comment);
                 $comment=str_replace("{datebirth}",$item->datebirth,$comment);
                 $comment=str_replace("{sex}",$item->sex,$comment);
-                //$this->sendSms($item->tel,$comment);
+                $this->sendSms($item->tel,$comment);
             }
             $msg = "پیام با موفقیت به تعداد " .count($user) . " ارسال شد";
             $errorStatus = "success";
@@ -204,20 +205,25 @@ class SmsController extends BaseController
 
     public function createAjax(request $request)
     {
+
         $user=user::query();
-        $user->leftjoin('followups','users.id','=','followups.user_id');
+
+        $user->leftjoin('followups','users.id','=','followups.user_id')
+                ->distinct('followups.user_id');
         if(isset($request->categories)) {
             for ($i = 0; $i < count($request->categories); $i++) {
                 $user = $user->orwhere('resource', '=', $request['categories'][$i]);
                 $user = $user->orwhere('detailsresource', '=', $request['categories'][$i]);
             }
         }
+
         if(isset($request->tags))
         {
             for ($i = 0; $i < count($request->tags); $i++) {
                 $user = $user->where('followups.tags', 'like', "%".$request['tags'][$i]."%");
             }
         }
+
         if(isset($request->fields)) {
             for ($i = 0; $i < count($request->fields); $i++) {
                 $user = $user->where($request['fields'][$i], $request['comparison'][$i], $request['values'][$i]);
@@ -244,7 +250,9 @@ class SmsController extends BaseController
                 }
             }
         }
+
         $user=$user->get();
+
         if((count($user)>0)||(isset($request['tel_recieves']))) {
             echo "تعداد افراد فیلترشده ".count($user)." نفر می باشد";
         }

@@ -17,7 +17,8 @@ Route::get('/', function () {
     return redirect("/login");
 });
 
-Route::middleware(['can:isUser','verified'])->prefix('panel')->group(function () {
+//Route::middleware(['can:isUser','verified'])->prefix('panel')->group(function () {
+Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
 
     // ROUTE USER
 
@@ -75,6 +76,7 @@ Route::middleware(['can:isUser','verified'])->prefix('panel')->group(function ()
     Route::get('/teacher/{teacher}','TeacherController@show');
 
     //coaches
+    Route::patch('/coach/{coach}/newrequest','CoachController@newrequest');
     Route::resource('coach','CoachController');
 
     //booking

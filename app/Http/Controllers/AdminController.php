@@ -137,93 +137,102 @@ class AdminController extends BaseController
         }
         else if(Gate::allows('isUser'))
         {
+
             $user=(Auth::user());
 
-                if(strlen($user->personal_image)==0)
-                {
-                    $user->personal_image="default-avatar.png";
-                }
+            if($user->status_coach==-2)
+            {
+                $user=User::join('coaches','users.id','=','coaches.user_id')
+                            ->where('users.id','=',$user->id)
+                            ->select('users.*','coaches.id as id_coaches_table')
+                            ->first();
+            }
 
-                //تعداد افراد دعوت شده
-                $countIntroducedUser=User::where('introduced','=',$user->id)
+            if(strlen($user->personal_image)==0)
+            {
+                $user->personal_image="default-avatar.png";
+            }
+
+            //تعداد افراد دعوت شده
+            $countIntroducedUser=User::where('introduced','=',$user->id)
+                ->count();
+
+            //یوزر توسط چه کسی معرفی شده است
+            $resourceIntroduce=User::where('id','=',$user->introduced)
+                ->first();
+            //تعداد پیام های خوانده نشده
+            $unreadMessage=message::where('user_id_recieve','=',$user->id)
+                    ->where('status','=',1)
+                    ->count();
+            //کسب امتیازات
+            $score=0;
+            $scoreIntroducedUser=$countIntroducedUser* ($this->get_scores()->introduced);
+            $score=$score+$scoreIntroducedUser;
+
+
+            $verifyScore=$user->tel_verified;
+            if($verifyScore==1)
+            {
+                $scoreTelverify=$this->get_scores()->tel_verified;
+                $score=$score+$scoreTelverify;
+            }
+            else
+            {
+                $scoreTelverify=0;
+            }
+
+
+
+            $verifyScore=$user->email_verified_at;
+
+            if(!is_null($verifyScore))
+            {
+                $scoreEmailverify=$this->get_scores()->email_verified;
+                $score=$score+$scoreEmailverify;
+            }
+            else
+            {
+                $scoreEmailverify=0;
+            }
+
+
+            $SuccessIntroduced=User::where('introduced','=',$user->id)
+                    ->where('type','=',20)
                     ->count();
 
-                //یوزر توسط چه کسی معرفی شده است
-                $resourceIntroduce=User::where('id','=',$user->introduced)
-                    ->first();
-                //تعداد پیام های خوانده نشده
-                $unreadMessage=message::where('user_id_recieve','=',$user->id)
-                        ->where('status','=',1)
-                        ->count();
-                //کسب امتیازات
-                $score=0;
-                $scoreIntroducedUser=$countIntroducedUser* ($this->get_scores()->introduced);
-                $score=$score+$scoreIntroducedUser;
 
 
-                $verifyScore=$user->tel_verified;
-                if($verifyScore==1)
+            $scoreSuccess=$SuccessIntroduced*($this->get_scores()->changeintroduced);
+            $score=$score+$scoreSuccess;
+
+            $checkTimeCode=verify::where('tel','=',$user['tel'])
+                            ->where('verify','=',0)
+                            ->latest()
+                            ->first();
+            $verifyStatus=false;
+            if(!is_null( $checkTimeCode))
+            {
+                $date=($checkTimeCode['created_at']);
+                $checkDays=$date->addMinutes(10);
+                if($checkDays>Carbon::now())
                 {
-                    $scoreTelverify=$this->get_scores()->tel_verified;
-                    $score=$score+$scoreTelverify;
+                    $verifyStatus=true;
                 }
-                else
-                {
-                    $scoreTelverify=0;
-                }
+            }
 
-
-
-                $verifyScore=$user->email_verified_at;
-
-                if(!is_null($verifyScore))
-                {
-                    $scoreEmailverify=$this->get_scores()->email_verified;
-                    $score=$score+$scoreEmailverify;
-                }
-                else
-                {
-                    $scoreEmailverify=0;
-                }
-
-
-                $SuccessIntroduced=User::where('introduced','=',$user->id)
-                        ->where('type','=',20)
-                        ->count();
-
-
-
-                $scoreSuccess=$SuccessIntroduced*($this->get_scores()->changeintroduced);
-                $score=$score+$scoreSuccess;
-
-                $checkTimeCode=verify::where('tel','=',$user['tel'])
-                                ->where('verify','=',0)
-                                ->latest()
-                                ->first();
-                $verifyStatus=false;
-                if(!is_null( $checkTimeCode))
-                {
-                    $date=($checkTimeCode['created_at']);
-                    $checkDays=$date->addMinutes(10);
-                    if($checkDays>Carbon::now())
-                    {
-                        $verifyStatus=true;
-                    }
-                }
-
-                return view('panelUser.home')
-                    ->with('user',$user)
-                    ->with('countIntroducedUser',$countIntroducedUser)
-                    ->with('resourceIntroduce',$resourceIntroduce)
-                    ->with('unreadMessage',$unreadMessage)
-                    ->with('score',$score)
-                    ->with('verifyScore',$verifyScore)
-                    ->with('scoreSuccess',$scoreSuccess)
-                    ->with('verifyStatus',$verifyStatus)
-                    ->with('scoreIntroducedUser',$scoreIntroducedUser)
-                    ->with('SuccessIntroduced',$SuccessIntroduced)
-                    ->with('scoreTelverify',$scoreTelverify)
-                    ->with('scoreEmailverify',$scoreEmailverify);
+            return view('panelUser.home')
+                ->with('user',$user)
+                ->with('countIntroducedUser',$countIntroducedUser)
+                ->with('resourceIntroduce',$resourceIntroduce)
+                ->with('unreadMessage',$unreadMessage)
+                ->with('score',$score)
+                ->with('verifyScore',$verifyScore)
+                ->with('scoreSuccess',$scoreSuccess)
+                ->with('verifyStatus',$verifyStatus)
+                ->with('scoreIntroducedUser',$scoreIntroducedUser)
+                ->with('SuccessIntroduced',$SuccessIntroduced)
+                ->with('scoreTelverify',$scoreTelverify)
+                ->with('scoreEmailverify',$scoreEmailverify);
 
         }
         else
