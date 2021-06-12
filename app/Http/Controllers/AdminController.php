@@ -37,15 +37,7 @@ class AdminController extends BaseController
      */
     public function index(Request $request)
     {
-        if(isset($_GET['range']))
-        {
 
-            $this->validate($request,[
-                'start_date'    =>'required|string',
-            ]);
-            $request['start_date']=explode(' ~ ',$request['start_date']);
-            dd($request);
-        }
         if(Gate::allows('isAdmin')||Gate::allows('isEducation'))
         {
             $notFollowup=count($this->get_notfollowup_withoutPaginate());
@@ -79,29 +71,38 @@ class AdminController extends BaseController
             $suminsertuser=0;
             $sumtalktimeToday=0;
             $sumtalktime=0;
+
+            if(isset($_GET['range']))
+            {
+                $this->validate($request,[
+                    'start_date'    =>'required|string',
+                ]);
+                $request['start_date']=explode(' ~ ',$request['start_date']);
+            }
+
             foreach ($usersEducation as $item)
             {
-                $item->cancelfollowup=$this->get_usersByType(12,$item->id)->count();
+                $item->cancelfollowup=$this->get_usersByType(12,$item->id,NULL,$request['start_date'])->count();
                 $sumcancelfollowup=$sumcancelfollowup+$item->cancelfollowup;
-                $item->allFollowups=count($this->get_myfollowupbyID_withoutPaginate($item->id));
+                $item->allFollowups=$this->get_usersByType(NULL,$item->id,NULL,$request['start_date'])->count();
                 $sumallFollowups=$sumallFollowups+$item->allFollowups;
                 $item->todayFollowups=count($this->get_todayFollowupbyID_withoutPaginate($item->id));
                 $sumtodayFollowups=$sumtodayFollowups+$item->todayFollowups;
                 $item->followedTodaybyID=count($this->get_followedTodaybyID_withoutPaginate($item->id));
                 $sumfollowedTodaybyID=$sumfollowedTodaybyID+$item->followedTodaybyID;
-                $item->continuefollowup=$this->get_usersByType(11,$item->id)->count();
+                $item->continuefollowup=$this->get_usersByType(11,$item->id,NULL,$request['start_date'])->count();
                 $sumcontinuefollowup=$sumcontinuefollowup+$item->continuefollowup;
-                $item->waiting=$this->get_usersByType(13,$item->id)->count();
+                $item->waiting=$this->get_usersByType(13,$item->id,NULL,$request['start_date'])->count();
                 $sumwaiting=$sumwaiting+$item->waiting;
-                $item->students=$this->get_usersByType(20,$item->id)->count();
+                $item->students=$this->get_usersByType(20,$item->id,NULL,$request['start_date'])->count();
                 $sumstudents=$sumstudents+$item->students;
-                $item->noanswering=$this->get_usersByType(11,$item->id)->count();
+                $item->noanswering=$this->get_usersByType(11,$item->id,NULL,$request['start_date'])->count();
                 $sumnoanswering=$sumnoanswering+$item->noanswering;
                 if(!is_null($item->last_login_at))
                 {
                     $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
                 }
-                $item->insertuser=$this->get_usersByType(NULL,$item->id)->count();
+                $item->insertuser=$this->get_usersByType(NULL,$item->id,NULL,$request['start_date'])->count();
                 $suminsertuser=$suminsertuser+$item->insertuser;
                 $item->talktimeToday=$this->get_talktimeTodayByID($item->id);
                 $sumtalktimeToday=$sumtalktimeToday+$item->talktimeToday;

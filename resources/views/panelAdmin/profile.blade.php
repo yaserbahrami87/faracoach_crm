@@ -129,8 +129,8 @@
                             <div class="form-group">
                                 <label>عکس پروفایل</label>
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="inputpersonal_image" aria-describedby="inputpersonal_image" name="personal_image"/>
-                                    <label class="custom-file-label" for="inputpersonal_image">Choose file</label>
+                                    <input type="file" class="custom-file-input" id="inputpersonal_image" name="personal_image"/>
+                                    <label class="custom-file-label" for="inputpersonal_image">انتخاب فایل</label>
                                 </div>
                             </div>
                         </div>
@@ -422,7 +422,6 @@
     <script src="{{asset('js/kamadatepicker.min.js')}}"></script>
     <script src="{{asset('js/kamadatepicker.holidays.js')}}"></script>
     <script>
-
         var customOptions={
             gotoToday: true,
             markHolidays:true,

@@ -5,9 +5,11 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8 text-center">
-            <img src="{{asset('/images/logo-colored.png')}}" class="mb-4"/>
-            <div class="card bg-light text-left">
-                <div class="card-header">{{ __('ورود') }}</div>
+            <a href="" class="">
+                <img src="{{asset('/images/logo-colored.png')}}" class="mb-4"/>
+            </a>
+            <div class="card bg-light text-left ">
+                <div class="card-header bg-info text-light">{{ __('ورود') }}</div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         {{csrf_field()}}

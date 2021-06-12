@@ -180,8 +180,13 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::resource('teachers','TeacherController');
 
     //coaches
+
+    Route::get('/coach/reject','CoachController@coach_reject');
     Route::get('/coach/request','CoachController@coach_request');
     Route::resource('coach','CoachController');
+
+    //Category Coaches
+    Route::resource('category_coach','CategoryCoachController');
 
     //Courses
     Route::resource('courses','CourseController');

@@ -19,10 +19,22 @@ class CoachController extends BaseController
     public function index()
     {
         $coaches=coach::join('users','coaches.user_id','=','users.id')
-                    ->where('users.status_coach','=','1')
+                    ->orwhere('users.status_coach','=','1')
+                    ->orwhere('users.status_coach','=','2')
                     ->select('users.*','coaches.*','users.id as id_user_table')
                     ->get();
+        foreach ($coaches as $item)
+        {
+            if($item->status==1)
+            {
+                $item->status='در حال همکاری';
+            }
+            else if ($item->status==2)
+            {
+                $item->status='عدم همکاری';
+            }
 
+        }
         return view('panelAdmin.coaches')
                     ->with('coaches',$coaches);
     }
@@ -39,7 +51,9 @@ class CoachController extends BaseController
             $user=Auth::user();
             if(strlen($user->username)>0)
             {
-                return view('panelUser.insertCoach');
+                $categoryCoaches=$this->get_categoryCoaches(NULL,NULL,true);
+                return view('panelUser.insertCoach')
+                                ->with('categoryCoaches',$categoryCoaches);
             }
             else
             {
@@ -63,6 +77,7 @@ class CoachController extends BaseController
      */
     public function store(Request $request)
     {
+
         $this->validate($request,[
             'education_background'  =>'required|string',
             'certificates'          =>'required|string',
@@ -71,6 +86,7 @@ class CoachController extends BaseController
             'researches'            =>'nullable|string',
             'count_meeting'         =>'required|numeric|between:0,10000',
             'customer_satisfaction' =>'required|numeric|between:0,1000',
+            'category'              =>'required|array',
             'change_customer'       =>'required|numeric|between:0,1000'
         ]);
 
@@ -82,16 +98,17 @@ class CoachController extends BaseController
             $user->update();
 
             $status = coach::create([
-                'user_id' => Auth::user()->id,
-                'education_background' => $request['education_background'],
-                'researches' => $request['researches'],
-                'certificates' => $request['certificates'],
-                'experience' => $request['experience'],
-                'skills' => $request['skills'],
-                'count_meeting' => $request['count_meeting'],
+                'user_id'               => Auth::user()->id,
+                'education_background'  => $request['education_background'],
+                'researches'            => $request['researches'],
+                'certificates'          => $request['certificates'],
+                'experience'            => $request['experience'],
+                'skills'                => $request['skills'],
+                'count_meeting'         => $request['count_meeting'],
                 'customer_satisfaction' => $request['customer_satisfaction'],
-                'change_customer' => $request['change_customer'],
-                'count_recommendation' => $request['count_recommendation'],
+                'category'              => implode(',',$request['category']),
+                'change_customer'       => $request['change_customer'],
+                'count_recommendation'  => $request['count_recommendation'],
             ]);
 
             if ($status) {
@@ -177,8 +194,12 @@ class CoachController extends BaseController
     {
         if((Auth::user()->type==2) ||(Auth::user()->type==3))
         {
+            $categoryCoaches=$this->get_categoryCoaches(NULL,NULL,true);
+            $coach->category=explode(',',$coach->category);
+
             return view('panelAdmin.editCoach')
-                ->with('coach',$coach);
+                ->with('coach',$coach)
+                ->with('categoryCoaches',$categoryCoaches);
         }
         else
         {
@@ -215,8 +236,40 @@ class CoachController extends BaseController
             'count_meeting'         =>'required|numeric|between:0,10000',
             'customer_satisfaction' =>'required|numeric|between:0,1000',
             'change_customer'       =>'required|numeric|between:0,1000',
+            'count_recommendation'  =>'required|numeric|between:0,1000',
+            'category'              =>'required|array',
             'status'                =>'required|numeric|between:-2,5'
+        ],[
+            'education_background.required' =>'سوابق تحصیلی اجباریست',
+            'education_background.string'   =>'سوابق تحصیلی درست وارد نشده است',
+            'certificates.required'         =>'گواهینامه ها اجباریست',
+            'certificates.string'           =>'گواهینامه ها درست وارد نشده است',
+            'experience.required'           =>'سوابق کاری اجباریست',
+            'experience.string'             =>'سوابق کاری درست وارد نشده است',
+            'skills.required'               =>'مهارت ها اجباریست',
+            'skills.string'                 =>'مهارت ها درست وارد نشده است',
+            'researches.string'             =>'سوابق مقالات درست وارد نشده است',
+            'count_meeting.required'        =>'تعداد ساعت جلسات اجباریست',
+            'count_meeting.numeric'         =>'تعداد ساعت جلسات باید عدد باشد',
+            'count_meeting.between'         =>'تعداد ساعت جلسات باید بین 0 تا 10000 باشد',
+            'customer_satisfaction.required'=>'تعداد رضایت مشتریان اجباریست',
+            'customer_satisfaction.numeric' =>'تعداد رضایت مشتریان باید عدد باشد',
+            'customer_satisfaction.between' =>'تعداد رضایت مشتریان باید بین 0 تا 1000 باشد',
+            'change_customer.required'      =>'تعداد تبدیل مشتری اجباریست',
+            'change_customer.numeric'       =>'تعداد تبدیل مشتری باید عدد باشد',
+            'change_customer.between'       =>'تعداد تبدیل مشتری باید بین 0 تا 1000 باشد',
+            'count_recommendation.required' =>'تعداد توضیه نامه اجباریست',
+            'count_recommendation.numeric'  =>'تعداد توضیه نامه باید عدد باشد',
+            'count_recommendation.between'  =>'تعداد توضیه نامه باید بین 0 تا 1000 باشد',
+            'category.required'             =>'دسته بندی ها اجباریست',
+            'category.array'                =>'دسته بندی ها درست انتخاب نشده است',
+            'status.required'               =>'وضعیت اجباریست',
+            'status.numeric'                =>'وضعیت درست انتخاب نشده است',
+            'status.between'                =>'وضعیت خارج از فرمت وارد شده است',
+
         ]);
+
+        $request['category']=implode(',',$request['category']);
 
         $status=$coach->update($request->all());
         if($status)
@@ -253,6 +306,33 @@ class CoachController extends BaseController
                 ->select('users.*','coaches.*','users.id as id_user_table')
                 ->get();
 
+        foreach ($coaches as $item)
+        {
+            if($item->status==0)
+            {
+                $item->status='درخواست همکاری';
+            }
+        }
+        return view('panelAdmin.coaches')
+            ->with('coaches',$coaches);
+    }
+
+    public function coach_reject()
+    {
+        $coaches=coach::join('users','coaches.user_id','=','users.id')
+            ->wherein('coaches.status',[2,-2])
+            ->select('users.*','coaches.*','users.id as id_user_table')
+            ->get();
+        foreach ($coaches as $item)
+        {
+            switch ($item->status)
+            {
+                case 2:$item->status='غیرفعال';
+                        break;
+                case -2:$item->status='رد درخواست';
+                        break;
+            }
+        }
         return view('panelAdmin.coaches')
             ->with('coaches',$coaches);
     }
@@ -264,6 +344,7 @@ class CoachController extends BaseController
             ->where('status','=',1)
             ->orderby('users.id','desc')
             ->get();
+
 
 
         return view('allCoaches')
@@ -281,10 +362,11 @@ class CoachController extends BaseController
             'count_meeting'         =>'required|numeric|between:0,10000',
             'customer_satisfaction' =>'required|numeric|between:0,1000',
             'change_customer'       =>'required|numeric|between:0,1000',
-
         ]);
 
-        $status=$coach->update($request->all());
+        $status=$coach->update($request->all()+[
+            'status'    =>0
+            ]);
         if($status)
         {
             $user = User::where('id', '=', $coach->user_id)

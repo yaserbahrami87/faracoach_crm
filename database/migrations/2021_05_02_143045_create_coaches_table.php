@@ -24,6 +24,7 @@ class CreateCoachesTable extends Migration
             $table->text('documents')->nullable();
             $table->integer('count_meeting')->nullable();
             $table->integer('customer_satisfaction')->default(0);
+            $table->string('category',250)->nullable();
             $table->integer('change_customer')->default(0);
             $table->integer('count_recommendation')->default(0);
             $table->tinyInteger('status')->default(0);

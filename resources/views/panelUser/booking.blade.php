@@ -1,7 +1,8 @@
 @extends('panelUser.master.index')
 @section('rowcontent')
     <?php
-    $roozha="'Sunday','Friday'";
+//    $roozha="'Sunday','Friday'";
+    $roozha="";
     ?>
 
     @if(Auth::user()->status_coach==1)
@@ -11,7 +12,7 @@
             @{{time}}-->
 
         <!-- <date-picker :disable="['1397/05/07', '1397/05/08', 'Friday']" /> -->
-            <p>ایجاد رزرو جدید</p>
+            <p>اختصاص وقت جدید</p>
             <form method="post" action="/panel/booking" id="formBooking">
                 {{csrf_field()}}
                 <date-picker

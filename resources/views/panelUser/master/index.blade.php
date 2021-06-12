@@ -27,6 +27,7 @@
 
 
     <script src="{{asset('/js/app.js')}}"></script>
+    @yield('headerScript')
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </head>

@@ -358,11 +358,14 @@ class UserController extends BaseController
 
             if($status)
             {
-                $msg="اطلاعات ما با موفقیت در سیستم ثبت شد";
-//                $errorStatus="success";
-                alert()->success("اطلاعات ما با موفقیت در سیستم ثبت شد",'پیام')->persistent('بستن');
+                $msg="اطلاعات با موفقیت در سیستم ثبت شد";
+                alert()->success("اطلاعات با موفقیت در سیستم ثبت شد",'پیام')->persistent('بستن');
+
+
 
                 // Send SMS
+                $this->sendSms($request['tel'],' به زودی کارشناسان ما با شما تماس خواهند گرفت');
+
                 $url = "https://ippanel.com/services.jspd";
                 $rcpt_nm = array($request['tel']);
                 $param = array
@@ -386,7 +389,7 @@ class UserController extends BaseController
             }
         }
         return back();
-//        ->with('msg',$msg)->with('errorStatus',$errorStatus);
+
     }
 
     public function showRegister()
@@ -464,22 +467,13 @@ class UserController extends BaseController
                 $request['sendsms']=(str_replace('...','',$request['sendsms']));
                 $this->sendSms($request['tel'],$request['sendsms']);
             }
-
-//            $msg="کاربر با موفقیت در سیستم ثبت شد";
-//            $errorStatus="success";
             alert()->success("کاربر با موفقیت در سیستم ثبت شد",'پیام')->persistent('بستن');
             return back();
-//                    ->with('msg',$msg)
-//                    ->with('errorStatus',$errorStatus);
         }
         else
         {
-//            $msg="خطا در ثبت کاربر";
-//            $errorStatus="danger";
             alert()->error("خطا در ثبت کاربر",'خطا')->persistent('بستن');
             return back();
-//                ->with('msg',$msg)
-//                ->with('errorStatus',$errorStatus);
         }
     }
 
@@ -751,7 +745,7 @@ class UserController extends BaseController
 
             $this->validate(request(),
                 [
-                    'username'          =>'nullable|max:200|regex:/(^([a-zA-Z]+)(\d+)?$)/u',
+                    'username'          =>'nullable|max:200|regex:/^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/u',
                     'fname'             =>'nullable|persian_alpha',
                     'lname'             =>'nullable|persian_alpha',
                     'codemelli'         =>'nullable|numeric|',
@@ -767,11 +761,11 @@ class UserController extends BaseController
                     'job'               =>'nullable|persian_alpha|',
                     'state'             =>'nullable|numeric',
                     'city'              =>'nullable|numeric',
-                    'address'           =>'nullable|min:4|',
-                    'personal_image'    =>'nullable|mimes:jpeg,jpg,|max:600',
-                    'shenasnameh_image' =>'nullable|mimes:jpeg,jpg,|max:600',
-                    'cartmelli_image'   =>'nullable|mimes:jpeg,jpg,|max:600',
-                    'education_image'   =>'nullable|mimes:jpeg,jpg,|max:600',
+                    'address'           =>'nullable|min:4|string',
+                    'personal_image'    =>'nullable|mimes:jpeg,jpg,bmp|max:600',
+                    'shenasnameh_image' =>'nullable|mimes:jpeg,jpg,bmp|max:600',
+                    'cartmelli_image'   =>'nullable|mimes:jpeg,jpg,bmp|max:600',
+                    'education_image'   =>'nullable|mimes:jpeg,jpg,bmp|max:600',
                     'resume'            =>'nullable|mimes:docx,doc,pdf|max:1024',
                     'email'             =>'nullable|email|',
                     'gettingknow'       =>'nullable|string',
@@ -856,13 +850,8 @@ class UserController extends BaseController
             }
 
             $user->save();
-
-//            $msg = "پروفایل با موفقیت به روزرسانی شد";
-//            $errorStatus = "success";
             alert()->success('پروفایل با موفقیت به روزرسانی شد','پیام')->persistent('بستن');
             return back();
-//            ->with('msg', $msg)
-//                ->with('errorStatus', $errorStatus);
     }
 
     /**
@@ -885,27 +874,17 @@ class UserController extends BaseController
                 if($status)
                 {
                     alert()->success("اطلاعات با موفقیت حذف شد",'پیام')->persistent('بستن');
-//                    $msg="اطلاعات با موفقیت حذف شد";
-//                    $errorStatus="success";
                 }
                 else
                 {
                     alert()->error("خطا در حذف کاربر",'خطا')->persistent('بستن');
-//                    $msg="خطا در حذف کاربر";
-//                    $errorStatus="danger";
                 }
                 return back();
-//                ->with('msg',$msg)
-//                    ->with('errorStatus',$errorStatus);
             }
             else
             {
-//                $msg = "شما در حال حذف کاربری خود میباشید و امکان آن وجود ندارد";
-//                $errorStatus = "danger";
                 alert()->error("شما در حال حذف کاربری خود میباشید و امکان آن وجود ندارد",'خطا')->persistent('بستن');
                 return redirect('/admin/users');
-//                        ->with('msg',$msg)
-//                        ->with('errorStatus',$errorStatus);
             }
         }
         else
@@ -1369,12 +1348,8 @@ class UserController extends BaseController
                 ]);
 
             if (!isset($request['tags'])) {
-//                $msg = "حداقل یک گزینه برای اعمال فیلترها انتخاب کنید";
-//                $errorStatus = "danger";
                 alert()->error("حداقل یک گزینه برای اعمال فیلترها انتخاب کنید",'خطا')->persistent('بستن');
                 return back();
-//                ->with('msg', $msg)
-//                    ->with('errorStatus', $errorStatus);
             } else {
                 $tags = implode(',', $request['tags']);
                 $users = user::join('followups', 'users.id', '=', 'followups.user_id')
@@ -1728,12 +1703,12 @@ class UserController extends BaseController
                 {
                     if($request['sms']==1) {
                         if (is_null(Auth::user()->fname) || (is_null(Auth::user()->lname))) {
-                            $this->sendSms($request['tel'], "به فراکوچ خوش آمدید/ شما توسط " . Auth::user()->tel . " به فراکوچ دعوت شدید");
+                            $this->sendSms($request['tel'], "به فراکوچ خوش آمدید/ شما توسط " . Auth::user()->tel . " به فراکوچ دعوت شدید"." رمز عبور:1234 ");
 //                        $msg="تلفن با موفقیت در سیستم فراکوچ ثبت شد";
 //                        $errorStatus="success";
                             alert()->success("تلفن با موفقیت در سیستم فراکوچ ثبت شد", 'پیام')->persistent('بستن');
                         } else {
-                            $this->sendSms($request['tel'], "به فراکوچ خوش آمدید/ شما توسط " . Auth::user()->fname . Auth::user()->lname . " به فراکوچ دعوت شدید");
+                            $this->sendSms($request['tel'], "به فراکوچ خوش آمدید/ شما توسط " . Auth::user()->fname . Auth::user()->lname . " به فراکوچ دعوت شدید" ." رمز عبور:1234 ");
 //                        $msg="تلفن با موفقیت در سیستم فراکوچ ثبت شد";
 //                        $errorStatus="success";
                             alert()->success("تلفن با موفقیت در سیستم فراکوچ ثبت شد", 'پیام')->persistent('بستن');

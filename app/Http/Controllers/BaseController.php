@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\category_coach;
 use App\category_post;
 use App\categoryTag;
 use App\city;
@@ -1125,8 +1126,9 @@ class BaseController extends Controller
     }
 
 
-    public function get_usersByType($type=NULL,$id=NULL,$paginate=NULL)
+    public function get_usersByType($type=NULL,$id=NULL,$paginate=NULL,$between=NULL,$condition=NULL)
     {
+
         $users= User::join('followups','users.id','=','followups.user_id')
             ->when($id, function ($query,$id) {
                 return $query->where('followby_expert', '=', $id);
@@ -1134,7 +1136,14 @@ class BaseController extends Controller
             ->when($type,function($query,$type){
                 return $query->where('users.type','=',$type);
             })
-
+            ->when($between,function($query,$between)
+            {
+                return $query->wherebetween('followups.date_fa',[$between[0],$between[1]]);
+            })
+            ->when($condition,function($query,$condition)
+            {
+                return $query->where($condition[0],'=',$condition[1]);
+            })
             ->orderby('followups.id', 'desc')
             ->groupby('followups.user_id')
             ->select('users.*')
@@ -1145,11 +1154,26 @@ class BaseController extends Controller
             });
 
         return $users;
+    }
 
-
-
-
-
+    public function get_categoryCoaches($id=NULL,$shortlink=NULL,$status=NULL,$paginate=NULL)
+    {
+        return category_coach::when($id,function($query,$id){
+                return $query->where('id','=',$id);
+            })
+            ->when($shortlink,function ($query,$shortlink)
+            {
+                return $query->where('shortlink','=',$shortlink);
+            })
+            ->when($status,function($query,$status)
+            {
+                return $query->where('status','=',1);
+            })
+            ->when($paginate,function($query){
+                return $query->paginate($this->countPage());
+            },function($query){
+                return $query->get();
+            });
     }
 
 

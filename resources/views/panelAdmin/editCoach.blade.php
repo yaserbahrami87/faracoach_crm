@@ -1,4 +1,7 @@
 @extends('panelAdmin.master.index')
+@section('headerScript')
+    <link rel="stylesheet" href="{{asset('/dashboard/dist/css/bootstrap-select.css')}}" />
+@endsection
 @section('rowcontent')
     <div class="col-xs-12 col-md-8 col-lg-8 col-xl-8">
         <div class="card-body">
@@ -45,13 +48,23 @@
                     <input type="number" class="form-control" id="count_recommendation" name="count_recommendation" aria-describedby="count_recommendationHelp" min="0" max="1000" value="{{$coach->count_recommendation}}"/>
                     <small id="count_recommendationHelp" class="form-text text-muted"> تعداد توصیه نامه هایی که تاکنون داشته اید را وارد کنید</small>
                 </div>
-
+                <div class="form-group">
+                    <label for="count_meeting">دسته بندی ها *</label>
+                    <div class="form-group">
+                        <select class="form-control selectpicker" multiple data-live-search="true" name="category[]" id="selectpicker" >
+                            @foreach($categoryCoaches as $item)
+                                    <option value="{{$item->id}}" >{{$item->category}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
                 <div class="form-group">
                     <label for="status">وضعیت </label>
                     <select class="form-control" id="status" name="status">
                         <option disabled selected>انتخاب کنید</option>
                         <option value="1" @if($coach->status==1) selected @endif>کوچ حرفه ای</option>
                         <option value="-2" @if($coach->status==-2) selected @endif>رد درخواست</option>
+                        <option value="2" @if($coach->status==2) selected @endif>غیرفعال</option>
                     </select>
                 </div>
 
@@ -62,7 +75,23 @@
 @endsection
 
 @section('footerScript')
-    <script>
-        CKEDITOR.replace( '.ckeditor' );
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="{{asset('/dashboard/dist/js/bootstrap-select.min.js')}}"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('select').selectpicker();
+        });
+
+       var a=$('#selectpicker option');
+       @foreach($coach->category as $item)
+           for(i=0;i<a.length ;i++)
+            {
+                if(a[i].value=={{$item}})
+                {
+                   a[i].setAttribute("selected","selected");
+                }
+            }
+       @endforeach
     </script>
 @endsection

@@ -28,6 +28,7 @@
                     <label for="researches">سوابق مقالات </label>
                     <textarea class="form-control @error('researches') is-invalid @enderror " name="researches" id="researches" rows="3"></textarea>
                 </div>
+
                 <div class="form-group">
                     <label for="count_meeting">تعداد ساعت جلسات گذرانده شده *</label>
                     <input type="number" class="form-control" id="count_meeting" name="count_meeting" aria-describedby="count_meetingHelp" min="0" max="10000"/>

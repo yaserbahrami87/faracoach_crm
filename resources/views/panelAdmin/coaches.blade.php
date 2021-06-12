@@ -7,6 +7,7 @@
 
                 <th scope="col">نام </th>
                 <th scope="col">نام خانوادگی</th>
+                <th scope="col">وضعیت</th>
                 <th scope="col">ویرایش</th>
                 <th scope="col">حذف</th>
             </tr>
@@ -20,6 +21,9 @@
                 </td>
                 <td>
                     <a href="/admin/user/{{$item->id_user_table}}" class="d-block" target="_blank" >{{$item->lname}}</a>
+                </td>
+                <td>
+                    <a href="/admin/user/{{$item->id_user_table}}" class="d-block" target="_blank" >{{$item->status}}</a>
                 </td>
                 <td>
                     <a href="/admin/coach/{{$item->id}}/edit" class="btn btn-primary">

@@ -63,8 +63,7 @@
                                 <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="img-circle" alt="..." width="150px">
                                 <div class="card-body  text-center">
                                     <p class="text-bold">{{$item->fname}} {{$item->lname}}</p>
-                                    <a href="/coach/{{$item->username}}" class="btn btn-primary btn-sm" >مشاهده رزومه</a>
-                                    <a href="/coach/{{$item->username}}" class="btn btn-primary btn-sm" >رزرو جلسه</a>
+                                    <a href="/coach/{{$item->username}}" class="btn btn-primary btn-sm" >مشاهده اطلاعات </a>
                                 </div>
                             </div>
                         </div>

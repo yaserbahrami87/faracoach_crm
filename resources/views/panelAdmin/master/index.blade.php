@@ -234,8 +234,6 @@
 
 <!-- <script src="{{asset('dashboard/dist/js/pages/dashboard2.js')}}"></script> -->
 
-
-
 @yield('footerScript')
 
 </body>

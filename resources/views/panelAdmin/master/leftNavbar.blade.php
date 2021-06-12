@@ -162,10 +162,38 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="/admin/coach/request" class="nav-link @if(request()->is('admin/teachers/create')) active  @endif">
+                                <a href="/admin/coach/request" class="nav-link @if(request()->is('admin/coach/request')) active  @endif">
                                     <i class="fas fa-chalkboard-teacher"></i>
                                     <p>درخواست های همکاری</p>
                                 </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/admin/coach/reject" class="nav-link @if(request()->is('admin/coach/reject')) active  @endif">
+                                    <i class="fas fa-chalkboard-teacher"></i>
+                                    <p>درخواست های رد شده</p>
+                                </a>
+                            </li>
+                            <li class="nav-item has-treeview ">
+                                <a href="#" class="nav-link @if(request()->is('admin/category_coach*')) active  @endif">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-percent" viewBox="0 0 16 16">
+                                        <path d="M13.442 2.558a.625.625 0 0 1 0 .884l-10 10a.625.625 0 1 1-.884-.884l10-10a.625.625 0 0 1 .884 0zM4.5 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 1a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm7 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 1a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+                                    </svg>
+                                    <p>                                دسته بندی کوچ ها
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="/admin/category_coach/" class="nav-link @if(request()->is('admin/category_coach')) active  @endif">
+                                            <i class="fas fa-user-cog"></i>
+                                            <p>دسته بندی ها</p>
+                                        </a>
+                                        <a href="/admin/category_coach/create" class="nav-link @if(request()->is('admin/category_coach/create')) active  @endif">
+                                            <i class="fas fa-user-cog"></i>
+                                            <p>دسته جدید</p>
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                     </li>

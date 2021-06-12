@@ -1,7 +1,8 @@
 @extends('panelAdmin.master.index')
 @section('rowcontent')
     <?php
-    $roozha="'Sunday','Friday'";
+    //$roozha="'Sunday','Friday'";
+    $roozha="";
     ?>
 
     <div id="app" class="col-md-4">
@@ -10,7 +11,7 @@
         @{{time}}-->
 
     <!-- <date-picker :disable="['1397/05/07', '1397/05/08', 'Friday']" /> -->
-        <p>ایجاد رزرو جدید</p>
+        <p>اختصاص وقت جدید</p>
         <form method="post" action="/admin/booking" id="formBooking">
             {{csrf_field()}}
             <date-picker
