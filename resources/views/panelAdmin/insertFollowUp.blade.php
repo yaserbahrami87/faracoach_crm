@@ -122,12 +122,14 @@
                                             ارسال نشود
                                         </label>
                                     </div>
-                                    <div class="form-check">
+
                                         @foreach($settingsms as $item)
-                                            <input class="form-check-input" type="radio" name="sms" id="sendsms{{$item->id}}" value="{{$item->comment}}" >
-                                            <label class="form-check-label  text-dark" for="sendsms{{$item->id}}">{!! $item->comment !!}</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="sms" id="sendsms{{$item->id}}" value="{{$item->comment}}" >
+                                                <label class="form-check-label  text-dark" for="sendsms{{$item->id}}">{!! $item->comment !!}</label>
+                                            </div>
                                         @endforeach
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
