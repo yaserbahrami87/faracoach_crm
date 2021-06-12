@@ -671,7 +671,7 @@ class UserController extends BaseController
 
 
         //لیست دوره ها
-        $courses=$this->get_courses();
+        $courses=$this->get_courses($this->dateNow);
 
         //لیست پیامکها
         $settingsms=$this->get_settingsmsByType(1);
@@ -1755,7 +1755,7 @@ class UserController extends BaseController
 
                 $problemFollowup = $problemFollowup = $this->getproblemfollowup();
 
-                $courses=$this->get_courses();
+                $courses=$this->get_courses($this->dateNow);
 
                 //لیست پیامکها
                 $settingsms=$this->get_settingsmsByType(1);

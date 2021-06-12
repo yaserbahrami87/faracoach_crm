@@ -1015,9 +1015,13 @@ class BaseController extends Controller
                 ->first();
     }
 
-    public function get_courses()
+    public function get_courses($date=NULL)
     {
         return course::where('status','=',1)
+                    ->when($date,function($query,$date)
+                    {
+                        return $query->where('start','>',$date);
+                    })
                     ->get();
     }
 
