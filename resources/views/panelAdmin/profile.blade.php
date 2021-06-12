@@ -422,6 +422,16 @@
     <script src="{{asset('js/kamadatepicker.min.js')}}"></script>
     <script src="{{asset('js/kamadatepicker.holidays.js')}}"></script>
     <script>
+        kamaDatepicker('datebirth',
+            {
+                markHolidays:true,
+                markToday:true,
+                twodigit:true,
+                closeAfterSelect:true,
+                nextButtonIcon: "fa fa-arrow-circle-right",
+                previousButtonIcon: "fa fa-arrow-circle-left"
+            });
+
         var customOptions={
             gotoToday: true,
             markHolidays:true,
@@ -483,15 +493,7 @@
             });
 
 
-        kamaDatepicker('datebirth',
-            {
-                markHolidays:true,
-                markToday:true,
-                twodigit:true,
-                closeAfterSelect:true,
-                nextButtonIcon: "fa fa-arrow-circle-right",
-                previousButtonIcon: "fa fa-arrow-circle-left"
-            });
+
     </script>
     <!-- ****************  -->
     <script src="{{asset('js/timepicker.js')}}"></script>

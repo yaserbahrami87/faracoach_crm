@@ -167,7 +167,6 @@ class FollowupController extends BaseController
 
     public function store_user(Request $request)
     {
-
         $this->validate($request,[
             'insert_user_id'        =>'required|numeric',
             'course_id'             =>'required|numeric',
@@ -191,7 +190,6 @@ class FollowupController extends BaseController
             'talktime'              =>$request['talktime'],
             'problemfollowup_id'    =>$request['followup'],
             'status_followups'      =>$request['status_followups'],
-            'tags'                  =>$request['tags'],
             'date_fa'               =>$request['date_fa'],
             'insert_user_id'        =>auth()->user()->id,
             'nextfollowup_date_fa'  =>$request['nextfollowup_date_fa'],
@@ -200,10 +198,20 @@ class FollowupController extends BaseController
             'datetime_fa'           =>$request['date_fa']." ".$request['time_fa'],
         ]);
 
+
         $data=$this->get_user_byID($request['user_id']);
         $data->type=$request['status_followups'];
         $data->followby_expert=Auth::user()->id;
         $data->save();
+
+        if($request['sms']!="0")
+        {
+            //$request['sms']=$request['sms']."\n https://crm.faracoach.com";
+            $request['sms']=str_replace('{nextDate}',$request['nextfollowup_date_fa'],$request['sms']);
+            $request['sms']=str_replace('{followby_expert}',$request['followby_expert'],$request['sms']);
+            $request['sms']=str_replace("<br>","\r\n",$request['sms']);
+            $this->sendSms($data['tel'],$request['sms']);
+        }
 
         if($check)
         {

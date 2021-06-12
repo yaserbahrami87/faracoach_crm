@@ -26,7 +26,7 @@
     <link href="{{asset('../dashboard/dist/css/style.css')}}" rel="stylesheet" />
 
 
-    <script src="{{asset('/js/app.js')}}"></script>
+    <!-- <script src="{{asset('/js/app.js')}}"></script> -->
     @yield('headerScript')
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
@@ -223,8 +223,8 @@
 
 <!--   Core JS Files   -->
 <script src="{{asset('dashboard/assets/js/core/jquery.min.js')}}"></script>
-<script src="{{asset('dashboard/assets/js/java.js')}}"></script>
 
+<script src="{{asset('dashboard/assets/js/java.js')}}"></script>
 <script src="{{asset('vendor/file-manager/js/file-manager.js')}}"></script>
 
 <script src="{{asset('dashboard/assets/js/core/popper.min.js')}}"></script>
@@ -232,119 +232,14 @@
 <script src="{{asset('dashboard/assets/js/plugins/perfect-scrollbar.jquery.min.js')}}"></script>
 
 
-<!-- Chart JS -->
-<script src="{{asset('dashboard/assets/js/plugins/chartjs.min.js')}}"></script>
-<!--  Notifications Plugin    -->
-<script src="{{asset('dashboard/assets/js/plugins/bootstrap-notify.js')}}"></script>
-<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
 
 
-
-
-<!--  DATE SHAMSI PICKER  --->
-<script src="{{asset('js/kamadatepicker.min.js')}}"></script>
-<script src="{{asset('js/kamadatepicker.holidays.js')}}"></script>
-<script>
-
-    var customOptions={
-        gotoToday: true,
-        markHolidays:true,
-        markToday:true,
-        twodigit:true,
-        closeAfterSelect:true,
-        highlightSelectedDay:true,
-        nextButtonIcon: "fa fa-arrow-circle-right",
-        previousButtonIcon: "fa fa-arrow-circle-left",
-        sync:true,
-    }
-    kamaDatepicker('dateFollow',customOptions);
-
-    kamaDatepicker('nextfollowup_date_fa',
-        {
-            markHolidays:true,
-            markToday:true,
-            twodigit:true,
-            closeAfterSelect:true,
-            nextButtonIcon: "fa fa-arrow-circle-right",
-            previousButtonIcon: "fa fa-arrow-circle-left"
-        });
-
-    kamaDatepicker('start',
-        {
-            gotoToday: true,
-            markHolidays:true,
-            markToday:true,
-            twodigit:true,
-            closeAfterSelect:true,
-            highlightSelectedDay:true,
-            nextButtonIcon: "fa fa-arrow-circle-right",
-            previousButtonIcon: "fa fa-arrow-circle-left",
-            sync:true,
-        });
-    kamaDatepicker('end',
-        {
-            gotoToday: true,
-            markHolidays:true,
-            markToday:true,
-            twodigit:true,
-            closeAfterSelect:true,
-            highlightSelectedDay:true,
-            nextButtonIcon: "fa fa-arrow-circle-right",
-            previousButtonIcon: "fa fa-arrow-circle-left",
-            sync:true,
-        });
-    kamaDatepicker('exam',
-        {
-            gotoToday: true,
-            markHolidays:true,
-            markToday:true,
-            twodigit:true,
-            closeAfterSelect:true,
-            highlightSelectedDay:true,
-            nextButtonIcon: "fa fa-arrow-circle-right",
-            previousButtonIcon: "fa fa-arrow-circle-left",
-            sync:true,
-        });
-    kamaDatepicker('datebirth',
-        {
-            twodigit:true,
-            closeAfterSelect:true,
-            highlightSelectedDay:true,
-            nextButtonIcon: "fa fa-arrow-circle-right",
-            previousButtonIcon: "fa fa-arrow-circle-left",
-        });
-</script>
-<!-- ****************  -->
 
 <script src="{{asset('dashboard/plugins/jquery/jquery.min.js')}}"></script>
-<script src="{{asset('js/timepicker.js')}}"></script>
-<script>
-    $(document).ready(function()
-    {
-        jQuery.noConflict();
-        jQuery('#time_fa').timepicker();
-    });
-
-
-</script>
-
-
-
 
 <script src="{{asset('dashboard/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('dashboard/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 <script src="{{asset('dashboard/dist/js/adminlte.js')}}"></script>
-<!-- jQuery Mapael -->
-<script src="{{asset('dashboard/plugins/jquery-mousewheel/jquery.mousewheel.js')}}"></script>
-<script src="{{asset('dashboard/plugins/raphael/raphael.min.js')}}"></script>
-<script src="{{asset('dashboard/plugins/jquery-mapael/jquery.mapael.min.js')}}"></script>
-<script src="{{asset('dashboard/plugins/jquery-mapael/maps/usa_states.min.js')}}"></script>
-
-<script src="{{asset('dashboard/dist/js/pages/dashboard2.js')}}"></script>
-<script src="{{asset('ckeditor/ckeditor.js')}}"></script>
-<script>
-    CKEDITOR.replace( 'ckeditor' );
-</script>
 
 
 @yield('footerScript')

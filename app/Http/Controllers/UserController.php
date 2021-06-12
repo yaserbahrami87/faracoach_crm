@@ -770,8 +770,8 @@ class UserController extends BaseController
                     'email'             =>'nullable|email|',
                     'gettingknow'       =>'nullable|string',
                     'introduced'        =>'nullable|numeric',
-                    'telegram'          =>'nullable|string|max:50',
-                    'instagram'         =>'nullable|string|max:50',
+                    'telegram'          =>'nullable|max:50|regex:/^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/u',
+                    'instagram'         =>'nullable|max:50|regex:/^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/u',
                     'linkedin'          =>'nullable|string|max:250',
                     'aboutme'           =>'nullable|string|max:250',
                 ]);
@@ -1757,11 +1757,31 @@ class UserController extends BaseController
 
                 $courses=$this->get_courses();
 
+                //لیست پیامکها
+                $settingsms=$this->get_settingsmsByType(1);
+                foreach ($settingsms as $item)
+                {
+                    $item->comment=str_replace("\r\n","<br>",$item->comment);
+                    $item->comment=str_replace('{tel}',$user->tel,$item->comment);
+                    $item->comment=str_replace('{fname}',$user->fname,$item->comment);
+                    $item->comment=str_replace('{lname}',$user->lname,$item->comment);
+                    $item->comment=str_replace('{datebirth}',$user->datebirth,$item->comment);
+                    if($user->sex==0)
+                    {
+                        $item->comment=str_replace('{sex}','سرکارخانم ',$item->comment);
+                    }
+                    else if($user->sex==1)
+                    {
+                        $item->comment=str_replace('{sex}','جناب آقای ',$item->comment);
+                    }
+                }
+
                 return view('panelUser.followupsIntroduced')
                     ->with('followUps', $followUps)
                     ->with('userInsert', $userInsert)
                     ->with('user', $user)
                     ->with('problemFollowup', $problemFollowup)
+                    ->with('settingsms', $settingsms)
                     ->with('courses', $courses);
             } else {
                 return redirect('/panel/introduced');

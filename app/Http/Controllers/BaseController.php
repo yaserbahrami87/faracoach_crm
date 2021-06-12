@@ -82,8 +82,6 @@ class BaseController extends Controller
                     'code' => $messageid,
                 ]);
                 $msg=[];
-//                $msg['msg']= "پیامک با مشخصات " . $messageid . "  متن '" . $message . "' با وضعیت " . $status . " می باشد";
-//                $msg['status']=true;
                 return $msg;
             }
 

@@ -3,15 +3,7 @@
         <h5 class="card-title">پیگیری جدید</h5>
     </div>
     <div class="card-body">
-        @if($errors->any())
-            <div class="col-12">
-                <div class="alert alert-danger" role="alert">
-                    @foreach($errors->all() as $error)
-                        <li>{{$error}}</li>
-                    @endforeach
-                </div>
-            </div>
-        @endif
+
         <form method="POST" action="/panel/followup/create" >
             {{csrf_field()}}
                 <div class="row">
@@ -83,6 +75,29 @@
                     <div class="form-group">
                         <label>تاریخ پیگیری بعد</label>
                         <input type="text" class="form-control"  value="" name="nextfollowup_date_fa" id="nextfollowup_date_fa" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 px-1">
+                    <div class="form-group">
+                        <div class="form-group row mb-0">
+                            <label for="sendSMS" class="col-md-4 col-form-label text-md-right  text-dark">ارسال پیامک</label>
+                            <div class="col-md-6 mr-5">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="sms" id="sendsms1" value="0" checked>
+                                    <label class="form-check-label  text-dark" for="sendsms1">
+                                        ارسال نشود
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    @foreach($settingsms as $item)
+                                        <input class="form-check-input" type="radio" name="sms" id="sendsms{{$item->id}}" value="{{$item->comment}}" >
+                                        <label class="form-check-label  text-dark" for="sendsms{{$item->id}}">{!! $item->comment !!}</label>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

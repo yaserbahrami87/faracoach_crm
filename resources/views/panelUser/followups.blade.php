@@ -7,7 +7,7 @@
             {{csrf_field()}}
             {{method_field('PATCH')}}
             @foreach($followUps as $item)
-                <div class="row">
+                <div class="row" style="border-radius: 20px 20px 0px 0px;border:5px solid {{$item->color}};border-bottom:0px;">
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>دوره پیگیری شده</label>
@@ -38,8 +38,7 @@
                             <textarea class="form-control textarea" disabled="disabled">{{$item->comment}}</textarea>
                         </div>
                     </div>
-                </div>
-                <div class="row">
+
                     <div class="col-md-6 px-1">
                         <div class="form-group">
                             <label>تاریخ پیگیری</label>
