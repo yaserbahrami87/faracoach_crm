@@ -153,6 +153,7 @@
                                         <option>واتساپ</option>
                                         <option>دوستان</option>
                                         <option>موتورهای جستجو</option>
+                                        <option>رویداد</option>
 
                                     </select>
                                     @error('gettingknow')
