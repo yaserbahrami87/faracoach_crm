@@ -742,10 +742,9 @@ class UserController extends BaseController
      */
     public function update(Request $request,User $user)
     {
-
             $this->validate(request(),
                 [
-                    'username'          =>'nullable|max:200|regex:/^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/u',
+                    'username'          =>'nullable|max:200|regex:/^(?=[a-zA-Z0-9._]{3,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/u',
                     'fname'             =>'nullable|persian_alpha',
                     'lname'             =>'nullable|persian_alpha',
                     'codemelli'         =>'nullable|numeric|',
@@ -770,8 +769,8 @@ class UserController extends BaseController
                     'email'             =>'nullable|email|',
                     'gettingknow'       =>'nullable|string',
                     'introduced'        =>'nullable|numeric',
-                    'telegram'          =>'nullable|max:50|regex:/^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/u',
-                    'instagram'         =>'nullable|max:50|regex:/^(?=[a-zA-Z0-9._]{8,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/u',
+                    'telegram'          =>'nullable|max:50|regex:/^(?=[a-zA-Z0-9._]{3,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/u',
+                    'instagram'         =>'nullable|max:50|regex:/^(?=[a-zA-Z0-9._]{3,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/u',
                     'linkedin'          =>'nullable|string|max:250',
                     'aboutme'           =>'nullable|string|max:250',
                 ]);
