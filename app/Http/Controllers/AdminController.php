@@ -120,6 +120,9 @@ class AdminController extends BaseController
                 $item->talktimeToday=$this->get_talktimeTodayByID($item->id);
                 $sumtalktimeToday=$sumtalktimeToday+$item->talktimeToday;
                 $item->talktime=$this->get_talktimeByID($item->id);
+
+                $item->talktime=$this->get_usersByType(NULL,$item->id,NULL,$request['start_date']);
+                dd($this->get_usersByType(NULL,315,NULL,$request['start_date'])->sum('followups.talktime'));
                 $sumtalktime=$sumtalktime+$item->talktime;
             }
 
