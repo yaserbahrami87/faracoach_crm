@@ -82,27 +82,40 @@ class AdminController extends BaseController
 
             foreach ($usersEducation as $item)
             {
-                $item->cancelfollowup=$this->get_usersByType(12,$item->id,NULL,$request['start_date'])->count();
+                $item->cancelfollowup=$this->get_usersByType(NULL,$item->id,NULL,$request['start_date'],NULL,12)->count();
                 $sumcancelfollowup=$sumcancelfollowup+$item->cancelfollowup;
                 $item->allFollowups=$this->get_usersByType(NULL,$item->id,NULL,$request['start_date'])->count();
                 $sumallFollowups=$sumallFollowups+$item->allFollowups;
                 $item->todayFollowups=count($this->get_todayFollowupbyID_withoutPaginate($item->id));
                 $sumtodayFollowups=$sumtodayFollowups+$item->todayFollowups;
-                $item->followedTodaybyID=count($this->get_followedTodaybyID_withoutPaginate($item->id));
+                $condition=['followups.date_fa',$this->dateNow];
+
+                $item->followedTodaybyID=$this->get_usersByType(NULL,$item->id,NULL,NULL, $condition)->count();
                 $sumfollowedTodaybyID=$sumfollowedTodaybyID+$item->followedTodaybyID;
-                $item->continuefollowup=$this->get_usersByType(11,$item->id,NULL,$request['start_date'])->count();
+                $item->continuefollowup=$this->get_usersByType(NULL,$item->id,NULL,$request['start_date'],NULL,11)->count();
                 $sumcontinuefollowup=$sumcontinuefollowup+$item->continuefollowup;
-                $item->waiting=$this->get_usersByType(13,$item->id,NULL,$request['start_date'])->count();
+                $item->waiting=$this->get_usersByType(NULL,$item->id,NULL,$request['start_date'],NULL,13)->count();
                 $sumwaiting=$sumwaiting+$item->waiting;
-                $item->students=$this->get_usersByType(20,$item->id,NULL,$request['start_date'])->count();
+                $item->students=$this->get_usersByType(NULL,$item->id,NULL,$request['start_date'],NULL,20)->count();
                 $sumstudents=$sumstudents+$item->students;
-                $item->noanswering=$this->get_usersByType(11,$item->id,NULL,$request['start_date'])->count();
+                $item->noanswering=$this->get_usersByType(NULL,$item->id,NULL,$request['start_date'],NULL,14)->count();
                 $sumnoanswering=$sumnoanswering+$item->noanswering;
                 if(!is_null($item->last_login_at))
                 {
                     $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
                 }
-                $item->insertuser=$this->get_usersByType(NULL,$item->id,NULL,$request['start_date'])->count();
+                //تبدیل تاریخ شمسی  به میلادی برای نمایش کاربرهای براساس فیلد created_at
+                if(isset($request['start_date']))
+                {
+                    $date_en=[$this->changeTimestampToMilad($request['start_date'][0]),$this->changeTimestampToMilad($request['start_date'][1])];
+                }
+                else
+                {
+                    $date_en=NULL;
+                }
+
+                $item->insertuser=$this->get_user(NULL,NULL,NULL,NULL,NULL,$date_en,$item->id)->count();
+
                 $suminsertuser=$suminsertuser+$item->insertuser;
                 $item->talktimeToday=$this->get_talktimeTodayByID($item->id);
                 $sumtalktimeToday=$sumtalktimeToday+$item->talktimeToday;

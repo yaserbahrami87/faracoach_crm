@@ -187,11 +187,38 @@ class BaseController extends Controller
         }
     }
 
-    //کاربر براساس شماره تلفن برمیگرداند
-    public function get_user($tel)
+    //کاربر براساس شرطها برمیگرداند
+    public function get_user($tel=NULL,$id=NULL,$type=NULL,$condition=NULL,$paginate=NULL,$between=NULL,$insertUser=NULL)
     {
-        $user=User::where('tel','=',$tel)->first();
-        return  $user;
+        return User::when($tel,function($query,$tel)
+            {
+                return $query->where('tel','=',$tel);
+            })
+            ->when($id, function ($query,$id)
+            {
+                return $query->where('id', '=', $id);
+            })
+            ->when($type,function($query,$type){
+                return $query->where('type','=',$type);
+            })
+            ->when($condition,function($query,$condition)
+            {
+                return $query->where($condition[0],'=',$condition[1]);
+            })
+            ->when($between,function($query,$between)
+            {
+                return $query->wherebetween('created_at',[$between[0],$between[1]]);
+            })
+            ->when($insertUser,function($query,$insertUser)
+            {
+                return $query->where('insert_user_id','=',$insertUser);
+            })
+            ->orderby('id', 'desc')
+            ->when($paginate,function($query){
+                return $query->first();
+            },function($query){
+                return $query->get();
+            });
     }
 
     public function get_user_byID($id)
@@ -266,6 +293,15 @@ class BaseController extends Controller
     {
         $dateMiladi=new verta($date);
         return ($dateMiladi->hour.":".$dateMiladi->minute."  ".$dateMiladi->year."/".$dateMiladi->month."/".$dateMiladi->day);
+    }
+
+    //تبدیل تاریخ شمسی به میلادی
+    public function changeTimestampToMilad($date)
+    {
+        $dateShamsi=Verta::parse($date);
+        $dateMiladi= (Verta::getGregorian($dateShamsi->year,$dateShamsi->month,$dateShamsi->day));
+        $dateMiladi=($dateMiladi[0].'-'.$dateMiladi[1].'-'.$dateMiladi[2]);
+        return $dateMiladi;
     }
 
     //دسته بندی تگ ها را برمیگرداند
@@ -1128,7 +1164,7 @@ class BaseController extends Controller
     }
 
 
-    public function get_usersByType($type=NULL,$id=NULL,$paginate=NULL,$between=NULL,$condition=NULL)
+    public function get_usersByType($type=NULL,$id=NULL,$paginate=NULL,$between=NULL,$condition=NULL,$statusFollowup=NULL)
     {
 
         $users= User::join('followups','users.id','=','followups.user_id')
@@ -1145,6 +1181,10 @@ class BaseController extends Controller
             ->when($condition,function($query,$condition)
             {
                 return $query->where($condition[0],'=',$condition[1]);
+            })
+            ->when($statusFollowup,function($query,$statusFollowup)
+            {
+                return $query->where('followups.status_followups','=',$statusFollowup);
             })
             ->orderby('followups.id', 'desc')
             ->groupby('followups.user_id')

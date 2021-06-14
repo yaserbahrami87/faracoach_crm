@@ -95,7 +95,7 @@ class CouponController extends BaseController
             alert()->error('کوپن با این نام قبلا ایجاد شده است','خطا')->persistent('بستن');
         }
 
-        return back();
+        return redirect('/panel/coupon');
     }
 
     /**
@@ -117,7 +117,6 @@ class CouponController extends BaseController
      */
     public function edit(coupon $coupon)
     {
-        $coupon=coupon::find($coupon)->first();
         if($coupon->user_id==Auth::user()->id)
         {
             $dateNow=$this->dateNow;
@@ -138,6 +137,7 @@ class CouponController extends BaseController
         else
         {
             alert()->error('این کوپن متعلق به شما نیست','خطا')->persistent('بستن');
+            return redirect('/panel/coupon');
         }
     }
 

@@ -189,20 +189,19 @@ class UserController extends BaseController
                 $item->lastDateFollowup=$this->get_lastFollowupUser($item->id)['date_fa'];
                 $item->lastFollowupCourse=$this->get_lastFollowupUser($item->id)['course_id'];
                 $item->lastFollowupCourse=$this->get_coursesByID($item->lastFollowupCourse)['course'];
-                if(is_null($this->get_user($item->introduced))) {
-                    if(is_null($this->get_user_byID($item->introduced))) {
-                        $item->introduced = $item->introduced;
-                    }
-                    else
-                    {
-                        $item->introduced=$this->get_user_byID($item->introduced)['fname']." ".$this->get_user_byID($item->introduced)['lname'];
-                    }
-                }
-                else
-                {
-                    $item->introduced=$this->get_user($item->introduced)['fname']." ".$this->get_user($item->introduced)['lname'];
-                }
 
+                if(!is_null($item->introduced)) {
+                    if (!is_null($this->get_user(NULL, $item->introduced, NULL,NULL, true))) {
+                            $item->introduced = $this->get_user(NULL, $item->introduced, NULL, NULL,true)->fname.' '.$this->get_user(NULL, $item->introduced, NULL, NULL,true)->lname;
+
+
+                    } else if (!is_null($this->get_user($item->introduced, NULL, NULL, NULL,true))) {
+
+                        //$item->introduced = $this->get_user(NULL, $item->introduced, NULL, NULL, 'first', NULL, NULL)->first()->fname;//." ".$this->get_user(NULL,$item->introduced,NULL,NULL,'first')['lname'];
+                            $item->introduced=$this->get_user($item->introduced, NULL, NULL, NULL,true)->fname;
+
+                    }
+                }
 
                 if(is_null($item->personal_image))
                 {
@@ -991,10 +990,10 @@ class UserController extends BaseController
             }
         }
     }
+
     // نمایش اعضای سایت براساس دسته بندی برای ادمین
     public function showCategoryUsersAdmin(Request $request)
     {
-
         if(is_null($request->orderby)&&is_null($request->parameter))
         {
             $request['orderby']='id';
@@ -1142,7 +1141,8 @@ class UserController extends BaseController
                         $users = $this->get_expireFollowup();
                         break;
                     case 'myfollowup':
-                        $users = $this->get_usersByType(NULL,Auth::user()->id);
+
+                        $users = $this->get_user(NULL,Auth::user()->id);
                         break;
 
                     case 'followedToday':
@@ -1174,7 +1174,6 @@ class UserController extends BaseController
                 $myfollowup = count($this->getAll_myfollowup_withoutPaginate());
                 $followedToday = count($this->getAll_followedToday_withoutPaginate());
                 $trashUser=count($this->getAll_trashuser_withoutPaginate());
-
             }
         }
         else {
@@ -1244,10 +1243,8 @@ class UserController extends BaseController
         foreach ($users as $item)
         {
 
-
             $item->status_followups=$this->userType($this->get_lastFollowupUser($item->id)['status_followups']);
             $item->countFollowup=$this->get_countFollowup($item->id);
-
 
             $item->created_at = $this->changeTimestampToShamsi($item->created_at);
             if (!is_null($item->last_login_at)) {
@@ -1257,10 +1254,12 @@ class UserController extends BaseController
             $item->quality=$this->get_lastFollowupUser($item->id)['problem'];
             $item->quality_color=$this->get_lastFollowupUser($item->id)['color'];
             $expert=$this->get_user_byID($item->followby_expert);
+
             if(!is_null($expert))
             {
                 $item->followby_expert=$expert->fname." ".$expert->lname;
             }
+
             $item->lastDateFollowup=$this->get_lastFollowupUser($item->id)['date_fa'];
             $item->lastFollowupCourse=$this->get_lastFollowupUser($item->id)['course_id'];
             $item->lastFollowupCourse=$this->get_coursesByID($item->lastFollowupCourse)['course'];
@@ -1269,20 +1268,20 @@ class UserController extends BaseController
                 $item->personal_image="default-avatar.png";
             }
 
-            if(is_null($this->get_user($item->introduced))) {
-                if(is_null($this->get_user_byID($item->introduced))) {
-                    $item->introduced = $item->introduced;
-                }
-                else
-                {
-                    $item->introduced=$this->get_user_byID($item->introduced)['fname']." ".$this->get_user_byID($item->introduced)['lname'];
-                }
-            }
-            else
+            if(!is_null($item->introduced))
             {
-                $item->introduced=$this->get_user($item->introduced)['fname']." ".$this->get_user($item->introduced)['lname'];
-            }
+                if ($this->get_user(NULL, $item->introduced, NULL, NULL, true)->count()>0)
+                {
 
+                    $item->introduced = $this->get_user(NULL, $item->introduced, NULL, NULL, true)->fname.' '.$this->get_user(NULL, $item->introduced, NULL, NULL, true)->lname ;
+                }
+                else if ($this->get_user($item->introduced, NULL, NULL, NULL, true)->count()>0)
+                {
+
+                    $item->introduced=$this->get_user($item->introduced, NULL, NULL, NULL, true)->fname.' '.$this->get_user($item->introduced, NULL, NULL, NULL, true)->lname;
+
+                }
+            }
 
         }
         $usersAdmin=user::orwhere('type','=',2)

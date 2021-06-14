@@ -31,7 +31,7 @@
                     <th scope="col">#</th>
                     <th scope="col">نام و نام خانوادگی</th>
                     <th scope="col">ثبت نام ها</th>
-                    <th scope="col">کل مشتریان</th>
+                    <th scope="col">ارباب رجوع ها</th>
                     <th scope="col">پیگیری های امروز </th>
                     <th scope="col">پیگیری های انجام شده امروز </th>
                     <th scope="col">تور پیگیری</th>

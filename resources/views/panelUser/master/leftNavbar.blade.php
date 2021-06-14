@@ -100,10 +100,12 @@
                                     <i class="fas fa-user-cog"></i>
                                     <p>جلسات رزرو شده</p>
                                 </a>
+                                <!--
                                 <a href="/panel/booking_setting/" class="nav-link @if(request()->is('panel/booking_setting*')) active  @endif">
                                     <i class="fas fa-user-cog"></i>
                                     <p>تنظیمات جلسات</p>
                                 </a>
+                                -->
                             </li>
                         </ul>
                     </li>

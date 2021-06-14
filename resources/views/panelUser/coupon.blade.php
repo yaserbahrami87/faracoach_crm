@@ -7,7 +7,6 @@
             <tr>
                 <th scope="col">کوپن</th>
                 <th scope="col">تاریخ انقضا</th>
-                <th scope="col">نوع محصول</th>
                 <th scope="col">تعداد</th>
                 <th scope="col">ویرایش</th>
                 <th scope="col">حذف</th>
@@ -23,7 +22,6 @@
                     <td>
                         {{$item->expire_date}}
                     </td>
-                    <td>{{$item->product}}</td>
                     <td>{{$item->count}}</td>
                     <td>
                         <a class="btn btn-warning" href="/panel/coupon/{{$item->id}}/edit">

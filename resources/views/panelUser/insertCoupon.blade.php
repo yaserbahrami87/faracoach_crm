@@ -1,7 +1,7 @@
 @extends('panelUser.master.index')
 @section('rowcontent')
     <div class="col-xs-12 col-md-8 col-lg-8 col-xl-8">
-        <div class="card-header">
+        <div class="card-header bg-info">
             <h5 class="card-title">کوپن تخفیف جدید</h5>
         </div>
         <div class="card-body">
