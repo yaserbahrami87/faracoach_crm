@@ -2,7 +2,7 @@
 @section('rowcontent')
     <div class="col-md-12">
         <div class="card">
-            <div class="card-header">
+            <div class="card-header bg-info border-info">
                 <h4 class="card-title">اعضا</h4>
             </div>
             <div class="card-body" id="frmSearchUserAdmin">

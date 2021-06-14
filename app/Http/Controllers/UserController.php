@@ -87,6 +87,8 @@ class UserController extends BaseController
                 $myfollowup = count($this->get_myfollowup_withoutPaginate());
                 $followedToday = count($this->get_followedToday_withoutPaginate());
                 $trashuser=count($this->getAll_trashuser_withoutPaginate());
+
+
             }
             else
             {
@@ -160,17 +162,21 @@ class UserController extends BaseController
 
 
             //لیست تعداد کاربرها
-            $notfollowup = count($this->get_notfollowup_withoutPaginate());
-            $continuefollowup = count($this->get_continuefollowup_withoutPaginate());
-            $cancelfollowup = count($this->get_cancelfollowup_withoutPaginate());
-            $waiting = count($this->get_waiting_withoutPaginate());
-            $noanswering = count($this->get_noanswering_withoutPaginate());
-            $students = count($this->get_students_withoutPaginate());
-            $todayFollowup = count($this->get_todayFollowup_withoutPaginate());
+            $notfollowup = $this->get_usersByType(1,NULL,NULL,NULL,NULL,NULL )->count();
+            $continuefollowup = $this->get_usersByType(11,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
+            $cancelfollowup = $this->get_usersByType(12,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
+            $waiting = $this->get_usersByType(13,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
+            $noanswering = $this->get_usersByType(14,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
+            $students = $this->get_usersByType(20,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
+            $condition=['nextfollowup_date_fa',$this->dateNow];
+            $todayFollowup = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL )->count();
             $expireFollowup = $this->get_expireFollowup_withoutPaginate();
-            $myfollowup = count($this->get_myfollowup_withoutPaginate());
-            $followedToday = count($this->get_followedToday_withoutPaginate());
-            $trashuser=count($this->getAll_trashuser_withoutPaginate());
+            $myfollowup = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
+            $condition=['date_fa',$this->dateNow];
+            $followedToday = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL )->count();
+            $trashuser=$this->get_usersByType(0,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
+
+
 
 
 

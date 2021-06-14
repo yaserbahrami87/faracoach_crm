@@ -30,8 +30,8 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">نام و نام خانوادگی</th>
-                    <th scope="col">ثبت نام ها</th>
-                    <th scope="col">ارباب رجوع ها</th>
+                    <th scope="col">ورودی ها</th>
+                    <th scope="col">پیگیری ها</th>
                     <th scope="col">پیگیری های امروز </th>
                     <th scope="col">پیگیری های انجام شده امروز </th>
                     <th scope="col">تور پیگیری</th>
