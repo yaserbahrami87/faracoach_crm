@@ -1,7 +1,7 @@
 @extends('panelAdmin.master.index')
 @section('rowcontent')
 
-    @if(Auth::user()->type==2)
+
         <div class="col-12">
             <div class="row">
                 <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 mb-3" id="app">
@@ -52,38 +52,38 @@
                     <tr>
                         <th scope="row">{{$i++}}</th>
                         <td scope="row">{{$item->fname}} {{$item->lname}}</td>
-                        <td scope="row">{{$item->insertuser}}</td>
-                        <td scope="row">{{$item->allFollowups}}</td>
-                        <td scope="row">{{$item->todayFollowups}}</td>
-                        <td scope="row">{{$item->followedTodaybyID}}</td>
-                        <td scope="row">{{$item->continuefollowup}}</td>
-                        <td scope="row">{{$item->waiting}}</td>
-                        <td scope="row">{{$item->students}}</td>
-                        <td scope="row">{{$item->noanswering}}</td>
-                        <td scope="row">{{$item->cancelfollowup}}</td>
-                        <td scope="row">{{$item->talktimeToday}}</td>
-                        <td scope="row">{{$item->talktime}}</td>
+                        <td scope="row">{{number_format($item->insertuser)}}</td>
+                        <td scope="row">{{number_format($item->allFollowups)}}</td>
+                        <td scope="row">{{number_format($item->todayFollowups)}}</td>
+                        <td scope="row">{{number_format($item->followedTodaybyID)}}</td>
+                        <td scope="row">{{number_format($item->continuefollowup)}}</td>
+                        <td scope="row">{{number_format($item->waiting)}}</td>
+                        <td scope="row">{{number_format($item->students)}}</td>
+                        <td scope="row">{{number_format($item->noanswering)}}</td>
+                        <td scope="row">{{number_format($item->cancelfollowup)}}</td>
+                        <td scope="row">{{number_format($item->talktimeToday)}}</td>
+                        <td scope="row">{{number_format($item->talktime)}}</td>
                     </tr>
                 @endforeach
                     <tr class="text-bold">
                         <td>{{$i++}}</td>
                         <td>جمع کل</td>
-                        <td>{{$suminsertuser}}</td>
-                        <td>{{$sumallFollowups}}</td>
-                        <td>{{$sumtodayFollowups}}</td>
-                        <td>{{$sumfollowedTodaybyID}}</td>
-                        <td>{{$sumcontinuefollowup}}</td>
-                        <td>{{$sumwaiting}}</td>
-                        <td>{{$sumstudents}}</td>
-                        <td>{{$sumnoanswering}}</td>
-                        <td>{{$sumcancelfollowup}}</td>
-                        <td>{{$sumtalktimeToday}}</td>
-                        <td>{{$sumtalktime}}</td>
+                        <td>{{number_format($suminsertuser)}}</td>
+                        <td>{{number_format($sumallFollowups)}}</td>
+                        <td>{{number_format($sumtodayFollowups)}}</td>
+                        <td>{{number_format($sumfollowedTodaybyID)}}</td>
+                        <td>{{number_format($sumcontinuefollowup)}}</td>
+                        <td>{{number_format($sumwaiting)}}</td>
+                        <td>{{number_format($sumstudents)}}</td>
+                        <td>{{number_format($sumnoanswering)}}</td>
+                        <td>{{number_format($sumcancelfollowup)}}</td>
+                        <td>{{number_format($sumtalktimeToday)}}</td>
+                        <td>{{number_format($sumtalktime)}}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
-    @endif
+
     @include('panelAdmin.cardBox')
 
 

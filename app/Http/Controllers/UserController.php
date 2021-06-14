@@ -190,18 +190,19 @@ class UserController extends BaseController
                 $item->lastFollowupCourse=$this->get_lastFollowupUser($item->id)['course_id'];
                 $item->lastFollowupCourse=$this->get_coursesByID($item->lastFollowupCourse)['course'];
 
-//                if(!is_null($item->introduced)) {
-//                    if (!is_null($this->get_user(NULL, $item->introduced, NULL,NULL, true))) {
-//                        $item->introduced = $this->get_user(NULL, $item->introduced, NULL, NULL,true)->fname.' '.$this->get_user(NULL, $item->introduced, NULL, NULL,true)->lname;
-//
-//
-//                    } else if (!is_null($this->get_user($item->introduced, NULL, NULL, NULL,true))) {
-//
-//                        //$item->introduced = $this->get_user(NULL, $item->introduced, NULL, NULL, 'first', NULL, NULL)->first()->fname;//." ".$this->get_user(NULL,$item->introduced,NULL,NULL,'first')['lname'];
-//                        $item->introduced=$this->get_user($item->introduced, NULL, NULL, NULL,true)->fname;
-//
-//                    }
-//                }
+                if(!is_null($item->introduced))
+                {
+                    if ($this->get_user(NULL, $item->introduced, NULL, NULL, true)->count()>0)
+                    {
+                        $item->introduced = $this->get_user(NULL, $item->introduced, NULL, NULL, true)->fname.' '.$this->get_user(NULL, $item->introduced, NULL, NULL, true)->lname ;
+                    }
+                    else if ($this->get_user($item->introduced, NULL, NULL, NULL, true)->count()>0)
+                    {
+
+                        $item->introduced=$this->get_user($item->introduced, NULL, NULL, NULL, true)->fname.' '.$this->get_user($item->introduced, NULL, NULL, NULL, true)->lname;
+
+                    }
+                }
 
                 if(is_null($item->personal_image))
                 {
@@ -1272,7 +1273,6 @@ class UserController extends BaseController
             {
                 if ($this->get_user(NULL, $item->introduced, NULL, NULL, true)->count()>0)
                 {
-
                     $item->introduced = $this->get_user(NULL, $item->introduced, NULL, NULL, true)->fname.' '.$this->get_user(NULL, $item->introduced, NULL, NULL, true)->lname ;
                 }
                 else if ($this->get_user($item->introduced, NULL, NULL, NULL, true)->count()>0)

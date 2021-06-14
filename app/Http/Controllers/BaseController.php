@@ -1081,9 +1081,13 @@ class BaseController extends Controller
 
     }
 
-    public function get_talktimeByID($id)
+    public function get_talktimeByID($id,$between=NULL)
     {
         return followup::where('insert_user_id','=',$id)
+                    ->when($between,function($query,$between)
+                    {
+                        return $query->wherebetween('followups.date_fa',[$between[0],$between[1]]);
+                    })
                     ->sum('followups.talktime');
     }
 
