@@ -5,7 +5,7 @@
             <div class="col-12 border-bottom mb-4">
                 <h3>لیست کوچ های فراکوچ</h3>
             </div>
-            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3">
+            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 border-left">
                 <div class="card mb-3" >
                     <div class="card-header bg-info text-light">جستجو</div>
                     <div class="card-body">
@@ -38,7 +38,7 @@
                                     <label class="custom-control-label" for="customRadioInline1">آقا</label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="customRadioInline2" name="gender" class="custom-control-input" value="0">
+                                    <input type="radio" id="customRadioInline2" name="gender" class="custom-control-input" value="2">
                                     <label class="custom-control-label" for="customRadioInline2">خانم</label>
                                 </div>
                             </div>

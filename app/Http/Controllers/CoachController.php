@@ -349,6 +349,10 @@ class CoachController extends BaseController
             })
             ->when($request['gender'],function($query,$request)
             {
+                if($request==2)
+                {
+                    $request=0;
+                }
                 return $query->where('users.sex','=',$request);
             })
             ->when($request['categoryCoaches'],function($query,$request)
