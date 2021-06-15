@@ -153,7 +153,8 @@ class BaseController extends Controller
     {
         $types=['1' =>'پیگیری نشده',
                 '2' =>'مدیر',
-                '3' =>'آموزش',
+                '3' =>'فروش',
+                '4' =>'مدیرفروش',
                 '11'=>"تور پیگیری",
                 '12'=>"انصراف",
                 '13'=>"در انتظار تصمیم",
@@ -1221,6 +1222,8 @@ class BaseController extends Controller
                 return $query->get();
             });
     }
+
+
 
 
 }

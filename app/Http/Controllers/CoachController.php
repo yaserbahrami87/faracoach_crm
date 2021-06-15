@@ -337,20 +337,40 @@ class CoachController extends BaseController
             ->with('coaches',$coaches);
     }
 
-    public function viewAllCoaches()
+    //نمایش همه کوچ ها
+    public function viewAllCoaches(Request $request)
     {
+
         $users=coach::join('users','coaches.user_id','=','users.id')
+            ->when($request['q'], function ($query,$request)
+            {
+                return $query->orwhere('users.fname', 'like', "%$request%")
+                             ->orwhere('users.lname', 'like', "%$request%");
+            })
+            ->when($request['gender'],function($query,$request)
+            {
+                return $query->where('users.sex','=',$request);
+            })
+            ->when($request['categoryCoaches'],function($query,$request)
+            {
+                return $query->where('coaches.category','LIKE',"%$request%");
+            })
             ->where('status_coach','=',1)
             ->where('status','=',1)
             ->orderby('users.id','desc')
             ->get();
 
-
+        $category_coaches=$this->get_categoryCoaches(NULL,NULL,1);
 
         return view('allCoaches')
+            ->with('category_coaches',$category_coaches)
             ->with('coaches',$users);
     }
 
+    public function search(Request $request)
+    {
+        dd($request);
+    }
     public function newrequest (Request $request, coach $coach)
     {
         $this->validate($request,[

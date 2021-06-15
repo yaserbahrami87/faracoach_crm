@@ -1104,7 +1104,7 @@ class UserController extends BaseController
                 }
 
                 //لیست تعداد کاربرها
-                $notfollowup = count($this->get_notfollowup());
+                $notfollowup = $this->get_user(NULL,NULL,1)->count();
                 $continuefollowup = count($this->get_continuefollowupbyID_withoutPaginate($request['user']));
                 $cancelfollowup = count($this->get_cancelfollowupbyID_withoutPaginate($request['user']));
                 $waiting = count($this->get_waitingbyID_withoutPaginate($request['user']));
