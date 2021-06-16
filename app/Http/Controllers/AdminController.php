@@ -79,6 +79,11 @@ class AdminController extends BaseController
                 ]);
                 $request['start_date']=explode(' ~ ',$request['start_date']);
             }
+            else
+            {
+                $request['start_date']=[$this->dateNow,$this->dateNow];
+
+            }
 
             foreach ($usersEducation as $item)
             {

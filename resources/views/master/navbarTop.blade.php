@@ -23,6 +23,7 @@
            لیست کوچ ها
           </a>
         </li>
+          <!--
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
            کوچینگ چیست
@@ -44,7 +45,7 @@
             <a class="dropdown-item" href="#">فرصت‌های شغلی فراکوچ</a>
             <a class="dropdown-item" href="#">فرم بازخورد</a>
           </div>
-        </li>
+        </li>-->
       </ul>
       <!--
       <a href="">

@@ -1351,7 +1351,8 @@ class UserController extends BaseController
                     'tags'  =>'array|required'
                 ]);
 
-            if (!isset($request['tags'])) {
+            if (!isset($request['tags']))
+            {
                 alert()->error("حداقل یک گزینه برای اعمال فیلترها انتخاب کنید",'خطا')->persistent('بستن');
                 return back();
             } else {
