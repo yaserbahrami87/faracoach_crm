@@ -1,6 +1,6 @@
 @if(count($followUps)>0)
 <div class="card card-user">
-    <div class="card-header border-bottom">
+    <div class="card-header border-bottom bg-info">
         <h5 class="card-title">پیگیری ها</h5>
     </div>
     <div class="card-body">

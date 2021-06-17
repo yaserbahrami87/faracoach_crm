@@ -1801,7 +1801,8 @@ class UserController extends BaseController
 
     public function updatePassword(Request $request,$tel)
     {
-        $user=$this->get_user($tel);
+
+        $user=$this->get_user($tel,NULL,NULL,NULL,true);
         if(is_null($user))
         {
 //            $msg="کاربری با چنین مشخصاتی وجود ندارد";

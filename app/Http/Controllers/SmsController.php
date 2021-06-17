@@ -63,52 +63,91 @@ class SmsController extends BaseController
         $this->validate($request,[
             'comment'   =>'required'
         ]);
-        $user=user::query();
-        $user->leftjoin('followups','users.id','=','followups.user_id')
-                ->distinct('followups.user_id');
-
-        if(isset($request->categories)) {
-            for ($i = 0; $i < count($request->categories); $i++) {
-                $user = $user->orwhere('resource', '=', $request['categories'][$i]);
-                $user = $user->orwhere('detailsresource', '=', $request['categories'][$i]);
-            }
-        }
-
-        if(isset($request->tags))
-        {
-            for ($i = 0; $i < count($request->tags); $i++) {
-                $user = $user->where('followups.tags', 'like', "%".$request['tags'][$i]."%");
-            }
-        }
-        if(isset($request->fields)) {
-            for ($i = 0; $i < count($request->fields); $i++) {
-                $user = $user->where($request['fields'][$i], $request['comparison'][$i], $request['values'][$i]);
-            }
-        }
-
-        if(isset($request->problem)) {
-            for ($i = 0; $i < count($request->problem); $i++) {
-                $user = $user->orwhere('followups.problemfollowup_id', '=', $request['problem'][$i]);
-            }
-        }
-
-        if(isset($request->types)) {
-            for ($i = 0; $i < count($request->types); $i++) {
-                if ($request['types'][$i] == 1) {
-                    $user = $user->orwhere('users.type', '=', '1');
-                } else if ($request['types'][$i] == 2) {
-                    $user = $user->orwhere('users.type', '=', '2');
-                }else if($request['types'][$i] == 3) {
-                    $user = $user->orwhere('users.type', '=', '3');
-                }
-                else {
-                    $user = $user->orwhere('users.type', '=', $request['types'][$i]);
-                }
-            }
-        }
-
-
-        $user=$user->get();
+//        $user=user::query();
+//        $user->leftjoin('followups','users.id','=','followups.user_id')
+//                ->distinct('followups.user_id');
+//
+//        if(isset($request->categories)) {
+//            for ($i = 0; $i < count($request->categories); $i++) {
+//                $user = $user->orwhere('resource', '=', $request['categories'][$i]);
+//                $user = $user->orwhere('detailsresource', '=', $request['categories'][$i]);
+//            }
+//        }
+//
+//        if(isset($request->tags))
+//        {
+//            for ($i = 0; $i < count($request->tags); $i++) {
+//                $user = $user->where('followups.tags', 'like', "%".$request['tags'][$i]."%");
+//            }
+//        }
+//        if(isset($request->fields)) {
+//            for ($i = 0; $i < count($request->fields); $i++) {
+//                $user = $user->where($request['fields'][$i], $request['comparison'][$i], $request['values'][$i]);
+//            }
+//        }
+//
+//        if(isset($request->problem)) {
+//            for ($i = 0; $i < count($request->problem); $i++) {
+//                $user = $user->orwhere('followups.problemfollowup_id', '=', $request['problem'][$i]);
+//            }
+//        }
+//
+//        if(isset($request->types)) {
+//            for ($i = 0; $i < count($request->types); $i++) {
+//                if ($request['types'][$i] == 1) {
+//                    $user = $user->orwhere('users.type', '=', '1');
+//                } else if ($request['types'][$i] == 2) {
+//                    $user = $user->orwhere('users.type', '=', '2');
+//                }else if($request['types'][$i] == 3) {
+//                    $user = $user->orwhere('users.type', '=', '3');
+//                }
+//                else {
+//                    $user = $user->orwhere('users.type', '=', $request['types'][$i]);
+//                }
+//            }
+//        }
+//
+//
+//        $user=$user->get();
+        $user=User::leftjoin('followups','users.id','=','followups.user_id')
+                ->when($request->categories,function($query,$request)
+                {
+                    foreach ($request as $item) {
+                        $query->orwhere('resource', '=', $item);
+                        return $query->orwhere('detailsresource', '=', $item);
+                    }
+                })
+                ->when($request->tags,function($query,$request)
+                {
+                    foreach ($request as $item) {
+                        return $query->where('followups.tags', 'like', "%".$item."%");
+                    }
+                })
+                ->when($request->problem,function($query,$request)
+                {
+                    foreach ($request as $item) {
+                        $query->orwhere('followups.problemfollowup_id', '=', $item);
+                    }
+                    return $query->distinct('followups.user_id');
+                })
+                ->when($request->types,function($query,$request)
+                {
+                    foreach ($request as $item) {
+                        if ($item == 1) {
+                            $query->orwhere('users.type', '=', '1');
+                        } else if ($item == 2) {
+                            $query->orwhere('users.type', '=', '2');
+                        }else if($item == 3) {
+                            $query->orwhere('users.type', '=', '3');
+                        }
+                        else {
+                            $query->orwhere('users.type', '=', $item);
+                        }
+                    }
+                    return $query;
+                })
+                ->groupby('users.id')
+                ->get();
 
 
         if((count($user)>0)||(isset($request['tel_recieves']))) {
@@ -120,6 +159,13 @@ class SmsController extends BaseController
             if(isset($request['tel_recieves']))
             {
                 $tel=$tel.",".$request['tel_recieves'];
+            }
+
+            // دستور زیر باید برای قسمت فیلدها ادیت شود
+            if(isset($request->fields)) {
+                for ($i = 0; $i < count($request->fields); $i++) {
+                    $user = $user->where($request['fields'][$i], $request['comparison'][$i], $request['values'][$i]);
+                }
             }
 
             foreach ($user as $item) {
@@ -144,6 +190,8 @@ class SmsController extends BaseController
                 $comment=str_replace("{sex}",$item->sex,$comment);
                 $this->sendSms($item->tel,$comment);
             }
+
+
             $msg = "پیام با موفقیت به تعداد " .count($user) . " ارسال شد";
             $errorStatus = "success";
             return back()->with('msg', $msg)
@@ -203,58 +251,103 @@ class SmsController extends BaseController
         //
     }
 
-    public function createAjax(request $request)
+    public function createAjax(request $request,$paginate=NULL)
     {
 
-        $user=user::query();
+        //$user=user::get();
 
-        $user->leftjoin('followups','users.id','=','followups.user_id')
-                ->distinct('followups.user_id');
-        if(isset($request->categories)) {
-            for ($i = 0; $i < count($request->categories); $i++) {
-                $user = $user->orwhere('resource', '=', $request['categories'][$i]);
-                $user = $user->orwhere('detailsresource', '=', $request['categories'][$i]);
-            }
-        }
+        $user=User::leftjoin('followups','users.id','=','followups.user_id')
+                ->when($request->categories,function($query,$request)
+                {
+                    foreach ($request as $item) {
+                        $query->orwhere('resource', '=', $item);
+                        return $query->orwhere('detailsresource', '=', $item);
+                    }
+                })
+                ->when($request->tags,function($query,$request)
+                {
+                    foreach ($request as $item) {
+                        return $query->where('followups.tags', 'like', "%".$item."%");
+                    }
+                })
+                ->when($request->problem,function($query,$request)
+                {
+                    foreach ($request as $item) {
+                         $query->orwhere('followups.problemfollowup_id', '=', $item);
+                    }
+                    return $query->distinct('followups.user_id');
+                })
+                ->when($request->types,function($query,$request)
+                {
+                    foreach ($request as $item) {
+                        if ($item == 1) {
+                            $query->orwhere('users.type', '=', '1');
+                        } else if ($item == 2) {
+                            $query->orwhere('users.type', '=', '2');
+                        }else if($item == 3) {
+                            $query->orwhere('users.type', '=', '3');
+                        }
+                        else {
+                            $query->orwhere('users.type', '=', $item);
+                        }
+                    }
+                    return $query;
+                })
+                ->groupby('users.id')
+                ->get();
 
-        if(isset($request->tags))
-        {
-            for ($i = 0; $i < count($request->tags); $i++) {
-                $user = $user->where('followups.tags', 'like', "%".$request['tags'][$i]."%");
-            }
-        }
 
+
+
+
+//        if(isset($request->categories)) {
+//            for ($i = 0; $i < count($request->categories); $i++) {
+//                $user = $user->orwhere('resource', '=', $request['categories'][$i]);
+//                $user = $user->orwhere('detailsresource', '=', $request['categories'][$i]);
+//            }
+//        }
+
+//        if(isset($request->tags))
+//        {
+//            for ($i = 0; $i < count($request->tags); $i++) {
+//                $user = $user->where('followups.tags', 'like', "%".$request['tags'][$i]."%");
+//            }
+//        }
+
+
+
+        // دستور زیر باید برای قسمت فیلدها ادیت شود
         if(isset($request->fields)) {
             for ($i = 0; $i < count($request->fields); $i++) {
                 $user = $user->where($request['fields'][$i], $request['comparison'][$i], $request['values'][$i]);
             }
         }
 
-        if(isset($request->problem)) {
-            for ($i = 0; $i < count($request->problem); $i++) {
-                $user = $user->orwhere('followups.problemfollowup_id', '=', $request['problem'][$i]);
-            }
-        }
+//        if(isset($request->problem)) {
+//            for ($i = 0; $i < count($request->problem); $i++) {
+//                $user = $user->orwhere('followups.problemfollowup_id', '=', $request['problem'][$i]);
+//            }
+//        }
 
-        if(isset($request->types)) {
-            for ($i = 0; $i < count($request->types); $i++) {
-                if ($request['types'][$i] == 1) {
-                    $user = $user->orwhere('users.type', '=', '1');
-                } else if ($request['types'][$i] == 2) {
-                    $user = $user->orwhere('users.type', '=', '2');
-                }else if($request['types'][$i] == 3) {
-                    $user = $user->orwhere('users.type', '=', '3');
-                }
-                else {
-                    $user = $user->orwhere('users.type', '=', $request['types'][$i]);
-                }
-            }
-        }
+//        if(isset($request->types)) {
+//            for ($i = 0; $i < count($request->types); $i++) {
+//                if ($request['types'][$i] == 1) {
+//                    $user = $user->orwhere('users.type', '=', '1');
+//                } else if ($request['types'][$i] == 2) {
+//                    $user = $user->orwhere('users.type', '=', '2');
+//                }else if($request['types'][$i] == 3) {
+//                    $user = $user->orwhere('users.type', '=', '3');
+//                }
+//                else {
+//                    $user = $user->orwhere('users.type', '=', $request['types'][$i]);
+//                }
+//            }
+//        }
 
-        $user=$user->get();
+//        $user=$user->get();
 
-        if((count($user)>0)||(isset($request['tel_recieves']))) {
-            echo "تعداد افراد فیلترشده ".count($user)." نفر می باشد";
+        if(($user->count()>0)||(isset($request['tel_recieves']))) {
+            echo "تعداد افراد فیلترشده ".$user->count()." نفر می باشد";
         }
         else
         {

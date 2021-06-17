@@ -1,5 +1,5 @@
 <div class="card card-user rounded">
-    <div class="card-header">
+    <div class="card-header bg-info">
         <h5 class="card-title">پیگیری جدید</h5>
     </div>
     <div class="card-body">
