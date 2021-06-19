@@ -81,28 +81,9 @@ class CourseController extends BaseController
         $path=public_path('/documents/');
         $files=$request->file('image')->move($path, $image);
 
-        $status = course::create([
-                'course'                     => $request['course'],
-                'shortlink'                  => $request['shortlink'],
+        $status = course::create($request->all()+[
                 'teacher_id'                 => $request['teacher'],
                 'image'                      => $image,
-                'type'                       => $request['type'],
-                'duration'                   => $request['duration'],
-                'duration_date'              => $request['duration_date'],
-                'count_students'             => $request['count_students'],
-                'coaches'                    => $request['coaches'],
-                'coachingbycoach'            => $request['coachingbycoach'],
-                'coachingbyreference'        => $request['coachingbyreference'],
-                'intership'                  => $request['intership'],
-                'start'                      => $request['start'],
-                'end'                        => $request['end'],
-                'course_days'                => $request['course_days'],
-                'exam'                       => $request['exam'],
-                'certificate'                => $request['certificate'],
-                'fi'                         => $request['fi'],
-                'fi_off'                     => $request['fi_off'],
-                'type_peymant_id'            => $request['type_peymant_id'],
-                'infocourse'                 => $request['infocourse'],
             ]);
         if($status) {
             $msg = "دوره ما با موفقیت ثبت شد";

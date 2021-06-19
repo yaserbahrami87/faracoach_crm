@@ -41,10 +41,9 @@ class PostController extends BaseController
     {
         if(strlen(Auth::user()->username)==0)
         {
-            $msg = "لطفا از قسمت اطلاعات شخصی نام کاربری خود را مشخص کنید";
-            $errorStatus = "danger";
-            return redirect('/panel/profile')->with('msg', $msg)
-                ->with('errorStatus', $errorStatus);
+            alert()->error("لطفا از قسمت اطلاعات شخصی نام کاربری خود را مشخص کنید",'خطا')->persistent('بستن');
+
+            return redirect('/panel/profile');
         }
         else
         {
@@ -75,12 +74,8 @@ class PostController extends BaseController
     {
         if(strlen(Auth::user()->username)==0)
         {
-            return back();
-            $msg = "لطفا از قسمت اطلاعات شخصی نام کاربری خود را مشخص کنید";
-            $errorStatus = "danger";
-            return redirect('/panel/profile')
-                ->with('msg', $msg)
-                ->with('errorStatus', $errorStatus);
+            alert()->error("لطفا از قسمت اطلاعات شخصی نام کاربری خود را مشخص کنید",'خطا')->persistent('بستن');
+            return redirect('/panel/profile');
         }
         else {
             $categoryposts=$this->get_categoryPostByUserId(Auth::user()->id);
@@ -117,23 +112,17 @@ class PostController extends BaseController
 
             $status = post::create($request->all());
             if ($status) {
-                $msg = "پست با موفقیت ذخیره شد";
-                $errorStatus = "success";
-                return back()->with('msg', $msg)
-                    ->with('errorStatus', $errorStatus);
+                alert()->error("پست با موفقیت ذخیره شد",'پیام')->persistent('بستن');
+                return back();
             } else {
-                $msg = "خطا در ذخیره";
-                $errorStatus = "danger";
-                return back()->with('msg', $msg)
-                    ->with('errorStatus', $errorStatus);
+                alert()->error("خطا در ذخیره",'خطا')->persistent('بستن');
+                return back();
             }
         }
         else
         {
-            $msg = "لینک اختصاصی شما تکراری است";
-            $errorStatus = "danger";
-            return back()->with('msg', $msg)
-                ->with('errorStatus', $errorStatus);
+            alert()->error("لینک اختصاصی شما تکراری است",'خطا')->persistent('بستن');
+            return back();
         }
     }
 
@@ -250,18 +239,15 @@ class PostController extends BaseController
                 {
                     $status = $post->update($request->all());
                     if ($status) {
-                        $msg = "پست با موفقیت بروزرسانی شد";
-                        $errorStatus = "success";
+                        alert()->success("پست با موفقیت بروزرسانی شد",'پیام')->persistent('بستن');
 
                     } else {
-                        $msg = "خطا در بروزرسانی";
-                        $errorStatus = "danger";
+                        alert()->error("خطا در بروزرسانی",'خطا')->persistent('بستن');
                     }
                 }
                 else
                 {
-                    $msg = "لینک اختصاصی قبلا استفاده شده است";
-                    $errorStatus = "danger";
+                    alert()->error("لینک اختصاصی قبلا استفاده شده است",'خطا')->persistent('بستن');
 
                 }
 

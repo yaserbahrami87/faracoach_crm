@@ -873,6 +873,12 @@ class UserController extends BaseController
 
             if($user->id!=Auth::user()->id)
             {
+                $user=user::join('followups','users.id','=','followups.user_id')
+                        ->where('users.id','=',$user->id)
+                        ->get();
+                dd($user->delete());
+
+
                 //$status=$user->delete();
                 $user->type=0;
                 $status=$user->save();
