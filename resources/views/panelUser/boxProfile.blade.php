@@ -17,9 +17,7 @@
                 @endif
             </div>
             <p class="description text-center">
-                "I like the way you work it <br>
-                No diggity <br>
-                I wanna bag it up"
+                Everyone needs a coach
             </p>
         </div>
         <div class="card-footer">

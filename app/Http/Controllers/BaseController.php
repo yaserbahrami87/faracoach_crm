@@ -21,6 +21,7 @@ use App\sms;
 use App\state;
 use App\tag;
 use App\teacher;
+use App\type_coach;
 use App\User;
 use Kavenegar;
 use GuzzleHttp\Client;
@@ -1221,6 +1222,31 @@ class BaseController extends Controller
             },function($query){
                 return $query->get();
             });
+    }
+
+    public function get_typeCoaches($id=NULL,$status=NULL,$paginate='get')
+    {
+        return type_coach::when($id,function($query,$id)
+                    {
+                        return $query->where('id','=',$id);
+                    })
+                    ->when($status,function($query,$status)
+                    {
+                        return $query->where('status','=',$status);
+                    })
+                    ->when($paginate=='get',function($query)
+                    {
+                        return $query->get();
+                    })
+                    ->when($paginate=='first',function($query)
+                    {
+                        return $query->first();
+                    })
+                    ->when($paginate=='paginate',function($query)
+                    {
+                        return $query->paginate($this->countPage());
+                    });
+
     }
 
 

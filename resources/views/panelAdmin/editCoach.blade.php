@@ -49,11 +49,22 @@
                     <small id="count_recommendationHelp" class="form-text text-muted"> تعداد توصیه نامه هایی که تاکنون داشته اید را وارد کنید</small>
                 </div>
                 <div class="form-group">
-                    <label for="count_meeting">دسته بندی ها *</label>
+                    <label for="selectpicker">دسته بندی ها *</label>
                     <div class="form-group">
                         <select class="form-control selectpicker" multiple data-live-search="true" name="category[]" id="selectpicker" >
                             @foreach($categoryCoaches as $item)
                                     <option value="{{$item->id}}" >{{$item->category}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="typecoach_id">سطح *</label>
+                    <div class="form-group">
+                        <select class="form-control"  name="typecoach_id" id="typecoach_id" >
+                            <option selected disabled>انتخاب کنید</option>
+                            @foreach($typeCoaches as $item)
+                                <option value="{{$item->id}}" @if($item->id==$coach->typecoach_id) selected @endif >{{$item->type}}</option>
                             @endforeach
                         </select>
                     </div>

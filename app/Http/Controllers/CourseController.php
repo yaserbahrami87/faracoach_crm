@@ -134,6 +134,7 @@ class CourseController extends BaseController
      */
     public function update(Request $request, course $course)
     {
+
         $this->validate($request, [
             'course'                => ['required','string','max:250'],
             'shortlink'             => ['required','string','max:250'],
@@ -201,7 +202,7 @@ class CourseController extends BaseController
             }
         }
 
-        return back()->with('msg', $msg)
+        return redirect('/admin/courses')->with('msg', $msg)
             ->with('errorStatus', $errorStatus);
 
     }

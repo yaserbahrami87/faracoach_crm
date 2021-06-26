@@ -166,7 +166,7 @@ class AdminController extends BaseController
 
             $user=(Auth::user());
 
-            if($user->status_coach==-2)
+            if(($user->status_coach==-2)||($user->status_coach==1))
             {
                 $user=User::join('coaches','users.id','=','coaches.user_id')
                             ->where('users.id','=',$user->id)

@@ -873,10 +873,11 @@ class UserController extends BaseController
 
             if($user->id!=Auth::user()->id)
             {
+                dd($user);
                 $user=user::join('followups','users.id','=','followups.user_id')
                         ->where('users.id','=',$user->id)
                         ->get();
-                dd($user->delete());
+
 
 
                 //$status=$user->delete();
@@ -1715,13 +1716,9 @@ class UserController extends BaseController
                     if($request['sms']==1) {
                         if (is_null(Auth::user()->fname) || (is_null(Auth::user()->lname))) {
                             $this->sendSms($request['tel'], "به فراکوچ خوش آمدید/ شما توسط " . Auth::user()->tel . " به فراکوچ دعوت شدید"." رمز عبور:1234 ");
-//                        $msg="تلفن با موفقیت در سیستم فراکوچ ثبت شد";
-//                        $errorStatus="success";
                             alert()->success("تلفن با موفقیت در سیستم فراکوچ ثبت شد", 'پیام')->persistent('بستن');
                         } else {
                             $this->sendSms($request['tel'], "به فراکوچ خوش آمدید/ شما توسط " . Auth::user()->fname . Auth::user()->lname . " به فراکوچ دعوت شدید" ." رمز عبور:1234 ");
-//                        $msg="تلفن با موفقیت در سیستم فراکوچ ثبت شد";
-//                        $errorStatus="success";
                             alert()->success("تلفن با موفقیت در سیستم فراکوچ ثبت شد", 'پیام')->persistent('بستن');
                         }
                     }
@@ -2336,9 +2333,18 @@ class UserController extends BaseController
         $i=0;
         foreach ($collection as $item)
         {
-            $count=user::where('tel','=',$item['tel'])
-                         ->orwhere('email','=',$item['email'])
-                         ->count();
+            if(!strlen($item['email'])>0)
+            {
+                $item['email']=NULL;
+            }
+
+            $count=user::orwhere('tel','=',$item['tel'])
+                        ->when($item['email'],function($query,$item)
+                        {
+                            return $query->orwhere('email', '=', $item);
+                        })
+                        ->count();
+
             if($count==0)
             {
                 $status=user::create($item);
@@ -2349,14 +2355,8 @@ class UserController extends BaseController
 
             }
         }
-//        $msg = "تعداد".$i."نفر وارد بانک اطلاعاتی شدند";
-//        $errorStatus = "success";
         alert()->success("تعداد".$i."نفر وارد بانک اطلاعاتی شدند",'پیام')->persistent('بستن');
         return back();
-//        ->with('msg', $msg)
-//            ->with('errorStatus', $errorStatus);
-
-
     }
 
     public function introducedVerified(Request $request)

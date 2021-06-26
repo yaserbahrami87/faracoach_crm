@@ -112,7 +112,7 @@ class PostController extends BaseController
 
             $status = post::create($request->all());
             if ($status) {
-                alert()->error("پست با موفقیت ذخیره شد",'پیام')->persistent('بستن');
+                alert()->success("پست با موفقیت ذخیره شد",'پیام')->persistent('بستن');
                 return back();
             } else {
                 alert()->error("خطا در ذخیره",'خطا')->persistent('بستن');
@@ -257,12 +257,10 @@ class PostController extends BaseController
 
                 $status = $post->update($request->all());
                 if ($status) {
-                    $msg = "دسته با موفقیت بروزرسانی شد";
-                    $errorStatus = "success";
+                    alert()->success("دسته با موفقیت بروزرسانی شد",'پیام')->persistent('بستن');
 
                 } else {
-                    $msg = "خطا در بروزرسانی";
-                    $errorStatus = "danger";
+                    alert()->error("خطا در بروزرسانی",'خطا')->persistent('بستن');
                 }
             }
             else
@@ -275,9 +273,7 @@ class PostController extends BaseController
             return abort('403');
         }
 
-        return redirect('/panel/post')
-            ->with('msg', $msg)
-            ->with('errorStatus', $errorStatus);
+        return redirect('/panel/post');
     }
 
     /**

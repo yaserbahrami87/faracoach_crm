@@ -209,9 +209,6 @@ class ReserveController extends BaseController
         $reserve=reserve::where('booking_id','=',$request['booking_id'])
                         ->first();
 
-
-
-
         if(is_null($reserve)) {
             $status = reserve::create($request->all()+
                 [
@@ -333,11 +330,16 @@ class ReserveController extends BaseController
 
         if($status)
         {
-
-            // alert()->success('رزرو با موفقیت انجام شد','خطا')->persistent('بستن');
+            if($user->duration_booking==1)
+            {
+                $duration='جلسه معارفه';
+            }
+            else
+            {
+                $duration='جلسه کوچینگ';
+            }
+            $this->sendSms($user->tel,'رزرو '.$duration.' در فراکوچ انجام شد');
             return ('<div class="alert alert-success">رزرو با موفقیت انجام شد</div>');
-            // return back();
-
         }
         else
         {

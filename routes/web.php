@@ -77,6 +77,7 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
 
     //coaches
     Route::patch('/coach/{coach}/newrequest','CoachController@newrequest');
+    Route::patch('/coach/{coach}/updateCoach','CoachController@updateCoach');
     Route::resource('coach','CoachController');
 
     //booking
@@ -224,6 +225,9 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
 
     //feedback Coach
     Route::resource('feedbackcoach','FeedbackCoachingController');
+
+    //type Coaches
+    Route::resource('type_coach','TypeCoachController');
 
 });
 

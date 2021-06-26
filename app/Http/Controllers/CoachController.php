@@ -51,9 +51,13 @@ class CoachController extends BaseController
             $user=Auth::user();
             if(strlen($user->username)>0)
             {
+                $typeCoach=$this->get_typeCoaches(NULL,1,'get');
+
                 $categoryCoaches=$this->get_categoryCoaches(NULL,NULL,true);
+
                 return view('panelUser.insertCoach')
-                                ->with('categoryCoaches',$categoryCoaches);
+                                ->with('categoryCoaches',$categoryCoaches)
+                                ->with('typeCoach',$typeCoach);
             }
             else
             {
@@ -87,6 +91,7 @@ class CoachController extends BaseController
             'count_meeting'         =>'required|numeric|between:0,10000',
             'customer_satisfaction' =>'required|numeric|between:0,1000',
             'category'              =>'required|array',
+            'typecoach_id'          =>'required|numeric',
             'change_customer'       =>'required|numeric|between:0,1000'
         ]);
 
@@ -107,6 +112,7 @@ class CoachController extends BaseController
                 'count_meeting'         => $request['count_meeting'],
                 'customer_satisfaction' => $request['customer_satisfaction'],
                 'category'              => implode(',',$request['category']),
+                'typecoach_id'          => $request['typecoach_id'],
                 'change_customer'       => $request['change_customer'],
                 'count_recommendation'  => $request['count_recommendation'],
             ]);
@@ -196,9 +202,10 @@ class CoachController extends BaseController
         {
             $categoryCoaches=$this->get_categoryCoaches(NULL,NULL,true);
             $coach->category=explode(',',$coach->category);
-
+            $typeCoaches=$this->get_typeCoaches(NULL,1,'get');
             return view('panelAdmin.editCoach')
                 ->with('coach',$coach)
+                ->with('typeCoaches',$typeCoaches)
                 ->with('categoryCoaches',$categoryCoaches);
         }
         else
@@ -206,8 +213,13 @@ class CoachController extends BaseController
 
             if(Auth::user()->id==$coach->user_id)
             {
+                $coach->category=explode(',',$coach->category);
+                $categoryCoaches=$this->get_categoryCoaches(NULL,NULL,true);
+                $typeCoaches=$this->get_typeCoaches(NULL,1,'get');
                 return view('panelUser.editCoach')
-                    ->with('coach',$coach);
+                            ->with('categoryCoaches',$categoryCoaches)
+                            ->with('typeCoaches',$typeCoaches)
+                            ->with('coach',$coach);
             }
             else{
                 alert()->error('شما سطح دسترسی به این بخش را ندارید','خطا')->persistent('بستن');
@@ -238,6 +250,7 @@ class CoachController extends BaseController
             'change_customer'       =>'required|numeric|between:0,1000',
             'count_recommendation'  =>'required|numeric|between:0,1000',
             'category'              =>'required|array',
+            'typecoach_id'          =>'required|numeric',
             'status'                =>'required|numeric|between:-2,5'
         ],[
             'education_background.required' =>'سوابق تحصیلی اجباریست',
@@ -278,7 +291,6 @@ class CoachController extends BaseController
                 ->first();
             $user->status_coach = $request['status'];
             $user->save();
-
             alert()->success('اطلاعات با موفقیت بروزرسانی شد','پیام')->persistent('بستن');
         }
         else
@@ -375,6 +387,7 @@ class CoachController extends BaseController
     {
         dd($request);
     }
+
     public function newrequest (Request $request, coach $coach)
     {
         $this->validate($request,[
@@ -386,6 +399,7 @@ class CoachController extends BaseController
             'count_meeting'         =>'required|numeric|between:0,10000',
             'customer_satisfaction' =>'required|numeric|between:0,1000',
             'change_customer'       =>'required|numeric|between:0,1000',
+            'count_recommendation'  =>'required|numeric|between:0,1000',
         ]);
 
         $status=$coach->update($request->all()+[
@@ -398,6 +412,28 @@ class CoachController extends BaseController
             $user->status_coach = -1;
             $user->save();
 
+            alert()->success('اطلاعات با موفقیت بروزرسانی شد','پیام')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در بروزرسانی','خطا ')->persistent('بستن');
+        }
+        return redirect('/panel');
+    }
+
+    public function updateCoach(Request $request,coach $coach)
+    {
+        $this->validate($request,[
+            'education_background'  =>'nullable|string',
+            'certificates'          =>'nullable|string',
+            'experience'            =>'nullable|string',
+            'skills'                =>'nullable|string',
+            'researches'            =>'nullable|string',
+        ]);
+
+        $status=$coach->update($request->all());
+        if($status)
+        {
             alert()->success('اطلاعات با موفقیت بروزرسانی شد','پیام')->persistent('بستن');
         }
         else
