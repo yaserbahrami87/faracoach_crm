@@ -27,6 +27,7 @@ class CreateCoachesTable extends Migration
             $table->integer('customer_satisfaction')->default(0);
             $table->integer('change_customer')->default(0);
             $table->integer('count_recommendation')->default(0);
+            $table->integer('typecoach_id')->nullable();
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });

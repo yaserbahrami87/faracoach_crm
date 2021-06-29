@@ -266,8 +266,6 @@ class UserController extends BaseController
         if($check>0)
         {
             alert()->error("کد ملی / پست الکترونیکی تکراری است",'خطا')->persistent('بستن');
-//            $msg="کد ملی / پست الکترونیکی تکراری است";
-//            $errorStatus="danger";
         }
         else
         {
@@ -873,16 +871,17 @@ class UserController extends BaseController
 
             if($user->id!=Auth::user()->id)
             {
-                dd($user);
-                $user=user::join('followups','users.id','=','followups.user_id')
+
+                $user=user::leftjoin('followups','users.id','=','followups.user_id')
                         ->where('users.id','=',$user->id)
                         ->get();
+                foreach ($user as $item)
+                {
+                    $status=$item->delete();
+                    dd($item);
+                }
 
 
-
-                //$status=$user->delete();
-                $user->type=0;
-                $status=$user->save();
                 if($status)
                 {
                     alert()->success("اطلاعات با موفقیت حذف شد",'پیام')->persistent('بستن');

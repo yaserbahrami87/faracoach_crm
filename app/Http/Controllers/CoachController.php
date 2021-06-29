@@ -92,16 +92,14 @@ class CoachController extends BaseController
             'customer_satisfaction' =>'required|numeric|between:0,1000',
             'category'              =>'required|array',
             'typecoach_id'          =>'required|numeric',
-            'change_customer'       =>'required|numeric|between:0,1000'
+            'change_customer'       =>'required|numeric|between:0,1000',
+            'count_recommendation'  =>'required|numeric|between:0,1000'
         ]);
 
         $user=Auth::user();
         $coach=coach::where('user_id','=',$user->id)
                 ->first();
         if(is_null($coach)) {
-            $user->status_coach = '-1';
-            $user->update();
-
             $status = coach::create([
                 'user_id'               => Auth::user()->id,
                 'education_background'  => $request['education_background'],
@@ -118,6 +116,8 @@ class CoachController extends BaseController
             ]);
 
             if ($status) {
+                $user->status_coach = '-1';
+                $user->update();
                 $this->sendSms(Auth::user()->tel,'درخواست همکاری شما در سیستم فراکوچ ثبت شد');
                 $this->sendSms('09153159020',Auth::user()->fname.''.Auth::user()->lname.' درخواست همکاری به عنوان کوچ در سیستم ثبت کرد');
                 alert()->success('درخواست همکاری شما با موفقیت ثبت شد', 'پیام')->persistent('بستن');

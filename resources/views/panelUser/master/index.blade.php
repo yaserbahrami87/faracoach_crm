@@ -9,7 +9,8 @@
     <title>پنل کاربری فراکوچ</title>
 
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="{{asset('dashboard/plugins/fontawesome-free/css/all.min.css')}}">
+    <link rel="stylesheet" href="{{asset('dashboard/plugins/fontawesome-free/css/all.min.css')}}" />
+
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="{{asset('dashboard/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
     <!-- Theme style -->
