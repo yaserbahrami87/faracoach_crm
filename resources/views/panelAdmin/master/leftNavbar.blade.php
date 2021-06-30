@@ -59,7 +59,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="/admin/users/excel" class="nav-link @if(request()->is('admin/users')) active  @endif">
+                                <a href="/admin/users/excel" class="nav-link @if(request()->is('admin/users/excel')) active  @endif">
                                     <i class="fas fa-users nav-icon"></i>
                                     <p>اضافه کردن کاربر از طریق فایل</p>
                                 </a>

@@ -8,7 +8,7 @@
       </a>
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item ">
-          <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button">
+          <a class="nav-link" href="/blogs/newposts" id="navbarDropdownMenuLink" role="button">
            بلاگ کوچ
           </a>
           <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">

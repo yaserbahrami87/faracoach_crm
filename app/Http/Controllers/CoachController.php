@@ -388,6 +388,7 @@ class CoachController extends BaseController
         dd($request);
     }
 
+    //درخواست جدید توسط کاربر بعد از رد درخواست
     public function newrequest (Request $request, coach $coach)
     {
         $this->validate($request,[
@@ -420,6 +421,7 @@ class CoachController extends BaseController
         }
         return redirect('/panel');
     }
+
 
     public function updateCoach(Request $request,coach $coach)
     {
