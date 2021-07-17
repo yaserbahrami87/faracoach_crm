@@ -61,8 +61,8 @@ class BookingController extends BaseController
         else
         {
             $booking = booking::where('user_id', '=', Auth::user()->id)
-                ->orwhere('start_date','>',$this->dateNow)
-                ->orwhere('status','<>',1)
+                ->where('start_date','>',$this->dateNow)
+//                ->where('staus','<>',1)
                 ->orderby('start_date', 'desc')
                 ->orderby('start_time', 'desc')
                 ->paginate($this->countPage());

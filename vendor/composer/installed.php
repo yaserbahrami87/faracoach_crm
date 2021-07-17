@@ -1,12 +1,12 @@
 <?php return array (
   'root' => 
   array (
-    'pretty_version' => '1.0.0+no-version-set',
-    'version' => '1.0.0.0',
+    'pretty_version' => 'dev-master',
+    'version' => 'dev-master',
     'aliases' => 
     array (
     ),
-    'reference' => NULL,
+    'reference' => '19b85534f36bd342810120fc03308766fef9c90b',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -73,6 +73,15 @@
       array (
       ),
       'reference' => 'dff976c2f3487d42c1db75a3b180e2b9f0e72ce0',
+    ),
+    'composer/ca-bundle' => 
+    array (
+      'pretty_version' => '1.2.10',
+      'version' => '1.2.10.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '9fdb22c2e97a614657716178093cd1da90a64aa8',
     ),
     'cordoval/hamcrest-php' => 
     array (
@@ -471,6 +480,24 @@
       ),
       'reference' => 'e714f13298ecaf9b2d11cb7106a0415d5615cbe5',
     ),
+    'jaybizzle/crawler-detect' => 
+    array (
+      'pretty_version' => 'v1.2.106',
+      'version' => '1.2.106.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '78bf6792cbf9c569dc0bf2465481978fd2ed0de9',
+    ),
+    'jenssegers/agent' => 
+    array (
+      'pretty_version' => 'v2.6.4',
+      'version' => '2.6.4.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'daa11c43729510b3700bc34d414664966b03bffe',
+    ),
     'kavenegar/laravel' => 
     array (
       'pretty_version' => '1.3.2',
@@ -516,12 +543,12 @@
     ),
     'laravel/laravel' => 
     array (
-      'pretty_version' => '1.0.0+no-version-set',
-      'version' => '1.0.0.0',
+      'pretty_version' => 'dev-master',
+      'version' => 'dev-master',
       'aliases' => 
       array (
       ),
-      'reference' => NULL,
+      'reference' => '19b85534f36bd342810120fc03308766fef9c90b',
     ),
     'laravel/tinker' => 
     array (
@@ -576,6 +603,15 @@
       array (
       ),
       'reference' => '3b9dff8aaf7323590c1d2e443db701eb1f9aa0d3',
+    ),
+    'mobiledetect/mobiledetectlib' => 
+    array (
+      'pretty_version' => '2.8.37',
+      'version' => '2.8.37.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '9841e3c46f5bd0739b53aed8ac677fa712943df7',
     ),
     'mockery/mockery' => 
     array (
@@ -1020,6 +1056,15 @@
       ),
       'reference' => '99732be0ddb3361e16ad77b68ba41efc8e979019',
     ),
+    'shetabit/visitor' => 
+    array (
+      'pretty_version' => 'v3.1.0',
+      'version' => '3.1.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'e3ba504e4fef79110c9bad20aa190888c9814894',
+    ),
     'studio-42/elfinder' => 
     array (
       'pretty_version' => '2.1.57',
@@ -1312,6 +1357,15 @@
       array (
       ),
       'reference' => 'b43b05cf43c1b6d849478965062b6ef73e223bb5',
+    ),
+    'ua-parser/uap-php' => 
+    array (
+      'pretty_version' => 'v3.9.14',
+      'version' => '3.9.14.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'b796c5ea5df588e65aeb4e2c6cce3811dec4fed6',
     ),
     'uxweb/sweet-alert' => 
     array (

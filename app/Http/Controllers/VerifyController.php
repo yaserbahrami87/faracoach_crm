@@ -51,11 +51,12 @@ class VerifyController extends BaseController
             $six_digit_random_number = mt_rand(100000, 999999);
             if(preg_match('/^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}$/',$request))
             {
-                $user=$this->get_user($request);
+                $user=$this->get_user($request['tel'],NULL,NULL,NULL,true);
                 if(is_null($user)) {
                     $status = verify::where('tel', '=', $request)
                         ->where('verify', '=', 1)
                         ->count();
+
                     if ($status == 0) {
                         $status = verify::create(
                             [
@@ -290,6 +291,7 @@ class VerifyController extends BaseController
 
     public function checkCode($code)
     {
+
         if(preg_match('/\d/',$code))
         {
             $count=verify::where('code','=',$code)
@@ -387,10 +389,10 @@ class VerifyController extends BaseController
             $created_at_add=$created_at->addMinutes(10);
             if($created_at_add>Carbon::now())
             {
-                $user=$this->get_user($user->tel);
+                $user=$this->get_user($request['tel'],NULL,NULL,NULL,true);
                 if(!is_null($user))
                 {
-                    $user=$this->get_user($user->tel);
+                    $user=$this->get_user($request['tel'],NULL,NULL,NULL,true);
                     Auth::login($user);
                     return redirect('/panel');
                 }
@@ -416,10 +418,9 @@ class VerifyController extends BaseController
 
     public function sendResetCode(request $request)
     {
-
         $six_digit_random_number = mt_rand(100000, 999999);
         $now= Verta::now();
-        $user=$this->get_user($request['tel']);
+        $user=$this->get_user($request['tel'],NULL,NULL,NULL,true);
         if(!is_null($user))
         {
             $status=verify::where('tel','=',$user->tel)
@@ -524,6 +525,7 @@ class VerifyController extends BaseController
 
     public function checkResetCode(request $request)
     {
+
         if (is_null($request))
         {
             return back();
@@ -553,7 +555,7 @@ class VerifyController extends BaseController
                 $checkDays = $date->addMinutes(10);
 
                 if($checkDays>Carbon::now()){
-                    $user = $this->get_user($verify->tel);
+                    $user=$this->get_user($request['tel'],NULL,NULL,NULL,true);
                     $user['password'] = Hash::make($request['password']);
                     $status = $user->save();
                     if ($status)

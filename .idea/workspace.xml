@@ -20,10 +20,48 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/faracoach_crm.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/faracoach_crm.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CoachController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CoachController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/master/navbarTop.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/master/navbarTop.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BookingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BookingController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FollowupController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FollowupController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PostController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PostController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TypeCoachController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TypeCoachController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/VerifyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/VerifyController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bootstrap/cache/packages.php" beforeDir="false" afterPath="$PROJECT_DIR$/bootstrap/cache/packages.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bootstrap/cache/services.php" beforeDir="false" afterPath="$PROJECT_DIR$/bootstrap/cache/services.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/fa/validation.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/fa/validation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/allCoaches.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/allCoaches.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/coach.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/coach.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/formReserve.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/formReserve.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/booking.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/booking.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/editTypeCoach.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/editTypeCoach.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/insertTypeCoach.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/insertTypeCoach.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/master/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/master/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/master/leftNavbar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/master/leftNavbar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/booking.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/booking.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/boxScores.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/boxScores.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/profile.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/InstalledVersions.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/InstalledVersions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_files.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_files.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_namespaces.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_namespaces.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/installed.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/installed.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,6 +209,11 @@
       <path value="$PROJECT_DIR$/vendor/symfony/string" />
       <path value="$PROJECT_DIR$/vendor/symfony/console" />
       <path value="$PROJECT_DIR$/vendor/opis/closure" />
+      <path value="$PROJECT_DIR$/vendor/shetabit/visitor" />
+      <path value="$PROJECT_DIR$/vendor/ua-parser/uap-php" />
+      <path value="$PROJECT_DIR$/vendor/jaybizzle/crawler-detect" />
+      <path value="$PROJECT_DIR$/vendor/jenssegers/agent" />
+      <path value="$PROJECT_DIR$/vendor/mobiledetect/mobiledetectlib" />
     </include_path>
   </component>
   <component name="ProjectId" id="1jQZPkLojuzQbLLpfKUzyIIeJHa" />
@@ -200,15 +243,15 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\xampp\htdocs\faracoach_crm\resources\views" />
-      <recent name="D:\xampp\htdocs\faracoach_crm\resources\views\panelAdmin" />
-      <recent name="C:\xampp\htdocs\laravel\faracoach_crm\resources\views\panelAdmin" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\wamp64\www\faracoach_crm\resources\views\panelUser" />
       <recent name="C:\wamp64\www\faracoach_crm\resources\views\panelAdmin" />
       <recent name="C:\xampp\htdocs\laravel\faracoach_crm\resources\views\panelUser" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\xampp\htdocs\faracoach_crm\resources\views" />
+      <recent name="D:\xampp\htdocs\faracoach_crm\resources\views\panelAdmin" />
+      <recent name="C:\xampp\htdocs\laravel\faracoach_crm\resources\views\panelAdmin" />
     </key>
   </component>
   <component name="RunManager">
@@ -532,7 +575,17 @@
       <workItem from="1624776525441" duration="6897000" />
       <workItem from="1624858075632" duration="6217000" />
       <workItem from="1624945937927" duration="5271000" />
-      <workItem from="1625031205063" duration="1914000" />
+      <workItem from="1625031205063" duration="8420000" />
+      <workItem from="1625120645830" duration="10963000" />
+      <workItem from="1625289364308" duration="19109000" />
+      <workItem from="1625640504495" duration="6956000" />
+      <workItem from="1625891240402" duration="10035000" />
+      <workItem from="1626066853336" duration="12831000" />
+      <workItem from="1626151266703" duration="17953000" />
+      <workItem from="1626236723817" duration="15144000" />
+      <workItem from="1626321802431" duration="9708000" />
+      <workItem from="1626457031477" duration="1837000" />
+      <workItem from="1626496829104" duration="667000" />
     </task>
     <servers />
   </component>
@@ -580,9 +633,20 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1621149335602" />
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1624950669590">
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1626332847340">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1624950669590" />
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1626332847340" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php</url>
+          <line>10</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

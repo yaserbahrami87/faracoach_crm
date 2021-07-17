@@ -60,11 +60,17 @@
                         @foreach($coaches as $item)
                             <div class="col-xs-12 col-sm-4 col-lg-3 col-xl-3  box-products ">
                                 <div class="card p-1 text-center d-block shadow">
-                                    <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="img-circle" alt="..." width="150px" height="150px">
-                                    <div class="card-body  text-center">
-                                        <p class="text-bold">{{$item->fname}} {{$item->lname}}</p>
-                                        <a href="/coach/{{$item->username}}" class="btn btn-primary btn-sm" >مشاهده اطلاعات </a>
-                                    </div>
+                                    <a href="/coach/{{$item->username}}" data-toggle="tooltip" data-placement="top" title="{{$item->fname}} {{$item->lname}}">
+                                        @if(strlen($item->personal_image)>0)
+                                            <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="rounded-circle" alt="..." width="150px" height="150px">
+                                        @else
+                                            <img src="{{asset('/documents/users/default-avatar.png')}}" class="rounded-circle" alt="..." width="150px" height="150px">
+                                        @endif
+                                        <div class="card-body  text-center">
+                                            <p class="text-bold">{{$item->fname}} {{$item->lname}}</p>
+                                            <a href="/coach/{{$item->username}}" class="btn btn-primary btn-sm" >مشاهده اطلاعات </a>
+                                        </div>
+                                    </a>
                                 </div>
                             </div>
                         @endforeach
@@ -78,6 +84,10 @@
 
 
 @section('footerScript')
-
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
 @endsection
 

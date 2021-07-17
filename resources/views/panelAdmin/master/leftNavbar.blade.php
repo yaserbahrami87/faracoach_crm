@@ -17,7 +17,6 @@
                 @else
                     <img class="img-circle elevation-2" src={{asset("/documents/users/".Auth::user()->personal_image)}} alt="..." />
                 @endif
-
             </div>
             <div class="info">
                 <a href="/admin/user/{{Auth::user()->id}}" class="d-block">{{Auth::user()->fname}} {{Auth::user()->lname}}</a>
@@ -279,10 +278,6 @@
                                 <a href="/admin/reserve/waiting" class="nav-link @if(request()->is('admin/booking/waiting*')) active  @endif">
                                     <i class="fas fa-user-cog"></i>
                                     <p>رزرو های ناقص</p>
-                                </a>
-                                <a href="/admin/settings/" class="nav-link @if(request()->is('admin/setting*')) active  @endif">
-                                    <i class="fas fa-user-cog"></i>
-                                    <p>تنظیمات جلسات</p>
                                 </a>
                             </li>
                             <li class="nav-item has-treeview ">

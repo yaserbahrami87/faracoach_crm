@@ -44,10 +44,9 @@
     @endif
 
 
-    <div class="col-md-12 mt-3">
+    <div class="col-md-12 mt-3 table-responsive">
         <table class="table border table-hover table-striped">
             <tr>
-                <th scope="col">#</th>
                 <th scope="col">تاریخ شروع</th>
                 <th scope="col">ساعت شروع</th>
                 <th scope="col">ساعت پایان</th>
@@ -70,8 +69,6 @@
                     @default    <tr>
                                 @break
                 @endswitch
-
-                    <td>#</td>
                     <td>
                         @if(Auth::user()->status_coach==1 )
 

@@ -120,24 +120,38 @@
                     <span class="badge pr-4">15</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                    <span class="dropdown-item dropdown-header">15 Notifications</span>
+                    <span class="dropdown-item dropdown-header">15 اعلان</span>
                     <div class="dropdown-divider"></div>
                     <a href="#" class="dropdown-item">
                         <i class="fas fa-envelope mr-2"></i> 4 new messages
                         <span class="float-right text-muted text-sm">3 mins</span>
                     </a>
                     <div class="dropdown-divider"></div>
+                    <!--
                     <a href="#" class="dropdown-item">
                         <i class="fas fa-users mr-2"></i> 8 friend requests
                         <span class="float-right text-muted text-sm">12 hours</span>
                     </a>
+                    -->
                     <div class="dropdown-divider"></div>
                     <a href="#" class="dropdown-item">
-                        <i class="fas fa-file mr-2"></i> 3 new reports
+                        <i class="far fa-bell mr-2"></i>
+                        <small>تغییر رمز انجام شد</small>
                         <span class="float-right text-muted text-sm">2 days</span>
                     </a>
                     <div class="dropdown-divider"></div>
                     <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Dropdown
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
                 </div>
             </li>
         </ul>
@@ -216,12 +230,16 @@
 
 <!--   Core JS Files   -->
 <script src="{{asset('dashboard/assets/js/core/jquery.min.js')}}"></script>
+<script src="{{asset('dashboard/assets/js/core/popper.min.js')}}"></script>
+<script src="{{asset('dashboard/assets/js/core/bootstrap.min.js')}}"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 
 <script src="{{asset('dashboard/assets/js/java.js')}}"></script>
 <script src="{{asset('vendor/file-manager/js/file-manager.js')}}"></script>
 
-<script src="{{asset('dashboard/assets/js/core/popper.min.js')}}"></script>
-<script src="{{asset('dashboard/assets/js/core/bootstrap.min.js')}}"></script>
+
+
 <script src="{{asset('dashboard/assets/js/plugins/perfect-scrollbar.jquery.min.js')}}"></script>
 
 
@@ -229,8 +247,6 @@
 
 
 <script src="{{asset('dashboard/plugins/jquery/jquery.min.js')}}"></script>
-
-<script src="{{asset('dashboard/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('dashboard/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 <script src="{{asset('dashboard/dist/js/adminlte.js')}}"></script>
 

@@ -42,13 +42,12 @@
     </div>
 
 
-    <div class="col-md-12 mt-3">
+    <div class="col-md-12 mt-3 table-responsive">
         <table class="table border table-hover table-striped">
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">تاریخ شروع</th>
                 <th scope="col">ساعت شروع</th>
-                <th scope="col">تاریخ پایان</th>
                 <th scope="col">ساعت پایان</th>
                 <th scope="col">مدت جلسه</th>
                 <th scope="col">وضعیت</th>
@@ -80,7 +79,6 @@
                         @endif
                     </td>
                     <td>{{$item->start_time}}</td>
-                    <td>{{$item->end_date}}</td>
                     <td>{{$item->end_time}}</td>
                     <td>{{$item->duration_booking}}</td>
                     @if($item->status==0)

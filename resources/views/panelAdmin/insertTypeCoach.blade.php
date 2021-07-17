@@ -17,6 +17,11 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="coefficient">ضریب *</label>
+                    <input type="text" class="form-control @error('coefficient') is-invalid @enderror" id="coefficient" name="coefficient" value="{{old('coefficient')}}" />
+                </div>
+
+                <div class="form-group">
                     <label for="status">وضعیت *</label>
                     <select id="status" class="form-control p-0 @error('status') is-invalid @enderror" name="status">
                         <option selected disabled>انتخاب کنید</option>

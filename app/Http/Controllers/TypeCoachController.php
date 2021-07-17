@@ -54,6 +54,7 @@ class TypeCoachController extends BaseController
         $this->validate($request,[
             'type'          =>'required|string|min:3',
             'shortlink'     =>'required|string|unique:type_coaches',
+            'coefficient'   =>'required|numeric|',
             'status'        =>'required|boolean'
         ]);
         $status=type_coach::create($request->all());
@@ -105,6 +106,7 @@ class TypeCoachController extends BaseController
         $this->validate($request,[
             'type'          =>'required|string|min:3',
             'shortlink'     =>'required|string|',
+            'coefficient'   =>'required|numeric|',
             'status'        =>'required|boolean'
         ]);
         try {

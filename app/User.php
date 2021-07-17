@@ -5,12 +5,12 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\followup;
+
+
 
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -54,6 +54,15 @@ class User extends Authenticatable implements MustVerifyEmail
         {
             return $this->hasMany('App\followup');
         }
+
+        public function lastLoginUser()
+        {
+            return User::orderby('last_login_at','desc')
+                    ->limit(30)
+                    ->get();
+        }
+
+
 
 
 

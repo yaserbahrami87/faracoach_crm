@@ -67,6 +67,17 @@
       'Image' => 'Intervention\\Image\\Facades\\Image',
     ),
   ),
+  'jenssegers/agent' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Jenssegers\\Agent\\AgentServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Agent' => 'Jenssegers\\Agent\\Facades\\Agent',
+    ),
+  ),
   'kavenegar/laravel' => 
   array (
     'providers' => 
@@ -111,6 +122,17 @@
     'providers' => 
     array (
       0 => 'Rap2hpoutre\\FastExcel\\Providers\\FastExcelServiceProvider',
+    ),
+  ),
+  'shetabit/visitor' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Shetabit\\Visitor\\Provider\\VisitorServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Visitor' => 'Shetabit\\Visitor\\Facade\\Visitor',
     ),
   ),
   'uxweb/sweet-alert' => 

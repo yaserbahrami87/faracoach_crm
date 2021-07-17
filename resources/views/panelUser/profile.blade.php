@@ -12,7 +12,7 @@
             {{method_field('PATCH')}}
             <div class="card card-user">
                 <div class="card-header bg-info">
-                    <h5 class="card-title">اطلاعات شخصی</h5>
+                    <h5 class="card-title m-0 p-0">اطلاعات شخصی</h5>
                 </div>
                 <div class="card-body" id="infoProfile">
                     <div class="row">
@@ -55,7 +55,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12 px-1">
+                        <div class="col-md-6 px-1">
                             <div class="form-group">
                                 <label>نام کاربری</label>
                                 <label class="text-danger" data-toggle="tooltip" data-placement="top" title="نام کاربری باید انگلیسی و غیرقابل تغییر می باشد">
@@ -87,7 +87,7 @@
             </div>
             <div class="card card-user">
                 <div class="card-header bg-info">
-                    <h5 class="card-title">اطلاعات تماس</h5>
+                    <h5 class="card-title m-0 p-0">اطلاعات تماس</h5>
                 </div>
                 <div class="card-body" id="infoProfile">
                     <div class="row">
@@ -151,7 +151,7 @@
             </div>
             <div class="card card-user " id="infogettingKnow">
                 <div class="card-header bg-info">
-                    <h5 class="card-title">نحوه آشنایی</h5>
+                    <h5 class="card-title p-0 m-0">نحوه آشنایی</h5>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -182,7 +182,7 @@
             </div>
             <div class="card card-user">
                 <div class="card-header bg-info">
-                    <h5 class="card-title">اطلاعات قرارداد</h5>
+                    <h5 class="card-title m-0 p-0">اطلاعات قرارداد</h5>
                 </div>
                 <div class="card-body" id="infoProfile">
                     <div class="row">

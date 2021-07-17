@@ -213,5 +213,6 @@ return [
         'shortlink'             =>'شورت لینک',
         'status'                =>'وضعیت',
         'typecoach_id'          =>'سطح کوچ',
+        'tweet'                 =>'دلنوشته',
     ],
 ];

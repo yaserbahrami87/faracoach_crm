@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return redirect("/login");
-});
+Route::get('/', 'HomeController@index');
 
 //Route::middleware(['can:isUser','verified'])->prefix('panel')->group(function () {
 Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
@@ -61,7 +59,6 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     Route::get('/documents/{document}','DocumentController@showUser');
 
     //POSTS
-
     Route::resource('post','PostController');
 
     //comments
@@ -296,4 +293,5 @@ Route::get('/coach/{coach}','CoachController@show');
 //Coupon
 Route::post('/coupon/check','CouponController@check');
 
-
+//TWEETS
+Route::resource('tweets','TweetController');

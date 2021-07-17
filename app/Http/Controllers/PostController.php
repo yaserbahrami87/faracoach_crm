@@ -179,7 +179,7 @@ class PostController extends BaseController
                 }
             }
 
-            $categoryposts=$this->get_categoryPostByUserId(Auth::user()->id);
+            $categoryposts=$this->get_categoryPostByUserId($user->id);
 
 
 

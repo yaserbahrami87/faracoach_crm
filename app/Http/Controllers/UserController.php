@@ -1007,6 +1007,7 @@ class UserController extends BaseController
     // نمایش اعضای سایت براساس دسته بندی برای ادمین
     public function showCategoryUsersAdmin(Request $request)
     {
+
         if(is_null($request->orderby)&&is_null($request->parameter))
         {
             $request['orderby']='id';

@@ -4,6 +4,10 @@
         <h4 class="card-title">امتیازات</h4>
     </div>
     <div class="card-body">
+        <label>درصد تکمیل اطلاعات شما</label>
+        <div class="progress ">
+            <div class="progress-bar progress-bar-striped  progress-bar-animated  bg-success" role="progressbar" style="width: 50%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">50%</div>
+        </div>
         <ul class="list-unstyled team-members p-0">
             <li class="mb-1" >
                 <div class="row border pt-2">

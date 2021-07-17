@@ -36,6 +36,7 @@ class ComposerStaticInitf54d8edf51459297346cdb00d8423a68
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
         '4ad677cf23be1eeec8c74951804d4cb0' => __DIR__ . '/..' . '/hekmatinasser/verta/src/helpers.php',
         'c379e2a4ec3735f6c4915556c8c81813' => __DIR__ . '/..' . '/rap2hpoutre/fast-excel/src/functions/fastexcel.php',
+        'e45cfea11e5f327d4009ce1fae8fa9fc' => __DIR__ . '/..' . '/shetabit/visitor/src/helpers.php',
         'a806c12c6e24e7e4e900847766218dba' => __DIR__ . '/..' . '/uxweb/sweet-alert/src/SweetAlert/functions.php',
     );
 
@@ -56,6 +57,7 @@ class ComposerStaticInitf54d8edf51459297346cdb00d8423a68
         'U' => 
         array (
             'UxWeb\\SweetAlert\\' => 17,
+            'UAParser\\' => 9,
         ),
         'T' => 
         array (
@@ -90,6 +92,7 @@ class ComposerStaticInitf54d8edf51459297346cdb00d8423a68
             'Symfony\\Component\\ErrorHandler\\' => 31,
             'Symfony\\Component\\CssSelector\\' => 30,
             'Symfony\\Component\\Console\\' => 26,
+            'Shetabit\\Visitor\\' => 17,
         ),
         'R' => 
         array (
@@ -137,6 +140,11 @@ class ComposerStaticInitf54d8edf51459297346cdb00d8423a68
             'Kavenegar\\Laravel\\' => 18,
             'Kavenegar\\' => 10,
         ),
+        'J' => 
+        array (
+            'Jenssegers\\Agent\\' => 17,
+            'Jaybizzle\\CrawlerDetect\\' => 24,
+        ),
         'I' => 
         array (
             'Intervention\\Image\\' => 19,
@@ -178,6 +186,7 @@ class ComposerStaticInitf54d8edf51459297346cdb00d8423a68
         'C' => 
         array (
             'Cron\\' => 5,
+            'Composer\\CaBundle\\' => 18,
             'Carbon\\' => 7,
         ),
         'B' => 
@@ -218,6 +227,10 @@ class ComposerStaticInitf54d8edf51459297346cdb00d8423a68
         'UxWeb\\SweetAlert\\' => 
         array (
             0 => __DIR__ . '/..' . '/uxweb/sweet-alert/src/SweetAlert',
+        ),
+        'UAParser\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ua-parser/uap-php/src',
         ),
         'TijsVerkoyen\\CssToInlineStyles\\' => 
         array (
@@ -331,6 +344,10 @@ class ComposerStaticInitf54d8edf51459297346cdb00d8423a68
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
         ),
+        'Shetabit\\Visitor\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/shetabit/visitor/src',
+        ),
         'Rap2hpoutre\\FastExcel\\' => 
         array (
             0 => __DIR__ . '/..' . '/rap2hpoutre/fast-excel/src',
@@ -431,6 +448,14 @@ class ComposerStaticInitf54d8edf51459297346cdb00d8423a68
         array (
             0 => __DIR__ . '/..' . '/kavenegar/php/src',
         ),
+        'Jenssegers\\Agent\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jenssegers/agent/src',
+        ),
+        'Jaybizzle\\CrawlerDetect\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jaybizzle/crawler-detect/src',
+        ),
         'Intervention\\Image\\' => 
         array (
             0 => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image',
@@ -516,6 +541,10 @@ class ComposerStaticInitf54d8edf51459297346cdb00d8423a68
         array (
             0 => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron',
         ),
+        'Composer\\CaBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/composer/ca-bundle/src',
+        ),
         'Carbon\\' => 
         array (
             0 => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon',
@@ -560,6 +589,13 @@ class ComposerStaticInitf54d8edf51459297346cdb00d8423a68
             'Mockery' => 
             array (
                 0 => __DIR__ . '/..' . '/mockery/mockery/library',
+            ),
+        ),
+        'D' => 
+        array (
+            'Detection' => 
+            array (
+                0 => __DIR__ . '/..' . '/mobiledetect/mobiledetectlib/namespaced',
             ),
         ),
     );
@@ -648,6 +684,7 @@ class ComposerStaticInitf54d8edf51459297346cdb00d8423a68
         'App\\Http\\Controllers\\StateController' => __DIR__ . '/../..' . '/app/Http/Controllers/StateController.php',
         'App\\Http\\Controllers\\TagController' => __DIR__ . '/../..' . '/app/Http/Controllers/TagController.php',
         'App\\Http\\Controllers\\TeacherController' => __DIR__ . '/../..' . '/app/Http/Controllers/TeacherController.php',
+        'App\\Http\\Controllers\\TypeCoachController' => __DIR__ . '/../..' . '/app/Http/Controllers/TypeCoachController.php',
         'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Controllers\\VerifyController' => __DIR__ . '/../..' . '/app/Http/Controllers/VerifyController.php',
         'App\\Http\\Controllers\\landingController' => __DIR__ . '/../..' . '/app/Http/Controllers/landingController.php',
@@ -695,6 +732,7 @@ class ComposerStaticInitf54d8edf51459297346cdb00d8423a68
         'App\\state' => __DIR__ . '/../..' . '/app/state.php',
         'App\\tag' => __DIR__ . '/../..' . '/app/tag.php',
         'App\\teacher' => __DIR__ . '/../..' . '/app/teacher.php',
+        'App\\tweet' => __DIR__ . '/../..' . '/app/tweet.php',
         'App\\type_coach' => __DIR__ . '/../..' . '/app/type_coach.php',
         'App\\verify' => __DIR__ . '/../..' . '/app/verify.php',
         'Asm89\\Stack\\Cors' => __DIR__ . '/..' . '/asm89/stack-cors/src/Cors.php',
@@ -896,6 +934,7 @@ class ComposerStaticInitf54d8edf51459297346cdb00d8423a68
         'Carbon\\Traits\\Units' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Traits/Units.php',
         'Carbon\\Traits\\Week' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Traits/Week.php',
         'Carbon\\Translator' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Translator.php',
+        'Composer\\CaBundle\\CaBundle' => __DIR__ . '/..' . '/composer/ca-bundle/src/CaBundle.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Cron\\AbstractField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/AbstractField.php',
         'Cron\\CronExpression' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/CronExpression.php',
@@ -931,6 +970,7 @@ class ComposerStaticInitf54d8edf51459297346cdb00d8423a68
         'DeepCopy\\TypeFilter\\Spl\\SplDoublyLinkedListFilter' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/TypeFilter/Spl/SplDoublyLinkedListFilter.php',
         'DeepCopy\\TypeFilter\\TypeFilter' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/TypeFilter/TypeFilter.php',
         'DeepCopy\\TypeMatcher\\TypeMatcher' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/TypeMatcher/TypeMatcher.php',
+        'Detection\\MobileDetect' => __DIR__ . '/..' . '/mobiledetect/mobiledetectlib/namespaced/Detection/MobileDetect.php',
         'Doctrine\\Common\\Lexer\\AbstractLexer' => __DIR__ . '/..' . '/doctrine/lexer/lib/Doctrine/Common/Lexer/AbstractLexer.php',
         'Doctrine\\Inflector\\CachedWordInflector' => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Inflector/CachedWordInflector.php',
         'Doctrine\\Inflector\\GenericLanguageInflectorFactory' => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Inflector/GenericLanguageInflectorFactory.php',
@@ -2835,6 +2875,14 @@ class ComposerStaticInitf54d8edf51459297346cdb00d8423a68
         'Intervention\\Image\\Templates\\Large' => __DIR__ . '/..' . '/intervention/imagecache/src/Intervention/Image/Templates/Large.php',
         'Intervention\\Image\\Templates\\Medium' => __DIR__ . '/..' . '/intervention/imagecache/src/Intervention/Image/Templates/Medium.php',
         'Intervention\\Image\\Templates\\Small' => __DIR__ . '/..' . '/intervention/imagecache/src/Intervention/Image/Templates/Small.php',
+        'Jaybizzle\\CrawlerDetect\\CrawlerDetect' => __DIR__ . '/..' . '/jaybizzle/crawler-detect/src/CrawlerDetect.php',
+        'Jaybizzle\\CrawlerDetect\\Fixtures\\AbstractProvider' => __DIR__ . '/..' . '/jaybizzle/crawler-detect/src/Fixtures/AbstractProvider.php',
+        'Jaybizzle\\CrawlerDetect\\Fixtures\\Crawlers' => __DIR__ . '/..' . '/jaybizzle/crawler-detect/src/Fixtures/Crawlers.php',
+        'Jaybizzle\\CrawlerDetect\\Fixtures\\Exclusions' => __DIR__ . '/..' . '/jaybizzle/crawler-detect/src/Fixtures/Exclusions.php',
+        'Jaybizzle\\CrawlerDetect\\Fixtures\\Headers' => __DIR__ . '/..' . '/jaybizzle/crawler-detect/src/Fixtures/Headers.php',
+        'Jenssegers\\Agent\\Agent' => __DIR__ . '/..' . '/jenssegers/agent/src/Agent.php',
+        'Jenssegers\\Agent\\AgentServiceProvider' => __DIR__ . '/..' . '/jenssegers/agent/src/AgentServiceProvider.php',
+        'Jenssegers\\Agent\\Facades\\Agent' => __DIR__ . '/..' . '/jenssegers/agent/src/Facades/Agent.php',
         'JsonException' => __DIR__ . '/..' . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
         'Kavenegar\\Enums\\ApiLogs' => __DIR__ . '/..' . '/kavenegar/php/src/Enums/ApiLogs.php',
         'Kavenegar\\Enums\\General' => __DIR__ . '/..' . '/kavenegar/php/src/Enums/General.php',
@@ -3141,6 +3189,7 @@ class ComposerStaticInitf54d8edf51459297346cdb00d8423a68
         'League\\MimeTypeDetection\\FinfoMimeTypeDetector' => __DIR__ . '/..' . '/league/mime-type-detection/src/FinfoMimeTypeDetector.php',
         'League\\MimeTypeDetection\\GeneratedExtensionToMimeTypeMap' => __DIR__ . '/..' . '/league/mime-type-detection/src/GeneratedExtensionToMimeTypeMap.php',
         'League\\MimeTypeDetection\\MimeTypeDetector' => __DIR__ . '/..' . '/league/mime-type-detection/src/MimeTypeDetector.php',
+        'Mobile_Detect' => __DIR__ . '/..' . '/mobiledetect/mobiledetectlib/Mobile_Detect.php',
         'Mockery' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery.php',
         'Mockery\\Adapter\\Phpunit\\MockeryPHPUnitIntegration' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryPHPUnitIntegration.php',
         'Mockery\\Adapter\\Phpunit\\MockeryPHPUnitIntegrationAssertPostConditions' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryPHPUnitIntegrationAssertPostConditions.php',
@@ -4607,6 +4656,18 @@ class ComposerStaticInitf54d8edf51459297346cdb00d8423a68
         'SebastianBergmann\\Type\\UnknownType' => __DIR__ . '/..' . '/sebastian/type/src/UnknownType.php',
         'SebastianBergmann\\Type\\VoidType' => __DIR__ . '/..' . '/sebastian/type/src/VoidType.php',
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
+        'Shetabit\\Visitor\\Contracts\\UserAgentParser' => __DIR__ . '/..' . '/shetabit/visitor/src/Contracts/UserAgentParser.php',
+        'Shetabit\\Visitor\\Drivers\\JenssegersAgent' => __DIR__ . '/..' . '/shetabit/visitor/src/Drivers/JenssegersAgent.php',
+        'Shetabit\\Visitor\\Drivers\\UAParser' => __DIR__ . '/..' . '/shetabit/visitor/src/Drivers/UAParser.php',
+        'Shetabit\\Visitor\\Exceptions\\DriverNotFoundException' => __DIR__ . '/..' . '/shetabit/visitor/src/Exceptions/DriverNotFoundException.php',
+        'Shetabit\\Visitor\\Facade\\Visitor' => __DIR__ . '/..' . '/shetabit/visitor/src/Facade/Visitor.php',
+        'Shetabit\\Visitor\\Middlewares\\LogVisits' => __DIR__ . '/..' . '/shetabit/visitor/src/Middlewares/LogVisits.php',
+        'Shetabit\\Visitor\\Models\\Visit' => __DIR__ . '/..' . '/shetabit/visitor/src/Models/Visit.php',
+        'Shetabit\\Visitor\\Provider\\VisitorServiceProvider' => __DIR__ . '/..' . '/shetabit/visitor/src/Provider/VisitorServiceProvider.php',
+        'Shetabit\\Visitor\\Traits\\CanVisit' => __DIR__ . '/..' . '/shetabit/visitor/src/Traits/CanVisit.php',
+        'Shetabit\\Visitor\\Traits\\Visitable' => __DIR__ . '/..' . '/shetabit/visitor/src/Traits/Visitable.php',
+        'Shetabit\\Visitor\\Traits\\Visitor' => __DIR__ . '/..' . '/shetabit/visitor/src/Traits/Visitor.php',
+        'Shetabit\\Visitor\\Visitor' => __DIR__ . '/..' . '/shetabit/visitor/src/Visitor.php',
         'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
         'Symfony\\Component\\Console\\Application' => __DIR__ . '/..' . '/symfony/console/Application.php',
         'Symfony\\Component\\Console\\Color' => __DIR__ . '/..' . '/symfony/console/Color.php',
@@ -5367,6 +5428,35 @@ class ComposerStaticInitf54d8edf51459297346cdb00d8423a68
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Property\\Property' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Property/Property.php',
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Processor' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Processor.php',
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Rule' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Rule.php',
+        'UAParser\\AbstractParser' => __DIR__ . '/..' . '/ua-parser/uap-php/src/AbstractParser.php',
+        'UAParser\\Command\\ConvertCommand' => __DIR__ . '/..' . '/ua-parser/uap-php/src/Command/ConvertCommand.php',
+        'UAParser\\Command\\FetchCommand' => __DIR__ . '/..' . '/ua-parser/uap-php/src/Command/FetchCommand.php',
+        'UAParser\\Command\\LogfileCommand' => __DIR__ . '/..' . '/ua-parser/uap-php/src/Command/LogfileCommand.php',
+        'UAParser\\Command\\ParserCommand' => __DIR__ . '/..' . '/ua-parser/uap-php/src/Command/ParserCommand.php',
+        'UAParser\\Command\\UpdateCommand' => __DIR__ . '/..' . '/ua-parser/uap-php/src/Command/UpdateCommand.php',
+        'UAParser\\DeviceParser' => __DIR__ . '/..' . '/ua-parser/uap-php/src/DeviceParser.php',
+        'UAParser\\Exception\\DomainException' => __DIR__ . '/..' . '/ua-parser/uap-php/src/Exception/DomainException.php',
+        'UAParser\\Exception\\FetcherException' => __DIR__ . '/..' . '/ua-parser/uap-php/src/Exception/FetcherException.php',
+        'UAParser\\Exception\\FileNotFoundException' => __DIR__ . '/..' . '/ua-parser/uap-php/src/Exception/FileNotFoundException.php',
+        'UAParser\\Exception\\InvalidArgumentException' => __DIR__ . '/..' . '/ua-parser/uap-php/src/Exception/InvalidArgumentException.php',
+        'UAParser\\Exception\\ReaderException' => __DIR__ . '/..' . '/ua-parser/uap-php/src/Exception/ReaderException.php',
+        'UAParser\\OperatingSystemParser' => __DIR__ . '/..' . '/ua-parser/uap-php/src/OperatingSystemParser.php',
+        'UAParser\\Parser' => __DIR__ . '/..' . '/ua-parser/uap-php/src/Parser.php',
+        'UAParser\\ParserFactoryMethods' => __DIR__ . '/..' . '/ua-parser/uap-php/src/ParserFactoryMethods.php',
+        'UAParser\\Result\\AbstractClient' => __DIR__ . '/..' . '/ua-parser/uap-php/src/Result/AbstractClient.php',
+        'UAParser\\Result\\AbstractSoftware' => __DIR__ . '/..' . '/ua-parser/uap-php/src/Result/AbstractSoftware.php',
+        'UAParser\\Result\\AbstractVersionedSoftware' => __DIR__ . '/..' . '/ua-parser/uap-php/src/Result/AbstractVersionedSoftware.php',
+        'UAParser\\Result\\Client' => __DIR__ . '/..' . '/ua-parser/uap-php/src/Result/Client.php',
+        'UAParser\\Result\\Device' => __DIR__ . '/..' . '/ua-parser/uap-php/src/Result/Device.php',
+        'UAParser\\Result\\OperatingSystem' => __DIR__ . '/..' . '/ua-parser/uap-php/src/Result/OperatingSystem.php',
+        'UAParser\\Result\\UserAgent' => __DIR__ . '/..' . '/ua-parser/uap-php/src/Result/UserAgent.php',
+        'UAParser\\UserAgentParser' => __DIR__ . '/..' . '/ua-parser/uap-php/src/UserAgentParser.php',
+        'UAParser\\Util\\CodeGenerator' => __DIR__ . '/..' . '/ua-parser/uap-php/src/Util/CodeGenerator.php',
+        'UAParser\\Util\\Converter' => __DIR__ . '/..' . '/ua-parser/uap-php/src/Util/Converter.php',
+        'UAParser\\Util\\Fetcher' => __DIR__ . '/..' . '/ua-parser/uap-php/src/Util/Fetcher.php',
+        'UAParser\\Util\\Logfile\\AbstractReader' => __DIR__ . '/..' . '/ua-parser/uap-php/src/Util/Logfile/AbstractReader.php',
+        'UAParser\\Util\\Logfile\\ApacheCommonLogFormatReader' => __DIR__ . '/..' . '/ua-parser/uap-php/src/Util/Logfile/ApacheCommonLogFormatReader.php',
+        'UAParser\\Util\\Logfile\\ReaderInterface' => __DIR__ . '/..' . '/ua-parser/uap-php/src/Util/Logfile/ReaderInterface.php',
         'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
         'UxWeb\\SweetAlert\\ConvertMessagesIntoSweetAlert' => __DIR__ . '/..' . '/uxweb/sweet-alert/src/SweetAlert/ConvertMessagesIntoSweetAlert.php',
         'UxWeb\\SweetAlert\\LaravelSessionStore' => __DIR__ . '/..' . '/uxweb/sweet-alert/src/SweetAlert/LaravelSessionStore.php',

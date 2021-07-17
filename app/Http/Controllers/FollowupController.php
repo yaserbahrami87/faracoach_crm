@@ -84,6 +84,7 @@ class FollowupController extends BaseController
         $data=$this->get_user_byID($request['user_id']);
         $data->type=$request['status_followups'];
         $data->followby_expert=$request['followby_expert'];
+        $data->tel_verified=1;
         $data->save();
         $request['followby_expert']=$this->get_user_byID($request['followby_expert'])->fname." ".$this->get_user_byID($request['followby_expert'])->lname;
         if($request['sms']!="0")
