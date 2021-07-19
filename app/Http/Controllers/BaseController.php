@@ -1174,39 +1174,40 @@ class BaseController extends Controller
 
     public function get_tweet($user=NULL,$status=NULL,$paginate='paginate')
     {
-        return tweet::when($user,function ($query,$user)
-        {
-            return $query->where('user_id','=',$user);
-        })
-        ->when($status,function($query,$status)
-        {
-            return $query->where('status','=',$status);
-        })
-        ->when($paginate=='paginate',function($query,$paginate)
-        {
-            return  $query->orderby('id','desc')
-                ->select('users.*','tweets.*','tweets.created_at as created_at_tweet')
-                ->paginate($this->countPage());
-        })
-        ->when($paginate=='first',function($query)
-        {
-            return  $query->orderby('id','desc')
-                ->select('users.*','tweets.*','tweets.created_at as created_at_tweet')
-                ->first();
-        })
-        ->when($paginate=='limit',function($query)
-        {
-            return  $query->orderby('posts.id','desc')
-                ->select('users.*','tweets.*','tweets.created_at as created_at_tweet')
-                ->limit(10)
-                ->get();
-        })
-        ->when($paginate=='get',function($query)
-        {
-            return  $query->orderby('id','desc')
-                ->select('users.*','tweets.*','tweets.created_at as created_at_tweet')
-                ->get();
-        });
+        return tweet::join('users','tweets.user_id','=','users.id')
+            ->when($user,function ($query,$user)
+            {
+                return $query->where('user_id','=',$user);
+            })
+            ->when($status,function($query,$status)
+            {
+                return $query->wherein ('status',$status);
+            })
+            ->when($paginate=='paginate',function($query,$paginate)
+            {
+                return  $query->orderby('tweets.id','desc')
+                    ->select('users.*','tweets.*','tweets.created_at as created_at_tweet')
+                    ->paginate($this->countPage());
+            })
+            ->when($paginate=='first',function($query)
+            {
+                return  $query->orderby('tweets.id','desc')
+                    ->select('users.*','tweets.*','tweets.created_at as created_at_tweet')
+                    ->first();
+            })
+            ->when($paginate=='limit',function($query)
+            {
+                return  $query->orderby('tweets.id','desc')
+                    ->select('users.*','tweets.*','tweets.created_at as created_at_tweet')
+                    ->limit(10)
+                    ->get();
+            })
+            ->when($paginate=='get',function($query)
+            {
+                return  $query->orderby('tweets.id','desc')
+                    ->select('users.*','tweets.*','tweets.created_at as created_at_tweet')
+                    ->get();
+            });
 
     }
     public function get_commentByPostId($id,$status=1)

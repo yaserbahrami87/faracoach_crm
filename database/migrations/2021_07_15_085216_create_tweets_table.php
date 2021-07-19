@@ -17,7 +17,7 @@ class CreateTweetsTable extends Migration
             $table->id();
             $table->integer('user_id')->nullable();
             $table->string('tweet',250)->nullable();
-            $table->bigInteger('likes')->nullable();
+            $table->bigInteger('likes')->default(0);
             $table->tinyInteger('status')->default(1);
             $table->string('date_fa')->nullable();
             $table->string('time_fa')->nullable();

@@ -20,48 +20,46 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/faracoach_crm.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/faracoach_crm.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BookingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BookingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FollowupController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FollowupController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PostController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PostController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TypeCoachController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TypeCoachController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TweetController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TweetController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/VerifyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/VerifyController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bootstrap/cache/packages.php" beforeDir="false" afterPath="$PROJECT_DIR$/bootstrap/cache/packages.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/tweet.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/tweet.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bootstrap/cache/services.php" beforeDir="false" afterPath="$PROJECT_DIR$/bootstrap/cache/services.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/fa/validation.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/fa/validation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/allCoaches.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/allCoaches.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/coach.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/coach.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/formReserve.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/formReserve.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_07_15_085216_create_tweets_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_07_15_085216_create_tweets_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/booking.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/booking.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/editTypeCoach.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/editTypeCoach.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/insertTypeCoach.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/insertTypeCoach.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/master/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/master/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/master/leftNavbar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/master/leftNavbar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/booking.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/booking.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/master/navbarTop.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/master/navbarTop.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/boxProfile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/boxProfile.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/panelUser/boxScores.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/boxScores.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/panelUser/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/profile.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/master/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/master/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vendor/composer/InstalledVersions.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/InstalledVersions.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_files.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_files.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_namespaces.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_namespaces.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vendor/composer/installed.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vendor/composer/installed.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/intervention/image/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/intervention/image/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/intervention/image/src/Intervention/Image/AbstractDecoder.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/intervention/image/src/Intervention/Image/AbstractDecoder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/intervention/image/src/Intervention/Image/AbstractDriver.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/intervention/image/src/Intervention/Image/AbstractDriver.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/intervention/image/src/Intervention/Image/AbstractEncoder.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/intervention/image/src/Intervention/Image/AbstractEncoder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/intervention/image/src/Intervention/Image/AbstractFont.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/intervention/image/src/Intervention/Image/AbstractFont.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/intervention/image/src/Intervention/Image/Commands/ExifCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/intervention/image/src/Intervention/Image/Commands/ExifCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/intervention/image/src/Intervention/Image/Gd/Commands/RotateCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/intervention/image/src/Intervention/Image/Gd/Commands/RotateCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/intervention/image/src/Intervention/Image/Gd/Decoder.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/intervention/image/src/Intervention/Image/Gd/Decoder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/intervention/image/src/Intervention/Image/Gd/Encoder.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/intervention/image/src/Intervention/Image/Gd/Encoder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/intervention/image/src/Intervention/Image/Gd/Font.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/intervention/image/src/Intervention/Image/Gd/Font.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/intervention/image/src/Intervention/Image/ImageServiceProviderLaravelRecent.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/intervention/image/src/Intervention/Image/ImageServiceProviderLaravelRecent.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/intervention/image/src/Intervention/Image/Imagick/Commands/RotateCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/intervention/image/src/Intervention/Image/Imagick/Commands/RotateCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/intervention/image/src/Intervention/Image/Imagick/Encoder.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/intervention/image/src/Intervention/Image/Imagick/Encoder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/intervention/image/src/Intervention/Image/Imagick/Font.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/intervention/image/src/Intervention/Image/Imagick/Font.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/intervention/image/src/Intervention/Image/Size.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/intervention/image/src/Intervention/Image/Size.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -585,7 +583,10 @@
       <workItem from="1626236723817" duration="15144000" />
       <workItem from="1626321802431" duration="9708000" />
       <workItem from="1626457031477" duration="1837000" />
-      <workItem from="1626496829104" duration="667000" />
+      <workItem from="1626496829104" duration="20584000" />
+      <workItem from="1626584385375" duration="12094000" />
+      <workItem from="1626600567896" duration="8514000" />
+      <workItem from="1626669147864" duration="4340000" />
     </task>
     <servers />
   </component>
@@ -633,10 +634,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1621149335602" />
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1626332847340">
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1626680056814">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1626332847340" />
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1626680056814" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

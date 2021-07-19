@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 use Hekmatinasser\Verta\Verta;
 use Throwable;
 use SweetAlert;
+use Intervention\Image\Facades\Image;
 
 class UserController extends BaseController
 {
@@ -765,10 +766,10 @@ class UserController extends BaseController
                     'state'             =>'nullable|numeric',
                     'city'              =>'nullable|numeric',
                     'address'           =>'nullable|min:4|string',
-                    'personal_image'    =>'nullable|mimes:jpeg,jpg,bmp|max:600',
-                    'shenasnameh_image' =>'nullable|mimes:jpeg,jpg,bmp|max:600',
-                    'cartmelli_image'   =>'nullable|mimes:jpeg,jpg,bmp|max:600',
-                    'education_image'   =>'nullable|mimes:jpeg,jpg,bmp|max:600',
+                    'personal_image'    =>'nullable|mimes:jpeg,jpg,bmp,png|max:600',
+                    'shenasnameh_image' =>'nullable|mimes:jpeg,jpg,bmp,png|max:600',
+                    'cartmelli_image'   =>'nullable|mimes:jpeg,jpg,bmp,png|max:600',
+                    'education_image'   =>'nullable|mimes:jpeg,jpg,bmp,png|max:600',
                     'resume'            =>'nullable|mimes:docx,doc,pdf|max:1024',
                     'email'             =>'nullable|email|',
                     'gettingknow'       =>'nullable|string',
@@ -783,8 +784,11 @@ class UserController extends BaseController
             if ($request->has('personal_image') && $request->file('personal_image')->isValid()) {
                 $file = $request->file('personal_image');
                 $personal_image = "personal-" . $user->tel . "." . $request->file('personal_image')->extension();
-                $path = public_path('/documents/users/');
+                $path = public_path('documents/users/');
                 $files = $request->file('personal_image')->move($path, $personal_image);
+                $img=Image::make($files->getRealPath());
+                $img->resize(350,350);
+                $img->save($path.'small-'.$personal_image);
                 $request->personal_image = $personal_image;
             }
 

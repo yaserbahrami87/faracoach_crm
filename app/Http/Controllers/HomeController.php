@@ -31,18 +31,23 @@ class HomeController extends BaseController
         $posts=$this->get_post(NULL,1,'limit');
         if(Auth::check())
         {
-            $tweets=$this->get_tweet(NULL,2,'paginate');
+            $tweets=$this->get_tweet(NULL,[2,1],'paginate');
         }
         else
         {
-            $tweets=$this->get_tweet(NULL,1,'paginate');
+            $tweets=$this->get_tweet(NULL,[1],'paginate');
         }
+
 
         foreach ($posts as $item)
         {
-//            $item->time=($this->dateNow)->formatDifference($item->updated_at);
             $item->time=$this->diff($item->created_at_post,'Asia/Tehran');
 
+        }
+
+        foreach ($tweets as $item)
+        {
+            $item->time=$this->diff($item->created_at_tweet,'Asia/Tehran');
         }
 
         $last_users=User::wherenotin('type',['2','3','4'])
@@ -50,6 +55,7 @@ class HomeController extends BaseController
             ->orderby('last_login_at','desc')
             ->limit(12)
             ->get();
+
         $last_coaches=User::join('coaches','users.id','=','coaches.user_id')
                 //->wherenotin('users.type',['2','3','4'])
                 ->where('users.status_coach','=',1)
@@ -58,8 +64,8 @@ class HomeController extends BaseController
                 ->get();
 
 
-//        return view('home')
-        return redirect('/login')
+        return view('home')
+//        return redirect('/login')
                     ->with('tweets',$tweets)
                     ->with('posts',$posts)
                     ->with('last_users',$last_users)

@@ -10,7 +10,7 @@
 
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{{asset('dashboard/plugins/fontawesome-free/css/all.min.css')}}" />
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="{{asset('dashboard/plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
     <!-- Theme style -->
@@ -54,72 +54,76 @@
 
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
-            <!-- Messages Dropdown Menu -->
+            <!-- Messages Dropdown Menu
             <li class="nav-item ">
                 <a class="nav-link"  href="/logout">
                     <i class="fas fa-sign-out-alt"></i>
                     <span class="badge navbar-badge pr-4">خروج</span>
                 </a>
             </li>
-            <!--
+            -->
             <li class="nav-item dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#">
-                    <i class="far fa-comments"></i>
-                    <span class="badge  pr-4">3</span>
+                    <i class="far fa-user"></i>
+                    <span class="badge  pr-4">{{Auth::user()->fname}} {{Auth::user()->lname}}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                    <a href="#" class="dropdown-item">
-
+                    <a href="/" class="dropdown-item">
                         <div class="media">
-                            <img src="{{asset('dashboard/dist/img/user1-128x128.jpg')}}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                             <div class="media-body">
-                                <h3 class="dropdown-item-title">
-                                    Brad Diesel
-                                    <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
+                                <h3 class="dropdown-item-title text-right">
+                                    سایت اصلی
+                                    <span class="float-left text-sm ">
+                                        <i class="bi bi-house-fill"></i>
+                                    </span>
                                 </h3>
-                                <p class="text-sm">Call me whenever you can...</p>
-                                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="/panel/profile" class="dropdown-item">
+                        <div class="media">
+                            <div class="media-body">
+                                <h3 class="dropdown-item-title text-right">
+                                    پروفایل
+                                    <span class="float-left text-sm ">
+                                        <i class="bi bi-person-circle"></i>
+                                    </span>
+                                </h3>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="/panel/user/password" class="dropdown-item">
+                        <div class="media">
+                            <div class="media-body">
+                                <h3 class="dropdown-item-title text-right">
+                                   تغییر رمز
+                                    <span class="float-left text-sm ">
+                                        <i class="fas fa-lock"></i>
+                                    </span>
+                                </h3>
                             </div>
                         </div>
 
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-
+                    <a href="/logout" class="dropdown-item">
                         <div class="media">
-                            <img src="{{asset('dashboard/dist/img/user8-128x128.jpg')}}" alt="User Avatar" class="img-size-50 img-circle mr-3">
                             <div class="media-body">
-                                <h3 class="dropdown-item-title">
-                                    John Pierce
-                                    <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
+                                <h3 class="dropdown-item-title text-right">
+                                    خروج
+                                    <span class="float-left text-sm">
+                                        <i class="bi bi-power"></i>
+                                    </span>
                                 </h3>
-                                <p class="text-sm">I got your message bro</p>
-                                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
                             </div>
                         </div>
 
                     </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-
-                        <div class="media">
-                            <img src="{{asset('dashboard/dist/img/user3-128x128.jpg')}}" alt="User Avatar" class="img-size-50 img-circle mr-3">
-                            <div class="media-body">
-                                <h3 class="dropdown-item-title">
-                                    Nora Silvester
-                                    <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                                </h3>
-                                <p class="text-sm">The subject goes here</p>
-                                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-                            </div>
-                        </div>
-
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
                 </div>
             </li>
-            -->
+
             <!-- Notifications Dropdown Menu
             <li class="nav-item dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#">
@@ -222,14 +226,19 @@
 @include('sweet::alert')
 
 
+
 <!--   Core JS Files   -->
 <script src="{{asset('dashboard/assets/js/core/jquery.min.js')}}"></script>
+<script src="{{asset('dashboard/assets/js/core/popper.min.js')}}"></script>
+<script src="{{asset('dashboard/assets/js/core/bootstrap.min.js')}}"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 
 <script src="{{asset('dashboard/assets/js/java.js')}}"></script>
 <script src="{{asset('vendor/file-manager/js/file-manager.js')}}"></script>
 
-<script src="{{asset('dashboard/assets/js/core/popper.min.js')}}"></script>
-<script src="{{asset('dashboard/assets/js/core/bootstrap.min.js')}}"></script>
+
+
 <script src="{{asset('dashboard/assets/js/plugins/perfect-scrollbar.jquery.min.js')}}"></script>
 
 
@@ -237,11 +246,10 @@
 
 
 <script src="{{asset('dashboard/plugins/jquery/jquery.min.js')}}"></script>
-
-<script src="{{asset('dashboard/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('dashboard/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 <script src="{{asset('dashboard/dist/js/adminlte.js')}}"></script>
 
+<!-- <script src="{{asset('dashboard/dist/js/pages/dashboard2.js')}}"></script> -->
 
 @yield('footerScript')
 </body>

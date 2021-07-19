@@ -3,7 +3,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" dir="rtl" id="navbarTogglerDemo01">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="/">
         <img src="{{asset('images/white-logo.png')}}" alt="" />
       </a>
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -55,6 +55,22 @@
       </a>
       -->
       @if(Auth::check())
+            <ul class="nav nav-pills">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        {{Auth::user()->fname}} {{Auth::user()->lname}}
+                        <i class="bi bi-person-circle"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/panel">صفحه مدیریت</a>
+                        <a class="dropdown-item" href="/panel/user/password">تغییر رمز </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/logout">خروج</a>
+                    </div>
+                </li>
+            </ul>
+
+            <!--
             <a href="/panel" class="btn btn-primary" role="button" aria-pressed="true" id="btnRegister">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="m-0 bi bi-person-circle" viewBox="0 0 16 16">
                     <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
@@ -62,6 +78,7 @@
                 </svg>
                 پنل مدیریت
             </a>
+            -->
       @else
             <a href="/login" class="btn btn-primary" role="button" aria-pressed="true" id="btnRegister">ورود / ثبت نام</a>
       @endif

@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '19b85534f36bd342810120fc03308766fef9c90b',
+    'reference' => '454d10a1e9d1156298d2561610b67490b459e084',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -464,12 +464,12 @@
     ),
     'intervention/image' => 
     array (
-      'pretty_version' => '2.5.1',
-      'version' => '2.5.1.0',
+      'pretty_version' => '2.6.0',
+      'version' => '2.6.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'abbf18d5ab8367f96b3205ca3c89fb2fa598c69e',
+      'reference' => 'a2d7238069bb01322f9c2a661449955434fec9c6',
     ),
     'intervention/imagecache' => 
     array (
@@ -548,7 +548,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '19b85534f36bd342810120fc03308766fef9c90b',
+      'reference' => '454d10a1e9d1156298d2561610b67490b459e084',
     ),
     'laravel/tinker' => 
     array (

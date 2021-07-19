@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\tweet;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TweetController extends Controller
 {
@@ -35,13 +36,25 @@ class TweetController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
         $this->validate($request,[
             'tweet'     =>'required|string',
             'status'    =>'required|numeric',
         ]);
 
+        $status=tweet::create($request->all()+[
+            'user_id'   =>Auth::user()->id
+            ]);
 
+        if($status)
+        {
+            alert()->success('دلنوشته با موفقیت اضافه شد')->persistent('بستن');
+            return '<script>window.location="/"</script>';
+        }
+        else
+        {
+            alert()->error('خطا در دلنوشته')->persistent('بستن');
+            return redirect('/');
+        }
     }
 
     /**

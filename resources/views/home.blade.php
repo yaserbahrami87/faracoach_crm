@@ -1,8 +1,12 @@
 @extends('master.index')
 
 @section('headerscript')
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+    <link href="{{asset('/trumbowyg-2.25.1/dist/ui/trumbowyg.min.css')}}" rel="stylesheet" />
+
 @endsection
 
 @section('row1')
@@ -44,7 +48,7 @@
         </aside>
     </div>
     <div class="col-md-6">
-        <h3 class="pb-3 border-bottom mb-3">آخرین دلنوشته ها  </h3>
+        <!--  <h3 class="pb-3 border-bottom mb-3">آخرین دلنوشته ها  </h3> -->
         @if(Auth::check())
                 <div class="card-body p-0">
                     <div class="media pb-2 pt-2">
@@ -75,6 +79,7 @@
 
                                     </div>
                                     <textarea name="tweet" id="tweet"></textarea>
+
                                     <div class="form-group">
                                         <label for="status">نمایش برای</label>
                                         <select class="form-control" id="status" name="status">
@@ -100,10 +105,14 @@
             <article class="card mb-3" >
                 <div class="card-body">
                     <div class="media pb-2 pt-2">
-                        <img src="{{$item->image}}" class="mr-3 rounded-circle border"  width="50px" height="50px" alt="...">
+                        @if(strlen($item->personal_image)>0)
+                            <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="mr-3 rounded-circle border"  width="50px" height="50px" alt="...">
+                        @else
+                            <img src="{{asset('/documents/users/default-avatar.png')}}" class="mr-3 rounded-circle border"  width="50px" height="50px" alt="...">
+                        @endif
+
                         <div class="media-body pt-3">
-                            <h6 class="mt-0 text-justify">{{$item->title}}</h6>
-                            <small>{{$item->time}} قبل</small>
+                            {!!$item->tweet !!}
                             <small>منتشر شده توسط
                                 <a href="{{asset('/'.$item->username)}}" target="_blank">
                                     <small>{{$item->username}}</small>
@@ -113,13 +122,15 @@
                     </div>
                 </div>
                 <div class="card-footer text-muted">
-                    <a href="">
+                    <a href="" class="likes">
                         <i class="bi bi-suit-heart-fill"></i>
                     </a>
-                    <a href="">
+                    <a href="" class="likes">
                         <i class="bi bi-suit-heart"></i>
                     </a>
-                    <small>0 نفر پسندید</small>
+                    <small>{{$item->likes}} نفر پسندید</small>
+
+                    <small class="float-left">{{$item->time}} قبل</small>
                 </div>
             </article>
         @endforeach
@@ -148,9 +159,13 @@
 
 @section('footerScript')
     <script>
+        $('.likes').click(function (e)
+        {
+            e.preventDefault();
+        });
+
         $('#insert_tweet').click(function()
         {
-            console.log('asdasdads');
             var loading = '<div class="col-12 text-center"><div class="spinner-border text-primary text-center" role="status"><span class="sr-only">Loading...</span></div></div>';
             $("#div_error").html(loading);
             var data=$('#tweetForm').serialize();
@@ -159,9 +174,9 @@
                 url: "/tweets/" ,
                 data:data,
                 statusCode: {
-                    // 422: function() {
-                    //     $("#div_error").html('<div class="alert alert-danger" role="alert">لطفا تمامی فیلدها رو پر کنید</div>');
-                    // },
+                    422: function() {
+                        $("#div_error").html('<div class="alert alert-danger" role="alert">خطا 422</div>');
+                    },
                     500:function()
                     {
                         $("#div_error").html("خطا 500");
@@ -181,11 +196,26 @@
             $('[data-toggle="tooltip"]').tooltip()
         })
     </script>
-    <script src="https://cdn.ckeditor.com/4.16.1/basic/ckeditor.js"></script>
+
+
+    <script src="{{asset('/trumbowyg-2.25.1/dist/trumbowyg.min.js')}}"></script>
+    <script src="{{asset('/trumbowyg-2.25.1/dist/langs/fa.js')}}"></script>
     <script>
-        CKEDITOR.replace( 'tweet' ,
-            {
-                language:'fa'
-            });
+        $('#tweet').trumbowyg({
+            lang:'fa',
+            btns: [
+                ['undo', 'redo'], // Only supported in Blink browsers
+                ['formatting'],
+                ['strong', 'em', 'del'],
+                ['superscript', 'subscript'],
+                ['link'],
+                ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+                ['unorderedList', 'orderedList'],
+                ['horizontalRule'],
+                ['removeformat'],
+                ['fullscreen']
+            ]
+        })
     </script>
+
 @endsection

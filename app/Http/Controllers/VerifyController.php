@@ -382,19 +382,21 @@ class VerifyController extends BaseController
                     ->count();
         if($status==1)
         {
-            $user=verify::where('code','=',$request['code'])
+            $verify=verify::where('code','=',$request['code'])
                     ->where('verify','=',0)
                     ->first();
-            $created_at=($user['created_at']);
+
+            $created_at=($verify['created_at']);
             $created_at_add=$created_at->addMinutes(10);
             if($created_at_add>Carbon::now())
             {
-                $user=$this->get_user($request['tel'],NULL,NULL,NULL,true);
+
+                $user=$this->get_user($verify->tel,NULL,NULL,NULL,true);
                 if(!is_null($user))
                 {
-                    $user=$this->get_user($request['tel'],NULL,NULL,NULL,true);
+                    $user=$this->get_user($verify->tel,NULL,NULL,NULL,true);
                     Auth::login($user);
-                    return redirect('/panel');
+                    return redirect('/');
                 }
                 else
                 {

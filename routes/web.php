@@ -281,7 +281,6 @@ Route::post('/booking/mohasebe','ReserveController@mohasebe');
 Route::resource('booking','BookingController');
 
 //reserve
-
 Route::post('/reserve/insert', 'ReserveController@insert');
 Route::resource('reserve','ReserveController');
 
