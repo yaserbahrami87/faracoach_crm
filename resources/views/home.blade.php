@@ -122,13 +122,7 @@
                     </div>
                 </div>
                 <div class="card-footer text-muted">
-                    <a href="" class="likes">
-                        <i class="bi bi-suit-heart-fill"></i>
-                    </a>
-                    <a href="" class="likes">
-                        <i class="bi bi-suit-heart"></i>
-                    </a>
-                    <small>{{$item->likes}} نفر پسندید</small>
+
 
                     <small class="float-left">{{$item->time}} قبل</small>
                 </div>

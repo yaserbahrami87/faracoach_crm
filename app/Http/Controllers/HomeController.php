@@ -70,6 +70,7 @@ class HomeController extends BaseController
                     ->with('posts',$posts)
                     ->with('last_users',$last_users)
                     ->with('last_coaches',$last_coaches);
+
     }
 
     public function diff($item,$timezone)

@@ -196,7 +196,17 @@
                                     <i class="fas fa-arrows-alt-v float-left"></i>
                                 </a>
                             </th>
-                            <th>نحوه آشنایی
+                            <th>معرف
+                                <a href="?orderby=last_login_at&parameter=@if($parameter=='desc')asc @elseif($parameter=='asc')desc @endif">
+                                    <i class="fas fa-arrows-alt-v float-left"></i>
+                                </a>
+                            </th>
+                            <th> آشنایی
+                                <a href="?orderby=created_at&parameter=@if($parameter=='desc')asc @elseif($parameter=='asc')desc @endif">
+                                    <i class="fas fa-arrows-alt-v float-left"></i>
+                                </a>
+                            </th>
+                            <th> ورود
                                 <a href="?orderby=created_at&parameter=@if($parameter=='desc')asc @elseif($parameter=='asc')desc @endif">
                                     <i class="fas fa-arrows-alt-v float-left"></i>
                                 </a>
@@ -234,11 +244,7 @@
                                     <i class="fas fa-arrows-alt-v float-left"></i>
                                 </a>
                             </th>
-                            <th>معرف
-                                <a href="?orderby=last_login_at&parameter=@if($parameter=='desc')asc @elseif($parameter=='asc')desc @endif">
-                                    <i class="fas fa-arrows-alt-v float-left"></i>
-                                </a>
-                            </th>
+
                             @if(Auth::user()->type==2)
                                 <th>حذف</th>
                             @endif
@@ -267,7 +273,12 @@
                                         {{$item->tel}}
                                     </a>
                                 </td>
-
+                                <td>{{$item->introduced}}</td>
+                                <td>
+                                    <a href="/admin/user/{{$item->id}}" class="text-dark d-block">
+                                        {{$item->gettingknow}}
+                                    </a>
+                                </td>
                                 <td>
                                     <a href="/admin/user/{{$item->id}}" class="text-dark d-block">
                                         {{$item->resource}}
@@ -303,7 +314,7 @@
                                         {{$item->last_login_at}}
                                     </a>
                                 </td>
-                                <td>{{$item->introduced}}</td>
+
                                 @if(Auth::user()->type==2)
                                     <td>
                                         <a href="/admin/user/{{$item->id}}/delete" class="text-dark del">
@@ -322,7 +333,9 @@
                             <th>نام</th>
                             <th>نام خانوادگی</th>
                             <th>شماره همراه	</th>
-                            <th>نحوه آشنایی</th>
+                            <th>معرف</th>
+                            <th> آشنایی</th>
+                            <th>ورود</th>
                             @if(Auth::user()->type==2)
                                 <th>مسئول پیگیری</th>
                             @endif
@@ -332,7 +345,7 @@
                             <th>کیفیت</th>
                             <th>وضعیت</th>
                             <th>اخرین ورود</th>
-                            <th>معرف</th>
+
                             @if(Auth::user()->type==2)
                                 <th>حذف</th>
                             @endif
