@@ -294,3 +294,6 @@ Route::post('/coupon/check','CouponController@check');
 
 //TWEETS
 Route::resource('tweets','TweetController');
+
+//LiKE
+Route::resource('like','LikeController');

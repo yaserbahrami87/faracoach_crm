@@ -61,8 +61,6 @@ class BookingController extends BaseController
         else
         {
             $booking = booking::where('user_id', '=', Auth::user()->id)
-                ->where('start_date','>',$this->dateNow)
-//                ->where('staus','<>',1)
                 ->orderby('start_date', 'desc')
                 ->orderby('start_time', 'desc')
                 ->paginate($this->countPage());
@@ -368,7 +366,7 @@ class BookingController extends BaseController
 
     public function acceptReserve()
     {
-        $booking=booking::where('status','=',0)
+        $booking=booking::wherein('status',[0,2,3])
                 ->where('user_id','=',Auth::user()->id)
                 ->orderby('id','desc')
                 ->paginate($this->countPage());

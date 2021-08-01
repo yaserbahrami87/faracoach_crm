@@ -66,9 +66,24 @@ class UserController extends BaseController
                 $item->lastDateFollowup=$this->get_lastFollowupUser($item->id)['date_fa'];
                 $item->lastFollowupCourse=$this->get_lastFollowupUser($item->id)['course_id'];
                 $item->lastFollowupCourse=$this->get_coursesByID($item->lastFollowupCourse)['course'];
+                $item->insert_user=$this->get_user( NULL,$item->insert_user_id,NULL,NULL,true)['fname']." ".$this->get_user( NULL,$item->insert_user_id,NULL,NULL,true)['lname'];
                 if(is_null($item->personal_image))
                 {
                     $item->personal_image="default-avatar.png";
+                }
+
+                if(!is_null($item->introduced))
+                {
+                    if ($this->get_user(NULL, $item->introduced, NULL, NULL, true)->count()>0)
+                    {
+                        $item->introduced = $this->get_user(NULL, $item->introduced, NULL, NULL, true)->fname.' '.$this->get_user(NULL, $item->introduced, NULL, NULL, true)->lname ;
+                    }
+                    else if ($this->get_user($item->introduced, NULL, NULL, NULL, true)->count()>0)
+                    {
+
+                        $item->introduced=$this->get_user($item->introduced, NULL, NULL, NULL, true)->fname.' '.$this->get_user($item->introduced, NULL, NULL, NULL, true)->lname;
+
+                    }
                 }
             }
             $tags=$this->get_tags();
@@ -931,81 +946,97 @@ class UserController extends BaseController
 
     public function categorybyAdmin(Request $request)
     {
-        if(Auth::user()->type==2) {
-            if (!is_null($request) &&(strlen($request['user'])>0)) {
-                $users = user::where('followby_expert', '=', $request['user'])
+        $this->validate($request,[
+            'user'              =>'required|numeric',
+            'categorypeygiri'   =>'required|boolean',
+        ]);
+        if (!is_null($request) &&(strlen($request['user'])>0)) {
+            if($request['categorypeygiri']==0)
+            {
+                $users = user::join('followups','users.id','=','followups.user_id')
+                        ->where('followups.insert_user_id', '=', $request['user'])
+                        ->select('users.*')
                         ->paginate($this->countPage());
-                $countList = user::where('followby_expert', '=', $request['user'])
-                        ->count();
-                if(is_null($request->orderby)&&is_null($request->parameter))
-                {
-                    $request['orderby']='id';
-                    $request['parameter']='desc';
-                }
-                foreach ($users as $item)
-                {
-                    $expert=$this->get_user_byID($item->followby_expert);
-                    if(!is_null($expert))
-                    {
-                        $item->followby_expert=$expert->fname." ".$expert->lname;
-                    }
-
-                    $item->status_followups=$this->userType($this->get_lastFollowupUser($item->id)['status_followups']);
-                    $item->quality=$this->get_lastFollowupUser($item->id)['problem'];
-                    $item->quality_color=$this->get_lastFollowupUser($item->id)['color'];
-                    $item->lastDateFollowup=$this->get_lastFollowupUser($item->id)['date_fa'];
-                    $item->lastFollowupCourse=$this->get_lastFollowupUser($item->id)['course_id'];
-                    $item->lastFollowupCourse=$this->get_coursesByID($item->lastFollowupCourse)['course'];
-                    if(is_null($item->personal_image))
-                    {
-                        $item->personal_image="default-avatar.png";
-                    }
-                }
-                $users->appends(['user' => $request['user']]);
-                $tags = $this->get_tags();
-                $parentCategory = $this->get_category('پیگیری');
-                $usersAdmin = user::orwhere('type', '=', 2)
-                    ->orwhere('type', '=', 3)
-                    ->get();
-
-
-
-                //لیست تعداد کاربرهای هر شخص
-                $notfollowup=count($this->get_notfollowup_withoutPaginate());
-                $continuefollowup=count($this->get_continuefollowupbyID_withoutPaginate($request['user']));
-                $cancelfollowup=count($this->get_cancelfollowupbyID_withoutPaginate($request['user']));
-                $waiting=count($this->get_waitingbyID_withoutPaginate($request['user']));
-                $noanswering=count($this->get_noansweringbyID_withoutPaginate($request['user']));
-                $students =count($this->get_studentsbyID_withoutPaginate($request['user']));
-                $todayFollowup = count($this->get_todayFollowupbyID_withoutPaginate($request['user']));
-                $expireFollowup = $this->get_expireFollowupbyID($request['user']);
-                $myfollowup=count($this->get_myfollowupbyID_withoutPaginate($request['user']));
-                $followedToday = count($this->get_followedTodaybyID_withoutPaginate($request['user']));
-                $trashuser=count($this->getAll_trashuser_withoutPaginate());
-
-                return view('panelAdmin.users')
-                    ->with('tags', $tags)
-                    ->with('users', $users)
-                    ->with('countList', $countList)
-                    ->with('parentCategory', $parentCategory)
-                    ->with('usersAdmin', $usersAdmin)
-                    ->with('followedToday',$followedToday)
-                    ->with('myfollowup',$myfollowup)
-                    ->with('todayFollowup',$todayFollowup)
-                    ->with('students',$students)
-                    ->with('noanswering',$noanswering)
-                    ->with('waiting',$waiting)
-                    ->with('cancelfollowup',$cancelfollowup)
-                    ->with('continuefollowup',$continuefollowup)
-                    ->with('notfollowup',$notfollowup)
-                    ->with('user',$request['user'])
-                    ->with('trashuser',$trashuser)
-                    ->with('parameter',$request['parameter'])
-                    ->with('orderby',$request['orderby']);
-            } else {
-                return redirect('/admin/users');
             }
+            elseif($request['categorypeygiri']==1)
+            {
+                $users = user::where('insert_user_id', '=', $request['user'])
+                    ->paginate($this->countPage());
+            }
+
+
+            $countList = user::where('followby_expert', '=', $request['user'])
+                    ->count();
+            if(is_null($request->orderby)&&is_null($request->parameter))
+            {
+                $request['orderby']='id';
+                $request['parameter']='desc';
+            }
+            foreach ($users as $item)
+            {
+                $expert=$this->get_user_byID($item->followby_expert);
+                if(!is_null($expert))
+                {
+                    $item->followby_expert=$expert->fname." ".$expert->lname;
+                }
+
+                $item->status_followups=$this->userType($this->get_lastFollowupUser($item->id)['status_followups']);
+                $item->quality=$this->get_lastFollowupUser($item->id)['problem'];
+                $item->quality_color=$this->get_lastFollowupUser($item->id)['color'];
+                $item->lastDateFollowup=$this->get_lastFollowupUser($item->id)['date_fa'];
+                $item->lastFollowupCourse=$this->get_lastFollowupUser($item->id)['course_id'];
+                $item->lastFollowupCourse=$this->get_coursesByID($item->lastFollowupCourse)['course'];
+                $item->insert_user=$this->get_user( NULL,$item->insert_user_id,NULL,NULL,true)['fname']." ".$this->get_user( NULL,$item->insert_user_id,NULL,NULL,true)['lname'];
+                if(is_null($item->personal_image))
+                {
+                    $item->personal_image="default-avatar.png";
+                }
+            }
+            $users->appends(['user' => $request['user'],'categorypeygiri' => $request['categorypeygiri']]);
+            $tags = $this->get_tags();
+            $parentCategory = $this->get_category('پیگیری');
+            $usersAdmin = user::orwhere('type', '=', 2)
+                ->orwhere('type', '=', 3)
+                ->get();
+
+
+
+            //لیست تعداد کاربرهای هر شخص
+            $notfollowup=count($this->get_notfollowup_withoutPaginate());
+            $continuefollowup=count($this->get_continuefollowupbyID_withoutPaginate($request['user']));
+            $cancelfollowup=count($this->get_cancelfollowupbyID_withoutPaginate($request['user']));
+            $waiting=count($this->get_waitingbyID_withoutPaginate($request['user']));
+            $noanswering=count($this->get_noansweringbyID_withoutPaginate($request['user']));
+            $students =count($this->get_studentsbyID_withoutPaginate($request['user']));
+            $todayFollowup = count($this->get_todayFollowupbyID_withoutPaginate($request['user']));
+            $expireFollowup = $this->get_expireFollowupbyID($request['user']);
+            $myfollowup=count($this->get_myfollowupbyID_withoutPaginate($request['user']));
+            $followedToday = count($this->get_followedTodaybyID_withoutPaginate($request['user']));
+            $trashuser=count($this->getAll_trashuser_withoutPaginate());
+
+            return view('panelAdmin.users')
+                ->with('tags', $tags)
+                ->with('users', $users)
+                ->with('countList', $countList)
+                ->with('parentCategory', $parentCategory)
+                ->with('usersAdmin', $usersAdmin)
+                ->with('followedToday',$followedToday)
+                ->with('myfollowup',$myfollowup)
+                ->with('todayFollowup',$todayFollowup)
+                ->with('students',$students)
+                ->with('noanswering',$noanswering)
+                ->with('waiting',$waiting)
+                ->with('cancelfollowup',$cancelfollowup)
+                ->with('continuefollowup',$continuefollowup)
+                ->with('notfollowup',$notfollowup)
+                ->with('user',$request['user'])
+                ->with('trashuser',$trashuser)
+                ->with('parameter',$request['parameter'])
+                ->with('orderby',$request['orderby']);
+        } else {
+            return redirect('/admin/users');
         }
+
     }
 
     // نمایش اعضای سایت براساس دسته بندی برای ادمین
@@ -1195,7 +1226,6 @@ class UserController extends BaseController
             }
         }
         else {
-
             switch ($request['categoryUsers']) {
                 case '0':
                     return redirect('/admin/users/');

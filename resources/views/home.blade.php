@@ -4,9 +4,12 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-
     <link href="{{asset('/trumbowyg-2.25.1/dist/ui/trumbowyg.min.css')}}" rel="stylesheet" />
-
+    <style>
+        body{
+            background-color:#fafbfd;
+        }
+    </style>
 @endsection
 
 @section('row1')
@@ -55,7 +58,7 @@
                         <img src="{{asset('/documents/users/'.Auth::user()->personal_image)}}" class="mr-3 rounded-circle"  width="50px" height="50px" alt="...">
                         <div class="media-body pt-3">
                             <div class="custom-file">
-                                <button type="button" class="btn btn-block btn-secondary" data-toggle="modal" data-target="#exampleModal" >دلنوشته جدید</button>
+                                <button type="button" class="btn btn-block btn-secondary" data-toggle="modal" data-target="#exampleModal" >نوشته جدید</button>
                             </div>
                         </div>
                     </div>
@@ -92,15 +95,15 @@
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 <button type="button" class="btn btn-primary" id="insert_tweet">انتشار</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
                             </div>
                         </div>
                     </div>
                 </div>
 
         @endif
-        <h6 class="card-title mt-4 pb-3 border-bottom">آخرین دلنوشته ها  </h6>
+        <h6 class="card-title mt-4 pb-3 border-bottom">آخرین نوشته ها  </h6>
         @foreach($tweets as $item)
             <article class="card mb-3" >
                 <div class="card-body">
@@ -122,9 +125,27 @@
                     </div>
                 </div>
                 <div class="card-footer text-muted">
+                    <div class="row">
+                        <div id="like{{$item->id}}" class="col-6">
+                            @if(Auth::check())
+                                @if($item->status_like==true)
+                                    <!-- <a href="" class="dislikes" description="{{$item->like[0]->id}}" post="{{$item->id}}" >
+                                        <i class="bi bi-heart-fill"></i>
+                                    </a> -->
+                                @else
+                                    <!--
+                                    <a href='' class='likes' description='{{$item->id}}' >
+                                        <i class='bi bi-heart'></i>
+                                    </a>-->
+                                @endif
+                            @endif
+                            <!-- <small> {{count($item->like)}} نفر پسندیدند</small>  -->
+                        </div>
+                        <div class="col-6">
+                            <small class="float-left">{{$item->time}} قبل</small>
+                        </div>
+                    </div>
 
-
-                    <small class="float-left">{{$item->time}} قبل</small>
                 </div>
             </article>
         @endforeach
@@ -156,7 +177,39 @@
         $('.likes').click(function (e)
         {
             e.preventDefault();
+            var id=$(this).attr('description');
+            var _token= $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                method:'POST',
+                url:'/like',
+                data:{post_id :id,_token: _token},
+                success:function(data)
+                {
+                    $("#like"+id).html(data);
+                }
+            });
         });
+
+        $('.dislikes').click(function (e)
+        {
+            console.log("DISLIKE");
+            e.preventDefault();
+            var id=$(this).attr('description');
+            var post=$(this).attr('post');
+            var _token= $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                method:'DELETE',
+                url:'/like/'+id,
+                data:{post_id :id,_token: _token},
+                success:function(data)
+                {
+                    console.log(post);
+                    $("#like"+post).html(data);
+                }
+            });
+        });
+
+
 
         $('#insert_tweet').click(function()
         {
@@ -165,7 +218,7 @@
             var data=$('#tweetForm').serialize();
             $.ajax({
                 type: 'POST',
-                url: "/tweets/" ,
+                url: "/tweets" ,
                 data:data,
                 statusCode: {
                     422: function() {

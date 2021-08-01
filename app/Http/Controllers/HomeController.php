@@ -48,6 +48,15 @@ class HomeController extends BaseController
         foreach ($tweets as $item)
         {
             $item->time=$this->diff($item->created_at_tweet,'Asia/Tehran');
+            $item->like=$this->get_likes(NULL, NULL,$item->id,'دلنوشته','get');
+            if(Auth::check()) {
+                foreach ($item->like as $item_like)
+                {
+                    if ($item_like->user_id == Auth::user()->id) {
+                        $item->status_like = true;
+                    }
+                }
+            }
         }
 
         $last_users=User::wherenotin('type',['2','3','4'])

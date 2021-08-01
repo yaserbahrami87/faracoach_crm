@@ -20,10 +20,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/views/dislike.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/like.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BookingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BookingController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/LikeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/LikeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/like.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/like.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_07_19_112712_create_likes_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_07_19_112712_create_likes_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/register.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/master/navbarTop.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/master/navbarTop.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/master/leftNavbar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/master/leftNavbar.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/users.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/users.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -550,7 +562,21 @@
       <workItem from="1626496829104" duration="20584000" />
       <workItem from="1626584385375" duration="12094000" />
       <workItem from="1626600567896" duration="8514000" />
-      <workItem from="1626669147864" duration="5601000" />
+      <workItem from="1626669147864" duration="13532000" />
+      <workItem from="1626754331863" duration="10883000" />
+      <workItem from="1627023319019" duration="55000" />
+      <workItem from="1627023447512" duration="1965000" />
+      <workItem from="1627104823791" duration="5926000" />
+      <workItem from="1627114637435" duration="1780000" />
+      <workItem from="1627118716528" duration="1908000" />
+      <workItem from="1627196990196" duration="6790000" />
+      <workItem from="1627274785527" duration="5542000" />
+      <workItem from="1627296138257" duration="2378000" />
+      <workItem from="1627359511639" duration="15991000" />
+      <workItem from="1627445667448" duration="2474000" />
+      <workItem from="1627703956347" duration="1874000" />
+      <workItem from="1627709483805" duration="16647000" />
+      <workItem from="1627793157248" duration="12401000" />
     </task>
     <servers />
   </component>
@@ -598,10 +624,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1621149335602" />
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1626681109270">
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1627730693098">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1626681109270" />
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1627730693098" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

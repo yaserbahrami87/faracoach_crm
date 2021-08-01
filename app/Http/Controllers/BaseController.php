@@ -11,6 +11,7 @@ use App\course;
 use App\coursetype;
 use App\followbyCategory;
 use App\followup;
+use App\like;
 use App\message;
 use App\option;
 use App\post;
@@ -225,6 +226,47 @@ class BaseController extends Controller
             },function($query){
                 return $query->get();
             });
+    }
+
+    public function get_likes($id=NULL,$user_id=NULL,$post_id=NULL,$type=NULL,$paginate='paginate',$date_fa=NULL,$time_fa=NULL)
+    {
+        return like::when($id,function($query,$id)
+        {
+            return $query->where('id','=',$id);
+        })
+        ->when($user_id,function($query,$user_id)
+        {
+            return $query->where('user_id','=',$user_id);
+        })
+        ->when($post_id,function($query,$post_id)
+        {
+            return $query->where('post_id','=',$post_id);
+        })
+        ->when($type,function($query,$type)
+        {
+            return $query->where('type','=',$type);
+        })
+        ->when($date_fa,function($query,$date_fa)
+        {
+            return $query->where('date_fa','=',$date_fa);
+        })
+        ->when($time_fa,function($query,$time_fa)
+        {
+            return $query->where('time_fa','=',$time_fa);
+        })
+        ->orderby('id', 'desc')
+        ->when($paginate=='paginate',function($query){
+            return $query->paginate($this->countPage());
+        })
+        ->when($paginate=='paginate',function($query){
+            return $query->paginate($this->countPage());
+        })
+        ->when($paginate=='first',function($query){
+            return $query->first();
+        })
+        ->when($paginate=='get',function($query){
+            return $query->get();
+        });
     }
 
     public function get_user_byID($id)

@@ -5,9 +5,11 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8 text-center">
-            <img src="{{asset('/images/logo-colored.png')}}" class="mb-4"/>
+            <a href="/">
+                <img src="{{asset('/images/logo-colored.png')}}" class="mb-4"/>
+            </a>
             <div class="card text-left">
-                <div class="card-header">{{ __('ثبت نام') }}</div>
+                <div class="card-header bg-info text-light">{{ __('ثبت نام') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
@@ -40,7 +42,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('جنسیت:') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('جنسیت:*') }}</label>
 
                             <div class="col-md-6">
                                 <div class="custom-control custom-radio custom-control-inline">
@@ -61,7 +63,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('پست الکترونیکی:') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('پست الکترونیکی:*') }}</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
@@ -75,7 +77,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="tel" class="col-md-4 col-form-label text-md-right">{{ __('تلفن همراه:') }}</label>
+                            <label for="tel" class="col-md-4 col-form-label text-md-right">{{ __('تلفن همراه:*') }}</label>
 
                             <div class="col-md-6">
                                 <div class="input-group">
@@ -167,7 +169,7 @@
 
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('رمز عبور:') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('رمز عبور:*') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -181,7 +183,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('تکرار رمز عبور:') }}</label>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('تکرار رمز عبور:*') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
@@ -193,9 +195,11 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('ثبت نام') }}
                                 </button>
+                                <!--
                                 <a class="btn btn-link" href="/login">
                                     {{ __('ورود') }}
                                 </a>
+                                -->
                             </div>
                         </div>
                     </form>
