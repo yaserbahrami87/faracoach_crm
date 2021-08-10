@@ -1317,7 +1317,7 @@ class BaseController extends Controller
             ->orderby('followups.id', 'desc')
             ->groupby('followups.user_id')
             ->select('users.*')
-            ->when($paginate,function($query){
+            ->when($paginate=='paginate',function($query){
                 return $query->paginate($this->countPage());
             },function($query){
                 return $query->get();

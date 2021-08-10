@@ -2,14 +2,14 @@
 @section('rowcontent')
     <div class="col-xs-12 col-md-8 col-lg-8 col-xl-8">
         <div class="card-header bg-info">
-            <h5 class="card-title">ویرایش دسته بندی کوچ ها</h5>
+            <h5 class="card-title">ویرایش موضوعات کوچ ها</h5>
         </div>
         <div class="card-body">
             <form method="post" action="/admin/category_coach/{{$categorycoaches->id}}">
                 {{csrf_field()}}
                 {{method_field('PATCH')}}
                 <div class="form-group">
-                    <label for="category">دسته بندی</label>
+                    <label for="category">موضوع</label>
                     <input type="text" class="form-control" id="category" name="category" value="{{$categorycoaches->category}}"/>
                 </div>
                 <div class="form-group">

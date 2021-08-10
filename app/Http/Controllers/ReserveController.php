@@ -156,7 +156,8 @@ class ReserveController extends BaseController
         $change_customer=$user->change_customer;
         $count_recommendation=$user->count_recommendation;
 
-        $fi=($count_meeting_fi*$count_meeting)+($customer_satisfaction_fi*$customer_satisfaction)+($change_customer_fi*$change_customer)+($count_recommendation_fi*$count_recommendation);
+//        $fi=($count_meeting_fi*$count_meeting)+($customer_satisfaction_fi*$customer_satisfaction)+($change_customer_fi*$change_customer)+($count_recommendation_fi*$count_recommendation);
+        $fi=$user->fi;
         $off=0;
         $final_off=$fi-$off;
 
@@ -193,7 +194,7 @@ class ReserveController extends BaseController
     }
 
 
-    //
+    //ثبت نهایی رزرو
     public  function insert(Request $request)
     {
 
@@ -225,23 +226,25 @@ class ReserveController extends BaseController
                     $users=booking::join('users','bookings.user_id','=','users.id')
                             ->where('bookings.id','=',$request['booking_id'])
                             ->first();
-                    $coupon =coupon::where('coupon','=',$request['coupon'])
+
+                    $coupon=coupon::where('coupon','=',$request['coupon'])
                                             ->where('user_id','=',$users->id)
                                             ->first();
+
                     if(!is_null($coupon))
                     {
-
                         if ($coupon->count == 0) {
                             return ('<div class="alert alert-danger">تعداد کوپن مورد نظر استفاده شده است</div>');
                         }
-
-                        if ($coupon->count != '-1') {
-                            $coupon->count--;
-                            $coupon->save();
+                        else if($coupon->expire_date < $this->dateNow) {
+                            return ('<div class="alert alert-danger">کوپن مورد نظر منقضی شده است</div>');
                         }
                     }
+                    else
+                    {
+                        return ('<div class="alert alert-danger">کوپن مورد نظر یافت نشد</div>');
+                    }
                 }
-
 
                 if(isset($coupon))
                 {
@@ -266,7 +269,7 @@ class ReserveController extends BaseController
                     $change_customer=$user->change_customer;
                     $count_recommendation=$user->count_recommendation;
 
-                    $fi=($count_meeting_fi*$count_meeting)+($customer_satisfaction_fi*$customer_satisfaction)+($change_customer_fi*$change_customer)+($count_recommendation_fi*$count_recommendation);
+                    $fi=$user->fi;
                     $off=($fi*$coupon->discount)/100;
                     $final_off=$fi-$off;
                     $status=$reserve->update($request->all()+
@@ -276,6 +279,14 @@ class ReserveController extends BaseController
                         'final_off' =>$final_off,
                         'fi'        =>$fi,
                     ]);
+
+                    if($status)
+                    {
+                        if ($coupon->count != '-1') {
+                            $coupon->count--;
+                            $coupon->save();
+                        }
+                    }
                 }
                 else
                 {
@@ -300,7 +311,28 @@ class ReserveController extends BaseController
                     $change_customer=$user->change_customer;
                     $count_recommendation=$user->count_recommendation;
 
-                    $fi=($count_meeting_fi*$count_meeting)+($customer_satisfaction_fi*$customer_satisfaction)+($change_customer_fi*$change_customer)+($count_recommendation_fi*$count_recommendation);
+
+                    $coupon=coupon::where('coupon','=',$reserve['coupon'])
+                        ->where('user_id','=',$users->id)
+                        ->first();
+
+                    if(!is_null($coupon))
+                    {
+                        if ($coupon->count == 0) {
+                            return ('<div class="alert alert-danger">تعداد کوپن مورد نظر استفاده شده است</div>');
+                        }
+                        else if($coupon->expire_date < $this->dateNow) {
+                            return ('<div class="alert alert-danger">کوپن مورد نظر منقضی شده است</div>');
+                        }
+                    }
+                    else
+                    {
+                        return ('<div class="alert alert-danger">کوپن مورد نظر یافت نشد</div>');
+                    }
+
+
+
+                    $fi=$user->fi;
                     $off=0;
                     $final_off=$fi-$off;
 
@@ -338,8 +370,10 @@ class ReserveController extends BaseController
             {
                 $duration='جلسه کوچینگ';
             }
-            $this->sendSms($user->tel,'رزرو '.$duration.' در فراکوچ انجام شد');
-            return ('<div class="alert alert-success">رزرو با موفقیت انجام شد</div>');
+            $this->sendSms($user->tel,$duration." \n تاریخ ".$booking->start_date." \n ساعت ".$booking->start_time);
+            alert()->success('رزرو با موفقیت انجام شد')->persistent('بستن');
+            return '<script>window.location="/"</script>';
+
         }
         else
         {

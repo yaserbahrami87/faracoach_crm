@@ -257,7 +257,8 @@ class CouponController extends BaseController
             $change_customer=$user->change_customer;
             $count_recommendation=$user->count_recommendation;
 
-            $fi=($count_meeting_fi*$count_meeting)+($customer_satisfaction_fi*$customer_satisfaction)+($change_customer_fi*$change_customer)+($count_recommendation_fi*$count_recommendation);
+//            $fi=($count_meeting_fi*$count_meeting)+($customer_satisfaction_fi*$customer_satisfaction)+($change_customer_fi*$change_customer)+($count_recommendation_fi*$count_recommendation);
+            $fi=$user->fi;
             $off=0;
             $final_off=$fi-$off;
             $request['coupon']=NULL;
@@ -325,7 +326,8 @@ class CouponController extends BaseController
             $change_customer=$user->change_customer;
             $count_recommendation=$user->count_recommendation;
 
-            $fi=($count_meeting_fi*$count_meeting)+($customer_satisfaction_fi*$customer_satisfaction)+($change_customer_fi*$change_customer)+($count_recommendation_fi*$count_recommendation);
+//            $fi=($count_meeting_fi*$count_meeting)+($customer_satisfaction_fi*$customer_satisfaction)+($change_customer_fi*$change_customer)+($count_recommendation_fi*$count_recommendation);
+            $fi=$user->fi;
             $off=0;
             $final_off=$fi-$off;
             $request['coupon']=NULL;
@@ -360,14 +362,12 @@ class CouponController extends BaseController
         }
         else
         {
-
             $coupon=coupon::join('users','coupons.user_id','=','users.id')
                     ->where('coupon','=',$request['coupon'])
                     ->where('user_id','=',$users->id)
                     ->first();
             if($coupon->user_id==$users->id)
             {
-
                 $this->validate($request,
                     [
                         'booking_id'    =>'required|numeric',
@@ -376,9 +376,9 @@ class CouponController extends BaseController
                         'details'       =>'nullable|string',
                     ]
                 );
+
                 $reserve=reserve::where('booking_id','=',$request['booking_id'])
                         ->first();
-
 
                 $count_meeting_fi=$this->get_optionByName('count_meeting');
                 $count_meeting_fi=$count_meeting_fi->option_value;
@@ -401,8 +401,21 @@ class CouponController extends BaseController
                 $change_customer=$user->change_customer;
                 $count_recommendation=$user->count_recommendation;
 
-                $fi=($count_meeting_fi*$count_meeting)+($customer_satisfaction_fi*$customer_satisfaction)+($change_customer_fi*$change_customer)+($count_recommendation_fi*$count_recommendation);
-                $off=($fi*$coupon->discount)/100;
+//                $fi=($count_meeting_fi*$count_meeting)+($customer_satisfaction_fi*$customer_satisfaction)+($change_customer_fi*$change_customer)+($count_recommendation_fi*$count_recommendation);
+                $fi=$user->fi;
+                if($coupon->expire_date<$this->dateNow)
+                {
+
+                    $off=0;
+                    $reserve->off=NULL;
+                    $reserve->coupon=NULL;
+                    $request['coupon']=NULL;
+                }
+                else
+                {
+                    $off=($fi*$coupon->discount)/100;
+                }
+
                 $final_off=$fi-$off;
 
 
@@ -418,17 +431,35 @@ class CouponController extends BaseController
                 }
                 else
                 {
-                    $reserve->update($request->all()+
-                        [
-                            'user_id' => Auth::user()->id,
-                            'off'       =>$coupon->discount,
-                            'final_off' =>$final_off,
-                            'fi'        =>$fi,
-                        ]);
+                    if($coupon->expire_date<$this->dateNow)
+                    {
+                        $reserve->update($request->all() +
+                            [
+                                'user_id'   => Auth::user()->id,
+                                'off'       => NULL,
+                                'coupon'    => NULL,
+                                'final_off' => $final_off,
+                                'fi'        => $fi,
+                            ]);
+
+                        $msg='کوپن تخفیف منقضی شده است';
+                        $errorStatus='danger';
+                    }
+                    else
+                    {
+                        $reserve->update($request->all() +
+                            [
+                                'user_id'   => Auth::user()->id,
+                                'off'       => $coupon->discount,
+                                'final_off' => $final_off,
+                                'fi'        => $fi,
+                            ]);
+                        $msg='کوپن اعمال شد';
+                        $errorStatus='success';
+                    }
                 }
 
-                $msg='کوپن اعمال شد';
-                $errorStatus='success';
+
 
                 return view('reserveFi')
                     ->with('msg',$msg)

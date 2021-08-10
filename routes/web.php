@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@index');
 
+
 //Route::middleware(['can:isUser','verified'])->prefix('panel')->group(function () {
 Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
 
@@ -117,7 +118,10 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::get('/user/{user}/delete','UserController@destroy');
     Route::get('/users/category/','UserController@showCategoryUsersAdmin');
     Route::get('/users/categoryTags/','UserController@showCategoryTagsAdmin');
-    Route::get('/users/categorybyAdmin/','UserController@categorybyAdmin');
+//    Route::get('/users/categorybyAdmin/','UserController@categorybyAdmin');
+//    Route::get('/users/list_user_gettingknow','UserController@list_user_gettingknow');
+    Route::get('/users/advancesearch','UserController@advancesearch');
+
 
     Route::get('/user/{tel}/password','AdminController@changePasswordView');
     Route::patch('/user/{tel}/updatePassword','UserController@updatePassword');
@@ -297,3 +301,5 @@ Route::resource('tweets','TweetController');
 
 //LiKE
 Route::resource('like','LikeController');
+
+

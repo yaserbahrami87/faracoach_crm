@@ -214,5 +214,10 @@ return [
         'status'                =>'وضعیت',
         'typecoach_id'          =>'سطح کوچ',
         'tweet'                 =>'دلنوشته',
+        'user'                  =>'کاربر',
+        'categorypeygiri'       =>'پیگیری/ثبت شده',
+        'start_time'            =>'زمان شروع',
+        'duration_booking'      =>'مدت زمان',
+        'fi'                    =>'قیمت',
     ],
 ];

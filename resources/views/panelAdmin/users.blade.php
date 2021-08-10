@@ -3,7 +3,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header bg-info border-info">
-                <h4 class="card-title">اعضا</h4>
+                <h4 class="card-title m-0">اعضا</h4>
             </div>
             <div class="card-body" id="frmSearchUserAdmin">
                 <div class="row">
@@ -24,41 +24,73 @@
                             </div>
                         </form>
                     </div>
-                    @if(Auth::user()->type==2)
-                        <div class="col-sm-12 col-md-5 col-lg-5 col-xl-5 border" >
-                            <small>نمایش براساس کاربر</small>
-                            <form method="GET" action="/admin/users/categorybyAdmin/">
-                                <div class="input-group mb-5">
-                                    <select class="form-control p-0 mr-4 " name="user">
-                                        <option disabled="disabled" selected="selected">انتخاب کنید</option>
-                                        @foreach($usersAdmin  as $item)
-                                            <option value="{{$item->id}}">{{$item->fname}} {{$item->lname}}</option>
-                                        @endforeach
-                                    </select>
-                                    <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="categorypeygiri1" name="categorypeygiri" class="custom-control-input" value="0" />
-                                        <label class="custom-control-label" for="categorypeygiri1">پیگیری ها</label>
-                                    </div>
-                                    <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="categorypeygiri2" name="categorypeygiri" class="custom-control-input" value="1" />
-                                        <label class="custom-control-label" for="categorypeygiri2">ثبت شده ها</label>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">
-                                        <i class="bi bi-binoculars-fill"></i>
-                                    </button>
-
-                                </div>
-
-                            </form>
-                        </div>
-                    @endif
-                    <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3" >
+                    <div class="col-sm-12 col-md-2 col-lg-2 col-xl-2" >
                         <small class="d-block">عضو جدید</small>
                         <a href="/admin/add" class="btn btn-primary m-0">
                             <i class="bi bi-person-plus-fill"></i>
                             ثبت عضو جدید
                         </a>
                     </div>
+
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 border" >
+                        <!-- <form method="GET" action="/admin/users/categorybyAdmin/"> -->
+                        <form method="GET" action="/admin/users/advancesearch">
+                            <div class="row">
+                                <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3">
+                                    <small>نمایش براساس کاربر</small>
+                                    <div class="input-group mb-5">
+                                        <select class="form-control p-0 mr-4 " name="user">
+                                            <option disabled="disabled" selected="selected">انتخاب کنید</option>
+                                            @foreach($usersAdmin  as $item)
+                                                <option value="{{$item->id}}"  @if(isset($_GET['user'])&&($_GET['user']==$item->id)) selected @endif   >{{$item->fname}} {{$item->lname}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3">
+                                    <small class="d-block mb-3">نوع ثبت</small>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="categorypeygiri1" name="categorypeygiri" class="custom-control-input" value="0" @if(isset($_GET['categorypeygiri'])&&($_GET['categorypeygiri']==0)) checked @endif  />
+                                        <label class="custom-control-label" for="categorypeygiri1">پیگیری ها</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="categorypeygiri2" name="categorypeygiri" class="custom-control-input" value="1" @if(isset($_GET['categorypeygiri'])&&($_GET['categorypeygiri']==1)) checked @endif />
+                                        <label class="custom-control-label" for="categorypeygiri2">ثبت شده ها</label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3">
+                                    <small>نمایش بر اساس نحوه آشنایی</small>
+                                    <!-- <form method="get" action="/admin/users/list_user_gettingknow"> -->
+                                        <div class="input-group mb-3">
+                                            <div class="input-group mb-3">
+                                                <select class="custom-select" id="list_gettingknow" name="gettingknow" >
+                                                    <option selected disabled>انتخاب کنید</option>
+                                                    <option @if(isset($_GET['gettingknow'])&&($_GET['gettingknow']=='اینستاگرام')) selected @endif >اینستاگرام</option>
+                                                    <option @if(isset($_GET['gettingknow'])&&($_GET['gettingknow']=='تلگرام')) selected @endif>تلگرام</option>
+                                                    <option @if(isset($_GET['gettingknow'])&&($_GET['gettingknow']=='تبلیغاتی محیطی')) selected @endif>تبلیغاتی محیطی</option>
+                                                    <option @if(isset($_GET['gettingknow'])&&($_GET['gettingknow']=='تبلیغات فضای مجازی')) selected @endif>تبلیغات فضای مجازی</option>
+                                                    <option @if(isset($_GET['gettingknow'])&&($_GET['gettingknow']=='پکیج رایگان')) selected @endif>پکیج رایگان</option>
+                                                    <option @if(isset($_GET['gettingknow'])&&($_GET['gettingknow']=='واتساپ')) selected @endif>واتساپ</option>
+                                                    <option @if(isset($_GET['gettingknow'])&&($_GET['gettingknow']=='دوستان')) selected @endif>دوستان</option>
+                                                    <option @if(isset($_GET['gettingknow'])&&($_GET['gettingknow']=='موتورهای جستجو')) selected @endif>موتورهای جستجو</option>
+                                                    <option @if(isset($_GET['gettingknow'])&&($_GET['gettingknow']=='رویداد')) selected @endif>رویداد</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    <!-- </form> -->
+                                </div>
+                                <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3">
+                                    <small class="btn-block mb-1">نمایش</small>
+                                    <button class="btn btn-secondary ">
+                                        <i class="bi bi-binoculars-fill"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+
+
                     <div class="col-12">
                         <small class="m-0">انتخاب تگ ها</small>
                         <form method="GET" action="/admin/users/categoryTags/">
@@ -94,7 +126,7 @@
 
                     @if(Auth::user()->type==2)
                         <div class="col-12">
-                            <label class="text-dark">دسترسی سریع</label>
+                            <small class="text-dark">دسترسی سریع:</small>
                             <ul class="list-group list-group-horizontal" id="users_tags">
                                 <a href="/admin/users/category/?categoryUsers=0&user={{$user}}" class="list-group-item p-0 border-0 mr-3 p-1 @if(request()->is('admin/users')) bg-info  @endif ">نمایش همه</a>
                                 <a href="/admin/users/category/?categoryUsers=todayFollowup&user={{$user}}" class="list-group-item p-0 border-0 mr-3 p-1 @if(request()->is('admin/users/category/?categoryUsers=todayFollowup')) bg-info  @endif">پیگیری روز<span class="text-danger"> {{$todayFollowup}} </span></a>

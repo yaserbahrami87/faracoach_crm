@@ -4,7 +4,13 @@
 @endsection
 @section('rowcontent')
     <div class="col-xs-12 col-md-8 col-lg-8 col-xl-8">
+        <div class="card-header bg-info">
+            <h5 class="card-title m-0 p-0">ویرایش {{$coach->fname}} {{$coach->lname}}</h5>
+        </div>
         <div class="card-body">
+            <div class="col-12 text-center">
+                <img src="{{asset('documents/users/'.$coach->personal_image)}}" class="rounded-circle" alt="..." width="150px" height="150px">
+            </div>
             <form method="post" action="/admin/coach/{{$coach->id}}" >
                 {{csrf_field()}}
                 {{method_field('PATCH')}}
@@ -68,6 +74,10 @@
                             @endforeach
                         </select>
                     </div>
+                </div>
+                <div class="form-group">
+                    <label for="fi">قیمت هر ساعت جلسه (تومان) *</label>
+                    <input type="number" class="form-control" id="fi" name="fi" value="{{$coach->fi}}"/>
                 </div>
                 <div class="form-group">
                     <label for="status">وضعیت </label>

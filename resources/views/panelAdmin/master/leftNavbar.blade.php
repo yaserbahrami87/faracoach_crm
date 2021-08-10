@@ -182,7 +182,7 @@
                             <li class="nav-item has-treeview ">
                                 <a href="#" class="nav-link @if(request()->is('admin/category_coach*')) active  @endif">
                                     <i class="fas fa-list-alt"></i>
-                                    <p>                                دسته بندی کوچ ها
+                                    <p>                                موضوعات کوچ ها
                                         <i class="right fas fa-angle-left"></i>
                                     </p>
                                 </a>
@@ -190,11 +190,11 @@
                                     <li class="nav-item">
                                         <a href="/admin/category_coach/" class="nav-link @if(request()->is('admin/category_coach')) active  @endif">
                                             <i class="fas fa-user-cog"></i>
-                                            <p>دسته بندی ها</p>
+                                            <p>موضوعات</p>
                                         </a>
                                         <a href="/admin/category_coach/create" class="nav-link @if(request()->is('admin/category_coach/create')) active  @endif">
                                             <i class="fas fa-plus-square"></i>
-                                            <p>دسته جدید</p>
+                                            <p>موضوع جدید</p>
                                         </a>
                                     </li>
                                 </ul>

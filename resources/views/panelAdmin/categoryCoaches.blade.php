@@ -5,7 +5,7 @@
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">دسته بندی</th>
+            <th scope="col">موضوعات</th>
             <th scope="col">وضعیت</th>
             <th scope="col">ویرایش</th>
             <th scope="col">حذف</th>

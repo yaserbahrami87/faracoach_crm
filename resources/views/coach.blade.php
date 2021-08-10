@@ -230,7 +230,7 @@
                                 <span class="fa fa-star p-1"></span>
                             </div>
                             <div>
-                                <div class=" mt-3"> ارزش رزرو جلسه :10000 ریال</div>
+                                <div class=" mt-3"> ارزش رزرو جلسه : {{number_format($coach->fi)}} ریال</div>
                             </div>
                         </div>
                     </div>
@@ -260,7 +260,7 @@
                                 <p>{{$coach->researches}}</p>
                             </div>
                             <div class="col-lg-4 col-md-4 col-xl-4">
-                                <img src="{{asset('/documents/researches.jpg')}}" alt="" width="100%" >
+                                <img src="{{asset('/images/researches.jpg')}}" alt="" width="100%" >
                             </div>
                         </div>
 
@@ -273,7 +273,7 @@
                                 <p>{{$coach->certificates}}</p>
                             </div>
                             <div class="col-lg-4 col-md-4 col-xl-4">
-                                <img src="{{asset('/documents/certificate.png')}}" alt="" width="100%">
+                                <img src="{{asset('/images/certificate.png')}}" alt="" width="100%">
                             </div>
                         </div>
                     </section>
@@ -285,7 +285,7 @@
                                 <p>{{$coach->skills}}</p>
                             </div>
                             <div class="col-lg-4 col-md-4 col-xl-4">
-                                <img src="{{asset('/documents/20943948.png')}}" alt="" width="100%">
+                                <img src="{{asset('/images/20943948.png')}}" alt="" width="100%">
                             </div>
                         </div>
                     </section>
@@ -297,7 +297,7 @@
                                 <p>{{$coach->experience}}</p>
                             </div>
                             <div class="col-lg-4 col-md-4 col-xl-4">
-                                <img src="{{asset('/documents/job.png')}}" alt="" width="100%">
+                                <img src="{{asset('/images/job.png')}}" alt="" width="100%">
                             </div>
                         </div>
                     </section>
@@ -310,7 +310,7 @@
 
                             </div>
                             <div class="col-lg-4 col-md-4 col-xl-4">
-                                <img src="{{asset('/documents/edu.jpg')}}" alt="" width="100%">
+                                <img src="{{asset('/images/edu.jpg')}}" alt="" width="100%">
                             </div>
                         </div>
                     </section>
@@ -328,7 +328,6 @@
                             <input type="hidden" id="calenderSelector" />
                             <input type="hidden" id="coach_id" value="{{$coach->id}}" />
                             <p class="text-bold mb-2 mt-3 pb-2 border-bottom">انتخاب ساعت</p>
-
                             <div class="col-12 p-0" id="show_bookings">
                                 <div class="alert alert-warning" role="alert">لطفا یک تاریخ را انتخاب کنید</div>
                             </div>

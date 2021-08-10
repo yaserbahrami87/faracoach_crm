@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
     <link href="{{asset('/dashboard/dist/css/style.css')}}" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link rel="icon" href="{{asset('images/logo.png')}}"  />
     <!-- <script src="{{asset('/js/app.js')}}"></script> -->
     @yield('headerScript')
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -216,8 +217,7 @@
 
     <!-- Main Footer -->
     <footer class="main-footer" dir="rtl">
-
-        <strong>تمامی حقوق این سایت متعلق به مرکز آموزش کوچینگ ایران <a href="https://www.faracoach.com" target="_blank">فراکوچ</a> است</strong> -
+        <small>تمامی حقوق این سایت متعلق به مرکز آموزش کوچینگ ایران <a href="https://www.faracoach.com" target="_blank">فراکوچ</a> است</small> -
         <small>طراحی شده توسط <a href="" target="_blank">یاسر بهرامی</a> </small>
         <div class="float-left d-none d-sm-inline-block">
             <b>نسخه</b> 1.5.0

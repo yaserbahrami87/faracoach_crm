@@ -13,8 +13,9 @@
     <link href={{asset("css/stepwizard.css")}} rel="stylesheet" />
     <link href={{asset("slick-1.8.1/slick-1.8.1/slick/slick.css")}} rel="stylesheet" type="text/css" />
     <link href={{asset("slick-1.8.1/slick-1.8.1/slick/slick-theme.css")}} rel="stylesheet" type="text/css" />
+      <link rel="icon" href="{{asset('images/logo.png')}}"  />
 
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
      @yield('headerscript')
 

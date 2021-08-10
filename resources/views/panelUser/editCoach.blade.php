@@ -5,7 +5,13 @@
 
 @section('rowcontent')
     <div class="col-xs-12 col-md-8 col-lg-8 col-xl-8">
+        <div class="card-header bg-info">
+            <h5 class="card-title m-0 p-0">ویرایش {{$coach->fname}} {{$coach->lname}}</h5>
+        </div>
         <div class="card-body">
+            <div class="col-12 text-center">
+                <img src="{{asset('documents/users/'.$coach->personal_image)}}" class="rounded-circle" alt="..." width="150px" height="150px">
+            </div>
             <form method="post" action="@if($coach->status!=1) /panel/coach/{{$coach->id}}/newrequest @else /panel/coach/{{$coach->id}}/updateCoach @endif" >
                 {{csrf_field()}}
                 {{method_field('PATCH')}}

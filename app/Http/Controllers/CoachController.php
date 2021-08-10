@@ -200,6 +200,11 @@ class CoachController extends BaseController
     {
         if((Auth::user()->type==2) ||(Auth::user()->type==3))
         {
+
+            $coach=coach::join('users','coaches.user_id','=','users.id')
+                ->where('coaches.id','=',$coach->id)
+                ->select('coaches.*','users.fname','users.lname','users.personal_image')
+                ->first();
             $categoryCoaches=$this->get_categoryCoaches(NULL,NULL,true);
             $coach->category=explode(',',$coach->category);
             $typeCoaches=$this->get_typeCoaches(NULL,1,'get');
@@ -215,6 +220,10 @@ class CoachController extends BaseController
             {
                 $coach->category=explode(',',$coach->category);
                 $categoryCoaches=$this->get_categoryCoaches(NULL,NULL,true);
+                $coach=coach::join('users','coaches.user_id','=','users.id')
+                    ->where('coaches.id','=',$coach->id)
+                    ->select('coaches.*','users.fname','users.lname','users.personal_image')
+                    ->first();
                 $typeCoaches=$this->get_typeCoaches(NULL,1,'get');
                 return view('panelUser.editCoach')
                             ->with('categoryCoaches',$categoryCoaches)
@@ -251,6 +260,7 @@ class CoachController extends BaseController
             'count_recommendation'  =>'required|numeric|between:0,1000',
             'category'              =>'required|array',
             'typecoach_id'          =>'required|numeric',
+            'fi'                    =>'required|numeric',
             'status'                =>'required|numeric|between:-2,5'
         ],[
             'education_background.required' =>'سوابق تحصیلی اجباریست',

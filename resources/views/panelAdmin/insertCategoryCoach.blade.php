@@ -1,14 +1,14 @@
 @extends('panelAdmin.master.index')
 @section('rowcontent')
     <div class="col-xs-12 col-md-8 col-lg-8 col-xl-8">
-        <div class="card-header">
-            <h5 class="card-title">اضافه کردن دسته بندی</h5>
+        <div class="card-header bg-info">
+            <h5 class="card-title m-0 p-0">اضافه کردن موضوع</h5>
         </div>
         <div class="card-body">
             <form method="post" action="/admin/category_coach" >
                 {{csrf_field()}}
                 <div class="form-group">
-                    <label for="course">دسته بندی *</label>
+                    <label for="course">موضوع *</label>
                     <input type="text" class="form-control @error('category') is-invalid @enderror" id="category" name="category" value="{{old('category')}}"/>
                 </div>
                 <div class="form-group">

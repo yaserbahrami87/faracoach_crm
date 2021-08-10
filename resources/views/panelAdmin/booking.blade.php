@@ -32,11 +32,14 @@
                 :round-minute=true
                 name="start_time"
             ></date-picker>
-            <select class="custom-select" name="duration_booking">
-                <option selected disabled>نوع جلسه مشخص شود</option>
-                <option value="1">معارفه 30 دقیقه ای</option>
-                <option value="2">کوچینگ 60 دقیقه ای</option>
-            </select>
+            <div class="form-check form-check-inline pr-3">
+                <input class="form-check-input" type="radio" name="duration_booking" id="duration_booking1" value="1">
+                <label class="form-check-label" for="duration_booking1">معارفه 30 دقیقه ای</label>
+            </div>
+            <div class="form-check form-check-inline text-left">
+                <input class="form-check-input" type="radio" name="duration_booking" id="duration_booking2" value="2">
+                <label class="form-check-label" for="duration_booking2">کوچینگ 60 دقیقه ای</label>
+            </div>
             <button type="submit" class="btn btn-success">ایجاد رزرو</button>
         </form>
     </div>
