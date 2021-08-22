@@ -221,6 +221,7 @@ class ReserveController extends BaseController
         {
             if($reserve->status==0)
             {
+
                 if(!is_null($request['coupon']))
                 {
                     $users=booking::join('users','bookings.user_id','=','users.id')
@@ -311,24 +312,29 @@ class ReserveController extends BaseController
                     $change_customer=$user->change_customer;
                     $count_recommendation=$user->count_recommendation;
 
-
-                    $coupon=coupon::where('coupon','=',$reserve['coupon'])
-                        ->where('user_id','=',$users->id)
-                        ->first();
-
-                    if(!is_null($coupon))
+                    if($request['coupon'])
                     {
-                        if ($coupon->count == 0) {
-                            return ('<div class="alert alert-danger">تعداد کوپن مورد نظر استفاده شده است</div>');
+                        $coupon=coupon::where('coupon','=',$reserve['coupon'])
+                            ->where('user_id','=',$users->id)
+                            ->first();
+
+                        if(!is_null($coupon))
+                        {
+                            if ($coupon->count == 0) {
+                                return ('<div class="alert alert-danger">تعداد کوپن مورد نظر استفاده شده است</div>');
+                            }
+                            else if($coupon->expire_date < $this->dateNow) {
+                                return ('<div class="alert alert-danger">کوپن مورد نظر منقضی شده است</div>');
+                            }
                         }
-                        else if($coupon->expire_date < $this->dateNow) {
-                            return ('<div class="alert alert-danger">کوپن مورد نظر منقضی شده است</div>');
+                        else
+                        {
+                            return ('<div class="alert alert-danger">کوپن مورد نظر یافت نشد</div>');
                         }
                     }
-                    else
-                    {
-                        return ('<div class="alert alert-danger">کوپن مورد نظر یافت نشد</div>');
-                    }
+
+
+
 
 
 

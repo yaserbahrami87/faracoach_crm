@@ -60,7 +60,13 @@ class BookingController extends BaseController
         }
         else
         {
+           // وصعیت 1 برای رزرو های در حال رزرو و 0 رزرو شده هاست
             $booking = booking::where('user_id', '=', Auth::user()->id)
+                ->where(function($query)
+                {
+                    $query->orwhere('status','<>',1)
+                            ->orwhere('start_date','>=',$this->dateNow);
+                })
                 ->orderby('start_date', 'desc')
                 ->orderby('start_time', 'desc')
                 ->paginate($this->countPage());
