@@ -398,6 +398,7 @@ class BookingController extends BaseController
     public function accept_reserve_user()
     {
         $booking=booking::join('reserves','bookings.id','=','reserves.booking_id')
+                ->where('reserves.user_id','=',Auth::user()->id)
                 ->where(function($query){
                       $query->orwhere('reserves.status','=',1)
                             ->orwhere('reserves.status','=',3)
