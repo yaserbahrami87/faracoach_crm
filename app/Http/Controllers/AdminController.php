@@ -38,7 +38,6 @@ class AdminController extends BaseController
      */
     public function index(Request $request)
     {
-
         if(Gate::allows('isAdmin')||Gate::allows('isEducation'))
         {
             $notFollowup=count($this->get_notfollowup_withoutPaginate());

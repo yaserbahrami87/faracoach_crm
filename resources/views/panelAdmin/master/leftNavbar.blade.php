@@ -111,7 +111,7 @@
                     </ul>
                 </li>
                 @if(Auth::user()->type==2)
-                    <li class="nav-item has-treeview @if(request()->is('admin/reports')) menu-open  @endif">
+                    <!-- <li class="nav-item has-treeview @if(request()->is('admin/reports')) menu-open  @endif">
                         <a href="#" class="nav-link @if(request()->is('admin/reports*')) active  @endif">
                             <i class="nav-icon fas fa-chart-pie"></i>
                             <p>
@@ -151,7 +151,9 @@
                                 </a>
                             </li>
                         </ul>
-                    </li>
+                    </li>-->
+                @endif
+                @if(Auth::user()->type==2 || Auth::user()->type==3 || Auth::user()->type==4)
                     <li class="nav-item has-treeview @if(request()->is('admin/coach')) menu-open  @endif">
                         <a href="#" class="nav-link @if(request()->is('admin/coach*')) active  @endif">
                             <i class="fas fa-chalkboard-teacher"></i>
@@ -305,7 +307,8 @@
                         </ul>
                     </li>
 
-
+                @endif
+                @if(Auth::user()->type==2)
                     <li class="nav-item has-treeview ">
                         <a href="/admin/settings/" class="nav-link @if(request()->is('admin/setting*')) active  @endif">
                             <i class="nav-icon fas fa-cogs"></i>

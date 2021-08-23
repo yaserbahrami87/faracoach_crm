@@ -454,4 +454,70 @@ class CoachController extends BaseController
         }
         return redirect('/panel');
     }
+
+
+    public function coach_report($coach,Request $request)
+    {
+
+        if(isset($request['start_date']))
+        {
+            $this->validate($request,[
+                'start_date'    =>'required|string',
+            ]);
+            $request['start_date']=explode(' ~ ',$request['start_date']);
+        }
+        else
+        {
+            $request['start_date']=[$this->dateNow,$this->dateNow];
+
+        }
+
+        $coach=coach::join('users','coaches.user_id','=','users.id')
+                ->where('users.id','=',$coach)
+                ->first();
+        if($coach)
+        {
+            $reserve=coach::join('users','coaches.user_id','=','users.id')
+                        ->join('bookings','users.id','=','bookings.user_id')
+                        ->where('users.id','=',$coach->id)
+                        ->where('bookings.status','=',1)
+                        ->whereBetween('bookings.start_date', [$request['start_date'][0],$request['start_date'][1]])
+                        ->get();
+
+            $waiting=coach::join('users','coaches.user_id','=','users.id')
+                ->join('bookings','users.id','=','bookings.user_id')
+                ->where('users.id','=',$coach->id)
+                ->where('bookings.status','=',0)
+                ->whereBetween('bookings.start_date', [$request['start_date'][0],$request['start_date'][1]])
+                ->get();
+
+            $held=coach::join('users','coaches.user_id','=','users.id')
+                ->join('bookings','users.id','=','bookings.user_id')
+                ->where('users.id','=',$coach->id)
+                ->where('bookings.status','=',3)
+                ->whereBetween('bookings.start_date', [$request['start_date'][0],$request['start_date'][1]])
+                ->get();
+
+            $cancel=coach::join('users','coaches.user_id','=','users.id')
+                ->join('bookings','users.id','=','bookings.user_id')
+                ->where('users.id','=',$coach->id)
+                ->where('bookings.status','=',4)
+                ->whereBetween('bookings.start_date', [$request['start_date'][0],$request['start_date'][1]])
+                ->get();
+
+            $dateNow=$this->dateNow;
+            return view('panelAdmin.reportCoach')
+                    ->with('dateNow',$dateNow)
+                    ->with('reserve',$reserve)
+                    ->with('waiting',$waiting)
+                    ->with('held',$held)
+                    ->with('cancel',$cancel)
+                    ->with('coach',$coach);
+        }
+        else
+        {
+            alert()->error('کوچ مورد نظر یافت نشد')->persistent('بستن');
+            return back();
+        }
+    }
 }

@@ -183,6 +183,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
 
     //coaches
 
+    Route::get('/coach/{coach}/report','CoachController@coach_report');
     Route::get('/coach/reject','CoachController@coach_reject');
     Route::get('/coach/request','CoachController@coach_request');
     Route::resource('coach','CoachController');

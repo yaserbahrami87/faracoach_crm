@@ -19,6 +19,9 @@ class BookingController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
+
+    // وضعیتstatus مقدار 3 یعنی برگزار شده مقدار 4 یعنی کنسل شده
+
     public function index()
     {
         if(Auth::user()->type==2) {

@@ -157,7 +157,15 @@ class ReserveController extends BaseController
         $count_recommendation=$user->count_recommendation;
 
 //        $fi=($count_meeting_fi*$count_meeting)+($customer_satisfaction_fi*$customer_satisfaction)+($change_customer_fi*$change_customer)+($count_recommendation_fi*$count_recommendation);
-        $fi=$user->fi;
+        if($user->duration_booking==1)
+        {
+            $fi=$user->fi/2;
+        }
+        else
+        {
+            $fi=$user->fi;
+        }
+
         $off=0;
         $final_off=$fi-$off;
 

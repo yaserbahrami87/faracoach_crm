@@ -156,12 +156,14 @@
                             <p>فایلها</p>
                         </a>
                     </li>
+                    <!--
                     <li class="nav-item">
                         <a href="/panel/freepackages" class="nav-link @if(request()->is('panel/freepackages*')) active  @endif">
                             <i class="fas fa-chalkboard"></i>
                             <p>دوره رایگان آموزش کوچینگ</p>
                         </a>
                     </li>
+                    -->
                     <li class="nav-item has-treeview ">
                         <a href="#" class="nav-link @if(request()->is('panel/post*')||request()->is('panel/categoryposts*')||request()->is('panel/comments*')) active  @endif">
                             <i class="fas fa-blog"></i>

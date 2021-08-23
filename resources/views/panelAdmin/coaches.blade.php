@@ -1,15 +1,15 @@
 @extends('panelAdmin.master.index')
 @section('rowcontent')
     <a href="/admin/coach/create" class="btn btn-primary mb-5">اضافه کردن<i class="fas fa-plus"></i></a>
-    <table class="table .table-striped .table-bordered ">
+    <table class="table table-striped table-bordered ">
         <thead>
             <tr>
-
                 <th scope="col">نام </th>
                 <th scope="col">نام خانوادگی</th>
                 <th scope="col">وضعیت</th>
                 <th scope="col">ویرایش</th>
                 <th scope="col">حذف</th>
+                <th scope="col">گزارش</th>
             </tr>
         </thead>
         <tbody>
@@ -38,6 +38,11 @@
                             <i class="fas fa-user-times"></i>
                         </button>
                     </form>
+                </td>
+                <td>
+                    <a href="/admin/coach/{{$item->id_user_table}}/report" class="btn btn-success">
+                        <i class="bi bi-bar-chart-line-fill"></i>
+                    </a>
                 </td>
             </tr>
         @endforeach

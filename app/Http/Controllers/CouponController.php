@@ -210,6 +210,7 @@ class CouponController extends BaseController
 
     public function check(Request $request)
     {
+
         $this->validate($request,[
             'coupon'=>'nullable|string'
         ]);
@@ -217,9 +218,14 @@ class CouponController extends BaseController
         $users=booking::join('users','bookings.user_id','=','users.id')
                 ->where('bookings.id','=',$request['booking_id'])
                 ->first();
+
         $coupon=coupon::where('coupon','=',$request['coupon'])
-                ->where('user_id','=',$users->id)
-                ->first();
+            ->where('user_id','=',$users->id)
+            ->wherein('product',[0,$users->duration_booking])
+            ->first();
+
+
+
 
 
         //اگر کوپن وجود نداشت
