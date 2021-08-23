@@ -477,41 +477,81 @@ class CoachController extends BaseController
                 ->first();
         if($coach)
         {
-            $reserve=coach::join('users','coaches.user_id','=','users.id')
+            $reserveMoarefeh=coach::join('users','coaches.user_id','=','users.id')
                         ->join('bookings','users.id','=','bookings.user_id')
                         ->where('users.id','=',$coach->id)
                         ->where('bookings.status','=',1)
+                        ->where('bookings.duration_booking','=',1)
                         ->whereBetween('bookings.start_date', [$request['start_date'][0],$request['start_date'][1]])
                         ->get();
 
-            $waiting=coach::join('users','coaches.user_id','=','users.id')
+            $reserveCoaching=coach::join('users','coaches.user_id','=','users.id')
+                        ->join('bookings','users.id','=','bookings.user_id')
+                        ->where('users.id','=',$coach->id)
+                        ->where('bookings.status','=',1)
+                        ->where('bookings.duration_booking','=',2)
+                        ->whereBetween('bookings.start_date', [$request['start_date'][0],$request['start_date'][1]])
+                        ->get();
+
+            $waitingCoaching=coach::join('users','coaches.user_id','=','users.id')
+                        ->join('bookings','users.id','=','bookings.user_id')
+                        ->where('users.id','=',$coach->id)
+                        ->where('bookings.status','=',0)
+                        ->where('bookings.duration_booking','=',2)
+                        ->whereBetween('bookings.start_date', [$request['start_date'][0],$request['start_date'][1]])
+                        ->get();
+
+            $waitingMoarefeh=coach::join('users','coaches.user_id','=','users.id')
                 ->join('bookings','users.id','=','bookings.user_id')
                 ->where('users.id','=',$coach->id)
                 ->where('bookings.status','=',0)
+                ->where('bookings.duration_booking','=',1)
                 ->whereBetween('bookings.start_date', [$request['start_date'][0],$request['start_date'][1]])
                 ->get();
 
-            $held=coach::join('users','coaches.user_id','=','users.id')
+            $heldCoaching=coach::join('users','coaches.user_id','=','users.id')
                 ->join('bookings','users.id','=','bookings.user_id')
                 ->where('users.id','=',$coach->id)
                 ->where('bookings.status','=',3)
+                ->where('bookings.duration_booking','=',2)
                 ->whereBetween('bookings.start_date', [$request['start_date'][0],$request['start_date'][1]])
                 ->get();
 
-            $cancel=coach::join('users','coaches.user_id','=','users.id')
+            $heldMoarefeh=coach::join('users','coaches.user_id','=','users.id')
+                ->join('bookings','users.id','=','bookings.user_id')
+                ->where('users.id','=',$coach->id)
+                ->where('bookings.status','=',3)
+                ->where('bookings.duration_booking','=',1)
+                ->whereBetween('bookings.start_date', [$request['start_date'][0],$request['start_date'][1]])
+                ->get();
+
+            $cancelMoarefeh=coach::join('users','coaches.user_id','=','users.id')
                 ->join('bookings','users.id','=','bookings.user_id')
                 ->where('users.id','=',$coach->id)
                 ->where('bookings.status','=',4)
+                ->where('bookings.duration_booking','=',1)
+                ->whereBetween('bookings.start_date', [$request['start_date'][0],$request['start_date'][1]])
+                ->get();
+
+            $cancelCoaching=coach::join('users','coaches.user_id','=','users.id')
+                ->join('bookings','users.id','=','bookings.user_id')
+                ->where('users.id','=',$coach->id)
+                ->where('bookings.status','=',4)
+                ->where('bookings.duration_booking','=',2)
                 ->whereBetween('bookings.start_date', [$request['start_date'][0],$request['start_date'][1]])
                 ->get();
 
             $dateNow=$this->dateNow;
             return view('panelAdmin.reportCoach')
                     ->with('dateNow',$dateNow)
-                    ->with('reserve',$reserve)
-                    ->with('waiting',$waiting)
-                    ->with('held',$held)
-                    ->with('cancel',$cancel)
+                    ->with('reserveMoarefeh',$reserveMoarefeh)
+                    ->with('reserveCoaching',$reserveCoaching)
+                    ->with('waitingCoaching',$waitingCoaching)
+                    ->with('waitingMoarefeh',$waitingMoarefeh)
+                    ->with('heldCoaching',$heldCoaching)
+                    ->with('heldMoarefeh',$heldMoarefeh)
+                    ->with('cancelMoarefeh',$cancelMoarefeh)
+                    ->with('cancelCoaching',$cancelCoaching)
                     ->with('coach',$coach);
         }
         else

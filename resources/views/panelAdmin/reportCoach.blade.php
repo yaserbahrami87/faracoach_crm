@@ -28,17 +28,25 @@
         <table class="table border table-hover table-striped">
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">تعداد جلسات در انتظار رزرو</th>
-                <th scope="col">تعداد جلسات رزرو شده</th>
-                <th scope="col">تعداد جلسات برگزار شده</th>
-                <th scope="col">تعداد جلسات کنسل شده</th>
+                <th scope="col">تعداد جلسات کوچینگ در انتظار رزرو</th>
+                <th scope="col">تعداد جلسات معارفه در انتظار رزرو</th>
+                <th scope="col">تعداد جلسات کوچینگ رزرو شده</th>
+                <th scope="col">تعداد جلسات معارفه رزرو شده</th>
+                <th scope="col">تعداد جلسات کوچینگ برگزار شده</th>
+                <th scope="col">تعداد جلسات معارفه برگزار شده</th>
+                <th scope="col">تعداد جلسات کوچینگ کنسل شده</th>
+                <th scope="col">تعداد جلسات معارفه کنسل شده</th>
             </tr>
             <tr>
                 <td>#</td>
-                <td>{{$reserve->count()}}</td>
-                <td>{{$waiting->count()}}</td>
-                <td>{{$held->count()}}</td>
-                <td>{{$cancel->count()}}</td>
+                <td>{{$reserveCoaching->count()}}</td>
+                <td>{{$reserveMoarefeh->count()}}</td>
+                <td>{{$waitingCoaching->count()}}</td>
+                <td>{{$waitingMoarefeh->count()}}</td>
+                <td>{{$heldCoaching->count()}}</td>
+                <td>{{$heldMoarefeh->count()}}</td>
+                <td>{{$cancelCoaching->count()}}</td>
+                <td>{{$cancelMoarefeh->count()}}</td>
             </tr>
         </table>
     </div>
