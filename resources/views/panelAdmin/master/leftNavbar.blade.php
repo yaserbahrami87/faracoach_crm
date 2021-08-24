@@ -69,14 +69,15 @@
                 </li>
 
                 <li class="nav-item has-treeview @if(request()->is('admin/message')) menu-open  @endif">
+                    <!--
                     <a href="#" class="nav-link @if(request()->is('admin/message*')) active  @endif">
                         <i class="nav-icon fas fa-comment"></i>
                         <p>
                             پیام ها
                             <i class="fas fa-angle-left right"></i>
-                            <!-- <span class="badge badge-info right">6</span> -->
+                             <span class="badge badge-info right">6</span>
                         </p>
-                    </a>
+                    </a>-->
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="/admin/messages/" class="nav-link @if(request()->is('admin/message')) active  @endif">
