@@ -20,14 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/panelUser/reportCoach.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BookingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BookingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CoachController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CoachController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/master/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/master/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/master/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/master/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/panelUser/master/leftNavbar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/master/leftNavbar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -591,7 +584,7 @@
       <workItem from="1629710962467" duration="10214000" />
       <workItem from="1629737902992" duration="256000" />
       <workItem from="1629738862431" duration="3106000" />
-      <workItem from="1629814452366" duration="5569000" />
+      <workItem from="1629814452366" duration="6323000" />
     </task>
     <servers />
   </component>

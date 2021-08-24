@@ -44,16 +44,17 @@
                     </a>
                 </li>
 
+                <!--
                 <li class="nav-item">
                     <a href="/panel/messages#" class="nav-link @if(request()->is('panel/messages*')) active  @endif">
                         <i class="nav-icon fas fa-comment"></i>
                         <p>
                             پیام ها
 
-                            <!-- <span class="badge badge-info right">6</span>-->
+                             <span class="badge badge-info right">6</span>
                         </p>
                     </a>
-                </li>
+                </li> -->
                 @if(Auth::user()->tel_verified==1)
 
                     <li class="nav-item">
