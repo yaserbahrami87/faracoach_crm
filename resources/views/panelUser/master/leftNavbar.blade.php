@@ -92,7 +92,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="/panel/booking/" class="nav-link @if(request()->is('panel/booking*')) active  @endif">
+                                <a href="/panel/booking/" class="nav-link @if(request()->is('panel/booking')) active  @endif">
                                     <i class="fas fa-user-cog"></i>
                                     <p> لیست جلسات</p>
                                 </a>
@@ -100,12 +100,11 @@
                                     <i class="fas fa-user-cog"></i>
                                     <p>جلسات رزرو شده</p>
                                 </a>
-                                <!--
-                                <a href="/panel/booking_setting/" class="nav-link @if(request()->is('panel/booking_setting*')) active  @endif">
-                                    <i class="fas fa-user-cog"></i>
-                                    <p>تنظیمات جلسات</p>
+                                <a href="/panel/booking/report" class="nav-link @if(request()->is('panel/booking/report*')) active  @endif">
+                                    <i class="bi bi-bar-chart-fill"></i>
+                                    <p>گزارش جلسات</p>
                                 </a>
-                                -->
+
                             </li>
                         </ul>
                     </li>

@@ -443,4 +443,6 @@ class BookingController extends BaseController
             ->with('dateNow', $this->dateNow);
     }
 
+
+
 }

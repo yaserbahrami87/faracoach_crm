@@ -18,8 +18,9 @@
       <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
      @yield('headerscript')
+      <script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="05ea1956-7561-4af6-a7ab-1c599909f103";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
 
-    <title>فراکوچ | آموزش کوچینگ</title>
+      <title>فراکوچ | آموزش کوچینگ</title>
   </head>
   <body>
     @include('master.navbarTop')

@@ -76,12 +76,16 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     //coaches
     Route::patch('/coach/{coach}/newrequest','CoachController@newrequest');
     Route::patch('/coach/{coach}/updateCoach','CoachController@updateCoach');
+    Route::get('/booking/report','CoachController@booking_report_byUser');
     Route::resource('coach','CoachController');
+
 
     //booking
     Route::get('/booking/accept','BookingController@acceptReserve');
     Route::get('/booking/accept_reserve_user','BookingController@accept_reserve_user');
     Route::resource('booking','BookingController');
+
+
 
     //coupon
     Route::resource('coupon','CouponController');
