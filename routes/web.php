@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController@index');
 
 
+
 //Route::middleware(['can:isUser','verified'])->prefix('panel')->group(function () {
 Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
 
@@ -242,7 +243,6 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
 Auth::routes(['verify'=>true]);
 
 
-
 Route::post('/crm/user/insert','UserController@store');
 
 Route::get('/signup crm','BaseController@signupForm');
@@ -259,6 +259,8 @@ Route::post('/panel/checkCodewithoutPass','VerifyController@checkCodewithoutPass
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
+
+
 // Landing Page
 Route::get('/landingPage','landingController@index');
 Route::post('/landing/store','landingController@store');
@@ -272,12 +274,10 @@ Route::get('/register2',function()
     return view('register_landingPage');
 });
 
-//blog
-Route::get('/{username}','PostController@blogHomePage');
-Route::get('/{username}/post/{post}','PostController@show');
-Route::get('/{username}/category/{category}','PostController@categoryBlog');
-Route::get('/blogs/newposts','PostController@newPosts');
 
+
+//checkout
+Route::resource('checkout','CheckoutController');
 
 
 //comments
@@ -289,14 +289,20 @@ Route::get('/booking/showformreserve','BookingController@showFormReserve');
 Route::post('/booking/mohasebe','ReserveController@mohasebe');
 Route::resource('booking','BookingController');
 
+
+
+
 //reserve
 Route::post('/reserve/insert', 'ReserveController@insert');
 Route::resource('reserve','ReserveController');
 
 
+
 //coaches
 Route::get('/coaches/all','CoachController@viewAllCoaches');
 Route::get('/coach/{coach}','CoachController@show');
+
+
 
 //Coupon
 Route::post('/coupon/check','CouponController@check');
@@ -304,7 +310,14 @@ Route::post('/coupon/check','CouponController@check');
 //TWEETS
 Route::resource('tweets','TweetController');
 
+
+
 //LiKE
 Route::resource('like','LikeController');
 
+//blog
+Route::get('/{username}','PostController@blogHomePage');
+Route::get('/{username}/post/{post}','PostController@show');
+Route::get('/{username}/category/{category}','PostController@categoryBlog');
+Route::get('/blogs/newposts','PostController@newPosts');
 

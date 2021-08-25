@@ -124,6 +124,17 @@
       0 => 'Rap2hpoutre\\FastExcel\\Providers\\FastExcelServiceProvider',
     ),
   ),
+  'shetabit/payment' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Shetabit\\Payment\\Provider\\PaymentServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Payment' => 'Shetabit\\Payment\\Facade\\Payment',
+    ),
+  ),
   'shetabit/visitor' => 
   array (
     'providers' => 

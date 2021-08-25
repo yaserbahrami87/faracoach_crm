@@ -41,6 +41,8 @@ return array(
     'Symfony\\Component\\CssSelector\\' => array($vendorDir . '/symfony/css-selector'),
     'Symfony\\Component\\Console\\' => array($vendorDir . '/symfony/console'),
     'Shetabit\\Visitor\\' => array($vendorDir . '/shetabit/visitor/src'),
+    'Shetabit\\Payment\\' => array($vendorDir . '/shetabit/payment/src'),
+    'Shetabit\\Multipay\\' => array($vendorDir . '/shetabit/multipay/src'),
     'Rap2hpoutre\\FastExcel\\' => array($vendorDir . '/rap2hpoutre/fast-excel/src'),
     'Ramsey\\Uuid\\' => array($vendorDir . '/ramsey/uuid/src'),
     'Ramsey\\Collection\\' => array($vendorDir . '/ramsey/collection/src'),
