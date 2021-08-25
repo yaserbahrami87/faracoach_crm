@@ -669,6 +669,7 @@ class ComposerStaticInitf54d8edf51459297346cdb00d8423a68
         'App\\Http\\Controllers\\CategoryPostController' => __DIR__ . '/../..' . '/app/Http/Controllers/CategoryPostController.php',
         'App\\Http\\Controllers\\CategoryTagController' => __DIR__ . '/../..' . '/app/Http/Controllers/CategoryTagController.php',
         'App\\Http\\Controllers\\CategoryfollowupController' => __DIR__ . '/../..' . '/app/Http/Controllers/CategoryfollowupController.php',
+        'App\\Http\\Controllers\\CheckoutController' => __DIR__ . '/../..' . '/app/Http/Controllers/CheckoutController.php',
         'App\\Http\\Controllers\\CityController' => __DIR__ . '/../..' . '/app/Http/Controllers/CityController.php',
         'App\\Http\\Controllers\\CoachController' => __DIR__ . '/../..' . '/app/Http/Controllers/CoachController.php',
         'App\\Http\\Controllers\\CommentController' => __DIR__ . '/../..' . '/app/Http/Controllers/CommentController.php',

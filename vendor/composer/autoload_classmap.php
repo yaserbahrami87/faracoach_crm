@@ -64,6 +64,7 @@ return array(
     'App\\Http\\Controllers\\CategoryPostController' => $baseDir . '/app/Http/Controllers/CategoryPostController.php',
     'App\\Http\\Controllers\\CategoryTagController' => $baseDir . '/app/Http/Controllers/CategoryTagController.php',
     'App\\Http\\Controllers\\CategoryfollowupController' => $baseDir . '/app/Http/Controllers/CategoryfollowupController.php',
+    'App\\Http\\Controllers\\CheckoutController' => $baseDir . '/app/Http/Controllers/CheckoutController.php',
     'App\\Http\\Controllers\\CityController' => $baseDir . '/app/Http/Controllers/CityController.php',
     'App\\Http\\Controllers\\CoachController' => $baseDir . '/app/Http/Controllers/CoachController.php',
     'App\\Http\\Controllers\\CommentController' => $baseDir . '/app/Http/Controllers/CommentController.php',
