@@ -20,24 +20,35 @@ class CheckoutController extends Controller
      */
     public function index()
     {
+        // At the top of the file.
+
+
 
         // Create new invoice.
-        # create new invoice
         $invoice = (new Invoice)->amount(1000);
-# purchase and pay the given invoice
-// you should use return statement to redirect user to the bank's page.
+        // Purchase and pay the given invoice.
+        // You should use return statement to redirect user to the bank page.
         return Payment::purchase($invoice, function($driver, $transactionId) {
-            // store transactionId in database, we need it to verify payment in future.
-        })->pay();
+            // Store transactionId in database as we need it to verify payment in the future.
+        })->pay()->render();
 
-# do all things together a single line
+        // Do all things together in a single line.
         return Payment::purchase(
             (new Invoice)->amount(1000),
             function($driver, $transactionId) {
-                // store transactionId in database.
-                // we need the transactionId to verify payment in future
+                // Store transactionId in database.
+                // We need the transactionId to verify payment in the future.
             }
-        )->pay();
+        )->pay()->render();
+
+        // Retrieve json format of Redirection (in this case you can handle redirection to bank gateway)
+        return Payment::purchase(
+            (new Invoice)->amount(1000),
+            function($driver, $transactionId) {
+                // Store transactionId in database.
+                // We need the transactionId to verify payment in the future.
+            }
+        )->pay()->toJson();
 
     }
 

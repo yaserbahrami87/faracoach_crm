@@ -219,7 +219,7 @@ return [
 
             'mode' => 'normal', // can be normal, sandbox, zaringate
             'merchantId' => '16dd8032-0e0b-11e9-9da0-005056a205be',
-            'callbackUrl' => 'http://127.0.0.1:8000/path/to',
+            'callbackUrl' => 'https://crm.faracoach.com/path/to',
             'description' => 'payment using zarinpal',
         ],
         'zibal' => [

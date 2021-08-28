@@ -320,6 +320,7 @@
                     </div>
                     @else
                     <div class="alert alert-warning">جلسه کوچینک هنوز انجام نشده است</div>
+
                 @endif
             </div>
         </div>

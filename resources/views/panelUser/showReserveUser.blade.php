@@ -230,6 +230,7 @@
                     <div class="alert alert-warning">جلسه کوچینگ شما لغو شده است</div>
                 @else
                     <div class="alert alert-warning">جلسه کوچینک هنوز انجام نشده است</div>
+                    <a href="" class="btn btn-danger">لغو جلسه</a>
                 @endif
             </div>
         </div>

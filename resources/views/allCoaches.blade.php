@@ -58,7 +58,7 @@
                         </div>
                     @else
                         @foreach($coaches as $item)
-                            <div class="col-xs-12 col-sm-4 col-lg-3 col-xl-3  box-products ">
+                            <div class="col-xs-12 col-sm-4 col-lg-3 col-xl-3  box-products mb-1">
                                 <div class="card p-1 text-center d-block shadow">
                                     <a href="/coach/{{$item->username}}" data-toggle="tooltip" data-placement="top" title="{{$item->fname}} {{$item->lname}}">
                                         @if(strlen($item->personal_image)>0)
