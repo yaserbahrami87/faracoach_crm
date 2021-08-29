@@ -58,7 +58,7 @@
                                         <label class="custom-control-label" for="categorypeygiri2">ثبت شده ها</label>
                                     </div>
                                 </div>
-                                <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3">
+                                <div class="col-xs-12 col-md-2 col-lg-2 col-xl-2">
                                     <small>نمایش بر اساس نحوه آشنایی</small>
                                     <!-- <form method="get" action="/admin/users/list_user_gettingknow"> -->
                                         <div class="input-group mb-3">
@@ -79,7 +79,22 @@
                                         </div>
                                     <!-- </form> -->
                                 </div>
-                                <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3">
+                                <div class="col-xs-12 col-md-2 col-lg-2 col-xl-2">
+                                    <small>نمایش بر اساس کیفیت</small>
+                                    <!-- <form method="get" action="/admin/users/list_user_gettingknow"> -->
+                                    <div class="input-group mb-3">
+                                        <div class="input-group mb-3">
+                                            <select class="custom-select" id="list_$problem" name="problem" >
+                                                <option selected disabled>انتخاب کنید</option>
+                                                @foreach($problem as $item)
+                                                    <option @if(isset($_GET['problem'])&&($_GET['problem']==$item->id)) selected @endif value="{{$item->id}}" >{{$item->problem}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!-- </form> -->
+                                </div>
+                                <div class="col-xs-12 col-md-2 col-lg-2 col-xl-2">
                                     <small class="btn-block mb-1">نمایش</small>
                                     <button class="btn btn-secondary ">
                                         <i class="bi bi-binoculars-fill"></i>

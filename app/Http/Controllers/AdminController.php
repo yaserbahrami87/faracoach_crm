@@ -163,7 +163,6 @@ class AdminController extends BaseController
         }
         else if(Gate::allows('isUser'))
         {
-
             $user=(Auth::user());
 
             if(($user->status_coach==-2)||($user->status_coach==1))
@@ -265,9 +264,6 @@ class AdminController extends BaseController
         {
             return redirect('/login');
         }
-
-
-
     }
 
     /**

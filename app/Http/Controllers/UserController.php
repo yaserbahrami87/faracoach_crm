@@ -137,6 +137,10 @@ class UserController extends BaseController
                 $users->appends(['orderby'=>$request['orderby']]);
                 $users->appends(['parameter'=>$request['parameter']]);
             }
+
+            //دریافت کفیت های پیگیری
+            $problem=$this->getproblemfollowup();
+
             return view('panelAdmin.users')
                 ->with('users',$users)
                 ->with('tags',$tags)
@@ -153,6 +157,7 @@ class UserController extends BaseController
                 ->with('notfollowup',$notfollowup)
                 ->with('user',$user)
                 ->with('trashuser',$trashuser)
+                ->with('problem',$problem)
                 ->with('parameter',$request['parameter']);
         }
         else
@@ -237,6 +242,9 @@ class UserController extends BaseController
                 $users->appends(['parameter'=>$request['parameter']]);
             }
 
+            //دریافت کفیت های پیگیری
+            $problem=$this->getproblemfollowup();
+
             return view('panelAdmin.users')
                         ->with('users',$users)
                         ->with('tags',$tags)
@@ -251,6 +259,7 @@ class UserController extends BaseController
                         ->with('continuefollowup',$continuefollowup)
                         ->with('notfollowup',$notfollowup)
                         ->with('usersAdmin',$usersAdmin)
+                        ->with('problem',$problem)
                         ->with('parameter',$request['parameter']);
         }
     }
@@ -1352,6 +1361,10 @@ class UserController extends BaseController
         {
             $user="";
         }
+
+        //دریافت کفیت های پیگیری
+        $problem=$this->getproblemfollowup();
+
         return view('panelAdmin.users')
                     ->with('tags',$tags)
                     ->with('users',$users)
@@ -1369,6 +1382,7 @@ class UserController extends BaseController
                     ->with('user',$user)
                     ->with('trashuser',$trashUser)
                     ->with('parameter',$request['parameter'])
+                    ->with('problem',$problem)
                     ->with('categoryUsers',$request['categoryUsers']);
     }
 
@@ -1460,6 +1474,11 @@ class UserController extends BaseController
                 $myfollowup = count($this->get_myfollowup_withoutPaginate());
                 $followedToday = count($this->get_followedToday_withoutPaginate());
                 $trashUser=count($this->getAll_trashuser_withoutPaginate());
+
+                //دریافت کفیت های پیگیری
+                $problem=$this->getproblemfollowup();
+
+
                 return view('panelAdmin.users')
                     ->with('tags',$tags)
                     ->with('users',$users)
@@ -1477,6 +1496,7 @@ class UserController extends BaseController
                     ->with('user',$user)
                     ->with('orderby',$request['orderby'])
                     ->with('parameter',$request['parameter'])
+                    ->with('problem',$problem)
                     ->with('trashuser',$trashUser);
             }
         }
@@ -1636,6 +1656,9 @@ class UserController extends BaseController
             $user="";
         }
 
+        //دریافت کفیت های پیگیری
+        $problem=$this->getproblemfollowup();
+
         return view('panelAdmin.users')
                     ->with('users',$users)
                     ->with('tags',$tags)
@@ -1652,6 +1675,7 @@ class UserController extends BaseController
                     ->with('notfollowup',$notfollowup)
                     ->with('user',$user)
                     ->with('trashuser',$trashuser)
+                    ->with('problem',$problem)
                     ->with('parameter',$request['parameter']);
     }
 
@@ -2002,6 +2026,10 @@ class UserController extends BaseController
                     {
                         return $query->where('users.gettingknow','=',$request->gettingknow);
                     })
+                    ->when(($request['problem']),function($query) use ($request)
+                    {
+                        return $query->where('followups.problemfollowup_id','=',$request->problem);
+                    })
                     ->orderby('date_fa', 'desc')
                     ->orderby('followups.id','desc')
                     ->groupby('followups.user_id')
@@ -2072,6 +2100,10 @@ class UserController extends BaseController
         $myfollowup = count($this->get_myfollowup_withoutPaginate());
         $followedToday = count($this->get_followedToday_withoutPaginate());
         $trashuser=count($this->getAll_trashuser_withoutPaginate());
+
+        //دریافت کفیت های پیگیری
+        $problem=$this->getproblemfollowup();
+
         return view('panelAdmin.users')
             ->with('users',$users)
             ->with('tags',$tags)
@@ -2088,6 +2120,7 @@ class UserController extends BaseController
             ->with('trashuser',$trashuser)
             ->with('user',Auth::user()->id)
             ->with('parameter',$request['parameter'])
+            ->with('problem',$problem)
             ->with('notfollowup',$notfollowup);
     }
 
