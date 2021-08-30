@@ -168,11 +168,6 @@ class UserController extends BaseController
         }
         else
         {
-            if(is_null($request->orderby)&&is_null($request->parameter))
-            {
-                $request['orderby']='id';
-                $request['parameter']='desc';
-            }
             $users=User::leftjoin('followups','users.id','=','followups.user_id')
                         ->where(function($query)
                         {
