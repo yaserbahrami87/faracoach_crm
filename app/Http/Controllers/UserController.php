@@ -36,14 +36,13 @@ class UserController extends BaseController
     {
         if(Auth::user()->type==2)
         {
-            if(is_null($request->orderby)&&is_null($request->parameter))
-            {
-                $request['orderby']='id';
-                $request['parameter']='desc';
-            }
+//            if(is_null($request->orderby)&&is_null($request->parameter))
+//            {
+//                $request['orderby']='id';
+//                $request['parameter']='desc';
+//            }
 
-            $users=User::orderby($request['orderby'],$request['parameter'])
-                    ->select('users.*')
+            $users=User::select('users.*')
                     ->groupby('users.id')
 //                    ->paginate($this->countPage());
                     ->get();
