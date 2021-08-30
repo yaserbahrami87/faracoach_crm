@@ -42,11 +42,11 @@ class UserController extends BaseController
 //                $request['parameter']='desc';
 //            }
 
-            $users=User::leftjoin('followups','users.id','=','followups.user_id')
-                    ->where('users.type','<>',0)
+            $users=User::where('users.type','<>',0)
+                    ->where('users.type','=',1)
                     ->orderby('id','desc')
                     ->select('users.*')
-                    ->groupby('followups.user_id')
+
 //                    ->paginate($this->countPage());
                     ->get();
 
@@ -111,8 +111,6 @@ class UserController extends BaseController
                 $myfollowup = count($this->get_myfollowup_withoutPaginate());
                 $followedToday = count($this->get_followedToday_withoutPaginate());
                 $trashuser=count($this->getAll_trashuser_withoutPaginate());
-
-
             }
             else
             {
