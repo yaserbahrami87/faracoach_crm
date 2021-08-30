@@ -1070,7 +1070,9 @@ class UserController extends BaseController
                         return redirect('/admin/users/');
                         break;
                     case 'notfollowup':
-                        $users = $this->get_notfollowup($request['orderby'],$request['parameter']);
+                        $users = $users = user::where('type','=',1)
+                                ->orderby('id','desc')
+                                ->paginate($this->countPage());
                         break;
                     case 'continuefollowup':
                         $users =$this->get_usersByType(11,$request['user'],true);
@@ -1179,7 +1181,9 @@ class UserController extends BaseController
                         return redirect('/admin/users/');
                         break;
                     case 'notfollowup':
-                        $users = $this->get_usersByType(1,Auth::user()->id,true);
+                        $users = user::where('type','=',1)
+                            ->orderby('id','desc')
+                            ->paginate($this->countPage());
                         break;
                     case 'continuefollowup':
                         $users = $this->get_usersByType(11,Auth::user()->id,true);
@@ -1241,12 +1245,15 @@ class UserController extends BaseController
             }
         }
         else {
+
             switch ($request['categoryUsers']) {
                 case '0':
                     return redirect('/admin/users/');
                     break;
                 case 'notfollowup':
-                    $users = $this->get_usersByType(1,Auth::user()->id,true);
+                    $users = user::where('type','=',1)
+                                ->orderby('id','desc')
+                                ->paginate($this->countPage());
                     break;
                 case 'continuefollowup':
                     $users = $this->get_usersByType(11,Auth::user()->id,true);
