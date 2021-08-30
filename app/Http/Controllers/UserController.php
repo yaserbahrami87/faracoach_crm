@@ -13,6 +13,9 @@ use Hekmatinasser\Verta\Verta;
 use Throwable;
 use SweetAlert;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
+
+
 
 class UserController extends BaseController
 {
@@ -2307,6 +2310,62 @@ class UserController extends BaseController
 //            ->with('user',$user)
 //            ->with('trashuser',$trashuser)
 //            ->with('parameter',$request['parameter']);
+    }
+
+
+    public function export_excel()
+    {
+        //خروجی اکسل
+        $list=User::where('users.type','=',1)
+            ->where('created_at','<','2021-07-23')
+            ->select('users.*')
+            ->groupby('users.id')
+            ->get();
+        foreach ($list as $item)
+        {
+            $item->created_at=$this->changeTimestampToShamsi($item->created_at);
+            if(!is_null($item->last_login_at))
+            {
+                $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
+            }
+
+            $item->status_followups=$this->userType($this->get_lastFollowupUser($item->id)['status_followups']);
+            $item->countFollowup=$this->get_countFollowup($item->id);
+            $item->quality=$this->get_lastFollowupUser($item->id)['problem'];
+            $item->quality_color=$this->get_lastFollowupUser($item->id)['color'];
+            $item->lastDateFollowup=$this->get_lastFollowupUser($item->id)['date_fa'];
+            $item->lastFollowupCourse=$this->get_lastFollowupUser($item->id)['course_id'];
+            $item->lastFollowupCourse=$this->get_coursesByID($item->lastFollowupCourse)['course'];
+            $item->type=$this->userType($item->type);
+            $item->insert_user_id=$this->get_user_byID($item->insert_user_id);
+
+            if(!is_null($item->introduced))
+            {
+                if ($this->get_user(NULL, $item->introduced, NULL, NULL, true)->count()>0)
+                {
+                    $item->introduced = $this->get_user(NULL, $item->introduced, NULL, NULL, true)->fname.' '.$this->get_user(NULL, $item->introduced, NULL, NULL, true)->lname ;
+                }
+                else if ($this->get_user($item->introduced, NULL, NULL, NULL, true)->count()>0)
+                {
+
+                    $item->introduced=$this->get_user($item->introduced, NULL, NULL, NULL, true)->fname.' '.$this->get_user($item->introduced, NULL, NULL, NULL, true)->lname;
+
+                }
+            }
+
+            if(is_null($item->personal_image))
+            {
+                $item->personal_image="default-avatar.png";
+            }
+        }
+        $excel=fastexcel($list)->export('file.xlsx');
+        if($excel)
+        {
+//                return Storage::disk('public')->download('file.xlsx');
+//                return response()->download(storage_path("/public/file.xlsx"));
+            return response()->download(public_path('file.xlsx'));
+
+        }
     }
 
 

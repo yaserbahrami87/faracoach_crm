@@ -126,6 +126,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
 //    Route::get('/users/categorybyAdmin/','UserController@categorybyAdmin');
 //    Route::get('/users/list_user_gettingknow','UserController@list_user_gettingknow');
     Route::get('/users/advancesearch','UserController@advancesearch');
+    Route::get('/users/export_excel','UserController@export_excel');
 
 
     Route::get('/user/{tel}/password','AdminController@changePasswordView');

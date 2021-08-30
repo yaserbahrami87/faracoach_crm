@@ -160,7 +160,7 @@ class BaseController extends Controller
         $types=['1' =>'پیگیری نشده',
                 '2' =>'مدیر',
                 '3' =>'فروش',
-                '4' =>'مدیرفروش',
+                '4' =>'جلسات',
                 '11'=>"تور پیگیری",
                 '12'=>"انصراف",
                 '13'=>"در انتظار تصمیم",
@@ -179,6 +179,8 @@ class BaseController extends Controller
             case "2":return "مدیر";
                         break;
             case "3":return "آموزش";
+                        break;
+            case "4":return "جلسات";
                         break;
             case "11": return "تور پیگیری";
                         break;
