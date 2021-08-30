@@ -1,4 +1,9 @@
 @extends('panelAdmin.master.index')
+
+@section('headerScript')
+<link href="{{asset('/dashboard/assets/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
+@endsection
+
 @section('rowcontent')
     <div class="col-md-12">
         <div class="card">
@@ -179,7 +184,7 @@
 
                 <div class="table-responsive overflow-auto">
 
-                    <table id="usersTable" class="table table-striped table-bordered" style="width:100%">
+                    <table id="example" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                         <tr>
                             <th></th>
@@ -355,11 +360,21 @@
                         </tr>
                         </tfoot>
                     </table>
-                    {{$users->links()}}
+
                 </div>
             </div>
 
         </div>
     </div>
+@endsection
+
+@section('footerScript')
+<script src="{{asset('/dashboard/assets/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('/dashboard/assets/js/dataTables.bootstrap4.min.js')}}"></script>
+<script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
+</script>
 @endsection
 
