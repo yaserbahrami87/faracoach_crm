@@ -176,7 +176,6 @@ class UserController extends BaseController
                         })
                         ->whereNotIn('users.type',[2,3,0])
                         ->select('users.*')
-                        ->orderby($request['orderby'],$request['parameter'])
                         ->groupby('users.id')
 //                        ->paginate($this->countPage());
                         ->get();
