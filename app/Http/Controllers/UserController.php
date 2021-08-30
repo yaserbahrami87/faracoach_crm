@@ -42,8 +42,11 @@ class UserController extends BaseController
 //                $request['parameter']='desc';
 //            }
 
-            $users=User::select('users.*')
-                    ->groupby('users.id')
+            $users=User::leftjoin('followups','users.id','=','followups.user_id')
+                    ->where('users.type','<>',0)
+                    ->orderby('id','desc')
+                    ->select('users.*')
+                    ->groupby('followups.user_id')
 //                    ->paginate($this->countPage());
                     ->get();
 

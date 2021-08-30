@@ -188,42 +188,13 @@
                         <thead>
                         <tr>
                             <th></th>
-                            <th>نام
-
-                                <a href="?orderby=fname&parameter=@if($parameter=='desc'){{'asc'}}@elseif($parameter=='asc'){{'desc'}}@endif">
-                                    <i class="fas fa-arrows-alt-v float-left"></i>
-                                </a>
-                            </th>
-                            <th>نام خانوادگی
-                                <a href="?orderby=lname&parameter=@if($parameter=='desc')asc @elseif($parameter=='asc')desc @endif">
-                                    <i class="fas fa-arrows-alt-v float-left"></i>
-                                </a>
-                            </th>
-                            <th>شماره همراه
-                                <a href="?orderby=tel&parameter=@if($parameter=='desc')asc @elseif($parameter=='asc')desc @endif">
-                                    <i class="fas fa-arrows-alt-v float-left"></i>
-                                </a>
-                            </th>
-                            <th>ثبت کننده
-                                <a href="?orderby=tel&parameter=@if($parameter=='desc')asc @elseif($parameter=='asc')desc @endif">
-                                    <i class="fas fa-arrows-alt-v float-left"></i>
-                                </a>
-                            </th>
-                            <th>معرف
-                                <a href="?orderby=last_login_at&parameter=@if($parameter=='desc')asc @elseif($parameter=='asc')desc @endif">
-                                    <i class="fas fa-arrows-alt-v float-left"></i>
-                                </a>
-                            </th>
-                            <th> آشنایی
-                                <a href="?orderby=created_at&parameter=@if($parameter=='desc')asc @elseif($parameter=='asc')desc @endif">
-                                    <i class="fas fa-arrows-alt-v float-left"></i>
-                                </a>
-                            </th>
-                            <th> ورود
-                                <a href="?orderby=created_at&parameter=@if($parameter=='desc')asc @elseif($parameter=='asc')desc @endif">
-                                    <i class="fas fa-arrows-alt-v float-left"></i>
-                                </a>
-                            </th>
+                            <th>نام</th>
+                            <th>نام خانوادگی</th>
+                            <th>شماره همراه</th>
+                            <th>ثبت کننده</th>
+                            <th>معرف</th>
+                            <th> آشنایی</th>
+                            <th> ورود</th>
                             @if(Auth::user()->type==2)
                                 <th>مسئول پیگیری</th>
                             @endif
@@ -232,27 +203,10 @@
                                     <i class="fas fa-arrows-alt-v float-left"></i>
                                 </a>
                             </th>
-                            <th>آخرین محصول پیگیری شده
-                                <a href="">
-                                    <i class="fas fa-arrows-alt-v float-left"></i>
-                                </a>
-                            </th>
-                            <th >آخرین پیگیری
-                                <a href="">
-                                    <i class="fas fa-arrows-alt-v float-left"></i>
-                                </a>
-                            </th>
-
-                            <th>وضعیت
-                                <a href="">
-                                    <i class="fas fa-arrows-alt-v float-left"></i>
-                                </a>
-                            </th>
-                            <th>اخرین ورود
-                                <a href="?orderby=last_login_at&parameter=@if($parameter=='desc')asc @elseif($parameter=='asc')desc @endif">
-                                    <i class="fas fa-arrows-alt-v float-left"></i>
-                                </a>
-                            </th>
+                            <th>آخرین محصول پیگیری شده</th>
+                            <th>آخرین پیگیری</th>
+                            <th>وضعیت</th>
+                            <th>اخرین ورود</th>
 
                             @if(Auth::user()->type==2)
                                 <th>حذف</th>
