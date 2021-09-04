@@ -1521,6 +1521,7 @@ class UserController extends BaseController
 
                 //لیست تعداد کاربرها
                 $notfollowup = $this->get_user(NULL,NULL,1,NULL,NULL,NULL )->count();
+                $lead=$this->get_user(NULL,NULL,-1,NULL,NULL)->count();
                 $continuefollowup = $this->get_usersByType(11,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
                 $cancelfollowup = $this->get_usersByType(12,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
                 $waiting = $this->get_usersByType(13,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
@@ -1556,6 +1557,7 @@ class UserController extends BaseController
                     ->with('orderby',$request['orderby'])
                     ->with('parameter',$request['parameter'])
                     ->with('problem',$problem)
+                    ->with('lead',$lead)
                     ->with('trashuser',$trashUser);
             }
         }
