@@ -48,18 +48,35 @@
                     @if(Auth::user()->type==2)
                         <div class="input-group mb-3 mt-3 ">
                             <div class="input-group-prepend">
-                                <button class="btn btn-outline-secondary" type="submit" id="button-addon1">تغییر وضعیت</button>
+                                <button class="btn btn-outline-secondary" type="submit" id="button-addon1">تغییر دسترسی</button>
                             </div>
-
                             <select class="form-control p-0" name="type" >
                                 <option selected disabled>یک گزینه را انتخاب کنید</option>
                                 <option value="2" {{$user->type===2 ? "selected":""  }} >مدیر</option>
                                 <option value="3" {{$user->type===3 ? "selected":""  }}>آموزش</option>
                                 <option value="4" {{$user->type===4 ? "selected":""  }}>جلسات</option>
+                                <option value="5" {{$user->type===5 ? "selected":""  }}>مارکتینگ</option>
                                 <option value="1" {{$user->type===1 ? "selected":""  }}>کاربر ساده</option>
                             </select>
                         </div>
                     @endif
+                </form>
+
+                <form method="post" action="/admin/user/{{$user->id}}/changeType">
+                    {{csrf_field()}}
+                    {{method_field('PATCH')}}
+                    <input type="hidden" value="NULL" name="followby_expert">
+                    <div class="input-group mb-3 mt-3 ">
+                        <div class="input-group-prepend">
+                            <button class="btn btn-outline-secondary" type="submit" id="button-addon1">تغییر دسته بندی</button>
+                        </div>
+                        <select class="form-control p-0" name="type" >
+                            <option selected disabled>یک گزینه را انتخاب کنید</option>
+                            <option value="-1" {{$user->type===-1 ? "selected":"" }} >مارکتینگ</option>
+                            <option value="11" {{$user->type===1 ? "selected":"" }}>فروش</option>
+                        </select>
+                    </div>
+
                 </form>
                 <hr>
             </div>
@@ -169,7 +186,6 @@
                         <div class="col-md-6 pr-1">
                             <div class="form-group">
                                 <label for="email">پست الکترونیکی</label>
-
                                 <input type="email" class="form-control" placeholder="پست الکترونیکی را وارد کنید" @if(old('email')) value='{{old('email')}}' @else value="{{$user->email}}" @endif name="email"  id="email"  @if(strlen($user->email)>0) disabled  @endif />
                             </div>
                         </div>

@@ -149,6 +149,7 @@
                             <small class="text-dark">دسترسی سریع:</small>
                             <ul class="list-group list-group-horizontal" id="users_tags">
                                 <a href="/admin/users/category/?categoryUsers=0&user={{$user}}" class="list-group-item p-0 border-0 mr-3 p-1 @if(request()->is('admin/users')) bg-info  @endif ">نمایش همه</a>
+                                <a href="/admin/users/category/?categoryUsers=lead" class="list-group-item p-0 border-0 mr-3 p-1 @if(request()->is('admin/users/category/?categoryUsers=lead')) bg-info  @endif ">لید خام  <span class="text-danger"> {{$lead}} </span></a>
                                 <a href="/admin/users/category/?categoryUsers=todayFollowup&user={{$user}}" class="list-group-item p-0 border-0 mr-3 p-1 @if(request()->is('admin/users/category/?categoryUsers=todayFollowup')) bg-info  @endif">پیگیری روز<span class="text-danger"> {{$todayFollowup}} </span></a>
                                 <a href="/admin/users/category/?categoryUsers=notfollowup&user={{$user}}" class="list-group-item p-0 border-0 mr-3 p-1 @if(request()->is('admin/users/category/?categoryUsers=notfollowup')) bg-info  @endif ">پیگیری نشده<span class="text-danger"> {{$notfollowup}} </span></a>
                                 <a href="/admin/users/category/?categoryUsers=continuefollowup&user={{$user}}" class="list-group-item p-0 border-0 mr-2 p-1">تور پیگیری<span class="text-danger"> {{$continuefollowup}} </span></a>
@@ -166,15 +167,19 @@
                             <label class="text-dark">دسترسی سریع</label>
                             <ul class="list-group list-group-horizontal" id="users_tags">
                                 <a href="/admin/users/category/?categoryUsers=0" class="list-group-item p-0 border-0 mr-3 p-1 @if(request()->is('admin/users')) bg-info  @endif ">نمایش همه</a>
-                                <a href="/admin/users/category/?categoryUsers=todayFollowup" class="list-group-item p-0 border-0 mr-3 p-1 @if(request()->is('admin/users/category/?categoryUsers=todayFollowup')) bg-info  @endif">پیگیری روز<span class="text-danger"> {{$todayFollowup}} </span></a>
-                                <a href="/admin/users/category/?categoryUsers=notfollowup" class="list-group-item p-0 border-0 mr-3 p-1 @if(request()->is('admin/users/category/?categoryUsers=notfollowup')) bg-info  @endif ">پیگیری نشده<span class="text-danger"> {{$notfollowup}} </span></a>
-                                <a href="/admin/users/category/?categoryUsers=continuefollowup" class="list-group-item p-0 border-0 mr-2 p-1">تور پیگیری<span class="text-danger"> {{$continuefollowup}} </span></a>
-                                <a href="/admin/users/category?categoryUsers=waiting" class="list-group-item p-0 border-0 mr-3 p-1">در انتظار تصمیم<span class="text-danger"> {{$waiting}} </span></a>
-                                <a href="/admin/users/category/?categoryUsers=cancelfollowup" class="list-group-item p-0 border-0 mr-3 p-1">انصراف<span class="text-danger"> {{$cancelfollowup}} </span></a>
-                                <a href="/admin/users/category/?categoryUsers=students" class="list-group-item p-0 border-0 mr-3 p-1">مشتری<span class="text-danger"> {{$students}} </span></a>
-                                <a href="/admin/users/category/?categoryUsers=noanswering" class="list-group-item p-0 border-0 mr-3 p-1">عدم پاسخ<span class="text-danger"> {{$noanswering}} </span></a>
-                                <a href="/admin/users/category/?categoryUsers=myfollowup" class="list-group-item  p-0 border-0 mr-3 p-1"> پیگیری های خودم<span class="text-danger"> {{$myfollowup}} </span></a>
-                                <a href="/admin/users/category/?categoryUsers=followedToday" class="list-group-item  p-0 border-0 mr-3 p-1"> پیگیری شده های امروز<span class="text-danger"> {{$followedToday}} </span></a>
+                                @if(Auth::user()->type==5)
+                                    <a href="/admin/users/category/?categoryUsers=lead" class="list-group-item p-0 border-0 mr-3 p-1 @if(request()->is('admin/users/category/?categoryUsers=lead')) bg-info  @endif ">لید خام <span class="text-danger"> {{$lead}}</a>
+                                @else
+                                    <a href="/admin/users/category/?categoryUsers=todayFollowup" class="list-group-item p-0 border-0 mr-3 p-1 @if(request()->is('admin/users/category/?categoryUsers=todayFollowup')) bg-info  @endif">پیگیری روز<span class="text-danger"> {{$todayFollowup}} </span></a>
+                                    <a href="/admin/users/category/?categoryUsers=notfollowup" class="list-group-item p-0 border-0 mr-3 p-1 @if(request()->is('admin/users/category/?categoryUsers=notfollowup')) bg-info  @endif ">پیگیری نشده<span class="text-danger"> {{$notfollowup}} </span></a>
+                                    <a href="/admin/users/category/?categoryUsers=continuefollowup" class="list-group-item p-0 border-0 mr-2 p-1">تور پیگیری<span class="text-danger"> {{$continuefollowup}} </span></a>
+                                    <a href="/admin/users/category?categoryUsers=waiting" class="list-group-item p-0 border-0 mr-3 p-1">در انتظار تصمیم<span class="text-danger"> {{$waiting}} </span></a>
+                                    <a href="/admin/users/category/?categoryUsers=cancelfollowup" class="list-group-item p-0 border-0 mr-3 p-1">انصراف<span class="text-danger"> {{$cancelfollowup}} </span></a>
+                                    <a href="/admin/users/category/?categoryUsers=students" class="list-group-item p-0 border-0 mr-3 p-1">مشتری<span class="text-danger"> {{$students}} </span></a>
+                                    <a href="/admin/users/category/?categoryUsers=noanswering" class="list-group-item p-0 border-0 mr-3 p-1">عدم پاسخ<span class="text-danger"> {{$noanswering}} </span></a>
+                                    <a href="/admin/users/category/?categoryUsers=myfollowup" class="list-group-item  p-0 border-0 mr-3 p-1"> پیگیری های خودم<span class="text-danger"> {{$myfollowup}} </span></a>
+                                    <a href="/admin/users/category/?categoryUsers=followedToday" class="list-group-item  p-0 border-0 mr-3 p-1"> پیگیری شده های امروز<span class="text-danger"> {{$followedToday}} </span></a>
+                                @endif
                             </ul>
                         </div>
                     @endif

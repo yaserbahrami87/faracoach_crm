@@ -101,6 +101,7 @@ class UserController extends BaseController
             {
                 //لیست تعداد کاربرها
                 $notfollowup = count($this->get_notfollowup_withoutPaginate());
+                $lead=$this->get_user(NULL,NULL,-1,NULL,NULL)->count();
                 $continuefollowup = count($this->get_continuefollowup_withoutPaginate());
                 $cancelfollowup = count($this->get_cancelfollowup_withoutPaginate());
                 $waiting = count($this->get_waiting_withoutPaginate());
@@ -116,6 +117,7 @@ class UserController extends BaseController
             {
                 //لیست تعداد کاربرها
                 $notfollowup = $this->get_user(NULL,NULL,1,NULL,NULL,NULL )->count();
+                $lead=$this->get_user(NULL,NULL,-1,NULL,NULL)->count();
                 $continuefollowup = $this->get_usersByType(11,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
                 $cancelfollowup = $this->get_usersByType(12,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
                 $waiting = $this->get_usersByType(13,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
@@ -164,6 +166,7 @@ class UserController extends BaseController
                 ->with('user',$user)
                 ->with('trashuser',$trashuser)
                 ->with('problem',$problem)
+                ->with('lead',$lead)
                 ->with('parameter',$request['parameter']);
         }
         else
@@ -174,7 +177,7 @@ class UserController extends BaseController
                             $query->orwhere('followby_expert','=',Auth::user()->id)
                                   ->orwhere('followby_expert','=',NULL);
                         })
-                        ->whereNotIn('users.type',[2,3,0])
+                        ->whereNotIn('users.type',[-1,2,3,0])
                         ->select('users.*')
                         ->groupby('users.id')
 //                        ->paginate($this->countPage());
@@ -184,8 +187,11 @@ class UserController extends BaseController
                 ->orwhere('type','=',3)
                 ->get();
 
+
+
             //لیست تعداد کاربرها
             $notfollowup = $this->get_user(NULL,NULL,1,NULL,NULL,NULL )->count();
+            $lead=$this->get_user(NULL,NULL,-1,NULL,NULL)->count();
             $continuefollowup = $this->get_usersByType(11,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
             $cancelfollowup = $this->get_usersByType(12,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
             $waiting = $this->get_usersByType(13,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
@@ -261,6 +267,7 @@ class UserController extends BaseController
                         ->with('notfollowup',$notfollowup)
                         ->with('usersAdmin',$usersAdmin)
                         ->with('problem',$problem)
+                        ->with('lead',$lead)
                         ->with('parameter',$request['parameter']);
         }
     }
@@ -443,7 +450,8 @@ class UserController extends BaseController
             'introduced'    => ['nullable','numeric'],
             'gettingknow'   => ['nullable','persian_alpha'],
             'organization'  => ['nullable','persian_alpha'],
-            'jobside'       => ['nullable','persian_alpha']
+            'jobside'       => ['nullable','persian_alpha'],
+            'type'          => ['required','string']
         ]);
 
         if(!isset($request['gettingknow']))
@@ -469,6 +477,8 @@ class UserController extends BaseController
             'insert_user_id'    =>Auth::user()->id,
             'organization'      => $request['organization'],
             'jobside'           => $request['jobside'],
+            'type'              =>$request['type']
+
         ]);
 
         if($status)
@@ -1051,6 +1061,7 @@ class UserController extends BaseController
     // نمایش اعضای سایت براساس دسته بندی برای ادمین
     public function showCategoryUsersAdmin(Request $request)
     {
+
         if(is_null($request->orderby)&&is_null($request->parameter))
         {
             $request['orderby']='id';
@@ -1060,10 +1071,18 @@ class UserController extends BaseController
 
         if(Auth::user()->type==2)
         {
-            if (!is_null($request)&&(strlen($request['user'])>0)) {
+            if (!is_null($request)&&(strlen($request['user'])>0))
+            {
+
                 switch ($request['categoryUsers']) {
                     case '0':
                         return redirect('/admin/users/');
+                        break;
+                    case 'lead':
+                        $users = $users = user::where('type','=',-1)
+                            ->orderby('id','desc')
+//                                ->paginate($this->countPage());
+                            ->get();
                         break;
                     case 'notfollowup':
                         $users = $users = user::where('type','=',1)
@@ -1186,6 +1205,12 @@ class UserController extends BaseController
                     case '0':
                         return redirect('/admin/users/');
                         break;
+                    case 'lead':
+                        $users = user::where('type','=',-1)
+                            ->orderby('id','desc')
+//                                ->paginate($this->countPage());
+                            ->get();
+                        break;
                     case 'notfollowup':
                         $users = user::where('type','=',1)
                             ->orderby('id','desc')
@@ -1238,6 +1263,7 @@ class UserController extends BaseController
 
                 //لیست تعداد کاربرها
                 $notfollowup = $this->get_user(NULL,NULL,1,NULL,NULL,NULL )->count();
+                $lead=$this->get_user(NULL,NULL,-1,NULL,NULL)->count();
                 $continuefollowup = $this->get_usersByType(11,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
                 $cancelfollowup = $this->get_usersByType(12,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
                 $waiting = $this->get_usersByType(13,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
@@ -1253,10 +1279,16 @@ class UserController extends BaseController
             }
         }
         else {
-
-            switch ($request['categoryUsers']) {
+            switch ($request['categoryUsers'])
+            {
                 case '0':
                     return redirect('/admin/users/');
+                    break;
+                case 'lead':
+                    $users = user::where('type','=',-1)
+                        ->orderby('id','desc')
+//                                ->paginate($this->countPage());
+                        ->get();
                     break;
                 case 'notfollowup':
                     $users = user::where('type','=',1)
@@ -1302,6 +1334,7 @@ class UserController extends BaseController
 
             //لیست تعداد کاربرها
             $notfollowup = $this->get_user(NULL,NULL,1,NULL,NULL,NULL )->count();
+            $lead=$this->get_user(NULL,NULL,-1,NULL,NULL)->count();
             $continuefollowup = $this->get_usersByType(11,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
             $cancelfollowup = $this->get_usersByType(12,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
             $waiting = $this->get_usersByType(13,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
@@ -1405,6 +1438,7 @@ class UserController extends BaseController
                     ->with('trashuser',$trashuser)
                     ->with('parameter',$request['parameter'])
                     ->with('problem',$problem)
+                    ->with('lead',$lead)
                     ->with('categoryUsers',$request['categoryUsers']);
     }
 
@@ -1658,6 +1692,7 @@ class UserController extends BaseController
 
         //لیست تعداد کاربرها
         $notfollowup =count($this->get_notfollowup_withoutPaginate()) ;
+        $lead=$this->get_user(NULL,NULL,-1,NULL,NULL)->count();
         $continuefollowup =count($this->get_continuefollowup_withoutPaginate());
         $cancelfollowup = count($this->get_cancelfollowup_withoutPaginate());
         $waiting = count($this->get_waiting_withoutPaginate());
@@ -1698,6 +1733,7 @@ class UserController extends BaseController
                     ->with('user',$user)
                     ->with('trashuser',$trashuser)
                     ->with('problem',$problem)
+                    ->with('lead',$lead)
                     ->with('parameter',$request['parameter']);
     }
 
@@ -2025,7 +2061,11 @@ class UserController extends BaseController
             $categorypeygiri=$request['categorypeygiri'];
         }
 
-
+        $users = User:: join('followups', 'users.id', '=', 'followups.user_id')
+                        ->orderby('followups.id','desc')
+                        ->where('followups.user_id','=',3654)
+                        ->get()
+                        ->unique('followups.user_id');
 
         $users = User:: join('followups', 'users.id', '=', 'followups.user_id')
                     ->when(($request['categorypeygiri']=="1" && $request['user'] ),function($query) use ($request)
@@ -2052,12 +2092,12 @@ class UserController extends BaseController
                     {
                         return $query->where('followups.problemfollowup_id','=',$request->problem);
                     })
-                    ->orderby('date_fa', 'desc')
                     ->orderby('followups.id','desc')
-                    ->groupby('followups.user_id')
+//                    ->groupby('followups.user_id')
                     ->select('users.*')
 //                    ->paginate($this->countPage());
                     ->get();
+
 
 
 
@@ -2081,6 +2121,7 @@ class UserController extends BaseController
             {
                 $item->followby_expert=$expert->fname." ".$expert->lname;
             }
+
             if(!is_null($item->introduced))
             {
                 if ($this->get_user(NULL, $item->introduced, NULL, NULL, true)->count()>0)
@@ -2113,6 +2154,7 @@ class UserController extends BaseController
 
         //لیست تعداد کاربرها
         $notfollowup = count($this->get_notfollowup_withoutPaginate());
+        $lead=$this->get_user(NULL,NULL,-1,NULL,NULL)->count();
         $continuefollowup = count($this->get_continuefollowup_withoutPaginate());
         $cancelfollowup = count($this->get_cancelfollowup_withoutPaginate());
         $waiting = count($this->get_waiting_withoutPaginate());
@@ -2126,6 +2168,8 @@ class UserController extends BaseController
 
         //دریافت کفیت های پیگیری
         $problem=$this->getproblemfollowup();
+
+
 
         return view('panelAdmin.users')
             ->with('users',$users)
@@ -2144,6 +2188,7 @@ class UserController extends BaseController
             ->with('user',Auth::user()->id)
             ->with('parameter',$request['parameter'])
             ->with('problem',$problem)
+            ->with('lead',$lead)
             ->with('notfollowup',$notfollowup);
     }
 

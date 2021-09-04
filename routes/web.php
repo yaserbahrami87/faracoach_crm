@@ -116,6 +116,9 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::get('/user/{user}','UserController@show');
     Route::patch('/profile/update/{user}','UserController@update');
     Route::patch('/user/{id}/changeType','UserController@changeType');
+
+
+
     Route::get('/users/search/','UserController@searchUsers');
     Route::get('/users/search/advance','UserController@advanceSearchUsers');
     Route::get('/add','UserController@showRegister');

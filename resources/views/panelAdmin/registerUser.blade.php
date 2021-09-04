@@ -185,7 +185,26 @@
                                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" value="1234">
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label for="type1" class="col-md-4 col-form-label text-md-right text-dark">{{ __('دسته بندی: *') }}</label>
 
+                                <div class="col-md-6">
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="type1" name="type" class="custom-control-input"  value="-1">
+                                        <label class="custom-control-label  text-dark" for="type1" title="مربوط به دسته بندی مارکتنیگ و تبلیغات" >سرد</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="type2" name="type" class="custom-control-input" value="1">
+                                        <label class="custom-control-label  text-dark" for="type2"  >گرم</label>
+                                    </div>
+
+                                    @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
                             <div class="form-group row mb-0">
                                 <label for="sendSMS" class="col-md-4 col-form-label text-md-right  text-dark">ارسال پیامک</label>
                                 <div class="col-md-6 mr-5">
@@ -241,3 +260,6 @@
 
 
 @endsection
+
+
+@section('')

@@ -21,7 +21,15 @@
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/profile.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/registerUser.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/registerUser.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/users.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/users.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/showReserveUser.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/showReserveUser.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -593,7 +601,14 @@
       <workItem from="1629966540783" duration="2457000" />
       <workItem from="1630172809081" duration="3366000" />
       <workItem from="1630223973087" duration="13026000" />
-      <workItem from="1630300392561" duration="14011000" />
+      <workItem from="1630300392561" duration="18211000" />
+      <workItem from="1630355794729" duration="708000" />
+      <workItem from="1630361501944" duration="1431000" />
+      <workItem from="1630439686618" duration="1341000" />
+      <workItem from="1630471362940" duration="9849000" />
+      <workItem from="1630600755580" duration="1920000" />
+      <workItem from="1630659362518" duration="3462000" />
+      <workItem from="1630727742228" duration="17000000" />
     </task>
     <servers />
   </component>
@@ -629,10 +644,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1630301350720" />
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1630224964623">
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1630751540855">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1630224964623" />
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1630751540855" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

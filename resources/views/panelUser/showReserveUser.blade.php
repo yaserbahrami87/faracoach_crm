@@ -230,7 +230,9 @@
                     <div class="alert alert-warning">جلسه کوچینگ شما لغو شده است</div>
                 @else
                     <div class="alert alert-warning">جلسه کوچینک هنوز انجام نشده است</div>
-                    <a href="" class="btn btn-danger">لغو جلسه</a>
+                    @if($reserve->start_date>$dateNow)
+                        <a href="" class="btn btn-danger">لغو جلسه</a>
+                    @endif
                 @endif
             </div>
         </div>
@@ -270,19 +272,19 @@
                     <div class="col-md-4 px-1">
                         <div class="form-group">
                             <label>تاریخ رزرو</label>
-                            <input type="text" class="form-control " placeholder="نام را وارد کنید" value="{{$reserve->start_date}}"    disabled="disabled"  />
+                            <input type="text" class="form-control "  value="{{$reserve->start_date}}"    disabled="disabled"  />
                         </div>
                     </div>
                     <div class="col-md-4 px-1">
                         <div class="form-group">
                             <label>ساعت شروع</label>
-                            <input type="text" class="form-control " placeholder="نام را وارد کنید" value="{{$reserve->start_time}}"    disabled="disabled"  />
+                            <input type="text" class="form-control "  value="{{$reserve->start_time}}"    disabled="disabled"  />
                         </div>
                     </div>
                     <div class="col-md-4 px-1">
                         <div class="form-group">
                             <label>ساعت پایان</label>
-                            <input type="text" class="form-control " placeholder="نام را وارد کنید" value="{{$reserve->end_time}}"    disabled="disabled"  />
+                            <input type="text" class="form-control " value="{{$reserve->end_time}}"    disabled="disabled"  />
                         </div>
                     </div>
                     <div class="col-md-12 px-1">
