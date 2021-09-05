@@ -115,6 +115,7 @@ return array(
     'App\\booking' => $baseDir . '/app/booking.php',
     'App\\categoryTag' => $baseDir . '/app/categoryTag.php',
     'App\\category_coach' => $baseDir . '/app/category_coach.php',
+    'App\\category_gettingknow' => $baseDir . '/app/category_gettingknow.php',
     'App\\category_post' => $baseDir . '/app/category_post.php',
     'App\\categoryfollowup' => $baseDir . '/app/categoryfollowup.php',
     'App\\checkout' => $baseDir . '/app/checkout.php',

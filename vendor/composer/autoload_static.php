@@ -720,6 +720,7 @@ class ComposerStaticInitf54d8edf51459297346cdb00d8423a68
         'App\\booking' => __DIR__ . '/../..' . '/app/booking.php',
         'App\\categoryTag' => __DIR__ . '/../..' . '/app/categoryTag.php',
         'App\\category_coach' => __DIR__ . '/../..' . '/app/category_coach.php',
+        'App\\category_gettingknow' => __DIR__ . '/../..' . '/app/category_gettingknow.php',
         'App\\category_post' => __DIR__ . '/../..' . '/app/category_post.php',
         'App\\categoryfollowup' => __DIR__ . '/../..' . '/app/categoryfollowup.php',
         'App\\checkout' => __DIR__ . '/../..' . '/app/checkout.php',

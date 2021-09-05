@@ -93,6 +93,8 @@
     </div>
 </div>
 
-@include('panelAdmin.settingsTags')
 @include('panelAdmin.settingsCategoryTag')
+@include('panelAdmin.settingsTags')
+@include('panelAdmin.settingCategoryGettingknow')
+
 @endsection

@@ -240,6 +240,9 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     //type Coaches
     Route::resource('type_coach','TypeCoachController');
 
+    //categorygettingknows
+    Route::resource('category_gettingknow','CategoryGettingknowController');
+
 });
 
 
@@ -318,6 +321,11 @@ Route::resource('tweets','TweetController');
 
 //LiKE
 Route::resource('like','LikeController');
+
+Route::get('/ravanshenasi',function()
+{
+    return view('landeRavanshenasi');
+});
 
 //blog
 Route::get('/{username}','PostController@blogHomePage');

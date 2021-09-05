@@ -219,5 +219,6 @@ return [
         'start_time'            =>'زمان شروع',
         'duration_booking'      =>'مدت زمان',
         'fi'                    =>'قیمت',
+        'category'             =>'دسته بندی',
     ],
 ];

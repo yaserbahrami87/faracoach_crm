@@ -183,8 +183,6 @@
                             </ul>
                         </div>
                     @endif
-
-
                 </div>
 
                 <div class="table-responsive overflow-auto">

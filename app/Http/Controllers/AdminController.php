@@ -384,10 +384,31 @@ class AdminController extends BaseController
 
         }
 
+        $categoryGettingknow=$this->get_categoryGettingknow(NULL,NULL,NULL,NULL);
+        foreach ($categoryGettingknow as $item)
+        {
+            if($item->status==1)
+            {
+                $item->status="نمایش";
+            }
+            elseif ($item->status==0)
+            {
+                $item->status="عدم نمایش";
+            }
+        }
+
+        $tmp=['parent_id','<>',NULL];
+        $gettingknow=$this->get_categoryGettingknow(NULL,NULL,1,NULL,NULL,$tmp);
+        dd($gettingknow);
+
+
+
+
         return view('panelAdmin.settings')
                     ->with('problemfollowup',$problemfollowup)
                     ->with('parentCategory',$parentCategory)
                     ->with('categoryTags',$categoryTags)
+                    ->with('categoryGettingknow',$categoryGettingknow)
                     ->with('options',$options);
     }
 

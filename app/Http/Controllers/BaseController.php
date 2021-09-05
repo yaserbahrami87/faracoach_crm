@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\category_coach;
+use App\category_gettingknow;
 use App\category_post;
 use App\categoryTag;
 use App\city;
@@ -1373,6 +1374,42 @@ class BaseController extends Controller
                         return $query->paginate($this->countPage());
                     });
 
+    }
+
+    public function get_categoryGettingknow($id=NULL,$category=NULL,$status=NULL,$parent_id=NULL,$paginate='get',$condition=NULL)
+    {
+        return category_gettingknow::when($id,function($query) use ($id)
+        {
+            return $query->where('id','=',$id);
+        })
+        ->when($category,function($query) use ($category)
+        {
+            return $query->where('category','=',$category);
+        })
+        ->when($status,function($query) use ($status)
+        {
+            return $query->where('status','=',$status);
+        })
+        ->when($parent_id,function($query) use ($parent_id)
+        {
+            return $query->where('parent_id','=',$parent_id);
+        })
+        ->when($condition,function($query) use ($condition)
+        {
+            return $query->where($condition[0],$condition[1],$condition[2]);
+        })
+        ->when($paginate=='get',function($query)
+        {
+            return $query->get();
+        })
+        ->when($paginate=='first',function($query)
+        {
+            return $query->first();
+        })
+        ->when($paginate=='paginate',function($query)
+        {
+            return $query->paginate($this->countPage());
+        });
     }
 
 

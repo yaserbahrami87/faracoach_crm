@@ -82,9 +82,11 @@
                             <div class="col-md-6">
                                 <div class="input-group">
                                     <input id="tel" type="text" class="form-control @error('tel') is-invalid @enderror" name="tel" value="{{ old('tel') }}" required autocomplete="tel">
+                                    <!--
                                     <div class="input-group-prepend">
                                         <button class="btn btn-outline-secondary btn-info text-light" type="button" id="activeMobile" data-toggle="modal" data-target="#ModalMobile">فعال سازی</button>
                                     </div>
+                                    -->
                                     @error('tel')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -95,10 +97,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="tel" class="col-md-4 col-form-label text-md-right">{{ __('معرف:') }}</label>
+                            <label for="tel" class="col-md-4 col-form-label text-md-right  text-dark">{{ __('معرف:') }}</label>
                             <div class="col-md-6">
                                 <div class="input-group">
-                                    <input id="introduced" type="text" class="form-control @error('introduced') is-invalid @enderror" value="{{ old('introduced') }}" autocomplete="introduced">
+                                    <input id="introduced_registerAdmin" type="text" class="form-control @error('introduced') is-invalid @enderror" value="{{ old('introduced') }}" autocomplete="introduced">
 
                                     @error('introduced')
                                     <span class="invalid-feedback" role="alert">
