@@ -326,9 +326,9 @@ class VerifyController extends BaseController
                 'tel'           =>'required|numeric|iran_mobile|',
             ]);
             $six_digit_random_number = mt_rand(100000, 999999);
-            $verify=verify::where('tel','=',$request['tel'])
-                        ->latest()
-                        ->first();
+            $verify=$this->get_user($request['tel'],NULL,NULL,NULL,true);    //verify::where('tel','=',$request['tel'])
+//                        ->latest()
+//                        ->first();
             if(is_null($verify))
             {
                 return back()->with('msg','شماره وارد شده در سیستم موجود نمی باشد')
