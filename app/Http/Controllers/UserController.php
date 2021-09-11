@@ -126,7 +126,7 @@ class UserController extends BaseController
             $students = $this->get_usersByType(20,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
             $condition=['nextfollowup_date_fa','=',$this->dateNow];
             $todayFollowup = $this->get_followup_join_user(NULL,Auth::user()->id,NULL,1,$condition,NULL )->count();
-            $condition=['followups.nextfollowup_date_fa', '<', $dateNow];
+            $condition=['followups.nextfollowup_date_fa', '<', $this->dateNow];
             $expireFollowup=$this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL )->count();
             $myfollowup = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
             $condition=['date_fa','=',$this->dateNow];
@@ -1162,7 +1162,7 @@ class UserController extends BaseController
                         break;
                     case 'expireFollowup':
                         $users = User::join('followups', 'users.id', '=', 'followups.user_id')
-                            ->where('followups.nextfollowup_date_fa', '<', $dateNow)
+                            ->where('followups.nextfollowup_date_fa', '<', $this->dateNow)
                             ->where('followby_expert', '=', $request['user'])
                             ->wherenotIn('users.type', [2, 12])
                             ->select('users.*')
@@ -1217,7 +1217,7 @@ class UserController extends BaseController
                 $condition=['nextfollowup_date_fa','=',$this->dateNow];
                 $todayFollowup = $this->get_followup_join_user(NULL,Auth::user()->id,NULL,1,$condition,NULL )->count();
 
-                $condition=['followups.nextfollowup_date_fa', '<', $dateNow];
+                $condition=['followups.nextfollowup_date_fa', '<', $this->dateNow];
                 $expireFollowup=$this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL )->count();
                 $myfollowup = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
                 $condition=['date_fa','=',$this->dateNow];
