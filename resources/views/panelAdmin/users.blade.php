@@ -171,6 +171,7 @@
                                     <a href="/admin/users/category/?categoryUsers=lead" class="list-group-item p-0 border-0 mr-3 p-1 @if(request()->is('admin/users/category/?categoryUsers=lead')) bg-info  @endif ">لید خام <span class="text-danger"> {{$lead}}</a>
                                 @else
                                     <a href="/admin/users/category/?categoryUsers=todayFollowup" class="list-group-item p-0 border-0 mr-3 p-1 @if(request()->is('admin/users/category/?categoryUsers=todayFollowup')) bg-info  @endif">پیگیری روز<span class="text-danger"> {{$todayFollowup}} </span></a>
+                                    <a href="/admin/users/category/?categoryUsers=expireFollowup" class="list-group-item p-0 border-0 mr-3 p-1 @if(request()->is('admin/users/category/?categoryUsers=expireFollowup')) bg-info  @endif">پیگیری تاریخ گذشته<span class="text-danger"> {{$expireFollowup}} </span></a>
                                     <a href="/admin/users/category/?categoryUsers=notfollowup" class="list-group-item p-0 border-0 mr-3 p-1 @if(request()->is('admin/users/category/?categoryUsers=notfollowup')) bg-info  @endif ">پیگیری نشده<span class="text-danger"> {{$notfollowup}} </span></a>
                                     <a href="/admin/users/category/?categoryUsers=continuefollowup" class="list-group-item p-0 border-0 mr-2 p-1">تور پیگیری<span class="text-danger"> {{$continuefollowup}} </span></a>
                                     <a href="/admin/users/category?categoryUsers=waiting" class="list-group-item p-0 border-0 mr-3 p-1">در انتظار تصمیم<span class="text-danger"> {{$waiting}} </span></a>
@@ -198,14 +199,8 @@
                             <th>معرف</th>
                             <th> آشنایی</th>
                             <th> ورود</th>
-                            @if(Auth::user()->type==2)
-                                <th>مسئول پیگیری</th>
-                            @endif
-                            <th>تعداد پیگیری
-                                <a href="">
-                                    <i class="fas fa-arrows-alt-v float-left"></i>
-                                </a>
-                            </th>
+                            <th>مسئول پیگیری</th>
+                            <th>تعداد پیگیری</th>
                             <th>آخرین محصول پیگیری شده</th>
                             <th>آخرین پیگیری</th>
                             <th>وضعیت</th>
@@ -251,11 +246,9 @@
                                         {{$item->resource}}
                                     </a>
                                 </td>
-                                @if(Auth::user()->type==2)
-                                    <td>
-                                        {{$item->followby_expert}}
-                                    </td>
-                                @endif
+                                <td>
+                                    {{$item->followby_expert}}
+                                </td>
                                 <td>
                                     {{$item->countFollowup}}
                                 </td>
@@ -302,9 +295,7 @@
                             <th>معرف</th>
                             <th> آشنایی</th>
                             <th>ورود</th>
-                            @if(Auth::user()->type==2)
-                                <th>مسئول پیگیری</th>
-                            @endif
+                            <th>مسئول پیگیری</th>
                             <th>تعداد پیگیری</th>
                             <th>آخرین محصول پیگیری شده</th>
                             <th>آخرین پیگیری</th>

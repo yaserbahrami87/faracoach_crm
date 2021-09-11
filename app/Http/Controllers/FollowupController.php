@@ -64,6 +64,11 @@ class FollowupController extends BaseController
 
         $request['tags']=implode(',',$request['tags']);
 
+
+
+
+
+
         $check=followup::create([
             'user_id'               =>$request['user_id'],
             'insert_user_id'        =>$request['insert_user_id'],
@@ -97,6 +102,21 @@ class FollowupController extends BaseController
         }
         if($check)
         {
+            $tmp=$this->get_followup_join_user(NULL,$request['user_id']);
+            if($tmp)
+            {
+                foreach ($tmp as $item)
+                {
+                    $t=$this->get_followup($item->followups_id,NULL,NULL,NULL,"first");
+                    $t['flag']="0";
+                    $t->update();
+                }
+            }
+
+            $t=$this->get_followup($check->id,NULL,NULL,NULL,"first");
+            $t['flag']="1";
+            $t->update();
+
             $msg="پیگیری با موفقیت ثبت شد";
             $errorStatus="success";
         }
@@ -182,6 +202,7 @@ class FollowupController extends BaseController
         ]);
 
 
+        $tmp=$this->get_followup_join_user(NULL,$request['user_id'],NULL,'get');
 
         $check=followup::create([
             'user_id'               =>$request['user_id'],
@@ -226,5 +247,18 @@ class FollowupController extends BaseController
 
         return back();
 
+    }
+
+
+
+    public function test()
+    {
+        $follow=followup::get();
+        foreach ($follow as $item)
+        {
+            $t=$this->get_followup(NULL,$item->user_id,NULL,NULL,"first");
+            $t['flag']="1";
+            $t->update();
+        }
     }
 }

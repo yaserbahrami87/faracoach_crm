@@ -46,7 +46,6 @@ class UserController extends BaseController
                     ->where('users.type','=',1)
                     ->orderby('id','desc')
                     ->select('users.*')
-
 //                    ->paginate($this->countPage());
                     ->get();
 
@@ -65,6 +64,14 @@ class UserController extends BaseController
                     $item->followby_expert=$expert->fname." ".$expert->lname;
                 }
 
+//                $item->status_followups=$this->userType($this->get_lastFollowupUser($item->id)['status_followups']);
+//                $item->countFollowup=$this->get_countFollowup($item->id);
+//                $item->quality=$this->get_lastFollowupUser($item->id)['problem'];
+//                $item->quality_color=$this->get_lastFollowupUser($item->id)['color'];
+//                $item->lastDateFollowup=$this->get_lastFollowupUser($item->id)['date_fa'];
+//                $item->lastFollowupCourse=$this->get_lastFollowupUser($item->id)['course_id'];
+//                $item->lastFollowupCourse=$this->get_coursesByID($item->lastFollowupCourse)['course'];
+
                 $item->status_followups=$this->userType($this->get_lastFollowupUser($item->id)['status_followups']);
                 $item->countFollowup=$this->get_countFollowup($item->id);
                 $item->quality=$this->get_lastFollowupUser($item->id)['problem'];
@@ -72,7 +79,16 @@ class UserController extends BaseController
                 $item->lastDateFollowup=$this->get_lastFollowupUser($item->id)['date_fa'];
                 $item->lastFollowupCourse=$this->get_lastFollowupUser($item->id)['course_id'];
                 $item->lastFollowupCourse=$this->get_coursesByID($item->lastFollowupCourse)['course'];
-                $item->insert_user=$this->get_user( NULL,$item->insert_user_id,NULL,NULL,true)['fname']." ".$this->get_user( NULL,$item->insert_user_id,NULL,NULL,true)['lname'];
+                $item->type=$this->userType($item->type);
+                $item->insert_user_id=$this->get_user_byID($item->insert_user_id);
+
+
+                if(!is_null($item->insert_user))
+                {
+                    $item->insert_user=$this->get_user(NULL,$item->insert_user_id,NULL,NULL,true)['fname']." ".$this->get_user( NULL,$item->insert_user_id,NULL,NULL,true)['lname'];
+                }
+
+
                 if(is_null($item->personal_image))
                 {
                     $item->personal_image="default-avatar.png";
@@ -92,45 +108,30 @@ class UserController extends BaseController
                     }
                 }
             }
+
+
             $tags=$this->get_tags();
             $parentCategory=$this->get_category('پیگیری');
             $usersAdmin=user::orwhere('type'    ,'=',2)
                         ->orwhere('type','=',3)
                         ->get();
-            if(isset($request['user']))
-            {
-                //لیست تعداد کاربرها
-                $notfollowup = count($this->get_notfollowup_withoutPaginate());
-                $lead=$this->get_user(NULL,NULL,-1,NULL,NULL)->count();
-                $continuefollowup = count($this->get_continuefollowup_withoutPaginate());
-                $cancelfollowup = count($this->get_cancelfollowup_withoutPaginate());
-                $waiting = count($this->get_waiting_withoutPaginate());
-                $noanswering = count($this->get_noanswering_withoutPaginate());
-                $students = count($this->get_students_withoutPaginate());
-                $todayFollowup = count($this->get_todayFollowup_withoutPaginate());
-                $expireFollowup = $this->get_expireFollowup_withoutPaginate();
-                $myfollowup = count($this->get_myfollowup_withoutPaginate());
-                $followedToday = count($this->get_followedToday_withoutPaginate());
-                $trashuser=count($this->getAll_trashuser_withoutPaginate());
-            }
-            else
-            {
-                //لیست تعداد کاربرها
-                $notfollowup = $this->get_user(NULL,NULL,1,NULL,NULL,NULL )->count();
-                $lead=$this->get_user(NULL,NULL,-1,NULL,NULL)->count();
-                $continuefollowup = $this->get_usersByType(11,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-                $cancelfollowup = $this->get_usersByType(12,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-                $waiting = $this->get_usersByType(13,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-                $noanswering = $this->get_usersByType(14,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-                $students = $this->get_usersByType(20,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-                $condition=['nextfollowup_date_fa',$this->dateNow];
-                $todayFollowup = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL )->count();
-                $expireFollowup = $this->get_expireFollowup_withoutPaginate();
-                $myfollowup = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-                $condition=['date_fa',$this->dateNow];
-                $followedToday = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL )->count();
-                $trashuser=$this->get_usersByType(0,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-            }
+
+            //لیست تعداد کاربرها
+            $notfollowup = $this->get_user(NULL,NULL,1,NULL,NULL,NULL )->count();
+            $lead=$this->get_user(NULL,NULL,-1,NULL,NULL)->count();
+            $continuefollowup = $this->get_usersByType(11,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
+            $cancelfollowup = $this->get_usersByType(12,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
+            $waiting = $this->get_usersByType(13,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
+            $noanswering = $this->get_usersByType(14,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
+            $students = $this->get_usersByType(20,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
+            $condition=['nextfollowup_date_fa','=',$this->dateNow];
+            $todayFollowup = $this->get_followup_join_user(NULL,Auth::user()->id,NULL,1,$condition,NULL )->count();
+            $condition=['followups.nextfollowup_date_fa', '<', $dateNow];
+            $expireFollowup=$this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL )->count();
+            $myfollowup = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
+            $condition=['date_fa','=',$this->dateNow];
+            $followedToday = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL )->count();
+            $trashuser=$this->get_usersByType(0,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
 
             if(isset($request['user']))
             {
@@ -147,7 +148,7 @@ class UserController extends BaseController
 //            }
 
             //دریافت کفیت های پیگیری
-            $problem=$this->getproblemfollowup();
+            $problem=$this->get_problemfollowup(NULL,1);
 
             return view('panelAdmin.users')
                 ->with('users',$users)
@@ -177,8 +178,10 @@ class UserController extends BaseController
                             $query->orwhere('followby_expert','=',Auth::user()->id)
                                   ->orwhere('followby_expert','=',NULL);
                         })
+                        ->where('followups.flag','=',1)
                         ->whereNotIn('users.type',[-1,2,3,0])
                         ->select('users.*')
+                        ->orderby('users.id','desc')
                         ->groupby('users.id')
 //                        ->paginate($this->countPage());
                         ->get();
@@ -192,17 +195,18 @@ class UserController extends BaseController
             //لیست تعداد کاربرها
             $notfollowup = $this->get_user(NULL,NULL,1,NULL,NULL,NULL )->count();
             $lead=$this->get_user(NULL,NULL,-1,NULL,NULL)->count();
-            $continuefollowup = $this->get_usersByType(11,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-            $cancelfollowup = $this->get_usersByType(12,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-            $waiting = $this->get_usersByType(13,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-            $noanswering = $this->get_usersByType(14,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-            $students = $this->get_usersByType(20,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-            $condition=['nextfollowup_date_fa',$this->dateNow];
-            $todayFollowup = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL )->count();
-            $expireFollowup = $this->get_expireFollowup_withoutPaginate();
+            $continuefollowup = $this->get_usersByType(11,Auth::user()->id,NULL,NULL,NULL,NULL,"1")->count();
+            $cancelfollowup = $this->get_usersByType(12,Auth::user()->id,NULL,NULL,NULL,NULL ,"1")->count();
+            $waiting = $this->get_usersByType(13,Auth::user()->id,NULL,NULL,NULL,NULL ,"1")->count();
+            $noanswering = $this->get_usersByType(14,Auth::user()->id,NULL,NULL,NULL,NULL,"1")->count();
+            $students = $this->get_usersByType(20,Auth::user()->id,NULL,NULL,NULL,NULL)->count();
+            $condition=['nextfollowup_date_fa','=',$this->dateNow];
+            $todayFollowup = $this->get_followup_join_user(NULL,Auth::user()->id,NULL,1,$condition,NULL )->count();
+            $condition=['followups.nextfollowup_date_fa', '<', $this->dateNow];
+            $expireFollowup=$this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL )->count();
             $myfollowup = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-            $condition=['date_fa',$this->dateNow];
-            $followedToday = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL )->count();
+            $condition=['date_fa','=',$this->dateNow];
+            $followedToday = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL ,"1")->count();
             $trashuser=$this->get_usersByType(0,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
 
 
@@ -214,6 +218,14 @@ class UserController extends BaseController
                         $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
                 }
 
+//                $item->status_followups=$this->userType($this->get_lastFollowupUser($item->id)['status_followups']);
+//                $item->countFollowup=$this->get_countFollowup($item->id);
+//                $item->quality=$this->get_lastFollowupUser($item->id)['problem'];
+//                $item->quality_color=$this->get_lastFollowupUser($item->id)['color'];
+//                $item->lastDateFollowup=$this->get_lastFollowupUser($item->id)['date_fa'];
+//                $item->lastFollowupCourse=$this->get_lastFollowupUser($item->id)['course_id'];
+//                $item->lastFollowupCourse=$this->get_coursesByID($item->lastFollowupCourse)['course'];
+
                 $item->status_followups=$this->userType($this->get_lastFollowupUser($item->id)['status_followups']);
                 $item->countFollowup=$this->get_countFollowup($item->id);
                 $item->quality=$this->get_lastFollowupUser($item->id)['problem'];
@@ -221,6 +233,8 @@ class UserController extends BaseController
                 $item->lastDateFollowup=$this->get_lastFollowupUser($item->id)['date_fa'];
                 $item->lastFollowupCourse=$this->get_lastFollowupUser($item->id)['course_id'];
                 $item->lastFollowupCourse=$this->get_coursesByID($item->lastFollowupCourse)['course'];
+                $item->type=$this->userType($item->type);
+                $item->insert_user_id=$this->get_user_byID($item->insert_user_id);
 
                 if(!is_null($item->introduced))
                 {
@@ -240,6 +254,15 @@ class UserController extends BaseController
                 {
                     $item->personal_image="default-avatar.png";
                 }
+
+                $expert=$this->get_user_byID($item->followby_expert);
+
+                if(!is_null($expert))
+                {
+                    $item->followby_expert=$expert->fname." ".$expert->lname;
+                }
+
+
             }
             $tags=$this->get_tags();
             $parentCategory=$this->get_category('پیگیری');
@@ -250,7 +273,7 @@ class UserController extends BaseController
 //            }
 
             //دریافت کفیت های پیگیری
-            $problem=$this->getproblemfollowup();
+            $problem=$this->get_problemfollowup(NULL,1);
 
             return view('panelAdmin.users')
                         ->with('users',$users)
@@ -268,6 +291,7 @@ class UserController extends BaseController
                         ->with('usersAdmin',$usersAdmin)
                         ->with('problem',$problem)
                         ->with('lead',$lead)
+                        ->with('expireFollowup',$expireFollowup)
                         ->with('parameter',$request['parameter']);
         }
     }
@@ -607,7 +631,7 @@ class UserController extends BaseController
        }
 
         //دسته بندی های لیست پیگیری
-        $problemFollowup=$this->getproblemfollowup();
+        $problemFollowup=$this->get_problemfollowup(NULL,1);
 
         //مقدار یوزر با توجه به دستور زیر مقدار ورودی تابع با مقدار خروجی تقییر میکند
         $user=User::find($user);
@@ -1073,7 +1097,6 @@ class UserController extends BaseController
         {
             if (!is_null($request)&&(strlen($request['user'])>0))
             {
-
                 switch ($request['categoryUsers']) {
                     case '0':
                         return redirect('/admin/users/');
@@ -1191,11 +1214,13 @@ class UserController extends BaseController
                 $waiting = $this->get_usersByType(13,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
                 $noanswering = $this->get_usersByType(14,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
                 $students = $this->get_usersByType(20,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-                $condition=['nextfollowup_date_fa',$this->dateNow];
-                $todayFollowup = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL )->count();
-                $expireFollowup = $this->get_expireFollowup_withoutPaginate();
+                $condition=['nextfollowup_date_fa','=',$this->dateNow];
+                $todayFollowup = $this->get_followup_join_user(NULL,Auth::user()->id,NULL,1,$condition,NULL )->count();
+
+                $condition=['followups.nextfollowup_date_fa', '<', $dateNow];
+                $expireFollowup=$this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL )->count();
                 $myfollowup = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-                $condition=['date_fa',$this->dateNow];
+                $condition=['date_fa','=',$this->dateNow];
                 $followedToday = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL )->count();
                 $trashuser=$this->get_usersByType(0,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
             }
@@ -1269,16 +1294,18 @@ class UserController extends BaseController
                 $waiting = $this->get_usersByType(13,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
                 $noanswering = $this->get_usersByType(14,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
                 $students = $this->get_usersByType(20,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-                $condition=['nextfollowup_date_fa',$this->dateNow];
-                $todayFollowup = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL )->count();
-                $expireFollowup = $this->get_expireFollowup_withoutPaginate();
+                $condition=['nextfollowup_date_fa','=',$this->dateNow];
+                $todayFollowup = $this->get_followup_join_user(NULL,Auth::user()->id,NULL,1,$condition,NULL )->count();
+                $condition=['followups.nextfollowup_date_fa', '<', $dateNow];
+                $expireFollowup=$this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL )->count();
                 $myfollowup = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-                $condition=['date_fa',$this->dateNow];
+                $condition=['date_fa','=',$this->dateNow];
                 $followedToday = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL )->count();
                 $trashuser=$this->get_usersByType(0,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
             }
         }
-        else {
+        else
+        {
             switch ($request['categoryUsers'])
             {
                 case '0':
@@ -1315,14 +1342,17 @@ class UserController extends BaseController
                     $users = $this->get_usersByType(20,Auth::user()->id);
                     break;
                 case 'todayFollowup':
-                    $users = $this->get_todayFollowup();
+                    $condition=['nextfollowup_date_fa','=',$this->dateNow];
+                    $users=$this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL,1);
                     break;
                 case 'expireFollowup':
-                    $users = $this->get_expireFollowup();
+                    $condition=['nextfollowup_date_fa','<',$this->dateNow];
+                    $users=$this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL,1);
+                    //$users = $this->get_expireFollowup();
                     break;
                 case 'myfollowup':
 //                    $users =$this->get_myfollowup();
-                    $users =$this->get_usersByType(NULL,Auth::user()->id,);
+                    $users =$this->get_usersByType(NULL,Auth::user()->id);
                     break;
                 case 'followedToday':
                     $users = $this->get_followedToday();
@@ -1332,6 +1362,7 @@ class UserController extends BaseController
                     break;
             }
 
+
             //لیست تعداد کاربرها
             $notfollowup = $this->get_user(NULL,NULL,1,NULL,NULL,NULL )->count();
             $lead=$this->get_user(NULL,NULL,-1,NULL,NULL)->count();
@@ -1340,42 +1371,65 @@ class UserController extends BaseController
             $waiting = $this->get_usersByType(13,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
             $noanswering = $this->get_usersByType(14,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
             $students = $this->get_usersByType(20,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-            $condition=['nextfollowup_date_fa',$this->dateNow];
-            $todayFollowup = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL )->count();
-            $expireFollowup = $this->get_expireFollowup_withoutPaginate();
+            $condition=['nextfollowup_date_fa','=',$this->dateNow];
+            $todayFollowup = $this->get_followup_join_user(NULL,Auth::user()->id,NULL,1,$condition,NULL )->count();
+
+            $condition=['followups.nextfollowup_date_fa', '<', $dateNow];
+            $expireFollowup=$this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL )->count();
             $myfollowup = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-            $condition=['date_fa',$this->dateNow];
+            $condition=['date_fa','=',$this->dateNow];
             $followedToday = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL )->count();
             $trashuser=$this->get_usersByType(0,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
         }
 
+
+
         foreach ($users as $item)
         {
+            $tmp=$this->get_followup(NULL,$item->id,NULL,1,'first');
 
-            $item->status_followups=$this->userType($this->get_lastFollowupUser($item->id)['status_followups']);
-            $item->countFollowup=$this->get_countFollowup($item->id);
+//            $item->status_followups=$this->userType($tmp['status_followups']);
+            if($tmp->count()>0)
+            {
+                $item->status_followups=$this->userType($this->get_lastFollowupUser($item->id)['status_followups']);
+                $quality=$this->get_problemfollowup($tmp['problemfollowup_id'],NULL,NULL,'first');
+            }
+
+
+
+            if(isset($quality) && ($quality->count()>0))
+            {
+                echo "<script>console.log(".$item['date_fa'].")</script>";
+                $item->quality=$quality['problem'];
+                $item->quality_color=$quality['color'];
+                $item->lastDateFollowup=$item['date_fa'];
+                $item->lastFollowupCourse=$item['course_id'];
+                $item->countFollowup=$this->get_followup(NULL,$item->id,NULL,NULL,'get')->count();
+            }
+            else
+            {
+                $item->quality=NULL;
+                $item->quality_color=NULL;
+                $item->lastDateFollowup=NULL;
+                $item->lastFollowupCourse=NULL;
+                $item->countFollowup=NULL;
+            }
+
+
             $item->created_at = $this->changeTimestampToShamsi($item->created_at);
             if (!is_null($item->last_login_at)) {
                 $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
             }
-
-            $item->quality=$this->get_lastFollowupUser($item->id)['problem'];
-            $item->quality_color=$this->get_lastFollowupUser($item->id)['color'];
             $expert=$this->get_user_byID($item->followby_expert);
-
             if(!is_null($expert))
             {
                 $item->followby_expert=$expert->fname." ".$expert->lname;
             }
-
-            $item->lastDateFollowup=$this->get_lastFollowupUser($item->id)['date_fa'];
-            $item->lastFollowupCourse=$this->get_lastFollowupUser($item->id)['course_id'];
             $item->lastFollowupCourse=$this->get_coursesByID($item->lastFollowupCourse)['course'];
             if(is_null($item->personal_image))
             {
                 $item->personal_image="default-avatar.png";
             }
-
             if(!is_null($item->introduced))
             {
                 if ($this->get_user(NULL, $item->introduced, NULL, NULL, true)->count()>0)
@@ -1384,13 +1438,13 @@ class UserController extends BaseController
                 }
                 else if ($this->get_user($item->introduced, NULL, NULL, NULL, true)->count()>0)
                 {
-
                     $item->introduced=$this->get_user($item->introduced, NULL, NULL, NULL, true)->fname.' '.$this->get_user($item->introduced, NULL, NULL, NULL, true)->lname;
-
                 }
             }
 
         }
+
+
         $usersAdmin=user::orwhere('type'    ,'=',2)
                         ->orwhere('type','=',3)
                         ->get();
@@ -1407,7 +1461,6 @@ class UserController extends BaseController
         $tags=$this->get_tags();
         $parentCategory=$this->get_category('پیگیری');
 
-
         if(isset($request['user']))
         {
             $user=$request['user'];
@@ -1418,7 +1471,7 @@ class UserController extends BaseController
         }
 
         //دریافت کفیت های پیگیری
-        $problem=$this->getproblemfollowup();
+        $problem=$this->get_problemfollowup(NULL,1);
 
         return view('panelAdmin.users')
                     ->with('tags',$tags)
@@ -1430,6 +1483,7 @@ class UserController extends BaseController
                     ->with('todayFollowup',$todayFollowup)
                     ->with('students',$students)
                     ->with('noanswering',$noanswering)
+                    ->with('expireFollowup',$expireFollowup)
                     ->with('waiting',$waiting)
                     ->with('cancelfollowup',$cancelfollowup)
                     ->with('continuefollowup',$continuefollowup)
@@ -1527,16 +1581,17 @@ class UserController extends BaseController
                 $waiting = $this->get_usersByType(13,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
                 $noanswering = $this->get_usersByType(14,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
                 $students = $this->get_usersByType(20,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-                $condition=['nextfollowup_date_fa',$this->dateNow];
-                $todayFollowup = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL )->count();
-                $expireFollowup = $this->get_expireFollowup_withoutPaginate();
+                $condition=['nextfollowup_date_fa','=',$this->dateNow];
+                $todayFollowup = $this->get_followup_join_user(NULL,Auth::user()->id,NULL,1,$condition,NULL )->count();
+                $condition=['followups.nextfollowup_date_fa', '<', $this->dateNow];
+                $expireFollowup=$this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL ,1)->count();
                 $myfollowup = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-                $condition=['date_fa',$this->dateNow];
+                $condition=['date_fa','=',$this->dateNow];
                 $followedToday = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL )->count();
                 $trashUser=$this->get_usersByType(0,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
 
                 //دریافت کفیت های پیگیری
-                $problem=$this->getproblemfollowup();
+                $problem=$this->get_problemfollowup(NULL,1);
 
 
                 return view('panelAdmin.users')
@@ -1558,6 +1613,7 @@ class UserController extends BaseController
                     ->with('parameter',$request['parameter'])
                     ->with('problem',$problem)
                     ->with('lead',$lead)
+                    ->with('expireFollowup',$expireFollowup)
                     ->with('trashuser',$trashUser);
             }
         }
@@ -1700,8 +1756,10 @@ class UserController extends BaseController
         $waiting = count($this->get_waiting_withoutPaginate());
         $noanswering = count($this->get_noanswering_withoutPaginate());
         $students = count($this->get_students_withoutPaginate());
-        $todayFollowup = count($this->get_todayFollowup_withoutPaginate());
-        $expireFollowup = count($this->get_expireFollowup_withoutPaginate());
+        $condition=['nextfollowup_date_fa','=',$this->dateNow];
+        $todayFollowup = $this->get_followup_join_user(NULL,Auth::user()->id,NULL,1,$condition,NULL )->count();
+        $condition=['followups.nextfollowup_date_fa', '<', $this->dateNow];
+        $expireFollowup=$this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL,1 )->count();
         $myfollowup = count($this->get_myfollowup_withoutPaginate());
         $followedToday = count($this->get_followedToday_withoutPaginate());
         $trashuser=count($this->getAll_trashuser_withoutPaginate());
@@ -1716,7 +1774,7 @@ class UserController extends BaseController
         }
 
         //دریافت کفیت های پیگیری
-        $problem=$this->getproblemfollowup();
+        $problem=$this->get_problemfollowup(NULL,1);
 
         return view('panelAdmin.users')
                     ->with('users',$users)
@@ -1736,6 +1794,7 @@ class UserController extends BaseController
                     ->with('trashuser',$trashuser)
                     ->with('problem',$problem)
                     ->with('lead',$lead)
+                    ->with('expireFollowup',$expireFollowup)
                     ->with('parameter',$request['parameter']);
     }
 
@@ -1878,7 +1937,7 @@ class UserController extends BaseController
                     $item->course_id=$this->get_coursesByID($item->course_id)->course;
                 }
 
-                $problemFollowup = $problemFollowup = $this->getproblemfollowup();
+                $problemFollowup = $this->$this->get_problemfollowup(NULL,1);
 
                 $courses=$this->get_courses($this->dateNow);
 
@@ -2063,11 +2122,7 @@ class UserController extends BaseController
             $categorypeygiri=$request['categorypeygiri'];
         }
 
-        $users = User:: join('followups', 'users.id', '=', 'followups.user_id')
-                        ->orderby('followups.id','desc')
-                        ->where('followups.user_id','=',3654)
-                        ->get()
-                        ->unique('followups.user_id');
+
 
         $users = User:: join('followups', 'users.id', '=', 'followups.user_id')
                     ->when(($request['categorypeygiri']=="1" && $request['user'] ),function($query) use ($request)
@@ -2094,6 +2149,7 @@ class UserController extends BaseController
                     {
                         return $query->where('followups.problemfollowup_id','=',$request->problem);
                     })
+                    ->where('flag','=',1)
                     ->orderby('followups.id','desc')
 //                    ->groupby('followups.user_id')
                     ->select('users.*')
@@ -2105,25 +2161,31 @@ class UserController extends BaseController
 
         foreach ($users as $item)
         {
-            $item->created_at=$this->changeTimestampToShamsi($item->created_at);
-            if(!is_null($item->last_login_at))
-            {
+            //$item->countFollowup=$this->get_countFollowup($item->id);
+
+
+            $tmp=$this->get_followup(NULL,$item->id,NULL,1,'first');
+            $item->status_followups=$this->userType($tmp['status_followups']);
+            $quality=$this->get_problemfollowup($tmp['problemfollowup_id'],NULL,NULL,'first');
+            $item->quality=$quality->problem;
+            $item->quality_color=$quality['color'];
+            $item->lastDateFollowup=$tmp['date_fa'];
+            $item->lastFollowupCourse=$tmp['course_id'];
+            $item->countFollowup=$this->get_followup(NULL,$item->id,NULL,NULL,'get')->count();
+            $item->created_at = $this->changeTimestampToShamsi($item->created_at);
+            if (!is_null($item->last_login_at)) {
                 $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
             }
-
-            $item->status_followups=$this->userType($this->get_lastFollowupUser($item->id)['status_followups']);
-            $item->countFollowup=$this->get_countFollowup($item->id);
-            $item->quality=$this->get_lastFollowupUser($item->id)['problem'];
-            $item->quality_color=$this->get_lastFollowupUser($item->id)['color'];
-            $item->lastDateFollowup=$this->get_lastFollowupUser($item->id)['date_fa'];
-            $item->lastFollowupCourse=$this->get_lastFollowupUser($item->id)['course_id'];
-            $item->lastFollowupCourse=$this->get_coursesByID($item->lastFollowupCourse)['course'];
             $expert=$this->get_user_byID($item->followby_expert);
             if(!is_null($expert))
             {
                 $item->followby_expert=$expert->fname." ".$expert->lname;
             }
-
+            $item->lastFollowupCourse=$this->get_coursesByID($item->lastFollowupCourse)['course'];
+            if(is_null($item->personal_image))
+            {
+                $item->personal_image="default-avatar.png";
+            }
             if(!is_null($item->introduced))
             {
                 if ($this->get_user(NULL, $item->introduced, NULL, NULL, true)->count()>0)
@@ -2132,15 +2194,8 @@ class UserController extends BaseController
                 }
                 else if ($this->get_user($item->introduced, NULL, NULL, NULL, true)->count()>0)
                 {
-
                     $item->introduced=$this->get_user($item->introduced, NULL, NULL, NULL, true)->fname.' '.$this->get_user($item->introduced, NULL, NULL, NULL, true)->lname;
-
                 }
-            }
-
-            if(is_null($item->personal_image))
-            {
-                $item->personal_image="default-avatar.png";
             }
         }
 
@@ -2162,14 +2217,16 @@ class UserController extends BaseController
         $waiting = count($this->get_waiting_withoutPaginate());
         $noanswering = count($this->get_noanswering_withoutPaginate());
         $students = count($this->get_students_withoutPaginate());
-        $todayFollowup = count($this->get_todayFollowup_withoutPaginate());
-        $expireFollowup = $this->get_expireFollowup_withoutPaginate();
+        $condition=['nextfollowup_date_fa','=',$this->dateNow];
+        $todayFollowup = $this->get_followup_join_user(NULL,Auth::user()->id,NULL,1,$condition,NULL )->count();
+        $condition=['followups.nextfollowup_date_fa', '<', $this->dateNow];
+        $expireFollowup=$this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL )->count();
         $myfollowup = count($this->get_myfollowup_withoutPaginate());
         $followedToday = count($this->get_followedToday_withoutPaginate());
         $trashuser=count($this->getAll_trashuser_withoutPaginate());
 
         //دریافت کفیت های پیگیری
-        $problem=$this->getproblemfollowup();
+        $problem=$this->get_problemfollowup(NULL,1);
 
 
 
@@ -2191,6 +2248,7 @@ class UserController extends BaseController
             ->with('parameter',$request['parameter'])
             ->with('problem',$problem)
             ->with('lead',$lead)
+            ->with('expireFollowup',$expireFollowup)
             ->with('notfollowup',$notfollowup);
     }
 
@@ -2396,6 +2454,15 @@ class UserController extends BaseController
                 $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
             }
 
+//            $item->status_followups=$this->userType($this->get_lastFollowupUser($item->id)['status_followups']);
+//            $item->countFollowup=$this->get_countFollowup($item->id);
+//            $item->quality=$this->get_lastFollowupUser($item->id)['problem'];
+//            $item->quality_color=$this->get_lastFollowupUser($item->id)['color'];
+//            $item->lastDateFollowup=$this->get_lastFollowupUser($item->id)['date_fa'];
+//            $item->lastFollowupCourse=$this->get_lastFollowupUser($item->id)['course_id'];
+//            $item->lastFollowupCourse=$this->get_coursesByID($item->lastFollowupCourse)['course'];
+//            $item->type=$this->userType($item->type);
+//            $item->insert_user_id=$this->get_user_byID($item->insert_user_id);
             $item->status_followups=$this->userType($this->get_lastFollowupUser($item->id)['status_followups']);
             $item->countFollowup=$this->get_countFollowup($item->id);
             $item->quality=$this->get_lastFollowupUser($item->id)['problem'];
@@ -2405,6 +2472,8 @@ class UserController extends BaseController
             $item->lastFollowupCourse=$this->get_coursesByID($item->lastFollowupCourse)['course'];
             $item->type=$this->userType($item->type);
             $item->insert_user_id=$this->get_user_byID($item->insert_user_id);
+
+
 
             if(!is_null($item->introduced))
             {

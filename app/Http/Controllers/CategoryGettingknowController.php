@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\category_gettingknow;
 use Illuminate\Http\Request;
 
-class CategoryGettingknowController extends Controller
+class CategoryGettingknowController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -24,7 +24,10 @@ class CategoryGettingknowController extends Controller
      */
     public function create()
     {
-        return view('panelAdmin.insertCategoryGettingknow');
+        $tmp=['parent_id','=',0];
+        $categoryGettingknow=$this->get_categoryGettingknow(NULL,NULL,NULL,NULL,'get',$tmp);
+        return view('panelAdmin.insertCategoryGettingknow')
+                    ->with('categoryGettingknow',$categoryGettingknow);
     }
 
     /**
@@ -36,8 +39,9 @@ class CategoryGettingknowController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'category'  =>'required|string',
-            'status'    =>'required|boolean',
+            'category'      =>'required|string',
+            'parent_id'     =>'required',
+            'status'        =>'required|boolean',
         ]);
 
         $status=category_gettingknow::where('category','=',$request['category'])
@@ -82,7 +86,10 @@ class CategoryGettingknowController extends Controller
      */
     public function edit(category_gettingknow $category_gettingknow)
     {
+        $tmp=['parent_id','=',0];
+        $categoryGettingknow=$this->get_categoryGettingknow(NULL,NULL,NULL,NULL,'get',$tmp);
         return view('panelAdmin.editCategoryGettingknow')
+                        ->with('categoryGettingknow',$categoryGettingknow)
                         ->with('category_gettingknow',$category_gettingknow);
     }
 
@@ -96,8 +103,9 @@ class CategoryGettingknowController extends Controller
     public function update(Request $request, category_gettingknow $category_gettingknow)
     {
         $this->validate($request,[
-            'category'  =>'required|string',
-            'status'    =>'required|boolean',
+            'category'      =>'required|string',
+            'parent_id'     =>'required',
+            'status'        =>'required|boolean',
         ]);
 
         $status=category_gettingknow::where('category','=',$request['category'])

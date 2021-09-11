@@ -15,7 +15,7 @@
                     <form method="POST" action="{{ route('register') }}">
                         {{csrf_field()}}
                         <div class="form-group row">
-                            <label for="fname" class="col-md-4 col-form-label text-md-right">{{ __('نام:') }}</label>
+                            <label for="fname" class="col-md-4 col-form-label text-md-right">{{ __('نام*:') }}</label>
 
                             <div class="col-md-6">
                                 <input id="fname" type="text" class="form-control @error('fname') is-invalid @enderror" name="fname" value="{{ old('fname') }}" lang="fa" required autocomplete="fname" autofocus>
@@ -29,7 +29,7 @@
                         </div>
                         <input type="hidden" value="0" name="tel_verified" id="tel_verified"/>
                         <div class="form-group row">
-                            <label for="lname" class="col-md-4 col-form-label text-md-right">{{ __('نام خانوادگی:') }}</label>
+                            <label for="lname" class="col-md-4 col-form-label text-md-right">{{ __('نام خانوادگی*:') }}</label>
 
                             <div class="col-md-6">
                                 <input id="lname" type="text" class="form-control @error('lname') is-invalid @enderror"  lang="fa" name="lname" value="{{ old('lname') }}" required autocomplete="lname" autofocus>
@@ -97,17 +97,39 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="gettingknow" class="col-md-4 col-form-label text-md-right">{{ __('نحوه آشنایی با فراکوچ:') }}</label>
+
+                            <div class="col-md-6">
+                                <select id="gettingknow" class="form-control" @error('gettingknow') is-invalid @enderror" name="gettingknow">
+                                <option selected disabled>انتخاب کنید</option>
+                                <option>اینستاگرام</option>
+                                <option>تلگرام</option>
+                                <option>تبلیغاتی محیطی</option>
+                                <option>تبلیغات فضای مجازی</option>
+                                <option>پکیج رایگان</option>
+                                <option>واتساپ</option>
+                                <option>موتورهای جستجو</option>
+                                </select>
+                                @error('gettingknow')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="tel" class="col-md-4 col-form-label text-md-right  text-dark">{{ __('معرف:') }}</label>
                             <div class="col-md-6">
                                 <div class="input-group">
                                     <input id="introduced_registerAdmin" type="text" class="form-control @error('introduced') is-invalid @enderror" value="{{ old('introduced') }}" autocomplete="introduced">
-
                                     @error('introduced')
                                     <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
+                                <small class="text-muted">لطفا تلفن همراه معرف خود را وارد کنید</small>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -147,28 +169,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="gettingknow" class="col-md-4 col-form-label text-md-right">{{ __('نحوه آشنایی با فراکوچ:') }}</label>
-
-                            <div class="col-md-6">
-                                <select id="gettingknow" class="form-control" @error('gettingknow') is-invalid @enderror" name="gettingknow">
-                                    <option selected disabled>انتخاب کنید</option>
-                                    <option>اینستاگرام</option>
-                                    <option>تلگرام</option>
-                                    <option>تبلیغاتی محیطی</option>
-                                    <option>تبلیغات فضای مجازی</option>
-                                    <option>پکیج رایگان</option>
-                                    <option>واتساپ</option>
-                                    <option>موتورهای جستجو</option>
-                                </select>
-                                @error('gettingknow')
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
 
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('رمز عبور:*') }}</label>

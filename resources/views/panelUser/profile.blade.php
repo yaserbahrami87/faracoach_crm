@@ -174,6 +174,7 @@
                             <div class="form-group">
                                 <label>معرف</label>
                                 <input type="text" class="form-control @if(strlen($user->introduced)==0) is-invalid @endif" @if(old('introduced')) value='{{old('introduced')}}' @else value="{{$user->introduced}}" @endif id="introduced" @if(strlen($user->introduced)>0) disabled @endif />
+                                <small class="text-muted">لطفا تلفن همراه معرف خود را وارد کنید</small>
                                 <span id="feedback_introduced" ></span>
                             </div>
                         </div>

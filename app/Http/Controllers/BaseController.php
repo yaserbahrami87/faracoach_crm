@@ -204,6 +204,7 @@ class BaseController extends Controller
     {
         return User::when($tel,function($query,$tel)
             {
+
                 return $query->where('tel','=',$tel);
             })
             ->when($id, function ($query,$id)
@@ -319,11 +320,35 @@ class BaseController extends Controller
         return problemfollowup::where('id','=',$id)->first();
     }
 
-    public function getproblemfollowup()
+    public function get_problemfollowup($id=NULL,$status=NULL,$color=NULL,$paginate='get')
     {
         return problemfollowup::orderby('problem')
-                ->where('status','=','1')
-                ->get();
+                ->when($id,function($query) use ($id)
+                {
+                    return $query->where('id','=',$id);
+                })
+                ->when($color,function($query) use ($color)
+                {
+                    return $query->where('color','=',$color);
+                })
+                ->when($status,function($query) use ($status)
+                {
+                    return $query->where('status','=',$status);
+                })
+                ->when($paginate=='get',function($query) use ($paginate)
+                {
+                    return $query->get();
+                })
+                ->when($paginate=='paginate',function($query)
+                {
+                    return $query->paginate($this->countPage());
+                })
+                ->when($paginate=='first',function($query)
+                {
+                    return $query->first();
+                });
+
+
     }
 
     // تگ های فعال را برمی گرداند
@@ -393,7 +418,6 @@ class BaseController extends Controller
     //آخرین پیگیری کاربر را براساس آیدی آن بر میگرداند
     public function get_lastFollowupUser($id)
     {
-
         return followup::join('problemfollowups','followups.problemfollowup_id','=','problemfollowups.id')
                     ->where('user_id','=',$id)
                     ->orderby('followups.id','desc')
@@ -1297,12 +1321,12 @@ class BaseController extends Controller
     }
 
 
-    public function get_usersByType($type=NULL,$id=NULL,$paginate=NULL,$between=NULL,$condition=NULL,$statusFollowup=NULL)
+    public function get_usersByType($type=NULL,$followby_expert=NULL,$paginate=NULL,$between=NULL,$condition=NULL,$statusFollowup=NULL,$flag=NULL)
     {
 
         $users= User::join('followups','users.id','=','followups.user_id')
-            ->when($id, function ($query,$id) {
-                return $query->where('followby_expert', '=', $id);
+            ->when($followby_expert, function ($query,$followby_expert) {
+                return $query->where('followby_expert', '=', $followby_expert);
             })
             ->when($type,function($query,$type){
                 return $query->where('users.type','=',$type);
@@ -1313,11 +1337,19 @@ class BaseController extends Controller
             })
             ->when($condition,function($query,$condition)
             {
-                return $query->where($condition[0],'=',$condition[1]);
+                return $query->where($condition[0],$condition[1],$condition[2]);
             })
             ->when($statusFollowup,function($query,$statusFollowup)
             {
                 return $query->where('followups.status_followups','=',$statusFollowup);
+            })
+            ->when($flag,function($query,$flag)
+            {
+                return $query->where('followups.flag','=',$flag);
+            })
+            ->when($flag,function($query,$flag)
+            {
+                return $query->where('followups.flag','=',$flag);
             })
             ->orderby('followups.id', 'desc')
             ->groupby('followups.user_id')
@@ -1398,18 +1430,93 @@ class BaseController extends Controller
         {
             return $query->where($condition[0],$condition[1],$condition[2]);
         })
-        ->when($paginate=='get',function($query)
+        ->when($paginate=='get',function($query)use ($paginate)
         {
             return $query->get();
         })
-        ->when($paginate=='first',function($query)
+        ->when($paginate=='first',function($query)use ($paginate)
         {
             return $query->first();
         })
-        ->when($paginate=='paginate',function($query)
+        ->when($paginate=='paginate',function($query)use ($paginate)
         {
             return $query->paginate($this->countPage());
         });
+    }
+
+
+    public function get_followup_join_user($id=NULL,$user_id=NULL,$insert_user_id=NULL,$flag=NULL,$paginate='get')
+    {
+        return user::join('followups','users.id','=','followups.user_id')
+                ->when($id,function($query)use ($id)
+                {
+                    return $query->where('id','=',$id);
+                })
+                ->when($user_id,function($query)use ($user_id)
+                {
+                    return $query->where('user_id','=',$user_id);
+                })
+                ->when($insert_user_id,function($query)use ($insert_user_id)
+                {
+                    return $query->where('insert_user_id','=',$insert_user_id);
+                })
+                ->when($flag,function($query)use ($flag)
+                {
+                    return $query->where('flag','=',$flag);
+                })
+                ->when($paginate=='get',function($query)use ($paginate)
+                {
+                    $query->select('users.*','followups.id as followups_id');
+                    return $query->get();
+                })
+                ->when($paginate=='first',function($query)use ($paginate)
+                {
+                    $query->select('users.*','followups.id as followups_id');
+                    return $query->first();
+                })
+                ->when($paginate=='paginate',function($query)use ($paginate)
+                {
+                    $query->select('users.*','followups.id as followups_id');
+                    return $query->paginate($this->countPage());
+                });
+
+    }
+
+    public function get_followup($id=NULL,$user_id=NULL,$insert_user_id=NULL,$flag=NULL,$paginate=NULL)
+    {
+        return followup::join('problemfollowups','followups.problemfollowup_id','=','problemfollowups.id')
+            ->when($id,function($query)use ($id)
+            {
+                return $query->where('id','=',$id);
+            })
+            ->when($user_id,function($query)use ($user_id)
+            {
+                return $query->where('user_id','=',$user_id);
+            })
+            ->when($insert_user_id,function($query)use ($insert_user_id)
+            {
+                return $query->where('insert_user_id','=',$insert_user_id);
+            })
+            ->when($flag,function($query)use ($flag)
+            {
+                return $query->where('flag','=',$flag);
+            })
+            ->when($paginate=='get',function($query)
+            {
+                $query->orderby('followups.id','desc');
+                return $query->get();
+            })
+            ->when($paginate=='paginate',function($query)
+            {
+                $query->orderby('followups.id','desc');
+                return $query->paginate($this->countPage());
+            })
+            ->when($paginate=='first',function($query)
+            {
+                $query->orderby('followups.id','desc');
+                return $query->first();
+            });
+
     }
 
 

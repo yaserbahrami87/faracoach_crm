@@ -96,5 +96,6 @@
 @include('panelAdmin.settingsCategoryTag')
 @include('panelAdmin.settingsTags')
 @include('panelAdmin.settingCategoryGettingknow')
+@include('panelAdmin.settingGettingknow')
 
 @endsection

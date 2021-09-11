@@ -327,6 +327,8 @@ Route::get('/ravanshenasi',function()
     return view('landeRavanshenasi');
 });
 
+Route::get('/test','FollowupController@test');
+
 //blog
 Route::get('/{username}','PostController@blogHomePage');
 Route::get('/{username}/post/{post}','PostController@show');

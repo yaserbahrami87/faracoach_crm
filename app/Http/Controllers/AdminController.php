@@ -40,6 +40,7 @@ class AdminController extends BaseController
     {
         if(Gate::allows('isAdmin')||Gate::allows('isEducation'))
         {
+
             $notFollowup=count($this->get_notfollowup_withoutPaginate());
             $follow=$this->get_usersByType(11,Auth::user()->id)->count();
             $cancel=$this->get_usersByType(12,Auth::user()->id)->count();
@@ -60,6 +61,7 @@ class AdminController extends BaseController
 
             $usersEducation=user::where('type','=',3)
                         ->get();
+
             $sumcancelfollowup=0;
             $sumallFollowups=0;
             $sumtodayFollowups=0;
@@ -87,26 +89,29 @@ class AdminController extends BaseController
 
             foreach ($usersEducation as $item)
             {
-                $condition=['followups.insert_user_id',$item->id];
+                $condition=['followups.insert_user_id','=',$item->id];
                 $item->cancelfollowup=$this->get_usersByType(NULL,NULL,NULL,$request['start_date'],$condition,12)->count();
+
                 $sumcancelfollowup=$sumcancelfollowup+$item->cancelfollowup;
-                $condition=['followups.insert_user_id',$item->id];
+
+                $condition=['followups.insert_user_id','=',$item->id];
                 $item->allFollowups=$this->get_usersByType(NULL,NULL,NULL,$request['start_date'],$condition)->count();
                 $sumallFollowups=$sumallFollowups+$item->allFollowups;
                 $item->todayFollowups=count($this->get_todayFollowupbyID_withoutPaginate($item->id));
                 $sumtodayFollowups=$sumtodayFollowups+$item->todayFollowups;
-                $condition=['followups.date_fa',$this->dateNow];
+
+                $condition=['followups.date_fa','=',$this->dateNow];
                 $item->followedTodaybyID=$this->get_usersByType(NULL,$item->id,NULL,NULL, $condition)->count();
                 $sumfollowedTodaybyID=$sumfollowedTodaybyID+$item->followedTodaybyID;
-                $condition=['followups.insert_user_id',$item->id];
+
+                $condition=['followups.insert_user_id','=',$item->id];
                 $item->continuefollowup=$this->get_usersByType(NULL,NULL,NULL,$request['start_date'],$condition,11)->count();
                 $sumcontinuefollowup=$sumcontinuefollowup+$item->continuefollowup;
                 $item->waiting=$this->get_usersByType(NULL,NULL,NULL,$request['start_date'],$condition,13)->count();
                 $sumwaiting=$sumwaiting+$item->waiting;
-                $condition=['followups.insert_user_id',$item->id];
-                $item->students=$this->get_usersByType(NULL,NULL,NULL,$request['start_date'],$condition,20)->count();
 
-                $sumstudents=$sumstudents+$item->students;
+                $condition=['followups.insert_user_id','=',$item->id];
+                $item->students=$this->get_usersByType(NULL,NULL,NULL,$request['start_date'],$condition,20)->count();                $sumstudents=$sumstudents+$item->students;
                 $item->noanswering=$this->get_usersByType(NULL,NULL,NULL,$request['start_date'],$condition,14)->count();
                 $sumnoanswering=$sumnoanswering+$item->noanswering;
                 if(!is_null($item->last_login_at))
@@ -116,11 +121,13 @@ class AdminController extends BaseController
                 //تبدیل تاریخ شمسی  به میلادی برای نمایش کاربرهای براساس فیلد created_at
                 if(isset($request['start_date']))
                 {
+
                     $date_en=[$this->changeTimestampToMilad($request['start_date'][0]),$this->changeTimestampToMilad($request['start_date'][1])];
                 }
                 else
                 {
-                    $date_en=NULL;
+
+                    $date_en=[$this->changeTimestampToMilad($request['start_date'][0]),$this->changeTimestampToMilad($request['start_date'][1])];
                 }
 
                 $item->insertuser=$this->get_user(NULL,NULL,NULL,NULL,NULL,$date_en,$item->id)->count();
@@ -164,7 +171,6 @@ class AdminController extends BaseController
         else if(Gate::allows('isUser'))
         {
             $user=(Auth::user());
-
             if(($user->status_coach==-2)||($user->status_coach==1))
             {
                 $user=User::join('coaches','users.id','=','coaches.user_id')
@@ -384,7 +390,8 @@ class AdminController extends BaseController
 
         }
 
-        $categoryGettingknow=$this->get_categoryGettingknow(NULL,NULL,NULL,NULL);
+        $tmp=['parent_id','=',0];
+        $categoryGettingknow=$this->get_categoryGettingknow(NULL,NULL,NULL,NULL,'get',$tmp);
         foreach ($categoryGettingknow as $item)
         {
             if($item->status==1)
@@ -397,9 +404,23 @@ class AdminController extends BaseController
             }
         }
 
-        $tmp=['parent_id','<>',NULL];
-        $gettingknow=$this->get_categoryGettingknow(NULL,NULL,1,NULL,NULL,$tmp);
-        dd($gettingknow);
+        $tmp=['parent_id','<>',0];
+        $gettingknow=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$tmp);
+        foreach ($gettingknow as $item)
+        {
+
+            //dd($this->get_categoryGettingknow(2,NULL,NULL,NULL,'first'));
+            if($item->status==1)
+            {
+                $item->status="نمایش";
+            }
+            elseif ($item->status==0)
+            {
+                $item->status="عدم نمایش";
+            }
+        }
+
+
 
 
 
@@ -409,6 +430,7 @@ class AdminController extends BaseController
                     ->with('parentCategory',$parentCategory)
                     ->with('categoryTags',$categoryTags)
                     ->with('categoryGettingknow',$categoryGettingknow)
+                    ->with('gettingknow',$gettingknow)
                     ->with('options',$options);
     }
 
