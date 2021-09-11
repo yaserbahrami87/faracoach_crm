@@ -256,7 +256,11 @@ class FollowupController extends BaseController
         $follow=followup::get();
         foreach ($follow as $item)
         {
-            $t=$this->get_followup(NULL,$item->user_id,NULL,NULL,"first");
+
+            $t=followup::where('user_id','=',$item->user_id)
+                         ->orderby('id','desc')
+                         ->first();//$this->get_followup_join_user(NULL,$item->user_id,NULL,NULL,'first',NULL);
+//            echo ("<script>console.log(".$t.")</script>");
             $t['flag']="1";
             $t->update();
         }

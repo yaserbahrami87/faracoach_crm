@@ -1445,9 +1445,13 @@ class BaseController extends Controller
     }
 
 
-    public function get_followup_join_user($id=NULL,$user_id=NULL,$insert_user_id=NULL,$flag=NULL,$paginate='get')
+    public function get_followup_join_user($id=NULL,$user_id=NULL,$insert_user_id=NULL,$flag=NULL,$paginate='get',$join=true)
     {
-        return user::join('followups','users.id','=','followups.user_id')
+        return followup::when($join,function ($query)
+                {
+                    $query->select('users.*','followups.id as followups_id');
+                    return $query->join('users','users.id','=','followups.user_id');
+                })
                 ->when($id,function($query)use ($id)
                 {
                     return $query->where('id','=',$id);
@@ -1466,17 +1470,15 @@ class BaseController extends Controller
                 })
                 ->when($paginate=='get',function($query)use ($paginate)
                 {
-                    $query->select('users.*','followups.id as followups_id');
                     return $query->get();
                 })
                 ->when($paginate=='first',function($query)use ($paginate)
                 {
-                    $query->select('users.*','followups.id as followups_id');
-                    return $query->first();
+
+                    $query->first();
                 })
                 ->when($paginate=='paginate',function($query)use ($paginate)
                 {
-                    $query->select('users.*','followups.id as followups_id');
                     return $query->paginate($this->countPage());
                 });
 
@@ -1516,10 +1518,5 @@ class BaseController extends Controller
                 $query->orderby('followups.id','desc');
                 return $query->first();
             });
-
     }
-
-
-
-
 }
