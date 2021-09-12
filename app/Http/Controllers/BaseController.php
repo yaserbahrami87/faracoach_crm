@@ -1472,15 +1472,15 @@ class BaseController extends Controller
                 {
                     return $query->get();
                 })
-                ->when($paginate=='first',function($query)use ($paginate)
-                {
-
-                    $query->first();
-                })
                 ->when($paginate=='paginate',function($query)use ($paginate)
                 {
                     return $query->paginate($this->countPage());
+                })
+                ->when($paginate=='first',function($query)use ($paginate)
+                {
+                    $query->first();
                 });
+
 
     }
 

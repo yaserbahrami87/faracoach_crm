@@ -50,13 +50,15 @@ class AdminController extends BaseController
 
             $followupToday=User::join('followups','users.id','=','followups.user_id')
                     ->where('nextfollowup_date_fa','=',$dateNow)
+                    ->where('flag','=',1)
                     ->wherenotIn('users.type',[2,12])
                     ->groupby('users.id')
                     ->count();
             $expirefollowupToday=User::join('followups','users.id','=','followups.user_id')
                     ->where('nextfollowup_date_fa','<',$dateNow)
-                    ->wherenotIn('users.type',[2,12])
-                    ->groupby('users.id')
+                    ->where('flag','=',1)
+                    ->where('followby_expert','=',Auth::user()->id)
+//                    ->wherenotIn('users.type',[2,12])
                     ->count();
 
             $usersEducation=user::where('type','=',3)

@@ -65,10 +65,6 @@ class FollowupController extends BaseController
         $request['tags']=implode(',',$request['tags']);
 
 
-
-
-
-
         $check=followup::create([
             'user_id'               =>$request['user_id'],
             'insert_user_id'        =>$request['insert_user_id'],
@@ -102,18 +98,22 @@ class FollowupController extends BaseController
         }
         if($check)
         {
-            $tmp=$this->get_followup_join_user(NULL,$request['user_id']);
+//            $tmp=$this->get_followup_join_user(NULL,$request['user_id'],NULL,NULL,NULL,NULL);
+            $tmp=$this->get_followup(NULL,$request['user_id'],NULL,NULL,'get');
             if($tmp)
             {
                 foreach ($tmp as $item)
                 {
-                    $t=$this->get_followup($item->followups_id,NULL,NULL,NULL,"first");
+                    $t=$this->get_followup(NULL,$item->followups_id,NULL,NULL,"first");
                     $t['flag']="0";
                     $t->update();
                 }
             }
 
-            $t=$this->get_followup($check->id,NULL,NULL,NULL,"first");
+            $t=followup::where('id','=',$check->id)
+                        ->first();  //$this->get_followup(,NULL,NULL,NULL,"first");
+
+
             $t['flag']="1";
             $t->update();
 
@@ -202,7 +202,7 @@ class FollowupController extends BaseController
         ]);
 
 
-        $tmp=$this->get_followup_join_user(NULL,$request['user_id'],NULL,'get');
+        //$tmp=$this->get_followup_join_user(NULL,$request['user_id'],NULL,'get');
 
         $check=followup::create([
             'user_id'               =>$request['user_id'],
@@ -249,20 +249,19 @@ class FollowupController extends BaseController
 
     }
 
-
-
-    public function test()
-    {
-        $follow=followup::get();
-        foreach ($follow as $item)
-        {
-
-            $t=followup::where('user_id','=',$item->user_id)
-                         ->orderby('id','desc')
-                         ->first();//$this->get_followup_join_user(NULL,$item->user_id,NULL,NULL,'first',NULL);
-//            echo ("<script>console.log(".$t.")</script>");
-            $t['flag']="1";
-            $t->update();
-        }
-    }
+//    این بخش برای پیدا کردن و پیاده سازی آخرین پیگیری های انجام شده در جدول است
+//    public function test()
+//    {
+//        $follow=followup::get();
+//        foreach ($follow as $item)
+//        {
+//
+//            $t=followup::where('user_id','=',$item->user_id)
+//                         ->orderby('id','desc')
+//                         ->first();//$this->get_followup_join_user(NULL,$item->user_id,NULL,NULL,'first',NULL);
+////            echo ("<script>console.log(".$t.")</script>");
+//            $t['flag']="1";
+//            $t->update();
+//        }
+//    }
 }
