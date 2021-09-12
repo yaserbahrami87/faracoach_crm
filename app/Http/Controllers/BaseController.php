@@ -322,8 +322,7 @@ class BaseController extends Controller
 
     public function get_problemfollowup($id=NULL,$status=NULL,$color=NULL,$paginate='get')
     {
-        return problemfollowup::orderby('problem')
-                ->when($id,function($query) use ($id)
+        return problemfollowup::when($id,function($query) use ($id)
                 {
                     return $query->where('id','=',$id);
                 })

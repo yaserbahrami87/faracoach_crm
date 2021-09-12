@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\followup;
 use App\User;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Gate;
@@ -2161,16 +2162,48 @@ class UserController extends BaseController
         foreach ($users as $item)
         {
             //$item->countFollowup=$this->get_countFollowup($item->id);
+            $tmp=followup::where('user_id','=',$item->id)
+                        ->where('flag','=',1)
+                        ->orderby('id','desc')
+                        ->first();//$this->get_followup(NULL,$item->id,NULL,1,'first');
 
 
-            $tmp=$this->get_followup(NULL,$item->id,NULL,1,'first');
-            $item->status_followups=$this->userType($tmp['status_followups']);
-            $quality=$this->get_problemfollowup($tmp['problemfollowup_id'],NULL,NULL,'first');
-            $item->quality=$quality->problem;
-            $item->quality_color=$quality['color'];
-            $item->lastDateFollowup=$tmp['date_fa'];
-            $item->lastFollowupCourse=$tmp['course_id'];
-            $item->countFollowup=$this->get_followup(NULL,$item->id,NULL,NULL,'get')->count();
+            if($tmp->count()>0)
+            {
+                $item->status_followups=$this->userType($this->get_lastFollowupUser($item->id)['status_followups']);
+                $quality=$this->get_problemfollowup($tmp['problemfollowup_id'],NULL,NULL,'first');
+            }
+
+            if(isset($quality) && ($quality->count()>0))
+            {
+                $item->quality=$quality['problem'];
+                $item->quality_color=$quality['color'];
+                $item->lastDateFollowup=$item['date_fa'];
+                $item->lastFollowupCourse=$item['course_id'];
+                $item->countFollowup=$this->get_followup(NULL,$item->id,NULL,NULL,'get')->count();
+            }
+            else
+            {
+                $item->quality=NULL;
+                $item->quality_color=NULL;
+                $item->lastDateFollowup=NULL;
+                $item->lastFollowupCourse=NULL;
+                $item->countFollowup=NULL;
+            }
+
+
+
+
+
+//            $item->status_followups=$this->userType($tmp['status_followups']);
+//            $quality=$this->get_problemfollowup($tmp['problemfollowup_id'],NULL,NULL,'first');
+//            echo "<script>console.log(Q=".$tmp['problemfollowup_id'].");</script>";
+
+//            $item->quality=$quality->problem;
+//            $item->quality_color=$quality['color'];
+//            $item->lastDateFollowup=$tmp['date_fa'];
+//            $item->lastFollowupCourse=$tmp['course_id'];
+//            $item->countFollowup=$this->get_followup(NULL,$item->id,NULL,NULL,'get')->count();
             $item->created_at = $this->changeTimestampToShamsi($item->created_at);
             if (!is_null($item->last_login_at)) {
                 $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
