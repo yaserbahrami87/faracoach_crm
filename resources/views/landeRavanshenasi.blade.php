@@ -1,45 +1,42 @@
 @extends('master.index')
-@section('row1')
+@section('headerscript')
     <style>
-
-
-
-        h1{
+        #ravanshenasi h1{
             font-size:28px;
             text-align:center;
             color:rgb(13 44 90);
             padding-bottom:10px;
             font-weight:700;
         }
-        h2{
+        #ravanshenasi h2{
             font-size:24px;
             text-align:center;
             color:rgb(13 44 90);
             padding:20px 0 10px 0;
             font-weight:600;
         }
-        .mad{
+        #ravanshenasi .mad{
             background-color:#f7f7f7;
         }
-        p, a, ol, li{
+        #ravanshenasi p, #ravanshenasi a, #ravanshenasi ol, #ravanshenasi li{
             text-align:justify;
             margin-top:10px;
             line-height: 2;
             font-size:17px;
         }
-        .text-img{
+        #ravanshenasi .text-img{
             border:1px solid #ced4da;
         }
-        .img{
+        #ravanshenasi .img{
             width:50%;
             height: 50%;
         }
         /* Small devices (320 px) */
         @media only screen and (max-width: 321px){
-            .title{
+            #ravanshenasi .title{
                 font-size:21px;
             }
-            p, a,li{
+            #ravanshenasi p, #ravanshenasi a, #ravanshenasi li{
                 font-size:15px;
             }
             h2{
@@ -52,7 +49,9 @@
 
 
     </style>
-    <div class="container mt-5">
+@endsection
+@section('row1')
+    <div class="container mt-5" id="ravanshenasi">
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div >
@@ -119,7 +118,7 @@
                         <br/>
                         بدین‌وسیله اعلام می‌شود باکمال احترام به مدیران سازمان نظام روانشناسی و مشاوره کشور، اعضای این سازمان، متخصصین و فعالین حوزه مشاوره، روانشناسی و درمان، موسسه فراکوچ هیچ‌گونه تأییدیه یا همکاری با سازمان نظام روانشناسی نداشته و مستقلاً با مجوزهایی از سازمان فنی و حرفه‌ای و اداره تعاون، کار و رفاه اجتماعی فعالیت می‌نماید.
                     </p>
-                    {تصاویر مجوزهای آموزشگاه و مرکز مشاوره}
+
                     <div class=" row col-12">
                         <div class=" license p-3 col-xl-4 col-lg-4 col-md-4 col-sm-12">
                             <img class="img-fluid img-thumbnail" src="{{asset('/images/madrak.jpeg')}}" target="_blank">
@@ -165,6 +164,9 @@
                     <p>
                         لذا با توجه به توضیحات ارائه‌شده و ایجاد شفافیت بیشتر، مرکز آموزش کوچینگ ایران – فراکوچ، آمادگی خود را جهت برگزاری وبینار کاربرد کوچینگ برای روانشناسان و مشاوران اعلام می‌دارد.
                     </p>
+                    <p class="text-center font-weight-bold">
+                        <a href="https://faracoach.com/about/" target="_blank" >جهت آشنایی بیشتر با موسسه فراکوچ اینجا کلیک کنید.</a>
+                    </p>
                     <div class="row col-12 mad">
                         <div class="p-3 col-12 text-justify">
                             <h2>
@@ -196,9 +198,7 @@
                                     نتیجه و تجربه افرادی که از کوچینگ استفاده کرده اند
                                 </li>
                                 <li>
-                                    <b>
-                                        اشتراک تجربه 3 نفر از روانشناسانی که در دوره آموزش کوچینگ شرکت نموده اند.
-                                    </b>
+                                    اشتراک تجربه 3 نفر از روانشناسانی که در دوره آموزش کوچینگ شرکت نموده اند.
                                 </li>
                             </ol>
                         </div>
@@ -217,10 +217,6 @@
                             جهت کسب اطلاعات بیشتر و شرکت در این وبینار فرم زیر را تکمیل فرمایید.
                         </h2>
                     </div>
-                    <p class="text-center">
-                        <a href="https://faracoach.com/about/" target="_blank" >جهت آشنایی بیشتر با موسسه فراکوچ اینجا کلیک کنید.</a>
-                    </p>
-
                 </div>
                 <form method="POST" action="{{ route('register') }}">
                     {{csrf_field()}}
@@ -292,11 +288,6 @@
                         <div class="col-md-4">
                             <div class="input-group">
                                 <input id="tel" type="text" class="form-control @error('tel') is-invalid @enderror" name="tel" value="{{ old('tel') }}" required autocomplete="tel">
-                                <!--
-                                <div class="input-group-prepend">
-                                    <button class="btn btn-outline-secondary btn-info text-light" type="button" id="activeMobile" data-toggle="modal" data-target="#ModalMobile">فعال سازی</button>
-                                </div>
-                                -->
                                 @error('tel')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -310,7 +301,7 @@
                         <label for="gettingknow" class="col-md-4 col-form-label text-md-right">{{ __('نحوه آشنایی با فراکوچ:') }}</label>
 
                         <div class="col-md-4">
-                            <select id="gettingknow" class="form-control" @error('gettingknow') is-invalid @enderror" name="gettingknow">
+                            <select id="gettingknow" class="form-control @error('gettingknow') is-invalid @enderror" name="gettingknow">
                             <option selected disabled>انتخاب کنید</option>
                             <option>اینستاگرام</option>
                             <option>تلگرام</option>
@@ -365,4 +356,13 @@
             </div>
         </div>
     </div>
+@endsection
+
+
+@section('footerScript')
+    <script>
+
+            window.location="#ravanshenasi";
+
+    </script>
 @endsection

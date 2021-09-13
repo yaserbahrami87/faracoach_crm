@@ -329,7 +329,6 @@ Route::get('/ravanshenasi',function()
 
 Route::get('/integrity',function()
 {
-
     return view('landeTamamiat');
 });
 

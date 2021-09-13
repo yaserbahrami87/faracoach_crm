@@ -1733,6 +1733,18 @@ class UserController extends BaseController
             {
                 $item->personal_image="default-avatar.png";
             }
+
+            if(!is_null($item->introduced))
+            {
+                if ($this->get_user(NULL, $item->introduced, NULL, NULL, true)->count()>0)
+                {
+                    $item->introduced = $this->get_user(NULL, $item->introduced, NULL, NULL, true)->fname.' '.$this->get_user(NULL, $item->introduced, NULL, NULL, true)->lname ;
+                }
+                else if ($this->get_user($item->introduced, NULL, NULL, NULL, true)->count()>0)
+                {
+                    $item->introduced=$this->get_user($item->introduced, NULL, NULL, NULL, true)->fname.' '.$this->get_user($item->introduced, NULL, NULL, NULL, true)->lname;
+                }
+            }
         }
 
 //        $users->appends(['q' => $request['q']]);
@@ -1937,7 +1949,7 @@ class UserController extends BaseController
                     $item->course_id=$this->get_coursesByID($item->course_id)->course;
                 }
 
-                $problemFollowup = $this->$this->get_problemfollowup(NULL,1);
+                $problemFollowup = $this->get_problemfollowup(NULL,1,NULL,'get');
 
                 $courses=$this->get_courses($this->dateNow);
 
