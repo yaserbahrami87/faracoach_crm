@@ -327,6 +327,13 @@ Route::get('/ravanshenasi',function()
     return view('landeRavanshenasi');
 });
 
+Route::get('/integrity',function()
+{
+
+    return view('landeTamamiat');
+});
+
+
 
 
 //blog
