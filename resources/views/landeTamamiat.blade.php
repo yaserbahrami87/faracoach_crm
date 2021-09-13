@@ -373,12 +373,13 @@
 
 
         $(window).resize(function() {
-            if ($(window).width() <= 320) {
+            if ($(window).width() <= 425) {
                 $("#banner").attr('src', "{{asset('/images/int2.jpg')}}");
             }
         });
 
-        if ($(window).width() <= 320) {
+        if (screen.width <= 425) {
+            alert
             $("#banner").attr('src', "{{asset('/images/int2.jpg')}}");
         }
     </script>
