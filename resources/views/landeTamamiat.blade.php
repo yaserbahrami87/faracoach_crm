@@ -44,6 +44,11 @@
                 font-size:16px;
             }
 
+            #angizeshi,#vebinar,#time
+            {
+                font-size: 24px;
+            }
+
         }
 
     </style>
@@ -51,7 +56,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div >
-                    <img src="{{asset('/images/int.png')}}" target="_blank" class="img-fluid img-thumbnail " />
+                    <img src="{{asset('/images/int.png')}}" target="_blank" class="img-fluid img-thumbnail " id="banner" />
                     <div class="text-center title mt-3">
                         <h1>وبینار تمامیت</h1>
                     </div>
@@ -69,12 +74,12 @@
                     <p class="d-inline" style="font-size: 20px">و به کارگیری دستورات «قانون تمامیت » است؟</p>
                 </div>
                 <div class="row col-12 mad">
-                    <div class="p-5 mt-5 col-8  text-justify">
+                    <div class="p-5 mt-5 col-sm-12 col-md-8 col-lg-8 col-xl-8  text-justify">
                         <p>وارن بافت ، سرمایه گذار و کارآفرین امریکایی :</p>
                         <p>وقتی میخواهید فردی را استخدام کنید، به سه قابلیت اصلی او توجه کنید:<strong> تمامیت، هوشمندی، انرژی </strong>یادتان باشد که اگر اولی را نداشته باشد، دو مورد بعدی شما را خواهد کشت.
                         </p>
                     </div>
-                    <div class="p-3 col-4 text-justify ">
+                    <div class="p-3  col-sm-12 col-md-4 col-lg-4 col-xl-4 text-justify ">
                         <img src="{{asset('/images/وارن-بافت.jpg')}}" target="_blank" class="img-fluid img-thumbnail border border-primary" />
                     </div>
                 </div>
@@ -100,40 +105,42 @@
                         </strong>
                     </p>
                     <div class="row col-12 mad">
-                        <div class="p-5 mt-5 col-8  text-justify">
+                        <div class="p-5 mt-5  col-sm-12 col-md-8 col-lg-8 col-xl-8  text-justify">
                             <p>
                                 پروفسور مایکل جنسن ، استاد ممتاز دانشگاه هاروارد پس از حدود یک دهه تحقیق و بررسی سازمانها و برندهای موفق و ناموفق، متوجه شد که اغلب شکست‌ها، حتی در سازمان‌هایی که بودجه های کلانی را صرف تبلیغات و برندسازی و حتی تجهیزات و فناوری کرده‌اند، نداشتن « تمامیت» بوده است.
                             </p>
                         </div>
-                        <div class="p-3 col-4 text-justify ">
+                        <div class="p-3  col-sm-12 col-md-4 col-lg-4 col-xl-4 text-justify ">
                             <img src="{{asset('/images/jjjjjj.jpg')}}" target="_blank" class="img-fluid img-thumbnail border border-primary" />
                         </div>
                     </div>
                     <p class="text-center font-weight-bold">
                         و موسسه فراکوچ با همکاری موسسه مدیران ایران با توجه به اهمیت شناخت و به‌کارگیری تمامیت در زندگی امروزی، بر آن شدند تا با برگزاری یک وبینار با محوریت موضوع تمامیت، به معرفی این ویژگی مهم و تأثیرگذار بپردازد.
                     </p>
-                    <div class="row col-12 mad pt-2">
-                        <div class="col-12 text-center">
-                            <img src="{{asset('/images/logo_ravanshenasi.jpg')}}" class="img-fluid" />
-                        </div>
-                        <div class="p-3 col-12 text-justify">
-                            <h2 class="text-left" >
-                                محوریت این وبینار چیست؟
-                            </h2>
-                            <p>
-                                در این وبینار بیشتر به مفهوم تمامیت و تحولی که در زندگی ایجاد خواهد کرد می‌پردازیم. با درک بهتر از تمامیت، بهتر می‌توانیم تمامیت را به زندگی شخصی آورده و حتی آن را به محیط کار ببریم و از مزایای آن استفاده کنیم. با پیشرفت علمی و درک عمیقی که افراد از زندگی باکیفیت به دست آورده‌اند، بحث تمامیت خود یک دانشگاه توسعه فردی محسوب می‌شود که به افزایش کیفیت روابط، افزایش اعتماد و احترام می‌انجامد.
-                            </p>
+                    <div class="col-12 mad pt-2">
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <img src="{{asset('/images/logo_ravanshenasi.jpg')}}" class="img-fluid" />
+                            </div>
+                            <div class="p-3 col-12 text-justify">
+                                <h2 class="text-left" >
+                                    محوریت این وبینار چیست؟
+                                </h2>
+                                <p>
+                                    در این وبینار بیشتر به مفهوم تمامیت و تحولی که در زندگی ایجاد خواهد کرد می‌پردازیم. با درک بهتر از تمامیت، بهتر می‌توانیم تمامیت را به زندگی شخصی آورده و حتی آن را به محیط کار ببریم و از مزایای آن استفاده کنیم. با پیشرفت علمی و درک عمیقی که افراد از زندگی باکیفیت به دست آورده‌اند، بحث تمامیت خود یک دانشگاه توسعه فردی محسوب می‌شود که به افزایش کیفیت روابط، افزایش اعتماد و احترام می‌انجامد.
+                                </p>
+                            </div>
                         </div>
                     </div >
                     <div class="col-12">
-                        <h2 class="text-center text-danger display-4">
+                        <h2 class="text-center text-danger display-4" id="angizeshi">
                             این یک جمله انگیزشی و یا اغراق شده نیست:
                         </h2>
-                        <h3 class="text-center display-5" >شرکت در این وبینار می‌تواند یک تغییر اساسی در زندگی شخصی و کاری شما ایجاد کند</h3>
+                        <h3 class="text-center display-5" id="vebinar">شرکت در این وبینار می‌تواند یک تغییر اساسی در زندگی شخصی و کاری شما ایجاد کند</h3>
                     </div>
 
 
-                    <p  class="mt-3 text-center">
+                    <p  class="mt-3 text-center" >
                         شرکت در این وبینار برای هر فرد لازم است؛ چراکه:
                         <br/>
                         علاوه بر آشنایی با مفهوم تمامیت با کاربردهای آن در زندگی شخصی و کسب‌وکار خود نیز آشنا خواهید شد. اینکه چگونه افراد تمامیت را در فضای کسب‌وکار و زندگی خود پیاده‌سازی کنند. چگونه با تمامیت زندگی خود را تغییر دهند و تحولی عظیم اول در خود و کم‌کم پس‌ازآن، در اجتماع ایجاد کنند. در وبینار تمامیت به بررسی گام‌هایی خواهیم پرداخت که شما را به سمت داشتن تمامیت در زندگی سوق می‌دهند.
@@ -149,7 +156,7 @@
                         <h2 class="text-center display-5">
                             تاریخ برگزاری این وبینار
                         </h2>
-                        <p class="text-center display-4 ">
+                        <p class="text-center display-4 " id="time">
                             پنج‌شنبه ۱ مهر ساعت ۱۷:۰۰
                         </p>
                     </div>
@@ -163,7 +170,7 @@
                                     این وبینار با حضور سرکار خانم ندا مفاخری و استاد یاسر متحدین برگزار خواهد شد.
                                 </p>
                             </div>
-                            <div class="p-3 col-6 text-center ">
+                            <div class="p-3 col-xs-12 col-md-6 col-xl-6 col-lg-6 text-center ">
                                 <img src="{{asset('/images/neda.jpg')}}" target="_blank" class="img-fluid img-thumbnail border border-primary" />
                                 <p class="text-center font-weight-bold">
                                     خانم دکتر مفاخری
@@ -172,7 +179,7 @@
                                      مدیرعامل مدیران ایران، مربی حرفه‌ای توسعه فردی و سازمانی ICF هستند. ایشان دارای مدرک DBA، نویسنده صدها مقاله و مطلب مدیریتی بوده و در این حوزه سخنران و مدرس هم می‌باشند. خانم دکتر مفاخری به مطالبی در مورد مفهوم تمامیت، تمامیت و تحول، تمامیت در زندگی شخصی و تمامیت در فضای کسب‌وکار خواهند پرداخت.
                                 </p>
                             </div>
-                            <div class="p-3 col-6 text-center">
+                            <div class="p-3 col-xs-12 col-md-6 col-xl-6 col-lg-6 text-center">
                                 <img src="{{asset('/images/yaser.jpg')}}" target="_blank" class="img-fluid img-thumbnail border border-primary" />
                                 <p class="text-center font-weight-bold">
                                     استاد یاسر متحدین
@@ -364,5 +371,15 @@
 
         window.location="#int";
 
+
+        $(window).resize(function() {
+            if ($(window).width() <= 320) {
+                $("#banner").attr('src', "{{asset('/images/int2.jpg')}}");
+            }
+        });
+
+        if ($(window).width() <= 320) {
+            $("#banner").attr('src', "{{asset('/images/int2.jpg')}}");
+        }
     </script>
 @endsection
