@@ -53,6 +53,10 @@
 @section('row1')
     <div class="container mt-5" id="ravanshenasi">
         <div class="row justify-content-center">
+            <div class="col-12 text-center">
+                <img src="{{asset('/images/evand-ravanshenasi.jpg')}}" class="img-fluid " />
+
+            </div>
             <div class="col-md-12">
                 <div >
                     <div class="title mt-3">
