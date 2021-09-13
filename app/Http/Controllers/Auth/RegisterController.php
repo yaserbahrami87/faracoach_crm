@@ -111,4 +111,11 @@ class RegisterController extends Controller
             'detailsresource'   =>$data['detailsresource']
         ]);
     }
+
+
+    public function showRegistrationForm()
+    {
+
+        return view('auth.register');
+    }
 }
