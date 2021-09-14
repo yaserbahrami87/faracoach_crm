@@ -290,7 +290,7 @@
                 <div class="form-group row">
                     <label for="introduced" class="col-md-4 col-form-label text-md-right">{{ __('معرف:') }}</label>
                     <div class="col-md-6">
-                        <input id="introduced" type="text" class="form-control @error('introduced') is-invalid @enderror" name="introduced" value="{{ old('introduced') }}"  required placeholder="به عنوان مثال: 09151234567"  />
+                        <input id="introduced" type="text" class="form-control @error('introduced') is-invalid @enderror" name="introduced" value="{{ old('introduced') }}"  placeholder="به عنوان مثال: 09151234567"  />
                         <small class="text-muted">لطفا شماره همراه معرف خود را وارد کنید</small>
                         @error('introduced')
                         <span class="invalid-feedback" role="alert">
