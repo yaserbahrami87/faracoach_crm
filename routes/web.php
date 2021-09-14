@@ -283,7 +283,12 @@ Route::get('/register2',function()
 
 // Landing Register
 Route::post('/register/land','UserController@register_landing');
-Route::resource('land','LandPageController');
+//Route::get('/test2',function()
+//{
+//    return view('landTamamiat_return');
+//});
+
+Route::resource('landPage','LandPageController');
 
 
 
@@ -331,10 +336,7 @@ Route::get('/ravanshenasi',function()
     return view('landeRavanshenasi');
 });
 
-Route::get('/integrity',function()
-{
-    return view('landeTamamiat');
-});
+Route::get('/integrity','LandPageController@create');
 
 
 

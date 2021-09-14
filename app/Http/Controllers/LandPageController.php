@@ -22,9 +22,19 @@ class LandPageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        if(is_numeric($request->q) )
+        {
+            $introduced=$request->q;
+        }
+        else
+        {
+            $introduced=NULL;
+//            alert()->error('لینک معرف شما نادرست است')->persistent('بستن');
+        }
+        return  view('landeTamamiat')
+                    ->with('introduced',$introduced);
     }
 
     /**
@@ -46,7 +56,17 @@ class LandPageController extends Controller
         $status=landPage::create($request->all());
         if($status)
         {
-            alert()->success('ثبت نام شما در '.$request->resource." با موفقیت انجام شد")->persistent('بستن');
+            if($request->resource=='وبینار تمامیت')
+            {
+                alert()->success('ثبت نام شما در '.$request->resource." با موفقیت انجام شد")->persistent('بستن');
+                return view('landTamamiat_return')
+                            ->with('land',$status);
+            }
+            else
+            {
+                alert()->success('ثبت نام شما در '.$request->resource." با موفقیت انجام شد")->persistent('بستن');
+            }
+
         }
         else
         {
@@ -87,7 +107,22 @@ class LandPageController extends Controller
      */
     public function update(Request $request, landPage $landPage)
     {
-        //
+
+        $this->validate($request,[
+            'options'   =>'required|array'
+        ]);
+
+        $request['options']=implode(',',$request->options);
+        $status=$landPage->update($request->all());
+        if($status)
+        {
+            alert()->success('اطلاعات با موفقیت ثبت شد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در ثبت اطلاعات')->persistent('بستن');
+        }
+        return redirect('/integrity');
     }
 
     /**

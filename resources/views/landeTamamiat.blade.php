@@ -220,14 +220,17 @@
                     </div>
                 </div>
                 <p class="text-center">
-                    جهت کسب اطلاعات بیشتر و شرکت در این وبینار فرم زیر را تکمیل فرمایید.
+                    جهت رزرو وبینار تمامیت  فرم زیر را تکمیل نمائید.
                 </p>
             </div>
         </div>
 
-        <form method="POST" action="/land" class="mb-3" id="form">
+        <form method="POST" action="/landPage" class="mb-3" id="form">
             {{csrf_field()}}
             <input type="hidden" value="وبینار تمامیت" name="resource" />
+            @if(!is_null($introduced))
+                <input type="hidden" value="{{$introduced}}" name="introduced" />
+            @endif
             <div class="form-group row">
                 <label for="fname" class="col-md-4 col-form-label text-md-right">{{ __('نام:*') }}</label>
                 <div class="col-md-6">
