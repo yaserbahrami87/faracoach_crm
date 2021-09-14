@@ -21,8 +21,8 @@
                  <img src="{{asset('/images/int.png')}}" target="_blank" class="img-fluid img-thumbnail " id="banner" />
             </div>
             <div class="col-12">
-                <p class="font-weight-bold text-center text-success mb-5">با تشکر، رزرو شما با موفقیت انجام شد</p>
-                <p class="text-center">لطفا شما هم در آگاهی جامعه نسبت به مقوله مهم « تمامیت » یاری کننده باشید.</p>
+                <p class="font-weight-bold text-center text-success mb-5">با تشکر،  مرحله اول رزرو در وبینار تمامیت با موفقیت انجام شد</p>
+                <p class="text-center">ما بدلیل ارزش این مساله و دسترسی آحاد جامعه ،  این  دوره را به  شما هدیه  میدهیم. لطفا شما هم در آگاهی جامعه نسبت به مقوله مهم « تمامیت » یاری کننده باشید.</p>
                 <p class="text-center">شما هم میتوانید در راستای مسئولیت اجتماعی خود، در حد توان نسبت به اطلاع رسانی این وبینار سهیم باشید. </p>
                 <p>من داوطلبانه نسبت به :</p>
             </div>

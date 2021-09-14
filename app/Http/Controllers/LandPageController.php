@@ -58,9 +58,8 @@ class LandPageController extends BaseController
         {
             if($request->resource=='وبینار تمامیت')
             {
-                $msg=$request->lname ." عزیز \n ثبت نام شما در وبینار تمامیت با موفقیت انجام شد \n جهت اطلاع از رویدادهای آموزشی آتی، پیج فراکوچ را دنبال کنید\n"."https://www.instagram.com/faracoach";
+                $msg=$request->lname ." عزیز \n  مرحله اول رزرو در 'وبینار تمامیت' با موفقیت انجام شد. \n"." لطفا مرحله دوم را تکمیل نمایید \n"."لینک اختصاصی جهت معرفی:\n".asset('/integrity?q='.$status->id)."\n"."فراکوچ-مدیران ایران";
                 $this->sendSms($request->tel,$msg);
-                alert()->success('ثبت نام شما در '.$request->resource." با موفقیت انجام شد")->persistent('بستن');
                 return view('landTamamiat_return')
                             ->with('land',$status);
             }
@@ -118,6 +117,9 @@ class LandPageController extends BaseController
         $status=$landPage->update($request->all());
         if($status)
         {
+            $msg=$landPage->lname." عزیز \n".'میزبان شما و 10 میهمان ارزشمندتان در "وبینار تمامیت" خواهیم بود'."لینک اختصاصی جهت معرفی میهمانان: \n".asset('/integrity?q='.$landPage->id)."\n فراکوچ-مدیران ایران ";
+
+            $this->sendSms($landPage->tel,$msg);
             alert()->success('اطلاعات با موفقیت ثبت شد')->persistent('بستن');
         }
         else

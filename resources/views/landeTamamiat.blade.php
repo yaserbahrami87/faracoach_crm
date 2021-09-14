@@ -232,7 +232,7 @@
             <div class="form-group row">
                 <label for="fname" class="col-md-4 col-form-label text-md-right">{{ __('نام:*') }}</label>
                 <div class="col-md-6">
-                    <input id="fname" type="text" class="form-control @error('fname') is-invalid @enderror" placeholder="به عنوان مثال: علیرضا" name="fname" value="{{ old('fname') }}" lang="fa" required autocomplete="fname" autofocus />
+                    <input id="fname" type="text" class="form-control @error('fname') is-invalid @enderror" placeholder="به عنوان مثال: علیرضا" name="fname" value="{{ old('fname') }}" required  />
 
                     @error('fname')
                             <span class="invalid-feedback" role="alert">
