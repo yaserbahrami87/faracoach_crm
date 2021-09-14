@@ -115,7 +115,7 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-
+        //ارسال پارامتر به صفحه ثبت نام
         return view('auth.register');
     }
 }

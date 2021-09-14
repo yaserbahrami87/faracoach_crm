@@ -58,6 +58,7 @@
                 <div >
                     <img src="{{asset('/images/int.png')}}" target="_blank" class="img-fluid img-thumbnail " id="banner" />
                     <div class="text-center title mt-3">
+                        <a href="#form" class="btn btn-success btn-block btn-lg mb-5 mt-5" style="font-size: 30px">فرم ثبت نام</a>
                         <h1>وبینار تمامیت</h1>
                     </div>
                     <p class="d-inline">
@@ -173,7 +174,7 @@
                             <div class="p-3 col-xs-12 col-md-6 col-xl-6 col-lg-6 text-center ">
                                 <img src="{{asset('/images/neda.jpg')}}" target="_blank" class="img-fluid img-thumbnail border border-primary" />
                                 <p class="text-center font-weight-bold">
-                                    خانم دکتر مفاخری
+                                     دکتر ندا مفاخری
                                 </p>
                                 <p class="text-justify">
                                      مدیرعامل مدیران ایران، مربی حرفه‌ای توسعه فردی و سازمانی ICF هستند. ایشان دارای مدرک DBA، نویسنده صدها مقاله و مطلب مدیریتی بوده و در این حوزه سخنران و مدرس هم می‌باشند. خانم دکتر مفاخری به مطالبی در مورد مفهوم تمامیت، تمامیت و تحول، تمامیت در زندگی شخصی و تمامیت در فضای کسب‌وکار خواهند پرداخت.
@@ -218,136 +219,66 @@
                         </div>
                     </div>
                 </div>
-                <p>
+                <p class="text-center">
                     جهت کسب اطلاعات بیشتر و شرکت در این وبینار فرم زیر را تکمیل فرمایید.
                 </p>
             </div>
         </div>
 
-        <form method="POST" action="{{ route('register') }}">
+        <form method="POST" action="/land" class="mb-3" id="form">
             {{csrf_field()}}
+            <input type="hidden" value="وبینار تمامیت" name="resource" />
             <div class="form-group row">
-                <label for="fname" class="col-md-4 col-form-label text-md-right">{{ __('نام: *') }}</label>
-                <div class="col-md-4">
-                    <input id="fname" type="text" class="form-control @error('fname') is-invalid @enderror" name="fname" value="{{ old('fname') }}" required autocomplete="fname" autofocus>
+                <label for="fname" class="col-md-4 col-form-label text-md-right">{{ __('نام:*') }}</label>
+                <div class="col-md-6">
+                    <input id="fname" type="text" class="form-control @error('fname') is-invalid @enderror" name="fname" value="{{ old('fname') }}" lang="fa" required autocomplete="fname" autofocus>
+
                     @error('fname')
-                    <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
+                            <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
                             </span>
                     @enderror
                 </div>
             </div>
-            <input type="hidden" value="0" name="tel_verified" id="tel_verified"/>
             <div class="form-group row">
-                <label for="lname" class="col-md-4 col-form-label text-md-right">{{ __('نام خانوادگی: *') }}</label>
+                <label for="lname" class="col-md-4 col-form-label text-md-right">{{ __('نام خانوادگی:*') }}</label>
 
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <input id="lname" type="text" class="form-control @error('lname') is-invalid @enderror"  lang="fa" name="lname" value="{{ old('lname') }}" required autocomplete="lname" autofocus>
 
                     @error('lname')
                     <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                     @enderror
                 </div>
             </div>
             <div class="form-group row">
-                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('جنسیت: *') }}</label>
+                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('پست الکترونیکی:*') }}</label>
 
-                <div class="col-md-4">
-                    <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="gender1" name="sex" class="custom-control-input"  value="1">
-                        <label class="custom-control-label" for="gender1" >مرد</label>
-                    </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="gender2" name="sex" class="custom-control-input" value="0">
-                        <label class="custom-control-label" for="gender2" >زن</label>
-                    </div>
-
-                    @error('email')
-                    <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                    @enderror
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('پست الکترونیکی: *') }}</label>
-
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
                     @error('email')
                     <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                     @enderror
                 </div>
             </div>
 
             <div class="form-group row">
-                <label for="tel" class="col-md-4 col-form-label text-md-right">{{ __('تلفن همراه: *') }}</label>
+                <label for="tel" class="col-md-4 col-form-label text-md-right">{{ __('تلفن همراه:*') }}</label>
 
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="input-group">
                         <input id="tel" type="text" class="form-control @error('tel') is-invalid @enderror" name="tel" value="{{ old('tel') }}" required autocomplete="tel">
-                        <!--
-                        <div class="input-group-prepend">
-                            <button class="btn btn-outline-secondary btn-info text-light" type="button" id="activeMobile" data-toggle="modal" data-target="#ModalMobile">فعال سازی</button>
-                        </div>
-                        -->
                         @error('tel')
                         <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                         @enderror
                     </div>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="gettingknow" class="col-md-4 col-form-label text-md-right">{{ __('نحوه آشنایی با فراکوچ:') }}</label>
-
-                <div class="col-md-4">
-                    <select id="gettingknow" class="form-control" @error('gettingknow') is-invalid @enderror" name="gettingknow">
-                        <option selected disabled>انتخاب کنید</option>
-                        <option>اینستاگرام</option>
-                        <option>تلگرام</option>
-                        <option>تبلیغاتی محیطی</option>
-                        <option>تبلیغات فضای مجازی</option>
-                        <option>پکیج رایگان</option>
-                        <option>واتساپ</option>
-                        <option>موتورهای جستجو</option>
-                    </select>
-                    @error('gettingknow')
-                    <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                    @enderror
-                </div>
-            </div>
-
-
-            <div class="form-group row">
-                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('رمز عبور: *') }}</label>
-
-                <div class="col-md-4">
-                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                    @error('password')
-                    <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                    @enderror
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('تکرار رمز عبور: *') }}</label>
-
-                <div class="col-md-4">
-                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                 </div>
             </div>
 
@@ -379,7 +310,6 @@
         });
 
         if (screen.width <= 425) {
-            alert
             $("#banner").attr('src', "{{asset('/images/int2.jpg')}}");
         }
     </script>

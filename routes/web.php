@@ -281,6 +281,10 @@ Route::get('/register2',function()
     return view('register_landingPage');
 });
 
+// Landing Register
+Route::post('/register/land','UserController@register_landing');
+Route::resource('land','LandPageController');
+
 
 
 //checkout
