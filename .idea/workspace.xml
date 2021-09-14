@@ -25,8 +25,6 @@
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/LandPageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/LandPageController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/landTamamiat_return.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/landTamamiat_return.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/landeTamamiat.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/landeTamamiat.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -629,7 +627,7 @@
       <workItem from="1631512877007" duration="16612000" />
       <workItem from="1631553170941" duration="7728000" />
       <workItem from="1631591841943" duration="23688000" />
-      <workItem from="1631628594805" duration="8529000" />
+      <workItem from="1631628594805" duration="9330000" />
     </task>
     <servers />
   </component>
