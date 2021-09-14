@@ -215,7 +215,7 @@
                         <div class="text p-3 col-xl-3 col-lg-3 col-md-3 col-sm-6 " style="text-align:center;">
                         <!--<img src="{{asset('/images/ravanshenasi.jpg')}}" target="_blank" class="img-fluid img-thumbnail"/>
     --><p class="text-center text-primary display-5 font-weight-bold">نحوه ثبت‌نام</p>
-                            <p class="text-justify"> برای شرکت در این وبینار تمامیت تنها کافی است روی لینک زیر کلیک کنید و با درج موارد موردنیاز ثبت‌نام خود را نهایی کنید و از این وبینار ارزشمند بهره‌مند شوید..</p>
+                            <p class="text-justify"> برای شرکت در این وبینار تمامیت تنها با درج موارد مورد نیاز در فرم زیر ثبت ‌نام خود را نهایی کنید و از این وبینار ارزشمند بهره‌مند شوید.</p>
                         </div>
                     </div>
                 </div>
@@ -228,13 +228,11 @@
         <form method="POST" action="/landPage" class="mb-3" id="form">
             {{csrf_field()}}
             <input type="hidden" value="وبینار تمامیت" name="resource" />
-            @if(!is_null($introduced))
-                <input type="hidden" value="{{$introduced}}" name="introduced" />
-            @endif
+
             <div class="form-group row">
                 <label for="fname" class="col-md-4 col-form-label text-md-right">{{ __('نام:*') }}</label>
                 <div class="col-md-6">
-                    <input id="fname" type="text" class="form-control @error('fname') is-invalid @enderror" name="fname" value="{{ old('fname') }}" lang="fa" required autocomplete="fname" autofocus>
+                    <input id="fname" type="text" class="form-control @error('fname') is-invalid @enderror" placeholder="به عنوان مثال: علیرضا" name="fname" value="{{ old('fname') }}" lang="fa" required autocomplete="fname" autofocus />
 
                     @error('fname')
                             <span class="invalid-feedback" role="alert">
@@ -247,7 +245,7 @@
                 <label for="lname" class="col-md-4 col-form-label text-md-right">{{ __('نام خانوادگی:*') }}</label>
 
                 <div class="col-md-6">
-                    <input id="lname" type="text" class="form-control @error('lname') is-invalid @enderror"  lang="fa" name="lname" value="{{ old('lname') }}" required autocomplete="lname" autofocus>
+                    <input id="lname" type="text" class="form-control @error('lname') is-invalid @enderror"  placeholder="به عنوان مثال: متحدین" name="lname" value="{{ old('lname') }}" required autocomplete="lname" autofocus>
 
                     @error('lname')
                     <span class="invalid-feedback" role="alert">
@@ -260,7 +258,7 @@
                 <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('پست الکترونیکی:*') }}</label>
 
                 <div class="col-md-6">
-                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required placeholder="به عنوان مثال: yaser@gmail.com">
 
                     @error('email')
                     <span class="invalid-feedback" role="alert">
@@ -275,7 +273,7 @@
 
                 <div class="col-md-6">
                     <div class="input-group">
-                        <input id="tel" type="text" class="form-control @error('tel') is-invalid @enderror" name="tel" value="{{ old('tel') }}" required autocomplete="tel">
+                        <input id="tel" type="text" class="form-control @error('tel') is-invalid @enderror" name="tel" value="{{ old('tel') }}" required placeholder="به عنوان مثال: 09151234567">
                         @error('tel')
                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -284,6 +282,24 @@
                     </div>
                 </div>
             </div>
+
+
+            @if(!is_null($introduced))
+                <input type="hidden" value="{{$introduced}}" name="introduced" />
+            @else
+                <div class="form-group row">
+                    <label for="introduced" class="col-md-4 col-form-label text-md-right">{{ __('معرف:') }}</label>
+                    <div class="col-md-6">
+                        <input id="introduced" type="text" class="form-control @error('introduced') is-invalid @enderror" name="introduced" value="{{ old('introduced') }}"  required placeholder="به عنوان مثال: 09151234567"  />
+                        <small class="text-muted">لطفا شماره همراه معرف خود را وارد کنید</small>
+                        @error('introduced')
+                        <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                                </span>
+                        @enderror
+                    </div>
+                </div>
+            @endif
 
             <div class="form-group row mb-0">
                 <div class="col-md-6 offset-md-4">

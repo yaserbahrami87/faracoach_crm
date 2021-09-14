@@ -57,7 +57,7 @@
                     </div>
                 </form>
                 <b>لینک اختصاصی معرفی دوستان: </b>
-                <p class="p-3 bg-light rounded text-center" id="link_copy" >{{asset('/integrity?q='.$land->tel)}}</p>
+                <p class="p-3 bg-light rounded text-center" id="link_copy" >{{asset('/integrity?q='.$land->id)}}</p>
             </div>
             <div class="col-sm-12 col-md-6 col-xl-6 text-center">
                 <a href="{{asset('/images/story1-small.jpg')}}" class="btn btn-primary m-2" target="_blank">

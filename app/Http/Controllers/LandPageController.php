@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\landPage;
 use Illuminate\Http\Request;
 
-class LandPageController extends Controller
+class LandPageController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -58,6 +58,8 @@ class LandPageController extends Controller
         {
             if($request->resource=='وبینار تمامیت')
             {
+                $msg=$request->lname ." عزیز \n ثبت نام شما در وبینار تمامیت با موفقیت انجام شد \n جهت اطلاع از رویدادهای آموزشی آتی، پیج فراکوچ را دنبال کنید\n"."https://www.instagram.com/faracoach";
+                $this->sendSms($request->tel,$msg);
                 alert()->success('ثبت نام شما در '.$request->resource." با موفقیت انجام شد")->persistent('بستن');
                 return view('landTamamiat_return')
                             ->with('land',$status);
