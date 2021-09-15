@@ -51,6 +51,7 @@ class LandPageController extends BaseController
             'email'     =>'required|email',
             'tel'       =>'required|iran_mobile',
             'resource'  =>'required|string',
+            'introduced'=>'nullable|numeric',
         ]);
 
         $status=landPage::create($request->all());
@@ -117,7 +118,15 @@ class LandPageController extends BaseController
         $status=$landPage->update($request->all());
         if($status)
         {
-            $msg=$landPage->lname." عزیز \n".'میزبان شما و 10 میهمان ارزشمندتان در "وبینار تمامیت" خواهیم بود'."لینک اختصاصی جهت معرفی میهمانان: \n".asset('/integrity?q='.$landPage->id)."\n فراکوچ-مدیران ایران ";
+            if(!is_null($request->count))
+            {
+                $msg=$landPage->lname." عزیز \n".'میزبان شما و '.$request->count.' میهمان ارزشمندتان در "وبینار تمامیت" خواهیم بود'."لینک اختصاصی جهت معرفی میهمانان: \n".asset('/integrity?q='.$landPage->id)."\n فراکوچ-مدیران ایران ";
+            }
+            else
+            {
+                $msg=$landPage->lname." عزیز \n".'میزبان شما و میهمان ارزشمندتان در "وبینار تمامیت" خواهیم بود'."لینک اختصاصی جهت معرفی میهمانان: \n".asset('/integrity?q='.$landPage->id)."\n فراکوچ-مدیران ایران ";
+            }
+
 
             $this->sendSms($landPage->tel,$msg);
             alert()->success('اطلاعات با موفقیت ثبت شد')->persistent('بستن');

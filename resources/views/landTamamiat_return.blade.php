@@ -52,6 +52,15 @@
                                 ارسال لینک ثبت نام برای دوستان و عزیزانم اقدام خواهم کرد
                             </label>
                         </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">تعداد میهمان همراه :</span>
+                            </div>
+                            <input type="text" class="form-control" name="count" />
+                            <div class="input-group-append">
+                                <span class="input-group-text">نفر</span>
+                            </div>
+                        </div>
                         <input type="submit"  class="btn btn-success mb-3" value="اقدام میکنم" />
                         <br/>
                     </div>

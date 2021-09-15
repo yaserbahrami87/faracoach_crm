@@ -89,15 +89,17 @@
                 </h2>
                 <p>تمامیت مفهومی از تمام و کمال بودن است. اتوموبیلی را فرض کنید که چرخ ندارد، این اتوموبیل هرگز کارکرد درستی نخواهد داشت. حتی جزئی تر از آن، اتوموبیلی را تصور کنید که یک برف پاک کن ساده را ندارد ، باز هم یک اتوموبیل تمام و کمال نخواهد بود و در شرایط بحرانی ممکن است باعث بروز خسارت های جدی به ما شود.                        <br/>
                 </p>
-                <div class=" row  p-3 col-12">
-                    <div class=" feed col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                        <div id="97454693371"><script type="text/JavaScript" src="https://www.aparat.com/embed/5JOI3?data[rnddiv]=97454693371&data[responsive]=yes"></script></div>
-                    </div>
-                    <div class=" feed col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                        <div id="60738551128"><script type="text/JavaScript" src="https://www.aparat.com/embed/jdl9N?data[rnddiv]=60738551128&data[responsive]=yes"></script></div>
-                    </div>
-                    <div class=" feed col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                <div class="p-3 col-12">
+                    <div class="row">
+                        <div class=" feed col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                            <div id="97454693371"><script type="text/JavaScript" src="https://www.aparat.com/embed/5JOI3?data[rnddiv]=97454693371&data[responsive]=yes"></script></div>
+                        </div>
+                        <div class=" feed col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                            <div id="60738551128"><script type="text/JavaScript" src="https://www.aparat.com/embed/jdl9N?data[rnddiv]=60738551128&data[responsive]=yes"></script></div>
+                        </div>
+                        <div class=" feed col-xl-4 col-lg-4 col-md-4 col-sm-12">
                         <div id="75923739805"><script type="text/JavaScript" src="https://www.aparat.com/embed/5jvpk?data[rnddiv]=75923739805&data[responsive]=yes"></script></div>
+                    </div>
                     </div>
                     <p>
                         تمامیت در انسانها هم تقریبا به همین شکل است. اگر ما یک فرد تمام و کمال نباشیم چگونه می‌توانیم اهدافمان را به درستی تدوین و اجرا کنیم؟ چگونه نزدیکان ما می‌توانند به ما اعتماد کنند؟ و اگر کسی به ما اعتماد نداشته باشد، چگونه می‌توانیم در ایجاد روابط اجتماعی و عاطفی موفق باشیم.
@@ -243,14 +245,12 @@
             </div>
             <div class="form-group row">
                 <label for="lname" class="col-md-4 col-form-label text-md-right">{{ __('نام خانوادگی:*') }}</label>
-
                 <div class="col-md-6">
-                    <input id="lname" type="text" class="form-control @error('lname') is-invalid @enderror"  placeholder="به عنوان مثال: متحدین" name="lname" value="{{ old('lname') }}" required autocomplete="lname" autofocus>
-
+                    <input id="lname" type="text" class="form-control @error('lname') is-invalid @enderror"  placeholder="به عنوان مثال: علیرضایی" name="lname" value="{{ old('lname') }}" required />
                     @error('lname')
                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                        <strong>{{ $message }}</strong>
+                    </span>
                     @enderror
                 </div>
             </div>
@@ -258,12 +258,12 @@
                 <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('پست الکترونیکی:*') }}</label>
 
                 <div class="col-md-6">
-                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required placeholder="به عنوان مثال: yaser@gmail.com">
+                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required placeholder="به عنوان مثال: yaser@gmail.com" />
 
                     @error('email')
-                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
                     @enderror
                 </div>
             </div>
@@ -275,9 +275,9 @@
                     <div class="input-group">
                         <input id="tel" type="text" class="form-control @error('tel') is-invalid @enderror" name="tel" value="{{ old('tel') }}" required placeholder="به عنوان مثال: 09151234567">
                         @error('tel')
-                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
                         @enderror
                     </div>
                 </div>
