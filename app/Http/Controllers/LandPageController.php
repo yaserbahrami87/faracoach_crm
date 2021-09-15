@@ -60,7 +60,7 @@ class LandPageController extends BaseController
             if($request->resource=='وبینار تمامیت')
             {
                 $msg=$request->lname ." عزیز \nمرحله اول رزرو در 'وبینار تمامیت' با موفقیت انجام شد.\n"."لطفا مرحله دوم را تکمیل نمایید\n"."\n"."مدیران ایران -فراکوچ";
-                //$this->sendSms($request->tel,$msg);
+                $this->sendSms($request->tel,$msg);
                 return view('landTamamiat_return')
                             ->with('land',$status);
             }
