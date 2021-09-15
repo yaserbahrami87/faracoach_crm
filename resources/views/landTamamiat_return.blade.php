@@ -12,6 +12,11 @@
         {
             cursor: pointer;
         }
+
+        #guest *
+        {
+            font-size: 15px;
+        }
     </style>
 @endsection
 @section('row1')
@@ -22,11 +27,14 @@
             </div>
             <div class="col-12">
                 <p class="font-weight-bold text-center text-success mb-5">با تشکر،  مرحله اول رزرو در وبینار تمامیت با موفقیت انجام شد</p>
-                <p class="text-center">ما بدلیل ارزش این مساله و دسترسی آحاد جامعه ،  این  دوره را به  شما هدیه  میدهیم. لطفا شما هم در آگاهی جامعه نسبت به مقوله مهم « تمامیت » یاری کننده باشید.</p>
-                <p class="text-center">شما هم میتوانید در راستای مسئولیت اجتماعی خود، در حد توان نسبت به اطلاع رسانی این وبینار سهیم باشید. </p>
-                <p>من داوطلبانه نسبت به :</p>
             </div>
-            <div class="col-sm-12 col-md-6 col-xl-6">
+            <div class="col-12 border bg-success p-3 text-light">
+                <p class="font-weight-bold" >مسئولیت اجتماعی شما  :</p>
+                <p class="d-inline">ما بدلیل ارزش بسیار بالای این موضوع و دسترسی عموم جامعه ،  این  دوره را به  شما <p class="d-inline" style="color: yellow">هدیه</p><p class="d-inline">  میدهیم. لطفا شما هم در آگاهی جامعه نسبت به مقوله مهم «تمامیت» یاری کننده باشید.</p>
+                <p >شما هم وفادارانه در راستای مسئولیت اجتماعی خود، در حد توان نسبت به اطلاع رسانی این وبینار سهیم باشید. </p>
+            </div>
+            <div class="col-sm-12 col-md-6 col-xl-6 mt-3" >
+                <p>من داوطلبانه نسبت به :</p>
                 @if($errors->any())
                     <div class="col-12">
                         <div class="alert alert-danger" role="alert">
@@ -36,32 +44,35 @@
                         </div>
                     </div>
                 @endif
-                <form method="post" action="/landPage/{{$land->id}}">
+                <form method="post" action="/landPage/{{$land->id}}" >
                     {{csrf_field()}}
                     {{method_field('PATCH')}}
                     <div class="form-group">
                         <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox" id="item1" name="options[]" value="انتشار پوستر وبینار در صفحه اینستاگرامم" />
-                            <label class="form-check-label" for="item1">
+                            <input class="form-check-input border-danger items" type="checkbox" id="item1" name="options[]" value="انتشار پوستر وبینار در صفحه اینستاگرامم" />
+                            <label class="form-check-label m-0 p-0" for="item1">
                                 انتشار پوستر وبینار در صفحه اینستاگرامم
                             </label>
                         </div>
                         <div class="form-check mb-3">
-                            <input class="form-check-input" type="checkbox"  id="item2" name="options[]" value="ارسال لینک ثبت نام برای دوستان و عزیزانم اقدام خواهم کرد">
-                            <label class="form-check-label" for="item2">
-                                ارسال لینک ثبت نام برای دوستان و عزیزانم اقدام خواهم کرد
+                            <input class="form-check-input items" type="checkbox"  id="item2" name="options[]" value="ارسال لینک ثبت نام برای دوستان و عزیزانم اقدام خواهم کرد">
+                            <label class="form-check-label m-0 p-0" for="item2">
+                                ارسال لینک ثبت نام برای دوستان و عزیزانم
                             </label>
                         </div>
-                        <div class="input-group mb-3">
+                        <div class="input-group mb-3" id="guest">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">تعداد میهمان همراه :</span>
                             </div>
-                            <input type="text" class="form-control" name="count" />
+                            <input type="number" class="form-control" name="count" min="0"/>
                             <div class="input-group-append">
                                 <span class="input-group-text">نفر</span>
                             </div>
                         </div>
-                        <input type="submit"  class="btn btn-success mb-3" value="اقدام میکنم" />
+                        <p class="d-block pt-2">اقدام میکنم</p>
+
+
+                        <input type="submit" id="send" class="btn btn-success mb-3" value="پایان مرحله دوم و رزرو وبینار" />
                         <br/>
                     </div>
                 </form>
@@ -74,7 +85,7 @@
                     <i class="bi bi-download"></i>
                 </a>
 
-                <a href="{{asset('/images/int.png')}}"  class="btn btn-primary" target="_blank" >
+                <a href="{{asset('/images/integrity2.jpg')}}"  class="btn btn-primary" target="_blank" >
                     دانلود پوستر سایز پست
                     <i class="bi bi-download"></i>
                 </a>
@@ -94,6 +105,28 @@
             navigator.clipboard.writeText(links);
             alert('لینک اختصاصی کپی شد');
         });
+
+
+
+        $(".items").change(function()
+        {
+            var c=($('.items').length);
+            for (i=0;i<c;i++)
+            {
+                if($('.items')[i].checked==true)
+                {
+                    console.log('AAAAA');
+                    $("#send").css('display','inline !important');
+                }
+
+            }
+
+
+
+        });
+
+
+
 
     </script>
 

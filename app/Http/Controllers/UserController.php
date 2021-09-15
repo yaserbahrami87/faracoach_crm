@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\followup;
+use App\landPage;
 use App\User;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Gate;
@@ -2485,11 +2486,18 @@ class UserController extends BaseController
     public function export_excel()
     {
         //خروجی اکسل
-        $list=User::where('users.type','=',1)
-            ->where('created_at','<','2021-07-23')
-            ->select('users.*')
-            ->groupby('users.id')
+        $list=landPage::where('resource','=','کمپین روانشناسان')
             ->get();
+
+        $excel=fastexcel($list)->export('file.xlsx');
+        if($excel)
+        {
+//                return Storage::disk('public')->download('file.xlsx');
+//                return response()->download(storage_path("/public/file.xlsx"));
+            return response()->download(public_path('file.xlsx'));
+
+        }
+
         foreach ($list as $item)
         {
             $item->created_at=$this->changeTimestampToShamsi($item->created_at);
@@ -2538,14 +2546,7 @@ class UserController extends BaseController
                 $item->personal_image="default-avatar.png";
             }
         }
-        $excel=fastexcel($list)->export('file.xlsx');
-        if($excel)
-        {
-//                return Storage::disk('public')->download('file.xlsx');
-//                return response()->download(storage_path("/public/file.xlsx"));
-            return response()->download(public_path('file.xlsx'));
 
-        }
     }
 
 
