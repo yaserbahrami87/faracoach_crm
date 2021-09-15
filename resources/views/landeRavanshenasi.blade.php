@@ -220,7 +220,7 @@
                         </h2>
                     </div>
                 </div>
-                <form method="POST" action="/land" class="mb-3" id="form">
+                <form method="POST" action="/landPage" class="mb-3" id="form">
                     {{csrf_field()}}
                     <input type="hidden" value="کمپین روانشناسان" name="resource" />
                     <div class="form-group row">

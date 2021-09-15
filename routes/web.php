@@ -338,7 +338,7 @@ Route::get('/ravanshenasi',function()
 
 Route::get('/integrity','LandPageController@create');
 
-
+Route::get('/export_excel','UserController@export_excel');
 
 
 //blog
