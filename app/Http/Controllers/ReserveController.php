@@ -104,7 +104,7 @@ class ReserveController extends BaseController
      */
     public function update(Request $request, reserve $reserve)
     {
-        //
+        dd($reserve);
     }
 
     /**
@@ -471,4 +471,6 @@ class ReserveController extends BaseController
                     ->with('booking',$reserve)
                     ->with('dateNow',$dateNow);
     }
+
+
 }

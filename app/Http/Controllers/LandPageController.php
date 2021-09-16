@@ -66,7 +66,7 @@ class LandPageController extends BaseController
             }
             else
             {
-                alert()->success('ثبت نام شما در '.$request->resource." با موفقیت انجام شد")->persistent('بستن');
+                alert()->success("ثبت نام شما با موفقیت انجام شد")->persistent("بستن");
             }
 
         }

@@ -1,4 +1,4 @@
-<div class="col-12 mt-3 border-top pt-3">
+    <div class="col-12 mt-3 border-top pt-3">
     <p>برای رزرو زمان مشخص شده لطفا فرم زیر را پر کنید</p>
     <form method="post" action="/{{$booking->id}}" id="reserveForm">
         {{csrf_field()}}
@@ -8,12 +8,12 @@
         <input type="hidden" value="{{$booking->id}}" name="booking_id">
         <div class="form-group">
             <label for="subject">موضوع جلسه درخواستی:*</label>
-            <input type="text" class="form-control form-control" id="subject"  name="subject" placeholder="لطفا در مورد هر موضوع خلاصه ای یک سطری بنویسید" />
+            <input type="text" class="form-control form-control" id="subject"  name="subject" placeholder="لطفا در مورد هر موضوع خلاصه ای یک سطری بنویسید"  autocomplete="subject" />
             <small>لطفا در مورد هر موضوع خلاصه ای یک سطری بنویسید</small>
         </div>
         <div class="form-group">
             <label for="type_coach">نوع جلسه*</label>
-            <select class="form-control form-control" id="type_coach" name="type_booking">
+            <select class="form-control form-control" id="type_coach" name="type_booking"  >
                 <option disabled selected>انتخاب کنید</option>
                 <option value="1">حضوری</option>
                 <option value="2">آنلاین</option>

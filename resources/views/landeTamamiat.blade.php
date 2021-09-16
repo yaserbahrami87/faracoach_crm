@@ -98,8 +98,11 @@
                             <div id="60738551128"><script type="text/JavaScript" src="https://www.aparat.com/embed/jdl9N?data[rnddiv]=60738551128&data[responsive]=yes"></script></div>
                         </div>
                         <div class=" feed col-xl-4 col-lg-4 col-md-4 col-sm-12">
-                        <div id="75923739805"><script type="text/JavaScript" src="https://www.aparat.com/embed/5jvpk?data[rnddiv]=75923739805&data[responsive]=yes"></script></div>
-                    </div>
+                            <div id="75923739805">
+                                <script type="text/JavaScript" src="https://www.aparat.com/embed/5jvpk?data[rnddiv]=75923739805&data[responsive]=yes"></script>
+                            </div>
+                        </div>
+
                     </div>
                     <p>
                         تمامیت در انسانها هم تقریبا به همین شکل است. اگر ما یک فرد تمام و کمال نباشیم چگونه می‌توانیم اهدافمان را به درستی تدوین و اجرا کنیم؟ چگونه نزدیکان ما می‌توانند به ما اعتماد کنند؟ و اگر کسی به ما اعتماد نداشته باشد، چگونه می‌توانیم در ایجاد روابط اجتماعی و عاطفی موفق باشیم.
@@ -114,7 +117,7 @@
                             </p>
                         </div>
                         <div class="p-3  col-sm-12 col-md-4 col-lg-4 col-xl-4 text-justify ">
-                            <img src="{{asset('/images/jjjjjj.jpg')}}" target="_blank" class="img-fluid img-thumbnail border border-primary" />
+                            <img src="{{asset('/images/jenson.png')}}" target="_blank" class="img-fluid img-thumbnail border border-primary" />
                         </div>
                     </div>
                     <p class="text-center font-weight-bold">
@@ -135,6 +138,9 @@
                             </div>
                         </div>
                     </div >
+                    <div class="feed col-12 text-center mt-3 mb-3">
+                        <div id="91334936968" style="width: 400px" class="d-inline-block"><script type="text/JavaScript" src="https://www.aparat.com/embed/vnwCo?data[rnddiv]=91334936968&data[responsive]=yes"></script></div>
+                    </div>
                     <div class="col-12">
                         <h2 class="text-center text-danger display-4" id="angizeshi">
                             این یک جمله انگیزشی و یا اغراق شده نیست:

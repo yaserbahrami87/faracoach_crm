@@ -17,7 +17,7 @@
     <div class="col-md-3 ">
         <article class="card mb-3" >
             <div class="card-body">
-                <h6 class="card-title pb-3 border-bottom">آخرین مقالات  </h6>
+                <h6 class="card-title pb-3 border-bottom">آخرین مقالات شما  </h6>
                 @foreach($posts as $item)
                     <div class="media border-bottom pb-2 pt-2">
                         <img src="{{$item->image}}" class="mr-3"  width="100px" alt="...">
