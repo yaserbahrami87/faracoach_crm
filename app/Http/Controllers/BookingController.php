@@ -297,7 +297,27 @@ class BookingController extends BaseController
      */
     public function update(Request $request, booking $booking)
     {
-        //
+
+        $this->validate($request,[
+            'status'    =>'required|numeric',
+        ]);
+
+        $status=$booking->update($request->all());
+
+        if($status)
+        {
+            $reserve=$this->get_reserve(NULL,NULL,$booking->id,NULL,NULL,NULL,'first');   reserve::where('booking_id','=',$booking->id)
+                                ->first();
+            $reserve->status=$request->status;
+            $reserve->save();
+            alert()->success('جلسه با موفقیت لغو شد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در لغو جلسه')->persistent('بستن');
+        }
+
+        return redirect('/panel/booking/accept_reserve_user');
     }
 
     /**
@@ -442,6 +462,8 @@ class BookingController extends BaseController
             ->with('booking', $booking)
             ->with('dateNow', $this->dateNow);
     }
+
+
 
 
 

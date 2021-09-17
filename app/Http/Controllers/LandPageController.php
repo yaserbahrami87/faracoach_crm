@@ -45,6 +45,8 @@ class LandPageController extends BaseController
      */
     public function store(Request $request)
     {
+        $request['tel']=$this->convertPersianNumber($request->tel);
+
         $this->validate($request,[
             'fname'     =>'string|max:15|required',
             'lname'     =>'string|max:50|required',

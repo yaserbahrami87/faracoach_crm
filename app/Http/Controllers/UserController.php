@@ -38,11 +38,6 @@ class UserController extends BaseController
     {
         if(Auth::user()->type==2)
         {
-//            if(is_null($request->orderby)&&is_null($request->parameter))
-//            {
-//                $request['orderby']='id';
-//                $request['parameter']='desc';
-//            }
 
             $users=User::where('users.type','<>',0)
                     ->where('users.type','=',1)
@@ -54,61 +49,7 @@ class UserController extends BaseController
 
             foreach ($users as $item)
             {
-                $item->created_at=$this->changeTimestampToShamsi($item->created_at);
-                if(!is_null($item->last_login_at))
-                {
-                    $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
-                }
-
-                $expert=$this->get_user_byID($item->followby_expert);
-                if(!is_null($expert))
-                {
-                    $item->followby_expert=$expert->fname." ".$expert->lname;
-                }
-
-//                $item->status_followups=$this->userType($this->get_lastFollowupUser($item->id)['status_followups']);
-//                $item->countFollowup=$this->get_countFollowup($item->id);
-//                $item->quality=$this->get_lastFollowupUser($item->id)['problem'];
-//                $item->quality_color=$this->get_lastFollowupUser($item->id)['color'];
-//                $item->lastDateFollowup=$this->get_lastFollowupUser($item->id)['date_fa'];
-//                $item->lastFollowupCourse=$this->get_lastFollowupUser($item->id)['course_id'];
-//                $item->lastFollowupCourse=$this->get_coursesByID($item->lastFollowupCourse)['course'];
-
-                $item->status_followups=$this->userType($this->get_lastFollowupUser($item->id)['status_followups']);
-                $item->countFollowup=$this->get_countFollowup($item->id);
-                $item->quality=$this->get_lastFollowupUser($item->id)['problem'];
-                $item->quality_color=$this->get_lastFollowupUser($item->id)['color'];
-                $item->lastDateFollowup=$this->get_lastFollowupUser($item->id)['date_fa'];
-                $item->lastFollowupCourse=$this->get_lastFollowupUser($item->id)['course_id'];
-                $item->lastFollowupCourse=$this->get_coursesByID($item->lastFollowupCourse)['course'];
-                $item->type=$this->userType($item->type);
-                $item->insert_user_id=$this->get_user_byID($item->insert_user_id);
-
-
-                if(!is_null($item->insert_user))
-                {
-                    $item->insert_user=$this->get_user(NULL,$item->insert_user_id,NULL,NULL,true)['fname']." ".$this->get_user( NULL,$item->insert_user_id,NULL,NULL,true)['lname'];
-                }
-
-
-                if(is_null($item->personal_image))
-                {
-                    $item->personal_image="default-avatar.png";
-                }
-
-                if(!is_null($item->introduced))
-                {
-                    if ($this->get_user(NULL, $item->introduced, NULL, NULL, true)->count()>0)
-                    {
-                        $item->introduced = $this->get_user(NULL, $item->introduced, NULL, NULL, true)->fname.' '.$this->get_user(NULL, $item->introduced, NULL, NULL, true)->lname ;
-                    }
-                    else if ($this->get_user($item->introduced, NULL, NULL, NULL, true)->count()>0)
-                    {
-
-                        $item->introduced=$this->get_user($item->introduced, NULL, NULL, NULL, true)->fname.' '.$this->get_user($item->introduced, NULL, NULL, NULL, true)->lname;
-
-                    }
-                }
+                $item=$this->changeNumberToData($item);
             }
 
 
@@ -119,21 +60,7 @@ class UserController extends BaseController
                         ->get();
 
             //لیست تعداد کاربرها
-            $notfollowup = $this->get_user(NULL,NULL,1,NULL,NULL,NULL )->count();
-            $lead=$this->get_user(NULL,NULL,-1,NULL,NULL)->count();
-            $continuefollowup = $this->get_usersByType(11,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-            $cancelfollowup = $this->get_usersByType(12,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-            $waiting = $this->get_usersByType(13,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-            $noanswering = $this->get_usersByType(14,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-            $students = $this->get_usersByType(20,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-            $condition=['nextfollowup_date_fa','=',$this->dateNow];
-            $todayFollowup = $this->get_followup_join_user(NULL,Auth::user()->id,NULL,1,$condition,NULL )->count();
-            $condition=['followups.nextfollowup_date_fa', '<', $this->dateNow];
-            $expireFollowup=$this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL )->count();
-            $myfollowup = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-            $condition=['date_fa','=',$this->dateNow];
-            $followedToday = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL )->count();
-            $trashuser=$this->get_usersByType(0,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
+            $statics=$this->get_staticsCountUsers_admin();
 
             if(isset($request['user']))
             {
@@ -144,11 +71,6 @@ class UserController extends BaseController
                 $user="";
             }
 
-//            if(!is_null($request->orderby)&&(!is_null($request->parameter))) {
-//                $users->appends(['orderby'=>$request['orderby']]);
-//                $users->appends(['parameter'=>$request['parameter']]);
-//            }
-
             //دریافت کفیت های پیگیری
             $problem=$this->get_problemfollowup(NULL,1);
 
@@ -157,19 +79,9 @@ class UserController extends BaseController
                 ->with('tags',$tags)
                 ->with('parentCategory',$parentCategory)
                 ->with('usersAdmin',$usersAdmin)
-                ->with('followedToday',$followedToday)
-                ->with('myfollowup',$myfollowup)
-                ->with('todayFollowup',$todayFollowup)
-                ->with('students',$students)
-                ->with('noanswering',$noanswering)
-                ->with('waiting',$waiting)
-                ->with('cancelfollowup',$cancelfollowup)
-                ->with('continuefollowup',$continuefollowup)
-                ->with('notfollowup',$notfollowup)
                 ->with('user',$user)
-                ->with('trashuser',$trashuser)
                 ->with('problem',$problem)
-                ->with('lead',$lead)
+                ->with('statics',$statics)
                 ->with('parameter',$request['parameter']);
         }
         else
@@ -199,65 +111,10 @@ class UserController extends BaseController
 
             foreach ($users as $item)
             {
-                $item->created_at=$this->changeTimestampToShamsi($item->created_at);
-                if(!is_null($item->last_login_at))
-                {
-                        $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
-                }
-
-//                $item->status_followups=$this->userType($this->get_lastFollowupUser($item->id)['status_followups']);
-//                $item->countFollowup=$this->get_countFollowup($item->id);
-//                $item->quality=$this->get_lastFollowupUser($item->id)['problem'];
-//                $item->quality_color=$this->get_lastFollowupUser($item->id)['color'];
-//                $item->lastDateFollowup=$this->get_lastFollowupUser($item->id)['date_fa'];
-//                $item->lastFollowupCourse=$this->get_lastFollowupUser($item->id)['course_id'];
-//                $item->lastFollowupCourse=$this->get_coursesByID($item->lastFollowupCourse)['course'];
-
-                $item->status_followups=$this->userType($this->get_lastFollowupUser($item->id)['status_followups']);
-                $item->countFollowup=$this->get_countFollowup($item->id);
-                $item->quality=$this->get_lastFollowupUser($item->id)['problem'];
-                $item->quality_color=$this->get_lastFollowupUser($item->id)['color'];
-                $item->lastDateFollowup=$this->get_lastFollowupUser($item->id)['date_fa'];
-                $item->lastFollowupCourse=$this->get_lastFollowupUser($item->id)['course_id'];
-                $item->lastFollowupCourse=$this->get_coursesByID($item->lastFollowupCourse)['course'];
-                $item->type=$this->userType($item->type);
-                $item->insert_user_id=$this->get_user_byID($item->insert_user_id);
-
-                if(!is_null($item->introduced))
-                {
-                    if ($this->get_user(NULL, $item->introduced, NULL, NULL, true)->count()>0)
-                    {
-                        $item->introduced = $this->get_user(NULL, $item->introduced, NULL, NULL, true)->fname.' '.$this->get_user(NULL, $item->introduced, NULL, NULL, true)->lname ;
-                    }
-                    else if ($this->get_user($item->introduced, NULL, NULL, NULL, true)->count()>0)
-                    {
-
-                        $item->introduced=$this->get_user($item->introduced, NULL, NULL, NULL, true)->fname.' '.$this->get_user($item->introduced, NULL, NULL, NULL, true)->lname;
-
-                    }
-                }
-
-                if(is_null($item->personal_image))
-                {
-                    $item->personal_image="default-avatar.png";
-                }
-
-                $expert=$this->get_user_byID($item->followby_expert);
-
-                if(!is_null($expert))
-                {
-                    $item->followby_expert=$expert->fname." ".$expert->lname;
-                }
-
-
+                $item=$this->changeNumberToData($item);
             }
             $tags=$this->get_tags();
             $parentCategory=$this->get_category('پیگیری');
-
-//            if(!is_null($request->orderby)&&(!is_null($request->parameter))) {
-//                $users->appends(['orderby'=>$request['orderby']]);
-//                $users->appends(['parameter'=>$request['parameter']]);
-//            }
 
             //دریافت کفیت های پیگیری
             $problem=$this->get_problemfollowup(NULL,1);
@@ -302,7 +159,7 @@ class UserController extends BaseController
         }
         else
         {
-
+            $request['tel']=$this->convertPersianNumber($request->tel);
             $this->validate(request(),
             [
                 'fname'             =>'persian_alpha|required|min:3',
@@ -348,25 +205,7 @@ class UserController extends BaseController
                 $request->shenasnameh_image=$shenasnameh_image;
 
             }
-            /*
-            if($request->has('cartmelli_image')&&$request->file('cartmelli_image')->isValid())
-            {
-                $file=$request->file('cartmelli_image');
-                $cartmelli_image="cartmelli-".$request->codemelli.".".$request->file('cartmelli_image')->extension();
-                $path=public_path('/documents/users/');
-                $files=$request->file('cartmelli_image')->move($path, $cartmelli_image);
-                $request->cartmelli_image=$cartmelli_image;
-            }
 
-            if($request->has('education_image')&&$request->file('education_image')->isValid())
-            {
-                $file=$request->file('education_image');
-                $education_image="education-".$request->codemelli.".".$request->file('education_image')->extension();
-                $path=public_path('/documents/users/');
-                $files=$request->file('education_image')->move($path, $education_image);
-                $request->education_image=$education_image;
-            }
-            */
             $type=1;
             $status = User::create([
                 'fname'                     => $request['fname'],
@@ -397,8 +236,6 @@ class UserController extends BaseController
             {
                 $msg="اطلاعات با موفقیت در سیستم ثبت شد";
                 alert()->success("اطلاعات با موفقیت در سیستم ثبت شد",'پیام')->persistent('بستن');
-
-
 
                 // Send SMS
                 $this->sendSms($request['tel'],' به زودی کارشناسان ما با شما تماس خواهند گرفت');
@@ -439,7 +276,7 @@ class UserController extends BaseController
     //Register User by Admin
     public function register(Request $request)
     {
-
+        $request['tel']=$this->convertPersianNumber($request->tel);
         $this->validate($request, [
             'fname'         => ['nullable','persian_alpha', 'string', 'max:30'],
             'lname'         => ['nullable','persian_alpha', 'string', 'max:30'],
@@ -635,16 +472,6 @@ class UserController extends BaseController
             ->count();
         $introducedUser = User::where('introduced', '=', $user->id)
             ->get();
-
-        $introducedTree=[];
-//        dd(gettype($introducedTree));
-//        foreach ($introducedUser as $item)
-//        {
-//            $introducedTree=array_push($introducedTree,User::where('introduced', '=', $item->id)->get());
-//        }
-
-//        dd($introducedTree);
-
 
         //لیست افراد معرفی کرده
         $listIntroducedUser = User::where('introduced', '=', $user->id)
@@ -966,243 +793,15 @@ class UserController extends BaseController
 
     public function categorybyAdmin(Request $request)
     {
-//        $this->validate($request,[
-//            'user'              =>'required|numeric',
-//            'categorypeygiri'   =>'required|boolean',
-//        ]);
-//        if (!is_null($request) &&(strlen($request['user'])>0)) {
-//            if($request['categorypeygiri']==0)
-//            {
-//                $users = user::join('followups','users.id','=','followups.user_id')
-//                        ->where('followups.insert_user_id', '=', $request['user'])
-//                        ->select('users.*')
-//                        ->groupby('followups.user_id')
-//                        ->paginate($this->countPage());
-//            }
-//            elseif($request['categorypeygiri']==1)
-//            {
-//                $users = user::where('insert_user_id', '=', $request['user'])
-//                    ->paginate($this->countPage());
-//            }
-//
-//
-//            $countList = user::where('followby_expert', '=', $request['user'])
-//                    ->count();
-//            if(is_null($request->orderby)&&is_null($request->parameter))
-//            {
-//                $request['orderby']='id';
-//                $request['parameter']='desc';
-//            }
-//            foreach ($users as $item)
-//            {
-//                $expert=$this->get_user_byID($item->followby_expert);
-//                if(!is_null($expert))
-//                {
-//                    $item->followby_expert=$expert->fname." ".$expert->lname;
-//                }
-//
-//                $item->status_followups=$this->userType($this->get_lastFollowupUser($item->id)['status_followups']);
-//                $item->quality=$this->get_lastFollowupUser($item->id)['problem'];
-//                $item->quality_color=$this->get_lastFollowupUser($item->id)['color'];
-//                $item->lastDateFollowup=$this->get_lastFollowupUser($item->id)['date_fa'];
-//                $item->lastFollowupCourse=$this->get_lastFollowupUser($item->id)['course_id'];
-//                $item->lastFollowupCourse=$this->get_coursesByID($item->lastFollowupCourse)['course'];
-//                $item->insert_user=$this->get_user( NULL,$item->insert_user_id,NULL,NULL,true)['fname']." ".$this->get_user( NULL,$item->insert_user_id,NULL,NULL,true)['lname'];
-//                if(is_null($item->personal_image))
-//                {
-//                    $item->personal_image="default-avatar.png";
-//                }
-//            }
-//            $users->appends(['user' => $request['user'],'categorypeygiri' => $request['categorypeygiri']]);
-//            $tags = $this->get_tags();
-//            $parentCategory = $this->get_category('پیگیری');
-//            $usersAdmin = user::orwhere('type', '=', 2)
-//                ->orwhere('type', '=', 3)
-//                ->get();
-//
-//
-//
-//            //لیست تعداد کاربرهای هر شخص
-//            $notfollowup=count($this->get_notfollowup_withoutPaginate());
-//            $continuefollowup=count($this->get_continuefollowupbyID_withoutPaginate($request['user']));
-//            $cancelfollowup=count($this->get_cancelfollowupbyID_withoutPaginate($request['user']));
-//            $waiting=count($this->get_waitingbyID_withoutPaginate($request['user']));
-//            $noanswering=count($this->get_noansweringbyID_withoutPaginate($request['user']));
-//            $students =count($this->get_studentsbyID_withoutPaginate($request['user']));
-//            $todayFollowup = count($this->get_todayFollowupbyID_withoutPaginate($request['user']));
-//            $expireFollowup = $this->get_expireFollowupbyID($request['user']);
-//            $myfollowup=count($this->get_myfollowupbyID_withoutPaginate($request['user']));
-//            $followedToday = count($this->get_followedTodaybyID_withoutPaginate($request['user']));
-//            $trashuser=count($this->getAll_trashuser_withoutPaginate());
-//
-//            return view('panelAdmin.users')
-//                ->with('tags', $tags)
-//                ->with('users', $users)
-//                ->with('countList', $countList)
-//                ->with('parentCategory', $parentCategory)
-//                ->with('usersAdmin', $usersAdmin)
-//                ->with('followedToday',$followedToday)
-//                ->with('myfollowup',$myfollowup)
-//                ->with('todayFollowup',$todayFollowup)
-//                ->with('students',$students)
-//                ->with('noanswering',$noanswering)
-//                ->with('waiting',$waiting)
-//                ->with('cancelfollowup',$cancelfollowup)
-//                ->with('continuefollowup',$continuefollowup)
-//                ->with('notfollowup',$notfollowup)
-//                ->with('user',$request['user'])
-//                ->with('trashuser',$trashuser)
-//                ->with('parameter',$request['parameter'])
-//                ->with('orderby',$request['orderby']);
-//        } else {
-//            return redirect('/admin/users');
-//        }
     }
 
     // نمایش اعضای سایت براساس دسته بندی برای ادمین
     public function showCategoryUsersAdmin(Request $request)
     {
-//        if(is_null($request->orderby)&&is_null($request->parameter))
-//        {
-//            $request['orderby']='id';
-//            $request['parameter']='desc';
-//        }
         $dateNow=$this->dateNow;
 
         if(Auth::user()->type==2)
         {
-//            if (!is_null($request)&&(strlen($request['user'])>0))
-//            {
-//                dd('asdasdasd');
-//                switch ($request['categoryUsers']) {
-//                    case '0':
-//                        return redirect('/admin/users/');
-//                        break;
-//                    case 'lead':
-//                        $users = $users = user::where('type','=',-1)
-//                            ->orderby('id','desc')
-////                                ->paginate($this->countPage());
-//                            ->get();
-//                        break;
-//                    case 'notfollowup':
-//                        $users = $users = user::where('type','=',1)
-//                                ->orderby('id','desc')
-////                                ->paginate($this->countPage());
-//                                ->get();
-//                        break;
-//                    case 'continuefollowup':
-//                        $users =$this->get_usersByType(11,$request['user']);
-//
-//                        break;
-//                    case 'cancelfollowup':
-//                        $users = User::join('followups','users.id','=','followups.user_id')
-//                            ->where('status_followups', '=', '12')
-//                            ->where('followby_expert', '=', $request['user'])
-//                            ->orderby('users.id', 'desc')
-//                            ->groupby('users.id')
-////                            ->paginate($this->countPage());
-//                            ->get();
-//                        break;
-//                    case 'waiting' :
-//                        $users = User::join('followups','users.id','=','followups.user_id')
-//                            ->where('status_followups', '=', '13')
-//                            ->where('followby_expert', '=', $request['user'])
-//                            ->orderby('users.id', 'desc')
-//                            ->get();
-////                            ->paginate($this->countPage());
-//                        break;
-//                    case 'noanswering':
-//                        $users = User::join('followups','users.id','=','followups.user_id')
-//                            ->where('status_followups', '=', '14')
-//                            ->where('followby_expert', '=', $request['user'])
-//                            ->orderby('users.id', 'desc')
-////                            ->paginate($this->countPage());
-//                            ->get();
-//                        break;
-//                    case 'students':
-//                        $users = User::join('followups','users.id','=','followups.user_id')
-//                            ->where('status_followups', '=', '20')
-//                            ->where('followby_expert', '=', $request['user'])
-//                            ->orderby('users.id', 'desc')
-////                            ->paginate($this->countPage());
-//                            ->get();
-//                        break;
-//                    case 'todayFollowup':
-//                        $users = User::join('followups', 'users.id', '=', 'followups.user_id')
-//                            ->where('followups.nextfollowup_date_fa', '=', $this->dateNow)
-//                            ->where('followby_expert', '=', $request['user'])
-//                            ->select('users.*')
-//                            ->groupby('users.id')
-//                            ->orderby('date_fa', 'desc')
-////                            ->paginate($this->countPage());
-//                            ->get();
-//                        break;
-//                    case 'expireFollowup':
-//                        $users = User::join('followups', 'users.id', '=', 'followups.user_id')
-//                            ->where('followups.nextfollowup_date_fa', '<', $this->dateNow)
-//                            ->where('followby_expert', '=', $request['user'])
-//                            ->wherenotIn('users.type', [2, 12])
-//                            ->select('users.*')
-//                            ->groupby('users.id')
-//                            ->orderby('date_fa', 'desc')
-////                            ->paginate($this->countPage());
-//                            ->get();
-//                        break;
-//                    case 'myfollowup':
-//                        $users = User::join('followups', 'users.id', '=', 'followups.user_id')
-//                            ->where('followups.insert_user_id', '=', Auth::user()->id)
-//                            ->where('followby_expert', '=', $request['user'])
-//                            ->select('users.*')
-//                            ->orderby('date_fa', 'desc')
-//                            ->groupby('users.id')
-////                            ->paginate($this->countPage());
-//                            ->get();
-//                        break;
-//
-//                    case 'followedToday':
-//                        $users = User::join('followups', 'users.id', '=', 'followups.user_id')
-//                            ->where('followups.insert_user_id', '=', Auth::user()->id)
-//                            ->where('date_fa', '=', $dateNow)
-//                            ->where('followby_expert', '=', $request['user'])
-//                            ->select('users.*')
-//                            ->groupby('users.id')
-//                            ->orderby('date_fa', 'desc')
-////                            ->paginate($this->countPage());
-//                            ->get();
-//                        break;
-//                    case 'trashuser':
-//                        $users=User::join('followups', 'users.id', '=', 'followups.user_id')
-//                            ->where('type', '=', 0)
-//                            ->select('users.*')
-//                            ->groupby('users.id')
-//                            ->orderby('date_fa', 'desc')
-//                            ->get();
-////                            ->paginate($this->countPage());
-//                            break;
-//                    default:
-//                        return redirect('/admin/users/');
-//                        break;
-//                }
-//
-//                //لیست تعداد کاربرها
-//                $notfollowup = $this->get_user(NULL,NULL,1,NULL,NULL,NULL )->count();
-//                $continuefollowup = $this->get_usersByType(11,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-//                $cancelfollowup = $this->get_usersByType(12,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-//                $waiting = $this->get_usersByType(13,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-//                $noanswering = $this->get_usersByType(14,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-//                $students = $this->get_usersByType(20,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-//                $condition=['nextfollowup_date_fa','=',$this->dateNow];
-//                $todayFollowup = $this->get_followup_join_user(NULL,Auth::user()->id,NULL,1,$condition,NULL )->count();
-//
-//                $condition=['followups.nextfollowup_date_fa', '<', $this->dateNow];
-//                $expireFollowup=$this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL )->count();
-//                $myfollowup = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-//                $condition=['date_fa','=',$this->dateNow];
-//                $followedToday = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL )->count();
-//                $trashuser=$this->get_usersByType(0,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-//            }
-//            else
-//            {
                 switch ($request['categoryUsers']) {
                     case '0':
                         return redirect('/admin/users/');
@@ -1262,8 +861,6 @@ class UserController extends BaseController
                         break;
                 }
                 $statics=$this->get_staticsCountUsers_admin();
-
-//            }
         }
         else
         {
@@ -1330,78 +927,12 @@ class UserController extends BaseController
 
         foreach ($users as $item)
         {
-            $tmp=$this->get_followup(NULL,$item->id,NULL,1,'first');
-
-//            $item->status_followups=$this->userType($tmp['status_followups']);
-            if($tmp->count()>0)
-            {
-                $item->status_followups=$this->userType($this->get_lastFollowupUser($item->id)['status_followups']);
-                $quality=$this->get_problemfollowup($tmp['problemfollowup_id'],NULL,NULL,'first');
-            }
-
-
-
-            if(isset($quality) && ($quality->count()>0))
-            {
-                echo "<script>console.log(".$item['date_fa'].")</script>";
-                $item->quality=$quality['problem'];
-                $item->quality_color=$quality['color'];
-                $item->lastDateFollowup=$item['date_fa'];
-                $item->lastFollowupCourse=$item['course_id'];
-                $item->countFollowup=$this->get_followup(NULL,$item->id,NULL,NULL,'get')->count();
-            }
-            else
-            {
-                $item->quality=NULL;
-                $item->quality_color=NULL;
-                $item->lastDateFollowup=NULL;
-                $item->lastFollowupCourse=NULL;
-                $item->countFollowup=NULL;
-            }
-
-
-            $item->created_at = $this->changeTimestampToShamsi($item->created_at);
-            if (!is_null($item->last_login_at)) {
-                $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
-            }
-            $expert=$this->get_user_byID($item->followby_expert);
-            if(!is_null($expert))
-            {
-                $item->followby_expert=$expert->fname." ".$expert->lname;
-            }
-            $item->lastFollowupCourse=$this->get_coursesByID($item->lastFollowupCourse)['course'];
-            if(is_null($item->personal_image))
-            {
-                $item->personal_image="default-avatar.png";
-            }
-            if(!is_null($item->introduced))
-            {
-                if ($this->get_user(NULL, $item->introduced, NULL, NULL, true)->count()>0)
-                {
-                    $item->introduced = $this->get_user(NULL, $item->introduced, NULL, NULL, true)->fname.' '.$this->get_user(NULL, $item->introduced, NULL, NULL, true)->lname ;
-                }
-                else if ($this->get_user($item->introduced, NULL, NULL, NULL, true)->count()>0)
-                {
-                    $item->introduced=$this->get_user($item->introduced, NULL, NULL, NULL, true)->fname.' '.$this->get_user($item->introduced, NULL, NULL, NULL, true)->lname;
-                }
-            }
-
+            $item= $this->changeNumberToData($item);
         }
-
 
         $usersAdmin=user::orwhere('type'    ,'=',2)
                         ->orwhere('type','=',3)
                         ->get();
-
-
-//        $users->appends(['categoryUsers'=>$request['categoryUsers']]);
-
-
-//        if(!is_null($request->orderby)&&(!is_null($request->parameter))) {
-//            $users->appends(['orderby'=>$request['orderby']]);
-//            $users->appends(['parameter'=>$request['parameter']]);
-//        }
-
         $tags=$this->get_tags();
         $parentCategory=$this->get_category('پیگیری');
 
@@ -1438,11 +969,6 @@ class UserController extends BaseController
             return redirect('/panel');
         }
         else {
-//            if(is_null($request->orderby)&&is_null($request->parameter))
-//            {
-//                $request['orderby']='id';
-//                $request['parameter']='desc';
-//            }
             $this->validate($request,
                 [
                     'tags'  =>'array|required'
@@ -1466,26 +992,7 @@ class UserController extends BaseController
 
                 foreach ($users as $item)
                 {
-                    $item->status_followups=$this->userType($this->get_lastFollowupUser($item->id)['status_followups']);
-                    $item->created_at = $this->changeTimestampToShamsi($item->created_at);
-                    if (!is_null($item->last_login_at)) {
-                        $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
-                    }
-                    $item->countFollowup=$this->get_countFollowup($item->id);
-                    $item->quality=$this->get_lastFollowupUser($item->id)['problem'];
-                    $item->quality_color=$this->get_lastFollowupUser($item->id)['color'];
-                    $expert=$this->get_user_byID($item->followby_expert);
-                    if(!is_null($expert))
-                    {
-                        $item->followby_expert=$expert->fname." ".$expert->lname;
-                    }
-                    $item->lastDateFollowup=$this->get_lastFollowupUser($item->id)['date_fa'];
-                    $item->lastFollowupCourse=$this->get_lastFollowupUser($item->id)['course_id'];
-                    $item->lastFollowupCourse=$this->get_coursesByID($item->lastFollowupCourse)['course'];
-                    if(is_null($item->personal_image))
-                    {
-                        $item->personal_image="default-avatar.png";
-                    }
+                    $item=$this->changeNumberToData($item);
                 }
 
 //                $users->appends(['tags' => $request['tags']]);
@@ -1624,42 +1131,8 @@ class UserController extends BaseController
 
         foreach ($users as $item)
         {
-            $item->status_followups=$this->userType($this->get_lastFollowupUser($item->id)['status_followups']);
-            $expert=$this->get_user_byID($item->followby_expert);
-            if(!is_null($expert))
-            {
-                $item->followby_expert=$expert->fname." ".$expert->lname;
-            }
-            $item->countFollowup=$this->get_countFollowup($item->id);
-            $item->lastDateFollowup=$this->get_lastFollowupUser($item->id)['date_fa'];
-            $item->quality=$this->get_lastFollowupUser($item->id)['problem'];
-            $item->quality_color=$this->get_lastFollowupUser($item->id)['color'];
-            $item->lastFollowupCourse=$this->get_lastFollowupUser($item->id)['course_id'];
-            $item->lastFollowupCourse=$this->get_coursesByID($item->lastFollowupCourse)['course'];
-            if(is_null($item->personal_image))
-            {
-                $item->personal_image="default-avatar.png";
-            }
-
-            if(!is_null($item->introduced))
-            {
-                if ($this->get_user(NULL, $item->introduced, NULL, NULL, true)->count()>0)
-                {
-                    $item->introduced = $this->get_user(NULL, $item->introduced, NULL, NULL, true)->fname.' '.$this->get_user(NULL, $item->introduced, NULL, NULL, true)->lname ;
-                }
-                else if ($this->get_user($item->introduced, NULL, NULL, NULL, true)->count()>0)
-                {
-                    $item->introduced=$this->get_user($item->introduced, NULL, NULL, NULL, true)->fname.' '.$this->get_user($item->introduced, NULL, NULL, NULL, true)->lname;
-                }
-            }
+            $item=$this->changeNumberToData($item);
         }
-
-//        $users->appends(['q' => $request['q']]);
-//        if(!is_null($request->orderby)&&(!is_null($request->parameter))) {
-//            $users->appends(['orderby'=>$request['orderby']]);
-//            $users->appends(['parameter'=>$request['parameter']]);
-//        }
-
 
         $tags=$this->get_tags();
         $parentCategory=$this->get_category('پیگیری');
@@ -1743,9 +1216,7 @@ class UserController extends BaseController
     //اضافه کردن یوزر توسط سفیر
     public function addIntroducedUser(Request $request)
     {
-
-//        if(preg_match('/^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}$/',$request['tel']))
-//        {
+            $request['tel']=$this->convertPersianNumber($request->tel);
             $this->validate(request(),
             [
                 'fname'         =>'required|persian_alpha|min:3|max:15',
@@ -2002,12 +1473,6 @@ class UserController extends BaseController
             'gettingknow'       =>'nullable|string'
         ]);
 
-//        if(is_null($request->orderby)&&is_null($request->parameter))
-//        {
-//            $request['orderby']='id';
-//            $request['parameter']='desc';
-//        }
-
         if(!is_null($request['user']))
         {
             $user=$request['user'];
@@ -2056,85 +1521,15 @@ class UserController extends BaseController
 
         foreach ($users as $item)
         {
-            //$item->countFollowup=$this->get_countFollowup($item->id);
-            $tmp=followup::where('user_id','=',$item->id)
-                        ->where('flag','=',1)
-                        ->orderby('id','desc')
-                        ->first();//$this->get_followup(NULL,$item->id,NULL,1,'first');
-
-
-            if($tmp->count()>0)
-            {
-                $item->status_followups=$this->userType($this->get_lastFollowupUser($item->id)['status_followups']);
-                $quality=$this->get_problemfollowup($tmp['problemfollowup_id'],NULL,NULL,'first');
-            }
-
-            if(isset($quality) && ($quality->count()>0))
-            {
-                $item->quality=$quality['problem'];
-                $item->quality_color=$quality['color'];
-                $item->lastDateFollowup=$item['date_fa'];
-                $item->lastFollowupCourse=$item['course_id'];
-                $item->countFollowup=$this->get_followup(NULL,$item->id,NULL,NULL,'get')->count();
-            }
-            else
-            {
-                $item->quality=NULL;
-                $item->quality_color=NULL;
-                $item->lastDateFollowup=NULL;
-                $item->lastFollowupCourse=NULL;
-                $item->countFollowup=NULL;
-            }
-
-
-
-
-
-//            $item->status_followups=$this->userType($tmp['status_followups']);
-//            $quality=$this->get_problemfollowup($tmp['problemfollowup_id'],NULL,NULL,'first');
-//            echo "<script>console.log(Q=".$tmp['problemfollowup_id'].");</script>";
-
-//            $item->quality=$quality->problem;
-//            $item->quality_color=$quality['color'];
-//            $item->lastDateFollowup=$tmp['date_fa'];
-//            $item->lastFollowupCourse=$tmp['course_id'];
-//            $item->countFollowup=$this->get_followup(NULL,$item->id,NULL,NULL,'get')->count();
-            $item->created_at = $this->changeTimestampToShamsi($item->created_at);
-            if (!is_null($item->last_login_at)) {
-                $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
-            }
-            $expert=$this->get_user_byID($item->followby_expert);
-            if(!is_null($expert))
-            {
-                $item->followby_expert=$expert->fname." ".$expert->lname;
-            }
-            $item->lastFollowupCourse=$this->get_coursesByID($item->lastFollowupCourse)['course'];
-            if(is_null($item->personal_image))
-            {
-                $item->personal_image="default-avatar.png";
-            }
-            if(!is_null($item->introduced))
-            {
-                if ($this->get_user(NULL, $item->introduced, NULL, NULL, true)->count()>0)
-                {
-                    $item->introduced = $this->get_user(NULL, $item->introduced, NULL, NULL, true)->fname.' '.$this->get_user(NULL, $item->introduced, NULL, NULL, true)->lname ;
-                }
-                else if ($this->get_user($item->introduced, NULL, NULL, NULL, true)->count()>0)
-                {
-                    $item->introduced=$this->get_user($item->introduced, NULL, NULL, NULL, true)->fname.' '.$this->get_user($item->introduced, NULL, NULL, NULL, true)->lname;
-                }
-            }
+            $item=$this->changeNumberToData($item);
         }
 
-
-//        $users->appends(['user' => $request['user'],'categorypeygiri'=>$request['categorypeygiri'],'gettingknow'=>$request['gettingknow']]);
         $tags=$this->get_tags();
         $parentCategory=$this->get_category('پیگیری');
         $usersAdmin=user::orwhere('type','=',2)
                 ->orwhere('type','=',3)
                 ->get();
 
-        //لیست تعداد کاربرها
 
         //لیست تعداد کاربرها
         $statics=$this->get_staticsCountUsers_admin();
@@ -2174,7 +1569,7 @@ class UserController extends BaseController
             {
                 $item['email']=NULL;
             }
-
+            $item['tel']=$this->convertPersianNumber($item->tel);
             $count=user::orwhere('tel','=',$item['tel'])
                         ->when($item['email'],function($query,$item)
                         {
@@ -2220,199 +1615,90 @@ class UserController extends BaseController
     //نمایش اعضا براساس نحوه آشنایی برای ادمین
     public function list_user_gettingknow(Request $request)
     {
-//        $this->validate($request,[
-//            'gettingknow'  =>'required|string'
-//        ]);
-//
-//        $users=$this->get_usersByType(NULL,NULL,true,NULL,['gettingknow',$request['gettingknow']]);
-//        foreach ($users as $item)
-//        {
-//            $item->created_at=$this->changeTimestampToShamsi($item->created_at);
-//            if(!is_null($item->last_login_at))
-//            {
-//                $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
-//            }
-//
-//            $expert=$this->get_user_byID($item->followby_expert);
-//            if(!is_null($expert))
-//            {
-//                $item->followby_expert=$expert->fname." ".$expert->lname;
-//            }
-//
-//            $item->status_followups=$this->userType($this->get_lastFollowupUser($item->id)['status_followups']);
-//            $item->countFollowup=$this->get_countFollowup($item->id);
-//            $item->quality=$this->get_lastFollowupUser($item->id)['problem'];
-//            $item->quality_color=$this->get_lastFollowupUser($item->id)['color'];
-//            $item->lastDateFollowup=$this->get_lastFollowupUser($item->id)['date_fa'];
-//            $item->lastFollowupCourse=$this->get_lastFollowupUser($item->id)['course_id'];
-//            $item->lastFollowupCourse=$this->get_coursesByID($item->lastFollowupCourse)['course'];
-//            $item->insert_user=$this->get_user( NULL,$item->insert_user_id,NULL,NULL,true)['fname']." ".$this->get_user( NULL,$item->insert_user_id,NULL,NULL,true)['lname'];
-//            if(is_null($item->personal_image))
-//            {
-//                $item->personal_image="default-avatar.png";
-//            }
-//
-//            if(!is_null($item->introduced))
-//            {
-//                if ($this->get_user(NULL, $item->introduced, NULL, NULL, true)->count()>0)
-//                {
-//                    $item->introduced = $this->get_user(NULL, $item->introduced, NULL, NULL, true)->fname.' '.$this->get_user(NULL, $item->introduced, NULL, NULL, true)->lname ;
-//                }
-//                else if ($this->get_user($item->introduced, NULL, NULL, NULL, true)->count()>0)
-//                {
-//
-//                    $item->introduced=$this->get_user($item->introduced, NULL, NULL, NULL, true)->fname.' '.$this->get_user($item->introduced, NULL, NULL, NULL, true)->lname;
-//
-//                }
-//            }
-//        }
-//        $tags=$this->get_tags();
-//        $parentCategory=$this->get_category('پیگیری');
-//
-//        if(isset($request['user']))
-//        {
-//            //لیست تعداد کاربرها
-//            $notfollowup = count($this->get_notfollowup_withoutPaginate());
-//            $continuefollowup = count($this->get_continuefollowup_withoutPaginate());
-//            $cancelfollowup = count($this->get_cancelfollowup_withoutPaginate());
-//            $waiting = count($this->get_waiting_withoutPaginate());
-//            $noanswering = count($this->get_noanswering_withoutPaginate());
-//            $students = count($this->get_students_withoutPaginate());
-//            $todayFollowup = count($this->get_todayFollowup_withoutPaginate());
-//            $expireFollowup = $this->get_expireFollowup_withoutPaginate();
-//            $myfollowup = count($this->get_myfollowup_withoutPaginate());
-//            $followedToday = count($this->get_followedToday_withoutPaginate());
-//            $trashuser=count($this->getAll_trashuser_withoutPaginate());
-//
-//
-//        }
-//        else
-//        {
-//            //لیست تعداد کاربرها
-//            $notfollowup = count($this->get_notfollowup_withoutPaginate());
-//            $continuefollowup = count($this->get_continuefollowup_withoutPaginate());
-//            $cancelfollowup = count($this->get_cancelfollowup_withoutPaginate());
-//            $waiting = count($this->get_waiting_withoutPaginate());
-//            $noanswering = count($this->get_noanswering_withoutPaginate());
-//            $students = count($this->get_students_withoutPaginate());
-//            $todayFollowup = count($this->get_todayFollowup_withoutPaginate());
-//            $expireFollowup = $this->get_expireFollowup_withoutPaginate();
-//            $myfollowup = count($this->get_myfollowup_withoutPaginate());
-//            $followedToday = count($this->get_followedToday_withoutPaginate());
-//            $trashuser=count($this->getAll_trashuser_withoutPaginate());
-//        }
-//
-//        $usersAdmin=user::orwhere('type','=',2)
-//            ->orwhere('type','=',3)
-//            ->get();
-//
-//        if(isset($request['user']))
-//        {
-//            $user=$request['user'];
-//        }
-//        else
-//        {
-//            $user="";
-//        }
-//
-//        if(!is_null($request->orderby)&&(!is_null($request->parameter))) {
-//            $users->appends(['orderby'=>$request['orderby']]);
-//            $users->appends(['parameter'=>$request['parameter']]);
-//        }
-//
-//        $users->appends(['list_gettingknow'=>$request['list_gettingknow']]);
-//        return view('panelAdmin.users')
-//            ->with('users',$users)
-//            ->with('tags',$tags)
-//            ->with('parentCategory',$parentCategory)
-//            ->with('usersAdmin',$usersAdmin)
-//            ->with('followedToday',$followedToday)
-//            ->with('myfollowup',$myfollowup)
-//            ->with('todayFollowup',$todayFollowup)
-//            ->with('students',$students)
-//            ->with('noanswering',$noanswering)
-//            ->with('waiting',$waiting)
-//            ->with('cancelfollowup',$cancelfollowup)
-//            ->with('continuefollowup',$continuefollowup)
-//            ->with('notfollowup',$notfollowup)
-//            ->with('user',$user)
-//            ->with('trashuser',$trashuser)
-//            ->with('parameter',$request['parameter']);
+
     }
 
 
     public function export_excel()
     {
         //خروجی اکسل
-        $list=landPage::where('resource','=','کمپین روانشناسان')
+        $list=landPage::where('resource','=','وبینار تمامیت')
+            ->groupby('tel')
             ->get();
 
-        $excel=fastexcel($list)->export('file.xlsx');
+        $excel=fastexcel($list)->export('export.xlsx');
         if($excel)
         {
 //                return Storage::disk('public')->download('file.xlsx');
 //                return response()->download(storage_path("/public/file.xlsx"));
-            return response()->download(public_path('file.xlsx'));
+            return response()->download(public_path('export.xlsx'));
 
         }
 
         foreach ($list as $item)
         {
-            $item->created_at=$this->changeTimestampToShamsi($item->created_at);
-            if(!is_null($item->last_login_at))
-            {
-                $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
-            }
-
-//            $item->status_followups=$this->userType($this->get_lastFollowupUser($item->id)['status_followups']);
-//            $item->countFollowup=$this->get_countFollowup($item->id);
-//            $item->quality=$this->get_lastFollowupUser($item->id)['problem'];
-//            $item->quality_color=$this->get_lastFollowupUser($item->id)['color'];
-//            $item->lastDateFollowup=$this->get_lastFollowupUser($item->id)['date_fa'];
-//            $item->lastFollowupCourse=$this->get_lastFollowupUser($item->id)['course_id'];
-//            $item->lastFollowupCourse=$this->get_coursesByID($item->lastFollowupCourse)['course'];
-//            $item->type=$this->userType($item->type);
-//            $item->insert_user_id=$this->get_user_byID($item->insert_user_id);
-            $item->status_followups=$this->userType($this->get_lastFollowupUser($item->id)['status_followups']);
-            $item->countFollowup=$this->get_countFollowup($item->id);
-            $item->quality=$this->get_lastFollowupUser($item->id)['problem'];
-            $item->quality_color=$this->get_lastFollowupUser($item->id)['color'];
-            $item->lastDateFollowup=$this->get_lastFollowupUser($item->id)['date_fa'];
-            $item->lastFollowupCourse=$this->get_lastFollowupUser($item->id)['course_id'];
-            $item->lastFollowupCourse=$this->get_coursesByID($item->lastFollowupCourse)['course'];
-            $item->type=$this->userType($item->type);
-            $item->insert_user_id=$this->get_user_byID($item->insert_user_id);
-
-
-
-            if(!is_null($item->introduced))
-            {
-                if ($this->get_user(NULL, $item->introduced, NULL, NULL, true)->count()>0)
-                {
-                    $item->introduced = $this->get_user(NULL, $item->introduced, NULL, NULL, true)->fname.' '.$this->get_user(NULL, $item->introduced, NULL, NULL, true)->lname ;
-                }
-                else if ($this->get_user($item->introduced, NULL, NULL, NULL, true)->count()>0)
-                {
-
-                    $item->introduced=$this->get_user($item->introduced, NULL, NULL, NULL, true)->fname.' '.$this->get_user($item->introduced, NULL, NULL, NULL, true)->lname;
-
-                }
-            }
-
-            if(is_null($item->personal_image))
-            {
-                $item->personal_image="default-avatar.png";
-            }
+            $item=$this->changeNumberToData($item);
         }
 
     }
 
 
-
-
-    public function sss()
+    //تبدیل کدهای خارجی به دیتاهای مربوط به خودشون در زمان نمایش کاربرها بر اساس دسته بندی های مختلف
+    public function changeNumberToData($item)
     {
-        dd('aAas');
+        $tmp=$this->get_followup(NULL,$item->id,NULL,1,'first');
+        if($tmp->count()>0)
+        {
+            $item->status_followups=$this->userType($this->get_lastFollowupUser($item->id)['status_followups']);
+            $quality=$this->get_problemfollowup($tmp['problemfollowup_id'],NULL,NULL,'first');
+        }
+
+        if(isset($quality) && ($quality->count()>0))
+        {
+            $item->quality=$quality['problem'];
+            $item->quality_color=$quality['color'];
+            $item->lastDateFollowup=$item['date_fa'];
+            $item->lastFollowupCourse=$item['course_id'];
+            $item->countFollowup=$this->get_followup(NULL,$item->id,NULL,NULL,'get')->count();
+        }
+        else
+        {
+            $item->quality=NULL;
+            $item->quality_color=NULL;
+            $item->lastDateFollowup=NULL;
+            $item->lastFollowupCourse=NULL;
+            $item->countFollowup=NULL;
+        }
+
+
+        $item->created_at = $this->changeTimestampToShamsi($item->created_at);
+        if (!is_null($item->last_login_at)) {
+            $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
+        }
+        $expert=$this->get_user_byID($item->followby_expert);
+        if(!is_null($expert))
+        {
+            $item->followby_expert=$expert->fname." ".$expert->lname;
+        }
+        $item->lastFollowupCourse=$this->get_coursesByID($item->lastFollowupCourse)['course'];
+
+        if(is_null($item->personal_image))
+        {
+            $item->personal_image="default-avatar.png";
+        }
+        if(!is_null($item->introduced))
+        {
+            if ($this->get_user(NULL, $item->introduced, NULL, NULL, true)->count()>0)
+            {
+                $item->introduced = $this->get_user(NULL, $item->introduced, NULL, NULL, true)->fname.' '.$this->get_user(NULL, $item->introduced, NULL, NULL, true)->lname ;
+            }
+            else if ($this->get_user($item->introduced, NULL, NULL, NULL, true)->count()>0)
+            {
+                $item->introduced=$this->get_user($item->introduced, NULL, NULL, NULL, true)->fname.' '.$this->get_user($item->introduced, NULL, NULL, NULL, true)->lname;
+            }
+        }
+
+        return $item;
     }
 
 

@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
+use Faker\Provider\Base;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
-class RegisterController extends Controller
+class RegisterController extends BaseController
 {
     /*
     |--------------------------------------------------------------------------
@@ -49,6 +51,9 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+
+        $data['tel']=$this->convertPersianNumber($data['tel']);
+
         return Validator::make($data, [
             'fname'         => ['persian_alpha','required', 'string', 'max:30'],
             'lname'         => ['persian_alpha','required', 'string', 'max:30'],
@@ -72,6 +77,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
         if(!isset($data['gettingknow']))
         {
             $data['gettingknow']=NULL;
@@ -94,6 +100,8 @@ class RegisterController extends Controller
 
         $data['resource']=NULL;
         $data['detailsresource']=NULL;
+
+        $data['tel']=$this->convertPersianNumber($data['tel']);
 
         return User::create([
             'fname'             => $data['fname'],

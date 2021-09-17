@@ -226,12 +226,19 @@
                             </div>
                         @endif
                     </form>
-                @elseif(($reserve->start_date<$dateNow)&&($reserve->status_reserve==4))
+                @elseif($reserve->status_reserve==4)
                     <div class="alert alert-warning">جلسه کوچینگ شما لغو شده است</div>
                 @else
                     <div class="alert alert-warning">جلسه کوچینک هنوز انجام نشده است</div>
                     @if($reserve->start_date>$dateNow)
-                        <a href="" class="btn btn-danger">لغو جلسه</a>
+                        <form method="POST" action="/booking/{{$reserve->booking_id}}" onsubmit="return confirm('آیا از لغو جلسه اطمینان دارید؟')">
+                            {{csrf_field()}}
+                            {{method_field('PATCH')}}
+                            <input type="hidden" name="status" value="4" />
+                            <button type="submit" class="btn btn-danger">لغو جلسه
+                                <i class="bi bi-x-lg"></i>
+                            </button>
+                        </form>
                     @endif
                 @endif
             </div>

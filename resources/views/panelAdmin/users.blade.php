@@ -213,6 +213,7 @@
                         </thead>
                         <tbody>
                         @foreach($users as $item)
+
                             <tr style="background-color: {{$item->quality_color}}">
                                 <td>
                                     <a href="/admin/user/{{$item->id}}">
@@ -234,7 +235,7 @@
                                         {{$item->tel}}
                                     </a>
                                 </td>
-                                <td>{{$item->insert_user}}</td>
+                                <td>{{$item['insert_user']}}</td>
                                 <td>{{$item->introduced}}</td>
                                 <td>
                                     <a href="/admin/user/{{$item->id}}" class="text-dark d-block">
@@ -253,7 +254,7 @@
                                     {{$item->countFollowup}}
                                 </td>
                                 <td>
-                                    {{$item->lastFollowupCourse}}
+                                    {{$item['lastFollowupCourse']}}
                                 </td>
                                 <td>
                                     <a href="/admin/user/{{$item->id}}" class="text-dark d-block">

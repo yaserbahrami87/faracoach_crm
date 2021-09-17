@@ -17,6 +17,7 @@ use App\message;
 use App\option;
 use App\post;
 use App\problemfollowup;
+use App\reserve;
 use App\settingscore;
 use App\settingsms;
 use App\sms;
@@ -1519,6 +1520,8 @@ class BaseController extends Controller
             });
     }
 
+
+    //ارسال گزارش تعداد کاربرها براساس دسته بندی برای همکاران
     public function get_staticsCountUsers_admin()
     {
         if(Auth::user()->ty==2)
@@ -1564,6 +1567,58 @@ class BaseController extends Controller
 
                 return ($statics);
             }
-
     }
+
+    public function get_reserve($id=NULL,$user_id=NULL,$booking_id=NULL,$type_booking=NULL,$condition=NULL,$status=NULL,$paginate='get')
+    {
+        return reserve::when($id,function ($query) use ($id)
+        {
+            return $query->where('id','=',$id);
+        })
+        ->when($user_id,function ($query) use ($user_id)
+        {
+            return $query->where('user_id','=',$user_id);
+        })
+        ->when($booking_id,function ($query) use ($booking_id)
+        {
+            return $query->where('booking_id','=',$booking_id);
+        })
+        ->when($type_booking,function ($query) use ($type_booking)
+        {
+            return $query->where('type_booking','=',$type_booking);
+        })
+        ->when($condition,function ($query) use ($condition)
+        {
+            return $query->where($condition[0],$condition[1],$condition[2]);
+        })
+        ->when($status,function ($query) use ($status)
+        {
+            return $query->where('status','=',$status);
+        })
+        ->when($paginate=='get',function ($query)
+        {
+            return $query->get();
+        })
+        ->when($paginate=='paginate',function ($query)
+        {
+            return $query->paginate($this->countPage());
+        })
+        ->when($paginate=='first',function ($query)
+        {
+            return $query->first();
+        });
+    }
+
+    public function convertPersianNumber($string) {
+        $persian = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+        $arabic = ['٩', '٨', '٧', '٦', '٥', '٤', '٣', '٢', '١','٠'];
+
+        $num = range(0, 9);
+        $convertedPersianNums = str_replace($persian, $num, $string);
+        $englishNumbersOnly = str_replace($arabic, $num, $convertedPersianNums);
+
+        return $englishNumbersOnly;
+    }
+
+
 }
