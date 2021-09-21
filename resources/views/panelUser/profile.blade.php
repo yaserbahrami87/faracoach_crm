@@ -158,30 +158,34 @@
                         <div class="col-md-6 px-1">
                             <div class="form-group">
                                 <label>نحوه آشنایی</label>
-                                <select id="gettingknow" class="form-control p-0 @if(strlen($user->gettingknow)==0) is-invalid  @else is-valid  @endif  @error('gettingknow') is-invalid @enderror" name="gettingknow">
+
+                                <select id="gettingknow_parent" class="form-control p-0 @if(strlen($user->gettingknow)==0) is-invalid  @else is-valid  @endif  @error('gettingknow') is-invalid @enderror" name="gettingKnow_parent">
                                     <option selected disabled>انتخاب کنید</option>
-                                    @foreach($gettingKnow as $item)
-                                        <option value="{{$item->id}}"  {{ $user->gettingknow ==$item->id ? 'selected='.'"'.'selected'.'"' : '' }} >{{$item->category}}</option>
+                                    @foreach($gettingKnow_parent_list as $item)
+                                        <option value="{{$item->id}}"  {{ $user->gettingknow_parent_user ==$item->id ? 'selected='.'"'.'selected'.'"' : '' }} >{{$item->category}}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
 
-                        @if(!is_null( $user->gettingknow_child))
+
+                        @if(!is_null($user->gettingknow))
                             <div class="col-md-6 px-1" id="gettingknow2" >
                                 <div class="form-group">
                                     <label>عنوان آشنایی</label>
-                                    <select id="gettingknow_child" class="form-control p-0 @if(strlen($user->gettingknow_child)==0) is-invalid  @else is-valid  @endif  @error('gettingknow_child') is-invalid @enderror" name="gettingknow_child">
+                                    <select id="gettingknow" class="form-control p-0 @if(strlen($user->gettingknow)==0) is-invalid  @else is-valid  @endif  @error('gettingknow') is-invalid @enderror" name="gettingknow">
                                         <option selected disabled>انتخاب کنید</option>
-                                        <option selected value="{{$user->gettingknow_child->id}}">{{$user->gettingknow_child->category}}</option>
+                                        @foreach($gettingKnow_child_list as $item)
+                                            <option value="{{$item->id}}"  {{$user->gettingknow==$item->id ? 'selected='.'"'.'selected'.'"' : '' }}>{{$item->category}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                         @else
-                            <div class="col-md-6 px-1" id="gettingknow2" style="display: none">
+                            <div class="col-md-6 px-1" id="gettingknow2">
                                 <div class="form-group">
                                     <label>عنوان آشنایی</label>
-                                    <select id="gettingknow_child" class="form-control p-0 @if(strlen($user->gettingknow_child)==0) is-invalid  @else is-valid  @endif  @error('gettingknow_child') is-invalid @enderror" name="gettingknow_child">
+                                    <select id="gettingknow" class="form-control p-0 @if(strlen($user->gettingknow)==0) is-invalid  @else is-valid  @endif  @error('gettingknow') is-invalid @enderror" name="gettingknow">
                                         <option selected disabled>انتخاب کنید</option>
 
                                     </select>
@@ -334,7 +338,7 @@
 @section('footerScript')
 
     <script>
-        $("#gettingknow").change(function()
+        $("#gettingknow_parent").change(function()
         {
             var loading='<div class="col-12 text-center"><div class="spinner-border text-primary text-center" role="status"><span class="sr-only">Loading...</span></div></div>';
             //$("#gettingknow2").html(loading);
@@ -345,7 +349,7 @@
                 success:function(data)
                 {
                     $("#gettingknow2").css('display','flex');
-                    $("#gettingknow_child").html(data);
+                    $("#gettingknow").html(data);
                 }
             });
         })

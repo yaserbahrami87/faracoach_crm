@@ -389,11 +389,13 @@ class UserController extends BaseController
 
         if(!is_null($user->gettingknow))
         {
-            $user->gettingknow_child=$this->get_categoryGettingknow($user->gettingknow_child,NULL,NULL,NULL,'first');
+            $user->gettingknow_parent_user=$this->get_categoryGettingknow($user->gettingknow,NULL,NULL,NULL,'first')->parent_id;
+            $condition=['parent_id','=',$user->gettingknow_parent_user];
+            $gettingKnow_child_list=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
         }
         else
         {
-            $user->gettingknow_child=NULL;
+            $gettingKnow_child_list=NULL;
         }
 
 
@@ -401,14 +403,15 @@ class UserController extends BaseController
         $city=$this->city($user->city);
 
         $condition=['parent_id','=','0'];
-        $gettingKnow=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
+        $gettingKnow_parent_list=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
 
         return view ('panelUser.profile')
                         ->with('user',$user)
                         ->with('countIntroducedUser',$countIntroducedUser)
                         ->with('resourceIntroduce',$resourceIntroduce)
                         ->with('states',$states)
-                        ->with('gettingKnow',$gettingKnow)
+                        ->with('gettingKnow_parent_list',$gettingKnow_parent_list)
+                        ->with('gettingKnow_child_list',$gettingKnow_child_list)
                         ->with('city',$city);
     }
 
