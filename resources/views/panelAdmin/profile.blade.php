@@ -3,6 +3,7 @@
 @section('headerScript')
     <link href="{{asset('/css/kamadatepicker.min.css')}}" rel="stylesheet" />
     <link href="{{asset('/css/timepicker.min.css')}}" rel="stylesheet" />
+
 @endsection
 
 @section('rowcontent')
@@ -377,18 +378,41 @@
                         <div class="col-md-6 px-1">
                             <div class="form-group">
                                 <label>نحوه آشنایی</label>
-                                <select id="gettingknow" class="form-control p-0 @if(strlen($user->gettingknow)==0) is-invalid  @else is-valid  @endif  @error('gettingknow') is-invalid @enderror" name="gettingknow">
+
+                                <select id="gettingknow_parent" class="form-control p-0 @if(strlen($user->gettingknow)==0) is-invalid  @else is-valid  @endif  @error('gettingknow') is-invalid @enderror" name="gettingKnow_parent">
                                     <option selected disabled>انتخاب کنید</option>
-                                    <option {{ $user->gettingknow =="اینستاگرام" ? 'selected='.'"'.'selected'.'"' : '' }}>اینستاگرام</option>
-                                    <option {{ $user->gettingknow =="تلگرام" ? 'selected='.'"'.'selected'.'"' : '' }}>تلگرام</option>
-                                    <option {{ $user->gettingknow =="تبلیغاتی محیطی" ? 'selected='.'"'.'selected'.'"' : '' }}>تبلیغاتی محیطی</option>
-                                    <option {{ $user->gettingknow =="تبلیغات فضای مجازی" ? 'selected='.'"'.'selected'.'"' : '' }}>تبلیغات فضای مجازی</option>
-                                    <option {{ $user->gettingknow =="پکیج رایگان" ? 'selected='.'"'.'selected'.'"' : '' }}>پکیج رایگان</option>
-                                    <option {{ $user->gettingknow =="واتساپ" ? 'selected='.'"'.'selected'.'"' : '' }}>واتساپ</option>
-                                    <option {{ $user->gettingknow =="موتورهای جستجو" ? 'selected='.'"'.'selected'.'"' : '' }}>موتورهای جستجو</option>
+                                    @foreach($gettingKnow_parent_list as $item)
+                                        <option value="{{$item->id}}"  {{ $user->gettingknow_parent_user ==$item->id ? 'selected='.'"'.'selected'.'"' : '' }} >{{$item->category}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
+
+
+                        @if(!is_null($user->gettingknow))
+                            <div class="col-md-6 px-1" id="gettingknow2" >
+                                <div class="form-group">
+                                    <label>عنوان آشنایی</label>
+                                    <select id="gettingknow" class="form-control p-0 @if(strlen($user->gettingknow)==0) is-invalid  @else is-valid  @endif  @error('gettingknow') is-invalid @enderror" name="gettingknow">
+                                        <option selected disabled>انتخاب کنید</option>
+                                        @foreach($gettingKnow_child_list as $item)
+                                            <option value="{{$item->id}}"  {{$user->gettingknow==$item->id ? 'selected='.'"'.'selected'.'"' : '' }}>{{$item->category}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        @else
+                            <div class="col-md-6 px-1" id="gettingknow2">
+                                <div class="form-group">
+                                    <label>عنوان آشنایی</label>
+                                    <select id="gettingknow" class="form-control p-0 @if(strlen($user->gettingknow)==0) is-invalid  @else is-valid  @endif  @error('gettingknow') is-invalid @enderror" name="gettingknow">
+                                        <option selected disabled>انتخاب کنید</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                        @endif
+
                         <div class="col-md-6 px-1">
                             <div class="form-group">
                                 <label>معرف</label>
@@ -520,5 +544,21 @@
             jQuery.noConflict();
             jQuery('#time_fa').timepicker();
         });
+
+        $("#gettingknow_parent").change(function()
+        {
+            var loading='<div class="col-12 text-center"><div class="spinner-border text-primary text-center" role="status"><span class="sr-only">Loading...</span></div></div>';
+            //$("#gettingknow2").html(loading);
+            var content=$(this).val();
+            $.ajax({
+                type:'GET',
+                url:"/showListChildGettingKnow/"+content,
+                success:function(data)
+                {
+                    //$("#gettingknow2").css('display','flex');
+                    $("#gettingknow").html(data);
+                }
+            });
+        })
     </script>
 @endsection

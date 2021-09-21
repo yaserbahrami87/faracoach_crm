@@ -122,16 +122,16 @@ class LandPageController extends BaseController
         {
             if(!is_null($request->count))
             {
-                $msg=$landPage->lname." عزیز \n".'میزبان شما و '.$request->count.' میهمان ارزشمندتان در "وبینار تمامیت" خواهیم بود'."لینک اختصاصی جهت معرفی میهمانان: \n".asset('/integrity?q='.$landPage->id)."\n فراکوچ-مدیران ایران ";
+                $msg=$landPage->lname." عزیز \n".'میزبان شما و '.$request->count." میهمان ارزشمندتان در 'وبینار تمامیت' خواهیم بود\n"."لینک وبینار متعاقبا ارسال خواهد شد\n"."لینک اختصاصی جهت معرفی میهمانان: \n".asset('/integrity?q='.$landPage->id)."\n فراکوچ-مدیران ایران ";
             }
             else
             {
-                $msg=$landPage->lname." عزیز \n".'میزبان شما و میهمان ارزشمندتان در "وبینار تمامیت" خواهیم بود'."لینک اختصاصی جهت معرفی میهمانان: \n".asset('/integrity?q='.$landPage->id)."\n فراکوچ-مدیران ایران ";
+                $msg=$landPage->lname." عزیز \n".'میزبان شما و میهمان ارزشمندتان در "وبینار تمامیت" خواهیم بود'."لینک وبینار متعاقبا ارسال خواهد شد\n"."لینک اختصاصی جهت معرفی میهمانان: \n".asset('/integrity?q='.$landPage->id)."\n فراکوچ-مدیران ایران ";
             }
 
 
             $this->sendSms($landPage->tel,$msg);
-            alert()->success('اطلاعات با موفقیت ثبت شد')->persistent('بستن');
+            alert()->success("رزرو وبینار شما با موفقیت انجام شد\n یک روز قبل از وبینار لینک وبینار برای شما ارسال میگردد.")->persistent("بستن");
         }
         else
         {

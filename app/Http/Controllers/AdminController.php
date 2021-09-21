@@ -40,7 +40,6 @@ class AdminController extends BaseController
     {
         if(Gate::allows('isAdmin')||Gate::allows('isEducation'))
         {
-
             $notFollowup=count($this->get_notfollowup_withoutPaginate());
             $follow=$this->get_usersByType(11,Auth::user()->id)->count();
             $cancel=$this->get_usersByType(12,Auth::user()->id)->count();
@@ -246,7 +245,7 @@ class AdminController extends BaseController
             if(!is_null( $checkTimeCode))
             {
                 $date=($checkTimeCode['created_at']);
-                $checkDays=$date->addMinutes(10);
+                $checkDays=$date->addMinutes(2);
                 if($checkDays>Carbon::now())
                 {
                     $verifyStatus=true;
@@ -410,8 +409,9 @@ class AdminController extends BaseController
         $gettingknow=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$tmp);
         foreach ($gettingknow as $item)
         {
-
             //dd($this->get_categoryGettingknow(2,NULL,NULL,NULL,'first'));
+            $parent=$this->get_categoryGettingknow($item->parent_id,NULL,NULL,NULL,'first');
+            $item->parent=$parent->category;
             if($item->status==1)
             {
                 $item->status="نمایش";
@@ -421,11 +421,6 @@ class AdminController extends BaseController
                 $item->status="عدم نمایش";
             }
         }
-
-
-
-
-
 
         return view('panelAdmin.settings')
                     ->with('problemfollowup',$problemfollowup)

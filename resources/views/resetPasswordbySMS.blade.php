@@ -22,6 +22,13 @@
                         @endif
                             <form method="POST" action="/password/reset/update">
                                 {{csrf_field()}}
+                                <input type="hidden" value="{{$tel}}" name="tel" />
+                                <div class="form-group row">
+                                    <label for="code" class="col-md-4 col-form-label text-md-right">{{ __('کد ارسال شده:') }}</label>
+                                    <div class="col-md-6">
+                                        <input id="code" type="text" class="form-control" name="code" required autocomplete="/password/sendcode">
+                                    </div>
+                                </div>
                                 <div class="form-group row">
                                     <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('رمز عبور:') }}</label>
 
@@ -44,18 +51,12 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group row">
-                                    <label for="code" class="col-md-4 col-form-label text-md-right">{{ __('کد ارسال شده:') }}</label>
 
-                                    <div class="col-md-6">
-                                        <input id="code" type="text" class="form-control" name="code" required autocomplete="/password/sendcode">
-                                    </div>
-                                </div>
 
                                 <div class="form-group row mb-0">
                                     <div class="col-md-6 offset-md-4">
                                         <button type="submit" class="btn btn-primary">
-                                            {{ __('ارسال کد') }}
+                                            {{ __('بروزرسانی') }}
                                         </button>
                                     </div>
                                 </div>

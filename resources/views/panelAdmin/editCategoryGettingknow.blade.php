@@ -15,7 +15,7 @@
                     <option disabled="disabled  p-0" selected>انتخاب کنید</option>
                     <option value="NULL" >والد</option>
                     @foreach($categoryGettingknow as $item)
-                        <option value="{{$item->id}}" >{{$item->category}}</option>
+                        <option value="{{$item->id}}" @if($category_gettingknow->parent_id==$item->id) selected @endif >{{$item->category}}</option>
                     @endforeach
                 </select>
             </div>

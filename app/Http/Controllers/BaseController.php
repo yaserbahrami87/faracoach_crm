@@ -205,7 +205,6 @@ class BaseController extends Controller
     {
         return User::when($tel,function($query,$tel)
             {
-
                 return $query->where('tel','=',$tel);
             })
             ->when($id, function ($query,$id)
@@ -1424,7 +1423,7 @@ class BaseController extends Controller
         })
         ->when($parent_id,function($query) use ($parent_id)
         {
-            return $query->where('parent_id','=',$parent_id);
+            return $query->where('parent_i','=',$parent_id);
         })
         ->when($condition,function($query) use ($condition)
         {
@@ -1434,13 +1433,13 @@ class BaseController extends Controller
         {
             return $query->get();
         })
-        ->when($paginate=='first',function($query)use ($paginate)
-        {
-            return $query->first();
-        })
-        ->when($paginate=='paginate',function($query)use ($paginate)
+        ->when($paginate=='paginate',function($query)
         {
             return $query->paginate($this->countPage());
+        })
+        ->when($paginate=='first',function($query)
+        {
+            return $query->first();
         });
     }
 
@@ -1609,6 +1608,8 @@ class BaseController extends Controller
         });
     }
 
+
+    //تبدیل اعداد فارسی به انگلیسی
     public function convertPersianNumber($string) {
         $persian = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
         $arabic = ['٩', '٨', '٧', '٦', '٥', '٤', '٣', '٢', '١','٠'];
@@ -1618,6 +1619,44 @@ class BaseController extends Controller
         $englishNumbersOnly = str_replace($arabic, $num, $convertedPersianNums);
 
         return $englishNumbersOnly;
+    }
+
+
+    //دریافت دسته بندی و زیر مجمومعه های نحوه های آشنایی
+    public function get_category_gettingknows($id=NULL,$category=NULL,$status=NULL,$parent_id=NULL,$content=NULL,$paginate='get')
+    {
+        category_gettingknow::when($id,function($query) use ($id)
+        {
+            return $query->where('id','=',$id);
+        })
+        ->when($category, function ($query) use ($category)
+        {
+            return $query->where('category','=',$category);
+        })
+        ->when($status,function($query) use ($status)
+        {
+            return $query->where('status','=',$status);
+        })
+        ->when($parent_id,function($query) use ($parent_id)
+        {
+            return $query->where('parent_id','=',$parent_id);
+        })
+        ->when($content,function ($query) use ($content)
+        {
+            return $query->where($content[0],$content[1],$content[2]);
+        })
+        ->when($paginate=='get',function($query)
+        {
+            return $query->get();
+        })
+        ->when($paginate=='paginate',function($query)
+        {
+            return $query->paginate($this->countPage());
+        })
+        ->when($paginate=='first',function($query)
+        {
+            return $query->first();
+        });
     }
 
 

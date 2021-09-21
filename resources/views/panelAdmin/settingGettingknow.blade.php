@@ -29,7 +29,7 @@
                             {{$item->category}}
                         </td>
                         <td>
-
+                            {{$item->parent}}
                         </td>
                         <td>
                             {{$item->status}}

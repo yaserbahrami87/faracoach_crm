@@ -58,7 +58,7 @@
                 <div >
                     <img src="{{asset('/images/int.png')}}" target="_blank" class="img-fluid img-thumbnail " id="banner" />
                     <div class="text-center title mt-3">
-                        <a href="#form" class="btn btn-success btn-block btn-lg mb-5 mt-5" style="font-size: 30px">فرم ثبت نام</a>
+                        <a href="#form" class="btn btn-success btn-block btn-lg mb-5 mt-5" style="font-size: 30px">فرم ثبت نام - کلیک کنید</a>
                         <h1>وبینار تمامیت</h1>
                     </div>
                     <p class="d-inline">
@@ -66,7 +66,6 @@
                         <br/>
                         آیا میدانستید تمامیت ، در کنار منابع چهارگانه سازمانها، بعنوان یکی از مهمترین عوامل موفقیت یا عدم موفقیت سازمانها و برندهاست؟
                         <br/>
-
                     </p>
                     <p class="d-inline" style="font-size: 20px">آیا می‌دانستید،</p>
                     <p class="d-inline font-weight-bold" style="font-size: 20px"> مهمترین عامل برای ساختن پرسنال برند </p>

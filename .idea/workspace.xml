@@ -24,13 +24,29 @@
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BookingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BookingController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CategoryGettingknowController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CategoryGettingknowController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/LandPageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/LandPageController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReserveController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReserveController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/VerifyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/VerifyController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/export.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/public/export.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/register.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/coach.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/coach.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/landeTamamiat.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/landeTamamiat.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/editCategoryGettingknow.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/editCategoryGettingknow.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/profile.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/registerUser.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/registerUser.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/settingGettingknow.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/settingGettingknow.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/users.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/users.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/showReserveUser.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/showReserveUser.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/cardBox.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/cardBox.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/profile.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/resetPasswordbySMS.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/resetPasswordbySMS.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -640,7 +656,15 @@
       <workItem from="1631774808372" duration="9630000" />
       <workItem from="1631814749934" duration="9747000" />
       <workItem from="1631867759674" duration="3267000" />
-      <workItem from="1631880546753" duration="8170000" />
+      <workItem from="1631880546753" duration="8848000" />
+      <workItem from="1631898145016" duration="11629000" />
+      <workItem from="1631938846476" duration="16604000" />
+      <workItem from="1631981170831" duration="1865000" />
+      <workItem from="1632026982016" duration="13021000" />
+      <workItem from="1632079673970" duration="3299000" />
+      <workItem from="1632110373813" duration="10549000" />
+      <workItem from="1632163629830" duration="8458000" />
+      <workItem from="1632198421328" duration="3295000" />
     </task>
     <servers />
   </component>
@@ -672,14 +696,18 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="413" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1629824587918" />
+    <state width="499" height="446" key="SwitcherDM" timestamp="1632028641588">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="499" height="446" key="SwitcherDM/0.0.1366.728@0.0.1366.728" timestamp="1632028641588" />
     <state x="339" y="162" key="run.anything.popup" timestamp="1631648462505">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1631648462505" />
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1631896070651">
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1632201588270">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1631896070651" />
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1632201588270" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

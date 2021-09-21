@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\category_gettingknow;
 use App\followup;
 use App\landPage;
 use App\User;
@@ -103,11 +104,8 @@ class UserController extends BaseController
             $usersAdmin=user::orwhere('type','=',2)
                 ->orwhere('type','=',3)
                 ->get();
-
+            // دریافت تعداد کاربرها بر اساس دسته بندی ها
             $statics=$this->get_staticsCountUsers_admin();
-
-
-
 
             foreach ($users as $item)
             {
@@ -269,7 +267,12 @@ class UserController extends BaseController
     public function showRegister()
     {
         $settingsms=$this->get_settingsmsByType(2);
+
+        $condition=['parent_id','=','0'];
+        $gettingKnow=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
+
         return view('panelAdmin.registerUser')
+                    ->with('gettingKnow',$gettingKnow)
                     ->with('settingsms',$settingsms);
 
     }
@@ -278,18 +281,19 @@ class UserController extends BaseController
     {
         $request['tel']=$this->convertPersianNumber($request->tel);
         $this->validate($request, [
-            'fname'         => ['nullable','persian_alpha', 'string', 'max:30'],
-            'lname'         => ['nullable','persian_alpha', 'string', 'max:30'],
-            'email'         => ['nullable', 'string', 'email', 'max:150', 'unique:users'],
-            'sex'           => ['required','numeric'],
-            'tel'           => ['required','iran_mobile','unique:users'],
-            'password'      => ['required', 'string', 'confirmed'],
-            'tel_verified'  => ['required','boolean'],
-            'introduced'    => ['nullable','numeric'],
-            'gettingknow'   => ['nullable','persian_alpha'],
-            'organization'  => ['nullable','persian_alpha'],
-            'jobside'       => ['nullable','persian_alpha'],
-            'type'          => ['required','string']
+            'fname'             => ['nullable','persian_alpha', 'string', 'max:30'],
+            'lname'             => ['nullable','persian_alpha', 'string', 'max:30'],
+            'email'             => ['nullable', 'string', 'email', 'max:150', 'unique:users'],
+            'sex'               => ['required','numeric'],
+            'tel'               => ['required','iran_mobile','unique:users'],
+            'password'          => ['required', 'string', 'confirmed'],
+            'tel_verified'      => ['required','boolean'],
+            'introduced'        => ['nullable','numeric'],
+            'gettingknow'       => ['nullable','numeric'],
+            'gettingknow_child' => ['nullable','numeric'],
+            'organization'      => ['nullable','persian_alpha'],
+            'jobside'           => ['nullable','persian_alpha'],
+            'type'              => ['required','string']
         ]);
 
         if(!isset($request['gettingknow']))
@@ -312,6 +316,7 @@ class UserController extends BaseController
             'password'          => Hash::make($request['password']),
             'introduced'        => $request['introduced'],
             'gettingknow'       => $request['gettingknow'],
+            'gettingknow_child' => $request['gettingknow_child'],
             'insert_user_id'    =>Auth::user()->id,
             'organization'      => $request['organization'],
             'jobside'           => $request['jobside'],
@@ -383,14 +388,29 @@ class UserController extends BaseController
 
         $states=$this->states();
 
+
+        if(!is_null($user->gettingknow))
+        {
+            $user->gettingknow_child=$this->get_categoryGettingknow($user->gettingknow_child,NULL,NULL,NULL,'first');
+        }
+        else
+        {
+            $user->gettingknow_child=NULL;
+        }
+
+
         //انتخاب شهر براساس کد
         $city=$this->city($user->city);
+
+        $condition=['parent_id','=','0'];
+        $gettingKnow=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
 
         return view ('panelUser.profile')
                         ->with('user',$user)
                         ->with('countIntroducedUser',$countIntroducedUser)
                         ->with('resourceIntroduce',$resourceIntroduce)
                         ->with('states',$states)
+                        ->with('gettingKnow',$gettingKnow)
                         ->with('city',$city);
     }
 
@@ -413,9 +433,9 @@ class UserController extends BaseController
                         ->where('followups.user_id','=',$user)
                         ->orderby('followups.id','desc')
                         ->get();
+
         foreach ($followUps as $item)
         {
-
             $admin_Followup=User::where('id','=',$item->insert_user_id)
                                 ->first();
             $item->insert_user_id=$admin_Followup->fname." ".$admin_Followup->lname;
@@ -449,6 +469,19 @@ class UserController extends BaseController
 
         //مقدار یوزر با توجه به دستور زیر مقدار ورودی تابع با مقدار خروجی تقییر میکند
         $user=User::find($user);
+
+        if(!is_null($user->gettingknow))
+        {
+            $user->gettingknow_parent_user=$this->get_categoryGettingknow($user->gettingknow,NULL,NULL,NULL,'first')->parent_id;
+            $condition=['parent_id','=',$user->gettingknow_parent_user];
+            $gettingKnow_child_list=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
+        }
+        else
+        {
+            $gettingKnow_child_list=NULL;
+        }
+
+
 
         if (strlen($user->personal_image) == 0) {
             $user->personal_image = "default-avatar.png";
@@ -492,6 +525,8 @@ class UserController extends BaseController
         }
 
         $states = $this->states();
+
+
 
         $city = NULL;
         if (strlen($user->city) > 0) {
@@ -560,6 +595,11 @@ class UserController extends BaseController
         }
 
 
+        $condition=['parent_id','=','0'];
+        $gettingKnow_parent_list=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
+
+
+
 
         return view('panelAdmin.profile')
                     ->with('user',$user)
@@ -585,6 +625,8 @@ class UserController extends BaseController
                     ->with('courses',$courses)
                     ->with('scoreIntroducedUser',$scoreIntroducedUser)
                     ->with('SuccessIntroduced',$SuccessIntroduced)
+                    ->with('gettingKnow_child_list',$gettingKnow_child_list)
+                    ->with('gettingKnow_parent_list',$gettingKnow_parent_list)
                     ->with('scoreTelverify',$scoreTelverify);
 
     }
@@ -634,7 +676,8 @@ class UserController extends BaseController
                     'education_image'   =>'nullable|mimes:jpeg,jpg,bmp,png|max:600',
                     'resume'            =>'nullable|mimes:docx,doc,pdf|max:1024',
                     'email'             =>'nullable|email|',
-                    'gettingknow'       =>'nullable|string',
+                    'gettingknow'       =>'nullable|numeric',
+                    'gettingknow_child' =>'nullable|numeric',
                     'introduced'        =>'nullable|numeric',
                     'telegram'          =>'nullable|max:50|regex:/^(?=[a-zA-Z0-9._]{3,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/u',
                     'instagram'         =>'nullable|max:50|regex:/^(?=[a-zA-Z0-9._]{3,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/u',
@@ -734,19 +777,9 @@ class UserController extends BaseController
     {
         if(isset($user))
         {
-
             if($user->id!=Auth::user()->id)
             {
-
-                $user=user::leftjoin('followups','users.id','=','followups.user_id')
-                        ->where('users.id','=',$user->id)
-                        ->get();
-                foreach ($user as $item)
-                {
-                    $status=$item->delete();
-                    dd($item);
-                }
-
+                $status=$user->delete();
 
                 if($status)
                 {
@@ -800,70 +833,70 @@ class UserController extends BaseController
     {
         $dateNow=$this->dateNow;
 
-        if(Auth::user()->type==2)
-        {
-                switch ($request['categoryUsers']) {
-                    case '0':
-                        return redirect('/admin/users/');
-                        break;
-                    case 'lead':
-                        $users = user::where('type','=',-1)
-                            ->orderby('id','desc')
-//                                ->paginate($this->countPage());
-                            ->get();
-                        break;
-                    case 'notfollowup':
-                        $users = user::where('type','=',1)
-                            ->orderby('id','desc')
-//                            ->paginate($this->countPage());
-                            ->get();
-                        break;
-                    case 'continuefollowup':
-                        $users = $this->get_usersByType(11,Auth::user()->id);
-                        break;
-                    case 'cancelfollowup':
-                        $users = $this->get_usersByType(12,Auth::user()->id);
-                        break;
-                    case 'waiting' :
-                        $users =$users = $this->get_usersByType(13,Auth::user()->id);
-                        break;
-                    case 'noanswering':
-                        $users = $this->get_usersByType(14,Auth::user()->id);
-                        break;
-                    case 'students':
-                        $users = $this->get_usersByType(20,Auth::user()->id);
-                        break;
-                    case 'todayFollowup':
-                        $users = $this->get_todayFollowup();
-                        break;
-                    case 'expireFollowup':
-                        $users = $this->get_expireFollowup();
-                        break;
-                    case 'myfollowup':
-                        $users =$this->get_usersByType(NULL,NULL,NULL,NULL,['followups.insert_user_id',Auth::user()->id]);
-                        break;
-
-                    case 'followedToday':
-                        $users = User::join('followups', 'users.id', '=', 'followups.user_id')
-                            ->where('date_fa', '=', $dateNow)
-                            ->where('followby_expert', '=', $request['user'])
-                            ->select('users.*')
-                            ->groupby('users.id')
-                            ->orderby('date_fa', 'desc')
-//                            ->paginate($this->countPage());
-                            ->get();
-                        break;
-                    case 'trashuser':
-                        $users=$this->getAll_trashuser();
-                            break;
-                    default:
-                        return redirect('/admin/users/');
-                        break;
-                }
-                $statics=$this->get_staticsCountUsers_admin();
-        }
-        else
-        {
+//        if(Auth::user()->type==2)
+//        {
+//                switch ($request['categoryUsers']) {
+//                    case '0':
+//                        return redirect('/admin/users/');
+//                        break;
+//                    case 'lead':
+//                        $users = user::where('type','=',-1)
+//                            ->orderby('id','desc')
+////                                ->paginate($this->countPage());
+//                            ->get();
+//                        break;
+//                    case 'notfollowup':
+//                        $users = user::where('type','=',1)
+//                            ->orderby('id','desc')
+////                            ->paginate($this->countPage());
+//                            ->get();
+//                        break;
+//                    case 'continuefollowup':
+//                        $users = $this->get_usersByType(11,Auth::user()->id);
+//                        break;
+//                    case 'cancelfollowup':
+//                        $users = $this->get_usersByType(12,Auth::user()->id);
+//                        break;
+//                    case 'waiting' :
+//                        $users =$users = $this->get_usersByType(13,Auth::user()->id);
+//                        break;
+//                    case 'noanswering':
+//                        $users = $this->get_usersByType(14,Auth::user()->id);
+//                        break;
+//                    case 'students':
+//                        $users = $this->get_usersByType(20,Auth::user()->id);
+//                        break;
+//                    case 'todayFollowup':
+//                        $users = $this->get_todayFollowup();
+//                        break;
+//                    case 'expireFollowup':
+//                        $users = $this->get_expireFollowup();
+//                        break;
+//                    case 'myfollowup':
+//                        $users =$this->get_usersByType(NULL,Auth::user()->id);
+//                        break;
+//
+//                    case 'followedToday':
+//                        $users = User::join('followups', 'users.id', '=', 'followups.user_id')
+//                            ->where('date_fa', '=', $dateNow)
+//                            ->where('followby_expert', '=', $request['user'])
+//                            ->select('users.*')
+//                            ->groupby('users.id')
+//                            ->orderby('date_fa', 'desc')
+////                            ->paginate($this->countPage());
+//                            ->get();
+//                        break;
+//                    case 'trashuser':
+//                        $users=$this->getAll_trashuser();
+//                            break;
+//                    default:
+//                        return redirect('/admin/users/');
+//                        break;
+//                }
+//                $statics=$this->get_staticsCountUsers_admin();
+//        }
+//        else
+//        {
             switch ($request['categoryUsers'])
             {
                 case '0':
@@ -920,8 +953,8 @@ class UserController extends BaseController
                     break;
             }
 
-            $statics=$this->get_staticsCountUsers_admin();
-        }
+                    $statics=$this->get_staticsCountUsers_admin();
+//        }
 
 
 
@@ -1634,11 +1667,15 @@ class UserController extends BaseController
             return response()->download(public_path('export.xlsx'));
 
         }
-
-        foreach ($list as $item)
+        else
         {
-            $item=$this->changeNumberToData($item);
+            return back();
         }
+
+//        foreach ($list as $item)
+//        {
+//            $item=$this->changeNumberToData($item);
+//        }
 
     }
 
@@ -1653,12 +1690,13 @@ class UserController extends BaseController
             $quality=$this->get_problemfollowup($tmp['problemfollowup_id'],NULL,NULL,'first');
         }
 
+
         if(isset($quality) && ($quality->count()>0))
         {
             $item->quality=$quality['problem'];
             $item->quality_color=$quality['color'];
-            $item->lastDateFollowup=$item['date_fa'];
-            $item->lastFollowupCourse=$item['course_id'];
+            $item->lastDateFollowup=$tmp['date_fa'];
+            $item->lastFollowupCourse=$tmp['course_id'];
             $item->countFollowup=$this->get_followup(NULL,$item->id,NULL,NULL,'get')->count();
         }
         else
@@ -1698,7 +1736,39 @@ class UserController extends BaseController
             }
         }
 
+
+        if(!is_null($item->insert_user_id))
+        {
+
+            $item->insert_user = $this->get_user(NULL, $item->insert_user_id, NULL, NULL, true)->fname.' '.$this->get_user(NULL, $item->insert_user_id, NULL, NULL, true)->lname ;
+        }
+
         return $item;
+    }
+
+    public function test()
+    {
+        $users=user::get();
+        foreach ($users as $item)
+        {
+            $category=category_gettingknow::where('category','=',$item->gettingknow)
+                                    ->first();
+            if(!is_null($category))
+            {
+//                if($category->parent_id==0)
+//                {
+                    $item->gettingknow=$category->id;
+//                }
+//                else
+//                {
+//                    $item->gettingknow=$category->parent_id;
+//                    $item->gettingknow_child=$category->id;
+//                }
+
+                $item->save();
+            }
+
+        }
     }
 
 

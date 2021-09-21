@@ -155,4 +155,18 @@ class CategoryGettingknowController extends BaseController
 
         return back();
     }
+
+    public function showListChild($id)
+    {
+        $category=category_gettingknow::where('status','=',1)
+                                ->where('parent_id','=',$id)
+
+                                ->get();
+
+        echo "<option disabled selected>انتخاب کنید</option>";
+        foreach ($category as $item)
+        {
+            echo "<option value='$item->id'>".$item->category."</option>";
+        }
+    }
 }

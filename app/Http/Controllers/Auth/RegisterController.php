@@ -55,17 +55,18 @@ class RegisterController extends BaseController
         $data['tel']=$this->convertPersianNumber($data['tel']);
 
         return Validator::make($data, [
-            'fname'         => ['persian_alpha','required', 'string', 'max:30'],
-            'lname'         => ['persian_alpha','required', 'string', 'max:30'],
-            'sex'           => ['required','boolean'],
-            'email'         => ['required', 'string', 'email', 'max:150', 'unique:users'],
-            'tel'           => ['required','unique:users','iran_mobile'],
-            'password'      => ['required', 'string', 'min:8', 'confirmed'],
-            'tel_verified'  => ['required','boolean'],
-            'introduced'    => ['nullable','numeric'],
-            'gettingknow'   => ['nullable','persian_alpha'],
-            'organization'  => ['nullable','persian_alpha'],
-            'jobside'       => ['nullable','persian_alpha']
+            'fname'             => ['persian_alpha','required', 'string', 'max:30'],
+            'lname'             => ['persian_alpha','required', 'string', 'max:30'],
+            'sex'               => ['required','boolean'],
+            'email'             => ['required', 'string', 'email', 'max:150', 'unique:users'],
+            'tel'               => ['required','unique:users','iran_mobile'],
+            'password'          => ['required', 'string', 'min:8', 'confirmed'],
+            'tel_verified'      => ['required','boolean'],
+            'introduced'        => ['nullable','numeric'],
+            'gettingknow'       => ['nullable','numeric'],
+            'gettingknow_child' => ['nullable','numeric'],
+            'organization'      => ['nullable','persian_alpha'],
+            'jobside'           => ['nullable','persian_alpha']
         ]);
     }
 
@@ -113,6 +114,7 @@ class RegisterController extends BaseController
             'password'          => Hash::make($data['password']),
             'introduced'        =>$data['introduced'],
             'gettingknow'       =>$data['gettingknow'],
+            'gettingknow_child' =>$data['gettingknow_child'],
             'organization'      =>$data['organization'],
             'jobside'           =>$data['jobside'],
             'resource'          =>$data['resource'],
@@ -124,6 +126,9 @@ class RegisterController extends BaseController
     public function showRegistrationForm()
     {
         //ارسال پارامتر به صفحه ثبت نام
-        return view('auth.register');
+        $condition=['parent_id','=','0'];
+        $gettingKnow=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
+        return view('auth.register')
+                    ->with('gettingKnow',$gettingKnow);
     }
 }

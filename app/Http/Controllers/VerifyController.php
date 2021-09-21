@@ -137,7 +137,7 @@ class VerifyController extends BaseController
                                     ->latest()
                                     ->first();
                         $date=($checkTimeCode['created_at']);
-                        $checkDays=$date->addMinutes(10);
+                        $checkDays=$date->addMinutes(2);
                         if($checkDays<Carbon::now())
                         {
 
@@ -163,7 +163,7 @@ class VerifyController extends BaseController
                         }
                         else
                         {
-                            $msg="کد فعال سازی مجدد هر 10 دقیقه ارسال خواهد شد";
+                            $msg="کد فعال سازی مجدد هر 2 دقیقه ارسال خواهد شد";
                             $errorStatus="danger";
                         }
                     }
@@ -208,7 +208,7 @@ class VerifyController extends BaseController
                         ->latest()
                         ->first();
             $created_at=($verify['created_at']);
-            $created_at_add=$created_at->addMinutes(10);
+            $created_at_add=$created_at->addMinutes(2);
 
             if($created_at_add>Carbon::now())
             {
@@ -338,7 +338,7 @@ class VerifyController extends BaseController
             {
                 $created_at = ($verify['created_at']);
 
-                $created_at_add = $created_at->addMinutes(10);
+                $created_at_add = $created_at->addMinutes(2);
 
                 if ($created_at_add < Carbon::now()) {
                     $status = verify::create(
@@ -359,7 +359,7 @@ class VerifyController extends BaseController
                             ->with('errorStatus', 'danger');
                     }
                 } else {
-                    return back()->with('msg', 'رمز یکبار مصرف کمتر از 10 دقیقه به شماره ' . $request['tel'] . " ارسال شده است")
+                    return back()->with('msg', 'رمز یکبار مصرف کمتر از 2 دقیقه به شماره ' . $request['tel'] . " ارسال شده است")
                         ->with('errorStatus', 'success')
                         ->with('status', true);
                 }
@@ -387,7 +387,7 @@ class VerifyController extends BaseController
                     ->first();
 
             $created_at=($verify['created_at']);
-            $created_at_add=$created_at->addMinutes(10);
+            $created_at_add=$created_at->addMinutes(2);
             if($created_at_add>Carbon::now())
             {
 
@@ -470,7 +470,7 @@ class VerifyController extends BaseController
                     ->latest()
                     ->first();
                 $date=($checkTimeCode['created_at']);
-                $checkDays=$date->addMinutes(10);
+                $checkDays=$date->addMinutes(2);
                 if($checkDays<Carbon::now())
                 {
                     $status=verify::create(
@@ -491,7 +491,8 @@ class VerifyController extends BaseController
 
                         return view('resetPasswordbySMS')
                             ->with('msg',$msg)
-                            ->with('errorStatus',$errorStatus);
+                            ->with('errorStatus',$errorStatus)
+                            ->with('tel',$user->tel);
                     }
                     else
                     {
@@ -499,21 +500,24 @@ class VerifyController extends BaseController
                         $errorStatus="danger";
                         return back()
                             ->with('msg',$msg)
-                            ->with('errorStatus',$errorStatus);
+                            ->with('errorStatus',$errorStatus)
+                            ->with('tel',$user->tel);
                     }
                 }
                 else
                 {
-                    $msg="کد بازیابی مجدد هر 10 دقیقه ارسال خواهد شد";
+                    $msg="کد بازیابی مجدد هر 2 دقیقه ارسال خواهد شد";
                     $errorStatus="danger";
                     return view('resetPasswordbySMS')
                                 ->with('msg', $msg)
-                                ->with('errorStatus', $errorStatus);
+                                ->with('errorStatus', $errorStatus)
+                                ->with('tel',$user->tel);
                 }
             }
             return back()
                 ->with('msg',$msg)
-                ->with('errorStatus',$errorStatus);
+                ->with('errorStatus',$errorStatus)
+                ->with('tel',$user->tel);
         }
         else
         {
@@ -521,7 +525,8 @@ class VerifyController extends BaseController
             $errorStatus="danger";
             return back()
                 ->with('msg',$msg)
-                ->with('errorStatus',$errorStatus);
+                ->with('errorStatus',$errorStatus)
+                ->with('tel',$user->tel);
         }
     }
 
@@ -534,7 +539,6 @@ class VerifyController extends BaseController
         }
         else
         {
-
             $this->validate($request,[
                 'password'      => ['required', 'string', 'min:8', 'confirmed'],
                 'code'          =>['required','numeric','min:6']
@@ -549,12 +553,13 @@ class VerifyController extends BaseController
             {
                 return view('resetPasswordbySMS')
                             ->with('msg',"کد وارد شده اشتباه است")
-                            ->with('errorStatus','danger');
+                            ->with('errorStatus','danger')
+                            ->with('tel',$request['tel']);
             }
             else {
                 $date = ($verify['created_at']);
 
-                $checkDays = $date->addMinutes(10);
+                $checkDays = $date->addMinutes(2);
 
                 if($checkDays>Carbon::now()){
                     $user=$this->get_user($request['tel'],NULL,NULL,NULL,true);
@@ -564,7 +569,8 @@ class VerifyController extends BaseController
                     {
                         $msg = "رمز با موفقیت تغییر کرد";
                         $errorStatus = "success";
-                        return redirect('/password/reset')
+                        alert()->success('رمز با موفقیت تغییر کرد')->persistent('بستن');
+                        return redirect('/login')
                                 ->with('msg', $msg)
                                 ->with('errorStatus', $errorStatus);
                     }
@@ -574,15 +580,17 @@ class VerifyController extends BaseController
                         $errorStatus = "danger";
                         return view('resetPasswordbySMS')
                             ->with('msg', $msg)
-                            ->with('errorStatus', $errorStatus);
+                            ->with('errorStatus', $errorStatus)
+                            ->with('tel',$request['tel']);
                     }
 
                 } else {
                     $msg = "کد بازیابی شما منقضی شده است";
                     $errorStatus = "danger";
-                    return view('resetPasswordbySMS')
+                    return redirect('/password/reset')
                         ->with('msg', $msg)
-                        ->with('errorStatus', $errorStatus);
+                        ->with('errorStatus', $errorStatus)
+                        ->with('tel',$request['tel']);
                 }
             }
         }

@@ -1,5 +1,13 @@
 @extends('master.index')
 
+@section('headerscript')
+    <style>
+        #gettingknow2
+        {
+            display: none;
+        }
+    </style>
+@endsection
 
 @section('row1')
 <div class="container mt-5">
@@ -98,23 +106,35 @@
 
                         <div class="form-group row">
                             <label for="gettingknow" class="col-md-4 col-form-label text-md-right">{{ __('نحوه آشنایی با فراکوچ:') }}</label>
-
                             <div class="col-md-6">
-                                <select id="gettingknow" class="form-control" @error('gettingknow') is-invalid @enderror" name="gettingknow">
+                                <select id="gettingknow" class="form-control @error('gettingknow') is-invalid @enderror" name="gettingknow">
                                 <option selected disabled>انتخاب کنید</option>
-                                <option>اینستاگرام</option>
-                                <option>تلگرام</option>
-                                <option>تبلیغاتی محیطی</option>
-                                <option>تبلیغات فضای مجازی</option>
-                                <option>پکیج رایگان</option>
-                                <option>واتساپ</option>
-                                <option>موتورهای جستجو</option>
+                                @foreach($gettingKnow as $item)
+                                    <option value="{{$item->id}}">{{$item->category}}</option>
+                                @endforeach
                                 </select>
                                 @error('gettingknow')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row" id="gettingknow2">
+                            <label for="gettingknow_child" class="col-md-4 col-form-label text-md-right">{{ __('عنوان آشنایی:') }}</label>
+                            <div class="col-md-6">
+                                <select id="gettingknow_child" class="form-control @error('gettingknow_child') is-invalid @enderror" name="gettingknow_child">
+                                <option selected disabled>انتخاب کنید</option>
+                                @foreach($gettingKnow as $item)
+                                    <option >{{$item->category}}</option>
+                                    @endforeach
+                                    </select>
+                                    @error('gettingknow')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                             </div>
                         </div>
 
@@ -227,4 +247,25 @@
 </div>
 
 
+@endsection
+
+@section('footerScript')
+    <script>
+        $("#gettingknow").change(function()
+        {
+            var loading='<div class="col-12 text-center"><div class="spinner-border text-primary text-center" role="status"><span class="sr-only">Loading...</span></div></div>';
+            //$("#gettingknow2").html(loading);
+            var content=$(this).val();
+            $.ajax({
+                type:'GET',
+                url:"/showListChildGettingKnow/"+content,
+                success:function(data)
+                {
+                    $("#gettingknow2").css('display','flex');
+                    $("#gettingknow_child").html(data);
+                }
+            });
+
+        })
+    </script>
 @endsection

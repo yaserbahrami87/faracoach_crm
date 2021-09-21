@@ -1,15 +1,12 @@
 @if($user->tel_verified==0)
     <div class="col-12">
-        <div class="alert alert-warning">
+        <div class="alert alert-danger">
+            <i class="bi bi-exclamation-triangle-fill"></i>
             برای ادامه فعالیت باید تلفن همراه خود را در سیستم فراکوچ ثبت کنید
         </div>
         @if ($verifyStatus==false)
             <form method="get" action="/panel/active/mobile/">
-                <div class="input-group">
-                    <div class="input-group-prepend ">
-                        <button class="btn btn-outline-secondary btn-info text-light m-0" type="submit" id="activeMobile" data-toggle="modal" data-target="#ModalMobile">ارسال کد فعال سازی</button>
-                    </div>
-                </div>
+                <button class="btn btn-outline-secondary btn-info text-light mb-2" type="submit" id="activeMobile" data-toggle="modal" data-target="#ModalMobile">ارسال کد فعال سازی</button>
             </form>
         @else
             <div class="alert alert-warning">
@@ -93,7 +90,7 @@
             </a>
         </div>
     @elseif($user->status_coach==1)
-        
+
         <div class="col-lg-4 col-md-4 col-sm-6 p-0">
             <a href="/panel/coach/{{$user->id_coaches_table}}/edit"  class="btn btn-success btn-lg">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-square" viewBox="0 0 16 16">

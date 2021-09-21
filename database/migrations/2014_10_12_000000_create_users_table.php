@@ -15,8 +15,8 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('username',250)->unique();
-            $table->string('email',250)->unique()->nullable();
+            $table->string('username',200)->unique();
+            $table->string('email',190)->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->boolean('tel_verified')->default(0);
             $table->boolean('introduced_verified')->default(0);
@@ -47,7 +47,8 @@ class CreateUsersTable extends Migration
             $table->tinyInteger('type')->default('0');
             $table->string('resource',30)->nullable();
             $table->string('detailsresource',50)->nullable();
-            $table->string('gettingknow',40)->nullable();
+            $table->bigInteger('gettingknow')->nullable();
+            $table->bigInteger('gettingknow_child')->nullable();
             $table->string('introduced',40)->nullable();
             $table->integer('followby_id')->nullable();
             $table->integer('followby_expert')->nullable();

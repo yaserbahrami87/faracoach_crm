@@ -158,18 +158,37 @@
                         <div class="col-md-6 px-1">
                             <div class="form-group">
                                 <label>نحوه آشنایی</label>
-                                <select id="gettingknow" class="form-control p-0 @if(strlen($user->gettingknow)==0) is-invalid @else is-valid @endif @error('gettingknow') is-invalid @enderror" name="gettingknow">
+                                <select id="gettingknow" class="form-control p-0 @if(strlen($user->gettingknow)==0) is-invalid  @else is-valid  @endif  @error('gettingknow') is-invalid @enderror" name="gettingknow">
                                     <option selected disabled>انتخاب کنید</option>
-                                    <option {{ $user->gettingknow =="اینستاگرام" ? 'selected='.'"'.'selected'.'"' : '' }}>اینستاگرام</option>
-                                    <option {{ $user->gettingknow =="تلگرام" ? 'selected='.'"'.'selected'.'"' : '' }}>تلگرام</option>
-                                    <option {{ $user->gettingknow =="تبلیغاتی محیطی" ? 'selected='.'"'.'selected'.'"' : '' }}>تبلیغاتی محیطی</option>
-                                    <option {{ $user->gettingknow =="تبلیغات فضای مجازی" ? 'selected='.'"'.'selected'.'"' : '' }}>تبلیغات فضای مجازی</option>
-                                    <option {{ $user->gettingknow =="پکیج رایگان" ? 'selected='.'"'.'selected'.'"' : '' }}>پکیج رایگان</option>
-                                    <option {{ $user->gettingknow =="واتساپ" ? 'selected='.'"'.'selected'.'"' : '' }}>واتساپ</option>
-                                    <option {{ $user->gettingknow =="موتورهای جستجو" ? 'selected='.'"'.'selected'.'"' : '' }}>موتورهای جستجو</option>
+                                    @foreach($gettingKnow as $item)
+                                        <option value="{{$item->id}}"  {{ $user->gettingknow ==$item->id ? 'selected='.'"'.'selected'.'"' : '' }} >{{$item->category}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
+
+                        @if(!is_null( $user->gettingknow_child))
+                            <div class="col-md-6 px-1" id="gettingknow2" >
+                                <div class="form-group">
+                                    <label>عنوان آشنایی</label>
+                                    <select id="gettingknow_child" class="form-control p-0 @if(strlen($user->gettingknow_child)==0) is-invalid  @else is-valid  @endif  @error('gettingknow_child') is-invalid @enderror" name="gettingknow_child">
+                                        <option selected disabled>انتخاب کنید</option>
+                                        <option selected value="{{$user->gettingknow_child->id}}">{{$user->gettingknow_child->category}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        @else
+                            <div class="col-md-6 px-1" id="gettingknow2" style="display: none">
+                                <div class="form-group">
+                                    <label>عنوان آشنایی</label>
+                                    <select id="gettingknow_child" class="form-control p-0 @if(strlen($user->gettingknow_child)==0) is-invalid  @else is-valid  @endif  @error('gettingknow_child') is-invalid @enderror" name="gettingknow_child">
+                                        <option selected disabled>انتخاب کنید</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                        @endif
+
                         <div class="col-md-6 px-1">
                             <div class="form-group">
                                 <label>معرف</label>
@@ -313,8 +332,26 @@
 
 
 @section('footerScript')
-    <!--  DATE SHAMSI PICKER  --->
 
+    <script>
+        $("#gettingknow").change(function()
+        {
+            var loading='<div class="col-12 text-center"><div class="spinner-border text-primary text-center" role="status"><span class="sr-only">Loading...</span></div></div>';
+            //$("#gettingknow2").html(loading);
+            var content=$(this).val();
+            $.ajax({
+                type:'GET',
+                url:"/showListChildGettingKnow/"+content,
+                success:function(data)
+                {
+                    $("#gettingknow2").css('display','flex');
+                    $("#gettingknow_child").html(data);
+                }
+            });
+        })
+    </script>
+
+    <!--  DATE SHAMSI PICKER  --->
     <script src="{{asset('js/kamadatepicker.min.js')}}"></script>
     <script src="{{asset('js/kamadatepicker.holidays.js')}}"></script>
     <script>
@@ -388,6 +425,7 @@
                 previousButtonIcon: "fa fa-arrow-circle-left",
                 sync:true,
             });
+
 
 
 
