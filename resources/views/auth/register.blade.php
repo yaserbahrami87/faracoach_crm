@@ -105,15 +105,15 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="gettingknow" class="col-md-4 col-form-label text-md-right">{{ __('نحوه آشنایی با فراکوچ:') }}</label>
+                            <label for="gettingknow_parent" class="col-md-4 col-form-label text-md-right">{{ __('نحوه آشنایی با فراکوچ:') }}</label>
                             <div class="col-md-6">
-                                <select id="gettingknow" class="form-control @error('gettingknow') is-invalid @enderror" name="gettingknow">
+                                <select id="gettingknow_parent" class="form-control @error('gettingknow_parent') is-invalid @enderror" name="gettingknow_parent">
                                 <option selected disabled>انتخاب کنید</option>
-                                @foreach($gettingKnow as $item)
+                                @foreach($gettingknow_parent as $item)
                                     <option value="{{$item->id}}">{{$item->category}}</option>
                                 @endforeach
                                 </select>
-                                @error('gettingknow')
+                                @error('gettingknow_parent')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -122,19 +122,16 @@
                         </div>
 
                         <div class="form-group row" id="gettingknow2">
-                            <label for="gettingknow_child" class="col-md-4 col-form-label text-md-right">{{ __('عنوان آشنایی:') }}</label>
+                            <label for="gettingknow" class="col-md-4 col-form-label text-md-right">{{ __('عنوان آشنایی:') }}</label>
                             <div class="col-md-6">
-                                <select id="gettingknow_child" class="form-control @error('gettingknow_child') is-invalid @enderror" name="gettingknow_child">
-                                <option selected disabled>انتخاب کنید</option>
-                                @foreach($gettingKnow as $item)
-                                    <option >{{$item->category}}</option>
-                                    @endforeach
-                                    </select>
-                                    @error('gettingknow')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
+                                <select id="gettingknow" class="form-control @error('gettingknow') is-invalid @enderror" name="gettingknow">
+                                    <option selected disabled>انتخاب کنید</option>
+                                </select>
+                                @error('gettingknow')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
 
@@ -251,7 +248,7 @@
 
 @section('footerScript')
     <script>
-        $("#gettingknow").change(function()
+        $("#gettingknow_parent").change(function()
         {
             var loading='<div class="col-12 text-center"><div class="spinner-border text-primary text-center" role="status"><span class="sr-only">Loading...</span></div></div>';
             //$("#gettingknow2").html(loading);
@@ -262,7 +259,7 @@
                 success:function(data)
                 {
                     $("#gettingknow2").css('display','flex');
-                    $("#gettingknow_child").html(data);
+                    $("#gettingknow").html(data);
                 }
             });
 

@@ -269,10 +269,10 @@ class UserController extends BaseController
         $settingsms=$this->get_settingsmsByType(2);
 
         $condition=['parent_id','=','0'];
-        $gettingKnow=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
+        $gettingKnow_parent=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
 
         return view('panelAdmin.registerUser')
-                    ->with('gettingKnow',$gettingKnow)
+                    ->with('gettingKnow_parent',$gettingKnow_parent)
                     ->with('settingsms',$settingsms);
 
     }
@@ -290,7 +290,6 @@ class UserController extends BaseController
             'tel_verified'      => ['required','boolean'],
             'introduced'        => ['nullable','numeric'],
             'gettingknow'       => ['nullable','numeric'],
-            'gettingknow_child' => ['nullable','numeric'],
             'organization'      => ['nullable','persian_alpha'],
             'jobside'           => ['nullable','persian_alpha'],
             'type'              => ['required','string']
@@ -316,7 +315,6 @@ class UserController extends BaseController
             'password'          => Hash::make($request['password']),
             'introduced'        => $request['introduced'],
             'gettingknow'       => $request['gettingknow'],
-            'gettingknow_child' => $request['gettingknow_child'],
             'insert_user_id'    =>Auth::user()->id,
             'organization'      => $request['organization'],
             'jobside'           => $request['jobside'],
@@ -1736,6 +1734,10 @@ class UserController extends BaseController
             }
         }
 
+        if(!is_null($item))
+        {
+            $item->gettingknow=$this->get_categoryGettingknow($item->gettingknow,NULL,NULL,NULL,'first')->category;
+        }
 
         if(!is_null($item->insert_user_id))
         {

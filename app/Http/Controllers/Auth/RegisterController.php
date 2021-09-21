@@ -114,7 +114,6 @@ class RegisterController extends BaseController
             'password'          => Hash::make($data['password']),
             'introduced'        =>$data['introduced'],
             'gettingknow'       =>$data['gettingknow'],
-            'gettingknow_child' =>$data['gettingknow_child'],
             'organization'      =>$data['organization'],
             'jobside'           =>$data['jobside'],
             'resource'          =>$data['resource'],
@@ -127,8 +126,8 @@ class RegisterController extends BaseController
     {
         //ارسال پارامتر به صفحه ثبت نام
         $condition=['parent_id','=','0'];
-        $gettingKnow=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
+        $gettingknow_parent=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
         return view('auth.register')
-                    ->with('gettingKnow',$gettingKnow);
+                    ->with('gettingknow_parent',$gettingknow_parent);
     }
 }
