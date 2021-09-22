@@ -299,6 +299,14 @@ Route::resource('checkout','CheckoutController');
 //comments
 Route::post('/post/addcomment/{post}','CommentController@store');
 
+
+//integrity test
+Route::get('/integrity_test',function()
+{
+    return view('integrityTest');
+});
+
+
 //booking
 Route::get('/booking/createajax','BookingController@createAjax');
 Route::get('/booking/showformreserve','BookingController@showFormReserve');
@@ -340,8 +348,13 @@ Route::get('/ravanshenasi',function()
 Route::get('/integrity','LandPageController@create');
 
 Route::get('/exportexcel','UserController@export_excel');
-
+// تبدیل نحوه شانایی به کد
 Route::get('/test','UserController@test');
+
+
+//تست
+Route::post('/tamamiat_send','AdminController@tamamiat_test');
+
 
 
 //blog

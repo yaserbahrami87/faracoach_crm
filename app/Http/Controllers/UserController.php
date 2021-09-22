@@ -1603,7 +1603,8 @@ class UserController extends BaseController
             {
                 $item['email']=NULL;
             }
-            $item['tel']=$this->convertPersianNumber($item->tel);
+
+            $item['tel']=$this->convertPersianNumber($item['tel']);
             $count=user::orwhere('tel','=',$item['tel'])
                         ->when($item['email'],function($query,$item)
                         {
@@ -1613,6 +1614,7 @@ class UserController extends BaseController
 
             if($count==0)
             {
+                $item['password']=Hash::make('1234');
                 $status=user::create($item);
                 if($status)
                 {
