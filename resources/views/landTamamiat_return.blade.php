@@ -72,7 +72,7 @@
                         <p class="d-block pt-2">اقدام میکنم</p>
 
 
-                        <input type="submit" id="send" class="btn btn-success mb-3" value="پایان مرحله دوم و رزرو وبینار" />
+                        <input type="submit" id="send" class="btn btn-success mb-3 send" value="پایان مرحله دوم و رزرو وبینار" />
                         <br/>
                     </div>
                 </form>
@@ -99,6 +99,11 @@
 @section('footerScript')
     <script>
 
+        $(document).ready(function()
+        {
+            $(".send ").hide();
+        });
+
         $("#link_copy").click(function()
         {
             var links=this.innerHTML;
@@ -110,18 +115,24 @@
 
         $(".items").change(function()
         {
+            var sw=false;
             var c=($('.items').length);
             for (i=0;i<c;i++)
             {
                 if($('.items')[i].checked==true)
                 {
                     console.log('AAAAA');
-                    $("#send").css('display','inline !important');
+
+                    sw=true;
+
                 }
-
+                if (sw==true){
+                    $(".send ").show();
+                }
+                else{
+                    $(".send ").hide();
+                }
             }
-
-
 
         });
 
