@@ -5,13 +5,69 @@
 @endsection
 
 @section('row1')
-    <div id="chtAnimatedBarChart" class="container mt-5 ">
-        <div class="col-12 mb-5">
-
-            <h2 class="text-center"> نتیجه آزمون تمامیت  </h2>
+    <div class="col-12 mt-5">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="text-center"> نتیجه آزمون تمامیت شما  </h2>
+            </div>
+            <div class="col-sm-4 col-md-3 col-lg-2 col-xl-2 text-center">
+                <div class="card text-white bg-primary mb-3">
+                    <div class="card-header">امور شخصی</div>
+                    <div class="card-body ">
+                        <h3 class="card-title">{{$personality_percent}} %</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-3 col-lg-2 col-xl-2 text-center">
+                <div class="card text-white bg-secondary mb-3">
+                    <div class="card-header">تعهدات</div>
+                    <div class="card-body ">
+                        <h3 class="card-title">{{$tahodat_percent}} %</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-3 col-lg-2 col-xl-2 text-center">
+                <div class="card text-white bg-warning mb-3">
+                    <div class="card-header">روابط</div>
+                    <div class="card-body ">
+                        <h3 class="card-title">{{$relation_percent}} %</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-3 col-lg-2 col-xl-2 text-center">
+                <div class="card text-white bg-success mb-3">
+                    <div class="card-header">سلامتی و بهداشت</div>
+                    <div class="card-body ">
+                        <h3 class="card-title">{{$health_percent}} %</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-3 col-lg-2 col-xl-2 text-center">
+                <div class="card text-white bg-danger mb-3">
+                    <div class="card-header">عرف و مقررات</div>
+                    <div class="card-body ">
+                        <h3 class="card-title">{{$ghavanin_percent}} %</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 col-md-3 col-lg-2 col-xl-2 text-center">
+                <div class="card text-white bg-info mb-3">
+                    <div class="card-header">امور مالی</div>
+                    <div class="card-body ">
+                        <h3 class="card-title">{{$mali_percent}} %</h3>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>
+    <!-- <div id="chtAnimatedBarChart" class="container mt-5 ">
+        <div class="col-12 mb-5">
+
+
+
+        </div>
+    </div> -->
 
 @endsection
 @section('footerScript')
@@ -27,7 +83,6 @@
             { "group_name": "تمامیت", "name": "روابط", "value": {{$relation_percent}} },
             { "group_name": "تمامیت", "name": "سلامتی", "value": {{$health_percent}} },
             { "group_name": "تمامیت", "name": "قوانین ، عرف و اخلاقیات", "value": {{$ghavanin_percent}} },
-            { "group_name": "تمامیت", "name": "شاخص", "value": 100 }
         ]
     </script>
     <!--<script>
@@ -68,7 +123,7 @@
 
             // colors for chart
             colors: null,
-
+            max:100,
             // show chart legend
             show_legend: false,
 

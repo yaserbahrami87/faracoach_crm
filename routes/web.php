@@ -98,6 +98,9 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     //feedback Coach
     Route::resource('feedbackcoach','FeedbackCoachingController');
 
+    //integrity
+    Route::resource('integrityTest','IntegrityTestController');
+
 });
 
 

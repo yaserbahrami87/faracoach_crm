@@ -83,8 +83,9 @@
         </div>
         <div class="container d-flex justify-content-center">
             <div class=" col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                <form name="demo" id="demo" method="POST" action="/tamamiat_send" class="myBook mt-4">
+                <form name="demo" id="demo" method="POST" action="/panel/integrityTest" class="myBook mt-4">
                     {{csrf_field()}}
+                    <!--
                     <section>
                         <label for="fname">نام:</label><br>
                         <input type="text" id="fname" name="fname" class="form-control" placeholder="علی" required><br>
@@ -96,6 +97,7 @@
                         </div>
                         <button type="button" class="page-next btn btn-primary col-3">بعدی</button>
                     </section>
+                    -->
                     <section >
                         <p>1- اتفاق می افتد که خط تلفن یا موبایلم یک طرف می شود و یا اخطار قطع دریافت می کنم</p>
                         <input class="page-next" type="radio" id="vehicle1_5" name="vehicle1" value="5" required />
