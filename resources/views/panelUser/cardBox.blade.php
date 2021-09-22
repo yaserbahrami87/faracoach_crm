@@ -132,7 +132,7 @@
             <li>در صورت داشتن سوال، افراد مانند کلاس‌های حضوری می‌توانند با بلند کردن دست و وصل شدن میکروفون توسط استاد، سوال خود را مطرح کنند.</li>
             <li>ثبت نام در دوره آموزشی به منزله پذیرش تمامی موارد فوق است.</li>
         </ol>
-        <a href="/panel/integrityTest" class="btn btn-block btn-lg btn-secondary"> آزمون رایگان تمامیت</a>
+        <a href="/panel/integrityTest" class="btn btn-block btn-lg btn-warning mb-5">برای آشنایی اولیه با موضوع تمامیت این تست را انجام دهید</a>
     </div>
 
 </div>
