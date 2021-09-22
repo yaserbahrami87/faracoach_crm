@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
+use Illuminate\Support\Facades\Auth;
 use Socialite;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
@@ -40,6 +41,14 @@ class LoginController extends Controller
         $this->redirectTo = url()->previous();
     }
 
+    //برای ریدایرکت کردن بعد از لاگین این تابع باید تغییر کند
+    protected function authenticated(Request $request)
+    {
+        if(Auth::check())
+        {
+            return redirect('/panel');
+        }
+    }
 
 
     protected function credentials(Request $request)
