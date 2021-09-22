@@ -326,7 +326,7 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-outline-success">بروزرسانی</button>
+            <button type="submit" class="btn btn-success mb-5">بروزرسانی</button>
 
         </form>
     </div>

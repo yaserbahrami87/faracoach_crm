@@ -73,6 +73,12 @@
 
 @endsection
 @section ('row1')
+    <div class="container pb-4 mt-5">
+        <div class="col-12 text-justify">
+            <p >سلام ، تست پیشرو به منظور بررسی میزان « تمامیت » شما در حوزه های مختلف: مالی ، مسائل شخصی ، تعهدات ، روابط اجتماعی ، سلامتی و بهداشت ، عرف و قوانین جامعه تدارک دیده شده است.</p>
+            <p>لطفا این تست را یکبار قبل از برگزاری وبینار و یکبار دیگر حدود یک ماه بعد از برگزاری وبینار و آشنایی شما با تمامیت ، مجددا انجام داده و اثرات به کار بستن قانون تمامیت را در زندگی و کسب و کار خود مشاهده نمائید</p>
+        </div>
+    </div>
     <div class="container pb-4 mt-5 " id="fff">
         <div class=" d-flex justify-content-center">
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12  progress">
@@ -99,7 +105,7 @@
                     </section>
                     -->
                     <section >
-                        <p>1- اتفاق می افتد که خط تلفن یا موبایلم یک طرف می شود و یا اخطار قطع دریافت می کنم</p>
+                        <p>1- اتفاق می افتد که خط تلفن یا موبایلم یک طرفه می شود و یا اخطار قطع دریافت می کنم</p>
                         <input class="page-next" type="radio" id="vehicle1_5" name="vehicle1" value="5" required />
                         <label for="vehicle1_5"> کاملا موافقم</label><br>
                         <input class="page-next" type="radio" id="vehicle1_4" name="vehicle1" value="4" required />

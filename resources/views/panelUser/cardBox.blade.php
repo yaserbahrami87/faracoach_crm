@@ -114,9 +114,13 @@
 
     <div class="col-12 mt-3">
         <img src="{{asset('/images/int.png')}}" class="img-fluid" />
-        <div class="alert alert-warning mt-3 mb-1">
+        <div class="alert alert-warning mb-1">
             <i class="bi bi-exclamation-triangle-fill"></i>
             در هنگام ورود به اسکای روم گزینه مهمان را انتخاب و سپس نام و نام خانوادگی خود را وارد کنید
+        </div>
+        <div class="alert alert-warning mb-1">
+            <i class="bi bi-exclamation-triangle-fill"></i>
+            برای ورود به اسکای روم از مرورگر های کروم یا فایرفاکس در گوشی های موبایل استفاده نمائید
         </div>
         <a href="https://www.skyroom.online/ch/faracoach/integrity" class="btn btn-success btn-block mt-3 btn-lg" target="_blank" >لینک ورود به وبینار تمامیت (اسکای روم)</a>
     </div>
