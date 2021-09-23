@@ -24,11 +24,7 @@
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/IntegrityTestController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/IntegrityTestController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/integrityTest.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/integrityTest.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/integrityTest_result.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/integrityTest_result.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/master/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/master/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/cardBox.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/cardBox.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -653,7 +649,7 @@
       <workItem from="1632292557892" duration="11168000" />
       <workItem from="1632308599286" duration="18102000" />
       <workItem from="1632344301779" duration="2048000" />
-      <workItem from="1632372941375" duration="2119000" />
+      <workItem from="1632372941375" duration="4183000" />
     </task>
     <servers />
   </component>
