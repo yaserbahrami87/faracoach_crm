@@ -113,18 +113,10 @@
     @endif
 
     <div class="col-12 mt-3">
-        <img src="{{asset('/images/int.png')}}" class="img-fluid" />
-        <div class="alert alert-warning mb-1">
-            <i class="bi bi-exclamation-triangle-fill"></i>
-            در هنگام ورود به اسکای روم گزینه میهمان را انتخاب و سپس نام و نام خانوادگی خود را وارد کنید
-        </div>
-        <div class="alert alert-warning mb-1">
-            <i class="bi bi-exclamation-triangle-fill"></i>
-            برای ورود به اسکای روم از مرورگر های کروم یا فایرفاکس در گوشی های موبایل استفاده نمائید
-        </div>
-        <a href="https://www.skyroom.online/ch/faracoach/integrity" class="btn btn-success btn-block mt-3 btn-lg" target="_blank" >لینک ورود به وبینار تمامیت (اسکای روم)</a>
+        <a href="/panel/integrity/files" class="btn btn-success btn-block mt-3 btn-lg" target="_blank" >لینک مشاهده ویدئوی وبینار تمامیت</a>
     </div>
     <div class="col-12 mt-3">
+        <!--
         <p class="text-center text-bold">قوانین و مقررات شرکت در دوره‌ آنلاین</p>
         <ol>
             <li class="">دوره‌های آنلاین موسسه فراکوچ توسط سایت اسکای روم برگزار می‌شود و نیاز به نصب برنامه خاصی بر روی کامپیوتر یا گوشی موبایل نیست. </li>
@@ -136,6 +128,7 @@
             <li>در صورت داشتن سوال، افراد مانند کلاس‌های حضوری می‌توانند با بلند کردن دست و وصل شدن میکروفون توسط استاد، سوال خود را مطرح کنند.</li>
             <li>ثبت نام در دوره آموزشی به منزله پذیرش تمامی موارد فوق است.</li>
         </ol>
+        -->
         <a href="/panel/integrityTest" class="btn btn-block btn-lg btn-warning mb-5">برای آشنایی اولیه با موضوع تمامیت این تست را انجام دهید</a>
     </div>
 

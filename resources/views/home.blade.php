@@ -53,16 +53,6 @@
     <div class="col-md-6">
         <!--  <h3 class="pb-3 border-bottom mb-3">آخرین دلنوشته ها  </h3> -->
         @if(Auth::check())
-                <div class="row">
-                    <div class="col-12 mt-3">
-                        <img src="{{asset('/images/int.png')}}" class="img-fluid" />
-                        <div class="alert alert-warning mt-3 mb-1">
-                            <i class="bi bi-exclamation-triangle-fill"></i>
-                            در هنگام ورود به اسکای روم گزینه مهمان را انتخاب و سپس نام و نام خانوادگی خود را وارد کنید
-                        </div>
-                        <a href="https://www.skyroom.online/ch/faracoach/integrity" class="btn btn-success btn-block mt-3 btn-lg" target="_blank" >لینک ورود به وبینار تمامیت (اسکای روم)</a>
-                    </div>
-                </div>
                 <div class="card-body p-0">
                     <div class="media pb-2 pt-2">
                         <img src="{{asset('/documents/users/'.Auth::user()->personal_image)}}" class="mr-3 rounded-circle"  width="50px" height="50px" alt="...">
