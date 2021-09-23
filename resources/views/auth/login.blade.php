@@ -11,6 +11,9 @@
             <div class="card bg-light text-left ">
                 <div class="card-header bg-info text-light">{{ __('ورود') }}</div>
                 <div class="card-body">
+                    <div class="alert alert-warning">
+                        اگر  قبلا  وارد سایت شده اید  از رمز  قبلی  خود  و یا از رمز یک بار مصرف استفاده کنید
+                    </div>
                     <form method="POST" action="{{ route('login') }}">
                         {{csrf_field()}}
                         <div class="form-group row">
