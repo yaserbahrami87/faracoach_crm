@@ -32,6 +32,12 @@
             width:50%;
             height: 50%;
         }
+
+        .swal-text
+        {
+            text-align: center;
+            direction: rtl;
+        }
         /* Small devices (320 px) */
         @media only screen and (max-width: 321px){
             .title{
