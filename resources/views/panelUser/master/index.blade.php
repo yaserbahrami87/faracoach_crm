@@ -214,7 +214,7 @@
     <!-- Main Footer -->
     <footer class="main-footer" dir="rtl">
 
-        <strong>تمامی حقوق این سایت متعلق به مرکز آموزش کوچینگ ایران <a href="https://www.faracoach.com" target="_blank">فراکوچ</a> است</strong> -
+        <small>تمامی حقوق این سایت متعلق به مرکز آموزش کوچینگ ایران <a href="https://www.faracoach.com" target="_blank">فراکوچ</a> است</small> -
         <small>طراحی شده توسط <a href="" target="_blank">یاسر بهرامی</a> </small>
         <div class="float-left d-none d-sm-inline-block">
             <b>نسخه</b> 1.5.0

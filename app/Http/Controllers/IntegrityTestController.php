@@ -54,17 +54,17 @@ class IntegrityTestController extends Controller
         ]);
 
         $mali_percent=floor(($mali*100)/50);
-        $mali_percent=100-$mali_percent;
+//        $mali_percent=100-$mali_percent;
         $personality_percent=floor(($personality*100)/60);
-        $personality_percent=100-$personality_percent;
+//        $personality_percent=100-$personality_percent;
         $tahodat_percent=floor(($tahodat*100)/55);
-        $tahodat_percent=100-$tahodat_percent;
+//        $tahodat_percent=100-$tahodat_percent;
         $relation_percent=floor(($relation*100)/70);
-        $relation_percent=100-$relation_percent;
+//        $relation_percent=100-$relation_percent;
         $health_percent=floor(($health*100)/45);
-        $health_percent=100-$health_percent;
+//        $health_percent=100-$health_percent;
         $ghavanin_percent=floor(($ghavanin*100)/45);
-        $ghavanin_percent=100-$ghavanin_percent;
+//        $ghavanin_percent=100-$ghavanin_percent;
 
         return view('integrityTest_result')
             ->with('mali',$mali)
