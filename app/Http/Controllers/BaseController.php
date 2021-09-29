@@ -1523,7 +1523,7 @@ class BaseController extends Controller
     //ارسال گزارش تعداد کاربرها براساس دسته بندی برای همکاران
     public function get_staticsCountUsers_admin()
     {
-        if(Auth::user()->ty==2)
+        if(Auth::user()->type==2)
             {
                 //لیست تعداد کاربرها
                 $statics['notfollowup'] = $this->get_user(NULL,NULL,1,NULL,NULL,NULL )->count();
@@ -1536,7 +1536,7 @@ class BaseController extends Controller
                 $students = $this->get_usersByType(20,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
                 $condition=['nextfollowup_date_fa','=',$this->dateNow];
                 $todayFollowup = $this->get_followup_join_user(NULL,Auth::user()->id,NULL,1,$condition,NULL )->count();
-                $condition=['followups.nextfollowup_date_fa', '<', $dateNow];
+                $condition=['followups.nextfollowup_date_fa', '<', $this->dateNow];
                 $expireFollowup=$this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL )->count();
                 $myfollowup = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
                 $condition=['date_fa','=',$this->dateNow];
@@ -1555,8 +1555,7 @@ class BaseController extends Controller
                 $statics['noanswering'] = $this->get_usersByType(14,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
                 $statics['students'] = $this->get_usersByType(20,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
                 $condition=['nextfollowup_date_fa','=',$this->dateNow];
-                $statics['todayFollowup'] = $this->get_followup_join_user(NULL,Auth::user()->id,NULL,1,$condition,NULL )->count();
-
+                $statics['todayFollowup'] = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL,1)->count();
                 $condition=['followups.nextfollowup_date_fa', '<', $this->dateNow];
                 $statics['expireFollowup']=$this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL,1)->count();
                 $statics['myfollowup'] = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,NULL,NULL )->count();

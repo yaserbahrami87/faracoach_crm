@@ -153,31 +153,28 @@ class VerifyController extends BaseController
                                 $message="کد فعالی سازی شما در سیستم فراکوچ : " . $six_digit_random_number ;
                                 $this->sendSms($user->tel,$message);
                                 $msg=" کد فعال سازی به شماره ".$user->tel." ارسال شد ";
-                                $errorStatus="warning";
+                                alert()->warning($msg)->persistent('بستن');
+
                             }
                             else
                             {
-                                $msg="خطا";
-                                $errorStatus="danger";
+                                alert()->error('خطا')->persistent('بستن');
                             }
                         }
                         else
                         {
+
                             $msg="کد فعال سازی مجدد هر 2 دقیقه ارسال خواهد شد";
-                            $errorStatus="danger";
+                            alert()->error($msg)->persistent('بستن');
+
                         }
                     }
-                    return back()
-                        ->with('msg',$msg)
-                        ->with('errorStatus',$errorStatus);
+                    return back();
                 }
                 else
                 {
-                    $msg="شماره همراه قبلا ثبت و تایید شده است";
-                    $errorStatus="danger";
-                    return back()
-                        ->with('msg',$msg)
-                        ->with('errorStatus',$errorStatus);
+                    alert()->error('شماره همراه قبلا ثبت و تایید شده است')->persistent('بستن');
+                    return back();
                 }
             // }
             // else
@@ -218,26 +215,21 @@ class VerifyController extends BaseController
                     $user=Auth::user();
                     $user->tel_verified=1;
                     $user->update();
-                    $msg="شماره تلفن با موفقیت تایید شد";
-                    $errorStatus="success";
+                    alert()->success('شماره تلفن با موفقیت تایید شد')->persistent('بستن');
                 }
             }
             else
             {
-                $msg="کد وارد شده منقضی شده است";
-                $errorStatus="danger";
-
+                alert()->error('کد وارد شده منقضی شده است')->persistent('بستن');
             }
         }
         else
         {
-            $msg="کد وارد شده اشتباه است";
-            $errorStatus="danger";
+            alert()->error('کد وارد شده اشتباه است')->persistent('بستن');
+
         }
 
-        return back()
-                ->with('msg',$msg)
-                ->with('errorStatus',$errorStatus);
+        return back();
 
 
 

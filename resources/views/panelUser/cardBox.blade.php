@@ -1,26 +1,29 @@
 @if($user->tel_verified==0)
     <div class="col-12">
-        <div class="alert alert-danger">
-            <i class="bi bi-exclamation-triangle-fill"></i>
-            برای ادامه فعالیت باید تلفن همراه خود را در سیستم فراکوچ ثبت کنید
-        </div>
+
         @if ($verifyStatus==false)
-            <form method="get" action="/panel/active/mobile/">
-                <button class="btn btn-outline-secondary btn-info text-light mb-2" type="submit" id="activeMobile" data-toggle="modal" data-target="#ModalMobile">ارسال کد فعال سازی</button>
-            </form>
+            <div class="alert alert-danger">
+                <i class="bi bi-exclamation-triangle-fill"></i>
+                برای ادامه فعالیت باید تلفن همراه خود را در سیستم فراکوچ ثبت کنید
+                <form class="d-inline" method="get" action="/panel/active/mobile/">
+                    <button class="btn btn-info text-light btn-sm mb-2" type="submit" id="activeMobile" data-toggle="modal" data-target="#ModalMobile">ارسال کد فعال سازی</button>
+                </form>
+            </div>
+
         @else
             <div class="alert alert-warning">
                 جهت فعال سازی کد ارسال شده به تلفن همراه را وارد کنید
-            </div>
-            <form method="post" action="/panel/active/mobile/code">
-                {{csrf_field()}}
-                <div class="input-group">
-                    <input id="tel" type="text" class="form-control @error('tel') is-invalid @enderror" name="tel" value="{{ old('tel') }}" required autocomplete="tel">
-                    <div class="input-group-prepend ">
-                        <button class="btn btn-outline-secondary btn-info text-light m-0" type="submit" id="activeMobile" data-toggle="modal" data-target="#ModalMobile">فعال سازی</button>
+                <form method="post" action="/panel/active/mobile/code" class="mt-2">
+                    {{csrf_field()}}
+                    <div class="input-group">
+                        <input id="tel" type="text" class="form-control @error('tel') is-invalid @enderror" name="tel" value="{{ old('tel') }}" required autocomplete="tel">
+                        <div class="input-group-prepend ">
+                            <button class="btn btn-outline-secondary btn-info text-light m-0" type="submit" id="activeMobile" data-toggle="modal" data-target="#ModalMobile">فعال سازی</button>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
+
         @endif
 
     </div>
@@ -68,70 +71,73 @@
         </div>
     </div>
 </div>
-<div class="container-fluid">
-    @if($user->status_coach==0)
-        <div class="col-lg-4 col-md-6 col-sm-6 p-0">
-            <a href="panel/coach/create"  class="btn btn-info btn-lg">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-square" viewBox="0 0 16 16">
-                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                    <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z"/>
-                </svg>
-                <p>همکاری به عنوان کوچ</p>
+<div class="container-fluid border-top pt-3">
+    <div class="row p-3">
+        <div class="col-12">
+            <h5 class="pb-1">
+                <i class="bi bi-pen-fill"></i>
+                میز کار
+            </h5>
+        </div>
+        @if($user->status_coach==0)
+            <div class="col-lg-3 col-md-6 col-sm-6 p-0 text-center mt-3">
+                <a href="panel/coach/create"  class="btn btn-info btn-lg shadow-lg">
+                    <i class="bi bi-person-circle" style="font-size: 32px"></i>
+                    <p>همکاری به عنوان کوچ</p>
+                </a>
+            </div>
+        @elseif($user->status_coach=='-1')
+            <div class="col-lg-3 col-md-6 col-sm-6 p-0 text-center mt-3">
+                <a href="#"  class="btn btn-info btn-lg shadow-lg">
+                    <i class="bi bi-person-circle" style="font-size: 32px"></i>
+                    <p>درخواست همکاری شما در حال بررسی است</p>
+                </a>
+            </div>
+        @elseif($user->status_coach==1)
+            <div class="col-lg-3 col-md-6 col-sm-6 p-0 text-center mt-3">
+                <a href="/panel/coach/{{$user->id_coaches_table}}/edit"  class="btn btn-info btn-lg shadow-lg">
+                    <i class="bi bi-person-circle" style="font-size: 32px"></i>
+                    <p>شما یک کوچ هستید</p>
+                </a>
+            </div>
+        @elseif($user->status_coach==-2)
+            <div class="col-lg-3 col-md-6 col-sm-6 p-0 text-center mt-3">
+                <a href="/panel/coach/{{$user->id_coaches_table}}/edit"  class="btn btn-info btn-lg shadow-lg">
+                    <i class="bi bi-person-circle" style="font-size: 32px"></i>
+                    <p>درخواست همکاری شما رد شد</p>
+                </a>
+            </div>
+        @endif
+        <div class="col-lg-3 col-md-6 col-sm-6 p-0 text-center mt-3">
+            <a href="/panel/integrity/files"  class="btn btn-success btn-lg">
+                <i class="bi bi-camera-reels-fill" style="font-size: 32px"></i>
+                <p> ویدئوی وبینار تمامیت</p>
             </a>
         </div>
-    @elseif($user->status_coach=='-1')
-        <div class="col-lg-4 col-md-6 col-sm-6 p-0">
-            <a href="#"  class="btn btn-warning btn-lg">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-square" viewBox="0 0 16 16">
-                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                    <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z"/>
-                </svg>
-                <p>درخواست همکاری شما در حال بررسی است</p>
-            </a>
-        </div>
-    @elseif($user->status_coach==1)
 
-        <div class="col-lg-4 col-md-4 col-sm-6 p-0">
-            <a href="/panel/coach/{{$user->id_coaches_table}}/edit"  class="btn btn-success btn-lg">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-square" viewBox="0 0 16 16">
-                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                    <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z"/>
-                </svg>
-                <p>شما یک کوچ هستید</p>
+        <div class="col-lg-3 col-md-6 col-sm-6 p-0 text-center mt-3">
+            <a href="/panel/integrityTest"  class="btn btn-success btn-lg">
+                <i class="bi bi-pentagon-half" style="font-size: 32px"></i>
+                <p> تست تمامیت شخصی</p>
             </a>
         </div>
-    @elseif($user->status_coach==-2)
-        <div class="col-lg-4 col-md-4 col-sm-6 p-0">
-            <a href="/panel/coach/{{$user->id_coaches_table}}/edit"  class="btn btn-danger btn-lg">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-square" viewBox="0 0 16 16">
-                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                    <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z"/>
-                </svg>
-                <p>درخواست همکاری شما رد شد</p>
-            </a>
-        </div>
-    @endif
+        <div class="col-12 mt-3">
+            <!--
+            <p class="text-center text-bold">قوانین و مقررات شرکت در دوره‌ آنلاین</p>
+            <ol>
+                <li class="">دوره‌های آنلاین موسسه فراکوچ توسط سایت اسکای روم برگزار می‌شود و نیاز به نصب برنامه خاصی بر روی کامپیوتر یا گوشی موبایل نیست. </li>
+                <li>برای شرکت در دوره نیاز به اینترنت پر سرعت ندارید. سرعت اینترنت گوشی‌های موبایل پاسخگوی کلاس خواهد بود. </li>
+                <li> این وبینار در تاریخ 1 مهر روز پنجشنبه، از ساعت ۱۷ تا ساعت ۲۰ برگزار خواهد شد.</li>
+                <li> فایل صوتی کلاس توسط موسسه ضبط خواهد شد و پس از پایان دوره در غالب یک لینک دانلود به شرکت کننده داده خواهد شد تا ایشان بتواند فایل صوتی کلاس را دانلود کند تا بتواند بعدها با مرور آن مبحث را برای خودش مرور کند. </li>
+                <li>اگر برای وصل شدن به صفحه کلاس نیاز به راهنمایی داشته باشید می‌توانید روز قبل از کارگاه، از کاربران فنی موسسه راهنمایی بگیرید. این امکان در لحظه شروع کلاس عملا مقدور نخواهد بود. </li>
+                <li>تصویر شرکت کنندگان توسط مربی و سایر شرکت کنندگان دیده نخواهد شد. هر فردی می‌تواند پوشش خاص خودش را داشته باشد. </li>
+                <li>در صورت داشتن سوال، افراد مانند کلاس‌های حضوری می‌توانند با بلند کردن دست و وصل شدن میکروفون توسط استاد، سوال خود را مطرح کنند.</li>
+                <li>ثبت نام در دوره آموزشی به منزله پذیرش تمامی موارد فوق است.</li>
+            </ol>
+            -->
 
-    <div class="col-12 mt-3">
-        <a href="/panel/integrity/files" class="btn btn-success btn-block mt-3 btn-lg" target="_blank" >لینک مشاهده ویدئوی وبینار تمامیت</a>
+        </div>
     </div>
-    <div class="col-12 mt-3">
-        <!--
-        <p class="text-center text-bold">قوانین و مقررات شرکت در دوره‌ آنلاین</p>
-        <ol>
-            <li class="">دوره‌های آنلاین موسسه فراکوچ توسط سایت اسکای روم برگزار می‌شود و نیاز به نصب برنامه خاصی بر روی کامپیوتر یا گوشی موبایل نیست. </li>
-            <li>برای شرکت در دوره نیاز به اینترنت پر سرعت ندارید. سرعت اینترنت گوشی‌های موبایل پاسخگوی کلاس خواهد بود. </li>
-            <li> این وبینار در تاریخ 1 مهر روز پنجشنبه، از ساعت ۱۷ تا ساعت ۲۰ برگزار خواهد شد.</li>
-            <li> فایل صوتی کلاس توسط موسسه ضبط خواهد شد و پس از پایان دوره در غالب یک لینک دانلود به شرکت کننده داده خواهد شد تا ایشان بتواند فایل صوتی کلاس را دانلود کند تا بتواند بعدها با مرور آن مبحث را برای خودش مرور کند. </li>
-            <li>اگر برای وصل شدن به صفحه کلاس نیاز به راهنمایی داشته باشید می‌توانید روز قبل از کارگاه، از کاربران فنی موسسه راهنمایی بگیرید. این امکان در لحظه شروع کلاس عملا مقدور نخواهد بود. </li>
-            <li>تصویر شرکت کنندگان توسط مربی و سایر شرکت کنندگان دیده نخواهد شد. هر فردی می‌تواند پوشش خاص خودش را داشته باشد. </li>
-            <li>در صورت داشتن سوال، افراد مانند کلاس‌های حضوری می‌توانند با بلند کردن دست و وصل شدن میکروفون توسط استاد، سوال خود را مطرح کنند.</li>
-            <li>ثبت نام در دوره آموزشی به منزله پذیرش تمامی موارد فوق است.</li>
-        </ol>
-        -->
-        <a href="/panel/integrityTest" class="btn btn-block btn-lg btn-warning mb-5">برای آشنایی اولیه با موضوع تمامیت این تست را انجام دهید</a>
-    </div>
-
 </div>
 
 <!-- Modal Scores-->
