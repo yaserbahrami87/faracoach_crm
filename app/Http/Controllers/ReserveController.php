@@ -341,11 +341,6 @@ class ReserveController extends BaseController
                         }
                     }
 
-
-
-
-
-
                     $fi=$user->fi;
                     $off=0;
                     $final_off=$fi-$off;
@@ -385,10 +380,11 @@ class ReserveController extends BaseController
                 $duration='جلسه کوچینگ';
             }
             //ارسال پیامک برای مشتری
-            $msg='رزرو '.$duration." \n تاریخ ".$booking->start_date." \n ساعت ".$booking->start_time. "\n کوچ:".$user->fname." ".$user->lname."\n شماره تماس کوچ:".Auth::user()->tel;
-            $this->sendSms($user->tel,$msg);
-            //ارسال پیامک به کوچ
             $msg='رزرو '.$duration." \n تاریخ ".$booking->start_date." \n ساعت ".$booking->start_time. "\n مراجع:".Auth::user()->fname." ".Auth::user()->lname."\nتماس:".$user->tel;
+            $this->sendSms($user->tel,$msg);
+
+            //ارسال پیامک به کوچ
+            $msg='رزرو '.$duration." \n تاریخ ".$booking->start_date." \n ساعت ".$booking->start_time. "\n کوچ:".$user->fname." ".$user->lname."\n تماس کوچ:".Auth::user()->tel;
             $this->sendSms(Auth::user()->tel,$msg);
 
             alert()->success('رزرو با موفقیت انجام شد')->persistent('بستن');

@@ -224,18 +224,18 @@ class BookingController extends BaseController
      */
     public function show(booking $booking)
     {
+
         if((Auth::user()->id==$booking->user_id)||(Auth::user()->type==2))
         {
             $booking=booking::join('reserves','bookings.id','=','reserves.booking_id')
-                    ->where('bookings.id','=',$booking->id)
-                    ->first();
+                        ->where('bookings.id','=',$booking->id)
+                        ->first();
 
             $reserve=Reserve::join('users','reserves.user_id','=','users.id')
                         ->where('reserves.booking_id','=',$booking['booking_id'])
                         ->first();
 
             $states=$this->states();
-
             if(!is_null($reserve->city))
             {
                 $reserve['city']=$this->city($reserve->city);
