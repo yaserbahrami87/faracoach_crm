@@ -1,4 +1,137 @@
 @extends('master.index')
+
+@section('headerscript')
+    <style>
+        @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+        #team {
+            background: #eee !important;
+        }
+
+        .btn-primary:hover,
+        .btn-primary:focus {
+            /*
+            background-color: #108d6f;
+            border-color: #108d6f;*/
+            box-shadow: none;
+            outline: none;
+        }
+
+        .btn-primary {
+            color: #fff;
+           /* background-color: #007b5e;
+            border-color: #007b5e;*/
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        section .section-title {
+            text-align: center;
+            /*color: #007b5e;*/
+            margin-bottom: 50px;
+            text-transform: uppercase;
+        }
+
+        #team .card {
+            border: none;
+            background: #ffffff;
+        }
+
+        .image-flip:hover .backside,
+        .image-flip.hover .backside {
+            -webkit-transform: rotateY(0deg);
+            -moz-transform: rotateY(0deg);
+            -o-transform: rotateY(0deg);
+            -ms-transform: rotateY(0deg);
+            transform: rotateY(0deg);
+            border-radius: .25rem;
+        }
+
+        .image-flip:hover .frontside,
+        .image-flip.hover .frontside {
+            -webkit-transform: rotateY(180deg);
+            -moz-transform: rotateY(180deg);
+            -o-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+        }
+
+        .mainflip {
+            -webkit-transition: 1s;
+            -webkit-transform-style: preserve-3d;
+            -ms-transition: 1s;
+            -moz-transition: 1s;
+            -moz-transform: perspective(1000px);
+            -moz-transform-style: preserve-3d;
+            -ms-transform-style: preserve-3d;
+            transition: 1s;
+            transform-style: preserve-3d;
+            position: relative;
+        }
+
+        .frontside {
+            position: relative;
+            -webkit-transform: rotateY(0deg);
+            -ms-transform: rotateY(0deg);
+            z-index: 2;
+            margin-bottom: 30px;
+        }
+
+        .backside {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: white;
+            -webkit-transform: rotateY(-180deg);
+            -moz-transform: rotateY(-180deg);
+            -o-transform: rotateY(-180deg);
+            -ms-transform: rotateY(-180deg);
+            transform: rotateY(-180deg);
+            -webkit-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+            -moz-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+            box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+        }
+
+        .frontside,
+        .backside {
+            -webkit-backface-visibility: hidden;
+            -moz-backface-visibility: hidden;
+            -ms-backface-visibility: hidden;
+            backface-visibility: hidden;
+            -webkit-transition: 1s;
+            -webkit-transform-style: preserve-3d;
+            -moz-transition: 1s;
+            -moz-transform-style: preserve-3d;
+            -o-transition: 1s;
+            -o-transform-style: preserve-3d;
+            -ms-transition: 1s;
+            -ms-transform-style: preserve-3d;
+            transition: 1s;
+            transform-style: preserve-3d;
+        }
+
+        .frontside .card,
+        .backside .card {
+            min-height: 312px;
+        }
+
+        .backside .card a {
+            font-size: 18px;
+            /* color: #007b5e !important;*/
+        }
+
+        .frontside .card .card-title,
+        .backside .card .card-title {
+            /*color: #007b5e !important; */
+        }
+
+        .frontside .card .card-body img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+        }
+    </style>
+@endsection
 @section('row1')
     <div class="col-12 mt-5">
         <div class="row">
@@ -57,23 +190,79 @@
                             موردی برای نمایش پیدا نشد
                         </div>
                     @else
-                        @foreach($coaches as $item)
-                            <div class="col-xs-12 col-sm-4 col-lg-3 col-xl-3  box-products mb-1">
-                                <div class="card p-1 text-center d-block shadow">
-                                    <a href="/coach/{{$item->username}}" data-toggle="tooltip" data-placement="top" title="{{$item->fname}} {{$item->lname}}">
-                                        @if(strlen($item->personal_image)>0)
-                                            <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="rounded-circle" alt="..." width="150px" height="150px">
-                                        @else
-                                            <img src="{{asset('/documents/users/default-avatar.png')}}" class="rounded-circle" alt="..." width="150px" height="150px">
-                                        @endif
-                                        <div class="card-body  text-center">
-                                            <p class="text-bold">{{$item->fname}} {{$item->lname}}</p>
-                                            <a href="/coach/{{$item->username}}" class="btn btn-primary btn-sm" >مشاهده اطلاعات </a>
+                        <section id="team" class="pb-5">
+                            <div class="container">
+                                <div class="row">
+                                    <!-- Team member -->
+                                    @foreach($coaches as $item)
+                                        <div class="col-xs-12 col-sm-6 col-md-4">
+                                            <div class="image-flip" >
+                                                <div class="mainflip flip-0">
+                                                    <div class="frontside">
+                                                        <div class="card">
+                                                            <div class="card-body text-center">
+                                                                <p>
+                                                                    @if(strlen($item->personal_image)>0)
+                                                                        <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="rounded-circle img-fluid" alt="..." />
+                                                                    @else
+                                                                        <img src="{{asset('/documents/users/default-avatar.png')}}" class="rounded-circle img-fluid" />
+                                                                    @endif
+                                                                <h4 class="card-title">{{$item->fname}} {{$item->lname}}</h4>
+                                                                <p class="card-text">{{$item->aboutme}}</p>
+                                                                <a href="/coach/{{$item->username}}" class="btn btn-primary btn-block">مشاهده اطلاعات</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="backside">
+                                                        <div class="card">
+                                                            <div class="card-body text-center mt-4">
+                                                                <a href="/coach/{{$item->username}}">
+                                                                    <h4 class="card-title">{{$item->fname}} {{$item->lname}}</h4>
+                                                                </a>
+
+                                                                <p class="card-text">{{$item->aboutme}}</p>
+                                                                <ul class="list-inline">
+                                                                    @if(strlen($item->instagram)>0)
+                                                                        <li class="list-inline-item">
+                                                                            <a class="social-icon text-xs-center" target="_blank" href="https://www.instagram.com/{{$item->instagram}}">
+                                                                                <i class="fa fa-instagram"></i>
+                                                                            </a>
+                                                                        </li>
+                                                                    @endif
+
+                                                                    @if(strlen($item->telegram)>0)
+                                                                        <li class="list-inline-item">
+                                                                            <a class="social-icon text-xs-center" target="_blank" href="https://t.me/{{$item->telegram}}">
+                                                                                <i class="fa fa-telegram"></i>
+                                                                            </a>
+                                                                        </li>
+                                                                    @endif
+                                                                    @if(strlen($item->email)>0)
+                                                                        <li class="list-inline-item">
+                                                                            <a class="social-icon text-xs-center" target="_blank" href="mailto:{{$item->email}}">
+                                                                                <i class="fa fa-envelope"></i>
+                                                                            </a>
+                                                                        </li>
+                                                                    @endif
+                                                                    <li class="list-inline-item">
+                                                                        <a class="social-icon text-xs-center" target="_blank" href="tel:02191091121">
+                                                                            <i class="fa fa-phone"></i>
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                                <a href="/coach/{{$item->username}}" class="btn btn-primary btn-block">مشاهده اطلاعات</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </a>
+                                    @endforeach
+                                    <!-- ./Team member -->
+
                                 </div>
                             </div>
-                        @endforeach
+                        </section>
                     @endif
                 </div>
             </div>

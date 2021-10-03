@@ -184,8 +184,12 @@
                     </div>
                     <div class="row">
                         <div class="avatar col-xl-3 col-lg-3 col-md-3 col-sm-12 text-center">
-                            <img alt="" src="{{asset('/documents/users/'.$coach->personal_image)}}">
-                        <!--<div>{{asset('/documents/users/'.$coach->personal_image)}}"</div>-->
+
+                            @if(strlen($coach->personal_image)>0)
+                                <img src="{{asset('/documents/users/'.$coach->personal_image)}}" />
+                            @else
+                                <img src="{{asset('/documents/users/default-avatar.png')}}" />
+                            @endif
                         </div>
                         <div class="info col-sm-12 col-md-6 col-xs-6 col-lg-6">
 
@@ -213,15 +217,13 @@
                             @endif
                             @if(strlen($coach->email)>0)
                                 <a class="circle" href="mailto:{{$coach->email}}" title="پست الکترونیکی">
-                                    <i class="fa fa-envelope"></i>
+                                    <i class="fa fa-mail-bulk"></i>
                                 </a>
                             @endif
+                            <a class="circle" href="tel:02191091121" title="شماره همراه">
+                                <i class="fa fa-phone"></i>
+                            </a>
 
-                            @if(strlen($coach->tel)>0)
-                                <a class="circle" href="tel:02191091121" title="شماره همراه">
-                                    <i class="fa fa-phone"></i>
-                                </a>
-                            @endif
                             <div class="mt-3">
                                 <span class="fa fa-star checked p-1"></span>
                                 <span class="fa fa-star checked p-1"></span>
