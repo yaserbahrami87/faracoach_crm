@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\booking;
 use App\category_coach;
 use App\category_gettingknow;
 use App\category_post;
@@ -1656,6 +1657,72 @@ class BaseController extends Controller
         {
             return $query->first();
         });
+    }
+
+
+    public function get_booking($id=NULL,$user_id=NULL,$start_date=NULL,$start_time=NULL,$duration_booking=NULL,$status=NULL,$condition=NULL,$paginate='get')
+    {
+        return booking::when($id,function($query)use($id)
+        {
+            return $query->where('id','=',$id);
+        })
+        ->when($user_id,function($query)use($user_id)
+        {
+            return $query->where('user_id','=',$user_id);
+        })
+        ->when($start_date,function($query)use($start_date)
+        {
+            return $query->where('start_date','=',$start_date);
+        })
+        ->when($start_time,function($query)use($start_time)
+        {
+            return $query->where('start_date','=',$start_time);
+        })
+        ->when($duration_booking,function($query)use($duration_booking)
+        {
+            return $query->where('duration_booking','=',$duration_booking);
+        })
+        ->when($status,function($query)use($status)
+        {
+            return $query->where('status','=',$status);
+        })
+        ->when($condition,function($query)use($condition)
+        {
+            return $query->where($condition[0],$condition[1],$condition[2]);
+        })
+        ->when($paginate=='paginate',function($query)
+        {
+            return $query->paginate($this->countPage());
+        })
+        ->when($paginate=='get',function($query)
+        {
+            return $query->get();
+        })
+        ->when($paginate=='first',function($query)
+        {
+            return $query->first();
+        });
+
+    }
+
+
+    public function get_cartUser()
+    {
+        if(Auth::check()) {
+
+
+            return reserve::join('bookings', 'bookings.id', '=', 'reserves.booking_id')
+                ->join('users', 'users.id', '=', 'bookings.user_id')
+                ->where('reserves.user_id', '=', Auth::user()->id)
+                ->where('bookings.start_date', '>', $this->dateNow)
+                ->where('reserves.status', '=', 0)
+                ->select('users.*', 'bookings.*', 'reserves.*', 'reserves.id as reserves_id')
+                ->get();
+        }
+        else
+        {
+            return NULL;
+        }
     }
 
 

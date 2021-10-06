@@ -63,6 +63,7 @@ class BookingController extends BaseController
         }
         else
         {
+
            // وصعیت 1 برای رزرو های در حال رزرو و 0 رزرو شده هاست
             $booking = booking::where('user_id', '=', Auth::user()->id)
                 ->where(function($query)
@@ -306,10 +307,29 @@ class BookingController extends BaseController
 
         if($status)
         {
-            $reserve=$this->get_reserve(NULL,NULL,$booking->id,NULL,NULL,NULL,'first');   reserve::where('booking_id','=',$booking->id)
-                                ->first();
+            $reserve=$this->get_reserve(NULL,NULL,$booking->id,NULL,NULL,NULL,'first');
+//                    reserve::where('booking_id','=',$booking->id)
+//                                ->first();
+
             $reserve->status=$request->status;
             $reserve->save();
+            if ($reserve->duration_booking == 1) {
+                $duration = 'جلسه معارفه';
+            } else {
+                $duration = 'جلسه کوچینگ';
+            }
+
+            $user = booking::join('users', 'bookings.user_id', '=', 'users.id')
+                            ->join('coaches', 'users.id', '=', 'coaches.user_id')
+                            ->where('bookings.id', '=', $reserve['booking_id'])
+                            ->first();
+
+            //ارسال پیامک برای کوچ
+            $msg =$duration . " \n " . $user->start_date . " \n " . $user->start_time . "\n " . Auth::user()->fname . " " . Auth::user()->lname . "\nلغو شد" ;
+            $this->sendSms($user->tel, $msg);
+            //ارسال پیامک به مراجعه
+            $msg =$duration . " \n " . $user->start_date . " \n ساعت " . $user->start_time . "\n کوچ:" . $user->fname . " " . $user->lname . "\nلغو شد" ;
+            $this->sendSms(Auth::user()->tel, $msg);
             alert()->success('جلسه با موفقیت لغو شد')->persistent('بستن');
         }
         else
@@ -317,7 +337,7 @@ class BookingController extends BaseController
             alert()->error('خطا در لغو جلسه')->persistent('بستن');
         }
 
-        return redirect('/panel/booking/accept_reserve_user');
+        return back();//('/panel/booking/accept_reserve_user');
     }
 
     /**
@@ -370,11 +390,15 @@ class BookingController extends BaseController
                     ->where('bookings.status','=','0')
                     ->count();
 
+        //چک کردن تعداد رزروهای ناقص کامل نشده در سبد خرید
+        $cart=$this->get_reserve(NULL,Auth::user()->id,NULL,NULL,NULL,0,'get');
+
         if (count($booking) == 0) {
             return '<div class="alert alert-warning" role="alert">برای این تاریخ ساعت رزرو یافت نشد</div>';
         } else {
             return view('reserveCoaching')
                 ->with('booking', $booking)
+                ->with('cart', $cart)
                 ->with('user',$user);
         }
     }
@@ -395,10 +419,14 @@ class BookingController extends BaseController
 
     public function acceptReserve()
     {
-        $booking=booking::wherein('status',[0,2,3])
-                ->where('user_id','=',Auth::user()->id)
-                ->orderby('id','desc')
+        $booking=booking::join('reserves','bookings.id','=','reserves.booking_id')
+                ->join('users','users.id','=','reserves.user_id')
+                ->wherein('bookings.status',[0,2,3])
+                ->where('bookings.user_id','=',Auth::user()->id)
+                ->orderby('bookings.id','desc')
+                ->select('bookings.*','users.fname','users.lname','bookings.id as booking_id')
                 ->paginate($this->countPage());
+
         foreach ($booking as $item)
         {
             switch ($item->duration_booking)
@@ -410,8 +438,22 @@ class BookingController extends BaseController
                     $item->duration_booking = 'کوچینگ 60 دقیقه ای';
                     break;
             }
+
+            switch ($item->status)
+            {
+                case '0':
+                    $item->caption_status = 'رزرو شده';
+                    break;
+                case '3':
+                    $item->caption_status = 'برگزار شد';
+                    break;
+                case '4':
+                    $item->caption_status = 'لغو شد';
+                    break;
+            }
         }
-        return view('panelUser.booking')
+        return view('panelUser.bookingAcceptReserveCoach')
+//        return view('panelUser.booking')
                 ->with('booking', $booking)
                 ->with('dateNow', $this->dateNow);
     }
@@ -420,14 +462,15 @@ class BookingController extends BaseController
     //جلسات رزرو شده کاربر ساده
     public function accept_reserve_user()
     {
-        $booking=booking::join('reserves','bookings.id','=','reserves.booking_id')
+        $booking=booking::join('users','users.id','=','bookings.user_id')
+                ->join('reserves','bookings.id','=','reserves.booking_id')
                 ->where('reserves.user_id','=',Auth::user()->id)
                 ->where(function($query){
                       $query->orwhere('reserves.status','=',1)
                             ->orwhere('reserves.status','=',3)
                             ->orwhere('reserves.status','=',4);
                 })
-                ->select('bookings.*','reserves.*','reserves.id as id_reserves')
+                ->select('bookings.*','reserves.*','reserves.id as id_reserves','bookings.id as bookings_id','users.fname','users.lname','users.personal_image')
                 ->orderby('reserves.id','desc')
                 ->paginate($this->countPage());
 

@@ -53,6 +53,7 @@
     <div class="col-md-12 mt-3 table-responsive">
         <table class="table border table-hover table-striped">
             <tr>
+                <th></th>
                 <th scope="col">تاریخ شروع</th>
                 <th scope="col">ساعت شروع</th>
                 <th scope="col">ساعت پایان</th>
@@ -60,6 +61,8 @@
                 <th scope="col">وضعیت</th>
                 @if(Auth::user()->status_coach==1)
                     <th scope="col">حذف</th>
+                @else
+                    <th>لغو جلسه</th>
                 @endif
             </tr>
 
@@ -75,6 +78,9 @@
                     @default    <tr>
                                 @break
                 @endswitch
+                    <td>
+                        <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="img-circle"  width="50px" height="50px"/>
+                    </td>
                     <td>
                         @if(Auth::user()->status_coach==1 )
 
@@ -99,6 +105,17 @@
                                 {{ csrf_field() }}
                                 <button  class="btn btn-danger" type="submit">
                                     <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                    @else
+                        <td>
+                            <form method="POST" action="/booking/{{$item->booking_id}}" onsubmit="return confirm('آیا از لغو جلسه اطمینان دارید؟')">
+                                {{csrf_field()}}
+                                {{method_field('PATCH')}}
+                                <input type="hidden" name="status" value="4" />
+                                <button type="submit" class="btn btn-danger">لغو جلسه
+                                    <i class="bi bi-x-lg"></i>
                                 </button>
                             </form>
                         </td>

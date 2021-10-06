@@ -335,11 +335,15 @@ Route::resource('reserve','ReserveController');
 Route::get('/coaches/all','CoachController@viewAllCoaches');
 Route::get('/coach/{coach}','CoachController@show');
 
+//Cart
+Route::get('/cart','ReserveController@showCart');
+
 //Category GettingKnow
 Route::get('/showListChildGettingKnow/{id}','CategoryGettingknowController@showListChild');
 
 //Coupon
 Route::post('/coupon/check','CouponController@check');
+Route::post('/coupon/checkoff','CouponController@checkOff');
 
 //TWEETS
 Route::resource('tweets','TweetController');

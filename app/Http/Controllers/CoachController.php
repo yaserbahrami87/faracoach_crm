@@ -161,7 +161,8 @@ class CoachController extends BaseController
                     ->join('users','users.id','=','feedback_coachings.user_id')
                     ->where('coaches.user_id','=',$user->id)
                     ->paginate(10);
-
+            $condition=['start_date','>',$this->dateNow];
+            $bookings=$this->get_booking(NULL,$coach->user_id,NULL,NULL,NULL,1,$condition,'get');
 
             if(is_null($coach))
             {
@@ -176,16 +177,25 @@ class CoachController extends BaseController
                 }
 
                 $dateNow = verta();
-                $dateShamsi = $dateNow->format('Y-m-d');
+                $dateNow->addDays(1);
+                $dateShamsi = $dateNow->format('Y-m-d H:i:s');
+
+
                 $date_Miladi = Verta::getGregorian($dateNow->format('Y'), $dateNow->format('m'), $dateNow->format('d'));
 
                 $date_Miladi = $date_Miladi[0] . '-' . $date_Miladi[1] . '-' . $date_Miladi[2];
 
+                //چک کردن تعداد رزروهای ناقص کامل نشده در سبد خرید
+                $cart=$this->get_cartUser();
+
+
                 return view('coach')
                     ->with('coach', $coach)
+                    ->with('bookings', $bookings)
                     ->with('dateNow', $dateShamsi)
                     ->with('date_Miladi', $date_Miladi)
-                    ->with('feedbacks',$feedbacks);
+                    ->with('feedbacks',$feedbacks)
+                    ->with('cart',$cart);
             }
         }
     }

@@ -61,6 +61,14 @@
       -->
       @if(Auth::check())
             <ul class="nav nav-pills">
+                @if(request()->is('coach/*'))
+                    <li class="nav-item ">
+                        <a class="nav-link"  href="/cart" >
+                            <span class="badge badge-light">{{$cart->count()}}</span>
+                            <i class="bi bi-cart-fill"></i>
+                        </a>
+                    </li>
+                @endif
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                         {{Auth::user()->fname}} {{Auth::user()->lname}}

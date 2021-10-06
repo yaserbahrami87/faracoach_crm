@@ -104,7 +104,7 @@ class ReserveController extends BaseController
      */
     public function update(Request $request, reserve $reserve)
     {
-        dd($reserve);
+
     }
 
     /**
@@ -115,7 +115,25 @@ class ReserveController extends BaseController
      */
     public function destroy(reserve $reserve)
     {
-        //
+        if($reserve->user_id==Auth::user()->id)
+        {
+            $status=$reserve->delete();
+            if($status)
+            {
+                  alert()->success('زمان مورد نظر حذف شد')->persistent('بستن');
+            }
+            else
+            {
+                  alert()->error('خطا در حذف زمان رزرو شده مورد نظر')->persistent('بستن');
+            }
+
+        }
+        else
+        {
+            alert()->error('شما مجاز به حذف این مورد نیستید')->persistent('بستن');
+        }
+
+        return back();
     }
 
     //محاسبه قیمت و ثبت اطلاعات
@@ -191,9 +209,12 @@ class ReserveController extends BaseController
 
         if($status)
         {
-            return view('formReserveBills')
-                ->with('reserve',$reserve)
-                ->with('status',NULL);
+
+//            return view('formReserveBills')
+//                ->with('reserve',$reserve)
+//                ->with('status',NULL);
+            alert()->success('تاریخ مورد نظر به سبد شما اضافه شد.')->persistent('بستن');
+            return "<script>window.location.reload()</script>";
         }
         else
         {
@@ -205,196 +226,84 @@ class ReserveController extends BaseController
     //ثبت نهایی رزرو
     public  function insert(Request $request)
     {
-
-        $this->validate($request,
-            [
-                'booking_id'    =>'required|numeric',
-                'subject'       =>'required|string',
-                'type_booking'  =>'required|numeric',
-                'details'       =>'nullable|string',
-            ]
-        );
-
-        $reserve=reserve::where('booking_id','=',$request['booking_id'])
-                        ->first();
-
-        if(is_null($reserve)) {
-            $status = reserve::create($request->all()+
-                [
-                    'user_id'       => Auth::user()->id,
-                    'status'        =>1
-                ]);
-        }
-        else
+        $cart = $this->get_cartUser();
+        foreach ($cart as $item)
         {
-            if($reserve->status==0)
+            $reserve = reserve::where('booking_id', '=', $item['booking_id'])
+                ->first();
+
+            if ($reserve->status == 0)
             {
+                $count_meeting_fi = $this->get_optionByName('count_meeting');
+                $count_meeting_fi = $count_meeting_fi->option_value;
 
-                if(!is_null($request['coupon']))
-                {
-                    $users=booking::join('users','bookings.user_id','=','users.id')
-                            ->where('bookings.id','=',$request['booking_id'])
-                            ->first();
+                $customer_satisfaction_fi = $this->get_optionByName('customer_satisfaction');
+                $customer_satisfaction_fi = $customer_satisfaction_fi->option_value;
 
-                    $coupon=coupon::where('coupon','=',$request['coupon'])
-                                            ->where('user_id','=',$users->id)
-                                            ->first();
+                $change_customer_fi = $this->get_optionByName('change_customer');
+                $change_customer_fi = $change_customer_fi->option_value;
 
-                    if(!is_null($coupon))
-                    {
-                        if ($coupon->count == 0) {
-                            return ('<div class="alert alert-danger">تعداد کوپن مورد نظر استفاده شده است</div>');
-                        }
-                        else if($coupon->expire_date < $this->dateNow) {
-                            return ('<div class="alert alert-danger">کوپن مورد نظر منقضی شده است</div>');
-                        }
-                    }
-                    else
-                    {
-                        return ('<div class="alert alert-danger">کوپن مورد نظر یافت نشد</div>');
-                    }
-                }
+                $count_recommendation_fi = $this->get_optionByName('count_recommendation');
+                $count_recommendation_fi = $count_recommendation_fi->option_value;
 
-                if(isset($coupon))
-                {
-                    $count_meeting_fi=$this->get_optionByName('count_meeting');
-                    $count_meeting_fi=$count_meeting_fi->option_value;
+                $user = booking::join('users', 'bookings.user_id', '=', 'users.id')
+                    ->join('coaches', 'users.id', '=', 'coaches.user_id')
+                    ->where('bookings.id', '=', $item['booking_id'])
+                    ->first();
+                $count_meeting = $user->count_meeting;
+                $customer_satisfaction = $user->customer_satisfaction;
+                $change_customer = $user->change_customer;
+                $count_recommendation = $user->count_recommendation;
 
-                    $customer_satisfaction_fi=$this->get_optionByName('customer_satisfaction');
-                    $customer_satisfaction_fi=$customer_satisfaction_fi->option_value;
+                $fi = $user->fi;
+                $off = 0;
+                $final_off = $fi - $off;
 
-                    $change_customer_fi=$this->get_optionByName('change_customer');
-                    $change_customer_fi=$change_customer_fi->option_value;
-
-                    $count_recommendation_fi=$this->get_optionByName('count_recommendation');
-                    $count_recommendation_fi=$count_recommendation_fi->option_value;
-
-                    $user=booking::join('users','bookings.user_id','=','users.id')
-                        ->join('coaches','users.id','=','coaches.user_id')
-                        ->where('bookings.id','=',$request['booking_id'])
-                        ->first();
-                    $count_meeting=$user->count_meeting;
-                    $customer_satisfaction=$user->customer_satisfaction;
-                    $change_customer=$user->change_customer;
-                    $count_recommendation=$user->count_recommendation;
-
-                    $fi=$user->fi;
-                    $off=($fi*$coupon->discount)/100;
-                    $final_off=$fi-$off;
-                    $status=$reserve->update($request->all()+
+                $reserve->update(
                     [
-                        'status'    =>1,
-                        'off'       =>$coupon->discount,
-                        'final_off' =>$final_off,
-                        'fi'        =>$fi,
+                        'status' => 1,
                     ]);
+                $status=$reserve->save();
 
-                    if($status)
-                    {
-                        if ($coupon->count != '-1') {
-                            $coupon->count--;
-                            $coupon->save();
-                        }
-                    }
-                }
-                else
-                {
-                    $count_meeting_fi=$this->get_optionByName('count_meeting');
-                    $count_meeting_fi=$count_meeting_fi->option_value;
 
-                    $customer_satisfaction_fi=$this->get_optionByName('customer_satisfaction');
-                    $customer_satisfaction_fi=$customer_satisfaction_fi->option_value;
-
-                    $change_customer_fi=$this->get_optionByName('change_customer');
-                    $change_customer_fi=$change_customer_fi->option_value;
-
-                    $count_recommendation_fi=$this->get_optionByName('count_recommendation');
-                    $count_recommendation_fi=$count_recommendation_fi->option_value;
-
-                    $user=booking::join('users','bookings.user_id','=','users.id')
-                        ->join('coaches','users.id','=','coaches.user_id')
-                        ->where('bookings.id','=',$request['booking_id'])
+                if ($status) {
+                    $booking = booking::where('id', '=', $item['booking_id'])
                         ->first();
-                    $count_meeting=$user->count_meeting;
-                    $customer_satisfaction=$user->customer_satisfaction;
-                    $change_customer=$user->change_customer;
-                    $count_recommendation=$user->count_recommendation;
-
-                    if($request['coupon'])
-                    {
-                        $coupon=coupon::where('coupon','=',$reserve['coupon'])
-                            ->where('user_id','=',$users->id)
-                            ->first();
-
-                        if(!is_null($coupon))
-                        {
-                            if ($coupon->count == 0) {
-                                return ('<div class="alert alert-danger">تعداد کوپن مورد نظر استفاده شده است</div>');
-                            }
-                            else if($coupon->expire_date < $this->dateNow) {
-                                return ('<div class="alert alert-danger">کوپن مورد نظر منقضی شده است</div>');
-                            }
-                        }
-                        else
-                        {
-                            return ('<div class="alert alert-danger">کوپن مورد نظر یافت نشد</div>');
-                        }
-                    }
-
-                    $fi=$user->fi;
-                    $off=0;
-                    $final_off=$fi-$off;
-
-                    $status=$reserve->update($request->all()+
-                    [
-                        'status'    =>1,
-                        'final_off' =>$final_off,
-                        'fi'        =>$fi,
-                    ]);
-                }
-
-
-                if($status)
-                {
-                    $booking=booking::where('id','=',$request['booking_id'])
-                            ->first();
-                    $booking->status=0;
+                    $booking->status = 0;
                     $booking->save();
 
                 }
+            } else {
+                alert()->error('این وقت رزرو شده است')->persistent('بستن');
+                return back();
             }
-            else
-            {
-                return ('<div class="alert alert-danger">این وقت رزرو شده است</div>');
+
+
+            if ($status) {
+                if ($user->duration_booking == 1) {
+                    $duration = 'جلسه معارفه';
+                } else {
+                    $duration = 'جلسه کوچینگ';
+                }
+                //ارسال پیامک برای مشتری
+                $msg =$duration . " \n " . $booking->start_date . " \n ساعت " . $booking->start_time . "\n " . Auth::user()->fname . " " . Auth::user()->lname . "\nتماس:" .Auth::user()->tel;
+                $this->sendSms($user->tel, $msg);
+
+                //ارسال پیامک به کوچ
+                $msg =$duration . " \n " . $booking->start_date . " \n  " . $booking->start_time . "\n کوچ:" . $user->fname . " " . $user->lname . "\n تماس کوچ:" .  $user->tel;
+                $this->sendSms(Auth::user()->tel, $msg);
+
+
+
+            } else {
+                alert()->error('خطا در محاسبه')->persistent('بستن');
+                return back();
             }
         }
 
-        if($status)
-        {
-            if($user->duration_booking==1)
-            {
-                $duration='جلسه معارفه';
-            }
-            else
-            {
-                $duration='جلسه کوچینگ';
-            }
-            //ارسال پیامک برای مشتری
-            $msg='رزرو '.$duration." \n ".$booking->start_date." \n ساعت ".$booking->start_time. "\n ".Auth::user()->fname." ".Auth::user()->lname."\nتماس:".$user->tel;
-            $this->sendSms($user->tel,$msg);
 
-            //ارسال پیامک به کوچ
-            $msg='رزرو '.$duration." \n ".$booking->start_date." \n ساعت ".$booking->start_time. "\n کوچ:".$user->fname." ".$user->lname."\n تماس کوچ:".Auth::user()->tel;
-            $this->sendSms(Auth::user()->tel,$msg);
-
-            alert()->success('رزرو با موفقیت انجام شد')->persistent('بستن');
-            return '<script>window.location="/"</script>';
-
-        }
-        else
-        {
-            return ('<div class="alert alert-danger">خطا در محاسبه</div>');
-        }
+        alert()->success('رزرو با موفقیت انجام شد')->persistent('بستن');
+        return '<script>window.location="/"</script>';
     }
 
 
@@ -403,7 +312,7 @@ class ReserveController extends BaseController
     {
 
         $this->validate($request,[
-            'result_coach'  =>'required|string|persian_alpha',
+            'result_coach'  =>'required|string|',
             'score'         =>'required|numeric|between:1,5',
             'status'        =>'required|numeric|between:1,4'
 
@@ -465,13 +374,21 @@ class ReserveController extends BaseController
                         break;
                 case '0':$item->caption_status='رزرو ناقص';
                     break;
-
             }
         }
         $dateNow=$this->dateNow;
         return view('panelAdmin.reserves')
                     ->with('booking',$reserve)
                     ->with('dateNow',$dateNow);
+    }
+
+    public function showCart()
+    {
+        //چک کردن تعداد رزروهای ناقص کامل نشده در سبد خرید
+        $cart=$this->get_cartUser();
+//        $cart=$this->get_reserve(NULL,Auth::user()->id,NULL,NULL,NULL,0,'get');
+        return view('cart')
+                    ->with('cart',$cart);
     }
 
 

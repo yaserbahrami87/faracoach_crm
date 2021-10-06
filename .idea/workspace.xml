@@ -23,10 +23,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/views/cart.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/panelUser/bookingAcceptReserveCoach.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/allCoaches.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/allCoaches.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BookingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BookingController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CoachController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CoachController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CouponController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CouponController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReserveController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReserveController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/coach.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/coach.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/integrity_webinarDownload.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/integrity_webinarDownload.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/formReserve.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/formReserve.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/formReserveBills.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/_formReserveBills.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/master/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/master/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/master/navbarTop.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/master/navbarTop.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/booking.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/booking.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/profile.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/reserveCoaching.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/reserveCoaching.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/reserveFi.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/_reserveFi.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -210,16 +225,16 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\faracoach_crm\resources\views\panelUser" />
+      <recent name="C:\wamp64\www\faracoach_crm\resources\views\panelAdmin" />
+      <recent name="C:\xampp\htdocs\laravel\faracoach_crm\resources\views\panelUser" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\wamp64\www\faracoach_crm\resources\views\panelAdmin" />
       <recent name="D:\xampp\htdocs\faracoach_crm\resources\views" />
       <recent name="D:\xampp\htdocs\faracoach_crm\resources\views\panelAdmin" />
       <recent name="C:\xampp\htdocs\laravel\faracoach_crm\resources\views\panelAdmin" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\wamp64\www\faracoach_crm\resources\views\panelUser" />
-      <recent name="C:\wamp64\www\faracoach_crm\resources\views\panelAdmin" />
-      <recent name="C:\xampp\htdocs\laravel\faracoach_crm\resources\views\panelUser" />
     </key>
   </component>
   <component name="RunManager">
@@ -659,7 +674,12 @@
       <workItem from="1632827975301" duration="2846000" />
       <workItem from="1632894957671" duration="20825000" />
       <workItem from="1632941841529" duration="43000" />
-      <workItem from="1633239406219" duration="12032000" />
+      <workItem from="1633239406219" duration="14102000" />
+      <workItem from="1633283536525" duration="7856000" />
+      <workItem from="1633324716046" duration="17837000" />
+      <workItem from="1633372771682" duration="4103000" />
+      <workItem from="1633424438775" duration="33333000" />
+      <workItem from="1633494753767" duration="11421000" />
     </task>
     <servers />
   </component>
@@ -703,14 +723,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="286" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.728@0.0.1366.728" timestamp="1632224450467" />
-    <state x="339" y="162" key="run.anything.popup" timestamp="1632322457517">
+    <state x="339" y="162" key="run.anything.popup" timestamp="1633452651974">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1632322457517" />
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1633253633199">
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1633452651974" />
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1633504011434">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1633253633199" />
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1633504011434" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

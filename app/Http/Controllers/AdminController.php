@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\booking;
 use App\categoryTag;
 use App\followup;
 use App\message;
 use App\problemfollowup;
+use App\reserve;
 use App\tag;
 use App\User;
 use App\verify;
@@ -251,6 +253,30 @@ class AdminController extends BaseController
                     $verifyStatus=true;
                 }
             }
+
+            //تعداد جلسات رزرو شده تعیین تکلیف نشده
+            $condition=['start_date','<',$this->dateNow];
+            $undefind_booking=booking::where('user_id','=',Auth::user()->id)
+                                        ->where('status','=',0)
+                                        ->where('start_date','<',$this->dateNow)
+                                        ->get();
+//            $this->get_booking(NULL,Auth::user()->id,NULL,NULL,NULL,0,$condition,'get');
+            if($undefind_booking->count()>0)
+            {
+                alert()->warning(' تعداد '.$undefind_booking->count()." جلسه رزرو شده شما تعیین تکلیف نشده است.\n لطفا نسبت به برگزار شدن یا عدم برگزاری جلسه اقدام نمائید. ")->persistent('بستن');
+            }
+
+            //تعداد جلسات مراجعی که بازخورد ثبت نکرده است
+            $reserve_notFeedback=reserve::leftjoin('feedback_coachings','reserves.booking_id','=','feedback_coachings.booking_id')
+                        ->where('reserves.status','=',3)
+                        ->where('reserves.user_id','=',Auth::user()->id)
+                        ->whereNull('feedback_coachings.created_at')
+                        ->get();
+            if($undefind_booking->count()>0)
+            {
+                alert()->warning(' برای تعداد '.$reserve_notFeedback->count()." جلسه برگزار شده بازخورد ثبت نشده است ")->persistent('بستن');
+            }
+
 
             return view('panelUser.home')
                 ->with('user',$user)

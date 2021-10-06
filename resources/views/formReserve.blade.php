@@ -24,7 +24,7 @@
             <label for="details">توضیحات</label>
             <textarea class="form-control form-control" id="details" rows="3" name="details"></textarea>
         </div>
-        <button type="button" class="btn btn-primary btn-lg btn-block " id="mohasebe">محاسبه هزینه</button>
+        <button type="button" class="btn btn-primary btn-lg btn-block " id="mohasebe">اضافه به سبد</button>
         <div class="card" >
             <div class="card-body" id="div_mohasebe">
 

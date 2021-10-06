@@ -170,6 +170,50 @@
                 padding: 13px;
             }
         }
+
+
+
+
+        .highlighted-1 > span
+        {
+            color: #EF6C00 !important;
+        }
+
+        .vpd-day-effect {
+            background-color: transparent !important;
+            border: solid 2px #EF6C00;
+        }
+
+        .vpd-addon-list-item {
+            color: #ef6c00 !important;
+        }
+
+        .vpd-selected {
+             background-color: transparent;
+        }
+
+        .highlighted-2 {
+            color: #E91E63;
+        }
+
+        .vpd-day-effect {
+            background-color: transparent !important;
+        }
+
+        .vpd-addon-list-item {
+            color: #e91e63 !important;
+        }
+        .vpd-selected {
+            background-color: transparent;
+            color:#000000 !important;
+        }
+
+
+
+
+
+
+
     </style>
 
 @endsection
@@ -240,7 +284,7 @@
             </div>
             <div class="col-sm-12 col-md-8 col-xs-8 col-lg-8 pb-3" >
                 <div class="tab_container" id="tabs">
-                    <input id="tab1" type="radio" name="tabs">
+                    <input id="tab1" type="radio" name="tabs" checked>
                     <label for="tab1"><i class="fa fa-graduation-cap"></i><br><span>سوابق تحصیلی </span></label>
 
                     <input id="tab2" type="radio" name="tabs">
@@ -252,7 +296,7 @@
                     <input id="tab4" type="radio" name="tabs">
                     <label for="tab4"><i class="fa fa-certificate"></i><br><span>مدارک</span></label>
 
-                    <input id="tab5" type="radio" name="tabs" checked>
+                    <input id="tab5" type="radio" name="tabs" >
                     <label for="tab5"><i class="fa fa-book"></i><br><span>مقالات </span></label>
 
                     <section id="content5" class="tab-content">
@@ -323,11 +367,24 @@
                     <div class="card-header  bg-info text-light">
                         رزرو جلسه کوچینگ
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" id="app" >
                         @if(Auth::check())
                             <p class="text-bold border-bottom mb-2 pb-2">انتخاب روز</p>
-                            <div class="calender"></div>
-                            <input type="hidden" id="calenderSelector" />
+
+                            <date-picker
+                                :highlight="highlight"
+                                v-model="date"
+                                inline
+                                name="start_date"
+                                min="{{$dateNow}}"
+                                id="start_date"
+                            ></date-picker>
+
+
+
+
+
+
                             <input type="hidden" id="coach_id" value="{{$coach->id}}" />
                             <p class="text-bold mb-2 mt-3 pb-2 border-bottom">انتخاب ساعت</p>
                             <div class="col-12 p-0" id="show_bookings">
@@ -336,6 +393,7 @@
                             <div class="row" id="reserve">
 
                             </div>
+
                         @else
                             <div class="alert alert-warning text-center">
                                 <p>برای رزرو جلسه باید وارد سایت شوید</p>
@@ -484,38 +542,110 @@
 
 @section('footerScript')
 
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment-jalaali@0.7.4/build/moment-jalaali.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-persian-datetime-picker/dist/vue-persian-datetime-picker-browser.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            components: {
+                DatePicker: VuePersianDatetimePicker
+            },
+            data: {
+                time:"{{old('time')}}",
+                dates: [],
+                date:[],
+                message:'asdasdasd'
+            },
+            methods: {
+                highlight(formatted, dateMoment, checkingFor) {
+                    let attributes = {'title': 'در ' + formatted+" فاقد ساعت خالی می باشد. "};
+
+                    @foreach($bookings as $item)
+                    if (checkingFor === 'day' && formatted === '{{$item->start_date}}'){
+                        attributes['class'] = 'highlighted-1';
+                        attributes['title'] = 'رزرو جلسه';
+                    }
+                    @endforeach
+                    return attributes;
+                }
+            }
+        });
+
+
+
+
+
+    </script>
+
 
 
     <script src="{{asset('/dashboard/assets/js/datepicker.js')}}"> </script>
     <script>
         $(".calender").datepicker({
-            altField : "#calenderSelector",
-            //altSecondaryField : "#calenderSecondarySelector",
-            format : "short",
-            today    :true,
-            date:'{{$date_Miladi}}',
-            minDate  :'{{$dateNow}}',
-            view:'day',
-            select: {
-                highlight(formatted, dateMoment, checkingFor) {
-                    let attributes = {'title': 'Today is ' + formatted};
-                    if (checkingFor === 'day' && formatted === '1400-02-28'){
-                        attributes['class'] = 'highlighted-1';
-                        attributes['title'] = 'جشن چهارشنبه سوری';
-                    }
-                    if (checkingFor === 'day' && formatted === '2021/04/29'){
-                        attributes['class'] = 'highlighted-2';
-                        attributes['title'] = 'روز ملی شدن صنعت نفت';
-                    }
-                    return attributes;
-                }
-            }
+            {{--altField : "#calenderSelector",--}}
+            {{--//altSecondaryField : "#calenderSecondarySelector",--}}
+            {{--format : "short",--}}
+            {{--today    :true,--}}
+            {{--date:'{{$date_Miladi}}',--}}
+            {{--minDate  :'{{$dateNow}}',--}}
+            {{--view:'day',--}}
+            {{--methods: {--}}
+            {{--    highlight(formatted, dateMoment, checkingFor) {--}}
+            {{--        let attributes = {'title': 'Today is ' + formatted};--}}
+            {{--        if (checkingFor === 'day' && formatted === '1400/07/28'){--}}
+            {{--            attributes['class'] = 'highlighted-1';--}}
+            {{--            attributes['title'] = 'جشن چهارشنبه سوری';--}}
+            {{--        }--}}
+            {{--        if (checkingFor === 'day' && formatted === '1400/7/29'){--}}
+            {{--            attributes['class'] = 'highlighted-2';--}}
+            {{--            attributes['title'] = 'روز ملی شدن صنعت نفت';--}}
+            {{--        }--}}
+            {{--        return attributes;--}}
+            {{--    }--}}
+            {{--}--}}
 
         });
         function changes_datepicker(){
 
+            // var coach=$("#coach_id").val();
+            // var calenderSelector=$("#calenderSelector").val();
+            // if((coach==0) &&(calenderSelector==0) )
+            // {
+            //     var loading = '<div class="alert alert-warning" role="alert">خطا در انتخاب رزروها</div>';
+            // }
+            // else {
+            //     var loading = '<div class="col-12 text-center"><div class="spinner-border text-primary text-center" role="status"><span class="sr-only">Loading...</span></div></div>';
+            //     $("#show_bookings").html(loading);
+            //     $.ajax({
+            //         type: 'GET',
+            //         url: "/booking/createajax?coach=" + coach + "&calenderSelector=" + calenderSelector,
+            //         success: function (data) {
+            //             $("#show_bookings").html(data);
+            //         }
+            //     });
+            // }
+
+        }
+        function toggleIcon(e) {
+            $(e.target)
+                .prev('.panel-heading')
+                .find(".more-less")
+                .toggleClass('glyphicon-plus glyphicon-minus');
+        }
+        $('.panel-group').on('hidden.bs.collapse', toggleIcon);
+        $('.panel-group').on('shown.bs.collapse', toggleIcon);
+
+
+
+
+
+        $('.vpd-day').click(function()
+        {
+            console.log($("#vpd-start_date").val());
             var coach=$("#coach_id").val();
-            var calenderSelector=$("#calenderSelector").val();
+            var calenderSelector=$("#vpd-start_date").val();
             if((coach==0) &&(calenderSelector==0) )
             {
                 var loading = '<div class="alert alert-warning" role="alert">خطا در انتخاب رزروها</div>';
@@ -531,16 +661,7 @@
                     }
                 });
             }
-
-        }
-        function toggleIcon(e) {
-            $(e.target)
-                .prev('.panel-heading')
-                .find(".more-less")
-                .toggleClass('glyphicon-plus glyphicon-minus');
-        }
-        $('.panel-group').on('hidden.bs.collapse', toggleIcon);
-        $('.panel-group').on('shown.bs.collapse', toggleIcon);
+        });
 
     </script>
 @endsection
