@@ -424,7 +424,7 @@ class BookingController extends BaseController
                 ->wherein('bookings.status',[0,2,3])
                 ->where('bookings.user_id','=',Auth::user()->id)
                 ->orderby('bookings.id','desc')
-                ->select('bookings.*','users.fname','users.lname','bookings.id as booking_id')
+                ->select('bookings.*','users.fname','users.lname','bookings.id as booking_id','users.personal_image')
                 ->paginate($this->countPage());
 
         foreach ($booking as $item)

@@ -20,6 +20,7 @@
                 <h3>لیست جلسات رزرو شده</h3>
             </div>
             @foreach($booking as $item)
+                {{dd($item)}}
             <div class="col-lg-3 col-sm-6" id="listFriends">
                 <div class="card hovercard  shadow-sm">
                     <div class="cardheader">
