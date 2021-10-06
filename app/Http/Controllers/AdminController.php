@@ -272,7 +272,7 @@ class AdminController extends BaseController
                         ->where('reserves.user_id','=',Auth::user()->id)
                         ->whereNull('feedback_coachings.created_at')
                         ->get();
-            if($undefind_booking->count()>0)
+            if($reserve_notFeedback->count()>0)
             {
                 alert()->warning(' برای تعداد '.$reserve_notFeedback->count()." جلسه برگزار شده بازخورد ثبت نشده است ")->persistent('بستن');
             }

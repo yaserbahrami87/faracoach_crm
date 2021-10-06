@@ -23,25 +23,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/cart.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/panelUser/bookingAcceptReserveCoach.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BookingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BookingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CoachController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CoachController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CouponController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CouponController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReserveController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReserveController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/coach.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/coach.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/formReserve.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/formReserve.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/formReserveBills.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/_formReserveBills.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/master/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/master/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/master/navbarTop.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/master/navbarTop.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/booking.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/booking.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/profile.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/reserveCoaching.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/reserveCoaching.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/reserveFi.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/_reserveFi.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/bookingAcceptReserveCoach.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/bookingAcceptReserveCoach.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -679,7 +663,7 @@
       <workItem from="1633324716046" duration="17837000" />
       <workItem from="1633372771682" duration="4103000" />
       <workItem from="1633424438775" duration="33333000" />
-      <workItem from="1633494753767" duration="11421000" />
+      <workItem from="1633494753767" duration="13104000" />
     </task>
     <servers />
   </component>
