@@ -24,6 +24,7 @@
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BookingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BookingController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -661,7 +662,7 @@
       <workItem from="1633324716046" duration="17837000" />
       <workItem from="1633372771682" duration="4103000" />
       <workItem from="1633424438775" duration="33333000" />
-      <workItem from="1633494753767" duration="15671000" />
+      <workItem from="1633494753767" duration="15973000" />
     </task>
     <servers />
   </component>

@@ -451,6 +451,11 @@ class BookingController extends BaseController
                     $item->caption_status = 'لغو شد';
                     break;
             }
+
+            if(is_null($item->personal_image))
+            {
+                $item->personal_image='default-avatar.png';
+            }
         }
         return view('panelUser.bookingAcceptReserveCoach')
 //        return view('panelUser.booking')
