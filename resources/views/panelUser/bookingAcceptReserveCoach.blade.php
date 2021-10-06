@@ -53,14 +53,16 @@
                         <a class="btn btn-primary btn-sm" href="/panel/booking/{{$item->id}}" title="نمایش" >
                             <i class="bi bi-eye-fill"></i>
                         </a>
-                        <form class="d-inline-block" method="POST" action="/booking/{{$item->booking_id}}" onsubmit="return confirm('آیا از لغو جلسه اطمینان دارید؟')">
-                            {{csrf_field()}}
-                            {{method_field('PATCH')}}
-                            <input type="hidden" name="status" value="4" />
-                            <button type="submit" class="btn btn-danger">
-                                لغو جلسه
-                            </button>
-                        </form>
+                        @if($item->start_date>$dateNow)
+                            <form class="d-inline-block" method="POST" action="/booking/{{$item->booking_id}}" onsubmit="return confirm('آیا از لغو جلسه اطمینان دارید؟')">
+                                {{csrf_field()}}
+                                {{method_field('PATCH')}}
+                                <input type="hidden" name="status" value="4" />
+                                <button type="submit" class="btn btn-danger">
+                                    لغو جلسه
+                                </button>
+                            </form>
+                        @endif
                     </div>
                 </div>
             </div>
