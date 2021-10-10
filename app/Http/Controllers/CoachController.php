@@ -275,7 +275,7 @@ class CoachController extends BaseController
             'count_recommendation'  =>'required|numeric|between:0,1000',
             'category'              =>'required|array',
             'typecoach_id'          =>'required|numeric',
-            'fi'                    =>'required|numeric',
+            'fi'                    =>'nullable|numeric',
             'status'                =>'required|numeric|between:-2,5'
         ],[
             'education_background.required' =>'سوابق تحصیلی اجباریست',

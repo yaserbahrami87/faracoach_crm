@@ -99,7 +99,7 @@
     <div class=" container col-xs-12 col-md-8 col-lg-8 col-xl-8">
         <div class="line">
             <div class="card-body">
-                <form method="post" action="/admin/coach/{{$coach->id}}" >
+                <form method="post" action="/panel/coach/{{$coach->id}}" >
                     {{csrf_field()}}
                     {{method_field('PATCH')}}
                     <label for="education_background">سوابق تحصیلی *</label>
@@ -109,9 +109,10 @@
                     <div class="form-group">
                         <label for="certificates">گواهینامه ها *</label>
                         <textarea class="form-control @error('certificates') is-invalid @enderror " name="certificates" id="certificates" rows="3">{{$coach->certificates}}</textarea>
-                        <div id="btn">
+                        <!-- <div id="btn">
                             <button type=" " class="btn btn-primary btn-sm" >مشاهده گواهینامه</button>
                         </div>
+                        -->
                     </div>
                     <div class="form-group">
                         <label for="experience">سوابق کاری *</label>
