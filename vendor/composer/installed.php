@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '6763d411f33021c1e0eefdfff18491ac55c0d29e',
+    'reference' => 'badee9f39b3ce2e84890464dc2aeb934edf045a2',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -132,6 +132,16 @@
       array (
       ),
       'reference' => '65b2d8ee1f10915efb3b55597da3404f096acba2',
+    ),
+    'econea/nusoap' => 
+    array (
+      'pretty_version' => 'dev-master',
+      'version' => 'dev-master',
+      'aliases' => 
+      array (
+        0 => '0.10.x-dev',
+      ),
+      'reference' => 'e110d63658bdb6161775956c08aef02648011b9c',
     ),
     'egulias/email-validator' => 
     array (
@@ -548,7 +558,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '6763d411f33021c1e0eefdfff18491ac55c0d29e',
+      'reference' => 'badee9f39b3ce2e84890464dc2aeb934edf045a2',
     ),
     'laravel/tinker' => 
     array (

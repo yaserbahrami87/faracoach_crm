@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\checkout;
 use App\reserve;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -259,6 +260,9 @@ class ReserveController extends BaseController
                 $off = 0;
                 $final_off = $fi - $off;
 
+
+
+                //از اینجا تا خط 278 پاک شود
                 $reserve->update(
                     [
                         'status' => 1,
@@ -271,30 +275,29 @@ class ReserveController extends BaseController
                         ->first();
                     $booking->status = 0;
                     $booking->save();
-
                 }
             } else {
                 alert()->error('این وقت رزرو شده است')->persistent('بستن');
                 return back();
             }
 
-
+              //این شرک بهتعریف جلسه باید حذف شود
             if ($status) {
                 if ($user->duration_booking == 1) {
                     $duration = 'جلسه معارفه';
                 } else {
                     $duration = 'جلسه کوچینگ';
                 }
-                //ارسال پیامک برای مشتری
+//                //ارسال پیامک برای مشتری
                 $msg =$duration . " \n " . $booking->start_date . " \n ساعت " . $booking->start_time . "\n " . Auth::user()->fname . " " . Auth::user()->lname . "\nتماس:" .Auth::user()->tel;
                 $this->sendSms($user->tel, $msg);
-
-                //ارسال پیامک به کوچ
+//
+//                //ارسال پیامک به کوچ
                 $msg =$duration . " \n " . $booking->start_date . " \n  " . $booking->start_time . "\n کوچ:" . $user->fname . " " . $user->lname . "\n تماس کوچ:" .  $user->tel;
                 $this->sendSms(Auth::user()->tel, $msg);
-
-
-
+//
+//
+//
             } else {
                 alert()->error('خطا در محاسبه')->persistent('بستن');
                 return back();
@@ -303,6 +306,7 @@ class ReserveController extends BaseController
 
 
         alert()->success('رزرو با موفقیت انجام شد')->persistent('بستن');
+//        return $this->checkout(Auth::user()->id,$reserve->id,$reserve->final_off,'جلسه',Auth::user()->email,Auth::user()->tel,$duration.$user->fname . " " . $user->lname);
         return '<script>window.location="/"</script>';
     }
 

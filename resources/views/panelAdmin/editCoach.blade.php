@@ -42,7 +42,7 @@
                 <div class="form-group">
                     <label for="customer_satisfaction">تعداد رضایت مشتریان *</label>
                     <input type="number" class="form-control" id="customer_satisfaction" name="customer_satisfaction" aria-describedby="customer_satisfactiongHelp" min="0" max="1000" value="{{$coach->customer_satisfaction}}"/>
-                    <small id="customer_satisfactionHelp" class="form-text text-muted"> تعداد افرادی که رضایت کامل از جلسات مشاوره داشته اند وارد کنید</small>
+                    <small id="customer_satisfactionHelp" class="form-text text-muted"> درصد رضایت مراجعین خود را وارد کنید</small>
                 </div>
                 <div class="form-group">
                     <label for="change_customer">تعداد تبدیل مشتری *</label>
@@ -114,5 +114,14 @@
                 }
             }
        @endforeach
+    </script>
+
+    <script src="{{asset('/ckeditor/ckeditor.js')}}"></script>
+    <script>
+        CKEDITOR.replace( 'education_background' );
+        CKEDITOR.replace( 'certificates' );
+        CKEDITOR.replace( 'experience' );
+        CKEDITOR.replace( 'skills' );
+        CKEDITOR.replace( 'researches' );
     </script>
 @endsection

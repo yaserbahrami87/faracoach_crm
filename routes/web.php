@@ -107,6 +107,12 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
        return view('panelUser.integrity_webinarDownload');
     });
 
+    //Gift Certificates
+    Route::get('/gift/certificate',function()
+    {
+        return view('gift_certificate');
+    });
+
 });
 
 
@@ -275,7 +281,9 @@ Route::post('/panel/checkCodewithoutPass','VerifyController@checkCodewithoutPass
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
-
+// Verify Tel Landings
+Route::get('/verify/active/tel', 'VerifyController@store_landings');
+Route::get('/verify/active/tel/check/{code}','VerifyController@checkCode_landings');
 
 // Landing Page
 Route::get('/landingPage','landingController@index');
@@ -302,11 +310,19 @@ Route::resource('landPage','LandPageController');
 
 
 //checkout
+Route::get('/checkout/callback','CheckoutController@callback');
 Route::resource('checkout','CheckoutController');
 
 
 //comments
 Route::post('/post/addcomment/{post}','CommentController@store');
+
+//gift
+Route::get('/gift',function()
+{
+    return view('gift');
+});
+
 
 
 //integrity test

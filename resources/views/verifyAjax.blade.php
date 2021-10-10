@@ -1,13 +1,11 @@
 <div class="class-12 text-center">
-    <form >
-        <p>لطفا کد ارسال شده به تلفن همراه {{$tel}} را وارد کنید</p>
-        <div class="col-12" id="resultVerify"></div>
-        <div class="form-group " id="bodyActiveSms">
-        <input type="text" class="form-control" id="code"  max="6" />
-        <input type="hidden" name="tel" value="{{$tel}}" id="tel"/>
-        </div>
-        <button type="button" class="btn btn-success btn-block" id="submitVerifySMS" >ثبت</button>
-    </form>
+    <p> لطفا کد ارسال شده به تلفن همراه {{$tel}} را وارد کنید </p>
+    <div class="col-12" id="resultVerify"></div>
+    <div class="form-group " id="bodyActiveSms">
+    <input type="text" class="form-control" id="code"  max="6" />
+    <input type="hidden" name="tel" value="{{$tel}}" id="tel"/>
+    </div>
+    <button type="button" class="btn btn-success btn-block" id="submitVerifySMS" >ثبت</button>
 </div>
 
 <script src={{asset("js/jquery-3.5.1.slim.min.js")}} ></script>
@@ -21,7 +19,7 @@
         {
             $.ajax({
                 type:'get',
-                url:"/active/mobile/verify/"+data,
+                url:"/verify/active/tel/check/"+data,
                 success:function(data)
                 {
                     $("#resultVerify").html(data);

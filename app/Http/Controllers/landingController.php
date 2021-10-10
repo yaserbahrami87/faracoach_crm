@@ -53,7 +53,7 @@ class landingController extends BaseController
             'fname' =>'required|min:3|persian_alpha',
             'lname' =>'required|min:3|persian_alpha',
             'tel'   =>'required|iran_mobile',
-            'email' =>'required|email'
+            'email' =>'nullable|email'
         ]);
 
         $check=User::where('email','=',$request['email'])
@@ -198,5 +198,112 @@ class landingController extends BaseController
     public function destroy($id)
     {
         //
+    }
+
+    public function store_landing_tel(Request $request)
+    {
+        $this->validate(request(),
+            [
+                'fname' =>'required|min:3|persian_alpha',
+                'lname' =>'required|min:3|persian_alpha',
+                'tel'   =>'required|iran_mobile',
+                'email' =>'nullable|email'
+            ]);
+
+        $check=User::where('email','=',$request['email'])
+            ->orwhere('tel','=',$request['tel'])
+            ->count();
+
+        if($check==1)
+        {
+            $user=User::where('tel','=',$request['tel'])
+                ->orwhere('email','=',$request['email'])
+                ->first();
+
+            if(!is_null($user) )
+            {
+                if ($user->fname != $request['fname']) {
+                    $user->fname = $request['fname'];
+                }
+
+                if($user->lname!=$request['lname'])
+                {
+                    $user->lname=$request['lname'];
+                }
+
+
+                if($user->email!=$request['email'])
+                {
+                    $user->email=$request['email'];
+                }
+
+                if($user->tel!=$request['tel'])
+                {
+                    $user->tel!=$request['tel'];
+                }
+                $status=$user->update();
+            }
+            else
+            {
+                $status=User::create($request->all() +
+                    [
+                        'date_fa'       =>$this->dateNow,
+                        'time_fa'       =>$this->timeNow
+                    ]);
+
+            }
+
+            if($status)
+            {
+                $msg = "پروفایل با موفقیت به روزرسانی شد";
+                $errorStatus = "success";
+            }
+            else
+            {
+                $msg = "خطا در بروزرسانی اطلاعات";
+                $errorStatus = "danger";
+            }
+            return  redirect()
+                ->route('freePackageLanding')
+                ->with('status',true)
+                ->with('msg',$msg)
+                ->with('errorStatus',$errorStatus);
+
+        }
+        else if($check>1)
+        {
+            $msg="بیش از 1 نفر با اطلاعات وارد شده در سیستم موجوداست";
+            $errorStatus="danger";
+            return  back()
+                ->with('msg',$msg)
+                ->with('errorStatus',$errorStatus);
+        }
+        else if($check==0)
+        {
+            $status = User::create($request->all()+
+                [
+                    'type'               =>'1',
+                    'password'           =>Hash::make('12345678'),
+                    'resource'           =>'کمپین',
+                    'detailsresource'    =>'17 ربیع 1399'
+                ]);
+            if($status)
+            {
+                $msg = "اطلاعات با موفقیت ثبت شد";
+                $errorStatus = "success";
+                $msgSMS=$request->fname." ".$request->lname. " عزیز اطلاعات شما در سیستم فراکوچ ثبت شد";
+                $this->sensSms($request['tel'],$msgSMS);
+            }
+            else
+            {
+                $msg = "خطا در ثبت اطلاعات";
+                $errorStatus = "danger";
+            }
+            return  redirect()
+                ->route('freePackageLanding')
+                ->with('msg',$msg)
+                ->with('errorStatus',$errorStatus)
+                ->with('status',true);
+        }
     }
 }

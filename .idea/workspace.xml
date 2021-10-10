@@ -23,8 +23,44 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/app/lib/zarinpal.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/gift.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/icf_certificate.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/icf_logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/videos/export.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/callBackCheckout.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/gift.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/gift_certificate.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/faracoach_crm.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/faracoach_crm.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/bookingAcceptReserveCoach.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/bookingAcceptReserveCoach.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CheckoutController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CheckoutController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReserveController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReserveController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/VerifyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/VerifyController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/landingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/landingController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/checkout.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/checkout.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/payment.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/payment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_08_25_114119_create_checkouts_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_08_25_114119_create_checkouts_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/dashboard/dist/css/bootstrap-select.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/dashboard/dist/css/bootstrap-select.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/dashboard/dist/js/bootstrap-select.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/dashboard/dist/js/bootstrap-select.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/coach.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/coach.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/editCoach.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/editCoach.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/boxMadarak.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/boxMadarak.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/editCoach.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/editCoach.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/editPost.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/editPost.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/insertPost.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/insertPost.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/verifyAjax.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/verifyAjax.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/InstalledVersions.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/InstalledVersions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/installed.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/installed.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,9 +215,13 @@
       <path value="$PROJECT_DIR$/vendor/mobiledetect/mobiledetectlib" />
       <path value="$PROJECT_DIR$/vendor/shetabit/payment" />
       <path value="$PROJECT_DIR$/vendor/shetabit/multipay" />
+      <path value="$PROJECT_DIR$/vendor/econea/nusoap" />
     </include_path>
   </component>
   <component name="ProjectId" id="1jQZPkLojuzQbLLpfKUzyIIeJHa" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -196,7 +236,7 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/panelUser" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/images" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -209,6 +249,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\faracoach_crm\public\images" />
+      <recent name="C:\wamp64\www\faracoach_crm\public\videos" />
       <recent name="C:\wamp64\www\faracoach_crm\resources\views\panelUser" />
       <recent name="C:\wamp64\www\faracoach_crm\resources\views\panelAdmin" />
       <recent name="C:\xampp\htdocs\laravel\faracoach_crm\resources\views\panelUser" />
@@ -662,7 +704,17 @@
       <workItem from="1633324716046" duration="17837000" />
       <workItem from="1633372771682" duration="4103000" />
       <workItem from="1633424438775" duration="33333000" />
-      <workItem from="1633494753767" duration="16201000" />
+      <workItem from="1633494753767" duration="21826000" />
+      <workItem from="1633543450693" duration="1189000" />
+      <workItem from="1633599158910" duration="13291000" />
+      <workItem from="1633625107925" duration="13028000" />
+      <workItem from="1633683086793" duration="39000" />
+      <workItem from="1633683170111" duration="206000" />
+      <workItem from="1633698911961" duration="10409000" />
+      <workItem from="1633754317249" duration="21879000" />
+      <workItem from="1633795496232" duration="182000" />
+      <workItem from="1633815744451" duration="47000" />
+      <workItem from="1633844042990" duration="4623000" />
     </task>
     <servers />
   </component>
@@ -690,10 +742,10 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="413" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1629824587918">
+    <state x="413" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1633627512926">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1629824587918" />
+    <state x="413" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1633627512926" />
     <state x="184" y="8" key="SettingsEditor" timestamp="1632374771441">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -706,14 +758,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="286" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.728@0.0.1366.728" timestamp="1632224450467" />
-    <state x="339" y="162" key="run.anything.popup" timestamp="1633452651974">
+    <state x="339" y="162" key="run.anything.popup" timestamp="1633715054497">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1633452651974" />
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1633504011434">
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1633715054497" />
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1633760218921">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1633504011434" />
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1633760218921" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

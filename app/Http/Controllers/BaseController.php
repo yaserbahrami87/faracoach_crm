@@ -7,12 +7,14 @@ use App\category_coach;
 use App\category_gettingknow;
 use App\category_post;
 use App\categoryTag;
+use App\checkout;
 use App\city;
 use App\comment;
 use App\course;
 use App\coursetype;
 use App\followbyCategory;
 use App\followup;
+use App\lib\zarinpal;
 use App\like;
 use App\message;
 use App\option;
@@ -96,11 +98,21 @@ class BaseController extends Controller
 
         } catch (\Kavenegar\Exceptions\ApiException $e) {
             // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
+            if(Auth::check())
+            {
+                $insert_user_id=Auth::user()->id;
+            }
+            else
+            {
+                $insert_user_id=NULL;
+            }
+
+
             $msg=[];
             $msg['msg'] = $e->errorMessage();
             $msg['status']=false;
             sms::create([
-                'insert_user_id' => Auth::user()->id,
+                'insert_user_id' => $insert_user_id,
                 'recieve_user' => $tel,
                 'comment' => $message,
                 'date_fa' => $this->dateNow,
@@ -1725,5 +1737,33 @@ class BaseController extends Controller
         }
     }
 
+    public  function checkout($user_id=NULL,$product_id=NULL,$Amount=NULL,$type='جلسه',$Email=NULL,$Mobile=NULL,$Description=NULL)
+    {
+//        $Amount=$fi;
+//        $Email=Auth::user()->email;
+//        $Mobile=Auth::user()->tel;
+//        $Description="تست فروش";
 
+        //Redirect to URL You can do it also by creating a form
+        $order = new zarinpal();
+
+        $res = $order->pay($Amount,$Email,$Mobile,$Description);
+
+        $status=checkout::create([
+            'user_id'       =>$user_id,
+            'product_id'    =>$product_id,
+            'price'         =>$Amount,
+            'type'          =>$type,
+            'authority'     =>$res,
+            'description'   =>$Description,
+        ]);
+        if($status)
+        {
+            return redirect('https://www.zarinpal.com/pg/StartPay/' . $res);
+        }
+        else
+        {
+            return redirect('/');
+        }
+    }
 }

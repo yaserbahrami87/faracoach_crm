@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\landPage;
 use App\verify;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -44,50 +45,50 @@ class VerifyController extends BaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($request)
+    public function store(Request $request)
     {
-        if(isset($request))
+        $six_digit_random_number = mt_rand(100000, 999999);
+
+        $this->validate($request,
+            [
+                'tel'   =>'required|iran_mobile'
+            ]
+        );
+
+
+        $user=$this->get_user($request['tel'],NULL,NULL,NULL,true);
+        if(is_null($user))
         {
-            $six_digit_random_number = mt_rand(100000, 999999);
-            if(preg_match('/^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}$/',$request))
-            {
-                $user=$this->get_user($request['tel'],NULL,NULL,NULL,true);
-                if(is_null($user)) {
-                    $status = verify::where('tel', '=', $request)
-                        ->where('verify', '=', 1)
-                        ->count();
+            $status = verify::where('tel', '=', $request)
+                ->where('verify', '=', 1)
+                ->count();
 
-                    if ($status == 0) {
-                        $status = verify::create(
-                            [
-                                'tel' => $request,
-                                'code' => $six_digit_random_number,
-                                'date_fa' => $this->dateNow,
-                                'time_fa' => $this->timeNow
-                            ]);
-                        if ($status) {
-                            $message = "کد فعالی سازی شما در سیستم فراکوچ : " . $six_digit_random_number;
-                            $this->sendSms($request, $message);
-                            return view('verifyAjax')
-                                ->with('tel', $request);
-                        } else {
-                            echo('<div  class="alert alert-danger">خطا</div>');
-                        }
-                    } else {
+            if ($status == 0) {
+                $status = verify::create(
+                    [
+                        'tel' => $request,
+                        'code' => $six_digit_random_number,
+                        'date_fa' => $this->dateNow,
+                        'time_fa' => $this->timeNow
+                    ]);
+                if ($status) {
+                    $message = "کد فعالی سازی شما در سیستم فراکوچ : " . $six_digit_random_number;
+                    $this->sendSms($request, $message);
+                    return view('verifyAjax')
+                        ->with('tel', $request);
+                } else {
+                    echo('<div  class="alert alert-danger">خطا</div>');
+                }
+            } else {
 
-                        echo('<div  class="alert alert-danger">شماره همراه قبلا ثبت و تایید شده است</div>');
-                    }
-                }
-                else
-                {
-                    echo('<div  class="alert alert-danger">شماره وارد شده قبلا در سیستم ثبت شده است</div>');
-                }
-            }
-            else
-            {
-                return '<div class="alert alert-danger">لظفا تلفن همراه را جهت تایید درست وارد کنید</div>';
+                echo('<div  class="alert alert-danger">شماره همراه قبلا ثبت و تایید شده است</div>');
             }
         }
+        else
+        {
+            echo('<div  class="alert alert-danger">شماره وارد شده قبلا در سیستم ثبت شده است</div>');
+        }
+
 
     }
 
@@ -586,6 +587,69 @@ class VerifyController extends BaseController
                 }
             }
         }
+    }
 
+
+    //کد فعال سازی شماره لندینگ ها
+    public function store_landings(Request $request)
+    {
+        $six_digit_random_number = mt_rand(100000, 999999);
+
+        $this->validate($request,
+            [
+                'tel' => 'required|iran_mobile'
+            ]
+        );
+
+        $status = verify::create(
+            [
+                'tel' => $request->tel,
+                'type' => 'landing',
+                'code' => $six_digit_random_number,
+                'date_fa' => $this->dateNow,
+                'time_fa' => $this->timeNow
+            ]);
+        if ($status) {
+            landPage::create(
+                [
+                    'tel' => $request->tel,
+                    'resource' => 'جایزه',
+                ]
+            );
+            $message = "کد فعالی سازی شما در سیستم فراکوچ : " . $six_digit_random_number;
+//                $this->sendSms($request->tel, $message);
+            return view('verifyAjax')
+                ->with('tel', $request->tel);
+        } else {
+            echo('<div  class="alert alert-danger">خطا</div>');
+        }
+    }
+
+
+    public function checkCode_landings($code)
+    {
+
+        if(preg_match('/\d/',$code))
+        {
+            $count=verify::where('code','=',$code)
+                ->where('verify','=',0)
+                ->count();
+            if($count==1)
+            {
+                $verify=verify::where('code','=',$code)->first();
+                $verify->verify=1;
+                $verify->save();
+                echo "<script> $('#tel_verified').val('".$verify->tel."');$('#bodyActiveSms').hide();$('#submitVerifySMS').hide();$('#tel_landing').hide();   $('#frm_tel_landing').show();    </script>";
+                return '<div  class="alert alert-success">شماره همراه تایید شد</div>';
+            }
+            else
+            {
+                return '<div  class="alert alert-danger">کد وارد شده اشتباه است</div>';
+            }
+        }
+        else
+        {
+            return '<div  class="alert alert-danger">لطفا کد را درست وارد کنید</div>';
+        }
     }
 }

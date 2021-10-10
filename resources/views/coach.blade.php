@@ -303,7 +303,7 @@
                         <div class="row">
                             <div class="col-lg-8 col-md-8 col-sm-12 col-xl-8">
                                 <h3>مقالات</h3><hr>
-                                <p>{{$coach->researches}}</p>
+                                <p>{!! $coach->researches !!} </p>
                             </div>
                             <div class="col-lg-4 col-md-4 col-xl-4">
                                 <img src="{{asset('/images/researches.jpg')}}" alt="" width="100%" >
@@ -316,7 +316,8 @@
                         <div class="row">
                             <div class="col-lg-8 col-md-8 col-sm-12 col-xl-8">
                                 <h3>مدارک</h3><hr>
-                                <p>{{$coach->certificates}}</p>
+                                <p>
+                                {!! $coach->certificates !!}</p>
                             </div>
                             <div class="col-lg-4 col-md-4 col-xl-4">
                                 <img src="{{asset('/images/certificate.png')}}" alt="" width="100%">
@@ -328,7 +329,8 @@
                         <div class="row">
                             <div class="col-lg-8 col-md-8 col-sm-12 col-xl-8">
                                 <h3>مهارت ها</h3><hr>
-                                <p>{{$coach->skills}}</p>
+
+                                {!! $coach->skills !!}
                             </div>
                             <div class="col-lg-4 col-md-4 col-xl-4">
                                 <img src="{{asset('/images/20943948.png')}}" alt="" width="100%">
@@ -340,7 +342,7 @@
                         <div class="row">
                             <div class="col-lg-8 col-md-8 col-sm-12 col-xl-8">
                                 <h3>سوابق شغلی</h3><hr>
-                                <p>{{$coach->experience}}</p>
+                                <p>{!! $coach->experience !!}   </p>
                             </div>
                             <div class="col-lg-4 col-md-4 col-xl-4">
                                 <img src="{{asset('/images/job.png')}}" alt="" width="100%">
@@ -352,7 +354,7 @@
                         <div class="row">
                             <div class="col-lg-8 col-md-8 col-sm-12 col-xl-8">
                                 <h3>سوابق تحصیلی</h3><hr>
-                                <p>{{$coach->education_background}}</p>
+                                <p>{!! $coach->education_background !!}</p>
 
                             </div>
                             <div class="col-lg-4 col-md-4 col-xl-4">
@@ -663,5 +665,14 @@
             }
         });
 
+    </script>
+
+    <script src="{{asset('/ckeditor/ckeditor.js')}}"></script>
+    <script>
+        CKEDITOR.replace( 'education_background' );
+        CKEDITOR.replace( 'certificates' );
+        CKEDITOR.replace( 'experience' );
+        CKEDITOR.replace( 'skills' );
+        CKEDITOR.replace( 'researches' );
     </script>
 @endsection
