@@ -672,12 +672,4 @@
 
     </script>
 
-    <script src="{{asset('/ckeditor/ckeditor.js')}}"></script>
-    <script>
-        CKEDITOR.replace( 'education_background' );
-        CKEDITOR.replace( 'certificates' );
-        CKEDITOR.replace( 'experience' );
-        CKEDITOR.replace( 'skills' );
-        CKEDITOR.replace( 'researches' );
-    </script>
 @endsection

@@ -57,7 +57,7 @@
             .back .bi{
                 font-size: 16px;
                 text-align:center;
-                color:#31303f;
+                color:#FFFFFF;
             }
             .back i > p {
                 font-size: 11px;

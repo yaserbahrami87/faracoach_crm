@@ -28,7 +28,8 @@
            لیست کوچ ها
           </a>
         </li>
-      @if(request()->is('coach/*'))
+
+      @if(request()->is('coach/*') &&(Auth::check()))
               <li class="nav-item ">
                   <a class="nav-link"  href="/cart" >
                       <span class="badge badge-light">{{$cart->count()}}</span>
