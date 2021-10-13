@@ -20,7 +20,16 @@ class CourseController extends BaseController
                     ->get();
         foreach ($courses as $item)
         {
-            $item->teacher_id=$this->get_teachersById($item->teacher_id)->fname." ".$this->get_teachersById($item->teacher_id)->lname;
+            if(!is_null($item->teacher_id)&&($item->teacher_id!=0))
+            {
+                $item->teacher_id=$this->get_teachersById($item->teacher_id)->fname." ".$this->get_teachersById($item->teacher_id)->lname;
+            }
+            else
+            {
+                $item->teacher_id='نامشخص';
+            }
+
+
 
         }
         return view('panelAdmin.courses')
@@ -55,7 +64,7 @@ class CourseController extends BaseController
             'course'                => ['required','string','max:250'],
             'shortlink'             => ['required','string','max:250','unique:courses'],
             'teacher'               => ['required', 'numeric'],
-            'image'                 => ['required','mimes:jpeg,jpg,png','max:600'],
+            'image'                 => ['nullable','mimes:jpeg,jpg,png','max:600'],
             'type'                  => ['required', 'numeric'],
             'duration'              => ['nullable', 'numeric'],
             'duration_date'         => ['nullable', 'string','max:20'],
@@ -216,5 +225,19 @@ class CourseController extends BaseController
     public function destroy(course $course)
     {
         //
+    }
+
+    public function course_test()
+    {
+        for ($i=1;$i<=46;$i++)
+        {
+            course::create([
+                'course'    =>'دوره '.$i,
+                'shortlink' =>'دوره '.$i,
+                'teacher'   =>1,
+                'type'      =>1,
+                'start'     =>'1400/01/01',
+            ]);
+        }
     }
 }

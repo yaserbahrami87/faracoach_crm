@@ -208,6 +208,11 @@
             color:#000000 !important;
         }
 
+        .vpd-header,.vpd-actions
+        {
+            display: none;
+        }
+
 
 
 

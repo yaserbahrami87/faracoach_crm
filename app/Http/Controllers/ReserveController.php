@@ -214,7 +214,7 @@ class ReserveController extends BaseController
 //            return view('formReserveBills')
 //                ->with('reserve',$reserve)
 //                ->with('status',NULL);
-            alert()->success('تاریخ مورد نظر به سبد شما اضافه شد.')->persistent('بستن');
+            alert()->success("تاریخ مورد نظر به سبد شما اضافه شد.\n جهت تکمیل به سبد خرید خود مراجعه کنید.")->persistent('بستن');
             return "<script>window.location.reload()</script>";
         }
         else
@@ -391,8 +391,11 @@ class ReserveController extends BaseController
         //چک کردن تعداد رزروهای ناقص کامل نشده در سبد خرید
         $cart=$this->get_cartUser();
 //        $cart=$this->get_reserve(NULL,Auth::user()->id,NULL,NULL,NULL,0,'get');
+
         return view('cart')
-                    ->with('cart',$cart);
+            ->with('cart',$cart);
+
+
     }
 
 

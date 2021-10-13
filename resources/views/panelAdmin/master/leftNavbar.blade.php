@@ -155,6 +155,24 @@
                     </li>-->
                 @endif
                 @if(Auth::user()->type==2 || Auth::user()->type==3 || Auth::user()->type==4)
+                    <li class="nav-item has-treeview ">
+                        <a href="" class="nav-link @if(request()->is('admin/education*')) active  @endif">
+                            <i class="fas fa-university"></i>
+                            <p>
+                                آموزش
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/admin/education/students" class="nav-link @if(request()->is('admin/education/students*')) active  @endif">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <p> لیست دانشجویان</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
                     <li class="nav-item has-treeview @if(request()->is('admin/coach')) menu-open  @endif">
                         <a href="#" class="nav-link @if(request()->is('admin/coach*')) active  @endif">
                             <i class="fas fa-chalkboard-teacher"></i>

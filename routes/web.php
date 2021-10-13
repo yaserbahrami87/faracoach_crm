@@ -110,7 +110,7 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     //Gift Certificates
     Route::get('/gift/certificate',function()
     {
-        return view('gift_certificate');
+        return view('panelUser.gift_certificate');
     });
 
 });
@@ -216,6 +216,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::resource('category_coach','CategoryCoachController');
 
     //Courses
+    Route::get('/courses/test','CourseController@course_test');
     Route::resource('courses','CourseController');
 
     //CourseType
@@ -258,6 +259,16 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     //categorygettingknows
     Route::resource('category_gettingknow','CategoryGettingknowController');
 
+    //Students
+    Route::prefix('education/')->group(function ()
+    {
+        Route::prefix('students')->group(function () {
+            Route::get('search','StudentController@search');
+            Route::get('advancesearch','StudentController@advancesearch');
+        });
+
+        Route::resource('students', 'StudentController');
+    });
 });
 
 

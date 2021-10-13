@@ -1753,30 +1753,36 @@ class UserController extends BaseController
         return $item;
     }
 
-    public function test()
-    {
-        $users=user::get();
-        foreach ($users as $item)
-        {
-            $category=category_gettingknow::where('category','=',$item->gettingknow)
-                                    ->first();
-            if(!is_null($category))
-            {
-//                if($category->parent_id==0)
-//                {
-                    $item->gettingknow=$category->id;
-//                }
-//                else
-//                {
-//                    $item->gettingknow=$category->parent_id;
-//                    $item->gettingknow_child=$category->id;
-//                }
 
-                $item->save();
-            }
 
-        }
-    }
+
+
+//    public function test()
+//    {
+//        $users=user::get();
+//        foreach ($users as $item)
+//        {
+//            $category=category_gettingknow::where('category','=',$item->gettingknow)
+//                                    ->first();
+//            if(!is_null($category))
+//            {
+////                if($category->parent_id==0)
+////                {
+//                    $item->gettingknow=$category->id;
+////                }
+////                else
+////                {
+////                    $item->gettingknow=$category->parent_id;
+////                    $item->gettingknow_child=$category->id;
+////                }
+//
+//                $item->save();
+//            }
+//
+//        }
+//    }
+
+
 
 
 }

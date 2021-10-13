@@ -42,6 +42,11 @@
             outline: none;
 
         }
+
+        .custom-select
+        {
+            width: auto !important;
+        }
     </style>
 @endsection
 @section('rowcontent')
@@ -69,6 +74,7 @@
                 <p>و طی هفته های آینده عنواین نهایی بهمراه امتیازات هر فعالیت، در همین صفحه درج میشود و شما قادر به انتخاب و انجام فعالیت مورد نظر خواهید بود.</p>
             </div>
             <form method="POST" action="">
+                {{csrf_field()}}
                 <div class="col-12 mb-5" id="suggest">
                     <ol>
                         <li>
@@ -92,16 +98,25 @@
                     <ol>
                         <li>
                             <span>5</span>
-                            <input type="text"  id="suggest_text" placeholder="پیشنهاد شما">
+                            <input type="text"  id="suggest_text" name="suggest" placeholder="پیشنهاد شما">
                         </li>
                     </ol>
                 </div>
                 <div class="col-12">
                     <p>اینجانب {{Auth::user()->fname." ".Auth::user()->lname}}
                         دانشپذیر دوره
-                        <input type="number" size="10px"/>
+                        <select class="custom-select" name="options">
+                            <option selected disabled>انتخاب دوره</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
                         تقاضای حضور در این رویداد و مشارکت در مسئولیت های اجتماعی خانواده فراکوچ را دارم.
                     </p>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="options" name="options" value="شرکت در دورهمی" />
+                        <label class="custom-control-label" for="options">آمادگی خود را برای شرکت در دورهمی مشهد اعلام می نمایم.</label>
+                    </div>
                     <input type="submit" class="btn btn-success btn-lg float-left" value="ثبت درخواست و ارسال پیشنهاد" />
                 </div>
             </form>

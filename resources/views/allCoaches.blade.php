@@ -108,6 +108,7 @@
             -ms-transform-style: preserve-3d;
             transition: 1s;
             transform-style: preserve-3d;
+            width: 100%;
         }
 
         .frontside .card,
@@ -219,8 +220,6 @@
                                                                 <a href="/coach/{{$item->username}}">
                                                                     <h4 class="card-title">{{$item->fname}} {{$item->lname}}</h4>
                                                                 </a>
-
-                                                                <p class="card-text">{{$item->aboutme}}</p>
                                                                 <ul class="list-inline">
                                                                     @if(strlen($item->instagram)>0)
                                                                         <li class="list-inline-item">
