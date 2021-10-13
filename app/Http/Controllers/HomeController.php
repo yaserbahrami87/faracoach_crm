@@ -73,6 +73,9 @@ class HomeController extends BaseController
                 ->get();
 
 
+        $condition=['last_login_at',$this->changeTimestampToMilad($this->dateNow)];
+        $onlineUser=$this->get_user(NULL,NULL,NULL,$condition,'get');
+
         return view('home')
 //        return redirect('/login')
                     ->with('tweets',$tweets)

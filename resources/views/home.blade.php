@@ -1,13 +1,14 @@
 @extends('master.index')
 @section('headerscript')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link href="{{asset('/trumbowyg-2.25.1/dist/ui/trumbowyg.min.css')}}" rel="stylesheet" />
     <style>
         .back{
             width:100%;
             height:380px;
             padding:0;
         }
-        .services{
+        .back .services{
             width:100%;
             height:165px;
             background: rgba(2,1,19,.81);
@@ -21,14 +22,14 @@
             margin: -40px 0px 0px 50px;
             padding:23px;
         }
-        .bi{
+        .back .bi{
             color: #ffff;
             font-size: 36px;
         }
-        .bi:hover{
+        .back .bi:hover{
             color:orange;
         }
-        i > p{
+        .back i > p{
             color: #ffff;
             font-size: 16px;
             margin-top: 18px;
@@ -36,11 +37,11 @@
             margin-right: -36px;
             text-align: center;
         }
-        i > p:hover{
+        .back i > p:hover{
             color:orange;
         }
         @media only screen and (max-width: 321px){
-            .services{
+            .back .services{
                 background:rgb(210 210 210);
                 height:75px;
                 padding:0;
@@ -48,17 +49,17 @@
             .back .rounded-circle {
                 width: 39px;
                 height: 39px;
-                background: rgb(222 222 222 / 97%);
+                background: rgb(222 222 222  97%);
                 float: left;
                 margin: -17px 4px 0;
                 padding: 11px;
             }
-            .bi{
+            .back .bi{
                 font-size: 16px;
                 text-align:center;
                 color:#31303f;
             }
-            i > p {
+            .back i > p {
                 font-size: 11px;
                 font-weight: bold;
                 margin-top: 8px;
@@ -95,11 +96,9 @@
                         </a>
                     </div>
                     <div class=" rounded-circle">
-                        <a href="{{asset('/coaches/all')}}">
-                            <i class="bi bi-calendar2-date">
-                                <p> رزرو جلسه کوچینگ </p>
-                            </i>
-                        </a>
+                        <i class="bi bi-calendar2-date">
+                            <p> رزرو جلسه کوچینگ </p>
+                        </i>
                     </div>
                     <div class="rounded-circle">
                         <i class="bi bi-display">
@@ -155,7 +154,7 @@
                             <img src="{{asset('/documents/users/default-avatar.png')}}" class="border mr-3 rounded-circle"  width="50px" height="50px"  alt="{{$item->fname}} {{$item->lname}}" title="{{$item->fname}} {{$item->lname}}" data-toggle="tooltip" data-placement="top" />
                         @endif
                     </div>
-                    @endforeach
+                @endforeach
             </div>
         </aside>
     </div>
@@ -224,7 +223,7 @@
                                     @endif
 
                                     <div class="media-body pt-3">
-                                        {!! $item->tweet !!}
+                                        {!!$item->tweet !!}
                                         <small>منتشر شده توسط
                                             <a href="{{asset('/'.$item->username)}}" target="_blank">
                                                 <small>{{$item->username}}</small>
@@ -248,7 +247,7 @@
                                             </a>-->
                                         @endif
                                     @endif
-                                    <!-- <small> {{count($item->like)}}} نفر پسندیدند</small>  -->
+                                    <!-- <small> {{count($item->like)}} نفر پسندیدند</small>  -->
                                     </div>
                                     <div class="col-6">
                                         <small class="float-left">{{$item->time}} قبل</small>
@@ -277,8 +276,8 @@
                             </div>
                         </aside>
                     </div>
-                </div>
-        @endsection
+    </div>
+    @endsection
 @section('footerScript')
 <script>
 $('.likes').click(function (e)
@@ -304,50 +303,50 @@ e.preventDefault();
 var id=$(this).attr('description');
 var post=$(this).attr('post');
 var _token= $('meta[name="csrf-token"]').attr('content');
-    $.ajax({
-        method:'DELETE',
-        url:'/like/'+id,
-        data:{post_id :id,_token: _token},
-        success:function(data)
-        {
-            console.log(post);
-            $("#like"+post).html(data);
-        }
-    });
+$.ajax({
+    method:'DELETE',
+    url:'/like/'+id,
+    data:{post_id :id,_token: _token},
+    success:function(data)
+    {
+        console.log(post);
+        $("#like"+post).html(data);
+    }
+});
 });
 
 
 
 $('#insert_tweet').click(function()
 {
-    var loading = '<div class="col-12 text-center"><div class="spinner-border text-primary text-center" role="status"><span class="sr-only">Loading...</span></div></div>';
-    $("#div_error").html(loading);
-    var data=$('#tweetForm').serialize();
-        $.ajax({
-            type: 'POST',
-            url: "/tweets" ,
-            data:data,
-            statusCode: {
-                422: function() {
-                    $("#div_error").html('<div class="alert alert-danger" role="alert">خطا 422</div>');
-                },
-                500:function()
-                {
-                    $("#div_error").html("خطا 500");
-                }
-            },
-            success: function (data) {
-                $("#div_error").html(data);
-            },
-            error:function(data)
-            {
-                $("#div_error").html(data);
-            }
-        });
+var loading = '<div class="col-12 text-center"><div class="spinner-border text-primary text-center" role="status"><span class="sr-only">Loading...</span></div></div>';
+$("#div_error").html(loading);
+var data=$('#tweetForm').serialize();
+$.ajax({
+    type: 'POST',
+    url: "/tweets" ,
+    data:data,
+    statusCode: {
+        422: function() {
+            $("#div_error").html('<div class="alert alert-danger" role="alert">خطا 422</div>');
+        },
+        500:function()
+        {
+            $("#div_error").html("خطا 500");
+        }
+    },
+    success: function (data) {
+        $("#div_error").html(data);
+    },
+    error:function(data)
+    {
+        $("#div_error").html(data);
+    }
+});
 });
 
 $(function () {
-    $('[data-toggle="tooltip"]').tooltip()
+$('[data-toggle="tooltip"]').tooltip()
 })
 </script>
 
