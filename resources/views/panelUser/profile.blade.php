@@ -53,6 +53,7 @@
                                     <input type="file" class="custom-file-input @if(strlen($user->personal_image)<>0) is-valid @endif" id="inputpersonal_image" aria-describedby="inputpersonal_image" name="personal_image"/>
                                     <label class="custom-file-label" for="inputpersonal_image">Choose file</label>
                                 </div>
+                                <small class="text-muted">فایل های مجاز: JPG و PNG و حداکثر اندازه مجاز: 600KB</small>
                             </div>
                         </div>
                         <div class="col-md-6 px-1">
@@ -65,12 +66,9 @@
                                     </svg>
                                 </label>
                                 <input type="text" class="form-control @if(strlen($user->username)<>0) is-valid @endif" placeholder="نام کاربری خود را وارد کنید" @if(old('username')) value='{{old('username')}}' @else value="{{$user->username}}" @endif name="username" @if(strlen($user->username)>0) disabled @endif/>
-                                <small class="text-muted float-left " dir="ltr">crm.faracoach.com/نام کاربری شما
+                                <small class="text-muted " dir="ltr">نام کاربری به صورت انگلیسی و تنها کارکترهای مجاز . و _ میباشد
                                     <label class="text-danger" data-toggle="tooltip" data-placement="top" title="فقط مجاز به استفاده از . و _ هستید">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
-                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                            <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
-                                        </svg>
+                                        <i class="bi bi-info-circle-fill"></i>
                                     </label>
                                 </small>
 
@@ -293,6 +291,7 @@
                                     <input type="file" class="custom-file-input @if(strlen($user->shenasnameh_image)<>0) is-valid  @endif" id="inputshenasnameh_image" aria-describedby="inputshenasnameh_image" name="shenasnameh_image" />
                                     <label class="custom-file-label" for="inputshenasnameh_image">Choose file</label>
                                 </div>
+                                <small class="text-muted"> فایل های مجاز: JPG و PNG و حداکثر اندازه مجاز: 600KB</small>
                             </div>
                         </div>
                         <div class="col-md-6 px-1">
@@ -302,6 +301,7 @@
                                     <input type="file" class="custom-file-input @if(strlen($user->cartmelli_image)<>0) is-valid  @endif" id="inputcartmelli_image" aria-describedby="inputcartmelli_image" name="cartmelli_image">
                                     <label class="custom-file-label" for="inputcartmelli_image">Choose file</label>
                                 </div>
+                                <small class="text-muted"> فایل های مجاز: JPG و PNG و حداکثر اندازه مجاز: 600KB</small>
                             </div>
                         </div>
                         <div class="col-md-6 px-1">
@@ -311,6 +311,7 @@
                                     <input type="file" class="custom-file-input @if(strlen($user->education_image)<>0) is-valid  @endif" id="inputeducation_image" aria-describedby="inputeducation_image" name="education_image" />
                                     <label class="custom-file-label" for="inputeducation_image">Choose file</label>
                                 </div>
+                                <small class="text-muted"> فایل های مجاز: JPG و PNG و حداکثر اندازه مجاز: 600KB</small>
                             </div>
                         </div>
                         <div class="col-md-6 px-1">
@@ -320,6 +321,7 @@
                                     <input type="file" class="custom-file-input @if(strlen($user->resume)<>0) is-valid  @endif" id="resume" aria-describedby="resume" name="resume" />
                                     <label class="custom-file-label" for="resume">Choose file</label>
                                 </div>
+                                <small class="text-muted"> فایل های مجاز: JPG , DOC و PDF و حداکثر اندازه مجاز: 600KB</small>
                             </div>
                         </div>
 
