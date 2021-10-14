@@ -73,7 +73,11 @@
 
                             </div>
                             <div class="avatar">
-                                <img alt="" src="{{asset('documents/users/'.$item->personal_image)}}">
+                                @if($item->getOriginal('personal_image'))
+                                    <img alt="" src="{{asset('documents/users/'.$item->personal_image)}}">
+                                @else
+                                    <img alt="" src="{{asset('documents/users/default-avatar.png')}}">
+                                @endif
                             </div>
                             <div class="info">
                                 <div class="title">

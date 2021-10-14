@@ -50,7 +50,7 @@
                             <div class="form-group">
                                 <label>عکس پروفایل</label>
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input @if(strlen($user->personal_image)<>0) is-valid @endif" id="inputpersonal_image" aria-describedby="inputpersonal_image" name="personal_image"/>
+                                    <input type="file" class="custom-file-input @if(is_null($user->getOriginal('personal_image'))) is-valid @endif" id="inputpersonal_image" aria-describedby="inputpersonal_image" name="personal_image"/>
                                     <label class="custom-file-label" for="inputpersonal_image">Choose file</label>
                                 </div>
                                 <small class="text-muted">فایل های مجاز: JPG و PNG و حداکثر اندازه مجاز: 600KB</small>
