@@ -1,4 +1,4 @@
-@extends('panelAdmin.master.index')
+@extends('panelUser.master.index')
 @section('headerScript')
     <link rel="stylesheet" href="{{asset('/dashboard/dist/css/bootstrap-select.css')}}" />
 @endsection

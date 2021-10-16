@@ -24,14 +24,8 @@
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CoachController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CoachController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/VerifyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/VerifyController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/landingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/landingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/gift.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/gift.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/editCoach.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/editCoach.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/panelUser/insertCoach.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/insertCoach.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/profile.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -694,7 +688,7 @@
       <workItem from="1634103068848" duration="17583000" />
       <workItem from="1634188742634" duration="7675000" />
       <workItem from="1634323456005" duration="3998000" />
-      <workItem from="1634359864395" duration="11813000" />
+      <workItem from="1634359864395" duration="14717000" />
     </task>
     <servers />
   </component>

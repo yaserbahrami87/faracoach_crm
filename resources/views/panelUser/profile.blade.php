@@ -43,7 +43,7 @@
                         <div class="col-md-6 px-1">
                             <div class="form-group">
                                 <label>تاریخ تولد</label>
-                                <input type="text" class="form-control @if(strlen($user->datebirth)<>0) is-valid @endif" placeholder="تاریخ تولد را وارد کنید" @if(old('datebirth')) value='{{old('datebirth')}}' @else value="{{$user->datebirth}}" @endif name="datebirth" id="datebirth" />
+                                <input type="text" class="form-control @if(strlen($user->datebirth)<>0) is-valid @endif" placeholder="تاریخ تولد را وارد کنید" @if(old('datebirth')) value='{{old('datebirth')}}' @else value="{{$user->datebirth}}" @endif name="datebirth" id="datebirth" autocomplete="autocomplete" />
                             </div>
                         </div>
                         <div class="col-md-6 px-1">
