@@ -617,7 +617,7 @@ class VerifyController extends BaseController
                 ]
             );
             $message = "کد فعالی سازی شما در سیستم فراکوچ : " . $six_digit_random_number;
-//                $this->sendSms($request->tel, $message);
+            //$this->sendSms($request->tel, $message);
             return view('verifyAjax')
                 ->with('tel', $request->tel);
         } else {

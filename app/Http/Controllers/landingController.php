@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\landPage;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -200,8 +201,9 @@ class landingController extends BaseController
         //
     }
 
-    public function store_landing_tel(Request $request)
+    public function store_landing_gift(Request $request)
     {
+
         $this->validate(request(),
             [
                 'fname' =>'required|min:3|persian_alpha',
@@ -210,100 +212,31 @@ class landingController extends BaseController
                 'email' =>'nullable|email'
             ]);
 
-        $check=User::where('email','=',$request['email'])
-            ->orwhere('tel','=',$request['tel'])
-            ->count();
-
-        if($check==1)
-        {
-            $user=User::where('tel','=',$request['tel'])
-                ->orwhere('email','=',$request['email'])
-                ->first();
-
-            if(!is_null($user) )
-            {
-                if ($user->fname != $request['fname']) {
-                    $user->fname = $request['fname'];
-                }
-
-                if($user->lname!=$request['lname'])
-                {
-                    $user->lname=$request['lname'];
-                }
 
 
-                if($user->email!=$request['email'])
-                {
-                    $user->email=$request['email'];
-                }
+            $land=landPage::where('tel','=',$request->tel)
+                            ->latest()
+                            ->first();
 
-                if($user->tel!=$request['tel'])
-                {
-                    $user->tel!=$request['tel'];
-                }
-                $status=$user->update();
-            }
-            else
-            {
-                $status=User::create($request->all() +
-                    [
-                        'date_fa'       =>$this->dateNow,
-                        'time_fa'       =>$this->timeNow
-                    ]);
 
-            }
-
-            if($status)
-            {
-                $msg = "پروفایل با موفقیت به روزرسانی شد";
-                $errorStatus = "success";
-            }
-            else
-            {
-                $msg = "خطا در بروزرسانی اطلاعات";
-                $errorStatus = "danger";
-            }
-            return  redirect()
-                ->route('freePackageLanding')
-                ->with('status',true)
-                ->with('msg',$msg)
-                ->with('errorStatus',$errorStatus);
-
-        }
-        else if($check>1)
-        {
-            $msg="بیش از 1 نفر با اطلاعات وارد شده در سیستم موجوداست";
-            $errorStatus="danger";
-            return  back()
-                ->with('msg',$msg)
-                ->with('errorStatus',$errorStatus);
-        }
-        else if($check==0)
-        {
-            $status = User::create($request->all()+
-                [
-                    'type'               =>'1',
-                    'password'           =>Hash::make('12345678'),
-                    'resource'           =>'کمپین',
-                    'detailsresource'    =>'17 ربیع 1399'
+            $status=$land->update($request->all()+[
+                    'date_fa'       =>$this->dateNow,
+                    'time_fa'       =>$this->timeNow
                 ]);
+
+
             if($status)
             {
-                $msg = "اطلاعات با موفقیت ثبت شد";
-                $errorStatus = "success";
-                $msgSMS=$request->fname." ".$request->lname. " عزیز اطلاعات شما در سیستم فراکوچ ثبت شد";
-                $this->sensSms($request['tel'],$msgSMS);
+                alert()->success('اطلاعات با موفقیت ثبت شد')->persistent('بستن');
             }
             else
             {
-                $msg = "خطا در ثبت اطلاعات";
-                $errorStatus = "danger";
+                alert()->error('خطا در ثبت')->persistent('بستن');
             }
-            return  redirect()
-                ->route('freePackageLanding')
-                ->with('msg',$msg)
-                ->with('errorStatus',$errorStatus)
-                ->with('status',true);
-        }
+
+            return  redirect('/gift');
+
+
+
     }
 }

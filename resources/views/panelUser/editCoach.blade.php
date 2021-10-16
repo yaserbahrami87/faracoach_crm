@@ -1,6 +1,7 @@
 @extends('panelUser.master.index')
 @section('headerScript')
-    <link rel="stylesheet" href="{{asset('/css/bootstrap-multiselect.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('/css/bootstrap-multiselect.min.css')}}" type="text/css"/>
+    <link href="{{asset('/trumbowyg-2.25.1/dist/ui/trumbowyg.min.css')}}" rel="stylesheet" />
     <style>
         body{
             padding: 0;
@@ -85,13 +86,12 @@
             text-align:left;
         }
     </style>
-    <!----------------------------------ستون سمت راست - اسم و عکس کوچ -------------------------->
 @endsection
 @section('rowcontent')
     <div class=" container col-xs-12 col-md-3 col-lg-3 col-xl-3">
         <div class="position-sticky " >
-            <img src="{{asset('/documents/users/'.$coach->personal_image)}}" id="pic-coach" />
-            <p style="color:#fff;" >{{$coach->fname." ".$coach->lname}}</p>
+            <img src=" http://127.0.0.1:8000/documents/users/personal-09120769020.jpg" id="pic-coach" />
+            <p style="color:#fff;" >اسم کوچ</p>
         </div>
     </div>
     <!-----------------------------------ستون سمت چپ - رزومه کوچ --------------------------------->
@@ -99,7 +99,7 @@
     <div class=" container col-xs-12 col-md-8 col-lg-8 col-xl-8">
         <div class="line">
             <div class="card-body">
-                <form method="post" action="/panel/coach/{{$coach->id}}" >
+                <form method="post" action="/admin/coach/{{$coach->id}}" >
                     {{csrf_field()}}
                     {{method_field('PATCH')}}
                     <label for="education_background">سوابق تحصیلی *</label>
@@ -109,10 +109,9 @@
                     <div class="form-group">
                         <label for="certificates">گواهینامه ها *</label>
                         <textarea class="form-control @error('certificates') is-invalid @enderror " name="certificates" id="certificates" rows="3">{{$coach->certificates}}</textarea>
-                        <!-- <div id="btn">
+                        <div id="btn">
                             <button type=" " class="btn btn-primary btn-sm" >مشاهده گواهینامه</button>
                         </div>
-                        -->
                     </div>
                     <div class="form-group">
                         <label for="experience">سوابق کاری *</label>
@@ -155,7 +154,7 @@
                     <div class="form-group">
                         <label for="selectpicker">دسته بندی ها *</label>
                         <div class="form-group" id="border">
-                            <select class="form-control"  name="category[]" id="selectpicker" multiple="multiple">
+                            <select class="form-control selectpicker" multiple="multiple" name="category[]" id="selectpicker" >
                                 @foreach($categoryCoaches as $item)
                                     <option value="{{$item->id}}" >{{$item->category}}</option>
                                 @endforeach
@@ -173,15 +172,6 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="status">وضعیت </label>
-                        <select class="form-control" id="status" name="status">
-                            <option disabled selected>انتخاب کنید</option>
-                            <option value="1" @if($coach->status==1) selected @endif>کوچ تایید است</option>
-                            <option value="-2" @if($coach->status==-2) selected @endif>رد درخواست</option>
-                            <option value="2" @if($coach->status==2) selected @endif>غیرفعال</option>
-                        </select>
-                    </div>
                     <div id="btn">
                         <button type="submit" class="col-4 mx-auto btn btn-primary" >انتشار</button>
                     </div>
@@ -192,38 +182,44 @@
 @endsection
 
 @section('footerScript')
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   
     <script src="{{asset('/js/bootstrap-multiselect.min.js')}}"></script>
     <script type="text/javascript">
-        $(function(){
+        $(function () {
             $('#selectpicker').multiselect();
         });
 
         var a=$('#selectpicker option');
             @foreach($coach->category as $item)
-                for(i=0;i<a.length ;i++)
-                {
-                    if(a[i].value=='{{$item}}')
-                    {
-                        a[i].setAttribute("selected","selected");
-                    }
-                }
-            @endforeach
+        for(i=0;i<a.length ;i++)
+        {
+            if(a[i].value=={{$item}})
+            {
+                a[i].setAttribute("selected","selected");
+            }
+        }
+        @endforeach
     </script>
 
-    <script src="{{asset('/ckeditor/ckeditor.js')}}"></script>
+
+    <script src="{{asset('/trumbowyg-2.25.1/dist/trumbowyg.min.js')}}"></script>
+    <script src="{{asset('/trumbowyg-2.25.1/dist/langs/fa.js')}}"></script>
     <script>
-        CKEDITOR.replace( 'education_background' );
-        CKEDITOR.replace( 'certificates' );
-        CKEDITOR.replace( 'experience' );
-        CKEDITOR.replace( 'skills' );
-        CKEDITOR.replace( 'researches' );
+        $('textarea').trumbowyg({
+            lang:'fa',
+            btns: [
+                ['undo', 'redo'], // Only supported in Blink browsers
+                ['formatting'],
+                ['strong', 'em', 'del'],
+                ['superscript', 'subscript'],
+                //['link'],
+                ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+                ['unorderedList', 'orderedList'],
+                ['horizontalRule'],
+                ['removeformat'],
+                ['fullscreen']
+            ]
+        })
     </script>
 @endsection
-
-
-
-
-
-
-

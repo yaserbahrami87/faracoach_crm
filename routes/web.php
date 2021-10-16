@@ -298,7 +298,8 @@ Route::get('/verify/active/tel/check/{code}','VerifyController@checkCode_landing
 
 // Landing Page
 Route::get('/landingPage','landingController@index');
-Route::post('/landing/store','landingController@store');
+
+Route::post('/landing/store','landingController@store_landing_gift');
 Route::get('/showPackageDownload', 'landingController@showPackageDownload')->name('freePackageLanding');
 Route::get('/password/sendcode','VerifyController@sendResetCode');
 Route::post('/password/reset/update','VerifyController@checkResetCode');

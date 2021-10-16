@@ -49,7 +49,7 @@ class CoachController extends BaseController
         if((Auth::user()->status_coach==0)||((Auth::user()->type==2)))
         {
             $user=Auth::user();
-            if(strlen($user->username)>0)
+            if((strlen($user->username)>0) && (strlen($user->fname)>0)&& (strlen($user->lname)>0)&&(strlen($user->codemelli )>0)&&(strlen($user->job)>0)&&(strlen($user->datebirth)>0) )
             {
                 $typeCoach=$this->get_typeCoaches(NULL,1,'get');
 

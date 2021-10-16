@@ -24,8 +24,14 @@
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/students.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/students.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/profile.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CoachController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CoachController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/VerifyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/VerifyController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/landingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/landingController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/gift.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/gift.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/editCoach.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/editCoach.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/insertCoach.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/insertCoach.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -686,7 +692,9 @@
       <workItem from="1634013716787" duration="22858000" />
       <workItem from="1634064305139" duration="354000" />
       <workItem from="1634103068848" duration="17583000" />
-      <workItem from="1634188742634" duration="3255000" />
+      <workItem from="1634188742634" duration="7675000" />
+      <workItem from="1634323456005" duration="3998000" />
+      <workItem from="1634359864395" duration="11813000" />
     </task>
     <servers />
   </component>
@@ -726,18 +734,18 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="499" height="446" key="SwitcherDM/0.0.1366.728@0.0.1366.728" timestamp="1632028641588" />
-    <state x="286" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1632224450467">
+    <state x="286" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1634374001816">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="286" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.728@0.0.1366.728" timestamp="1632224450467" />
+    <state x="286" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.728@0.0.1366.728" timestamp="1634374001816" />
     <state x="339" y="162" key="run.anything.popup" timestamp="1633715054497">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1633715054497" />
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1634111540472">
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1634373959861">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1634111540472" />
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1634373959861" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
