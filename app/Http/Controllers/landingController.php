@@ -263,19 +263,34 @@ class landingController extends BaseController
         ]);
 
         $status=landPage::create($request->all()+[
-                'user_id'   =>Auth::user()->id
+                'user_id'   =>Auth::user()->id,
+                'resource'  =>'گردهمایی مشهد'
+
             ]);
 
         if($status)
         {
-            alert()->success('درخواست شما برای شرکت در گردهمایی مشهد ثبت شد')->persistent('بستن');
+            if($status->options==0)
+            {
+                alert()->warning("این مراسم ویژه دانشپذیران و فارغ التحصیلان فراکوچ می باشد \n همکاران ما به زودی با شما تماس خواهند گرفت.")->persistent('بستن');
+                $sw=false;
+                return redirect('/');
+            }
+            else
+            {
+                alert()->success('درخواست شما برای شرکت در گردهمایی مشهد ثبت شد')->persistent('بستن');
+                $msg="حضور شما در گردهمایی خانواده بزرگ فراکوچ ثبت شد.\nآدرس: مشهد جاده شاندیز مدرس 1/6 باغ تالار بارثاوا\nساعت ۱۵:۴۵\n";
+                $this->sendSms(Auth::user()->tel,$msg);
+                return view('panelUser.invitation_back');
+            }
+
         }
         else
         {
             alert()->error('خطا در درخواست شرکت در گردهمایی')->persistent('بستن');
         }
 
-        return redirect('/panel');
+        return back();
 
     }
 }
