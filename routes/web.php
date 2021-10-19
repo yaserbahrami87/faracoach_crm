@@ -113,6 +113,10 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
         return view('panelUser.gift_certificate');
     });
 
+    //Landing Page
+    Route::post('/landing/invitation/','landingController@invitaionStore');
+    Route::get('/invitation','landingController@invitaionCreate');
+
 });
 
 
@@ -303,6 +307,7 @@ Route::post('/landing/store','landingController@store_landing_gift');
 Route::get('/showPackageDownload', 'landingController@showPackageDownload')->name('freePackageLanding');
 Route::get('/password/sendcode','VerifyController@sendResetCode');
 Route::post('/password/reset/update','VerifyController@checkResetCode');
+
 
 
 Route::get('/register2',function()

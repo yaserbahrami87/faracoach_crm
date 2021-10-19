@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\landPage;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class landingController extends BaseController
@@ -237,6 +238,44 @@ class landingController extends BaseController
             return  redirect('/gift');
 
 
+
+    }
+
+    //لندینگ دعوت گردهمایی مشهد
+    public function invitaionCreate()
+    {
+        $courses=$this->get_courses();
+
+        return view('panelUser.invitation')
+                    ->with('courses',$courses);
+    }
+
+    public function invitaionStore (Request $request)
+    {
+        $this->validate($request,[
+            'options'   =>'required|numeric',
+            'count'     =>'required|numeric'
+        ],[
+            'options.required'  =>'انتخاب دوره اجباریست',
+            'options.numeric'   =>'انتخاب دوره را صحیح وارد کنید',
+            'count.required'    =>'نحوه شرکت در دوره اجباریست',
+            'count.numeric'     =>'نحوه شرکت در دوره را صحیح وارد کنید',
+        ]);
+
+        $status=landPage::create($request->all()+[
+                'user_id'   =>Auth::user()->id
+            ]);
+
+        if($status)
+        {
+            alert()->success('درخواست شما برای شرکت در گردهمایی مشهد ثبت شد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در درخواست شرکت در گردهمایی')->persistent('بستن');
+        }
+
+        return redirect('/panel');
 
     }
 }

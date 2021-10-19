@@ -182,6 +182,12 @@
         .vpd-day-effect {
             background-color: transparent !important;
             border: solid 2px #EF6C00;
+
+        }
+
+        .vpd-day:not([disabled]):hover
+        {
+            color:#000000 !important;
         }
 
         .vpd-addon-list-item {

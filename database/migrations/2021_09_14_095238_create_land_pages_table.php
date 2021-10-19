@@ -15,6 +15,7 @@ class CreateLandPagesTable extends Migration
     {
         Schema::create('land_pages', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('user_id')->nullable();
             $table->string('fname','100')->nullable();
             $table->string('lname','100')->nullable();
             $table->string('email','150')->nullable();
