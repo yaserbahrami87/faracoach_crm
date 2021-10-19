@@ -254,12 +254,9 @@ class landingController extends BaseController
     {
         $this->validate($request,[
             'options'   =>'required|numeric',
-            'count'     =>'required|numeric'
         ],[
             'options.required'  =>'انتخاب دوره اجباریست',
             'options.numeric'   =>'انتخاب دوره را صحیح وارد کنید',
-            'count.required'    =>'نحوه شرکت در دوره اجباریست',
-            'count.numeric'     =>'نحوه شرکت در دوره را صحیح وارد کنید',
         ]);
 
         $status=landPage::create($request->all()+[
@@ -272,7 +269,7 @@ class landingController extends BaseController
         {
             if($status->options==0)
             {
-                alert()->warning("این مراسم ویژه دانشپذیران و فارغ التحصیلان فراکوچ می باشد \n همکاران ما به زودی با شما تماس خواهند گرفت.")->persistent('بستن');
+                alert()->warning("این مراسم ویژه دانشپذیران و فارغ التحصیلان فراکوچ می باشد \n شما می توانید به صورت آنلاین از طریق صفحه اینستاگرام فراکوچ در رویداد شرکت کنید.")->persistent('بستن');
                 $sw=false;
                 return redirect('/');
             }
