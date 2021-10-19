@@ -25,7 +25,6 @@
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/landingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/landingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/invitation.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/invitation.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -690,7 +689,7 @@
       <workItem from="1634323456005" duration="3998000" />
       <workItem from="1634359864395" duration="25588000" />
       <workItem from="1634450754951" duration="8051000" />
-      <workItem from="1634626643879" duration="14263000" />
+      <workItem from="1634626643879" duration="15722000" />
     </task>
     <servers />
   </component>

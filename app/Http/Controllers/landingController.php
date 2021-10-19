@@ -244,10 +244,22 @@ class landingController extends BaseController
     //لندینگ دعوت گردهمایی مشهد
     public function invitaionCreate()
     {
-        $courses=$this->get_courses();
+        $user=landPage::where('user_id','=',Auth::user()->id)
+                    ->where('resource','=','گردهمایی مشهد')
+                    ->get();
 
-        return view('panelUser.invitation')
-                    ->with('courses',$courses);
+        if($user->count()>0)
+        {
+            alert()->error('اطلاعات شما در دورهمی فراکوچ ثبت شده است.')->persistent('بستن');
+            return back();
+        }
+        else
+        {
+            $courses=$this->get_courses();
+            return view('panelUser.invitation')
+                ->with('courses',$courses);
+        }
+
     }
 
     public function invitaionStore (Request $request)
