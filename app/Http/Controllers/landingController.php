@@ -321,7 +321,7 @@ class landingController extends BaseController
 
         }
 
-        return view('panelAdmin.invitation_list')
+        return view('panelAdmin.Invitation_list')
                     ->with('users',$user);
     }
 }
