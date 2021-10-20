@@ -302,4 +302,26 @@ class landingController extends BaseController
         return back();
 
     }
+
+    public function invitationIndex()
+    {
+        $user=landPage::join('users','land_pages.user_id','=','users.id')
+                    ->where('land_pages.resource','=','گردهمایی مشهد')
+                    ->get();
+        foreach ($user as $item)
+        {
+            if($item->options==0)
+            {
+                $item->course='دانشجو نیستم';
+            }
+            else
+            {
+                $item->course=$this->get_coursesByID($item->options)->course;
+            }
+
+        }
+
+        return view('panelAdmin.invitation_list')
+                    ->with('users',$user);
+    }
 }

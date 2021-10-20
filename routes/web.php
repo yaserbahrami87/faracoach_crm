@@ -273,6 +273,18 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
 
         Route::resource('students', 'StudentController');
     });
+
+
+    //Landing Page
+    Route::prefix('invitation/')->group(function ()
+    {
+//        Route::prefix('students')->group(function () {
+//            Route::get('search','StudentController@search');
+//            Route::get('advancesearch','StudentController@advancesearch');
+//        });
+
+        Route::get('/index','landingController@invitationIndex');
+    });
 });
 
 
