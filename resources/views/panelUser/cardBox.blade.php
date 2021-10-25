@@ -29,12 +29,6 @@
     </div>
 @endif
 
-<div class="col-12 text-center pt-3 mb-5">
-    <a href="/panel/invitation" class="">
-        <img src="{{asset('/images/invitation_mashhad.png')}}" class="img-fluid " />
-    </a>
-</div>
-
 <div class="col-lg-3 col-md-6 col-sm-6">
     <div class="info-box">
         <span class="info-box-icon bg-info elevation-1"><i class="fas fa-envelope"></i></span>
@@ -126,6 +120,13 @@
             <a href="/panel/integrityTest"  class="btn btn-success btn-lg">
                 <i class="bi bi-pentagon-half" style="font-size: 32px"></i>
                 <p> تست تمامیت شخصی</p>
+            </a>
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-sm-6 p-0 text-center mt-3">
+            <a href="/panel/effectiveListenings/create"  class="btn btn-success btn-lg">
+                <i class="fas fa-question" style="font-size: 32px"></i>
+                <p>ارزیابی گوش دادن موثر</p>
             </a>
         </div>
 

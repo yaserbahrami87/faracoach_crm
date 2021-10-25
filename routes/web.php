@@ -101,6 +101,9 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     //integrity
     Route::resource('integrityTest','IntegrityTestController');
 
+    //effectiveListenings
+    Route::resource('effectiveListenings','EffectivelisteningController');
+
     //Download video webinar Integrity
     Route::get('/integrity/files',function()
     {
@@ -344,7 +347,7 @@ Route::get('/gift',function()
 //integrity test
 Route::get('/integrity_test',function()
 {
-    return view('integrityTest');
+    return view('panelUser.integrityTest');
 });
 
 

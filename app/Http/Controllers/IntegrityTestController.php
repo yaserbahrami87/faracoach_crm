@@ -15,7 +15,8 @@ class IntegrityTestController extends Controller
      */
     public function index()
     {
-        return view('integrityTest');
+
+        return view('panelUser.integrityTest');
     }
 
     /**

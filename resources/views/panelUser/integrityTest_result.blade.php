@@ -1,10 +1,10 @@
-@extends('master.index')
-@section('headerscript')
+@extends('panelUser.master.index')
+@section('headerScript')
     <link src="{{asset('/css/bar.chart.min.css')}}" rel="stylesheet" ></link>
 
 @endsection
 
-@section('row1')
+@section('rowcontent')
     <div class="col-12 mt-5">
         <div class="row">
             <div class="col-12 text-center mb-5">

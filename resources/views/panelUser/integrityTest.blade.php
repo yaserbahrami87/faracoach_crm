@@ -1,5 +1,5 @@
-@extends('master.index')
-@section('headerscript')
+@extends('panelUser.master.index')
+@section('headerScript')
     <link src="{{asset('/css/jquery-book.css')}}"></link>
     <style>
         #fff{
@@ -72,7 +72,7 @@
     </style>
 
 @endsection
-@section ('row1')
+@section ('rowcontent')
     <div class="container pb-4 mt-5">
         <div class="col-12 text-justify">
             <p >سلام ، تست پیش رو شامل 65 سوال است که به منظور بررسی میزان « تمامیت » شما در حوزه های مختلف: مالی ، مسائل شخصی ، تعهدات ، روابط اجتماعی ، سلامتی و بهداشت ، عرف و قوانین جامعه تدارک دیده شده است.</p>
