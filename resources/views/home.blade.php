@@ -120,11 +120,6 @@
     </div>
 @endsection
 @section('row2')
-    <div class="col-12 text-center">
-        <a href="/login">
-            <img src="{{asset('/images/invitation_mashhad.png')}}" class="img-fluid shadow-lg" />
-        </a>
-    </div>
     <div class="row mt-5">
         <div class="col-md-3 ">
             <article class="card mb-3" >

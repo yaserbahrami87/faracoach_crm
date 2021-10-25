@@ -113,9 +113,7 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
         return view('panelUser.gift_certificate');
     });
 
-    //Landing Page
-    Route::post('/landing/invitation/','landingController@invitaionStore');
-    Route::get('/invitation','landingController@invitaionCreate');
+    //Landing Pages
 
 });
 
@@ -274,17 +272,6 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
         Route::resource('students', 'StudentController');
     });
 
-
-    //Landing Page
-    Route::prefix('invitation/')->group(function ()
-    {
-//        Route::prefix('students')->group(function () {
-//            Route::get('search','StudentController@search');
-//            Route::get('advancesearch','StudentController@advancesearch');
-//        });
-
-        Route::get('/index','landingController@invitationIndex');
-    });
 });
 
 

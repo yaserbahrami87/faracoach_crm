@@ -1,10 +1,6 @@
 @extends('panelAdmin.master.index')
 @section('rowcontent')
-        <div class="col-12 text-center">
-            <a href="/admin/invitation/index">
-                <img src="{{asset('/images/invitation_mashhad.png')}}" class="img-fluid" />
-            </a>
-        </div>
+
         <div class="col-12">
             <div class="row">
                 <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 mb-3" id="app">

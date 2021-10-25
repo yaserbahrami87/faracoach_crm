@@ -241,87 +241,87 @@ class landingController extends BaseController
 
     }
 
-    //لندینگ دعوت گردهمایی مشهد
-    public function invitaionCreate()
-    {
-        $user=landPage::where('user_id','=',Auth::user()->id)
-                    ->where('resource','=','گردهمایی مشهد')
-                    ->get();
+//    //لندینگ دعوت گردهمایی مشهد
+//    public function invitaionCreate()
+//    {
+//        $user=landPage::where('user_id','=',Auth::user()->id)
+//                    ->where('resource','=','گردهمایی مشهد')
+//                    ->get();
+//
+//        if($user->count()>0)
+//        {
+//            alert()->error('اطلاعات شما در دورهمی فراکوچ ثبت شده است.')->persistent('بستن');
+//            return back();
+//        }
+//        else
+//        {
+//            $courses=$this->get_courses();
+//            return view('panelUser.invitation')
+//                ->with('courses',$courses);
+//        }
+//
+//    }
 
-        if($user->count()>0)
-        {
-            alert()->error('اطلاعات شما در دورهمی فراکوچ ثبت شده است.')->persistent('بستن');
-            return back();
-        }
-        else
-        {
-            $courses=$this->get_courses();
-            return view('panelUser.invitation')
-                ->with('courses',$courses);
-        }
+//    public function invitaionStore (Request $request)
+//    {
+//        $this->validate($request,[
+//            'options'   =>'required|numeric',
+//        ],[
+//            'options.required'  =>'انتخاب دوره اجباریست',
+//            'options.numeric'   =>'انتخاب دوره را صحیح وارد کنید',
+//        ]);
+//
+//        $status=landPage::create($request->all()+[
+//                'user_id'   =>Auth::user()->id,
+//                'resource'  =>'گردهمایی مشهد'
+//
+//            ]);
+//
+//        if($status)
+//        {
+//            if($status->options==0)
+//            {
+//                alert()->warning("این مراسم ویژه دانشپذیران و فارغ التحصیلان فراکوچ می باشد \n شما می توانید به صورت آنلاین از طریق صفحه اینستاگرام فراکوچ در رویداد شرکت کنید.")->persistent('بستن');
+//                $sw=false;
+//                return redirect('/');
+//            }
+//            else
+//            {
+//                alert()->success('درخواست شما برای شرکت در گردهمایی مشهد ثبت شد')->persistent('بستن');
+//                $msg="حضور شما در گردهمایی خانواده بزرگ فراکوچ ثبت شد.\nآدرس: مشهد جاده شاندیز مدرس 1/6 باغ تالار بارثاوا\nساعت ۱۵:۴۵\n";
+//                $this->sendSms(Auth::user()->tel,$msg);
+//                return view('panelUser.invitation_back');
+//            }
+//
+//        }
+//        else
+//        {
+//            alert()->error('خطا در درخواست شرکت در گردهمایی')->persistent('بستن');
+//        }
+//
+//        return back();
+//
+//    }
 
-    }
-
-    public function invitaionStore (Request $request)
-    {
-        $this->validate($request,[
-            'options'   =>'required|numeric',
-        ],[
-            'options.required'  =>'انتخاب دوره اجباریست',
-            'options.numeric'   =>'انتخاب دوره را صحیح وارد کنید',
-        ]);
-
-        $status=landPage::create($request->all()+[
-                'user_id'   =>Auth::user()->id,
-                'resource'  =>'گردهمایی مشهد'
-
-            ]);
-
-        if($status)
-        {
-            if($status->options==0)
-            {
-                alert()->warning("این مراسم ویژه دانشپذیران و فارغ التحصیلان فراکوچ می باشد \n شما می توانید به صورت آنلاین از طریق صفحه اینستاگرام فراکوچ در رویداد شرکت کنید.")->persistent('بستن');
-                $sw=false;
-                return redirect('/');
-            }
-            else
-            {
-                alert()->success('درخواست شما برای شرکت در گردهمایی مشهد ثبت شد')->persistent('بستن');
-                $msg="حضور شما در گردهمایی خانواده بزرگ فراکوچ ثبت شد.\nآدرس: مشهد جاده شاندیز مدرس 1/6 باغ تالار بارثاوا\nساعت ۱۵:۴۵\n";
-                $this->sendSms(Auth::user()->tel,$msg);
-                return view('panelUser.invitation_back');
-            }
-
-        }
-        else
-        {
-            alert()->error('خطا در درخواست شرکت در گردهمایی')->persistent('بستن');
-        }
-
-        return back();
-
-    }
-
-    public function invitationIndex()
-    {
-        $user=landPage::join('users','land_pages.user_id','=','users.id')
-                    ->where('land_pages.resource','=','گردهمایی مشهد')
-                    ->get();
-        foreach ($user as $item)
-        {
-            if($item->options==0)
-            {
-                $item->course='دانشجو نیستم';
-            }
-            else
-            {
-                $item->course=$this->get_coursesByID($item->options)->course;
-            }
-
-        }
-
-        return view('panelAdmin.Invitation_list')
-                    ->with('users',$user);
-    }
+//    public function invitationIndex()
+//    {
+//        $user=landPage::join('users','land_pages.user_id','=','users.id')
+//                    ->where('land_pages.resource','=','گردهمایی مشهد')
+//                    ->get();
+//        foreach ($user as $item)
+//        {
+//            if($item->options==0)
+//            {
+//                $item->course='دانشجو نیستم';
+//            }
+//            else
+//            {
+//                $item->course=$this->get_coursesByID($item->options)->course;
+//            }
+//
+//        }
+//
+//        return view('panelAdmin.Invitation_list')
+//                    ->with('users',$user);
+//    }
 }
