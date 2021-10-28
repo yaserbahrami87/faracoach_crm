@@ -23,23 +23,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/public/css/bootstrap_cerulean.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/birthday-cake.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/whatiscoaching.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/panelUser/communicationSkill_assessments.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/whatIsCoaching.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/landingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/landingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/master/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/master/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/_Invitation_list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/pageBuilder.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/panelUser/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -713,7 +698,8 @@
       <workItem from="1635223929902" duration="12956000" />
       <workItem from="1635268425401" duration="2490000" />
       <workItem from="1635313471814" duration="4866000" />
-      <workItem from="1635402852517" duration="12083000" />
+      <workItem from="1635402852517" duration="13252000" />
+      <workItem from="1635452462411" duration="138000" />
     </task>
     <servers />
   </component>
