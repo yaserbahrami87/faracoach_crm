@@ -40,6 +40,22 @@
         .back i > p:hover{
             color:orange;
         }
+
+        .card-header
+        {
+            background-color: #A0C6D1;
+        }
+
+        .card-header h6
+        {
+            color: #000000;
+        }
+
+        #tweets .card-body,#tweets .card-footer
+        {
+            background-color: #EFDCB1;
+        }
+
         @media only screen and (max-width: 321px){
             .back .services{
                 background:rgb(210 210 210);
@@ -66,6 +82,60 @@
                 width: 47px;
                 margin-right: -17px;
                 color:rgba(2,1,19,.81);
+            }
+        }
+
+        @media only screen and (min-width: 321px) and (max-width:425px)
+        {
+            .back .rounded-circle {
+                width: 39px;
+                height: 39px;
+                background: rgb(222 222 222  97%);
+                float: left;
+                margin: -17px 4px 0;
+                padding: 11px;
+            }
+
+            .back .bi{
+                font-size: 14px;
+                text-align:center;
+                color:#FFFFFF;
+            }
+
+            .back i > p {
+                font-size: 11px;
+                font-weight: bold;
+                margin-top: 8px;
+                width: 47px;
+                margin-right: -17px;
+                color:#FFFFFF;
+            }
+        }
+
+        @media only screen and (min-width: 426px) and (max-width:768px)
+        {
+            .back .rounded-circle {
+                width: 50px;
+                height: 50px;
+                background: rgb(222 222 222  97%);
+                float: left;
+                margin: -17px 4px 0;
+                padding: 11px;
+            }
+
+            .back .bi{
+                font-size: 24px;
+                text-align:center;
+                color:#FFFFFF;
+            }
+
+            .back i > p {
+                font-size: 11px;
+                font-weight: bold;
+                margin-top: 8px;
+                width: 47px;
+                margin-right: -17px;
+                color:#FFFFFF;
             }
         }
     </style>
@@ -123,8 +193,10 @@
     <div class="row mt-5">
         <div class="col-md-3 ">
             <article class="card mb-3" >
+                <div class="card-header">
+                    <h6 class="card-title m-0 p-0">آخرین مقالات شما  </h6>
+                </div>
                 <div class="card-body">
-                    <h6 class="card-title pb-3 border-bottom">آخرین مقالات شما  </h6>
                     @foreach($posts as $item)
                     <div class="media border-bottom pb-2 pt-2">
                         <img src="{{$item->image}}" class="mr-3"  width="100px" alt="...">
@@ -142,9 +214,12 @@
                     @endforeach
                 </div>
             </article>
-            <aside class="card" >
+            <aside class="card mb-2" >
+                <div class="card-header">
+                    <h6 class="card-title p-0 m-0">کاربرهای فعال</h6>
+                </div>
                 <div class="card-body">
-                    <h6 class="card-title pb-3 border-bottom">کاربرهای فعال</h6>
+
                     @foreach($last_users as $item)
                     <div class="avatar pb-3 d-inline">
                         @if(strlen($item->personal_image)>0)
@@ -153,20 +228,37 @@
                             <img src="{{asset('/documents/users/default-avatar.png')}}" class="border mr-3 rounded-circle"  width="50px" height="50px"  alt="{{$item->fname}} {{$item->lname}}" title="{{$item->fname}} {{$item->lname}}" data-toggle="tooltip" data-placement="top" />
                         @endif
                     </div>
-                @endforeach
-            </div>
-        </aside>
-    </div>
-    <div class="col-md-6">
-        <!--  <h3 class="pb-3 border-bottom mb-3">آخرین دلنوشته ها  </h3> -->
+                    @endforeach
+                </div>
+            </aside>
+            <aside class="card" >
+                <div class="card-header">
+                    <h6 class="card-title m-0">
+                        متولدین این ماه</h6>
 
+                </div>
+                <div class="card-body">
+
+                    @foreach($birthday as $item)
+                        <div class="avatar pb-3 d-inline">
+                            @if(strlen($item->personal_image)>0)
+                                <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="border mr-3 rounded-circle"  width="50px" height="50px"  alt="{{$item->fname}} {{$item->lname}} " data-toggle="tooltip" data-placement="top" title="{{$item->fname}} {{$item->lname}}" />
+                            @else
+                                <img src="{{asset('/documents/users/default-avatar.png')}}" class="border mr-3 rounded-circle"  width="50px" height="50px"  alt="{{$item->fname}} {{$item->lname}}" title="{{$item->fname}} {{$item->lname}} " data-toggle="tooltip" data-placement="top" />
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
+            </aside>
+        </div>
+        <div class="col-md-6" id="tweets">
         @if(Auth::check())
                 <div class="card-body p-0">
                     <div class="media pb-2 pt-2">
                         <img src="{{asset('/documents/users/'.Auth::user()->personal_image)}}" class="mr-3 rounded-circle"  width="50px" height="50px" alt="...">
                         <div class="media-body pt-3">
                             <div class="custom-file">
-                                <button type="button" class="btn btn-block btn-secondary" data-toggle="modal" data-target="#exampleModal" >نوشته جدید</button>
+                                <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#exampleModal" >نوشته جدید</button>
                             </div>
                         </div>
                     </div>
@@ -204,80 +296,82 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-primary" id="insert_tweet">انتشار</button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">بستن</button>
                             </div>
                         </div>
                     </div>
                 </div>
-
         @endif
         <h6 class="card-title mt-4 pb-3 border-bottom">آخرین نوشته ها  </h6>
         @foreach($tweets as $item)
-                        <article class="card mb-3" >
-                            <div class="card-body">
-                                <div class="media pb-2 pt-2">
-                                    @if(strlen($item->personal_image)>0)
-                                    <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="mr-3 rounded-circle border"  width="50px" height="50px" alt="...">
-                                    @else
-                                        <img src="{{asset('/documents/users/default-avatar.png')}}" class="mr-3 rounded-circle border"  width="50px" height="50px" alt="...">
-                                    @endif
+            <article class="card mb-3" >
+                <div class="card-body">
+                    <div class="media pb-2 pt-2">
+                        @if(strlen($item->personal_image)>0)
+                        <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="mr-3 rounded-circle border"  width="50px" height="50px" alt="...">
+                        @else
+                            <img src="{{asset('/documents/users/default-avatar.png')}}" class="mr-3 rounded-circle border"  width="50px" height="50px" alt="...">
+                        @endif
 
-                                    <div class="media-body pt-3">
-                                        {!!$item->tweet !!}
-                                        <small>منتشر شده توسط
-                                            <a href="{{asset('/'.$item->username)}}" target="_blank">
-                                                <small>{{$item->username}}</small>
-                                            </a>
-                                        </small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-footer text-muted">
-                                <div class="row">
-                                    <div id="like{{$item->id}}" class="col-6">
-                                    @if(Auth::check())
-                                        @if($item->status_like==true)
-                                            <!-- <a href="" class="dislikes" description="{{$item->like[0]->id}}" post="{{$item->id}}" >
-                                                <i class="bi bi-heart-fill"></i>
-                                            </a> -->
-                                        @else
-                                            <!--
-                                            <a href='' class='likes' description='{{$item->id}}' >
-                                                <i class='bi bi-heart'></i>
-                                            </a>-->
-                                        @endif
-                                    @endif
-                                    <!-- <small> {{count($item->like)}} نفر پسندیدند</small>  -->
-                                    </div>
-                                    <div class="col-6">
-                                        <small class="float-left">{{$item->time}} قبل</small>
-                                    </div>
-                                </div>
+                        <div class="media-body pt-3">
+                            {!!$item->tweet !!}
+                            <small>منتشر شده توسط
+                                <a href="{{asset('/'.$item->username)}}" target="_blank">
+                                    <small>{{$item->username}}</small>
+                                </a>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-muted">
+                    <div class="row">
+                        <div id="like{{$item->id}}" class="col-6">
+                        @if(Auth::check())
+                            @if($item->status_like==true)
+                                <!-- <a href="" class="dislikes" description="{{$item->like[0]->id}}" post="{{$item->id}}" >
+                                    <i class="bi bi-heart-fill"></i>
+                                </a> -->
+                            @else
+                                <!--
+                                <a href='' class='likes' description='{{$item->id}}' >
+                                    <i class='bi bi-heart'></i>
+                                </a>-->
+                            @endif
+                        @endif
+                        <!-- <small> {{count($item->like)}} نفر پسندیدند</small>  -->
+                        </div>
+                        <div class="col-6">
+                            <small class="float-left">{{$item->time}} قبل</small>
+                        </div>
+                    </div>
 
-                            </div>
-                        </article>
-                        @endforeach
-                    </div>
-                    <div class="col-md-3">
-                        <aside class="card position-sticky" >
-                            <div class="card-body">
-                                <h6 class="card-title pb-3 border-bottom">کوچ های فعال</h6>
-                                @foreach($last_coaches as $item)
-                                    <div class="avatar pb-3 d-inline">
-                                        <a href="/coach/{{$item->username}}">
-                                            @if(strlen($item->personal_image)>0)
-                                                <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="mr-3 rounded-circle border"  width="50px" height="50px"  alt="{{$item->fname}} {{$item->lname}}" data-toggle="tooltip" data-placement="top" title="{{$item->fname}} {{$item->lname}}" />
-                                            @else
-                                                <img src="{{asset('/documents/users/default-avatar.png')}}" class="mr-3 rounded-circle border"  width="50px" height="50px"  alt="{{$item->fname}} {{$item->lname}}" title="{{$item->fname}} {{$item->lname}}" data-toggle="tooltip" data-placement="top" />
-                                            @endif
-                                        </a>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </aside>
-                    </div>
+                </div>
+            </article>
+        @endforeach
+        </div>
+        <div class="col-md-3">
+            <aside class="card position-sticky" >
+                <div class="card-header">
+                    <h6 class="card-title p-0 m-0">کوچ های فعال</h6>
+                </div>
+                <div class="card-body">
+                    @foreach($last_coaches as $item)
+                        <div class="avatar pb-3 d-inline">
+                            <a href="/coach/{{$item->username}}">
+                                @if(strlen($item->personal_image)>0)
+                                    <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="mr-3 rounded-circle border"  width="50px" height="50px"  alt="{{$item->fname}} {{$item->lname}}" data-toggle="tooltip" data-placement="top" title="{{$item->fname}} {{$item->lname}}" />
+                                @else
+                                    <img src="{{asset('/documents/users/default-avatar.png')}}" class="mr-3 rounded-circle border"  width="50px" height="50px"  alt="{{$item->fname}} {{$item->lname}}" title="{{$item->fname}} {{$item->lname}}" data-toggle="tooltip" data-placement="top" />
+                                @endif
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
+            </aside>
+        </div>
     </div>
-    @endsection
+@endsection
+
 @section('footerScript')
 <script>
 $('.likes').click(function (e)

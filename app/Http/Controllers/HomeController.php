@@ -72,6 +72,15 @@ class HomeController extends BaseController
                 ->limit(12)
                 ->get();
 
+        $v=verta();
+        if($v->month<10)
+        {
+            $s="0".$v->month;
+        }
+
+        $birthday=User::where('datebirth','like','%/'.$s.'/%')
+                    ->get();
+
 
         $condition=['last_login_at',$this->changeTimestampToMilad($this->dateNow)];
         $onlineUser=$this->get_user(NULL,NULL,NULL,$condition,'get');
@@ -81,6 +90,7 @@ class HomeController extends BaseController
                     ->with('tweets',$tweets)
                     ->with('posts',$posts)
                     ->with('last_users',$last_users)
+                    ->with('birthday',$birthday)
                     ->with('last_coaches',$last_coaches);
 
     }

@@ -104,6 +104,9 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     //effectiveListenings
     Route::resource('effectiveListenings','EffectivelisteningController');
 
+    // communication skill
+    Route::get('/communication_skill','AssessmentController@communicationSkill_create');
+
     //Download video webinar Integrity
     Route::get('/integrity/files',function()
     {
@@ -264,6 +267,13 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     //categorygettingknows
     Route::resource('category_gettingknow','CategoryGettingknowController');
 
+    // Page Builder
+    Route::get('/pagebuilder',function()
+    {
+        return view('panelAdmin.pageBuilder');
+    });
+
+
     //Students
     Route::prefix('education/')->group(function ()
     {
@@ -306,9 +316,14 @@ Route::get('/verify/active/tel/check/{code}','VerifyController@checkCode_landing
 Route::get('/landingPage','landingController@index');
 
 Route::post('/landing/store','landingController@store_landing_gift');
+
 Route::get('/showPackageDownload', 'landingController@showPackageDownload')->name('freePackageLanding');
 Route::get('/password/sendcode','VerifyController@sendResetCode');
 Route::post('/password/reset/update','VerifyController@checkResetCode');
+
+//landing Booking coaching
+Route::get('/what-is-coaching/', 'landingController@bookOffCreate');
+Route::post('/what-is-coaching/bookOffStore', 'landingController@bookOffStore');
 
 
 

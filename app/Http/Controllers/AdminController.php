@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\booking;
 use App\categoryTag;
 use App\followup;
+use App\landPage;
 use App\message;
 use App\problemfollowup;
 use App\reserve;
@@ -277,6 +278,11 @@ class AdminController extends BaseController
                 alert()->warning(' برای تعداد '.$reserve_notFeedback->count()." جلسه برگزار شده بازخورد ثبت نشده است ")->persistent('بستن');
             }
 
+            //کدتخفیف کتاب کوچینگ چیست
+            $bookoff=landPage::where('tel','=',Auth::user()->tel)
+                                ->where('resource','=','کتاب کوچینگ چیست')
+                                ->first();
+
 
             return view('panelUser.home')
                 ->with('user',$user)
@@ -290,6 +296,7 @@ class AdminController extends BaseController
                 ->with('scoreIntroducedUser',$scoreIntroducedUser)
                 ->with('SuccessIntroduced',$SuccessIntroduced)
                 ->with('scoreTelverify',$scoreTelverify)
+                ->with('bookoff',$bookoff)
                 ->with('scoreEmailverify',$scoreEmailverify);
 
         }

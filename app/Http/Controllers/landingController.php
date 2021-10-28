@@ -241,41 +241,46 @@ class landingController extends BaseController
 
     }
 
-//    //لندینگ دعوت گردهمایی مشهد
-//    public function invitaionCreate()
-//    {
-//        $user=landPage::where('user_id','=',Auth::user()->id)
-//                    ->where('resource','=','گردهمایی مشهد')
-//                    ->get();
-//
-//        if($user->count()>0)
-//        {
-//            alert()->error('اطلاعات شما در دورهمی فراکوچ ثبت شده است.')->persistent('بستن');
-//            return back();
-//        }
-//        else
-//        {
-//            $courses=$this->get_courses();
-//            return view('panelUser.invitation')
-//                ->with('courses',$courses);
-//        }
-//
-//    }
+//    //لندینگ دریافت تخفیف 50درصد
+    public function bookOffCreate()
+    {
+            return view('whatIsCoaching');
+    }
 
-//    public function invitaionStore (Request $request)
-//    {
-//        $this->validate($request,[
-//            'options'   =>'required|numeric',
-//        ],[
-//            'options.required'  =>'انتخاب دوره اجباریست',
-//            'options.numeric'   =>'انتخاب دوره را صحیح وارد کنید',
-//        ]);
+    public function bookOffStore (Request $request)
+    {
+        $this->validate($request,[
+            'tel'               =>'required|iran_mobile',
+        ]);
 //
-//        $status=landPage::create($request->all()+[
-//                'user_id'   =>Auth::user()->id,
-//                'resource'  =>'گردهمایی مشهد'
-//
-//            ]);
+        $status=landPage::create($request->all()+[
+                'resource'  =>'کتاب کوچینگ چیست'
+
+            ]);
+
+        $user=User::where('tel','=',$status->tel)
+                    ->first();
+
+        if(!is_null($user))
+        {
+            if(Auth::check())
+            {
+                return redirect('/panel');
+            }
+            else
+            {
+                Auth::loginUsingId($user->id);
+                return redirect('/panel');
+            }
+        }
+        else
+        {
+            $user=User::create($request->all()+[
+                    'password'   => Hash::make('1234'),
+                ]);
+            Auth::loginUsingId($user->id);
+            return redirect('/panel');
+        }
 //
 //        if($status)
 //        {
@@ -323,5 +328,5 @@ class landingController extends BaseController
 //
 //        return view('panelAdmin.Invitation_list')
 //                    ->with('users',$user);
-//    }
+    }
 }
