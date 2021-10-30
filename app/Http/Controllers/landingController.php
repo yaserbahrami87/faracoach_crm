@@ -281,52 +281,38 @@ class landingController extends BaseController
             Auth::loginUsingId($user->id);
             return redirect('/panel');
         }
-//
-//        if($status)
-//        {
-//            if($status->options==0)
-//            {
-//                alert()->warning("این مراسم ویژه دانشپذیران و فارغ التحصیلان فراکوچ می باشد \n شما می توانید به صورت آنلاین از طریق صفحه اینستاگرام فراکوچ در رویداد شرکت کنید.")->persistent('بستن');
-//                $sw=false;
-//                return redirect('/');
-//            }
-//            else
-//            {
-//                alert()->success('درخواست شما برای شرکت در گردهمایی مشهد ثبت شد')->persistent('بستن');
-//                $msg="حضور شما در گردهمایی خانواده بزرگ فراکوچ ثبت شد.\nآدرس: مشهد جاده شاندیز مدرس 1/6 باغ تالار بارثاوا\nساعت ۱۵:۴۵\n";
-//                $this->sendSms(Auth::user()->tel,$msg);
-//                return view('panelUser.invitation_back');
-//            }
-//
-//        }
-//        else
-//        {
-//            alert()->error('خطا در درخواست شرکت در گردهمایی')->persistent('بستن');
-//        }
-//
-//        return back();
-//
-//    }
+    }
 
-//    public function invitationIndex()
-//    {
-//        $user=landPage::join('users','land_pages.user_id','=','users.id')
-//                    ->where('land_pages.resource','=','گردهمایی مشهد')
-//                    ->get();
-//        foreach ($user as $item)
-//        {
-//            if($item->options==0)
-//            {
-//                $item->course='دانشجو نیستم';
-//            }
-//            else
-//            {
-//                $item->course=$this->get_coursesByID($item->options)->course;
-//            }
+
+    // رویداد اصفهان
+    public function isfahanCreate()
+    {
+        return view('invitation');
+    }
+
+    public function isfahanStore (Request $request)
+    {
+        $this->validate($request,[
+            'fname'             =>'required|persian_alpha|',
+            'lname'             =>'required|persian_alpha|',
+            'tel'               =>'required|iran_mobile',
+            'options'           =>'required|persian_alpha',
+        ]);
 //
-//        }
-//
-//        return view('panelAdmin.Invitation_list')
-//                    ->with('users',$user);
+        $status=landPage::create($request->all()+[
+                'resource'  =>'رویداد اصفهان'
+
+            ]);
+
+        if($status)
+        {
+            alert()->success('درخواست شما برای گردهمایی اصفهان با موفقیت ثبت شد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در ثبت')->persistent('بستن');
+        }
+
+        return redirect('/');
     }
 }

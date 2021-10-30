@@ -119,7 +119,8 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
         return view('panelUser.gift_certificate');
     });
 
-    //Landing Pages
+
+
 
 });
 
@@ -403,12 +404,20 @@ Route::resource('tweets','TweetController');
 //LiKE
 Route::resource('like','LikeController');
 
+
+//RAVANSHENASI
 Route::get('/ravanshenasi',function()
 {
     return view('landeRavanshenasi');
 });
 
 Route::get('/integrity','LandPageController@create');
+
+
+//landing Isfahan
+Route::get('/events/isfahan', 'landingController@isfahanCreate');
+Route::post('/events/isfahan/store', 'landingController@isfahanStore');
+
 
 Route::get('/exportexcel','UserController@export_excel');
 // تبدیل نحوه شانایی به کد

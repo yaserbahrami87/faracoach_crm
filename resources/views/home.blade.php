@@ -51,10 +51,10 @@
             color: #000000;
         }
 
-        #tweets .card-body,#tweets .card-footer
+        /*#tweets .card-body,#tweets .card-footer
         {
             background-color: #EFDCB1;
-        }
+        }*/
 
         @media only screen and (max-width: 321px){
             .back .services{
@@ -252,6 +252,9 @@
             </aside>
         </div>
         <div class="col-md-6" id="tweets">
+            <a href="/events/isfahan" class="mt-3">
+                <img src="{{asset('/images/events-isfahan.jpeg')}}" class="img-fluid" />
+            </a>
         @if(Auth::check())
                 <div class="card-body p-0">
                     <div class="media pb-2 pt-2">
@@ -348,6 +351,7 @@
                 </div>
             </article>
         @endforeach
+            {{ $tweets->links() }}
         </div>
         <div class="col-md-3">
             <aside class="card position-sticky" >

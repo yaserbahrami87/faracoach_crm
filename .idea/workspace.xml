@@ -23,8 +23,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/public/images/events-Isfahan-01.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/events-Isfahan.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/invitation.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/landingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/landingController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/allCoaches.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/allCoaches.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/_invitation.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -212,19 +220,19 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\wamp64\www\faracoach_crm\resources\views\panelUser" />
-      <recent name="C:\wamp64\www\faracoach_crm\resources\views\panelAdmin" />
-      <recent name="D:\xampp\htdocs\faracoach_crm\resources\views" />
-      <recent name="D:\xampp\htdocs\faracoach_crm\resources\views\panelAdmin" />
-      <recent name="C:\xampp\htdocs\laravel\faracoach_crm\resources\views\panelAdmin" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\wamp64\www\faracoach_crm\public\images" />
       <recent name="C:\wamp64\www\faracoach_crm\public\css" />
       <recent name="C:\wamp64\www\faracoach_crm\public\videos" />
       <recent name="C:\wamp64\www\faracoach_crm\resources\views\panelUser" />
       <recent name="C:\wamp64\www\faracoach_crm\resources\views\panelAdmin" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\faracoach_crm\resources\views" />
+      <recent name="C:\wamp64\www\faracoach_crm\resources\views\panelUser" />
+      <recent name="C:\wamp64\www\faracoach_crm\resources\views\panelAdmin" />
+      <recent name="D:\xampp\htdocs\faracoach_crm\resources\views" />
+      <recent name="D:\xampp\htdocs\faracoach_crm\resources\views\panelAdmin" />
     </key>
   </component>
   <component name="RunManager">
@@ -699,7 +707,9 @@
       <workItem from="1635268425401" duration="2490000" />
       <workItem from="1635313471814" duration="4866000" />
       <workItem from="1635402852517" duration="13252000" />
-      <workItem from="1635452462411" duration="138000" />
+      <workItem from="1635452462411" duration="1636000" />
+      <workItem from="1635527867758" duration="1844000" />
+      <workItem from="1635576781665" duration="11103000" />
     </task>
     <servers />
   </component>
@@ -747,10 +757,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1633715054497" />
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1635418507577">
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1635592601725">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1635418507577" />
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1635592601725" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

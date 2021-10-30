@@ -141,14 +141,13 @@
             </div>
             <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 border-left">
                 <div class="card mb-3" >
-                    <div class="card-header bg-info text-light">جستجو</div>
                     <div class="card-body">
                         <form method="get" action="/coaches/all/">
                             <div class="form-group">
                                 <label for="search">جستجوی کوچ:</label>
                                 <input type="text" class="form-control" id="search" placeholder="نام خانوادگی را وارد کنید" name="q">
                             </div>
-                            <button class="btn btn-success btn-block" type="submit" name="search">فیلتر کن</button>
+                            <button class="btn btn-success btn-block" type="submit" name="search">بگرد</button>
                         </form>
                     </div>
                 </div>

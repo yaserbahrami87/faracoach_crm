@@ -1266,12 +1266,7 @@ class BaseController extends Controller
             {
                 return $query->wherein ('status',$status);
             })
-            ->when($paginate=='paginate',function($query,$paginate)
-            {
-                return  $query->orderby('tweets.id','desc')
-                    ->select('users.*','tweets.*','tweets.created_at as created_at_tweet')
-                    ->paginate($this->countPage());
-            })
+
             ->when($paginate=='first',function($query)
             {
                 return  $query->orderby('tweets.id','desc')
@@ -1290,6 +1285,12 @@ class BaseController extends Controller
                 return  $query->orderby('tweets.id','desc')
                     ->select('users.*','tweets.*','tweets.created_at as created_at_tweet')
                     ->get();
+            })
+            ->when($paginate=='paginate',function($query,$paginate)
+            {
+                return  $query->orderby('tweets.id','desc')
+                    ->select('users.*','tweets.*','tweets.created_at as created_at_tweet')
+                    ->paginate(10);
             });
 
     }
