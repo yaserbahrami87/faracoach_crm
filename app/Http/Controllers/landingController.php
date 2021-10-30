@@ -285,9 +285,24 @@ class landingController extends BaseController
 
 
     // رویداد اصفهان
-    public function isfahanCreate()
+    public function isfahanCreate(Request $request)
     {
-        return view('invitation');
+        if(isset($request->q))
+        {
+            $user=landPage::where('id','=',$request->q)
+                        ->first();
+            if(is_null($user))
+            {
+                alert()->error('کد اختصاصی شما اشتباه است')->persistent('بستن');
+            }
+        }
+        else
+        {
+            $user=NULL;
+        }
+
+        return view('invitation')
+                        ->with('user',$user);
     }
 
     public function isfahanStore (Request $request)
@@ -296,6 +311,7 @@ class landingController extends BaseController
             'fname'             =>'required|persian_alpha|',
             'lname'             =>'required|persian_alpha|',
             'tel'               =>'required|iran_mobile',
+            'introduced'        =>'nullable|numeric',
             'options'           =>'required|persian_alpha',
         ]);
 //
@@ -306,6 +322,8 @@ class landingController extends BaseController
 
         if($status)
         {
+            $tmp="درخواست شما برای گردهمایی اصفهان ثبت شد \n"."لینک دعوت اختصاصی:"."\n crm.faracoach.com/events/isfahan?q=".$status->id;
+            $this->sendSms($request->tel,$tmp);
             alert()->success('درخواست شما برای گردهمایی اصفهان با موفقیت ثبت شد')->persistent('بستن');
         }
         else

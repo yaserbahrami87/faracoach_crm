@@ -38,7 +38,7 @@
                     <div class="col-12 mt-5 text-center" id="inveite">
                         <h2>گردهمایی خانواده بزرگ فراکوچ - اصفهان </h2>
                         <p>زمان پنجشنبه .13 آبان ماه ساعت 16 الی 19</p>
-                        <p>مکان . سالن شهید آوینی -دانشگاه تهران</p>
+                        <p>مکان . سالن شهید آوینی -دانشگاه اصفهان</p>
                         <p>اگر افتخار میزبانی شما رو در این جشن داریم لطفا حتما در فرم زیر ما رو مطلع کنید.</p>
                         <p>با سپاس -  مشتاق دیدار شما هستیم<p>
                     </div>
@@ -72,6 +72,14 @@
                         <label for="tel">شماره همراه:*</label>
                         <input type="text" class="form-control" id="tel" name="tel"/>
                     </div>
+                    @if(is_null($user))
+                    <div class="form-group">
+                        <label for="introduced">شماره معرف:</label>
+                        <input type="text" class="form-control" id="introduced" name="introduced"/>
+                    </div>
+                    @else
+                        <input type="hidden" value="{{$user->id}}" id="introduced" name="introduced"/>
+                    @endif
                     <p>درباره کوچینگ:*</p>
 
                     <div class="form-check">
@@ -92,6 +100,7 @@
                             صرفا کنجکاو هستم
                         </label>
                     </div>
+
                     <button type="submit" class="btn btn-primary text-center mt-3">ثبت</button>
                 </form>
             </div>
