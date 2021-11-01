@@ -120,8 +120,11 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     });
 
 
-
-
+    //Psychological
+    Route::get('/Psychological',function()
+    {
+        return view('panelUser.PsychologicalPsychiatry_test');
+    });
 });
 
 
@@ -286,6 +289,11 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
         Route::resource('students', 'StudentController');
     });
 
+
+    //EVENTS
+    Route::get('/event/all','EventController@eventsListAdmin');
+    Route::get('/event/isfahan/list','LandingController@isfahanList');
+    Route::resource('events','EventController');
 });
 
 
@@ -335,11 +343,6 @@ Route::get('/register2',function()
 
 // Landing Register
 Route::post('/register/land','UserController@register_landing');
-//Route::get('/test2',function()
-//{
-//    return view('landTamamiat_return');
-//});
-
 Route::resource('landPage','LandPageController');
 
 
@@ -420,12 +423,8 @@ Route::post('/events/isfahan/store', 'landingController@isfahanStore');
 
 
 Route::get('/exportexcel','UserController@export_excel');
-// تبدیل نحوه شانایی به کد
-Route::get('/test','UserController@test');
 
-
-//تست
-Route::post('/tamamiat_send','AdminController@tamamiat_test');
+Route::resource('events','EventController');
 
 
 

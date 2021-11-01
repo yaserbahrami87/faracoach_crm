@@ -5,14 +5,14 @@
     <style>
         .back{
             width:100%;
-            height:380px;
+            /*height:380px;*/
             padding:0;
         }
         .back .services{
             width:100%;
             height:165px;
             background: rgba(2,1,19,.81);
-            margin-top:-165px;
+            margin-top:0px;
         }
         .back .rounded-circle{
             width:85px;
@@ -61,6 +61,7 @@
                 background:rgb(210 210 210);
                 height:75px;
                 padding:0;
+                margin-top: 0px;
             }
             .back .rounded-circle {
                 width: 39px;
@@ -87,12 +88,16 @@
 
         @media only screen and (min-width: 321px) and (max-width:425px)
         {
+            .back .services
+            {
+                height: 75px;
+            }
             .back .rounded-circle {
                 width: 39px;
                 height: 39px;
                 background: rgb(222 222 222  97%);
                 float: left;
-                margin: -17px 4px 0;
+                margin: -17px 10px 0;
                 padding: 11px;
             }
 
@@ -119,7 +124,7 @@
                 height: 50px;
                 background: rgb(222 222 222  97%);
                 float: left;
-                margin: -17px 4px 0;
+                margin: -17px 12px 0;
                 padding: 11px;
             }
 
@@ -138,12 +143,62 @@
                 color:#FFFFFF;
             }
         }
+
+        @media only screen and (min-width: 769px) and (max-width:1024px)
+        {
+            .back .rounded-circle
+            {
+                width: 55px;
+                height: 55px;
+            }
+
+            .back .bi
+            {
+                font-size:28px;
+            }
+
+            .back .rounded-circle
+            {
+                padding: 12px;
+            }
+
+            .back .services
+            {
+                height: 85px;
+            }
+        }
     </style>
 @endsection
 @section('row1')
     <div class="row" id="">
         <div class="col-md-12 back">
-            <img src="{{asset('/images/coach1-1.png')}}" alt=""/>
+
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="{{asset('/images/coach1-1.png')}}" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{{asset('/images/events-isfahan.jpeg')}}" class="d-block w-100"  alt="...">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-target="#carouselExampleControls" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-target="#carouselExampleControls" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </button>
+            </div>
+
+
+
+
+
+
+
+
             <div class="col-12 services d-md-flex justify-content-md-center">
                 <div class="col-xl-2 col-lg-2 col-md-2 col-sm-0">
                 </div>

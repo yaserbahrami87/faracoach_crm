@@ -333,4 +333,14 @@ class landingController extends BaseController
 
         return redirect('/');
     }
+
+    public function isfahanList()
+    {
+        $users=landPage::where('resource','=','رویداد اصفهان')
+                    ->groupby('tel')
+                    ->paginate($this->countPage());
+
+        return view('panelAdmin.event_isfahan')
+                    ->with('users',$users);
+    }
 }

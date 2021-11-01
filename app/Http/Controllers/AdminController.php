@@ -517,9 +517,5 @@ class AdminController extends BaseController
 
     }
 
-    public function tamamiat_test(Request $request)
-    {
 
-
-    }
 }
