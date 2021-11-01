@@ -292,7 +292,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
 
     //EVENTS
     Route::get('/event/all','EventController@eventsListAdmin');
-    Route::get('/event/isfahan/list','LandingController@isfahanList');
+    Route::get('/event/isfahan/list','landingController@isfahanList');
     Route::resource('events','EventController');
 });
 

@@ -23,7 +23,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/event_Isfahan.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/event_Isfahan.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -704,7 +704,7 @@
       <workItem from="1635613243602" duration="7984000" />
       <workItem from="1635656870627" duration="18545000" />
       <workItem from="1635744227881" duration="21000" />
-      <workItem from="1635744282986" duration="17452000" />
+      <workItem from="1635744282986" duration="17658000" />
     </task>
     <servers />
   </component>
