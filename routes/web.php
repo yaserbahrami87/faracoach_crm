@@ -291,8 +291,8 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
 
 
     //EVENTS
-    Route::get('/event/all','EventController@eventsListAdmin');
     Route::get('/event/isfahan/list','landingController@isfahanList');
+    Route::get('/event/all','EventController@eventsListAdmin');
     Route::resource('events','EventController');
 });
 
@@ -420,6 +420,7 @@ Route::get('/integrity','LandPageController@create');
 //landing Isfahan
 Route::get('/events/isfahan', 'landingController@isfahanCreate');
 Route::post('/events/isfahan/store', 'landingController@isfahanStore');
+Route::get('/events/isfahan/exportexcel', 'landingController@isfahanExport');
 
 
 Route::get('/exportexcel','UserController@export_excel');

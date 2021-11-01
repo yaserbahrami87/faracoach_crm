@@ -40,30 +40,48 @@
                             <input type="number" class="form-control" id="capacity" name="capacity" />
                             <small class="text-muted">در صورت نامحدود بودن عدد 1- را وارد کنید</small>
                         </div>
-                        <div class="form-group">
-                            <label for="image">آدرس عکس شاخص*</label>
-                            <input type="text" class="form-control" id="image" name="image" />
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="image">آدرس عکس شاخص*</label>
+                                    <input type="text" class="form-control" id="image" name="image" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="custom-file">
+                                    <label for="video">آدرس ویدئو</label>
+                                    <input type="file" class="custom-file-input" id="video" name="video" />
+                                    <label class="custom-file-label" for="video">Choose file</label>
+                                </div>
+                            </div>
                         </div>
-
-                        <div class="form-group">
-                            <label for="video">آدرس ویدئو</label>
-                            <input type="number" class="form-control" id="video" name="video" />
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="start_date">تاریخ شروع رویداد*</label>
+                                    <input type="text" class="form-control" id="start_date" name="start_date"  autocomplete="off"  />
+                                </div>
+                            </div>
+                            <div class="col-md-6 ">
+                                <div class="form-group">
+                                    <label for="start_date">ساعت شروع رویداد*</label>
+                                    <input type="text" class="form-control time" id="start_time" name="start_time"  autocomplete="off"  />
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="start_date">تاریخ شروع رویداد*</label>
-                            <input type="text" class="form-control" id="start_date" name="start_date"  autocomplete="off"  />
-                        </div>
-                        <div class="form-group">
-                            <label for="start_date">ساعت شروع رویداد*</label>
-                            <input type="text" class="form-control time" id="start_time" name="start_time"  autocomplete="off"  />
-                        </div>
-                        <div class="form-group">
-                            <label for="end_date">تاریخ پایان رویداد*</label>
-                            <input type="text" class="form-control" id="end_date" name="end_date"  autocomplete="off"  />
-                        </div>
-                        <div class="form-group">
-                            <label for="end_time">ساعت پایان رویداد*</label>
-                            <input type="text" class="form-control time" id="end_time" name="end_time"  autocomplete="off"  />
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="end_date">تاریخ پایان رویداد*</label>
+                                    <input type="text" class="form-control" id="end_date" name="end_date"  autocomplete="off"  />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="end_time">ساعت پایان رویداد*</label>
+                                    <input type="text" class="form-control time" id="end_time" name="end_time"  autocomplete="off"  />
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="expire_date">تاریخ پایان ثبت نام*</label>

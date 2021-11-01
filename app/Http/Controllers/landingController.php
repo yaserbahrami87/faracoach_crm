@@ -343,4 +343,25 @@ class landingController extends BaseController
         return view('panelAdmin.event_Isfahan')
                     ->with('users',$users);
     }
+
+    public function isfahanExport()
+    {
+        //خروجی اکسل
+        $list=landPage::where('resource','=','رویداد اصفهان')
+                ->groupby('tel')
+                ->get();
+        $name='isfahan'.time();
+
+        $excel=fastexcel($list)->export($name.'.xlsx');
+        if($excel)
+        {
+            return response()->download(public_path($name.'.xlsx'));
+
+        }
+        else
+        {
+            return back();
+        }
+
+    }
 }
