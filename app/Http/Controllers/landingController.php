@@ -338,7 +338,7 @@ class landingController extends BaseController
     {
         $users=landPage::where('resource','=','رویداد اصفهان')
                     ->groupby('tel')
-                    ->paginate($this->countPage());
+                    ->get();
 
         return view('panelAdmin.event_Isfahan')
                     ->with('users',$users);

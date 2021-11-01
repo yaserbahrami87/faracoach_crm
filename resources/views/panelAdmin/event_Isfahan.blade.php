@@ -3,7 +3,7 @@
     <div class="container bg-light">
         <div class="row  ">
             <div class="col-md-12 table-responsive">
-
+                {{ "تعداد ".$users->count()." نفر "}}
                 <table class="table table-striped">
                     <tr>
                         <th>نام</th>
@@ -18,7 +18,7 @@
                         </tr>
                     @endforeach
                 </table>
-                {{$users->links()}}
+
             </div>
         </div>
     </div>
