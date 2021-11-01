@@ -340,7 +340,7 @@ class landingController extends BaseController
                     ->groupby('tel')
                     ->paginate($this->countPage());
 
-        return view('panelAdmin.event_isfahan')
+        return view('panelAdmin.event_Isfahan')
                     ->with('users',$users);
     }
 }
