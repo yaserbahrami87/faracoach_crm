@@ -427,6 +427,26 @@
                     @endforeach
                 </div>
             </aside>
+
+            <aside class="card" >
+                <div class="card-header">
+                    <h6 class="card-title m-0">
+                        متولدین این ماه</h6>
+
+                </div>
+                <div class="card-body">
+
+                    @foreach($birthday as $item)
+                        <div class="avatar pb-3 d-inline">
+                            @if(strlen($item->personal_image)>0)
+                                <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="border mr-3 rounded-circle"  width="50px" height="50px"  alt="{{$item->fname}} {{$item->lname}} " data-toggle="tooltip" data-placement="top" title="{{$item->fname}} {{$item->lname}}" />
+                            @else
+                                <img src="{{asset('/documents/users/default-avatar.png')}}" class="border mr-3 rounded-circle"  width="50px" height="50px"  alt="{{$item->fname}} {{$item->lname}}" title="{{$item->fname}} {{$item->lname}} " data-toggle="tooltip" data-placement="top" />
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
+            </aside>
         </div>
     </div>
 @endsection

@@ -4,6 +4,8 @@
     <link href="{{asset('/css/kamadatepicker.min.css')}}" rel="stylesheet" />
     <link href="{{asset('/css/timepicker.min.css')}}" rel="stylesheet" />
     <link href="{{asset('/trumbowyg-2.25.1/dist/ui/trumbowyg.min.css')}}" rel="stylesheet" />
+    <link rel="stylesheet" href="{{asset('/trumbowyg-2.25.1/dist/plugins/colors/ui/trumbowyg.colors.min.css')}}">
+
     <style>
         form
         {
@@ -14,43 +16,43 @@
 
 
 @section('rowcontent')
-    <div class="container bg-light shadow-lg">
+    <div class="container bg-light shadow-lg mb-5">
         <div class="row p-5">
             <div class="col-12 border-bottom mb-5">
                 <h4>ایجاد رویداد جدید</h4>
             </div>
-            <form method="post" action="/admin/events">
+            <form method="post" action="/admin/events" enctype="multipart/form-data">
                 {{csrf_field()}}
                 <div class="col-12 col-sm-6 col-md-6 col-xl-6 col-lg-6 ">
                         <div class="form-group">
                             <label for="event">موضوع رویداد*</label>
-                            <input type="text" class="form-control" id="event" name="event" />
+                            <input type="text" class="form-control" id="event" name="event" value="{{old('event')}}"  autocomplete="off"/>
                         </div>
                         <div class="form-group">
                             <label for="shortlink">لینک اختصاصی*</label>
-                            <input type="text" class="form-control" id="shortlink" name="shortlink" />
+                            <input type="text" class="form-control" id="shortlink" name="shortlink" value="{{old('shortlink')}}" autocomplete="off" />
                             <small>لینک اختصاصی نباید تکراری باشد</small>
                         </div>
                         <div class="form-group">
                             <label for="description">توضیح کوتاه*</label>
-                            <input type="text" class="form-control" id="description" name="description" />
+                            <input type="text" class="form-control" id="description" name="description" value="{{old('description')}}" />
                             <small>حداکثر 150 کارکتر</small>
                         </div>
                         <div class="form-group">
                             <label for="capacity">ظرفیت*</label>
-                            <input type="number" class="form-control" id="capacity" name="capacity" />
+                            <input type="number" class="form-control" id="capacity" name="capacity" value="{{old('capacity')}}"  />
                             <small class="text-muted">در صورت نامحدود بودن عدد 1- را وارد کنید</small>
                         </div>
                         <div class="form-row">
                             <div class="col-6">
                                 <label for="capacity">نوع رویداد *</label>
                                 <div class="form-check  form-check-inline" >
-                                    <input class="form-check-input ml-3 type" type="radio" name="type" id="type1" value="حضوری" />
+                                    <input class="form-check-input ml-3 type" type="radio" name="type" id="type1" value="1" />
                                     <label class="form-check-label p-0" for="type1">
                                         حضوری
                                     </label>
 
-                                    <input class="form-check-input ml-3 type" type="radio" name="type" id="type2" value="آنلاین" />
+                                    <input class="form-check-input ml-3 type" type="radio" name="type" id="type2" value="2" />
                                     <label class="form-check-label p-0" for="type2">
                                         آنلاین
                                     </label>
@@ -58,21 +60,21 @@
                             </div>
                             <div class="col-6"></div>
                         </div>
-                        <div class="form-group d-none" id="address">
+                        <div class="form-group d-none" id="address1">
                             <label for="address">آدرس*</label>
-                            <input type="number" class="form-control" id="address" name="address" />
+                            <input type="text" class="form-control" id="address" name="address" value="{{old('address')}}" />
                         </div>
                         <div class="form-row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="image">آدرس عکس شاخص*</label>
-                                    <input type="file" class="form-control" id="image" name="image" />
+                                    <input type="file" class="form-control" id="image" name="image" value="{{old('image')}}"/>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="custom-file">
                                     <label for="video">آدرس ویدئو</label>
-                                    <input type="text" class="form-control" id="video" name="video" />
+                                    <input type="text" class="form-control" id="video" name="video" value="{{old('video')}}"/>
                                 </div>
                             </div>
                         </div>
@@ -80,13 +82,13 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="start_date">تاریخ شروع رویداد*</label>
-                                    <input type="text" class="form-control" id="start_date" name="start_date"  autocomplete="off"  />
+                                    <input type="text" class="form-control" id="start_date" name="start_date"  autocomplete="off"  value="{{old('start_date')}}"/>
                                 </div>
                             </div>
                             <div class="col-md-6 ">
                                 <div class="form-group">
                                     <label for="start_date">ساعت شروع رویداد*</label>
-                                    <input type="text" class="form-control time" id="start_time" name="start_time"  autocomplete="off"  />
+                                    <input type="text" class="form-control time" id="start_time" name="start_time"  autocomplete="off" value="{{old('start_time')}}" />
                                 </div>
                             </div>
                         </div>
@@ -94,19 +96,30 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="end_date">تاریخ پایان رویداد*</label>
-                                    <input type="text" class="form-control" id="end_date" name="end_date"  autocomplete="off"  />
+                                    <input type="text" class="form-control" id="end_date" name="end_date"  autocomplete="off" value="{{old('end_date')}}" />
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="end_time">ساعت پایان رویداد*</label>
-                                    <input type="text" class="form-control time" id="end_time" name="end_time"  autocomplete="off"  />
+                                    <input type="text" class="form-control time" id="end_time" name="end_time"  autocomplete="off" value="{{old('end_time')}}" />
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="expire_date">تاریخ پایان ثبت نام*</label>
-                            <input type="text" class="form-control" id="expire_date" name="expire_date"  autocomplete="off"  />
+                        <div class="form-row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="duration">مدت رویداد*</label>
+                                    <input type="text" class="form-control" id="duration" name="duration"  autocomplete="off" value="{{old('duration')}}" />
+                                    <small class="text-muted">مدت زمان رویداد به عنوان مثال: یک ساعت و نیم</small>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="expire_date">تاریخ پایان ثبت نام*</label>
+                                    <input type="text" class="form-control" id="expire_date" name="expire_date"  autocomplete="off" value="{{old('expire_date')}}" />
+                                </div>
+                            </div>
                         </div>
                 </div>
                 <div class="col-12 col-sm-6 col-md-6 col-xl-6 col-lg-6 ">
@@ -116,7 +129,7 @@
                         </a>
                         <div class="collapse" id="collapseEventText">
                             <div class="card card-body">
-                                <textarea class="form-control" id="event_text" name="event_text"></textarea>
+                                <textarea class="form-control" id="event_text" name="event_text">{{old('event_text')}}</textarea>
                             </div>
                         </div>
                     </div>
@@ -126,7 +139,7 @@
                         </a>
                         <div class="collapse" id="collapseheading">
                             <div class="card card-body">
-                                <textarea class="form-control" id="heading" name="heading"></textarea>
+                                <textarea class="form-control" id="heading" name="heading">{{old('heading')}}</textarea>
                             </div>
                         </div>
                     </div>
@@ -136,7 +149,7 @@
                         </a>
                         <div class="collapse" id="collapsecontacts">
                             <div class="card card-body">
-                                <textarea class="form-control" id="contacts" name="contacts"></textarea>
+                                <textarea class="form-control" id="contacts" name="contacts">{{old('contacts')}}</textarea>
                             </div>
                         </div>
                     </div>
@@ -146,7 +159,7 @@
                         </a>
                         <div class="collapse" id="collapsefaq">
                             <div class="card card-body">
-                                 <textarea class="form-control" id="faq" name="faq"></textarea>
+                                 <textarea class="form-control" id="faq" name="faq">{{old('faq')}}</textarea>
                             </div>
                         </div>
                     </div>
@@ -156,7 +169,7 @@
                         </a>
                         <div class="collapse" id="collapselinks">
                             <div class="card card-body">
-                                <textarea class="form-control" id="links" name="links"></textarea>
+                                <textarea class="form-control" id="links" name="links">{{old('links')}}</textarea>
                             </div>
                         </div>
                     </div>
@@ -169,6 +182,20 @@
 @endsection
 
 @section('footerScript')
+    <script>
+        $('.type').click(function()
+        {
+            if($(this).val()=='1')
+            {
+                $("#address1").attr('class','form-group');
+            }
+            else
+            {
+                $("#address1").attr('class','form-group d-none');
+            }
+        });
+    </script>
+
     <!--  DATE SHAMSI PICKER  --->
     <script src="{{asset('js/kamadatepicker.min.js')}}"></script>
     <script src="{{asset('js/kamadatepicker.holidays.js')}}"></script>
@@ -208,6 +235,7 @@
 
 
     <script src="{{asset('/trumbowyg-2.25.1/dist/trumbowyg.min.js')}}"></script>
+    <script src="{{asset('/trumbowyg-2.25.1/dist/plugins/colors/trumbowyg.colors.min.js')}}"></script>
     <script src="{{asset('/trumbowyg-2.25.1/dist/langs/fa.js')}}"></script>
     <script>
         $('textarea').trumbowyg({
@@ -218,6 +246,7 @@
                 ['strong', 'em', 'del'],
                 ['superscript', 'subscript'],
                 ['link'],
+                ['foreColor', 'backColor'],
                 ['insertImage'],
                 ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
                 ['unorderedList', 'orderedList'],

@@ -22,6 +22,8 @@ class CreateEventsTable extends Migration
             $table->text('description')->nullable();
             $table->string('image',250)->nullable();
             $table->tinyInteger('capacity')->nullable();
+            $table->tinyInteger('type')->nullable();
+            $table->string('address',250)->nullable();
             $table->text('heading')->nullable();
             $table->string('contacts',250)->nullable();
             $table->string('faq',250)->nullable();
@@ -32,6 +34,7 @@ class CreateEventsTable extends Migration
             $table->string('end_date',11)->nullable();
             $table->string('start_time',8)->nullable();
             $table->string('end_time',8)->nullable();
+            $table->string('duration',100)->nullable();
             $table->string('options',250)->nullable();
             $table->tinyInteger('status')->default(1);
             $table->bigInteger('insert_user')->nullable();

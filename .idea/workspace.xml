@@ -26,6 +26,10 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/EventController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/EventController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/landingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/landingController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/event.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/event.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_10_31_161855_create_events_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_10_31_161855_create_events_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/fa/validation.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/fa/validation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/insertEvent.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/insertEvent.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -709,7 +713,7 @@
       <workItem from="1635744227881" duration="21000" />
       <workItem from="1635744282986" duration="22018000" />
       <workItem from="1635795595876" duration="22000" />
-      <workItem from="1635830944008" duration="7379000" />
+      <workItem from="1635830944008" duration="18111000" />
     </task>
     <servers />
   </component>
@@ -737,10 +741,10 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="413" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1635418158215">
+    <state x="413" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1635846649049">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1635418158215" />
+    <state x="413" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1635846649049" />
     <state x="184" y="8" key="SettingsEditor" timestamp="1632374771441">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -757,10 +761,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1635620465694" />
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1635836149162">
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1635851364036">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1635836149162" />
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1635851364036" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
