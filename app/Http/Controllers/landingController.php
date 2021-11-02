@@ -322,9 +322,9 @@ class landingController extends BaseController
 
         if($status)
         {
-            $tmp="درخواست شما برای گردهمایی اصفهان ثبت شد \n"."لینک دعوت اختصاصی:"."\n crm.faracoach.com/events/isfahan?q=".$status->id;
+            $tmp="ظرفیت گردهمایی اصفهان تکمیل شده است \n"."لینک دعوت اختصاصی:"."\nشما در لیست انتظار قرار گرفته اید و با شما تماس خواهد گرفته شد ";
             $this->sendSms($request->tel,$tmp);
-            alert()->success('درخواست شما برای گردهمایی اصفهان با موفقیت ثبت شد')->persistent('بستن');
+            alert()->success("ظرفیت گردهمایی اصفهان تکمیل شده است \n همکاران ما با شما تماس خواهند گرفت.")->persistent('بستن');
         }
         else
         {
@@ -337,6 +337,7 @@ class landingController extends BaseController
     public function isfahanList()
     {
         $users=landPage::where('resource','=','رویداد اصفهان')
+                    ->orderby('id','desc')
                     ->groupby('tel')
                     ->get();
 
@@ -348,6 +349,7 @@ class landingController extends BaseController
     {
         //خروجی اکسل
         $list=landPage::where('resource','=','رویداد اصفهان')
+                ->orderby('id','desc')
                 ->groupby('tel')
                 ->get();
         $name='isfahan'.time();
