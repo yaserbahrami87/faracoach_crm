@@ -19,7 +19,8 @@
             <div class="col-12 border-bottom mb-5">
                 <h4>ایجاد رویداد جدید</h4>
             </div>
-            <form>
+            <form method="post" action="/admin/events">
+                {{csrf_field()}}
                 <div class="col-12 col-sm-6 col-md-6 col-xl-6 col-lg-6 ">
                         <div class="form-group">
                             <label for="event">موضوع رویداد*</label>
@@ -41,17 +42,37 @@
                             <small class="text-muted">در صورت نامحدود بودن عدد 1- را وارد کنید</small>
                         </div>
                         <div class="form-row">
+                            <div class="col-6">
+                                <label for="capacity">نوع رویداد *</label>
+                                <div class="form-check  form-check-inline" >
+                                    <input class="form-check-input ml-3 type" type="radio" name="type" id="type1" value="حضوری" />
+                                    <label class="form-check-label p-0" for="type1">
+                                        حضوری
+                                    </label>
+
+                                    <input class="form-check-input ml-3 type" type="radio" name="type" id="type2" value="آنلاین" />
+                                    <label class="form-check-label p-0" for="type2">
+                                        آنلاین
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-6"></div>
+                        </div>
+                        <div class="form-group d-none" id="address">
+                            <label for="address">آدرس*</label>
+                            <input type="number" class="form-control" id="address" name="address" />
+                        </div>
+                        <div class="form-row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="image">آدرس عکس شاخص*</label>
-                                    <input type="text" class="form-control" id="image" name="image" />
+                                    <input type="file" class="form-control" id="image" name="image" />
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="custom-file">
                                     <label for="video">آدرس ویدئو</label>
-                                    <input type="file" class="custom-file-input" id="video" name="video" />
-                                    <label class="custom-file-label" for="video">Choose file</label>
+                                    <input type="text" class="form-control" id="video" name="video" />
                                 </div>
                             </div>
                         </div>
@@ -91,7 +112,7 @@
                 <div class="col-12 col-sm-6 col-md-6 col-xl-6 col-lg-6 ">
                     <div class="form-group">
                         <a class="btn btn-outline-info d-block mb-2" data-toggle="collapse" href="#collapseEventText" role="button" aria-expanded="false" aria-controls="collapseEventText">
-                            توضیحات رویداد
+                            توضیحات رویداد *
                         </a>
                         <div class="collapse" id="collapseEventText">
                             <div class="card card-body">

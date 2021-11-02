@@ -337,7 +337,6 @@ class landingController extends BaseController
     public function isfahanList()
     {
         $users=landPage::where('resource','=','رویداد اصفهان')
-                    ->orderby('id','desc')
                     ->groupby('tel')
                     ->get();
 
@@ -349,7 +348,6 @@ class landingController extends BaseController
     {
         //خروجی اکسل
         $list=landPage::where('resource','=','رویداد اصفهان')
-                ->orderby('id','desc')
                 ->groupby('tel')
                 ->get();
         $name='isfahan'.time();
