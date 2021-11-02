@@ -2,6 +2,8 @@
 @section('headerscript')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link href="{{asset('/trumbowyg-2.25.1/dist/ui/trumbowyg.min.css')}}" rel="stylesheet" />
+
+
     <style>
         .back{
             width:100%;
@@ -409,7 +411,7 @@
             {{ $tweets->links() }}
         </div>
         <div class="col-md-3">
-            <aside class="card position-sticky" >
+            <aside class="card mb-3" >
                 <div class="card-header">
                     <h6 class="card-title p-0 m-0">کوچ های فعال</h6>
                 </div>
@@ -430,21 +432,10 @@
 
             <aside class="card" >
                 <div class="card-header">
-                    <h6 class="card-title m-0">
-                        متولدین این ماه</h6>
-
+                    <h6 class="card-title m-0">آخرین رویدادها</h6>
                 </div>
-                <div class="card-body">
-
-                    @foreach($birthday as $item)
-                        <div class="avatar pb-3 d-inline">
-                            @if(strlen($item->personal_image)>0)
-                                <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="border mr-3 rounded-circle"  width="50px" height="50px"  alt="{{$item->fname}} {{$item->lname}} " data-toggle="tooltip" data-placement="top" title="{{$item->fname}} {{$item->lname}}" />
-                            @else
-                                <img src="{{asset('/documents/users/default-avatar.png')}}" class="border mr-3 rounded-circle"  width="50px" height="50px"  alt="{{$item->fname}} {{$item->lname}}" title="{{$item->fname}} {{$item->lname}} " data-toggle="tooltip" data-placement="top" />
-                            @endif
-                        </div>
-                    @endforeach
+                <div class="card-body text-center ">
+                    <!-- <img src="{{asset('/images/birthday-cake.png')}}" class="img-fluid" />-->
                 </div>
             </aside>
         </div>
@@ -543,5 +534,22 @@ btns: [
 ]
 })
 </script>
+
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="{{asset('/slick-1.8.1/slick-1.8.1/slick/slick.js')}}"></script>
+<script>
+    $(document).ready(function(){
+        $('.events').slick({
+            dots: true,
+            infinite: true,
+            speed: 300,
+            slidesToShow: 1,
+            arrows:false,
+            adaptiveHeight: true
+    });
+    });
+</script>
+
+
 
 @endsection
