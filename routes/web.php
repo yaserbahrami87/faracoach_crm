@@ -121,10 +121,8 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
 
 
     //Psychological
-    Route::get('/Psychological',function()
-    {
-        return view('panelUser.PsychologicalPsychiatry_test');
-    });
+    Route::resource('psychological','PsychologicalController');
+
 });
 
 

@@ -88,7 +88,7 @@
         </div>
         <div class="container d-flex justify-content-center">
             <div class=" col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                <form name="demo" id="demo" method="POST" action="/panel/integrityTest" class="myBook mt-4">
+                <form name="demo" id="demo" method="POST" action="/panel/psychological" class="myBook mt-4">
                 {{csrf_field()}}
                 <!--
                     <section>
@@ -784,17 +784,17 @@
                         <p>35- از طراحی برای آینده و تلاش برای رساندن آن‌ها به واقعیت لذت می برم.
                         </p>
                         <input class="page-next" type="radio" id="vehicle35_5" name="vehicle35" value="6" required>
-                        <label for="vehicle35_5"> کاملا موافقم</label><br />
+                        <label for="vehicle35_5"> کاملا موافق</label><br />
                         <input class="page-next" type="radio" id="vehicle35_4" name="vehicle35" value="5" required>
-                        <label for="vehicle35_4">موافقم </label><br>
+                        <label for="vehicle35_4">موافق </label><br>
                         <input class="page-next" type="radio" id="vehicle35_3" name="vehicle35" value="4" required>
-                        <label for="vehicle35_3"> نه موافق و نه مخالف</label><br/>
+                        <label for="vehicle35_3"> تا حدودی موافق</label><br/>
                         <input class="page-next" type="radio" id="vehicle35_2" name="vehicle35" value="3" required>
-                        <label for="vehicle35_2"> مخالفم</label><br>
+                        <label for="vehicle35_2"> تا حدودی مخالف</label><br>
                         <input class="page-next" type="radio" id="vehicle35_1" name="vehicle35" value="2" required>
-                        <label for="vehicle35_1"> به شدت مخالفم</label><br>
+                        <label for="vehicle35_1"> مخالف</label><br>
                         <input class="page-next" type="radio" id="vehicle35_0" name="vehicle35" value="1" required>
-                        <label for="vehicle35_0"> به شدت مخالفم</label><br>
+                        <label for="vehicle35_0"> کاملا مخالف</label><br>
                         <div class="col-12 text-center mt-3">
                             <button type="button" class="page-prev btn btn-danger col-3 ">قبلی</button>
                             <button type="button" class="page-next btn btn-primary col-3">بعدی</button>
