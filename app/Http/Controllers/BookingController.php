@@ -236,11 +236,11 @@ class BookingController extends BaseController
                         ->where('reserves.booking_id','=',$booking['booking_id'])
                         ->first();
 
-            $states=$this->states();
-            if(!is_null($reserve->city))
-            {
-                $reserve['city']=$this->city($reserve->city);
-            }
+//            $states=$this->states();
+//            if(!is_null($reserve->city))
+//            {
+//                $reserve['city']=$this->city($reserve->city);
+//            }
 
             switch($reserve->type_booking)
             {
@@ -265,7 +265,7 @@ class BookingController extends BaseController
            return view('panelUser.InfoReserve')
                         ->with('user',$reserve)
                         ->with('booking',$booking)
-                        ->with('states',$states)
+//                        ->with('states',$states)
                         ->with('feedback',$feedback)
                         ->with('dateNow',$dateNow);
 
