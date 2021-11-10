@@ -17,7 +17,8 @@ class EventController extends BaseController
     public function index()
     {
         $events=event::where('status','=',1)
-                ->paginate();
+                ->orderby('start_date','desc')
+                ->paginate(20);
         foreach ($events as $item)
         {
             if($item->start_date<$this->dateNow)

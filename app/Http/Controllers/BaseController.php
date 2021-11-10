@@ -1802,6 +1802,12 @@ class BaseController extends Controller
             return  $query->orderby('id','desc')
                 ->paginate($this->countPage());
         })
+        ->when($paginate=='limit',function($query)
+        {
+            return  $query->orderby('start_date','desc')
+                ->limit(4)
+                ->get();
+        })
         ->when($paginate=='get',function($query)
         {
             return  $query->orderby('id','desc')

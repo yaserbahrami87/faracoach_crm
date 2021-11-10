@@ -88,8 +88,8 @@ class HomeController extends BaseController
         $onlineUser=$this->get_user(NULL,NULL,NULL,$condition,'get');
 
         // آآخرین رویدادها
-        $condition=['start_date','>',$this->dateNow];
-        $events=$this->get_events(NULL,NULL,NULL,NULL,$condition,1,'get');
+        //$condition=['start_date','>',$this->dateNow];
+        $events=$this->get_events(NULL,NULL,NULL,NULL,NULL,1,'limit');
 
         return view('home')
 //        return redirect('/login')
