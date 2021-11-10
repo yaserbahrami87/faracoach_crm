@@ -325,6 +325,30 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-item has-treeview ">
+                        <a href="#" class="nav-link @if(request()->is('admin/setting*')) active  @endif">
+                            <i class="bi bi-display"></i>
+                            <p>
+                                رویدادها
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/admin/event/all" class="nav-link @if(request()->is('admin/event*')) active  @endif">
+                                    <i class="bi bi-display"></i>
+                                    <p>همه رویدادها</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/admin/event/create" class="nav-link @if(request()->is('admin/event/create')) active  @endif">
+                                    <i class="bi bi-plus-lg"></i>
+                                    <p>ایجاد رویداد</p>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
 
                 @endif
                 @if(Auth::user()->type==2)

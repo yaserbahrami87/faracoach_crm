@@ -42,13 +42,13 @@ class LoginController extends Controller
     }
 
     //برای ریدایرکت کردن بعد از لاگین این تابع باید تغییر کند
-    protected function authenticated(Request $request)
-    {
-        if(Auth::check())
-        {
-            return redirect('/panel');
-        }
-    }
+//    protected function authenticated(Request $request)
+//    {
+//        if(Auth::check())
+//        {
+//            return redirect('/panel');
+//        }
+//    }
 
 
     protected function credentials(Request $request)

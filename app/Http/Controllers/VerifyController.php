@@ -88,8 +88,6 @@ class VerifyController extends BaseController
         {
             echo('<div  class="alert alert-danger">شماره وارد شده قبلا در سیستم ثبت شده است</div>');
         }
-
-
     }
 
     // ایجاد کد فعال سازی موبایل در داخل پروفایل کاربر
@@ -589,6 +587,66 @@ class VerifyController extends BaseController
         }
     }
 
+
+    public function verifyCreate(Request $request)
+    {
+        $this->validate($request,[
+            'type' =>'required|string'
+        ]);
+
+        //غیرفعال کردن کدهای قبلی
+        verify::where('type','=',$request->type)
+            ->where('verify','=',0)
+            ->update(['verify'=>1]);
+
+
+        $six_digit_random_number = mt_rand(100000, 999999);
+        $status=verify::create($request->all()+[
+                'code'      =>$six_digit_random_number,
+                'date_fa'   =>$this->dateNow,
+                'time_fa'   =>$this->timeNow,
+                'tel'       =>Auth::user()->tel,
+            ]);
+        if($status) {
+            $msg = NULL;
+            switch ($request->type) {
+                case 'event':
+                    $msg = " کد فعال سازی شما در رویداد '" . $request->event . "' فراکوچ \n " . $six_digit_random_number;
+                    break;
+            }
+            if (!is_null($msg)) {
+                $this->sendSms(Auth::user()->tel, $msg);
+                return "<div class='alert '></div>";
+            }
+        }
+
+
+    }
+
+    public function verifyStore(Request $request)
+    {
+        $this->validate($request,[
+            'code'  =>'required|numeric',
+            'type'  =>'required|string'
+        ]);
+
+
+        $verify=verify::where('type','=',$request->type)
+                ->where('code','=',$request->code)
+                ->where('verify','=',0)
+                ->latest()
+                ->first();
+        if($verify)
+        {
+            return $verify;
+        }
+        else
+        {
+            return NULL;
+        }
+
+
+    }
 
     //کد فعال سازی شماره لندینگ ها
     public function store_landings(Request $request)

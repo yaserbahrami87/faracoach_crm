@@ -12,6 +12,8 @@ use App\city;
 use App\comment;
 use App\course;
 use App\coursetype;
+use App\event;
+use App\eventreserve;
 use App\followbyCategory;
 use App\followup;
 use App\lib\zarinpal;
@@ -1766,5 +1768,90 @@ class BaseController extends Controller
         {
             return redirect('/');
         }
+    }
+
+
+    public function get_events($id=NULL,$event=NULL,$shortlink=NULL,$type=NULL,$condition=NULL,$status=1,$paginate='paginate')
+    {
+        return event::when($id,function($query) use ($id)
+        {
+            return $query->where('id','=',$id);
+        })
+        ->when($event,function($query) use ($event)
+        {
+            return $query->where('event','=',$event);
+        })
+        ->when($shortlink,function($query) use ($shortlink)
+        {
+            return $query->where('shortlink','=',$shortlink);
+        })
+        ->when($type,function($query) use ($type)
+        {
+            return $query->where('type','=',$type);
+        })
+        ->when($status,function($query) use ($status)
+        {
+            return $query->where('status','=',$status);
+        })
+        ->when($condition,function($query) use ($condition)
+        {
+            return $query->where($condition[0],$condition[1],$condition[2]);
+        })
+        ->when($paginate=='paginate',function($query,$paginate)
+        {
+            return  $query->orderby('id','desc')
+                ->paginate($this->countPage());
+        })
+        ->when($paginate=='get',function($query)
+        {
+            return  $query->orderby('id','desc')
+                        ->get();
+        })
+        ->when($paginate=='first',function($query)
+        {
+            return  $query->orderby('id','desc')
+                ->first();
+        });
+
+    }
+
+
+    public function get_eventReserve($id=NULL,$user_id=NULL,$event_id=NULL,$status=NULL,$condition=NULL,$paginate='paginate')
+    {
+        return eventreserve::when($id,function($query) use ($id)
+        {
+            return $query->where('id','=',$id);
+        })
+        ->when($user_id,function($query) use ($user_id)
+        {
+            return $query->where('user_id','=',$user_id);
+        })
+        ->when($event_id,function($query) use ($event_id)
+        {
+            return $query->where('event_id','=',$event_id);
+        })
+        ->when($status,function($query) use ($status)
+        {
+            return $query->where('status','=',$status);
+        })
+        ->when($condition,function($query) use ($condition)
+        {
+            return $query->where($condition[0],$condition[1],$condition[2]);
+        })
+        ->when($paginate=='paginate',function($query,$paginate)
+        {
+            return  $query->orderby('id','desc')
+                ->paginate($this->countPage());
+        })
+        ->when($paginate=='get',function($query)
+        {
+            return  $query->orderby('id','desc')
+                ->get();
+        })
+        ->when($paginate=='first',function($query)
+        {
+            return  $query->orderby('id','desc')
+                ->first();
+        });
     }
 }

@@ -21,7 +21,7 @@
             <div class="col-12 border-bottom mb-5">
                 <h4>ایجاد رویداد جدید</h4>
             </div>
-            <form method="post" action="/admin/events" enctype="multipart/form-data">
+            <form method="post" action="/admin/event" enctype="multipart/form-data">
                 {{csrf_field()}}
                 <div class="col-12 col-sm-6 col-md-6 col-xl-6 col-lg-6 ">
                         <div class="form-group">
@@ -60,8 +60,8 @@
                             </div>
                             <div class="col-6"></div>
                         </div>
-                        <div class="form-group d-none" id="address1">
-                            <label for="address">آدرس*</label>
+                        <div class="form-group" id="address1">
+                            <label for="address">آدرس/لینک*</label>
                             <input type="text" class="form-control" id="address" name="address" value="{{old('address')}}" />
                         </div>
                         <div class="form-row">
@@ -182,19 +182,6 @@
 @endsection
 
 @section('footerScript')
-    <script>
-        $('.type').click(function()
-        {
-            if($(this).val()=='1')
-            {
-                $("#address1").attr('class','form-group');
-            }
-            else
-            {
-                $("#address1").attr('class','form-group d-none');
-            }
-        });
-    </script>
 
     <!--  DATE SHAMSI PICKER  --->
     <script src="{{asset('js/kamadatepicker.min.js')}}"></script>

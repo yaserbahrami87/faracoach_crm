@@ -59,12 +59,14 @@ class HomeController extends BaseController
             }
         }
 
+        //آخرین کاربرهای فعال
         $last_users=User::wherenotin('type',['2','3','4'])
             ->where('status_coach','<>','1')
             ->orderby('last_login_at','desc')
             ->limit(12)
             ->get();
 
+        //آخرین کوچ های فعال
         $last_coaches=User::join('coaches','users.id','=','coaches.user_id')
                 //->wherenotin('users.type',['2','3','4'])
                 ->where('users.status_coach','=',1)
@@ -72,18 +74,22 @@ class HomeController extends BaseController
                 ->limit(12)
                 ->get();
 
+        //متولدین ای ماه
         $v=verta();
         if($v->month<10)
         {
             $s="0".$v->month;
         }
-
         $birthday=User::where('datebirth','like','%/'.$s.'/%')
                     ->get();
 
-
+        //کاربرهای آنلاین ناقص می باشد
         $condition=['last_login_at',$this->changeTimestampToMilad($this->dateNow)];
         $onlineUser=$this->get_user(NULL,NULL,NULL,$condition,'get');
+
+        // آآخرین رویدادها
+        $condition=['start_date','>',$this->dateNow];
+        $events=$this->get_events(NULL,NULL,NULL,NULL,$condition,1,'get');
 
         return view('home')
 //        return redirect('/login')
@@ -91,6 +97,7 @@ class HomeController extends BaseController
                     ->with('posts',$posts)
                     ->with('last_users',$last_users)
                     ->with('birthday',$birthday)
+                    ->with('events',$events)
                     ->with('last_coaches',$last_coaches);
 
     }

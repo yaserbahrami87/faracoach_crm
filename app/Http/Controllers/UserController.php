@@ -1753,4 +1753,34 @@ class UserController extends BaseController
         return $item;
     }
 
+    public function signupAjax(Request $request)
+    {
+        $request->email=$this->convertPersianNumber($request->email);
+        $request->tel=$this->convertPersianNumber($request->tel);
+        $request->password=$this->convertPersianNumber($request->password);
+        $request->password_confirmation=$this->convertPersianNumber($request->password_confirmation);
+        $this->validate($request,[
+            'email'     =>'required|email|unique:users',
+            'tel'       =>'required|iran_mobile|unique:users',
+            'password'  =>'required|string|min:8|confirmed'
+        ]);
+
+        $user=User::create([
+            'email'     =>$request->email,
+            'tel'       =>$request->tel,
+            'password'  =>Hash::make($request['password'])
+        ]);
+
+        if($user)
+        {
+            Auth::loginUsingId($user->id);
+            alert()->success('ثبت نام با موفقیت انجام شد')->persistent('بستن');
+            echo "<script>location.reload()</script>";
+        }
+        else
+        {
+            return "<div class='alert alert-danger'>خطا در ثبت نام</div>";
+        }
+    }
+
 }

@@ -285,54 +285,54 @@ class landingController extends BaseController
 
 
     // رویداد اصفهان
-    public function isfahanCreate(Request $request)
-    {
-        if(isset($request->q))
-        {
-            $user=landPage::where('id','=',$request->q)
-                        ->first();
-            if(is_null($user))
-            {
-                alert()->error('کد اختصاصی شما اشتباه است')->persistent('بستن');
-            }
-        }
-        else
-        {
-            $user=NULL;
-        }
-
-        return view('invitation')
-                        ->with('user',$user);
-    }
-
-    public function isfahanStore (Request $request)
-    {
-        $this->validate($request,[
-            'fname'             =>'required|persian_alpha|',
-            'lname'             =>'required|persian_alpha|',
-            'tel'               =>'required|iran_mobile',
-            'introduced'        =>'nullable|numeric',
-            'options'           =>'required|persian_alpha',
-        ]);
+//    public function isfahanCreate(Request $request)
+//    {
+//        if(isset($request->q))
+//        {
+//            $user=landPage::where('id','=',$request->q)
+//                        ->first();
+//            if(is_null($user))
+//            {
+//                alert()->error('کد اختصاصی شما اشتباه است')->persistent('بستن');
+//            }
+//        }
+//        else
+//        {
+//            $user=NULL;
+//        }
 //
-        $status=landPage::create($request->all()+[
-                'resource'  =>'رویداد اصفهان'
+//        return view('invitation')
+//                        ->with('user',$user);
+//    }
 
-            ]);
-
-        if($status)
-        {
-            $tmp="شما در لیست رزرو قرار گرفتید \n"."\nجهت حضور بهتون اطلاع رسانی خواهد شد "."لینک دعوت اختصاصی:"."\n crm.faracoach.com/events/isfahan?q=".$status->id;
-            $this->sendSms($request->tel,$tmp);
-            alert()->success( " شما در لیست رزرو قرار گرفتید \n جهت حضور بهتون اطلاع رسانی خواهد شد.\n منتظر اطلاع رسانی های بعدی باشید.")->persistent('بستن');
-        }
-        else
-        {
-            alert()->error('خطا در ثبت')->persistent('بستن');
-        }
-
-        return redirect('/');
-    }
+//    public function isfahanStore (Request $request)
+//    {
+//        $this->validate($request,[
+//            'fname'             =>'required|persian_alpha|',
+//            'lname'             =>'required|persian_alpha|',
+//            'tel'               =>'required|iran_mobile',
+//            'introduced'        =>'nullable|numeric',
+//            'options'           =>'required|persian_alpha',
+//        ]);
+////
+//        $status=landPage::create($request->all()+[
+//                'resource'  =>'رویداد اصفهان'
+//
+//            ]);
+//
+//        if($status)
+//        {
+//            $tmp="شما در لیست رزرو قرار گرفتید \n"."\nجهت حضور بهتون اطلاع رسانی خواهد شد "."لینک دعوت اختصاصی:"."\n crm.faracoach.com/events/isfahan?q=".$status->id;
+//            $this->sendSms($request->tel,$tmp);
+//            alert()->success( " شما در لیست رزرو قرار گرفتید \n جهت حضور بهتون اطلاع رسانی خواهد شد.\n منتظر اطلاع رسانی های بعدی باشید.")->persistent('بستن');
+//        }
+//        else
+//        {
+//            alert()->error('خطا در ثبت')->persistent('بستن');
+//        }
+//
+//        return redirect('/');
+//    }
 
     public function isfahanList()
     {
@@ -345,24 +345,24 @@ class landingController extends BaseController
                     ->with('users',$users);
     }
 
-    public function isfahanExport()
-    {
-        //خروجی اکسل
-        $list=landPage::where('resource','=','رویداد اصفهان')
-                ->groupby('tel')
-                ->get();
-        $name='isfahan'.time();
-
-        $excel=fastexcel($list)->export($name.'.xlsx');
-        if($excel)
-        {
-            return response()->download(public_path($name.'.xlsx'));
-
-        }
-        else
-        {
-            return back();
-        }
-
-    }
+//    public function isfahanExport()
+//    {
+//        //خروجی اکسل
+//        $list=landPage::where('resource','=','رویداد اصفهان')
+//                ->groupby('tel')
+//                ->get();
+//        $name='isfahan'.time();
+//
+//        $excel=fastexcel($list)->export($name.'.xlsx');
+//        if($excel)
+//        {
+//            return response()->download(public_path($name.'.xlsx'));
+//
+//        }
+//        else
+//        {
+//            return back();
+//        }
+//
+//    }
 }

@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'HomeController@index');
+Route::post('/signupAjax', 'UserController@signupAjax');
 
 
 
@@ -122,6 +123,9 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
 
     //Psychological
     Route::resource('psychological','PsychologicalController');
+
+    //Event Reserves
+    Route::resource('eventreserve','EventreserveController');
 
 });
 
@@ -290,8 +294,11 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
 
     //EVENTS
     Route::get('/event/isfahan/list','landingController@isfahanList');
+
+
+    Route::get('/event/{event}/users','EventController@usersEvent');
     Route::get('/event/all','EventController@eventsListAdmin');
-    Route::resource('events','EventController');
+    Route::resource('event','EventController');
 });
 
 
@@ -332,6 +339,9 @@ Route::post('/password/reset/update','VerifyController@checkResetCode');
 Route::get('/what-is-coaching/', 'landingController@bookOffCreate');
 Route::post('/what-is-coaching/bookOffStore', 'landingController@bookOffStore');
 
+//Verify Codes
+Route::post('/verify', 'VerifyController@verifyCreate');
+Route::post('/verifyCode', 'VerifyController@verifyStore');
 
 
 Route::get('/register2',function()
@@ -416,14 +426,14 @@ Route::get('/integrity','LandPageController@create');
 
 
 //landing Isfahan
-Route::get('/events/isfahan', 'landingController@isfahanCreate');
-Route::post('/events/isfahan/store', 'landingController@isfahanStore');
-Route::get('/events/isfahan/exportexcel', 'landingController@isfahanExport');
+//Route::get('/events/isfahan', 'landingController@isfahanCreate');
+//Route::post('/events/isfahan/store', 'landingController@isfahanStore');
+//Route::get('/events/isfahan/exportexcel', 'landingController@isfahanExport');
 
 
 Route::get('/exportexcel','UserController@export_excel');
 
-Route::resource('events','EventController');
+Route::resource('event','EventController');
 
 
 

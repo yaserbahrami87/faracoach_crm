@@ -180,9 +180,6 @@
                     <div class="carousel-item active">
                         <img src="{{asset('/images/coach1-1.png')}}" class="d-block w-100" alt="...">
                     </div>
-                    <div class="carousel-item">
-                        <img src="{{asset('/images/events-isfahan.jpeg')}}" class="d-block w-100"  alt="...">
-                    </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-target="#carouselExampleControls" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -193,14 +190,6 @@
                     <span class="sr-only">Next</span>
                 </button>
             </div>
-
-
-
-
-
-
-
-
             <div class="col-12 services d-md-flex justify-content-md-center">
                 <div class="col-xl-2 col-lg-2 col-md-2 col-sm-0">
                 </div>
@@ -228,9 +217,11 @@
                         </i>
                     </div>
                     <div class="rounded-circle">
-                        <i class="bi bi-display">
-                            <p> وبینارها </p>
-                        </i>
+                        <a href="{{asset('/event')}}">
+                            <i class="bi bi-display">
+                                <p> وبینارها </p>
+                            </i>
+                        </a>
                     </div>
                     <div class="rounded-circle">
                         <a tel="02191091121" >
@@ -309,9 +300,6 @@
             </aside>
         </div>
         <div class="col-md-6" id="tweets">
-            <a href="/events/isfahan" class="mt-3">
-                <img src="{{asset('/images/events-isfahan.jpeg')}}" class="img-fluid" />
-            </a>
         @if(Auth::check())
                 <div class="card-body p-0">
                     <div class="media pb-2 pt-2">
@@ -435,7 +423,29 @@
                     <h6 class="card-title m-0">آخرین رویدادها</h6>
                 </div>
                 <div class="card-body text-center ">
-                    <!-- <img src="{{asset('/images/birthday-cake.png')}}" class="img-fluid" />-->
+                    <!-- <img src="" class="img-fluid" />-->
+
+                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+
+                        <div class="carousel-inner">
+                            @foreach($events as $item)
+                                <div class="carousel-item @if($loop->iteration-1==0) active @endif ">
+                                    <a href="/event/{{$item->shortlink}}">
+                                        <img src="{{asset('/documents/events/'.$item->image)}}" class="d-block w-100" alt="...">
+                                    </a>
+                                </div>
+                            @endforeach
+
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-target="#carouselExampleIndicators" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-target="#carouselExampleIndicators" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </button>
+                    </div>
                 </div>
             </aside>
         </div>
@@ -533,21 +543,6 @@ btns: [
     ['fullscreen']
 ]
 })
-</script>
-
-<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="{{asset('/slick-1.8.1/slick-1.8.1/slick/slick.js')}}"></script>
-<script>
-    $(document).ready(function(){
-        $('.events').slick({
-            dots: true,
-            infinite: true,
-            speed: 300,
-            slidesToShow: 1,
-            arrows:false,
-            adaptiveHeight: true
-    });
-    });
 </script>
 
 
