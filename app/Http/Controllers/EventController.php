@@ -45,7 +45,7 @@ class EventController extends BaseController
      */
     public function create()
     {
-        return view('panelAdmin.insertevent');
+        return view('panelAdmin.insertEvent');
     }
 
     /**
