@@ -9,6 +9,7 @@ use App\category_post;
 use App\categoryTag;
 use App\checkout;
 use App\city;
+use App\coach;
 use App\comment;
 use App\course;
 use App\coursetype;
@@ -1860,4 +1861,43 @@ class BaseController extends Controller
                 ->first();
         });
     }
+
+    public function get_coach($id=NULL,$user_id=NULL,$status=NULL,$condition=NULL,$paginate='first')
+    {
+        return coach::join('users','coaches.user_id','=','users.id')
+            ->when($id,function($query) use ($id)
+            {
+                return $query->where('coaches.id','=',$id);
+            })
+            ->when($user_id,function($query) use ($user_id)
+            {
+                 return $query->where('users.id','=',$user_id);
+            })
+            ->when($status,function($query) use ($status)
+            {
+                return $query->where('coaches.status','=',$status);
+            })
+            ->when($condition,function($query) use ($condition)
+            {
+                return $query->where($condition[0],$condition[1],$condition[2]);
+            })
+            ->when($paginate=='paginate',function($query)
+            {
+                return  $query->orderby('coaches.id','desc')
+                    ->paginate($this->countPage());
+            })
+            ->when($paginate=='get',function($query)
+            {
+                return  $query->orderby('coaches.id','desc')
+                    ->get();
+            })
+            ->when($paginate=='first',function($query)
+            {
+                return  $query->orderby('coaches.id','desc')
+                    ->first();
+            });
+
+    }
+
+
 }

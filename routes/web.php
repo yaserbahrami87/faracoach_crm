@@ -220,8 +220,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::resource('teachers','TeacherController');
 
     //coaches
-
-    Route::get('/coach/{coach}/report','CoachController@coach_report');
+    Route::get('/booking/{coach}/report','BookingController@coach_report');
     Route::get('/coach/reject','CoachController@coach_reject');
     Route::get('/coach/request','CoachController@coach_request');
     Route::resource('coach','CoachController');

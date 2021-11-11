@@ -40,7 +40,7 @@
                     </form>
                 </td>
                 <td>
-                    <a href="/admin/coach/{{$item->id_user_table}}/report" class="btn btn-success">
+                    <a href="/admin/booking/{{$item->id_user_table}}/report" class="btn btn-success">
                         <i class="bi bi-bar-chart-line-fill"></i>
                     </a>
                 </td>
