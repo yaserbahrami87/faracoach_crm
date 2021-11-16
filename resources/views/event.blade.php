@@ -462,7 +462,7 @@
                        else
                        {
                            $('#result_reserve').html("<div class='alert alert-success'>کد صحیح وارد شد</div>");
-                           $.post('/panel/eventreserve', { event_id: '{{$event->id}}'},
+                           $.post('/panel/eventreserve', {"_token": "{{ csrf_token() }}",  event_id: '{{$event->id}}'},
                                function(returnedData){
                                    if(typeof(data)=='object')
                                    {
