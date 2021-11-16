@@ -228,5 +228,7 @@ return [
         'event_text'            =>'توضیحات رویداد',
         'event'                 =>'رویداد',
         'code'                  =>'کد',
+        'presession'            =>'پیش جلسه',
+        'comment'               =>'پیام',
     ],
 ];

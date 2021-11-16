@@ -49,7 +49,8 @@
             </div>
             @foreach($booking as $item)
                 <div class="col-lg-3 col-sm-6" id="listFriends">
-                    <div class="card hovercard  shadow-sm @if($item->caption_status=='رزرو شده') bg-warning @elseif($item->caption_status=='برگزار شد') bg-success @endif">
+
+                    <div class="card hovercard  shadow-sm @if($item->caption_status=='رزرو شد') bg-warning @elseif($item->caption_status=='برگزارشد') bg-success @endif">
                         <div class="cardheader">
 
                         </div>
@@ -76,11 +77,17 @@
                             <p class="border-bottom">
                                 {{$item->duration_booking}}
                             </p>
+                            <p class="border-bottom pb-4">
+                                <span class="float-right">ارزیابی  @if(is_null($item->feedback_coachings_id))<i class="bi bi-x-lg" ></i>@else <i class="bi bi-check-lg" ></i> @endif</span>
+                                <span class="float-left">پیش جلسه  @if(is_null($item->presession))<i class="bi bi-x-lg"></i>@else <i class="bi bi-check-lg"></i> @endif</span>
+                            </p>
+
                             <p>{{$item->caption_status}}</p>
 
                             <a class="btn btn-primary btn-sm" href="/panel/booking/{{$item->id}}" title="نمایش" >
                                 <i class="bi bi-eye-fill"></i>
                             </a>
+
 
                             @if($item->start_date>$dateNow)
                                 <form class="d-inline-block" method="POST" action="/booking/{{$item->booking_id}}" onsubmit="return confirm('آیا از لغو جلسه اطمینان دارید؟')">
@@ -91,6 +98,7 @@
                                         لغو جلسه
                                     </button>
                                 </form>
+
                             @endif
                         </div>
                     </div>

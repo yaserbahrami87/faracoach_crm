@@ -35,6 +35,8 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     Route::get('/messages/new','MessageController@create');
     Route::post('/messages/send','MessageController@store');
     Route::post('/messages/reply','MessageController@reply');
+    Route::post('/message/send','MessageController@sendMessageAllParts');
+
 
 
     //Introduced
@@ -87,6 +89,9 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     Route::get('/booking/accept_reserve_user','BookingController@accept_reserve_user');
     Route::resource('booking','BookingController');
 
+    //Homework
+    Route::resource('homework','HomeworkController');
+
 
 
     //coupon
@@ -95,6 +100,7 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     //Reserves
     Route::patch('/reserve/{reserve}/update','ReserveController@result_coach');
     Route::get('/reserve/{reserve}','ReserveController@show');
+    Route::PATCH('/reserve/{reserve}','ReserveController@update');
 
     //feedback Coach
     Route::resource('feedbackcoach','FeedbackCoachingController');
@@ -126,6 +132,8 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
 
     //Event Reserves
     Route::resource('eventreserve','EventreserveController');
+
+
 
 });
 
@@ -200,6 +208,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::get('/messages/new','MessageController@create');
     Route::post('/messages/send','MessageController@store');
     Route::post('/messages/reply','MessageController@reply');
+    Route::post('/message/send','MessageController@sendMessageAllParts');
 
     // Route Admin Followup
     Route::post('/followup/create','FollowupController@store');
@@ -295,8 +304,9 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::get('/event/isfahan/list','landingController@isfahanList');
 
 
-    Route::get('/event/{event}/users','EventController@usersEvent');
+    Route::Patch('/event/{event}/updateStatus','EventController@updateStatus');
     Route::get('/event/all','EventController@eventsListAdmin');
+    Route::get('/event/{event}/users','EventController@usersEvent');
     Route::resource('event','EventController');
 });
 

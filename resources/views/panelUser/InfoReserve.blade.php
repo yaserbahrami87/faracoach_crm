@@ -3,9 +3,11 @@
     <div class="col-md-6">
         <div class="card card-user">
             <div class="card-header bg-info">
-                <h5 class="card-title">اطلاعات رزرو</h5>
+                <a class="btn p-0 m-0" data-toggle="collapse" href="#infoReserve" role="button" aria-expanded="true" aria-controls="infoReserve">
+                    <h5 class="card-title m-0">اطلاعات جلسه</h5>
+                </a>
             </div>
-            <div class="card-body" id="infoProfile">
+            <div class="card-body collapse show" id="infoReserve">
                 <div class="row">
                     <div class="col-md-6 px-1">
                         <div class="form-group">
@@ -67,10 +69,25 @@
         </div>
         <div class="card card-user ">
             <div class="card-header  bg-info">
-                <h5 class="card-title">گزارش  جلسه</h5>
+                <a class="btn m-0 p-0" data-toggle="collapse" href="#preSession" role="button" aria-expanded="false" aria-controls="preSession">
+                   <h5 class="card-title m-0 p-0">اطلاعات پیش از جلسه</h5>
+                </a>
             </div>
-            <div class="card-body" >
-                @if(($booking->start_date<$dateNow))
+            <div class="card-body collapse show" id="preSession">
+                <div class="form-group">
+                    <label for="presession">توضیحی کوتاه درباره موضوع این جلسه و مباحث آن </label>
+                    <textarea class="form-control" id="presession"   rows="3" disabled readonly>{{$booking->presession}}</textarea>
+                </div>
+            </div>
+        </div>
+        <div class="card card-user ">
+            <div class="card-header  bg-info">
+                <a class="btn m-0 p-0" data-toggle="collapse" href="#status_reserve" role="button" aria-expanded="false" aria-controls="status_reserve">
+                    <h5 class="card-title m-0 p-0">گزارش  جلسه</h5>
+                </a>
+            </div>
+            <div class="card-body collapse show" id="status_reserve">
+                @if($booking->start_date<$dateNow)
                     <form method="post" action="/panel/reserve/{{$booking->id}}/update" >
                         {{csrf_field()}}
                         {{method_field('PATCH')}}
@@ -84,7 +101,7 @@
                         </div>
                         <div class="form-group">
                             <label>نتیجه جلسه *</label>
-                            <textarea class="form-control"rows="5" name="result_coach" @if(!is_null($user->result_coach)) disabled @endif >{{$user->result_coach}}</textarea>
+                            <textarea class="form-control"rows="5" name="result_coach" @if(!is_null($user->result_coach)) disabled @endif >{{old('result_coach',$user->result_coach)}}</textarea>
                             <small class="text-muted">این گزارش فقط برای خود کوچ جهت ثبت سوابق جلسات ثبت می شود</small>
                         </div>
                         <div class="form-group">
@@ -106,15 +123,9 @@
                         @endif
                     </form>
 
-
-
-
-
                     <p>کوچ گرامی</p>
                     <p class="text-justify">یکی از مهم ترین مهارت های یک کوچ ارائه بازخورد سازنده است که توام با صداقت، صراحت و صمیمیت است.</p>
                     <p class="text-justify">فرم نظرسنجی شما توسط مراجعه کننده به شکل زیر پر شده است .</p>
-
-
                     <div class="form-group border-bottom">
                         <label>حس شما از شرکت در جلسه:*</label>
                         @if(is_null($feedback))
@@ -314,49 +325,117 @@
                         <small class="text-muted">این نظر در سوابق کوچ نمایش داده می شود</small>
                     </div>
                     <div class="form-group">
-                        <label for="comment">نظر / پیشنهاد درباره کوچ یا جلسه</label>
+                        <label for="comment">توصیه نامه نوشته شده برای این کوچ:</label>
                         <textarea class="form-control" id="comment" rows="3" name="comment" disabled >@if(old('comment')) {{old('comment')}} @elseif(!is_null($feedback)){{$feedback->comment}} @endif</textarea>
                         <small class="text-muted">این نظر در سوابق کوچ نمایش داده می شود</small>
                     </div>
-                    @else
+                @else
                     <div class="alert alert-warning">جلسه کوچینک هنوز انجام نشده است</div>
 
                 @endif
             </div>
         </div>
+
+        @if($booking->start_date<$dateNow)
+            <div class="card card-user">
+                <div class="card-header bg-info">
+                    <a class="btn m-0 p-0" data-toggle="collapse" href="#homework" role="button" aria-expanded="false" aria-controls="homework">
+                        <h5 class="card-title m-0 p-0">تکلیف</h5>
+                    </a>
+                </div>
+                <div class="card-body collapse show" id="homework" >
+                    @if($homework->count()>0)
+                        @foreach($homework as $item)
+                            <div class="form-group border-bottom">
+                                @if($loop->iteration==1)
+                                    <label for="text">محتوی تکلیف مراجع را در کادر زیر وارد کنید</label>
+                                @else
+                                    <label for="text">توضیحات</label>
+                                @endif
+                                <textarea class="form-control" id="text" rows="3" name="text" disabled >{{$item->text}}</textarea>
+                                @if(!is_null($item->attach))
+                                    <label for="attach">فایل ضمیمه</label>
+                                    <a href="{{asset('/documents/homework/'.$item->attach)}}" class="">
+                                        <i class="bi bi-paperclip font-weight-bold"></i>
+                                    </a>
+                                @endif
+                                <small class="text-muted float-left">{{$item->time_fa." ".$item->date_fa}}</small>
+                            </div>
+                        @endforeach
+                        <form method="post" action="/panel/homework" enctype="multipart/form-data">
+                            {{csrf_field()}}
+                            <input type="hidden" value="{{$booking->booking_id}}" name="booking_id"/>
+                            <input type="hidden" value="{{$homework[0]->id}}" name="homework_id_answer"/>
+                            <div class="form-group">
+                                <label for="text">توضیحات:*</label>
+                                <textarea class="form-control" id="text" rows="3" name="text" >{{old('text')}}</textarea>
+                            </div>
+                            <input type="file" class="form-control" name="attach" />
+                            <button type="submit" class="btn btn-primary mt-3">ثبت</button>
+                        </form>
+                    @else
+                        <form method="post" action="/panel/homework" enctype="multipart/form-data">
+                            {{csrf_field()}}
+                            <input type="hidden" value="{{$booking->booking_id}}" name="booking_id"/>
+                            <div class="form-group">
+                                <label for="text">محتوی تکلیف مراجع را در کادر زیر وارد کنید</label>
+                                <textarea class="form-control" id="text" rows="3" name="text" >{{old('text')}}</textarea>
+                            </div>
+                            <input type="file" class="form-control" name="attach" />
+                            <button type="submit" class="btn btn-primary mt-3">ثبت</button>
+                        </form>
+                    @endif
+                </div>
+            </div>
+        @endif
     </div>
     <div class="col-md-6">
         <div class="card card-user">
             <div class="card-header  bg-info">
-                <h5 class="card-title">اطلاعات شخصی</h5>
+                <a class="btn p-0 m-0" data-toggle="collapse" href="#infoProfile" role="button" aria-expanded="false" aria-controls="infoProfile">
+                    <h5 class="card-title p-0 m-0">اطلاعات شخصی</h5>
+                </a>
             </div>
-            <div class="card-body" id="infoProfile">
+            <div class="card-body collapse show" id="infoProfile">
                 <div class="row">
-                    <div class="col-12 text-center mb-3">
-                        <img  src="{{asset('/documents/users/'.$user->personal_image)}}" class="img-circle shadow-lg" width="150px" height="150px"/>
-                    </div>
-                    <div class="col-md-6 px-1">
-                        <div class="form-group">
-                            <label>نام</label>
-                            <input type="text" class="form-control @if(strlen($user->fname)==0) is-invalid @endif"  value="{{$user->fname}}"    disabled="disabled"  />
-                        </div>
-                    </div>
-                    <div class="col-md-6 px-1">
-                        <div class="form-group">
-                            <label>نام خانوادگی</label>
-                            <input type="text" class="form-control @if(strlen($user->lname)==0) is-invalid @endif"  value="{{$user->lname}}"  disabled="disabled"/>
-                        </div>
-                    </div>
-                    <div class="col-md-6 px-1">
-                        <div class="form-group">
-                            <label>تاریخ تولد</label>
-                            <input type="text" class="form-control @if(strlen($user->datebirth)==0) is-invalid @endif"  value="{{$user->datebirth}}" id="datebirth" disabled="disabled"/>
-                        </div>
-                    </div>
-                    <div class="col-md-12 px-1">
-                        <div class="form-group">
-                            <label>درباره من</label>
-                            <textarea class="form-control @if(strlen($user->aboutme)==0) is-invalid @endif" id="aboutme"  rows="3" disabled="disabled">{{$user->aboutme}}</textarea>
+                    <div class="col-12">
+                        <div class="media">
+                            <img src="{{asset('/documents/users/'.$user->personal_image)}}" class="mr-3" width="100px" >
+                            <div class="media-body">
+                                <div class="row">
+                                    <div class="col-12 col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                                        <h5 class="mt-0">{{$user->fname." ".$user->lname}}</h5>
+                                        <p class="m-0 p-0">متولد: {{$user->datebirth}}</p>
+                                        <p class="m-0 p-0">جنسیت: @if($user->sex==1) مرد @else زن @endif</p>
+                                        <p class="m-0 p-0">تاهل: @if($user->married==0) مجرد@elseif($user->married==1) متاهل @endif</p>
+                                        <p class="m-0 p-0">شغل: {{$user->job}}</p>
+
+                                    </div>
+                                    <div class="col-12 col-md-6 col-sm-6 col-xl-6 col-lg-6 pt-3" >
+                                        <p class="m-0 p-0">
+                                            <i class="bi bi-telephone-fill"></i>
+                                            <a href="tel:{{$user->tel}}">{{$user->tel}}</a>
+                                        </p>
+                                        <p class="m-0 p-0">
+                                            <i class="bi bi-envelope-fill"></i>
+                                            <a href="mail:{{$user->email}}">{{$user->email}}</a>
+                                        </p>
+                                        <p class="m-0 p-0">
+                                            <i class="bi bi-instagram"></i>
+                                            <a href="https://instagram/{{$user->instagram}}">{{$user->instagram}}</a>
+                                        </p>
+                                        <p class="m-0 p-0">
+                                            <i class="bi bi-telegram"></i>
+                                            <a href="https://telegram.org/{{$user->telegram}}">{{$user->telegram}}</a>
+                                        </p>
+                                        <p class="m-0 p-0">
+                                            <i class="bi bi-linkedin"></i>
+                                            <a href="https://www.linkedin.com/in/{{$user->linkedin}}">{{$user->linkedin}}</a>
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -364,109 +443,51 @@
         </div>
         <div class="card card-user">
             <div class="card-header  bg-info">
-                <h5 class="card-title">اطلاعات تماس</h5>
+                <a class="btn p-0 m-0" data-toggle="collapse" href="#history" role="button" aria-expanded="false" aria-controls="history">
+                    <h5 class="card-title m-0 p-0">سوابق جلسات - {{$history->count()}} جلسه </h5>
+                </a>
             </div>
-            <div class="card-body" id="infoProfile">
-                <div class="row">
-                    <div class="col-md-6 px-1">
-                        <div class="form-group">
-                            <label>تلفن تماس</label>
-                            <input type="text" class="form-control @if(strlen($user->tel)==0) is-invalid @endif"  @if(strlen($user->tel)>0) value="{{$user->tel}}" disabled @endif   />
-                        </div>
-                    </div>
-                    <div class="col-md-6 pr-1">
-                        <div class="form-group">
-                            <label for="email">پست الکترونیکی</label>
-                            <input type="email" class="form-control @if(strlen($user->email)==0) is-invalid @endif"  @if(strlen($user->email)>0) value="{{$user->email}}" disabled @endif id="email"  />
-                        </div>
-                    </div>
-
-
-                    <div class="col-md-4 px-1">
-                        <div class="form-group">
-                            <label>اینستاگرام</label>
-                            <input type="text" class="form-control @if(strlen($user->instagram)==0) is-invalid @endif"  value="{{$user->instagram}}" disabled="disabled"  />
-                        </div>
-                    </div>
-                    <div class="col-md-4 px-1">
-                        <div class="form-group">
-                            <label>تلگرام</label>
-                            <input type="text" class="form-control @if(strlen($user->telegram)==0) is-invalid @endif"  value="{{$user->telegram}}" disabled="disabled"  />
-                        </div>
-                    </div>
-                    <div class="col-md-4 px-1">
-                        <div class="form-group">
-                            <label>لینکدین</label>
-                            <input type="text" class="form-control @if(strlen($user->linkedin)==0) is-invalid @endif"  value="{{$user->linkedin}}" disabled="disabled"  />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card card-user">
-            <div class="card-header  bg-info">
-                <h5 class="card-title">اطلاعات قرارداد</h5>
-            </div>
-            <div class="card-body" id="infoProfile">
-                <div class="row">
-                    <div class="col-md-4 px-1">
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect1">جنسیت</label>
+            <div class="card-body collapse show" id="history">
+                @foreach($history as $item)
+                    <div class="row border-bottom mb-2">
+                        <div class="col-md-6 px-1">
                             <div class="form-group">
-                                <select class="form-control p-0 @if(strlen($user->sex)==0) is-invalid @endif" id="exampleFormControlSelect1" disabled="disabled" >
-                                    <option selected disabled>انتخاب کنید</option>
-                                    <option value="0"  {{ $user->sex =="0" ? 'selected='.'"'.'selected'.'"' : '' }}>زن</option>
-                                    <option value="1" {{ $user->sex =="1" ? 'selected='.'"'.'selected'.'"' : '' }}>مرد</option>
-                                </select>
+                                <label>موضوع جلسه {{$loop->iteration}}</label>
+                                <input type="text" class="form-control " value="{{$item->subject}}"    disabled="disabled"  />
+                            </div>
+                        </div>
+                        <div class="col-md-12 px-1">
+                            <div class="form-group">
+                                <label>توضیحات</label>
+                                <textarea class="form-control"rows="3" disabled="disabled">{{$item->details}}</textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-4 px-1">
+                            <div class="form-group">
+                                <label>تاریخ رزرو</label>
+                                <input type="text" class="form-control " value="{{$item->start_date}}"    disabled="disabled"  />
+                            </div>
+                        </div>
+                        <div class="col-md-4 px-1">
+                            <div class="form-group">
+                                <label>ساعت شروع</label>
+                                <input type="text" class="form-control "  value="{{$item->start_time}}"    disabled="disabled"  />
+                            </div>
+                        </div>
+                        <div class="col-md-4 px-1">
+                            <div class="form-group">
+                                <label>وضعیت جلسه</label>
+                                <input type="text" class="form-control " value="{{$item->status}}"    disabled="disabled"  />
+                            </div>
+                        </div>
+                        <div class="col-md-12 px-1">
+                            <div class="form-group">
+                                <label>نتیجه جلسه</label>
+                                <textarea class="form-control"rows="3" disabled="disabled">{{$item->result_coach}}</textarea>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 pr-1">
-                        <div class="form-group">
-                            <label>تاهل</label>
-                            <div class="form-group">
-                                <select class="form-control p-0 @if(strlen($user->married)==0) is-invalid @endif" id="exampleFormControlSelect1" disabled="disabled" >
-                                    <option selected disabled>انتخاب کنید</option>
-                                    <option value="0" {{ $user->married =="0" ? 'selected='.'"'.'selected'.'"' : '' }}>مجرد</option>
-                                    <option value="1" {{ $user->married =="1" ? 'selected='.'"'.'selected'.'"' : '' }}>متاهل</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-
-                    <div class="col-md-4 px-1">
-                        <div class="form-group">
-                            <label>تحصیلات</label>
-                            <select class="custom-select @if(strlen($user->education)==0) is-invalid @endif" disabled="disabled"    id="education">
-                                <option selected disabled>انتخاب کنید</option>
-                                <option @if($user->education=='سیکل') selected   @endif>سیکل</option>
-                                <option @if($user->education=='دیپلم') selected   @endif>دیپلم</option>
-                                <option @if($user->education=='فوق دیپلم') selected   @endif>فوق دیپلم</option>
-                                <option @if($user->education=='لیسانس') selected   @endif>لیسانس</option>
-                                <option @if($user->education=='فوق لیسانس') selected   @endif>فوق لیسانس</option>
-                                <option @if($user->education=='دکتری و بالاتر') selected   @endif>دکتری و بالاتر</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-4 pr-1">
-                        <div class="form-group">
-                            <label>رشته</label>
-                            <div class="form-group">
-                                <input type="text" class="form-control @if(strlen($user->reshteh)==0) is-invalid @endif"  value="{{$user->reshteh}}"    disabled="disabled"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 px-1">
-                        <div class="form-group">
-                            <label>شغل</label>
-                            <div class="form-group">
-                                <input type="text" class="form-control @if(strlen($user->job)==0) is-invalid @endif"  value="{{$user->job}}" disabled="disabled" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>

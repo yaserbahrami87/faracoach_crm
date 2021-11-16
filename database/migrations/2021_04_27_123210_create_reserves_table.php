@@ -24,6 +24,7 @@ class CreateReservesTable extends Migration
             $table->string('off',20)->nullable();
             $table->string('copon',100)->nullable();
             $table->string('final_off',100)->nullable();
+            $table->string('presession',250)->nullable();
             $table->tinyInteger('status')->default(0);
             $table->string('result_coach',250)->nullable();
             $table->tinyInteger('score')->default(0);

@@ -219,7 +219,7 @@
                     <div class="rounded-circle">
                         <a href="{{asset('/event')}}">
                             <i class="bi bi-display">
-                                <p> وبینارها </p>
+                                <p> رویدادها </p>
                             </i>
                         </a>
                     </div>

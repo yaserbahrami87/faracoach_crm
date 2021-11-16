@@ -216,7 +216,7 @@
                             <small class="text-muted">این نظر در سوابق کوچ نمایش داده می شود</small>
                         </div>
                         <div class="form-group">
-                            <label for="comment">نظر / پیشنهاد درباره کوچ یا جلسه</label>
+                            <label for="comment">توصیه نامه شما برای این کوچ:</label>
                             <textarea class="form-control" id="comment" rows="3" name="comment" @if(!is_null($booking))disabled @endif >@if(old('comment')) {{old('comment')}} @elseif(!is_null($booking)){{$booking->comment}} @endif</textarea>
                             <small class="text-muted">این نظر در سوابق کوچ نمایش داده می شود</small>
                         </div>
@@ -239,6 +239,21 @@
                                 <i class="bi bi-x-lg"></i>
                             </button>
                         </form>
+                    @elseif(is_null($reserve->presession))
+                        <form method="POST" action="/panel/reserve/{{$reserve->id_reserve}}">
+                            {{csrf_field()}}
+                            {{method_field('PATCH')}}
+                            <div class="form-group">
+                                <label for="presession">لطفا قبل از شروع جلسه درباره موضوع این جلسه و مباحث آن توضیحی کوتاه دهید*</label>
+                                <textarea class="form-control" id="presession"  name="presession" rows="3"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">ثبت</button>
+                        </form>
+                    @else
+                        <div class="form-group">
+                            <label for="presession">لطفا قبل از شروع جلسه درباره موضوع این جلسه و مباحث آن توضیحی کوتاه دهید*</label>
+                            <textarea class="form-control" id="presession"  name="presession" rows="3" disabled readonly>{{$reserve->presession}}</textarea>
+                        </div>
                     @endif
                 @endif
             </div>

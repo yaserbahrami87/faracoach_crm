@@ -321,4 +321,32 @@ class MessageController extends BaseController
 
 
     }
+
+
+    public function sendMessageAllParts(Request $request)
+    {
+        $this->validate($request,[
+            'subject'   =>'nullable|string',
+            'comment'   =>'required|string',
+            'attach'    =>'nullable|mimes:jpeg,jpg,pdf|max:600',
+        ]);
+
+        $status=message::create($request->all()+
+            [
+                'user_id_send'      =>Auth::user()->id,
+                'date_fa'           =>$this->dateNow,
+                'time_fa'           =>$this->timeNow,
+            ]
+        );
+        if($status)
+        {
+            alert()->success('پیام با موفقیت ارسال شد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در ارسال پیام')->persistent('بستن');
+        }
+
+        return back();
+    }
 }

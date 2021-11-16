@@ -10,7 +10,7 @@
         }
         .form-control{
             background-color: #fdfdff !important;
-            border: #fdfdff !important;
+            border: 1px solid #5ACFD6 !important;
         }
         .content-wrapper{
             background-color: #fdfdff !important;
@@ -90,8 +90,8 @@
 @section('rowcontent')
     <div class=" container col-xs-12 col-md-3 col-lg-3 col-xl-3">
         <div class="position-sticky " >
-            <img src=" http://127.0.0.1:8000/documents/users/personal-09120769020.jpg" id="pic-coach" />
-            <p style="color:#fff;" >اسم کوچ</p>
+            <img src=" {{asset('/documents/users/'.Auth::user()->personal_image)}}" id="pic-coach" />
+            <p style="color:#fff;" >{{Auth::user()->fname.' '.Auth::user()->lname}}</p>
         </div>
     </div>
     <!-----------------------------------ستون سمت چپ - رزومه کوچ --------------------------------->
@@ -99,7 +99,7 @@
     <div class=" container col-xs-12 col-md-8 col-lg-8 col-xl-8">
         <div class="line">
             <div class="card-body">
-                <form method="post" action="/admin/coach/{{$coach->id}}" >
+                <form class="border-bottom mb-3 pb-3" method="post" action="/admin/coach/{{$coach->id}}" >
                     {{csrf_field()}}
                     {{method_field('PATCH')}}
                     <label for="education_background">سوابق تحصیلی *</label>
@@ -108,31 +108,25 @@
                     </div>
                     <div class="form-group">
                         <label for="certificates">گواهینامه ها *</label>
-                        <textarea class="form-control @error('certificates') is-invalid @enderror " name="certificates" id="certificates" rows="3">{{$coach->certificates}}</textarea>
+                        <textarea class="form-control textarea  @error('certificates') is-invalid @enderror " name="certificates" id="certificates" rows="3">{{$coach->certificates}}</textarea>
                         <div id="btn">
                             <button type=" " class="btn btn-primary btn-sm" >مشاهده گواهینامه</button>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="experience">سوابق کاری *</label>
-                        <textarea class="form-control @error('experience') is-invalid @enderror " name="experience" id="experience" rows="3">{{$coach->experience}}</textarea>
+                        <textarea class="form-control textarea  @error('experience') is-invalid @enderror " name="experience" id="experience" rows="3">{{$coach->experience}}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="skills">مهارت ها *</label>
-                        <textarea class="form-control @error('skills') is-invalid @enderror " name="skills" id="skills" rows="3">{{$coach->skills}}</textarea>
+                        <textarea class="form-control  textarea @error('skills') is-invalid @enderror " name="skills" id="skills" rows="3">{{$coach->skills}}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="researches">سوابق علمی </label>
-                        <textarea class="form-control @error('researches') is-invalid @enderror " name="researches" id="researches" rows="3">{{$coach->researches}}</textarea>
+                        <textarea class="form-control textarea @error('researches') is-invalid @enderror " name="researches" id="researches" rows="3">{{$coach->researches}}</textarea>
                     </div>
                     <div class="form-group">
-                        <label for="count_meeting">تجربه برگزاری جلسات رایگان *</label>
-                        <small id="count_meetinglHelp" class="form-text text-muted"> تعداد ساعت جلساتی که تاکنون توسط شما ارائه شده است را وارد کنید</small>
-                        <input type="number" class="form-control" id="count_meeting" name="count_meeting" aria-describedby="count_meetingHelp" min="0" max="10000" value="{{$coach->count_meeting}} ساعت " />
-
-                    </div>
-                    <div class="form-group">
-                        <label for="count_meeting">تجربه برگزاری جلسات قراردادی *</label>
+                        <label for="count_meeting">تجربه برگزاری جلسات *</label>
                         <small id="count_meetinglHelp" class="form-text text-muted">تعداد ساعت جلساتی که تاکنون توسط شما ارائه شده است را وارد کنید</small>
                         <input type="number" class="form-control" id="count_meeting" name="count_meeting" aria-describedby="count_meetingHelp" min="0" max="10000" value="{{$coach->count_meeting}}"/>
                     </div>
@@ -176,6 +170,30 @@
                         <button type="submit" class="col-4 mx-auto btn btn-primary" >انتشار</button>
                     </div>
                 </form>
+
+
+                <h3>سابقه پیام ها</h3>
+                @foreach($messages as $item)
+                    <div class="form-group shadow-lg @if($item->user_id_send==Auth::user()->id) bg-success @else bg-warning @endif">
+                        @if($item->user_id_send==Auth::user()->id)
+                            <label for="comment"> پیام ارسال شده:</label>
+                        @else
+                            <label for="comment"> پیام دریافت شده:</label>
+                        @endif
+                        <textarea class="form-control" id="comment" name="comment" rows="3" disabled readonly>{{$item->comment }}</textarea>
+                        <small class="font-weight-bold float-left">{{$item->time_fa.' '.$item->date_fa}}</small>
+                    </div>
+                @endforeach
+                <form method="post" action="/panel/message/send">
+                    {{csrf_field()}}
+                    <input type="hidden" value="coach" name="type">
+                    <input type="hidden" value="{{$coach->id}}" name="user_id_recieve">
+                    <div class="form-group">
+                        <label for="comment">ارسال پیام:<span class="text-danger">*</span></label>
+                        <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="col-4 mx-auto btn btn-primary" >ارسال پیام</button>
+                </form>
             </div>
         </div>
     </div>
@@ -183,7 +201,7 @@
 
 @section('footerScript')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-   
+
     <script src="{{asset('/js/bootstrap-multiselect.min.js')}}"></script>
     <script type="text/javascript">
         $(function () {
@@ -206,7 +224,7 @@
     <script src="{{asset('/trumbowyg-2.25.1/dist/trumbowyg.min.js')}}"></script>
     <script src="{{asset('/trumbowyg-2.25.1/dist/langs/fa.js')}}"></script>
     <script>
-        $('textarea').trumbowyg({
+        $('.textarea').trumbowyg({
             lang:'fa',
             btns: [
                 ['undo', 'redo'], // Only supported in Blink browsers

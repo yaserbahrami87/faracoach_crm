@@ -410,7 +410,7 @@
                         @else
                             <div class="alert alert-warning text-center">
                                 <p>برای رزرو جلسه باید وارد سایت شوید</p>
-                                <a href="/login" class="btn btn-outline-primary">ورود به سایت</a>
+                                @include('loginAjax')
                             </div>
                         @endif
                     </div>
@@ -554,7 +554,6 @@
 @endsection
 
 @section('footerScript')
-
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <script src="https://cdn.jsdelivr.net/npm/moment"></script>
     <script src="https://cdn.jsdelivr.net/npm/moment-jalaali@0.7.4/build/moment-jalaali.js"></script>
@@ -585,11 +584,6 @@
                 }
             }
         });
-
-
-
-
-
     </script>
 
 
@@ -677,5 +671,7 @@
         });
 
     </script>
+
+
 
 @endsection

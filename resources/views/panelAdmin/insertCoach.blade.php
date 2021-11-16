@@ -52,6 +52,8 @@
 
                 <button type="submit" class="btn btn-primary">انتشار</button>
             </form>
+
+
         </div>
     </div>
 @endsection

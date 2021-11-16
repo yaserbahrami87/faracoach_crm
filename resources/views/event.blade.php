@@ -519,7 +519,6 @@
                             errorsHtml += '<li>'+ value[0] + '</li>'; //showing only the first error.
                         });
                         errorsHtml += '</ul></div>';
-
                         $( '#result_login' ).html( errorsHtml );
                     }
                 }

@@ -28,6 +28,11 @@
            لیست کوچ ها
           </a>
         </li>
+          <li class="nav-item dropdown">
+              <a class="nav-link " href="/event" id="navbarDropdownMenuLink1" >
+                  رویدادها
+              </a>
+          </li>
 
       @if(request()->is('coach/*') &&(Auth::check()))
               <li class="nav-item ">

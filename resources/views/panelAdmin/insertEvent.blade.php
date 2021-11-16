@@ -25,27 +25,27 @@
                 {{csrf_field()}}
                 <div class="col-12 col-sm-6 col-md-6 col-xl-6 col-lg-6 ">
                         <div class="form-group">
-                            <label for="event">موضوع رویداد*</label>
+                            <label for="event">موضوع رویداد<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="event" name="event" value="{{old('event')}}"  autocomplete="off"/>
                         </div>
                         <div class="form-group">
-                            <label for="shortlink">لینک اختصاصی*</label>
+                            <label for="shortlink">لینک اختصاصی<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="shortlink" name="shortlink" value="{{old('shortlink')}}" autocomplete="off" />
                             <small>لینک اختصاصی نباید تکراری باشد</small>
                         </div>
                         <div class="form-group">
-                            <label for="description">توضیح کوتاه*</label>
+                            <label for="description">توضیح کوتاه<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="description" name="description" value="{{old('description')}}" />
                             <small>حداکثر 150 کارکتر</small>
                         </div>
                         <div class="form-group">
-                            <label for="capacity">ظرفیت*</label>
+                            <label for="capacity">ظرفیت<span class="text-danger">*</span></label>
                             <input type="number" class="form-control" id="capacity" name="capacity" value="{{old('capacity')}}"  />
                             <small class="text-muted">در صورت نامحدود بودن عدد 1- را وارد کنید</small>
                         </div>
                         <div class="form-row">
                             <div class="col-6">
-                                <label for="capacity">نوع رویداد *</label>
+                                <label for="capacity">نوع رویداد <span class="text-danger">*</span></label>
                                 <div class="form-check  form-check-inline" >
                                     <input class="form-check-input ml-3 type" type="radio" name="type" id="type1" value="1" />
                                     <label class="form-check-label p-0" for="type1">
@@ -61,33 +61,35 @@
                             <div class="col-6"></div>
                         </div>
                         <div class="form-group" id="address1">
-                            <label for="address">آدرس/لینک*</label>
+                            <label for="address">آدرس/لینک<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="address" name="address" value="{{old('address')}}" />
                         </div>
                         <div class="form-row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="image">آدرس عکس شاخص*</label>
+                                    <label for="image">آدرس عکس شاخص<span class="text-danger">*</span></label>
                                     <input type="file" class="form-control" id="image" name="image" value="{{old('image')}}"/>
+                                    <small class="text-muted">فایل های مجاز: JPG و PNG و حداکثر اندازه مجاز: 600KB</small>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="custom-file">
                                     <label for="video">آدرس ویدئو</label>
                                     <input type="text" class="form-control" id="video" name="video" value="{{old('video')}}"/>
+                                    <small>آدرس ویدئو در یکی از پلتفرمهای اشتراک ویدئو مانند آپارات ، یوتیوب و ...</small>
                                 </div>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="start_date">تاریخ شروع رویداد*</label>
+                                    <label for="start_date">تاریخ شروع رویداد<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" id="start_date" name="start_date"  autocomplete="off"  value="{{old('start_date')}}"/>
                                 </div>
                             </div>
                             <div class="col-md-6 ">
                                 <div class="form-group">
-                                    <label for="start_date">ساعت شروع رویداد*</label>
+                                    <label for="start_date">ساعت شروع رویداد<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control time" id="start_time" name="start_time"  autocomplete="off" value="{{old('start_time')}}" />
                                 </div>
                             </div>
@@ -95,13 +97,13 @@
                         <div class="form-row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="end_date">تاریخ پایان رویداد*</label>
+                                    <label for="end_date">تاریخ پایان رویداد<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" id="end_date" name="end_date"  autocomplete="off" value="{{old('end_date')}}" />
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="end_time">ساعت پایان رویداد*</label>
+                                    <label for="end_time">ساعت پایان رویداد<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control time" id="end_time" name="end_time"  autocomplete="off" value="{{old('end_time')}}" />
                                 </div>
                             </div>
@@ -109,14 +111,14 @@
                         <div class="form-row">
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="duration">مدت رویداد*</label>
+                                    <label for="duration">مدت رویداد<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" id="duration" name="duration"  autocomplete="off" value="{{old('duration')}}" />
                                     <small class="text-muted">مدت زمان رویداد به عنوان مثال: یک ساعت و نیم</small>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="expire_date">تاریخ پایان ثبت نام*</label>
+                                    <label for="expire_date">تاریخ پایان ثبت نام<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" id="expire_date" name="expire_date"  autocomplete="off" value="{{old('expire_date')}}" />
                                 </div>
                             </div>
@@ -125,7 +127,7 @@
                 <div class="col-12 col-sm-6 col-md-6 col-xl-6 col-lg-6 ">
                     <div class="form-group">
                         <a class="btn btn-outline-info d-block mb-2" data-toggle="collapse" href="#collapseEventText" role="button" aria-expanded="false" aria-controls="collapseEventText">
-                            توضیحات رویداد *
+                            توضیحات رویداد <span class="text-danger">*</span>
                         </a>
                         <div class="collapse" id="collapseEventText">
                             <div class="card card-body">
@@ -187,6 +189,14 @@
     <script src="{{asset('js/kamadatepicker.min.js')}}"></script>
     <script src="{{asset('js/kamadatepicker.holidays.js')}}"></script>
     <script>
+        $('#end_date,#expire_date').change(function(){
+            if($(this).val()<$('#start_date').val())
+            {
+                alert('تاریخ درج شده با شروع دوره مطابقت ندارد');
+                $(this).val('');
+            }
+        });
+
         kamaDatepicker('start_date',
             {
                 markHolidays:true,

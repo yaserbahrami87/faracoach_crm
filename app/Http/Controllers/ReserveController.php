@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\checkout;
+use App\coach;
 use App\reserve;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -105,6 +106,20 @@ class ReserveController extends BaseController
      */
     public function update(Request $request, reserve $reserve)
     {
+        $this->validate($request,[
+            'presession'    =>'required|string|'
+        ]);
+        $status=$reserve->update($request->all());
+        if($status)
+        {
+            alert()->success('فرم پیش جلسه با موفقیت ثبت شد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در ثبت فرم پیش جلسه')->persistent('بستن');
+        }
+
+        return back();
 
     }
 
@@ -315,36 +330,51 @@ class ReserveController extends BaseController
     public function result_coach (Request $request,Reserve $reserve)
     {
 
-        $this->validate($request,[
-            'result_coach'  =>'required|string|',
-            'score'         =>'required|numeric|between:1,5',
-            'status'        =>'required|numeric|between:1,4'
+        $this->validate($request, [
+            'result_coach' => 'required|string|',
+            'score' => 'required|numeric|between:1,5',
+            'status' => 'required|numeric|between:1,4'
 
-        ],[
-            'result_coach.required'         =>'نتیجه جلسه الزامی است',
-            'result_coach.string'           =>'نتیجه جلسه را درست وارد کنید',
-            'score.required'                =>'امتیاز  جلسه را وارد کنید',
-            'score.numeric'                 =>'امتیاز جلسه باید عدد باشد',
-            'score.between'                 =>'وضعیت باید بین 1 تا 5 باشد',
-            'status.required'               =>'وضعیت  جلسه را وارد کنید',
-            'status.numeric'                =>'وضعیت جلسه باید عدد باشد',
-            'status.between'                =>'وضعیت جلسه باید بین 1 تا 5 باشد'
+        ], [
+            'result_coach.required' => 'نتیجه جلسه الزامی است',
+            'result_coach.string' => 'نتیجه جلسه را درست وارد کنید',
+            'score.required' => 'امتیاز  جلسه را وارد کنید',
+            'score.numeric' => 'امتیاز جلسه باید عدد باشد',
+            'score.between' => 'وضعیت باید بین 1 تا 5 باشد',
+            'status.required' => 'وضعیت  جلسه را وارد کنید',
+            'status.numeric' => 'وضعیت جلسه باید عدد باشد',
+            'status.between' => 'وضعیت جلسه باید بین 1 تا 5 باشد'
         ]);
+        $coach = coach::where('user_id','=',Auth::user()->id)
+                        ->first();
 
-        $status=$reserve->update($request->all());
+//            $this->get_coach(NULL, , NULL, NULL, 'first');
+        $coach->count_meeting=$coach->count_meeting+1;
+        $coach->save();
 
-        $booking=booking::where('id','=',$reserve->booking_id)
-                ->first();
-        $booking->status=$request->status;
-        $booking->save();
 
-        if($status)
-        {
-            alert()->success('گزارش جلسه با موفقیت ثبت شد','پیام')->persistent('بستن');
+        if ($coach) {
+            $status = $reserve->update($request->all());
+            $booking = booking::where('id', '=', $reserve->booking_id)
+                        ->first();
+            $booking->status = $request->status;
+            $booking->save();
+            if ($status) {
+                if($request->status=="3")
+                {
+
+                    $coach->count_meeting=$coach->count_meeting+1;
+                    $coach->save();
+                }
+
+                alert()->success('گزارش جلسه با موفقیت ثبت شد', 'پیام')->persistent('بستن');
+            } else {
+                alert()->error('خطا در ثبت گزارش جلسه', 'خطا')->persistent('بستن');
+            }
         }
         else
         {
-            alert()->error('خطا در ثبت گزارش جلسه','خطا')->persistent('بستن');
+            alert()->error('خطا در در یافتن اطلاعات کوچ موردنظر', 'خطا')->persistent('بستن');
         }
 
         return back();

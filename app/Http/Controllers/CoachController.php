@@ -57,7 +57,7 @@ class CoachController extends BaseController
 
                 return view('panelUser.insertCoach')
                                 ->with('categoryCoaches',$categoryCoaches)
-                                ->with('typeCoach',$typeCoach);
+                                ->with('typeCoaches',$typeCoach);
             }
             else
             {
@@ -108,10 +108,10 @@ class CoachController extends BaseController
                 'experience'            => $request['experience'],
                 'skills'                => $request['skills'],
                 'count_meeting'         => $request['count_meeting'],
-                'customer_satisfaction' => $request['customer_satisfaction'],
+                //'customer_satisfaction' => $request['customer_satisfaction'],
                 'category'              => implode(',',$request['category']),
                 'typecoach_id'          => $request['typecoach_id'],
-                'change_customer'       => $request['change_customer'],
+                //'change_customer'       => $request['change_customer'],
                 'count_recommendation'  => $request['count_recommendation'],
             ]);
 
@@ -217,12 +217,25 @@ class CoachController extends BaseController
                 ->select('coaches.*','users.fname','users.lname','users.personal_image')
                 ->first();
 
+            $messages=coach::join('messages', function($query)
+            {
+                $query->oron('coaches.id', '=', 'messages.user_id_send')
+                    ->oron('coaches.id', '=', 'messages.user_id_recieve');
+
+            })
+            ->where('coaches.id','=',$coach->id)
+            ->where('messages.type','=','coach')
+            ->get();
+
+
+
             $categoryCoaches=$this->get_categoryCoaches(NULL,NULL,true);
             $coach->category=explode(',',$coach->category);
             $typeCoaches=$this->get_typeCoaches(NULL,1,'get');
             return view('panelAdmin.editCoach')
                 ->with('coach',$coach)
                 ->with('typeCoaches',$typeCoaches)
+                ->with('messages',$messages)
                 ->with('categoryCoaches',$categoryCoaches);
         }
         else
@@ -239,9 +252,21 @@ class CoachController extends BaseController
                             ->first();
                 $coach->category=explode(',',$coach->category);
 
+
+                $messages=coach::join('messages', function($query)
+                {
+                    $query->oron('coaches.id', '=', 'messages.user_id_send')
+                        ->oron('coaches.id', '=', 'messages.user_id_recieve');
+
+                })
+                ->where('coaches.id','=',$coach->id)
+                ->where('messages.type','=','coach')
+                ->get();
+
                 $typeCoaches=$this->get_typeCoaches(NULL,1,'get');
                 return view('panelUser.editCoach')
                             ->with('categoryCoaches',$categoryCoaches)
+                            ->with('messages',$messages)
                             ->with('typeCoaches',$typeCoaches)
                             ->with('coach',$coach);
             }
@@ -263,6 +288,7 @@ class CoachController extends BaseController
      */
     public function update(Request $request, coach $coach)
     {
+
         $this->validate($request,[
             'education_background'  =>'required|string',
             'certificates'          =>'required|string',
@@ -270,8 +296,8 @@ class CoachController extends BaseController
             'skills'                =>'required|string',
             'researches'            =>'nullable|string',
             'count_meeting'         =>'required|numeric|between:0,10000',
-            'customer_satisfaction' =>'required|numeric|between:0,1000',
-            'change_customer'       =>'required|numeric|between:0,1000',
+            //'customer_satisfaction' =>'required|numeric|between:0,1000',
+            //'change_customer'       =>'required|numeric|between:0,1000',
             'count_recommendation'  =>'required|numeric|between:0,1000',
             'category'              =>'required|array',
             'typecoach_id'          =>'required|numeric',

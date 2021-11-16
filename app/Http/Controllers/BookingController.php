@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\booking;
+use App\homework;
 use App\reserve;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -33,14 +34,9 @@ class BookingController extends BaseController
                 ->paginate($this->countPage());
 
             foreach ($booking as $item) {
-                switch ($item->status) {
-                    case '1':
-                        $item->caption_status = 'آماده رزرو';
-                        break;
-                    case '0':
-                        $item->caption_status = 'رزرو شده';
-                        break;
-                }
+
+                $item->caption_status=$this->get_statusBookings($item->status);
+
                 //تعیین وضعیت رزروهایی که تاریخ گذشته و رزرو نشده
 
 //                if (($item->status == 1) && ($item->start_date < $this->dateNow)) {
@@ -76,21 +72,23 @@ class BookingController extends BaseController
                 ->paginate($this->countPage());
 
             foreach ($booking as $item) {
-                switch ($item->status) {
-                    case '1':
-                        $item->caption_status = 'آماده رزرو';
-                        break;
-                    case '0':
-                        $item->caption_status = 'رزرو شده';
-                        break;
-                    case '3':
-                        $item->caption_status = 'برگزارشده';
-                        break;
-                    case '4':
-                        $item->caption_status = 'کنسل شده';
-                        break;
 
-                }
+                $item->caption_status=$this->get_statusBookings($item->status);
+//                switch ($item->status) {
+//                    case '1':
+//                        $item->caption_status = 'آماده رزرو';
+//                        break;
+//                    case '0':
+//                        $item->caption_status = 'رزرو شده';
+//                        break;
+//                    case '3':
+//                        $item->caption_status = 'برگزارشده';
+//                        break;
+//                    case '4':
+//                        $item->caption_status = 'کنسل شده';
+//                        break;
+//
+//                }
                 //تعیین وضعیت رزروهایی که تاریخ گذشته و رزرو نشده
 //                if (($item->status == 1) && ($item->start_date < $this->dateNow)) {
 //                    $item->status = -1;
@@ -232,9 +230,29 @@ class BookingController extends BaseController
                         ->where('bookings.id','=',$booking->id)
                         ->first();
 
-            $reserve=Reserve::join('users','reserves.user_id','=','users.id')
+
+            $reserve=reserve::join('users','reserves.user_id','=','users.id')
                         ->where('reserves.booking_id','=',$booking['booking_id'])
                         ->first();
+
+
+            //تاریخچه جلسات
+            $history=reserve::join('users','reserves.user_id','=','users.id')
+                        ->join('bookings','reserves.booking_id','=','bookings.id')
+                        ->where('bookings.user_id','=',Auth::user()->id)
+                        ->where('reserves.user_id','=',$booking->user_id)
+                        ->get();
+
+            foreach ($history as $item)
+            {
+                $item->status=$this->get_statusBookings($item->status);
+            }
+
+
+            $homework=homework::where('booking_id','=',$booking->booking_id)
+                        ->where('type','=','booking')
+                        ->orderby('id')
+                        ->get();
 
 //            $states=$this->states();
 //            if(!is_null($reserve->city))
@@ -265,7 +283,8 @@ class BookingController extends BaseController
            return view('panelUser.InfoReserve')
                         ->with('user',$reserve)
                         ->with('booking',$booking)
-//                        ->with('states',$states)
+                        ->with('history',$history)
+                        ->with('homework',$homework)
                         ->with('feedback',$feedback)
                         ->with('dateNow',$dateNow);
 
@@ -421,10 +440,11 @@ class BookingController extends BaseController
     {
         $booking=booking::join('reserves','bookings.id','=','reserves.booking_id')
                 ->join('users','users.id','=','reserves.user_id')
+                ->leftjoin('feedback_coachings','bookings.id','=','feedback_coachings.booking_id')
                 ->wherein('bookings.status',[0,2,3])
                 ->where('bookings.user_id','=',Auth::user()->id)
                 ->orderby('bookings.id','desc')
-                ->select('bookings.*','users.fname','users.lname','bookings.id as booking_id','users.personal_image')
+                ->select('bookings.*','users.fname','users.lname','bookings.id as booking_id','reserves.presession','users.personal_image','feedback_coachings.id as feedback_coachings_id')
                 ->paginate($this->countPage());
 
         foreach ($booking as $item)
@@ -439,18 +459,7 @@ class BookingController extends BaseController
                     break;
             }
 
-            switch ($item->status)
-            {
-                case '0':
-                    $item->caption_status = 'رزرو شده';
-                    break;
-                case '3':
-                    $item->caption_status = 'برگزار شد';
-                    break;
-                case '4':
-                    $item->caption_status = 'لغو شد';
-                    break;
-            }
+            $item->caption_status=$this->get_statusBookings($item->status);
 
             if(is_null($item->personal_image))
             {
@@ -491,19 +500,8 @@ class BookingController extends BaseController
                     break;
             }
 
-            switch ($item->status)
-            {
-                case '1':
-                    $item->caption_status = 'رزرو شده';
-                    break;
-                case '3':
-                    $item->caption_status = 'برگزار شد';
-                    break;
-                case '4':
-                    $item->caption_status = 'لغو شد';
-                    break;
-            }
 
+            $item->caption_status=$this->get_statusBookings($item->status);
 
         }
         return view('panelUser.booking')
@@ -595,18 +593,9 @@ class BookingController extends BaseController
                         break;
                 }
 
-                switch ($item->status)
-                {
-                    case '1':
-                        $item->caption_status = 'رزرو شده';
-                        break;
-                    case '3':
-                        $item->caption_status = 'برگزار شد';
-                        break;
-                    case '4':
-                        $item->caption_status = 'لغو شد';
-                        break;
-                }
+
+                $item->caption_status=$this->get_statusBookings($item->caption_status);
+
             }
 
 
@@ -633,18 +622,9 @@ class BookingController extends BaseController
                         break;
                 }
 
-                switch ($item->status)
-                {
-                    case '1':
-                        $item->caption_status = 'رزرو شده';
-                        break;
-                    case '3':
-                        $item->caption_status = 'برگزار شد';
-                        break;
-                    case '4':
-                        $item->caption_status = 'لغو شد';
-                        break;
-                }
+
+                $item->caption_status=$this->get_statusBookings($item->status);
+
             }
 
             $cancelMoarefeh=booking::join('users','users.id','=','bookings.user_id')
@@ -680,6 +660,25 @@ class BookingController extends BaseController
         {
             alert()->error('کوچ مورد نظر یافت نشد')->persistent('بستن');
             return back();
+        }
+    }
+
+    public function get_statusBookings($status)
+    {
+        switch ($status) {
+            case '1':
+                return 'آماده رزرو';
+                break;
+            case '0':
+                return 'رزرو شد';
+                break;
+            case '3':
+                return 'برگزارشد';
+                break;
+            case '4':
+                return 'کنسل شد';
+                break;
+
         }
     }
 
