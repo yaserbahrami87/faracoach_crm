@@ -417,6 +417,7 @@
                     type:'post',
                     url:'/verify',
                     data:{
+                        "_token"    : "{{ csrf_token() }}",
                         type:'event',
                         event:'{{$event->event}}',
                     },
