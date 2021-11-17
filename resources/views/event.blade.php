@@ -259,7 +259,7 @@
                                         <div class="col-12 text-center">
                                             <input type="button"  class="btn btn-primary mt-3" value="شرکت در دوره" data-toggle="modal" data-target="#eventreserve" />
                                         </div>
-                                        <div class="modal fade" id="eventreserve" tabindex="-1" aria-labelledby="eventreserveModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="eventreserve" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="eventreserveModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -271,7 +271,7 @@
                                                     <div class="modal-body text-center">
                                                         <div class="col-12" id="result_reserve"></div>
                                                         <h3>{{$event->event}}</h3>
-                                                        <p>برای شرکت در رویداد لطفا کد ارسال شده به همراهتون را وارد کنید</p>
+                                                        <p>برای  تایید رزرو  خود،کد اعتبارسنجی که برای شما پیامک و ایمیل شده است را وارد نمایید</p>
                                                         <form method="POST" id="frm_checkCode">
                                                             {{csrf_field()}}
                                                             <input type="number" class="form-control mt-3 mb-3" value="کد ارسال شده را وارد کنید" name="code"/>

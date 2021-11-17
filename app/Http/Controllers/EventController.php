@@ -19,7 +19,8 @@ class EventController extends BaseController
         $events = event::where('status', '=', 1)
             ->orderby('start_date', 'desc')
             ->paginate(20);
-        foreach ($events as $item) {
+        foreach ($events as $item)
+        {
             if ($item->start_date < $this->dateNow) {
                 $item->status_event = "برگزار شد";
             } else if ($item->start_date >= $this->dateNow && ($item->capacity > 0)) {
@@ -27,6 +28,11 @@ class EventController extends BaseController
             } else if ($item->start_date >= $this->dateNow && ($item->capacity == 0)) {
                 $item->status_event = "تکمیل ظرفیت";
             }
+
+            $d = explode('/', $item->start_date);
+            $t = explode(':', $item->start_time);
+            $v = (Verta::createJalali($d[0], $d[1], $d[2], $t[0], $t[1], 0));
+            $item->eventDate = ($v->formatWord('l')." ".$item->start_date);
 
         }
         return view('events')

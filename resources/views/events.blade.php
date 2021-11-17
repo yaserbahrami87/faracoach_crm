@@ -114,7 +114,9 @@
                             <div class="col-xs-6 col-md-3 col-lg-3 col-xl-3 mb-4  ">
                                 <div class="card h-100">
                                     <div class="h-50 mb-2">
-                                        <img src="{{asset('/documents/events/'.$item->image)}}" style="height: 180px !important;" class="img-fluid card-img-top" alt="...">
+                                        <a href="{{asset('/event/'.$item->shortlink)}}">
+                                            <img src="{{asset('/documents/events/'.$item->image)}}" style="height: 180px !important;" class="img-fluid card-img-top" alt="...">
+                                        </a>
                                     </div>
                                     <div class="card-body ">
                                         <a href="{{asset('/event/'.$item->shortlink)}}">
@@ -122,9 +124,10 @@
                                                 {{$item->event}}
                                             </h5>
                                         </a>
-                                        <div class="col-12 ">
+                                        <div class="col-12 p-0">
                                             <p class="p-0  float-right  font-weight-bold d-inline">
-                                                <i class="bi bi-calendar-event-fill"></i> {{$item->start_date}}
+
+                                                <i class="bi bi-calendar-event-fill"></i> {{$item->eventDate}}
                                             </p>
                                             <p class="p-0  float-left font-weight-bold d-inline">
                                                 <i class="bi bi-alarm-fill"></i> {{$item->start_time}}

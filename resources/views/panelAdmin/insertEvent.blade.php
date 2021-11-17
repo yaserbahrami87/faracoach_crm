@@ -189,8 +189,15 @@
     <script src="{{asset('js/kamadatepicker.min.js')}}"></script>
     <script src="{{asset('js/kamadatepicker.holidays.js')}}"></script>
     <script>
-        $('#end_date,#expire_date').change(function(){
+        $('#end_date').change(function(){
             if($(this).val()<$('#start_date').val())
+            {
+                alert('تاریخ درج شده با شروع دوره مطابقت ندارد');
+                $(this).val('');
+            }
+        });
+        $('#expire_date').change(function(){
+            if($(this).val()>$('#start_date').val())
             {
                 alert('تاریخ درج شده با شروع دوره مطابقت ندارد');
                 $(this).val('');
