@@ -254,14 +254,14 @@ class FollowupController extends BaseController
 //    این بخش برای پیدا کردن و پیاده سازی آخرین پیگیری های انجام شده در جدول است
     public function test()
     {
-//        $follow=followup::get();
-//        foreach ($follow as $item)
-//        {
-//            $t=followup::where('id','=',$item->id)   //    $this->get_followup($item->followups_id,NULL,NULL,NULL,"first");
-//                        ->first();
-//            $t->flag=0;
-//            $t->update();
-//        }
+        $follow=followup::get();
+        foreach ($follow as $item)
+        {
+            $t=followup::where('id','=',$item->id)   //    $this->get_followup($item->followups_id,NULL,NULL,NULL,"first");
+                        ->first();
+            $t->flag=0;
+            $t->update();
+        }
 
         $follow=followup::get();
         foreach ($follow as $item)
