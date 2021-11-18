@@ -56,40 +56,40 @@ class CommentController extends BaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,$post)
+    public function store(Request $request)
     {
-
-        $post=$this->get_postById($post);
-        dd($post);
-        if(!is_null($post))
-        {
-            $this->validate($request,
+        $this->validate($request,
             [
                 'comment'   =>'required|string|min:5',
+                'post_id'   =>'required|numeric',
+                'type'      =>'required|string'
             ]);
 
-            $status=comment::create(
+        switch ($request->type)
+        {
+            case 'coach':$post=$this->get_coach(NULL,$request->post_id);
+                            break;
+            case 'event':$post=$this->get_events($request->id,NULL,NULL,'event');
+                            break;
+                            
+        }
+
+        if(!is_null($post))
+        {
+            $status=comment::create($request->all()+
                 [
                     'user_id'   =>Auth::user()->id,
-                    'post_id'   =>$post->id,
-                    'comment'   =>$request['comment'],
                     'date_fa'   =>$this->dateNow,
                     'time_fa'   =>$this->timeNow,
                 ]);
             if($status) {
-                $msg = "دیدگاه با موفقیت ثبت شد";
-                $errorStatus = "success";
-                return back()
-                    ->with('msg', $msg)
-                    ->with('errorStatus', $errorStatus);
+                alert()->success('دیدگاه با موفقیت ثبت شد')->persistent('بستن');
+                return back();
             }
             else
             {
-                $msg = "خطا در ثبت دیدگاه";
-                $errorStatus = "success";
-                return back()
-                    ->with('msg', $msg)
-                    ->with('errorStatus', $errorStatus);
+                alert()->error('خطا در ثبت دیدگاه')->persistent('بستن');
+                return back();
             }
 
         }

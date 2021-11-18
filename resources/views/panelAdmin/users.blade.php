@@ -2,6 +2,25 @@
 
 @section('headerScript')
 <link href="{{asset('/dashboard/assets/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
+    <style>
+        .img_profile
+        {
+            animation: images_effect 2s infinite;
+            animation-direction: alternate;
+
+        }
+
+        @keyframes images_effect {
+            from{
+                border:5px solid red;
+                transition: 1s;
+            }
+
+            to{
+                border:0px solid red;
+            }
+        }
+    </style>
 @endsection
 
 @section('rowcontent')
@@ -177,7 +196,7 @@
                             <th>شماره همراه</th>
                             <th>ثبت کننده</th>
                             <th>معرف</th>
-                            <th> آشنایی</th>
+                            <th> پیگیری بعد</th>
                             <th> ورود</th>
                             <th>مسئول پیگیری</th>
                             <th>تعداد پیگیری</th>
@@ -197,7 +216,7 @@
                             <tr style="background-color: {{$item->quality_color}}">
                                 <td>
                                     <a href="/admin/user/{{$item->id}}">
-                                        <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="img-circle"  width="50px" height="50px"/>
+                                        <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="img-circle "  width="50px" height="50px" />
                                     </a>
                                 </td>
                                 <td>
@@ -217,11 +236,8 @@
                                 </td>
                                 <td>{{$item['insert_user']}}</td>
                                 <td>{{$item->introduced}}</td>
-                                <td>
-                                    <a href="/admin/user/{{$item->id}}" class="text-dark d-block">
-                                        {{$item->gettingknow}}
-                                    </a>
-                                </td>
+
+                                <td>{{$item->nextfollowup_date_fa}}</td>
                                 <td>
                                     <a href="/admin/user/{{$item->id}}" class="text-dark d-block">
                                         {{$item->resource}}

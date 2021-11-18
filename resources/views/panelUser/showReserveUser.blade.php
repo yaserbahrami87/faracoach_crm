@@ -7,6 +7,22 @@
                 <h5 class="card-title">بازخورد جلسه</h5>
             </div>
             <div class="card-body" >
+                @if(is_null($reserve->presession))
+                    <form method="POST" action="/panel/reserve/{{$reserve->id_reserve}}" class="border-bottom pb-3">
+                        {{csrf_field()}}
+                        {{method_field('PATCH')}}
+                        <div class="form-group">
+                            <label for="presession">لطفا قبل از شروع جلسه درباره موضوع این جلسه و مباحث آن توضیحی کوتاه دهید*</label>
+                            <textarea class="form-control" id="presession"  name="presession" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">ثبت</button>
+                    </form>
+                @else
+                    <div class="form-group border-bottom pb-3">
+                        <label for="presession">لطفا قبل از شروع جلسه درباره موضوع این جلسه و مباحث آن توضیحی کوتاه دهید*</label>
+                        <textarea class="form-control" id="presession"  name="presession" rows="3" disabled readonly>{{$reserve->presession}}</textarea>
+                    </div>
+                @endif
                 @if(($reserve->start_date<$dateNow)&&($reserve->status_reserve==3))
                     <p>دانشپذیر گرامی</p>
                     <p class="text-justify">یکی از مهم ترین مهارت های یک کوچ ارائه بازخورد سازنده است که توام با صداقت، صراحت و صمیمیت است.</p>
@@ -230,32 +246,64 @@
                     <div class="alert alert-warning">جلسه کوچینگ شما لغو شده است</div>
                 @else
                     <div class="alert alert-warning">جلسه کوچینک هنوز انجام نشده است</div>
-                    @if($reserve->start_date>$dateNow)
-                        <form method="POST" action="/booking/{{$reserve->booking_id}}" onsubmit="return confirm('آیا از لغو جلسه اطمینان دارید؟')">
-                            {{csrf_field()}}
-                            {{method_field('PATCH')}}
-                            <input type="hidden" name="status" value="4" />
-                            <button type="submit" class="btn btn-danger">لغو جلسه
-                                <i class="bi bi-x-lg"></i>
-                            </button>
-                        </form>
-                    @elseif(is_null($reserve->presession))
-                        <form method="POST" action="/panel/reserve/{{$reserve->id_reserve}}">
-                            {{csrf_field()}}
-                            {{method_field('PATCH')}}
-                            <div class="form-group">
-                                <label for="presession">لطفا قبل از شروع جلسه درباره موضوع این جلسه و مباحث آن توضیحی کوتاه دهید*</label>
-                                <textarea class="form-control" id="presession"  name="presession" rows="3"></textarea>
+                @endif
+                @if($reserve->start_date>$dateNow)
+                    <form method="POST" action="/booking/{{$reserve->booking_id}}" onsubmit="return confirm('آیا از لغو جلسه اطمینان دارید؟')">
+                        {{csrf_field()}}
+                        {{method_field('PATCH')}}
+                        <input type="hidden" name="status" value="4" />
+                        <button type="submit" class="btn btn-danger">لغو جلسه
+                            <i class="bi bi-x-lg"></i>
+                        </button>
+                    </form>
+                @endif
+
+                    @if($reserve->start_date<=$dateNow)
+                        <div class="card card-user">
+                            <div class="card-header bg-info">
+                                <a class="btn m-0 p-0" data-toggle="collapse" href="#homework" role="button" aria-expanded="false" aria-controls="homework">
+                                    <h5 class="card-title m-0 p-0">تکلیف</h5>
+                                </a>
                             </div>
-                            <button type="submit" class="btn btn-primary">ثبت</button>
-                        </form>
-                    @else
-                        <div class="form-group">
-                            <label for="presession">لطفا قبل از شروع جلسه درباره موضوع این جلسه و مباحث آن توضیحی کوتاه دهید*</label>
-                            <textarea class="form-control" id="presession"  name="presession" rows="3" disabled readonly>{{$reserve->presession}}</textarea>
+                            <div class="card-body collapse show" id="homework" >
+                                @if($homework->count()>0)
+                                    @foreach($homework as $item)
+                                        <div class="form-group border-bottom">
+                                            @if($loop->iteration==1)
+                                                <label for="text">تکلیف ارائه شده توسط کوچ:</label>
+                                            @else
+                                                <label for="text">توضیحات</label>
+                                            @endif
+                                            <textarea class="form-control" id="text" rows="3" name="text" disabled >{{$item->text}}</textarea>
+                                            @if(!is_null($item->attach))
+                                                <label for="attach">فایل ضمیمه</label>
+                                                <a href="{{asset('/documents/homework/'.$item->attach)}}" class="">
+                                                    <i class="bi bi-paperclip font-weight-bold"></i>
+                                                </a>
+                                            @endif
+                                            <small class="text-muted float-left">{{$item->time_fa." ".$item->date_fa}}</small>
+                                        </div>
+                                    @endforeach
+                                    <form method="post" action="/panel/homework" enctype="multipart/form-data">
+                                        {{csrf_field()}}
+                                        <input type="hidden" value="{{$reserve->booking_id}}" name="booking_id"/>
+                                        <input type="hidden" value="{{$homework[0]->id}}" name="homework_id_answer"/>
+                                        <div class="form-group">
+                                            <label for="text">توضیحات:*</label>
+                                            <textarea class="form-control" id="text" rows="3" name="text" >{{old('text')}}</textarea>
+                                        </div>
+                                        <input type="file" class="form-control" name="attach" />
+                                        <button type="submit" class="btn btn-primary mt-3">ثبت</button>
+                                    </form>
+                                @else
+                                    <div class="alert alert-warning">
+                                        تکلیفی توسط کوچ ارائه نشده است
+                                    </div>
+                                @endif
+                            </div>
                         </div>
                     @endif
-                @endif
+
             </div>
         </div>
     </div>

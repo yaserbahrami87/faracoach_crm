@@ -24,11 +24,26 @@
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CoachController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CoachController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CommentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CommentController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/EventController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/EventController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FollowupController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FollowupController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReserveController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReserveController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/comment.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/comment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_02_26_154655_create_comments_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_02_26_154655_create_comments_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/coach.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/coach.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/event.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/event.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/events.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/events.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/editEvent.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/editEvent.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/insertEvent.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/insertEvent.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/coaches.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/coaches.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/editCoach.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/editCoach.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/profile.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/users.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/users.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/InfoReserve.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/InfoReserve.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/booking.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/booking.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/editCoach.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/editCoach.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/showReserveUser.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/showReserveUser.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -736,7 +751,9 @@
       <workItem from="1636998330703" duration="2709000" />
       <workItem from="1637043209665" duration="15038000" />
       <workItem from="1637092903516" duration="1228000" />
-      <workItem from="1637132480749" duration="2163000" />
+      <workItem from="1637132480749" duration="12626000" />
+      <workItem from="1637163288752" duration="9913000" />
+      <workItem from="1637215114307" duration="12855000" />
     </task>
     <servers />
   </component>
@@ -764,10 +781,10 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="413" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1636580727601">
+    <state x="413" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1637180876359">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1636580727601" />
+    <state x="413" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1637180876359" />
     <state x="184" y="8" key="SettingsEditor" timestamp="1632374771441">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -784,9 +801,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1637094012948" />
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1637132871494">
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1637230914630">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1637132871494" />
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1637230914630" />
   </component>
 </project>

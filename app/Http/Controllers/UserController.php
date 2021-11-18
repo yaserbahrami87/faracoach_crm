@@ -83,10 +83,12 @@ class UserController extends BaseController
                 ->with('user',$user)
                 ->with('problem',$problem)
                 ->with('statics',$statics)
+                ->with('dateNow',$this->dateNow)
                 ->with('parameter',$request['parameter']);
         }
         else
         {
+
             $users=User::leftjoin('followups','users.id','=','followups.user_id')
                         ->where(function($query)
                         {
@@ -95,7 +97,8 @@ class UserController extends BaseController
                         })
                         ->where('followups.flag','=',1)
                         ->whereNotIn('users.type',[-1,2,3,0])
-                        ->select('users.*')
+                        ->select('users.*','followups.nextfollowup_date_fa')
+                        ->orderby('followups.nextfollowup_date_fa','desc')
                         ->orderby('users.id','desc')
                         ->groupby('users.id')
 //                        ->paginate($this->countPage());
@@ -111,6 +114,8 @@ class UserController extends BaseController
             {
                 $item=$this->changeNumberToData($item);
             }
+
+
             $tags=$this->get_tags();
             $parentCategory=$this->get_category('پیگیری');
 
@@ -124,6 +129,7 @@ class UserController extends BaseController
                         ->with('usersAdmin',$usersAdmin)
                         ->with('problem',$problem)
                         ->with('statics',$statics)
+                        ->with('dateNow',$this->dateNow)
                         ->with('parameter',$request['parameter']);
         }
     }
@@ -833,71 +839,6 @@ class UserController extends BaseController
     public function showCategoryUsersAdmin(Request $request)
     {
         $dateNow=$this->dateNow;
-
-//        if(Auth::user()->type==2)
-//        {
-//                switch ($request['categoryUsers']) {
-//                    case '0':
-//                        return redirect('/admin/users/');
-//                        break;
-//                    case 'lead':
-//                        $users = user::where('type','=',-1)
-//                            ->orderby('id','desc')
-////                                ->paginate($this->countPage());
-//                            ->get();
-//                        break;
-//                    case 'notfollowup':
-//                        $users = user::where('type','=',1)
-//                            ->orderby('id','desc')
-////                            ->paginate($this->countPage());
-//                            ->get();
-//                        break;
-//                    case 'continuefollowup':
-//                        $users = $this->get_usersByType(11,Auth::user()->id);
-//                        break;
-//                    case 'cancelfollowup':
-//                        $users = $this->get_usersByType(12,Auth::user()->id);
-//                        break;
-//                    case 'waiting' :
-//                        $users =$users = $this->get_usersByType(13,Auth::user()->id);
-//                        break;
-//                    case 'noanswering':
-//                        $users = $this->get_usersByType(14,Auth::user()->id);
-//                        break;
-//                    case 'students':
-//                        $users = $this->get_usersByType(20,Auth::user()->id);
-//                        break;
-//                    case 'todayFollowup':
-//                        $users = $this->get_todayFollowup();
-//                        break;
-//                    case 'expireFollowup':
-//                        $users = $this->get_expireFollowup();
-//                        break;
-//                    case 'myfollowup':
-//                        $users =$this->get_usersByType(NULL,Auth::user()->id);
-//                        break;
-//
-//                    case 'followedToday':
-//                        $users = User::join('followups', 'users.id', '=', 'followups.user_id')
-//                            ->where('date_fa', '=', $dateNow)
-//                            ->where('followby_expert', '=', $request['user'])
-//                            ->select('users.*')
-//                            ->groupby('users.id')
-//                            ->orderby('date_fa', 'desc')
-////                            ->paginate($this->countPage());
-//                            ->get();
-//                        break;
-//                    case 'trashuser':
-//                        $users=$this->getAll_trashuser();
-//                            break;
-//                    default:
-//                        return redirect('/admin/users/');
-//                        break;
-//                }
-//                $statics=$this->get_staticsCountUsers_admin();
-//        }
-//        else
-//        {
             switch ($request['categoryUsers'])
             {
                 case '0':
@@ -964,7 +905,7 @@ class UserController extends BaseController
             $item= $this->changeNumberToData($item);
         }
 
-        $usersAdmin=user::orwhere('type'    ,'=',2)
+        $usersAdmin=user::orwhere('type','=',2)
                         ->orwhere('type','=',3)
                         ->get();
         $tags=$this->get_tags();

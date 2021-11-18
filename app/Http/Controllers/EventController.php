@@ -135,9 +135,11 @@ class EventController extends BaseController
             $event->status_event = "تکمیل ظرفیت";
         }
 
+        $comments=$this->get_comments(NULL,NULL,$event->id,NULL,'event');
 
         return view('event')
             ->with('event', $event)
+            ->with('comments', $comments)
             ->with('eventReserve', $eventReserve);
     }
 
@@ -193,8 +195,8 @@ class EventController extends BaseController
                 $path = public_path('/documents/events/');
                 $files = $request->file('image')->move($path, $image);
                 $request->image = $image;
-                $status->image = $image;
-                $status->update();
+                $event->image = $image;
+                $event->update();
             }
 
             alert()->success('رویداد با موفقیت بروزرسانی شد')->persistent('بستن');
@@ -226,7 +228,8 @@ class EventController extends BaseController
 
     public function eventsListAdmin()
     {
-        $events = event::get();
+        $events = event::orderby('id','desc')
+                    ->get();
         foreach ($events as $item) {
             if ($item->start_date < $this->dateNow) {
                 $item->status_event = "برگزار شد";

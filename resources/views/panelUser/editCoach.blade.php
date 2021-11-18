@@ -9,8 +9,8 @@
             box-sizing: border-box;
         }
         .form-control{
-            background-color: #fdfdff !important;
-            border: 1px solid #5ACFD6 !important;
+
+            border: 1px solid ;
         }
         .content-wrapper{
             background-color: #fdfdff !important;

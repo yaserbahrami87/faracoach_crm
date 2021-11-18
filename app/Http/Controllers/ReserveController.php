@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\checkout;
 use App\coach;
+use App\homework;
 use App\reserve;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -77,12 +78,17 @@ class ReserveController extends BaseController
 
         $user_coach=$this->get_user_byID($reserve->user_id);
 
+        $homework=homework::where('booking_id','=',$reserve->booking_id)
+            ->where('type','=','booking')
+            ->orderby('id')
+            ->get();
 
         $dateNow=$this->dateNow;
         return view('panelUser.showReserveUser')
                     ->with('reserve',$reserve)
                     ->with('dateNow',$dateNow)
                     ->with('booking',$booking)
+                    ->with('homework',$homework)
                     ->with('user_coach',$user_coach);
     }
 

@@ -68,16 +68,17 @@
                     {{csrf_field()}}
                     {{method_field('PATCH')}}
                     <input type="hidden" value="NULL" name="followby_expert">
-                    <div class="input-group mb-3 mt-3 ">
-                        <div class="input-group-prepend">
-                            <button class="btn btn-outline-secondary" type="submit" id="button-addon1">تغییر دسته بندی</button>
-                        </div>
+                    <div class="input-group mt-3 ">
                         <select class="form-control p-0" name="type" >
                             <option selected disabled>یک گزینه را انتخاب کنید</option>
                             <option value="-1" {{$user->type===-1 ? "selected":"" }} >مارکتینگ</option>
                             <option value="11" {{$user->type===1 ? "selected":"" }}>فروش</option>
                         </select>
                     </div>
+                    <div class="col-12 text-center">
+                        <button class="btn btn-danger text-center" type="submit" id="button-addon1">تغییر دسته بندی</button>
+                    </div>
+
 
                 </form>
                 <hr>

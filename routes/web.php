@@ -369,8 +369,6 @@ Route::get('/checkout/callback','CheckoutController@callback');
 Route::resource('checkout','CheckoutController');
 
 
-//comments
-Route::post('/post/addcomment/{post}','CommentController@store');
 
 //gift
 Route::get('/gift',function()
@@ -444,7 +442,7 @@ Route::get('/exportexcel','UserController@export_excel');
 
 Route::resource('event','EventController');
 
-
+Route::get('/test','FollowupController@test');
 
 //blog
 Route::get('/{username}','PostController@blogHomePage');

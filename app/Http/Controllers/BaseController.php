@@ -1899,5 +1899,50 @@ class BaseController extends Controller
 
     }
 
+    public function get_comments($id=NULL,$user_id=NULL,$post_id=NULL,$status=NULL,$type=NULL,$condition=NULL,$paginate='get')
+    {
+        return comment::join('users','comments.user_id','=','users.id')
+                        ->when($id,function ($query)use($id)
+                        {
+                            return $query->where('id','=',$id);
+                        })
+                        ->when($user_id,function ($query)use($user_id)
+                        {
+                            return $query->where('user_id','=',$user_id);
+                        })
+                        ->when($post_id,function ($query)use($post_id)
+                        {
+                            return $query->where('post_id','=',$post_id);
+                        })
+                        ->when($status,function ($query)use($status)
+                        {
+                            return $query->where('status','=',$status);
+                        })
+                        ->when($type,function ($query)use($type)
+                        {
+                            return $query->where('comments.type','=',$type);
+                        })
+                        ->when($condition,function($query) use ($condition)
+                        {
+                            return $query->where($condition[0],$condition[1],$condition[2]);
+                        })
+                        ->when($paginate=='paginate',function($query)
+                        {
+                            return  $query->orderby('comments.id','desc')
+                                ->paginate($this->countPage());
+                        })
+                        ->when($paginate=='get',function($query)
+                        {
+                            return  $query->orderby('comments.id','desc')
+                                ->get();
+                        })
+                        ->when($paginate=='first',function($query)
+                        {
+                            return  $query->orderby('comments.id','desc')
+                                ->first();
+                        });
+
+    }
+
 
 }

@@ -164,6 +164,12 @@ class CoachController extends BaseController
             $condition=['start_date','>',$this->dateNow];
             $bookings=$this->get_booking(NULL,$coach->user_id,NULL,NULL,NULL,1,$condition,'get');
 
+            //کامنت های گذاشته شده برای کوچ
+            $comments=$this->get_comments(NULL,NULL,$user->id,NULL,'coach');
+
+
+
+
             if(is_null($coach))
             {
                 alert()->error('شخص مورد نظر به عنوان کوچ تعریف نشده است','خطا')->persistent('بستن');
@@ -195,6 +201,7 @@ class CoachController extends BaseController
                     ->with('dateNow', $dateShamsi)
                     ->with('date_Miladi', $date_Miladi)
                     ->with('feedbacks',$feedbacks)
+                    ->with('comments',$comments)
                     ->with('cart',$cart);
             }
         }

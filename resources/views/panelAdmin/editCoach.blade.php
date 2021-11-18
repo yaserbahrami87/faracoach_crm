@@ -9,8 +9,8 @@
             box-sizing: border-box;
         }
         .form-control{
-            background-color: #fdfdff !important;
-            border: 1px solid #5ACFD6 !important;
+
+            border: 1px solid ;
         }
         .content-wrapper{
             background-color: #fdfdff !important;
@@ -200,7 +200,7 @@
                         @else
                             <label for="comment"> پیام دریافت شده:</label>
                         @endif
-                        <textarea class="form-control" id="comment" name="comment" rows="3" disabled readonly>{{$item->comment }}</textarea>
+                        <textarea class="form-control bg-light" id="comment" name="comment" rows="3" disabled readonly>{{$item->comment }}</textarea>
                         <small class="font-weight-bold float-left">{{$item->time_fa.' '.$item->date_fa}}</small>
                     </div>
                 @endforeach

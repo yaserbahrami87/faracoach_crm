@@ -87,7 +87,7 @@
                 </a>
             </div>
             <div class="card-body collapse show" id="status_reserve">
-                @if($booking->start_date<$dateNow)
+                @if($booking->start_date<=$dateNow)
                     <form method="post" action="/panel/reserve/{{$booking->id}}/update" >
                         {{csrf_field()}}
                         {{method_field('PATCH')}}

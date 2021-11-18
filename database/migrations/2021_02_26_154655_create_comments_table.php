@@ -20,6 +20,7 @@ class CreateCommentsTable extends Migration
             $table->integer('comment_id')->nullable();
             $table->string('comment',250)->nullable();
             $table->boolean('status')->default(0);
+            $table->string('type',100)->nullable();
             $table->string('date_fa',11)->nullable();
             $table->string('time_fa',11)->nullable();
             $table->timestamps();

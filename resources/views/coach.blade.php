@@ -436,8 +436,10 @@
                     </div>
                 @endif
                 @if(Auth::check())
-                    <form method="post" action="/post/addcomment/{{$coach->id}}"class="mb-5">
+                    <form method="post" action="/panel/comments"class="pb-2 border-bottom">
                         {{csrf_field()}}
+                        <input type="hidden" name="post_id" value="{{$coach->id}}">
+                        <input type="hidden" name="type" value="coach">
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 @if(is_null(Auth::user()->personal_image))
@@ -459,7 +461,7 @@
                         برای ارسال دیدگاه لطفا <a href="/login">وارد</a> شوید
                     </div>
                 @endif
-                <div class="row">
+                <div class="row mt-2">
                     <div class="panel panel-default widget" >
                         <div class="panel-heading">
                             <span class="glyphicon glyphicon-comment"></span>
@@ -480,23 +482,25 @@
                             <!-- TAB COMMENTS -->
                             <div class="tab-pane fade show active" id="nav-comments" role="tabpanel" aria-labelledby="nav-home-tab">
                                 <ul class="list-group pl-0">
-                                    <li class="list-group-item border-bottom text-justify" >
-                                        <div class="row">
-                                            <div class="col-xs-2 col-md-1">
-                                                <img src="{{asset('/documents/users/')}}" class="img-circle img-responsive" width="50px" height="50px" /></div>
-                                            <div class="col-xs-10 col-md-11">
-                                                <div>
-                                                    <a href="#">#</a>
-                                                    <div class="mic-info ">
-
+                                    @foreach($comments as $item)
+                                        <li class="list-group-item border-bottom text-justify" >
+                                            <div class="row">
+                                                <div class="col-xs-2 col-md-1">
+                                                    <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="img-circle img-responsive" width="50px" height="50px" />
+                                                </div>
+                                                <div class="col-xs-10 col-md-11">
+                                                    <div  class="mb-2">
+                                                        <a href="#">{{$item->fname.' '.$item->lname}}</a>
+                                                        <div class="mic-info ">
+                                                        </div>
+                                                    </div>
+                                                    <div class="comment-text">
+                                                        {{$item->comment}}
                                                     </div>
                                                 </div>
-                                                <div class="comment-text">
-
-                                                </div>
                                             </div>
-                                        </div>
-                                    </li>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </div>
 

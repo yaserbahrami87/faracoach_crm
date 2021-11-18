@@ -98,7 +98,7 @@
                     <td>{{$item->duration_booking}}</td>
                     <td>{{$item->caption_status}}</td>
 
-                    @if((Auth::user()->status_coach==1 && ($item['status'])!=0))
+                    @if(($item->start_date>$dateNow && Auth::user()->status_coach==1 && ($item['status'])!=0))
                         <td>
                             <form method="post" action="/panel/booking/{{$item->id}}" onsubmit="return confirm('آیا از حذف زمان رزرو اطمینان دارید؟');">
                                 {{ method_field('DELETE') }}
@@ -108,7 +108,7 @@
                                 </button>
                             </form>
                         </td>
-                    @else
+                    @elseif($item->start_date>$dateNow)
                         <td>
                             <form method="POST" action="/booking/{{$item->booking_id}}" onsubmit="return confirm('آیا از لغو جلسه اطمینان دارید؟')">
                                 {{csrf_field()}}
