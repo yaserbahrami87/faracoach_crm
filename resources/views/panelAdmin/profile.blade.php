@@ -4,6 +4,13 @@
     <link href="{{asset('/css/kamadatepicker.min.css')}}" rel="stylesheet" />
     <link href="{{asset('/css/timepicker.min.css')}}" rel="stylesheet" />
 
+    <style>
+        select
+        {
+            padding-right:25px !important;
+        }
+    </style>
+
 @endsection
 
 @section('rowcontent')

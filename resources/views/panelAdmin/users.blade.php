@@ -196,12 +196,12 @@
                             <th>شماره همراه</th>
                             <th>ثبت کننده</th>
                             <th>معرف</th>
-                            <th> پیگیری بعد</th>
                             <th> ورود</th>
                             <th>مسئول پیگیری</th>
                             <th>تعداد پیگیری</th>
                             <th>آخرین محصول پیگیری شده</th>
                             <th>آخرین پیگیری</th>
+                            <th> پیگیری بعد</th>
                             <th>وضعیت</th>
                             <th>اخرین ورود</th>
 
@@ -237,7 +237,7 @@
                                 <td>{{$item['insert_user']}}</td>
                                 <td>{{$item->introduced}}</td>
 
-                                <td>{{$item->nextfollowup_date_fa}}</td>
+
                                 <td>
                                     <a href="/admin/user/{{$item->id}}" class="text-dark d-block">
                                         {{$item->resource}}
@@ -252,9 +252,11 @@
                                 <td>
                                     {{$item['lastFollowupCourse']}}
                                 </td>
+                                <td>{{$item->lastDateFollowup}}</td>
                                 <td>
                                     <a href="/admin/user/{{$item->id}}" class="text-dark d-block">
-                                        {{$item->lastDateFollowup}}
+
+                                        {{$item->nextfollowup_date_fa}}
                                     </a>
                                 </td>
 

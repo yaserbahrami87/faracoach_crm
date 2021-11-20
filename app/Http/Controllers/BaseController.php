@@ -1369,7 +1369,7 @@ class BaseController extends Controller
             })
             ->orderby('followups.id', 'desc')
             ->groupby('followups.user_id')
-            ->select('users.*')
+            ->select('users.*','followups.nextfollowup_date_fa')
             ->when($paginate=='paginate',function($query){
                 return $query->paginate($this->countPage());
             },function($query){

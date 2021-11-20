@@ -354,12 +354,12 @@ class UserController extends BaseController
                 $this->sendSms($request['tel'],$request['sendsms']);
             }
             alert()->success("کاربر با موفقیت در سیستم ثبت شد",'پیام')->persistent('بستن');
-            return back();
+            return redirect('/admin/add');
         }
         else
         {
             alert()->error("خطا در ثبت کاربر",'خطا')->persistent('بستن');
-            return back();
+            return redirect('/admin/add');
         }
     }
 
