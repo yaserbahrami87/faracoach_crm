@@ -15,7 +15,11 @@ class PsychologicalController extends BaseController
      */
     public function index()
     {
-        //
+        $psychological=psychological::join('users','psychologicals.user_id','=','users.id')
+                        ->orderby('psychologicals.id','desc')
+                        ->get();
+        return view('panelUser.PsychologicalPsychiatry_list')
+                    ->with('psychological',$psychological);
     }
 
     /**
