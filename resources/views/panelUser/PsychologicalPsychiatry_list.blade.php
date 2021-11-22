@@ -1,4 +1,4 @@
-@extends('panelUser.master.index')
+@extends('panelAdmin.master.index')
 
 @section('headerScript')
     <link href="{{asset('/dashboard/assets/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
@@ -23,7 +23,7 @@
                         <td>{{$item->fname}}</td>
                         <td>{{$item->lname}}</td>
                         <td>
-                            <a href="/panel/psychological/{{$item->user_id}}" class="btn btn-success">
+                            <a href="/admin/psychological/{{$item->id}}" class="btn btn-success">
                                 <i class="bi bi-eye-fill"></i>
                             </a>
                         </td>

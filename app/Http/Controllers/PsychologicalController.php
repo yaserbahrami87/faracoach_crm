@@ -17,6 +17,7 @@ class PsychologicalController extends BaseController
     {
         $psychological=psychological::join('users','psychologicals.user_id','=','users.id')
                         ->orderby('psychologicals.id','desc')
+                        ->select('psychologicals.*','users.fname','users.lname')
                         ->get();
         return view('panelUser.PsychologicalPsychiatry_list')
                     ->with('psychological',$psychological);
@@ -75,7 +76,16 @@ class PsychologicalController extends BaseController
      */
     public function show(psychological $psychological)
     {
-        //
+        $psychological=psychological::join('users','psychologicals.user_id','=','users.id')
+            ->where('psychologicals.id','=',$psychological->id)
+            ->orderby('psychologicals.id','desc')
+            ->select('psychologicals.*','users.fname','users.lname')
+            ->first();
+
+        $psychological['result']=explode(',',$psychological->result);
+
+        return view('panelAdmin.psychological_result')
+                        ->with('psychological',$psychological);
     }
 
     /**

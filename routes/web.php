@@ -128,7 +128,8 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
 
 
     //Psychological
-    Route::resource('psychological','PsychologicalController');
+    Route::get('/psychological/create','PsychologicalController@create');
+
 
     //Event Reserves
     Route::resource('eventreserve','EventreserveController');
@@ -299,11 +300,14 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
         Route::resource('students', 'StudentController');
     });
 
+    //psychological
+    Route::resource('psychological','PsychologicalController');
+
 
     //EVENTS
     Route::get('/event/isfahan/list','landingController@isfahanList');
 
-
+    //Events
     Route::Patch('/event/{event}/updateStatus','EventController@updateStatus');
     Route::get('/event/all','EventController@eventsListAdmin');
     Route::get('/event/{event}/users','EventController@usersEvent');
