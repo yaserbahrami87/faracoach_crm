@@ -459,8 +459,14 @@
 
     </div>
     <div class="col-md-8">
-        @if((Auth::user()->id==$user->followby_expert)||(is_null($user->followby_expert)))
+        @if((Auth::user()->id==$user->followby_expert||is_null($user->followby_expert))&& $user->type!=-1)
             @include('panelAdmin.insertFollowUp')
+            <hr/>
+        @elseif((Auth::user()->id==$user->followby_expert||is_null($user->followby_expert))&& $user->type!=5)
+            <div class="alert alert-warning">
+                <i class="bi bi-exclamation-triangle-fill"></i>
+                کاربر مربوط به بخش مارکتینگ می باشد
+            </div>
             <hr/>
         @endif
         @include('panelAdmin.followups')

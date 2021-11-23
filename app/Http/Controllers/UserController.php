@@ -86,7 +86,7 @@ class UserController extends BaseController
                 ->with('dateNow',$this->dateNow)
                 ->with('parameter',$request['parameter']);
         }
-        else
+        elseif(Auth::user()->type!=2 && Auth::user()->type!=5)
         {
 
             $users=User::leftjoin('followups','users.id','=','followups.user_id')

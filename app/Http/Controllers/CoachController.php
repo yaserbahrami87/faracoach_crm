@@ -295,7 +295,6 @@ class CoachController extends BaseController
      */
     public function update(Request $request, coach $coach)
     {
-
         $this->validate($request,[
             'education_background'  =>'required|string',
             'certificates'          =>'required|string',
