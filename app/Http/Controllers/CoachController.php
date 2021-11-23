@@ -484,13 +484,18 @@ class CoachController extends BaseController
     public function updateCoach(Request $request,coach $coach)
     {
         $this->validate($request,[
-            'education_background'  =>'nullable|string',
-            'certificates'          =>'nullable|string',
-            'experience'            =>'nullable|string',
-            'skills'                =>'nullable|string',
+            'education_background'  =>'required|string',
+            'certificates'          =>'required|string',
+            'experience'            =>'required|string',
+            'skills'                =>'required|string',
             'researches'            =>'nullable|string',
+            'count_meeting'         =>'required|numeric',
+            'count_recommendation'  =>'required|numeric',
+            'category'              =>'required|array',
+            'typecoach_id'          =>'required|numeric',
         ]);
 
+        $request['category']=implode(',',$request->category);
         $status=$coach->update($request->all());
         if($status)
         {

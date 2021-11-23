@@ -99,51 +99,53 @@
     <div class=" container col-xs-12 col-md-8 col-lg-8 col-xl-8">
         <div class="line">
             <div class="card-body">
-                <form class="border-bottom mb-3 pb-3" method="post" action="/admin/coach/{{$coach->id}}" >
+                <form class="border-bottom mb-3 pb-3" method="post" action="/panel/coach/{{$coach->id}}/updateCoach" >
                     {{csrf_field()}}
                     {{method_field('PATCH')}}
                     <label for="education_background">سوابق تحصیلی *</label>
                     <div class="form-group">
-                        <textarea class="form-control @error('education_background') is-invalid @enderror " name="education_background" id="education_background" rows="3">{{$coach->education_background}}</textarea>
+                        <textarea class="form-control textarea @error('education_background') is-invalid @enderror " name="education_background" id="education_background" rows="3">{{old('education_background',$coach->education_background)}}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="certificates">گواهینامه ها *</label>
-                        <textarea class="form-control textarea  @error('certificates') is-invalid @enderror " name="certificates" id="certificates" rows="3">{{$coach->certificates}}</textarea>
+                        <textarea class="form-control textarea  @error('certificates') is-invalid @enderror " name="certificates" id="certificates" rows="3">{{old('certificates',$coach->certificates)}}</textarea>
                         <div id="btn">
                             <button type=" " class="btn btn-primary btn-sm" >مشاهده گواهینامه</button>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="experience">سوابق کاری *</label>
-                        <textarea class="form-control textarea  @error('experience') is-invalid @enderror " name="experience" id="experience" rows="3">{{$coach->experience}}</textarea>
+                        <textarea class="form-control textarea  @error('experience') is-invalid @enderror " name="experience" id="experience" rows="3">{{old('experience',$coach->experience)}}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="skills">مهارت ها *</label>
-                        <textarea class="form-control  textarea @error('skills') is-invalid @enderror " name="skills" id="skills" rows="3">{{$coach->skills}}</textarea>
+                        <textarea class="form-control  textarea @error('skills') is-invalid @enderror " name="skills" id="skills" rows="3">{{old('skills',$coach->skills)}}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="researches">سوابق علمی </label>
-                        <textarea class="form-control textarea @error('researches') is-invalid @enderror " name="researches" id="researches" rows="3">{{$coach->researches}}</textarea>
+                        <textarea class="form-control textarea @error('researches') is-invalid @enderror " name="researches" id="researches" rows="3">{{old('researches',$coach->researches)}}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="count_meeting">تجربه برگزاری جلسات *</label>
                         <small id="count_meetinglHelp" class="form-text text-muted">تعداد ساعت جلساتی که تاکنون توسط شما ارائه شده است را وارد کنید</small>
-                        <input type="number" class="form-control" id="count_meeting" name="count_meeting" aria-describedby="count_meetingHelp" min="0" max="10000" value="{{$coach->count_meeting}}"/>
+                        <input type="number" class="form-control" id="count_meeting" name="count_meeting" aria-describedby="count_meetingHelp" min="0" max="10000" value="{{old('count_meeting',$coach->count_meeting)}}"/>
                     </div>
+                    <!--
                     <div class="form-group">
                         <label for="customer_satisfaction">درصد رضایت مشتریان *</label>
                         <small id="customer_satisfactionHelp" class="form-text text-muted"> تعداد افرادی که رضایت کامل از جلسات مشاوره داشته اند وارد کنید</small>
-                        <input type="number" class="form-control" id="customer_satisfaction" name="customer_satisfaction" aria-describedby="customer_satisfactiongHelp" min="0" max="1000" value="{{$coach->customer_satisfaction}}"/>
+                        <input type="number" class="form-control" id="customer_satisfaction" name="customer_satisfaction" aria-describedby="customer_satisfactiongHelp" min="0" max="1000" value="{{old('customer_satisfaction',$coach->customer_satisfaction)}}"/>
                     </div>
                     <div class="form-group">
                         <label for="change_customer">درصد تبدیل مشتری *</label>
                         <small id="change_customerHelp" class="form-text text-muted"> تعداد افرادی که تبدیل به مشتری وفادارا شده اند را وارد کنید</small>
-                        <input type="number" class="form-control" id="change_customer" name="change_customer" aria-describedby="change_customerHelp" min="0" max="1000" value="{{$coach->change_customer}}"/>
+                        <input type="number" class="form-control" id="change_customer" name="change_customer" aria-describedby="change_customerHelp" min="0" max="1000" value="{{old('change_customer',$coach->change_customer)}}"/>
                     </div>
+                    -->
                     <div class="form-group">
                         <label for="count_recommendation">تعداد توصیه نامه *</label>
                         <small id="count_recommendationHelp" class="form-text text-muted"> تعداد توصیه نامه هایی که تاکنون داشته اید را وارد کنید</small>
-                        <input type="number" class="form-control" id="count_recommendation" name="count_recommendation" aria-describedby="count_recommendationHelp" min="0" max="1000" value="{{$coach->count_recommendation}}"/>
+                        <input type="number" class="form-control" id="count_recommendation" name="count_recommendation" aria-describedby="count_recommendationHelp" min="0" max="1000" value="{{old('count_recommendation',$coach->count_recommendation)}}"/>
                     </div>
                     <div class="form-group">
                         <label for="selectpicker">دسته بندی ها *</label>
