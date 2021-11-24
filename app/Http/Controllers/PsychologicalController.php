@@ -19,7 +19,7 @@ class PsychologicalController extends BaseController
                         ->orderby('psychologicals.id','desc')
                         ->select('psychologicals.*','users.fname','users.lname')
                         ->get();
-        return view('panelUser.PsychologicalPsychiatry_list')
+        return view('panelAdmin.PsychologicalPsychiatry_list')
                     ->with('psychological',$psychological);
     }
 
@@ -120,5 +120,11 @@ class PsychologicalController extends BaseController
     public function destroy(psychological $psychological)
     {
         //
+    }
+
+    public function export_excel(psychological $psychological)
+    {
+        return $psychological->user;
+//        return psychological::find($psychological->id)->user;
     }
 }

@@ -88,7 +88,6 @@ class UserController extends BaseController
         }
         elseif(Auth::user()->type!=2 && Auth::user()->type!=5)
         {
-
             $users=User::leftjoin('followups','users.id','=','followups.user_id')
                         ->where(function($query)
                         {
@@ -1387,8 +1386,12 @@ class UserController extends BaseController
         [
             'type'=>'required|numeric'
         ]);
-        $user=User::where('id','=',$id)
+        $user=User::join('followups','users.id','=','followups.user_id')
+                ->where('users.id','=',$id)
+                ->where('followups.flag','=',1)
+                ->select('users.*','followups.nextfollowup_date_fa')
                 ->first();
+
         if(is_null($user))
         {
             alert()->error('کاربری با این اطلاعات موجود نمی باشد','خطا')->persistent('بستن');
@@ -1397,6 +1400,7 @@ class UserController extends BaseController
         else
         {
             $user['type']=$request['type'];
+            $user['nextfollowup_date_fa']=NULL;
             $status=$user->save();
             if($status)
             {
@@ -1599,16 +1603,17 @@ class UserController extends BaseController
     public function export_excel()
     {
         //خروجی اکسل
-        $list=landPage::where('resource','=','وبینار تمامیت')
+        $list=user::join('eventreserves', 'users.id', '=', 'eventreserves.user_id')
+            ->where('eventreserves.event_id', '=', 5)
             ->groupby('tel')
             ->get();
 
-        $excel=fastexcel($list)->export('export.xlsx');
+        $excel=fastexcel($list)->export('exportWebinar.xlsx');
         if($excel)
         {
 //                return Storage::disk('public')->download('file.xlsx');
 //                return response()->download(storage_path("/public/file.xlsx"));
-            return response()->download(public_path('export.xlsx'));
+            return response()->download(public_path('exportWebinar.xlsx'));
 
         }
         else

@@ -50,6 +50,7 @@ class User extends Authenticatable implements MustVerifyEmail
         ];
 
 
+
         public function followups()
         {
             return $this->hasMany('App\followup');

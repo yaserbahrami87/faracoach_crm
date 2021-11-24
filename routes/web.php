@@ -302,6 +302,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     });
 
     //psychological
+    Route::get('/psychological/export/{psychological}','PsychologicalController@export_excel');
     Route::resource('psychological','PsychologicalController');
 
 

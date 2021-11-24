@@ -113,7 +113,7 @@
 
         .frontside .card,
         .backside .card {
-            min-height: 312px;
+            min-height: 270px;
         }
 
         .backside .card a {
@@ -208,8 +208,6 @@
                                                                         <img src="{{asset('/documents/users/default-avatar.png')}}" class="rounded-circle img-fluid" />
                                                                     @endif
                                                                 <h4 class="card-title">{{$item->fname}} {{$item->lname}}</h4>
-                                                                <p class="card-text">{{$item->aboutme}}</p>
-                                                                <a href="/coach/{{$item->username}}" class="btn btn-primary btn-block">مشاهده اطلاعات</a>
                                                             </div>
                                                         </div>
                                                     </div>

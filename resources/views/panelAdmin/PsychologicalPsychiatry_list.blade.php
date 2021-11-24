@@ -14,6 +14,7 @@
                     <th scope="col">نام</th>
                     <th scope="col">نام خانوادگی</th>
                     <th scope="col">مشاهده</th>
+                    <th scope="col">خروجی</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -25,6 +26,11 @@
                         <td>
                             <a href="/admin/psychological/{{$item->id}}" class="btn btn-success">
                                 <i class="bi bi-eye-fill"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/admin/psychological/export/{{$item->id}}" class="btn btn-info">
+                                <i class="bi bi-file-earmark-excel-fill"></i>
                             </a>
                         </td>
                     </tr>
