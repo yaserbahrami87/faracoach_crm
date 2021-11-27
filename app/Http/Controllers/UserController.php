@@ -1386,6 +1386,8 @@ class UserController extends BaseController
         [
             'type'=>'required|numeric'
         ]);
+
+
         $user=User::join('followups','users.id','=','followups.user_id')
                 ->where('users.id','=',$id)
                 ->where('followups.flag','=',1)
@@ -1399,13 +1401,28 @@ class UserController extends BaseController
         }
         else
         {
+
+            $user=$this->get_user(NULL,$id,NULL,NULL,'first');
             $user['type']=$request['type'];
-            $user['nextfollowup_date_fa']=NULL;
+            $user['followby_expert']=NULL;
             $status=$user->save();
+
             if($status)
             {
-                alert()->success('سطح دسترسی کاربر تغییر کرد','پیام')->persistent('بستن');
-                return back();
+                $followups=$this->get_followup(NULL,$id,NULL,1,'first');
+
+                $followups['nextfollowup_date_fa']=NULL;
+                $status=$followups->save();
+
+                if($status)
+                {
+                    alert()->success('سطح دسترسی کاربر تغییر کرد','پیام')->persistent('بستن');
+                    return back();
+                }
+                else
+                {
+                    alert()->error('خطا در پاک کردن تاریخ پیگیری بعد')->persistent('بستن');
+                }
             }
             else
             {
