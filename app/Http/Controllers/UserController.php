@@ -925,7 +925,7 @@ class UserController extends BaseController
         //دریافت کفیت های پیگیری
         $problem=$this->get_problemfollowup(NULL,1);
 
-        return view('panelAdmin.users')
+        return view('admin.users')
                     ->with('tags',$tags)
                     ->with('users',$users)
                     ->with('parentCategory',$parentCategory)
@@ -997,7 +997,7 @@ class UserController extends BaseController
                 $problem=$this->get_problemfollowup(NULL,1);
 
 
-                return view('panelAdmin.users')
+                return view('admin.users')
                     ->with('tags',$tags)
                     ->with('users',$users)
                     ->with('parentCategory',$parentCategory)
@@ -1131,7 +1131,7 @@ class UserController extends BaseController
         //دریافت کفیت های پیگیری
         $problem=$this->get_problemfollowup(NULL,1);
 
-        return view('panelAdmin.users')
+        return view('admin.users')
                     ->with('users',$users)
                     ->with('tags',$tags)
                     ->with('parentCategory',$parentCategory)
@@ -1537,7 +1537,7 @@ class UserController extends BaseController
 
 
 
-        return view('panelAdmin.users')
+        return view('admin.users')
             ->with('users',$users)
             ->with('tags',$tags)
             ->with('parentCategory',$parentCategory)
