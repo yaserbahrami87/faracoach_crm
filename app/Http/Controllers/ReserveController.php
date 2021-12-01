@@ -417,7 +417,7 @@ class ReserveController extends BaseController
             }
         }
         $dateNow=$this->dateNow;
-        return view('panelAdmin.reserves')
+        return view('admin.reserves')
                     ->with('booking',$reserve)
                     ->with('dateNow',$dateNow);
     }

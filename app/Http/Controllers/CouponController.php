@@ -22,12 +22,12 @@ class CouponController extends BaseController
                 ->paginate($this->countPage());
         if(Auth::user()->type==2)
         {
-            return view('panelAdmin.coupon')
+            return view('admin.coupon')
                 ->with('coupons',$coupons);
         }
         else
         {
-            return view('panelUser.coupon')
+            return view('user.coupon')
                 ->with('coupons',$coupons);
         }
 
@@ -43,12 +43,12 @@ class CouponController extends BaseController
         $dateNow=$this->dateNow;
         if(Auth::user()->type==2)
         {
-            return view('panelAdmin.insertCoupon')
+            return view('admin.insertCoupon')
                 ->with('dateNow',$dateNow);
         }
         else
         {
-            return view('panelUser.insertCoupon')
+            return view('user.insertCoupon')
                 ->with('dateNow',$dateNow);
         }
 
@@ -122,13 +122,13 @@ class CouponController extends BaseController
             $dateNow=$this->dateNow;
             if(Auth::user()->type==2)
             {
-                return view('panelAdmin.editCoupon')
+                return view('admin.editCoupon')
                     ->with('coupon',$coupon)
                     ->with('dateNow',$dateNow);
             }
             else
             {
-                return view('panelUser.editCoupon')
+                return view('user.editCoupon')
                     ->with('coupon',$coupon)
                     ->with('dateNow',$dateNow);
             }

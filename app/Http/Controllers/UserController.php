@@ -75,7 +75,7 @@ class UserController extends BaseController
             //دریافت کفیت های پیگیری
             $problem=$this->get_problemfollowup(NULL,1);
 
-            return view('panelAdmin.users')
+            return view('admin.users')
                 ->with('users',$users)
                 ->with('tags',$tags)
                 ->with('parentCategory',$parentCategory)
@@ -121,7 +121,7 @@ class UserController extends BaseController
             //دریافت کفیت های پیگیری
             $problem=$this->get_problemfollowup(NULL,1);
 
-            return view('panelAdmin.users')
+            return view('admin.users')
                         ->with('users',$users)
                         ->with('tags',$tags)
                         ->with('parentCategory',$parentCategory)
@@ -142,6 +142,7 @@ class UserController extends BaseController
     {
 
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -276,7 +277,7 @@ class UserController extends BaseController
         $condition=['parent_id','=','0'];
         $gettingKnow_parent=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
 
-        return view('panelAdmin.registerUser')
+        return view('admin.registerUser')
                     ->with('gettingKnow_parent',$gettingKnow_parent)
                     ->with('settingsms',$settingsms);
 
@@ -284,6 +285,7 @@ class UserController extends BaseController
     //Register User by Admin
     public function register(Request $request)
     {
+        dd($request);
         $request['tel']=$this->convertPersianNumber($request->tel);
         $this->validate($request, [
             'fname'             => ['nullable','persian_alpha', 'string', 'max:30'],
@@ -410,7 +412,7 @@ class UserController extends BaseController
         $condition=['parent_id','=','0'];
         $gettingKnow_parent_list=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
 
-        return view ('panelUser.profile')
+        return view ('user.profile')
                         ->with('user',$user)
                         ->with('countIntroducedUser',$countIntroducedUser)
                         ->with('resourceIntroduce',$resourceIntroduce)
@@ -607,7 +609,7 @@ class UserController extends BaseController
 
 
 
-        return view('panelAdmin.profile')
+        return view('admin.profile')
                     ->with('user',$user)
                     ->with('countFollowups',$countFollowups)
                     ->with('followUps',$followUps)
@@ -657,6 +659,7 @@ class UserController extends BaseController
      */
     public function update(Request $request,User $user)
     {
+
             $this->validate(request(),
                 [
                     'username'          =>'nullable|max:200|regex:/^(?=[a-zA-Z0-9._]{3,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/u',
@@ -664,7 +667,7 @@ class UserController extends BaseController
                     'lname'             =>'nullable|persian_alpha',
                     'codemelli'         =>'nullable|numeric|',
                     'sex'               =>'nullable|boolean',
-                    'tel'               =>'nullable|iran_mobile',
+                    'tel'               =>'nullable|string',
                     'shenasname'        =>'nullable|numeric|',
                     'datebirth'         =>'nullable|max:11|string',
                     'father'            =>'nullable|persian_alpha|',
@@ -1015,8 +1018,7 @@ class UserController extends BaseController
         if($user->introduced_verified==0)
         {
             $options=$this->get_options();
-
-            return view('panelUser.IntroducedVerified')
+            return view('user.IntroducedVerified')
                     ->with('options',$options);
         }
         else {
@@ -1075,7 +1077,7 @@ class UserController extends BaseController
             $listIntroducedUser->appends(['category' => $request['category']]);
             $getFollowbyCategory = $this->getFollowbyCategory();
 
-            return view('panelUser.listIntroducedUser')
+            return view('user.listIntroducedUser')
                 ->with('listIntroducedUser', $listIntroducedUser)
                 ->with('countIntroducedUser', $countIntroducedUser)
                 ->with('getFollowbyCategory', $getFollowbyCategory);
@@ -1300,7 +1302,7 @@ class UserController extends BaseController
                     }
                 }
 
-                return view('panelUser.followupsIntroduced')
+                return view('user.followupsIntroduced')
                     ->with('followUps', $followUps)
                     ->with('userInsert', $userInsert)
                     ->with('user', $user)
@@ -1548,7 +1550,7 @@ class UserController extends BaseController
 
     public function createExcel()
     {
-        return view('panelAdmin.excelImport');
+        return view('admin.excelImport');
     }
 
     public function storeExcel(Request $request)
@@ -1744,6 +1746,172 @@ class UserController extends BaseController
         {
             return "<div class='alert alert-danger'>خطا در ثبت نام</div>";
         }
+    }
+
+    public function contacts()
+    {
+        $user=Auth::user();
+        if(strlen(Auth::user()->personal_image)==0)
+        {
+            $user->personal_image="default-avatar.png";
+        }
+
+        //تعداد افراد دعوت شده
+        $countIntroducedUser=User::where('introduced','=',$user->tel)
+            ->count();
+
+        //یوزر توسط چه کسی معرفی شده است
+        $resourceIntroduce=User::where('tel','=',$user->introduced)
+            ->first();
+
+        $states=$this->states();
+
+
+        if(!is_null($user->gettingknow))
+        {
+            $user->gettingknow_parent_user=$this->get_categoryGettingknow($user->gettingknow,NULL,NULL,NULL,'first')->parent_id;
+            $condition=['parent_id','=',$user->gettingknow_parent_user];
+            $gettingKnow_child_list=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
+        }
+        else
+        {
+            $gettingKnow_child_list=NULL;
+        }
+
+
+        //انتخاب شهر براساس کد
+        $city=$this->city($user->city);
+
+        $condition=['parent_id','=','0'];
+        $gettingKnow_parent_list=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
+
+        return view ('user.contacts_info')
+            ->with('user',$user)
+            ->with('countIntroducedUser',$countIntroducedUser)
+            ->with('resourceIntroduce',$resourceIntroduce)
+            ->with('states',$states)
+            ->with('gettingKnow_parent_list',$gettingKnow_parent_list)
+            ->with('gettingKnow_child_list',$gettingKnow_child_list)
+            ->with('city',$city);
+    }
+
+    public function introduction()
+    {
+        $user=Auth::user();
+        if(strlen(Auth::user()->personal_image)==0)
+        {
+            $user->personal_image="default-avatar.png";
+        }
+
+        //تعداد افراد دعوت شده
+        $countIntroducedUser=User::where('introduced','=',$user->tel)
+            ->count();
+
+        //یوزر توسط چه کسی معرفی شده است
+        $resourceIntroduce=User::where('tel','=',$user->introduced)
+            ->first();
+
+        $states=$this->states();
+
+
+        if(!is_null($user->gettingknow))
+        {
+            $user->gettingknow_parent_user=$this->get_categoryGettingknow($user->gettingknow,NULL,NULL,NULL,'first')->parent_id;
+            $condition=['parent_id','=',$user->gettingknow_parent_user];
+            $gettingKnow_child_list=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
+        }
+        else
+        {
+            $gettingKnow_child_list=NULL;
+        }
+
+
+        //انتخاب شهر براساس کد
+        $city=$this->city($user->city);
+
+        $condition=['parent_id','=','0'];
+        $gettingKnow_parent_list=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
+
+        return view ('user.introduction_info')
+            ->with('user',$user)
+            ->with('countIntroducedUser',$countIntroducedUser)
+            ->with('resourceIntroduce',$resourceIntroduce)
+            ->with('states',$states)
+            ->with('gettingKnow_parent_list',$gettingKnow_parent_list)
+            ->with('gettingKnow_child_list',$gettingKnow_child_list)
+            ->with('city',$city);
+    }
+
+    public function contract()
+    {
+        $user=Auth::user();
+        if(strlen(Auth::user()->personal_image)==0)
+        {
+            $user->personal_image="default-avatar.png";
+        }
+
+        //تعداد افراد دعوت شده
+        $countIntroducedUser=User::where('introduced','=',$user->tel)
+            ->count();
+
+        //یوزر توسط چه کسی معرفی شده است
+        $resourceIntroduce=User::where('tel','=',$user->introduced)
+            ->first();
+
+        $states=$this->states();
+
+
+        if(!is_null($user->gettingknow))
+        {
+            $user->gettingknow_parent_user=$this->get_categoryGettingknow($user->gettingknow,NULL,NULL,NULL,'first')->parent_id;
+            $condition=['parent_id','=',$user->gettingknow_parent_user];
+            $gettingKnow_child_list=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
+        }
+        else
+        {
+            $gettingKnow_child_list=NULL;
+        }
+
+
+        //انتخاب شهر براساس کد
+        $city=$this->city($user->city);
+
+        $condition=['parent_id','=','0'];
+        $gettingKnow_parent_list=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
+
+        return view ('user.contract_info')
+            ->with('user',$user)
+            ->with('countIntroducedUser',$countIntroducedUser)
+            ->with('resourceIntroduce',$resourceIntroduce)
+            ->with('states',$states)
+            ->with('gettingKnow_parent_list',$gettingKnow_parent_list)
+            ->with('gettingKnow_child_list',$gettingKnow_child_list)
+            ->with('city',$city);
+    }
+
+    public function test()
+    {
+        $users=User::get();
+        foreach ($users as $item)
+        {
+            $user=User::find($item->id);
+            echo "<script>console.log(".$user->id.");</script>";
+
+            if(($user->tel[0]=='0')&&(!is_null($user->tel)))
+            {
+                try {
+                    $user->tel='+98'.substr($user['tel'],1);
+                    $user->save();
+                }
+                catch (Throwable $e)
+                {
+                    $user->tel='0'.substr($user['tel'],1);
+                    $user->save();
+                }
+
+            }
+        }
+
     }
 
 }

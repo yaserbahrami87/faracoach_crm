@@ -32,7 +32,7 @@ class CourseController extends BaseController
 
 
         }
-        return view('panelAdmin.courses')
+        return view('admin.courses')
                     ->with('courses',$courses);
     }
 
@@ -45,7 +45,7 @@ class CourseController extends BaseController
     {
         $teachers=$this->get_teachers();
         $courseType=$this->get_courseType();
-        return view('panelAdmin.insertCourse')
+        return view('admin.insertCourse')
                     ->with('teachers',$teachers)
                     ->with('courseType',$courseType);
 
@@ -128,7 +128,7 @@ class CourseController extends BaseController
     {
         $teachers=$this->get_teachers();
         $courseType=$this->get_courseType();
-        return view('panelAdmin.editCourse')
+        return view('admin.editCourse')
                     ->with('course',$course)
                     ->with('teachers',$teachers)
                     ->with('courseType',$courseType);

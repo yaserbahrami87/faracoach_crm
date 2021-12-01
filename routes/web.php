@@ -24,6 +24,9 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     // ROUTE USER
 
     Route::get('/profile','UserController@profile');
+    Route::get('/user/contacts','UserController@contacts');
+    Route::get('/user/introduction','UserController@introduction');
+    Route::get('/user/contract','UserController@contract');
     Route::patch('/profile/update/{user}','UserController@update');
     Route::get('/userAjax/{user}','UserController@introducedUserAjax');
     Route::get('/user/password','AdminController@changePasswordViewUser')->middleware('password.confirm');
@@ -160,7 +163,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
 
     Route::get('/users/search/','UserController@searchUsers');
     Route::get('/users/search/advance','UserController@advanceSearchUsers');
-    Route::get('/add','UserController@showRegister');
+        Route::get('/add','UserController@showRegister');
     Route::post('/register','UserController@register');
     Route::get('/user/{user}/delete','UserController@destroy');
     Route::get('/users/category/','UserController@showCategoryUsersAdmin');
@@ -218,7 +221,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     // File Manager
     Route::get('/filemanager',function()
     {
-        return view('panelAdmin/fileManager');
+        return view('admin/fileManager');
     });
 
     //Route reports
@@ -448,7 +451,8 @@ Route::get('/exportexcel','UserController@export_excel');
 
 Route::resource('event','EventController');
 
-Route::get('/test','FollowupController@test');
+//Route::get('/test','FollowupController@test');
+Route::get('/test','UserController@test');
 
 //blog
 Route::get('/{username}','PostController@blogHomePage');

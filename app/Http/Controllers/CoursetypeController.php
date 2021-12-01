@@ -27,7 +27,7 @@ class CoursetypeController extends Controller
                 $item->status="عدم نمایش";
             }
         }
-        return view('panelAdmin.coursetype')
+        return view('admin.coursetype')
                     ->with('courseType',$coursetype);
     }
 
@@ -38,7 +38,7 @@ class CoursetypeController extends Controller
      */
     public function create()
     {
-        return view('panelAdmin.insertCourseType');
+        return view('admin.insertCourseType');
     }
 
     /**
@@ -94,7 +94,7 @@ class CoursetypeController extends Controller
      */
     public function edit(coursetype $coursetype)
     {
-        return view('panelAdmin.editCourseType')
+        return view('admin.editCourseType')
                     ->with('courseType',$coursetype);
     }
 

@@ -46,7 +46,7 @@ class EventController extends BaseController
      */
     public function create()
     {
-        return view('panelAdmin.insertEvent');
+        return view('admin.insertEvent');
     }
 
     /**
@@ -151,7 +151,7 @@ class EventController extends BaseController
      */
     public function edit(event $event)
     {
-        return view('panelAdmin.editEvent')
+        return view('admin.editEvent')
             ->with('event', $event);
     }
 
@@ -240,10 +240,12 @@ class EventController extends BaseController
             }
 
         }
-        return view('panelAdmin.events')
+        return view('admin.events')
             ->with('events', $events);
     }
 
+
+    //شرکت کننده ها در رویئداد
     public function usersEvent(event $event)
     {
         $users = event::join('eventreserves', 'events.id', '=', 'eventreserves.event_id')
@@ -252,7 +254,7 @@ class EventController extends BaseController
             ->orderby('eventreserves.id', 'asc')
             ->select('users.*', 'eventreserves.date_fa', 'eventreserves.time_fa')
             ->simplePaginate(20);
-        return view('panelAdmin.listEventReserveUsers')
+        return view('admin.listEventReserveUsers')
             ->with('event', $event)
             ->with('users', $users);
     }

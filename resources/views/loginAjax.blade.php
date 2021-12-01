@@ -35,7 +35,7 @@
                                                     <i class="bi bi-person-fill"></i>
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"   required autocomplete="tel" autofocus placeholder="نام کاربری / ایمیل خود را وارد کنید" />
+                                            <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"   required autocomplete="tel" autofocus placeholder="تلفن همراه / ایمیل خود را وارد کنید" />
                                         </div>
                                     </div>
                                 </div>

@@ -1,4 +1,4 @@
-@extends('panelAdmin.master.index')
+@extends('admin.master.index')
 @section('rowcontent')
 
         <div class="col-12">
@@ -83,7 +83,7 @@
             </table>
         </div>
 
-    @include('panelAdmin.cardBox')
+    @include('panelAdmin._cardBox')
 
 
 @endsection

@@ -25,7 +25,7 @@ class StudentController extends BaseController
 
         $course=$this->get_courses();
 
-        return view('panelAdmin.students')
+        return view('admin.students')
             ->with('course',$course)
             ->with('students',$students);
 
@@ -119,7 +119,7 @@ class StudentController extends BaseController
 
         $course=$this->get_courses();
 
-        return view('panelAdmin.students')
+        return view('admin.students')
                 ->with('students',$students)
                 ->with('course',$course);
     }
@@ -141,7 +141,7 @@ class StudentController extends BaseController
 
         $course=$this->get_courses();
 
-        return view('panelAdmin.students')
+        return view('admin.students')
             ->with('students',$students)
             ->with('course',$course);
     }

@@ -35,7 +35,7 @@ class CoachController extends BaseController
             }
 
         }
-        return view('panelAdmin.coaches')
+        return view('admin.coaches')
                     ->with('coaches',$coaches);
     }
 
@@ -55,7 +55,7 @@ class CoachController extends BaseController
 
                 $categoryCoaches=$this->get_categoryCoaches(NULL,NULL,true);
 
-                return view('panelUser.insertCoach')
+                return view('user.insertCoach')
                                 ->with('categoryCoaches',$categoryCoaches)
                                 ->with('typeCoaches',$typeCoach);
             }
@@ -239,7 +239,7 @@ class CoachController extends BaseController
             $categoryCoaches=$this->get_categoryCoaches(NULL,NULL,true);
             $coach->category=explode(',',$coach->category);
             $typeCoaches=$this->get_typeCoaches(NULL,1,'get');
-            return view('panelAdmin.editCoach')
+            return view('admin.editCoach')
                 ->with('coach',$coach)
                 ->with('typeCoaches',$typeCoaches)
                 ->with('messages',$messages)
@@ -271,7 +271,7 @@ class CoachController extends BaseController
                 ->get();
 
                 $typeCoaches=$this->get_typeCoaches(NULL,1,'get');
-                return view('panelUser.editCoach')
+                return view('user.editCoach')
                             ->with('categoryCoaches',$categoryCoaches)
                             ->with('messages',$messages)
                             ->with('typeCoaches',$typeCoaches)
@@ -382,7 +382,7 @@ class CoachController extends BaseController
                 $item->status='درخواست همکاری';
             }
         }
-        return view('panelAdmin.coaches')
+        return view('admin.coaches')
             ->with('coaches',$coaches);
     }
 
@@ -402,7 +402,7 @@ class CoachController extends BaseController
                         break;
             }
         }
-        return view('panelAdmin.coaches')
+        return view('admin.coaches')
             ->with('coaches',$coaches);
     }
 
@@ -598,7 +598,7 @@ class CoachController extends BaseController
                 ->get();
 
             $dateNow=$this->dateNow;
-            return view('panelUser.reportCoach')
+            return view('user.reportCoach')
                 ->with('dateNow',$dateNow)
                 ->with('reserveMoarefeh',$reserveMoarefeh)
                 ->with('reserveCoaching',$reserveCoaching)

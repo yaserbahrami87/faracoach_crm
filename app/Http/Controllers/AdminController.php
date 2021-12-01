@@ -148,7 +148,7 @@ class AdminController extends BaseController
 
 
             $countUnreadMessages=$this->countUnreadMessages();
-            return view('panelAdmin.home')
+            return view('admin.home')
                         ->with('notFollowup',$notFollowup)
                         ->with('follow',$follow)
                         ->with('cancel',$cancel)
@@ -279,7 +279,7 @@ class AdminController extends BaseController
             }
 
 
-            return view('panelUser.home')
+            return view('user.home')
                 ->with('user',$user)
                 ->with('countIntroducedUser',$countIntroducedUser)
                 ->with('resourceIntroduce',$resourceIntroduce)
@@ -449,7 +449,7 @@ class AdminController extends BaseController
             }
         }
 
-        return view('panelAdmin.settings')
+        return view('admin.settings')
                     ->with('problemfollowup',$problemfollowup)
                     ->with('parentCategory',$parentCategory)
                     ->with('categoryTags',$categoryTags)

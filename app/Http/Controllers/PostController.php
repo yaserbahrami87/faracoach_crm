@@ -59,7 +59,7 @@ class PostController extends BaseController
 
 
 
-            return view('panelUser.posts')
+            return view('user.posts')
                     ->with('posts',$posts)
                     ->with('categoryposts',$categoryposts);
         }
@@ -79,7 +79,7 @@ class PostController extends BaseController
         }
         else {
             $categoryposts=$this->get_categoryPostByUserId(Auth::user()->id);
-            return view('panelUser.insertPost')
+            return view('user.insertPost')
                         ->with('categoryposts',$categoryposts);
         }
     }
@@ -206,7 +206,7 @@ class PostController extends BaseController
         //چک می شود که پست آیا متعلق به خود کاربر است
         if(Auth::user()->id==$post->user_id) {
             $categoryposts=$this->get_categoryPostByUserId(Auth::user()->id);
-            return view('panelUser.editPost')
+            return view('user.editPost')
                 ->with('post', $post)
                 ->with('categoryposts',$categoryposts);
         }

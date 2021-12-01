@@ -25,7 +25,7 @@ class CategoryPostController extends BaseController
                         ->orderby('id','desc')
                         ->paginate($this->countPage());
 
-            return view('panelUser.categoryPosts')
+            return view('user.categoryPosts')
                         ->with('category_post',$category_post);
         }
     }
@@ -37,7 +37,7 @@ class CategoryPostController extends BaseController
      */
     public function create()
     {
-        return view('panelUser.insertCategoryPosts');
+        return view('user.insertCategoryPosts');
     }
 
     /**
@@ -119,7 +119,7 @@ class CategoryPostController extends BaseController
         }
         else {
             if (Auth::user()->id == $category_post->user_id) {
-                return view('panelUser.editCategoryPost')
+                return view('user.editCategoryPost')
                     ->with('category_post', $category_post);
             } else {
                 return abort(403);

@@ -53,7 +53,7 @@ class BookingController extends BaseController
                         break;
                 }
             }
-            return view('panelAdmin.booking')
+            return view('admin.booking')
                 ->with('booking', $booking)
                 ->with('dateNow', $this->dateNow);
         }
@@ -106,7 +106,7 @@ class BookingController extends BaseController
 
 
             }
-            return view('panelUser.booking')
+            return view('user.booking')
                 ->with('booking', $booking)
                 ->with('dateNow', $this->dateNow);
         }
@@ -223,7 +223,6 @@ class BookingController extends BaseController
      */
     public function show(booking $booking)
     {
-
         if((Auth::user()->id==$booking->user_id)||(Auth::user()->type==2))
         {
             $booking=booking::join('reserves','bookings.id','=','reserves.booking_id')
@@ -280,7 +279,7 @@ class BookingController extends BaseController
            $dateNow=$this->dateNow;
            $timeNow=$this->timeNow;
 
-           return view('panelUser.InfoReserve')
+           return view('admin.InfoReserve')
                         ->with('user',$reserve)
                         ->with('booking',$booking)
                         ->with('history',$history)
@@ -466,7 +465,7 @@ class BookingController extends BaseController
                 $item->personal_image='default-avatar.png';
             }
         }
-        return view('panelUser.bookingAcceptReserveCoach')
+        return view('admin.bookingAcceptReserveCoach')
 //        return view('panelUser.booking')
                 ->with('booking', $booking)
                 ->with('dateNow', $this->dateNow);
@@ -644,7 +643,7 @@ class BookingController extends BaseController
                 ->get();
 
             $dateNow=$this->dateNow;
-            return view('panelAdmin.reportCoach')
+            return view('admin.reportCoach')
                 ->with('dateNow',$dateNow)
                 ->with('reserveMoarefeh',$reserveMoarefeh)
                 ->with('reserveCoaching',$reserveCoaching)

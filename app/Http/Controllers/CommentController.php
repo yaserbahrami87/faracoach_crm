@@ -35,7 +35,7 @@ class CommentController extends BaseController
             }
 
 
-            return view('panelUser.comments')
+            return view('user.comments')
                         ->with('comments',$comments);
         }
     }
@@ -71,7 +71,7 @@ class CommentController extends BaseController
                             break;
             case 'event':$post=$this->get_events($request->id,NULL,NULL,'event');
                             break;
-                            
+
         }
 
         if(!is_null($post))

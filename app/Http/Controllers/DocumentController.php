@@ -15,7 +15,7 @@ class DocumentController extends BaseController
     public function index()
     {
         $documents=document::get();
-        return view('panelAdmin.documents')
+        return view('admin.documents')
                     ->with('documents',$documents);
 
     }
