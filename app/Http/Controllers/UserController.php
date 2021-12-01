@@ -285,7 +285,6 @@ class UserController extends BaseController
     //Register User by Admin
     public function register(Request $request)
     {
-        dd($request);
         $request['tel']=$this->convertPersianNumber($request->tel);
         $this->validate($request, [
             'fname'             => ['nullable','persian_alpha', 'string', 'max:30'],

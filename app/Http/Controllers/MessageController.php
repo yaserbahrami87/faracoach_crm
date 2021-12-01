@@ -28,34 +28,32 @@ class MessageController extends BaseController
     {
         if(Gate::allows('isAdmin'))
         {
-            if(isset($request['q']))
-            {
-                $this->validate(request(),
-                    [
-                        'q'     =>'required|numeric'
-                    ],
-                    [
-                        'q.required'=>'شماره تیکت به عدد وارد کنید'
-                    ]);
-                $messages = message::where('message_id_answer', '=', NULL)
-                    ->where('id','=',$request['q'])
-                    ->where(function ($query) {
-                        $query->orwhere('user_id_send', '=', Auth::user()->id)
-                            ->orwhere('user_id_recieve', '=', Auth::user()->id);
+//            if(isset($request['q']))
+//            {
+//                $this->validate(request(),
+//                    [
+//                        'q'     =>'required|numeric'
+//                    ],
+//                    [
+//                        'q.required'=>'شماره تیکت به عدد وارد کنید'
+//                    ]);
+//                $messages = message::where('message_id_answer', '=', NULL)
+//                    ->where('id','=',$request['q'])
+//                    ->where(function ($query) {
+//                        $query->orwhere('user_id_send', '=', Auth::user()->id)
+//                            ->orwhere('user_id_recieve', '=', Auth::user()->id);
+//
+//                    })
+//                    ->get();
+//            }
+//            else {
 
-                    })
-                    ->get();
-            }
-            else {
+                $messages = message::orwhere('user_id_send', '=', Auth::user()->type)
+                            ->orwhere('user_id_recieve', '=', Auth::user()->type)
+                            ->paginate(20);
 
-                $messages = message::where('message_id_answer', '=', NULL)
-                    ->where(function ($query) {
-                        $query->orwhere('user_id_send', '=', Auth::user()->id)
-                            ->orwhere('user_id_recieve', '=', Auth::user()->id);
-
-                    })
-                    ->paginate(20);
-            }
+                dd($messages);
+//            }
 
             foreach ($messages as $item)
             {
@@ -66,7 +64,7 @@ class MessageController extends BaseController
 
 
             $countUnreadMessages=$this->countUnreadMessages();
-            return view('panelAdmin.messages')
+            return view('admin.messages')
                     ->with('messages',$messages)
                     ->with('countUnreadMessages',$countUnreadMessages);
         }
@@ -107,40 +105,42 @@ class MessageController extends BaseController
     public function create()
     {
         //یوزر توسط چه کسی معرفی شده است
-        $resourceIntroduce=User::where('id','=',Auth::user()->introduced)
-                ->select('users.id','users.fname','users.lname','users.tel')
-                ->first();
+//        $resourceIntroduce=User::where('id','=',Auth::user()->introduced)
+//                ->select('users.id','users.fname','users.lname','users.tel')
+//                ->first();
+//
+//        //لیست افراد معرفی شده
+//        $listIntroducedUser=User::where('introduced','=',Auth::user()->id)
+//                ->select('users.id','users.fname','users.lname','users.tel')
+//                ->get();
 
-        //لیست افراد معرفی شده
-        $listIntroducedUser=User::where('introduced','=',Auth::user()->id)
-                ->select('users.id','users.fname','users.lname','users.tel')
-                ->get();
-
-        $followby_expert=user::orwhere('type','=',2)
-                            ->orwhere('type','=',3)
-                            ->get();
-        foreach ($followby_expert as $item)
-        {
-            $item->type=$this->userType($item->type);
-        }
+//        $followby_expert=user::orwhere('type','=',2)
+//                            ->orwhere('type','=',3)
+//                            ->get();
+//        foreach ($followby_expert as $item)
+//        {
+//            $item->type=$this->userType($item->type);
+//        }
         //سطح دسترسی ها
-        if(Gate::allows('isAdmin'))
-        {
-            return view('panelAdmin.insertMessage')
-                    ->with('resourceIntroduce',$resourceIntroduce)
-                    ->with('listIntroducedUser',$listIntroducedUser)
-                    ->with('followby_expert',$followby_expert);
-        }else if(Gate::allows('isUser'))
-        {
-            return view('panelUser.insertMessage')
-                    ->with('resourceIntroduce',$resourceIntroduce)
-                    ->with('listIntroducedUser',$listIntroducedUser)
-                    ->with('followby_expert',$followby_expert);
-        }
-        else
-        {
-            return back();
-        }
+//        if(Gate::allows('isAdmin'))
+//        {
+//            return view('panelAdmin.insertMessage')
+//                    ->with('resourceIntroduce',$resourceIntroduce)
+//                    ->with('listIntroducedUser',$listIntroducedUser)
+//                    ->with('followby_expert',$followby_expert);
+//        }else if(Gate::allows('isUser'))
+//        {
+//            return view('panelUser.insertMessage')
+//                    ->with('resourceIntroduce',$resourceIntroduce)
+//                    ->with('listIntroducedUser',$listIntroducedUser)
+//                    ->with('followby_expert',$followby_expert);
+//        }
+//        else
+//        {
+//            return back();
+//        }
+
+        return view('admin.insertMessage');
 
     }
 
@@ -152,7 +152,6 @@ class MessageController extends BaseController
      */
     public function store(Request $request)
     {
-
         $this->validate(request(),
         [
             'subject'           =>'required|min:3|string',
@@ -181,17 +180,13 @@ class MessageController extends BaseController
             ]);
         if($status)
         {
-            $msg="پیام با موفقیت ارسال شد";
-            $errorStatus='success';
+            alert()->success('پیام با موفقیت ارسال شد')->persistent('بستن');
         }
         else
         {
-            $msg="خطا در ارسال";
-            $errorStatus="danger";
+            alert()->error('خطا در ارسال')->persistent('بستن');
         }
-        return  back()
-            ->with('msg',$msg)
-            ->with('errorStatus',$errorStatus);
+        return  back();
     }
 
     /**

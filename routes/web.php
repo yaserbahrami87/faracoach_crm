@@ -33,12 +33,13 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     Route::patch('/user/updatePassword','UserController@updatePasswordUser');
 
     //messages
-    Route::get('/messages/','MessageController@index');
-    Route::get('/messages/show/{message}','MessageController@show');
-    Route::get('/messages/new','MessageController@create');
-    Route::post('/messages/send','MessageController@store');
-    Route::post('/messages/reply','MessageController@reply');
-    Route::post('/message/send','MessageController@sendMessageAllParts');
+//    Route::get('/messages/','MessageController@index');
+//    Route::get('/messages/show/{message}','MessageController@show');
+//    Route::get('/messages/new','MessageController@create');
+//    Route::post('/messages/send','MessageController@store');
+//    Route::post('/messages/reply','MessageController@reply');
+//    Route::post('/message/send','MessageController@sendMessageAllParts');
+    Route::resource('message','MessageController');
 
 
 
@@ -208,12 +209,13 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::get('/settings/subcategorytags/{data}','CategoryTagController@ajaxsubcategory');
 
     //Route Messages
-    Route::get('/messages/','MessageController@index');
-    Route::get('/messages/show/{message}','MessageController@show');
-    Route::get('/messages/new','MessageController@create');
-    Route::post('/messages/send','MessageController@store');
-    Route::post('/messages/reply','MessageController@reply');
-    Route::post('/message/send','MessageController@sendMessageAllParts');
+//    Route::get('/messages/','MessageController@index');
+//    Route::get('/messages/show/{message}','MessageController@show');
+//    Route::get('/messages/new','MessageController@create');
+//    Route::post('/messages/send','MessageController@store');
+//    Route::post('/messages/reply','MessageController@reply');
+//    Route::post('/message/send','MessageController@sendMessageAllParts');
+    Route::resource('message','MessageController');
 
     // Route Admin Followup
     Route::post('/followup/create','FollowupController@store');
