@@ -1,8 +1,5 @@
 @extends('master.index')
 
-@section('headerscript')
-    <link rel="stylesheet" type="text/css" href="{{ asset('/panel_assets/intl_tel/css/intlTelInput.css') }}" />
-@endsection
 
 @section('row1')
 
@@ -98,8 +95,7 @@
 @endsection
 
 @section('footerScript')
-    <script src="{{asset('/panel_assets/intl_tel/js/intlTelInput.js')}}"></script>
-    <script src="{{asset('/panel_assets/intl_tel/js/utils.js')}}"></script>
+
     <script>
         var input = document.querySelector("#tel");
         var intl=intlTelInput(input,{

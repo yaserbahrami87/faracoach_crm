@@ -170,7 +170,7 @@ class UserController extends BaseController
                 'lname'             =>'persian_alpha|required|min:3',
                 'codemelli'         =>'nullable|melli_code',
                 'sex'               =>'nullable|boolean',
-                'tel'               =>'required|iran_mobileiran_mobile',
+                'tel'               =>'required|',
                 'shenasname'        =>'nullable|numeric',
                 'father'            =>'nullable|min:3|',
                 'born'              =>'nullable|min:3',
@@ -291,7 +291,7 @@ class UserController extends BaseController
             'lname'             => ['nullable','persian_alpha', 'string', 'max:30'],
             'email'             => ['nullable', 'string', 'email', 'max:150', 'unique:users'],
             'sex'               => ['required','numeric'],
-            'tel'               => ['required','iran_mobile','unique:users'],
+            'tel'               => ['required','unique:users'],
             'password'          => ['required', 'string', 'confirmed'],
             'tel_verified'      => ['required','boolean'],
             'introduced'        => ['nullable','numeric'],
@@ -1196,7 +1196,7 @@ class UserController extends BaseController
             [
                 'fname'         =>'required|persian_alpha|min:3|max:15',
                 'lname'         =>'required|persian_alpha|min:3|max:15',
-                'tel'           =>'required|iran_mobile|unique:users',
+                'tel'           =>'required|unique:users',
                 'sex'           =>'required|boolean',
                 'followby_id'   =>'required|numeric'
             ],
@@ -1725,7 +1725,7 @@ class UserController extends BaseController
         $request->password_confirmation=$this->convertPersianNumber($request->password_confirmation);
         $this->validate($request,[
             'email'     =>'required|email|unique:users',
-            'tel'       =>'required|iran_mobile|unique:users',
+            'tel'       =>'required|unique:users',
             'password'  =>'required|string|min:8|confirmed'
         ]);
 
