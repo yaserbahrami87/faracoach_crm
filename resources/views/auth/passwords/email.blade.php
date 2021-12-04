@@ -61,10 +61,12 @@
                     <form method="GET" action="/password/sendcode">
                         {{csrf_field()}}
                         <div class="form-group row">
+
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('تلفن همراه:') }}</label>
 
                             <div class="col-md-6">
-                                <input id="tel" type="text" class="form-control @error('tel') is-invalid @enderror" name="tel" value="{{ old('tel') }}" required autocomplete="email" autofocus>
+                                <input type="hidden" id="tel_org" value="{{ old('tel') }}" name="tel"/>
+                                <input id="tel" type="text" class="form-control @error('tel') is-invalid @enderror" value="{{ old('tel') }}" required autocomplete="email" autofocus>
 
                                 @error('tel')
                                 <span class="invalid-feedback" role="alert">
@@ -88,4 +90,27 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('footerScript')
+
+    <script>
+        var input = document.querySelector("#tel");
+        var intl=intlTelInput(input,{
+            formatOnDisplay:false,
+            separateDialCode:true,
+            preferredCountries:["ir", "gb"]
+        });
+
+
+
+        input.addEventListener("countrychange", function() {
+            document.querySelector("#tel_org").value=intl.getNumber();
+        });
+
+        $('#tel').change(function()
+        {
+            document.querySelector("#tel_org").value=intl.getNumber();
+        });
+    </script>
 @endsection

@@ -441,19 +441,13 @@ class VerifyController extends BaseController
                     $message="کد بازیابی شما در سیستم فراکوچ : " . $six_digit_random_number ;
                     $this->sendSms($user->tel,$message);
                     $msg=" کد بازیابی به شماره ".$user->tel." ارسال شد ";
-                    $errorStatus="warning";
-                    return view('resetPasswordbySMS')
-                                ->with('msg',$msg)
-                                ->with('errorStatus',$errorStatus);
+                    alert()->warning($msg)->persistent('بستن');
+                    return view('resetPasswordbySMS');
                 }
                 else
                 {
-
-                    $msg="خطا";
-                    $errorStatus="danger";
-                    return back()
-                            ->with('msg',$msg)
-                            ->with('errorStatus',$errorStatus);
+                    alert()->error('خطا')->persistent('بستن');
+                    return back();
                 }
             }
             else
@@ -481,20 +475,14 @@ class VerifyController extends BaseController
                         $message="کد بازیابی شما در سیستم فراکوچ : " . $six_digit_random_number ;
                         $this->sendSms($user->tel,$message);
                         $msg=" کد بازیابی به شماره ".$user->tel." ارسال شد ";
-                        $errorStatus="warning";
-
+                        alert()->warning($msg)->persistent('بستن');
                         return view('resetPasswordbySMS')
-                            ->with('msg',$msg)
-                            ->with('errorStatus',$errorStatus)
                             ->with('tel',$user->tel);
                     }
                     else
                     {
-                        $msg="خطا";
-                        $errorStatus="danger";
+                        alert()->error('خطا')->persistent('بستن');
                         return back()
-                            ->with('msg',$msg)
-                            ->with('errorStatus',$errorStatus)
                             ->with('tel',$user->tel);
                     }
                 }
@@ -509,17 +497,12 @@ class VerifyController extends BaseController
                 }
             }
             return back()
-                ->with('msg',$msg)
-                ->with('errorStatus',$errorStatus)
                 ->with('tel',$user->tel);
         }
         else
         {
-            $msg="شماره همراه وارد شده در سیستم موجود نمی باشد";
-            $errorStatus="danger";
+            alert()->error("شماره همراه وارد شده در سیستم موجود نمی باشد")->persistent('بستن');
             return back()
-                ->with('msg',$msg)
-                ->with('errorStatus',$errorStatus)
                 ->with('tel',$user->tel);
         }
     }

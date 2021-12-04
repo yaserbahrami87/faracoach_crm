@@ -1,6 +1,7 @@
 @extends('master.index')
 
 @section('headerscript')
+
     <style>
         .btnContactSubmit
         {
