@@ -156,8 +156,8 @@
 
 
     <!-- BEGIN: Vendor JS -->
-    <script src="{{ asset('/acckt/js/jquery.min.js') }}"></script>
-    <!--<script src="{{ asset('/acckt/js/bootstrap.min.js') }}"></script>-->
+    <script src="{{ asset('/panel_assets/js/jquery.min.js') }}"></script>
+    <!--<script src="{{ asset('/panel_assets/js/bootstrap.min.js') }}"></script>-->
     <script src="{{ asset('/panel_assets/vendors/js/vendors.min.js') }}"></script>
 
     <script src="{{ asset('/panel_assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.min.js') }}"></script>
@@ -189,7 +189,7 @@
 
     <!-- BEGIN: Page JS-->
     <script src="{{ asset('/panel_assets/js/scripts/pages/page-account-settings.js') }}"></script>
-    <script src="{{ asset('/panel_assets/js/scripts/forms/form-repeater.js') }}"></script>
+    <script src="{{ asset('/panel_assets/js/jquery.min.jsel_assets/js/scripts/forms/form-repeater.js') }}"></script>
     <script src="{{ asset('/panel_assets/js/scripts/forms/wizard-steps.js') }}"></script>
     <script src="{{ asset('/panel_assets/js/scripts/forms/validation/form-validation.js') }}"></script>
     <script src="{{ asset('/panel_assets/js/scripts/pages/faq.js') }}"></script>

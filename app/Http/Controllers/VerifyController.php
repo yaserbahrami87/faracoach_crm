@@ -310,16 +310,19 @@ class VerifyController extends BaseController
     //ارسال کد فعالی سازی بدون رمز عبور
     public function storeCodewithoutPass(Request $request)
     {
-        if(preg_match('/^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}$/',$request['tel']))
-        {
-            $this->validate(request(),
-            [
-                'tel'           =>'required|numeric|iran_mobile|',
-            ]);
+
+        $this->validate($request,[
+            'tel'   =>'required|string|iran_mobile'
+        ]);
+//        if(preg_match('/^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}$/',$request['tel']))
+//        {
+
+
             $six_digit_random_number = mt_rand(100000, 999999);
             $verify=$this->get_user($request['tel'],NULL,NULL,NULL,true);    //verify::where('tel','=',$request['tel'])
 //                        ->latest()
 //                        ->first();
+
             if(is_null($verify))
             {
                 return back()->with('msg','شماره وارد شده در سیستم موجود نمی باشد')
@@ -356,12 +359,12 @@ class VerifyController extends BaseController
                 }
             }
 
-        }
-        else
-        {
-            return back()->with('msg','تلفن همراه وارد شده معتبر نمی باشد')
-                         ->with('errorStatus','danger');
-        }
+//        }
+//        else
+//        {
+//            return back()->with('msg','تلفن همراه وارد شده معتبر نمی باشد')
+//                         ->with('errorStatus','danger');
+//        }
 
     }
 

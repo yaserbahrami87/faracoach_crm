@@ -48,19 +48,29 @@ class MessageController extends BaseController
 //            }
 //            else {
 
-                $messages = message::orwhere('user_id_send', '=', Auth::user()->type)
-                            ->orwhere('user_id_recieve', '=', Auth::user()->type)
+                $messages = message::where('message_id_answer', '=', NULL)
+                            ->where(function ($query) {
+                                $query->orwhere('user_id_send', '=', Auth::user()->id)
+                                    ->orwhere('user_id_recieve', '=', Auth::user()->id)
+                                    ->orwhere('user_id_send', '=', Auth::user()->type)
+                                    ->orwhere('user_id_recieve', '=', Auth::user()->type);
+
+                            })
+//                            ->orwhere('user_id_send', '=', Auth::user()->type)
+//                            ->orwhere('user_id_recieve', '=', Auth::user()->type)
+//                            ->orwhere('user_id_send', '=', Auth::user()->id)
+//                            ->orwhere('user_id_recieve', '=', Auth::user()->id)
+                            ->orderby('id','desc')
                             ->paginate(20);
 
-                dd($messages);
+
 //            }
 
             foreach ($messages as $item)
             {
-
-                $item->user_id_recieve=$this->get_user_byID($item->user_id_recieve)->fname." ".$this->get_user_byID($item->user_id_recieve)->lname;
                 $item->user_id_send=$this->get_user_byID($item->user_id_send)->fname." ".$this->get_user_byID($item->user_id_send)->lname;
             }
+
 
 
             $countUnreadMessages=$this->countUnreadMessages();
@@ -70,28 +80,20 @@ class MessageController extends BaseController
         }
         else if(Gate::allows('isUser'))
         {
-            $messages=message::where('message_id_answer','=',NULL)
-                            ->where(function ($query)
-                            {
-                                $query  ->orwhere('user_id_send','=',Auth::user()->id)
-                                        ->orwhere('user_id_recieve','=',Auth::user()->id);
+            $messages = message::where('message_id_answer', '=', NULL)
+                ->where(function ($query) {
+                    $query->orwhere('user_id_send', '=', Auth::user()->id)
+                        ->orwhere('user_id_recieve', '=', Auth::user()->id);
 
-                            })
-                            ->paginate(20);
+                })
+                ->orderby('id','desc')
+                ->paginate(20);
             foreach ($messages as $item)
             {
-                if(Auth::user()->id!=$item->user_id_recieve)
-                {
-                    $item->user_id_recieve=$this->get_user_byID($item->user_id_recieve)->fname.$this->get_user_byID($item->user_id_recieve)->lname;
-                }
-                else if($item->user_id_send!=Auth::user()->id)
-                {
-                    $item->user_id_send=$this->get_user_byID($item->user_id_send)->fname.$this->get_user_byID($item->user_id_send)->lname;
-
-                }
+                $item->user_id_send=$this->get_user_byID($item->user_id_send)->fname." ".$this->get_user_byID($item->user_id_send)->lname;
             }
             $countUnreadMessages=$this->countUnreadMessages();
-            return view('panelUser.messages')
+            return view('user.messages')
                     ->with('messages',$messages)
                     ->with('countUnreadMessages',$countUnreadMessages);
         }
@@ -139,8 +141,13 @@ class MessageController extends BaseController
 //        {
 //            return back();
 //        }
-
-        return view('admin.insertMessage');
+        if(Gate::allows('isAdmin')) {
+            return view('admin.insertMessage');
+        }
+        else
+        {
+            return view('user.insertMessage');
+        }
 
     }
 
@@ -197,45 +204,63 @@ class MessageController extends BaseController
      */
     public function show(message $message)
     {
-        if(($message->user_id_send== Auth::user()->id)||(($message->user_id_recieve== Auth::user()->id)))
+        if(Gate::allows('isAdmin'))
         {
-
-            $messages=message::leftjoin('users','messages.user_id_send','=','users.id')
-                ->orwhere('messages.id','=',$message->id)
-                ->orwhere('messages.message_id_answer','=',$message->id)
-                ->orderby('messages.id','desc')
-                ->select('messages.*','users.fname','users.lname')
-                ->get();
-            foreach ($messages as $item)
+            if(($message->user_id_send== Auth::user()->id)||($message->user_id_recieve== Auth::user()->id)||($message->user_id_send== Auth::user()->type)||($message->user_id_recieve== Auth::user()->type))
             {
-                if($item->user_id_recieve==Auth::user()->id)
+
+                $messages=message::leftjoin('users','messages.user_id_send','=','users.id')
+                    ->orwhere('messages.id','=',$message->id)
+                    ->orwhere('messages.message_id_answer','=',$message->id)
+                    //->orderby('messages.id','desc')
+                    ->select('messages.*','users.fname','users.lname')
+                    ->get();
+
+                foreach ($messages as $item)
                 {
-                   $item['status']=0;
-                   message::where('id','=',$item->id)
-                        ->update([
-                            'status'    =>$item[0]
-                        ]);
+                    if($item->user_id_recieve==Auth::user()->id)
+                    {
+                       $item['status']=0;
+                       message::where('id','=',$item->id)
+                            ->update([
+                                'status'    =>$item[0]
+                            ]);
+                    }
                 }
-            }
-
-            if(Gate::allows('isAdmin'))
-            {
-                return view('panelAdmin/showMessage')
+                return view('admin.message_single')
                         ->with('messages',$messages)
                         ->with('message',$message);
             }
-            else if(Gate::allows('isUser'))
+            else
             {
-                return view('panelUser/showMessage')
-                        ->with('messages',$messages)
-                        ->with('message',$message);
+                return back();
             }
-
-
         }
-        else
-        {
-            return redirect('/panel/messages/');
+        else if(Gate::allows('isUser')) {
+            if (($message->user_id_send == Auth::user()->id) || ($message->user_id_recieve == Auth::user()->id)) {
+
+                $messages = message::leftjoin('users', 'messages.user_id_send', '=', 'users.id')
+                    ->orwhere('messages.id', '=', $message->id)
+                    ->orwhere('messages.message_id_answer', '=', $message->id)
+                    //->orderby('messages.id','desc')
+                    ->select('messages.*', 'users.fname', 'users.lname')
+                    ->get();
+
+                foreach ($messages as $item) {
+                    if ($item->user_id_recieve == Auth::user()->id) {
+                        $item['status'] = 0;
+                        message::where('id', '=', $item->id)
+                            ->update([
+                                'status' => $item[0]
+                            ]);
+                    }
+                }
+
+                return view('user.message_single')
+                    ->with('messages', $messages)
+                    ->with('message', $message);
+
+            }
         }
     }
 
@@ -302,17 +327,13 @@ class MessageController extends BaseController
 
         if($status)
         {
-            $msg="پیام با موفقیت ارسال شد";
-            $errorStatus='success';
+            alert()->success('پیام با موفقیت ارسال شد')->persistent('بستن');
         }
         else
         {
-            $msg="خطا در ارسال";
-            $errorStatus="danger";
+            alert()->error('خطا در ارسال ')->persistent('بستن');
         }
-        return  back()
-            ->with('msg',$msg)
-            ->with('errorStatus',$errorStatus);
+        return  back();
 
 
     }

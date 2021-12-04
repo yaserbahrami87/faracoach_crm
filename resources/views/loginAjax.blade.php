@@ -35,7 +35,8 @@
                                                     <i class="bi bi-person-fill"></i>
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"   required autocomplete="tel" autofocus placeholder="تلفن همراه / ایمیل خود را وارد کنید" />
+                                            <input type="hidden" id="tel_org_login" value="{{ old('email') }}" name="email"/>
+                                            <input type="tel"  id="tel_login" class="form-control @error('email') is-invalid @enderror"  value="{{ old('email') }}"   required autocomplete="tel" autofocus placeholder="تلفن همراه خود را وارد کنید" />
                                         </div>
                                     </div>
                                 </div>
@@ -72,9 +73,9 @@
                                         <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
                                         @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                                                                <strong>{{ $message }}</strong>
-                                                                            </span>
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
                                         @enderror
                                     </div>
                                 </div>
@@ -83,11 +84,12 @@
                                     <label for="tel" class="col-md-4 col-form-label text-md-right">{{ __('تلفن همراه:*') }}</label>
                                     <div class="col-md-6">
                                         <div class="input-group">
-                                            <input id="tel" type="text" class="form-control @error('tel') is-invalid @enderror" name="tel" value="{{ old('tel') }}" required autocomplete="tel">
+                                            <input type="hidden" id="tel_org_register" value="{{ old('tel') }}" name="tel"/>
+                                            <input id="tel" type="tel" class="form-control @error('tel') is-invalid @enderror"  value="{{ old('tel') }}" required autocomplete="tel">
                                             @error('tel')
                                             <span class="invalid-feedback" role="alert">
-                                                                                    <strong>{{ $message }}</strong>
-                                                                                </span>
+                                                <strong>{{ $message }}</strong>
+                                            </span>
                                             @enderror
                                         </div>
                                     </div>
@@ -101,8 +103,8 @@
 
                                         @error('password')
                                         <span class="invalid-feedback" role="alert">
-                                                                                <strong>{{ $message }}</strong>
-                                                                            </span>
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                         @enderror
                                     </div>
                                 </div>
@@ -132,7 +134,44 @@
 </div>
 
 
-@section('footerScript')<script>
+@section('footerScript')
+<script src="{{asset('/panel_assets/intl_tel/js/intlTelInput.js')}}"></script>
+<script src="{{asset('/panel_assets/intl_tel/js/utils.js')}}"></script>
+<script>
+    var input_register = document.querySelector("#tel");
+    var intl_register=intlTelInput(input_register,{
+        formatOnDisplay:false,
+        separateDialCode:true,
+        preferredCountries:["ir", "gb"]
+    });
+
+
+    var input = document.querySelector("#tel_login");
+    var intl=intlTelInput(input,{
+        formatOnDisplay:false,
+        separateDialCode:true,
+        preferredCountries:["ir", "gb"]
+    });
+
+    input_register.addEventListener("countrychange", function() {
+        document.querySelector("#tel_org_register").value=intl_register.getNumber();
+    });
+
+    $('#tel').change(function()
+    {
+        document.querySelector("#tel_org_register").value=intl_register.getNumber();
+    });
+
+    input.addEventListener("countrychange", function() {
+        document.querySelector("#tel_org_login").value=intl.getNumber();
+    });
+
+    $('#tel_login').change(function()
+    {
+        document.querySelector("#tel_org_login").value=intl.getNumber();
+    });
+</script>
+<script>
     //لاگین ایجکس
     $("#btn_submit").click(function()
     {

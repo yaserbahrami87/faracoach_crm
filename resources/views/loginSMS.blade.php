@@ -1,5 +1,9 @@
 @extends('master.index')
 
+@section('headerscript')
+    <link rel="stylesheet" type="text/css" href="{{ asset('/panel_assets/intl_tel/css/intlTelInput.css') }}" />
+@endsection
+
 @section('row1')
 
 <div class="container mt-5">
@@ -53,7 +57,8 @@
                                 <label for="tel" class="col-md-4 col-form-label text-md-right">{{ __('شماره همراه') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="tel" type="text" class="form-control @error('tel') is-invalid @enderror" name="tel" value="{{ old('tel') }}" required autocomplete="tel" autofocus>
+                                    <input type="hidden" id="tel_org_login" value="{{ old('tel') }}" name="tel"/>
+                                    <input id="tel" type="tel" class="form-control @error('tel') is-invalid @enderror"  value="{{ old('tel') }}" required autocomplete="tel" autofocus>
                                     @error('tel')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -90,4 +95,31 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('footerScript')
+    <script src="{{asset('/panel_assets/intl_tel/js/intlTelInput.js')}}"></script>
+    <script src="{{asset('/panel_assets/intl_tel/js/utils.js')}}"></script>
+    <script>
+        var input = document.querySelector("#tel");
+        var intl=intlTelInput(input,{
+            formatOnDisplay:false,
+            separateDialCode:true,
+            preferredCountries:["ir", "gb"]
+        });
+
+
+
+
+        input.addEventListener("countrychange", function() {
+            document.querySelector("#tel_org_login").value=intl.getNumber();
+        });
+
+        $('#tel').change(function()
+        {
+            document.querySelector("#tel_org_login").value=intl.getNumber();
+        });
+
+
+    </script>
 @endsection

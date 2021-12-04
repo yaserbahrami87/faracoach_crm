@@ -37,7 +37,7 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
 //    Route::get('/messages/show/{message}','MessageController@show');
 //    Route::get('/messages/new','MessageController@create');
 //    Route::post('/messages/send','MessageController@store');
-//    Route::post('/messages/reply','MessageController@reply');
+    Route::post('/message/reply','MessageController@reply');
 //    Route::post('/message/send','MessageController@sendMessageAllParts');
     Route::resource('message','MessageController');
 
@@ -213,7 +213,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
 //    Route::get('/messages/show/{message}','MessageController@show');
 //    Route::get('/messages/new','MessageController@create');
 //    Route::post('/messages/send','MessageController@store');
-//    Route::post('/messages/reply','MessageController@reply');
+    Route::post('/message/reply','MessageController@reply');
 //    Route::post('/message/send','MessageController@sendMessageAllParts');
     Route::resource('message','MessageController');
 

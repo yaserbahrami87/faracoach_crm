@@ -1,4 +1,4 @@
-@extends('admin.master.index')
+@extends('user.master.index')
 @section('content')
     <div class="col-12 table-responsive">
         <table class="table">
@@ -13,19 +13,19 @@
             @foreach($messages As $item)
                 <tr >
                     <td class="text-center">
-                        <a href="/admin/message/{{$item->id}}">{{$item->id}}</a>
+                        <a href="/panel/message/{{$item->id}}">{{$item->id}}</a>
                     </td>
                     <td class="text-center">
-                        <a href="/admin/message/{{$item->id}}">{{$item->subject}}</a>
+                        <a href="/panel/message/{{$item->id}}">{{$item->subject}}</a>
                     </td>
                     <td class="text-center">
-                        <a href="/admin/message/{{$item->id}}">{{$item->user_id_send}}</a>
+                        <a href="/panel/message/{{$item->id}}">{{$item->user_id_send}}</a>
                     </td>
                     <td class="text-center">
-                        <a href="/admin/message/{{$item->id}}">{{$item->date_fa}}</a>
+                        <a href="/panel/message/{{$item->id}}">{{$item->date_fa}}</a>
                     </td>
                     <td class="text-center">
-                        <a href="/admin/message/{{$item->id}}">{{$item->time_fa}}</a>
+                        <a href="/panel/message/{{$item->id}}">{{$item->time_fa}}</a>
                     </td>
                 </tr>
             @endforeach
