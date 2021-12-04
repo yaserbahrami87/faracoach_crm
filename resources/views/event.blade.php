@@ -376,6 +376,56 @@
        });
 
 
+       //بررسی کد فعال سازی
+       $("#btn-checkCode").click(function()
+       {
+           $('#result_reserve').html('<div class="spinner-border text-primary mb-3" role="status"> <span class="sr-only">لطفا صبر کنید...</span> </div>');
+           var data=$('#frm_checkCode').serialize();
+           $.ajax(
+               {
+                   data:data,
+                   url:'/verifyCode',
+                   type:'POST',
+                   success: function (data) {
+                       // $('#result_reserve').html(data);
+                       if(typeof(data)!='object')
+                       {
+                           $('#result_reserve').html("<div class='alert alert-danger'>کد اشتباه است</div>");
+                       }
+                       else
+                       {
+                           $('#result_reserve').html("<div class='alert alert-success'>کد صحیح وارد شد</div>");
+                           $.post('/panel/eventreserve', {"_token": "{{ csrf_token() }}",  event_id: '{{$event->id}}'},
+                               function(returnedData){
+                                   if(typeof(data)=='object')
+                                   {
+                                       $('#result_reserve').html("<div class='alert alert-success'>رزرو دوره با موفقیت انجام شد</div>");
+                                       location.reload();
+                                   }
+                                   else
+                                   {
+                                       $('#result_reserve').html("<div class='alert alert-danger'>خطا در رزرو</div>");
+                                   }
+                               });
+                       }
+                       console.log(typeof (data));
+                   },
+                   error : function(data)
+                   {
+                       $('#result_reserve').text(data.responseJSON.errors);
+                       console.log(data.responseJSON.errors);
+                       errorsHtml='<div class="alert alert-danger text-left"><ul>';
+                       $.each( data.responseJSON.errors, function( key, value ) {
+                           errorsHtml += '<li>'+ value[0] + '</li>'; //showing only the first error.
+                       });
+                       errorsHtml += '</ul></div>';
+                       $( '#result_reserve' ).html( errorsHtml );
+                   }
+               }
+           )
+       });
+
+
 
        //ارسال کد فعال سازی
        $('#eventreserve').on('show.bs.modal', function (event) {

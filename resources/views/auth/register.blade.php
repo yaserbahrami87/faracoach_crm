@@ -276,8 +276,10 @@
 
         })
     </script>
-
+    <script src="{{asset('/panel_assets/intl_tel/js/intlTelInput.js')}}"></script>
+    <script src="{{asset('/panel_assets/intl_tel/js/utils.js')}}"></script>
     <script>
+
         var input = document.querySelector("#tel");
         var intl=intlTelInput(input,{
             formatOnDisplay:false,
