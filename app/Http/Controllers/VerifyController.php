@@ -417,6 +417,7 @@ class VerifyController extends BaseController
         $six_digit_random_number = mt_rand(100000, 999999);
         $now= Verta::now();
         $user=$this->get_user($request['tel'],NULL,NULL,NULL,true);
+
         if(!is_null($user))
         {
             $status=verify::where('tel','=',$user->tel)
@@ -442,7 +443,8 @@ class VerifyController extends BaseController
                     $this->sendSms($user->tel,$message);
                     $msg=" کد بازیابی به شماره ".$user->tel." ارسال شد ";
                     alert()->warning($msg)->persistent('بستن');
-                    return view('resetPasswordbySMS');
+                    return view('resetPasswordbySMS')
+                                        ->with('tel',$user->tel);;
                 }
                 else
                 {
