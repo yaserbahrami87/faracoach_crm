@@ -99,8 +99,8 @@
                             <div class="col-md-6">
                                 <div class="input-group">
 
-                                    <input type="hidden" id="tel_org" value="" name="tel"/>
-                                    <input id="tel" dir="ltr" type="tel" class="form-control @error('tel') is-invalid @enderror"  value="{{ old('tel') }}" required autocomplete="tel">
+                                    <input type="hidden" id="tel_org" value="{{ old('tel') }}" name="tel"/>
+                                    <input id="tel" dir="ltr" type="tel" class="form-control @error('tel') is-invalid @enderror"  value="{{old('tel')}}" required autocomplete="tel">
                                     <!--
                                     <div class="input-group-prepend">
                                         <button class="btn btn-outline-secondary btn-info text-light" type="button" id="activeMobile" data-toggle="modal" data-target="#ModalMobile">فعال سازی</button>

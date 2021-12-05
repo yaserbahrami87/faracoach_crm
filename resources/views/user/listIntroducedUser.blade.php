@@ -7,47 +7,48 @@
             <small>مشخصات دوستان خود را جهت دعوت به فراکوچ وارد کنید</small>
             <div class="row pt-1" id="formAddIntroduce">
                 {{csrf_field()}}
-                <div class="col-xs-12 col-md-2 col-lg-2 col-xl-2 ">
-                    <small>نام:*</small>
+                <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 ">
+                    <small>نام:<span class="text-danger">*</span></small>
                     <div class="input-group mb-1">
-                        <input type="text" class="form-control" placeholder="نام وارد کنید" name="fname" lang="fa"/>
+                        <input type="text" class="form-control" placeholder="نام وارد کنید" name="fname" value="{{old('fname')}}"/>
                         <div class="input-group-prepend">
 
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-md-2 col-lg-2 col-xl-2 ">
-                    <small>نام خانوادگی:*</small>
+                <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 ">
+                    <small>نام خانوادگی:<span class="text-danger">*</span></small>
                     <div class="input-group mb-1">
-                        <input type="text" class="form-control" placeholder="نام خانوادگی وارد کنید" name="lname" lang="fa" />
+                        <input type="text" class="form-control" placeholder="نام خانوادگی وارد کنید" name="lname" value="{{old('lname')}}" />
                         <div class="input-group-prepend">
 
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-md-2 col-lg-2 col-xl-2 ">
-                    <small>تلفن همراه:*</small>
+                <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 ">
+                    <small>تلفن همراه:<span class="text-danger">*</span></small>
                     <div class="input-group mb-1">
-                        <input type="text" class="form-control" placeholder="شماره همراه وارد کنید" name="tel"/>
+                        <input type="hidden" id="tel_org" value="{{old('tel')}}" name="tel"/>
+                        <input id="tel" dir="ltr" type="tel" class="form-control" placeholder="شماره همراه وارد کنید" value="{{old('tel')}}" />
                         <div class="input-group-prepend">
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-md-2 col-lg-2 col-xl-2">
-                    <small>جنسیت:*</small>
+                <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3">
+                    <small>جنسیت:<span class="text-danger">*</span></small>
                     <div class="input-group mb-1">
                         <div class="custom-control custom-radio">
-                            <input type="radio" id="sex1" name="sex" class="custom-control-input" value="1">
+                            <input type="radio" id="sex1" name="sex" class="custom-control-input" value="1" {{ old('sex')=="1" ? 'checked='.'"'.'checked'.'"' : '' }} >
                             <label class="custom-control-label" for="sex1">آقا</label>
                         </div>
                         <div class="custom-control custom-radio">
-                            <input type="radio" id="sex0" name="sex" class="custom-control-input" value="0">
+                            <input type="radio" id="sex0" name="sex" class="custom-control-input" value="0" {{ old('sex')=="0" ? 'checked='.'"'.'checked'.'"' : '' }} >
                             <label class="custom-control-label" for="sex0">خانم</label>
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-md-2 col-lg-2 col-xl-2 ">
-                    <small>پیگیری توسط:*</small>
+                <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 ">
+                    <small>پیگیری توسط:<span class="text-danger">*</span></small>
                     <div class="input-group mb-1">
                         @foreach($getFollowbyCategory as $item)
                             <div class="custom-control custom-radio">
@@ -56,7 +57,7 @@
                             </div>
                         @endforeach
                     </div>
-                </div><div class="col-xs-12 col-md-2 col-lg-2 col-xl-2 ">
+                </div><div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 ">
                     <small> پیامک اطلاع رسانی</small>
                     <div class="input-group mb-1">
                         <div class="custom-control custom-radio">
@@ -132,7 +133,7 @@
             <small data-bs-toggle="tooltip" data-bs-placement="top" title="در صورت تبدیل حداقل 5 نفر از دعوت شدگان شما به دانشجو امکان ثبت بیشتر از 50 نفر فعال خواهد شد">تعداد دوستان دعوت شده: <b>{{$countIntroducedUser}}  نفر </b> از 50 نفر </small>
         </div>
         @foreach ($listIntroducedUser as $item)
-        <div class="col-lg-3 col-sm-6 listFriends" id="">
+        <div class="col-lg-3 col-sm-6 listFriends " id="">
             <div class="card hovercard">
                 <div class="cardheader">
 
@@ -182,6 +183,37 @@
                     </a>
                 </div>
             </div>
+
+
+
+
+
+
+
+            <div class="box shadow-lg">
+                <img class="profile" src="{{asset('documents/users/'.$item->personal_image)}}" alt=""/>
+
+                <div class="box-title">{{$item->fname.' '.$item->lname}}</div>
+
+                <div class="box-text mt-1" dir="ltr">
+                    <span>
+                        <a href="tel:{{$item->tel}}">{{$item->tel}}</a>
+                    </span>
+                </div>
+
+                <div class="icons">
+                    <a class="btn-modal-introduced btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" href="/panel/followup/{{$item->id}}" title="پیگیری" >
+                        <i class="bi bi-asterisk"></i>
+                    </a>
+                    <a class="btn-modal-introduced btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" href="{{$item->id}}" title="نمایش" data-toggle="modal" data-target="#modal_introduced_profile">
+                        <i class="bi bi-eye-fill"></i>
+                    </a>
+                    <a href="#"><i class="fa fa-tumblr"></i></a>
+                    <a href="#"><i class="fa fa-linkedin"></i></a>
+                </div>
+            </div>
+
+
         </div>
 
         @endforeach
@@ -212,4 +244,31 @@
         </div>
         </div>
     </div>
+@endsection
+
+
+
+@section('footerScript')
+    <script src="{{asset('/panel_assets/intl_tel/js/intlTelInput.js')}}"></script>
+    <script src="{{asset('/panel_assets/intl_tel/js/utils.js')}}"></script>
+    <script>
+
+        var input = document.querySelector("#tel");
+        var intl=intlTelInput(input,{
+            formatOnDisplay:false,
+            separateDialCode:true,
+            preferredCountries:["ir", "gb"]
+        });
+
+
+
+        input.addEventListener("countrychange", function() {
+            document.querySelector("#tel_org").value=intl.getNumber();
+        });
+
+        $('#tel').change(function()
+        {
+            document.querySelector("#tel_org").value=intl.getNumber();
+        });
+    </script>
 @endsection

@@ -206,3 +206,29 @@ table.table td
     text-align: center; }
 
 
+
+
+
+
+
+
+.listFriends .box {
+    padding: 10px 0px;
+
+    background:#FFF;
+    text-align: center;
+}
+
+.listFriends .box-title {
+    color: #428bca;
+}
+
+.listFriends  img {
+    width: 100px;
+    margin-bottom: 15px;
+}
+
+.listFriends  .fa {
+    padding: 15px;
+    font-size: 30px;
+}

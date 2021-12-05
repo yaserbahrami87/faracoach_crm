@@ -230,5 +230,6 @@ return [
         'code'                  =>'کد',
         'presession'            =>'پیش جلسه',
         'comment'               =>'پیام',
+        'followby_id'           =>'مسئول پیگیری',
     ],
 ];

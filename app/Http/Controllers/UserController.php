@@ -688,7 +688,7 @@ class UserController extends BaseController
                     'gettingknow_child' =>'nullable|numeric',
                     'introduced'        =>'nullable|numeric',
                     'telegram'          =>'nullable|max:50|regex:/^[a-zA-Z0-9._]+$/u',
-                    'instagram'         =>'nullable|max:50|regex:/^(?=[a-zA-Z0-9._]{3,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/u',
+                    'instagram'         =>'nullable|max:50|regex:/^[a-zA-Z0-9._]+$/u',
                     'linkedin'          =>'nullable|string|max:250',
                     'aboutme'           =>'nullable|string|max:250',
                 ]);
@@ -1093,6 +1093,7 @@ class UserController extends BaseController
                 'q.required'=>'برای جستجو یک مقدار وارد کنید'
             ]);
 
+
         $users=User::leftjoin('followups','users.id','=','followups.user_id')
                     ->orwhere('fname','like','%'.$request['q'].'%')
                     ->orwhere('lname','like','%'.$request['q'].'%')
@@ -1129,6 +1130,8 @@ class UserController extends BaseController
 
         //دریافت کفیت های پیگیری
         $problem=$this->get_problemfollowup(NULL,1);
+
+
 
         return view('admin.users')
                     ->with('users',$users)
@@ -1182,8 +1185,11 @@ class UserController extends BaseController
                         ->count();
 
         $listIntroducedUser->appends(['q' => $request['q']]);
-        return view('panelUser.listIntroducedUser')
+
+        $getFollowbyCategory = $this->getFollowbyCategory();
+        return view('user.listIntroducedUser')
                     ->with('listIntroducedUser',$listIntroducedUser)
+                    ->with('getFollowbyCategory',$getFollowbyCategory)
                     ->with('countIntroducedUser',$countIntroducedUser);
     }
 
@@ -1387,34 +1393,32 @@ class UserController extends BaseController
         [
             'type'=>'required|numeric'
         ]);
-
-
-        $user=User::join('followups','users.id','=','followups.user_id')
-                ->where('users.id','=',$id)
-                ->where('followups.flag','=',1)
-                ->select('users.*','followups.nextfollowup_date_fa')
-                ->first();
-
-        if(is_null($user))
+        switch($request['type'])
         {
-            alert()->error('کاربری با این اطلاعات موجود نمی باشد','خطا')->persistent('بستن');
-            return back();
+            case '-1': $typing='مارکتینگ';
+                        break;
+            case '11': $typing='فروش';
+                        break;
+
         }
-        else
+        $data=$this->get_user_byID($id);
+        if($data)
         {
+            $check=followup::create([
+                'user_id'               =>$id,
+                'insert_user_id'        =>Auth::user()->id,
+                'date_fa'               =>$this->dateNow,
+                'time_fa'               =>$this->timeNow,
+                'comment'               =>" کاربر ارجاع داده شد به بخش $typing",
+                'datetime_fa'           =>$this->dateNow." ".$this->timeNow,
 
-            $user=$this->get_user(NULL,$id,NULL,NULL,'first');
-            $user['type']=$request['type'];
-            $user['followby_expert']=NULL;
-            $status=$user->save();
-
-            if($status)
+            ]);
+            if($check)
             {
-                $followups=$this->get_followup(NULL,$id,NULL,1,'first');
 
-                $followups['nextfollowup_date_fa']=NULL;
-                $status=$followups->save();
-
+                $data->type=$request['type'];
+                $data->followby_expert=NULL;
+                $status=$data->save();
                 if($status)
                 {
                     alert()->success('سطح دسترسی کاربر تغییر کرد','پیام')->persistent('بستن');
@@ -1422,16 +1426,53 @@ class UserController extends BaseController
                 }
                 else
                 {
-                    alert()->error('خطا در پاک کردن تاریخ پیگیری بعد')->persistent('بستن');
+                    alert()->error('خطاتغییر سطح دسترسی')->persistent('بستن');
                 }
             }
-            else
-            {
-                alert()->error('خطا در تغییر سطح دسترسی','خطا')->persistent('بستن');
-                return back();
-            }
 
+//        $user=User::leftjoin('followups','users.id','=','followups.user_id')
+//                ->where('users.id','=',$id)
+//                ->where('followups.flag','=',1)
+//                ->select('users.*','followups.nextfollowup_date_fa')
+//                ->first();
         }
+        else
+        {
+            alert()->error('کاربری با این اطلاعات موجود نمی باشد','خطا')->persistent('بستن');
+            return back();
+        }
+//        else
+//        {
+//
+////            $user=$this->get_user(NULL,$id,NULL,NULL,'first');
+////            $user['type']=$request['type'];
+////            $user['followby_expert']=NULL;
+//            $status=$user->save();
+//
+//            if($status)
+//            {
+//                $followups=$this->get_followup(NULL,$id,NULL,1,'first');
+//
+//                $followups['nextfollowup_date_fa']=NULL;
+//                $status=$followups->save();
+//
+//                if($status)
+//                {
+//                    alert()->success('سطح دسترسی کاربر تغییر کرد','پیام')->persistent('بستن');
+//                    return back();
+//                }
+//                else
+//                {
+//                    alert()->error('خطا در پاک کردن تاریخ پیگیری بعد')->persistent('بستن');
+//                }
+//            }
+//            else
+//            {
+//                alert()->error('خطا در تغییر سطح دسترسی','خطا')->persistent('بستن');
+//                return back();
+//            }
+//
+//        }
     }
 
     public function checkUserAjax($id)

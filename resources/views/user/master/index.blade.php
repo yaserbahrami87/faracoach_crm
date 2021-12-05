@@ -198,7 +198,11 @@
 <script src="{{ asset('/panel_assets/js/java.js') }}"></script>
 <!-- END: Page JS-->
 
-
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
 @yield('footerScript')
 
 </body>
