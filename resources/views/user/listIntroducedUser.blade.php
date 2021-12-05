@@ -183,6 +183,7 @@
                 </div>
             </div>
         </div>
+
         @endforeach
         <div class="col-12 text-center">
             {{$listIntroducedUser->links()}}

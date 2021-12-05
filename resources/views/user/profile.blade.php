@@ -29,19 +29,19 @@
                     <div class="row">
                         <div class="col-md-6 px-1">
                             <div class="form-group">
-                                <label>نام*</label>
+                                <label>نام<span class="text-danger font-weight-bold">*</span></label>
                                 <input type="text" class="form-control @if(strlen($user->fname)<>0) is-valid @endif" placeholder="نام را وارد کنید" @if(old('fname')) value='{{old('fname')}}' @else value="{{$user->fname}}" @endif name="fname"  autocomplete="autocomplete"  />
                             </div>
                         </div>
                         <div class="col-md-6 px-1">
                             <div class="form-group">
-                                <label>نام خانوادگی*</label>
+                                <label>نام خانوادگی<span class="text-danger font-weight-bold">*</span></label>
                                 <input type="text" class="form-control @if(strlen($user->lname)<>0) is-valid @endif" placeholder="نام خانوادگی را وارد کنید" @if(old('lname')) value='{{old('lname')}}' @else value="{{$user->lname}}" @endif name="lname"   autocomplete="autocomplete" />
                             </div>
                         </div>
                         <div class="col-md-6 px-1">
                             <div class="form-group">
-                                <label for="codemelli">کد ملی*</label>
+                                <label for="codemelli">کد ملی<span class="text-danger font-weight-bold">*</span></label>
                                 <input type="text" class="form-control  @if(strlen($user->codemelli)<>0) is-valid @endif" placeholder="کد ملی را وارد کنید" @if(strlen($user->codemelli)>0) value="{{$user->codemelli}}" disabled @endif id="codemelli" name="codemelli"  autocomplete="autocomplete" />
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                         </div>
                         <div class="col-md-6 px-1">
                             <div class="form-group">
-                                <label>تاریخ تولد*</label>
+                                <label>تاریخ تولد<span class="text-danger font-weight-bold">*</span></label>
                                 <input type="text" class="form-control @if(strlen($user->datebirth)<>0) is-valid @endif" placeholder="تاریخ تولد را وارد کنید" @if(old('datebirth')) value='{{old('datebirth')}}' @else value="{{$user->datebirth}}" @endif name="datebirth" id="datebirth" autocomplete="autocomplete" />
                             </div>
                         </div>

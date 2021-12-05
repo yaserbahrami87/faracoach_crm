@@ -95,7 +95,7 @@
                         </div>
                         <div class="col-md-4 px-1">
                             <div class="form-group">
-                                <label>شغل*</label>
+                                <label>شغل<span class="text-danger font-weight-bold">*</span></label>
                                 <div class="form-group">
                                     <input type="text" class="form-control @if(strlen($user->job)<>0) is-valid  @endif" placeholder="شغل را وارد کنید" @if(old('job')) value='{{old('job')}}' @else value="{{$user->job}}" @endif name="job" />
                                 </div>

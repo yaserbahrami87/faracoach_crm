@@ -323,13 +323,14 @@ class VerifyController extends BaseController
 //                        ->latest()
 //                        ->first();
 
-            if(is_null($verify))
+            if($verify->count()==0)
             {
                 return back()->with('msg','شماره وارد شده در سیستم موجود نمی باشد')
                     ->with('errorStatus','danger');
             }
             else
             {
+
                 $created_at = ($verify['created_at']);
 
                 $created_at_add = $created_at->addMinutes(2);
