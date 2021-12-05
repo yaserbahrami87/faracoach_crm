@@ -30,7 +30,7 @@
                         <div class="col-md-6 px-1">
                             <div class="form-group">
                                 <label>تلفن تماس</label>
-                                <input type="hidden" id="tel_org" value="" name="tel"/>
+                                <input type="hidden" id="tel_org" value="{{old('tel',$user->tel)}}" name="tel"/>
                                 <input type="tel" dir="ltr" class="form-control @if(strlen($user->tel)==0) is-invalid  @else is-valid  @endif" placeholder="تلفن تماس را وارد کنید" value='{{old('tel',$user->tel)}}'  id="tel"  @if(strlen($user->tel)>0 ) disabled  @endif  />
                             </div>
                         </div>
