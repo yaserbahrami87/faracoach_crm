@@ -687,7 +687,7 @@ class UserController extends BaseController
                     'gettingknow'       =>'nullable|numeric',
                     'gettingknow_child' =>'nullable|numeric',
                     'introduced'        =>'nullable|numeric',
-                    'telegram'          =>'nullable|max:50|regex:/^(?=[a-zA-Z0-9._]{3,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/u',
+                    'telegram'          =>'nullable|max:50|regex:/^[a-zA-Z0-9._]+$/u',
                     'instagram'         =>'nullable|max:50|regex:/^(?=[a-zA-Z0-9._]{3,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/u',
                     'linkedin'          =>'nullable|string|max:250',
                     'aboutme'           =>'nullable|string|max:250',
