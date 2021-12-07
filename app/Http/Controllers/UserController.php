@@ -1393,14 +1393,17 @@ class UserController extends BaseController
         [
             'type'=>'required|numeric'
         ]);
-        switch($request['type'])
-        {
-            case '-1': $typing='مارکتینگ';
-                        break;
-            case '11': $typing='فروش';
-                        break;
 
-        }
+        $typing=$this->userType($request['type']);
+
+//        switch($request['type'])
+//        {
+//            case '-1': $typing='مارکتینگ';
+//                        break;
+//            case '11': $typing='فروش';
+//                        break;
+//
+//        }
         $data=$this->get_user_byID($id);
         if($data)
         {

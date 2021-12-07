@@ -51,17 +51,17 @@
                             </td>
                             <td>
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="customSwitch{{$item->id}}" onchange="changeStatus(this)" value="{{$item->status}}"  title="{{$item->shortlink}}"  @if($item->status==1) checked @endif />
+                                    <input type="checkbox" class="custom-control-input btn-sm" id="customSwitch{{$item->id}}" onchange="changeStatus(this)" value="{{$item->status}}"  title="{{$item->shortlink}}"  @if($item->status==1) checked @endif />
                                     <label class="custom-control-label" id="customSwitch{{$item->id}}Label" for="customSwitch{{$item->id}}">@if($item->status==1) فعال @else غیرفعال @endif</label>
                                 </div>
                             </td>
                             <td>
                                 @if($item->status_event=='در حال ثبت نام')
-                                    <a href="{{asset('/event/'.$item->shortlink)}}" class=" btn btn-outline-primary">{{$item->status_event}}</a>
+                                    <a href="{{asset('/event/'.$item->shortlink)}}" class=" btn btn-outline-primary btn-sm">{{$item->status_event}}</a>
                                 @elseif($item->status_event=='تکمیل ظرفیت')
-                                    <a href="{{asset('/event/'.$item->shortlink)}}" class=" btn btn-outline-warning">{{$item->status_event}}</a>
+                                    <a href="{{asset('/event/'.$item->shortlink)}}" class=" btn btn-outline-warning btn-sm">{{$item->status_event}}</a>
                                 @elseif($item->status_event=='برگزار شد')
-                                    <a href="{{asset('/event/'.$item->shortlink)}}" class=" btn btn-outline-danger">{{$item->status_event}}</a>
+                                    <a href="{{asset('/event/'.$item->shortlink)}}" class=" btn btn-outline-danger btn-sm">{{$item->status_event}}</a>
                                 @endif
                             </td>
                             <td class="text-center">
@@ -86,19 +86,7 @@
                         </tr>
                     @endforeach
                     </tbody>
-                    <tfoot>
-                        <tr>
-                            <th></th>
-                            <th>رویداد</th>
-                            <th>تاریخ رویداد</th>
-                            <th>ساعت رویداد</th>
-                            <th>فعال/غیرفعال</th>
-                            <th>وضعیت</th>
-                            <th>ویرایش</th>
-                            <th> شرکت کننده ها</th>
-                            <th>حذف</th>
-                        </tr>
-                    </tfoot>
+
                 </table>
 
             </div>
