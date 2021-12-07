@@ -119,7 +119,7 @@
                                             قیمت
                                         </div>
                                         <div class="col-6 pt-3 font-weight-bold">
-                                            <p>{{$event->fi}} تومان</p>
+                                            <p>{{number_format($event->fi)}} تومان</p>
                                         </div>
                                     </div>
                                 </div>
