@@ -30,31 +30,31 @@
                         <div class="col-md-6 px-1">
                             <div class="form-group">
                                 <label>نام<span class="text-danger font-weight-bold">*</span></label>
-                                <input type="text" class="form-control @if(strlen($user->fname)<>0) is-valid @endif" placeholder="نام را وارد کنید" @if(old('fname')) value='{{old('fname')}}' @else value="{{$user->fname}}" @endif name="fname"  autocomplete="autocomplete"  />
+                                <input type="text" class="form-control @if(strlen($user->fname)<>0) is-valid @endif" placeholder="نام را وارد کنید" @if(old('fname')) value='{{old('fname')}}' @else value="{{old('fname',$user->fname) }}" @endif name="fname"  autocomplete="autocomplete"  />
                             </div>
                         </div>
                         <div class="col-md-6 px-1">
                             <div class="form-group">
                                 <label>نام خانوادگی<span class="text-danger font-weight-bold">*</span></label>
-                                <input type="text" class="form-control @if(strlen($user->lname)<>0) is-valid @endif" placeholder="نام خانوادگی را وارد کنید" @if(old('lname')) value='{{old('lname')}}' @else value="{{$user->lname}}" @endif name="lname"   autocomplete="autocomplete" />
+                                <input type="text" class="form-control @if(strlen($user->lname)<>0) is-valid @endif" placeholder="نام خانوادگی را وارد کنید" @if(old('lname')) value='{{old('lname')}}' @else value="{{old('lname',$user->lname)}}" @endif name="lname"   autocomplete="autocomplete" />
                             </div>
                         </div>
                         <div class="col-md-6 px-1">
                             <div class="form-group">
                                 <label for="codemelli">کد ملی<span class="text-danger font-weight-bold">*</span></label>
-                                <input type="text" class="form-control  @if(strlen($user->codemelli)<>0) is-valid @endif" placeholder="کد ملی را وارد کنید" @if(strlen($user->codemelli)>0) value="{{$user->codemelli}}" disabled @endif id="codemelli" name="codemelli"  autocomplete="autocomplete" />
+                                <input type="text" class="form-control  @if(strlen($user->codemelli)<>0) is-valid @endif" placeholder="کد ملی را وارد کنید" @if(strlen($user->codemelli)>0) value="{{old('codemelli',$user->codemelli)}}" disabled @endif id="codemelli" name="codemelli"  autocomplete="autocomplete" />
                             </div>
                         </div>
                         <div class="col-md-6 px-1">
                             <div class="form-group">
                                 <label>شماره شناسنامه</label>
-                                <input type="text" class="form-control  @if(strlen($user->shenasname)<>0) is-valid @endif" placeholder="شماره شناسنامه را وارد کنید" @if(old('shenasname')) value='{{old('shenasname')}}' @else value="{{$user->shenasname}}" @endif name="shenasname"  autocomplete="autocomplete" />
+                                <input type="text" class="form-control  @if(strlen($user->shenasname)<>0) is-valid @endif" placeholder="شماره شناسنامه را وارد کنید" value='{{old('shenasname',$user->shenasname)}}'  name="shenasname"  autocomplete="autocomplete" />
                             </div>
                         </div>
                         <div class="col-md-6 px-1">
                             <div class="form-group">
                                 <label>تاریخ تولد<span class="text-danger font-weight-bold">*</span></label>
-                                <input type="text" class="form-control @if(strlen($user->datebirth)<>0) is-valid @endif" placeholder="تاریخ تولد را وارد کنید" @if(old('datebirth')) value='{{old('datebirth')}}' @else value="{{$user->datebirth}}" @endif name="datebirth" id="datebirth" autocomplete="autocomplete" />
+                                <input type="text" class="form-control @if(strlen($user->datebirth)<>0) is-valid @endif" placeholder="تاریخ تولد را وارد کنید"  value='{{old('datebirth',$user->datebirth)}}' name="datebirth" id="datebirth" autocomplete="autocomplete" />
                             </div>
                         </div>
                         <div class="col-md-6 px-1">

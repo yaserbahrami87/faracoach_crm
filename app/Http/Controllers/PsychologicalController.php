@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\psychological;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -124,7 +125,29 @@ class PsychologicalController extends BaseController
 
     public function export_excel(psychological $psychological)
     {
-        return $psychological->user;
+        //return $psychological->user;
+        //خروجی اکسل
+        $list=psychological::join('users', 'users.id', '=', 'psychologicals.user_id')
+                    ->where('users.id', '=', $psychological->user_id)
+                    ->where('psychologicals.id','=',$psychological->id)
+                    ->select('users.fname','users.lname','users.tel','psychologicals.result')
+                    ->get();
+
+
+        $excel=fastexcel($list)->export($list[0]->fname.'_'.$list[0]->lname.'.xlsx');
+
+        if($excel)
+        {
+//                return Storage::disk('public')->download('file.xlsx');
+//                return response()->download(storage_path("/public/file.xlsx"));
+            return response()->download(public_path($list[0]->fname.'_'.$list[0]->lname.'.xlsx'))
+                             ->deleteFileAfterSend(true);
+
+        }
+        else
+        {
+            return back();
+        }
 //        return psychological::find($psychological->id)->user;
     }
 }

@@ -287,7 +287,7 @@
                                 <span class="fa fa-star p-1"></span>
                             </div>
                             <div>
-                                <div class=" mt-3"> ارزش رزرو جلسه : {{number_format($coach->fi)}} ریال</div>
+                                <div class=" mt-3"> ارزش رزرو جلسه : {{number_format($coach->fi)}} تومان</div>
                             </div>
                         </div>
                     </div>

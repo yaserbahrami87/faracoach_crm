@@ -40,6 +40,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use nusoap_client;
 
 
 
@@ -1741,7 +1742,7 @@ class BaseController extends Controller
         }
     }
 
-    public  function checkout($user_id=NULL,$product_id=NULL,$Amount=NULL,$type='جلسه',$Email=NULL,$Mobile=NULL,$Description=NULL)
+    public function checkout($user_id=NULL,$product_id=NULL,$Amount=NULL,$type=NULL,$Email=NULL,$Mobile=NULL,$Description=NULL)
     {
 //        $Amount=$fi;
 //        $Email=Auth::user()->email;
@@ -1761,8 +1762,11 @@ class BaseController extends Controller
             'authority'     =>$res,
             'description'   =>$Description,
         ]);
+
         if($status)
         {
+            dd($res);
+
             return redirect('https://www.zarinpal.com/pg/StartPay/' . $res);
         }
         else

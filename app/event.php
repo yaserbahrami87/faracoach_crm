@@ -8,7 +8,7 @@ class event extends Model
 {
     //
     protected $fillable=[
-        'user_id','event','shortlink','event_text','description','image','capacity','type','address','heading','contacts','faq','video','links','expire_date','start_date','end_date','start_time','end_time','duration','options','status','insert_user'
+        'user_id','event','shortlink','event_text','description','fi','image','capacity','type','address','heading','contacts','faq','video','links','expire_date','start_date','end_date','start_time','end_time','duration','options','status','insert_user'
     ];
 
 

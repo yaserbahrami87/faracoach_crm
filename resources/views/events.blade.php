@@ -124,6 +124,9 @@
                                                 {{$item->event}}
                                             </h5>
                                         </a>
+                                        <div class="col-12 p-0 text-center font-weight-bold">
+                                            <p>قیمت {{ number_format($item->fi) }} تومان</p>
+                                        </div>
                                         <div class="col-12 p-0">
                                             <p class="p-0  float-right  font-weight-bold d-inline">
 

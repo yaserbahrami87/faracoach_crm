@@ -134,62 +134,6 @@
         </div>
         @foreach ($listIntroducedUser as $item)
         <div class="col-lg-3 col-sm-6 listFriends " id="">
-            <div class="card hovercard">
-                <div class="cardheader">
-
-                </div>
-                <div class="avatar">
-                    <img alt="" src="{{asset('documents/users/'.$item->personal_image)}}">
-                </div>
-                <div class="info">
-                    <div class="title">
-                        <a class="btn-modal-introduced" href="{{$item->id}}"  data-toggle="modal" data-target="#modal_introduced_profile"   >{{$item->fname}} {{$item->lname}}</a>
-                    </div>
-                    <div class="desc">{{$item->tel}}</div>
-                    <!--
-                    <div class="desc">Curious developer</div>
-                    <div class="desc">Tech geek</div>
-                    -->
-                </div>
-                <div class="bottom">
-                    <!--
-                    <a class="btn btn-primary btn-twitter btn-sm" href="https://twitter.com/webmaniac">
-                        <i class="fa fa-envelope"></i>
-                    </a>
-                    <a class="btn btn-danger btn-sm" rel="publisher"
-                    href="https://plus.google.com/+ahmshahnuralam">
-                        <i class="fa fa-google-plus"></i>
-                    </a>
-                    <a class="btn btn-primary btn-sm" rel="publisher"
-                    href="https://plus.google.com/shahnuralam">
-                        <i class="fa fa-facebook"></i>
-                    </a>
-                    -->
-                    @if(strlen($item->email)>0)
-                        <a class="btn btn-success btn-sm" href="mailto:{{$item->email}}" title="ارسال پیام الکترونیکی">
-                            <i class="fa fa-envelope"></i>
-                        </a>
-                    @endif
-                    <a class="btn-modal-introduced btn btn-primary btn-sm" href="{{$item->id}}" title="نمایش" data-toggle="modal" data-target="#modal_introduced_profile">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
-                            <path fill-rule="evenodd" d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
-                        </svg>
-                    </a>
-                    <a class="btn-modal-introduced btn btn-primary btn-sm" href="/panel/followup/{{$item->id}}" title="پیگیری ها" >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-
-
-
-
-
-
-
             <div class="box shadow-lg">
                 <img class="profile" src="{{asset('documents/users/'.$item->personal_image)}}" alt=""/>
 
@@ -205,7 +149,7 @@
                     <a class="btn-modal-introduced btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" href="/panel/followup/{{$item->id}}" title="پیگیری" >
                         <i class="bi bi-asterisk"></i>
                     </a>
-                    <a class="btn-modal-introduced btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" href="{{$item->id}}" title="نمایش" data-toggle="modal" data-target="#modal_introduced_profile">
+                    <a class="btn-modal-introduced btn btn-primary btn-sm" href="{{$item->id}}" title="نمایش" data-toggle="modal" data-target="#modal_introduced_profile">
                         <i class="bi bi-eye-fill"></i>
                     </a>
                     <a href="#"><i class="fa fa-tumblr"></i></a>

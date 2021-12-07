@@ -96,14 +96,6 @@
                 <ul class="menu-content">
                     <li><a href="/admin/event/all"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">همه رویدادها</span></a></li>
                     <li><a href="/admin/event/create"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">ایجاد رویداد</span></a></li>
-
-                    <li><a href=" nav-item has-sub "><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice Add">کوپن تخفیف</span></a>
-                        <ul class="menu-content">
-                            <li><a href="/admin/coupon/" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">کوپن ها</span></a></li>
-                            <li><a href="/admin/coupon/create" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">کوپن جدید</span></a></li>
-
-                        </ul>
-                    </li>
                 </ul>
             </li>
             <li class=" nav-item"><a href="#"><span class="menu-title" data-i18n="Chat">تنظیمات</span></a>

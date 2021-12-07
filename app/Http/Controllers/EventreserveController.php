@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\checkout;
 use App\eventreserve;
+use App\lib\zarinpal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -43,23 +45,58 @@ class EventreserveController extends BaseController
         $event=$this->get_events($request->event_id,NULL,NULL,NULL,NULL,NULL,'first');
 
         if($event->capacity!=0) {
-            $status = eventreserve::create([
-                'user_id' => Auth::user()->id,
-                'event_id' => $event->id,
-                'date_fa' => $this->dateNow,
-                'time_fa' => $this->timeNow,
-            ]);
 
-            if ($status) {
-                $event->capacity--;
-                $event->save();
-                $msg = Auth::user()->lname . " عزیز \nثبت نام شما در " . $event->event . " با موفقیت انجام شد\n فراکوچ ";
-                $this->sendSms(Auth::user()->tel, $msg);
-                alert()->success('رزرو دوره با موفقیت انجام شد')->persistent('بستن');
-                return $status;
-            } else {
-                return $status;
+
+
+            if($event->fi==0 || is_null($event->fi)|| $event->fi=='')
+            {
+                $status = eventreserve::create([
+                    'user_id' => Auth::user()->id,
+                    'event_id' => $event->id,
+                    'date_fa' => $this->dateNow,
+                    'time_fa' => $this->timeNow,
+                ]);
+
+                if ($status) {
+                    $event->capacity--;
+                    $event->save();
+                    $msg = Auth::user()->lname . " عزیز \nثبت نام شما در " . $event->event . " با موفقیت انجام شد\n فراکوچ ";
+                    $this->sendSms(Auth::user()->tel, $msg);
+                    alert()->success('رزرو دوره با موفقیت انجام شد')->persistent('بستن');
+                    return $status;
+                } else {
+                    return $status;
+                }
             }
+            else
+            {
+                $order = new zarinpal();
+
+                $res = $order->pay($event->fi,Auth::user()->email,Auth::user()->tel,$event->event);
+
+                $status=checkout::create([
+                    'user_id'       =>Auth::user()->id,
+                    'product_id'    =>$event->id,
+                    'price'         =>$event->fi,
+                    'type'          =>'event',
+                    'authority'     =>$res,
+                    'description'   =>'انتقال به درگاه',
+                ]);
+
+                if($status)
+                {
+                    return redirect('https://www.zarinpal.com/pg/StartPay/' . $res);
+                }
+                else
+                {
+                    return redirect('/');
+                }
+
+
+                //$this->checkout(Auth::user()->id,$event->id,$event->fi,'event',Auth::user()->email,Auth::user()->tel,$event->event);
+            }
+
+
         }
         else
         {

@@ -15,7 +15,9 @@
                             <th scope="col">نام خانوادگی</th>
                             <th scope="col">وضعیت</th>
                             <th scope="col">ویرایش</th>
+                            <!--
                             <th scope="col">حذف</th>
+                            -->
                             <th scope="col">گزارش</th>
                         </tr>
                     </thead>
@@ -42,6 +44,7 @@
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
                             </td>
+                            <!--
                             <td>
                                 <form method="post" action="/admin/coach/{{$item->id}}" onsubmit="return confirm('آیا از حذف دوره اطمینان دارید؟(در صورت حذف تمام اطلاعات مربوط به آن از بانک حذف می شود)')">
                                     {{ method_field('DELETE') }}
@@ -51,6 +54,7 @@
                                     </button>
                                 </form>
                             </td>
+                            -->
                             <td>
                                 <a href="/admin/booking/{{$item->id_user_table}}/report" class="btn btn-success">
                                     <i class="bi bi-bar-chart-line-fill"></i>
