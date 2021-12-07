@@ -318,6 +318,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::Patch('/event/{event}/updateStatus','EventController@updateStatus');
     Route::get('/event/all','EventController@eventsListAdmin');
     Route::get('/event/{event}/users','EventController@usersEvent');
+    Route::get('/event/{event}/export','EventController@exportExcel');
     Route::resource('event','EventController');
 });
 

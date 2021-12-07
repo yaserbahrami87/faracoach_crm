@@ -24,6 +24,7 @@
                             <th>ویرایش</th>
                             <th>تعداد ثبت نام</th>
                             <th> شرکت کننده ها</th>
+                            <th> خروجی</th>
                             <th>حذف</th>
                         </tr>
                     </thead>
@@ -76,6 +77,11 @@
                             <td class="text-center">
                                 <a href="/admin/event/{{$item->shortlink}}/users" class="btn btn-success" title="افراد شرکت کننده ها" >
                                     <i class="bi bi-people-fill" ></i>
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a href="/admin/event/{{$item->shortlink}}/export" class="btn btn-success">
+                                    <i class="bi bi-file-earmark-excel-fill"></i>
                                 </a>
                             </td>
                             <td class="text-center">

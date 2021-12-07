@@ -235,7 +235,7 @@ class EventController extends BaseController
             $item->count=$this->get_eventReserve(NULL,NULL,$item->id,NULL,NULL,'get')->count();
         }
 
-        
+
 
         foreach ($events as $item) {
             if ($item->start_date < $this->dateNow) {
@@ -287,6 +287,27 @@ class EventController extends BaseController
             }
 
         }
+    }
+
+    public function exportExcel(event $event)
+    {
+        $users=event::join('eventreserves','events.id','=','eventreserves.event_id')
+                ->join('users','eventreserves.user_id','=','users.id')
+                ->where('events.id','=',$event->id)
+                ->select('users.fname','users.lname','users.tel')
+                ->get();
+        $excel=fastexcel($users)->export($event->event.'.xlsx');
+
+        if($excel)
+        {
+            return response()->download(public_path($event->event.'.xlsx'))
+                ->deleteFileAfterSend(true);
+        }
+        else
+        {
+            return back();
+        }
+
     }
 
 }
