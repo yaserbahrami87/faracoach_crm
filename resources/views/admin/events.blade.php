@@ -22,6 +22,7 @@
                             <th>فعال/غیرفعال</th>
                             <th>وضعیت</th>
                             <th>ویرایش</th>
+                            <th>تعداد ثبت نام</th>
                             <th> شرکت کننده ها</th>
                             <th>حذف</th>
                         </tr>
@@ -68,6 +69,9 @@
                                 <a href="/admin/event/{{$item->shortlink}}/edit" class="btn btn-warning" title="ویرایش رویداد" >
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
+                            </td>
+                            <td class="text-center">
+                                {{$item->count}} نفر
                             </td>
                             <td class="text-center">
                                 <a href="/admin/event/{{$item->shortlink}}/users" class="btn btn-success" title="افراد شرکت کننده ها" >

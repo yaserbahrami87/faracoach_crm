@@ -73,7 +73,7 @@ class EventreserveController extends BaseController
             {
                 $order = new zarinpal();
 
-                $res = $order->pay($event->fi,Auth::user()->email,Auth::user()->tel,$event->event);
+                $res = $order->pay($event->fi*10,Auth::user()->email,Auth::user()->tel,$event->event);
 
                 $status=checkout::create([
                     'user_id'       =>Auth::user()->id,

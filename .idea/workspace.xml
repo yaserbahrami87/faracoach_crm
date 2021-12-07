@@ -23,14 +23,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/views/user/InfoReserve.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/user/bookingAcceptReserveCoach.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CoachController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CoachController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BookingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BookingController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/EventController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/EventController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/EventreserveController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/EventreserveController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MessageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MessageController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/editCoach.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/editCoach.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/reportCoach.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/reportCoach.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/master/right_menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/master/right_menu.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/payment.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/payment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/events.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/events.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -206,7 +206,7 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/panel_assets/js" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/user" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -218,19 +218,19 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\faracoach_crm\resources\views\user" />
+      <recent name="C:\wamp64\www\faracoach_crm\public\panel_assets\js" />
+      <recent name="C:\wamp64\www\faracoach_crm\resources\views\user\master" />
+      <recent name="C:\wamp64\www\faracoach_crm\resources\views\panelUser\master" />
+      <recent name="C:\wamp64\www\faracoach_crm\resources\views\admin" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\wamp64\www\faracoach_crm\resources\views\admin\master" />
       <recent name="C:\wamp64\www\faracoach_crm\resources\views\panelAdmin" />
       <recent name="C:\wamp64\www\faracoach_crm\resources\views" />
       <recent name="C:\wamp64\www\faracoach_crm\resources\views\panelUser" />
       <recent name="D:\xampp\htdocs\faracoach_crm\resources\views" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\wamp64\www\faracoach_crm\public\panel_assets\js" />
-      <recent name="C:\wamp64\www\faracoach_crm\resources\views\user" />
-      <recent name="C:\wamp64\www\faracoach_crm\resources\views\user\master" />
-      <recent name="C:\wamp64\www\faracoach_crm\resources\views\panelUser\master" />
-      <recent name="C:\wamp64\www\faracoach_crm\resources\views\admin" />
     </key>
   </component>
   <component name="RunManager">
@@ -774,7 +774,7 @@
       <workItem from="1638856202972" duration="13260000" />
       <workItem from="1638870880037" duration="154000" />
       <workItem from="1638871051187" duration="200000" />
-      <workItem from="1638871334043" duration="540000" />
+      <workItem from="1638871334043" duration="5150000" />
     </task>
     <servers />
   </component>
@@ -826,9 +826,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1638804908500" />
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1638871876337">
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1638877420362">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1638871876337" />
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1638877420362" />
   </component>
 </project>

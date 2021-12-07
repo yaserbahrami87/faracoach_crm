@@ -279,13 +279,24 @@ class BookingController extends BaseController
            $dateNow=$this->dateNow;
            $timeNow=$this->timeNow;
 
-           return view('admin.InfoReserve')
-                        ->with('user',$reserve)
-                        ->with('booking',$booking)
-                        ->with('history',$history)
-                        ->with('homework',$homework)
-                        ->with('feedback',$feedback)
-                        ->with('dateNow',$dateNow);
+           if(Auth::user()->type==2)
+               return view('admin.InfoReserve')
+                            ->with('user',$reserve)
+                            ->with('booking',$booking)
+                            ->with('history',$history)
+                            ->with('homework',$homework)
+                            ->with('feedback',$feedback)
+                            ->with('dateNow',$dateNow);
+           else
+            {
+                return view('user.InfoReserve')
+                    ->with('user',$reserve)
+                    ->with('booking',$booking)
+                    ->with('history',$history)
+                    ->with('homework',$homework)
+                    ->with('feedback',$feedback)
+                    ->with('dateNow',$dateNow);
+            }
 
         }
         else
@@ -465,10 +476,18 @@ class BookingController extends BaseController
                 $item->personal_image='default-avatar.png';
             }
         }
-        return view('admin.bookingAcceptReserveCoach')
+
+        if(Auth::user()->type==2)
+            return view('admin.bookingAcceptReserveCoach')
 //        return view('panelUser.booking')
                 ->with('booking', $booking)
                 ->with('dateNow', $this->dateNow);
+        else
+        {
+            return view('user.bookingAcceptReserveCoach')
+                ->with('booking', $booking)
+                ->with('dateNow', $this->dateNow);
+        }
     }
 
 

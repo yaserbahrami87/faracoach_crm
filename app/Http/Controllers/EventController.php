@@ -230,6 +230,13 @@ class EventController extends BaseController
     {
         $events = event::orderby('id','desc')
                     ->get();
+        foreach ($events as $item)
+        {
+            $item->count=$this->get_eventReserve(NULL,NULL,$item->id,NULL,NULL,'get')->count();
+        }
+
+        
+
         foreach ($events as $item) {
             if ($item->start_date < $this->dateNow) {
                 $item->status_event = "برگزار شد";
