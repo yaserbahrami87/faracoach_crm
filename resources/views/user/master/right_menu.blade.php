@@ -32,6 +32,9 @@
                     <li><a href="/panel/user/contacts" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item"  >اطلاعات تماس</span></a></li>
                     <li><a href="/panel/user/introduction" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item"  >نحوه آشنایی</span></a></li>
                     <li><a href="/panel/user/contract" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item"  >اطلاعات قرارداد</span></a></li>
+                    @if(Auth::user()->status_coach==1)
+                        <li><a href="/panel/coach/profile" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item"  >رزومه کوچ</span></a></li>
+                    @endif
                 </ul>
             </li>
 

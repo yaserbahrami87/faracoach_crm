@@ -250,6 +250,7 @@ class CoachController extends BaseController
 
             if(Auth::user()->id==$coach->user_id)
             {
+
                 $coach->category=explode(',',$coach->category);
 
                 $categoryCoaches=$this->get_categoryCoaches(NULL,NULL,true);
@@ -278,6 +279,7 @@ class CoachController extends BaseController
                             ->with('coach',$coach);
             }
             else{
+
                 alert()->error('شما سطح دسترسی به این بخش را ندارید','خطا')->persistent('بستن');
                 return back();
             }
@@ -615,5 +617,38 @@ class CoachController extends BaseController
             alert()->error('کوچ مورد نظر یافت نشد')->persistent('بستن');
             return back();
         }
+    }
+
+    public function profile_coach()
+    {
+        $coach=coach::where('user_id','=',Auth::user()->id)
+                    ->first();
+
+        $coach->category=explode(',',$coach->category);
+
+        $categoryCoaches=$this->get_categoryCoaches(NULL,NULL,true);
+        $coach=coach::join('users','coaches.user_id','=','users.id')
+            ->where('coaches.id','=',$coach->id)
+            ->select('coaches.*','users.fname','users.lname','users.personal_image')
+            ->first();
+        $coach->category=explode(',',$coach->category);
+
+
+        $messages=coach::join('messages', function($query)
+        {
+            $query->oron('coaches.id', '=', 'messages.user_id_send')
+                ->oron('coaches.id', '=', 'messages.user_id_recieve');
+
+        })
+        ->where('coaches.id','=',$coach->id)
+        ->where('messages.type','=','coach')
+        ->get();
+
+        $typeCoaches=$this->get_typeCoaches(NULL,1,'get');
+        return view('user.editCoach')
+            ->with('categoryCoaches',$categoryCoaches)
+            ->with('messages',$messages)
+            ->with('typeCoaches',$typeCoaches)
+            ->with('coach',$coach);
     }
 }

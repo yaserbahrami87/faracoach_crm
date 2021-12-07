@@ -7,6 +7,7 @@ use App\eventreserve;
 use App\lib\zarinpal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use nusoap_client;
 
 class EventreserveController extends BaseController
 {

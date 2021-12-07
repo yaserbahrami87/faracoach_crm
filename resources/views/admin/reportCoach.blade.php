@@ -362,90 +362,66 @@
             <div class="col-12 border-bottom  mt-3 mb-3">
                 <h4>جلسات کوچینگ</h4>
             </div>
-            @foreach($heldCoaching as $item)
-                <div class="col-lg-3 col-sm-6  mb-1 listFriends @if($item->caption_status=='رزرو شده') bg-warning @elseif($item->caption_status=='برگزار شد') bg-success @endif" id="">
-                    <div class="box shadow-lg p-1">
-                        <img class="profile" src="{{asset('documents/users/'.$item->personal_image)}}" alt=""/>
-
-                        <div class="box-title">{{$item->fname.' '.$item->lname}}</div>
-
-                        <div class="box-text mt-1" dir="ltr">
-                            <p class="border-bottom pb-4">
-                                <span class="float-right">
-                                    <i class="bi bi-calendar-date-fill"></i>
-                                    {{$item->start_date}}
-                                </span>
-                                <span class="float-left">
-                                    <i class="bi bi-clock-fill"></i>
-                                    {{$item->start_time}}
-                                </span>
-                            </p>
-                            <p class="border-bottom">
-                                {{$item->duration_booking}}
-                            </p>
-                            <p>{{$item->caption_status}}</p>
-
-                            <!-- <a class="btn btn-primary btn-sm" href="/panel/booking/{{$item->id}}" title="نمایش" >
-                                <i class="bi bi-eye-fill"></i>
-                            </a>-->
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            <div class="col-12 table-responsive">
+                <table class="table table-striped table-bordered">
+                @foreach($heldCoaching as $item)
+                    <tr class="@if($item->caption_status=='رزرو شده') bg-warning @elseif($item->caption_status=='برگزار شد') bg-success @endif">
+                        <td>{{$loop->iteration}}</td>
+                        <td class="p-0">
+                            <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="rounded-circle "  width="50px" height="50px" />
+                        </td>
+                        <td>
+                            {{$item->fname.' '.$item->lname}}
+                        </td>
+                        <td>
+                            {{$item->start_date}}
+                        </td>
+                        <td>
+                            {{$item->start_time}}
+                        </td>
+                        <td>
+                            {{$item->duration_booking}}
+                        </td>
+                        <td>
+                            {{$item->caption_status}}
+                        </td>
+                    </tr>
+                @endforeach
+                </table>
+            </div>
 
 
 
             <div class="col-12 border-bottom  mt-3 mb-3">
                 <h4>جلسات معارفه</h4>
             </div>
-            @foreach($heldMoarefeh as $item)
-                <div class="col-lg-3 col-sm-6  mb-1 listFriends @if($item->caption_status=='رزرو شده') bg-warning @elseif($item->caption_status=='برگزار شد') bg-success @endif" id="">
-                    <div class="box shadow-lg p-1">
-                        <img class="profile" src="{{asset('documents/users/'.$item->personal_image)}}" alt=""/>
-
-                        <div class="box-title">{{$item->fname.' '.$item->lname}}</div>
-
-                        <div class="box-text mt-1" dir="ltr">
-                            <p class="border-bottom pb-4">
-                                <span class="float-right">
-                                    <i class="bi bi-calendar-date-fill"></i>
-                                    {{$item->start_date}}
-                                </span>
-                                <span class="float-left">
-                                    <i class="bi bi-clock-fill"></i>
-                                    {{$item->start_time}}
-                                </span>
-                            </p>
-                            <p class="border-bottom">
+            <div class="col-12 table-responsive">
+                <table class="table table-striped table-bordered">
+                    @foreach($heldMoarefeh as $item)
+                        <tr class="@if($item->caption_status=='رزرو شده') bg-warning @elseif($item->caption_status=='برگزار شد') bg-success @endif">
+                            <td>{{$loop->iteration}}</td>
+                            <td class="p-0">
+                                <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="rounded-circle "  width="50px" height="50px" />
+                            </td>
+                            <td>
+                                {{$item->fname.' '.$item->lname}}
+                            </td>
+                            <td>
+                                {{$item->start_date}}
+                            </td>
+                            <td>
+                                {{$item->start_time}}
+                            </td>
+                            <td>
                                 {{$item->duration_booking}}
-                            </p>
-                            <p>{{$item->caption_status}}</p>
-
-                        <!-- <a class="btn btn-primary btn-sm" href="/panel/booking/{{$item->id}}" title="نمایش" >
-                                <i class="bi bi-eye-fill"></i>
-                            </a>-->
-                        </div>
-                    </div>
-
-
-                </div>
-            @endforeach
+                            </td>
+                            <td>
+                                {{$item->caption_status}}
+                            </td>
+                        </tr>
+                    @endforeach
+                </table>
+            </div>
         </div>
     </div>
 

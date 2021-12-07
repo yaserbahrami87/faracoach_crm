@@ -38,7 +38,7 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
 //    Route::get('/messages/new','MessageController@create');
 //    Route::post('/messages/send','MessageController@store');
     Route::post('/message/reply','MessageController@reply');
-//    Route::post('/message/send','MessageController@sendMessageAllParts');
+    Route::post('/message/send','MessageController@sendMessage');
     Route::resource('message','MessageController');
 
 
@@ -84,7 +84,7 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     //coaches
     Route::patch('/coach/{coach}/newrequest','CoachController@newrequest');
     Route::patch('/coach/{coach}/updateCoach','CoachController@updateCoach');
-
+    Route::get('/coach/profile','CoachController@profile_coach');
     Route::get('/booking/report','CoachController@booking_report_byUser');
     Route::resource('coach','CoachController');
 
@@ -214,7 +214,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
 //    Route::get('/messages/new','MessageController@create');
 //    Route::post('/messages/send','MessageController@store');
     Route::post('/message/reply','MessageController@reply');
-//    Route::post('/message/send','MessageController@sendMessageAllParts');
+    Route::post('/message/send','MessageController@sendMessage');
     Route::resource('message','MessageController');
 
     // Route Admin Followup

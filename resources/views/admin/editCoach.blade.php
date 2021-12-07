@@ -178,7 +178,7 @@
                         <label for="status">وضعیت </label>
                         <select class="form-control" id="status" name="status">
                             <option disabled selected>انتخاب کنید</option>
-                            <option value="1" @if($coach->status==1) selected @endif>کوچ حرفه ای</option>
+                            <option value="1" @if($coach->status==1) selected @endif>فعال</option>
                             <option value="-2" @if($coach->status==-2) selected @endif>رد درخواست</option>
                             <option value="2" @if($coach->status==2) selected @endif>غیرفعال</option>
                         </select>

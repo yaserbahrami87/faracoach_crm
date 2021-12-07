@@ -159,6 +159,7 @@ class MessageController extends BaseController
      */
     public function store(Request $request)
     {
+
         $this->validate(request(),
         [
             'subject'           =>'required|min:3|string',
@@ -339,7 +340,7 @@ class MessageController extends BaseController
     }
 
 
-    public function sendMessageAllParts(Request $request)
+    public function sendMessage(Request $request)
     {
         $this->validate($request,[
             'subject'   =>'nullable|string',
