@@ -43,6 +43,11 @@
                             <input type="number" class="form-control" id="capacity" name="capacity" value="{{old('capacity')}}"  />
                             <small class="text-muted">در صورت نامحدود بودن عدد 1- را وارد کنید</small>
                         </div>
+                        <div class="form-group">
+                            <label for="fi">قیمت (تومان):<span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" id="fi" name="fi" value="{{old('fi',$event->fi)}}"  />
+                            <small class="text-muted">در صورت رایگان بودن عدد 0 را وارد و یا هیچ عددی وارد نکنید</small>
+                        </div>
                         <div class="form-row">
                             <div class="col-6">
                                 <label for="capacity">نوع رویداد <span class="text-danger">*</span></label>

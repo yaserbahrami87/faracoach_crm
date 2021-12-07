@@ -134,7 +134,6 @@
                                     </div>
                                 @else
                                     @if(($eventReserve->count()==0) && ($event->status_event=='در حال ثبت نام'))
-                                        <p class="mt-3 text-center font-weight-bold">ظرفیت باقیمانده: {{$event->capacity}} نفر</p>
                                         @if($event->fi==0 || is_null($event->fi)|| $event->fi=='')
                                             <div class="col-12 text-center">
                                                 <input type="button"  class="btn btn-primary mt-3" value="شرکت در دوره" data-toggle="modal" data-target="#eventreserve" />
