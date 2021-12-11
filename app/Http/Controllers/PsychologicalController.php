@@ -56,6 +56,8 @@ class PsychologicalController extends BaseController
 
         if($status)
         {
+            $msg=Auth::user()->fname.' '.Auth::user()->lname.' پرسشنامه پژوهشی را تکمیل کرد ';
+            $this->sendSms('09198906540',$msg);
             alert()->success('اطلاعات با موفقیت در سیستم ثبت شد')->persistent('بستن');
         }
         else
@@ -63,7 +65,7 @@ class PsychologicalController extends BaseController
             alert()->error('خطا در ثبت سیستم')->persistent('بستن');
         }
 
-        return redirect('/panel');
+            return redirect('/panel');
 
 
 

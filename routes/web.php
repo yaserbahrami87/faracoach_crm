@@ -134,6 +134,7 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
 
     //Psychological
     Route::get('/psychological/create','PsychologicalController@create');
+    Route::post('/psychological','PsychologicalController@store');
 
 
     //Event Reserves
