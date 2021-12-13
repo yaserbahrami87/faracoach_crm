@@ -20,53 +20,53 @@ class CheckoutController extends BaseController
      */
     public function index()
     {
-//        $invoice = (new Invoice)->amount(500);
-//        $invoice->detail(['detailName' => 'your detail goes here']);
-//
-//        return Payment::purchase($invoice, function($driver, $transactionId) {
-//
-//        })->pay()->render();
-//
-//        // Do all things together in a single line.
-//        return Payment::purchase(
-//            (new Invoice)->amount(1000),
-//            function($driver, $transactionId) {
-//            }
-//        )->pay()->render();
-//
-//        // Retrieve json format of Redirection (in this case you can handle redirection to bank gateway)
-//        return Payment::purchase(
-//            (new Invoice)->amount(1000),
-//            function($driver, $transactionId) {
-//
-//            }
-//        )->pay()->toJson();
 
-
-        $Amount=100;
-        $Email=Auth::user()->email;
-        $Mobile=Auth::user()->tel;
-        $Description="فروش";
-
-        //Redirect to URL You can do it also by creating a form
-        $order = new zarinpal();
-
-        $res = $order->pay($Amount,$Email,$Mobile,$Description);
-
-        $status=checkout::create([
-            'user_id'       =>Auth::user()->id,
-            'price'         =>100,
-            'authority'     =>$res,
-            'description'   =>$Description,
-        ]);
-        if($status)
+//        $Amount=100;
+//        $Email=Auth::user()->email;
+//        $Mobile=Auth::user()->tel;
+//        $Description="فروش";
+//
+//        //Redirect to URL You can do it also by creating a form
+//        $order = new zarinpal();
+//
+//        $res = $order->pay($Amount,$Email,$Mobile,$Description);
+//
+//        $status=checkout::create([
+//            'user_id'       =>Auth::user()->id,
+//            'price'         =>100,
+//            'authority'     =>$res,
+//            'description'   =>$Description,
+//        ]);
+//        if($status)
+//        {
+//            return redirect('https://www.zarinpal.com/pg/StartPay/' . $res);
+//        }
+//        else
+//        {
+//            return redirect('/');
+//        }
+        $checkout=checkout::join('users','checkouts.user_id','=','users.id')
+                            ->orderby('checkouts.id','desc')
+                            ->select('checkouts.*','users.fname','users.lname')
+                            ->paginate(30);
+        foreach ($checkout as $item)
         {
-            return redirect('https://www.zarinpal.com/pg/StartPay/' . $res);
+             switch ($item->type)
+             {
+                 case 'event':$item->product=$this->get_events($item->product_id,NULL,NULL,NULL,NULL,NULL,'first')->event;
+                                break;
+                 default:$item->product='خطا';
+                                break;
+             }
+
+
+
+             $item->dateTime=($this->changeTimestampToShamsi( $item->created_at));
         }
-        else
-        {
-            return redirect('/');
-        }
+        return view('admin.checkout.checkout_accept')
+                    ->with('checkout',$checkout);
+
+
     }
 
     /**

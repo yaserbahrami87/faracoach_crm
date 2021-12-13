@@ -54,6 +54,7 @@
                                             {{csrf_field()}}
                                             {{method_field('PATCH')}}
                                             @if(Auth::user()->type==2)
+
                                                 <div class="input-group mb-1 mt-1 border-bottom border-1 pb-1 ">
                                                     <select class="form-control p-0" name="type" >
                                                         <option selected disabled>یک گزینه را انتخاب کنید</option>

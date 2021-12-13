@@ -53,6 +53,11 @@
                     <li><a href="/admin/education/students" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">لیست دانشجویان</span></a></li>
                 </ul>
             </li>
+            <li class=" nav-item"><a href="#"><span class="menu-title" data-i18n="Chat">مالی</span></a>
+                <ul class="menu-content">
+                    <li><a href="/admin/checkout" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">پرداختی ها</span></a></li>
+                </ul>
+            </li>
             <li class=" nav-item"><a href="#"><span class="menu-title" data-i18n="Chat"> کوچ ها</span></a>
                 <ul class="menu-content">
                     <li><a href="/admin/coach" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">همه کوچ ها</span></a></li>

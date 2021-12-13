@@ -289,6 +289,9 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     //categorygettingknows
     Route::resource('category_gettingknow','CategoryGettingknowController');
 
+    //Checkout
+    route::resource('/checkout','CheckoutController');
+
     // Page Builder
     Route::get('/pagebuilder',function()
     {
