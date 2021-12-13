@@ -182,11 +182,11 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="رمز عبور خود را وارد کنید" name="password" required autocomplete="current-password">
                     @error('password')
                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                        </span>
+                        <strong>{{ $message }}</strong>
+                    </span>
                     @enderror
                 </div>
                 <div class="form-group">
@@ -205,7 +205,7 @@
             <form method="POST" action="{{ route('login') }}">
                 {{csrf_field()}}
                 <div class="form-group row">
-                    <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                    <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="ایمیل خود را وارد کنید" value="{{ old('email') }}" required autocomplete="email" autofocus>
                     @error('email')
                     <span class="invalid-feedback" role="alert">
                          <strong>{{ $message }}</strong>
@@ -214,7 +214,7 @@
                 </div>
 
                 <div class="form-group row">
-                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="رمز عبور خود را وارد کنید" name="password" required autocomplete="current-password">
                     @error('password')
                     <span class="invalid-feedback" role="alert">
                          <strong>{{ $message }}</strong>

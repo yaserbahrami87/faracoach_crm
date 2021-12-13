@@ -286,7 +286,7 @@
                                     <select class="form-control p-0 @if(strlen($user->married)==0) is-invalid  @else is-valid  @endif" id="exampleFormControlSelect1" name="married" >
                                         <option selected disabled>انتخاب کنید</option>
                                         <option value="0" {{ old('married',$user->married)=="0" ? 'selected='.'"'.'selected'.'"' : '' }} >مجرد</option>
-                                        <option value="1" {{ old('married',$user->married)=="1" ? 'selected='.'"'.'selected'.'"' : '' }} >مجرد</option>
+                                        <option value="1" {{ old('married',$user->married)=="1" ? 'selected='.'"'.'selected'.'"' : '' }} >متاهل</option>
                                     </select>
                                 </div>
                             </div>
