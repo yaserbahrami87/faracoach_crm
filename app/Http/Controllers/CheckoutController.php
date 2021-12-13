@@ -263,7 +263,9 @@ class CheckoutController extends BaseController
                                 ->with('msg',$msg)
                                 ->with('alert',$alert);
 
-                } else {
+                }
+                else
+                {
 //                    return 'خطا در انجام عملیات';
                     $checkout->description='خطا در انجام عملیات';
                     $checkout->save();

@@ -305,12 +305,12 @@
                 <table class="table table-bordered table-striped">
                     @foreach($booking as $item)
                         <tr class="@if($item->caption_status=='رزرو شد') bg-warning @elseif($item->caption_status=='برگزارشد') bg-success @endif">
-                            <td>{{$loop->iteration}}</td>
+                            <td>{{$item->iteration}}</td>
                             <td class="p-0">
                                 <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="rounded-circle "  width="50px" height="50px" />
                             </td>
                             <td>
-                                <a class="btn-modal-introduced" href="{{$item->id}}"   >{{$item->fname}} {{$item->lname}}</a>
+                                    <a class="btn-modal-introduced" href="{{$item->id}}"   >{{$item->fname}} {{$item->lname}}</a>
                             </td>
 
                             <td>

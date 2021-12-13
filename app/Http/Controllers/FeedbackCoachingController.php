@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\feedback_coaching;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class FeedbackCoachingController extends Controller
+class FeedbackCoachingController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -78,12 +79,21 @@ class FeedbackCoachingController extends Controller
             'summary_comments.required'     =>'امتیاز "جمع بندی نظرات شما در یک جمله" الزامی است',
             'satisfaction.required'         =>'امتیاز "پیشنهاد این کوچ به دیگران" الزامی است',
         ]);
+
+        $coach=User::join('bookings','users.id','=','bookings.user_id')
+                        ->where('bookings.id','=',$request->booking_id)
+                        ->select('users.*','bookings.start_date')
+                        ->first();
+
+
         $status=feedback_coaching::create($request->all()+[
                 'user_id'   =>Auth::user()->id,
             ]);
         if($status)
         {
             alert()->success('بازخورد با موفقیت ثبت شد','پیام')->persistent('بستن');
+            $msg='بازخورد جلسه '.$coach->start_date."  شما در سیستم ثبت شد \n فراکوچ ";
+            $this->sendSms($coach->tel,$msg);
         }
         else
         {

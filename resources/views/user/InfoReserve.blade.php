@@ -1,72 +1,7 @@
 @extends('user.master.index')
 @section('content')
     <div class="col-md-6">
-        <div class="card card-user">
-            <div class="card-header bg-secondary">
-                <a class="btn p-0 m-0" data-toggle="collapse" href="#infoReserve" role="button" aria-expanded="true" aria-controls="infoReserve">
-                    <h5 class="card-title m-0  text-light">اطلاعات جلسه</h5>
-                </a>
-            </div>
-            <div class="card-body collapse show bg-secondary-light border-secondary" id="infoReserve">
-                <div class="row">
-                    <div class="col-md-6 px-1">
-                        <div class="form-group">
-                            <label>موضوع رزرو</label>
-                            <input type="text" class="form-control " placeholder="نام را وارد کنید" value="{{$user->subject}}"    disabled="disabled"  />
-                        </div>
-                    </div>
-                    <div class="col-md-6 px-1">
-                        <div class="form-group">
-                            <label>نوع رزرو</label>
-                            <input type="text" class="form-control " placeholder="نام را وارد کنید" value="{{$user->type_booking}}"    disabled="disabled"  />
-                        </div>
-                    </div>
-                    <div class="col-md-12 px-1">
-                        <div class="form-group">
-                            <label>توضیحات</label>
-                            <textarea class="form-control"rows="3" disabled="disabled">{{$user->details}}</textarea>
-                        </div>
-                    </div>
 
-                    <div class="col-md-4 px-1">
-                        <div class="form-group">
-                            <label>تاریخ رزرو</label>
-                            <input type="text" class="form-control " placeholder="نام را وارد کنید" value="{{$booking->start_date}}"    disabled="disabled"  />
-                        </div>
-                    </div>
-                    <div class="col-md-4 px-1">
-                        <div class="form-group">
-                            <label>ساعت شروع</label>
-                            <input type="text" class="form-control " placeholder="نام را وارد کنید" value="{{$booking->start_time}}"    disabled="disabled"  />
-                        </div>
-                    </div>
-                    <div class="col-md-4 px-1">
-                        <div class="form-group">
-                            <label>ساعت پایان</label>
-                            <input type="text" class="form-control " placeholder="نام را وارد کنید" value="{{$booking->end_time}}"    disabled="disabled"  />
-                        </div>
-                    </div>
-                    <div class="col-md-12 px-1">
-                        <div class="card">
-                            <div class="card-body" id="div_show_fi">
-                                <span class="float-right">قیمت </span>
-                                <span class="float-left">{{number_format($booking->fi)}} تومان</span>
-                                <br/>
-                                <span class="float-right">کوپن تخفیف </span>
-                                <span class="float-left">{{$booking->coupon}} </span>
-                                <br/>
-                                <span class="float-right">کد تخفیف </span>
-                                <span class="float-left">{{$booking->off}} %</span>
-                                <br/>
-                                <span class="float-right">قیمت نهایی</span>
-                                <span class="float-left">{{number_format($booking->final_off)}} تومان</span>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="card card-user ">
             <div class="card-header  bg-secondary">
                 <a class="btn m-0 p-0" data-toggle="collapse" href="#preSession" role="button" aria-expanded="false" aria-controls="preSession">
@@ -80,6 +15,58 @@
                 </div>
             </div>
         </div>
+        @if($booking->start_date<$dateNow)
+            <div class="card card-user">
+                <div class="card-header bg-secondary">
+                    <a class="btn m-0 p-0" data-toggle="collapse" href="#homework" role="button" aria-expanded="false" aria-controls="homework">
+                        <h5 class="card-title m-0 p-0  text-light">تکلیف</h5>
+                    </a>
+                </div>
+                <div class="card-body collapse show bg-secondary-light border-secondary" id="homework" >
+                    @if($homework->count()>0)
+                        @foreach($homework as $item)
+                            <div class="form-group border-bottom">
+                                @if($loop->iteration==1)
+                                    <label for="text">محتوی تکلیف مراجع را در کادر زیر وارد کنید</label>
+                                @else
+                                    <label for="text">توضیحات</label>
+                                @endif
+                                <textarea class="form-control" id="text" rows="3" name="text" disabled >{{$item->text}}</textarea>
+                                @if(!is_null($item->attach))
+                                    <label for="attach">فایل ضمیمه</label>
+                                    <a href="{{asset('/documents/homework/'.$item->attach)}}" class="">
+                                        <i class="bi bi-paperclip font-weight-bold"></i>
+                                    </a>
+                                @endif
+                                <small class="text-muted float-left">{{$item->time_fa." ".$item->date_fa}}</small>
+                            </div>
+                        @endforeach
+                        <form method="post" action="/panel/homework" enctype="multipart/form-data">
+                            {{csrf_field()}}
+                            <input type="hidden" value="{{$booking->booking_id}}" name="booking_id"/>
+                            <input type="hidden" value="{{$homework[0]->id}}" name="homework_id_answer"/>
+                            <div class="form-group">
+                                <label for="text">توضیحات:*</label>
+                                <textarea class="form-control" id="text" rows="3" name="text" >{{old('text')}}</textarea>
+                            </div>
+                            <input type="file" class="form-control" name="attach" />
+                            <button type="submit" class="btn btn-primary mt-3">ثبت</button>
+                        </form>
+                    @else
+                        <form method="post" action="/panel/homework" enctype="multipart/form-data">
+                            {{csrf_field()}}
+                            <input type="hidden" value="{{$booking->booking_id}}" name="booking_id"/>
+                            <div class="form-group">
+                                <label for="text">محتوی تکلیف مراجع را در کادر زیر وارد کنید</label>
+                                <textarea class="form-control" id="text" rows="3" name="text" >{{old('text')}}</textarea>
+                            </div>
+                            <input type="file" class="form-control" name="attach" />
+                            <button type="submit" class="btn btn-primary mt-3">ثبت</button>
+                        </form>
+                    @endif
+                </div>
+            </div>
+        @endif
         <div class="card card-user ">
             <div class="card-header  bg-secondary">
                 <a class="btn m-0 p-0" data-toggle="collapse" href="#status_reserve" role="button" aria-expanded="false" aria-controls="status_reserve">
@@ -336,60 +323,9 @@
             </div>
         </div>
 
-        @if($booking->start_date<$dateNow)
-            <div class="card card-user">
-                <div class="card-header bg-secondary">
-                    <a class="btn m-0 p-0" data-toggle="collapse" href="#homework" role="button" aria-expanded="false" aria-controls="homework">
-                        <h5 class="card-title m-0 p-0  text-light">تکلیف</h5>
-                    </a>
-                </div>
-                <div class="card-body collapse show bg-secondary-light border-secondary" id="homework" >
-                    @if($homework->count()>0)
-                        @foreach($homework as $item)
-                            <div class="form-group border-bottom">
-                                @if($loop->iteration==1)
-                                    <label for="text">محتوی تکلیف مراجع را در کادر زیر وارد کنید</label>
-                                @else
-                                    <label for="text">توضیحات</label>
-                                @endif
-                                <textarea class="form-control" id="text" rows="3" name="text" disabled >{{$item->text}}</textarea>
-                                @if(!is_null($item->attach))
-                                    <label for="attach">فایل ضمیمه</label>
-                                    <a href="{{asset('/documents/homework/'.$item->attach)}}" class="">
-                                        <i class="bi bi-paperclip font-weight-bold"></i>
-                                    </a>
-                                @endif
-                                <small class="text-muted float-left">{{$item->time_fa." ".$item->date_fa}}</small>
-                            </div>
-                        @endforeach
-                        <form method="post" action="/panel/homework" enctype="multipart/form-data">
-                            {{csrf_field()}}
-                            <input type="hidden" value="{{$booking->booking_id}}" name="booking_id"/>
-                            <input type="hidden" value="{{$homework[0]->id}}" name="homework_id_answer"/>
-                            <div class="form-group">
-                                <label for="text">توضیحات:*</label>
-                                <textarea class="form-control" id="text" rows="3" name="text" >{{old('text')}}</textarea>
-                            </div>
-                            <input type="file" class="form-control" name="attach" />
-                            <button type="submit" class="btn btn-primary mt-3">ثبت</button>
-                        </form>
-                    @else
-                        <form method="post" action="/panel/homework" enctype="multipart/form-data">
-                            {{csrf_field()}}
-                            <input type="hidden" value="{{$booking->booking_id}}" name="booking_id"/>
-                            <div class="form-group">
-                                <label for="text">محتوی تکلیف مراجع را در کادر زیر وارد کنید</label>
-                                <textarea class="form-control" id="text" rows="3" name="text" >{{old('text')}}</textarea>
-                            </div>
-                            <input type="file" class="form-control" name="attach" />
-                            <button type="submit" class="btn btn-primary mt-3">ثبت</button>
-                        </form>
-                    @endif
-                </div>
-            </div>
-        @endif
     </div>
     <div class="col-md-6">
+
         <div class="card card-user">
             <div class="card-header bg-secondary">
                 <a class="btn p-0 m-0" data-toggle="collapse" href="#infoProfile" role="button" aria-expanded="false" aria-controls="infoProfile">
@@ -442,12 +378,78 @@
             </div>
         </div>
         <div class="card card-user">
+            <div class="card-header bg-secondary">
+                <a class="btn p-0 m-0" data-toggle="collapse" href="#infoReserve" role="button" aria-expanded="true" aria-controls="infoReserve">
+                    <h5 class="card-title m-0  text-light">اطلاعات جلسه</h5>
+                </a>
+            </div>
+            <div class="card-body collapse bg-secondary-light border-secondary" id="infoReserve">
+                <div class="row">
+                    <div class="col-md-6 px-1">
+                        <div class="form-group">
+                            <label>موضوع رزرو</label>
+                            <input type="text" class="form-control " placeholder="نام را وارد کنید" value="{{$user->subject}}"    disabled="disabled"  />
+                        </div>
+                    </div>
+                    <div class="col-md-6 px-1">
+                        <div class="form-group">
+                            <label>نوع رزرو</label>
+                            <input type="text" class="form-control " placeholder="نام را وارد کنید" value="{{$user->type_booking}}"    disabled="disabled"  />
+                        </div>
+                    </div>
+                    <div class="col-md-12 px-1">
+                        <div class="form-group">
+                            <label>توضیحات</label>
+                            <textarea class="form-control"rows="3" disabled="disabled">{{$user->details}}</textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 px-1">
+                        <div class="form-group">
+                            <label>تاریخ رزرو</label>
+                            <input type="text" class="form-control " placeholder="نام را وارد کنید" value="{{$booking->start_date}}"    disabled="disabled"  />
+                        </div>
+                    </div>
+                    <div class="col-md-4 px-1">
+                        <div class="form-group">
+                            <label>ساعت شروع</label>
+                            <input type="text" class="form-control " placeholder="نام را وارد کنید" value="{{$booking->start_time}}"    disabled="disabled"  />
+                        </div>
+                    </div>
+                    <div class="col-md-4 px-1">
+                        <div class="form-group">
+                            <label>ساعت پایان</label>
+                            <input type="text" class="form-control " placeholder="نام را وارد کنید" value="{{$booking->end_time}}"    disabled="disabled"  />
+                        </div>
+                    </div>
+                    <div class="col-md-12 px-1">
+                        <div class="card">
+                            <div class="card-body" id="div_show_fi">
+                                <span class="float-right">قیمت </span>
+                                <span class="float-left">{{number_format($booking->fi)}} تومان</span>
+                                <br/>
+                                <span class="float-right">کوپن تخفیف </span>
+                                <span class="float-left">{{$booking->coupon}} </span>
+                                <br/>
+                                <span class="float-right">کد تخفیف </span>
+                                <span class="float-left">{{$booking->off}} %</span>
+                                <br/>
+                                <span class="float-right">قیمت نهایی</span>
+                                <span class="float-left">{{number_format($booking->final_off)}} تومان</span>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card card-user">
             <div class="card-header  bg-secondary">
                 <a class="btn p-0 m-0  text-light" data-toggle="collapse" href="#history" role="button" aria-expanded="false" aria-controls="history">
                     <h5 class="card-title m-0 p-0  text-light">سوابق جلسات - {{$history->count()}} جلسه </h5>
                 </a>
             </div>
-            <div class="card-body collapse show bg-secondary-light border-secondary" id="history">
+            <div class="card-body collapse  bg-secondary-light border-secondary" id="history">
                 @foreach($history as $item)
                     <div class="row border-bottom mb-2">
                         <div class="col-md-6 px-1">

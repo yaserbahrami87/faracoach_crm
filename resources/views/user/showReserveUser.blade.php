@@ -1,5 +1,5 @@
-@extends('panelUser.master.index')
-@section('rowcontent')
+@extends('user.master.index')
+@section('content')
 
     <div class="col-md-8">
         <div class="card card-user">
@@ -23,6 +23,53 @@
                         <textarea class="form-control" id="presession"  name="presession" rows="3" disabled readonly>{{$reserve->presession}}</textarea>
                     </div>
                 @endif
+
+                    @if($reserve->start_date<=$dateNow)
+                        <div class="card card-user">
+                            <div class="card-header bg-info">
+                                <a class="btn m-0 p-0" data-toggle="collapse" href="#homework" role="button" aria-expanded="false" aria-controls="homework">
+                                    <h5 class="card-title m-0 p-0">تکلیف</h5>
+                                </a>
+                            </div>
+                            <div class="card-body collapse show" id="homework" >
+                                @if($homework->count()>0)
+                                    @foreach($homework as $item)
+                                        <div class="form-group border-bottom">
+                                            @if($loop->iteration==1)
+                                                <label for="text">تکلیف ارائه شده توسط کوچ:</label>
+                                            @else
+                                                <label for="text">توضیحات</label>
+                                            @endif
+                                            <textarea class="form-control" id="text" rows="3" name="text" disabled >{{$item->text}}</textarea>
+                                            @if(!is_null($item->attach))
+                                                <label for="attach">فایل ضمیمه</label>
+                                                <a href="{{asset('/documents/homework/'.$item->attach)}}" class="">
+                                                    <i class="bi bi-paperclip font-weight-bold"></i>
+                                                </a>
+                                            @endif
+                                            <small class="text-muted float-left">{{$item->time_fa." ".$item->date_fa}}</small>
+                                        </div>
+                                    @endforeach
+                                    <form method="post" action="/panel/homework" enctype="multipart/form-data">
+                                        {{csrf_field()}}
+                                        <input type="hidden" value="{{$reserve->booking_id}}" name="booking_id"/>
+                                        <input type="hidden" value="{{$homework[0]->id}}" name="homework_id_answer"/>
+                                        <div class="form-group">
+                                            <label for="text">توضیحات:*</label>
+                                            <textarea class="form-control" id="text" rows="3" name="text" >{{old('text')}}</textarea>
+                                        </div>
+                                        <input type="file" class="form-control" name="attach" />
+                                        <button type="submit" class="btn btn-primary mt-3">ثبت</button>
+                                    </form>
+                                @else
+                                    <div class="alert alert-warning">
+                                        تکلیفی توسط کوچ ارائه نشده است
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                    @endif
+
                 @if(($reserve->start_date<$dateNow)&&($reserve->status_reserve==3))
                     <p>دانشپذیر گرامی</p>
                     <p class="text-justify">یکی از مهم ترین مهارت های یک کوچ ارائه بازخورد سازنده است که توام با صداقت، صراحت و صمیمیت است.</p>
@@ -247,7 +294,7 @@
                 @else
                     <div class="alert alert-warning">جلسه کوچینک هنوز انجام نشده است</div>
                 @endif
-                @if($reserve->start_date>$dateNow)
+                @if($reserve->start_date>$dateNow && ($reserve->status_reserve!=4))
                     <form method="POST" action="/booking/{{$reserve->booking_id}}" onsubmit="return confirm('آیا از لغو جلسه اطمینان دارید؟')">
                         {{csrf_field()}}
                         {{method_field('PATCH')}}
@@ -257,53 +304,6 @@
                         </button>
                     </form>
                 @endif
-
-                    @if($reserve->start_date<=$dateNow)
-                        <div class="card card-user">
-                            <div class="card-header bg-info">
-                                <a class="btn m-0 p-0" data-toggle="collapse" href="#homework" role="button" aria-expanded="false" aria-controls="homework">
-                                    <h5 class="card-title m-0 p-0">تکلیف</h5>
-                                </a>
-                            </div>
-                            <div class="card-body collapse show" id="homework" >
-                                @if($homework->count()>0)
-                                    @foreach($homework as $item)
-                                        <div class="form-group border-bottom">
-                                            @if($loop->iteration==1)
-                                                <label for="text">تکلیف ارائه شده توسط کوچ:</label>
-                                            @else
-                                                <label for="text">توضیحات</label>
-                                            @endif
-                                            <textarea class="form-control" id="text" rows="3" name="text" disabled >{{$item->text}}</textarea>
-                                            @if(!is_null($item->attach))
-                                                <label for="attach">فایل ضمیمه</label>
-                                                <a href="{{asset('/documents/homework/'.$item->attach)}}" class="">
-                                                    <i class="bi bi-paperclip font-weight-bold"></i>
-                                                </a>
-                                            @endif
-                                            <small class="text-muted float-left">{{$item->time_fa." ".$item->date_fa}}</small>
-                                        </div>
-                                    @endforeach
-                                    <form method="post" action="/panel/homework" enctype="multipart/form-data">
-                                        {{csrf_field()}}
-                                        <input type="hidden" value="{{$reserve->booking_id}}" name="booking_id"/>
-                                        <input type="hidden" value="{{$homework[0]->id}}" name="homework_id_answer"/>
-                                        <div class="form-group">
-                                            <label for="text">توضیحات:*</label>
-                                            <textarea class="form-control" id="text" rows="3" name="text" >{{old('text')}}</textarea>
-                                        </div>
-                                        <input type="file" class="form-control" name="attach" />
-                                        <button type="submit" class="btn btn-primary mt-3">ثبت</button>
-                                    </form>
-                                @else
-                                    <div class="alert alert-warning">
-                                        تکلیفی توسط کوچ ارائه نشده است
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-                    @endif
-
             </div>
         </div>
     </div>

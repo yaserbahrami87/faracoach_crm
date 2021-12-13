@@ -7,130 +7,28 @@
             background: #eee !important;
         }
 
-        .btn-primary:hover,
-        .btn-primary:focus {
-            /*
-            background-color: #108d6f;
-            border-color: #108d6f;*/
-            box-shadow: none;
-            outline: none;
-        }
 
-        .btn-primary {
-            color: #fff;
-           /* background-color: #007b5e;
-            border-color: #007b5e;*/
-        }
-
-        section {
-            padding: 60px 0;
-        }
-
-        section .section-title {
+        .listFriends .box {
+            padding: 10px 0px;
+            background:#FFF;
             text-align: center;
-            /*color: #007b5e;*/
-            margin-bottom: 50px;
-            text-transform: uppercase;
         }
 
-        #team .card {
-            border: none;
-            background: #ffffff;
+        .listFriends .box-title {
+            color: #428bca;
         }
 
-        .image-flip:hover .backside,
-        .image-flip.hover .backside {
-            -webkit-transform: rotateY(0deg);
-            -moz-transform: rotateY(0deg);
-            -o-transform: rotateY(0deg);
-            -ms-transform: rotateY(0deg);
-            transform: rotateY(0deg);
-            border-radius: .25rem;
+        .listFriends  img {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 15px;
         }
 
-        .image-flip:hover .frontside,
-        .image-flip.hover .frontside {
-            -webkit-transform: rotateY(180deg);
-            -moz-transform: rotateY(180deg);
-            -o-transform: rotateY(180deg);
-            transform: rotateY(180deg);
+        .listFriends  .fa {
+            padding: 15px;
+            font-size: 30px;
         }
 
-        .mainflip {
-            -webkit-transition: 1s;
-            -webkit-transform-style: preserve-3d;
-            -ms-transition: 1s;
-            -moz-transition: 1s;
-            -moz-transform: perspective(1000px);
-            -moz-transform-style: preserve-3d;
-            -ms-transform-style: preserve-3d;
-            transition: 1s;
-            transform-style: preserve-3d;
-            position: relative;
-        }
-
-        .frontside {
-            position: relative;
-            -webkit-transform: rotateY(0deg);
-            -ms-transform: rotateY(0deg);
-            z-index: 2;
-            margin-bottom: 30px;
-        }
-
-        .backside {
-            position: absolute;
-            top: 0;
-            left: 0;
-            background: white;
-            -webkit-transform: rotateY(-180deg);
-            -moz-transform: rotateY(-180deg);
-            -o-transform: rotateY(-180deg);
-            -ms-transform: rotateY(-180deg);
-            transform: rotateY(-180deg);
-            -webkit-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
-            -moz-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
-            box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
-        }
-
-        .frontside,
-        .backside {
-            -webkit-backface-visibility: hidden;
-            -moz-backface-visibility: hidden;
-            -ms-backface-visibility: hidden;
-            backface-visibility: hidden;
-            -webkit-transition: 1s;
-            -webkit-transform-style: preserve-3d;
-            -moz-transition: 1s;
-            -moz-transform-style: preserve-3d;
-            -o-transition: 1s;
-            -o-transform-style: preserve-3d;
-            -ms-transition: 1s;
-            -ms-transform-style: preserve-3d;
-            transition: 1s;
-            transform-style: preserve-3d;
-            width: 100%;
-        }
-
-        .frontside .card,
-        .backside .card {
-            min-height: 270px;
-        }
-
-        .backside .card a {
-            font-size: 18px;
-            /* color: #007b5e !important;*/
-        }
-
-        .frontside .card .card-title,
-        .backside .card .card-title {
-            /*color: #007b5e !important; */
-        }
-
-        .frontside .card .card-body img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-        }
     </style>
 @endsection
 @section('row1')
@@ -193,66 +91,57 @@
                         <section id="team" class="pb-5">
                             <div class="container">
                                 <div class="row">
+                                    <div class="col-12">
+                                        <a class="btn btn-primary" data-toggle="collapse" href="#collapseFilter" role="button" aria-expanded="false" aria-controls="collapseFilter">
+                                            فیلتر <i class="bi bi-filter"></i>
+                                        </a>
+                                        <div class="collapse" id="collapseFilter">
+                                            <div class="card card-body">
+                                                <div class="row">
+                                                    <a href=#" class="btn btn-primary btn-sm col-6 col-sm-1 col-md-1 col-lg-1 colxl-1" >گران ترین</a>
+                                                    <a href=#" class="btn btn-primary btn-sm col-6  col-sm-1 col-md-1 col-lg-1 colxl-1" >ارزان ترین</a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
                                     <!-- Team member -->
                                     @foreach($coaches as $item)
-                                        <div class="col-xs-12 col-sm-6 col-md-4">
-                                            <div class="image-flip" >
-                                                <div class="mainflip flip-0">
-                                                    <div class="frontside">
-                                                        <div class="card">
-                                                            <div class="card-body text-center">
-                                                                <p>
-                                                                    @if(strlen($item->personal_image)>0)
-                                                                        <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="rounded-circle img-fluid" alt="..." />
-                                                                    @else
-                                                                        <img src="{{asset('/documents/users/default-avatar.png')}}" class="rounded-circle img-fluid" />
-                                                                    @endif
-                                                                <h4 class="card-title">{{$item->fname}} {{$item->lname}}</h4>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="backside">
-                                                        <div class="card">
-                                                            <div class="card-body text-center mt-4">
-                                                                <a href="/coach/{{$item->username}}">
-                                                                    <h4 class="card-title">{{$item->fname}} {{$item->lname}}</h4>
-                                                                </a>
-                                                                <ul class="list-inline">
-                                                                    @if(strlen($item->instagram)>0)
-                                                                        <li class="list-inline-item">
-                                                                            <a class="social-icon text-xs-center" target="_blank" href="https://www.instagram.com/{{$item->instagram}}">
-                                                                                <i class="fa fa-instagram"></i>
-                                                                            </a>
-                                                                        </li>
-                                                                    @endif
 
-                                                                    @if(strlen($item->telegram)>0)
-                                                                        <li class="list-inline-item">
-                                                                            <a class="social-icon text-xs-center" target="_blank" href="https://t.me/{{$item->telegram}}">
-                                                                                <i class="fa fa-telegram"></i>
-                                                                            </a>
-                                                                        </li>
-                                                                    @endif
-                                                                    @if(strlen($item->email)>0)
-                                                                        <li class="list-inline-item">
-                                                                            <a class="social-icon text-xs-center" target="_blank" href="mailto:{{$item->email}}">
-                                                                                <i class="fa fa-envelope"></i>
-                                                                            </a>
-                                                                        </li>
-                                                                    @endif
-                                                                    <li class="list-inline-item">
-                                                                        <a class="social-icon text-xs-center" target="_blank" href="tel:02191091121">
-                                                                            <i class="fa fa-phone"></i>
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
-                                                                <a href="/coach/{{$item->username}}" class="btn btn-primary btn-block">مشاهده اطلاعات</a>
-                                                            </div>
-                                                        </div>
+                                            <div class="col-lg-3 col-sm-6 listFriends mt-3" id="">
+                                                <div class="box shadow-lg p-1">
+                                                    <a href="/coach/{{$item->username}}">
+                                                        @if(strlen($item->personal_image)>0)
+                                                            <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="rounded-circle profile"  />
+                                                        @else
+                                                            <img src="{{asset('/documents/users/default-avatar.png')}}" class="rounded-circle profile" />
+                                                        @endif
+                                                    </a>
+
+
+                                                    <div class="box-title mt-2">
+                                                        <a href="/coach/{{$item->username}}" class="font-weight-bold">
+                                                        {{$item->fname.' '.$item->lname}}
+                                                        </a>
+                                                    </div>
+
+                                                    <div class="box-text mt-1" dir="ltr">
+                                                        <span>
+                                                            @if($item->fi==0 || $item->fi=='')
+                                                                <p> هزینه هر جلسه رایگان </p>
+                                                            @else
+                                                                <p> هزینه هر جلسه {{number_format($item->fi)}} تومان </p>
+                                                            @endif
+                                                        </span>
+                                                    </div>
+
+                                                    <div class="icons">
+                                                        <a class="btn btn-primary btn-sm d-block " data-toggle="tooltip" data-placement="bottom" href="/coach/{{$item->username}}" >
+                                                            مشاهده اطلاعات
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
                                     @endforeach
                                     <!-- ./Team member -->
 

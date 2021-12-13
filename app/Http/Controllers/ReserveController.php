@@ -6,6 +6,7 @@ use App\checkout;
 use App\coach;
 use App\homework;
 use App\reserve;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\booking;
@@ -84,7 +85,7 @@ class ReserveController extends BaseController
             ->get();
 
         $dateNow=$this->dateNow;
-        return view('panelUser.showReserveUser')
+        return view('user.showReserveUser')
                     ->with('reserve',$reserve)
                     ->with('dateNow',$dateNow)
                     ->with('booking',$booking)
@@ -235,8 +236,9 @@ class ReserveController extends BaseController
 //            return view('formReserveBills')
 //                ->with('reserve',$reserve)
 //                ->with('status',NULL);
-            alert()->success("تاریخ مورد نظر به سبد شما اضافه شد.\n جهت تکمیل به سبد خرید خود مراجعه کنید.")->persistent('بستن');
-            return "<script>window.location.reload()</script>";
+            //alert()->success("تاریخ مورد نظر به سبد شما اضافه شد.\n جهت تکمیل به سبد خرید خود مراجعه کنید.")->persistent('بستن');
+            return "<script>window.location='/cart'</script>";
+
         }
         else
         {
@@ -363,15 +365,30 @@ class ReserveController extends BaseController
             $status = $reserve->update($request->all());
             $booking = booking::where('id', '=', $reserve->booking_id)
                         ->first();
+            $user=User::join('reserves','reserves.user_id','=','users.id')
+                ->join('bookings','bookings.id','=','reserves.booking_id')
+                ->where('bookings.id', '=', $reserve->booking_id)
+                ->select('users.*')
+                ->first();
+
+
             $booking->status = $request->status;
             $booking->save();
+
+
+
             if ($status) {
                 if($request->status=="3")
                 {
-
                     $coach->count_meeting=$coach->count_meeting+1;
                     $coach->save();
+
+                    $msg='لطفا نسبت به تکمیل فرم ارزیابی جلسه '.$booking->start_date." اقدام نمایید \n فراکوچ ";
+                    $this->sendSms($user->tel,$msg);
+
                 }
+
+
 
                 alert()->success('گزارش جلسه با موفقیت ثبت شد', 'پیام')->persistent('بستن');
             } else {
@@ -427,9 +444,17 @@ class ReserveController extends BaseController
         //چک کردن تعداد رزروهای ناقص کامل نشده در سبد خرید
         $cart=$this->get_cartUser();
 //        $cart=$this->get_reserve(NULL,Auth::user()->id,NULL,NULL,NULL,0,'get');
+        if($cart->count()==0)
+        {
+            alert()->warning('سبد خرید شما خالی می باشد')->persistent('بستن');
+            return redirect('/coaches/all');
+        }
+        else
+        {
+            return view('cart')
+                ->with('cart',$cart);
+        }
 
-        return view('cart')
-            ->with('cart',$cart);
 
 
     }

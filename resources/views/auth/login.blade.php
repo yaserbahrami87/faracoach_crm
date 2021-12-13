@@ -24,7 +24,7 @@
             margin-top: -3%;
             margin-bottom: -9%;
 
-            padding: 10%;
+            padding: 2%;
             margin-left: 30%;
         }
         .form-new{
@@ -66,6 +66,82 @@
             border-top-right-radius: .25rem;
             color: white;
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        .login-container{
+            margin-top: 5%;
+            margin-bottom: 5%;
+        }
+        .login-form-1{
+            padding: 5%;
+            box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+        }
+        .login-form-1 h3{
+            text-align: center;
+            color: #333;
+        }
+        .login-form-2{
+            padding: 5%;
+            background: #0062cc;
+            box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+        }
+        .login-form-2 h3{
+            text-align: center;
+            color: #fff;
+        }
+        .login-container form{
+            padding: 10%;
+        }
+        .btnSubmit
+        {
+            width: 50%;
+            border-radius: 1rem;
+            padding: 1.5%;
+            border: none;
+            cursor: pointer;
+        }
+        .login-form-1 .btnSubmit{
+            font-weight: 600;
+            color: #fff;
+            background-color: #0062cc;
+        }
+        .login-form-2 .btnSubmit{
+            font-weight: 600;
+            color: #0062cc;
+            background-color: #fff;
+        }
+        .login-form-2 .ForgetPwd{
+            color: #fff;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .login-form-1 .ForgetPwd{
+            color: #0062cc;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
     </style>
 @endsection
 @section('row1')
@@ -81,137 +157,84 @@
 
 
 
-
-
-
-
-
-<div class="container register">
+<div class="container login-container">
     <div class="row">
-        <div class="col-md-12">
-            @if($errors->any())
-                <div class="col-12">
-                    <div class="alert alert-danger" role="alert">
-                        @foreach($errors->all() as $error)
-                            <li>{{$error}}</li>
-                        @endforeach
-                    </div>
-                </div>
-            @endif
-            <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">ورود با شماره همراه</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">ورود با ایمیل</a>
-                </li>
-            </ul>
-            <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active text-align form-new" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    <div class="row register-form">
-                        <div class="col-md-12">
-                            <form method="POST" action="{{ route('login') }}">
-                                {{csrf_field()}}
-                                <div class="form-group row">
-                                    <label for="exampleInputEmail1">شماره همراه:</label>
-                                    <input type="hidden" id="tel_org" value="{{ old('email') }}" name="email"/>
-                                    <input id="tel" type="tel" class="form-control @error('email') is-invalid @enderror"  value="{{ old('email') }}" required autocomplete="email" autofocus>
-                                    @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="exampleInputEmail1">{{ __('رمز عبور:') }}</label>
-                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-                                    @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="form-group row mb-0">
-                                    <div class="col-md-8 offset-md-4 mb-1">
-                                        <button type="submit" class="btn btn-primary mb-1">
-                                            {{ __('ورود') }}
-                                        </button>
-                                        <a class="btn btn-link  btn-light mb-1" href="/loginSMS">
-                                            {{ __('ورود بدون رمز') }}
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="form-group row m-0 p-0">
-                                    <div class="col-md-6 col-12">
-                                        <a class="btn text-light mb-1" href="/register">
-                                            {{ __('ثبت نام') }}
-                                        </a>
-                                        @if (Route::has('password.request'))
-                                            <a class="btn text-light mb-1" href="{{ route('password.request') }}">
-                                                {{ __('رمز را فراموش کردید؟') }}
-                                            </a>
-                                        @endif
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade show text-align form-new" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                    <div class="row register-form">
-                        <div class="col-md-12">
-                            <form method="POST" action="{{ route('login') }}">
-                                {{csrf_field()}}
-                                <div class="form-group row">
-                                    <label for="exampleInputEmail1">ایمیل:</label>
-                                    <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                                    @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-
-                                <div class="form-group row">
-                                    <label for="exampleInputEmail1">{{ __('رمز عبور:') }}</label>
-                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-                                    @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="form-group row mb-0">
-                                    <div class="col-md-8 offset-md-4 mb-1">
-                                        <button type="submit" class="btn btn-primary mb-1">
-                                            {{ __('ورود') }}
-                                        </button>
-                                        <a class="btn btn-link  btn-light mb-1" href="/loginSMS">
-                                            {{ __('ورود بدون رمز') }}
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="form-group row m-0 p-0">
-                                    <div class="col-md-6 col-12">
-                                        <a class="btn text-light mb-1" href="/register">
-                                            {{ __('ثبت نام') }}
-                                        </a>
-                                        @if (Route::has('password.request'))
-                                            <a class="btn text-light mb-1" href="{{ route('password.request') }}">
-                                                {{ __('رمز را فراموش کردید؟') }}
-                                            </a>
-                                        @endif
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+        @if($errors->any())
+            <div class="col-12">
+                <div class="alert alert-danger" role="alert">
+                    @foreach($errors->all() as $error)
+                        <li>{{$error}}</li>
+                    @endforeach
                 </div>
             </div>
+        @endif
+        <div class="col-md-6 login-form-1">
+            <h3>ورود با شماره همراه</h3>
+            <form method="post" action="{{ route('login') }}">
+                {{csrf_field()}}
+                <div class="form-group">
+                    <input type="hidden" id="tel_org" value="{{ old('email') }}" name="email"/>
+                    <input id="tel" type="tel" class="form-control @error('email') is-invalid @enderror"  value="{{ old('email') }}" required autocomplete="email" autofocus>
+                    @error('email')
+                    <span class="invalid-feedback" role="alert">
+                         <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                    @error('password')
+                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                        </span>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btnSubmit" value="ورود" />
+                </div>
+                <div class="form-group">
+                    <a href="{{ route('password.request') }}" class="ForgetPwd">فراموشی رمز؟</a>
+                    <a class="btn btn-link  btn-primary text-light mb-1" href="/loginSMS">
+                        {{ __('ورود با رمز یکبار مصرف') }}
+                    </a>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6 login-form-2">
+            <h3>ورود با ایمیل</h3>
+            <form method="POST" action="{{ route('login') }}">
+                {{csrf_field()}}
+                <div class="form-group row">
+                    <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                    @error('email')
+                    <span class="invalid-feedback" role="alert">
+                         <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+
+                <div class="form-group row">
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                    @error('password')
+                    <span class="invalid-feedback" role="alert">
+                         <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btnSubmit" value="ورود" />
+                </div>
+                <div class="form-group">
+                    <a href="{{ route('password.request') }}" class="ForgetPwd">فراموشی رمز؟</a>
+                    <a class="btn btn-link  btn-light mb-1" href="/loginSMS">
+                        {{ __('ورود با رمز یکبار مصرف') }}
+                    </a>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+
 
 @endsection
 
@@ -223,6 +246,7 @@
         var intl=intlTelInput(input,{
             formatOnDisplay:false,
             separateDialCode:true,
+            autoPlaceholder:'off',
             preferredCountries:["ir", "gb"]
         });
 

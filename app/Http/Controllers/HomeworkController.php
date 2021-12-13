@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\homework;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -42,6 +43,12 @@ class HomeworkController extends BaseController
             'attach'                =>'nullable|mimes:jpeg,jpg,pdf,doc,docx|max:600'
         ]);
 
+        $user=User::join('reserves','users.id','=','reserves.user_id')
+            ->join('bookings','reserves.booking_id','=','bookings.id')
+            ->where('bookings.id','=',$request->booking_id)
+            ->select('users.*','bookings.start_date')
+            ->first();
+
 
         $status=homework::create($request->all()+
         [
@@ -50,8 +57,6 @@ class HomeworkController extends BaseController
             'date_fa'           =>$this->dateNow,
             'time_fa'           =>$this->timeNow,
         ]);
-
-
 
         if($status)
         {
@@ -64,6 +69,8 @@ class HomeworkController extends BaseController
                 $status->attach=$attach;
                 $status->save();
             }
+
+//            $this->sendSms($user->tel,'تکلیف جلسه کوچینگ '.$user->start_date." شما توسط کوچ در پورتال قرار گرفت.\n فراکوچ " );
             alert()->success('تکلیف با موفقیت ثبت شد')->persistent('بستن');
         }
         else

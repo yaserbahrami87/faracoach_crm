@@ -156,6 +156,7 @@ class CoachController extends BaseController
                 ->where('users.id', '=', $user->id)
                 ->first();
 
+
             $feedbacks=coach::join('bookings', 'coaches.user_id', '=', 'bookings.user_id')
                     ->join('feedback_coachings','bookings.id','=','feedback_coachings.booking_id')
                     ->join('users','users.id','=','feedback_coachings.user_id')

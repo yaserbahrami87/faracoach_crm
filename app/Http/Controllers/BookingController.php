@@ -518,11 +518,10 @@ class BookingController extends BaseController
                     break;
             }
 
-
             $item->caption_status=$this->get_statusBookings($item->status);
 
         }
-        return view('panelUser.booking')
+        return view('user.booking')
             ->with('booking', $booking)
             ->with('dateNow', $this->dateNow);
     }

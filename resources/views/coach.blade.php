@@ -287,7 +287,13 @@
                                 <span class="fa fa-star p-1"></span>
                             </div>
                             <div>
-                                <div class=" mt-3"> ارزش رزرو جلسه : {{number_format($coach->fi)}} تومان</div>
+                                <div class=" mt-3"> ارزش رزرو جلسه :
+                                    @if($coach->fi==0 || $coach->fi=='')
+                                        رایگان می باشد
+                                    @else
+                                        {{number_format($coach->fi)}} تومان
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -54,11 +54,14 @@
         <table class="table border table-hover table-striped">
             <tr>
                 <th></th>
+                <th>کد جلسه</th>
                 <th scope="col">تاریخ شروع</th>
                 <th scope="col">ساعت شروع</th>
                 <th scope="col">ساعت پایان</th>
                 <th scope="col">مدت جلسه</th>
-                <th scope="col">وضعیت</th>
+                @if(Auth::user()->status_coach==1)
+                    <th scope="col">وضعیت</th>
+                @endif
                 @if(Auth::user()->status_coach==1)
                     <th scope="col">حذف</th>
                 @else
@@ -81,7 +84,10 @@
                     <td>
                         <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="img-circle"  width="50px" height="50px"/>
                     </td>
-                    <td>
+                    <td class="text-center">
+                        <a href="/panel/reserve/{{$item->id}}">{{$item->id}}</a>
+                    </td>
+                    <td class="text-center">
                         @if(Auth::user()->status_coach==1 )
 
                             @if($item->status==1  || ($item->caption_status=='باطل شده'))
@@ -93,12 +99,14 @@
                             <a href="/panel/reserve/{{$item->id_reserves}}">{{$item->start_date}}</a>
                         @endif
                     </td>
-                    <td>{{$item->start_time}}</td>
-                    <td>{{$item->end_time}}</td>
-                    <td>{{$item->duration_booking}}</td>
-                    <td>{{$item->caption_status}}</td>
+                    <td class="text-center">{{$item->start_time}}</td>
+                    <td class="text-center">{{$item->end_time}}</td>
+                    <td class="text-center">{{$item->duration_booking}}</td>
+                    @if(Auth::user()->status_coach==1)
+                        <td>{{$item->caption_status}}</td>
+                    @endif
 
-                    @if(($item->start_date>$dateNow && Auth::user()->status_coach==1 && ($item['status'])!=0))
+                    @if((($item->start_date>$dateNow && Auth::user()->status_coach==1) && (($item['status'])!=0)&&($item['status']!=4)))
                         <td>
                             <form method="post" action="/panel/booking/{{$item->id}}" onsubmit="return confirm('آیا از حذف زمان رزرو اطمینان دارید؟');">
                                 {{ method_field('DELETE') }}
@@ -108,7 +116,7 @@
                                 </button>
                             </form>
                         </td>
-                    @elseif($item->start_date>$dateNow)
+                    @elseif($item->start_date>$dateNow && ($item['status']!=4))
                         <td>
                             <form method="POST" action="/booking/{{$item->booking_id}}" onsubmit="return confirm('آیا از لغو جلسه اطمینان دارید؟')">
                                 {{csrf_field()}}
