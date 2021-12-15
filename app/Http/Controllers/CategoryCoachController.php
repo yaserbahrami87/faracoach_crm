@@ -27,7 +27,7 @@ class CategoryCoachController extends BaseController
                 $item->status='غیرفعال';
             }
         }
-        return view('panelAdmin.categoryCoaches')
+        return view('admin.categoryCoaches')
                         ->with('categorycoaches',$categorycoaches);
     }
 
@@ -38,7 +38,7 @@ class CategoryCoachController extends BaseController
      */
     public function create()
     {
-        return view('panelAdmin.insertCategoryCoach');
+        return view('admin.insertCategoryCoach');
     }
 
     /**
@@ -97,7 +97,7 @@ class CategoryCoachController extends BaseController
      */
     public function edit(category_coach $category_coach)
     {
-       return view('panelAdmin.editCategoryCoaches')
+       return view('admin.editCategoryCoaches')
                 ->with('categorycoaches',$category_coach);
     }
 

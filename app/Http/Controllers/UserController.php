@@ -95,7 +95,7 @@ class UserController extends BaseController
                                   ->orwhere('followby_expert','=',NULL);
                         })
                         ->where('followups.flag','=',1)
-                        ->whereNotIn('users.type',[-1,2,3,0])
+                        ->whereNotIn('users.type',[-3,-2,-1,2,3,0])
                         ->select('users.*','followups.nextfollowup_date_fa')
                         ->orderby('followups.nextfollowup_date_fa','desc')
                         ->orderby('users.id','desc')
@@ -846,7 +846,9 @@ class UserController extends BaseController
                     return redirect('/admin/users/');
                     break;
                 case 'lead':
-                    $users = user::where('type','=',-1)
+                    $users = user::orwhere('type','=',-1)
+                        ->orwhere('type','=',-2)
+                        ->orwhere('type','=',-3)
                         ->orderby('id','desc')
 //                                ->paginate($this->countPage());
                         ->get();
@@ -896,7 +898,7 @@ class UserController extends BaseController
                     break;
             }
 
-                    $statics=$this->get_staticsCountUsers_admin();
+        $statics=$this->get_staticsCountUsers_admin();
 //        }
 
 

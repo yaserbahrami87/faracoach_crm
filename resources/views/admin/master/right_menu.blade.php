@@ -62,13 +62,12 @@
                 <ul class="menu-content">
                     <li><a href="/admin/coach" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">همه کوچ ها</span></a></li>
                     <li><a href="/admin/coach/request" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice Add">درخواست های همکاری</span></a></li>
+                    <li><a href="/admin/coach/reject" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >درخواست های رد شده</span></a></li>
                     <li><a href=" nav-item has-sub "><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice Add">موضوعات کوچ ها</span></a>
                         <ul class="menu-content">
                             <!--<li><a href="/portal/coworking_space_request"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">فضای کار اشتراکی</span></a></li>-->
-                            <li><a href="#" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">موضوعات</span></a></li>
-                            <li><a href="#" class="disabled"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice Add">جلسه منتورینگ و کوچینگ</span></a></li>
-                            <li><a href="#" class="disabled"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice Add">گواهینامه و معرفی نامه</span></a></li>
-                            <li><a href="#" class="disabled"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice Add">سایر درخواست ها</span></a></li>
+                            <li><a href="/admin/category_coach/" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">موضوعات</span></a></li>
+                            <li><a href="/admin/category_coach/create" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice Add">موضوعات جدید</span></a></li>
                         </ul>
                     </li>
 
