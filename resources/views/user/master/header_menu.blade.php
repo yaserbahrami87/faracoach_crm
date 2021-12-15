@@ -84,6 +84,7 @@
                         </span></a>
                         <div class="dropdown-menu pb-0">
                             <a class="dropdown-item" href="/panel/profile"><i class="bx bx-user mr-50"></i> ویرایش پروفایل</a>
+                            <a class="dropdown-item" href="/panel/user/password"><i class="bx bx-lock mr-50"></i> تغییر رمز</a>
                             <div class="dropdown-divider mb-0"></div>
                             <a class="dropdown-item" href="/logout" data-request="onLogout" data-request-data="redirect: '/'"><i class="bx bx-power-off mr-50"></i> خروج</a>
                         </div>

@@ -506,7 +506,7 @@ class AdminController extends BaseController
     public function changePasswordViewUser()
     {
         $user=Auth::user();
-        return view('panelUser.changePassword')
+        return view('user.changePassword')
                 ->with('user',$user);
 
     }
