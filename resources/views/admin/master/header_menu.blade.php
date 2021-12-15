@@ -32,6 +32,7 @@
                             <ul class="search-list"></ul>
                         </div>
                     </li>
+                    <!--
                     <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i class="ficon bx bx-bell bx-tada bx-flip-horizontal"></i><span class="badge badge-pill badge-danger badge-up">5</span></a>
                         <ul class="dropdown-menu dropdown-menu-media">
                             <li class="dropdown-menu-header">
@@ -70,6 +71,7 @@
                             <li class="dropdown-menu-footer"><a class="dropdown-item p-50 text-primary justify-content-center" href="javascript:void(0)">خواندن همه اعلان ها</a></li>
                         </ul>
                     </li>
+                    -->
                     <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                         <!--<div class="user-nav d-sm-flex d-none"><span class="user-name"></span></div>-->
                         <span>

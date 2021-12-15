@@ -126,7 +126,7 @@
     </div>
 @endsection
 
-@section('scriptfooter')
+@section('footerScript')
     <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
     <script>
         CKEDITOR.replace( 'ckeditor' );

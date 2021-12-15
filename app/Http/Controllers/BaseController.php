@@ -177,6 +177,8 @@ class BaseController extends Controller
     public function get_userTypes()
     {
         $types=[
+                '-3'    =>'مارکتینگ 3',
+                '-2'    =>'مارکتینگ 2',
                 '-1'    =>'خام',
                 '1'     =>'پیگیری نشده',
                 '2'     =>'مدیر',
@@ -195,6 +197,12 @@ class BaseController extends Controller
 
         switch($status)
         {
+            case "-3":return "مارکتینگ 3";
+                        break;
+            case "-2":return "مارکتینگ 2";
+                        break;
+            case "-1":return "مارکتینگ 1";
+                        break;
             case "1": return "پیگیری نشده";
                         break;
             case "2":return "مدیر";

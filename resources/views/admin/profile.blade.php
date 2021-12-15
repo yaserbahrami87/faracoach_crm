@@ -78,7 +78,9 @@
                                             <div class="input-group mt-1 ">
                                                 <select class="form-control p-0" name="type" >
                                                     <option selected disabled>یک گزینه را انتخاب کنید</option>
-                                                    <option value="-1" {{$user->type===-1 ? "selected":"" }} >مارکتینگ</option>
+                                                    <option value="-1" {{$user->type===-1 ? "selected":"" }} >مارکتینگ 1</option>
+                                                    <option value="-2" {{$user->type===-2 ? "selected":"" }} >مارکتینگ 2</option>
+                                                    <option value="-3" {{$user->type===-3 ? "selected":"" }} >مارکتینگ 3</option>
                                                     <option value="11" {{$user->type===1 ? "selected":"" }}>فروش</option>
                                                 </select>
                                             </div>
@@ -464,7 +466,7 @@
 
     </div>
     <div class="col-md-7">
-        @if((Auth::user()->id==$user->followby_expert||is_null($user->followby_expert))&& $user->type!=-1)
+        @if((Auth::user()->id==$user->followby_expert||is_null($user->followby_expert))&& $user->type!=-1&&$user->type!=-2&&$user->type!=-3 )
             @include('admin.insertFollowUp')
             <hr/>
         @elseif((Auth::user()->id==$user->followby_expert||is_null($user->followby_expert))&& $user->type!=5)
