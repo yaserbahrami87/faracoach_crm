@@ -421,6 +421,9 @@ Route::get('/coaches/all','CoachController@viewAllCoaches');
 Route::get('/coach/{coach}','CoachController@show');
 
 //Cart
+Route::post('/cart','CartController@store');
+Route::get('/cart/all','CartController@index');
+Route::get('/cart/{cart}','CartController@destroy');
 Route::get('/cart','ReserveController@showCart');
 
 //Category GettingKnow
@@ -429,10 +432,14 @@ Route::get('/showListChildGettingKnow/{id}','CategoryGettingknowController@showL
 //Coupon
 Route::post('/coupon/check','CouponController@check');
 Route::post('/coupon/checkoff','CouponController@checkOff');
+Route::post('/coupon/checkCoupon','CouponController@checkCoupon');
 
 //TWEETS
 Route::resource('tweets','TweetController');
 
+//Course
+Route::get('/courses','CourseController@showCourses');
+Route::get('/courses/{course}','CourseController@show');
 
 
 //LiKE

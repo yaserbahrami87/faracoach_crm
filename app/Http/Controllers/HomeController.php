@@ -80,6 +80,11 @@ class HomeController extends BaseController
         {
             $s="0".$v->month;
         }
+        else
+        {
+            $s=$v->month;
+        }
+
         $birthday=User::where('datebirth','like','%/'.$s.'/%')
                     ->get();
 

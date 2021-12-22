@@ -23,12 +23,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/user/changePassword.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/cart_all.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/course_single.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/courses.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/master/footer_menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/master/footer_menu.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/passwords/confirm.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/passwords/confirm.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/master/header_menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/master/header_menu.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CouponController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CouponController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CourseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CourseController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/coupon.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/coupon.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_05_04_011559_create_coupons_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_05_04_011559_create_coupons_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/editCourse.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/editCourse.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/editCourse.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/editCourse.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -786,6 +794,14 @@
       <workItem from="1639464099215" duration="5755000" />
       <workItem from="1639547119394" duration="1031000" />
       <workItem from="1639552082500" duration="10517000" />
+      <workItem from="1639595951926" duration="707000" />
+      <workItem from="1639638997338" duration="1401000" />
+      <workItem from="1639810978501" duration="6986000" />
+      <workItem from="1639852867964" duration="1061000" />
+      <workItem from="1639895132011" duration="16081000" />
+      <workItem from="1639980394841" duration="19487000" />
+      <workItem from="1640018530053" duration="17000" />
+      <workItem from="1640160323806" duration="327000" />
     </task>
     <servers />
   </component>
@@ -837,9 +853,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1638804908500" />
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1639569575530">
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1640160525860">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1639569575530" />
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1640160525860" />
   </component>
 </project>

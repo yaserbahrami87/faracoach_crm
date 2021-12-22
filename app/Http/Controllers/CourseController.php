@@ -115,7 +115,8 @@ class CourseController extends BaseController
      */
     public function show(course $course)
     {
-        //
+        return view('course_single')
+                    ->with('course',$course);
     }
 
     /**
@@ -239,5 +240,17 @@ class CourseController extends BaseController
                 'start'     =>'1400/01/01',
             ]);
         }
+    }
+
+
+
+    public function showCourses()
+    {
+        $courses=course::where('start','>',$this->dateNow)
+                    ->where('id','<>',3)
+                    ->where('id','<>',15)
+                    ->paginate(20);
+        return view('courses')
+                    ->with('courses',$courses);
     }
 }

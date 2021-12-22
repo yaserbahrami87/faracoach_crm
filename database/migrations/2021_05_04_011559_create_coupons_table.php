@@ -20,8 +20,11 @@ class CreateCouponsTable extends Migration
             $table->tinyInteger('discount')->default(0);
             $table->string('expire_date',11)->nullable();
             $table->string('product',11)->nullable();
+            $table->string('category_product',100)->nullable();
+            $table->string('type',20)->nullable();
             $table->tinyInteger('limit_user')->default(0);
             $table->integer('count')->default(-1);
+            $table->boolean('flag')->nullable();
             $table->timestamps();
         });
     }
