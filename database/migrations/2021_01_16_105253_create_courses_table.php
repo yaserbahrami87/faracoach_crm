@@ -37,6 +37,8 @@ class CreateCoursesTable extends Migration
             $table->string('fi',15)->nullable();
             $table->string('fi_off',15)->nullable();
             $table->tinyInteger('type_peymant_id')->nullable();
+            $table->integer('prepayment')->default(0);
+            $table->integer('peymant_off')->default(0);
             $table->string('images',250)->nullable();
             $table->tinyInteger('status')->default(1);
             $table->timestamps();

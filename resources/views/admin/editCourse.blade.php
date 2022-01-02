@@ -120,6 +120,18 @@
                     </select>
                 </div>
 
+                <div class="form-group d-none" id="collapseExample">
+                    <label for="prepayment">حداقل پرداخت (تومان)</label>
+                    <input type="number" class="form-control @error('prepayment') is-invalid @enderror" id="prepayment" name="prepayment" value="{{$course->prepayment}}" />
+                    <small class="text-muted">حداقل مبلغ برای پرداخت اقساط</small>
+                </div>
+
+                <div class="form-group" >
+                    <label for="peymant_off">درصد تخفیف نقدی</label>
+                    <input type="number" class="form-control @error('peymant_off') is-invalid @enderror" id="peymant_off" name="peymant_off" value="{{$course->peymant_off}}" min="0" max="100" />
+                    <small class="text-muted">میزان درصد تخفیف نقدی</small>
+                </div>
+
                 <div class="form-group">
                     <label for="ckeditor">مطالب دوره</label>
                     <textarea id="ckeditor" name="infocourse" class="@error('infocourse') is-invalid @enderror">{{$course->infocourse}}</textarea>
@@ -137,5 +149,20 @@
     <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
     <script>
         CKEDITOR.replace( 'ckeditor' );
+    </script>
+
+    <script>
+        $('#type_peymant_id').change(function()
+        {
+           if($('#type_peymant_id').val()!=1)
+           {
+               $('#collapseExample').attr('class','form-group');
+           }
+           else
+           {
+               $('#collapseExample').attr('class','form-group d-none');
+           }
+
+        });
     </script>
 @endsection

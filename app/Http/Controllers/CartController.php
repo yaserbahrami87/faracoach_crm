@@ -16,6 +16,7 @@ class CartController extends BaseController
      */
     public function index()
     {
+
         $cart=cart::where('user_id','=',Auth::user()->id)
                     ->get();
 
@@ -51,7 +52,12 @@ class CartController extends BaseController
      */
     public function store(Request $request)
     {
-        if(Auth::check()) {
+
+        if(Auth::check())
+        {
+            cart::where('user_id','=',Auth::user()->id)
+                ->where('product_id','<>',$request->product_id)
+                ->delete();
 
             $this->validate($request,
                 [
@@ -65,17 +71,39 @@ class CartController extends BaseController
                 ->where('user_id', '=', Auth::user()->id)
                 ->first();
 
+
+
             if ($cart)
             {
-                if ($request->capacity) {
+                if ($request->capacity)
+                {
+                    $cart->off=NULL;
+                    $cart->coupon=NULL;
                     $cart->capacity++;
                     $status = $cart->save();
-                    if ($status) {
+                    if ($status)
+                    {
                         alert()->success('محصول مورد نظر اضافه شد')->persistent('بستن');
                     } else {
                         alert()->error('خطا به اضافه کردن تعدا محصول مورد نظر ')->persistent('بستن');
                     }
                 } else {
+                    switch ($request->type)
+                    {
+                        case 'course': $product=course::where('id','=',$request->product_id)
+                                                        ->first();
+                                        //برای اینکه مقدار فیلد نهایی قیمت همه در یک فیلد باشد در فیلد زیر میریزم
+                                        $product->final_off=$product->fi_off;
+                                        break;
+                        default: alert()->error('خطا در بروزرسانی محصول')->persistent('بستن');
+                                        return back();
+                    }
+                    $cart->fi=$product->fi;
+                    $cart->final_off=$product->final_off;
+                    $cart->off=NULL;
+                    $cart->coupon=NULL;
+                    $cart->type_payment_id=$product->type_peymant_id;
+                    $cart->save();
                     alert()->warning('محصول مورد نظر در سبد شما وجود دارد')->persistent('بستن');
                 }
             } else {
@@ -91,13 +119,16 @@ class CartController extends BaseController
                                 return back();
                 }
 
+
+
                 $cart = cart::create($request->all() +
                     [
-                        'user_id'   => Auth::user()->id,
-                        'date_fa'   => $this->dateNow,
-                        'time_fa'   => $this->timeNow,
-                        'fi'        =>$product->fi,
-                        'final_off' =>$product->final_off,
+                        'user_id'           => Auth::user()->id,
+                        'date_fa'           => $this->dateNow,
+                        'time_fa'           => $this->timeNow,
+                        'fi'                =>$product->fi,
+                        'final_off'         =>$product->final_off,
+                        'type_payment_id'   =>$product->type_peymant_id,
                     ]);
 
                 if ($cart) {
@@ -168,6 +199,84 @@ class CartController extends BaseController
             alert()->error('خطا در حذف محصول از سبد')->persistent('بستن');
         }
         return back();
+
+    }
+
+    public function choosePaymant()
+    {
+        $cart=cart::where('user_id','=',Auth::user()->id)
+            ->get();
+
+        foreach ($cart as $item)
+        {
+            switch($item->type)
+            {
+                case 'course':$course=course::where('id','=',$item->product_id)
+                    ->first();
+                    $item->product=$course->course;
+                    $item->fi=$course->fi_off;
+            }
+        }
+
+        return view('payment')
+                ->with('cart',$cart);
+    }
+
+
+    public  function mohasebeAghsat(Request $request)
+    {
+
+        $this->validate($request,
+            [
+                'prepayment'    =>'required|numeric',
+                'peymant_off'   =>'required|numeric|between:0,100',
+                'fi'            =>'required|numeric',
+                'tedadGhest'    =>'required|numeric|between:0,24',
+                'payment'       =>'required|numeric',
+                'ghest'         =>'required|numeric|between:0,24',
+            ]
+        );
+
+        if(($request->ghest>=1) && ($request->ghest<=$request->tedadGhest))
+        {
+            if(($request->payment>=$request->prepayment) && $request->payment<=$request->fi)
+            {
+                $baghimandeh=($request->fi-$request->payment);
+                $mablagheTakhfifDadeshode=($baghimandeh*$request->peymant_off)/100;
+
+                $baghimandeh_batakhfif=($baghimandeh-($baghimandeh*$request->peymant_off)/100);
+                $gheymatAghsat=$baghimandeh_batakhfif/$request->ghest;
+                $v=verta();
+                $tarikhAghsat=[];
+                for ($i=0;$i<$request->ghest;$i++)
+                {
+                    $v=$v->addMonths(1);
+                    $Date=$v->format(' %d %B، %Y');
+                    array_push($tarikhAghsat,$Date);
+                }
+
+                return view('mohasebeAghsat')
+                            ->with('fi_asli',$request->fi)
+                            ->with('payment_pardakhti',$request->payment)
+                            ->with('darsadTakhkfif',$request->peymant_off)
+                            ->with('mablagheTakhfifDadeshode',$mablagheTakhfifDadeshode)
+                            ->with('baghimandeh_batakhfif',$baghimandeh_batakhfif)
+                            ->with('ghest',$request->ghest)
+                            ->with('tarikhAghsat',$tarikhAghsat)
+                            ->with('aghsat',$gheymatAghsat);
+            }
+            else
+            {
+                echo"<div class='alert alert-danger'>قیمت وارد شده صحیح نمی باشد</div>";
+            }
+
+        }
+        else
+        {
+            echo "<div class='alert alert-danger'>تعداد اقساط را صحیح وارد کنید</div>";
+        }
+
+
 
     }
 }

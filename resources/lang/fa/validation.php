@@ -231,5 +231,7 @@ return [
         'presession'            =>'پیش جلسه',
         'comment'               =>'پیام',
         'followby_id'           =>'مسئول پیگیری',
+        'ghest'                 =>'قسط',
+        'payment'               =>'مبلغ نقدی',
     ],
 ];

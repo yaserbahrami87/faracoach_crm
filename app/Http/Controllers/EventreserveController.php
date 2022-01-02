@@ -39,7 +39,6 @@ class EventreserveController extends BaseController
      */
     public function store(Request $request)
     {
-
         $this->validate($request,[
             'event_id'  =>'required|numeric'
         ]);

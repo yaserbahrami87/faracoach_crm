@@ -139,6 +139,31 @@
             </a>
         </div>
 
+        <div class="col-12 mt-2 border-bottom border-1">
+            <h5>آخرین دوره های ثبت نام شده</h5>
+        </div>
+        <div class="col-12">
+            <ul type="none">
+
+            </ul>
+
+
+            <div class="list-group">
+                @if($courses->count()>0)
+                    @foreach($courses as $item)
+                        <a href="" class="list-group-item list-group-item-action">{{$item->course}}</a>
+                    @endforeach
+                @else
+                    <div class="alert alert-warning">
+                        تا کنون دوره ای ثبت نام نکرده اید
+                    </div>
+                @endif
+
+            </div>
+
+        </div>
+
+
     </div>
 </div>
 

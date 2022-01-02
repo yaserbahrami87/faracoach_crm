@@ -80,12 +80,12 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4">  </td>
-                            <td>
-                                <form method="POST" action="/reserve/insert">
+                            <td colspan="3">  </td>
+                            <td colspan="2">
+                                <form method="post" action="/cart/payment">
                                     {{csrf_field()}}
                                     <button type="submit" class="btn btn-success btn-block">
-                                        ثبت <span class="glyphicon glyphicon-play"></span>
+                                        مرحله بعد<span class="glyphicon glyphicon-play"></span>
                                     </button>
                                 </form>
                             </td>

@@ -140,6 +140,10 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     //Event Reserves
     Route::resource('eventreserve','EventreserveController');
 
+    //Order
+    Route::post('/order','OrderController@store');
+    Route::post('/order/aghsat','OrderController@storeAghsat');
+
 
 
 });
@@ -423,8 +427,11 @@ Route::get('/coach/{coach}','CoachController@show');
 //Cart
 Route::post('/cart','CartController@store');
 Route::get('/cart/all','CartController@index');
+Route::post('/cart/payment','CartController@choosePaymant');
 Route::get('/cart/{cart}','CartController@destroy');
 Route::get('/cart','ReserveController@showCart');
+Route::post('/cart/mohasebeAghsat','CartController@mohasebeAghsat');
+
 
 //Category GettingKnow
 Route::get('/showListChildGettingKnow/{id}','CategoryGettingknowController@showListChild');

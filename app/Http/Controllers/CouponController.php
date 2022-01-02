@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\booking;
 use App\cart;
 use App\coupon;
+use App\course;
 use App\reserve;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -648,15 +649,23 @@ class CouponController extends BaseController
                             $tmp=cart::where('id','=',$item->id)
                                         ->first();
 
+                            switch ($item->type)
+                            {
+                                case 'course':$product=course::where('id','=',$item->product_id)
+                                                        ->first();
+                                                $product->final_off=$product->fi_off;
+                            }
+
                             $tmp->off=$coupon->discount;
                             $tmp->coupon=$coupon->coupon;
-                            $tmp->final_off =$item->fi -(($item->fi * $coupon->discount) / 100);
+
+                            $tmp->final_off =$product->final_off -(($product->final_off * $coupon->discount) / 100);
                             $tmp->save();
                         }
                     }
 
-                    $coupon->count=$coupon->count-1;
-                    $coupon->save();
+//                    $coupon->count=$coupon->count-1;
+//                    $coupon->save();
 
 
                     alert()->success('کوپن تخفیف اعمال شد')->persistent('بستن');

@@ -115,7 +115,15 @@ class CourseController extends BaseController
      */
     public function show(course $course)
     {
+        $tmp_start=str_replace("/",'-',$course->start);
+        $tmp_start=(verta($this->changeTimestampToMilad($tmp_start)));
+        $tmp_end=str_replace("/",'-',$course->end);
+        $tmp_end=(verta($this->changeTimestampToMilad($tmp_end)));
+        $tedadGhest=($tmp_start->diffMonths($tmp_end));
+
+
         return view('course_single')
+                    ->with('tedadGhest',$tedadGhest)
                     ->with('course',$course);
     }
 

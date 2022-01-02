@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\booking;
+use App\cart;
 use App\checkout;
 use App\eventreserve;
 use App\lib\zarinpal;
+use App\student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use nusoap_client;
@@ -58,8 +60,6 @@ class CheckoutController extends BaseController
                  default:$item->product='خطا';
                                 break;
              }
-
-
 
              $item->dateTime=($this->changeTimestampToShamsi( $item->created_at));
         }
@@ -163,15 +163,23 @@ class CheckoutController extends BaseController
         $Authority =$request->get('Authority') ;
 
         $checkout=checkout::where('authority','=',$Authority)
-                        ->first();
-        if(!is_null($checkout)) {
+                        ->get();
+
+
+        if(($checkout)->count()>0)
+        {
             //ما در اینجا مبلغ مورد نظر را بصورت دستی نوشتیم اما در پروژه های واقعی باید از دیتابیس بخوانیم
 //        $Amount = 500;
-            $Amount = $checkout->price;
+            //$Amount = $checkout->price;
             if ($request->get('Status') == 'OK')
             {
                 $client = new nusoap_client('https://www.zarinpal.com/pg/services/WebGate/wsdl', 'wsdl');
                 $client->soap_defencoding = 'UTF-8';
+
+                foreach ($checkout as $item)
+                {
+                    $sumFi=$item->price;
+                }
 
 
                 //در خط زیر یک درخواست به زرین پال ارسال می کنیم تا از صحت پرداخت کاربر مطمئن شویم
@@ -179,85 +187,66 @@ class CheckoutController extends BaseController
                     [
                         //این مقادیر را به سایت زرین پال برای دریافت تاییدیه نهایی ارسال می کنیم
                         'MerchantID' => $MerchantID,
-                        'Authority' => $checkout->authority,
-                        'Amount' => $checkout->price,
+                        'Authority' => $checkout[0]->authority,
+                        'Amount' => $sumFi,
                     ],
                 ]);
 
 
                 if ($result['Status'] == 100)
                 {
-                    $checkout->status = 1;
-                    $checkout->description = 'خرید انجام شد';
 
-                    $checkout->save();
-                    $check=checkout::where('authority','=',$request->get('Authority'))
-                                    ->first();
-                    if ($checkout->type=='event')
-                    {
-                        $event=$this->get_events($checkout->product_id,NULL,NULL,NULL,NULL,NULL,'first');
-                        $status = eventreserve::create([
-                            'user_id' => Auth::user()->id,
-                            'event_id' => $event->id,
-                            'date_fa' => $this->dateNow,
-                            'time_fa' => $this->timeNow,
-                        ]);
-                        if ($status) {
-                            $event->capacity--;
-                            $event->save();
-                            $msg = Auth::user()->lname . " عزیز \nثبت نام شما در " . $event->event . " با موفقیت انجام شد\n فراکوچ ";
-                            $this->sendSms(Auth::user()->tel, $msg);
-                            alert()->success('رزرو دوره با موفقیت انجام شد')->persistent('بستن');
+                    foreach ($checkout as $item) {
 
-                        } else {
-                            alert()->error('خطا در ثبت واریزی')->persistent('بستن');
+                        $item->status = 1;
+                        $item->description = 'خرید انجام شد';
+                        $item->save();
 
+//                        $check = checkout::where('authority', '=', $request->get('Authority'))
+//                                        ->get();
+
+
+
+                        if ($item->type == 'event')
+                        {
+                            $event = $this->get_events($item->product_id, NULL, NULL, NULL, NULL, NULL, 'first');
+                            $status = eventreserve::create([
+                                'user_id' => Auth::user()->id,
+                                'event_id' => $event->id,
+                                'date_fa' => $this->dateNow,
+                                'time_fa' => $this->timeNow,
+                            ]);
+                            if ($status) {
+                                $event->capacity--;
+                                $event->save();
+                                $msg = Auth::user()->lname . " عزیز \nثبت نام شما در " . $event->event . " با موفقیت انجام شد\n فراکوچ ";
+                                $this->sendSms(Auth::user()->tel, $msg);
+                                alert()->success('رزرو دوره با موفقیت انجام شد')->persistent('بستن');
+
+                            } else {
+                                alert()->error('خطا در ثبت واریزی')->persistent('بستن');
+
+                            }
+
+                        } else if ($item->type == 'course')
+                        {
+
+                            $status=student::create(
+                                [
+                                    'user_id'       =>Auth::user()->id,
+                                    'course_id'    =>$item->product_id,
+                                    'date_fa'       =>$this->dateNow,
+                                    'time_fa'       =>$this->timeNow,
+                                ]
+                            );
                         }
-
                     }
 
-//                    $reserve=$this->get_reserve($checkout->product_id,Auth::user()->id,NULL,NULL,NULL,NULL,'first');
-//                    $reserve->update(
-//                        [
-//                            'status' => 1,
-//                        ]);
-//                    $status=$reserve->save();
+                    cart::where('user_id','=',Auth::user()->id)
+                                    ->delete();
 
 
-//                    if ($status) {
-//                        $booking = booking::where('id', '=', $reserve['booking_id'])
-//                            ->first();
-//                        $booking->status = 0;
-//                        $booking->save();
-//                    }
-
-//                    if ($status) {
-//                        $user = booking::join('users', 'bookings.user_id', '=', 'users.id')
-//                            ->join('coaches', 'users.id', '=', 'coaches.user_id')
-//                            ->where('bookings.id', '=', $reserve['booking_id'])
-//                            ->first();
-//
-//                        if ($user->duration_booking == 1) {
-//                            $duration = 'جلسه معارفه';
-//                        } else {
-//                            $duration = 'جلسه کوچینگ';
-//                        }
-//                        //ارسال پیامک برای مشتری
-//                        $msg =$duration . " \n " . $booking->start_date . " \n ساعت " . $booking->start_time . "\n " . Auth::user()->fname . " " . Auth::user()->lname . "\nتماس:" .Auth::user()->tel;
-//                        $this->sendSms($user->tel, $msg);
-//
-//                        //ارسال پیامک به کوچ
-//                        $msg =$duration . " \n " . $booking->start_date . " \n  " . $booking->start_time . "\n کوچ:" . $user->fname . " " . $user->lname . "\n تماس کوچ:" .  $user->tel;
-//                        $this->sendSms(Auth::user()->tel, $msg);
-//
-//
-//
-//                    } else {
-//                        alert()->error('خطا در محاسبه')->persistent('بستن');
-//                        return redirect('/');
-//                    }
-
-                    $msg='<p>پرداخت با موفقیت انجام شد</p><p>شماره پیگیری: '.$checkout->authority.'</p>';
+                    $msg='<p>پرداخت با موفقیت انجام شد</p><p>شماره پیگیری: '.$item->authority.'</p>';
                     $alert='success';
                     return view('callBackCheckout')
                                 ->with('msg',$msg)
@@ -267,8 +256,10 @@ class CheckoutController extends BaseController
                 else
                 {
 //                    return 'خطا در انجام عملیات';
-                    $checkout->description='خطا در انجام عملیات';
-                    $checkout->save();
+                    foreach ($checkout as $item) {
+                        $item->description = 'خطا در انجام عملیات';
+                        $item->save();
+                    }
                     $msg='<p>خطا در انجام عملیات</p>';
                     $alert='danger';
                     return view('callBackCheckout')
@@ -276,8 +267,12 @@ class CheckoutController extends BaseController
                         ->with('alert',$alert);
                 }
             } else {
-                $checkout->description='انصراف از پرداخت';
-                $checkout->save();
+                foreach ($checkout as $item)
+                {
+                    $item->description='انصراف از پرداخت';
+                    $item->save();
+                }
+
                 $msg='<p>انصراف از پرداخت</p>';
                 $alert='danger';
                 return view('callBackCheckout')
@@ -288,7 +283,12 @@ class CheckoutController extends BaseController
         }
         else
         {
-            return "خطا در کد رهگیری";
+            $msg="خطا در کد رهگیری";
+            $alert='danger';
+            return view('callBackCheckout')
+                ->with('msg',$msg)
+                ->with('alert',$alert);
+
         }
     }
 }

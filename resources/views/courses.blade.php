@@ -16,7 +16,8 @@
 
         <div class="container-fluid px-4 px-lg-5 mt-5">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 ">
-                <div class="col-12 col-sm-3 col-md-2 col-lg-2 col-xl-2 bg-light mb-3">
+                <!--
+                <div class="col-12 col-sm-3 col-md-2 col-lg-2 col-xl-2 bg-light mb-3 pt-3">
                     <form>
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="نام دوره را وارد کنید" />
@@ -24,10 +25,12 @@
                         <button type="submit" class="btn btn-success btn-block">جستجو</button>
                     </form>
                 </div>
-                <div class="col-12 col-sm-10 col-lg-10 col-xl-10 col-lg-10">
+                -->
+                <div class="col-12 col-sm-12 col-lg-12 col-xl-12 col-lg-12">
                     <div class="row">
+
                         @foreach($courses as $item)
-                            <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 mb-5">
+                            <div class="col-12 col-sm-6 col-md-3 col-lg-3 col-xl-3 mb-5">
                                 <div class="card h-100">
                                     <!-- Product image-->
                                     <img class="card-img-top" src="{{asset('/documents/'.$item->image)}}" alt="{{$item->shortlink}}" style="height: 200px"/>

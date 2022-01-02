@@ -9,6 +9,7 @@ use App\landPage;
 use App\message;
 use App\problemfollowup;
 use App\reserve;
+use App\student;
 use App\tag;
 use App\User;
 use App\verify;
@@ -278,6 +279,14 @@ class AdminController extends BaseController
                 alert()->warning(' برای تعداد '.$reserve_notFeedback->count()." جلسه برگزار شده بازخورد ثبت نشده است ")->persistent('بستن');
             }
 
+            $courses=student::join('courses','students.course_id','=','courses.id')
+                        ->where('students.user_id','=',Auth::user()->id)
+                        ->orderby('students.id','desc')
+                        ->select('courses.*')
+                        ->get();
+
+
+
 
             return view('user.home')
                 ->with('user',$user)
@@ -290,6 +299,7 @@ class AdminController extends BaseController
                 ->with('verifyStatus',$verifyStatus)
                 ->with('scoreIntroducedUser',$scoreIntroducedUser)
                 ->with('SuccessIntroduced',$SuccessIntroduced)
+                ->with('courses',$courses)
                 ->with('scoreTelverify',$scoreTelverify)
                 ->with('scoreEmailverify',$scoreEmailverify);
 
