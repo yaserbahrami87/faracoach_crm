@@ -241,8 +241,10 @@
         const peymant_off={{$course->peymant_off}};
         const fi={{$course->fi_off}};
         const tedadGhest={{$tedadGhest}};
+
         function mohasebe()
         {
+
             var payment=$("#prepayment").val();
             if(payment>=prepayment && payment<=fi)
             {
