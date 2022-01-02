@@ -104,6 +104,16 @@
                     <input type="text" class="form-control @error('fi_off') is-invalid @enderror" id="fi_off" name="fi_off" value="{{old('fi_off')}}" />
                 </div>
                 <div class="form-group">
+                    <label for="prepayment"> حداقل مبلغ پرداخت دوره (تومان)</label>
+                    <input type="number" class="form-control @error('prepayment') is-invalid @enderror" id="prepayment" name="prepayment" value="{{old('prepayment')}}" />
+                    <small class="text-dark">مربوط به دوره های قسطی</small>
+                </div>
+                <div class="form-group">
+                    <label for="peymant_off"> میزان تخفیف پرداخت نقدی (%)</label>
+                    <input type="number" class="form-control @error('peymant_off') is-invalid @enderror" id="peymant_off" name="peymant_off" value="{{old('peymant_off')}}" />
+                    <small class="text-dark">مربوط به دوره های قسطی</small>
+                </div>
+                <div class="form-group">
                     <label for="type_peymant_id">شرایط پرداخت</label>
                     <select id="type_peymant_id" class="form-control p-0 @error('type_peymant_id') is-invalid @enderror" name="type_peymant_id">
                         <option selected disabled>انتخاب کنید</option>

@@ -85,26 +85,34 @@ class CourseController extends BaseController
             'infocourse'            => ['nullable', 'string'],
 
         ]);
-        $file=$request->file('image');
-        $image="course-".time().".".$request->file('image')->extension();
-        $path=public_path('/documents/');
-        $files=$request->file('image')->move($path, $image);
+
+//        $file=$request->file('image');
+//        $image="course-".time().".".$request->file('image')->extension();
+//        $path=public_path('/documents/');
+//        $files=$request->file('image')->move($path, $image);
 
         $status = course::create($request->all()+[
                 'teacher_id'                 => $request['teacher'],
-                'image'                      => $image,
             ]);
-        if($status) {
-            $msg = "دوره ما با موفقیت ثبت شد";
-            $errorStatus = "success";
+        if($status)
+        {
+            if ($request->has('image') && $request->file('image')->isValid()) {
+                $file = $request->file('image');
+                $image = "course-" . time() . "." . $request->file('image')->extension();
+                $path = public_path('/documents/');
+                $files = $request->file('image')->move($path, $image);
+                $request->image = $image;
+                $status->image = $image;
+                $status->update();
+            }
+
+            alert()->success("دوره ما با موفقیت ثبت شد")->persistent('بستن');
         }
         else
         {
-            $msg = "خطا در ثبت دوره";
-            $errorStatus = "success";
+            alert()->error("خطا در ثبت دوره")->persistent('بستن');
         }
-        return back()->with('msg',$msg)
-                     ->with('errorStatus',$errorStatus);
+        return back();
     }
 
     /**
