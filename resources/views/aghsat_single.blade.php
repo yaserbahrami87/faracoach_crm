@@ -115,8 +115,7 @@
                 tedadGhest:tedadGhest,
                 payment:payment,
                 ghest:ghest,
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                ,
+                _token: $('meta[name="csrf-token"]').attr('content'),
             }
 
             $.ajax({
