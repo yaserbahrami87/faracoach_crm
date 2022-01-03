@@ -59,7 +59,7 @@ class RegisterController extends BaseController
             'lname'             => ['persian_alpha','required', 'string', 'max:30'],
             'sex'               => ['required','boolean'],
             'email'             => ['required', 'string', 'email', 'max:150', 'unique:users'],
-            'tel'               => ['required','unique:users','iran_mobile'],
+            'tel'               => ['required','unique:users'],
             'password'          => ['required', 'string', 'min:8', 'confirmed'],
             'tel_verified'      => ['required','boolean'],
             'introduced'        => ['nullable','numeric'],

@@ -150,6 +150,7 @@
                             <label for="tel" class="col-md-4 col-form-label text-md-right  text-dark">{{ __('معرف:') }}</label>
                             <div class="col-md-6">
                                 <div class="input-group">
+                                    <input type="hidden" id="introduced_registerAdmin_org" value="{{ old('tel') }}" name="tel"/>
                                     <input id="introduced_registerAdmin" type="text" class="form-control @error('introduced') is-invalid @enderror" value="{{ old('introduced') }}" autocomplete="introduced">
                                     @error('introduced')
                                     <span class="invalid-feedback" role="alert">
@@ -297,6 +298,31 @@
         {
             document.querySelector("#tel_org").value=intl.getNumber();
         });
+
+
+
+
+        //
+        var input = document.querySelector("#introduced_registerAdmin");
+        var intl=intlTelInput(input,{
+            formatOnDisplay:false,
+            separateDialCode:true,
+            preferredCountries:["ir", "gb"]
+        });
+
+
+
+        input.addEventListener("countrychange", function() {
+            document.querySelector("#introduced_registerAdmin_org").value=intl.getNumber();
+        });
+
+        $('#introduced_registerAdmin').change(function()
+        {
+            document.querySelector("#introduced_registerAdmin_org").value=intl.getNumber();
+        });
+
+
+
     </script>
 @endsection
 

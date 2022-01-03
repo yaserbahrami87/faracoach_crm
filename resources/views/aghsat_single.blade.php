@@ -8,7 +8,7 @@
             </div>
             <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
                 <div class="card mb-3">
-                    <div class="card-header font-weight-bold">انتخاب شیوه پرداخت</div>
+                    <div class="card-header font-weight-bold">شرایط پرداخت</div>
                     <div class="card-body p-1">
                         <form method="post" action="/panel/order/aghsat">
                             {{csrf_field()}}
@@ -89,7 +89,7 @@
                         @php
                             $sum=0;
                         @endphp
-                        <p>مجموع مبلغ اقساط خرید شما {{$cart->final_off}} تومان می باشد</p>
+                        <p>مجموع مبلغ اقساط خرید شما {{number_format($cart->final_off) }} تومان می باشد</p>
                     </div>
                 </div>
             </div>

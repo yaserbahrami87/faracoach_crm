@@ -85,7 +85,7 @@
                                 <form method="post" action="/cart/payment">
                                     {{csrf_field()}}
                                     <button type="submit" class="btn btn-success btn-block">
-                                        مرحله بعد<span class="glyphicon glyphicon-play"></span>
+                                        شرایط پرداخت<span class="glyphicon glyphicon-play"></span>
                                     </button>
                                 </form>
                             </td>

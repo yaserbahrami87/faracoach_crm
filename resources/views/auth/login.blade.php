@@ -193,6 +193,9 @@
                     <input type="submit" class="btnSubmit" value="ورود" />
                 </div>
                 <div class="form-group">
+                    <a href="{{asset('/register')}}" class="ForgetPwd">ثبت نام</a>
+                </div>
+                <div class="form-group">
                     <a href="{{ route('password.request') }}" class="ForgetPwd">فراموشی رمز؟</a>
                     <a class="btn btn-link  btn-primary text-light mb-1" href="/loginSMS">
                         {{ __('ورود با رمز یکبار مصرف') }}
@@ -223,6 +226,9 @@
                 </div>
                 <div class="form-group">
                     <input type="submit" class="btnSubmit" value="ورود" />
+                </div>
+                <div class="form-group">
+                    <a href="{{asset('/register')}}" class="ForgetPwd">ثبت نام</a>
                 </div>
                 <div class="form-group">
                     <a href="{{ route('password.request') }}" class="ForgetPwd">فراموشی رمز؟</a>

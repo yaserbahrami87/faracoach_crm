@@ -1484,21 +1484,18 @@ class UserController extends BaseController
     {
         if(strlen($id)>0)
         {
-            if (preg_match('/^09(1[0-9]|3[0-9]|2[0-9])-?[0-9]{3}-?[0-9]{4}$/', $id)) {
-                $user = user::where('tel', '=', $id)
-                    ->first();
-                if (is_null($user)) {
-                    return "<input type='hidden' value='" . $id . "' name='introduced' />";
-                } else {
-                    if ((strlen($user->fname) > 0) || (strlen($user->lname) > 0)) {
-                        return "<span>معرف شما " . $user->fname . " " . $user->lname . "</span><input type='hidden' value='" . $user->id . "' name='introduced' />";
-
-                    } else {
-                        return "<span>معرف شما "  . $user->tel . "</span><input type='hidden' value='" . $user->id . "' name='introduced' />";
-                    }
-                }
+            dd($id);
+            $user = user::where('tel', '=', $id)
+                ->first();
+            if (is_null($user)) {
+                return "<input type='hidden' value='" . $id . "' name='introduced' />";
             } else {
-                return "<div class=''>فرمت شماره همراه صحیح نمی باشد</div>";
+                if ((strlen($user->fname) > 0) || (strlen($user->lname) > 0)) {
+                    return "<span>معرف شما " . $user->fname . " " . $user->lname . "</span><input type='hidden' value='" . $user->id . "' name='introduced' />";
+
+                } else {
+                    return "<span>معرف شما "  . $user->tel . "</span><input type='hidden' value='" . $user->id . "' name='introduced' />";
+                }
             }
         }
         else
