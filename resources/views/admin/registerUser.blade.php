@@ -348,12 +348,12 @@
 
 
         input.addEventListener("countrychange", function() {
-            document.querySelector("#introduced_registerAdmin_org").value=intl.getNumber();
+            document.querySelector("#introduced_registerAdmin_org").value=intl1.getNumber();
         });
 
         $('#introduced_registerAdmin').change(function()
         {
-            document.querySelector("#introduced_registerAdmin_org").value=intl.getNumber();
+            document.querySelector("#introduced_registerAdmin_org").value=intl1.getNumber();
         });
     </script>
 @endsection

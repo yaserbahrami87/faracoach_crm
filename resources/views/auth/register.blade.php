@@ -99,7 +99,7 @@
                             <div class="col-md-6">
                                 <div class="input-group">
 
-                                    <input type="hidden" id="tel_org" value="{{ old('tel') }}" name="tel"/>
+                                    <input type="hidden" id="tel_org" value="{{old('tel')}}" name="tel"/>
                                     <input id="tel" dir="ltr" type="tel" class="form-control @error('tel') is-invalid @enderror"  value="{{old('tel')}}" required autocomplete="tel">
                                     <!--
                                     <div class="input-group-prepend">
@@ -297,6 +297,7 @@
         $('#tel').change(function()
         {
             document.querySelector("#tel_org").value=intl.getNumber();
+            console.log(intl.getNumber());
         });
 
 
@@ -304,7 +305,7 @@
 
         //
         var input = document.querySelector("#introduced_registerAdmin");
-        var intl=intlTelInput(input,{
+        var intl1=intlTelInput(input,{
             formatOnDisplay:false,
             separateDialCode:true,
             preferredCountries:["ir", "gb"]
@@ -313,12 +314,12 @@
 
 
         input.addEventListener("countrychange", function() {
-            document.querySelector("#introduced_registerAdmin_org").value=intl.getNumber();
+            document.querySelector("#introduced_registerAdmin_org").value=intl1.getNumber();
         });
 
         $('#introduced_registerAdmin').change(function()
         {
-            document.querySelector("#introduced_registerAdmin_org").value=intl.getNumber();
+            document.querySelector("#introduced_registerAdmin_org").value=intl1.getNumber();
         });
 
 
