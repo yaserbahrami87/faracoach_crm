@@ -14,10 +14,10 @@
     <section class="py-5 bg-light ">
         <div class="container px-4 px-lg-5 my-5">
             <div class="row gx-4 gx-lg-5">
-                <div class="col-md-6">
+                <div class="col-md-7">
                     <img class="card-img-top mb-5 mb-md-0" src="{{asset('/documents/'.$course->image)}}" alt="..." height="600px"/>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-5">
                     <div class="mb-2"></div>
                     <h1 class="font-weight-bold">{{$course->course}}</h1>
                     <div class="fs-5 mb-2 mt-4">

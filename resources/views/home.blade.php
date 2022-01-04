@@ -178,7 +178,9 @@
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="{{asset('/images/coach1-1.png')}}" class="d-block w-100" alt="...">
+                        <a href="{{asset('/courses/مدیر%20در%20نقش%20کوچ')}}">
+                            <img src="{{asset('/images/photo_2022-01-04_15-21-41.jpg')}}" class="d-block w-100" alt="...">
+                        </a>
                     </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-target="#carouselExampleControls" data-slide="prev">
