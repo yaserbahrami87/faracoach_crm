@@ -24,15 +24,18 @@
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CartController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CartController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/course.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/course.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/dashboard/assets/js/java.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/dashboard/assets/js/java.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/panel_assets/js/java.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/panel_assets/js/java.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/aghsat_single.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/aghsat_single.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/registerUser.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/registerUser.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/register.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/cart_all.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/cart_all.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/course_single.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/course_single.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/master/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/master/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/payment.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/payment.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -811,7 +814,8 @@
       <workItem from="1641016817596" duration="16527000" />
       <workItem from="1641060549782" duration="18071000" />
       <workItem from="1641101176537" duration="10196000" />
-      <workItem from="1641189109255" duration="3528000" />
+      <workItem from="1641189109255" duration="16451000" />
+      <workItem from="1641282915191" duration="132000" />
     </task>
     <servers />
   </component>
@@ -855,9 +859,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1638804908500" />
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1641193895332">
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1641209819802">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1641193895332" />
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1641209819802" />
   </component>
 </project>

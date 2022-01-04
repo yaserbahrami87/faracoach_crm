@@ -215,6 +215,7 @@ class CartController extends BaseController
                     ->first();
                     $item->product=$course->course;
                     $item->fi=$course->fi_off;
+                    $item->peymant_off=$course->peymant_off;
             }
         }
 

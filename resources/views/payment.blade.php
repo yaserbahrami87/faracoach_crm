@@ -13,18 +13,26 @@
                        <form method="post" action="/panel/order">
                            {{csrf_field()}}
                             <div class="form-check mb-3">
-                                <input class="form-check-input payment" type="radio" name="payment_type" id="payment1" value="نقدی" checked>
-                                <label class="form-check-label font-weight-bold" for="payment1">
+                                <input class="form-check-input payment" type="radio" name="payment_type" id="payment1" value="نقدی" checked  />
+                                <label class="form-check-label font-weight-bold" for="payment1" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" >
                                     <img src="{{asset('/images/payment1.png')}}" width="50px" />
                                     پرداخت نقدی
                                 </label>
+                                <div class="collapse show" id="collapseExample">
+                                    <p>در صورت پرداخت نقدی میزان {{$cart[0]->peymant_off}}% تخفیف اعمال خواهد شد </p>
+                                </div>
+
                             </div>
                             <div class="form-check mb-5">
-                                <input class="form-check-input payment" type="radio" name="payment_type"  id="payment2" value="اقساط">
-                                <label class="form-check-label font-weight-bold" for="payment2">
+                                <input class="form-check-input payment" type="radio" name="payment_type"  id="payment2" value="اقساط" />
+                                <label class="form-check-label font-weight-bold" for="payment2" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">
                                     <img src="{{asset('/images/payment2.png')}}" width="50px" />
                                     پرداخت اقساط
                                 </label>
+
+                                <div class="collapse" id="collapseExample2">
+                                    <p>در صورت پرداخت نقدی میزان {{$cart[0]->peymant_off}}% تخفیف اعمال خواهد شد </p>
+                                </div>
                             </div>
 
                             <div class="collapse" id="payment_ghest">
@@ -68,7 +76,7 @@
                             @php
                                 $sum=$item->final_off+$sum;
                             @endphp
-                            مجموع مبلغ سبد خرید شما {{$sum}} تومان می باشد
+                            مجموع مبلغ سبد خرید شما {{number_format($sum)}} تومان می باشد
                         @endforeach
                     </div>
                 </div>

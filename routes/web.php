@@ -338,7 +338,7 @@ Auth::routes(['verify'=>true]);
 Route::post('/crm/user/insert','UserController@store');
 
 Route::get('/signup crm','BaseController@signupForm');
-Route::get('/check/user/{id}','UserController@checkUserAjax');
+Route::get('/check/user/{tel}','UserController@checkUserAjax');
 
 Route::get('/panel','AdminController@index')->name('panel');
 Route::get('/panel/state/{state}','BaseController@citiesAjax');

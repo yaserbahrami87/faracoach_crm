@@ -49,14 +49,28 @@ class OrderController extends BaseController
             $sum_final_off = 0;
             $typeOrders = [];
             foreach ($cart as $item) {
+                switch($item->type)
+                {
+                    case 'course':$course=course::where('id','=',$item->product_id)
+                        ->first();
+                        $item->final_off=$item->final_off-($item->final_off*$course->peymant_off)/100;
+                        break;
+
+
+                }
                 $sum_final_off = $item->final_off + $sum_final_off;
                 array_push($typeOrders, $item->type);
             }
 
 
+
+
             $res = $order->pay($sum_final_off, Auth::user()->email, Auth::user()->tel, implode(',', $typeOrders));
             foreach ($cart as $item)
             {
+
+                //dd(($item->final_off*$course->peymant_off)*100);
+
                 $status = order::create([
                     'user_id' => Auth::user()->id,
                     'product_id' => $item->product_id,

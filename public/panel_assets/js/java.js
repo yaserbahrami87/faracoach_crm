@@ -112,9 +112,8 @@ function lengthComment(nod)
 $("#introduced_registerAdmin").focusout(function()
 {
     var loading='<div class="col-12 text-center"><div class="spinner-border text-primary text-center" role="status"><span class="sr-only">Loading...</span></div></div>';
-    $("#feedback_introduced").html(loading);
     var data=$("#introduced_registerAdmin_org").val();
-    console.log(data);
+    console.log("TEL+"+data);
     if(data.length>0)
     {
         $.ajax({

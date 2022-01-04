@@ -69,6 +69,7 @@
                                                 <i class="bi-cart-fill me-1"></i>
                                                 خرید / اقساط
                                             </button>
+                                            <p class="font-weight-bold">میزان {{$course->peymant_off}}% تخفیف در صورت پرداخت نقدی </p>
                                         </form>
                                     </div>
                                 </div>

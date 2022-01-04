@@ -150,7 +150,7 @@
                             <label for="tel" class="col-md-4 col-form-label text-md-right  text-dark">{{ __('معرف:') }}</label>
                             <div class="col-md-6">
                                 <div class="input-group">
-                                    <input type="hidden" id="introduced_registerAdmin_org" value="{{ old('tel') }}" name="tel"/>
+                                    <input type="hidden" id="introduced_registerAdmin_org" value="{{ old('introduced') }}"  />
                                     <input id="introduced_registerAdmin" type="text" class="form-control @error('introduced') is-invalid @enderror" value="{{ old('introduced') }}" autocomplete="introduced">
                                     @error('introduced')
                                     <span class="invalid-feedback" role="alert">

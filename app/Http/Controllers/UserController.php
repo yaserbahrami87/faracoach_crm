@@ -1480,11 +1480,11 @@ class UserController extends BaseController
 //        }
     }
 
-    public function checkUserAjax($id)
+    public function checkUserAjax(Request $request,$id)
     {
+
         if(strlen($id)>0)
         {
-            dd($id);
             $user = user::where('tel', '=', $id)
                 ->first();
             if (is_null($user)) {
