@@ -23,10 +23,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/public/images/1080-608.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/photo_2022-01-04_15-21-41.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/course_single.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/course_single.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -807,7 +804,7 @@
       <workItem from="1641060549782" duration="18071000" />
       <workItem from="1641101176537" duration="10196000" />
       <workItem from="1641189109255" duration="16451000" />
-      <workItem from="1641282915191" duration="6063000" />
+      <workItem from="1641282915191" duration="6858000" />
     </task>
     <servers />
   </component>
