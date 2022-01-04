@@ -25,7 +25,6 @@
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/registerUser.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/registerUser.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/register.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -805,7 +804,7 @@
       <workItem from="1641060549782" duration="18071000" />
       <workItem from="1641101176537" duration="10196000" />
       <workItem from="1641189109255" duration="16451000" />
-      <workItem from="1641282915191" duration="1983000" />
+      <workItem from="1641282915191" duration="3239000" />
     </task>
     <servers />
   </component>

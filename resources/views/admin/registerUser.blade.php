@@ -106,7 +106,7 @@
                                 <div class="col-md-6">
                                     <div class="input-group">
                                         <input type="hidden" id="introduced_registerAdmin_org" value="{{ old('introduced') }}" />
-                                        <input id="introduced_registerAdmin" type="text" class="form-control @error('introduced') is-invalid @enderror" value="{{ old('introduced') }}" autocomplete="introduced">
+                                        <input dir="ltr" id="introduced_registerAdmin" type="text" class="form-control @error('introduced') is-invalid @enderror" value="{{ old('introduced') }}" autocomplete="introduced">
 
                                         @error('introduced')
                                         <span class="invalid-feedback" role="alert">
@@ -338,8 +338,8 @@
 
 
         //
-        var input = document.querySelector("#introduced_registerAdmin");
-        var intl=intlTelInput(input,{
+        var input1 = document.querySelector("#introduced_registerAdmin");
+        var intl1=intlTelInput(input1,{
             formatOnDisplay:false,
             separateDialCode:true,
             preferredCountries:["ir", "gb"]
@@ -347,7 +347,7 @@
 
 
 
-        input.addEventListener("countrychange", function() {
+        input1.addEventListener("countrychange", function() {
             document.querySelector("#introduced_registerAdmin_org").value=intl1.getNumber();
         });
 
