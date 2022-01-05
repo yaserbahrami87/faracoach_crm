@@ -470,11 +470,10 @@ Route::get('/integrity','LandPageController@create');
 
 
 //Pasargad Bimeh
-Route::prefix('landing/')->group(function ()
+Route::prefix('club')->group(function ()
 {
-    Route::prefix('pasargad/')->group(function ()
-    {
-        Route::get('club',function()
+
+        Route::get('/home',function()
         {
             return view('pasargadBimeh.club');
         });
@@ -483,7 +482,7 @@ Route::prefix('landing/')->group(function ()
         {
             return view('pasargadBimeh.bimeh');
         });
-    });
+
 
 });
 

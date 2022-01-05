@@ -23,29 +23,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/public/images/az-kar-oftadegi.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/back.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/bimari.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/kar-hadese.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/lapppp.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/logoBime_Pasargad.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/man-slim.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/man.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/pexels-kindel-media-7688374---.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/pexels-mikhail-nilov-7731330---.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/pexels-mikhail-nilov-8297362--.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/pexels-pixabay-268941--.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/woman_smiling.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/بیمه-پاسارگاد--بنر.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/courseStudents.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/pasargadBimeh/bimeh.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/pasargadBimeh/club.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CourseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CourseController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/StudentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/StudentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/course.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/course.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/student.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/student.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/pasargadBimeh/club.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/pasargadBimeh/club.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -828,7 +807,7 @@
       <workItem from="1641189109255" duration="16451000" />
       <workItem from="1641282915191" duration="7509000" />
       <workItem from="1641359470198" duration="7978000" />
-      <workItem from="1641368147667" duration="5953000" />
+      <workItem from="1641368147667" duration="6572000" />
     </task>
     <servers />
   </component>

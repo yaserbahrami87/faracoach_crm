@@ -198,7 +198,7 @@
                 <div class="mt-3 text-center service-font">
                     <i class="bi bi-laptop"></i>
                     <p>خدمات بیمه عمر </p>
-                    <a href="/landing/pasargad/bimeh"  class="btn btn-outline-primary px-5 my-2 "> شـروع کنیـد</a>
+                    <a href="/club/bimeh"  class="btn btn-outline-primary px-5 my-2 "> شـروع کنیـد</a>
                 </div>
             </div>
         </div>
