@@ -28,8 +28,9 @@ class CourseController extends BaseController
             {
                 $item->teacher_id='نامشخص';
             }
-
-
+            $item->countStudent=course::join('students','courses.id','=','students.course_id')
+                                    ->where('students.course_id','=',$item->id)
+                                    ->count();
 
         }
         return view('admin.courses')

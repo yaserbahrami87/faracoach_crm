@@ -10,6 +10,7 @@
                 <th scope="col">زمان شروع</th>
                 <th scope="col">تعداد ساعت</th>
                 <th scope="col">استاد</th>
+                <th scope="col">شرکت کننده ها</th>
                 <th scope="col">ویرایش</th>
                 <th scope="col">حذف</th>
             </tr>
@@ -28,7 +29,11 @@
                     <td>
                         <a href="/admin/courses/{{$item->shortlink}}" class="d-block" target="_blank" >{{$item->duration}}</a>
                     </td>
+
                     <td>{{$item->teacher_id}}</td>
+                    <td class="text-center">
+                        <a href="/admin/courses/{{$item->shortlink}}/students" class="btn btn-success" target="_blank" >{{$item->countStudent}} نفر</a>
+                    </td>
                     <td>
                         <a href="/admin/courses/{{$item->shortlink}}/edit" class="btn btn-primary">
                             <i class="bi bi-pencil-square"></i>
