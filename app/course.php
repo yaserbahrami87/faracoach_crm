@@ -14,4 +14,9 @@ class course extends Model
     {
         return 'shortlink';
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\user');
+    }
 }

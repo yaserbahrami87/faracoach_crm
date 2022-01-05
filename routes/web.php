@@ -251,6 +251,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
 
     //Courses
     Route::get('/courses/test','CourseController@course_test');
+    Route::get('/courses/{course}/students','CourseController@showStudents');
     Route::resource('courses','CourseController');
 
     //CourseType
@@ -467,6 +468,24 @@ Route::get('/integrity','LandPageController@create');
 //Route::post('/events/isfahan/store', 'landingController@isfahanStore');
 //Route::get('/events/isfahan/exportexcel', 'landingController@isfahanExport');
 
+
+//Pasargad Bimeh
+Route::prefix('landing/')->group(function ()
+{
+    Route::prefix('pasargad/')->group(function ()
+    {
+        Route::get('club',function()
+        {
+            return view('pasargadBimeh.club');
+        });
+
+        Route::get('bimeh',function()
+        {
+            return view('pasargadBimeh.bimeh');
+        });
+    });
+
+});
 
 Route::get('/exportexcel','UserController@export_excel');
 

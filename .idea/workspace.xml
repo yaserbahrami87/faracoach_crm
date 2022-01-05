@@ -23,9 +23,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/public/images/az-kar-oftadegi.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/back.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/bimari.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/kar-hadese.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/lapppp.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/logoBime_Pasargad.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/man-slim.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/man.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/pexels-kindel-media-7688374---.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/pexels-mikhail-nilov-7731330---.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/pexels-mikhail-nilov-8297362--.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/pexels-pixabay-268941--.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/woman_smiling.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/بیمه-پاسارگاد--بنر.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/courseStudents.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/pasargadBimeh/bimeh.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/pasargadBimeh/club.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CourseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CourseController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/courses.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/courses.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/StudentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/StudentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/course.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/course.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/student.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/student.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -213,19 +234,19 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\wamp64\www\faracoach_crm\public\documents" />
-      <recent name="C:\wamp64\www\faracoach_crm\public\images" />
-      <recent name="C:\wamp64\www\faracoach_crm\storage\app\private" />
-      <recent name="C:\wamp64\www\faracoach_crm\resources\views\admin\master" />
-      <recent name="C:\wamp64\www\faracoach_crm\resources\views\panelAdmin" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\wamp64\www\faracoach_crm\public\images" />
       <recent name="C:\wamp64\www\faracoach_crm\public\private" />
       <recent name="C:\wamp64\www\faracoach_crm\resources\views\user" />
       <recent name="C:\wamp64\www\faracoach_crm\resources\views\admin" />
       <recent name="C:\wamp64\www\faracoach_crm\public\panel_assets\js" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\faracoach_crm\public\documents" />
+      <recent name="C:\wamp64\www\faracoach_crm\public\images" />
+      <recent name="C:\wamp64\www\faracoach_crm\storage\app\private" />
+      <recent name="C:\wamp64\www\faracoach_crm\resources\views\admin\master" />
+      <recent name="C:\wamp64\www\faracoach_crm\resources\views\panelAdmin" />
     </key>
   </component>
   <component name="RunManager">
@@ -806,7 +827,8 @@
       <workItem from="1641101176537" duration="10196000" />
       <workItem from="1641189109255" duration="16451000" />
       <workItem from="1641282915191" duration="7509000" />
-      <workItem from="1641359470198" duration="2774000" />
+      <workItem from="1641359470198" duration="7978000" />
+      <workItem from="1641368147667" duration="5953000" />
     </task>
     <servers />
   </component>
@@ -834,10 +856,10 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="413" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1640687327547">
+    <state x="413" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1641366789073">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1640687327547" />
+    <state x="413" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1641366789073" />
     <state x="286" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1636181866888">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -850,9 +872,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1638804908500" />
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1641362219444">
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1641381407936">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1641362219444" />
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1641381407936" />
   </component>
 </project>
