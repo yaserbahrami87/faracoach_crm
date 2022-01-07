@@ -143,6 +143,9 @@
         }
 
     </style>
+
+    <script src="{{asset('/panel_assets/intl_tel/js/intlTelInput.js')}}"></script>
+    <script src="{{asset('/panel_assets/intl_tel/js/utils.js')}}"></script>
 @endsection
 @section('row1')
 <div class="container mt-5">
@@ -245,8 +248,7 @@
 @endsection
 
 @section('footerScript')
-    <script src="{{asset('/panel_assets/intl_tel/js/intlTelInput.js')}}"></script>
-    <script src="{{asset('/panel_assets/intl_tel/js/utils.js')}}"></script>
+
     <script>
         var input = document.querySelector("#tel");
         var intl=intlTelInput(input,{
