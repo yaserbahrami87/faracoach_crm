@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\course;
 use App\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -74,6 +75,7 @@ class HomeController extends BaseController
                 ->limit(12)
                 ->get();
 
+
         //متولدین ای ماه
         $v=verta();
         if($v->month<10)
@@ -96,6 +98,13 @@ class HomeController extends BaseController
         //$condition=['start_date','>',$this->dateNow];
         $events=$this->get_events(NULL,NULL,NULL,NULL,NULL,1,'limit');
 
+        //دوره های در حال ثبت نام
+        $courses=course::where('start','>',$this->dateNow)
+            ->where('id','<>',3)
+            ->where('id','<>',15)
+            ->paginate(20);
+
+
         return view('home')
 //        return redirect('/login')
                     ->with('tweets',$tweets)
@@ -103,6 +112,7 @@ class HomeController extends BaseController
                     ->with('last_users',$last_users)
                     ->with('birthday',$birthday)
                     ->with('events',$events)
+                    ->with('courses',$courses)
                     ->with('last_coaches',$last_coaches);
 
     }
