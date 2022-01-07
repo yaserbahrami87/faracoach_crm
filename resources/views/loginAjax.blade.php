@@ -67,7 +67,7 @@
                             <form method="POST" id="frm_signup">
                                 {{csrf_field()}}
                                 <div class="form-group row">
-                                    <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('پست الکترونیکی:*') }}</label>
+                                    <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('پست الکترونیکی:') }}<span class="font-weight-bold text-danger">*</span></label>
 
                                     <div class="col-md-6">
                                         <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
@@ -81,11 +81,11 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="tel" class="col-md-4 col-form-label text-md-right">{{ __('تلفن همراه:*') }}</label>
+                                    <label for="tel" class="col-md-4 col-form-label text-md-right">{{ __('تلفن همراه:') }}<span class="font-weight-bold text-danger">*</span></label>
                                     <div class="col-md-6">
                                         <div class="input-group">
                                             <input type="hidden" id="tel_org_register" value="{{ old('tel') }}" name="tel"/>
-                                            <input id="tel" type="tel" class="form-control @error('tel') is-invalid @enderror"  value="{{ old('tel') }}" required autocomplete="tel">
+                                            <input id="tel" type="tel" dir="ltr" class="form-control @error('tel') is-invalid @enderror"  value="{{ old('tel') }}" required autocomplete="tel"  />
                                             @error('tel')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -96,7 +96,7 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('رمز عبور:*') }}</label>
+                                    <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('رمز عبور:') }} <span class="font-weight-bold text-danger">*</span></label>
 
                                     <div class="col-md-6">
                                         <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -110,7 +110,7 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('تکرار رمز عبور:*') }}</label>
+                                    <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('تکرار رمز عبور:') }}<span class="font-weight-bold text-danger">*</span></label>
 
                                     <div class="col-md-6">
                                         <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">

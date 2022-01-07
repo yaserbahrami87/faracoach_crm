@@ -28,6 +28,7 @@ class CartController extends BaseController
                                                 ->first();
                               $item->product=$course->course;
                               $item->fi=$course->fi_off;
+                              $item->peymant_off=$course->peymant_off;
             }
         }
         return view('cart_all')
@@ -83,9 +84,9 @@ class CartController extends BaseController
                     $status = $cart->save();
                     if ($status)
                     {
-                        alert()->success('محصول مورد نظر اضافه شد')->persistent('بستن');
+                        //alert()->success('محصول مورد نظر اضافه شد')->persistent('بستن');
                     } else {
-                        alert()->error('خطا به اضافه کردن تعدا محصول مورد نظر ')->persistent('بستن');
+                        //alert()->error('خطا به اضافه کردن تعدا محصول مورد نظر ')->persistent('بستن');
                     }
                 } else {
                     switch ($request->type)
@@ -104,7 +105,7 @@ class CartController extends BaseController
                     $cart->coupon=NULL;
                     $cart->type_payment_id=$product->type_peymant_id;
                     $cart->save();
-                    alert()->warning('محصول مورد نظر در سبد شما وجود دارد')->persistent('بستن');
+                    //alert()->warning('محصول مورد نظر در سبد شما وجود دارد')->persistent('بستن');
                 }
             } else {
                 switch($request->type)

@@ -202,9 +202,11 @@
                         </i>
                     </div>
                     <div class=" rounded-circle">
-                        <i class="bi bi-book">
-                            <p> خرید دوره </p>
-                        </i>
+                        <a href="/courses">
+                            <i class="bi bi-book">
+                                <p> خرید دوره </p>
+                            </i>
+                        </a>
                     </div>
                     <div class="rounded-circle">
                         <a href="{{asset('/coaches/all')}}">
