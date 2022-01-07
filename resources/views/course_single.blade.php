@@ -58,7 +58,9 @@
                     </div>
                     <div class="d-flex mt-5 mb-5">
                         <div class="row">
-                            @if($course->type_peymant_id==1 || $course->type_peymant_id==3)
+                            @if(!Auth::check())
+                                @include('loginAjax')
+                            @elseif($course->type_peymant_id==1 || $course->type_peymant_id==3)
                                 <div class="col-12 mb-2">
                                     <div class="row">
                                         <form method="post" action="/cart">
@@ -74,6 +76,7 @@
                                     </div>
                                 </div>
                             @endif
+
 
                             @if($course->type_peymant_id==2 || $course->type_peymant_id==3)
                                 <div class="col-12">
