@@ -243,10 +243,11 @@ class CartController extends BaseController
         {
             if(($request->payment>=$request->prepayment) && $request->payment<=$request->fi)
             {
-                $baghimandeh=($request->fi-$request->payment);
-                $mablagheTakhfifDadeshode=($baghimandeh*$request->peymant_off)/100;
 
-                $baghimandeh_batakhfif=($baghimandeh-($baghimandeh*$request->peymant_off)/100);
+                $baghimandeh=($request->fi-$request->payment);
+                $mablagheTakhfifDadeshode=($request->payment*$request->peymant_off)/100;
+
+                $baghimandeh_batakhfif=($baghimandeh-($request->payment*$request->peymant_off)/100);
                 $gheymatAghsat=$baghimandeh_batakhfif/$request->ghest;
                 $v=verta();
                 $tarikhAghsat=[];
