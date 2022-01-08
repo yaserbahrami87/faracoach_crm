@@ -192,52 +192,7 @@
                     <span class="sr-only">Next</span>
                 </button>
             </div>
-            <div class="col-12 services d-md-flex justify-content-md-center">
-                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-0">
-                </div>
-                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 ">
-                    <div class= "rounded-circle ">
-                        <i class="bi bi-cart3 ">
-                            <p> خرید محصول </p>
-                        </i>
-                    </div>
-                    <div class=" rounded-circle">
-                        <a href="/courses">
-                            <i class="bi bi-book">
-                                <p> خرید دوره </p>
-                            </i>
-                        </a>
-                    </div>
-                    <div class="rounded-circle">
-                        <a href="{{asset('/coaches/all')}}">
-                            <i class="bi bi-person">
-                                <p> انتخاب کوچ </p>
-                            </i>
-                        </a>
-                    </div>
-                    <div class=" rounded-circle">
-                        <i class="bi bi-calendar2-date">
-                            <p> رزرو جلسه کوچینگ </p>
-                        </i>
-                    </div>
-                    <div class="rounded-circle">
-                        <a href="{{asset('/event')}}">
-                            <i class="bi bi-display">
-                                <p> رویدادها </p>
-                            </i>
-                        </a>
-                    </div>
-                    <div class="rounded-circle">
-                        <a tel="02191091121" >
-                            <i class="bi bi-telephone-outbound">
-                                <p> سوالی دارید ؟ </p>
-                            </i>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-0">
-                </div>
-            </div>
+
         </div>
     </div>
 @endsection
