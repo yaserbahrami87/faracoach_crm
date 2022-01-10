@@ -15,8 +15,9 @@ class course extends Model
         return 'shortlink';
     }
 
-    public function user()
+    public function students()
     {
-        return $this->belongsTo('App\user');
+        return $this->hasMany('App\student','course_id','id');
     }
+
 }

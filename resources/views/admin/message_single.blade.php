@@ -1,5 +1,18 @@
 @extends('admin.master.index')
 @section('content')
+    <!--
+    <div class="col-12 mb-2">
+        <p>وضعیت تیکت</p>
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <form method="get" action="#1">
+                <button type="submit" class="btn btn-info">در حال بررسی</button>
+            </form>
+            <form method="get" action="#2">
+                <button type="submit" class="btn btn-danger">بسته شده</button>
+            </form>
+        </div>
+    </div>
+    -->
     <div class="col-12">
         @foreach($messages as $item)
             <div class="form-group @if($item->user_id_send==Auth::user()->type || $item->user_id_send==Auth::user()->id) bg-success @else bg-warning @endif  pb-1 ">
@@ -26,5 +39,6 @@
             </div>
         </form>
     </div>
+
 
 @endsection

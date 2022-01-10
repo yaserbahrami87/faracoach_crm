@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\course;
 use App\message;
 use App\User;
 use Illuminate\Http\Request;
@@ -60,7 +61,10 @@ class MessageController extends BaseController
 //                            ->orwhere('user_id_recieve', '=', Auth::user()->type)
 //                            ->orwhere('user_id_send', '=', Auth::user()->id)
 //                            ->orwhere('user_id_recieve', '=', Auth::user()->id)
-                            ->orderby('id','desc')
+
+
+                            ->orderby('updated_at','desc')
+                            ->orderby('status','desc')
                             ->paginate(20);
 
 
@@ -69,6 +73,7 @@ class MessageController extends BaseController
             foreach ($messages as $item)
             {
                 $item->user_id_send=$this->get_user_byID($item->user_id_send)->fname." ".$this->get_user_byID($item->user_id_send)->lname;
+                $item->user_recieve=$this->get_user_byID($item->user_id_recieve)->fname." ".$this->get_user_byID($item->user_id_recieve)->lname;
             }
 
 
@@ -91,6 +96,7 @@ class MessageController extends BaseController
             foreach ($messages as $item)
             {
                 $item->user_id_send=$this->get_user_byID($item->user_id_send)->fname." ".$this->get_user_byID($item->user_id_send)->lname;
+                $item->user_recieve=$this->get_user_byID($item->user_id_recieve)->fname." ".$this->get_user_byID($item->user_id_recieve)->lname;
             }
             $countUnreadMessages=$this->countUnreadMessages();
             return view('user.messages')
@@ -142,7 +148,12 @@ class MessageController extends BaseController
 //            return back();
 //        }
         if(Gate::allows('isAdmin')) {
-            return view('admin.insertMessage');
+            $events=$this->get_events(NULL,NULL,NULL,NULL,NULL,1,'get');
+            $courses=course::get();
+
+            return view('admin.insertMessage')
+                        ->with('courses',$courses)
+                        ->with('events',$events);
         }
         else
         {
@@ -159,14 +170,15 @@ class MessageController extends BaseController
      */
     public function store(Request $request)
     {
-
         $this->validate(request(),
         [
             'subject'           =>'required|min:3|string',
-            'user_id_recieve'   =>'required|numeric',
+            //'user_id_recieve'   =>'required|numeric',
+            'events_id'         =>'nullable|array',
             'comment'           =>'required|string|min:3|max:250',
             'attach'            =>'nullable|mimes:jpeg,jpg,pdf|max:600',
         ]);
+
         if(isset($request['attach'])) {
             $filename = time() . "-" . Auth::user()->tel . "." . $request->file('attach')->extension();
             $files = $request->file('attach')->move(public_path('/documents/messages/'), $filename);
@@ -176,19 +188,69 @@ class MessageController extends BaseController
         {
             $filename=NULL;
         }
-        $status=message::create(
-            [
-                'subject'           =>$request['subject'],
-                'user_id_recieve'   =>$request['user_id_recieve'],
-                'comment'           =>$request['comment'],
-                'user_id_send'      =>Auth::user()->id,
-                'attach'            =>$filename,
-                'date_fa'           =>$this->dateNow,
-                'time_fa'           =>$this->timeNow
-            ]);
+
+
+        if($request->events_id)
+        {
+            foreach ($request->events_id as $item)
+            {
+                $users=User::join('eventreserves','users.id','=','eventreserves.user_id')
+                    ->where('eventreserves.event_id','=',$item)
+                    ->select('users.*')
+                    ->get();
+
+                foreach ($users as $item2)
+                {
+                    $status = message::create(
+                        [
+                            'subject' => $request['subject'],
+                            'user_id_recieve' => $item2->id,
+                            //'events_id' => $request['events_id'],
+                            'comment' => $request['comment'],
+                            'user_id_send' => Auth::user()->id,
+                            'attach' => $filename,
+                            'date_fa' => $this->dateNow,
+                            'time_fa' => $this->timeNow
+                        ]);
+                    $this->sendSms($item2->tel,'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\n my.faracoach.com");
+                }
+            }
+
+        }
+
+        if($request->course_id)
+        {
+            foreach ($request->course_id as $item)
+            {
+                $users=User::join('students','users.id','=','students.user_id')
+                            ->where('students.course_id','=',$item)
+                            ->select('users.*')
+                            ->get();
+                foreach ($users as $item2)
+                {
+                    $status = message::create(
+                        [
+                            'subject' => $request['subject'],
+                            'user_id_recieve' => $item2->id,
+                            //'events_id' => $request['events_id'],
+                            'comment' => $request['comment'],
+                            'user_id_send' => Auth::user()->id,
+                            'attach' => $filename,
+                            'date_fa' => $this->dateNow,
+                            'time_fa' => $this->timeNow
+                        ]);
+                    $this->sendSms($item2->tel,'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\n my.faracoach.com");
+                }
+            }
+        }
+
+//        $request['events_id']=implode(',',$request['events_id']);
+
+
+
         if($status)
         {
-            alert()->success('پیام با موفقیت ارسال شد')->persistent('بستن');
+            alert()->success("پیام با موفقیت ارسال شد")->persistent('بستن');
         }
         else
         {
@@ -219,7 +281,8 @@ class MessageController extends BaseController
 
                 foreach ($messages as $item)
                 {
-                    if($item->user_id_recieve==Auth::user()->id)
+                    //$item->info=$this->get_user(NULL,$item->)
+                    if($item->user_id_send!=Auth::user()->id)
                     {
                        $item['status']=0;
                        message::where('id','=',$item->id)
@@ -248,7 +311,8 @@ class MessageController extends BaseController
                     ->get();
 
                 foreach ($messages as $item) {
-                    if ($item->user_id_recieve == Auth::user()->id) {
+
+                    if ($item->user_id_send != Auth::user()->id) {
                         $item['status'] = 0;
                         message::where('id', '=', $item->id)
                             ->update([
@@ -322,19 +386,31 @@ class MessageController extends BaseController
                 'message_id_answer' =>$request['message_id_answer'],
                 'user_id_send'      =>Auth::user()->id,
                 'attach'            =>$filename,
-                'date_fa'       =>$this->dateNow,
-                'time_fa'       =>$this->timeNow
+                'date_fa'           =>$this->dateNow,
+                'time_fa'           =>$this->timeNow
             ]);
 
         if($status)
         {
+            $message=message::where('id','=',$request['message_id_answer'])->first();
+            $message->status=1;
+            $message->save();
             alert()->success('پیام با موفقیت ارسال شد')->persistent('بستن');
         }
         else
         {
             alert()->error('خطا در ارسال ')->persistent('بستن');
         }
-        return  back();
+
+
+        if(Gate::allows('isAdmin')) {
+            return redirect('/admin/message');
+        }
+        else
+        {
+            return redirect('/panel/message');
+        }
+
 
 
     }

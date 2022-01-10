@@ -27,6 +27,13 @@
                     <td class="text-center">
                         <a href="/panel/message/{{$item->id}}">{{$item->time_fa}}</a>
                     </td>
+                    <td>
+                        @if($item->status==1)
+                            خوانده نشده
+                        @else
+                            خوانده شده
+                        @endif
+                    </td>
                 </tr>
             @endforeach
         </table>
