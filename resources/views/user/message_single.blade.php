@@ -8,7 +8,7 @@
                 @else
                     <label for="comment"> پیام دریافت شده:</label>
                 @endif
-                <textarea class="form-control bg-secondary-light" id="comment" name="comment" rows="3" disabled readonly>{{$item->comment }}</textarea>
+                <textarea class="form-control bg-secondary-light" id="comment" name="comment" rows="10" disabled readonly>{{$item->comment }}</textarea>
                 <small class="font-weight-bold float-right text-dark">{{$item->time_fa.' '.$item->date_fa}}</small>
             </div>
         @endforeach

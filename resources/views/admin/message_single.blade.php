@@ -32,7 +32,7 @@
             <input type="hidden" value="{{($messages[0]->id)}}" name="message_id_answer">
             <div class="col-12">
                 <label>متن پیام، انتقاد یا پیشنهاد</label>
-                <textarea class="form-control" id="comment" name="comment" required rows="3" placeholder="توضیح خود را وارد کنید ..."></textarea>
+                <textarea class="form-control" id="comment" name="comment" required rows="10" placeholder="توضیح خود را وارد کنید ..."></textarea>
             </div>
             <div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
                 <button type="submit" class="btn btn-primary glow mr-sm-1 mb-1">ثبت نظر</button>
