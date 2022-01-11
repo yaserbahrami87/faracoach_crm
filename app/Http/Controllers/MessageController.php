@@ -212,7 +212,7 @@ class MessageController extends BaseController
                             'date_fa' => $this->dateNow,
                             'time_fa' => $this->timeNow
                         ]);
-                    $this->sendSms($item2->tel,'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\n my.faracoach.com");
+                    //$this->sendSms($item2->tel,'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\n my.faracoach.com");
                 }
             }
 
@@ -239,9 +239,38 @@ class MessageController extends BaseController
                             'date_fa' => $this->dateNow,
                             'time_fa' => $this->timeNow
                         ]);
-                    $this->sendSms($item2->tel,'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\n my.faracoach.com");
+                    //$this->sendSms($item2->tel,'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\n my.faracoach.com");
                 }
             }
+        }
+
+        if($request->user_category)
+        {
+            foreach ($request->user_category as $item)
+            {
+                foreach(explode(',',$item) as $item2)
+                {
+                    $users=user::where('type','=',$item2)
+                                ->get();
+                    foreach ($users as $item2)
+                    {
+                        $status = message::create(
+                            [
+                                'subject' => $request['subject'],
+                                'user_id_recieve' => $item2->id,
+                                //'events_id' => $request['events_id'],
+                                'comment' => $request['comment'],
+                                'user_id_send' => Auth::user()->id,
+                                'attach' => $filename,
+                                'date_fa' => $this->dateNow,
+                                'time_fa' => $this->timeNow
+                            ]);
+                        //$this->sendSms($item2->tel,'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\n my.faracoach.com");
+                    }
+                }
+
+            }
+
         }
 
 //        $request['events_id']=implode(',',$request['events_id']);

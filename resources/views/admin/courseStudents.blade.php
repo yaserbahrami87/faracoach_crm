@@ -6,7 +6,7 @@
             <tr>
                 <th>نام و نام وخانوادگی</th>
             </tr>
-            {{dd($students)}}
+
             @foreach($students as $item)
                 <tr>
                     {{$item->fname." ".$item->lname}}

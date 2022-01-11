@@ -78,7 +78,6 @@
             @endif
             <li class=" nav-item"><a href="#"><span class="menu-title" data-i18n="Chat">تماس با ما</span></a>
                 <ul class="menu-content">
-
                     <li><a href="/panel/message"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">تیکت ها</span></a></li>
                     <!-- <li><a href="/panel/message/create"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">ثبت تیکت</span></a></li> -->
 

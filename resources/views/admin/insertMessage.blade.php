@@ -5,14 +5,7 @@
             {{ csrf_field() }}
             <input type="hidden" name="type" value="ticket" />
             <div class="row">
-                <div class="col-4">
-                    <div class="form-group">
-                        <div class="controls">
-                            <label>موضوع<span class="text-danger">*</span></label>
-                            <input type="text" id="subject" name="subject" class="form-control text-left" required placeholder="موضوع " value="" dir="ltr" />
-                        </div>
-                    </div>
-                </div>
+
                 <!--
                 <div class="col-4">
                     <div class="form-group">
@@ -24,6 +17,15 @@
                     </div>
                 </div>
                 -->
+                <div class="col-4">
+                    <div class="form-group">
+                        <label>کاربرها </label>
+                        <select class="form-control" name="user_category[]" multiple>
+                                <option value="-1,-2,-3">مارکتینگ</option>
+                                <option value="1,11,12,13,14,20">فروش</option>
+                        </select>
+                    </div>
+                </div>
                 <div class="col-4">
                     <div class="form-group">
                         <label>رویدادها </label>
@@ -42,6 +44,15 @@
                                 <option value="{{$item->id}}">{{$item->course}}</option>
                             @endforeach
                         </select>
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <div class="form-group">
+                        <div class="controls">
+                            <label>موضوع<span class="text-danger">*</span></label>
+                            <input type="text" id="subject" name="subject" class="form-control text-left" required placeholder="موضوع " value="" dir="ltr" />
+                        </div>
                     </div>
                 </div>
 

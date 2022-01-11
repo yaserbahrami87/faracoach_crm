@@ -75,6 +75,13 @@
                                         </form>
                                     </div>
                                 </div>
+
+                                <div class="card mt-4" >
+                                    <div class="card-body">
+                                        <h5>لینک دعوت اختصاصی شما</h5>
+                                        <p class="text-light bg-secondary p-2 text-right"  id="personal_link" dir="ltr">{{asset('/courses/'.$course->shortlink)."?q=".Auth::user()->id}}</p>
+                                    </div>
+                                </div>
                             @endif
 
 
@@ -150,6 +157,15 @@
 
                })
             }
+        });
+
+
+
+
+        $("#personal_link").click(function()
+        {
+            navigator.clipboard.writeText($('#personal_link').text());
+            alert('لینک دعوت اختصاصی شما کپی شد');
         });
     </script>
 @endsection

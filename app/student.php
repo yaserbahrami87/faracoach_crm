@@ -18,6 +18,6 @@ class student extends Model
 
     public function user()
     {
-        return $this->belongsTo('App/user','user_id','id');
+        return $this->belongsTo('App\user','user_id','id');
     }
 }
