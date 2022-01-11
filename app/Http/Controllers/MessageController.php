@@ -212,7 +212,7 @@ class MessageController extends BaseController
                             'date_fa' => $this->dateNow,
                             'time_fa' => $this->timeNow
                         ]);
-                    $this->sendSms($item2->tel,'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\n my.faracoach.com");
+                    $this->sendSms($item2->tel,'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\nنام کاربری شماره همراه شما"."\n my.faracoach.com");
                 }
             }
 
@@ -239,7 +239,7 @@ class MessageController extends BaseController
                             'date_fa' => $this->dateNow,
                             'time_fa' => $this->timeNow
                         ]);
-                    $this->sendSms($item2->tel,'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\n my.faracoach.com");
+                    $this->sendSms($item2->tel,'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\nنام کاربری شماره همراه شما"."\n my.faracoach.com");
                 }
             }
         }
@@ -265,7 +265,7 @@ class MessageController extends BaseController
                                 'date_fa' => $this->dateNow,
                                 'time_fa' => $this->timeNow
                             ]);
-                        $this->sendSms($item2->tel,'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\n my.faracoach.com");
+                        $this->sendSms($item2->tel,'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\nنام کاربری شماره همراه شما"."\n my.faracoach.com");
                     }
                 }
 
