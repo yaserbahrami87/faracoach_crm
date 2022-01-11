@@ -175,7 +175,7 @@ class MessageController extends BaseController
             'subject'           =>'required|min:3|string',
             //'user_id_recieve'   =>'required|numeric',
             'events_id'         =>'nullable|array',
-            'comment'           =>'required|string|min:3|max:250',
+            'comment'           =>'required|string|min:3|',
             'attach'            =>'nullable|mimes:jpeg,jpg,pdf|max:600',
         ]);
 
