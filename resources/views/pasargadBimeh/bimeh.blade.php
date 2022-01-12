@@ -91,7 +91,7 @@
         }
 
         .slide-in .box:hover .overlay{
-            transform: translateX(0);
+            /*transform: translateX(0);*/
         }
 
         /* SLIDE UP */
@@ -107,7 +107,7 @@
         }
 
         .slide-up .box:hover .overlay{
-            transform: translateY(0);
+            /*transform: translateY(0);*/
         }
 
         /* SLIDE DOWN DELAY */
@@ -123,7 +123,7 @@
         }
 
         .slide-down-delay .box:hover .overlay{
-            transform: translateY(0);
+            /*transform: translateY(0);*/
         }
 
         .slide-down-delay .overlay i{
@@ -245,7 +245,7 @@
     <div class="container">
         <div class="row mt-2">
             <div class="col-12">
-                <img src="{{asset('/images/بیمه-پاسارگاد--بنر.jpg')}}" alt="post img" class="img-fluid"/>
+                <img src="{{asset('/images/بیمه-پاسارگاد--بنر.png')}}" alt="post img" class="img-fluid"/>
                 <div class="title text-center mt-5">
                     <h2>بیمه عمر و تامین آتیه پاسارگاد</h2>
                 </div>
@@ -274,7 +274,7 @@
         <div class="row mt-5">
             <div class="col-12 mt-5">
                 <div class="title text-center">
-                    <p>بیمه عمر پاسارگاد با مزایای بی‌نظیر خود در خدمت تمامی فراکوچی‌های عزیز خواهد بود. شعارما در بیمه عمر پاسارگاد این است که:<p>
+                    <p>شعارما در بیمه عمر پاسارگاد این است که:<p>
                     <h3> « بهترین بیمه عمر بیمه ای است که با توجه به نیازهای شما تنظیم شده باشد.» </h3>
                 </div>
             </div>
@@ -317,12 +317,12 @@
                 <div class="card">
                     <div class="card-header" id="headingOne">
                         <h2 class="mb-0">
-                            <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                 پوشش های مالی
                             </button>
                         </h2>
                     </div>
-                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingOne" data-parent="#collapseTwo">
                         <div class="card-body">
                             <p class=" text-justify mt-4">
                                 یکی از مواردی که اعضای باشگاه مشتریان فراکوچ باید بدانند این است که در بیمه عمر پاسارگاد سرمایه گذاری در طول مدت بیمه نامه شکل می‌گیرد و می‌تواند به صورت پشتوانه مالی و اقتصادی برای بیمه شده در صورت حیات و حتی ذینفعان بیمه نامه در صورت فوت بیمه شده باشند.
@@ -360,7 +360,7 @@
                             </button>
                         </h2>
                     </div>
-                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#collapseOne">
                         <div class="card-body">
                             <p class=" text-justify mt-4">
                                 با توجه به هزینه‌های زیاد خدمات بیمارستانی و به منظور جبران این هزینه ها بیمه عمر پاسارگاد به اعضای باشگاه فراکوچ پوشش های درمانی خود را به صورت کاربردی ارائه می دهد.
@@ -471,7 +471,7 @@
            </form> -->
         <!-------------------- CALL -------------------------------->
         <div class="row mt-5 ">
-            <h4> آیا مشاوره قبل از تکمیل فرم امکان‌پذیر است؟ </h4>
+            <h4 class="font-weight-bold text-center"> آیا مشاوره قبل از تکمیل فرم امکان‌پذیر است؟ </h4>
             <p>از آنجایی که رویکرد نمایندگی جنرال 8057بیمه پاسارگاد و باشگاه مشتریان فراکوچ، مبتنی بر ارائه مشاوره تخصصی است، می توانید جهت مشاوره و خرید بیمه عمر پاسارگاد، از طریق تکمیل فرم موجود و یا تماس شماره تلفن ۰۹۱۵1015130 و 09387368699 مدیر ارشد نمایندگی آقای مهدی دهقان پور مشاور تخصصی دریافت نمایید. </p>
             <p>  طبق قرارداد همکاری بین نمایندگی ۸۰۵۷ بیمه پاسارگاد و باشگاه مشتریان فراکوچ ۲۰% تخفیف جهت صدور بیمه نامه های عمر پاسارگاد در نظر گرفته شده است که شما می توانید برای خود خانواده یا دوستان خود اقدام نمایید.</p>
         </div>

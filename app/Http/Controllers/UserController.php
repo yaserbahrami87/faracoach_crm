@@ -860,7 +860,8 @@ class UserController extends BaseController
                                 ->get();
                     break;
                 case 'continuefollowup':
-                    $users = $this->get_usersByType(11,Auth::user()->id);
+                    $users = User::find(11)->followups;//  $this->get_usersByType(11,Auth::user()->id);
+                    dd($users);
                     break;
                 case 'cancelfollowup':
 //                    $users = $this->get_cancelfollowup();
