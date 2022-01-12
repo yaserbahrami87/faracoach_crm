@@ -20,4 +20,6 @@ class course extends Model
         return $this->hasMany('App\student','course_id','id');
     }
 
+
+
 }

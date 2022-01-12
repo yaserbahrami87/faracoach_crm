@@ -273,10 +273,9 @@ class CourseController extends BaseController
 
     public function showStudents(course $course)
     {
-        dd($course->students);
         return view('admin.courseStudents')
 //                    ->with('students',$course->students);
-                    ->with('students',$course);
+                    ->with('course',$course);
     }
 
 
