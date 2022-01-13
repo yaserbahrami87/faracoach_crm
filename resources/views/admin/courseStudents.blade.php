@@ -17,7 +17,7 @@
                         @if(is_null($item->user->personal_image))
                             <img src="{{asset('/documents/users/default-avatar.png')}}"  width="50px" height="50px" class="rounded-circle "/>
                         @else
-                            <img src="{{asset('/documents/users/'.$item->personal_image)}}"  width="50px" height="50px" class="rounded-circle "/>
+                            <img src="{{asset('/documents/users/'.$item->user->personal_image)}}"  width="50px" height="50px" class="rounded-circle "/>
                         @endif
                     </td>
                     <td class="text-center">
