@@ -50,7 +50,70 @@ class UserController extends BaseController
 
             foreach ($users as $item)
             {
-                $item=$this->changeNumberToData($item);
+                if($item->followups->where('flag','=',1)->first())
+                {
+                    $lastFollowup=$item->followups->where('flag','=',1)->first();
+                    $item->status_followups=$this->userType($lastFollowup->status_followups);
+                    $quality=($lastFollowup->problemfollowup);
+                    $item->lastFollowupCourse=$lastFollowup->courses['course'];
+
+                }
+
+
+                if(isset($quality))
+                {
+                    $item->quality=$quality['problem'];
+                    $item->quality_color=$quality['color'];
+                    $item->lastDateFollowup=$lastFollowup['date_fa'];
+
+                    $item->countFollowup=$item->followups->count();
+                }
+                else
+                {
+                    $item->quality=NULL;
+                    $item->quality_color=NULL;
+                    $item->lastDateFollowup=NULL;
+                    $item->lastFollowupCourse=NULL;
+                    $item->countFollowup=NULL;
+                }
+
+                $item->created_at = $this->changeTimestampToShamsi($item->created_at);
+                if (!is_null($item->last_login_at)) {
+                    $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
+                }
+
+                $expert=$this->get_user_byID($item->followby_expert);
+                if(!is_null($expert))
+                {
+                    $item->followby_expert=$expert->fname." ".$expert->lname;
+                }
+
+
+
+
+                if(is_null($item->personal_image))
+                {
+                    $item->personal_image="default-avatar.png";
+                }
+                if(!is_null($item->introduced))
+                {
+                    if ($this->get_user(NULL, $item->introduced, NULL, NULL, true)->count()>0)
+                    {
+                        $item->introduced = $this->get_user(NULL, $item->introduced, NULL, NULL, true)->fname.' '.$this->get_user(NULL, $item->introduced, NULL, NULL, true)->lname ;
+                    }
+                    else if ($this->get_user($item->introduced, NULL, NULL, NULL, true)->count()>0)
+                    {
+                        $item->introduced=$this->get_user($item->introduced, NULL, NULL, NULL, true)->fname.' '.$this->get_user($item->introduced, NULL, NULL, NULL, true)->lname;
+                    }
+                }
+
+
+                $item->gettingknow=($item->categoryGettingKnow['category']);
+                if(!is_null($item->insert_user_id))
+                {
+                    $item->insert_user=$item->get_insertuserInfo('insert_user_id')->first()->fname." ".$item->get_insertuserInfo('insert_user_id')->first()->lname;
+                }
+                //$item=$this->changeNumberToData($item);
             }
 
 
@@ -111,7 +174,70 @@ class UserController extends BaseController
 
             foreach ($users as $item)
             {
-                $item=$this->changeNumberToData($item);
+                if($item->followups->where('flag','=',1)->first())
+                {
+                    $lastFollowup=$item->followups->where('flag','=',1)->first();
+                    $item->status_followups=$this->userType($lastFollowup->status_followups);
+                    $quality=($lastFollowup->problemfollowup);
+                    $item->lastFollowupCourse=$lastFollowup->courses['course'];
+
+                }
+
+
+                if(isset($quality))
+                {
+                    $item->quality=$quality['problem'];
+                    $item->quality_color=$quality['color'];
+                    $item->lastDateFollowup=$lastFollowup['date_fa'];
+
+                    $item->countFollowup=$item->followups->count();
+                }
+                else
+                {
+                    $item->quality=NULL;
+                    $item->quality_color=NULL;
+                    $item->lastDateFollowup=NULL;
+                    $item->lastFollowupCourse=NULL;
+                    $item->countFollowup=NULL;
+                }
+
+                $item->created_at = $this->changeTimestampToShamsi($item->created_at);
+                if (!is_null($item->last_login_at)) {
+                    $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
+                }
+
+                $expert=$this->get_user_byID($item->followby_expert);
+                if(!is_null($expert))
+                {
+                    $item->followby_expert=$expert->fname." ".$expert->lname;
+                }
+
+
+
+
+                if(is_null($item->personal_image))
+                {
+                    $item->personal_image="default-avatar.png";
+                }
+                if(!is_null($item->introduced))
+                {
+                    if ($this->get_user(NULL, $item->introduced, NULL, NULL, true)->count()>0)
+                    {
+                        $item->introduced = $this->get_user(NULL, $item->introduced, NULL, NULL, true)->fname.' '.$this->get_user(NULL, $item->introduced, NULL, NULL, true)->lname ;
+                    }
+                    else if ($this->get_user($item->introduced, NULL, NULL, NULL, true)->count()>0)
+                    {
+                        $item->introduced=$this->get_user($item->introduced, NULL, NULL, NULL, true)->fname.' '.$this->get_user($item->introduced, NULL, NULL, NULL, true)->lname;
+                    }
+                }
+
+
+                $item->gettingknow=($item->categoryGettingKnow['category']);
+                if(!is_null($item->insert_user_id))
+                {
+                    $item->insert_user=$item->get_insertuserInfo('insert_user_id')->first()->fname." ".$item->get_insertuserInfo('insert_user_id')->first()->lname;
+                }
+               // $item=$this->changeNumberToData($item);
             }
 
 
