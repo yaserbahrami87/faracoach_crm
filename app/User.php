@@ -66,6 +66,11 @@ class User extends Authenticatable implements MustVerifyEmail
             return $this->belongsTo('App\User','insert_user_id','id');
         }
 
+        public function checkouts()
+        {
+            return $this->hasMany('App\checkout','user_id','id');
+        }
+
         public function lastLoginUser()
         {
             return User::orderby('last_login_at','desc')
