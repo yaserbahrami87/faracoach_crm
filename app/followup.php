@@ -16,5 +16,17 @@ class followup extends Model
         return $this->belongsTo('App\User');
     }
 
+    public function problemFollowup()
+    {
+        return $this->belongsTo('App\problemfollowup','problemfollowup_id','id');
+    }
+
+    public function courses()
+    {
+        return $this->belongsTo('App\course','course_id',"id");
+    }
+
+
+
 
 }

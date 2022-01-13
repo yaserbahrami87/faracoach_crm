@@ -12,7 +12,7 @@
                 <th scope="col" class="text-center">وضعیت</th>
             </tr>
             @foreach($messages As $item)
-                <tr >
+                <tr class="@if($item->status==1) bg-secondary-light  @else bg-success @endif" >
                     <td class="text-center">
                         <a href="/admin/message/{{$item->id}}">{{$item->id}}</a>
                     </td>

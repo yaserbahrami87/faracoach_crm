@@ -56,6 +56,16 @@ class User extends Authenticatable implements MustVerifyEmail
             return $this->hasMany('App\followup');
         }
 
+        public function categoryGettingKnow()
+        {
+            return $this->belongsTo('App\category_gettingknow','gettingknow','id');
+        }
+
+        public function get_insertuserInfo()
+        {
+            return $this->belongsTo('App\User','insert_user_id','id');
+        }
+
         public function lastLoginUser()
         {
             return User::orderby('last_login_at','desc')
