@@ -28,7 +28,7 @@
                     </td>
 
                     <td class="text-center">
-                        @foreach($item->user->checkouts->where('status','=',1)->where('product_id','=',$item->course_id) as $item2)
+                        @foreach($item->user->checkouts->where('status','=',1)->where('product_id','=',$item->course_id)->where('type','=','course') as $item2)
                             {{$item2->authority}}
                         @endforeach
                     </td>
