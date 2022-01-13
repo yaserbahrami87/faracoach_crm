@@ -8,7 +8,7 @@
                 <th class="text-center">نام و نام وخانوادگی</th>
                 <th class="text-center">شماره همراه</th>
                 <th class="text-center">تاریخ ثبت نام</th>
-
+                <th class="text-center">واریزی(تومان)</th>
                 <th class="text-center">کدرهگیری</th>
             </tr>
 
@@ -35,7 +35,11 @@
                     <td class="text-center">
                         {{$item->date_fa}}
                     </td>
-
+                    <td class="text-center">
+                        @foreach($item->user->checkouts->where('status','=',1)->where('product_id','=',$item->course_id)->where('type','=','course') as $item2)
+                            {{number_format($item2->price) }}
+                        @endforeach
+                    </td>
 
                     <td class="text-center">
                         @foreach($item->user->checkouts->where('status','=',1)->where('product_id','=',$item->course_id)->where('type','=','course') as $item2)
