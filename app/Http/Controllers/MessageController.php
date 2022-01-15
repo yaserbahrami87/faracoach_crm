@@ -201,9 +201,9 @@ class MessageController extends BaseController
                     ->get();
 
 //                //باید حذف شود
-                $users=user::orwhere('id','=',1)
-                            ->orwhere('tel','=','+989339273736')
-                            ->get();
+//                $users=user::orwhere('id','=',1)
+//                            ->orwhere('tel','=','+989339273736')
+//                            ->get();
 
                 foreach ($users as $item2)
                 {

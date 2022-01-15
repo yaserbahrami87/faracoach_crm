@@ -24,8 +24,6 @@ class sendMessageNotification extends Notification implements ShouldQueue
 
         $this->tel=$tel;
         $this->text=$text;
-
-
     }
 
     /**
