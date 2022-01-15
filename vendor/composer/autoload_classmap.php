@@ -156,6 +156,7 @@ return array(
     'App\\lib\\zarinpal' => $baseDir . '/app/lib/zarinpal.php',
     'App\\like' => $baseDir . '/app/like.php',
     'App\\message' => $baseDir . '/app/message.php',
+    'App\\notification' => $baseDir . '/app/notification.php',
     'App\\option' => $baseDir . '/app/option.php',
     'App\\order' => $baseDir . '/app/order.php',
     'App\\post' => $baseDir . '/app/post.php',

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\course;
 use App\message;
+use App\notification;
 use App\Notifications\sendMessageNotification;
 use App\User;
 use Illuminate\Http\Request;
@@ -219,6 +220,13 @@ class MessageController extends BaseController
                             'time_fa' => $this->timeNow
                         ]);
                     $item2->notify(new sendMessageNotification($item2->tel,'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\nنام کاربری شماره همراه شما"."\n my.faracoach.com"));
+                    notification::create([
+                        'user_id'           =>$item2->id,
+                        'insert_user_id'    =>Auth::user()->id,
+                        'notification'      =>'یک پیام خصوصی دارید',
+                        'date_fa'           =>$this->dateNow,
+                        'time_fa'           =>$this->timeNow,
+                    ]);
 //                    $this->sendSms($item2->tel,'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\nنام کاربری شماره همراه شما"."\n my.faracoach.com");
                 }
             }

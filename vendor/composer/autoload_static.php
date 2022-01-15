@@ -761,6 +761,7 @@ class ComposerStaticInitf54d8edf51459297346cdb00d8423a68
         'App\\lib\\zarinpal' => __DIR__ . '/../..' . '/app/lib/zarinpal.php',
         'App\\like' => __DIR__ . '/../..' . '/app/like.php',
         'App\\message' => __DIR__ . '/../..' . '/app/message.php',
+        'App\\notification' => __DIR__ . '/../..' . '/app/notification.php',
         'App\\option' => __DIR__ . '/../..' . '/app/option.php',
         'App\\order' => __DIR__ . '/../..' . '/app/order.php',
         'App\\post' => __DIR__ . '/../..' . '/app/post.php',
