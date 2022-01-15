@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\course;
 use App\message;
+use App\Notifications\sendMessageNotification;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -199,6 +200,11 @@ class MessageController extends BaseController
                     ->select('users.*')
                     ->get();
 
+//                //باید حذف شود
+                $users=user::orwhere('id','=',1)
+                            ->orwhere('tel','=','+989339273736')
+                            ->get();
+
                 foreach ($users as $item2)
                 {
                     $status = message::create(
@@ -212,7 +218,8 @@ class MessageController extends BaseController
                             'date_fa' => $this->dateNow,
                             'time_fa' => $this->timeNow
                         ]);
-                    $this->sendSms($item2->tel,'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\nنام کاربری شماره همراه شما"."\n my.faracoach.com");
+                    $item2->notify(new sendMessageNotification($item2->tel,'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\nنام کاربری شماره همراه شما"."\n my.faracoach.com"));
+//                    $this->sendSms($item2->tel,'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\nنام کاربری شماره همراه شما"."\n my.faracoach.com");
                 }
             }
 
@@ -239,7 +246,8 @@ class MessageController extends BaseController
                             'date_fa' => $this->dateNow,
                             'time_fa' => $this->timeNow
                         ]);
-                    $this->sendSms($item2->tel,'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\nنام کاربری شماره همراه شما"."\n my.faracoach.com");
+                    $item2->id->notify(new sendMessageNotification($item2->tel,'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\nنام کاربری شماره همراه شما"."\n my.faracoach.com"));
+                   // $this->sendSms($item2->tel,'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\nنام کاربری شماره همراه شما"."\n my.faracoach.com");
                 }
             }
         }
@@ -265,7 +273,8 @@ class MessageController extends BaseController
                                 'date_fa' => $this->dateNow,
                                 'time_fa' => $this->timeNow
                             ]);
-                        $this->sendSms($item2->tel,'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\nنام کاربری شماره همراه شما"."\n my.faracoach.com");
+                        $item2->id->notify(new sendMessageNotification($item2->tel,'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\nنام کاربری شماره همراه شما"."\n my.faracoach.com"));
+                        //$this->sendSms($item2->tel,'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\nنام کاربری شماره همراه شما"."\n my.faracoach.com");
                     }
                 }
 

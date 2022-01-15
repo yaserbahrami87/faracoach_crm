@@ -9,6 +9,11 @@
         {
             padding-right:25px !important;
         }
+
+        .card-user .card-body
+        {
+            min-height: auto !important;
+        }
     </style>
 
 @endsection

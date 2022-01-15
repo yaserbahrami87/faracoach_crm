@@ -559,6 +559,8 @@ class UserController extends BaseController
                             ->count();
 
 
+
+
         //لیست پیگیری های انجام شده
         $followUps=User::join('followups','users.id','=','followups.user_id')
                         //->join('followups','users.id','=','followups.insert_user_id')
@@ -1742,7 +1744,7 @@ class UserController extends BaseController
         $users = User:: join('followups', 'users.id', '=', 'followups.user_id')
                     ->when(($request['categorypeygiri']=="1" && $request['user'] ),function($query) use ($request)
                     {
-                        return $query->where('followups.insert_user_id','=',$request->user);
+                        return $query->where('users.insert_user_id','=',$request->user);
                     })
                     ->when(($request['categorypeygiri']=="0" && $request['user']),function($query) use ($request)
                     {

@@ -119,6 +119,8 @@ return array(
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Listeners\\LogSuccessfulLogin' => $baseDir . '/app/Listeners/LogSuccessfulLogin.php',
+    'App\\Notifications\\channels\\KavenegarChannel' => $baseDir . '/app/Notifications/channels/KavenegarChannel.php',
+    'App\\Notifications\\sendMessageNotification' => $baseDir . '/app/Notifications/sendMessageNotification.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',
