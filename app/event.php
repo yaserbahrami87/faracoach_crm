@@ -16,4 +16,9 @@ class event extends Model
     {
         return 'shortlink';
     }
+
+    public function eventreserves()
+    {
+        return $this->hasMany('App\eventreserve','event_id','id');
+    }
 }

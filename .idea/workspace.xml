@@ -24,12 +24,17 @@
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MessageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MessageController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CourseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CourseController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/EventController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/EventController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/master/header_menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/master/header_menu.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/master/header_menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/master/header_menu.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/course.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/course.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/event.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/event.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/eventreserve.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/eventreserve.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/teacher.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/teacher.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/courses.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/courses.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/listEventReserveUsers.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/listEventReserveUsers.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -824,7 +829,15 @@
       <workItem from="1642012742593" duration="9881000" />
       <workItem from="1642053953600" duration="18634000" />
       <workItem from="1642157951886" duration="6011000" />
-      <workItem from="1642235837497" duration="15487000" />
+      <workItem from="1642235837497" duration="16071000" />
+      <workItem from="1642276198421" duration="29000" />
+      <workItem from="1642276280217" duration="48000" />
+      <workItem from="1642276362674" duration="845000" />
+      <workItem from="1642312431526" duration="1179000" />
+      <workItem from="1642317479609" duration="3127000" />
+      <workItem from="1642353346784" duration="378000" />
+      <workItem from="1642359441495" duration="12262000" />
+      <workItem from="1642409846682" duration="5877000" />
     </task>
     <servers />
   </component>
@@ -872,9 +885,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1641801954138" />
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1642250343376">
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1642364348172">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1642250343376" />
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1642364348172" />
   </component>
 </project>

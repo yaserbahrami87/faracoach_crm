@@ -18,21 +18,21 @@ class CourseController extends BaseController
 
         $courses=course::orderby('id','desc')
                     ->get();
-        foreach ($courses as $item)
-        {
-            if(!is_null($item->teacher_id)&&($item->teacher_id!=0))
-            {
-                $item->teacher_id=$this->get_teachersById($item->teacher_id)->fname." ".$this->get_teachersById($item->teacher_id)->lname;
-            }
-            else
-            {
-                $item->teacher_id='نامشخص';
-            }
-            $item->countStudent=course::join('students','courses.id','=','students.course_id')
-                                    ->where('students.course_id','=',$item->id)
-                                    ->count();
+//        foreach ($courses as $item)
+//        {
+//            if(!is_null($item->teacher_id)&&($item->teacher_id!=0))
+//            {
+//                $item->teacher_id=$this->get_teachersById($item->teacher_id)->fname." ".$this->get_teachersById($item->teacher_id)->lname;
+//            }
+//            else
+//            {
+//                $item->teacher_id='نامشخص';
+//            }
+//            $item->countStudent=course::join('students','courses.id','=','students.course_id')
+//                                    ->where('students.course_id','=',$item->id)
+//                                    ->count();
 
-        }
+//        }
         return view('admin.courses')
                     ->with('courses',$courses);
     }

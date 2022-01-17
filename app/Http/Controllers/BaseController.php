@@ -1575,19 +1575,63 @@ class BaseController extends Controller
                 //لیست تعداد کاربرها
                 $statics['notfollowup'] = $this->get_user(NULL,NULL,1,NULL,NULL,NULL )->count();
                 $statics['lead']=$this->get_user(NULL,NULL,-1,NULL,NULL)->count();
-                $statics['continuefollowup'] = $this->get_usersByType(11,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-                $statics['cancelfollowup'] = $this->get_usersByType(12,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-                $statics['waiting'] = $this->get_usersByType(13,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-                $statics['noanswering'] = $this->get_usersByType(14,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-                $statics['students'] = $this->get_usersByType(20,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
+//                $statics['continuefollowup'] = $this->get_usersByType(11,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
+
+                $statics['continuefollowup']=Auth::user()
+                                            ->get_followby_expert()
+                                            ->where('users.type','=',11)
+                                            ->count();
+
+//                $statics['cancelfollowup'] = $this->get_usersByType(12,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
+
+                $statics['cancelfollowup'] = Auth::user()
+                                            ->get_followby_expert()
+                                            ->where('users.type','=',12)
+                                            ->count();
+
+//                $statics['waiting'] = $this->get_usersByType(13,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
+
+                $statics['waiting'] =Auth::user()
+                                    ->get_followby_expert()
+                                    ->where('users.type','=',13)
+                                    ->count();
+
+
+//                $statics['noanswering'] = $this->get_usersByType(14,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
+
+                $statics['noanswering'] = Auth::user()
+                                    ->get_followby_expert()
+                                    ->where('users.type','=',14)
+                                    ->count();
+
+
+
+//                $statics['students'] = $this->get_usersByType(20,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
+
+                $statics['students'] = Auth::user()
+                                    ->get_followby_expert()
+                                    ->where('users.type','=',20)
+                                    ->count();
+
                 $condition=['nextfollowup_date_fa','=',$this->dateNow];
                 $statics['todayFollowup'] = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL,1)->count();
                 $condition=['followups.nextfollowup_date_fa', '<', $this->dateNow];
                 $statics['expireFollowup']=$this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL,1)->count();
-                $statics['myfollowup'] = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
+//                $statics['myfollowup'] = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
+
+
+                $statics['myfollowup'] = Auth::user()
+                                    ->get_followby_expert()
+                                    ->count();
+
+
                 $condition=['date_fa','=',$this->dateNow];
                 $statics['followedToday'] = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL )->count();
-                $statics['trashuser']=$this->get_usersByType(0,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
+//                $statics['trashuser']=$this->get_usersByType(0,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
+                $statics['trashuser']=Auth::user()
+                                    ->get_followby_expert()
+                                    ->where('users.type','=',0)
+                                    ->count();;
 
                 return ($statics);
             }

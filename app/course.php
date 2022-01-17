@@ -20,6 +20,11 @@ class course extends Model
         return $this->hasMany('App\student','course_id','id');
     }
 
+    public function teacher()
+    {
+        return $this->belongsTo('App\teacher','teacher_id','id');
+    }
+
 
 
 }

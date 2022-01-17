@@ -166,6 +166,19 @@ class UserController extends BaseController
 //                        ->paginate($this->countPage());
                         ->get();
 
+            $users=User::where(function($query)
+                {
+                    $query->orwhere('followby_expert','=',Auth::user()->id)
+                        ->orwhere('followby_expert','=',NULL);
+                })
+                ->whereNotIn('users.type',[-3,-2,-1,2,3,0])
+                ->orderby('users.id','desc')
+                ->groupby('users.id')
+                ->get();
+
+
+
+
             $usersAdmin=user::orwhere('type','=',2)
                 ->orwhere('type','=',3)
                 ->get();
@@ -212,13 +225,12 @@ class UserController extends BaseController
                     $item->followby_expert=$expert->fname." ".$expert->lname;
                 }
 
-
-
-
                 if(is_null($item->personal_image))
                 {
                     $item->personal_image="default-avatar.png";
                 }
+
+
                 if(!is_null($item->introduced))
                 {
                     if ($this->get_user(NULL, $item->introduced, NULL, NULL, true)->count()>0)

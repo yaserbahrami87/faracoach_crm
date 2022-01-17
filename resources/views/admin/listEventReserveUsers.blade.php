@@ -17,41 +17,33 @@
     <div class="container bg-secondary-light">
         <div class="row p-1">
             <div class="col-12 mb-3 border-bottom">
+
                 <h4>لیست افراد شرکت کننده در دوره {{$event->event}}</h4>
             </div>
             <div class="col-12">
-                <div class="row">
-                    @if($users->count()>0)
-                        @foreach($users as $item)
-                            <div class="col-lg-3 col-sm-6 listFriends" id="">
-                                <div class="card hovercard  shadow-sm ">
-                                    <div class="cardheader">
+                <div class="row table-responsive">
+                    @if($event->eventreserves->count()>0)
+                        <table class="table">
+                            <tr>
+                                <th></th>
+                                <th>مشخصات</th>
+                                <th>شماره تماس</th>
+                                <th>تاریخ</th>
+                                <th>ساعت</th>
+                            </tr>
+                            @foreach($eventreserves as $item)
 
-                                    </div>
-                                    <div class="avatar">
-                                        <img alt="" src="{{asset('documents/users/'.$item->personal_image)}}">
-                                    </div>
-                                    <div class="info">
-                                        <div class="title">
-                                            <p   >{{$item->fname}} {{$item->lname}}</p>
-                                        </div>
-                                        <div class="desc">{{$item->tel}}</div>
-                                    </div>
-                                    <div class="bottom">
-                                        <p class="border-bottom pb-4">
-                                            <span class="float-right" title="تاریخ ثبت نام">
-                                                <i class="bi bi-calendar-date-fill"></i>
-                                                {{$item->date_fa}}
-                                            </span>
-                                                <span class="float-left" title="ساعت ثبت نام">
-                                                <i class="bi bi-clock-fill"></i>
-                                                {{$item->time_fa}}
-                                            </span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
+                                <tr>
+                                    <td>
+                                        <img class="rounded-circle" src="{{asset('documents/users/'.$item->user->personal_image)}}" width="50px" height="50px">
+                                    </td>
+                                    <td>{{$item->user->fname}} {{$item->user->lname}}</td>
+                                    <td>{{$item->user->tel}}</td>
+                                    <td>{{$item->date_fa}}</td>
+                                    <td>{{$item->time_fa}}</td>
+                                </tr>
+                            @endforeach
+                        </table>
                     @else
                         <div class="col-12 alert alert-warning">
                             <i class="bi bi-exclamation-triangle-fill"></i>
@@ -59,7 +51,7 @@
                         </div>
                     @endif
                 </div>
-                {{$users->links()}}
+                {{$eventreserves->links()}}
             </div>
         </div>
     </div>

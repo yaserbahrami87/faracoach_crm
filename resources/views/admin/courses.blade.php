@@ -30,9 +30,13 @@
                         <a href="/admin/courses/{{$item->shortlink}}" class="d-block" target="_blank" >{{$item->duration}}</a>
                     </td>
 
-                    <td>{{$item->teacher_id}}</td>
+                    <td>
+                        @if(isset($item->teacher->user))
+                            {{$item->teacher->user->fname." ".$item->teacher->user->lname}}
+                        @endif
+                    </td>
                     <td class="text-center">
-                        <a href="/admin/courses/{{$item->shortlink}}/students" class="btn btn-success" target="_blank" >{{$item->countStudent}} نفر</a>
+                        <a href="/admin/courses/{{$item->shortlink}}/students" class="btn btn-success" target="_blank" >{{$item->students()->count()}} نفر</a>
                     </td>
                     <td>
                         <a href="/admin/courses/{{$item->shortlink}}/edit" class="btn btn-primary">

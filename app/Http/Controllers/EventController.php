@@ -255,15 +255,18 @@ class EventController extends BaseController
     //شرکت کننده ها در رویئداد
     public function usersEvent(event $event)
     {
-        $users = event::join('eventreserves', 'events.id', '=', 'eventreserves.event_id')
-            ->join('users', 'eventreserves.user_id', '=', 'users.id')
-            ->where('eventreserves.event_id', '=', $event->id)
-            ->orderby('eventreserves.id', 'asc')
-            ->select('users.*', 'eventreserves.date_fa', 'eventreserves.time_fa')
-            ->simplePaginate(20);
+        $eventreserves=$event->eventreserves()
+                        ->paginate(25);
+
+//        $users = event::join('eventreserves', 'events.id', '=', 'eventreserves.event_id')
+//            ->join('users', 'eventreserves.user_id', '=', 'users.id')
+//            ->where('eventreserves.event_id', '=', $event->id)
+//            ->orderby('eventreserves.id', 'asc')
+//            ->select('users.*', 'eventreserves.date_fa', 'eventreserves.time_fa')
+//            ->simplePaginate(20);
         return view('admin.listEventReserveUsers')
             ->with('event', $event)
-            ->with('users', $users);
+            ->with('eventreserves', $eventreserves);
     }
 
     public function updateStatus(Request $request, event $event)

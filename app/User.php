@@ -56,6 +56,11 @@ class User extends Authenticatable implements MustVerifyEmail
             return $this->hasMany('App\followup');
         }
 
+        public function get_followby_expert()
+        {
+            return $this->hasMany('App\User','followby_expert','id');
+        }
+
         public function categoryGettingKnow()
         {
             return $this->belongsTo('App\category_gettingknow','gettingknow','id');
@@ -81,6 +86,11 @@ class User extends Authenticatable implements MustVerifyEmail
         public function notifications()
         {
             return $this->hasMany('App\notification');
+        }
+
+        public function types()
+        {
+
         }
 
 
