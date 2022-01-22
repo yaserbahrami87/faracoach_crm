@@ -1,5 +1,6 @@
 @extends('panelUser.master.index')
 @section('rowcontent')
+
     <div class="col-md-6">
         <div class="card card-user">
             <div class="card-header bg-info">
@@ -12,6 +13,7 @@
                     <div class="col-md-6 px-1">
                         <div class="form-group">
                             <label>موضوع رزرو</label>
+
                             <input type="text" class="form-control " placeholder="نام را وارد کنید" value="{{$user->subject}}"    disabled="disabled"  />
                         </div>
                     </div>

@@ -303,14 +303,28 @@
             </div>
             <div class="col-12 table-responsive">
                 <table class="table table-bordered table-striped">
+                    <tr>
+
+                        <th></th>
+                        <th>کدجلسه</th>
+                        <th>کاربر</th>
+                        <th>تاریخ</th>
+                        <th>ساعت شروع</th>
+                        <th>نوع جلسه</th>
+                        <th>شرایط</th>
+                        <th>وضعیت</th>
+                        <th></th>
+                    </tr>
                     @foreach($booking as $item)
                         <tr class="@if($item->caption_status=='رزرو شد') bg-warning @elseif($item->caption_status=='برگزارشد') bg-success @endif">
-                            <td>{{$item->iteration}}</td>
                             <td class="p-0">
                                 <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="rounded-circle "  width="50px" height="50px" />
                             </td>
                             <td>
-                                    <a class="btn-modal-introduced" href="{{$item->id}}"   >{{$item->fname}} {{$item->lname}}</a>
+                                {{$item->id}}
+                            </td>
+                            <td>
+                                <a class="btn-modal-introduced" href="{{$item->id}}"   >{{$item->fname}} {{$item->lname}}</a>
                             </td>
 
                             <td>
@@ -341,7 +355,7 @@
                             </td>
                             <td>
                                 @if($item->start_date>$dateNow)
-                                    <form class="d-inline-block" method="POST" action="/booking/{{$item->booking_id}}" onsubmit="return confirm('آیا از لغو جلسه اطمینان دارید؟')">
+                                    <form class="d-inline-block" method="POST" action="/panel/booking/{{$item->id}}" onsubmit="return confirm('آیا از لغو جلسه اطمینان دارید؟')">
                                         {{csrf_field()}}
                                         {{method_field('PATCH')}}
                                         <input type="hidden" name="status" value="4" />

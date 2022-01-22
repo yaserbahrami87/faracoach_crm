@@ -20,6 +20,7 @@ use App\followup;
 use App\lib\zarinpal;
 use App\like;
 use App\message;
+use App\notification;
 use App\option;
 use App\post;
 use App\problemfollowup;
@@ -1998,6 +1999,36 @@ class BaseController extends Controller
                                 ->first();
                         });
 
+    }
+
+    public function get_statusBookings($status)
+    {
+        switch ($status) {
+            case '1':
+                return 'آماده رزرو';
+                break;
+            case '0':
+                return 'رزرو شد';
+                break;
+            case '3':
+                return 'برگزارشد';
+                break;
+            case '4':
+                return 'کنسل شد';
+                break;
+
+        }
+    }
+
+    public function send_notification($user,$notification)
+    {
+        notification::create([
+            'user_id'           =>$user,
+            'insert_user_id'    =>Auth::user()->id,
+            'notification'      =>$notification,
+            'date_fa'           =>$this->dateNow,
+            'time_fa'           =>$this->timeNow,
+        ]);
     }
 
 

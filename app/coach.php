@@ -11,6 +11,11 @@ class coach extends Model
     ];
 
     public function user() {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo('App\User');
+    }
+
+    public function bookings()
+    {
+        return $this->hasMany('App\booking','user_id','id');
     }
 }

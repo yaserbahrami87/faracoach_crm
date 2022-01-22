@@ -29,10 +29,15 @@
                             </div>
                         </div>
                     @endif
+
+                    <div class="alert alert-warning">
+                        <i class="bi bi-exclamation-triangle-fill"></i>
+                        فیلدهای ستاره دار اجباریست
+                    </div>
                     <form method="POST" action="{{ route('register') }}">
                         {{csrf_field()}}
                         <div class="form-group row">
-                            <label for="fname" class="col-md-4 col-form-label text-md-right">{{ __('نام*:') }}</label>
+                            <label for="fname" class="col-md-4 col-form-label text-md-right">نام: <span class="text-danger">*</span></label>
 
                             <div class="col-md-6">
                                 <input id="fname" type="text" class="form-control @error('fname') is-invalid @enderror" name="fname" value="{{ old('fname') }}" lang="fa" required autocomplete="fname" autofocus>
@@ -46,7 +51,7 @@
                         </div>
                         <input type="hidden" value="0" name="tel_verified" id="tel_verified"/>
                         <div class="form-group row">
-                            <label for="lname" class="col-md-4 col-form-label text-md-right">{{ __('نام خانوادگی*:') }}</label>
+                            <label for="lname" class="col-md-4 col-form-label text-md-right">نام خانوادگی: <span class="text-danger">*</span></label>
 
                             <div class="col-md-6">
                                 <input id="lname" type="text" class="form-control @error('lname') is-invalid @enderror"  lang="fa" name="lname" value="{{ old('lname') }}" required autocomplete="lname" autofocus>
@@ -59,7 +64,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('جنسیت:*') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right">جنسیت: <span class="text-danger">*</span></label>
 
                             <div class="col-md-6">
                                 <div class="custom-control custom-radio custom-control-inline">
@@ -80,7 +85,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('پست الکترونیکی:*') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right">پست الکترونیکی: <span class="text-danger">*</span></label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
@@ -94,7 +99,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="tel" class="col-md-4 col-form-label text-md-right">{{ __('تلفن همراه:*') }}</label>
+                            <label for="tel" class="col-md-4 col-form-label text-md-right">تلفن همراه: <span class="text-danger">*</span></label>
 
                             <div class="col-md-6">
                                 <div class="input-group">
@@ -151,7 +156,7 @@
                             <div class="col-md-6">
                                 <div class="input-group">
                                     <input type="hidden" id="introduced_registerAdmin_org" value="{{ old('introduced') }}"  />
-                                    <input id="introduced_registerAdmin" type="text" class="form-control @error('introduced') is-invalid @enderror" value="{{ old('introduced') }}" autocomplete="introduced">
+                                    <input id="introduced_registerAdmin" type="text" class="form-control @error('introduced') is-invalid @enderror" value="{{ old('introduced') }}" autocomplete="introduced" dir="ltr"/>
                                     @error('introduced')
                                     <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -200,7 +205,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('رمز عبور:*') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right">رمز عبور: <span class="text-danger">*</span></label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -214,7 +219,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('تکرار رمز عبور:*') }}</label>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">تکرار رمز عبور: <span class="text-danger">*</span></label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">

@@ -92,7 +92,7 @@ class HomeController extends BaseController
 
         //کاربرهای آنلاین ناقص می باشد
         $condition=['last_login_at',$this->changeTimestampToMilad($this->dateNow)];
-        $onlineUser=$this->get_user(NULL,NULL,NULL,$condition,'get');
+        //$onlineUser=$this->get_user(NULL,NULL,NULL,$condition,'get');
 
         // آآخرین رویدادها
         //$condition=['start_date','>',$this->dateNow];

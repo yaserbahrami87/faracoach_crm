@@ -23,7 +23,7 @@
     <div class="shadow-bottom"></div>
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
-            <li class=" navigation-header"><span>پورتال فراکوچ</span></li>
+            <li class=" navigation-header"><span> پورتال فراکوچ</span></li>
             <li class=" nav-item"><a href="/panel"><span class="menu-title">داشبورد</span></a></li>
             <li class=" nav-item has-sub"><a href="#"><span class="menu-title" data-i18n="Email">کاربرها</span></a>
                 <ul class="menu-content">

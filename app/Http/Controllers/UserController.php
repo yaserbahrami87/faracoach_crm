@@ -1000,9 +1000,14 @@ class UserController extends BaseController
                                 ->get();
                     break;
                 case 'continuefollowup':
-                    $users = User::where('type','=',11)
-                                ->where('followby_expert','=',Auth::user()->id)
+//                    $users = User::where('type','=',11)
+//                                ->where('followby_expert','=',Auth::user()->id)
+//                                ->get();
+
+                    $users=Auth::user()->get_followby_expert()
+                                ->where('type','=',11)
                                 ->get();
+
 
 
                     //  $this->get_usersByType(11,Auth::user()->id);
@@ -1010,33 +1015,51 @@ class UserController extends BaseController
                     break;
                 case 'cancelfollowup':
 //                    $users = $this->get_cancelfollowup();
-                    $users =User::where('type','=',12)
-                                ->where('followby_expert','=',Auth::user()->id)
-                                ->get();
+//                    $users =User::where('type','=',12)
+//                                ->where('followby_expert','=',Auth::user()->id)
+//                                ->get();
+                    $users=Auth::user()->get_followby_expert()
+                        ->where('type','=',12)
+                        ->get();
 
                         //$this->get_usersByType(12,Auth::user()->id);
                     break;
                 case 'waiting' :
-                    $users =User::where('type','=',13)
-                                ->where('followby_expert','=',Auth::user()->id)
+//                    $users =User::where('type','=',13)
+//                                ->where('followby_expert','=',Auth::user()->id)
+//                                ->get();
+                    $users=Auth::user()->get_followby_expert()
+                                ->where('type','=',13)
                                 ->get();
+
 
                         //$this->get_usersByType(13,Auth::user()->id);
                     break;
                 case 'noanswering':
 //                    $users = $this->get_noanswering();
-                    $users =User::where('type','=',14)
-                                ->where('followby_expert','=',Auth::user()->id)
+//                    $users =User::where('type','=',14)
+//                                ->where('followby_expert','=',Auth::user()->id)
+//                                ->get();
+
+                    $users=Auth::user()->get_followby_expert()
+                                ->where('type','=',14)
                                 ->get();
+
+
 
 
                         //$this->get_usersByType(14,Auth::user()->id);
                     break;
                 case 'students':
 //                    $users = $this->get_students();
-                    $users = User::where('type','=',20)
-                                ->where('followby_expert','=',Auth::user()->id)
+//                    $users = User::where('type','=',20)
+//                                ->where('followby_expert','=',Auth::user()->id)
+//                                ->get();
+
+                    $users=Auth::user()->get_followby_expert()
+                                ->where('type','=',20)
                                 ->get();
+
 
 
 //                        $this->get_usersByType(20,Auth::user()->id);
@@ -1075,7 +1098,6 @@ class UserController extends BaseController
                 $item->status_followups=$this->userType($lastFollowup->status_followups);
                 $quality=($lastFollowup->problemfollowup);
                 $item->lastFollowupCourse=$lastFollowup->courses['course'];
-
             }
 
 

@@ -10,7 +10,7 @@
         }
         .form-control{
             background-color: #fdfdff !important;
-            border: #fdfdff !important;
+            border: 1px solid #5ACFD6 !important;
         }
         .content-wrapper{
             background-color: #fdfdff !important;
@@ -99,25 +99,31 @@
     <div class=" container col-xs-12 col-md-8 col-lg-8 col-xl-8">
         <div class="line">
             <div class="card-body">
+                <div class="alert alert-warning">
+                    <i class="bi bi-exclamation-triangle-fill"></i>پر کردن فیلدهای ستاره دار اجباریست
+                </div>
                 <form method="post" action="/panel/coach" >
                     {{csrf_field()}}
-                    <label for="education_background">سوابق تحصیلی *</label>
+                    <label for="education_background">سوابق تحصیلی <span class="text-danger">*</span></label>
                     <div class="form-group">
                         <textarea class="form-control @error('education_background') is-invalid @enderror " name="education_background" id="education_background" rows="3">{{old('education_background')}}</textarea>
                     </div>
                     <div class="form-group">
-                        <label for="certificates">گواهینامه ها *</label>
+                        <label for="certificates">گواهینامه ها <span class="text-danger">*</span></label>
                         <textarea class="form-control @error('certificates') is-invalid @enderror " name="certificates" id="certificates" rows="3">{{old('certificates')}}</textarea>
+                        <!--
                         <div id="btn">
                             <button type=" " class="btn btn-primary btn-sm" >مشاهده گواهینامه</button>
                         </div>
+
+                        -->
                     </div>
                     <div class="form-group">
-                        <label for="experience">سوابق کاری *</label>
+                        <label for="experience">سوابق کاری <span class="text-danger">*</span></label>
                         <textarea class="form-control @error('experience') is-invalid @enderror " name="experience" id="experience" rows="3">{{old('experience')}}</textarea>
                     </div>
                     <div class="form-group">
-                        <label for="skills">مهارت ها *</label>
+                        <label for="skills">مهارت ها <span class="text-danger">*</span></label>
                         <textarea class="form-control @error('skills') is-invalid @enderror " name="skills" id="skills" rows="3">{{old('skills')}}</textarea>
                     </div>
                     <div class="form-group">
@@ -125,33 +131,33 @@
                         <textarea class="form-control @error('researches') is-invalid @enderror " name="researches" id="researches" rows="3">{{old('researches')}}</textarea>
                     </div>
                     <div class="form-group">
-                        <label for="count_meeting">تجربه برگزاری جلسات رایگان *</label>
+                        <label for="count_meeting">تجربه برگزاری جلسات رایگان <span class="text-danger">*</span></label>
                         <small id="count_meetinglHelp" class="form-text text-muted"> تعداد ساعت جلساتی که تاکنون توسط شما ارائه شده است را وارد کنید</small>
                         <input type="number" class="form-control" id="count_meeting" name="count_meeting" aria-describedby="count_meetingHelp" min="0" max="10000" value="{{old('count_meeting')}} ساعت " />
 
                     </div>
                     <div class="form-group">
-                        <label for="count_meeting">تجربه برگزاری جلسات قراردادی *</label>
+                        <label for="count_meeting">تجربه برگزاری جلسات قراردادی <span class="text-danger">*</span></label>
                         <small id="count_meetinglHelp" class="form-text text-muted">تعداد ساعت جلساتی که تاکنون توسط شما ارائه شده است را وارد کنید</small>
                         <input type="number" class="form-control" id="count_meeting" name="count_meeting" aria-describedby="count_meetingHelp" min="0" max="10000" value="{{old('count_meeting')}}"/>
                     </div>
                     <div class="form-group">
-                        <label for="customer_satisfaction">درصد رضایت مشتریان *</label>
+                        <label for="customer_satisfaction">درصد رضایت مشتریان <span class="text-danger">*</span></label>
                         <small id="customer_satisfactionHelp" class="form-text text-muted"> تعداد افرادی که رضایت کامل از جلسات مشاوره داشته اند وارد کنید</small>
                         <input type="number" class="form-control" id="customer_satisfaction" name="customer_satisfaction" aria-describedby="customer_satisfactiongHelp" min="0" max="1000" value="{{old('customer_satisfaction')}}"/>
                     </div>
                     <div class="form-group">
-                        <label for="change_customer">درصد تبدیل مشتری *</label>
+                        <label for="change_customer">درصد تبدیل مشتری <span class="text-danger">*</span></label>
                         <small id="change_customerHelp" class="form-text text-muted"> تعداد افرادی که تبدیل به مشتری وفادارا شده اند را وارد کنید</small>
                         <input type="number" class="form-control" id="change_customer" name="change_customer" aria-describedby="change_customerHelp" min="0" max="1000" value="{{old('change_customer')}}"/>
                     </div>
                     <div class="form-group">
-                        <label for="count_recommendation">تعداد توصیه نامه *</label>
+                        <label for="count_recommendation">تعداد توصیه نامه <span class="text-danger">*</span></label>
                         <small id="count_recommendationHelp" class="form-text text-muted"> تعداد توصیه نامه هایی که تاکنون داشته اید را وارد کنید</small>
                         <input type="number" class="form-control" id="count_recommendation" name="count_recommendation" aria-describedby="count_recommendationHelp" min="0" max="1000" value="{{old('count_recommendation')}}"/>
                     </div>
                     <div class="form-group">
-                        <label for="selectpicker">دسته بندی ها *</label>
+                        <label for="selectpicker">دسته بندی ها <span class="text-danger">*</span></label>
                         <div class="form-group" id="border">
                             <select class="form-control selectpicker" multiple="multiple" name="category[]" id="selectpicker" >
                                 @foreach($categoryCoaches as $item)
@@ -161,7 +167,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="typecoach_id">سطح *</label>
+                        <label for="typecoach_id">سطح <span class="text-danger">*</span></label>
                         <div class="form-group" id="border">
                             <select class="form-control"  name="typecoach_id" id="typecoach_id" >
                                 <option selected disabled>انتخاب کنید</option>

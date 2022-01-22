@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\checkout;
 use App\coach;
 use App\homework;
+use App\notification;
+use App\Notifications\sendMessageNotification;
 use App\reserve;
 use App\User;
 use Illuminate\Http\Request;
@@ -54,11 +56,11 @@ class ReserveController extends BaseController
      */
     public function show(reserve $reserve)
     {
-
-        $reserve=reserve::join('bookings','bookings.id','=','reserves.booking_id')
-                    ->where('reserves.id','=',$reserve['id'])
-                    ->select('reserves.*','bookings.*','reserves.id as id_reserve','reserves.status as status_reserve')
-                    ->first();
+//        dd($reserve->booking);
+//        $reserve=reserve::join('bookings','bookings.id','=','reserves.booking_id')
+//                    ->where('reserves.id','=',$reserve['id'])
+//                    ->select('reserves.*','bookings.*','reserves.id as id_reserve','reserves.status as status_reserve')
+//                    ->first();
 
         switch($reserve->type_booking)
         {
@@ -77,20 +79,21 @@ class ReserveController extends BaseController
                     ->where('booking_id','=',$reserve['booking_id'])
                     ->first();
 
-        $user_coach=$this->get_user_byID($reserve->user_id);
+//        $user_coach=$this->get_user_byID($reserve->user_id);
+
 
         $homework=homework::where('booking_id','=',$reserve->booking_id)
             ->where('type','=','booking')
             ->orderby('id')
             ->get();
 
-        $dateNow=$this->dateNow;
+//        $dateNow=$this->dateNow;
         return view('user.showReserveUser')
                     ->with('reserve',$reserve)
-                    ->with('dateNow',$dateNow)
+//                    ->with('dateNow',$dateNow)
                     ->with('booking',$booking)
-                    ->with('homework',$homework)
-                    ->with('user_coach',$user_coach);
+                    ->with('homework',$homework);
+//                    ->with('user_coach',$user_coach);
     }
 
     /**
@@ -113,12 +116,15 @@ class ReserveController extends BaseController
      */
     public function update(Request $request, reserve $reserve)
     {
+        //$reserve->booking->coach->user);
         $this->validate($request,[
             'presession'    =>'required|string|'
         ]);
         $status=$reserve->update($request->all());
         if($status)
         {
+            //$reserve->notify(new sendMessageNotification(Auth::user()->tel,'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\nنام کاربری شماره همراه شما"."\n my.faracoach.com"));
+            $this->send_notification($reserve->booking->coach->user->id,'فرم پیش جلسه کد'.$reserve->booking->id." درسیستم ثبت شد ");
             alert()->success('فرم پیش جلسه با موفقیت ثبت شد')->persistent('بستن');
         }
         else
@@ -365,6 +371,7 @@ class ReserveController extends BaseController
 
 
         if ($coach) {
+
             $status = $reserve->update($request->all());
             $booking = booking::where('id', '=', $reserve->booking_id)
                         ->first();
@@ -405,6 +412,7 @@ class ReserveController extends BaseController
 
         return back();
     }
+
 
 
     //نمایش دوره های ثبت نام ناقص
@@ -457,9 +465,6 @@ class ReserveController extends BaseController
             return view('cart')
                 ->with('cart',$cart);
         }
-
-
-
     }
 
 

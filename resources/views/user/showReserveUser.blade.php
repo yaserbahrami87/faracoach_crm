@@ -8,7 +8,7 @@
             </div>
             <div class="card-body" >
                 @if(is_null($reserve->presession))
-                    <form method="POST" action="/panel/reserve/{{$reserve->id_reserve}}" class="border-bottom pb-3">
+                    <form method="POST" action="/panel/reserve/{{$reserve->id}}" class="border-bottom pb-3">
                         {{csrf_field()}}
                         {{method_field('PATCH')}}
                         <div class="form-group">
@@ -23,8 +23,7 @@
                         <textarea class="form-control" id="presession"  name="presession" rows="3" disabled readonly>{{$reserve->presession}}</textarea>
                     </div>
                 @endif
-
-                    @if($reserve->start_date<=$dateNow)
+                    @if($reserve->booking->start_date<=$dateNow)
                         <div class="card card-user">
                             <div class="card-header bg-info">
                                 <a class="btn m-0 p-0" data-toggle="collapse" href="#homework" role="button" aria-expanded="false" aria-controls="homework">
@@ -70,7 +69,7 @@
                         </div>
                     @endif
 
-                @if(($reserve->start_date<$dateNow)&&($reserve->status_reserve==3))
+                @if(($reserve->start_date<$dateNow)&&($reserve->status==3))
                     <p>دانشپذیر گرامی</p>
                     <p class="text-justify">یکی از مهم ترین مهارت های یک کوچ ارائه بازخورد سازنده است که توام با صداقت، صراحت و صمیمیت است.</p>
                     <p class="text-justify">لذا از اینکه با نظرات ارزشمند خودتان ما را در ارائه با کیفیت تر خدمات یاری می نمایید، بی نهایت سپاسگزاریم.</p>
@@ -310,14 +309,17 @@
     <div class="col-md-4">
         <div class="card card-user">
             <div class="card-header bg-info">
-                <h5 class="card-title">اطلاعات رزرو</h5>
+                <h5 class="card-title">اطلاعات جلسه</h5>
             </div>
+
+
             <div class="card-body" id="infoProfile">
                 <div class="row">
+
                     <div class="col-12 text-center">
-                        <img src="{{asset('/documents/users/'.$user_coach->personal_image)}}" width="150px" height="150px" class="img-circle" />
+                        <img src="{{asset('/documents/users/'.$reserve->booking->coach->personal_image)}}" width="150px" height="150px" class="img-circle" />
                         <p>
-                            <a href="{{asset('/coach/'.$user_coach->username)}}">{{$user_coach->fname}} {{$user_coach->lname}}</a>
+                            <a href="{{asset('/coach/'.    $reserve->booking->coach->username)}}">{{$reserve->booking->coach->fname}} {{$reserve->booking->coach->lname}}</a>
                         </p>
                     </div>
                     <div class="col-md-6 px-1 ">
@@ -342,19 +344,19 @@
                     <div class="col-md-4 px-1">
                         <div class="form-group">
                             <label>تاریخ رزرو</label>
-                            <input type="text" class="form-control "  value="{{$reserve->start_date}}"    disabled="disabled"  />
+                            <input type="text" class="form-control "  value="{{$reserve->booking->start_date}}"    disabled="disabled"  />
                         </div>
                     </div>
                     <div class="col-md-4 px-1">
                         <div class="form-group">
                             <label>ساعت شروع</label>
-                            <input type="text" class="form-control "  value="{{$reserve->start_time}}"    disabled="disabled"  />
+                            <input type="text" class="form-control "  value="{{$reserve->booking->start_time}}"    disabled="disabled"  />
                         </div>
                     </div>
                     <div class="col-md-4 px-1">
                         <div class="form-group">
                             <label>ساعت پایان</label>
-                            <input type="text" class="form-control " value="{{$reserve->end_time}}"    disabled="disabled"  />
+                            <input type="text" class="form-control " value="{{$reserve->booking->end_time}}"    disabled="disabled"  />
                         </div>
                     </div>
                     <div class="col-md-12 px-1">

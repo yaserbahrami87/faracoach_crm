@@ -74,6 +74,7 @@ class BookingController extends BaseController
             foreach ($booking as $item) {
 
                 $item->caption_status=$this->get_statusBookings($item->status);
+
 //                switch ($item->status) {
 //                    case '1':
 //                        $item->caption_status = 'آماده رزرو';
@@ -106,6 +107,8 @@ class BookingController extends BaseController
 
 
             }
+
+
             return view('user.booking')
                 ->with('booking', $booking)
                 ->with('dateNow', $this->dateNow);
@@ -225,14 +228,16 @@ class BookingController extends BaseController
     {
         if((Auth::user()->id==$booking->user_id)||(Auth::user()->type==2))
         {
-            $booking=booking::join('reserves','bookings.id','=','reserves.booking_id')
-                        ->where('bookings.id','=',$booking->id)
-                        ->first();
+
+//            $booking=booking::join('reserves','bookings.id','=','reserves.booking_id')
+//                        ->where('bookings.id','=',$booking->id)
+//                        ->first();
 
 
-            $reserve=reserve::join('users','reserves.user_id','=','users.id')
-                        ->where('reserves.booking_id','=',$booking['booking_id'])
-                        ->first();
+
+//            $reserve=reserve::join('users','reserves.user_id','=','users.id')
+//                        ->where('reserves.booking_id','=',$booking['booking_id'])
+//                        ->first();
 
 
             //تاریخچه جلسات
@@ -259,21 +264,21 @@ class BookingController extends BaseController
 //                $reserve['city']=$this->city($reserve->city);
 //            }
 
-            switch($reserve->type_booking)
+            switch($booking->reserve->type_booking)
             {
-                case '1':$reserve->type_booking='حضوری';
+                case '1':$booking->reserve->type_booking='حضوری';
                         break;
-                case '2':$reserve->type_booking='آنلاین';
+                case '2':$booking->reserve->type_booking='آنلاین';
                         break;
-                case '0':$reserve->type_booking='فرقی ندارد';
+                case '0':$booking->reserve->type_booking='فرقی ندارد';
                         break;
-                default:$reserve->type_booking='خطا';
+                default:$booking->reserve->type_booking='خطا';
                         break;
             }
 
-            $feedback=booking::join('feedback_coachings','bookings.id','=','feedback_coachings.booking_id')
-                ->where('booking_id','=',$booking['booking_id'])
-                ->first();
+//            $feedback=booking::join('feedback_coachings','bookings.id','=','feedback_coachings.booking_id')
+//                ->where('booking_id','=',$booking['booking_id'])
+//                ->first();
 
 
            $dateNow=$this->dateNow;
@@ -281,20 +286,20 @@ class BookingController extends BaseController
 
            if(Auth::user()->type==2)
                return view('admin.InfoReserve')
-                            ->with('user',$reserve)
+//                            ->with('user',$reserve)
                             ->with('booking',$booking)
                             ->with('history',$history)
                             ->with('homework',$homework)
-                            ->with('feedback',$feedback)
+//                            ->with('feedback',$feedback)
                             ->with('dateNow',$dateNow);
            else
             {
                 return view('user.InfoReserve')
-                    ->with('user',$reserve)
+//                    ->with('user',$reserve)
                     ->with('booking',$booking)
                     ->with('history',$history)
                     ->with('homework',$homework)
-                    ->with('feedback',$feedback)
+//                    ->with('feedback',$feedback)
                     ->with('dateNow',$dateNow);
             }
 
@@ -494,21 +499,33 @@ class BookingController extends BaseController
     //جلسات رزرو شده کاربر ساده
     public function accept_reserve_user()
     {
-        $booking=booking::join('users','users.id','=','bookings.user_id')
-                ->join('reserves','bookings.id','=','reserves.booking_id')
-                ->where('reserves.user_id','=',Auth::user()->id)
+
+//        $booking=booking::join('users','users.id','=','bookings.user_id')
+//                ->join('reserves','bookings.id','=','reserves.booking_id')
+//                ->where('reserves.user_id','=',Auth::user()->id)
+//                ->where(function($query){
+//                      $query->orwhere('reserves.status','=',1)
+//                            ->orwhere('reserves.status','=',3)
+//                            ->orwhere('reserves.status','=',4);
+//                })
+//                ->select('bookings.*','reserves.*','reserves.id as id_reserves','bookings.id as bookings_id','users.fname','users.lname','users.personal_image')
+//                ->orderby('reserves.id','desc')
+//                ->paginate($this->countPage());
+
+
+        $booking=reserve::where('user_id','=',Auth::user()->id)
                 ->where(function($query){
-                      $query->orwhere('reserves.status','=',1)
-                            ->orwhere('reserves.status','=',3)
-                            ->orwhere('reserves.status','=',4);
+                    $query->orwhere('status','=',1)
+                        ->orwhere('status','=',3)
+                        ->orwhere('status','=',4);
                 })
-                ->select('bookings.*','reserves.*','reserves.id as id_reserves','bookings.id as bookings_id','users.fname','users.lname','users.personal_image')
                 ->orderby('reserves.id','desc')
                 ->paginate($this->countPage());
 
+
         foreach ($booking as $item)
         {
-            switch ($item->duration_booking)
+            switch ($item->booking->duration_booking)
             {
                 case '1':
                     $item->duration_booking = 'معارفه 30 دقیقه ای';
@@ -521,7 +538,9 @@ class BookingController extends BaseController
             $item->caption_status=$this->get_statusBookings($item->status);
 
         }
-        return view('user.booking')
+
+
+        return view('user.bookingAcceptReserveUser')
             ->with('booking', $booking)
             ->with('dateNow', $this->dateNow);
     }

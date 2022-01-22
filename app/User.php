@@ -83,12 +83,22 @@ class User extends Authenticatable implements MustVerifyEmail
                     ->get();
         }
 
+        public function reserves()
+        {
+            return $this->hasMany('App\reserve','user_id','id');
+        }
+
         public function notifications()
         {
             return $this->hasMany('App\notification');
         }
 
-        public function types()
+        public function coach()
+        {
+            return $this->hasOne('App\coach','user_id','id');
+        }
+
+        public function userType()
         {
 
         }

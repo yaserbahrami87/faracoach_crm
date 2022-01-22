@@ -81,13 +81,19 @@
                     @default    <tr>
                                 @break
                 @endswitch
+
                     <td>
-                        <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="img-circle"  width="50px" height="50px"/>
+                        <img src="{{asset('/documents/users/'.$item->user['personal_image'])}}" class="img-circle"  width="50px" height="50px"/>
                     </td>
                     <td class="text-center">
-                        <a href="/panel/reserve/{{$item->id}}">{{$item->id}}</a>
+                        @if($item->status==1  || ($item->caption_status=='باطل شده'))
+                            {{$item->id}}
+                        @else
+                            <a href="/panel/booking/{{$item->id}}">{{$item->id}}</a>
+                        @endif
                     </td>
                     <td class="text-center">
+
                         @if(Auth::user()->status_coach==1 )
 
                             @if($item->status==1  || ($item->caption_status=='باطل شده'))
@@ -96,7 +102,7 @@
                                 <a href="/panel/booking/{{$item->id}}">{{$item->start_date}}</a>
                             @endif
                         @else
-                            <a href="/panel/reserve/{{$item->id_reserves}}">{{$item->start_date}}</a>
+                            <a href="/panel/booking/{{$item->id}}">{{$item->booking->start_date}}</a>
                         @endif
                     </td>
                     <td class="text-center">{{$item->start_time}}</td>
@@ -118,7 +124,7 @@
                         </td>
                     @elseif($item->start_date>$dateNow && ($item['status']!=4))
                         <td>
-                            <form method="POST" action="/booking/{{$item->booking_id}}" onsubmit="return confirm('آیا از لغو جلسه اطمینان دارید؟')">
+                            <form method="POST" action="/panel/booking/{{$item->id}}" onsubmit="return confirm('آیا از لغو جلسه اطمینان دارید؟')">
                                 {{csrf_field()}}
                                 {{method_field('PATCH')}}
                                 <input type="hidden" name="status" value="4" />

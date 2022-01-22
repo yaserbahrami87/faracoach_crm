@@ -9,4 +9,14 @@ class reserve extends Model
     protected $fillable = [
         'user_id','booking_id','subject','type_booking','details','fi','off','coupon','final_off','presession','status','result_coach','score'
     ];
+
+    public function booking()
+    {
+        return $this->belongsTo('App\booking');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }
