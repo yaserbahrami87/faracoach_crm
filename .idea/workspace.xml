@@ -23,28 +23,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/user/bookingAcceptReserveUser.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BookingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BookingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CourseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CourseController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReserveController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReserveController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/booking.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/booking.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/coach.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/coach.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/reserve.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/reserve.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/master/right_menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/master/right_menu.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/register.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/panelUser/InfoReserve.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelUser/InfoReserve.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/InfoReserve.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/InfoReserve.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/booking.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/booking.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/bookingAcceptReserveCoach.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/bookingAcceptReserveCoach.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/insertCoach.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/insertCoach.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/user/listIntroducedUser.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/listIntroducedUser.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/showReserveUser.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/showReserveUser.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -853,7 +833,7 @@
       <workItem from="1642482932614" duration="15331000" />
       <workItem from="1642574945897" duration="15295000" />
       <workItem from="1642613042658" duration="21000" />
-      <workItem from="1642833809497" duration="2281000" />
+      <workItem from="1642833809497" duration="3889000" />
     </task>
     <servers />
   </component>

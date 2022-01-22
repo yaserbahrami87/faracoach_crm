@@ -117,8 +117,8 @@
                     <br/>
                 </div>
                 <div class="btn-p-e">
-                    <a href="" class="btn btn-secondary btn-lg mr-2">ورود به صفحه محصولات</a>
-                    <a href="" class="btn btn-secondary btn-lg mr-2">ورود به صفحه وبینارها </a>
+                    <a href="/courses" class="btn btn-secondary btn-lg mr-2">ورود به صفحه محصولات</a>
+                    <a href="/event" class="btn btn-secondary btn-lg mr-2">ورود به صفحه رویدادها </a>
                 </div>
             </div>
         </section>
@@ -269,7 +269,6 @@
         <!------------------------------- Form ----------------------------->
         <div class="container mt-4 col-12">
             <div class="row">
-                @foreach ($listIntroducedUser as $item)
                     <div class="col-12 tabs p-0">
                         <nav>
                             <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
@@ -294,32 +293,34 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>
-                                            <img class="profile rounde" src="{{asset('documents/users/'.$item->personal_image)}}" alt=""/>
-                                        </td>
-                                        <td>
-                                            <div class="box-title">{{$item->fname.' '.$item->lname}}</div>
-                                        </td>
-                                        <td>
-                                        <span>
-                                            <a href="tel:{{$item->tel}}">{{$item->tel}}</a>
-                                        </span>
-                                        </td>
-                                        <td>
-                                            <a class="btn-modal-introduced btn btn-primary btn-sm" href="{{$item->id}}" title="نمایش" data-toggle="modal" data-target="#modal_introduced_profile">
-                                                <i class="bi bi-eye-fill"></i>
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <div class="icons">
-                                                <a class="btn-modal-introduced btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" href="/panel/followup/{{$item->id}}" title="پیگیری" >
-                                                    <i class="bi bi-asterisk"></i>
+                                    @foreach ($listIntroducedUser as $item)
+                                        <tr>
+                                            <th scope="row"></th>
+                                            <td>
+                                                <img class="profile rounde" src="{{asset('documents/users/'.$item->personal_image)}}" alt=""/>
+                                            </td>
+                                            <td>
+                                                <div class="box-title">{{$item->fname.' '.$item->lname}}</div>
+                                            </td>
+                                            <td>
+                                            <span>
+                                                <a href="tel:{{$item->tel}}">{{$item->tel}}</a>
+                                            </span>
+                                            </td>
+                                            <td>
+                                                <a class="btn-modal-introduced btn btn-primary btn-sm" href="{{$item->id}}" title="نمایش" data-toggle="modal" data-target="#modal_introduced_profile">
+                                                    <i class="bi bi-eye-fill"></i>
                                                 </a>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                            <td>
+                                                <div class="icons">
+                                                    <a class="btn-modal-introduced btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" href="/panel/followup/{{$item->id}}" title="پیگیری" >
+                                                        <i class="bi bi-asterisk"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -337,33 +338,35 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>
-                                            <img class="profile rounde" src="{{asset('documents/users/'.$item->personal_image)}}" alt=""/>
-                                        </td>
-                                        <td>
-                                            <div class="box-title">{{$item->fname.' '.$item->lname}}</div>
-                                        </td>
-                                        <td>
-                                        <span>
-                                            <a href="tel:{{$item->tel}}">{{$item->tel}}</a>
-                                        </span>
-                                        </td>
-                                        <td>
+                                    @foreach ($listIntroducedUser as $item)
+                                        <tr>
+                                            <th scope="row"></th>
+                                            <td>
+                                                <img class="profile rounde" src="{{asset('documents/users/'.$item->personal_image)}}" alt=""/>
+                                            </td>
+                                            <td>
+                                                <div class="box-title">{{$item->fname.' '.$item->lname}}</div>
+                                            </td>
+                                            <td>
+                                            <span>
+                                                <a href="tel:{{$item->tel}}">{{$item->tel}}</a>
+                                            </span>
+                                            </td>
+                                            <td>
 
-                                            <a class="btn-modal-introduced btn btn-primary btn-sm" href="{{$item->id}}" title="نمایش" data-toggle="modal" data-target="#modal_introduced_profile">
-                                                <i class="bi bi-eye-fill"></i>
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <div class="icons">
-                                                <a class="btn-modal-introduced btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" href="/panel/followup/{{$item->id}}" title="پیگیری" >
-                                                    <i class="bi bi-asterisk"></i>
+                                                <a class="btn-modal-introduced btn btn-primary btn-sm" href="{{$item->id}}" title="نمایش" data-toggle="modal" data-target="#modal_introduced_profile">
+                                                    <i class="bi bi-eye-fill"></i>
                                                 </a>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                            <td>
+                                                <div class="icons">
+                                                    <a class="btn-modal-introduced btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" href="/panel/followup/{{$item->id}}" title="پیگیری" >
+                                                        <i class="bi bi-asterisk"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -381,32 +384,34 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>
-                                            <img class="profile rounde" src="{{asset('documents/users/'.$item->personal_image)}}" alt=""/>
-                                        </td>
-                                        <td>
-                                            <div class="box-title">{{$item->fname.' '.$item->lname}}</div>
-                                        </td>
-                                        <td>
-                                            <span>
-                                                <a href="tel:{{$item->tel}}">{{$item->tel}}</a>
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <a class="btn-modal-introduced btn btn-primary btn-sm" href="{{$item->id}}" title="نمایش" data-toggle="modal" data-target="#modal_introduced_profile">
-                                                <i class="bi bi-eye-fill"></i>
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <div class="icons">
-                                                <a class="btn-modal-introduced btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" href="/panel/followup/{{$item->id}}" title="پیگیری" >
-                                                    <i class="bi bi-asterisk"></i>
+                                    @foreach ($listIntroducedUser as $item)
+                                        <tr>
+                                            <th scope="row"></th>
+                                            <td>
+                                                <img class="profile rounde" src="{{asset('documents/users/'.$item->personal_image)}}" alt=""/>
+                                            </td>
+                                            <td>
+                                                <div class="box-title">{{$item->fname.' '.$item->lname}}</div>
+                                            </td>
+                                            <td>
+                                                <span>
+                                                    <a href="tel:{{$item->tel}}">{{$item->tel}}</a>
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <a class="btn-modal-introduced btn btn-primary btn-sm" href="{{$item->id}}" title="نمایش" data-toggle="modal" data-target="#modal_introduced_profile">
+                                                    <i class="bi bi-eye-fill"></i>
                                                 </a>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                            <td>
+                                                <div class="icons">
+                                                    <a class="btn-modal-introduced btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" href="/panel/followup/{{$item->id}}" title="پیگیری" >
+                                                        <i class="bi bi-asterisk"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -424,39 +429,41 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>
-                                            <img class="profile rounde" src="{{asset('documents/users/'.$item->personal_image)}}" alt=""/>
-                                        </td>
-                                        <td>
-                                            <div class="box-title">{{$item->fname.' '.$item->lname}}</div>
-                                        </td>
-                                        <td>
-                                        <span>
-                                            <a href="tel:{{$item->tel}}">{{$item->tel}}</a>
-                                        </span>
-                                        </td>
-                                        <td>
+                                    @foreach ($listIntroducedUser as $item)
+                                        <tr>
+                                            <th scope="row"></th>
+                                            <td>
+                                                <img class="profile rounde" src="{{asset('documents/users/'.$item->personal_image)}}" alt=""/>
+                                            </td>
+                                            <td>
+                                                <div class="box-title">{{$item->fname.' '.$item->lname}}</div>
+                                            </td>
+                                            <td>
+                                            <span>
+                                                <a href="tel:{{$item->tel}}">{{$item->tel}}</a>
+                                            </span>
+                                            </td>
+                                            <td>
 
-                                            <a class="btn-modal-introduced btn btn-primary btn-sm" href="{{$item->id}}" title="نمایش" data-toggle="modal" data-target="#modal_introduced_profile">
-                                                <i class="bi bi-eye-fill"></i>
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <div class="icons">
-                                                <a class="btn-modal-introduced btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" href="/panel/followup/{{$item->id}}" title="پیگیری" >
-                                                    <i class="bi bi-asterisk"></i>
+                                                <a class="btn-modal-introduced btn btn-primary btn-sm" href="{{$item->id}}" title="نمایش" data-toggle="modal" data-target="#modal_introduced_profile">
+                                                    <i class="bi bi-eye-fill"></i>
                                                 </a>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                            <td>
+                                                <div class="icons">
+                                                    <a class="btn-modal-introduced btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" href="/panel/followup/{{$item->id}}" title="پیگیری" >
+                                                        <i class="bi bi-asterisk"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-                @endforeach
+
                 <div class="col-12 text-center">
                     {{$listIntroducedUser->links()}}
                 </div>
