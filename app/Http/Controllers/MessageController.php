@@ -101,7 +101,7 @@ class MessageController extends BaseController
                 $item->user_recieve=$this->get_user_byID($item->user_id_recieve)->fname." ".$this->get_user_byID($item->user_id_recieve)->lname;
             }
             $countUnreadMessages=$this->countUnreadMessages();
-            return view('user.messages')
+            return view('user.tickets')
                     ->with('messages',$messages)
                     ->with('countUnreadMessages',$countUnreadMessages);
         }
@@ -159,7 +159,7 @@ class MessageController extends BaseController
         }
         else
         {
-            return view('user.insertMessage');
+            return view('user.insertTicket');
         }
 
     }
