@@ -23,11 +23,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/user/insertTicket.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/user/ticketSingle.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/user/tickets.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MessageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MessageController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/events.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/events.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -836,7 +833,7 @@
       <workItem from="1642482932614" duration="15331000" />
       <workItem from="1642574945897" duration="15295000" />
       <workItem from="1642613042658" duration="21000" />
-      <workItem from="1642833809497" duration="6011000" />
+      <workItem from="1642833809497" duration="6479000" />
     </task>
     <servers />
   </component>

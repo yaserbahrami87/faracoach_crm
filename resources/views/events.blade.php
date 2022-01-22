@@ -90,10 +90,12 @@
                     <div class="col-xl-6 col-md-6 col-sm-12 col-sx-12 mt-5">
                         <h1> رویدادهای فراکوچ</h1>
                         <h2>جدید ترین رویدادهای فراکوچ را اینجا ببینید</h2>
-                        <p>  رویداد تسترویداد تسترویداد تسترویداد تسترویداد تسترویداد تسترویداد
-                            <br/> تسترویداد تسترویداد تسترویداد تسترویداد تست</p>
+                        <p>وبینار یه کلاسِ آنلاین با حضور استاده!</p>
+                        <p>این فرصت رو از دست نده و شرکت کن ...</p>
+                        <!--
                         <button type="button" class="btn btn-info btn-lg shadow-lg mt-5" id="btn-id"> همین الان ببین <i class="bi bi-arrow-left p-2 btn-font"></i></button>
                         <button type="button" class="btn btn-circle btn-lg shadow-lg mt-5 ml-4" id="btn-play"><i class="bi bi-caret-right-fill text-white btn-font"  ></i></button>
+                        -->
                     </div>
                     <div class="col-xl-6 col-md-6 col-sm-12 col-sx-12 float-left " id="banner">
                     </div>
