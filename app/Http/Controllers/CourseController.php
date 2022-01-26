@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\course;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Throwable;
 
 class CourseController extends BaseController
@@ -277,6 +278,14 @@ class CourseController extends BaseController
         return view('admin.courseStudents')
 //                    ->with('students',$course->students);
                     ->with('course',$course);
+    }
+    public function download($course,$file)
+    {
+
+//        dd(Storage::disk('public'));
+//       return (Storage::disk('private')->download($course.'/'.$file));
+       return (Storage::disk('public')->download('default-avatar.png'));
+
     }
 
 

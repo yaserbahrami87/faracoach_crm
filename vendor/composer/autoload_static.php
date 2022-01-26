@@ -694,6 +694,7 @@ class ComposerStaticInitf54d8edf51459297346cdb00d8423a68
         'App\\Http\\Controllers\\LandPageController' => __DIR__ . '/../..' . '/app/Http/Controllers/LandPageController.php',
         'App\\Http\\Controllers\\LikeController' => __DIR__ . '/../..' . '/app/Http/Controllers/LikeController.php',
         'App\\Http\\Controllers\\MessageController' => __DIR__ . '/../..' . '/app/Http/Controllers/MessageController.php',
+        'App\\Http\\Controllers\\NotificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/NotificationController.php',
         'App\\Http\\Controllers\\OptionController' => __DIR__ . '/../..' . '/app/Http/Controllers/OptionController.php',
         'App\\Http\\Controllers\\OrderController' => __DIR__ . '/../..' . '/app/Http/Controllers/OrderController.php',
         'App\\Http\\Controllers\\PostController' => __DIR__ . '/../..' . '/app/Http/Controllers/PostController.php',

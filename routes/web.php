@@ -136,6 +136,10 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     Route::get('/psychological/create','PsychologicalController@create');
     Route::post('/psychological','PsychologicalController@store');
 
+    //download Course
+    Route::get('/course/{course}/download/{file}','CourseController@download');
+
+
 
     //Event Reserves
     Route::resource('eventreserve','EventreserveController');
@@ -258,6 +262,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::resource('coursetype','CoursetypeController');
 
     //SMS
+    Route::get('/sms/countrecieve','SmsController@countRecieve');
     Route::resource('sms','SmsController');
     Route::post('/sms/createajax','SmsController@createAjax');
 

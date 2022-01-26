@@ -51,14 +51,16 @@ return [
         'public' => [
             'driver' => 'local',
             //'root' => storage_path('app/public'),
-            'root' => public_path('documents'),
-            'url' => env('APP_URL').'/storage',
+            'root' => storage_path('app/public'),
+//            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL').'/public',
+
             'visibility' => 'public',
         ],
 
         'private' => [
             'driver' => 'local',
-            'root' => storage_path('private'),
+            'root' => storage_path('app/private'),
         ],
 
         's3' => [

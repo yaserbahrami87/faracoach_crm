@@ -7,9 +7,26 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Kavenegar;
+use GuzzleHttp\Client;
+
 
 class SmsController extends BaseController
 {
+    public function __construct()
+    {
+        $api=config('kavenegar')['apikey'];
+        $this->client=new client(
+            [
+                'headers' => [
+                    'Accept' => 'application/json; charset=utf-8'
+                ],
+                'base_uri' => 'http://api.kavenegar.com/v1/'.$api.'/sms/',
+                'timeout'  => 3.0,
+            ]
+        );
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -356,5 +373,13 @@ class SmsController extends BaseController
             return back()->with('msg', $msg)
                 ->with('errorStatus', $errorStatus);
         }
+    }
+
+    public function countRecieve()
+    {
+
+//        $response=$this->client->request('GET', 'receive.json?linenumber=10004002002020&isread=0');
+        $response=$this->client->request('GET', 'countinbox.json?startdate=1642636800&enddate=1642723200&linenumber=10004002002020&isread=1');
+        dd(json_decode($response->getBody()->getContents())->entries);
     }
 }

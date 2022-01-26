@@ -20,6 +20,7 @@ use GuzzleHttp\Client;
 use Illuminate\Queue\RedisQueue;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 use SweetAlert;
 use Shetabit\Visitor\Traits\Visitor;
 
