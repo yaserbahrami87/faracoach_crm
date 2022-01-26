@@ -151,8 +151,8 @@
             <div class="list-group">
                 @if($courses->count()>0)
                     @foreach($courses as $item)
-                        <img src="{{asset(Storage::disk('public')->url('bahrami.jpg'))}}" />
-                        <a href="/panel/course/{{$item->course}}/download/ms.jpg" class="list-group-item list-group-item-action">{{$item->course}}</a>
+
+                        <a href="#" class="list-group-item list-group-item-action">{{$item->course}}</a>
                     @endforeach
                 @else
                     <div class="alert alert-warning">

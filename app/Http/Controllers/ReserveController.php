@@ -327,6 +327,10 @@ class ReserveController extends BaseController
                 //ارسال پیامک برای حسام
                 $msg=$duration . " \n " . $booking->start_date . " \n  " . $booking->start_time . "\n کوچ:" . $user->fname . " " . $user->lname . "\n مراجع ".Auth::user()->fname . " " . Auth::user()->lname . "\nتماس:" .Auth::user()->tel;
                 $this->sendSms('+989101769020', $msg);
+
+                //ارسال پیامک برای یوسفی
+                $msg=$duration . " \n " . $booking->start_date . " \n  " . $booking->start_time . "\n کوچ:" . $user->fname . " " . $user->lname . "\n مراجع ".Auth::user()->fname . " " . Auth::user()->lname . "\nتماس:" .Auth::user()->tel;
+                $this->sendSms('+989151060792', $msg);
 //
 //
 //
