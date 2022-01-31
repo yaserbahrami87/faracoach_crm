@@ -283,8 +283,8 @@ class CourseController extends BaseController
     {
 
 //        dd(Storage::disk('public'));
-//       return (Storage::disk('private')->download($course.'/'.$file));
-       return (Storage::disk('public')->download('default-avatar.png'));
+       return (Storage::disk('private')->download($course.'/'.$file));
+//       return (Storage::disk('public')->download('default-avatar.png'));
 
     }
 

@@ -45,11 +45,11 @@ class AdminController extends BaseController
     {
         if(Gate::allows('isAdmin')||Gate::allows('isEducation'))
         {
-            $notFollowup=count($this->get_notfollowup_withoutPaginate());
-            $follow=$this->get_usersByType(11,Auth::user()->id)->count();
-            $cancel=$this->get_usersByType(12,Auth::user()->id)->count();
-            $waiting=$this->get_usersByType(13,Auth::user()->id)->count();
-            $student=$this->get_usersByType(20,Auth::user()->id)->count();
+//            $notFollowup=count($this->get_notfollowup_withoutPaginate());
+//            $follow=$this->get_usersByType(11,Auth::user()->id)->count();
+//            $cancel=$this->get_usersByType(12,Auth::user()->id)->count();
+//            $waiting=$this->get_usersByType(13,Auth::user()->id)->count();
+//            $student=$this->get_usersByType(20,Auth::user()->id)->count();
             $dateNow=$this->dateNow;
 
             $followupToday=User::join('followups','users.id','=','followups.user_id')
@@ -57,7 +57,9 @@ class AdminController extends BaseController
                     ->where('flag','=',1)
                     ->wherenotIn('users.type',[2,12])
                     ->groupby('users.id')
-                    ->count();
+                    ->get();
+
+
             $expirefollowupToday=User::join('followups','users.id','=','followups.user_id')
                     ->where('nextfollowup_date_fa','<',$dateNow)
                     ->where('flag','=',1)
@@ -100,8 +102,10 @@ class AdminController extends BaseController
 
                 $sumcancelfollowup=$sumcancelfollowup+$item->cancelfollowup;
 
+                //پیگیریهای انجام شده در بازه تاریخی
                 $condition=['followups.insert_user_id','=',$item->id];
                 $item->allFollowups=$this->get_usersByType(NULL,NULL,NULL,$request['start_date'],$condition)->count();
+
                 $sumallFollowups=$sumallFollowups+$item->allFollowups;
                 $item->todayFollowups=count($this->get_todayFollowupbyID_withoutPaginate($item->id));
                 $sumtodayFollowups=$sumtodayFollowups+$item->todayFollowups;
@@ -151,12 +155,12 @@ class AdminController extends BaseController
 
             $countUnreadMessages=$this->countUnreadMessages();
             return view('admin.home')
-                        ->with('notFollowup',$notFollowup)
-                        ->with('follow',$follow)
-                        ->with('cancel',$cancel)
-                        ->with('waiting',$waiting)
+//                        ->with('notFollowup',$notFollowup)
+//                        ->with('follow',$follow)
+//                        ->with('cancel',$cancel)
+//                        ->with('waiting',$waiting)
                         ->with('sumstudents',$sumstudents)
-                        ->with('student',$student)
+//                        ->with('student',$student)
                         ->with('dateNow',$dateNow)
                         ->with('followupToday',$followupToday)
                         ->with('expirefollowupToday',$expirefollowupToday)

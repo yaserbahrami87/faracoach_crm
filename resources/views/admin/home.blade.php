@@ -69,13 +69,7 @@
 @endsection
 
 @section('content')
-    <div class="col-md-3">
-        <div class="card-counter bg-warning">
-            <i class="fa fa-code-fork"></i>
-            <span class="count-numbers text-dark">12</span>
-            <span class="count-name text-light">Flowz</span>
-        </div>
-    </div>
+
         <div class="col-12">
             <div class="row">
                 <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 mb-3" id="app">
@@ -104,8 +98,8 @@
                 <tr>
                     <th scope="col" >#</th>
                     <th scope="col">نام و نام خانوادگی</th>
-                    <th scope="col">ورودی ها</th>
-                    <th scope="col">پیگیری ها</th>
+                    <th scope="col">ثبت شده ها</th>
+                    <th scope="col">پیگیری های انجام شده</th>
                     <th scope="col">پیگیری های امروز </th>
                     <th scope="col">پیگیری های انجام شده امروز </th>
                     <th scope="col">تور پیگیری</th>

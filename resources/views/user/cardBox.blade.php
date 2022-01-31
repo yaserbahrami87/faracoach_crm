@@ -151,8 +151,7 @@
             <div class="list-group">
                 @if($courses->count()>0)
                     @foreach($courses as $item)
-
-                        <a href="#" class="list-group-item list-group-item-action">{{$item->course}}</a>
+                        <a href="#" class="list-group-item list-group-item-action" target="_blank">{{$item->course}}</a>
                     @endforeach
                 @else
                     <div class="alert alert-warning">

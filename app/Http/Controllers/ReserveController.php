@@ -351,6 +351,7 @@ class ReserveController extends BaseController
     public function result_coach (Request $request,Reserve $reserve)
     {
 
+
         $this->validate($request, [
             'result_coach' => 'required|string|',
             'score' => 'required|numeric|between:1,5',
@@ -377,18 +378,15 @@ class ReserveController extends BaseController
         if ($coach) {
 
             $status = $reserve->update($request->all());
-            $booking = booking::where('id', '=', $reserve->booking_id)
-                        ->first();
+            $booking = $reserve->booking;
             $user=User::join('reserves','reserves.user_id','=','users.id')
                 ->join('bookings','bookings.id','=','reserves.booking_id')
-                ->where('bookings.id', '=', $reserve->booking_id)
+                ->where('bookings.id', '=', $reserve->booking->id)
                 ->select('users.*')
                 ->first();
 
-
             $booking->status = $request->status;
             $booking->save();
-
 
 
             if ($status) {

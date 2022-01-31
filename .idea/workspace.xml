@@ -24,7 +24,10 @@
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CourseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CourseController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReserveController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReserveController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/home.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/user/cardBox.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/cardBox.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -213,19 +216,19 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\wamp64\www\faracoach_crm\storage\app\private\مدیر در نقش کوچ" />
-      <recent name="C:\wamp64\www\faracoach_crm\public\documents" />
-      <recent name="C:\wamp64\www\faracoach_crm\public\images" />
-      <recent name="C:\wamp64\www\faracoach_crm\storage\app\private" />
-      <recent name="C:\wamp64\www\faracoach_crm\resources\views\admin\master" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\wamp64\www\faracoach_crm\storage\app" />
       <recent name="C:\wamp64\www\faracoach_crm\storage\app\private" />
       <recent name="C:\wamp64\www\faracoach_crm\public\images" />
       <recent name="C:\wamp64\www\faracoach_crm\public\private" />
       <recent name="C:\wamp64\www\faracoach_crm\resources\views\user" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\faracoach_crm\storage\app\private" />
+      <recent name="C:\wamp64\www\faracoach_crm\storage\private" />
+      <recent name="C:\wamp64\www\faracoach_crm\storage\app\private\مدیر در نقش کوچ" />
+      <recent name="C:\wamp64\www\faracoach_crm\public\documents" />
+      <recent name="C:\wamp64\www\faracoach_crm\public\images" />
     </key>
   </component>
   <component name="RunManager">
@@ -841,7 +844,12 @@
       <workItem from="1643092579121" duration="2894000" />
       <workItem from="1643140485338" duration="594000" />
       <workItem from="1643176791499" duration="1022000" />
-      <workItem from="1643196807324" duration="1737000" />
+      <workItem from="1643196807324" duration="2122000" />
+      <workItem from="1643231085641" duration="882000" />
+      <workItem from="1643269038486" duration="6293000" />
+      <workItem from="1643439773914" duration="5584000" />
+      <workItem from="1643456088407" duration="5503000" />
+      <workItem from="1643610243314" duration="5301000" />
     </task>
     <servers />
   </component>
@@ -889,9 +897,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1641801954138" />
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1643197421077">
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1643618223686">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1643197421077" />
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1643618223686" />
   </component>
 </project>
