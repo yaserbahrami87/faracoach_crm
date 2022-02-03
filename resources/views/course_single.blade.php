@@ -22,15 +22,14 @@
                     <h1 class="font-weight-bold">{{$course->course}}</h1>
                     <div class="fs-5 mb-2 mt-4">
                         قیمت:
+                        <!--
                         <span class="text-decoration-line-through mr-5">{{number_format($course->fi)}} تومان</span>
+                        -->
                         <p class="font-weight-bold d-inline">{{number_format($course->fi_off)}} تومان</p>
                     </div>
 
                     <div>
-                        <p>
-                            مدرس:
-                            <span>{{$course->teacher_id}}</span>
-                        </p>
+
                     </div>
                     <div>
                         <p>
