@@ -51,6 +51,13 @@
             <li class=" nav-item"><a href="#"><span class="menu-title" data-i18n="Chat">آموزش</span></a>
                 <ul class="menu-content">
                     <li><a href="/admin/education/students" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">لیست دانشجویان</span></a></li>
+                    <li><a href=" nav-item has-sub "><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >دوره ها</span></a>
+                        <ul class="menu-content">
+                            <li><a href="/admin/courses" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >همه دوره ها</span></a></li>
+                            <!--<li><a href="/portal/certificates"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice Add">دریافت شده از شتابدهنده</span></a></li>-->
+                            <li><a href="/admin/coursetype" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >دسته بندی دوره ها</span></a></li>
+                        </ul>
+                    </li>
                 </ul>
             </li>
             <li class=" nav-item"><a href="#"><span class="menu-title" data-i18n="Chat">مالی</span></a>
@@ -58,35 +65,30 @@
                     <li><a href="/admin/checkout" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">پرداختی ها</span></a></li>
                 </ul>
             </li>
-            <li class=" nav-item"><a href="#"><span class="menu-title" data-i18n="Chat"> کوچ ها</span></a>
+            <li class=" nav-item"><a href="#"><span class="menu-title" data-i18n="Chat">کلینیک</span></a>
                 <ul class="menu-content">
-                    <li><a href="/admin/coach" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">همه کوچ ها</span></a></li>
-                    <li><a href="/admin/coach/request" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice Add">درخواست های همکاری</span></a></li>
-                    <li><a href="/admin/coach/reject" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >درخواست های رد شده</span></a></li>
-                    <li><a href=" nav-item has-sub "><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice Add">موضوعات کوچ ها</span></a>
+                    <li><a href=" nav-item has-sub "><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >کوچ ها</span></a>
                         <ul class="menu-content">
-                            <!--<li><a href="/portal/coworking_space_request"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">فضای کار اشتراکی</span></a></li>-->
-                            <li><a href="/admin/category_coach/" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">موضوعات</span></a></li>
-                            <li><a href="/admin/category_coach/create" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice Add">موضوعات جدید</span></a></li>
+                            <li><a href="/admin/coach" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >همه کوچ ها</span></a></li>
+                            <li><a href="/admin/coach/request" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >درخواست های همکاری</span></a></li>
+                            <li><a href="/admin/coach/reject" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >درخواست های رد شده</span></a></li>
                         </ul>
                     </li>
 
-                </ul>
-            </li>
-            <li class=" nav-item"><a href="#"><span class="menu-title" data-i18n="Chat">دوره ها</span></a>
-                <ul class="menu-content">
-                    <li><a href="/admin/courses" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">همه دوره ها</span></a></li>
-                    <!--<li><a href="/portal/certificates"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice Add">دریافت شده از شتابدهنده</span></a></li>-->
-                    <li><a href="/admin/coursetype" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice Add">دسته بندی دوره ها</span></a></li>
-                </ul>
-            </li>
-            <!--<li class=" nav-item"><a href="/portal/news"><i class="menu-livicon" data-icon="notebook"></i><span class="menu-title" data-i18n="Chat">اخبار</span></a></li>-->
-            <li class=" nav-item"><a href="#" class="disabled"><span class="menu-title" data-i18n="Chat">اخبار</span></a></li>
-            <li class=" nav-item"><a href="#"><span class="menu-title" data-i18n="Invoice">جلسات</span></a>
-                <ul class="menu-content">
-                    <li><a href="/admin/booking/"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">لیست جلسات</span></a></li>
-                    <li><a href="/admin/booking/accept"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">جلسات رزرو شده</span></a></li>
-                    <li><a href="/admin/reserve/waiting"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">رزروهای ناقص</span></a></li>
+                    <li><a href=" nav-item has-sub "><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >موضوعات کوچ ها</span></a>
+                        <ul class="menu-content">
+                            <!--<li><a href="/portal/coworking_space_request"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">فضای کار اشتراکی</span></a></li>-->
+                            <li><a href="/admin/category_coach/" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >موضوعات</span></a></li>
+                            <li><a href="/admin/category_coach/create" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >موضوعات جدید</span></a></li>
+                        </ul>
+                    </li>
+                    <li><a href=" nav-item has-sub "><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >جلسات</span></a>
+                        <ul class="menu-content">
+                            <li><a href="/admin/booking/"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">لیست جلسات</span></a></li>
+                            <li><a href="/admin/booking/accept"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">جلسات رزرو شده</span></a></li>
+                            <li><a href="/admin/reserve/waiting"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">رزروهای ناقص</span></a></li>
+                        </ul>
+                    </li>
                     <li><a href=" nav-item has-sub "><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice Add">کوپن تخفیف</span></a>
                         <ul class="menu-content">
                             <li><a href="/admin/coupon/" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">کوپن ها</span></a></li>
@@ -94,20 +96,39 @@
 
                         </ul>
                     </li>
-
                 </ul>
             </li>
+
+            <!--<li class=" nav-item"><a href="/portal/news"><i class="menu-livicon" data-icon="notebook"></i><span class="menu-title" data-i18n="Chat">اخبار</span></a></li>-->
+            <li class=" nav-item"><a href="#" class="disabled"><span class="menu-title" data-i18n="Chat">اخبار</span></a></li>
+
             <li class=" nav-item"><a href="#"><span class="menu-title" data-i18n="Invoice">رویدادها</span></a>
                 <ul class="menu-content">
                     <li><a href="/admin/event/all"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">همه رویدادها</span></a></li>
                     <li><a href="/admin/event/create"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">ایجاد رویداد</span></a></li>
                 </ul>
             </li>
+            <li class=" nav-item"><a href="#"><span class="menu-title" data-i18n="Chat">پیامک ها</span></a>
+                <ul class="menu-content">
+                    <li><a href="/admin/sms/recieve" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">آخرین پیامک های دریافتی</span></a></li>
+                    <li><a href="/admin/settings/answerline" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >منشی پیامک</span></a></li>
+                </ul>
+            </li>
+
+
+
+
+
+
+
             <li class=" nav-item"><a href="#"><span class="menu-title" data-i18n="Chat">تنظیمات</span></a>
                 <ul class="menu-content">
                     <li><a href="/admin/settings/" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">تنظیمات کلی</span></a></li>
                     <li><a href="/admin/settingscore" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice Add">امتیازات</span></a></li>
                     <li><a href="/admin/settingscore" disabled="disabled"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice Add">قیمت جلسات</span></a></li>
+                    <li><a href="/admin/settings/user_type" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >کاربرها</span></a></li>
+
+
                 </ul>
             </li>
             <li class=" nav-item"><a href="#"><span class="menu-title" data-i18n="Chat">تماس با ما</span></a>

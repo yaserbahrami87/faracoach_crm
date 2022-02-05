@@ -233,5 +233,9 @@ return [
         'followby_id'           =>'مسئول پیگیری',
         'ghest'                 =>'قسط',
         'payment'               =>'مبلغ نقدی',
+        'keyword'               =>'کلید',
+        'user_type'             =>'دسته',
+        'followup_comment'      =>'متن پیگیری',
+        'problemfollowup_id'    =>'کیفیت پیگیری',
     ],
 ];

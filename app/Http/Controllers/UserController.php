@@ -65,7 +65,6 @@ class UserController extends BaseController
                     $item->quality=$quality['problem'];
                     $item->quality_color=$quality['color'];
                     $item->lastDateFollowup=$lastFollowup['date_fa'];
-
                     $item->countFollowup=$item->followups->count();
                 }
                 else
@@ -1945,6 +1944,7 @@ class UserController extends BaseController
     public function changeNumberToData($item)
     {
         $tmp=$this->get_followup(NULL,$item->id,NULL,1,'first');
+
         if($tmp->count()>0)
         {
             $item->status_followups=$this->userType($this->get_lastFollowupUser($item->id)['status_followups']);
@@ -2182,6 +2182,8 @@ class UserController extends BaseController
             ->with('city',$city);
     }
 
+
+    //پیدا کردن و پاک کردن اطلاعات ناهمسان جداول باهمدیگر
     public function test()
     {
         $users=User::get();

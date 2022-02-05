@@ -12,7 +12,7 @@ class reserve extends Model
 
     public function booking()
     {
-        return $this->belongsTo('App\booking');
+        return $this->belongsTo('App\booking','booking_id','id');
     }
 
     public function user()

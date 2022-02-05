@@ -190,32 +190,42 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::post('/users/storeExcel','UserController@storeExcel');
 
     //  ROUTE SETTINGS
-    Route::post('/settings/problemfollowup/store','ProblemfollowupController@store');
-    Route::get('/settings/problemfollowup/delete/{problemfollowup}','ProblemfollowupController@destroy');
-    Route::get('/settings/problemfollowup/edit/{problemfollowup}','ProblemfollowupController@edit');
-    Route::patch('/settings/problemfollowup/update/{problemfollowup}','ProblemfollowupController@update');
-    Route::get('/settings/','AdminController@showSettings');
-    Route::get('/settings/problemfollowup/new',function()
+    Route::prefix('settings/')->group(function ()
     {
-        return view('panelAdmin.insertProblemFollowup');
+        Route::post('/problemfollowup/store', 'ProblemfollowupController@store');
+        Route::get('/problemfollowup/delete/{problemfollowup}', 'ProblemfollowupController@destroy');
+        Route::get('/problemfollowup/edit/{problemfollowup}', 'ProblemfollowupController@edit');
+        Route::patch('/problemfollowup/update/{problemfollowup}', 'ProblemfollowupController@update');
+        Route::get('/', 'AdminController@showSettings');
+        Route::get('/problemfollowup/new', function () {
+            return view('panelAdmin.insertProblemFollowup');
+        });
+
+
+
+        // *** Tags Setting
+        Route::get('/tags/new','TagController@create');
+        Route::post('/tags/store','TagController@store');
+        Route::get('/tags/delete/{tag}','TagController@destroy');
+        Route::get('/tags/edit/{tag}','TagController@edit');
+        Route::patch('/tags/update/{tag}','TagController@update');
+        Route::get('/settingtags/{data}','TagController@ajaxsettingstag');
+        Route::patch('/updatetags','TagController@updateAllTags');
+        //*** Category Tags Settings
+        Route::get('/categorytags/new','CategoryTagController@index');
+        Route::post('/categorytags/store','CategoryTagController@store');
+        Route::get('/categorytags/edit/{categoryTag}','CategoryTagController@edit');
+        Route::patch('/categorytags/update/{categoryTag}','CategoryTagController@update');
+        Route::get('/categorytags/delete/{categoryTag}','CategoryTagController@destroy');
+        Route::get('/subcategorytags/{data}','CategoryTagController@ajaxsubcategory');
+
+        //usertypes
+        Route::resource('user_type','UserTypeController');
+
+        //Answer Line
+        Route::get('/answerline/answer','AnswerlineController@answerLine');
+        Route::resource('answerline','AnswerlineController');
     });
-
-
-    // *** Tags Setting
-    Route::get('/settings/tags/new','TagController@create');
-    Route::post('/settings/tags/store','TagController@store');
-    Route::get('/settings/tags/delete/{tag}','TagController@destroy');
-    Route::get('/settings/tags/edit/{tag}','TagController@edit');
-    Route::patch('/settings/tags/update/{tag}','TagController@update');
-    Route::get('/settings/settingtags/{data}','TagController@ajaxsettingstag');
-    Route::patch('/settings/updatetags','TagController@updateAllTags');
-    //*** Category Tags Settings
-    Route::get('/settings/categorytags/new','CategoryTagController@index');
-    Route::post('/settings/categorytags/store','CategoryTagController@store');
-    Route::get('/settings/categorytags/edit/{categoryTag}','CategoryTagController@edit');
-    Route::patch('/settings/categorytags/update/{categoryTag}','CategoryTagController@update');
-    Route::get('/settings/categorytags/delete/{categoryTag}','CategoryTagController@destroy');
-    Route::get('/settings/subcategorytags/{data}','CategoryTagController@ajaxsubcategory');
 
     //Route Messages
 //    Route::get('/messages/','MessageController@index');
@@ -263,6 +273,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
 
     //SMS
     Route::get('/sms/countrecieve','SmsController@countRecieve');
+    Route::get('/sms/recieve','SmsController@recieve');
     Route::resource('sms','SmsController');
     Route::post('/sms/createajax','SmsController@createAjax');
 
@@ -279,6 +290,8 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::get('/settingreserve','OptionController@settingReserve');
     Route::patch('/settingreserve/update','OptionController@updateSettingReserve');
     Route::resource('options','OptionController');
+
+
 
     //booking
     Route::get('/booking/accept','BookingController@acceptReserve');
@@ -495,8 +508,14 @@ Route::get('/exportexcel','UserController@export_excel');
 
 Route::resource('event','EventController');
 
+
+//reserve test
+Route::get('/r/test','ReserveController@test');
+
+
 //Route::get('/test','FollowupController@test');
 Route::get('/test','UserController@test');
+
 
 //blog
 Route::get('/{username}','PostController@blogHomePage');

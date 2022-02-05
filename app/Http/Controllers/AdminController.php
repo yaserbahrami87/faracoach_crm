@@ -67,7 +67,8 @@ class AdminController extends BaseController
 //                    ->wherenotIn('users.type',[2,12])
                     ->count();
 
-            $usersEducation=user::where('type','=',3)
+            $usersEducation=user::orwhere('type','=',3)
+                        ->orwhere('type','=',4)
                         ->get();
 
             $sumcancelfollowup=0;

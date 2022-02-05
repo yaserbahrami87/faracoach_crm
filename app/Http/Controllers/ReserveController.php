@@ -469,5 +469,19 @@ class ReserveController extends BaseController
         }
     }
 
+    public function test()
+    {
+        $reserve=reserve::groupby('user_id')
+                    ->get();
+
+        foreach($reserve as $item)
+        {
+            $user=$this->get_user(NULL,$item->user_id,NULL,NULL,'first');
+            echo "<script>console.log(USER=".$user.");</script>";
+        }
+
+
+    }
+
 
 }

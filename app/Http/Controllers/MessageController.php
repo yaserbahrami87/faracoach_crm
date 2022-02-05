@@ -43,7 +43,7 @@ class MessageController extends BaseController
 //                $messages = message::where('message_id_answer', '=', NULL)
 //                    ->where('id','=',$request['q'])
 //                    ->where(function ($query) {
-//                        $query->orwhere('user_id_send', '=', Auth::user()->id)
+    //                        $query->orwhere('user_id_send', '=', Auth::user()->id)
 //                            ->orwhere('user_id_recieve', '=', Auth::user()->id);
 //
 //                    })

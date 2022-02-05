@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\followup;
 use App\sms;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Kavenegar;
@@ -14,6 +16,9 @@ class SmsController extends BaseController
 {
     public function __construct()
     {
+        $dateNow = verta();
+        $this->dateNow = $dateNow->format('Y/m/d');
+        $this->timeNow = $dateNow->format('H:i:s');
         $api=config('kavenegar')['apikey'];
         $this->client=new client(
             [
@@ -381,5 +386,41 @@ class SmsController extends BaseController
 //        $response=$this->client->request('GET', 'receive.json?linenumber=10004002002020&isread=0');
         $response=$this->client->request('GET', 'countinbox.json?startdate=1642636800&enddate=1642723200&linenumber=10004002002020&isread=1');
         dd(json_decode($response->getBody()->getContents())->entries);
+    }
+
+    public function recieve()
+    {
+//        $response=$this->client->request('GET','send.json?receptor=09376578529&sender=10004002002020&message=mobile=$clientnumber&keyword=$keyword&linenumber=$linenumber');
+        $enddate = Carbon::now()->timestamp;
+        $startdate = Carbon::yesterday()->timestamp;
+        $response=$this->client->request('GET','receive.json?linenumber=10004002002020&isread=1&page=2&pageindex=100');
+        $response=json_decode($response->getBody()->getContents())->entries;
+
+        if(!is_null($response)) {
+            foreach ($response as $item)
+            {
+                $user = User::where('tel', 'like', '%' . substr($item->sender, 1) . '%')
+                    ->first();
+
+                if ($user)
+                {
+                   $item->id=$user->id;
+                   $item->fname=$user->fname;
+                   $item->lname=$user->lname;
+                   $item->jalaliDate= $this->changeTimestampToShamsi($item->date);
+                }
+                else
+                {
+                    $item->id=NULL;
+                    $item->fname=NULL;
+                    $item->lname=NULL;
+                    $item->jalaliDate= $this->changeTimestampToShamsi($item->date);
+                }
+            }
+
+        }
+
+        return view('admin.smsPanel.smsRecieve')
+                        ->with('response',$response);
     }
 }

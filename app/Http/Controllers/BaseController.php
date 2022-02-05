@@ -34,6 +34,7 @@ use App\teacher;
 use App\tweet;
 use App\type_coach;
 use App\User;
+use App\user_type;
 use Kavenegar;
 use GuzzleHttp\Client;
 use Hekmatinasser\Verta\Verta;
@@ -2030,6 +2031,8 @@ class BaseController extends Controller
             'time_fa'           =>$this->timeNow,
         ]);
     }
+
+
 
 
 }
