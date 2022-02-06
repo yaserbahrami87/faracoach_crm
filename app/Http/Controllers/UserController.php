@@ -640,7 +640,8 @@ class UserController extends BaseController
         // دریافت لیست مسئولین پیگیری
         $expert_followup = user::where(function ($query) {
             $query->orwhere('type', '=', 2)
-                ->orwhere('type', '=', 3);
+                    ->orwhere('type', '=', 3)
+                    ->orwhere('type', '=', 4);
         })
             //->where('id','<>',Auth::user()->id)
             ->get();
