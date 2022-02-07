@@ -143,36 +143,38 @@
                 <br/>
                 این یک  فرصت بی نظیره
             </p>
-        </div>
-        <div class="col-md-10 offset-md-1 col-12  mb-4 ">
-            <div class="card mt-4 col-md-6 col-12 float-left" >
-                <div class="card-body text-center">
-                    <h5>لینک دعوت اختصاصی شما</h5>
-                    <p class="text-light bg-secondary p-2 dir-rtl text-center"  id="personal_link">{{asset('/jashn')."?q=".$user->id}}</p>
-                </div>
-            </div>
-            <div class="col-md-6 col-12 float-left my-5">
+
+
+
+            <div class="col-md-6 col-12 my-5">
                 <h4>
                     برای شرکت در قرعه کشی موارد زیر را انجام دادم.
                 </h4>
                 <form method="post" action="/landPage/{{$user->id}}">
                     {{csrf_field()}}
                     {{method_field('PATCH')}}
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="5 نفر از دوستانم رو تگ کردم" id="flexCheckIndeterminate" name="options[]">
-                        <label class="form-check-label" for="flexCheckIndeterminate">
-                            5 نفر از دوستانم رو تگ کردم.
-                        </label>
-                        <br/>
-                        <input class="form-check-input" type="checkbox" value="پست رو هم به مدت 24 ساعت استوری کردم و پیج فراکوچ رو هم منشن کردم" id="mention" name="options[]">
-                        <label class="form-check-label" for="mention">
-                            پست رو هم به مدت 24 ساعت استوری کردم و پیج فراکوچ رو هم منشن کردم.
-                        </label>
-                        <br/>
-                        <button type="submit" class="btn px-5 mt-3">ارسال</button>
+
+                    <div class="custom-control custom-checkbox text-left pl-5">
+                        <input type="checkbox" class="custom-control-input" id="customCheck1" value="5 نفر از دوستانم رو تگ کردم"  name="options[]" />
+                        <label class="custom-control-label" for="customCheck1">5 نفر از دوستانم رو تگ کردم.</label>
                     </div>
+                    <div class="custom-control custom-checkbox text-left  pl-5">
+                        <input type="checkbox" class="custom-control-input" id="customCheck2" value="پست رو هم به مدت 24 ساعت استوری کردم و پیج فراکوچ رو هم منشن کردم."  name="options[]" />
+                        <label class="custom-control-label" for="customCheck2">پست رو هم به مدت 24 ساعت استوری کردم و پیج فراکوچ رو هم منشن کردم.</label>
+                    </div>
+                    <input type="submit" class="btn mt-3" value="ارسال" />
+
                 </form>
             </div>
+            <div class="col-md-6 col-12  mb-4 ">
+                <div class="card mt-4 col-12 " >
+                    <div class="card-body text-center">
+                        <h5>لینک دعوت اختصاصی شما</h5>
+                        <p class="text-light bg-secondary p-2 dir-rtl text-center"  id="personal_link">{{asset('/jashn')."?q=".$user->id}}</p>
+                    </div>
+                </div>
+            </div>
+
         </div>
         <div class=" col-md-6 offset-md-3 col-12 text-center mt-5 ">
             <span >تعداد بازدید از طریق لینک تو  </span> <input type="number" value="0" disabled><span>  بار</span>
