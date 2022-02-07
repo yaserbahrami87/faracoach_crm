@@ -61,7 +61,7 @@
         </div>
         <div class="row mt-5 text-center">
             <div class="col-md-6 offset-md-3 col-12">
-                <img id="img-mobile" src="{{asset('/images/baner.png')}}"/>
+                <img id="img-mobile" src="{{asset('/images/baner.png')}}" class="img-fluid"/>
                 <h2 class="mt-5">به جشن ما خیلی خوش اومدی</h2>
             </div>
         </div>

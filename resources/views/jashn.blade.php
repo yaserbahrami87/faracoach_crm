@@ -15,7 +15,7 @@
         }
 
         h2, #title{
-            font-family:SGKara-bold;
+            font-family:SG#img-centerKara-bold;
             color:#29547b;
         }
         h4{
@@ -29,12 +29,19 @@
             font-size:24px;
             font-weight: bolder;
         }
+
+        #small + span
+        {
+            color:#29547b;
+            font-weight: bolder;
+            font-size: 16px ;
+        }
         .container-fluid p{
             line-height:30px;
         }
 
         .sticky{
-            background-color: #91bbe9;
+            border:2px solid #91bbe9 !important;
         }
 
         .btn{
@@ -58,7 +65,7 @@
 
         }
         #img-center{
-            width:100%;
+            width:85%;
         }
 
 
@@ -67,7 +74,7 @@ ol {
 	position: relative;
 	display: block;
 	margin-top: 100px;
-    margin-bottom:200px;
+    margin-bottom:150px;
 	height: 60px;
 	background-image: url({{asset("/images/red.png")}});
     background-size:100%;
@@ -116,6 +123,11 @@ li .description {
   padding: 12px;
   margin-top: 20px;
   z-index: 1;
+}
+
+.description p
+{
+    line-height: 20px;
 }
 li .p{
     display: none;
@@ -193,9 +205,10 @@ li:hover .description > p {
         </div>
         <div class="col-md-10 offset-md-1 col-12 text-center mt-3">
             <h2 class="text-danger">جایزه باران فراکوچ</h2>
-            <p id="small">
-                به مناسبت میلاد امیرالمومنین و روز پدر و ششمین سالگرد فعالیت فراکوچ (چهارمین سالگرد تاسیس)
+            <p id="small" class="d-inline">
+                به مناسبت میلاد امیرالمومنین و روز پدر و ششمین سالگرد فعالیت فراکوچ
             </p>
+            <span> (چهارمین سالگرد تاسیس)</span>
         </div>
 
         <div class="row text-center mt-3">
@@ -229,7 +242,7 @@ li:hover .description > p {
                             </span>
                             <div class="description">
                                 <p  class="p pb-4">
-                                هدیه نقدی 5 میلیون تومانی
+                                هدیه نقدی 5 میلیون تومانی برای یک نفر
                                 </p>
                             </div>
                         </li>
@@ -240,7 +253,7 @@ li:hover .description > p {
                             </span>
                             <div class="description">
                                 <p class="p pb-4">
-                                هدیه نقدی 500 هزار تومانی
+                                هدیه نقدی 500 هزار تومانی برای 6 نفر
                                 </p>
                             </div>
                         </li>
@@ -251,7 +264,7 @@ li:hover .description > p {
                             </span>
                             <div class="description">
                                 <p  class="p">
-                                بن  تخفیف 10 میلیون تومانی شرکت در دوره های آموزش کوچینگ
+                                بن  تخفیف 10 میلیون تومانی شرکت در دوره های آموزش کوچینگ برای 1 نفر
                                 </p>
                             </div>
                         </li>
@@ -262,7 +275,7 @@ li:hover .description > p {
                             </span>
                             <div class="description">
                                 <p  class="p">
-                                بن  تخفیف 6 میلیون تومانی شرکت در دوره های آموزش کوچینگ
+                                بن  تخفیف 6 میلیون تومانی شرکت در دوره های آموزش کوچینگ برای 3 نفر
                                 </p>
                             </div>
                         </li>
@@ -273,7 +286,7 @@ li:hover .description > p {
                             </span>
                             <div class="description">
                                 <p  class="p">
-                                جلسه کوچینگ خصوصی به ارزش 2 میلیون تومان با شخص استاد متحدین
+                                جلسه کوچینگ به ارزش 2 میلیون تومان با استاد متحدین برای 6 نفر
                                 </p>
                             </div>
                         </li>
@@ -284,7 +297,7 @@ li:hover .description > p {
                             </span>
                             <div class="description">
                                 <p  class="p">
-                                جلسه کوچینگ خصوصی به ارزش بیش از 500 هزار تومان با سایر کوچ های آکادمی فراکوچ
+                                جلسه کوچینگ به ارزش بیش از 500 هزار تومان با سایر کوچ های آکادمی فراکوچ برای 30 نفر
                                 </p>
                             </div>
                         </li>
@@ -295,7 +308,7 @@ li:hover .description > p {
                             </span>
                             <div class="description">
                                 <p class="p">
-                                بن  تخفیف 2 میلیون تومانی شرکت در دوره های آموزش کوچینگ
+                                بن  تخفیف 2 میلیون تومانی شرکت در دوره های آموزش کوچینگ برای 20 نفر
                                 </p>
                             </div>
                         </li>
@@ -450,8 +463,9 @@ li:hover .description > p {
             <div class="col-md-9 col-12">
                 <div class="col-12 text-center">
                     <h4 class="mt-5">
-                    قصد داریم این سالگرد رو با قدردانی از همراهی شما شیرین تر کنیم و با کلی هدیه بسیار ارزشمند جشن بگیریم. از 17 بهمن تا آخرین دقایق 24 بهمن فرصت داری تو این جشن  ثبت نام کنی.
+                    قصد داریم این سالگرد رو با قدردانی از همراهی شما شیرین تر کنیم و با کلی هدیه بسیار ارزشمند جشن بگیریم.
                     </h4>
+                    <h4> از 17 بهمن تا آخرین دقایق 24 بهمن فرصت داری تو این جشن  ثبت نام کنی.</h4>
                     <a href="#collapseExample"  class="btn btn-lg px-5 mt-4" id="ghoree"  data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample" >ثبت نام قرعه کشی فراکوچ</a>
 
                     <div id="collapseExample" class="mt-5 collapse" >
@@ -466,18 +480,23 @@ li:hover .description > p {
 تنها تا ساعت ۲۴ روز ۲۴ بهمن ماه 1400
                     </p>
 
-                    <h2 class="mt-5">
-                    زمان قرعه‌کشی
-                    </h2>
-                    <p class="mt-4">
-                    26 بهمن ماه 1400 ساعت 11 از طریق پیج اینستاگرام فراکوچ
+
                     <br/>
+                    <!--
                     نتایج قرعه کشی جشنواره هفتمین سالگرد تأسیس آکادمی بین‌المللی فراکوچ متعاقبا از طریق سایت و پیج رسمی این آکادمی اطلاع‌رسانی خواهد شد.
                     </p>
                     <a  class="btn btn-lg px-5 mt-4" data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample1" >ثبت نام قرعه کشی فراکوچ</a>
                     <div id="collapseExample1" class="mt-5 collapse" >
                         @include('registerLanding')
                     </div>
+                    -->
+                </div>
+                <div class="col-12  border border-4 p-3 border-danger rounded">
+                    <h2 class="">
+                        زمان قرعه‌کشی
+                    </h2>
+                    <p class="mt-4">
+                        26 بهمن ماه 1400 ساعت 11 از طریق پیج اینستاگرام فراکوچ
                 </div>
 
             </div>
