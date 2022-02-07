@@ -188,6 +188,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::patch('/user/{tel}/updatePassword','UserController@updatePassword');
     Route::get('/users/excel','UserController@createExcel');
     Route::post('/users/storeExcel','UserController@storeExcel');
+    Route::post('/user/ajax/search','UserController@userAjax');
 
     //  ROUTE SETTINGS
     Route::prefix('settings/')->group(function ()
@@ -266,6 +267,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     //Courses
     Route::get('/courses/test','CourseController@course_test');
     Route::get('/courses/{course}/students','CourseController@showStudents');
+    Route::get('/courses/{course}/students/add','CourseController@createAddStudent');
     Route::resource('courses','CourseController');
 
     //CourseType
@@ -370,7 +372,7 @@ Route::post('/panel/checkCodewithoutPass','VerifyController@checkCodewithoutPass
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
-// Verify Tel Landings
+// Verify Tel landings
 Route::get('/verify/active/tel', 'VerifyController@store_landings');
 Route::get('/verify/active/tel/check/{code}','VerifyController@checkCode_landings');
 
@@ -479,6 +481,10 @@ Route::get('/ravanshenasi',function()
 });
 
 Route::get('/integrity','LandPageController@create');
+Route::get('/jashn',function()
+{
+    return view('jashn');
+});
 
 
 //landing Isfahan

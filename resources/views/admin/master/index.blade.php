@@ -8,6 +8,7 @@
     <title>پورتال فراکوچ</title>
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('/images/logo.png') }}">
 	<meta name="theme-color" content="#5A8DEE">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('/panel_assets/vendors/css/vendors.min.css') }}">

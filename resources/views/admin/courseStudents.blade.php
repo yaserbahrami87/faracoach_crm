@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="col-12">
+        <a href="/admin/courses/{{$course->shortlink}}/students/add" class="btn btn-primary mb-2">اضافه کردن دانشجو</a>
         <table class="table table-striped">
             <tr>
                 <th></th>

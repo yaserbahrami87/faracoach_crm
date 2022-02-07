@@ -2210,4 +2210,9 @@ class UserController extends BaseController
 
     }
 
+    public function userAjax(Request $request)
+    {
+        dd($request->tel);
+    }
+
 }

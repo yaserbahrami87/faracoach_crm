@@ -279,6 +279,12 @@ class CourseController extends BaseController
 //                    ->with('students',$course->students);
                     ->with('course',$course);
     }
+
+    public function createAddStudent(course $course)
+    {
+        return view('admin.education.course.courseAddStudent')
+                    ->with('course',$course);
+    }
     public function download($course,$file)
     {
 

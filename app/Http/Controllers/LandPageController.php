@@ -48,9 +48,9 @@ class LandPageController extends BaseController
         $request['tel']=$this->convertPersianNumber($request->tel);
 
         $this->validate($request,[
-            'fname'     =>'string|max:15|required',
-            'lname'     =>'string|max:50|required',
-            'email'     =>'required|email',
+            'fname'     =>'nullable|string|max:15',
+            'lname'     =>'nullable|string|max:50',
+            'email'     =>'nullable|email',
             'tel'       =>'required|iran_mobile',
             'resource'  =>'required|string',
             'introduced'=>'nullable|numeric',
@@ -65,6 +65,11 @@ class LandPageController extends BaseController
                 alert()->success($request->lname ." عزیز \nاطلاعات شما با موفقیت ثبت شد.\n"."با توجه به تکمیل ظرفیت وبینار، ویدئوی ضبط شده وبینار در اختیار شما قرار خواهد گرفت.\n"."\n نام کاربری و رمز متعاقبا ارسال خواهد شد.")->persistent("بستن");
                 $this->sendSms($request->tel,$msg);
                 return back();
+            }
+            else if ($request->resource=='سالگرد')
+            {
+                return view('landings.jashn_return')
+                            ->with('user',$status);
             }
             else
             {
