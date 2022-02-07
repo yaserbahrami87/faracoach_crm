@@ -7,6 +7,7 @@ use App\checkout;
 use App\course;
 use App\lib\zarinpal;
 use App\order;
+use App\student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -97,7 +98,36 @@ class OrderController extends BaseController
             }
 
             if ($status) {
-                return redirect('https://www.zarinpal.com/pg/StartPay/' . $res);
+                if($sum_final_off==0)
+                {
+                    if ($item->type == 'course')
+                    {
+                        $status=student::create(
+                            [
+                                'user_id'       =>Auth::user()->id,
+                                'course_id'    =>$item->product_id,
+                                'date_fa'       =>$this->dateNow,
+                                'time_fa'       =>$this->timeNow,
+                            ]
+                        );
+
+                        if($status)
+                        {
+                            alert()->success('ثبت نام در دوره با موفقیت انجام شد')->persistent('بستن');
+                        }
+                        else
+                        {
+                            alert()->error('خطا در ثبت نام دانشجو')->persistent('بستن');
+                        }
+
+                        return redirect('/');
+                    }
+                }
+                else
+                {
+                    return redirect('https://www.zarinpal.com/pg/StartPay/' . $res);
+                }
+
             } else {
                 return redirect('/');
             }

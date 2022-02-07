@@ -44,7 +44,8 @@ class EventreserveController extends BaseController
         ]);
         $event=$this->get_events($request->event_id,NULL,NULL,NULL,NULL,NULL,'first');
 
-        if($event->capacity!=0) {
+        if($event->capacity!=0)
+        {
             if($event->fi==0 || is_null($event->fi)|| $event->fi=='')
             {
                 $status = eventreserve::create([
