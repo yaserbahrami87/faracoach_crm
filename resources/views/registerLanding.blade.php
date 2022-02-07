@@ -11,6 +11,6 @@
         <div class="col-md-4 mb-3">
             <input type="text" class="form-control"  value="{{old('tel')}}" required autocomplete="tel" placeholder="تلفن همراه" name="tel" />
         </div>
-        <button class="btn px-5 mt-4  d-block" typ="submit"> ثبت نام </button>
+        <button class="btn px-5 mt-4  d-block" typ="submit"> ثبت نام و مرحله بعد </button>
     </form>
 </div>

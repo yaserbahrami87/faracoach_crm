@@ -69,6 +69,18 @@
         }
 
 
+        .table-striped>tbody>tr:nth-of-type(odd)>*{
+            --bs-table-accent-bg:#ffe7bb;
+        }
+        .table-info, .table-info>td, .table-info>th {
+            background-color: #fff9ee;
+        }
+
+        #small img{
+            width:2%;
+        }
+
+
 /* ---- Timeline ---- */
 ol {
 	position: relative;
@@ -187,6 +199,10 @@ li:hover .description > p {
             font-size: 18px;
         }
 
+        #small img{
+            width:6%;
+        }
+
         p{
             text-align: justify;
         }
@@ -198,15 +214,15 @@ li:hover .description > p {
     <article class="container-fluid mb-5">
 
         <!-------------------------------- CONTER --------------------->
-        <div class="row text-center">
+        <div class="row text-center mt-5">
             <div class="col-md-6 offset-md-3 col-12">
-                <img id="img-des" src="{{asset('/images/line1.png')}}"/>
+
             </div>
         </div>
         <div class="col-md-10 offset-md-1 col-12 text-center mt-3">
             <h2 class="text-danger">جایزه باران فراکوچ</h2>
             <p id="small" class="d-inline">
-                به مناسبت میلاد امیرالمومنین و روز پدر و ششمین سالگرد فعالیت فراکوچ
+                به مناسبت میلاد امیرالمومنین <img src="{{asset('/images/u.svg')}}">و روز پدر و ششمین سالگرد فعالیت فراکوچ
             </p>
             <span> (چهارمین سالگرد تاسیس)</span>
         </div>

@@ -47,39 +47,43 @@ class LandPageController extends BaseController
     {
         $request['tel']=$this->convertPersianNumber($request->tel);
 
-        $this->validate($request,[
-            'fname'     =>'nullable|string|max:15',
-            'lname'     =>'nullable|string|max:50',
-            'email'     =>'nullable|email',
-            'tel'       =>'required|iran_mobile',
-            'resource'  =>'required|string',
-            'introduced'=>'nullable|numeric',
-        ]);
+        $user=landPage::where('tel','=',$request['tel'])
+                    ->where('resource','=',$request->resource)
+                    ->first();
+        if(is_null($user)) {
+            $this->validate($request, [
+                'fname' => 'nullable|string|max:15',
+                'lname' => 'nullable|string|max:50',
+                'email' => 'nullable|email',
+                'tel' => 'required|iran_mobile',
+                'resource' => 'required|string',
+                'introduced' => 'nullable|numeric',
+            ]);
 
-        $status=landPage::create($request->all());
-        if($status)
-        {
-            if($request->resource=='وبینار تمامیت')
-            {
-                $msg=$request->lname ." عزیز \nاطلاعات شما با موفقیت ثبت شد.\n"."با توجه به تکمیل ظرفیت وبینار، ویدئوی ضبط شده وبینار در اختیار شما قرار خواهد گرفت.\n"."\n نام کاربری و رمز متعاقبا ارسال خواهد شد."."\n"."فراکوچ";
-                alert()->success($request->lname ." عزیز \nاطلاعات شما با موفقیت ثبت شد.\n"."با توجه به تکمیل ظرفیت وبینار، ویدئوی ضبط شده وبینار در اختیار شما قرار خواهد گرفت.\n"."\n نام کاربری و رمز متعاقبا ارسال خواهد شد.")->persistent("بستن");
-                $this->sendSms($request->tel,$msg);
-                return back();
-            }
-            else if ($request->resource=='سالگرد')
-            {
-                return view('landings.jashn_return')
-                            ->with('user',$status);
-            }
-            else
-            {
-                alert()->success("ثبت نام شما با موفقیت انجام شد")->persistent("بستن");
-            }
+            $status = landPage::create($request->all());
+            if ($status) {
+                if ($request->resource == 'وبینار تمامیت') {
+                    $msg = $request->lname . " عزیز \nاطلاعات شما با موفقیت ثبت شد.\n" . "با توجه به تکمیل ظرفیت وبینار، ویدئوی ضبط شده وبینار در اختیار شما قرار خواهد گرفت.\n" . "\n نام کاربری و رمز متعاقبا ارسال خواهد شد." . "\n" . "فراکوچ";
+                    alert()->success($request->lname . " عزیز \nاطلاعات شما با موفقیت ثبت شد.\n" . "با توجه به تکمیل ظرفیت وبینار، ویدئوی ضبط شده وبینار در اختیار شما قرار خواهد گرفت.\n" . "\n نام کاربری و رمز متعاقبا ارسال خواهد شد.")->persistent("بستن");
+                    $this->sendSms($request->tel, $msg);
+                    return back();
+                } else if ($request->resource == 'سالگرد') {
+                    $msg = $request->fname . " " . $request->lname . "عزیز \n تبریک نام شما در لیست قرعه کشی هدایای سالگرد فراکوچ ثبت شد\n برای تایید نهایی سایر مراحل را انجام دهید";
+                    $this->sendSms($request['tel'], $msg);
+                    return view('landings.jashn_return')
+                        ->with('user', $status);
+                } else {
+                    alert()->success("ثبت نام شما با موفقیت انجام شد")->persistent("بستن");
+                }
 
+            } else {
+                alert()->error('خطا در ثبت نام ' . $request->resource)->persistent('بستن');;
+            }
         }
         else
         {
-            alert()->error('خطا در ثبت نام '.$request->resource)->persistent('بستن');;
+            return view('landings.jashn_return')
+                ->with('user', $user);
         }
 
         return back();
@@ -125,24 +129,27 @@ class LandPageController extends BaseController
         $status=$landPage->update($request->all());
         if($status)
         {
-            if(!is_null($request->count))
-            {
-                $msg=$landPage->lname." عزیز \n".'میزبان شما و '.$request->count." میهمان ارزشمندتان در 'وبینار تمامیت' خواهیم بود\n"."لینک وبینار متعاقبا ارسال خواهد شد\n"."لینک اختصاصی جهت معرفی میهمانان: \n".asset('/integrity?q='.$landPage->id)."\n فراکوچ-مدیران ایران ";
-            }
-            else
-            {
-                $msg=$landPage->lname." عزیز \n".'میزبان شما و میهمان ارزشمندتان در "وبینار تمامیت" خواهیم بود'."لینک وبینار متعاقبا ارسال خواهد شد\n"."لینک اختصاصی جهت معرفی میهمانان: \n".asset('/integrity?q='.$landPage->id)."\n فراکوچ-مدیران ایران ";
-            }
+//            if(!is_null($request->count))
+//            {
+//                $msg=$landPage->lname." عزیز \n".'میزبان شما و '.$request->count." میهمان ارزشمندتان در 'وبینار تمامیت' خواهیم بود\n"."لینک وبینار متعاقبا ارسال خواهد شد\n"."لینک اختصاصی جهت معرفی میهمانان: \n".asset('/integrity?q='.$landPage->id)."\n فراکوچ-مدیران ایران ";
+//            }
+//            else
+//            {
+//                $msg=$landPage->lname." عزیز \n".'میزبان شما و میهمان ارزشمندتان در "وبینار تمامیت" خواهیم بود'."لینک وبینار متعاقبا ارسال خواهد شد\n"."لینک اختصاصی جهت معرفی میهمانان: \n".asset('/integrity?q='.$landPage->id)."\n فراکوچ-مدیران ایران ";
+//            }
+
+
+            $msg=$landPage->fname.' '.$landPage->lname."عزیز \n"."درخواست شما ثبت شد\n پس از تایید اقدامات در لیست نهایی قرار می گیرید";
 
 
             $this->sendSms($landPage->tel,$msg);
-            alert()->success("رزرو وبینار شما با موفقیت انجام شد\n یک روز قبل از وبینار لینک وبینار برای شما ارسال میگردد.")->persistent("بستن");
+            alert()->success($msg)->persistent("بستن");
         }
         else
         {
             alert()->error('خطا در ثبت اطلاعات')->persistent('بستن');
         }
-        return redirect('/integrity');
+        return redirect('/jashn');
     }
 
     /**

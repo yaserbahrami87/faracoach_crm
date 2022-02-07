@@ -7,11 +7,9 @@
         @font-face {
             font-family: SGKara-Regular;
             src: url({{asset('/fonts/other/SGKara-Regular.ttf')}});
-
             font-family: SGKara-bold;
             src: url({{ asset('/fonts/other/SGKara-SemiBold.ttf') }});
         }
-
         h2, #title{
             font-family:SGKara-bold;
             color:#29547b;
@@ -29,7 +27,6 @@
         p{
             line-height:30px;
         }
-
         .btn{
             background-color:#a60802;
             color:#fff;
@@ -147,13 +144,42 @@
                 این یک  فرصت بی نظیره
             </p>
         </div>
-        <div class="card mt-4" >
-            <div class="card-body text-center">
-                <h5>لینک دعوت اختصاصی شما</h5>
-                <p class="text-light bg-secondary p-2 dir-rtl text-center"  id="personal_link">{{asset('/jashn')."?q=".$user->id}}</p>
+        <div class="col-md-10 offset-md-1 col-12  mb-4 ">
+            <div class="card mt-4 col-md-6 col-12 float-left" >
+                <div class="card-body text-center">
+                    <h5>لینک دعوت اختصاصی شما</h5>
+                    <p class="text-light bg-secondary p-2 dir-rtl text-center"  id="personal_link">{{asset('/jashn')."?q=".$user->id}}</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-12 float-left my-5">
+                <h4>
+                    برای شرکت در قرعه کشی موارد زیر را انجام دادم.
+                </h4>
+                <form method="post" action="/landPage/{{$user->id}}">
+                    {{csrf_field()}}
+                    {{method_field('PATCH')}}
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="5 نفر از دوستانم رو تگ کردم" id="flexCheckIndeterminate" name="options[]">
+                        <label class="form-check-label" for="flexCheckIndeterminate">
+                            5 نفر از دوستانم رو تگ کردم.
+                        </label>
+                        <br/>
+                        <input class="form-check-input" type="checkbox" value="پست رو هم به مدت 24 ساعت استوری کردم و پیج فراکوچ رو هم منشن کردم" id="mention" name="options[]">
+                        <label class="form-check-label" for="mention">
+                            پست رو هم به مدت 24 ساعت استوری کردم و پیج فراکوچ رو هم منشن کردم.
+                        </label>
+                        <br/>
+                        <button type="submit" class="btn px-5 mt-3">ارسال</button>
+                    </div>
+                </form>
             </div>
         </div>
-
+        <div class=" col-md-6 offset-md-3 col-12 text-center mt-5 ">
+            <span >تعداد بازدید از طریق لینک تو  </span> <input type="number" value="0" disabled><span>  بار</span>
+        </div>
+        <div class=" col-md-6 offset-md-3 text-center col-12 my-4 ">
+            <span >افرادی  که از طریق لینک تو تو این جشن شرکت کردن </span> <input type="number" value="0" disabled ><span>  نفر</span>
+        </div>
     </article>
 @endsection
 
