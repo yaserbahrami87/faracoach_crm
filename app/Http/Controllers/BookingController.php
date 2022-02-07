@@ -523,7 +523,7 @@ class BookingController extends BaseController
                 ->paginate($this->countPage());
 
 
-        dd($booking);
+
         foreach ($booking as $item)
         {
             switch ($item->booking->duration_booking)
