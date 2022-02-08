@@ -14,7 +14,11 @@ class LandPageController extends BaseController
      */
     public function index()
     {
-        //
+        $users=landPage::where('resource','=','سالگرد')
+                    ->get();
+
+        return view('landings.jashn_list')
+                ->with('users',$users);
     }
 
     /**
@@ -26,14 +30,26 @@ class LandPageController extends BaseController
     {
         if(is_numeric($request->q) )
         {
-            $introduced=$request->q;
+            $introduced=landPage::where('id','=',$request->q)
+                    ->where('resource','=','سالگرد')
+                    ->first();
+            if(!is_null($introduced))
+            {
+                $introduced=$request->q;
+            }
+            else
+            {
+                $introduced=NULL;
+                alert()->error('کاربر معرف شما نامعتبر است')->persistent('بستن');
+
+            }
+
         }
         else
         {
             $introduced=NULL;
-//            alert()->error('لینک معرف شما نادرست است')->persistent('بستن');
         }
-        return  view('landeTamamiat')
+        return  view('jashn')
                     ->with('introduced',$introduced);
     }
 
@@ -46,7 +62,6 @@ class LandPageController extends BaseController
     public function store(Request $request)
     {
         $request['tel']=$this->convertPersianNumber($request->tel);
-
         $user=landPage::where('tel','=',$request['tel'])
                     ->where('resource','=',$request->resource)
                     ->first();

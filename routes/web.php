@@ -349,6 +349,10 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::get('/event/{event}/users','EventController@usersEvent');
     Route::get('/event/{event}/export','EventController@exportExcel');
     Route::resource('event','EventController');
+
+
+    //Landing
+    Route::get('/jashn/list','LandPageController@index');
 });
 
 
@@ -480,11 +484,10 @@ Route::get('/ravanshenasi',function()
     return view('landeRavanshenasi');
 });
 
-Route::get('/integrity','LandPageController@create');
-Route::get('/jashn',function()
-{
-    return view('jashn');
-});
+//Route::get('/integrity','LandPageController@create');
+Route::get('/jashn','LandPageController@create');
+
+
 
 
 //landing Isfahan

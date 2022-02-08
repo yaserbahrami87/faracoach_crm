@@ -2,6 +2,7 @@
     <form method="post" action="/landPage" class="form-inline text-center">
         {{csrf_field()}}
         <input type="hidden" value="سالگرد" name="resource" />
+        <input type="hidden" value="{{$introduced}}" name="introduced" />
         <div class="col-md-4 mb-3" >
             <input type="text" class="form-control "  placeholder="نام" required/>
         </div>

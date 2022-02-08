@@ -529,6 +529,7 @@ li:hover .description > p {
                     <form method="post" action="/landPage">
                         {{csrf_field()}}
                         <input type="hidden" value="سالگرد" name="resource" />
+                        <input type="hidden" value="{{$introduced}}" name="introduced" />
                         <input class="form-control" type="text" name="tel" placeholder="تلفن همراه" required/>
                         <button class="btn px-5 mt-4"  type="submit">ثبت نام قرعه کشی فراکوچ</button>
                     </form>
