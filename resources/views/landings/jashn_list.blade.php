@@ -1,8 +1,10 @@
 @extends('admin.master.index')
 @section('content')
     <div class="col-12">
+        <p>تعداد کل ثبت نام </p>
         <table class="table table-striped">
             <tr>
+
                 <th class="text-center">نام و نام وخانوادگی</th>
                 <th class="text-center">شماره همراه</th>
                 <th class="text-center">تاریخ ثبت نام</th>
@@ -11,6 +13,7 @@
 
             @foreach ($users as $item)
                 <tr>
+
                     <td class="text-center">
                         {{$item->fname." ".$item->lname}}
                     </td>
@@ -29,5 +32,6 @@
                 </tr>
             @endforeach
         </table>
+        {{$users->links()}}
     </div>
 @endsection

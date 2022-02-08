@@ -29,13 +29,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/landings/jashn_list.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/LandPageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/LandPageController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/landPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/landPage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/jashn.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/jashn.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/landings/jashn_list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/landings/jashn_list.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/registerLanding.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/registerLanding.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -868,7 +865,7 @@
       <workItem from="1644212105113" duration="21783000" />
       <workItem from="1644249324042" duration="23000" />
       <workItem from="1644261828737" duration="3160000" />
-      <workItem from="1644301620809" duration="5405000" />
+      <workItem from="1644301620809" duration="7195000" />
     </task>
     <servers />
   </component>
