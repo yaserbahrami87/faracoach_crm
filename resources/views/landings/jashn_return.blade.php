@@ -180,7 +180,7 @@
             <span >تعداد بازدید از طریق لینک تو  </span> <input type="number" value="0" disabled><span>  بار</span>
         </div>
         <div class=" col-md-6 offset-md-3 text-center col-12 my-4 ">
-            <span >افرادی  که از طریق لینک تو تو این جشن شرکت کردن </span> <input type="number" value="0" disabled ><span>  نفر</span>
+            <span >افرادی  که از طریق لینک تو توی این جشن شرکت کردن: </span> <b>{{$user->introducedUser->count()}}<b>  نفر</b>
         </div>
     </article>
 @endsection

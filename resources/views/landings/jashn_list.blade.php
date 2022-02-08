@@ -18,6 +18,7 @@
                     <th class="text-center">شماره همراه</th>
                     <th class="text-center">تاریخ ثبت نام</th>
                     <th class="text-center">معرف</th>
+                    <th class="text-center">تعداد معرفی شده</th>
                 </tr>
                 </thead>
             <tbody>
@@ -36,10 +37,11 @@
                         {{$item->date_fa}}
                     </td>
                     <td class="text-center">
-                        {{$item->introducedUser['fname']." ".$item->introducedUser['lname']}}
+                        {{$item->introduce['fname']." ".$item->introduce['lname']}}
                     </td>
-
-
+                    <td class="text-center">
+                        {{$item->introducedUser->count()}}
+                    </td>
                 </tr>
             @endforeach
         </table>

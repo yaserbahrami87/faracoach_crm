@@ -15,6 +15,7 @@ class LandPageController extends BaseController
     public function index()
     {
         $users=landPage::where('resource','=','سالگرد')
+                    ->orderby('id','desc')
                     ->get();
 
         $count=$users->count();
@@ -86,7 +87,7 @@ class LandPageController extends BaseController
                     $this->sendSms($request->tel, $msg);
                     return back();
                 } else if ($request->resource == 'سالگرد') {
-                    $msg = $request->fname . " " . $request->lname . "عزیز \n تبریک نام شما در لیست قرعه کشی هدایای سالگرد فراکوچ ثبت شد\n برای تایید نهایی سایر مراحل را انجام دهید";
+                    $msg = $request->fname . " " . $request->lname . " عزیز \n تبریک نام شما در لیست قرعه کشی هدایای سالگرد فراکوچ ثبت شد\n برای تایید نهایی سایر مراحل را انجام دهید"."\n لینک معرفی اختصاصی شما:"."\n".asset('/jashn?q='.$status->id);
                     $this->sendSms($request['tel'], $msg);
                     return view('landings.jashn_return')
                         ->with('user', $status);

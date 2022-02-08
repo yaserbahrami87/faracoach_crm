@@ -13,6 +13,11 @@ class landPage extends Model
 
     public function introducedUser()
     {
+        return $this->hasMany('App\landPage','introduced','id');
+    }
+
+    public function introduce()
+    {
         return $this->belongsTo('App\landPage','introduced','id');
     }
 }
