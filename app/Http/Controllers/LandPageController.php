@@ -82,13 +82,21 @@ class LandPageController extends BaseController
             $status = landPage::create($request->all());
             if ($status) {
                 if ($request->resource == 'وبینار تمامیت') {
+                    $introduced=landPage::where('id','=',$request->introduced)
+                                    ->where('resource','=','سالگرد')
+                                    ->first();
+
                     $msg = $request->lname . " عزیز \nاطلاعات شما با موفقیت ثبت شد.\n" . "با توجه به تکمیل ظرفیت وبینار، ویدئوی ضبط شده وبینار در اختیار شما قرار خواهد گرفت.\n" . "\n نام کاربری و رمز متعاقبا ارسال خواهد شد." . "\n" . "فراکوچ";
-                    alert()->success($request->lname . " عزیز \nاطلاعات شما با موفقیت ثبت شد.\n" . "با توجه به تکمیل ظرفیت وبینار، ویدئوی ضبط شده وبینار در اختیار شما قرار خواهد گرفت.\n" . "\n نام کاربری و رمز متعاقبا ارسال خواهد شد.")->persistent("بستن");
                     $this->sendSms($request->tel, $msg);
+
+
+                    alert()->success($request->lname . " عزیز \nاطلاعات شما با موفقیت ثبت شد.\n" . "با توجه به تکمیل ظرفیت وبینار، ویدئوی ضبط شده وبینار در اختیار شما قرار خواهد گرفت.\n" . "\n نام کاربری و رمز متعاقبا ارسال خواهد شد.")->persistent("بستن");
                     return back();
                 } else if ($request->resource == 'سالگرد') {
                     $msg = $request->fname . " " . $request->lname . " عزیز \n تبریک نام شما در لیست قرعه کشی هدایای سالگرد فراکوچ ثبت شد\n برای تایید نهایی سایر مراحل را انجام دهید"."\n لینک معرفی اختصاصی شما:"."\n".asset('/jashn?q='.$status->id);
                     $this->sendSms($request['tel'], $msg);
+                    $msg="تبریک ".$request->fname.' '.$request->lname." توسط لینک شما در قرعه کشی فراکوچ ثبت نام کرد \n "."شانس شما بیشتر شد";
+                    $this->sendSms($status->introduce['tel'],$msg);
                     return view('landings.jashn_return')
                         ->with('user', $status);
                 } else {
