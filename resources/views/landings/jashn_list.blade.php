@@ -1,7 +1,11 @@
 @extends('admin.master.index')
 @section('content')
     <div class="col-12">
-        <p>تعداد کل ثبت نام </p>
+        <p >تعداد کل ثبت نام
+            <b class="font-weight-bold">{{$count}}</b>
+             نفر
+        </p>
+
         <table class="table table-striped">
             <tr>
 
