@@ -176,6 +176,13 @@ li:hover .description > p {
 #form{
     display:none;
 }
+
+#banner_jayeze_mobile
+{
+    display: none;
+}
+
+
 @media screen and (max-width:375px) and (min-width:320px){
     #img-des{
         width:35%
@@ -205,6 +212,16 @@ li:hover .description > p {
 
         p{
             text-align: justify;
+        }
+
+        #banner_jayeze_desktop
+        {
+            display: none;
+        }
+
+        #banner_jayeze_mobile
+        {
+            display: block;
         }
     }
     </style>
@@ -248,8 +265,20 @@ li:hover .description > p {
                     <div class="row">
                         <div id="app"></div>
                     </div>
-                    <!----------------------------------------TIMELINE ------------->
 
+                    <div id="banner_jayeze_desktop">
+                        <img src="{{asset('/images/jayeze1.png')}}" class="img-fluid mb-5 mt-5" width="70%" />
+                        <img src="{{asset('/images/jayeze2.png')}}" class="img-fluid mb-5" width="70%"/>
+                        <img src="{{asset('/images/jayeze3.png')}}" class="img-fluid mb-5" width="70%" />
+                    </div>
+                    <div id="banner_jayeze_mobile">
+                        <img src="{{asset('/images/jayeze1_mobile.png')}}" class="img-fluid mb-3 mt-3" />
+                        <img src="{{asset('/images/jayeze2_mobile.png')}}" class="img-fluid mb-3" />
+                        <img src="{{asset('/images/jayeze3_mobile.png')}}" class="img-fluid mb-3" />
+                    </div>
+
+                    <!----------------------------------------TIMELINE ------------->
+                    <!--
                     <ol id="des" class="d-none d-sm-block">
                         <li>
                             <p class="diplome"> 1 هدیه به ارزش <br/>  5,000,000 تومان  </p>
@@ -329,6 +358,7 @@ li:hover .description > p {
                             </div>
                         </li>
                         </ol>
+                    -->
 
                     <!---------------------------- MOBILE  --------------------------------------->
                     <div class="row text-right">
