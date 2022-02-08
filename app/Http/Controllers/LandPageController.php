@@ -15,10 +15,9 @@ class LandPageController extends BaseController
     public function index()
     {
         $users=landPage::where('resource','=','سالگرد')
-                    ->paginate(25);
+                    ->get();
 
-        $count=landPage::where('resource','=','سالگرد')
-                    ->count();
+        $count=$users->count();
 
         return view('landings.jashn_list')
                 ->with('count',$count)
