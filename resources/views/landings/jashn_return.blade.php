@@ -51,12 +51,8 @@
 @section('row1')
     <article class="mb-5">
         <!-------------------------------- CONTER --------------------->
-        <div class="row text-center">
-            <div class="col-md-6 offset-md-3 col-12">
-                <img id="img-des" src="{{asset('/images/line1.png')}}"/>
-            </div>
-        </div>
-        <div class="row mt-5 text-center">
+
+        <div class="row mt-5 text-center mt-5 ">
             <div class="col-md-6 offset-md-3 col-12">
                 <img id="img-mobile" src="{{asset('/images/baner.png')}}" class="img-fluid"/>
                 <h2 class="mt-5">به جشن ما خیلی خوش اومدی</h2>

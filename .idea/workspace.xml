@@ -30,8 +30,8 @@
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/landings/jashn_list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/landings/jashn_list.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/landings/jashn_options.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/landings/jashn_options.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/jashn.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/jashn.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/landings/jashn_return.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/landings/jashn_return.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -866,7 +866,7 @@
       <workItem from="1644261828737" duration="3160000" />
       <workItem from="1644301620809" duration="8256000" />
       <workItem from="1644311453623" duration="9730000" />
-      <workItem from="1644389275976" duration="13918000" />
+      <workItem from="1644389275976" duration="14479000" />
     </task>
     <servers />
   </component>

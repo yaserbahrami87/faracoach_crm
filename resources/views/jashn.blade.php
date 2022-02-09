@@ -539,12 +539,16 @@ li:hover .description > p {
                     </div>
                     -->
                 </div>
-                <div class="col-12  border border-4 p-3 border-danger rounded">
+                <div class="col-12  border border-4 p-3 bg-success rounded">
                     <h2 class="">
                         زمان قرعه‌کشی
                     </h2>
                     <p class="mt-4">
                         26 بهمن ماه 1400 ساعت 11 از طریق پیج اینستاگرام فراکوچ
+
+                    <p style="font-weight: bolder">
+                        برای شرکت در قرعه کشی حضور در لایو الزامی می باشد
+                    </p>
                 </div>
 
             </div>
