@@ -173,13 +173,24 @@
 
         </div>
         <div class=" col-md-6 offset-md-3 col-12 text-center mt-5 ">
+            <!--
             <span >تعداد بازدید از طریق لینک تو  </span>
             <input type="number" value="0" disabled><span>  بار</span>
+            -->
+
+            <div class="col-12  mb-4 ">
+                <div class="card mt-4 col-12 bg-success" >
+                    <div class="card-body text-center">
+                        <h5>وضعیت</h5>
+                        <p class=" bg-light p-2 text-center" > تگ کردن 5 نفر از دوستان @if($user->resultoptions[0]==1)  <b class="text-success">تایید شد</b>   @else  <b class="text-danger">تایید نشد</b>  @endif </p>
+                        <p class=" bg-light p-2 text-center" >استوری کردن 24 ساعته پست و منشن کردن پیج فراکوچ   تگ کردن 5 نفر از دوستان @if($user->resultoptions[1]==1)  <b class="text-success">تایید شد</b>   @else  <b class="text-danger">تایید نشد</b>  @endif </p>
+                        <p class=" bg-light p-2 text-center" >تعداد {{$user->introducedUser->count()}}  نفر از طریق لینک شما در این جشن شرکت کردن</p>
+                    </div>
+                </div>
+            </div>
+
         </div>
-        <div class=" col-md-6 offset-md-3 text-center col-12 my-4 ">
-            <span>افرادی  که از طریق لینک تو توی این جشن شرکت کردن: </span>
-            <b>{{$user->introducedUser->count()}}  نفر</b>
-        </div>
+
     </article>
 @endsection
 

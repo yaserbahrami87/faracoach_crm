@@ -97,6 +97,7 @@ class LandPageController extends BaseController
                     $this->sendSms($request['tel'], $msg);
                     $msg="تبریک ".$request->fname.' '.$request->lname." توسط لینک شما در قرعه کشی فراکوچ ثبت نام کرد \n "."شانس شما بیشتر شد";
                     $this->sendSms($status->introduce['tel'],$msg);
+                    $status->resultoptions=explode(',',$status->resultoptions);
                     return view('landings.jashn_return')
                         ->with('user', $status);
                 } else {
@@ -109,6 +110,7 @@ class LandPageController extends BaseController
         }
         else
         {
+            $user->resultoptions=explode(',',$user->resultoptions);
             return view('landings.jashn_return')
                 ->with('user', $user);
         }
