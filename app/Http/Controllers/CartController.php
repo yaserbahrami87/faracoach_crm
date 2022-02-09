@@ -20,19 +20,27 @@ class CartController extends BaseController
         $cart=cart::where('user_id','=',Auth::user()->id)
                     ->get();
 
-        foreach ($cart as $item)
+        if($cart->count()==0)
         {
-            switch($item->type)
-            {
-                case 'course':$course=course::where('id','=',$item->product_id)
-                                                ->first();
-                              $item->product=$course->course;
-                              $item->fi=$course->fi_off;
-                              $item->peymant_off=$course->peymant_off;
-            }
+            alert()->warning('سبد خرید شما خالی می باشد')->persistent('بستن');
+            return redirect('/');
         }
-        return view('cart_all')
-                        ->with('cart',$cart);
+        else
+        {
+            foreach ($cart as $item)
+            {
+                switch($item->type)
+                {
+                    case 'course':$course=course::where('id','=',$item->product_id)
+                        ->first();
+                        $item->product=$course->course;
+                        $item->fi=$course->fi_off;
+                        $item->peymant_off=$course->peymant_off;
+                }
+            }
+            return view('cart_all')
+                ->with('cart',$cart);
+        }
     }
 
     /**
