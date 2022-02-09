@@ -29,7 +29,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/landings/jashn_options.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/landings/jashn_options.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -217,19 +217,19 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\wamp64\www\faracoach_crm\public\images" />
-      <recent name="C:\wamp64\www\faracoach_crm\public\fonts\other" />
-      <recent name="C:\wamp64\www\faracoach_crm\resources\views" />
-      <recent name="C:\wamp64\www\faracoach_crm\storage\app" />
-      <recent name="C:\wamp64\www\faracoach_crm\storage\app\private" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\wamp64\www\faracoach_crm\storage\app\private" />
       <recent name="C:\wamp64\www\faracoach_crm\storage\private" />
       <recent name="C:\wamp64\www\faracoach_crm\storage\app\private\مدیر در نقش کوچ" />
       <recent name="C:\wamp64\www\faracoach_crm\public\documents" />
       <recent name="C:\wamp64\www\faracoach_crm\public\images" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\faracoach_crm\public\images" />
+      <recent name="C:\wamp64\www\faracoach_crm\public\fonts\other" />
+      <recent name="C:\wamp64\www\faracoach_crm\resources\views" />
+      <recent name="C:\wamp64\www\faracoach_crm\storage\app" />
+      <recent name="C:\wamp64\www\faracoach_crm\storage\app\private" />
     </key>
   </component>
   <component name="RunManager">
@@ -864,7 +864,7 @@
       <workItem from="1644261828737" duration="3160000" />
       <workItem from="1644301620809" duration="8256000" />
       <workItem from="1644311453623" duration="9730000" />
-      <workItem from="1644389275976" duration="15310000" />
+      <workItem from="1644389275976" duration="15434000" />
     </task>
     <servers />
   </component>
