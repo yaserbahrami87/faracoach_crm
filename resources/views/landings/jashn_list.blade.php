@@ -31,7 +31,9 @@
                         </a>
                     </td>
                     <td class="text-center" dir="ltr">
+                        <a href="/admin/jashn/user/options/{{$item->id}}" target="_blank">
                             {{$item->tel}}
+                        </a>
                     </td>
 
                     <td class="text-center">
