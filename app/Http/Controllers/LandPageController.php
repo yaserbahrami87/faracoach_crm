@@ -166,7 +166,7 @@ class LandPageController extends BaseController
 //            }
 
 
-            $msg=$landPage->fname.' '.$landPage->lname."عزیز \n"."درخواست شما ثبت شد\n پس از تایید اقدامات در لیست نهایی قرار می گیرید";
+            $msg=$landPage->fname.' '.$landPage->lname." عزیز \n"."درخواست شما ثبت شد\n پس از تایید اقدامات در لیست نهایی قرار می گیرید";
 
 
             $this->sendSms($landPage->tel,$msg);
@@ -188,5 +188,34 @@ class LandPageController extends BaseController
     public function destroy(landPage $landPage)
     {
         //
+    }
+
+    public function optionsUser(landPage $landPage)
+    {
+        $landPage->options=explode(',',$landPage->options);
+        $landPage->resultoptions=explode(',',$landPage->resultoptions);
+
+        return view('landings.jashn_options')
+                    ->with('landPage',$landPage);
+
+    }
+
+    public function optionsUserUpdate(Request $request,landPage $landPage)
+    {
+
+        $landPage->resultoptions=(implode(',',$request->resultoptions));
+        $status=$landPage->save();
+        if($status)
+        {
+            alert()->success('بروزرسانی شد')->persistent('بستن');
+
+        }
+        else
+        {
+            alert()->error('خطا در بروزرسانی')->persistent('بستن');
+        }
+
+        return back();
+
     }
 }

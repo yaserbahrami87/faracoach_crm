@@ -25,9 +25,10 @@
 
             @foreach ($users as $item)
                 <tr>
-
                     <td class="text-center">
-                        {{$item->fname." ".$item->lname}}
+                        <a href="/admin/jashn/user/options/{{$item->id}}">
+                            {{$item->fname." ".$item->lname}}
+                        </a>
                     </td>
                     <td class="text-center" dir="ltr">
                             {{$item->tel}}
@@ -46,6 +47,9 @@
             @endforeach
         </table>
 
+
+
+
     </div>
 @endsection
 
@@ -56,5 +60,10 @@
         $(document).ready(function() {
             $('#example').DataTable();
         } );
+
+
+
+
+
     </script>
 @endsection

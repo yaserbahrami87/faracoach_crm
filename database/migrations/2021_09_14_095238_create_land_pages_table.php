@@ -22,6 +22,7 @@ class CreateLandPagesTable extends Migration
             $table->string('tel','21')->nullable();
             $table->string('resource','100')->nullable();
             $table->string('options','250')->nullable();
+            $table->string('resultoptions','250')->nullable();
             $table->string('introduced','20')->nullable();
             $table->tinyInteger('count')->nullable();
             $table->timestamps();
