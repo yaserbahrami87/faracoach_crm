@@ -508,9 +508,11 @@ li:hover .description > p {
             </div>
             <div class="col-md-9 col-12">
                 <div class="col-12 text-center">
+                    <!--
                     <h4 class="mt-5">
                     قصد داریم این سالگرد رو با قدردانی از همراهی شما شیرین تر کنیم و با کلی هدیه بسیار ارزشمند جشن بگیریم.
                     </h4>
+                    -->
                     <h4> از 17 بهمن تا آخرین دقایق 24 بهمن فرصت داری تو این جشن  ثبت نام کنی.</h4>
                     <a href="#collapseExample"  class="btn btn-lg px-5 mt-4" id="ghoree"  data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample" >ثبت نام قرعه کشی فراکوچ</a>
 
