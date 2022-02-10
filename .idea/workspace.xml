@@ -29,9 +29,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/public/images/banner_jashn.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/jashn.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/jashn.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/landings/jashn_return.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/landings/jashn_return.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -219,19 +219,19 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\wamp64\www\faracoach_crm\storage\app\private" />
-      <recent name="C:\wamp64\www\faracoach_crm\storage\private" />
-      <recent name="C:\wamp64\www\faracoach_crm\storage\app\private\مدیر در نقش کوچ" />
-      <recent name="C:\wamp64\www\faracoach_crm\public\documents" />
-      <recent name="C:\wamp64\www\faracoach_crm\public\images" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\wamp64\www\faracoach_crm\public\images" />
       <recent name="C:\wamp64\www\faracoach_crm\public\fonts\other" />
       <recent name="C:\wamp64\www\faracoach_crm\resources\views" />
       <recent name="C:\wamp64\www\faracoach_crm\storage\app" />
       <recent name="C:\wamp64\www\faracoach_crm\storage\app\private" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\faracoach_crm\storage\app\private" />
+      <recent name="C:\wamp64\www\faracoach_crm\storage\private" />
+      <recent name="C:\wamp64\www\faracoach_crm\storage\app\private\مدیر در نقش کوچ" />
+      <recent name="C:\wamp64\www\faracoach_crm\public\documents" />
+      <recent name="C:\wamp64\www\faracoach_crm\public\images" />
     </key>
   </component>
   <component name="RunManager">
@@ -868,7 +868,7 @@
       <workItem from="1644311453623" duration="9730000" />
       <workItem from="1644389275976" duration="18623000" />
       <workItem from="1644478055181" duration="3280000" />
-      <workItem from="1644517698017" duration="568000" />
+      <workItem from="1644517698017" duration="1589000" />
     </task>
     <servers />
   </component>
