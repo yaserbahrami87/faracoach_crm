@@ -415,7 +415,7 @@
                 <div class="card-body text-center ">
                     <!-- <img src="" class="img-fluid" />-->
 
-                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <div id="carouselExampleIndicators1" class="carousel slide" data-ride="carousel">
 
                         <div class="carousel-inner">
                             @foreach($events as $item)
@@ -427,11 +427,11 @@
                             @endforeach
 
                         </div>
-                        <button class="carousel-control-prev" type="button" data-target="#carouselExampleIndicators" data-slide="prev">
+                        <button class="carousel-control-prev" type="button" data-target="#carouselExampleIndicators1" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="sr-only">Previous</span>
                         </button>
-                        <button class="carousel-control-next" type="button" data-target="#carouselExampleIndicators" data-slide="next">
+                        <button class="carousel-control-next" type="button" data-target="#carouselExampleIndicators1" data-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="sr-only">Next</span>
                         </button>
