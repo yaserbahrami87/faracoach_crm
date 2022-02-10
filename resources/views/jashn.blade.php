@@ -543,12 +543,12 @@ li:hover .description > p {
                     <h2 class="">
                         زمان قرعه‌کشی
                     </h2>
-                    <p class="mt-4">
+                    <h5 class="mt-4 mb-4">
                         26 بهمن ماه 1400 ساعت 11 از طریق پیج اینستاگرام فراکوچ
 
-                    <p style="font-weight: bolder">
+                    <h2 style="font-weight: bolder">
                         برای شرکت در قرعه کشی حضور در لایو الزامی می باشد
-                    </p>
+                    </h2>
                 </div>
 
             </div>
@@ -567,7 +567,7 @@ li:hover .description > p {
                         <input type="hidden" value="سالگرد" name="resource" />
                         <input type="hidden" value="{{$introduced}}" name="introduced" />
                         <input class="form-control" type="text" name="tel" placeholder="تلفن همراه" required/>
-                        <button class="btn px-5 mt-4"  type="submit">ثبت نام قرعه کشی فراکوچ</button>
+                        <button class="btn px-5 mt-4"  type="submit">ثبت نام قرعه کشی فراکوچ <small>(ورود مجدد)</small></button>
                     </form>
 
                 </div>

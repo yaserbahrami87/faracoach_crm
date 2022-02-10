@@ -181,7 +181,7 @@
             <div class="col-12  mb-4 ">
                 <div class="card mt-4 col-12 bg-success" >
                     <div class="card-body text-center">
-                        <h5>وضعیت</h5>
+                        <h5>وضعیت ثبت نام شما در این قرعه کشی :</h5>
                         <p class=" bg-light p-2 text-center" > تگ کردن 5 نفر از دوستان @if($user->resultoptions[0]==1)  <b class="text-success">تایید شد</b>   @else  <b class="text-danger">هنوز تایید نشد</b>  @endif </p>
                         <p class=" bg-light p-2 text-center" >استوری کردن 24 ساعته پست و منشن کردن پیج فراکوچ   تگ کردن 5 نفر از دوستان @if(isset($user->resultoptions[1])&&($user->resultoptions[1]==1))  <b class="text-success">تایید شد</b>   @else  <b class="text-danger">تایید نشد</b>  @endif </p>
                         <p class=" bg-light p-2 text-center" >تعداد {{$user->introducedUser->count()}}  نفر از طریق لینک شما در این جشن شرکت کردن</p>
