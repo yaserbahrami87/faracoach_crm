@@ -86,6 +86,7 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     Route::patch('/coach/{coach}/updateCoach','CoachController@updateCoach');
     Route::get('/coach/profile','CoachController@profile_coach');
     Route::get('/booking/report','CoachController@booking_report_byUser');
+
     Route::resource('coach','CoachController');
 
 
@@ -257,6 +258,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
 
     //coaches
     Route::get('/booking/{coach}/report','BookingController@coach_report');
+    Route::get('/booking/reportallcoach','BookingController@reportAllCoach');
     Route::get('/coach/reject','CoachController@coach_reject');
     Route::get('/coach/request','CoachController@coach_request');
     Route::resource('coach','CoachController');

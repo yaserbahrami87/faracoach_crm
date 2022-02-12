@@ -87,6 +87,7 @@
                             <li><a href="/admin/booking/"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">لیست جلسات</span></a></li>
                             <li><a href="/admin/booking/accept"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">جلسات رزرو شده</span></a></li>
                             <li><a href="/admin/reserve/waiting"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">رزروهای ناقص</span></a></li>
+                            <li><a href="/admin/booking/reportallcoach"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">گزارش</span></a></li>
                         </ul>
                     </li>
                     <li><a href=" nav-item has-sub "><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice Add">کوپن تخفیف</span></a>

@@ -719,4 +719,49 @@ class BookingController extends BaseController
         }
     }
 
+    public function reportAllCoach(Request $request)
+    {
+        if($request->start_date)
+        {
+                $this->validate($request,[
+                    'start_date'    =>'required|string',
+                ]);
+                $request['start_date']=explode(' ~ ',$request['start_date']);
+                $startDate=$request['start_date'][0];
+                $endDate=$request['start_date'][1];
+        }
+        else
+        {
+            $startDate=verta()->startMonth()->format('Y/m/d');
+            $endDate=verta()->format('Y/m/d');
+            //$request['start_date']=[$startDate,$endDate];
+
+        }
+
+
+
+
+
+
+        $reserveBooking=booking::where('status',0)
+                            ->wherebetween('start_date',[$startDate,$endDate])
+                            ->orderby('start_date','desc')
+                            ->get();
+
+        $successBooking=booking::where('status',3)
+                            ->wherebetween('start_date',[$startDate,$endDate])
+                            ->orderby('start_date','desc')
+                            ->get();
+
+        $cancelBooking=booking::where('status',4)
+                        ->wherebetween('start_date',[$startDate,$endDate])
+                        ->orderby('start_date','desc')
+                        ->get();
+
+        return view('admin.booking.reportAllCoach')
+                        ->with('reserveBooking',$reserveBooking)
+                        ->with('successBooking',$successBooking)
+                        ->with('cancelBooking',$cancelBooking);
+    }
+
 }

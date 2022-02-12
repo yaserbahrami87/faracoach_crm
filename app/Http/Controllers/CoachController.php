@@ -652,4 +652,7 @@ class CoachController extends BaseController
             ->with('typeCoaches',$typeCoaches)
             ->with('coach',$coach);
     }
+
+
+
 }
