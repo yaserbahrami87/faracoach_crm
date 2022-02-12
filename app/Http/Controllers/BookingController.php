@@ -561,7 +561,9 @@ class BookingController extends BaseController
         }
         else
         {
-            $request['start_date']=[$this->dateNow,$this->dateNow];
+            $startDate=verta()->startMonth()->format('Y/m/d');
+            $endDate=verta()->format('Y/m/d');
+            $request['start_date']=[$startDate,$endDate];
 
         }
 
@@ -719,6 +721,8 @@ class BookingController extends BaseController
         }
     }
 
+
+    //نمایش کامل لیست جلسات برای ادمین در ماه جاری
     public function reportAllCoach(Request $request)
     {
         if($request->start_date)
@@ -734,13 +738,8 @@ class BookingController extends BaseController
         {
             $startDate=verta()->startMonth()->format('Y/m/d');
             $endDate=verta()->format('Y/m/d');
-            //$request['start_date']=[$startDate,$endDate];
 
         }
-
-
-
-
 
 
         $reserveBooking=booking::where('status',0)

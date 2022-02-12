@@ -73,7 +73,12 @@
                     @foreach($successBooking as $item)
                         <tr>
                             <th>{{$loop->iteration}}</th>
-                            <td>{{$item->coach->user->fname.' '.$item->coach->user->lname}}</td>
+                            <td>
+                                <a href="/admin/booking/{{$item->coach->user->id}}/report" target="_blank">
+                                    <img src="{{asset('/documents/users/'.$item->coach->user->personal_image)}}" width="50px" height="50px" class="rounded-circle" />
+                                    {{$item->coach->user->fname.' '.$item->coach->user->lname}}
+                                </a>
+                            </td>
                             <td>{{$item->start_date}}</td>
                             <td>{{$item->start_time}}</td>
                             <td dir="ltr">
