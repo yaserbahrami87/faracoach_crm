@@ -243,4 +243,29 @@ class LandPageController extends BaseController
             return back();
         }
     }
+
+    public function update_jashn(Request $request,landPage $landPage)
+    {
+        $this->validate($request,[
+           'fname'  =>'required|string|min:3',
+           'lname'  =>'required|string|min:3',
+           'email'  =>'required|email',
+
+        ]);
+
+        $status=$landPage->update($request->all());
+        if($status)
+        {
+            alert()->success('اطلاعات تکمیلی با موفقیت بروزرسانی شد')->persistent('بستن');
+        }
+        else
+        {
+            alert('خطا در بروزرسانی اطلاعات تکمیلی')->persistent('بستن');
+        }
+
+        return view('landings.jashn_return')
+                        ->with('user',$landPage);
+
+    }
+
 }

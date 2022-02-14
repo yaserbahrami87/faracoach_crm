@@ -172,6 +172,35 @@
             </div>
 
         </div>
+        <div class="col-md-6 offset-md-3 col-12 mt-5 border border-2 border-success rounded">
+            <fieldset>
+                <legend class="text-center mb-3 mt-2">اطلاعات تکمیلی</legend>
+                <form method="post" action="/jashn/{{$user->id}}/update">
+                    {{csrf_field()}}
+                    {{method_field('PATCH')}}
+                    <div class="row">
+                        <div class="form-group col-12 col-md-6">
+                            <label for="fname">نام:</label>
+                            <input type="text" class="form-control" id="fname" name="fname" value="{{$user->fname}}" required />
+                        </div>
+                        <div class="form-group col-12 col-md-6">
+                            <label for="lname">نام خانوادگی:</label>
+                            <input type="text" class="form-control" id="lname" name="lname" value="{{$user->lname}}" required  />
+                        </div>
+                        <div class="form-group">
+                            <label for="email">پست الکترونیکی:</label>
+                            <input type="email" class="form-control" id="email" name="email" value="{{$user->email}}" required />
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">بروزرسانی</button>
+                        </div>
+
+
+
+                    </div>
+                </form>
+            </fieldset>
+        </div>
         <div class=" col-md-6 offset-md-3 col-12 text-center mt-5 ">
             <!--
             <span >تعداد بازدید از طریق لینک تو  </span>
@@ -190,6 +219,7 @@
             </div>
 
         </div>
+
 
     </article>
 @endsection

@@ -359,6 +359,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::get('/jashn/user/options/{landPage}','LandPageController@optionsUser');
     Route::patch('/jashn/user/options/{landPage}/update','LandPageController@optionsUserUpdate');
 
+
 });
 
 
@@ -492,6 +493,7 @@ Route::get('/ravanshenasi',function()
 
 //Route::get('/integrity','LandPageController@create');
 Route::get('/jashn','LandPageController@create');
+Route::patch('/jashn/{landPage}/update','LandPageController@update_jashn');
 
 
 
