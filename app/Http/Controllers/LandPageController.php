@@ -230,6 +230,7 @@ class LandPageController extends BaseController
 
         $fileName=rand();
         Artisan::call('cache:clear');
+        dd($fileName);
         $excel=fastexcel($landPage)->export($fileName.'.xlsx');
         if($excel)
         {
