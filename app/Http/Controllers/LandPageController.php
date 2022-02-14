@@ -247,9 +247,13 @@ class LandPageController extends BaseController
     public function update_jashn(Request $request,landPage $landPage)
     {
         $this->validate($request,[
-           'fname'  =>'required|string|min:3',
-           'lname'  =>'required|string|min:3',
-           'email'  =>'required|email',
+           'fname'                  =>'required|string|min:3',
+           'lname'                  =>'required|string|min:3',
+           'email'                  =>'required|email',
+           'instagram'              =>'required|string',
+           'introductioncoaching'   =>'required|string',
+           'attendingcoaching'      =>'required|string',
+           'coachingservices'       =>'required|string',
 
         ]);
 

@@ -187,9 +187,80 @@
                             <label for="lname">نام خانوادگی:</label>
                             <input type="text" class="form-control" id="lname" name="lname" value="{{$user->lname}}" required  />
                         </div>
-                        <div class="form-group">
+                        <div class="form-group col-12 col-md-6">
                             <label for="email">پست الکترونیکی:</label>
                             <input type="email" class="form-control" id="email" name="email" value="{{$user->email}}" required />
+                        </div>
+                        <div class="form-group col-12 col-md-6">
+                            <label for="instagram">صفحه اینستاگرام:</label>
+                            <input type="text" class="form-control" id="instagram" name="instagram" value="{{$user->instagram}}" required />
+                        </div>
+                        <div class="form-group col-12 col-md-6">
+                            <label for="instagram">با کوچینگ چقدر آشنایی دارید:</label>
+                            <div class="form-check">
+                                <label class="form-check-label" for="exampleRadios1">
+                                    آشنایی ندارم
+                                </label>
+                                <input class="form-check-input" type="radio" name="introductioncoaching" id="exampleRadios1" value="آشنایی ندارم" required  @if($user->introductioncoaching=='آشنایی ندارم') checked  @endif  />
+                            </div>
+                            <div class="form-check">
+
+                                <label class="form-check-label" for="exampleRadios2">
+                                    اطلاعات مختصری دارم
+                                </label>
+                                <input class="form-check-input" type="radio" name="introductioncoaching" id="exampleRadios2" value="اطلاعات مختصری دارم" required   @if($user->introductioncoaching=='اطلاعات مختصری دارم') checked  @endif  />
+                            </div>
+                            <div class="form-check">
+
+                                <label class="form-check-label" for="exampleRadios3">
+                                    اطلاعات کامل دارم
+                                </label>
+                                <input class="form-check-input" type="radio" name="introductioncoaching" id="exampleRadios3" value="اطلاعات کامل دارم" required  @if($user->introductioncoaching=='اطلاعات کامل دارم') checked  @endif />
+                            </div>
+
+                        </div>
+                        <div class="form-group col-12 col-md-6">
+                            <label for="instagram">آیا تمایل به حضور در دوره های کوچینگ دارید:</label>
+                            <div class="form-check">
+                                <label class="form-check-label" for="attendingcoaching1">
+                                    بلی
+                                </label>
+                                <input class="form-check-input" type="radio" name="attendingcoaching" id="attendingcoaching1" value="بلی" required @if($user->attendingcoaching=='بلی') checked  @endif  />
+                            </div>
+                            <div class="form-check">
+
+                                <label class="form-check-label" for="attendingcoaching2">
+                                    خیر
+                                </label>
+                                <input class="form-check-input" type="radio" name="attendingcoaching" id="attendingcoaching2" value="خیر" required  @if($user->attendingcoaching=='خیر') checked  @endif />
+                            </div>
+
+
+                        </div>
+                        <div class="form-group col-12 col-md-6">
+                            <label for="instagram">آیا تمایل به استفاده از خدمات کوچینگ دارید:</label>
+                            <div class="form-check">
+                                <label class="form-check-label" for="coachingservices1">
+                                    جلسه کوچینگ
+                                </label>
+                                <input class="form-check-input" type="radio" name="coachingservices" id="coachingservices1" value="جلسه کوچینگ" required  @if($user->coachingservices=='جلسه کوچینگ') checked  @endif />
+                            </div>
+                            <div class="form-check">
+
+                                <label class="form-check-label" for="coachingservices2">
+                                    لایف کوچینگ
+                                </label>
+                                <input class="form-check-input" type="radio" name="coachingservices" id="coachingservices2" value="لایف کوچینگ" required @if($user->coachingservices=='لایف کوچینگ') checked  @endif />
+                            </div>
+                            <div class="form-check">
+
+                                <label class="form-check-label" for="coachingservices3">
+                                    بیزنس کوچینگ
+                                </label>
+                                <input class="form-check-input" type="radio" name="coachingservices" id="coachingservices3" value="بیزنس کوچینگ" required @if($user->coachingservices=='بیزنس کوچینگ') checked  @endif  />
+                            </div>
+
+
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">بروزرسانی</button>

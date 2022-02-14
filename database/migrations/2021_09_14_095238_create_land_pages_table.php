@@ -22,6 +22,10 @@ class CreateLandPagesTable extends Migration
             $table->string('tel','21')->nullable();
             $table->string('resource','100')->nullable();
             $table->string('options','250')->nullable();
+            $table->string('instagram','250')->nullable();
+            $table->string('introductioncoaching','100')->nullable();
+            $table->string('attendingcoaching','100')->nullable();
+            $table->string('coachingservices','100')->nullable();
             $table->string('resultoptions','250')->nullable();
             $table->string('introduced','20')->nullable();
             $table->tinyInteger('count')->nullable();
