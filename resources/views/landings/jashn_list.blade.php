@@ -23,6 +23,7 @@
                     <th class="text-center">معرف</th>
                     <th class="text-center">تعداد معرفی شده</th>
                     <th class="text-center">تعداد منشن های پیشنهادی</th>
+                    <th class="text-center">وضعیت نهایی</th>
                 </tr>
                 </thead>
             <tbody>
@@ -51,6 +52,13 @@
                     </td>
                     <td class="text-center">
                         {{$item->mention}}
+                    </td>
+                    <td class="text-center">
+                        @if($item->resultoptions=='1,1')
+                            <i class="bi bi-check-square-fill"></i>
+                        @else
+                            <i class="bi bi-x-square-fill"></i>
+                        @endif
                     </td>
                 </tr>
             @endforeach
