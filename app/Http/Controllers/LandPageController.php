@@ -227,8 +227,9 @@ class LandPageController extends BaseController
         $landPage=landPage::where('resource','=','سالگرد')
                     ->orderby('id')
                     ->get();
-        Artisan::call('cache:clear');
+
         $fileName=time();
+        Artisan::call('cache:clear');
         $excel=fastexcel($landPage)->export($fileName.'.xlsx');
         if($excel)
         {
