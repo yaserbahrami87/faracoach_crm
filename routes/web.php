@@ -355,8 +355,10 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
 
     //Landing
     Route::get('/jashn/list','LandPageController@index');
+    Route::get('/jashn/list/exportexcel','LandPageController@exportExcel');
     Route::get('/jashn/user/options/{landPage}','LandPageController@optionsUser');
     Route::patch('/jashn/user/options/{landPage}/update','LandPageController@optionsUserUpdate');
+
 });
 
 

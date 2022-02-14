@@ -5,6 +5,9 @@
 @endsection
 
 @section('content')
+    <div class="col-12">
+        <a href="/admin/jashn/list/exportexcel" class="btn btn-primary">خروجی اکسل</a>
+    </div>
     <div class="col-12 table-responsive overflow-auto">
         <p >تعداد کل ثبت نام
             <b class="font-weight-bold">{{$count}}</b>

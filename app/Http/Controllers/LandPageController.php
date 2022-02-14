@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\landPage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 
 class LandPageController extends BaseController
 {
@@ -219,5 +220,26 @@ class LandPageController extends BaseController
 
         return back();
 
+    }
+
+    public function exportExcel()
+    {
+        $landPage=landPage::where('resource','=','سالگرد')
+                    ->orderby('id')
+                    ->get();
+        Artisan::call('cache:clear');
+        $fileName=time();
+        $excel=fastexcel($landPage)->export($fileName.'.xlsx');
+        if($excel)
+        {
+
+            return response()->download(public_path($fileName.'.xlsx'))
+                ->deleteFileAfterSend(true);
+
+        }
+        else
+        {
+            return back();
+        }
     }
 }

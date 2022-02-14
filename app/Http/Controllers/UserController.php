@@ -2212,7 +2212,12 @@ class UserController extends BaseController
 
     public function userAjax(Request $request)
     {
-        dd($request->tel);
+        $this->validate($request,[
+            'user'   =>'required|min:3|string',
+        ]);
+        $user=User::where('tel','like','%'.$request->user.'%')
+                    ->get();
+        return $user;
     }
 
 }
