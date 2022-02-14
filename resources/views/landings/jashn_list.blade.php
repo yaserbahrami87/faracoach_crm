@@ -55,9 +55,9 @@
                     </td>
                     <td class="text-center">
                         @if($item->resultoptions=='1,1')
-                            <i class="bi bi-check-square-fill"></i>
+                            <i class="bi bi-check-square-fill text-success"></i>
                         @else
-                            <i class="bi bi-x-square-fill"></i>
+                            <i class="bi bi-x-square-fill text-danger"></i>
                         @endif
                     </td>
                 </tr>
