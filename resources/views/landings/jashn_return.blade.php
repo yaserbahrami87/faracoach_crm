@@ -241,17 +241,9 @@
                                     </label>
                                     <input class="form-check-input" type="radio" name="attendingcoaching" id="attendingcoaching2" value="خیر" required  @if($user->attendingcoaching=='خیر') checked  @endif />
                                 </div>
-
-
                             </div>
                             <div class="form-group col-12 col-md-6">
                                 <label for="instagram">آیا تمایل به استفاده از خدمات کوچینگ دارم:</label>
-                                <div class="form-check">
-                                    <label class="form-check-label" for="coachingservices1">
-                                        جلسه کوچینگ
-                                    </label>
-                                    <input class="form-check-input" type="radio" name="coachingservices" id="coachingservices1" value="جلسه کوچینگ" required  @if($user->coachingservices=='جلسه کوچینگ') checked  @endif />
-                                </div>
                                 <div class="form-check">
 
                                     <label class="form-check-label" for="coachingservices2">
