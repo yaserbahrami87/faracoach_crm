@@ -22,6 +22,7 @@
                     <th class="text-center">تاریخ ثبت نام</th>
                     <th class="text-center">معرف</th>
                     <th class="text-center">تعداد معرفی شده</th>
+                    <th class="text-center">تعداد منشن های پیشنهادی</th>
                 </tr>
                 </thead>
             <tbody>
@@ -47,6 +48,9 @@
                     </td>
                     <td class="text-center">
                         {{$item->introducedUser->count()}}
+                    </td>
+                    <td class="text-center">
+                        {{$item->mention}}
                     </td>
                 </tr>
             @endforeach

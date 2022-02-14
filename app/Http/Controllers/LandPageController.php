@@ -210,6 +210,11 @@ class LandPageController extends BaseController
         $status=$landPage->save();
         if($status)
         {
+            $landPage->resultoptions=explode(',',$landPage->resultoptions);
+            if($landPage->resultoptions[0]==1 &&$landPage->resultoptions[1]==1)
+            {
+                $this->sendSms($landPage->tel,'شرایط شما برای شرکت در قرعه کشی فراکوچ توسط روابط عمومی تایید شد');
+            }
             alert()->success('بروزرسانی شد')->persistent('بستن');
 
         }
@@ -254,6 +259,7 @@ class LandPageController extends BaseController
            'introductioncoaching'   =>'required|string',
            'attendingcoaching'      =>'required|string',
            'coachingservices'       =>'required|string',
+           'mention'                =>'required|numeric',
 
         ]);
 

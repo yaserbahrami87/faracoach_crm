@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class landPage extends Model
 {
     protected $fillable=[
-        'user_id','fname','lname','email','tel','resource','options','instagram','introductioncoaching','attendingcoaching','coachingservices','resultoptions','introduced','count'
+        'user_id','fname','lname','email','tel','resource','options','instagram','introductioncoaching','attendingcoaching','coachingservices','mention','resultoptions','introduced','count'
     ];
 
 
