@@ -243,7 +243,7 @@
                                 </div>
                             </div>
                             <div class="form-group col-12 col-md-6">
-                                <label for="instagram">آیا تمایل به استفاده از خدمات کوچینگ دارم:</label>
+                                <label for="instagram"> تمایل به استفاده از کدام خدمات کوچینگ دارید:</label>
                                 <div class="form-check">
 
                                     <label class="form-check-label" for="coachingservices2">
