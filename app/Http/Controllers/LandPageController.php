@@ -172,6 +172,7 @@ class LandPageController extends BaseController
             $msg=$landPage->fname.' '.$landPage->lname." عزیز \n"."درخواست شما ثبت شد\n پس از تایید اقدامات در لیست نهایی قرار می گیرید";
 
 
+
             $this->sendSms($landPage->tel,$msg);
             alert()->success($msg)->persistent("بستن");
         }
@@ -264,8 +265,14 @@ class LandPageController extends BaseController
         ]);
 
         $status=$landPage->update($request->all());
+
         if($status)
         {
+            $landPage->resultoptions='1,1';
+            $landPage->save();
+            $msg=$landPage->fname." ".$landPage->lname."\n ثبت نام قطعی شد"."\n قرعه کشی سه شنبه 11 ظهر"."\n پیج فراکوچ";
+            $this->sendSms($landPage->tel,$msg);
+            $landPage->resultoptions=explode(',',$landPage->resultoptions);
             alert()->success('اطلاعات تکمیلی با موفقیت بروزرسانی شد')->persistent('بستن');
         }
         else
