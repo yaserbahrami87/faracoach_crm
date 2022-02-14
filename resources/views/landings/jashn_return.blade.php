@@ -227,7 +227,7 @@
 
                             </div>
                             <div class="form-group col-12 col-md-6">
-                                <label for="instagram">آیا تمایل به حضور در دوره های کوچینگ دارید:</label>
+                                <label for="instagram">آیا تمایل به حضور در دوره های آموزش کوچینگ دارید:</label>
                                 <div class="form-check">
                                     <label class="form-check-label" for="attendingcoaching1">
                                         بلی
@@ -245,7 +245,7 @@
 
                             </div>
                             <div class="form-group col-12 col-md-6">
-                                <label for="instagram">آیا تمایل به استفاده از خدمات کوچینگ دارید:</label>
+                                <label for="instagram">آیا تمایل به استفاده از خدمات کوچینگ دارم:</label>
                                 <div class="form-check">
                                     <label class="form-check-label" for="coachingservices1">
                                         جلسه کوچینگ
@@ -292,7 +292,7 @@
                         <h5>وضعیت ثبت نام شما در این قرعه کشی :</h5>
                         <small class="text-light mb-3 mt-3 ">این بخش توسط روابط عمومی تایید خواهد شد</small>
                         <p class=" bg-light p-2 text-center" > تگ کردن 5 نفر از دوستان @if($user->resultoptions[0]==1)  <b class="text-success">تایید شده</b>   @else  <b class="text-danger">هنوز تایید نشده</b>  @endif است </p>
-                        <p class=" bg-light p-2 text-center" >استوری کردن 24 ساعته پست و منشن کردن پیج فراکوچ   تگ کردن 5 نفر از دوستان @if(isset($user->resultoptions[1])&&($user->resultoptions[1]==1))  <b class="text-success">تایید شده</b>   @else  <b class="text-danger">تایید نشده</b>  @endif است </p>
+                        <p class=" bg-light p-2 text-center" >استوری کردن 24 ساعته پست و منشن کردن پیج فراکوچ @if(isset($user->resultoptions[1])&&($user->resultoptions[1]==1))  <b class="text-success">تایید شده</b>   @else  <b class="text-danger">تایید نشده</b>  @endif است </p>
                         <p class=" bg-light p-2 text-center" >تعداد {{$user->introducedUser->count()}}  نفر از طریق لینک شما در این جشن شرکت کردن</p>
                     </div>
                 </div>
