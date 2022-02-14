@@ -224,6 +224,7 @@ class LandPageController extends BaseController
 
     public function exportExcel()
     {
+        Artisan::call('cache:clear');
         $landPage=landPage::where('resource','=','سالگرد')
                     ->orderby('id')
                     ->get();
