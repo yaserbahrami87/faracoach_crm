@@ -178,8 +178,8 @@
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <a href="{{asset('/jashn')}}" target="_blank">
-                            <img src="{{asset('/images/banner_jashn.png')}}" class="d-block w-100" alt="...">
+                        <a href="#" >
+                            <img src="{{asset('/images/whatiscoaching.jpg')}}" class="d-block w-100" alt="...">
                         </a>
                     </div>
                 </div>

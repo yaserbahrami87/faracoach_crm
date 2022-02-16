@@ -492,8 +492,8 @@ Route::get('/ravanshenasi',function()
 });
 
 //Route::get('/integrity','LandPageController@create');
-Route::get('/jashn','LandPageController@create');
-Route::patch('/jashn/{landPage}/update','LandPageController@update_jashn');
+//Route::get('/jashn','LandPageController@create');
+//Route::patch('/jashn/{landPage}/update','LandPageController@update_jashn');
 
 
 
