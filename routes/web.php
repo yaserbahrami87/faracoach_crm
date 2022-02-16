@@ -230,7 +230,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     });
 
     //Automatic Answer SMS and change type user
-    Route::get('/answerline/answer','AnswerlineController@answerLine');
+    Route::get('/api/kavenegar/answer','AnswerlineController@answerLine');
 
     //Route Messages
 //    Route::get('/messages/','MessageController@index');
