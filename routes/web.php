@@ -229,8 +229,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
         Route::resource('answerline','AnswerlineController');
     });
 
-    //Automatic Answer SMS and change type user
-    Route::get('/api/kavenegar/answer','AnswerlineController@answerLine');
+
 
     //Route Messages
 //    Route::get('/messages/','MessageController@index');
@@ -486,6 +485,9 @@ Route::get('/courses/{course}','CourseController@show');
 
 //LiKE
 Route::resource('like','LikeController');
+
+//Automatic Answer SMS and change type user
+Route::get('/api/kavenegar/answer','AnswerlineController@answerLine');
 
 
 //RAVANSHENASI
