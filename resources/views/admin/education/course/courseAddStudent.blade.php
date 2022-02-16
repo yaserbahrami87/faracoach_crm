@@ -1,20 +1,19 @@
 @extends('admin.master.index')
 
 @section('headerScript')
-    <script src="{{asset('/panel_assets/intl_tel/js/intlTelInput.js')}}"></script>
-    <script src="{{asset('/panel_assets/intl_tel/js/utils.js')}}"></script>
+    <link href="{{asset('/css/kamadatepicker.min.css')}}" rel="stylesheet" />
 @endsection
 @section('content')
     <div class="col-6">
         <form>
             <div class="form-group">
                 <label for="user">جستجو کاربر:</label>
-                <input id="user" type="text" class="form-control @error('user') is-invalid @enderror"  value="{{ old('user') }}" required />
+                <input id="user" type="text" class="form-control @error('user') is-invalid @enderror"  value="{{ old('user') }}" autocomplete="off"   />
             </div>
             <div id="show"></div>
             <div class="form-group">
-                <label for="tel">تاریخ ثبت نام:</label>
-                <input type="text" class="form-control" id="tel" />
+                <label for="date">تاریخ ثبت نام:</label>
+                <input type="text" class="form-control" id="date" autocomplete="off"  />
             </div>
             <div class="form-group">
                 <label for="date_fa">مبلغ واریزی:</label>
@@ -29,6 +28,16 @@
                     <option>4</option>
                     <option>5</option>
                 </select>
+
+                <label for="exampleDataList" class="form-label">Datalist example</label>
+                <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
+                <datalist id="datalistOptions">
+                    <option value="San Francisco">
+                    <option value="New York">
+                    <option value="Seattle">
+                    <option value="Los Angeles">
+                    <option value="Chicago">
+                </datalist>
             </div>
 
 
@@ -38,7 +47,22 @@
 @endsection
 
 @section('footerScript')
+    <!--  DATE SHAMSI PICKER  --->
+    <script src="{{asset('js/kamadatepicker.min.js')}}"></script>
+    <script src="{{asset('js/kamadatepicker.holidays.js')}}"></script>
+
     <script>
+        kamaDatepicker('date',
+            {
+                markHolidays:true,
+                markToday:true,
+                twodigit:true,
+                closeAfterSelect:true,
+                nextButtonIcon: "fa fa-arrow-circle-right",
+                previousButtonIcon: "fa fa-arrow-circle-left"
+            });
+
+
 
         $('#user').change(function()
         {
@@ -65,20 +89,18 @@
 
                         for (i=0;i<data.length;i++)
                         {
-                            users="<table class='table table-striped'>";
+                            users="<label for=\"exampleFormControlSelect1\">دانشجو را انتخاب کنید</label>" +
+                                "<select class=\"form-control\" id=\"exampleFormControlSelect1\">";
                             $.each( data, function( key, value ) {
-                                users += '<tr>' +
-                                    '           <td>' +
-                                    '                   <img src="/documents/users/'+ value.personal_image + '" width=50px height="50px" class="rounded-circle" />' +
-                                    '           </td>' +
-                                    '           <td>'+ value.fname + '</td>' +
-                                    '           <td>'+ value.lname + '</td>' +
-                                    '           <td>' +
-                                    '               <button type="button" class="btn btn-primary students" data="'+value+'" >انتخاب</button>' +
-                                    '           </td>' +
-                                    '</tr>';
+                                // var item="{'fname':'"+value.fname+"', 'lname':'"+value.lname+"', 'id':'"+value.id+"'}";
+                                var item=JSON.stringify('{"name":"John", "age":30, "city":"New York"}');
+
+                                users += ''+
+                                    '<option value="'+value.id+'">'+
+                                        value.fname+' '+value.lname+' '+value.tel+
+                                    '</option>';
                             });
-                            users=users+"</table>"
+                            users=users+"</select>"
                         }
                         $('#show').html(users);
                     }
@@ -99,9 +121,15 @@
             })
         });
 
-        function detailsStudent(student)
+        // $('body').on('click','.students',function(){
+
+        function getStudent(data)
         {
-            alert(student);
-        }
+
+
+            console.log(data);
+            console.log(JSON.parse(data));
+        };
+
     </script>
 @endsection

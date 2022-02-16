@@ -225,9 +225,12 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
         Route::resource('user_type','UserTypeController');
 
         //Answer Line
-        Route::get('/answerline/answer','AnswerlineController@answerLine');
+
         Route::resource('answerline','AnswerlineController');
     });
+
+    //Automatic Answer SMS and change type user
+    Route::get('/answerline/answer','AnswerlineController@answerLine');
 
     //Route Messages
 //    Route::get('/messages/','MessageController@index');
