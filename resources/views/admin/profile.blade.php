@@ -76,6 +76,13 @@
                                             @endif
                                         </form>
 
+                                        <form method="get" action="/admin/user/{{$user->id}}/login" onsubmit="return window.confirm('آیا میخواهید با اکانت کاربر وارد سایت شوید؟')">
+                                            {{csrf_field()}}
+                                            <div class="input-group mb-1 mt-1 border-bottom border-1 pb-1 ">
+                                                <input type="submit"  class="btn btn-primary" value="ورود با اکانت کاربر"  />
+                                            </div>
+                                        </form>
+
                                         <form method="post" action="/admin/user/{{$user->id}}/changeType">
                                             {{csrf_field()}}
                                             {{method_field('PATCH')}}

@@ -2222,4 +2222,22 @@ class UserController extends BaseController
         return $user;
     }
 
+
+    //لاگین کاربر از طریق ادمین
+    public function loginWithUser(User $user)
+    {
+        $status=Auth::loginUsingId($user->id);
+        if($status)
+        {
+            alert()->warning('شما با اکانت '.$user->fname.' '.$user->lname.' وارد سایت شدید. ')->persistent('بستن');
+            return redirect('/panel');
+        }
+        else
+        {
+            alert()->error('خطا در ورود به سایت')->persistent('بستن');
+            return back();
+        }
+
+    }
+
 }
