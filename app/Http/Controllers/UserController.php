@@ -2215,7 +2215,9 @@ class UserController extends BaseController
         $this->validate($request,[
             'user'   =>'required|min:3|string',
         ]);
-        $user=User::where('tel','like','%'.$request->user.'%')
+        $user=User::orwhere('tel','like','%'.$request->user.'%')
+                    ->orwhere('fname','like','%'.$request->user.'%')
+                    ->orwhere('lname','like','%'.$request->user.'%')
                     ->get();
         return $user;
     }

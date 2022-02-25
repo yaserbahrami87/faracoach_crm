@@ -149,6 +149,13 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     Route::post('/order','OrderController@store');
     Route::post('/order/aghsat','OrderController@storeAghsat');
 
+    //checkout
+    Route::get('/financial/transaction','CheckoutController@transactionsUser');
+    Route::post('/faktor/checkout/pardakhtaghsat','CheckoutController@storeAghsat');
+
+    //faktors
+    Route::resource('faktor','FaktorController');
+
 
 
 });

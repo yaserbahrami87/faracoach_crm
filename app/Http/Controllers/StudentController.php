@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\student;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -49,7 +50,31 @@ class StudentController extends BaseController
      */
     public function store(Request $request)
     {
-        //
+
+        $this->validate($request,[
+            'course_id' =>'required|numeric',
+            'user_id'   =>'required|numeric',
+            'date_fa'   =>'nullable|string',
+            'status'    =>'required|numeric',
+        ]);
+        $student=student::where('user_id','=',$request->user_id)
+                        ->where('course_id','=',$request->course_id)
+                        ->first();
+
+        if(is_null($student)) {
+            $status = student::create($request->all());
+            if ($status) {
+                alert()->success('کاربر مورد نظر به لیست دانشجوها اضافه شد')->persistent('بستن');
+            } else {
+                alert()->error('خطا در اضافه کردن دانشجو')->persistent('بستن');
+            }
+        }
+        else
+        {
+            alert()->error('کاربر در لیست دانشجوهای دوره وجود دارد')->persistent('بستن');
+        }
+
+        return redirect('/admin/courses');
     }
 
     /**

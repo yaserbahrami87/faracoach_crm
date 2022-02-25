@@ -67,29 +67,30 @@ class OrderController extends BaseController
             foreach ($cart as $item)
             {
                 $status = order::create([
-                    'user_id' => Auth::user()->id,
-                    'product_id' => $item->product_id,
-                    'capacity' => $item->capacity,
-                    'fi' => $item->fi,
-                    'off' => $item->off,
-                    'coupon' => $item->free,
-                    'final_off' => $item->final_off,
-                    'type' => $item->type,
-                    'payment_type' => $request->payment_type,
-                    'date_fa' => $this->dateNow,
-                    'time_fa' => $this->timeNow,
-                    'description' => 'انتقال به درگاه',
-                    'authority' => $res,
+                    'user_id'       => Auth::user()->id,
+                    'product_id'    => $item->product_id,
+                    'capacity'      => $item->capacity,
+                    'fi'            => $item->fi,
+                    'off'           => $item->off,
+                    'coupon'        => $item->free,
+                    'final_off'     => $item->final_off,
+                    'type'          => $item->type,
+                    'payment_type'  => $request->payment_type,
+                    'date_fa'       => $this->dateNow,
+                    'time_fa'       => $this->timeNow,
+                    'description'   => 'انتقال به درگاه',
+                    'authority'     => $res,
                 ]);
 
                 if($status) {
                     $status = checkout::create([
-                        'user_id' => Auth::user()->id,
-                        'product_id' => $item->product_id,
-                        'price' => $sum_final_off,
-                        'type' => $item->type,
-                        'authority' => $res,
-                        'description' => 'انتقال به درگاه',
+                        'user_id'       => Auth::user()->id,
+                        'product_id'    => $item->product_id,
+                        'order_id'      => $status->id,
+                        'price'         => $sum_final_off,
+                        'type'          => $item->type,
+                        'authority'     => $res,
+                        'description'   => 'انتقال به درگاه',
                     ]);
                 } else {
                     alert()->error('خطا')->persistent('بستن');
@@ -160,6 +161,7 @@ class OrderController extends BaseController
 
 
         }
+
 
 
     }
@@ -251,12 +253,13 @@ class OrderController extends BaseController
             if($res)
             {
                 $status = checkout::create([
-                    'user_id' => Auth::user()->id,
-                    'product_id' => $request->product_id,
-                    'price' => $request->prepaymant,
-                    'type' => $request->type,
-                    'authority' => $res,
-                    'description' => 'انتقال به درگاه',
+                    'user_id'       => Auth::user()->id,
+                    'order_id'      =>$status->id,
+                    'product_id'    => $request->product_id,
+                    'price'         => $request->prepaymant,
+                    'type'          => $request->type,
+                    'authority'     => $res,
+                    'description'   => 'انتقال به درگاه',
                 ]);
 
                 if ($status) {
@@ -272,4 +275,6 @@ class OrderController extends BaseController
             }
         }
     }
+
+
 }

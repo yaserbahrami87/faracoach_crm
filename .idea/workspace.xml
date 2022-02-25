@@ -29,8 +29,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/views/user/financial/listFaktors.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/user/financial/transactions.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CheckoutController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CheckoutController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CourseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CourseController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/StudentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/StudentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/checkout.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/checkout.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_08_25_114119_create_checkouts_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_08_25_114119_create_checkouts_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/courseStudents.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/education/course/courseStudents.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/education/course/courseAddStudent.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/education/course/courseAddStudent.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/master/right_menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/master/right_menu.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/resetPasswordbySMS.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/resetPasswordbySMS.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/master/right_menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/master/right_menu.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -218,19 +237,19 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\faracoach_crm\resources\views\admin\education\course" />
+      <recent name="C:\wamp64\www\faracoach_crm\storage\app\private" />
+      <recent name="C:\wamp64\www\faracoach_crm\storage\private" />
+      <recent name="C:\wamp64\www\faracoach_crm\storage\app\private\مدیر در نقش کوچ" />
+      <recent name="C:\wamp64\www\faracoach_crm\public\documents" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\wamp64\www\faracoach_crm\public\images" />
       <recent name="C:\wamp64\www\faracoach_crm\public\fonts\other" />
       <recent name="C:\wamp64\www\faracoach_crm\resources\views" />
       <recent name="C:\wamp64\www\faracoach_crm\storage\app" />
       <recent name="C:\wamp64\www\faracoach_crm\storage\app\private" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\wamp64\www\faracoach_crm\storage\app\private" />
-      <recent name="C:\wamp64\www\faracoach_crm\storage\private" />
-      <recent name="C:\wamp64\www\faracoach_crm\storage\app\private\مدیر در نقش کوچ" />
-      <recent name="C:\wamp64\www\faracoach_crm\public\documents" />
-      <recent name="C:\wamp64\www\faracoach_crm\public\images" />
     </key>
   </component>
   <component name="RunManager">
@@ -880,7 +899,13 @@
       <workItem from="1644957800334" duration="2650000" />
       <workItem from="1644995371956" duration="7166000" />
       <workItem from="1645008439656" duration="6056000" />
-      <workItem from="1645039408079" duration="2526000" />
+      <workItem from="1645039408079" duration="3256000" />
+      <workItem from="1645082172519" duration="4931000" />
+      <workItem from="1645184454708" duration="10860000" />
+      <workItem from="1645301712901" duration="36000" />
+      <workItem from="1645442985799" duration="8251000" />
+      <workItem from="1645519819233" duration="28982000" />
+      <workItem from="1645785346098" duration="3053000" />
     </task>
     <servers />
   </component>
@@ -920,15 +945,16 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="1583" y="165" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1644401280325">
-      <screen x="1366" y="0" width="1024" height="728" />
+    <state x="289" y="165" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1645614659934">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="1583" y="165" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728/1366.0.1024.728@1366.0.1024.728" timestamp="1644401280325" />
-    <state x="1676" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1644401173279">
-      <screen x="1366" y="0" width="1024" height="728" />
+    <state x="289" y="165" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1645614659934" />
+    <state x="413" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1645485103989">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="1676" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728/1366.0.1024.728@1366.0.1024.728" timestamp="1644401173279" />
-    <state x="413" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1644007531938" />
+    <state x="413" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1645485103989" />
     <state x="432" y="86" key="NewPhpClassDialog" timestamp="1642196958237">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -941,11 +967,11 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1644743840726" />
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1645041039611">
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1645663882871">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="346" y="49" width="897" height="160" key="search.everywhere.popup/0.0.1366.728/1366.0.1024.728@0.0.1366.728" timestamp="1644398403546" />
     <state x="1625" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728/1366.0.1024.728@1366.0.1024.728" timestamp="1644404633653" />
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1645041039611" />
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1645663882871" />
   </component>
 </project>

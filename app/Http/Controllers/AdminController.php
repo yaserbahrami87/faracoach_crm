@@ -34,6 +34,17 @@ class AdminController extends BaseController
     {
         $dateNow = verta();
         $this->dateNow = $dateNow->format('Y/m/d');
+
+        $api=config('kavenegar')['apikey'];
+        $this->client=new client(
+            [
+                'headers' => [
+                    'Accept' => 'application/json; charset=utf-8'
+                ],
+                'base_uri' => 'http://api.kavenegar.com/v1/'.$api.'/sms/',
+                'timeout'  => 3.0,
+            ]
+        );
     }
 
     /**
@@ -154,7 +165,14 @@ class AdminController extends BaseController
             }
 
 
-            $countUnreadMessages=$this->countUnreadMessages();
+//            $countSMSRecieve=$this->countSMSRecieve();
+
+            $condition=['created_at','like',$this->changeTimestampToMilad($this->dateNow).'%'];
+            $countBookingReserve=$this->get_reserve(NULL,NULL,NULL,NULL,$condition,NULL,'get');
+
+
+
+//            $countUnreadMessages=$this->countUnreadMessages();
             return view('admin.home')
 //                        ->with('notFollowup',$notFollowup)
 //                        ->with('follow',$follow)
@@ -165,7 +183,7 @@ class AdminController extends BaseController
                         ->with('dateNow',$dateNow)
                         ->with('followupToday',$followupToday)
                         ->with('expirefollowupToday',$expirefollowupToday)
-                        ->with('countUnreadMessages',$countUnreadMessages)
+                        ->with('countBookingReserve',$countBookingReserve)
                         ->with('usersEducation',$usersEducation)
                         ->with('sumcancelfollowup',$sumcancelfollowup)
                         ->with('sumallFollowups',$sumallFollowups)
@@ -176,6 +194,7 @@ class AdminController extends BaseController
                         ->with('sumnoanswering',$sumnoanswering)
                         ->with('suminsertuser',$suminsertuser)
                         ->with('sumtalktimeToday',$sumtalktimeToday)
+//                        ->with('countSMSRecieve',$countSMSRecieve)
                         ->with('sumtalktime',$sumtalktime);
             //return redirect()->route('panelAdmin');
         }

@@ -11,12 +11,14 @@
                 <th class="text-center">تاریخ ثبت نام</th>
                 <th class="text-center">واریزی(تومان)</th>
                 <th class="text-center">کدرهگیری</th>
+                <th class="text-center"></th>
             </tr>
 
             @foreach ($course->students as $item)
 
                 <tr>
                     <td>
+
                         @if(is_null($item->user->personal_image))
                             <img src="{{asset('/documents/users/default-avatar.png')}}"  width="50px" height="50px" class="rounded-circle "/>
                         @else
@@ -46,6 +48,9 @@
                         @foreach($item->user->checkouts->where('status','=',1)->where('product_id','=',$item->course_id)->where('type','=','course') as $item2)
                             {{$item2->authority}}
                         @endforeach
+                    </td>
+                    <td>
+                        <a href="" class="btn btn-primary" >ایجاد فاکتور</a>
                     </td>
                 </tr>
             @endforeach

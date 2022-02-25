@@ -5,44 +5,37 @@
 @endsection
 @section('content')
     <div class="col-6">
-        <form>
-            <div class="form-group">
-                <label for="user">جستجو کاربر:</label>
-                <input id="user" type="text" class="form-control @error('user') is-invalid @enderror"  value="{{ old('user') }}" autocomplete="off"   />
-            </div>
+
+        <div class="form-group">
+            <label for="user">جستجو کاربر:</label>
+            <input id="user" type="text" class="form-control @error('user') is-invalid @enderror"  value="{{ old('user') }}" autocomplete="off"   />
+        </div>
+        <form method="post" action="/admin/education/students">
+            {{csrf_field()}}
+            <input type="hidden" value="{{$course->id}}" name="course_id" />
             <div id="show"></div>
-            <div class="form-group">
-                <label for="date">تاریخ ثبت نام:</label>
-                <input type="text" class="form-control" id="date" autocomplete="off"  />
+            <div id="insertStudent" class="d-none">
+                <div class="form-group">
+                    <label for="date">تاریخ ثبت نام:</label>
+                    <input type="text" class="form-control" id="date" name="date_fa" autocomplete="off"  />
+                </div>
+                <div class="form-group">
+                    <label for="status">وضعیت
+                        <span class="text-danger text-bold">*</span>
+                    </label>
+                    <select class="form-control" id="status" name="status">
+                        <option disabled selected>انتخاب کنید</option>
+                        <option value="1">دانشجو</option>
+                        <option value="2">انصراف</option>
+                        <option value="3">فارغ التحصیل</option>
+                        <option value="4">مرخصی</option>
+                        <option value="5">بلاتکلیف</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">اضافه</button>
             </div>
-            <div class="form-group">
-                <label for="date_fa">مبلغ واریزی:</label>
-                <input type="text" class="form-control" id="date_fa" />
-            </div>
-            <div class="form-group">
-                <label for="status">وضعیت</label>
-                <select class="form-control" id="status">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                </select>
-
-                <label for="exampleDataList" class="form-label">Datalist example</label>
-                <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search...">
-                <datalist id="datalistOptions">
-                    <option value="San Francisco">
-                    <option value="New York">
-                    <option value="Seattle">
-                    <option value="Los Angeles">
-                    <option value="Chicago">
-                </datalist>
-            </div>
-
-
-            <button type="submit" class="btn btn-primary">اضافه</button>
         </form>
+
     </div>
 @endsection
 
@@ -66,6 +59,9 @@
 
         $('#user').change(function()
         {
+            $('#show').html("<div class=\"spinner-border text-primary\" role=\"status\">\n" +
+                "  <span class=\"sr-only\">Loading...</span>\n" +
+                "</div>");
             user=$('#user').val();
             var data={
                 user:user,
@@ -89,8 +85,9 @@
 
                         for (i=0;i<data.length;i++)
                         {
-                            users="<label for=\"exampleFormControlSelect1\">دانشجو را انتخاب کنید</label>" +
-                                "<select class=\"form-control\" id=\"exampleFormControlSelect1\">";
+                            users="<label for=\"exampleFormControlSelect1\">دانشجو را انتخاب کنید <span class=\"text-danger text-bold\">*</span></label>" +
+                                "<select class=\"form-control\" id=\"exampleFormControlSelect1\" name='user_id'>" +
+                                "<option selected disabled>انتخاب کنید</option>";
                             $.each( data, function( key, value ) {
                                 // var item="{'fname':'"+value.fname+"', 'lname':'"+value.lname+"', 'id':'"+value.id+"'}";
                                 var item=JSON.stringify('{"name":"John", "age":30, "city":"New York"}');
@@ -103,6 +100,7 @@
                             users=users+"</select>"
                         }
                         $('#show').html(users);
+                        $('#insertStudent').attr('class','');
                     }
 
                 },
@@ -123,13 +121,6 @@
 
         // $('body').on('click','.students',function(){
 
-        function getStudent(data)
-        {
-
-
-            console.log(data);
-            console.log(JSON.parse(data));
-        };
 
     </script>
 @endsection

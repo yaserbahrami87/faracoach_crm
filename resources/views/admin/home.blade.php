@@ -23,8 +23,8 @@
         }
 
         .card-counter.primary{
-            background-color: #007bff;
-            color: #FFF;
+            background-color: #99caff;
+            color: #000000;
         }
 
         .card-counter.danger{
@@ -59,7 +59,6 @@
             position: absolute;
             right: 35px;
             top: 65px;
-            font-style: italic;
             text-transform: capitalize;
             opacity: 0.5;
             display: block;
@@ -151,6 +150,36 @@
                 </tbody>
             </table>
         </div>
+        <div class="col-md-3">
+            <div class="card-counter primary">
+                <span class="count-numbers text-white">12</span>
+                <span class="count-name text-dark">جلسات رزرو شده در امروز</span>
+            </div>
+        </div>
+        <!--
+        <div class="col-md-3">
+            <div class="card-counter danger text-dark">
+                <span class="count-numbers text-dark">599</span>
+                <span class="count-name text-dark">Instances</span>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card-counter success">
+                <i class="fa fa-database"></i>
+                <span class="count-numbers text-dark">6875</span>
+                <span class="count-name text-dark">Data</span>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card-counter info">
+                <i class="fa fa-users"></i>
+                <span class="count-numbers text-dark">35</span>
+                <span class="count-name text-dark">Users</span>
+            </div>
+        </div>
+        -->
 
 @endsection
 

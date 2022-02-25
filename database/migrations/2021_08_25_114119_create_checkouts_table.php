@@ -16,6 +16,8 @@ class CreateCheckoutsTable extends Migration
         Schema::create('checkouts', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->nullable()->index();
+            $table->bigInteger('checkout_id')->nullable()->index();
+            $table->bigInteger('order_id')->nullable()->index();
             $table->bigInteger('product_id')->nullable()->index();
             $table->bigInteger('price')->nullable();
             $table->string('type',100)->nullable();

@@ -54,6 +54,8 @@ class BaseController extends Controller
         $this->timeNow = $dateNow->format('H:i:s');
         //ایجاد لاگ در سیستم
         visitor()->visit();
+
+
     }
 
     public function signupForm()
@@ -404,6 +406,10 @@ class BaseController extends Controller
     {
         $dateShamsi=Verta::parse($date);
         $dateMiladi= (Verta::getGregorian($dateShamsi->year,$dateShamsi->month,$dateShamsi->day));
+        if(($dateMiladi[1]>0) && ($dateMiladi[1]<10))
+        {
+            $dateMiladi[1]='0'.$dateMiladi[1];
+        }
         $dateMiladi=($dateMiladi[0].'-'.$dateMiladi[1].'-'.$dateMiladi[2]);
         return $dateMiladi;
     }
@@ -431,9 +437,9 @@ class BaseController extends Controller
 
     public function countUnreadMessages()
     {
-        return message::where('status','=',1)
-            ->where('user_id_recieve', '=', Auth::user()->id)
-            ->count();
+//        return message::where('status','=',1)
+//            ->where('user_id_recieve', '=', Auth::user()->id)
+//            ->count();
     }
 
     public function get_countFollowup($id)
@@ -2031,6 +2037,15 @@ class BaseController extends Controller
             'time_fa'           =>$this->timeNow,
         ]);
     }
+
+
+    public function countSMSRecieve()
+    {
+        $response=$this->client->request('GET', 'countinbox.json?startdate=1642636800&enddate=1642723200&linenumber=10004002002020&isread=1');
+        return json_decode($response->getBody()->getContents())->entries;
+    }
+
+
 
 
 

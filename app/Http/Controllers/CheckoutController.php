@@ -6,6 +6,7 @@ use App\booking;
 use App\cart;
 use App\checkout;
 use App\eventreserve;
+use App\faktor;
 use App\lib\zarinpal;
 use App\student;
 use Illuminate\Http\Request;
@@ -166,6 +167,7 @@ class CheckoutController extends BaseController
                         ->get();
 
 
+
         if(($checkout)->count()>0)
         {
             //ما در اینجا مبلغ مورد نظر را بصورت دستی نوشتیم اما در پروژه های واقعی باید از دیتابیس بخوانیم
@@ -173,8 +175,10 @@ class CheckoutController extends BaseController
             //$Amount = $checkout->price;
             if ($request->get('Status') == 'OK')
             {
+
                 $client = new nusoap_client('https://www.zarinpal.com/pg/services/WebGate/wsdl', 'wsdl');
                 $client->soap_defencoding = 'UTF-8';
+
 
                 foreach ($checkout as $item)
                 {
@@ -195,7 +199,6 @@ class CheckoutController extends BaseController
 
                 if ($result['Status'] == 100)
                 {
-
                     foreach ($checkout as $item) {
 
                         $item->status = 1;
@@ -211,10 +214,10 @@ class CheckoutController extends BaseController
                         {
                             $event = $this->get_events($item->product_id, NULL, NULL, NULL, NULL, NULL, 'first');
                             $status = eventreserve::create([
-                                'user_id' => Auth::user()->id,
-                                'event_id' => $event->id,
-                                'date_fa' => $this->dateNow,
-                                'time_fa' => $this->timeNow,
+                                'user_id'   => Auth::user()->id,
+                                'event_id'  => $event->id,
+                                'date_fa'   => $this->dateNow,
+                                'time_fa'   => $this->timeNow,
                             ]);
                             if ($status) {
                                 $event->capacity--;
@@ -234,11 +237,61 @@ class CheckoutController extends BaseController
                             $status=student::create(
                                 [
                                     'user_id'       =>Auth::user()->id,
-                                    'course_id'    =>$item->product_id,
+                                    'course_id'     =>$item->product_id,
                                     'date_fa'       =>$this->dateNow,
                                     'time_fa'       =>$this->timeNow,
                                 ]
                             );
+
+                            if(!is_null($item->order->tedad_ghest))
+                            {
+                                $v=verta();
+                                for ($i=0;$i<$item->order->tedad_ghest;$i++)
+                                {
+
+                                    $v=$v->addMonths(1);
+                                    $Date=$v->format('Y/m/d');
+                                    faktor::create([
+                                        'user_id'           =>Auth::user()->id,
+                                        'checkout_id'       =>$item->id,
+                                        'product_id'        =>$item->product_id,
+                                        'type'              =>'course',
+                                        'date_createfaktor' =>$this->dateNow,
+                                        'date_faktor'       =>$Date,
+                                        'fi'                =>$item->order->fi_ghest,
+                                    ]);
+                                }
+                            }
+                        }
+                        else if ($item->type == 'ghest')
+                        {
+                            $faktor=faktor::where('id','=',$item->order_id)
+                                        ->where('user_id','=',Auth::user()->id)
+                                        ->first();
+                            if(is_null($faktor))
+                            {
+                                $msg='<p>خطا در بروزرسانی فاکتور اقساط</p>';
+                                $alert='danger';
+                                return view('callBackCheckout')
+                                    ->with('msg',$msg)
+                                    ->with('alert',$alert);
+                            }
+                            else
+                            {
+                                $faktor->authority=$Authority;
+                                $faktor->description='پرداخت شده';
+                                $faktor->date_pardakht=$this->dateNow;
+                                $faktor->time_pardakht=$this->timeNow;
+                                $faktor->checkout_id_pardakht=$item->id;
+                                $faktor->status=1;
+                                $faktor->save();
+                                $msg='<p>پرداخت با موفقیت انجام شد</p><p>شماره پیگیری: '.$item->authority.'</p>';
+                                $alert='success';
+                                return view('callBackCheckout')
+                                    ->with('msg',$msg)
+                                    ->with('alert',$alert);
+                            }
+
                         }
                     }
 
@@ -290,5 +343,60 @@ class CheckoutController extends BaseController
                 ->with('alert',$alert);
 
         }
+    }
+
+    //پرداخت اقساط دوره
+    public function storeAghsat(Request $request)
+    {
+
+        $this->validate($request,[
+            'faktor_id'     =>'required|numeric'
+        ]);
+
+        $faktor=faktor::where('id','=',$request->faktor_id)
+                    ->first();
+        if(is_null($faktor))
+        {
+            alert()->error('فاکتور اشتباه است')->persistent('بستن');
+            return back();
+        }
+        else
+        {
+            $order = new zarinpal();
+            $res = $order->pay($faktor->fi, Auth::user()->email, Auth::user()->tel,'پرداخت قسط');
+            $status=checkout::create([
+                'user_id'       =>Auth::user()->id,
+                //شماره آیدی فاکتور بجای order_id در اقساط ساب میشود
+                'order_id'      =>$faktor->id,
+                'product_id'    =>$faktor->product_id,
+                'price'         =>$faktor->fi,
+                'type'          =>'ghest',
+                'authority'     =>$res,
+                'description'   =>'انتقال به درگاه',
+            ]);
+
+            if($status)
+            {
+                return redirect('https://www.zarinpal.com/pg/StartPay/' . $res);
+            }
+            else
+            {
+                alert()->error('خطا در پرداخت فاکتور اقساط')->persistent('بستن');
+                return redirect('/');
+            }
+        }
+
+    }
+
+
+    public function transactionsUser()
+    {
+        $orders=checkout::where('user_id','=',Auth::user()->id)
+            ->where('status','=',1)
+            ->orderby('id','desc')
+            ->get();
+
+        return view('user.financial.transactions')
+                    ->with('orders',$orders);
     }
 }
