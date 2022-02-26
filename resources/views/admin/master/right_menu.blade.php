@@ -62,7 +62,8 @@
             </li>
             <li class=" nav-item"><a href="#"><span class="menu-title" data-i18n="Chat">مالی</span></a>
                 <ul class="menu-content">
-                    <li><a href="/admin/checkout" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">پرداختی ها</span></a></li>
+                    <li><a href="/admin/checkout" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >پرداختی ها</span></a></li>
+                    <li><a href="/admin/faktor/all" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >فاکتورها</span></a></li>
                 </ul>
             </li>
             <li class=" nav-item"><a href="#"><span class="menu-title" data-i18n="Chat">کلینیک</span></a>

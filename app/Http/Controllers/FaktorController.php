@@ -87,4 +87,45 @@ class FaktorController extends Controller
     {
         //
     }
+
+    //نمایش فاکتورها برای ادمین
+    public function faktorAdmin(Request $request)
+    {
+        if($request->start_date)
+        {
+            $this->validate($request,[
+                'start_date'    =>'required|string',
+            ]);
+            $request['start_date']=explode(' ~ ',$request['start_date']);
+            $startMonth=$request['start_date'][0];
+            $endtMonth=$request['start_date'][1];
+        }
+        else
+        {
+            $startMonth=verta();
+            $startMonth=($startMonth->startMonth())->format('Y/m/d');
+            $endtMonth=verta();
+            $endtMonth=($endtMonth->endMonth())->format('Y/m/d');
+
+        }
+
+
+        $faktors=faktor::orderby('id','desc')
+                    ->wherebetween('date_faktor',[$startMonth,$endtMonth])
+                    ->get();
+
+        $faktorsExpire=faktor::wherebetween('date_faktor',[$startMonth,$endtMonth])
+                            ->where('status','=','0')
+                            ->get();
+
+        $faktorsSuccess=faktor::wherebetween('date_faktor',[$startMonth,$endtMonth])
+            ->where('status','=','1')
+            ->get();
+
+        return view('admin.financial.faktor-all')
+                        ->with('faktorsExpire',$faktorsExpire)
+                        ->with('faktorsSuccess',$faktorsSuccess)
+                        ->with('faktors',$faktors);
+
+    }
 }

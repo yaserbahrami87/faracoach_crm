@@ -173,7 +173,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     // user
     //Route::get('/admin/panel/','AdminController@index')->name('panelAdmin');
     Route::get('/users','UserController@index');
-    Route::get('/user/{user}','UserController@show');
+    Route::get('/user/{user}','UserController@show')->name('showUserForAdmin');
     Route::patch('/profile/update/{user}','UserController@update');
     Route::patch('/user/{id}/changeType','UserController@changeType');
     Route::get('/user/{user}/login','UserController@loginWithUser');
@@ -328,6 +328,12 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
 
     //Checkout
     route::resource('/checkout','CheckoutController');
+
+    //financial
+
+    //faktor
+    route::get('/faktor/all','FaktorController@faktorAdmin');
+    route::resource('faktor','FaktorController');
 
     // Page Builder
     Route::get('/pagebuilder',function()
