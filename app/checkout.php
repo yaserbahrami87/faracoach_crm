@@ -17,7 +17,12 @@ class checkout extends Model
 
     public function course()
     {
-        return $this->hasMany('App\course','product_id','id');
+        return $this->belongsTo('App\course','product_id','id');
+    }
+
+    public function event()
+    {
+        return $this->belongsTo('App\event','product_id','id');
     }
 
     public function order()

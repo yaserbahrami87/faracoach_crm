@@ -289,21 +289,25 @@ class ReserveController extends BaseController
                 $off = 0;
                 $final_off = $fi - $off;
 
+                if($final_off==0) {
+                    //از اینجا تا خط 278 پاک شود
+                    $reserve->update(
+                        [
+                            'status' => 1,
+                        ]);
+                    $status = $reserve->save();
 
 
-                //از اینجا تا خط 278 پاک شود
-                $reserve->update(
-                    [
-                        'status' => 1,
-                    ]);
-                $status=$reserve->save();
-
-
-                if ($status) {
-                    $booking = booking::where('id', '=', $item['booking_id'])
-                        ->first();
-                    $booking->status = 0;
-                    $booking->save();
+                    if ($status) {
+                        $booking = booking::where('id', '=', $item['booking_id'])
+                            ->first();
+                        $booking->status = 0;
+                        $booking->save();
+                    }
+                }
+                else
+                {
+                    return  $this->checkoutStore($reserve->id,$final_off,Auth::user(),'reserve',NULL,'رزرو جلسه');
                 }
             } else {
                 alert()->error('این وقت رزرو شده است')->persistent('بستن');

@@ -10,27 +10,32 @@
             <thead>
                 <tr>
                     <th>#</th>
+                    <th>محصول</th>
+                    <th>مشخصات</th>
                     <th>تاریخ</th>
                     <th>قیمت(تومان)</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($orders as $item)
+                @foreach($checkouts as $item)
                     <tr>
                         <td>{{$loop->iteration}}</td>
-                        <td>asdasdasd</td>
+                        <td>
+                            @if($item->type=='event')
+                                {{$item->event->event}}
+                            @elseif($item->type=='reserve')
+                                جلسه کوچینگ
+                            @elseif($item->type=='course')
+                                {{$item->course->course}}
+                            @endif
+                        </td>
+                        <td>{{$item->user->fname.' '.$item->user->lname}}</td>
+                        <td>{{$item->user->fname.' '.$item->user->lname}}</td>
                         <td>{{number_format($item->price)}}</td>
 
                     </tr>
                 @endforeach
             </tbody>
-            <tfoot>
-                <tr>
-                    <th>#</th>
-                    <th>تاریخ</th>
-                    <th>قیمت</th>
-                </tr>
-            </tfoot>
         </table>
     </div>
 @endsection

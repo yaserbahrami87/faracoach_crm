@@ -2045,6 +2045,32 @@ class BaseController extends Controller
         return json_decode($response->getBody()->getContents())->entries;
     }
 
+    public function checkoutStore($product_id,$fi_final,$user,$type,$order_id=NULL,$description)
+    {
+        $order = new zarinpal();
+        $res = $order->pay($fi_final, $user->email, $user->tel,$description);
+        $status=checkout::create([
+            'user_id'       =>Auth::user()->id,
+            //شماره آیدی فاکتور بجای order_id در اقساط ساب میشود
+            'order_id'      =>$order_id,
+            'product_id'    =>$product_id,
+            'price'         =>$fi_final,
+            'type'          =>$type,
+            'authority'     =>$res,
+            'description'   =>'انتقال به درگاه',
+        ]);
+
+        if($status)
+        {
+            return redirect('https://www.zarinpal.com/pg/StartPay/' . $res);
+        }
+        else
+        {
+            alert()->error('خطا در اتصال به درگاه')->persistent('بستن');
+            return redirect('/');
+        }
+    }
+
 
 
 

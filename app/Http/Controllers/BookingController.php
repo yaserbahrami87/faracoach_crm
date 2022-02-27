@@ -526,17 +526,20 @@ class BookingController extends BaseController
 
         foreach ($booking as $item)
         {
-            switch ($item->booking->duration_booking)
-            {
-                case '1':
-                    $item->duration_booking = 'معارفه 30 دقیقه ای';
-                    break;
-                case '2':
-                    $item->duration_booking = 'کوچینگ 60 دقیقه ای';
-                    break;
-            }
 
-            $item->caption_status=$this->get_statusBookings($item->status);
+            if(isset($item->booking))
+            {
+                switch ($item->booking->duration_booking)
+                {
+                    case '1':
+                        $item->duration_booking = 'معارفه 30 دقیقه ای';
+                        break;
+                    case '2':
+                        $item->duration_booking = 'کوچینگ 60 دقیقه ای';
+                        break;
+                }
+                $item->caption_status=$this->get_statusBookings($item->status);
+            }
 
         }
 

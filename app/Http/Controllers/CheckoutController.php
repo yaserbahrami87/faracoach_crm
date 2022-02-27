@@ -8,7 +8,9 @@ use App\checkout;
 use App\eventreserve;
 use App\faktor;
 use App\lib\zarinpal;
+use App\reserve;
 use App\student;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use nusoap_client;
@@ -21,7 +23,7 @@ class CheckoutController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
 
 //        $Amount=100;
@@ -48,23 +50,48 @@ class CheckoutController extends BaseController
 //        {
 //            return redirect('/');
 //        }
-        $checkout=checkout::join('users','checkouts.user_id','=','users.id')
+
+        if($request->start_date)
+        {
+            $this->validate($request,[
+                'start_date'    =>'required|string',
+            ]);
+            $request['start_date']=explode(' ~ ',$request['start_date']);
+
+            $startMonth=$request['start_date'][0];
+            $startMonth=($this->changeTimestampToMilad($startMonth));
+            $endtMonth=$request['start_date'][1];
+            $endtMonth=$this->changeTimestampToMilad($endtMonth);
+
+        }
+        else
+        {
+            $MiladiDateNow=Carbon::now();
+            $startMonth=$MiladiDateNow->startOfMonth();
+            $MiladiDateNow=Carbon::now();
+            $endtMonth=($MiladiDateNow->endOfMonth());
+
+
+        }
+
+
+        $checkout=checkout::wherebetween('created_at',[$startMonth,$endtMonth])
                             ->orderby('checkouts.id','desc')
-                            ->select('checkouts.*','users.fname','users.lname')
-                            ->paginate(30);
+                            ->get();
+
         foreach ($checkout as $item)
         {
-             switch ($item->type)
-             {
-                 case 'event':$item->product=$this->get_events($item->product_id,NULL,NULL,NULL,NULL,NULL,'first')->event;
-                                break;
-                 default:$item->product='خطا';
-                                break;
-             }
+//             switch ($item->type)
+//             {
+//                 case 'event':$item->product=$this->get_events($item->product_id,NULL,NULL,NULL,NULL,NULL,'first')->event;
+//                                break;
+//                 default:$item->product='خطا';
+//                                break;
+//             }
 
              $item->dateTime=($this->changeTimestampToShamsi( $item->created_at));
         }
-        return view('admin.checkout.checkout_accept')
+        return view('admin.checkout.checkout_list')
                     ->with('checkout',$checkout);
 
 
@@ -293,6 +320,61 @@ class CheckoutController extends BaseController
                             }
 
                         }
+                        else if ($item->type == 'reserve')
+                        {
+                            $reserve=reserve::where('id','=',$item->product_id)
+                                            ->first();
+                            $reserve->update(
+                                [
+                                    'status' => 1,
+                                ]);
+                            $status = $reserve->save();
+
+
+                            if ($status) {
+                                $booking = booking::where('id', '=', $reserve->booking_id)
+                                            ->first();
+                                $booking->status = 0;
+                                $booking->save();
+                            }
+
+
+
+
+                            if ($booking->duration_booking == 1) {
+                                $duration = 'جلسه معارفه';
+                            } else {
+                                $duration = 'جلسه کوچینگ';
+                            }
+
+                            $user = booking::join('users', 'bookings.user_id', '=', 'users.id')
+                                ->join('coaches', 'users.id', '=', 'coaches.user_id')
+                                ->where('bookings.id', '=', $reserve->booking_id)
+                                ->first();
+
+//                //ارسال پیامک برای مشتری
+                            $msg =$duration . " \n " . $booking->start_date . " \n ساعت " . $booking->start_time . "\n " . Auth::user()->fname . " " . Auth::user()->lname . "\nتماس:" .Auth::user()->tel;
+                            $this->sendSms($user->tel, $msg);
+//
+//                //ارسال پیامک به کوچ
+                            $msg =$duration . " \n " . $booking->start_date . " \n  " . $booking->start_time . "\n کوچ:" . $user->fname . " " . $user->lname . "\n تماس کوچ:" .  $user->tel;
+                            $this->sendSms(Auth::user()->tel, $msg);
+                            //ارسال پیامک برای حسام
+                            $msg=$duration . " \n " . $booking->start_date . " \n  " . $booking->start_time . "\n کوچ:" . $user->fname . " " . $user->lname . "\n مراجع ".Auth::user()->fname . " " . Auth::user()->lname . "\nتماس:" .Auth::user()->tel;
+                            $this->sendSms('+989101769020', $msg);
+
+                            //ارسال پیامک برای یوسفی
+                            $msg=$duration . " \n " . $booking->start_date . " \n  " . $booking->start_time . "\n کوچ:" . $user->fname . " " . $user->lname . "\n مراجع ".Auth::user()->fname . " " . Auth::user()->lname . "\nتماس:" .Auth::user()->tel;
+                            $this->sendSms('+989151060792', $msg);
+
+                            $msg='<p>جلسه کوچینگ با موفقیت انجام شد</p><p>شماره پیگیری: '.$item->authority.'</p>';
+                            $alert='success';
+
+                            return view('callBackCheckout')
+                                ->with('msg',$msg)
+                                ->with('alert',$alert);
+
+                        }
                     }
 
                     cart::where('user_id','=',Auth::user()->id)
@@ -391,12 +473,12 @@ class CheckoutController extends BaseController
 
     public function transactionsUser()
     {
-        $orders=checkout::where('user_id','=',Auth::user()->id)
+        $checkouts=checkout::where('user_id','=',Auth::user()->id)
             ->where('status','=',1)
             ->orderby('id','desc')
             ->get();
 
         return view('user.financial.transactions')
-                    ->with('orders',$orders);
+                    ->with('checkouts',$checkouts);
     }
 }

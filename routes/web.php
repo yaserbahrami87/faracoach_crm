@@ -150,7 +150,7 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     Route::post('/order/aghsat','OrderController@storeAghsat');
 
     //checkout
-    Route::get('/financial/transaction','CheckoutController@transactionsUser');
+    Route::get('/checkout/transaction','CheckoutController@transactionsUser');
     Route::post('/faktor/checkout/pardakhtaghsat','CheckoutController@storeAghsat');
 
     //faktors

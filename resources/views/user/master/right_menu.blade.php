@@ -66,10 +66,8 @@
                 @endif
                 <li class="nav-item has-sub"><a href="#"><span class="menu-title" >مالی</span></a>
                     <ul class="menu-content">
-                        <!--
-                        <li><a href="/panel/financial/transaction" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >تراکنش های مالی</span></a></li>
-                        -->
                         <li><a href="/panel/faktor" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >فاکتورها</span></a></li>
+                        <li><a href="/panel/checkout/transaction" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >تراکنش های مالی</span></a></li>
                     </ul>
                 </li>
                 <li class=" nav-item has-sub "><a href="#"><span class="menu-title" >بلاگ</span></a>
