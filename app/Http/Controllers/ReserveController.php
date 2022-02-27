@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\cart;
 use App\checkout;
 use App\coach;
 use App\homework;
@@ -179,6 +180,8 @@ class ReserveController extends BaseController
         );
 
 
+
+
         $reserve=reserve::where('booking_id','=',$request['booking_id'])
                             ->where('user_id','=',Auth::user()->id)
                             ->first();
@@ -215,6 +218,14 @@ class ReserveController extends BaseController
 
         $off=0;
         $final_off=$fi-$off;
+
+
+
+        //حذف سبد خرید
+        $status=reserve::where('user_id','=',Auth::user()->id)
+                        ->where('status', '=', 0)
+                        ->delete();
+
 
         if(is_null($reserve)) {
             $reserve = reserve::create($request->all()+
