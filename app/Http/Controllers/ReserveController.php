@@ -180,6 +180,12 @@ class ReserveController extends BaseController
         );
 
 
+        //حذف سبد خرید
+        $status=reserve::where('user_id','=',Auth::user()->id)
+            ->where('status', '=', 0)
+            ->delete();
+
+
 
 
         $reserve=reserve::where('booking_id','=',$request['booking_id'])
@@ -221,10 +227,6 @@ class ReserveController extends BaseController
 
 
 
-        //حذف سبد خرید
-        $status=reserve::where('user_id','=',Auth::user()->id)
-                        ->where('status', '=', 0)
-                        ->delete();
 
 
         if(is_null($reserve)) {
