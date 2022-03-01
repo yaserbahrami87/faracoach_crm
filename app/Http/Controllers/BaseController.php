@@ -406,10 +406,16 @@ class BaseController extends Controller
     {
         $dateShamsi=Verta::parse($date);
         $dateMiladi= (Verta::getGregorian($dateShamsi->year,$dateShamsi->month,$dateShamsi->day));
+
         if(($dateMiladi[1]>0) && ($dateMiladi[1]<10))
         {
             $dateMiladi[1]='0'.$dateMiladi[1];
         }
+        if(($dateMiladi[2]>0) && ($dateMiladi[2]<10))
+        {
+            $dateMiladi[2]='0'.$dateMiladi[2];
+        }
+
         $dateMiladi=($dateMiladi[0].'-'.$dateMiladi[1].'-'.$dateMiladi[2]);
         return $dateMiladi;
     }
