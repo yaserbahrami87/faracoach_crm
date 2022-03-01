@@ -510,6 +510,8 @@ Route::get('/ravanshenasi',function()
     return view('landeRavanshenasi');
 });
 
+
+
 //Route::get('/integrity','LandPageController@create');
 //Route::get('/jashn','LandPageController@create');
 //Route::patch('/jashn/{landPage}/update','LandPageController@update_jashn');

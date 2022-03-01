@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\booking;
 use App\categoryTag;
+use App\checkout;
 use App\followup;
 use App\landPage;
 use App\message;
@@ -167,8 +168,41 @@ class AdminController extends BaseController
 
 //            $countSMSRecieve=$this->countSMSRecieve();
 
+            //جلسات رزرو شده در امروز
             $condition=['created_at','like',$this->changeTimestampToMilad($this->dateNow).'%'];
             $countBookingReserve=$this->get_reserve(NULL,NULL,NULL,NULL,$condition,NULL,'get');
+
+            //تعداد رزرو شده برای امروز
+            $bookingsToday=booking::where('status','=',0)
+                        ->where('start_date','=',$this->dateNow)
+                        ->get();
+
+
+
+            $dateNowMiladi=$this->changeTimestampToMilad($this->dateNow);
+
+            //میزان واریزی امروز
+            $checkoutToday=checkout::where('created_at','like','%'.$dateNowMiladi.'%')
+                        ->where('status','=',1)
+                        ->sum('price');
+            //تعداد ثبت نام امروز
+            $insertUserToday=User::where('created_at','like','%'.$dateNowMiladi.'%')
+                                    ->count();
+
+            //تعداد ورودی امروز
+            $loginUserToday=User::where('last_login_at','like','%'.$dateNowMiladi.'%')
+                            ->whereNotIn('type',[2,3])
+                            ->count();
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -194,7 +228,11 @@ class AdminController extends BaseController
                         ->with('sumnoanswering',$sumnoanswering)
                         ->with('suminsertuser',$suminsertuser)
                         ->with('sumtalktimeToday',$sumtalktimeToday)
-//                        ->with('countSMSRecieve',$countSMSRecieve)
+                        ->with('countBookingReserve',$countBookingReserve)
+                        ->with('bookingsToday',$bookingsToday)
+                        ->with('checkoutToday',$checkoutToday)
+                        ->with('insertUserToday',$insertUserToday)
+                        ->with('loginUserToday',$loginUserToday)
                         ->with('sumtalktime',$sumtalktime);
             //return redirect()->route('panelAdmin');
         }

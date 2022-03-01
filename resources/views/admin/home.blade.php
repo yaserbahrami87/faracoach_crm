@@ -42,6 +42,11 @@
             color: #FFF;
         }
 
+        .card-counter.warning{
+            background-color: #ffff99;
+            color: #FFF;
+        }
+
         .card-counter i{
             font-size: 5em;
             opacity: 0.2;
@@ -51,7 +56,7 @@
             position: absolute;
             right: 35px;
             top: 20px;
-            font-size: 32px;
+            font-size: 25px;
             display: block;
         }
 
@@ -152,25 +157,45 @@
         </div>
         <div class="col-md-3">
             <div class="card-counter primary">
-                <span class="count-numbers text-white">12</span>
-                <span class="count-name text-dark">جلسات رزرو شده در امروز</span>
+                <span class="count-numbers text-dark">{{$countBookingReserve->count()}} جلسه </span>
+                <span class="count-name text-dark"> رزرو شده در امروز</span>
             </div>
         </div>
-        <!--
+
+
         <div class="col-md-3">
-            <div class="card-counter danger text-dark">
-                <span class="count-numbers text-dark">599</span>
-                <span class="count-name text-dark">Instances</span>
+            <div class="card-counter warning text-dark">
+                <span class="count-numbers text-dark">{{$bookingsToday->count()}} جلسه</span>
+                <span class="count-name text-dark"> رزرو شده برای امروز</span>
             </div>
         </div>
+
 
         <div class="col-md-3">
             <div class="card-counter success">
                 <i class="fa fa-database"></i>
-                <span class="count-numbers text-dark">6875</span>
-                <span class="count-name text-dark">Data</span>
+                <span class="count-numbers text-dark">{{ number_format($checkoutToday) }} تومان</span>
+                <span class="count-name text-dark">واریزی امروز</span>
             </div>
         </div>
+
+        <div class="col-md-3">
+            <div class="card-counter primary">
+                <i class="fa fa-database"></i>
+                <span class="count-numbers text-dark">{{ number_format($insertUserToday) }} نفر </span>
+                <span class="count-name text-dark">ثبت نام امروز</span>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card-counter primary">
+                <i class="fa fa-database"></i>
+                <span class="count-numbers text-dark">{{ number_format($loginUserToday) }} نفر </span>
+                <span class="count-name text-dark">تعداد ورود امروز</span>
+            </div>
+        </div>
+
+        <!--
 
         <div class="col-md-3">
             <div class="card-counter info">

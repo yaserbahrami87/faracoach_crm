@@ -30,7 +30,10 @@
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReserveController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReserveController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -218,19 +221,19 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\wamp64\www\faracoach_crm\resources\views\admin\education\course" />
-      <recent name="C:\wamp64\www\faracoach_crm\storage\app\private" />
-      <recent name="C:\wamp64\www\faracoach_crm\storage\private" />
-      <recent name="C:\wamp64\www\faracoach_crm\storage\app\private\مدیر در نقش کوچ" />
-      <recent name="C:\wamp64\www\faracoach_crm\public\documents" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\wamp64\www\faracoach_crm\public\images" />
       <recent name="C:\wamp64\www\faracoach_crm\public\fonts\other" />
       <recent name="C:\wamp64\www\faracoach_crm\resources\views" />
       <recent name="C:\wamp64\www\faracoach_crm\storage\app" />
       <recent name="C:\wamp64\www\faracoach_crm\storage\app\private" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\faracoach_crm\resources\views\admin\education\course" />
+      <recent name="C:\wamp64\www\faracoach_crm\storage\app\private" />
+      <recent name="C:\wamp64\www\faracoach_crm\storage\private" />
+      <recent name="C:\wamp64\www\faracoach_crm\storage\app\private\مدیر در نقش کوچ" />
+      <recent name="C:\wamp64\www\faracoach_crm\public\documents" />
     </key>
   </component>
   <component name="RunManager">
@@ -890,7 +893,8 @@
       <workItem from="1645854391066" duration="21695000" />
       <workItem from="1645890008548" duration="6211000" />
       <workItem from="1645901852794" duration="666000" />
-      <workItem from="1645940463937" duration="5505000" />
+      <workItem from="1645940463937" duration="11566000" />
+      <workItem from="1646025806407" duration="16377000" />
     </task>
     <servers />
   </component>
@@ -952,11 +956,11 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1644743840726" />
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1645945129547">
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1645954641735">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="346" y="49" width="897" height="160" key="search.everywhere.popup/0.0.1366.728/1366.0.1024.728@0.0.1366.728" timestamp="1645881285102" />
     <state x="1625" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728/1366.0.1024.728@1366.0.1024.728" timestamp="1644404633653" />
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1645945129547" />
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1645954641735" />
   </component>
 </project>

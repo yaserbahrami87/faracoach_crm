@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\cart;
 use App\checkout;
 use App\coach;
+use App\event;
+use App\eventreserve;
 use App\homework;
 use App\notification;
 use App\Notifications\sendMessageNotification;
+use App\order;
 use App\reserve;
 use App\User;
 use Illuminate\Http\Request;
@@ -270,6 +273,7 @@ class ReserveController extends BaseController
     public  function insert(Request $request)
     {
         $cart = $this->get_cartUser();
+
         foreach ($cart as $item)
         {
             $reserve = reserve::where('booking_id', '=', $item['booking_id'])
@@ -298,7 +302,7 @@ class ReserveController extends BaseController
                 $change_customer = $user->change_customer;
                 $count_recommendation = $user->count_recommendation;
 
-                $fi = $user->fi;
+                $fi = $item->final_off;
                 $off = 0;
                 $final_off = $fi - $off;
 
@@ -317,6 +321,11 @@ class ReserveController extends BaseController
                         $booking->status = 0;
                         $booking->save();
                     }
+                }
+                elseif($final_off<100)
+                {
+                    alert()->warning('حداقل پرداختی 100 تومان می باشد');
+                    return back();
                 }
                 else
                 {
@@ -488,13 +497,21 @@ class ReserveController extends BaseController
 
     public function test()
     {
-        $reserve=reserve::groupby('user_id')
-                    ->get();
+        $reserve=checkout::get();
 
         foreach($reserve as $item)
         {
-            $user=$this->get_user(NULL,$item->user_id,NULL,NULL,'first');
-            echo "<script>console.log(USER=".$user.");</script>";
+            //$user=$this->get_user(NULL,$item->user_id,NULL,NULL,'first');
+            $booking=order::where('id','=',$item->order_id)
+                        ->first();
+            if(is_null($booking))
+            {
+                echo "<script>console.log(USER=".$item.");</script>";
+            }
+
+
+
+
         }
 
 
