@@ -419,8 +419,9 @@ class VerifyController extends BaseController
         $now= Verta::now();
         $user=$this->get_user($request['tel'],NULL,NULL,NULL,true);
 
-        if(!is_null($user))
+        if($user->count()!="0")
         {
+
             $status=verify::where('tel','=',$user->tel)
                 ->where('verify','=',0)
                 ->where('type','=',1)
@@ -504,9 +505,9 @@ class VerifyController extends BaseController
         }
         else
         {
+
             alert()->error("شماره همراه وارد شده در سیستم موجود نمی باشد")->persistent('بستن');
-            return back()
-                ->with('tel',$user->tel);
+            return back();
         }
     }
 
