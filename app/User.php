@@ -98,6 +98,15 @@ class User extends Authenticatable implements MustVerifyEmail
             return $this->hasOne('App\coach','user_id','id');
         }
 
+        public function faktors()
+        {
+            return $this->hasMany('App\faktor','user_id','id');
+        }
+
+        public function reserveEvent()
+        {
+            return $this->hasMany('App\eventreserve','user_id','id');
+        }
         public function userType()
         {
 

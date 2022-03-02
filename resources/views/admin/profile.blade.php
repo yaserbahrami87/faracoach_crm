@@ -16,6 +16,7 @@
         }
     </style>
 
+    <link href="{{asset('/dashboard/assets/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
 @endsection
 
 @section('content')
@@ -59,7 +60,6 @@
                                             {{csrf_field()}}
                                             {{method_field('PATCH')}}
                                             @if(Auth::user()->type==2)
-
                                                 <div class="input-group mb-1 mt-1 border-bottom border-1 pb-1 ">
                                                     <select class="form-control p-0" name="type" >
                                                         <option selected disabled>یک گزینه را انتخاب کنید</option>
@@ -478,21 +478,58 @@
 
     </div>
     <div class="col-md-7">
-        @if((Auth::user()->id==$user->followby_expert||is_null($user->followby_expert))&& $user->type!=-1&&$user->type!=-2&&$user->type!=-3 )
-            @include('admin.insertFollowUp')
-            <hr/>
-        @elseif((Auth::user()->id==$user->followby_expert||is_null($user->followby_expert))&& $user->type!=5)
-            <div class="alert alert-warning">
-                <i class="bi bi-exclamation-triangle-fill"></i>
-                کاربر مربوط به بخش مارکتینگ می باشد
+        <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="followups-tab" data-toggle="tab" href="#followups" role="tab" aria-controls="followups" aria-selected="true">پیگیری ها</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">مالی</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">#</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="followups" role="tabpanel" aria-labelledby="followups-tab">
+                @if((Auth::user()->id==$user->followby_expert||is_null($user->followby_expert))&& $user->type!=-1&&$user->type!=-2&&$user->type!=-3 )
+                    @include('admin.insertFollowUp')
+                    <hr/>
+                @elseif((Auth::user()->id==$user->followby_expert||is_null($user->followby_expert))&& $user->type!=5)
+                    <div class="alert alert-warning">
+                        <i class="bi bi-exclamation-triangle-fill"></i>
+                        کاربر مربوط به بخش مارکتینگ می باشد
+                    </div>
+                    <hr/>
+                @endif
+                @include('admin.followups')
             </div>
-            <hr/>
-        @endif
-        @include('admin.followups')
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                @if($user->faktors->count()==0)
+                    <div class="alert alert-warning">
+                        فاکتور مالی وجود ندارد
+                    </div>
+                @else
+                    @include('admin.user.financial')
+                @endif
+
+            </div>
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+        </div>
+
     </div>
 @endsection
 
 @section('footerScript')
+@section('footerScript')
+    <script src="{{asset('/dashboard/assets/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('/dashboard/assets/js/dataTables.bootstrap4.min.js')}}"></script>
+    <script>
+        $(document).ready(function() {
+            $('.dataTable').DataTable();
+        } );
+    </script>
+
+
     <!--  DATE SHAMSI PICKER  --->
     <script src="{{asset('js/kamadatepicker.min.js')}}"></script>
     <script src="{{asset('js/kamadatepicker.holidays.js')}}"></script>

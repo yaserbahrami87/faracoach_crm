@@ -563,8 +563,11 @@ class UserController extends BaseController
     public function show($user)
     {
 
+
+
         $userAdmin=Auth::user();
         //تعداد پیگیری های انجام شده
+
         $countFollowups=User::join('followups','users.id','=','followups.user_id')
                             ->where('users.id','=',$user)
                             ->count();
