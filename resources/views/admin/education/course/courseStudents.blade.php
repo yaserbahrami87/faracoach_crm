@@ -68,7 +68,7 @@
 
                     <td class="text-center">
                         @foreach($item->user->checkouts->where('status','=',1)->where('product_id','=',$item->course_id)->where('type','=','course') as $item2)
-                            {{number_format($item2->order['final_off'])}}
+                            {{number_format($item2->order['fi'])}}
                         @endforeach
                     </td>
 

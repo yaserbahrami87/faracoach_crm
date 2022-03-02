@@ -29,4 +29,9 @@ class checkout extends Model
     {
         return $this->belongsTo('App\order','order_id','id');
     }
+
+    public function reserve()
+    {
+        return $this->belongsTo('App\reserve','product_id','id');
+    }
 }

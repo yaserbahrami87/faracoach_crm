@@ -24,4 +24,5 @@ class booking extends Model
     {
         return $this->hasOne('App\feedback_coaching','booking_id','id');
     }
+
 }

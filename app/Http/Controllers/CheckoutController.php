@@ -89,11 +89,24 @@ class CheckoutController extends BaseController
 //                                break;
 //             }
 
-             $item->dateTime=($this->changeTimestampToShamsi( $item->created_at));
+             $item->dateTime=($this->changeTimestampToShamsi($item->created_at));
         }
-        return view('admin.checkout.checkout_list')
-                    ->with('checkout',$checkout);
 
+        //پرداخت های انجام شده درگاه
+        $checkoutAccess=checkout::wherebetween('created_at',[$startMonth,$endtMonth])
+            ->where('status','=',1)
+            ->orderby('checkouts.id','desc')
+            ->get();
+
+        foreach ($checkoutAccess as $item)
+        {
+            $item->dateTime=($this->changeTimestampToShamsi($item->created_at));
+        }
+
+
+        return view('admin.checkout.checkout_list')
+                    ->with('checkoutAccess',$checkoutAccess)
+                    ->with('checkout',$checkout);
 
     }
 
