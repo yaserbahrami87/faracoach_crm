@@ -99,7 +99,7 @@
                                 @elseif($item->type=='event')
                                     {{$item->event->event}}
                                 @elseif($item->type=='reserve')
-                                    جلسه کوچینگ {{$item->reserve->booking}}
+                                    جلسه کوچینگ {{$item->reserve['booking']['coach']['user']['fname'].' '.$item->reserve['booking']['coach']['user']['lname'].' - '.$item->reserve['booking']['start_date']}}
                                 @elseif($item->type=='ghest')
                                     پرداخت قسط
                                 @endif
