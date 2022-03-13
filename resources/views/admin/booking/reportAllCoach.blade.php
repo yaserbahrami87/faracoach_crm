@@ -54,11 +54,11 @@
                             <td>{{$item->start_date}}</td>
                             <td>{{$item->start_time}}</td>
                             <td dir="ltr">
-                                <a href="/admin/user/{{$item->reserveAccess->user->id}}" target="_blank">
-                                    @if(is_null($item->reserveAccess->user->fname)&&is_null($item->reserveAccess->user->lname))
-                                        {{$item->reserveAccess->user->tel}}
+                                <a href="/admin/user/{{$item->reserve->user->id}}" target="_blank">
+                                    @if(is_null($item->reserve->user->fname)&&is_null($item->reserve->user->lname))
+                                        {{$item->reserve->user->tel}}
                                     @else
-                                        {{$item->reserveAccess->user->fname." ".$item->reserveAccess->user->lname}}
+                                        {{$item->reserve->user->fname." ".$item->reserve->user->lname}}
                                     @endif
                                 </a>
                             </td>

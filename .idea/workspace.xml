@@ -30,22 +30,7 @@
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BookingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BookingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CheckoutController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CheckoutController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CouponController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CouponController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReserveController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReserveController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/booking.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/booking.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/InfoReserve.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/InfoReserve.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/booking/reportAllCoach.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/booking/reportAllCoach.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/bookingAcceptReserveCoach.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/bookingAcceptReserveCoach.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/passwords/email.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/passwords/email.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/register.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/loginSMS.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/loginSMS.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/insertCoupon.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/insertCoupon.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -920,7 +905,7 @@
       <workItem from="1647065096211" duration="10678000" />
       <workItem from="1647108691901" duration="595000" />
       <workItem from="1647115547452" duration="699000" />
-      <workItem from="1647156504329" duration="2232000" />
+      <workItem from="1647156504329" duration="4048000" />
     </task>
     <servers />
   </component>
