@@ -226,8 +226,10 @@ class BookingController extends BaseController
      */
     public function show(booking $booking)
     {
-        if((Auth::user()->id==$booking->user_id)||(Auth::user()->type==2))
+
+        if((Auth::user()->id==$booking->user_id))
         {
+
 
 //            $booking=booking::join('reserves','bookings.id','=','reserves.booking_id')
 //                        ->where('bookings.id','=',$booking->id)
@@ -244,19 +246,21 @@ class BookingController extends BaseController
             $history=reserve::join('users','reserves.user_id','=','users.id')
                         ->join('bookings','reserves.booking_id','=','bookings.id')
                         ->where('bookings.user_id','=',Auth::user()->id)
-                        ->where('reserves.user_id','=',$booking->user_id)
+                        ->where('reserves.user_id','=',$booking->reserve->user_id)
                         ->get();
 
-            foreach ($history as $item)
-            {
-                $item->status=$this->get_statusBookings($item->status);
-            }
+//            foreach ($history as $item)
+//            {
+//                $item->status=$this->get_statusBookings($item->status);
+//            }
 
 
-            $homework=homework::where('booking_id','=',$booking->booking_id)
+            $homework=homework::where('booking_id','=',$booking->id)
                         ->where('type','=','booking')
                         ->orderby('id')
                         ->get();
+
+
 
 //            $states=$this->states();
 //            if(!is_null($reserve->city))
@@ -284,16 +288,18 @@ class BookingController extends BaseController
            $dateNow=$this->dateNow;
            $timeNow=$this->timeNow;
 
-           if(Auth::user()->type==2)
-               return view('admin.InfoReserve')
+//           if(Auth::user()->type==2){
+//               return view('admin.InfoReserve')
 //                            ->with('user',$reserve)
-                            ->with('booking',$booking)
-                            ->with('history',$history)
-                            ->with('homework',$homework)
-//                            ->with('feedback',$feedback)
-                            ->with('dateNow',$dateNow);
-           else
-            {
+//                   ->with('feedback',$feedback)
+//                   ->with('booking',$booking)
+//                   ->with('history',$history);
+//                            ->with('homework',$homework)
+
+////                            ->with('dateNow',$dateNow);
+//           }
+//           else
+//            {
                 return view('user.InfoReserve')
 //                    ->with('user',$reserve)
                     ->with('booking',$booking)
@@ -301,7 +307,7 @@ class BookingController extends BaseController
                     ->with('homework',$homework)
 //                    ->with('feedback',$feedback)
                     ->with('dateNow',$dateNow);
-            }
+//            }
 
         }
         else
@@ -451,19 +457,84 @@ class BookingController extends BaseController
     }
 
 
-    public function acceptReserve()
+    public function acceptReserve(Request $request)
     {
-        $booking=booking::join('reserves','bookings.id','=','reserves.booking_id')
-                ->join('users','users.id','=','reserves.user_id')
-                ->leftjoin('feedback_coachings','bookings.id','=','feedback_coachings.booking_id')
-                ->wherein('bookings.status',[0,2,3])
-                ->where('bookings.user_id','=',Auth::user()->id)
-                ->orderby('bookings.id','desc')
-                ->select('bookings.*','users.fname','users.lname','bookings.id as booking_id','reserves.presession','users.personal_image','feedback_coachings.id as feedback_coachings_id')
-                ->paginate($this->countPage());
+        $this->validate($request,[
+            'start_date'    =>'nullable|string',
+            'type'          =>'nullable|string'
+        ]);
+
+//        if(!is_null($request) && (!strpos($request->start_date," ~ ")))
+//        {
+//
+//            alert()->error('بازه تاریخ انتخابی درست نمی باشد')->persistent('بستن');
+//            return redirect('/admin/booking/accept');
+//        }
+//
+//        dd(strpos($request->start_date," ~ "));
+
+//        $booking=booking::join('reserves','bookings.id','=','reserves.booking_id')
+//                ->join('users','users.id','=','reserves.user_id')
+//                ->leftjoin('feedback_coachings','bookings.id','=','feedback_coachings.booking_id')
+//                ->wherein('bookings.status',[0,2,3])
+//                ->where('bookings.user_id','=',Auth::user()->id)
+//                ->orderby('bookings.id','desc')
+//                ->select('bookings.*','users.fname','users.lname','bookings.id as booking_id','reserves.presession','users.personal_image','feedback_coachings.id as feedback_coachings_id')
+//                ->paginate($this->countPage());
+
+
+        if(Auth::user()->type==2  || Auth::user()->type==3 || Auth::user()->type==4)
+        {
+            if($request->type=='روز برگزاری')
+            {
+                $request['start_date']=explode(' ~ ',$request['start_date']);
+                $booking = booking::wherein('bookings.status', [0, 2, 3])
+                            ->wherebetween('start_date',[$request['start_date'][0],$request['start_date'][1]])
+                            ->orderby('bookings.id', 'desc')
+                            ->get();
+            }elseif($request->type=='رزرو شده')
+            {
+//                $request['start_date']=explode(' ~ ',$request['start_date']);
+//                $startMonth=$request['start_date'][0];
+//                $startMonth=($this->changeTimestampToMilad($startMonth).' 00:00:00');
+//                $endtMonth=$request['start_date'][1];
+//                $endtMonth=$this->changeTimestampToMilad($endtMonth).' 23:59:59';
+//                $booking = reserve::wherein('status', [1, 2, 3])
+//                            ->wherebetween('created_at',[$startMonth,$endtMonth])
+//                            ->orderby('id', 'desc')
+//                            ->get();
+//
+//                foreach ($booking as $item)
+//                {
+//                    $item=$item->booking;
+//                    dd($booking);
+//                }
+//
+//                dd($booking);
+            }
+            else
+            {
+                $booking = booking::wherein('bookings.status', [0, 2, 3])
+                    ->orderby('bookings.id', 'desc')
+                    ->get();
+            }
+
+        }
+        else
+        {
+            $booking = booking::where('user_id', '=', Auth::user()->id)
+                        ->wherein('bookings.status', [0, 2, 3])
+                        ->orderby('bookings.id', 'desc')
+                        ->get();
+        }
+
+
+
+
 
         foreach ($booking as $item)
         {
+
             switch ($item->duration_booking)
             {
                 case '1':
@@ -474,19 +545,27 @@ class BookingController extends BaseController
                     break;
             }
 
-            $item->caption_status=$this->get_statusBookings($item->status);
 
-            if(is_null($item->personal_image))
-            {
-                $item->personal_image='default-avatar.png';
-            }
+
+
+
+
+//            $item->caption_status=$this->get_statusBookings($item->status);
+//            dd($item->get_statusBookings($item->status));
+
+
         }
 
-        if(Auth::user()->type==2)
+
+
+        if(Auth::user()->type==2  || Auth::user()->type==3 || Auth::user()->type==4)
+        {
+
             return view('admin.bookingAcceptReserveCoach')
 //        return view('panelUser.booking')
                 ->with('booking', $booking)
                 ->with('dateNow', $this->dateNow);
+        }
         else
         {
             return view('user.bookingAcceptReserveCoach')
@@ -728,6 +807,7 @@ class BookingController extends BaseController
     //نمایش کامل لیست جلسات برای ادمین در ماه جاری
     public function reportAllCoach(Request $request)
     {
+
         if($request->start_date)
         {
                 $this->validate($request,[
@@ -764,6 +844,37 @@ class BookingController extends BaseController
                         ->with('reserveBooking',$reserveBooking)
                         ->with('successBooking',$successBooking)
                         ->with('cancelBooking',$cancelBooking);
+    }
+
+    public function showAdminBooking(booking $booking)
+    {
+
+        //تاریخچه جلسات
+        $history=reserve::join('users','reserves.user_id','=','users.id')
+            ->join('bookings','reserves.booking_id','=','bookings.id')
+            ->where('bookings.user_id','=',$booking->user_id)
+            ->where('reserves.user_id','=',$booking->reserve->user_id)
+            ->get();
+
+        switch($booking->reserve->type_booking)
+        {
+            case '1':$booking->reserve->type_booking='حضوری';
+                break;
+            case '2':$booking->reserve->type_booking='آنلاین';
+                break;
+            case '0':$booking->reserve->type_booking='فرقی ندارد';
+                break;
+            default:$booking->reserve->type_booking='خطا';
+                break;
+        }
+
+
+        $dateNow=$this->dateNow;
+        $timeNow=$this->timeNow;
+
+        return view('admin.InfoReserve')
+            ->with('booking',$booking)
+            ->with('history',$history);
     }
 
 }

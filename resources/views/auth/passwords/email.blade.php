@@ -100,6 +100,7 @@
         var intl=intlTelInput(input,{
             formatOnDisplay:false,
             separateDialCode:true,
+            autoPlaceholder:'off',
             preferredCountries:["ir", "gb"]
         });
 

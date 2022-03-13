@@ -10,6 +10,7 @@
                 <div class="form-group">
                     <label for="coupon">کوپن  *</label>
                     <input type="text" class="form-control @error('coupon') is-invalid @enderror" id="coupon" name="coupon" />
+                    <small class="text-muted">نام کوپن تخفیف را به انگلیسی وارد کنید</small>
 
                 </div>
                 <div class="form-group">
@@ -29,6 +30,7 @@
                         name="expire_date"
                         min="{{$dateNow}}"
                     ></date-picker>
+                    <small class="text-muted">تاریخ انقضای کوپن تخفیف را وارد کنید</small>
                 </div>
                 <div class="form-group">
                     <label for="product">نوع محصول *</label>
@@ -39,11 +41,14 @@
                         <option value="0">هردو</option>
                     </select>
                 </div>
+
+                <!--
                 <div class="form-group">
                     <label for="limit_user"> تعداد استفاده برای هر نفر *</label>
                     <input type="number" class="form-control @error('limit_user') is-invalid @enderror" id="limit_user" name="limit_user" min="0"/>
                     <small class="text-muted">تعداد استفاده هر نفر این کوپن</small>
                 </div>
+                -->
                 <div class="form-group">
                     <label for="count">تعداد استفاده</label>
                     <input type="number" class="form-control @error('count') is-invalid @enderror" id="count" name="count" min="0"/>

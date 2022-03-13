@@ -1,6 +1,7 @@
 @extends('admin.master.index')
 
 @section('content')
+
     <div class="col-12">
         <div id="app" class="col-md-4">
             <form method="get" action="/admin/booking/reportallcoach" id="formBooking">
@@ -53,11 +54,11 @@
                             <td>{{$item->start_date}}</td>
                             <td>{{$item->start_time}}</td>
                             <td dir="ltr">
-                                <a href="/admin/user/{{$item->reserve->user->id}}" target="_blank">
-                                    @if(is_null($item->reserve->user->fname)&&is_null($item->reserve->user->lname))
-                                        {{$item->reserve->user->tel}}
+                                <a href="/admin/user/{{$item->reserveAccess->user->id}}" target="_blank">
+                                    @if(is_null($item->reserveAccess->user->fname)&&is_null($item->reserveAccess->user->lname))
+                                        {{$item->reserveAccess->user->tel}}
                                     @else
-                                        {{$item->reserve->user->fname." ".$item->reserve->user->lname}}
+                                        {{$item->reserveAccess->user->fname." ".$item->reserveAccess->user->lname}}
                                     @endif
                                 </a>
                             </td>

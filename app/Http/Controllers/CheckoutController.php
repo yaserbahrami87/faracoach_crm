@@ -59,9 +59,9 @@ class CheckoutController extends BaseController
             $request['start_date']=explode(' ~ ',$request['start_date']);
 
             $startMonth=$request['start_date'][0];
-            $startMonth=($this->changeTimestampToMilad($startMonth));
+            $startMonth=($this->changeTimestampToMilad($startMonth).' 00:00:00');
             $endtMonth=$request['start_date'][1];
-            $endtMonth=$this->changeTimestampToMilad($endtMonth);
+            $endtMonth=$this->changeTimestampToMilad($endtMonth).' 23:59:59';
 
         }
         else

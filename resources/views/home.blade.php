@@ -199,6 +199,7 @@
 @section('row2')
     <div class="row mt-5">
         <div class="col-md-3 ">
+            <!--
             <article class="card mb-3" >
                 <div class="card-header">
                     <h6 class="card-title m-0 p-0">آخرین مقالات شما  </h6>
@@ -221,6 +222,7 @@
                     @endforeach
                 </div>
             </article>
+            -->
             <aside class="card mb-2" >
                 <div class="card-header">
                     <h6 class="card-title p-0 m-0">کاربرهای فعال</h6>

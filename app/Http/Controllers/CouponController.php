@@ -69,7 +69,7 @@ class CouponController extends BaseController
             'discount'      =>'required|numeric|between:0,100',
             'expire_date'   =>'required',
             'product'       =>'required|numeric',
-            'limit_user'    =>'required|numeric',
+            'limit_user'    =>'nullable|numeric',
             'count'         =>'nullable|numeric|',
         ]);
         $coupon=coupon::where('coupon','=',$request['coupon'])
@@ -486,9 +486,12 @@ class CouponController extends BaseController
     //اعمال کد تخفیف در سبد خرید رزرو نوبت
     public function checkOff(request $request)
     {
+
         $this->validate($request, [
             'coupon' => 'nullable|string'
         ]);
+
+//        dd(Auth::user()->reserves->where('status','=',0));
 
         $cart = $this->get_cartUser();
         foreach ($cart as $item)
@@ -497,10 +500,13 @@ class CouponController extends BaseController
                         ->where('bookings.id', '=', $item['booking_id'])
                         ->first();
 
+
+
             $coupon = coupon::where('coupon', '=', $request['coupon'])
                         ->where('user_id', '=', $coach->id)
                         ->wherein('product', [0, $coach->duration_booking])
                         ->first();
+
 
 
             //اگر کوپن وجود نداشت
@@ -514,6 +520,7 @@ class CouponController extends BaseController
                 alert()->warning('تعداد کوپن تمام شده است')->persistent('بستن');
                 return back();
             }
+//            else if($coupon->product==0 || $coupon->product== )
             else
             {
                 $coupon = coupon::join('users', 'coupons.user_id', '=', 'users.id')
