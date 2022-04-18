@@ -48,8 +48,13 @@
 
                             <tr class="@if($item->status==1) bg-success  @endif">
                                 <td>
+
                                     <a href="{{route('showUserForAdmin',$item->user->id)}}" target="_blank">
-                                        {{$item->user->fname.' '.$item->user->lname}}
+                                        @if(is_null($item->user->fname)&&(is_null($item->user->lname)))
+                                            {{$item->user->tel}}
+                                        @else
+                                            {{$item->user->fname.' '.$item->user->lname}}
+                                        @endif
                                     </a>
 
                                 </td>
@@ -90,7 +95,11 @@
                         <tr class="@if($item->status==1) bg-success  @endif">
                             <td>
                                 <a href="{{route('showUserForAdmin',$item->user->id)}}" target="_blank">
-                                    {{$item->user->fname.' '.$item->user->lname}}
+                                    @if(is_null($item->user->fname)&&(is_null($item->user->lname)))
+                                        {{$item->user->tel}}
+                                    @else
+                                        {{$item->user->fname.' '.$item->user->lname}}
+                                    @endif
                                 </a>
                             </td>
                             <td>
