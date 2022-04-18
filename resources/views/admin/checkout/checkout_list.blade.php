@@ -89,6 +89,7 @@
                         <th>واریزی(تومان)</th>
                         <th>توضیحات</th>
                         <th>تاریخ</th>
+                        <th>ساعت</th>
                         <th>کد</th>
                     </tr>
                     </thead>
@@ -117,7 +118,8 @@
                             </td>
                             <td>{{number_format($item->price)}}</td>
                             <td>{{$item->description}}</td>
-                            <td class="text-right">{{$item->dateTime}}</td>
+                            <td class="text-right">{{substr($item->dateTime,0,5)  }}</td>
+                            <td class="text-right">{{substr($item->dateTime,5)  }}</td>
                             <td class="text-right">{{$item->authority}}</td>
                         </tr>
                     @endforeach
