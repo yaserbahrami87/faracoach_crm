@@ -16,7 +16,7 @@ class CreateTweetsTable extends Migration
         Schema::create('tweets', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id')->nullable();
-            $table->string('tweet',250)->nullable();
+            $table->string('tweet',500)->nullable();
             $table->bigInteger('likes')->default(0);
             $table->tinyInteger('status')->default(1);
             $table->string('date_fa')->nullable();

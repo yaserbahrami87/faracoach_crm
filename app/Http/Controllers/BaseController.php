@@ -78,7 +78,6 @@ class BaseController extends Controller
             $message = $msg;
             $receptor = array($tel);
             $result = Kavenegar::Send($sender, $tel, $message);
-
             if ($result) {
                 foreach ($result as $r) {
                     $messageid = $r->messageid;

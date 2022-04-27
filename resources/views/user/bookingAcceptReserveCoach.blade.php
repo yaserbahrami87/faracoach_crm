@@ -304,10 +304,9 @@
             <div class="col-12 table-responsive">
                 <table class="table table-bordered table-striped">
                     <tr>
-
                         <th></th>
                         <th>کدجلسه</th>
-                        <th>کاربر</th>
+                        <th>مشخصات</th>
                         <th>تاریخ</th>
                         <th>ساعت شروع</th>
                         <th>نوع جلسه</th>
@@ -316,7 +315,8 @@
                         <th></th>
                     </tr>
                     @foreach($booking as $item)
-                        <tr class="@if($item->caption_status=='رزرو شد') bg-warning @elseif($item->caption_status=='برگزارشد') bg-success @endif">
+
+                        <tr class="@if($item->status==0) bg-warning @elseif($item->status==3) bg-success @endif">
                             <td class="p-0">
                                 <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="rounded-circle "  width="50px" height="50px" />
                             </td>
@@ -324,7 +324,9 @@
                                 {{$item->id}}
                             </td>
                             <td>
-                                <a class="btn-modal-introduced" href="{{$item->id}}"   >{{$item->fname}} {{$item->lname}}</a>
+                                @if(isset($item->reserveAccess->user))
+                                    <a class="btn-modal-introduced" href="{{$item->id}}"   >{{$item->reserveAccess->user->fname}} {{$item->reserveAccess->user->lname}}</a>
+                                @endif
                             </td>
 
                             <td>

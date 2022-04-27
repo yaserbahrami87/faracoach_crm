@@ -520,12 +520,29 @@ class UserController extends BaseController
             }
 
         //تعداد افراد دعوت شده
-        $countIntroducedUser=User::where('introduced','=',$user->tel)
-                        ->count();
+        if(is_null($user->tel))
+        {
+            $countIntroducedUser=NULL;
+        }
+        else
+        {
+            $countIntroducedUser=User::where('introduced','=',$user->tel)
+                ->count();
+        }
+
 
         //یوزر توسط چه کسی معرفی شده است
-        $resourceIntroduce=User::where('tel','=',$user->introduced)
-                        ->first();
+        if(is_null($user->introduced))
+        {
+            $resourceIntroduce=NULL;
+        }
+        else
+        {
+            $resourceIntroduce=User::where('tel','=',$user->introduced)
+                ->first();
+        }
+
+
 
         $states=$this->states();
 
@@ -562,9 +579,6 @@ class UserController extends BaseController
     // نمایش پروفایل کاربر توسط ادمین
     public function show($user)
     {
-
-
-
         $userAdmin=Auth::user();
         //تعداد پیگیری های انجام شده
 
@@ -2045,146 +2059,146 @@ class UserController extends BaseController
         }
     }
 
-    public function contacts()
-    {
-        $user=Auth::user();
-        if(strlen(Auth::user()->personal_image)==0)
-        {
-            $user->personal_image="default-avatar.png";
-        }
+//    public function contacts()
+//    {
+//        $user=Auth::user();
+//        if(strlen(Auth::user()->personal_image)==0)
+//        {
+//            $user->personal_image="default-avatar.png";
+//        }
+//
+//        //تعداد افراد دعوت شده
+//        $countIntroducedUser=User::where('introduced','=',$user->tel)
+//            ->count();
+//
+//        //یوزر توسط چه کسی معرفی شده است
+//        $resourceIntroduce=User::where('tel','=',$user->introduced)
+//            ->first();
+//
+//        $states=$this->states();
+//
+//
+//        if(!is_null($user->gettingknow))
+//        {
+//            $user->gettingknow_parent_user=$this->get_categoryGettingknow($user->gettingknow,NULL,NULL,NULL,'first')->parent_id;
+//            $condition=['parent_id','=',$user->gettingknow_parent_user];
+//            $gettingKnow_child_list=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
+//        }
+//        else
+//        {
+//            $gettingKnow_child_list=NULL;
+//        }
+//
+//
+//        //انتخاب شهر براساس کد
+//        $city=$this->city($user->city);
+//
+//        $condition=['parent_id','=','0'];
+//        $gettingKnow_parent_list=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
+//
+//        return view ('user.contacts_info')
+//            ->with('user',$user)
+//            ->with('countIntroducedUser',$countIntroducedUser)
+//            ->with('resourceIntroduce',$resourceIntroduce)
+//            ->with('states',$states)
+//            ->with('gettingKnow_parent_list',$gettingKnow_parent_list)
+//            ->with('gettingKnow_child_list',$gettingKnow_child_list)
+//            ->with('city',$city);
+//    }
 
-        //تعداد افراد دعوت شده
-        $countIntroducedUser=User::where('introduced','=',$user->tel)
-            ->count();
+//    public function introduction()
+//    {
+//        $user=Auth::user();
+//        if(strlen(Auth::user()->personal_image)==0)
+//        {
+//            $user->personal_image="default-avatar.png";
+//        }
+//
+//        //تعداد افراد دعوت شده
+//        $countIntroducedUser=User::where('introduced','=',$user->tel)
+//            ->count();
+//
+//        //یوزر توسط چه کسی معرفی شده است
+//        $resourceIntroduce=User::where('tel','=',$user->introduced)
+//            ->first();
+//
+//        $states=$this->states();
+//
+//
+//        if(!is_null($user->gettingknow))
+//        {
+//            $user->gettingknow_parent_user=$this->get_categoryGettingknow($user->gettingknow,NULL,NULL,NULL,'first')->parent_id;
+//            $condition=['parent_id','=',$user->gettingknow_parent_user];
+//            $gettingKnow_child_list=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
+//        }
+//        else
+//        {
+//            $gettingKnow_child_list=NULL;
+//        }
+//
+//
+//        //انتخاب شهر براساس کد
+//        $city=$this->city($user->city);
+//
+//        $condition=['parent_id','=','0'];
+//        $gettingKnow_parent_list=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
+//
+//        return view ('user.introduction_info')
+//            ->with('user',$user)
+//            ->with('countIntroducedUser',$countIntroducedUser)
+//            ->with('resourceIntroduce',$resourceIntroduce)
+//            ->with('states',$states)
+//            ->with('gettingKnow_parent_list',$gettingKnow_parent_list)
+//            ->with('gettingKnow_child_list',$gettingKnow_child_list)
+//            ->with('city',$city);
+//    }
 
-        //یوزر توسط چه کسی معرفی شده است
-        $resourceIntroduce=User::where('tel','=',$user->introduced)
-            ->first();
-
-        $states=$this->states();
-
-
-        if(!is_null($user->gettingknow))
-        {
-            $user->gettingknow_parent_user=$this->get_categoryGettingknow($user->gettingknow,NULL,NULL,NULL,'first')->parent_id;
-            $condition=['parent_id','=',$user->gettingknow_parent_user];
-            $gettingKnow_child_list=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
-        }
-        else
-        {
-            $gettingKnow_child_list=NULL;
-        }
-
-
-        //انتخاب شهر براساس کد
-        $city=$this->city($user->city);
-
-        $condition=['parent_id','=','0'];
-        $gettingKnow_parent_list=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
-
-        return view ('user.contacts_info')
-            ->with('user',$user)
-            ->with('countIntroducedUser',$countIntroducedUser)
-            ->with('resourceIntroduce',$resourceIntroduce)
-            ->with('states',$states)
-            ->with('gettingKnow_parent_list',$gettingKnow_parent_list)
-            ->with('gettingKnow_child_list',$gettingKnow_child_list)
-            ->with('city',$city);
-    }
-
-    public function introduction()
-    {
-        $user=Auth::user();
-        if(strlen(Auth::user()->personal_image)==0)
-        {
-            $user->personal_image="default-avatar.png";
-        }
-
-        //تعداد افراد دعوت شده
-        $countIntroducedUser=User::where('introduced','=',$user->tel)
-            ->count();
-
-        //یوزر توسط چه کسی معرفی شده است
-        $resourceIntroduce=User::where('tel','=',$user->introduced)
-            ->first();
-
-        $states=$this->states();
-
-
-        if(!is_null($user->gettingknow))
-        {
-            $user->gettingknow_parent_user=$this->get_categoryGettingknow($user->gettingknow,NULL,NULL,NULL,'first')->parent_id;
-            $condition=['parent_id','=',$user->gettingknow_parent_user];
-            $gettingKnow_child_list=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
-        }
-        else
-        {
-            $gettingKnow_child_list=NULL;
-        }
-
-
-        //انتخاب شهر براساس کد
-        $city=$this->city($user->city);
-
-        $condition=['parent_id','=','0'];
-        $gettingKnow_parent_list=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
-
-        return view ('user.introduction_info')
-            ->with('user',$user)
-            ->with('countIntroducedUser',$countIntroducedUser)
-            ->with('resourceIntroduce',$resourceIntroduce)
-            ->with('states',$states)
-            ->with('gettingKnow_parent_list',$gettingKnow_parent_list)
-            ->with('gettingKnow_child_list',$gettingKnow_child_list)
-            ->with('city',$city);
-    }
-
-    public function contract()
-    {
-        $user=Auth::user();
-        if(strlen(Auth::user()->personal_image)==0)
-        {
-            $user->personal_image="default-avatar.png";
-        }
-
-        //تعداد افراد دعوت شده
-        $countIntroducedUser=User::where('introduced','=',$user->tel)
-            ->count();
-
-        //یوزر توسط چه کسی معرفی شده است
-        $resourceIntroduce=User::where('tel','=',$user->introduced)
-            ->first();
-
-        $states=$this->states();
-
-
-        if(!is_null($user->gettingknow))
-        {
-            $user->gettingknow_parent_user=$this->get_categoryGettingknow($user->gettingknow,NULL,NULL,NULL,'first')->parent_id;
-            $condition=['parent_id','=',$user->gettingknow_parent_user];
-            $gettingKnow_child_list=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
-        }
-        else
-        {
-            $gettingKnow_child_list=NULL;
-        }
-
-
-        //انتخاب شهر براساس کد
-        $city=$this->city($user->city);
-
-        $condition=['parent_id','=','0'];
-        $gettingKnow_parent_list=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
-
-        return view ('user.contract_info')
-            ->with('user',$user)
-            ->with('countIntroducedUser',$countIntroducedUser)
-            ->with('resourceIntroduce',$resourceIntroduce)
-            ->with('states',$states)
-            ->with('gettingKnow_parent_list',$gettingKnow_parent_list)
-            ->with('gettingKnow_child_list',$gettingKnow_child_list)
-            ->with('city',$city);
-    }
+//    public function contract()
+//    {
+//        $user=Auth::user();
+//        if(strlen(Auth::user()->personal_image)==0)
+//        {
+//            $user->personal_image="default-avatar.png";
+//        }
+//
+//        //تعداد افراد دعوت شده
+//        $countIntroducedUser=User::where('introduced','=',$user->tel)
+//            ->count();
+//
+//        //یوزر توسط چه کسی معرفی شده است
+//        $resourceIntroduce=User::where('tel','=',$user->introduced)
+//            ->first();
+//
+//        $states=$this->states();
+//
+//
+//        if(!is_null($user->gettingknow))
+//        {
+//            $user->gettingknow_parent_user=$this->get_categoryGettingknow($user->gettingknow,NULL,NULL,NULL,'first')->parent_id;
+//            $condition=['parent_id','=',$user->gettingknow_parent_user];
+//            $gettingKnow_child_list=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
+//        }
+//        else
+//        {
+//            $gettingKnow_child_list=NULL;
+//        }
+//
+//
+//        //انتخاب شهر براساس کد
+//        $city=$this->city($user->city);
+//
+//        $condition=['parent_id','=','0'];
+//        $gettingKnow_parent_list=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
+//
+//        return view ('user.contract_info')
+//            ->with('user',$user)
+//            ->with('countIntroducedUser',$countIntroducedUser)
+//            ->with('resourceIntroduce',$resourceIntroduce)
+//            ->with('states',$states)
+//            ->with('gettingKnow_parent_list',$gettingKnow_parent_list)
+//            ->with('gettingKnow_child_list',$gettingKnow_child_list)
+//            ->with('city',$city);
+//    }
 
 
     //پیدا کردن و پاک کردن اطلاعات ناهمسان جداول باهمدیگر

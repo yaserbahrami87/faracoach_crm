@@ -15,7 +15,7 @@ class CreateVerifiesTable extends Migration
     {
         Schema::create('verifies', function (Blueprint $table) {
             $table->id();
-            $table->string('tel',15);
+            $table->string('tel',100);
             $table->string('code',10);
             $table->boolean('verify');
             $table->string('type',50)->nullable();

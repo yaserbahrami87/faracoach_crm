@@ -57,6 +57,7 @@ class AdminController extends BaseController
     {
         if(Gate::allows('isAdmin')||Gate::allows('isEducation'))
         {
+
 //            $notFollowup=count($this->get_notfollowup_withoutPaginate());
 //            $follow=$this->get_usersByType(11,Auth::user()->id)->count();
 //            $cancel=$this->get_usersByType(12,Auth::user()->id)->count();
@@ -238,6 +239,7 @@ class AdminController extends BaseController
         }
         else if(Gate::allows('isUser'))
         {
+
             $user=(Auth::user());
             if(($user->status_coach==-2)||($user->status_coach==1))
             {

@@ -3,12 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\landPage;
+use App\Notifications\LoginWithCode;
+use App\User;
 use App\verify;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Hekmatinasser\Verta\Verta;
+use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+
+
 
 class VerifyController extends BaseController
 {
@@ -698,6 +703,147 @@ class VerifyController extends BaseController
         else
         {
             return '<div  class="alert alert-danger">لطفا کد را درست وارد کنید</div>';
+        }
+    }
+
+
+    //ورود یک مرحله ای ثبت نام و ورود
+    public function loginOrStoreUser(Request $request)
+    {
+        $email=NULL;
+        if(preg_match('/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/',$request->tel))
+        {
+            $request->validate([
+                'tel'  =>'required|email',
+            ]);
+
+            $email=$request->tel;
+            $user=User::where('email','=',$email)
+                        ->first();
+        }
+        else
+        {
+            $request->validate([
+                'tel'   =>'required|string',
+            ]);
+
+            $user=User::where('email','=',$request->tel)
+                ->first();
+        }
+
+
+        $verify=verify::where('tel','=',$request->tel)
+                ->delete();
+
+
+        $six_digit_random_number = mt_rand(100000, 999999);
+        $status = verify::create(
+            [
+                'tel' => $request->tel,
+                'type' => 'login/store',
+                'code' => $six_digit_random_number,
+                'date_fa' => $this->dateNow,
+                'time_fa' => $this->timeNow,
+            ]);
+
+        if(!is_null($email))
+        {
+
+            if(is_null($user))
+            {
+                landPage::where('email','=',$email)
+                    ->where('resource','=','login/store')
+                    ->delete();
+
+                $user=landPage::create([
+                    'email'     =>$email,
+                    'resource'  =>'login/store',
+                ]);
+            }
+
+            $user->notify(new LoginWithCode($email,$six_digit_random_number));
+            echo "<div class='alert alert-warning'>کد یکبار مصرف ارسال شد</div>";
+        }
+        else
+        {
+            if ($status) {
+                $message = "کد یکبار مصرف شما در سیستم فراکوچ : " . $six_digit_random_number;
+                $this->sendSms($request->tel, $message);
+                echo "<div class='alert alert-warning'>کد یکبار مصرف ارسال شد</div>";
+            } else {
+                echo('<div  class="alert alert-danger">خطا</div>');
+            }
+        }
+    }
+
+    public function checkLoginOrStoreUser(Request $request)
+    {
+
+        $request->validate([
+            'code'  =>'required|numeric|digits:6',
+        ]);
+
+        $status=verify::where('code','=',$request->code)
+                    ->where('type','=','login/store')
+                    ->where('verify','=',0)
+                    ->first();
+        if(is_null($status))
+        {
+            return "<div class='alert alert-danger'>کد وارد شده اشتباه است</div>";
+        }
+        else
+        {
+            $status->verify=1;
+            $status->update();
+
+            $status_email=( preg_match('/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/',$status->tel));
+            if($status_email==0)
+            {
+                $email=NULL;
+                $tel=$status->tel;
+            }
+            else
+            {
+                $email=$status->tel;
+                $tel=NULL;
+            }
+
+            $user=User::orwhere('tel','=',$status->tel)
+                ->when($email,function ($query)use($email)
+                {
+                    return $query->orwhere('email','=',$email);
+                })
+                ->first();
+
+
+//            $user=User::where('tel','=',$status->tel)
+//                        ->when($request->email,function ($query)use($email)
+//                        {
+//                            return $query->orwhere('email','=',$email);
+//                        })
+//                        ->first();
+
+            if(is_null($user))
+            {
+                $user=User::create([
+                    'tel'           =>$tel,
+                    'email'         =>$email,
+                    'tel_verified'  =>1
+                ]);
+
+
+            }
+            else
+            {
+                if($user->tel_verified==0)
+                {
+                    $user->tel_verified=1;
+                    $user->save();
+                }
+            }
+            Auth::loginUsingId($user->id);
+            echo "<div class='alert alert-success'>ورود با موفقیت انجام شد</div>";
+            echo "<script>location.reload();</script>";
         }
     }
 }

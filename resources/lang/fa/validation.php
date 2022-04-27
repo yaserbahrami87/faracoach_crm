@@ -237,5 +237,10 @@ return [
         'user_type'             =>'دسته',
         'followup_comment'      =>'متن پیگیری',
         'problemfollowup_id'    =>'کیفیت پیگیری',
+        'type_holding'          =>'نوع برگزاری',
+        'online_platform'       =>'پلتفرم جلسه',
+        'today_meeting'         =>'جلسات روز جاری',
+        'subject'               =>'موضوع',
+        'type_booking'          =>'نوع جلسه',
     ],
 ];

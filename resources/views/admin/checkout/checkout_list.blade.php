@@ -29,7 +29,6 @@
                 <a class="nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">لاگ درگاه<span class="badge badge-secondary">{{$checkout->count()}}</span></a>
                 <a class="nav-link" id="nav-checkoutAccess-tab" data-toggle="tab" href="#nav-checkoutAccess" role="tab" aria-controls="nav-checkoutAccess" aria-selected="false">پرداخت شده <span class="badge badge-success">{{$checkoutAccess->count()}}</span></a>
                 <a class="nav-link" id="nav-checkoutCoach-tab" data-toggle="tab" href="#nav-checkoutCoach" role="tab" aria-controls="nav-checkoutCoach" aria-selected="false">پرداخت کلینیک <span class="badge badge-success">{{$checkoutAccess->where('type','=','reserve')->count()}}</span></a>
-
             </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
@@ -42,8 +41,9 @@
                         <th>محصول</th>
                         <th>واریزی(تومان)</th>
                         <th>توضیحات</th>
-                        <th>ساعت</th>
+
                         <th>تاریخ</th>
+                        <th>ساعت</th>
                         <th>کد</th>
                     </tr>
                     </thead>
@@ -131,9 +131,8 @@
                     </tbody>
                 </table>
             </div>
-
             <!--***** پرداختی های جلسات رزرو ****** -->
-            <div class="tab-pane fade show active" id="nav-checkoutCoach" role="tabpanel" aria-labelledby="nav-checkoutCoach-tab">
+            <div class="tab-pane fade show " id="nav-checkoutCoach" role="tabpanel" aria-labelledby="nav-checkoutCoach-tab">
                 <p>جمع مبالغ: {{number_format($checkoutAccess->where('type','=','reserve')->sum('price'))}} تومان</p>
                 <table class="dataTable table table-striped table-bordered" style="width:100%">
                     <thead>
@@ -142,15 +141,16 @@
                         <th>محصول</th>
                         <th>واریزی(تومان)</th>
                         <th>توضیحات</th>
-                        <th>ساعت</th>
                         <th>تاریخ</th>
+                        <th>ساعت</th>
+
                         <th>کد</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($checkoutAccess->where('type','=','reserve') as $item)
 
-                        <tr class="@if($item->status==1) bg-success  @endif">
+                        <tr >
                             <td>
 
                                 <a href="{{route('showUserForAdmin',$item->user->id)}}" target="_blank">

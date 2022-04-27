@@ -153,8 +153,8 @@ class CoachController extends BaseController
         {
             //جوین کردن دو جدول برای بدست آوردن اطلاعات کوچ و کاربر موردنظر که ممکنه آیدی درست باشد ولی کوچ نباشد
             $coach = coach::join('users', 'coaches.user_id', '=', 'users.id')
-                ->where('users.id', '=', $user->id)
-                ->first();
+                                ->where('users.id', '=', $user->id)
+                                ->first();
 
 
             $feedbacks=coach::join('bookings', 'coaches.user_id', '=', 'bookings.user_id')
@@ -162,7 +162,15 @@ class CoachController extends BaseController
                     ->join('users','users.id','=','feedback_coachings.user_id')
                     ->where('coaches.user_id','=',$user->id)
                     ->paginate(10);
-            $condition=['start_date','>',$this->dateNow];
+            if($coach->today_meeting)
+            {
+                $condition=['start_date','>=',$this->dateNow];
+            }
+            else
+            {
+                $condition=['start_date','>',$this->dateNow];
+            }
+
             $bookings=$this->get_booking(NULL,$coach->user_id,NULL,NULL,NULL,1,$condition,'get');
 
             //کامنت های گذاشته شده برای کوچ
@@ -184,7 +192,13 @@ class CoachController extends BaseController
                 }
 
                 $dateNow = verta();
-                $dateNow->addDays(1);
+
+                if($coach->today_meeting==0)
+                {
+                    $dateNow->addDays(1);
+                }
+
+
                 $dateShamsi = $dateNow->format('Y-m-d H:i:s');
 
 
@@ -352,6 +366,16 @@ class CoachController extends BaseController
             $user->status_coach = $request['status'];
             $user->save();
             alert()->success('اطلاعات با موفقیت بروزرسانی شد','پیام')->persistent('بستن');
+
+            switch ($request->status)
+            {
+                case '1':$this->sendSms($user->tel,'درخواست همکاری شما به عنوان کوچ در فراکوچ تائید شد');
+                            break;
+                case '-2':$this->sendSms($user->tel,'درخواست همکاری شما به عنوان کوچ در فراکوچ رد شد');
+                            break;
+                case '2':$this->sendSms($user->tel,'همکاری شما به عنوان کوچ در فراکوچ موقتا غیرفعال شد');
+                    break;
+            }
         }
         else
         {

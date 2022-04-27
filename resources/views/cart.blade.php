@@ -9,10 +9,19 @@
                         <tr>
                             <th>محصول</th>
 
-                            <th class="text-center">قیمت</th>
-                            <th class="text-center">درصد تخفیف</th>
-                            <th class="text-center">قیمت نهایی</th>
-                            <th> </th>
+                            <th class="text-center">
+                                قیمت
+                                <small class="text-muted d-block">تومان</small>
+                            </th>
+                            <th class="text-center">
+                                تخفیف
+                                <small class="text-muted d-block">%/نقد</small>
+                            </th>
+                            <th class="text-center">
+                                قیمت نهایی
+                                <small class="text-muted d-block">تومان</small>
+                            </th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -20,21 +29,21 @@
                             $sum_fi=0;
                             $sum_final_off=0;
                         @endphp
+
                         @foreach($cart as $item)
                             <tr>
                                 <td class="col-sm-8 col-md-6">
                                     <div class="media">
                                         <div class="media-body">
-                                            @if($item->duration_booking==1)
+                                            @if($item->booking->duration_booking==1)
                                                 <span>جلسه معارفه 30 دقیقه ای</span>
-                                            @elseif($item->duration_booking==2)
+                                            @elseif($item->booking->duration_booking==2)
 
                                                 <span>جلسه کوچینگ  60 دقیقه ای</span>
                                             @endif
-                                                <span>ساعت{{$item->start_time}} در تاریخ {{$item->start_date}}</span>
+                                                <span>ساعت{{$item->booking->start_time}} در تاریخ {{$item->booking->start_date}}</span>
                                             <h4 class="media-heading"><a href="#"></a></h4>
-                                            <p class="media-heading"> کوچ <a href="/coach/{{$item->username}}">{{$item->fname." ".$item->lname}}</a></p>
-
+                                            <p class="media-heading"> کوچ <a href="/coach/{{$item->booking->coach->user->username}}">{{$item->booking->coach->user->fname." ".$item->booking->coach->user->lname}}</a></p>
                                         </div>
                                     </div></td>
 
@@ -43,10 +52,10 @@
                                     <strong>{{number_format($item->fi) }}</strong>
                                 </td>
                                 <td class="col-sm-1 col-md-1 text-center">
-                                    <strong>{{$item->off}}%</strong>
+                                    <strong>{{$item->off}}</strong>
                                 </td>
                                 <td class="col-sm-1 col-md-1 text-center">
-                                    <strong>{{number_format($item->final_off)}}</strong>
+                                    <strong>{{number_format($item->final_off)}} تومان</strong>
                                 </td>
                                 @php
                                     $sum_fi=$sum_fi+$item->fi;
@@ -65,12 +74,12 @@
                         @endforeach
 
                         <tr>
-                            <td colspan="3">   </td>
+                            <td colspan="3">  </td>
                             <td><span>جمع قیمت</span></td>
                             <td class="text-right"><h5><strong> {{number_format($sum_fi)}}</strong></h5></td>
                         </tr>
                         <tr>
-                            <td colspan="3">   </td>
+                            <td colspan="3">  </td>
                             <td><span>قیمت نهایی</span></td>
                             <td class="text-right">
                                 <h5>
@@ -93,7 +102,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4">   </td>
+                            <td colspan="4">  </td>
                             <td>
                                 <form method="POST" action="/reserve/insert">
                                     {{csrf_field()}}
@@ -110,6 +119,9 @@
                         سبد خرید شما خالی است
                     </div>
                 @endif
+            </div>
+            <div class="col-12">
+                asdasdasdasd
             </div>
         </div>
     </div>

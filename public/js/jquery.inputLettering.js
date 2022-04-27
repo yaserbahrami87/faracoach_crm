@@ -3,6 +3,7 @@
     "use strict";
 
     $.fn.letteringInput = function( options ) {
+
         var settings,
             defaults = {
                 inputClass: "letter",
@@ -288,7 +289,8 @@
         /**
          * letteringInput methods processing
          */
-        if ( typeof options === "string" ) {
+        if ( typeof options === "string" )
+        {
             if ( options && methods[ options ] ) {
                 return methods[ options ].call( null, $( this ) );
             }
@@ -299,7 +301,8 @@
         /**
          * Initialize letteringInput events
          */
-        return this.each( function() {
+        return this.each( function()
+        {
             init( $( this ) );
         } );
     };

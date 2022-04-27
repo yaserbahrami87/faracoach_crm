@@ -18,67 +18,7 @@
                 فیلدهای ستاره دار اجباریست
             </div>
         </div>
-        <form method="post" action="/panel/profile/update/{{$user->id}}" enctype="multipart/form-data">
-            {{csrf_field()}}
-            {{method_field('PATCH')}}
-            <div class="card card-user " id="infogettingKnow">
-                <div class="card-header bg-secondary">
-                    <h5 class="card-title p-0 m-0 text-light">نحوه آشنایی</h5>
-                </div>
-                <div class="card-body bg-secondary-light">
-                    <div class="row">
-                        <div class="col-md-6 px-1">
-                            <div class="form-group">
-                                <label>نحوه آشنایی</label>
 
-                                <select id="gettingknow_parent" class="form-control p-0 @if(strlen($user->gettingknow)<>0) is-valid  @endif  @error('gettingknow') is-invalid @enderror" name="gettingKnow_parent">
-                                    <option selected disabled>انتخاب کنید</option>
-                                    @foreach($gettingKnow_parent_list as $item)
-                                        <option value="{{$item->id}}"  {{ $user->gettingknow_parent_user ==$item->id ? 'selected='.'"'.'selected'.'"' : '' }} >{{$item->category}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-
-
-                        @if(!is_null($user->gettingknow))
-                            <div class="col-md-6 px-1" id="gettingknow2" >
-                                <div class="form-group">
-                                    <label>عنوان آشنایی</label>
-                                    <select id="gettingknow" class="form-control p-0 @if(strlen($user->gettingknow)<>0) is-valid  @endif  @error('gettingknow') is-invalid @enderror" name="gettingknow">
-                                        <option selected disabled>انتخاب کنید</option>
-                                        @foreach($gettingKnow_child_list as $item)
-                                            <option value="{{$item->id}}"  {{$user->gettingknow==$item->id ? 'selected='.'"'.'selected'.'"' : '' }}>{{$item->category}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                        @else
-                            <div class="col-md-6 px-1" id="gettingknow2">
-                                <div class="form-group">
-                                    <label>عنوان آشنایی</label>
-                                    <select id="gettingknow" class="form-control p-0 @if(strlen($user->gettingknow)<>0) is-valid  @endif  @error('gettingknow') is-invalid @enderror" name="gettingknow">
-                                        <option selected disabled>انتخاب کنید</option>
-
-                                    </select>
-                                </div>
-                            </div>
-                        @endif
-
-                        <div class="col-md-6 px-1">
-                            <div class="form-group">
-                                <label>معرف</label>
-                                <input type="text" class="form-control @if(strlen($user->introduced)<>0) is-valid  @endif" @if(old('introduced')) value='{{old('introduced')}}' @else value="{{$user->introduced}}" @endif id="introduced" @if(strlen($user->introduced)>0) disabled @endif />
-                                <small class="text-muted">لطفا تلفن همراه معرف خود را وارد کنید</small>
-                                <span id="feedback_introduced" ></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-success mb-5">بروزرسانی</button>
-
-        </form>
     </div>
 @endsection
 

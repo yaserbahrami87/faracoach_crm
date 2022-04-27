@@ -18,6 +18,7 @@ class CreateCouponsTable extends Migration
             $table->integer('user_id')->nullable();
             $table->string('coupon',50)->nullable();
             $table->tinyInteger('discount')->default(0);
+            $table->tinyInteger('type_discount')->nullable();
             $table->string('expire_date',11)->nullable();
             $table->string('product',11)->nullable();
             $table->string('category_product',100)->nullable();

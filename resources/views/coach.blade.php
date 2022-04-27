@@ -66,7 +66,7 @@
             position: relative;
         }
 
-        input, section {
+        #tabs input, section {
             clear: both;
             padding-top: 10px;
             display: none;
@@ -388,30 +388,34 @@
                     </div>
                     <div class="card-body" id="app" >
                         @if(Auth::check())
-                            <p class="text-bold border-bottom mb-2 pb-2">انتخاب روز</p>
+                            @if(((is_null(Auth::user()->fname))||(is_null(Auth::user()->lname))||(is_null(Auth::user()->codemelli))||(is_null(Auth::user()->username))||(is_null(Auth::user()->job))))
+                                <div class="col-12">
+                                    <div class="alert alert-danger">
+                                        لطفا اطلاعات پروفایل خود را کامل کنید <a href="/panel/profile" class="btn btn-primary">اینجا</a>
+                                    </div>
+                                </div>
+                            @else
+                                <p class="text-bold border-bottom mb-2 pb-2">انتخاب روز</p>
 
-                            <date-picker
-                                :highlight="highlight"
-                                v-model="date"
-                                inline
-                                name="start_date"
-                                min="{{$dateNow}}"
-                                id="start_date"
-                            ></date-picker>
+                                <date-picker
+                                    :highlight="highlight"
+                                    v-model="date"
+                                    inline
+                                    name="start_date"
+                                    min="{{$dateNow}}"
+                                    id="start_date"
+                                    @change="changeDate"
+                                ></date-picker>
 
+                                <input type="hidden" id="coach_id" value="{{$coach->id}}" />
+                                <p class="text-bold mb-2 mt-3 pb-2 border-bottom">انتخاب ساعت</p>
+                                <div class="col-12 p-0" id="show_bookings">
+                                    <div class="alert alert-warning" role="alert">لطفا یک تاریخ را انتخاب کنید</div>
+                                </div>
+                                <div class="row" id="reserve">
 
-
-
-
-
-                            <input type="hidden" id="coach_id" value="{{$coach->id}}" />
-                            <p class="text-bold mb-2 mt-3 pb-2 border-bottom">انتخاب ساعت</p>
-                            <div class="col-12 p-0" id="show_bookings">
-                                <div class="alert alert-warning" role="alert">لطفا یک تاریخ را انتخاب کنید</div>
-                            </div>
-                            <div class="row" id="reserve">
-
-                            </div>
+                                </div>
+                            @endif
 
                         @else
                             <div class="alert alert-warning text-center">
@@ -576,21 +580,55 @@
             },
             data: {
                 time:"{{old('time')}}",
+                dateMoment: moment('1396/05/03', 'jYYYY/jMM/jDD'),
                 dates: [],
                 date:[],
-                message:'asdasdasd'
+                message:'asdasdasd',
+                coach:'',
             },
             methods: {
                 highlight(formatted, dateMoment, checkingFor) {
                     let attributes = {'title': 'در ' + formatted+" فاقد ساعت خالی می باشد. "};
 
                     @foreach($bookings as $item)
-                    if (checkingFor === 'day' && formatted === '{{$item->start_date}}'){
-                        attributes['class'] = 'highlighted-1';
-                        attributes['title'] = 'رزرو جلسه';
-                    }
+                        if ((checkingFor === 'day') && (formatted === '{{$item->start_date}}')){
+                            attributes['class'] = 'highlighted-1';
+                            attributes['title'] = 'رزرو جلسه';
+                        }
                     @endforeach
                     return attributes;
+                },
+                changeDate()
+                {
+
+                    this.coach=$("#coach_id").val();
+                    if((this.coach==0) &&(this.dateMoment=='') )
+                    {
+                        var loading = '<div class="alert alert-warning" role="alert">خطا در انتخاب رزروها</div>';
+                    }
+                    else {
+
+                        var loading = '<div class="col-12 text-center"><div class="spinner-border text-primary text-center" role="status"><span class="sr-only">Loading...</span></div></div>';
+                        $("#show_bookings").html(loading);
+                        $.ajax({
+                            type: 'GET',
+                            url: "/booking/createajax?coach=" + this.coach + "&calenderSelector=" + this.date,
+                            success: function (data) {
+                                $("#show_bookings").html(data);
+                            },
+                            error : function(data)
+                            {
+                                $('#show_bookings').text(data.responseJSON.errors);
+                                errorsHtml='<div class="alert alert-danger text-left"><ul>';
+                                $.each( data.responseJSON.errors, function( key, value ) {
+                                    errorsHtml += '<li>'+ value[0] + '</li>'; //showing only the first error.
+                                });
+                                errorsHtml += '</ul></div>';
+
+                                $( '#show_bookings' ).html( errorsHtml );
+                            }
+                        });
+                    }
                 }
             }
         });
@@ -660,24 +698,8 @@
 
         $('.vpd-day').click(function()
         {
-            console.log($("#vpd-start_date").val());
-            var coach=$("#coach_id").val();
-            var calenderSelector=$("#vpd-start_date").val();
-            if((coach==0) &&(calenderSelector==0) )
-            {
-                var loading = '<div class="alert alert-warning" role="alert">خطا در انتخاب رزروها</div>';
-            }
-            else {
-                var loading = '<div class="col-12 text-center"><div class="spinner-border text-primary text-center" role="status"><span class="sr-only">Loading...</span></div></div>';
-                $("#show_bookings").html(loading);
-                $.ajax({
-                    type: 'GET',
-                    url: "/booking/createajax?coach=" + coach + "&calenderSelector=" + calenderSelector,
-                    success: function (data) {
-                        $("#show_bookings").html(data);
-                    }
-                });
-            }
+
+
         });
 
     </script>

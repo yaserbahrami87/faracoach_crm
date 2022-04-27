@@ -1,13 +1,13 @@
 @font-face {
-	font-family: 'IranSansFaNum';
-	font-style: normal;
-	font-weight: 400;
-	font-display: auto;
-	src: url('../fonts/IRANSansWebFaNum.eot');
-	src: url('../fonts/IRANSansWebFaNum.eot?#iefix') format('embedded-opentype'),
-		url('../fonts/IRANSansWebFaNum-1-2.woff2') format('woff2'),
-		url('../fonts/IRANSansWebFaNum.woff') format('woff'),
-		url('../fonts/IRANSansWebFaNum.ttf') format('truetype');
+    font-family: 'IranSansFaNum';
+    font-style: normal;
+    font-weight: 400;
+    font-display: auto;
+    src: url('../fonts/IRANSansWebFaNum.eot');
+    src: url('../fonts/IRANSansWebFaNum.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/IRANSansWebFaNum-1-2.woff2') format('woff2'),
+    url('../fonts/IRANSansWebFaNum.woff') format('woff'),
+    url('../fonts/IRANSansWebFaNum.ttf') format('truetype');
 }
 
 *
@@ -668,6 +668,96 @@ div#form_signup_crm
 {
     margin-top: 700px;
 }
+
+/*--------------- login register -------------------*/
+
+.btn-regedit{
+    background-color: #ffc107!important;
+    color:#fff;
+}
+.tabs{
+    border: 1px solid #ddd;
+
+}
+
+nav > .nav.nav-tabs{
+    border: none;
+    color:#fff;
+    background:#f5f5f5;
+    border-radius:0;
+
+}
+nav > div a.nav-item.nav-link,
+nav > div a.nav-item.nav-link.active
+{
+    border: none;
+    padding: 18px 25px;
+    color:#2b343e;
+    background:#f5f5f5;
+    border-radius:0;
+}
+
+nav > div a.nav-item.nav-link.active:after
+{
+    content: "";
+    position: relative;
+    bottom: -60px;
+    left: -10%;
+}
+.tab-content{
+    background: #fdfdfd;
+    line-height: 25px;
+    padding:30px 25px;
+}
+
+nav > div a.nav-item.nav-link:hover,
+nav > div a.nav-item.nav-link:focus
+{
+    border: none;
+    background: #fff;
+    color:#2b343e;
+    border-radius:0;
+    transition:background 0.20s linear;
+    border-bottom: 3px solid #ffc107;
+}
+.nav.nav-tabs .nav-item{
+    margin-left:0px!important;
+}
+/*--------------- ENTER CODE -------------------*/
+.phoneInput .form-group {
+
+    display: flex;
+    border: 1px solid rgba(96,100,104,0.3);
+}
+
+.phoneInput .letter {
+    border-radius: 0;
+    border: none;
+    text-align: center;
+    max-width: calc((100% / 6) - 1px);
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: calc(100% / 6);
+    outline-style: none;
+    padding: 5px 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.phoneInput .letter + .letter {
+    border-left: 1px solid rgba(96,100,104,0.3);
+}
+
+@media (max-width: 480px) {
+    .phoneInput .letter {
+        font-size: 16px;
+        padding: 2px 0;
+        height: 38px;
+    }
+}
+/*--------------- End login register -------------------*/
+
+
 
 @media only screen and (max-width:576px)
 {

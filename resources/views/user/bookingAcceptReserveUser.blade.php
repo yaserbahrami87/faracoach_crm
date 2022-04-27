@@ -3,8 +3,8 @@
     <div class="col-md-12 mt-3 table-responsive">
         <table class="table border table-hover table-striped">
             <tr>
-                <th></th>
                 <th>کد جلسه</th>
+                <th scope="col">مشخصات</th>
                 <th scope="col">تاریخ شروع</th>
                 <th scope="col">ساعت شروع</th>
                 <th scope="col">ساعت پایان</th>
@@ -31,11 +31,12 @@
                         @break
                         @endswitch
 
-                        <td>
-                            <img src="{{asset('/documents/users/'.$item->user['personal_image'])}}" class="img-circle"  width="50px" height="50px"/>
-                        </td>
+
                         <td class="text-center">
                             <a href="/panel/reserve/{{$item->id}}">{{$item->booking->id}}</a>
+                        </td>
+                        <td>
+                            <a href="/panel/reserve/{{$item->id}}">{{$item->booking->coach->user->fname.' '.$item->booking->coach->user->lname}}</a>
                         </td>
                         <td class="text-center">
                             @if(Auth::user()->status_coach==1 )
@@ -56,7 +57,11 @@
                             <td>{{$item->caption_status}}</td>
                         @endif
 
-                        @if((($item->start_date>$dateNow && Auth::user()->status_coach==1) && (($item['status'])!=0)&&($item['status']!=4)))
+
+
+
+
+                        @if((($item->booking->start_date>$dateNow && Auth::user()->status_coach==1) && (($item['status'])!=0)&&($item['status']!=4)))
                             <td>
                                 <form method="post" action="/panel/booking/{{$item->id}}" onsubmit="return confirm('آیا از حذف زمان رزرو اطمینان دارید؟');">
                                     {{ method_field('DELETE') }}
@@ -66,7 +71,7 @@
                                     </button>
                                 </form>
                             </td>
-                        @elseif($item->start_date>$dateNow && ($item['status']!=4))
+                        @elseif($item->booking->start_date>$dateNow && ($item['status']!=4))
                             <td>
                                 <form method="POST" action="/panel/booking/{{$item->booking_id}}" onsubmit="return confirm('آیا از لغو جلسه اطمینان دارید؟')">
                                     {{csrf_field()}}

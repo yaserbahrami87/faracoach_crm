@@ -30,6 +30,11 @@ class CreateCoachesTable extends Migration
             $table->integer('typecoach_id')->nullable();
             $table->tinyInteger('status')->default(0);
             $table->string('fi',7)->default(0);
+            $table->tinyInteger('type_holding')->nullable();
+            $table->string('address',500)->nullable();
+            $table->string('online_platform',250)->nullable();
+            $table->string('tel',20)->nullable();
+            $table->boolean('today_meeting')->default(0);
             $table->timestamps();
         });
     }

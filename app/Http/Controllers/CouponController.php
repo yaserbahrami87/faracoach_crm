@@ -50,10 +50,9 @@ class CouponController extends BaseController
         }
         else
         {
-            return view('user.insertCoupon')
+            return view('user.coupon.insertCoupon')
                 ->with('dateNow',$dateNow);
         }
-
     }
 
     /**
@@ -66,7 +65,8 @@ class CouponController extends BaseController
     {
         $this->validate($request,[
             'coupon'        =>'required|string|',
-            'discount'      =>'required|numeric|between:0,100',
+            'discount'      =>'required|numeric|',
+            'type_discount' =>'required|persian_alpha|in:تومان,%',
             'expire_date'   =>'required',
             'product'       =>'required|numeric',
             'limit_user'    =>'nullable|numeric',
@@ -340,6 +340,8 @@ class CouponController extends BaseController
             $final_off=$fi-$off;
             $request['coupon']=NULL;
 
+
+
             if(is_null($reserve)) {
                 reserve::create($request->all()+
                     [
@@ -493,7 +495,8 @@ class CouponController extends BaseController
 
 //        dd(Auth::user()->reserves->where('status','=',0));
 
-        $cart = $this->get_cartUser();
+//        $cart = $this->get_cartUser();
+        $cart=(Auth::user()->reserves->where('status','=',0));
         foreach ($cart as $item)
         {
             $coach = booking::join('users', 'bookings.user_id', '=', 'users.id')
@@ -520,17 +523,16 @@ class CouponController extends BaseController
                 alert()->warning('تعداد کوپن تمام شده است')->persistent('بستن');
                 return back();
             }
-//            else if($coupon->product==0 || $coupon->product== )
+
             else
             {
-                $coupon = coupon::join('users', 'coupons.user_id', '=', 'users.id')
-                    ->where('coupon', '=', $request['coupon'])
-                    ->where('user_id', '=', $coach->id)
-                    ->first();
+                $coupon = coupon::where('coupon', '=', $request['coupon'])
+                        ->where('user_id', '=', $coach->id)
+                        ->first();
+
 
                 if ($coupon->user_id == $coach->id)
                 {
-
                     $reserve = reserve::where('booking_id', '=', $item['booking_id'])
                         ->first();
 
@@ -558,18 +560,30 @@ class CouponController extends BaseController
 
 //                $fi=($count_meeting_fi*$count_meeting)+($customer_satisfaction_fi*$customer_satisfaction)+($change_customer_fi*$change_customer)+($count_recommendation_fi*$count_recommendation);
                     $fi = $user->fi;
-                    if ($coupon->expire_date < $this->dateNow) {
+                    if ($coupon->expire_date < $this->dateNow)
+                    {
 
                         $off = 0;
                         $reserve->off = NULL;
                         $reserve->coupon = NULL;
                         $request['coupon'] = NULL;
                     } else {
+                        if($coupon->type_discount=='تومان')
+                        {
+                            $off = $coupon->discount;
+                        }
+                        else if($coupon->type_discount=='%')
+                        {
+                            $off = ($fi * $coupon->discount) / 100;
+                        }
 
-                        $off = ($fi * $coupon->discount) / 100;
                     }
 
                     $final_off = $fi - $off;
+                    if($final_off<0)
+                    {
+                        $final_off=0;
+                    }
                     if (is_null($reserve)) {
                         $reserve = reserve::create(
                             [

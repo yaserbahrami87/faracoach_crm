@@ -351,9 +351,6 @@ class CheckoutController extends BaseController
                                 $booking->save();
                             }
 
-
-
-
                             if ($booking->duration_booking == 1) {
                                 $duration = 'جلسه معارفه';
                             } else {

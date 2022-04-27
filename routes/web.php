@@ -24,9 +24,9 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     // ROUTE USER
 
     Route::get('/profile','UserController@profile');
-    Route::get('/user/contacts','UserController@contacts');
-    Route::get('/user/introduction','UserController@introduction');
-    Route::get('/user/contract','UserController@contract');
+//    Route::get('/user/contacts','UserController@contacts');
+//    Route::get('/user/introduction','UserController@introduction');
+//    Route::get('/user/contract','UserController@contract');
     Route::patch('/profile/update/{user}','UserController@update');
     Route::get('/userAjax/{user}','UserController@introducedUserAjax');
     Route::get('/user/password','AdminController@changePasswordViewUser')->middleware('password.confirm');
@@ -94,6 +94,11 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     Route::get('/booking/accept','BookingController@acceptReserve');
     Route::get('/booking/accept_reserve_user','BookingController@accept_reserve_user');
     Route::resource('booking','BookingController');
+
+    //booking Setting
+    Route::get('/settings/booking','BookingSettingController@index');
+    Route::patch('/settings/booking/{coach}','BookingSettingController@update');
+
 
     //Homework
     Route::resource('homework','HomeworkController');
@@ -396,6 +401,8 @@ Route::get('/active/mobile/verify/{code}','VerifyController@checkCode');
 Route::get('/loginSMS','AdminController@loginSMS');
 Route::post('/panel/storeCodewithoutPass','VerifyController@storeCodewithoutPass');
 Route::post('/panel/checkCodewithoutPass','VerifyController@checkCodewithoutPass');
+Route::post('/loginOrStoreUser','VerifyController@loginOrStoreUser');
+Route::post('/checkLoginOrStoreUser','VerifyController@checkLoginOrStoreUser');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');

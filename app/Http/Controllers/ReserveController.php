@@ -183,6 +183,8 @@ class ReserveController extends BaseController
         );
 
 
+
+
         //حذف سبد خرید
         $status=reserve::where('user_id','=',Auth::user()->id)
             ->where('status', '=', 0)
@@ -272,7 +274,8 @@ class ReserveController extends BaseController
     //ثبت نهایی رزرو
     public  function insert(Request $request)
     {
-        $cart = $this->get_cartUser();
+//        $cart = $this->get_cartUser();
+        $cart = (Auth::user()->reserves->where('status','=',0));
 
         foreach ($cart as $item)
         {
@@ -306,8 +309,23 @@ class ReserveController extends BaseController
                 $off = 0;
                 $final_off = $fi - $off;
 
-                if($final_off==0) {
-                    //از اینجا تا خط 278 پاک شود
+                if($final_off==0)
+                {
+                    if ($reserve->duration_booking == 1) {
+                        $duration = 'جلسه معارفه';
+                    } else {
+                        $duration = 'جلسه کوچینگ';
+                    }
+
+                    //                //ارسال پیامک به کوچ
+                    $msg =$duration . " \n " . $reserve->booking->start_date . " \n  " . $reserve->booking->start_time . "\n مراجع:" . Auth::user()->fname . " " . Auth::user()->lname . "\n تماس کوچ:" .  Auth::user()->tel;
+                    $this->sendSms($reserve->booking->coach->user->tel, $msg);
+
+                    //                //ارسال پیامک برای مراجع
+                    $msg =$duration . " \n " . $reserve->booking->start_date . " \n " . $reserve->booking->start_time . "\n کوچ: " . $reserve->booking->coach->user->fname . " " . $reserve->booking->coach->user->lname . "\nتماس:" .$reserve->booking->coach->user->tel;
+                    $this->sendSms(Auth::user()->tel, $msg);
+
+
                     $reserve->update(
                         [
                             'status' => 1,
@@ -315,15 +333,36 @@ class ReserveController extends BaseController
                     $status = $reserve->save();
 
 
+
                     if ($status) {
-                        $booking = booking::where('id', '=', $item['booking_id'])
+                        $booking = booking::where('id', '=', $reserve->booking->id)
                             ->first();
                         $booking->status = 0;
                         $booking->save();
                     }
+
+
+
                 }
+
                 elseif($final_off<100)
                 {
+//                    //از اینجا تا خط 278 پاک شود
+//                    $reserve->update(
+//                        [
+//                            'status' => 1,
+//                        ]);
+//                    $status = $reserve->save();
+//
+//
+//                    if ($status) {
+//                        $booking = booking::where('id', '=', $item['booking_id'])
+//                            ->first();
+//                        $booking->status = 0;
+//                        $booking->save();
+//                    }
+
+
                     alert()->warning('حداقل پرداختی 100 تومان می باشد');
                     return back();
                 }
@@ -415,7 +454,8 @@ class ReserveController extends BaseController
             $booking->save();
 
 
-            if ($status) {
+            if ($status)
+            {
                 if($request->status=="3")
                 {
                     $coach->count_meeting=$coach->count_meeting+1;
@@ -478,20 +518,25 @@ class ReserveController extends BaseController
                     ->with('dateNow',$dateNow);
     }
 
-        public function showCart()
+    public function showCart()
     {
-        //چک کردن تعداد رزروهای ناقص کامل نشده در سبد خرید
-        $cart=$this->get_cartUser();
+        if(Auth::check()) {
+            //چک کردن تعداد رزروهای ناقص کامل نشده در سبد خرید
+            $cart = (Auth::user()->reserves->where('status', '=', 0));
+//        $cart=$this->get_cartUser();
 //        $cart=$this->get_reserve(NULL,Auth::user()->id,NULL,NULL,NULL,0,'get');
-        if($cart->count()==0)
-        {
-            alert()->warning('سبد خرید شما خالی می باشد')->persistent('بستن');
-            return redirect('/coaches/all');
+            if ($cart->count() == 0) {
+                alert()->warning('سبد خرید شما خالی می باشد')->persistent('بستن');
+                return redirect('/coaches/all');
+            } else {
+                return view('cart')
+                    ->with('cart', $cart);
+            }
         }
         else
         {
-            return view('cart')
-                ->with('cart',$cart);
+            alert()->warning('لطفا ابتدا وارد سایت شوید')->persistent('بستن');
+            return redirect('/');
         }
     }
 
@@ -508,13 +553,7 @@ class ReserveController extends BaseController
             {
                 echo "<script>console.log(USER=".$item.");</script>";
             }
-
-
-
-
         }
-
-
     }
 
 

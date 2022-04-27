@@ -19,4 +19,6 @@ class reserve extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+
 }

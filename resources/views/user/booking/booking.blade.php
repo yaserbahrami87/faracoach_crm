@@ -34,14 +34,18 @@
                     name="start_time"
                 ></date-picker>
 
+                <!--
                 <div class="form-check form-check-inline pr-3">
                     <input class="form-check-input" type="radio" name="duration_booking" id="duration_booking1" value="1">
                     <label class="form-check-label" for="duration_booking1">معارفه 30 دقیقه ای</label>
                 </div>
+
+
                 <div class="form-check form-check-inline text-left">
                     <input class="form-check-input" type="radio" name="duration_booking" id="duration_booking2" value="2">
                     <label class="form-check-label" for="duration_booking2">کوچینگ 60 دقیقه ای</label>
                 </div>
+                -->
 
 
                 <button type="submit" class="btn btn-success">ایجاد رزرو</button>
@@ -53,12 +57,10 @@
     <div class="col-md-12 mt-3 table-responsive">
         <table class="table border table-hover table-striped">
             <tr>
-                <th></th>
                 <th>کد جلسه</th>
                 <th scope="col">تاریخ شروع</th>
                 <th scope="col">ساعت شروع</th>
                 <th scope="col">ساعت پایان</th>
-                <th scope="col">مدت جلسه</th>
                 @if(Auth::user()->status_coach==1)
                     <th scope="col">وضعیت</th>
                 @endif
@@ -82,9 +84,6 @@
                                 @break
                 @endswitch
 
-                    <td>
-                        <img src="{{asset('/documents/users/'.$item->user['personal_image'])}}" class="img-circle"  width="50px" height="50px"/>
-                    </td>
                     <td class="text-center">
                         @if($item->status==1  || ($item->caption_status=='باطل شده'))
                             {{$item->id}}
@@ -107,7 +106,7 @@
                     </td>
                     <td class="text-center">{{$item->start_time}}</td>
                     <td class="text-center">{{$item->end_time}}</td>
-                    <td class="text-center">{{$item->duration_booking}}</td>
+
                     @if(Auth::user()->status_coach==1)
                         <td>{{$item->caption_status}}</td>
                     @endif

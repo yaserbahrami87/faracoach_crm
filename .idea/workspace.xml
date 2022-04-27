@@ -30,7 +30,49 @@
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/booking/reportAllCoach.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/booking/reportAllCoach.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BookingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BookingController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BookingSettingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BookingSettingController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CheckoutController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CheckoutController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CoachController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CoachController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CouponController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CouponController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReserveController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReserveController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/VerifyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/VerifyController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Notifications/LoginWithCode.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Notifications/LoginWithCode.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/coach.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/coach.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/coupon.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/coupon.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/landPage.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/landPage.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/reserve.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/reserve.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_11_201837_create_verifies_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_12_11_201837_create_verifies_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_05_02_143045_create_coaches_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_05_02_143045_create_coaches_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_05_04_011559_create_coupons_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_05_04_011559_create_coupons_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_07_15_085216_create_tweets_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_07_15_085216_create_tweets_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/jquery.inputLettering.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/jquery.inputLettering.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/fa/validation.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/fa/validation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/checkout/checkout_list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/checkout/checkout_list.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/cart.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/cart.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/coach.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/coach.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/formReserve.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/formReserve.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/loginAjax.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/loginAjax.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/master/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/master/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/master/navbarTop.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/master/navbarTop.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/reserveCoaching.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/reserveCoaching.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/booking/booking.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/booking/booking.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/booking/settingBooking.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/booking/settingBooking.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/bookingAcceptReserveCoach.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/bookingAcceptReserveCoach.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/bookingAcceptReserveUser.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/bookingAcceptReserveUser.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/cardBox.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/cardBox.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/contacts_info.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/contacts_info.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/contract_info.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/contract_info.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/insertCoupon.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/coupon/insertCoupon.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/introduction_info.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/introduction_info.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/master/right_menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/master/right_menu.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/profile.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vendor/mail/html/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vendor/mail/html/header.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,6 +239,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
@@ -206,7 +249,7 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/images" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -214,23 +257,23 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.build" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\faracoach_crm\public\js" />
       <recent name="C:\wamp64\www\faracoach_crm\public\images" />
       <recent name="C:\wamp64\www\faracoach_crm\public\fonts\other" />
       <recent name="C:\wamp64\www\faracoach_crm\resources\views" />
       <recent name="C:\wamp64\www\faracoach_crm\storage\app" />
-      <recent name="C:\wamp64\www\faracoach_crm\storage\app\private" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\resources\views\user\coupon" />
+      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\resources\views\user\booking" />
       <recent name="C:\wamp64\www\faracoach_crm\resources\views\admin\education\course" />
       <recent name="C:\wamp64\www\faracoach_crm\storage\app\private" />
       <recent name="C:\wamp64\www\faracoach_crm\storage\private" />
-      <recent name="C:\wamp64\www\faracoach_crm\storage\app\private\مدیر در نقش کوچ" />
-      <recent name="C:\wamp64\www\faracoach_crm\public\documents" />
     </key>
   </component>
   <component name="RunManager">
@@ -905,7 +948,35 @@
       <workItem from="1647065096211" duration="10678000" />
       <workItem from="1647108691901" duration="595000" />
       <workItem from="1647115547452" duration="699000" />
-      <workItem from="1647156504329" duration="4048000" />
+      <workItem from="1647156504329" duration="6495000" />
+      <workItem from="1647200653962" duration="204000" />
+      <workItem from="1647329361071" duration="2989000" />
+      <workItem from="1647506302754" duration="2883000" />
+      <workItem from="1648398066001" duration="741000" />
+      <workItem from="1648963238730" duration="10340000" />
+      <workItem from="1649046697288" duration="16582000" />
+      <workItem from="1649100156588" duration="220000" />
+      <workItem from="1649100468058" duration="714000" />
+      <workItem from="1649135018080" duration="7886000" />
+      <workItem from="1649155495697" duration="3395000" />
+      <workItem from="1649225064491" duration="14444000" />
+      <workItem from="1649650466928" duration="14413000" />
+      <workItem from="1649757556530" duration="3297000" />
+      <workItem from="1649825537658" duration="23358000" />
+      <workItem from="1649962841385" duration="721000" />
+      <workItem from="1650007718400" duration="25763000" />
+      <workItem from="1650082193392" duration="591000" />
+      <workItem from="1650082812710" duration="17094000" />
+      <workItem from="1650168680981" duration="13463000" />
+      <workItem from="1650255487001" duration="14928000" />
+      <workItem from="1650342520538" duration="15585000" />
+      <workItem from="1650426644173" duration="16938000" />
+      <workItem from="1650516632729" duration="3685000" />
+      <workItem from="1650650518497" duration="2099000" />
+      <workItem from="1650776419999" duration="17532000" />
+      <workItem from="1650869068908" duration="8514000" />
+      <workItem from="1650947710773" duration="12572000" />
+      <workItem from="1651037642963" duration="10256000" />
     </task>
     <servers />
   </component>
@@ -944,31 +1015,42 @@
       <collection />
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
   <component name="WindowStateProjectService">
+    <state x="391" y="100" key="#Servers" timestamp="1650024159031">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="391" y="100" key="#Servers/0.0.1366.728@0.0.1366.728" timestamp="1650024159031" />
     <state x="289" y="165" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1645614659934">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="1583" y="165" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728/1366.0.1024.728@1366.0.1024.728" timestamp="1644401280325" />
     <state x="289" y="165" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1645614659934" />
+    <state x="420" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1650050261487">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="420" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.728@0.0.1366.728" timestamp="1650050261487" />
     <state x="413" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1645945028762">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="1676" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728/1366.0.1024.728@1366.0.1024.728" timestamp="1644401173279" />
     <state x="413" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1645945028762" />
-    <state x="432" y="86" key="NewPhpClassDialog" timestamp="1642196958237">
+    <state x="184" y="9" key="SettingsEditor" timestamp="1650082789774">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="432" y="86" key="NewPhpClassDialog/0.0.1366.728@0.0.1366.728" timestamp="1642196958237" />
-    <state x="339" y="162" key="run.anything.popup" timestamp="1644743840726">
+    <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1650082789774" />
+    <state x="339" y="162" key="run.anything.popup" timestamp="1651043195292">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1644743840726" />
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1647159208619">
+    <state x="339" y="162" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1651043195292" />
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup" timestamp="1651048273464">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="346" y="49" width="897" height="160" key="search.everywhere.popup/0.0.1366.728/1366.0.1024.728@0.0.1366.728" timestamp="1645881285102" />
     <state x="1625" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728/1366.0.1024.728@1366.0.1024.728" timestamp="1644404633653" />
     <state x="1792" y="68" width="827" height="222" key="search.everywhere.popup/0.0.1366.728/1366.0.1680.1010@1366.0.1680.1010" timestamp="1646726869973" />
-    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1647159208619" />
+    <state x="346" y="49" width="672" height="160" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1651048273464" />
   </component>
 </project>

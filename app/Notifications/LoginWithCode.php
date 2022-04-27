@@ -10,15 +10,17 @@ use Illuminate\Notifications\Notification;
 class LoginWithCode extends Notification
 {
     use Queueable;
-
+    public $code;
+    public $email;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($email,$code)
     {
-        //
+        $this->email=$email;
+        $this->code=$code;
     }
 
     /**
@@ -41,9 +43,9 @@ class LoginWithCode extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('تست.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->line(' کد یکبار مصرف جهت ورود به سایت فراکوچ: '.$this->code)
+//                    ->action('Notification Action', url('/'))
+                    ->line('ممنون از اینکه ما رو دنبال میکنید!');
     }
 
     /**
@@ -54,8 +56,7 @@ class LoginWithCode extends Notification
      */
     public function toArray($notifiable)
     {
-        return [
-            //
-        ];
+        dd('AAAA');
+        return [];
     }
 }
