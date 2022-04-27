@@ -226,9 +226,12 @@
             });
             if(data.length==6)
             {
-                data={code:data};
-                $.ajax({
+                data={
+                    code:data,
                     "_token": "{{ csrf_token() }}",
+                };
+                $.ajax({
+
                     data:data,
                     url:'/checkLoginOrStoreUser',
                     type:'POST',
