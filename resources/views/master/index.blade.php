@@ -163,6 +163,7 @@
         var data=$('#loginAjax').serialize();
         $.ajax(
             {
+
                 type:"POST",
                 url:'/login',
                 data:data,
