@@ -228,6 +228,7 @@
             {
                 data={code:data};
                 $.ajax({
+                    "_token": "{{ csrf_token() }}",
                     data:data,
                     url:'/checkLoginOrStoreUser',
                     type:'POST',
