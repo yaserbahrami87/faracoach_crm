@@ -142,7 +142,7 @@
                                     <!------------------------------- PHONE ------------------------>
                                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                                         <form id="frm_loginbytel">
-                                            {{csrf_filed()}}
+                                            {{csrf_field()}}
                                             <div class="mb-3 mt-5 text-center col-md-8 offset-md-2 col-12">
                                                 <label for="tel" class="form-label mb-2">.شماره تلفن همراه خود را وارد کنید </label>
                                                 <input type="hidden" id="tel_org_login" value="{{ old('tel') }}" name="tel"/>
@@ -176,7 +176,7 @@
                                     <!------------------------------- EMAIL ------------------------>
                                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                                         <form method="post" id="frm_loginbyemail">
-                                            {{csrf_filed()}}
+                                            {{csrf_field()}}
                                             <div class="mb-3 col-md-8 offset-md-2 col-12 mt-5 text-center">
                                                 <label for="exampleInputEmail" class="form-label mb-4">.آدرس ایمیل خود را وارد کنید</label>
                                                 <input type="email" class="form-control mb-4" id="exampleFormControlInput1" placeholder="name@example.com" name="tel"/>
