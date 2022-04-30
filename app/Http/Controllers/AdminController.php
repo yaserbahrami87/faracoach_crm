@@ -352,6 +352,11 @@ class AdminController extends BaseController
 
 
 
+            //
+            if((is_null(Auth::user()->fname))||(is_null(Auth::user()->lname))||(is_null(Auth::user()->codemelli))||(is_null(Auth::user()->username))||(is_null(Auth::user()->job)))
+            {
+                alert()->warning('لطفا اطلاعات پروفایل خود را کامل کنید')->persistent('بستن');
+            }
 
             return view('user.home')
                 ->with('user',$user)

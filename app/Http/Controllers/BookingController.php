@@ -429,6 +429,17 @@ class BookingController extends BaseController
             'id'    =>'required|numeric',
         ]);
         $booking=booking::find($request['id']);
+        if(is_null(Auth::user()->reserves->where('status','=',3)))
+        {
+            $booking->type_booking=1;
+        }
+        else
+        {
+            $booking->type_booking=2;
+        }
+
+        //
+
 
         return view('formReserve')
                     ->with('booking',$booking);
