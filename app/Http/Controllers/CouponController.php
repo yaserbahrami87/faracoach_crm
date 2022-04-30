@@ -66,7 +66,7 @@ class CouponController extends BaseController
         $this->validate($request,[
             'coupon'        =>'required|string|',
             'discount'      =>'required|numeric|',
-            'type_discount' =>'required|persian_alpha|in:تومان,%',
+            'type_discount' =>'required|in:تومان,%',
             'expire_date'   =>'required',
             'product'       =>'required|numeric',
             'limit_user'    =>'nullable|numeric',
