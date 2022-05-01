@@ -388,7 +388,7 @@
                     </div>
                     <div class="card-body" id="app" >
                         @if(Auth::check())
-                            @if(((is_null(Auth::user()->fname))||(is_null(Auth::user()->lname))||(is_null(Auth::user()->codemelli))||(is_null(Auth::user()->username))||(is_null(Auth::user()->job))))
+                            @if(((is_null(Auth::user()->fname))||(is_null(Auth::user()->lname))))
                                 <div class="col-12">
                                     <div class="alert alert-danger">
                                         لطفا اطلاعات پروفایل خود را کامل کنید <a href="/panel/profile" class="btn btn-primary">اینجا</a>

@@ -54,7 +54,7 @@
                                 </div>
                                 <div class="col-md-6 px-1">
                                     <div class="form-group">
-                                        <label for="codemelli">کد ملی<span class="text-danger font-weight-bold">*</span></label>
+                                        <label for="codemelli">کد ملی</label>
                                         <input type="text" class="form-control  @if(strlen($user->codemelli)<>0) is-valid @endif" placeholder="کد ملی را وارد کنید" @if(strlen($user->codemelli)>0) value="{{old('codemelli',$user->codemelli)}}" disabled @endif id="codemelli" name="codemelli"  autocomplete="off" />
                                     </div>
                                 </div>
@@ -66,7 +66,7 @@
                                 </div>
                                 <div class="col-md-6 px-1">
                                     <div class="form-group">
-                                        <label>تاریخ تولد<span class="text-danger font-weight-bold">*</span></label>
+                                        <label>تاریخ تولد</label>
                                         <input type="text" class="form-control @if(strlen($user->datebirth)<>0) is-valid @endif" placeholder="تاریخ تولد را وارد کنید"  value='{{old('datebirth',$user->datebirth)}}' name="datebirth" id="datebirth" autocomplete="off" />
                                     </div>
                                 </div>
@@ -323,7 +323,7 @@
                                 </div>
                                 <div class="col-md-4 px-1">
                                     <div class="form-group">
-                                        <label>شغل<span class="text-danger font-weight-bold">*</span></label>
+                                        <label>شغل</label>
                                         <div class="form-group">
                                             <input type="text" class="form-control @if(strlen($user->job)<>0) is-valid  @endif" placeholder="شغل را وارد کنید" @if(old('job')) value='{{old('job')}}' @else value="{{$user->job}}" @endif name="job" />
                                         </div>

@@ -32,7 +32,6 @@
                     </select>
                 </div>
 
-
                 <div id="app" class="form-group">
                     <label for="expire_date">تاریخ انقضا <span class="text-danger">*</span></label>
                     <date-picker

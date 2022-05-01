@@ -326,7 +326,7 @@
                             {!!$item->tweet !!}
                             <small>منتشر شده توسط
                                 <a href="{{asset('/'.$item->username)}}" target="_blank">
-                                    <small>{{$item->username}}</small>
+                                    <small>{{$item->fname.' '.$item->lname}}</small>
                                 </a>
                             </small>
                         </div>
