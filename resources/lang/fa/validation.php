@@ -242,5 +242,7 @@ return [
         'today_meeting'         =>'جلسات روز جاری',
         'subject'               =>'موضوع',
         'type_booking'          =>'نوع جلسه',
+        'type_discount'         =>'نوع تخفیف',
+        'product'               =>'محصول',
     ],
 ];

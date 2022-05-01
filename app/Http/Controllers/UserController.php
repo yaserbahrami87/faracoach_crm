@@ -1932,16 +1932,11 @@ class UserController extends BaseController
     public function export_excel()
     {
         //خروجی اکسل
-        $list=user::join('eventreserves', 'users.id', '=', 'eventreserves.user_id')
-            ->where('eventreserves.event_id', '=', 5)
-            ->groupby('tel')
-            ->get();
+        $list=user::get();
 
-        $excel=fastexcel($list)->export('exportWebinar.xlsx');
+        $excel=fastexcel($list)->export('export.xlsx');
         if($excel)
         {
-//                return Storage::disk('public')->download('file.xlsx');
-//                return response()->download(storage_path("/public/file.xlsx"));
             return response()->download(public_path('exportWebinar.xlsx'));
 
         }
@@ -1949,11 +1944,6 @@ class UserController extends BaseController
         {
             return back();
         }
-
-//        foreach ($list as $item)
-//        {
-//            $item=$this->changeNumberToData($item);
-//        }
 
     }
 

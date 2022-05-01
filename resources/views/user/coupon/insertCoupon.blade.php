@@ -9,9 +9,8 @@
                 {{csrf_field()}}
                 <div class="form-group">
                     <label for="coupon">نام کوپن:<span class="text-danger">*</span></label>
-                    <input type="text" class="form-control @error('coupon') is-invalid @enderror" id="coupon" name="coupon" />
+                    <input type="text" class="form-control @error('coupon') is-invalid @enderror" id="coupon" name="coupon" value="{{old('coupon')}}" />
                     <small class="text-muted">نام کوپن تخفیف را به انگلیسی وارد کنید</small>
-
                 </div>
 
                 <!--
@@ -25,7 +24,7 @@
 
                 <div class="input-group">
                     <label for="discount">میزان تخفیف<span class="text-danger">*</span></label>
-                    <input type="number" class="form-control @error('discount') is-invalid @enderror" id="discount" name="discount" />
+                    <input type="number" class="form-control @error('discount') is-invalid @enderror" id="discount" name="discount" value="{{old('discount')}}"/>
                     <select id="type_discount" class="form-control p-0 @error('type_discount') is-invalid @enderror" name="type_discount">
                         <option selected disabled>انتخاب کنید</option>
                         <option value="%">%</option>
