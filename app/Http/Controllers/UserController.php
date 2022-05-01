@@ -1937,7 +1937,7 @@ class UserController extends BaseController
         $excel=fastexcel($list)->export('export.xlsx');
         if($excel)
         {
-            return response()->download(public_path('exportWebinar.xlsx'));
+            return response()->download(public_path('export.xlsx'));
 
         }
         else
