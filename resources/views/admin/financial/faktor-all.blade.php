@@ -32,6 +32,7 @@
         </nav>
         <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">
+                <p>جمع مبالغ: {{number_format($faktors->sum('fi'))}} تومان</p>
                 <div class="col-12 table-responsive">
                     <table class="dataTable table table-striped table-bordered" style="width:100%">
                         <thead>
@@ -88,6 +89,7 @@
                 </div>
             </div>
             <div class="tab-pane fade" id="nav-expireFaktor" role="tabpanel" aria-labelledby="nav-expireFaktor-tab">
+                <p>جمع مبالغ: {{number_format($faktorsExpire->sum('fi'))}} تومان</p>
                 <div class="col-12 table-responsive">
                     <table class="dataTable table table-striped table-bordered" style="width:100%">
                         <thead>
@@ -144,6 +146,7 @@
                 </div>
             </div>
             <div class="tab-pane fade" id="nav-acceptFaktor" role="tabpanel" aria-labelledby="nav-acceptFaktor-tab">
+                <p>جمع مبالغ: {{number_format($faktorsSuccess->sum('fi'))}} تومان</p>
                 <div class="col-12 table-responsive">
                     <table class="dataTable table table-striped table-bordered" style="width:100%">
                         <thead>
