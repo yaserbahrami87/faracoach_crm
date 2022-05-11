@@ -218,7 +218,10 @@ class ReserveController extends BaseController
         $count_recommendation=$user->count_recommendation;
 
 //        $fi=($count_meeting_fi*$count_meeting)+($customer_satisfaction_fi*$customer_satisfaction)+($change_customer_fi*$change_customer)+($count_recommendation_fi*$count_recommendation);
-        if($user->duration_booking==1)
+
+
+
+        if($request->type_booking==1)
         {
             $fi=$user->fi/2;
         }
@@ -228,6 +231,7 @@ class ReserveController extends BaseController
         }
 
         $off=0;
+
         $final_off=$fi-$off;
 
 
@@ -283,6 +287,7 @@ class ReserveController extends BaseController
                 ->first();
 
             if ($reserve->status == 0)
+
             {
                 $count_meeting_fi = $this->get_optionByName('count_meeting');
                 $count_meeting_fi = $count_meeting_fi->option_value;
@@ -311,6 +316,9 @@ class ReserveController extends BaseController
 
                 if($final_off==0)
                 {
+
+
+
                     if ($reserve->duration_booking == 1) {
                         $duration = 'جلسه معارفه';
                     } else {
@@ -332,17 +340,13 @@ class ReserveController extends BaseController
                         ]);
                     $status = $reserve->save();
 
-
-
-                    if ($status) {
+                    if ($status)
+                    {
                         $booking = booking::where('id', '=', $reserve->booking->id)
                             ->first();
                         $booking->status = 0;
                         $booking->save();
                     }
-
-
-
                 }
 
                 elseif($final_off<100)

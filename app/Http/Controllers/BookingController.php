@@ -429,7 +429,7 @@ class BookingController extends BaseController
             'id'    =>'required|numeric',
         ]);
         $booking=booking::find($request['id']);
-        if(is_null(Auth::user()->reserves->where('status','=',3)))
+        if(count(Auth::user()->reserves->where('status','=',3))==0)
         {
             $booking->type_booking=1;
         }
@@ -437,8 +437,6 @@ class BookingController extends BaseController
         {
             $booking->type_booking=2;
         }
-
-        //
 
 
         return view('formReserve')

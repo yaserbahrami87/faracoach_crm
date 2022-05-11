@@ -22,6 +22,7 @@ class CreateReservesTable extends Migration
             $table->string('details',250)->nullable();
             $table->string('fi',20)->nullable();
             $table->string('off',20)->nullable();
+            $table->string('type_discount',10)->nullable();
             $table->string('copon',100)->nullable();
             $table->string('final_off',100)->nullable();
             $table->string('presession',250)->nullable();

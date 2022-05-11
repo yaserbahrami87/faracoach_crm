@@ -24,7 +24,7 @@ class CouponController extends BaseController
                 ->paginate($this->countPage());
         if(Auth::user()->type==2)
         {
-            return view('admin.coupon')
+            return view('admin.coupon.coupon')
                 ->with('coupons',$coupons);
         }
         else
@@ -45,13 +45,11 @@ class CouponController extends BaseController
         $dateNow=$this->dateNow;
         if(Auth::user()->type==2)
         {
-            return view('admin.insertCoupon')
-                ->with('dateNow',$dateNow);
+            return view('admin.coupon.insertCoupon');
         }
         else
         {
-            return view('user.coupon.insertCoupon')
-                ->with('dateNow',$dateNow);
+            return view('user.coupon.insertCoupon');
         }
     }
 
@@ -124,13 +122,13 @@ class CouponController extends BaseController
             $dateNow=$this->dateNow;
             if(Auth::user()->type==2)
             {
-                return view('admin.editCoupon')
+                return view('admin.coupon.editCoupon')
                     ->with('coupon',$coupon)
                     ->with('dateNow',$dateNow);
             }
             else
             {
-                return view('user.editCoupon')
+                return view('user.coupon.editCoupon')
                     ->with('coupon',$coupon)
                     ->with('dateNow',$dateNow);
             }
@@ -156,10 +154,11 @@ class CouponController extends BaseController
         {
             $this->validate($request,[
                 'coupon'        =>'required|string|',
-                'discount'      =>'required|numeric|between:0,100',
+                'discount'      =>'required|numeric|',
+                'type_discount' =>'required|in:تومان,%',
                 'expire_date'   =>'required',
                 'product'       =>'required|numeric',
-                'limit_user'    =>'required|numeric',
+                'limit_user'    =>'nullable|numeric',
                 'count'         =>'nullable|numeric|',
             ]);
 
@@ -216,6 +215,8 @@ class CouponController extends BaseController
         $this->validate($request,[
             'coupon'=>'nullable|string'
         ]);
+
+
 
         $users=booking::join('users','bookings.user_id','=','users.id')
                 ->where('bookings.id','=',$request['booking_id'])
@@ -493,28 +494,39 @@ class CouponController extends BaseController
             'coupon' => 'nullable|string'
         ]);
 
-//        dd(Auth::user()->reserves->where('status','=',0));
 
-//        $cart = $this->get_cartUser();
-        $cart=(Auth::user()->reserves->where('status','=',0));
+        $cart=  (Auth::user()->reserves->where('status','=',0));
+
+
         foreach ($cart as $item)
         {
-            $coach = booking::join('users', 'bookings.user_id', '=', 'users.id')
-                        ->where('bookings.id', '=', $item['booking_id'])
-                        ->first();
+
+            $booking=booking::where('bookings.id', '=', $item['booking_id'])
+                            ->first();
+
+
+
+//            $coach = booking::join('users', 'bookings.user_id', '=', 'users.id')
+//                        ->where('bookings.id', '=', $item['booking_id'])
+//                        ->first();
 
 
 
             $coupon = coupon::where('coupon', '=', $request['coupon'])
-                        ->where('user_id', '=', $coach->id)
-                        ->wherein('product', [0, $coach->duration_booking])
-                        ->first();
+                            ->where(function($query) use ($booking)
+                            {
+                                $query->orwhere('user_id', '=', $booking->coach->user->id)
+                                    ->orwhere('flag', '=', 1);
+                            })
+                            ->wherein('product', [0, $item->type_booking])
+                            ->first();
 
 
 
             //اگر کوپن وجود نداشت
             if (is_null($coupon))
             {
+
                 alert()->error('کوپن تخفیف وجود ندارد')->persistent('بستن');
                 return back();
             }
@@ -523,49 +535,56 @@ class CouponController extends BaseController
                 alert()->warning('تعداد کوپن تمام شده است')->persistent('بستن');
                 return back();
             }
-
             else
             {
-                $coupon = coupon::where('coupon', '=', $request['coupon'])
-                        ->where('user_id', '=', $coach->id)
-                        ->first();
+
+//                $coupon = coupon::where('coupon', '=', $request['coupon'])
+//                        ->where('user_id', '=', $coach->id)
+//                        ->first();
 
 
-                if ($coupon->user_id == $coach->id)
+                if (is_null($coupon->type) && ($coupon->product==$item->type_booking||$coupon->product==0))
                 {
-                    $reserve = reserve::where('booking_id', '=', $item['booking_id'])
-                        ->first();
+//                    $reserve = reserve::where('booking_id', '=', $item['booking_id'])
+//                                ->orwhere('status','=',0)
+//                                ->first();
 
 
-                    $count_meeting_fi = $this->get_optionByName('count_meeting');
-                    $count_meeting_fi = $count_meeting_fi->option_value;
 
-                    $customer_satisfaction_fi = $this->get_optionByName('customer_satisfaction');
-                    $customer_satisfaction_fi = $customer_satisfaction_fi->option_value;
+//                    $count_meeting_fi = $this->get_optionByName('count_meeting');
+//                    $count_meeting_fi = $count_meeting_fi->option_value;
+//
+//                    $customer_satisfaction_fi = $this->get_optionByName('customer_satisfaction');
+//                    $customer_satisfaction_fi = $customer_satisfaction_fi->option_value;
+//
+//                    $change_customer_fi = $this->get_optionByName('change_customer');
+//                    $change_customer_fi = $change_customer_fi->option_value;
+//
+//                    $count_recommendation_fi = $this->get_optionByName('count_recommendation');
+//                    $count_recommendation_fi = $count_recommendation_fi->option_value;
 
-                    $change_customer_fi = $this->get_optionByName('change_customer');
-                    $change_customer_fi = $change_customer_fi->option_value;
+//                      $booking = booking::where('bookings.id', '=', $item['booking_id'])
+//                                        ->first();
 
-                    $count_recommendation_fi = $this->get_optionByName('count_recommendation');
-                    $count_recommendation_fi = $count_recommendation_fi->option_value;
+//                        ->join('users', 'bookings.user_id', '=', 'users.id')
+//                        ->join('coaches', 'users.id', '=', 'coaches.user_id')
 
-                    $user = booking::join('users', 'bookings.user_id', '=', 'users.id')
-                        ->join('coaches', 'users.id', '=', 'coaches.user_id')
-                        ->where('bookings.id', '=', $item['booking_id'])
-                        ->first();
-                    $count_meeting = $user->count_meeting;
-                    $customer_satisfaction = $user->customer_satisfaction;
-                    $change_customer = $user->change_customer;
-                    $count_recommendation = $user->count_recommendation;
+//                    $count_meeting = $user->count_meeting;
+//                    $customer_satisfaction = $user->customer_satisfaction;
+//                    $change_customer = $user->change_customer;
+//                    $count_recommendation = $user->count_recommendation;
 
 //                $fi=($count_meeting_fi*$count_meeting)+($customer_satisfaction_fi*$customer_satisfaction)+($change_customer_fi*$change_customer)+($count_recommendation_fi*$count_recommendation);
-                    $fi = $user->fi;
+
+                    $fi = $item->booking->coach->fi;
+
+
                     if ($coupon->expire_date < $this->dateNow)
                     {
 
                         $off = 0;
-                        $reserve->off = NULL;
-                        $reserve->coupon = NULL;
+                        $item->off = NULL;
+                        $item->coupon = NULL;
                         $request['coupon'] = NULL;
                     } else {
                         if($coupon->type_discount=='تومان')
@@ -579,44 +598,56 @@ class CouponController extends BaseController
 
                     }
 
+//                    $final_off = $item->final_off - $off;
                     $final_off = $fi - $off;
+
                     if($final_off<0)
                     {
                         $final_off=0;
                     }
-                    if (is_null($reserve)) {
+
+
+
+                    if (is_null($item))
+                    {
                         $reserve = reserve::create(
                             [
-                                'user_id' => Auth::user()->id,
-                                'off' => $coupon->discount,
-                                'final_off' => $final_off,
-                                'fi' => $fi,
+                                'user_id'       => Auth::user()->id,
+                                'off'           => $coupon->discount,
+                                'type_discount' => $coupon->type_discount,
+                                'final_off'     => $final_off,
+                                'fi'            => $fi,
                             ]);
-                    } else {
+                    }
+                    else
+                    {
                         if ($coupon->expire_date < $this->dateNow)
                         {
-                            $reserve->update(
+                            $item->update(
                                 [
-                                    'user_id' => Auth::user()->id,
-                                    'off' => NULL,
-                                    'coupon' => NULL,
-                                    'final_off' => $final_off,
-                                    'fi' => $fi,
+                                    'user_id'       => Auth::user()->id,
+                                    'off'           => NULL,
+                                    'type_discount' => NULL,
+                                    'coupon'        => NULL,
+                                    'final_off'     => $final_off,
+                                    'fi'            => $fi,
                                 ]);
+
                             alert()->error('کوپن نخفیف منقضی شده است')->persistent('بستن');
 //                            $msg = 'کوپن تخفیف منقضی شده است';
 //                            $errorStatus = 'danger';
                         } else
                         {
-                            $status=$reserve->update(
+                            $status=$item->update(
                                 [
-                                    'user_id'   => Auth::user()->id,
-                                    'off'       => $coupon->discount,
-                                    'final_off' => $final_off,
-                                    'fi'        => $fi,
-                                    'coupon'    => $request['coupon'],
+                                    'user_id'       => Auth::user()->id,
+                                    'off'           => $coupon->discount,
+                                    'type_discount' => $coupon->type_discount,
+                                    'final_off'     => $final_off,
+                                    'fi'            => $fi,
+                                    'coupon'        => $request['coupon'],
                                 ]);
-                            $reserve->save();
+                            $item->save();
                             echo "<script>console.log('".$coupon."')</script>";
 //                            $msg = 'کوپن اعمال شد';
 //                            $errorStatus = 'success';
@@ -630,7 +661,8 @@ class CouponController extends BaseController
 //                        ->with('errorStatus', $errorStatus)
 //                        ->with('reserve', $reserve);
                 } else {
-                    return '<div class="alert alert-danger">کد تخفیف مربوط به این محصول نمیباشد</div>';
+                    alert()->error('کد تخفیف مربوط به این محصول نمی باشد')->persistent('بستن');
+                    return back();
                 }
             }
         }

@@ -20,6 +20,7 @@ class CreateCartsTable extends Migration
             $table->integer('capacity')->default(1);
             $table->string('fi',20)->nullable();
             $table->string('off',20)->nullable();
+            $table->string('type_discount',10)->nullable();
             $table->string('coupon',100)->nullable();
             $table->string('final_off',100)->nullable();
             $table->string('type',100)->nullable();

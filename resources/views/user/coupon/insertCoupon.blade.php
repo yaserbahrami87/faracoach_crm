@@ -13,17 +13,8 @@
                     <small class="text-muted">نام کوپن تخفیف را به انگلیسی وارد کنید</small>
                 </div>
 
-                <!--
-                <div class="form-group">
-                    <label for="discount">میزان تخفیف (درصد) <span class="text-danger">*</span></label>
-                    <input type="number" class="form-control @error('discount') is-invalid @enderror" id="discount" name="discount" />
-                    <small class="text-muted"> مقدار ورودی بین 0 تا 100 به عنوان مثال 20 معادل 20درصد تخفیف میباشد</small>
-                </div>
-
-                -->
-
                 <div class="input-group">
-                    <label for="discount">میزان تخفیف<span class="text-danger">*</span></label>
+                    <label for="discount">میزان تخفیف:<span class="text-danger">*</span></label>
                     <input type="number" class="form-control @error('discount') is-invalid @enderror" id="discount" name="discount" value="{{old('discount')}}"/>
                     <select id="type_discount" class="form-control p-0 @error('type_discount') is-invalid @enderror" name="type_discount">
                         <option selected disabled>انتخاب کنید</option>
@@ -33,7 +24,7 @@
                 </div>
 
                 <div id="app" class="form-group">
-                    <label for="expire_date">تاریخ انقضا <span class="text-danger">*</span></label>
+                    <label for="expire_date">تاریخ انقضا: <span class="text-danger">*</span></label>
                     <date-picker
                         type="date"
                         v-model="dates"
@@ -46,7 +37,7 @@
                     <small class="text-muted">تاریخ انقضای کوپن تخفیف را وارد کنید</small>
                 </div>
                 <div class="form-group">
-                    <label for="product">نوع محصول <span class="text-danger">*</span></label>
+                    <label for="product">نوع محصول: <span class="text-danger">*</span></label>
                     <select id="product" class="form-control p-0 @error('product') is-invalid @enderror" name="product">
                         <option selected disabled>انتخاب کنید</option>
                         <option value="1">معارفه</option>
@@ -57,13 +48,13 @@
 
 
                 <div class="form-group">
-                    <label for="limit_user"> تعداد استفاده برای هر نفر *</label>
+                    <label for="limit_user"> تعداد استفاده برای هر نفر: <span class="text-danger">*</span></label>
                     <input type="number" class="form-control @error('limit_user') is-invalid @enderror" id="limit_user" name="limit_user" min="0"/>
                     <small class="text-muted">تعداد استفاده هر نفر از این کوپن</small>
                 </div>
 
                 <div class="form-group">
-                    <label for="count">تعداد استفاده</label>
+                    <label for="count">تعداد کوپن:</label>
                     <input type="number" class="form-control @error('count') is-invalid @enderror" id="count" name="count" min="0"/>
                     <small class="text-muted">تعداد کوپن تخفیف در صورت وارد نکردن تعداد بینهایت خواهد بود</small>
                 </div>

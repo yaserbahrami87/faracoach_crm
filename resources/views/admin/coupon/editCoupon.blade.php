@@ -1,4 +1,4 @@
-@extends('user.master.index')
+@extends('admin.master.index')
 @section('content')
     <div class="col-xs-12 col-md-8 col-lg-8 col-xl-8">
         <div class="card-header bg-secondary">
@@ -8,7 +8,7 @@
             <form method="post" action="/panel/coupon/{{$coupon->id}}" >
                 {{csrf_field()}}
                 {{method_field('PATCH')}}
-
+                <input type="hidden" value="1" name="flag" />
                 <div class="form-group">
                     <label for="coupon">نام کوپن:<span class="text-danger">*</span></label>
                     <input type="text" class="form-control @error('coupon') is-invalid @enderror" id="coupon" name="coupon" value="{{old('coupon',$coupon->coupon)}}" />

@@ -34,7 +34,13 @@
                     <option value="0" @if($settings->today_meeting==0) selected @endif>خیر رزرو نشود</option>
                     <option value="1" @if($settings->today_meeting==1) selected @endif>بلی رزرو شود</option>
                 </select>
-
+            </div>
+            <label for="introduction_discount">تخفیف جلسات معارفه:</label>
+            <div class="input-group">
+                <input type="number" class="form-control" id="introduction_discount" name="introduction_discount" min="0" max="100" value="{{old('introduction_discount',$settings->introduction_discount)}}"/>
+                <div class="input-group-prepend">
+                    <span class="input-group-text" >%</span>
+                </div>
             </div>
             <input type="submit" value="بروزرسانی" class="btn btn-success">
         </form>

@@ -333,7 +333,6 @@ class BaseController extends Controller
             $item->name=str_replace('&#8211;','-',$item->name);
 
         }
-//        dd($contents_api);
         return $contents_api;
     }
 

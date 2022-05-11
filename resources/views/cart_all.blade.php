@@ -5,6 +5,7 @@
             <div class="col-sm-12 col-md-10 col-md-offset-1 ">
                 <div class="card mb-3 table-responsive ">
                     <div class="card-header font-weight-bold">انتخاب شیوه پرداخت</div>
+
                     @if($cart->count()>0)
                         <table class="table table-hover">
                             <thead>

@@ -31,15 +31,16 @@
                         @endphp
 
                         @foreach($cart as $item)
+
                             <tr>
                                 <td class="col-sm-8 col-md-6">
                                     <div class="media">
                                         <div class="media-body">
-                                            @if($item->booking->duration_booking==1)
-                                                <span>جلسه معارفه 30 دقیقه ای</span>
+                                            @if($item->type_booking==1)
+                                                <span>جلسه معارفه</span>
                                             @elseif($item->booking->duration_booking==2)
 
-                                                <span>جلسه کوچینگ  60 دقیقه ای</span>
+                                                <span>جلسه کوچینگ</span>
                                             @endif
                                                 <span>ساعت{{$item->booking->start_time}} در تاریخ {{$item->booking->start_date}}</span>
                                             <h4 class="media-heading"><a href="#"></a></h4>
@@ -53,6 +54,7 @@
                                 </td>
                                 <td class="col-sm-1 col-md-1 text-center">
                                     <strong>{{$item->off}}</strong>
+                                    <small>{{$item->type_discount }}</small>
                                 </td>
                                 <td class="col-sm-1 col-md-1 text-center">
                                     <strong>{{number_format($item->final_off)}} تومان</strong>

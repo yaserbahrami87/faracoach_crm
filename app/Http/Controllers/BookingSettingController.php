@@ -91,11 +91,12 @@ class BookingSettingController extends Controller
     public function update(Request $request,coach  $coach)
     {
         $request->validate([
-            'type_holding'      =>'required|in:0,1,2',
-            'address'           =>'required|string',
-            'online_platform'   =>'required|string',
-            'tel'               =>'nullable|string',
-            'today_meeting'     =>'required|in:0,1',
+            'type_holding'          =>'required|in:0,1,2',
+            'address'               =>'required|string',
+            'online_platform'       =>'required|string',
+            'tel'                   =>'nullable|string',
+            'today_meeting'         =>'required|in:0,1',
+            'introduction_discount' =>'required|numeric',
         ]);
 
 
