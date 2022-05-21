@@ -402,23 +402,18 @@ class BookingController extends BaseController
             ->orderby('start_time', 'asc')
             ->get();
 
-        $user=reserve::join('bookings','reserves.booking_id','=','bookings.id')
-                    ->join('users','reserves.user_id','users.id')
-                    ->where('reserves.user_id','=',Auth::user()->id)
-                    ->where('bookings.duration_booking','=','1')
-                    ->where('bookings.status','=','0')
-                    ->count();
 
         //چک کردن تعداد رزروهای ناقص کامل نشده در سبد خرید
         $cart=$this->get_reserve(NULL,Auth::user()->id,NULL,NULL,NULL,0,'get');
+
 
         if (count($booking) == 0) {
             return '<div class="alert alert-warning" role="alert">برای این تاریخ ساعت رزرو یافت نشد</div>';
         } else {
             return view('reserveCoaching')
                 ->with('booking', $booking)
-                ->with('cart', $cart)
-                ->with('user',$user);
+                ->with('cart', $cart);
+
         }
     }
 

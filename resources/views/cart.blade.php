@@ -36,9 +36,10 @@
                                 <td class="col-sm-8 col-md-6">
                                     <div class="media">
                                         <div class="media-body">
-                                            @if($item->type_booking==1)
+
+                                            @if($item->duration_booking==1)
                                                 <span>جلسه معارفه</span>
-                                            @elseif($item->booking->duration_booking==2)
+                                            @elseif($item->duration_booking==2)
 
                                                 <span>جلسه کوچینگ</span>
                                             @endif

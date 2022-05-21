@@ -351,7 +351,7 @@ class CheckoutController extends BaseController
                                 $booking->save();
                             }
 
-                            if ($booking->duration_booking == 1) {
+                            if ($reserve->type_booking == 1) {
                                 $duration = 'جلسه معارفه';
                             } else {
                                 $duration = 'جلسه کوچینگ';
@@ -362,12 +362,12 @@ class CheckoutController extends BaseController
                                 ->where('bookings.id', '=', $reserve->booking_id)
                                 ->first();
 
-//                //ارسال پیامک برای مشتری
+//                //ارسال پیامک برای کوچ
                             $msg =$duration . " \n " . $booking->start_date . " \n ساعت " . $booking->start_time . "\n " . Auth::user()->fname . " " . Auth::user()->lname . "\nتماس:" .Auth::user()->tel;
-                            $this->sendSms($user->tel, $msg);
+                            $this->sendSms($booking->coach->user->tel, $msg);
 //
-//                //ارسال پیامک به کوچ
-                            $msg =$duration . " \n " . $booking->start_date . " \n  " . $booking->start_time . "\n کوچ:" . $user->fname . " " . $user->lname . "\n تماس کوچ:" .  $user->tel;
+//                //ارسال پیامک به مراجع
+                            $msg =$duration . " \n " . $booking->start_date . " \n  " . $booking->start_time . "\n کوچ:" . $user->fname . " " . $user->lname . "\n تماس کوچ:" .  $booking->coach->user->tel;
                             $this->sendSms(Auth::user()->tel, $msg);
                             //ارسال پیامک برای حسام
                             $msg=$duration . " \n " . $booking->start_date . " \n  " . $booking->start_time . "\n کوچ:" . $user->fname . " " . $user->lname . "\n مراجع ".Auth::user()->fname . " " . Auth::user()->lname . "\nتماس:" .Auth::user()->tel;

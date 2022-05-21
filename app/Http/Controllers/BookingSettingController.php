@@ -92,8 +92,8 @@ class BookingSettingController extends Controller
     {
         $request->validate([
             'type_holding'          =>'required|in:0,1,2',
-            'address'               =>'required|string',
-            'online_platform'       =>'required|string',
+            'address'               =>'required_if:type_holding,0,1',
+            'online_platform'       =>'required_if:type_holding,0,2',
             'tel'                   =>'nullable|string',
             'today_meeting'         =>'required|in:0,1',
             'introduction_discount' =>'required|numeric',

@@ -7,7 +7,7 @@
         </div>
 
         <input type="hidden" value="{{$booking->id}}" name="booking_id">
-        <input type="hidden" value="{{$booking->type_booking}}" name="type_booking">
+
         <div class="form-group">
             <label for="subject">موضوع جلسه درخواستی:<span class="text-danger">*</span></label>
             <input type="text" class="form-control form-control" id="subject"  name="subject" placeholder="لطفا در مورد هر موضوع خلاصه ای یک سطری بنویسید"  autocomplete="subject" />
