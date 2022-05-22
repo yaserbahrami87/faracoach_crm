@@ -97,6 +97,7 @@ class BookingSettingController extends Controller
             'tel'                   =>'nullable|string',
             'today_meeting'         =>'required|in:0,1',
             'introduction_discount' =>'required|numeric',
+            'extra_presence'        =>'required|numeric',
         ]);
 
 

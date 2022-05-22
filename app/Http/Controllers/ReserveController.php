@@ -236,6 +236,14 @@ class ReserveController extends BaseController
         $final_off=$fi-$off;
 
 
+
+        if($request->type_booking==1)
+        {
+            $extra=$booking->coach->extra_presence;
+            $final_off=(($final_off*$extra)/100)+$final_off;
+        }
+
+
         if(is_null($reserve))
         {
 
@@ -326,9 +334,11 @@ class ReserveController extends BaseController
                 }
                 else
                 {
+
                     return  $this->checkoutStore($reserve->id,$final_off,Auth::user(),'reserve',NULL,'رزرو جلسه');
                 }
-            } else {
+            } else
+            {
                 alert()->error('این وقت رزرو شده است')->persistent('بستن');
                 return back();
             }

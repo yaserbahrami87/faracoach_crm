@@ -19,7 +19,7 @@ class CreateCheckoutsTable extends Migration
             $table->bigInteger('checkout_id')->nullable()->index();
             $table->bigInteger('order_id')->nullable()->index();
             $table->bigInteger('product_id')->nullable()->index();
-            $table->bigInteger('price')->nullable();
+            $table->string('price',50)->nullable();
             $table->string('type',100)->nullable();
             $table->string('authority',250)->nullable();
             $table->string('description',250)->nullable();

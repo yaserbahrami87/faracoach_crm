@@ -30,18 +30,15 @@
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BookingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BookingController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BookingSettingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BookingSettingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CartController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CartController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CheckoutController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CheckoutController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CouponController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CouponController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReserveController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReserveController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/reserve.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/reserve.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_04_27_123210_create_reserves_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_04_27_123210_create_reserves_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/coach.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/coach.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_05_02_143045_create_coaches_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_05_02_143045_create_coaches_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2021_08_25_114119_create_checkouts_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_08_25_114119_create_checkouts_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/lang/fa/validation.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/fa/validation.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/cart.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/cart.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/formReserve.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/formReserve.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/reserveCoaching.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/reserveCoaching.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/user/booking/settingBooking.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/booking/settingBooking.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -977,7 +974,8 @@
       <workItem from="1652761760624" duration="13542000" />
       <workItem from="1652810463820" duration="13609000" />
       <workItem from="1652936247193" duration="23586000" />
-      <workItem from="1653128801151" duration="1119000" />
+      <workItem from="1653128801151" duration="1602000" />
+      <workItem from="1653197388851" duration="10037000" />
     </task>
     <servers />
   </component>

@@ -400,7 +400,6 @@ class CheckoutController extends BaseController
                 }
                 else
                 {
-//                    return 'خطا در انجام عملیات';
                     foreach ($checkout as $item) {
                         $item->description = 'خطا در انجام عملیات';
                         $item->save();
@@ -423,7 +422,6 @@ class CheckoutController extends BaseController
                 return view('callBackCheckout')
                     ->with('msg',$msg)
                     ->with('alert',$alert);
-//                return '2خطا در انجام عملیات';
             }
         }
         else

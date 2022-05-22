@@ -244,6 +244,7 @@ return [
         'type_booking'          =>'نوع جلسه',
         'type_discount'         =>'نوع تخفیف',
         'product'               =>'محصول',
+        'extra_presence'        =>'افزایش جلسات حضوری',
     ],
 
     'values' => [

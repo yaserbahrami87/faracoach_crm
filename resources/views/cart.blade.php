@@ -58,6 +58,7 @@
                                     <small>{{$item->type_discount }}</small>
                                 </td>
                                 <td class="col-sm-1 col-md-1 text-center">
+
                                     <strong>{{number_format($item->final_off)}} تومان</strong>
                                 </td>
                                 @php

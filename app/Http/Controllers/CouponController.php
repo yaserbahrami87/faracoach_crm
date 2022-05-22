@@ -540,6 +540,14 @@ class CouponController extends BaseController
 
                             $fi=$fi-$introduction_discount;
                         }
+
+
+                        if($item->type_booking==1)
+                        {
+                            $extra=$booking->coach->extra_presence;
+                            $fi=(($fi*$extra)/100)+$fi;
+                        }
+
                         $off = 0;
                         $item->off = NULL;
                         $item->coupon = NULL;
@@ -552,6 +560,12 @@ class CouponController extends BaseController
                             $introduction_discount = ($fi * $item->booking->coach->introduction_discount) / 100;
 
                             $fi=$fi-$introduction_discount;
+                        }
+
+                        if($item->type_booking==1)
+                        {
+                            $extra=$booking->coach->extra_presence;
+                            $fi=(($fi*$extra)/100)+$fi;
                         }
 
 

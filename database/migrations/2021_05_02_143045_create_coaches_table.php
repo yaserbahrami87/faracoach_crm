@@ -36,6 +36,7 @@ class CreateCoachesTable extends Migration
             $table->string('tel',20)->nullable();
             $table->boolean('today_meeting')->default(0);
             $table->tinyInteger('introduction_discount')->default(0);
+            $table->tinyInteger('extra_presence')->default(0);
             $table->timestamps();
         });
     }

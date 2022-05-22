@@ -42,6 +42,14 @@
                     <span class="input-group-text" >%</span>
                 </div>
             </div>
+            <label for="extra_presence">میزان افزایش  جلسات حضوری:<span class="text-danger">*</span></label>
+            <div class="input-group">
+                <input type="number" class="form-control" id="extra_presence" name="extra_presence" min="0" max="100" value="{{old('extra_presence',$settings->extra_presence)}}"/>
+                <div class="input-group-prepend">
+                    <span class="input-group-text" >%</span>
+                </div>
+            </div>
+
             <input type="submit" value="بروزرسانی" class="btn btn-success">
         </form>
     </div>
