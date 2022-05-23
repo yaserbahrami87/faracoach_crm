@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\coach;
+use App\option;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -124,4 +125,6 @@ class BookingSettingController extends Controller
     {
         //
     }
+
+
 }

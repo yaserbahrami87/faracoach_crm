@@ -179,14 +179,15 @@ class OptionController extends Controller
             alert()->error('خطا در بزرورسانی قیمت هر ساعت جلسه','خطا')->persistent('بستن');
         }
         return back();
+    }
 
-//        $setting=option::orwhere('option_name','=','count_meeting')
-//            ->orwhere('option_name','=','customer_satisfaction')
-//            ->orwhere('option_name','=','change_customer')
-//            ->orwhere('option_name','=','count_recommendation')
-//            ->get();
+    public function optionsCoaching()
+    {
+        $options_coaching=option::where('option_name','like','%_coaching')
+            ->get();
 
-
+        return view('admin.options.options_coaching')
+                        ->with('options',$options_coaching);
 
     }
 }

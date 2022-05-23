@@ -120,9 +120,11 @@
             <li class=" nav-item"><a href="#"><span class="menu-title" data-i18n="Chat">تنظیمات</span></a>
                 <ul class="menu-content">
                     <li><a href="/admin/settings/" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">تنظیمات کلی</span></a></li>
+                    <li><a href="/admin/options/coaching" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >کلینیک</span></a></li>
                     <li><a href="/admin/settingscore" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice Add">امتیازات</span></a></li>
                     <li><a href="/admin/settingscore" disabled="disabled"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice Add">قیمت جلسات</span></a></li>
                     <li><a href="/admin/settings/user_type" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >کاربرها</span></a></li>
+
                     <!--
                     <li><a href=" nav-item has-sub "><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >آموزش</span></a>
                         <ul class="menu-content">

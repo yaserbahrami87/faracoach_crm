@@ -307,6 +307,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
 
     //options
     Route::get('/settingreserve','OptionController@settingReserve');
+    Route::get('/options/coaching','OptionController@optionsCoaching');
     Route::patch('/settingreserve/update','OptionController@updateSettingReserve');
     Route::resource('options','OptionController');
 
