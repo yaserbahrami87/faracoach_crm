@@ -96,7 +96,7 @@
 
 @section('content')
 
-    @if($countIntroducedUser<50)
+    @if($countIntroducedUser<150)
         <!------------------------------- CAPTION ----------------------------->
         <section class="col-12">
             <div class="row">
