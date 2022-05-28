@@ -233,8 +233,8 @@
             background-image:url("{{asset('/images/logo.png')}}");
             content: '';
             position:absolute;
-            top: 80px;
-            left: 135px;
+            top: 160px;
+            left: 180px;
             width: 40px;
             height: 40px;
             display: inline-block;
