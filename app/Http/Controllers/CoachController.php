@@ -230,7 +230,6 @@ class CoachController extends BaseController
      */
     public function edit(coach $coach)
     {
-
         if((Auth::user()->type==2) ||(Auth::user()->type==3))
         {
 
@@ -312,6 +311,7 @@ class CoachController extends BaseController
      */
     public function update(Request $request, coach $coach)
     {
+
         $this->validate($request,[
             'education_background'  =>'required|string',
             'certificates'          =>'required|string',
@@ -325,6 +325,7 @@ class CoachController extends BaseController
             'category'              =>'required|array',
             'typecoach_id'          =>'required|numeric',
             'fi'                    =>'nullable|numeric',
+            'confirm_faracoach'     =>'nullable|boolean',
             'status'                =>'required|numeric|between:-2,5'
         ],[
             'education_background.required' =>'سوابق تحصیلی اجباریست',

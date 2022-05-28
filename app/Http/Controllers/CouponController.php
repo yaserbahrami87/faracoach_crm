@@ -193,7 +193,7 @@ class CouponController extends BaseController
             $status=$coupon->delete();
             if($status)
             {
-                alert()->success('کوپن ما موفقیت حذف شد','پیام')->persistent('بستن');
+                alert()->success('کوپن با موفقیت حذف شد','پیام')->persistent('بستن');
             }
             else
             {

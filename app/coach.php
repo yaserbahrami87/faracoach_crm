@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class coach extends Model
 {
     protected $fillable = [
-        'user_id','education_background','researches','certificates','experience','skills','documents','count_meeting','customer_satisfaction','category','typecoach_id','change_customer','count_recommendation','fi','type_holding','address','online_platform','tel','today_meeting','status','introduction_discount','extra_presence'
+        'user_id','education_background','researches','certificates','experience','skills','documents','count_meeting','customer_satisfaction','category','typecoach_id','change_customer','count_recommendation','fi','type_holding','address','online_platform','tel','today_meeting','status','introduction_discount','extra_presence','confirm_faracoach'
     ];
 
     public function user() {

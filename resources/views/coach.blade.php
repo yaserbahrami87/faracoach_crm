@@ -219,11 +219,27 @@
             display: none;
         }
 
+        .faracoach
+        {
+            position:relative;
+        }
 
+        .faracoach img{
+            border:2px solid rgba(0,67,164,1) !important;
+        }
 
-
-
-
+        .faracoach::after
+        {
+            background-image:url("{{asset('/images/logo.png')}}");
+            content: '';
+            position:absolute;
+            top: 80px;
+            left: 135px;
+            width: 40px;
+            height: 40px;
+            display: inline-block;
+            background-size: 100% 100%;
+        }
 
     </style>
 
@@ -238,7 +254,7 @@
 
                     </div>
                     <div class="row">
-                        <div class="avatar col-xl-3 col-lg-3 col-md-3 col-sm-12 text-center">
+                        <div class="avatar col-xl-3 col-lg-3 col-md-3 col-sm-12 text-center @if($coach->confirm_faracoach==1) faracoach @endif">
 
                             @if(strlen($coach->personal_image)>0)
                                 <img src="{{asset('/documents/users/'.$coach->personal_image)}}" />

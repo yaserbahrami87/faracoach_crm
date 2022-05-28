@@ -29,6 +29,23 @@
             font-size: 30px;
         }
 
+        .faracoach img{
+            border:2px solid rgba(0,67,164,1);
+        }
+
+        .faracoach::after
+        {
+            background-image:url("{{asset('/images/logo.png')}}");
+            content: '';
+            position:relative;
+            top: 50px;
+            left: 90px;
+            width: 30px;
+            height: 30px;
+            display: inline-block;
+            background-size: 100% 100%;
+        }
+
     </style>
 @endsection
 @section('row1')
@@ -110,11 +127,11 @@
 
                                             <div class="col-lg-3 col-sm-6 listFriends mt-3" id="">
                                                 <div class="box shadow-lg p-1">
-                                                    <a href="/coach/{{$item->username}}">
+                                                    <a href="/coach/{{$item->username}}" class="@if($item->confirm_faracoach==1) faracoach @endif">
                                                         @if(strlen($item->personal_image)>0)
-                                                            <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="rounded-circle profile"  />
+                                                            <img src="{{asset('/documents/users/'.$item->personal_image)}}" class=" rounded-circle profile"  />
                                                         @else
-                                                            <img src="{{asset('/documents/users/default-avatar.png')}}" class="rounded-circle profile" />
+                                                            <img src="{{asset('/documents/users/default-avatar.png')}}" class=" rounded-circle profile" />
                                                         @endif
                                                     </a>
 

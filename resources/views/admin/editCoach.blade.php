@@ -175,6 +175,14 @@
                         <input type="number" class="form-control" id="fi" name="fi" value="{{$coach->fi}}"/>
                     </div>
                     <div class="form-group">
+                        <label for="confirm_faracoach">وضعیت منتورینگ کوچ : </label>
+                        <select class="form-control" id="confirm_faracoach" name="confirm_faracoach">
+                            <option disabled selected>انتخاب کنید</option>
+                            <option value="0" @if($coach->confirm_faracoach==0) selected @endif>مورد تایید نمی باشد</option>
+                            <option value="1" @if($coach->confirm_faracoach==1) selected @endif>مورد تایید می باشد</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="status">وضعیت </label>
                         <select class="form-control" id="status" name="status">
                             <option disabled selected>انتخاب کنید</option>
