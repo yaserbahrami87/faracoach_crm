@@ -29,19 +29,12 @@
             font-size: 30px;
         }
 
-        .faracoach img{
-            border:2px solid rgba(0,67,164,1);
-        }
-
-        .faracoach::after
+        .confirm_faracoach::before
         {
-            background-image:url("{{asset('/images/logo.png')}}");
+            background-image:url("{{asset('/images/tick.png')}}");
             content: '';
-            position:relative;
-            top: 50px;
-            left: 90px;
-            width: 30px;
-            height: 30px;
+            width: 20px;
+            height: 20px;
             display: inline-block;
             background-size: 100% 100%;
         }
@@ -127,7 +120,7 @@
 
                                             <div class="col-lg-3 col-sm-6 listFriends mt-3" id="">
                                                 <div class="box shadow-lg p-1">
-                                                    <a href="/coach/{{$item->username}}" class="@if($item->confirm_faracoach==1) faracoach @endif">
+                                                    <a href="/coach/{{$item->username}}" >
                                                         @if(strlen($item->personal_image)>0)
                                                             <img src="{{asset('/documents/users/'.$item->personal_image)}}" class=" rounded-circle profile"  />
                                                         @else
@@ -137,8 +130,8 @@
 
 
                                                     <div class="box-title mt-2">
-                                                        <a href="/coach/{{$item->username}}" class="font-weight-bold">
-                                                        {{$item->fname.' '.$item->lname}}
+                                                        <a href="/coach/{{$item->username}}" class="font-weight-bold  @if($item->confirm_faracoach==1) confirm_faracoach @endif">
+                                                            {{$item->fname.' '.$item->lname}}
                                                         </a>
                                                     </div>
 

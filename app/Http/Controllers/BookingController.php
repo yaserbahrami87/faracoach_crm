@@ -316,18 +316,17 @@ class BookingController extends BaseController
      */
     public function update(Request $request, booking $booking)
     {
-
         $this->validate($request,[
             'status'    =>'required|numeric',
         ]);
 
-        $status=$booking->update($request->all());
+
+        $booking->status=1;
+        $status=$booking->update();
 
         if($status)
         {
             $reserve=$this->get_reserve(NULL,NULL,$booking->id,NULL,NULL,NULL,'first');
-//                    reserve::where('booking_id','=',$booking->id)
-//                                ->first();
 
             $reserve->status=$request->status;
             $reserve->save();
@@ -524,49 +523,12 @@ class BookingController extends BaseController
         }
         else
         {
-            return view('user.bookingAcceptReserveCoach')
+            return view('user.booking.bookingAcceptReserveCoach')
                 ->with('booking', $booking);
         }
     }
 
 
-    //جلسات رزرو شده کاربر ساده
-    public function accept_reserve_user()
-    {
-        $booking=reserve::where('user_id','=',Auth::user()->id)
-                ->where(function($query){
-                    $query->orwhere('status','=',1)
-                        ->orwhere('status','=',3)
-                        ->orwhere('status','=',4);
-                })
-                ->orderby('reserves.id','desc')
-                ->paginate($this->countPage());
-
-
-
-        foreach ($booking as $item)
-        {
-
-            if(isset($item->booking))
-            {
-                switch ($item->booking->duration_booking)
-                {
-                    case '1':
-                        $item->duration_booking = 'معارفه 30 دقیقه ای';
-                        break;
-                    case '2':
-                        $item->duration_booking = 'کوچینگ 60 دقیقه ای';
-                        break;
-                }
-                $item->caption_status=$this->get_statusBookings($item->status);
-            }
-
-        }
-
-
-        return view('user.bookingAcceptReserveUser')
-            ->with('booking', $booking);
-    }
 
 
 

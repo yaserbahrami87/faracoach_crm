@@ -92,7 +92,7 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
 
     //booking
     Route::get('/booking/accept','BookingController@acceptReserve');
-    Route::get('/booking/accept_reserve_user','BookingController@accept_reserve_user');
+
     Route::resource('booking','BookingController');
 
     //booking Setting
@@ -109,6 +109,7 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     Route::resource('coupon','CouponController');
 
     //Reserves
+    Route::get('/reserve/accept_reserve_user','ReserveController@accept_reserve_user');
     Route::patch('/reserve/{reserve}/update','ReserveController@result_coach');
     Route::get('/reserve/{reserve}','ReserveController@show');
     Route::PATCH('/reserve/{reserve}','ReserveController@update');

@@ -380,6 +380,41 @@ class ReserveController extends BaseController
     }
 
 
+
+
+    //جلسات رزرو شده کاربر ساده
+    public function accept_reserve_user()
+    {
+        $reserves=reserve::where('user_id','=',Auth::user()->id)
+            ->where(function($query){
+                $query->orwhere('status','=',1)
+                    ->orwhere('status','=',3)
+                    ->orwhere('status','=',4);
+            })
+            ->orderby('reserves.id','desc')
+            ->paginate($this->countPage());
+
+
+
+        foreach ($reserves as $item)
+        {
+            switch ($item->duration_booking)
+            {
+                case '1':
+                    $item->duration_booking = 'معارفه 30 دقیقه ای';
+                    break;
+                case '2':
+                    $item->duration_booking = 'کوچینگ 60 دقیقه ای';
+                    break;
+            }
+            $item->caption_status=$this->get_statusBookings($item->status);
+        }
+
+        return view('user.booking.bookingAcceptReserveUser')
+                                        ->with('reserves', $reserves);
+    }
+
+
     //ثبت نتیجه جلسه توسط خود کوچ
     public function result_coach (Request $request,Reserve $reserve)
     {

@@ -19,7 +19,7 @@
                 @endif
             </tr>
 
-            @foreach($booking as $item)
+            @foreach($reserves as $item)
                 @switch($item['status'])
                     @case('1')   <tr class="table-warning">
                     @break
@@ -33,22 +33,27 @@
 
 
                         <td class="text-center">
-                            <a href="/panel/reserve/{{$item->id}}">{{$item->booking->id}}</a>
+                            @if($item->status==1 || $item->status==3)
+                                <a href="/panel/reserve/{{$item->id}}">{{$item->booking->id}}</a>
+                            @else
+                                {{$item->booking->id}}
+                            @endif
+
                         </td>
                         <td>
-                            <a href="/panel/reserve/{{$item->id}}">{{$item->booking->coach->user->fname.' '.$item->booking->coach->user->lname}}</a>
+                            @if($item->status==1 || $item->status==3)
+                                <a href="/panel/reserve/{{$item->id}}">{{$item->booking->coach->user->fname.' '.$item->booking->coach->user->lname}}</a>
+                            @else
+                                {{$item->booking->coach->user->fname.' '.$item->booking->coach->user->lname}}
+                            @endif
+
                         </td>
                         <td class="text-center">
-                            @if(Auth::user()->status_coach==1 )
-
-                                @if($item->status==1  || ($item->caption_status=='باطل شده'))
-                                    {{$item->booking->start_date}}
+                                @if($item->status==1 || $item->status==3)
+                                    <a href="/panel/booking/{{$item->id}}">{{$item->booking->start_date}}</a>
                                 @else
-                                    <a href="/panel/booking/{{$item->id}}">{{$item->start_date}}</a>
+                                    {{$item->booking->start_date}}
                                 @endif
-                            @else
-                                <a href="/panel/reserve/{{$item->id}}">{{$item->booking->start_date}}</a>
-                            @endif
                         </td>
                         <td class="text-center">{{$item->booking->start_time}}</td>
                         <td class="text-center">{{$item->booking->end_time}}</td>
@@ -86,7 +91,7 @@
                     </tr>
                     @endforeach
         </table>
-        {{$booking->links()}}
+        {{$reserves->links()}}
     </div>
 
 @endsection

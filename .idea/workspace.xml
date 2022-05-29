@@ -30,7 +30,13 @@
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BookingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BookingController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReserveController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReserveController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/allCoaches.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/allCoaches.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/coach.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/coach.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/booking/bookingAcceptReserveUser.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/booking/bookingAcceptReserveUser.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/master/right_menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/master/right_menu.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -218,7 +224,7 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/images" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -230,19 +236,19 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\resources\views\admin\coupon" />
-      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\resources\views\user\coupon" />
-      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\resources\views\user\booking" />
-      <recent name="C:\wamp64\www\faracoach_crm\resources\views\admin\education\course" />
-      <recent name="C:\wamp64\www\faracoach_crm\storage\app\private" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\images" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\resources\views\admin" />
       <recent name="C:\wamp64\www\faracoach_crm\public\js" />
       <recent name="C:\wamp64\www\faracoach_crm\public\images" />
       <recent name="C:\wamp64\www\faracoach_crm\public\fonts\other" />
-      <recent name="C:\wamp64\www\faracoach_crm\resources\views" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\resources\views\user\booking" />
+      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\resources\views\admin\coupon" />
+      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\resources\views\user\coupon" />
+      <recent name="C:\wamp64\www\faracoach_crm\resources\views\admin\education\course" />
+      <recent name="C:\wamp64\www\faracoach_crm\storage\app\private" />
     </key>
   </component>
   <component name="RunManager">
@@ -974,7 +980,9 @@
       <workItem from="1653540405183" duration="1936000" />
       <workItem from="1653650917734" duration="6393000" />
       <workItem from="1653717932689" duration="1050000" />
-      <workItem from="1653719807098" duration="675000" />
+      <workItem from="1653719807098" duration="6918000" />
+      <workItem from="1653799945863" duration="29000" />
+      <workItem from="1653800418031" duration="6551000" />
     </task>
     <servers />
   </component>
