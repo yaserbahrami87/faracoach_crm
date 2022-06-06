@@ -1235,6 +1235,12 @@ class BaseController extends Controller
                     ->first();
     }
 
+    public function get_optionsWithWhere($options,$camprison,$value)
+    {
+        return option::where($options,$camprison,$value)
+            ->get();
+    }
+
     public function get_postById($post)
     {
         return post::where('id','=',$post)

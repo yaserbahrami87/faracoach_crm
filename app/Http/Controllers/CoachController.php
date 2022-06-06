@@ -326,6 +326,7 @@ class CoachController extends BaseController
             'typecoach_id'          =>'required|numeric',
             'fi'                    =>'nullable|numeric',
             'confirm_faracoach'     =>'nullable|boolean',
+            'student_meeting'       =>'nullable|boolean',
             'status'                =>'required|numeric|between:-2,5'
         ],[
             'education_background.required' =>'سوابق تحصیلی اجباریست',

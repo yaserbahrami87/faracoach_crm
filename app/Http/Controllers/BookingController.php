@@ -535,7 +535,6 @@ class BookingController extends BaseController
     //گرارش کوچ توسط ادمین
     public function coach_report($coach,Request $request)
     {
-
         if(isset($request['start_date']))
         {
             $this->validate($request,[

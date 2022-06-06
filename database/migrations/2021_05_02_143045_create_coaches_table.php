@@ -38,6 +38,7 @@ class CreateCoachesTable extends Migration
             $table->tinyInteger('introduction_discount')->default(0);
             $table->tinyInteger('extra_presence')->default(0);
             $table->boolean('confirm_faracoach')->default(0);
+            $table->boolean('student_meeting')->default(0);
             $table->timestamps();
         });
     }

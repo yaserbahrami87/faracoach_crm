@@ -245,6 +245,7 @@ return [
         'type_discount'         =>'نوع تخفیف',
         'product'               =>'محصول',
         'extra_presence'        =>'افزایش جلسات حضوری',
+        'student_meeting'       =>'جلسات دانشجویی',
     ],
 
     'values' => [

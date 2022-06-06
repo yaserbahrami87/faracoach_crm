@@ -190,4 +190,42 @@ class OptionController extends Controller
                         ->with('options',$options_coaching);
 
     }
+
+    public function updateOptionsBooking(Request $request)
+    {
+        $this->validate($request, [
+            'rule_moarefeh_coaching'    => 'required|string',
+            'rule_meeting_coaching'     => 'required|string',
+        ]);
+//        $data = option::where('option_name', '=', 'rule_moarefeh')->first();
+        $data = option::updateorcreate([
+            'option_name'   =>'rule_moarefeh_coaching',
+        ],[
+            'option_name'   =>'rule_moarefeh_coaching',
+            'option_value'  =>$request['rule_moarefeh_coaching']
+        ]);
+        if(!is_null($data))
+        {
+            $data = option::updateorcreate([
+                'option_name'   =>'rule_meeting_coaching',
+            ],[
+                'option_name'   =>'rule_meeting_coaching',
+                'option_value'  =>$request['rule_meeting_coaching']
+            ]);
+            if($data)
+            {
+                alert()->success('تنظیمات با موفقیت بروزرسانی شد')->persistent('بستن');
+            }
+            else
+            {
+                alert()->error('خطا در بروزرسانی قوانین جلسات کوچینگ');
+            }
+        }
+        else
+        {
+            alert()->error('خطا در بروزرسانی تنظیمات')->persistent('بستن');
+
+        }
+        return back();
+    }
 }

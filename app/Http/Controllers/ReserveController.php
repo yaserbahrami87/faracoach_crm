@@ -531,7 +531,9 @@ class ReserveController extends BaseController
                 alert()->warning('سبد خرید شما خالی می باشد')->persistent('بستن');
                 return redirect('/coaches/all');
             } else {
+                $options=$this->get_optionsWithWhere('option_name','like','%_coaching');
                 return view('cart')
+                    ->with('options', $options)
                     ->with('cart', $cart);
             }
         }

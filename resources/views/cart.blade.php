@@ -106,9 +106,41 @@
                             </td>
                         </tr>
                         <tr>
+                            <td colspan="5">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input reading" id="customCheck1">
+                                    <label class="custom-control-label" for="customCheck1">من تمام <a href="#"  data-toggle="modal" data-target="#rulesModal">قوانین و مقررات رزرو  جلسات</a> را مطالعه کردم و با آن موافقم</label>
+                                </div>
+                                <p class="text-center"></p>
+                                <!-- Modal -->
+                                <div class="modal fade" id="rulesModal" tabindex="-1" aria-labelledby="rulesModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">قوانین و مقررات</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                @if($item->duration_booking==1)
+                                                    {!! $options->where('option_name','=','rule_moarefeh_coaching')->first()['option_value'] !!}
+                                                @elseif($item->duration_booking==2)
+                                                    {!! $options->where('option_name','=','rule_meeting_coaching')->first()['option_value'] !!}
+                                                @endif
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary reading" data-dismiss="modal">مطالعه کردم</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
                             <td colspan="4">  </td>
                             <td>
-                                <form method="POST" action="/reserve/insert">
+                                <form method="POST" action="/reserve/insert" class="d-none"  id="frm_insertReserve">
                                     {{csrf_field()}}
                                     <button type="submit" class="btn btn-success btn-block">
                                         ثبت <span class="glyphicon glyphicon-play"></span>
@@ -124,9 +156,23 @@
                     </div>
                 @endif
             </div>
-            <div class="col-12">
-                asdasdasdasd
-            </div>
+
         </div>
     </div>
+@endsection
+
+@section('footerScript')
+    <script>
+        $('.reading').change(function(){
+           if($(this).is(':checked'))
+           {
+               $('#frm_insertReserve').attr('class','');
+           }
+           else
+           {
+               $('#frm_insertReserve').attr('class','d-none');
+           }
+        });
+
+    </script>
 @endsection

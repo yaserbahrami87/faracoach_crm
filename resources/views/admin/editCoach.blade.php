@@ -183,6 +183,14 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label for="student_meeting">جلسات دانشجویی : </label>
+                        <select class="form-control" id="student_meeting" name="student_meeting">
+                            <option disabled selected>انتخاب کنید</option>
+                            <option value="0" @if($coach->student_meeting==0) selected @endif>برگزار نمی کند</option>
+                            <option value="1" @if($coach->student_meeting==1) selected @endif>برگزار می کند</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="status">وضعیت </label>
                         <select class="form-control" id="status" name="status">
                             <option disabled selected>انتخاب کنید</option>

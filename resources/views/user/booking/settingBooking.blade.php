@@ -49,6 +49,14 @@
                     <span class="input-group-text" >%</span>
                 </div>
             </div>
+            <div class="form-group">
+                <label for="student_meeting">جلسات دانشجویی : </label>
+                <select class="form-control" id="student_meeting" name="student_meeting">
+                    <option disabled selected>انتخاب کنید</option>
+                    <option value="0" @if($settings->student_meeting==0) selected @endif>برگزار نمی کنم</option>
+                    <option value="1" @if($settings->student_meeting==1) selected @endif>برگزار می کنم</option>
+                </select>
+            </div>
 
             <input type="submit" value="بروزرسانی" class="btn btn-success">
         </form>

@@ -99,6 +99,7 @@ class BookingSettingController extends Controller
             'today_meeting'         =>'required|in:0,1',
             'introduction_discount' =>'required|numeric',
             'extra_presence'        =>'required|numeric',
+            'student_meeting'       =>'required|boolean',
         ]);
 
 

@@ -21,9 +21,9 @@
 
             @foreach($reserves as $item)
                 @switch($item['status'])
-                    @case('1')   <tr class="table-warning">
+                    @case('1')   <tr class="table-warning clickable-row "  data-href='/panel/reserve/{{$item->id}}'>
                     @break
-                    @case('0')   <tr class="table-success">
+                    @case('0')   <tr class="table-success clickable-row"  data-href='/panel/reserve/{{$item->id}}'>
                     @break
                     @case('4')   <tr class="table-danger">
                     @break
@@ -34,7 +34,7 @@
 
                         <td class="text-center">
                             @if($item->status==1 || $item->status==3)
-                                <a href="/panel/reserve/{{$item->id}}">{{$item->booking->id}}</a>
+                                {{$item->booking->id}}
                             @else
                                 {{$item->booking->id}}
                             @endif
@@ -94,4 +94,14 @@
         {{$reserves->links()}}
     </div>
 
+@endsection
+
+@section('footerScript')
+    <script>
+        jQuery(document).ready(function($) {
+            $(".clickable-row").click(function() {
+                window.location = $(this).data("href");
+            });
+        });
+    </script>
 @endsection
