@@ -1932,7 +1932,7 @@ class UserController extends BaseController
     public function export_excel()
     {
         //خروجی اکسل
-        $list=user::join('users','users.id','=','followups.user_id')
+        $list=user::join('followups','users.id','=','followups.user_id')
                 ->where('followups.flag','=',1)
                 ->where('followups.nextfollowup_date_fa','<','1401/03/18')
                 ->where('users.type','=',11)
