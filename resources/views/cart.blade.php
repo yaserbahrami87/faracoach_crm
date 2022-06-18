@@ -138,12 +138,22 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="4">  </td>
-                            <td>
-                                <form method="POST" action="/reserve/insert" class="d-none"  id="frm_insertReserve">
+                            <td colspan="3">  </td>
+                            <td class="d-none frm_insertReserve">
+                                <!--
+                                <form method="POST" action="#">
                                     {{csrf_field()}}
-                                    <button type="submit" class="btn btn-success btn-block">
-                                        ثبت <span class="glyphicon glyphicon-play"></span>
+                                    <button type="submit" class="btn btn-success btn-sm ">
+                                        پرداخت با کیف پول<span class="glyphicon glyphicon-play"></span>
+                                    </button>
+                                </form>
+                                -->
+                            </td>
+                            <td class="d-none frm_insertReserve" >
+                                <form method="POST" action="/reserve/insert">
+                                    {{csrf_field()}}
+                                    <button type="submit" class="btn btn-success btn-sm ">
+                                        پرداخت نقدی  <span class="glyphicon glyphicon-play"></span>
                                     </button>
                                 </form>
                             </td>
@@ -166,11 +176,12 @@
         $('.reading').change(function(){
            if($(this).is(':checked'))
            {
-               $('#frm_insertReserve').attr('class','');
+               $('.frm_insertReserve').attr('class','');
            }
            else
            {
-               $('#frm_insertReserve').attr('class','d-none');
+               console.log('asdasd');
+               $('.frm_insertReserve').attr('class','d-none');
            }
         });
 

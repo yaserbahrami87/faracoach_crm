@@ -197,7 +197,6 @@ class BaseController extends Controller
     }
     public function userType($status)
     {
-
         switch($status)
         {
             case "-3":return "مارکتینگ 3";

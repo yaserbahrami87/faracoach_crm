@@ -31,20 +31,22 @@
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BookingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BookingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BookingSettingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BookingSettingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CoachController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CoachController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OptionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OptionController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReserveController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReserveController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/coach.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/coach.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2021_05_02_143045_create_coaches_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2021_05_02_143045_create_coaches_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/fa/validation.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/fa/validation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/editCoach.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/editCoach.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/options/options_coaching.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/options/options_coaching.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/student.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/student.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/cart.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/cart.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/booking/bookingAcceptReserveUser.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/booking/bookingAcceptReserveUser.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/booking/settingBooking.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/booking/settingBooking.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/event.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/event.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/loginAjax.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/loginAjax.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/master/navbarTop.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/master/navbarTop.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/boxProfile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/boxProfile.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/autoload.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/autoload.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/ClassLoader.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/ClassLoader.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_files.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_files.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_namespaces.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_namespaces.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_real.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_real.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -995,7 +997,19 @@
       <workItem from="1653974200122" duration="6300000" />
       <workItem from="1654285663424" duration="762000" />
       <workItem from="1654370502632" duration="1887000" />
-      <workItem from="1654491359363" duration="18095000" />
+      <workItem from="1654491359363" duration="20632000" />
+      <workItem from="1654526274530" duration="15000" />
+      <workItem from="1654576782962" duration="10579000" />
+      <workItem from="1654662229109" duration="4397000" />
+      <workItem from="1654752157092" duration="3671000" />
+      <workItem from="1654804328879" duration="1602000" />
+      <workItem from="1654886257942" duration="4914000" />
+      <workItem from="1654958438481" duration="14000" />
+      <workItem from="1655010996662" duration="7317000" />
+      <workItem from="1655097134312" duration="600000" />
+      <workItem from="1655144253638" duration="1202000" />
+      <workItem from="1655355801418" duration="3328000" />
+      <workItem from="1655527544574" duration="1555000" />
     </task>
     <servers />
   </component>

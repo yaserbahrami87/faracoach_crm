@@ -334,7 +334,6 @@ class ReserveController extends BaseController
                 }
                 else
                 {
-
                     return  $this->checkoutStore($reserve->id,$final_off,Auth::user(),'reserve',NULL,'رزرو جلسه');
                 }
             } else

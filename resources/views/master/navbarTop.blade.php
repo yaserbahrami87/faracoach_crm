@@ -105,10 +105,13 @@
             </a>
             -->
     @else
-        <!-- <a href="/login" class="btn btn-primary" role="button" aria-pressed="true" id="btnRegister">ورود / ثبت نام</a> -->
+        <a href="/login" class="btn btn-primary" role="button" aria-pressed="true" id="btnRegister">ورود / ثبت نام</a>
+
+            <!--
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                 ثبت نام/ ورود
             </button>
+            -->
     @endif
     <!-- Button trigger modal -->
 

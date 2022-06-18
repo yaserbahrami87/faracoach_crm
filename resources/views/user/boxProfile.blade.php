@@ -12,9 +12,7 @@
                     <h5 class="title">{{$user->fname}} {{$user->lname}}</h5>
                 </a>
                 <p class="d-inline"> تعداد افراد دعوت شده:</p><b> {{$countIntroducedUser}} نفر</b>
-                @if ($resourceIntroduce!=null)
-                    <p> دعوت شده توسط <a class="btn-modal-introduced" href="{{$resourceIntroduce->id}}" data-toggle="modal" data-target="#modal_introduced_profile" > {{$resourceIntroduce->fname}} {{$resourceIntroduce->lname}}</a></p>
-                @endif
+
             </div>
             <p class="description text-center">
                 Everyone needs a coach
