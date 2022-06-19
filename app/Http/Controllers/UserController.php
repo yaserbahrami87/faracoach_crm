@@ -148,7 +148,7 @@ class UserController extends BaseController
                 ->with('dateNow',$this->dateNow)
                 ->with('parameter',$request['parameter']);
         }
-        elseif(Auth::user()->type!=2 && Auth::user()->type!=5)
+        elseif(Auth::user()->type==3)
         {
             $users=User::leftjoin('followups','users.id','=','followups.user_id')
                         ->where(function($query)
@@ -157,7 +157,7 @@ class UserController extends BaseController
                                   ->orwhere('followby_expert','=',NULL);
                         })
                         ->where('followups.flag','=',1)
-                        ->whereNotIn('users.type',[-3,-2,-1,2,3,0])
+                        ->whereNotIn('users.type',[-3,-2,-1,2,3,0,30])
                         ->select('users.*','followups.nextfollowup_date_fa')
                         ->orderby('followups.nextfollowup_date_fa','desc')
                         ->orderby('users.id','desc')
@@ -165,12 +165,13 @@ class UserController extends BaseController
 //                        ->paginate($this->countPage());
                         ->get();
 
+
             $users=User::where(function($query)
                 {
                     $query->orwhere('followby_expert','=',Auth::user()->id)
                         ->orwhere('followby_expert','=',NULL);
                 })
-                ->whereNotIn('users.type',[-3,-2,-1,2,3,0])
+                ->whereNotIn('users.type',[-3,-2,-1,2,3,0,30])
                 ->orderby('users.id','desc')
                 ->groupby('users.id')
                 ->get();
@@ -267,6 +268,20 @@ class UserController extends BaseController
                         ->with('statics',$statics)
                         ->with('dateNow',$this->dateNow)
                         ->with('parameter',$request['parameter']);
+        }
+        elseif(Auth::user()->type==4)
+        {
+            $users=User::where('type','=',30)
+                ->where(function($query)
+                {
+                    $query->orwhere('followby_expert','=',Auth::user()->id)
+                        ->orwhere('followby_expert','=',NULL);
+                })
+                ->get();
+
+
+            return  view('admin.users_clinic')
+                            ->with('users',$users);
         }
     }
 
@@ -1932,11 +1947,8 @@ class UserController extends BaseController
     public function export_excel()
     {
         //خروجی اکسل
-        $list=user::join('followups','users.id','=','followups.user_id')
-                ->where('followups.flag','=',1)
-                ->where('followups.nextfollowup_date_fa','<','1401/03/18')
-                ->where('users.type','=',11)
-                ->get();
+        $list=user::where('introduced_verified','=',1)
+                    ->get();
 
 
         $excel=fastexcel($list)->export('export.xlsx');

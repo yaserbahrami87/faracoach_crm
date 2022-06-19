@@ -105,12 +105,7 @@
                                 <div class="input-group">
 
                                     <input type="hidden" id="tel_org" value="{{old('tel')}}" name="tel"/>
-                                    <input id="tel" dir="ltr" type="tel" class="form-control @error('tel') is-invalid @enderror"  value="{{old('tel')}}" required autocomplete="tel">
-                                    <!--
-                                    <div class="input-group-prepend">
-                                        <button class="btn btn-outline-secondary btn-info text-light" type="button" id="activeMobile" data-toggle="modal" data-target="#ModalMobile">فعال سازی</button>
-                                    </div>
-                                    -->
+                                    <input id="tel" dir="ltr" type="tel" class="form-control"  value="{{old('tel')}}" required autocomplete="tel">
                                     @error('tel')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -201,6 +196,27 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="type1" class="col-md-4 col-form-label text-md-right">متقاضی: <span class="text-danger">*</span></label>
+
+                            <div class="col-md-6">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="type1" name="types" class="custom-control-input"  value="1">
+                                    <label class="custom-control-label" for="type1" >دوره های آموزشی</label>
+                                </div>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" id="type2" name="types" class="custom-control-input" value="30">
+                                    <label class="custom-control-label" for="type2" >جلسه کوچینگ</label>
+                                </div>
+
+                                @error('type')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 

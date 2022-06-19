@@ -66,7 +66,8 @@ class RegisterController extends BaseController
             'gettingknow'       => ['nullable','numeric'],
             'gettingknow_child' => ['nullable','numeric'],
             'organization'      => ['nullable','persian_alpha'],
-            'jobside'           => ['nullable','persian_alpha']
+            'jobside'           => ['nullable','persian_alpha'],
+            'types'              => ['nullable','in:1,30']
         ]);
     }
 
@@ -117,7 +118,8 @@ class RegisterController extends BaseController
             'organization'      =>$data['organization'],
             'jobside'           =>$data['jobside'],
             'resource'          =>$data['resource'],
-            'detailsresource'   =>$data['detailsresource']
+            'detailsresource'   =>$data['detailsresource'],
+            'type'              =>$data['types'],
         ]);
     }
 

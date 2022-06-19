@@ -186,12 +186,14 @@ class BaseController extends Controller
                 '1'     =>'پیگیری نشده',
                 '2'     =>'مدیر',
                 '3'     =>'فروش',
-                '4'     =>'جلسات',
+                '4'     =>'کلینیک',
                 '11'    =>"تور پیگیری",
                 '12'    =>"انصراف",
                 '13'    =>"در انتظار تصمیم",
                 '14'    =>"عدم پاسخگویی",
-                '20'    =>"مشتری"
+                '20'    =>"مشتری",
+                '30'    =>'جلسات',
+                '40'    =>'رویداد',
         ];
         return $types;
     }
@@ -211,7 +213,7 @@ class BaseController extends Controller
                         break;
             case "3":return "آموزش";
                         break;
-            case "4":return "جلسات";
+            case "4":return "کلینیک";
                         break;
             case "11": return "تور پیگیری";
                         break;
@@ -223,6 +225,11 @@ class BaseController extends Controller
                         break;
             case "20":return "مشتری";
                         break;
+            case "30":return "جلسات";
+                        break;
+            case "40":return "رویداد";
+                        break;
+
             default:return "";
         }
     }

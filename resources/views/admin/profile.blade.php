@@ -20,7 +20,6 @@
 @endsection
 
 @section('content')
-
     <div class="col-md-5 ">
         <div class="card">
             <div class="card-body">
@@ -65,8 +64,7 @@
                                                         <option selected disabled>یک گزینه را انتخاب کنید</option>
                                                         <option value="2" {{$user->type===2 ? "selected":""  }} >مدیر</option>
                                                         <option value="3" {{$user->type===3 ? "selected":""  }}>آموزش</option>
-                                                        <option value="4" {{$user->type===4 ? "selected":""  }}>جلسات</option>
-                                                        <option value="5" {{$user->type===5 ? "selected":""  }}>مارکتینگ</option>
+                                                        <option value="4" {{$user->type===4 ? "selected":""  }}>کلینیک</option>
                                                         <option value="1" {{$user->type===1 ? "selected":""  }}>کاربر ساده</option>
                                                     </select>
                                                     <div class="col-12 text-center">

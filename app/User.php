@@ -56,6 +56,11 @@ class User extends Authenticatable implements MustVerifyEmail
             return $this->hasMany('App\followup');
         }
 
+        public function last_followupUser()
+        {
+            return $this->belongsTo('App\followup','user_id','id')->where('flag','=',1);
+        }
+
         public function get_followby_expert()
         {
             return $this->hasMany('App\User','followby_expert','id');
