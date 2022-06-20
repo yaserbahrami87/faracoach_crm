@@ -854,7 +854,7 @@ class UserController extends BaseController
                     'shenasnameh_image' =>'nullable|mimes:jpeg,jpg,bmp,png|max:600',
                     'cartmelli_image'   =>'nullable|mimes:jpeg,jpg,bmp,png|max:600',
                     'education_image'   =>'nullable|mimes:jpeg,jpg,bmp,png|max:600',
-                    'resume'            =>'nullable|mimes:docx,doc,pdf|max:1024',
+                    'resume'            =>'nullable|mimes:docx,doc,pdf,jpg,png|max:1024',
                     'email'             =>'nullable|email|',
                     'gettingknow'       =>'nullable|numeric',
                     'gettingknow_child' =>'nullable|numeric',

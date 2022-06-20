@@ -119,6 +119,10 @@
 </nav>
 
 <!------------------------------- Modal ------------------------>
+
+
+
+<!--
 <div slass="row" dir="rtl">
     <div class="col-md-12">
         <div class="modal fade mt-5" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel-regester" aria-hidden="true">
@@ -142,7 +146,7 @@
                                 </nav>
 
                                 <div class="tab-content py-2 px-2" id="nav-tabContent">
-                                    <!------------------------------- PHONE ------------------------>
+
                                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                                         <form id="frm_loginbytel">
                                             {{csrf_field()}}
@@ -176,7 +180,7 @@
 
                                     </div>
 
-                                    <!------------------------------- EMAIL ------------------------>
+
                                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                                         <form method="post" id="frm_loginbyemail">
                                             {{csrf_field()}}
@@ -217,3 +221,4 @@
         </div>
     </div>
 </div>
+-->

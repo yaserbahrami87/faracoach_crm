@@ -95,8 +95,6 @@
 @endsection
 
 @section('footerScript')
-    <script src="{{asset('/panel_assets/intl_tel/js/intlTelInput.js')}}"></script>
-    <script src="{{asset('/panel_assets/intl_tel/js/utils.js')}}"></script>
     <script>
         var input = document.querySelector("#tel");
         var intl=intlTelInput(input,{
@@ -106,16 +104,16 @@
             preferredCountries:["ir", "gb"]
         });
 
-
-
-
         input.addEventListener("countrychange", function() {
             document.querySelector("#tel_org_login").value=intl.getNumber();
         });
 
         $('#tel').change(function()
         {
+
             document.querySelector("#tel_org_login").value=intl.getNumber();
+            console.log(document.querySelector("#tel_org_login").value);
+
         });
 
 

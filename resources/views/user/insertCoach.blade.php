@@ -132,7 +132,7 @@
                     </div>
                     <div class="form-group">
                         <label for="count_meeting">تجربه برگزاری جلسات رایگان <span class="text-danger">*</span></label>
-                        <small id="count_meetinglHelp" class="form-text text-muted"> تعداد ساعت جلساتی که تاکنون توسط شما ارائه شده است را وارد کنید</small>
+                        <small id="count_meetinglHelp" class="form-text text-muted">تعداد ساعت جلسات رایگان برگزار شده جلسات تمرینی و همسطح قابل قبول نمی باشد. جلساتی که بعد از پایان دوره آموزشی و قبولی در آزمون برگزار نموده اید، محاسبه نمایید.</small>
                         <input type="number" class="form-control" id="count_meeting" name="count_meeting" aria-describedby="count_meetingHelp" min="0" max="10000" value="{{old('count_meeting')}} ساعت " />
 
                     </div>
@@ -142,13 +142,13 @@
                         <input type="number" class="form-control" id="count_meeting" name="count_meeting" aria-describedby="count_meetingHelp" min="0" max="10000" value="{{old('count_meeting')}}"/>
                     </div>
                     <div class="form-group">
-                        <label for="customer_satisfaction">درصد رضایت مشتریان <span class="text-danger">*</span></label>
-                        <small id="customer_satisfactionHelp" class="form-text text-muted"> تعداد افرادی که رضایت کامل از جلسات مشاوره داشته اند وارد کنید</small>
+                        <label for="customer_satisfaction">سطح رضایت مراجعین <span class="text-danger">*</span></label>
+                        <small id="customer_satisfactionHelp" class="form-text text-muted"> مراجعین شما، چقدر از جلسات کوچینگ شما رضایت دارند؟ از 1 تا 100 نمره دهید</small>
                         <input type="number" class="form-control" id="customer_satisfaction" name="customer_satisfaction" aria-describedby="customer_satisfactiongHelp" min="0" max="1000" value="{{old('customer_satisfaction')}}"/>
                     </div>
                     <div class="form-group">
                         <label for="change_customer">درصد تبدیل مشتری <span class="text-danger">*</span></label>
-                        <small id="change_customerHelp" class="form-text text-muted"> تعداد افرادی که تبدیل به مشتری وفادارا شده اند را وارد کنید</small>
+                        <small id="change_customerHelp" class="form-text text-muted"> به طور میانگین از هر 10 جلسه معارفه، چند مراجع جلسات خود را ادامه داده و قرارداد بستند؟ از بین 1 تا 10 نمره دهید</small>
                         <input type="number" class="form-control" id="change_customer" name="change_customer" aria-describedby="change_customerHelp" min="0" max="1000" value="{{old('change_customer')}}"/>
                     </div>
                     <div class="form-group">
@@ -157,7 +157,7 @@
                         <input type="number" class="form-control" id="count_recommendation" name="count_recommendation" aria-describedby="count_recommendationHelp" min="0" max="1000" value="{{old('count_recommendation')}}"/>
                     </div>
                     <div class="form-group">
-                        <label for="selectpicker">دسته بندی ها <span class="text-danger">*</span></label>
+                        <label for="selectpicker">گرایش های کوچ <span class="text-danger">*</span></label>
                         <div class="form-group" id="border">
                             <select class="form-control selectpicker" multiple="multiple" name="category[]" id="selectpicker" >
                                 @foreach($categoryCoaches as $item)

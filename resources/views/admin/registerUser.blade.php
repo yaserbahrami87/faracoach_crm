@@ -212,13 +212,18 @@
                                 <label for="type1" class="col-md-4 col-form-label text-md-right text-dark">{{ __('دسته بندی: *') }}</label>
 
                                 <div class="col-md-6">
-                                    <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="type1" name="type" class="custom-control-input"  value="-1">
-                                        <label class="custom-control-label  text-dark" for="type1" title="مربوط به دسته بندی مارکتنیگ و تبلیغات" >سرد</label>
-                                    </div>
+
                                     <div class="custom-control custom-radio custom-control-inline">
                                         <input type="radio" id="type2" name="type" class="custom-control-input" value="1">
-                                        <label class="custom-control-label  text-dark" for="type2"  >گرم</label>
+                                        <label class="custom-control-label  text-dark" for="type2"  >دوره های آموزشی</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="type3" name="type" class="custom-control-input" value="30">
+                                        <label class="custom-control-label  text-dark" for="type3"  >جلسات کوچینگ</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="type1" name="type" class="custom-control-input"  value="-1">
+                                        <label class="custom-control-label  text-dark" for="type1" title="مربوط به دسته بندی مارکتنیگ و تبلیغات" >مارکتینگ</label>
                                     </div>
 
                                     @error('email')

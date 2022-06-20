@@ -77,9 +77,8 @@
                             <th>معرف</th>
                             <th> ورود</th>
                             <th>مسئول پیگیری</th>
-                            <th>تعداد پیگیری</th>
-                            <th>آخرین محصول پیگیری شده</th>
-                            <th>آخرین پیگیری</th>
+                            <th>تعداد جلسات</th>
+
                             <th> پیگیری بعد</th>
                             <th>وضعیت</th>
                             <th>اخرین ورود</th>
@@ -107,13 +106,13 @@
                                         {{$item->lname}}
                                     </a>
                                 </td>
-                                <td class="p-0">
+                                <td class="p-0" dir="ltr">
                                     <a href="/admin/user/{{$item->id}}" class="text-dark d-block">
                                         {{$item->tel}}
                                     </a>
                                 </td>
                                 <td class="p-0">{{$item['insert_user']}}</td>
-                                <td class="p-0">{{$item->introduced}}</td>
+                                <td class="p-0" dir="ltr">{{$item->introduced}}</td>
 
 
                                 <td class="p-0">
@@ -127,10 +126,7 @@
                                 <td class="p-0">
                                     {{$item->countFollowup}}
                                 </td>
-                                <td class="p-0">
-                                    {{$item['lastFollowupCourse']}}
-                                </td>
-                                <td class="p-0">{{$item->lastDateFollowup}}</td>
+
                                 <td class="p-0">
                                     <a href="/admin/user/{{$item->id}}" class="text-dark d-block">
 
@@ -161,28 +157,6 @@
                             </tr>
                         @endforeach
                         </tbody>
-                        <tfoot>
-                        <tr>
-                            <th class="p-0"></th>
-                            <th class="p-0">نام</th>
-                            <th class="p-0">نام خانوادگی</th>
-                            <th class="p-0">شماره همراه	</th>
-                            <th class="p-0">ثبت کننده</th>
-                            <th class="p-0">معرف</th>
-                            <th class="p-0"> آشنایی</th>
-                            <th class="p-0">ورود</th>
-                            <th class="p-0">مسئول پیگیری</th>
-                            <th class="p-0">تعداد پیگیری</th>
-                            <th class="p-0">آخرین محصول پیگیری شده</th>
-                            <th class="p-0">آخرین پیگیری</th>
-                            <th class="p-0">وضعیت</th>
-                            <th class="p-0">اخرین ورود</th>
-
-                            @if(Auth::user()->type==2)
-                                <th>حذف</th>
-                            @endif
-                        </tr>
-                        </tfoot>
                     </table>
 
                 </div>

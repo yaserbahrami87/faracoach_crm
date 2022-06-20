@@ -127,7 +127,7 @@
                     </div>
                     <div class="form-group">
                         <label for="count_meeting">تجربه برگزاری جلسات *</label>
-                        <small id="count_meetinglHelp" class="form-text text-muted">تعداد ساعت جلساتی که تاکنون توسط شما ارائه شده است را وارد کنید</small>
+                        <small id="count_meetinglHelp" class="form-text text-muted">تعداد ساعت جلسات رایگان برگزار شده جلسات تمرینی و همسطح قابل قبول نمی باشد. جلساتی که بعد از پایان دوره آموزشی و قبولی در آزمون برگزار نموده اید، محاسبه نمایید.</small>
                         <input type="number" class="form-control" id="count_meeting" name="count_meeting" aria-describedby="count_meetingHelp" min="0" max="10000" value="{{old('count_meeting',$coach->count_meeting)}}"/>
                     </div>
                     <!--
@@ -148,7 +148,7 @@
                         <input type="number" class="form-control" id="count_recommendation" name="count_recommendation" aria-describedby="count_recommendationHelp" min="0" max="1000" value="{{old('count_recommendation',$coach->count_recommendation)}}"/>
                     </div>
                     <div class="form-group">
-                        <label for="selectpicker">دسته بندی ها *</label>
+                        <label for="selectpicker">گرایش های کوچینگ *</label>
                         <div class="form-group" id="border">
                             <select class="form-control selectpicker" multiple="multiple" name="category[]" id="selectpicker" >
                                 @foreach($categoryCoaches as $item)

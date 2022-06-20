@@ -27,7 +27,7 @@
             <li class=" nav-item"><a href="/panel"><span class="menu-title">داشبورد</span></a></li>
             <li class=" nav-item"><a href="/panel/profile"><span class="menu-title" > حساب کاربری </span></a> </li>
 
-            @if(Auth::user()->tel_verified==1 && (!is_null(Auth::user()->fname))&&(!is_null(Auth::user()->lname))&&(!is_null(Auth::user()->codemelli))&&(!is_null(Auth::user()->username))&&(!is_null(Auth::user()->job)))
+            @if(Auth::user()->tel_verified==1 && (!is_null(Auth::user()->fname))&&(!is_null(Auth::user()->lname))&&(!is_null(Auth::user()->codemelli))&&(!is_null(Auth::user()->username)))
                 <li class=" nav-item"><a href="/panel/introduced"><span class="menu-title">سفیر کوچینگ</span></a></li>
                 <li class=" nav-item"><a href="/coaches/all"><span class="menu-title">لیست کوچ ها</span></a></li>
                 <!-- <li class=" nav-item"><a href="/panel/teachers"><span class="menu-title">اساتید</span></a></li> -->
