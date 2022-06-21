@@ -30,16 +30,7 @@
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/registerUser.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/registerUser.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/users_clinic.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/users_clinic.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/loginSMS.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/loginSMS.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/master/navbarTop.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/master/navbarTop.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/editCoach.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/editCoach.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/insertCoach.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/insertCoach.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/master/right_menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/master/right_menu.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/profile.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1007,7 +998,8 @@
       <workItem from="1655615654657" duration="19844000" />
       <workItem from="1655669129261" duration="7358000" />
       <workItem from="1655735116227" duration="94000" />
-      <workItem from="1655751066011" duration="2885000" />
+      <workItem from="1655751066011" duration="3609000" />
+      <workItem from="1655787032949" duration="1254000" />
     </task>
     <servers />
   </component>
