@@ -272,7 +272,7 @@ class UserController extends BaseController
         elseif(Auth::user()->type==4)
         {
             $users=User::orwhere('type','=',30)
-                ->where(function($query)
+                ->orwhere(function($query)
                 {
                     $query->orwhere('followby_expert','=',Auth::user()->id)
                         ->orwhere('followby_expert','=',NULL);
