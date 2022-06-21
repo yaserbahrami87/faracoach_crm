@@ -277,6 +277,7 @@ class UserController extends BaseController
                     $query->orwhere('followby_expert','=',Auth::user()->id)
                         ->orwhere('followby_expert','=',NULL);
                 })
+                ->orderby('id','desc')
                 ->get();
 
 
