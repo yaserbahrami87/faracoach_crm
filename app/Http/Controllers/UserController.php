@@ -274,8 +274,8 @@ class UserController extends BaseController
             $users=User::orwhere('type','=',30)
                 ->orwhere(function($query)
                 {
-                    $query->orwhere('followby_expert','=',Auth::user()->id)
-                        ->orwhere('followby_expert','=',NULL);
+                    $query->orwhere('followby_expert','=',Auth::user()->id);
+                        //->orwhere('followby_expert','=',NULL);
                 })
                 ->orderby('id','desc')
                 ->get();
