@@ -227,11 +227,6 @@ class BookingController extends BaseController
                         ->where('reserves.user_id','=',$booking->reserve->user_id)
                         ->get();
 
-//            foreach ($history as $item)
-//            {
-//                $item->status=$this->get_statusBookings($item->status);
-//            }
-
 
             $homework=homework::where('booking_id','=',$booking->id)
                         ->where('type','=','booking')

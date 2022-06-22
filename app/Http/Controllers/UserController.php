@@ -279,6 +279,35 @@ class UserController extends BaseController
                 })
                 ->orderby('id','desc')
                 ->get();
+            $dateNow=$this->dateNow;
+            $todayFollowup=User::where('followby_expert','=',Auth::user()->id)
+                                ->whereHas("followups" , function ($query) use ($dateNow)
+                                {
+                                    $query->where('nextfollowup_date_fa','=',$dateNow)
+                                           ->where('flag','=',1);
+                                })
+                                ->get();
+//                            with(["last_followupUser"=>function($query) use ($dateNow){
+//                                $query->where('nextfollowup_date_fa','=',$dateNow);
+//                            }])->get();
+            //dd($todayFollowup);
+
+
+//                                with(['todayFollowup'=>function($query) use ($dateNow){
+//
+//                                }])
+//                                todayFollowup($this->dateNow)
+//                                ->get();
+
+
+
+
+
+//            where('nextfollowup_date_fa','=',$this->dateNow)
+//                                        ->where('flag','=',1)
+//                                        ->where('followby_expert','=',Auth::user()->id)
+//                                        ->orderby('id','desc')
+//                                        ->get();
 
 
             return  view('admin.users_clinic')
@@ -1017,97 +1046,61 @@ class UserController extends BaseController
             {
                 case '0':
                     return redirect('/admin/users/');
-                    break;
+                                break;
                 case 'lead':
                     $users = user::orwhere('type','=',-1)
                         ->orwhere('type','=',-2)
                         ->orwhere('type','=',-3)
                         ->orderby('id','desc')
-//                                ->paginate($this->countPage());
                         ->get();
                     break;
                 case 'notfollowup':
                     $users = user::where('type','=',1)
                                 ->orderby('id','desc')
-//                                ->paginate($this->countPage());
                                 ->get();
                     break;
                 case 'continuefollowup':
-//                    $users = User::where('type','=',11)
-//                                ->where('followby_expert','=',Auth::user()->id)
-//                                ->get();
-
                     $users=Auth::user()->get_followby_expert()
                                 ->where('type','=',11)
                                 ->get();
 
-
-
-                    //  $this->get_usersByType(11,Auth::user()->id);
-
                     break;
                 case 'cancelfollowup':
-//                    $users = $this->get_cancelfollowup();
-//                    $users =User::where('type','=',12)
-//                                ->where('followby_expert','=',Auth::user()->id)
-//                                ->get();
                     $users=Auth::user()->get_followby_expert()
                         ->where('type','=',12)
                         ->get();
-
-                        //$this->get_usersByType(12,Auth::user()->id);
                     break;
                 case 'waiting' :
-//                    $users =User::where('type','=',13)
-//                                ->where('followby_expert','=',Auth::user()->id)
-//                                ->get();
                     $users=Auth::user()->get_followby_expert()
                                 ->where('type','=',13)
                                 ->get();
-
-
-                        //$this->get_usersByType(13,Auth::user()->id);
                     break;
                 case 'noanswering':
-//                    $users = $this->get_noanswering();
-//                    $users =User::where('type','=',14)
-//                                ->where('followby_expert','=',Auth::user()->id)
-//                                ->get();
-
                     $users=Auth::user()->get_followby_expert()
                                 ->where('type','=',14)
                                 ->get();
-
-
-
-
-                        //$this->get_usersByType(14,Auth::user()->id);
                     break;
                 case 'students':
-//                    $users = $this->get_students();
-//                    $users = User::where('type','=',20)
-//                                ->where('followby_expert','=',Auth::user()->id)
-//                                ->get();
-
                     $users=Auth::user()->get_followby_expert()
                                 ->where('type','=',20)
                                 ->get();
-
-
-
-//                        $this->get_usersByType(20,Auth::user()->id);
                     break;
                 case 'todayFollowup':
                     $condition=['nextfollowup_date_fa','=',$this->dateNow];
                     $users=$this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL,1);
                     break;
                 case 'expireFollowup':
-                    $condition=['nextfollowup_date_fa','<',$this->dateNow];
-                    $users=$this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL,1);
-                    //$users = $this->get_expireFollowup();
+
+                    $users=User::where('followby_expert','=',Auth::user()->id)
+                            ->whereNotIn('type',['-1','-2','-3'])
+                            ->whereHas('followups',function($query) use ($dateNow)
+                            {
+                                $query->where('flag','=',1)
+                                        ->where('nextfollowup_date_fa','<',$dateNow);
+                            })
+                            ->get();
                     break;
                 case 'myfollowup':
-//                    $users =$this->get_myfollowup();
                     $users =$this->get_usersByType(NULL,Auth::user()->id);
                     break;
                 case 'followedToday':
@@ -1119,8 +1112,6 @@ class UserController extends BaseController
             }
 
         $statics=$this->get_staticsCountUsers_admin();
-//        }
-
 
 
         foreach ($users as $item)

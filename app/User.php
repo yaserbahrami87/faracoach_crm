@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-
+use Illuminate\Support\Facades\Auth;
 
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -60,6 +60,15 @@ class User extends Authenticatable implements MustVerifyEmail
         {
             return $this->belongsTo('App\followup','user_id','id')->where('flag','=',1);
         }
+
+//        public function todayFollowup($dateNow)
+//        {
+//            return $this->belongsTo('App\followup','user_id','id')
+//                            ->where('flag','=',1)
+//                            ->where('nextfollowup_date_fa','=',$dateNow);
+//
+//
+//        }
 
         public function get_followby_expert()
         {
