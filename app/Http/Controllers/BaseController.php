@@ -1640,8 +1640,15 @@ class BaseController extends Controller
                 $condition=['nextfollowup_date_fa','=',$this->dateNow];
                 $statics['todayFollowup'] = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL,1)->count();
                 $condition=['followups.nextfollowup_date_fa', '<', $this->dateNow];
-                $statics['expireFollowup']=$this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL,1)->count();
-//                $statics['myfollowup'] = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
+                $statics['expireFollowup']=User::where('followby_expert','=',Auth::user()->id)
+                    ->whereNotIn('type',['-1','-2','-3','12'])
+                    ->whereHas('followups',function($query) use ($dateNow)
+                    {
+                        $query->where('flag','=',1)
+                            ->where('nextfollowup_date_fa','<',$dateNow);
+                    })
+                    ->count();
+
 
 
                 $statics['myfollowup'] = Auth::user()

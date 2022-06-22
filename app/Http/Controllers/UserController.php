@@ -1092,7 +1092,7 @@ class UserController extends BaseController
                 case 'expireFollowup':
 
                     $users=User::where('followby_expert','=',Auth::user()->id)
-                            ->whereNotIn('type',['-1','-2','-3'])
+                            ->whereNotIn('type',['-1','-2','-3','12'])
                             ->whereHas('followups',function($query) use ($dateNow)
                             {
                                 $query->where('flag','=',1)
