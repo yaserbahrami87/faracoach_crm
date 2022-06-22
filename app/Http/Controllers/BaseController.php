@@ -1595,7 +1595,7 @@ class BaseController extends Controller
             }
         else
             {
-
+                $dateNow=$this->dateNow;
                 //لیست تعداد کاربرها
                 $statics['notfollowup'] = $this->get_user(NULL,NULL,1,NULL,NULL,NULL )->count();
                 $statics['lead']=$this->get_user(NULL,NULL,-1,NULL,NULL)->count();
