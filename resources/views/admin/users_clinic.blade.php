@@ -63,6 +63,27 @@
                         </a>
                     </div>
 
+                    <div class="col-12">
+                        <label class="text-dark">دسترسی سریع</label>
+                        <ul class="list-group list-group-horizontal" id="users_tags">
+                            <a href="/admin/users/category/?categoryUsers=0" class="mr-1 list-group-item p-0 border-0  @if(request()->is('admin/users')) bg-info  @endif ">نمایش همه</a>
+                            @if(Auth::user()->type==5)
+                                <a href="/admin/users/category/?categoryUsers=lead" class="mr-1  list-group-item p-0 border-0 ">لید خام <span class="text-danger"> {{$statics['lead']}}</a>
+                            @else
+                                <a href="/admin/users/category/?categoryUsers=todayFollowup" class="mr-1  list-group-item p-0 border-0 ">پیگیری روز<span class="text-danger"> {{$statics['todayFollowup']}} </span></a>
+                                <a href="/admin/users/category/?categoryUsers=expireFollowup" class="mr-1  list-group-item p-0 border-0 ">پیگیری تاریخ گذشته<span class="text-danger"> {{$statics['expireFollowup']}} </span></a>
+                                <a href="/admin/users/category/?categoryUsers=notfollowup" class="mr-1  list-group-item p-0 border-0   ">پیگیری نشده<span class="text-danger"> {{$statics['notfollowup']}} </span></a>
+                                <a href="/admin/users/category/?categoryUsers=continuefollowup" class="mr-1  list-group-item p-0 border-0 ">تور پیگیری<span class="text-danger"> {{$statics['continuefollowup']}} </span></a>
+                                <a href="/admin/users/category?categoryUsers=waiting" class="mr-1  list-group-item p-0 border-0 ">در انتظار تصمیم<span class="text-danger"> {{$statics['waiting']}} </span></a>
+                                <a href="/admin/users/category/?categoryUsers=cancelfollowup" class="mr-1  list-group-item p-0 border-0 ">انصراف<span class="text-danger"> {{$statics['cancelfollowup']}} </span></a>
+                                <a href="/admin/users/category/?categoryUsers=students" class="mr-1  list-group-item p-0 border-0  ">مشتری<span class="text-danger"> {{$statics['students']}} </span></a>
+                                <a href="/admin/users/category/?categoryUsers=noanswering" class="mr-1  list-group-item p-0 border-0 ">عدم پاسخ<span class="text-danger"> {{$statics['noanswering']}} </span></a>
+                                <a href="/admin/users/category/?categoryUsers=myfollowup" class="mr-1  list-group-item  p-0 border-0 "> پیگیری های خودم<span class="text-danger"> {{$statics['myfollowup']}} </span></a>
+                                <a href="/admin/users/category/?categoryUsers=followedToday" class="mr-1  list-group-item  p-0 border-0 "> پیگیری شده های امروز<span class="text-danger"> {{$statics['followedToday']}} </span></a>
+                            @endif
+                        </ul>
+                    </div>
+
                 </div>
 
                 <div class="table-responsive overflow-auto">

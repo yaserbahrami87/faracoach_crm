@@ -148,6 +148,8 @@ class UserController extends BaseController
                 ->with('dateNow',$this->dateNow)
                 ->with('parameter',$request['parameter']);
         }
+
+        //نیروهای فروش
         elseif(Auth::user()->type==3)
         {
             $users=User::leftjoin('followups','users.id','=','followups.user_id')
@@ -162,7 +164,6 @@ class UserController extends BaseController
                         ->orderby('followups.nextfollowup_date_fa','desc')
                         ->orderby('users.id','desc')
                         ->groupby('users.id')
-//                        ->paginate($this->countPage());
                         ->get();
 
 
@@ -249,7 +250,6 @@ class UserController extends BaseController
                 {
                     $item->insert_user=$item->get_insertuserInfo('insert_user_id')->first()->fname." ".$item->get_insertuserInfo('insert_user_id')->first()->lname;
                 }
-               // $item=$this->changeNumberToData($item);
             }
 
 
@@ -269,6 +269,7 @@ class UserController extends BaseController
                         ->with('dateNow',$this->dateNow)
                         ->with('parameter',$request['parameter']);
         }
+        //نیروهای کلینیک
         elseif(Auth::user()->type==4)
         {
             $users=User::orwhere('type','=',30)
@@ -279,6 +280,10 @@ class UserController extends BaseController
                 })
                 ->orderby('id','desc')
                 ->get();
+
+            $statics=$this->get_staticsCountUsers_admin();
+
+
             $dateNow=$this->dateNow;
             $todayFollowup=User::where('followby_expert','=',Auth::user()->id)
                                 ->whereHas("followups" , function ($query) use ($dateNow)
@@ -287,31 +292,10 @@ class UserController extends BaseController
                                            ->where('flag','=',1);
                                 })
                                 ->get();
-//                            with(["last_followupUser"=>function($query) use ($dateNow){
-//                                $query->where('nextfollowup_date_fa','=',$dateNow);
-//                            }])->get();
-            //dd($todayFollowup);
-
-
-//                                with(['todayFollowup'=>function($query) use ($dateNow){
-//
-//                                }])
-//                                todayFollowup($this->dateNow)
-//                                ->get();
-
-
-
-
-
-//            where('nextfollowup_date_fa','=',$this->dateNow)
-//                                        ->where('flag','=',1)
-//                                        ->where('followby_expert','=',Auth::user()->id)
-//                                        ->orderby('id','desc')
-//                                        ->get();
-
 
             return  view('admin.users_clinic')
-                            ->with('users',$users);
+                            ->with('users',$users)
+                            ->with('statics',$statics);
         }
     }
 
