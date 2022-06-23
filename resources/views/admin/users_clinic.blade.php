@@ -62,6 +62,7 @@
                             ثبت عضو جدید
                         </a>
                     </div>
+                    <!--
                     <div class="col-12">
                         <label class="text-dark">دسترسی سریع</label>
                         <ul class="list-group list-group-horizontal" id="users_tags">
@@ -82,6 +83,7 @@
                             @endif
                         </ul>
                     </div>
+                    -->
                 </div>
 
                 <div class="table-responsive overflow-auto">

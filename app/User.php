@@ -61,14 +61,6 @@ class User extends Authenticatable implements MustVerifyEmail
             return $this->belongsTo('App\followup','user_id','id')->where('flag','=',1);
         }
 
-//        public function todayFollowup($dateNow)
-//        {
-//            return $this->belongsTo('App\followup','user_id','id')
-//                            ->where('flag','=',1)
-//                            ->where('nextfollowup_date_fa','=',$dateNow);
-//
-//
-//        }
 
         public function get_followby_expert()
         {
@@ -121,9 +113,41 @@ class User extends Authenticatable implements MustVerifyEmail
         {
             return $this->hasMany('App\eventreserve','user_id','id');
         }
-        public function userType()
+        public function userType($status)
         {
+            switch($status)
+            {
+                case "-3":return "مارکتینگ 3";
+                    break;
+                case "-2":return "مارکتینگ 2";
+                    break;
+                case "-1":return "مارکتینگ 1";
+                    break;
+                case "1": return "پیگیری نشده";
+                    break;
+                case "2":return "مدیر";
+                    break;
+                case "3":return "آموزش";
+                    break;
+                case "4":return "کلینیک";
+                    break;
+                case "11": return "تور پیگیری";
+                    break;
+                case "12":return "انصراف";
+                    break;
+                case "13":return "در انتظار تصمیم";
+                    break;
+                case "14":return "عدم پاسخگویی";
+                    break;
+                case "20":return "مشتری";
+                    break;
+                case "30":return "جلسات";
+                    break;
+                case "40":return "رویداد";
+                    break;
 
+                default:return "";
+            }
         }
 
         public function carts()

@@ -1042,74 +1042,74 @@ class UserController extends BaseController
     public function showCategoryUsersAdmin(Request $request)
     {
         $dateNow=$this->dateNow;
-            switch ($request['categoryUsers'])
-            {
-                case '0':
-                    return redirect('/admin/users/');
-                                break;
-                case 'lead':
-                    $users = user::orwhere('type','=',-1)
-                        ->orwhere('type','=',-2)
-                        ->orwhere('type','=',-3)
-                        ->orderby('id','desc')
-                        ->get();
-                    break;
-                case 'notfollowup':
-                    $users = user::where('type','=',1)
-                                ->orderby('id','desc')
-                                ->get();
-                    break;
-                case 'continuefollowup':
-                    $users=Auth::user()->get_followby_expert()
-                                ->where('type','=',11)
-                                ->get();
-
-                    break;
-                case 'cancelfollowup':
-                    $users=Auth::user()->get_followby_expert()
-                        ->where('type','=',12)
-                        ->get();
-                    break;
-                case 'waiting' :
-                    $users=Auth::user()->get_followby_expert()
-                                ->where('type','=',13)
-                                ->get();
-                    break;
-                case 'noanswering':
-                    $users=Auth::user()->get_followby_expert()
-                                ->where('type','=',14)
-                                ->get();
-                    break;
-                case 'students':
-                    $users=Auth::user()->get_followby_expert()
-                                ->where('type','=',20)
-                                ->get();
-                    break;
-                case 'todayFollowup':
-                    $condition=['nextfollowup_date_fa','=',$this->dateNow];
-                    $users=$this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL,1);
-                    break;
-                case 'expireFollowup':
-
-                    $users=User::where('followby_expert','=',Auth::user()->id)
-                            ->whereNotIn('type',['-1','-2','-3','12'])
-                            ->whereHas('followups',function($query) use ($dateNow)
-                            {
-                                $query->where('flag','=',1)
-                                        ->where('nextfollowup_date_fa','<',$dateNow);
-                            })
+        switch ($request['categoryUsers'])
+        {
+            case '0':
+                return redirect('/admin/users/');
+                            break;
+            case 'lead':
+                $users = user::orwhere('type','=',-1)
+                    ->orwhere('type','=',-2)
+                    ->orwhere('type','=',-3)
+                    ->orderby('id','desc')
+                    ->get();
+                break;
+            case 'notfollowup':
+                $users = user::where('type','=',1)
+                            ->orderby('id','desc')
                             ->get();
-                    break;
-                case 'myfollowup':
-                    $users =$this->get_usersByType(NULL,Auth::user()->id);
-                    break;
-                case 'followedToday':
-                    $users = $this->get_followedToday();
-                    break;
-                default:
-                    return redirect('/admin/users/');
-                    break;
-            }
+                break;
+            case 'continuefollowup':
+                $users=Auth::user()->get_followby_expert()
+                            ->where('type','=',11)
+                            ->get();
+
+                break;
+            case 'cancelfollowup':
+                $users=Auth::user()->get_followby_expert()
+                    ->where('type','=',12)
+                    ->get();
+                break;
+            case 'waiting' :
+                $users=Auth::user()->get_followby_expert()
+                            ->where('type','=',13)
+                            ->get();
+                break;
+            case 'noanswering':
+                $users=Auth::user()->get_followby_expert()
+                            ->where('type','=',14)
+                            ->get();
+                break;
+            case 'students':
+                $users=Auth::user()->get_followby_expert()
+                            ->where('type','=',20)
+                            ->get();
+                break;
+            case 'todayFollowup':
+                $condition=['nextfollowup_date_fa','=',$this->dateNow];
+                $users=$this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL,1);
+                break;
+            case 'expireFollowup':
+
+                $users=User::where('followby_expert','=',Auth::user()->id)
+                        ->whereNotIn('type',['-1','-2','-3','12'])
+                        ->whereHas('followups',function($query) use ($dateNow)
+                        {
+                            $query->where('flag','=',1)
+                                    ->where('nextfollowup_date_fa','<',$dateNow);
+                        })
+                        ->get();
+                break;
+            case 'myfollowup':
+                $users =$this->get_usersByType(NULL,Auth::user()->id);
+                break;
+            case 'followedToday':
+                $users = $this->get_followedToday();
+                break;
+            default:
+                return redirect('/admin/users/');
+                break;
+        }
 
         $statics=$this->get_staticsCountUsers_admin();
 
@@ -1119,7 +1119,7 @@ class UserController extends BaseController
             if($item->followups->where('flag','=',1)->first())
             {
                 $lastFollowup=$item->followups->where('flag','=',1)->first();
-                $item->status_followups=$this->userType($lastFollowup->status_followups);
+                $item->status_followups=Auth::user()->userType($lastFollowup->status_followups);
                 $quality=($lastFollowup->problemfollowup);
                 $item->lastFollowupCourse=$lastFollowup->courses['course'];
             }
