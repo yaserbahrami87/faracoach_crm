@@ -219,10 +219,15 @@
                         </thead>
                         <tbody>
                         @foreach($users as $item)
-                            <tr style="background-color: {{$item->quality_color}}" >
+
+                            <tr style="background-color: @if(!is_null($item->last_followupUser)) {{$item->last_followupUser->problemFollowup['color']}} @endif" >
                                 <td class="p-0">
                                     <a href="/admin/user/{{$item->id}}">
-                                        <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="rounded-circle "  width="50px" height="50px" />
+                                        @if(is_null($item->personal_image))
+                                            <img src="{{asset('/documents/users/default-avatar.png')}}" class="rounded-circle "  width="50px" height="50px" />
+                                        @else
+                                            <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="rounded-circle "  width="50px" height="50px" />
+                                        @endif
                                     </a>
                                 </td>
                                 <td class="p-0">
@@ -236,12 +241,21 @@
                                     </a>
                                 </td>
                                 <td class="p-0">
-                                    <a href="/admin/user/{{$item->id}}" class="text-dark d-block">
+                                    <a href="/admin/user/{{$item->id}}" class="text-dark d-block" dir="ltr">
                                         {{$item->tel}}
                                     </a>
                                 </td>
-                                <td class="p-0">{{$item['insert_user']}}</td>
-                                <td class="p-0">{{$item->introduced}}</td>
+                                <td class="p-0">
+                                    @if(!is_null($item->get_insertuserInfo))
+                                        {{$item->get_insertuserInfo->fname." ".$item->get_insertuserInfo->lname}}
+                                    @endif
+                                </td>
+
+                                <td class="p-0">
+                                    @if(!is_null($item->getIntroduced))
+                                        {{$item->getIntroduced->fname." ".$item->getIntroduced->lname}}
+                                    @endif
+                                </td>
 
 
                                 <td class="p-0">
@@ -250,24 +264,33 @@
                                     </a>
                                 </td>
                                 <td class="p-0">
-                                    {{$item->followby_expert}}
+                                    @if(!is_null($item->get_followbyExpert))
+
+                                        {{$item->get_followbyExpert->fname." ".$item->get_followbyExpert->lname}}
+                                    @endif
                                 </td>
-                                <td class="p-0">
-                                    {{$item->countFollowup}}
+                                <td class="p-0 text-center">
+                                    {{$item->followups->count()}}
                                 </td>
-                                <td class="p-0">
-                                    {{$item['lastFollowupCourse']}}
+                                <td class="p-0 text-center">
+                                    @if(!is_null($item->last_followupUser))
+                                        {{$item->last_followupUser->course['course']}}
+                                    @endif
                                 </td>
-                                <td class="p-0">{{$item->lastDateFollowup}}</td>
+                                <td class="p-0 text-center">
+                                    @if(!is_null($item->last_followupUser))
+                                        {{$item->last_followupUser['date_fa']}}
+                                    @endif</td>
                                 <td class="p-0">
                                     <a href="/admin/user/{{$item->id}}" class="text-dark d-block">
-
-                                        {{$item->nextfollowup_date_fa}}
+                                        @if(!is_null($item->last_followupUser))
+                                            {{$item->last_followupUser->course['course']}}
+                                        @endif
                                     </a>
                                 </td>
                                 <td class="p-0">
                                     <a href="/admin/user/{{$item->id}}" class="text-dark d-block">
-                                        {{$item->status_followups}}
+                                        {{$item->userType()}}
                                     </a>
                                 </td>
                                 <td class="p-0">

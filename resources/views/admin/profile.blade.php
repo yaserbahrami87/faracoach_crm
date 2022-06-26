@@ -36,23 +36,23 @@
                                     </div>
                                     <div class="col-12 col-md-12 col-sm-12 col-xl-12 col-lg-12 text-center" >
                                         @if($user->type==1)
-                                            <p class="description text-warning">پیگیری نشده</p>
+                                            <p class="description text-warning">{{$user->userType()}}</p>
                                         @elseif($user->type==11)
-                                            <p class="description text-primary">در حال پیگیری</p>
+                                            <p class="description text-primary">{{$user->userType()}}</p>
                                         @elseif($user->type==12)
-                                            <p class="description text-danger">انصراف</p>
+                                            <p class="description text-danger">{{$user->userType()}}</p>
                                         @elseif($user->type==20)
-                                            <p class="description text-success">دانشجو</p>
+                                            <p class="description text-success">{{$user->userType()}}</p>
                                         @endif
-                                        @if ($resourceIntroduce!=null)
-                                            <p> معرفی شده توسط <a href="/admin/user/{{$resourceIntroduce->id}}"> {{$resourceIntroduce->fname}} {{$resourceIntroduce->lname}}</a></p>
+                                        @if ($user->getIntroduced!=null)
+                                            <p> معرفی شده توسط <a href="/admin/user/{{$user->getIntroduced->id}}"> {{$user->getIntroduced->fname}} {{$user->getIntroduced->lname}}</a></p>
                                         @endif
-                                        @if ($resourceIntroduce!=null)
-                                            <p> معرفی شده توسط <a href="/admin/user/{{$resourceIntroduce->id}}"> {{$resourceIntroduce->fname}} {{$resourceIntroduce->lname}}</a></p>
-                                        @endif
-                                        <p class="description text-dark"> پیگیری های انجام شده: <b> {{$countFollowups}} </b> نوبت</p>
-                                        <p class="d-inline"> تعداد افراد معرفی شده:</p><b> {{$countIntroducedUser}} نفر</b>
+                                        <p class="description text-dark"> پیگیری های انجام شده: <b> {{$user->followups->count()}} </b> نوبت</p>
+
+                                        <p class="d-inline"> تعداد افراد معرفی شده:</p><b> {{$user->get_invitations->count()}} نفر</b>
+
                                     </div>
+
                                     <div class="col-12 col-md-12 col-sm-12 col-xl-12 col-lg-12 pt-1 text-center" >
                                         <a href="/admin/user/{{$user->tel}}/password" class="btn btn-primary d-block text-center">تغییر رمز عبور</a>
                                         <form method="post" action="/admin/user/{{$user->id}}/changeType">
@@ -425,6 +425,7 @@
                                             <option value="{{$item->id}}"  {{ old('gettingknow',$user->gettingknow)==$item->id ? 'selected='.'"'.'selected'.'"' : '' }}   >{{$item->category}}</option>
                                         @endforeach
                                     </select>
+
                                 </div>
                             </div>
                         @else

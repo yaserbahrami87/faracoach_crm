@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Hekmatinasser\Verta\Verta;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -50,21 +51,48 @@ class User extends Authenticatable implements MustVerifyEmail
         ];
 
 
+        public function getIntroduced()
+        {
+            if($this->introduced<10)
+            {
+                return ($this->belongsTo('App\User','introduced','id'));
+            }
+            else
+            {
+                return ($this->belongsTo('App\User','introduced','tel'));
+            }
+        }
 
+        //دریافت پیگیریها
         public function followups()
         {
-            return $this->hasMany('App\followup');
+            return $this->hasMany('App\followup')->orderby('id','desc');
         }
 
+
+        //دریافت آخرین پیگیری
         public function last_followupUser()
         {
-            return $this->belongsTo('App\followup','user_id','id')->where('flag','=',1);
+            return $this->hasone('App\followup','user_id','id')->where('flag','=',1);
         }
 
 
+        //دریافت معرف
+        public function get_invitations()
+        {
+            return $this->hasMany('App\User','introduced','id');
+        }
+
+        //تعداد پیگیری های هر یوزر را برمیگرداند
         public function get_followby_expert()
         {
             return $this->hasMany('App\User','followby_expert','id');
+        }
+
+        //مسئول پیگیری  هر کاربر را برمیگراند
+        public function get_followbyExpert()
+        {
+            return $this->belongsTo('App\User','followby_expert','id');
         }
 
         public function categoryGettingKnow()
@@ -72,6 +100,7 @@ class User extends Authenticatable implements MustVerifyEmail
             return $this->belongsTo('App\category_gettingknow','gettingknow','id');
         }
 
+        //دریافت اطلاعات ثبت کننده
         public function get_insertuserInfo()
         {
             return $this->belongsTo('App\User','insert_user_id','id');
@@ -113,9 +142,16 @@ class User extends Authenticatable implements MustVerifyEmail
         {
             return $this->hasMany('App\eventreserve','user_id','id');
         }
-        public function userType($status)
+
+
+
+
+
+
+        public function userType()
         {
-            switch($status)
+
+            switch($this->type)
             {
                 case "-3":return "مارکتینگ 3";
                     break;
@@ -164,6 +200,8 @@ class User extends Authenticatable implements MustVerifyEmail
         {
             return $this->belongsTo('App\wallet');
         }
+
+
 
 
 

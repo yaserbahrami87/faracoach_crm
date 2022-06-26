@@ -58,11 +58,6 @@ class AdminController extends BaseController
         if(Gate::allows('isAdmin')||Gate::allows('isEducation'))
         {
 
-//            $notFollowup=count($this->get_notfollowup_withoutPaginate());
-//            $follow=$this->get_usersByType(11,Auth::user()->id)->count();
-//            $cancel=$this->get_usersByType(12,Auth::user()->id)->count();
-//            $waiting=$this->get_usersByType(13,Auth::user()->id)->count();
-//            $student=$this->get_usersByType(20,Auth::user()->id)->count();
             $dateNow=$this->dateNow;
 
             $followupToday=User::join('followups','users.id','=','followups.user_id')

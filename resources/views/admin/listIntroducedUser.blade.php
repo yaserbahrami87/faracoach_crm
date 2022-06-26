@@ -17,10 +17,10 @@
             <li>
                 <div class="row">
                     <div class="col-md-7 col-7">
-                        <p class="text-dark">افراد دعوت شده: {{$countIntroducedUser}} نفر</p>
+                        <p class="text-dark">افراد دعوت شده: {{$user->get_invitations->count()}} نفر</p>
                     </div>
                     <div class="col-md-5 col-5 text-right">
-                        <p class="text-dark">{{$scoreIntroducedUser}} امتیاز</p>
+                        <p class="text-dark"> امتیاز</p>
                     </div>
                 </div>
             </li>
@@ -30,17 +30,17 @@
                         <p class="text-dark">تایید شماره همراه:</p>
                     </div>
                     <div class="col-md-5 col-5 text-right">
-                        <p class="text-dark">{{$scoreTelverify}} امتیاز</p>
+                        <p class="text-dark"> امتیاز</p>
                     </div>
                 </div>
             </li>
             <li>
                 <div class="row">
                     <div class="col-md-8 col-8">
-                        <p class="text-dark">دانشجوی معرفی شده: {{$SuccessIntroduced}} نفر</p>
+                        <p class="text-dark">دانشجوی معرفی شده:   نفر</p>
                     </div>
                     <div class="col-md-4 col-4 text-right">
-                        <p class="text-dark">{{$scoreSuccess}} امتیاز</p>
+                        <p class="text-dark">{{''}} امتیاز</p>
                     </div>
                 </div>
             </li>
