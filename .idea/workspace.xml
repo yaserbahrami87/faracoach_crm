@@ -30,14 +30,7 @@
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/followup.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/followup.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/followups.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/followups.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/listIntroducedUser.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/listIntroducedUser.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/profile.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/users.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/users.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1011,7 +1004,7 @@
       <workItem from="1655873187937" duration="14080000" />
       <workItem from="1655925448728" duration="3574000" />
       <workItem from="1655960487750" duration="35528000" />
-      <workItem from="1656222003829" duration="9907000" />
+      <workItem from="1656222003829" duration="10698000" />
     </task>
     <servers />
   </component>
