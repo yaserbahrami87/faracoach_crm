@@ -28,7 +28,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>وضعیت</label>
-                                    <input type="text" class="form-control"  value="@if(!is_null($item->userType->type)){{$item->userType->type}} @endif" name="state" disabled="disabled"  />
+                                    <input type="text" class="form-control"  value="@if(!is_null($item->userType->type)){{$item->userType['type']}} @endif" name="state" disabled="disabled"  />
 
                                 </div>
                             </div>
