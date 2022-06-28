@@ -104,8 +104,9 @@
                     <th scope="col">نام و نام خانوادگی</th>
                     <th scope="col">ثبت شده ها</th>
                     <th scope="col">پیگیری های انجام شده</th>
-                    <th scope="col">پیگیری های امروز </th>
-                    <th scope="col">پیگیری های انجام شده امروز </th>
+
+
+
                     <th scope="col">تور پیگیری</th>
                     <th scope="col">در انتظار تصمیم</th>
                     <th scope="col">مشتری</th>
@@ -124,15 +125,13 @@
                     <tr>
                         <th scope="row">{{$i++}}</th>
                         <td scope="row">{{$item->fname}} {{$item->lname}}</td>
-                        <td scope="row">{{number_format($item->insertuser)}}</td>
-                        <td scope="row">{{number_format($item->allFollowups)}}</td>
-                        <td scope="row">{{number_format($item->todayFollowups)}}</td>
-                        <td scope="row">{{number_format($item->followedTodaybyID)}}</td>
-                        <td scope="row">{{number_format($item->continuefollowup)}}</td>
-                        <td scope="row">{{number_format($item->waiting)}}</td>
-                        <td scope="row">{{number_format($item->students)}}</td>
-                        <td scope="row">{{number_format($item->noanswering)}}</td>
-                        <td scope="row">{{number_format($item->cancelfollowup)}}</td>
+                        <td scope="row">{{number_format($item->get_insertUsers->wherebetween('created_at',$date_en)->count())}}</td>
+                        <td scope="row">{{number_format($item->followupsAdmin->wherebetween('date_fa',$rangeDate)->count())}}</td>
+                        <td scope="row">{{number_format($item->followupsAdmin->where('status_followups','=',11)->wherebetween('date_fa',$rangeDate)->count())}}</td>
+                        <td scope="row">{{number_format($item->followupsAdmin->where('status_followups','=',13)->wherebetween('date_fa',$rangeDate)->count())}}</td>
+                        <td scope="row">{{number_format($item->followupsAdmin->where('status_followups','=',20)->wherebetween('date_fa',$rangeDate)->count())}}</td>
+                        <td scope="row">{{number_format($item->followupsAdmin->where('status_followups','=',14)->wherebetween('date_fa',$rangeDate)->count())}}</td>
+                        <td scope="row">{{number_format($item->followupsAdmin->where('status_followups','=',12)->wherebetween('date_fa',$rangeDate)->count())}}</td>
                         <td scope="row">{{number_format($item->talktimeToday)}}</td>
                         <td scope="row">{{number_format($item->talktime)}}</td>
                     </tr>

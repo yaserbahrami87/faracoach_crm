@@ -462,10 +462,14 @@ class CoachController extends BaseController
             ->orderby('users.id','desc')
             ->get();
 
+        $v=verta();
+        $month=[$v->startMonth()->format('Y/m/d'),$v->endMonth()->format('Y/m/d')];
+
         $category_coaches=$this->get_categoryCoaches(NULL,NULL,1);
 
         return view('allCoaches')
             ->with('category_coaches',$category_coaches)
+            ->with('month',$month)
             ->with('coaches',$users);
     }
 

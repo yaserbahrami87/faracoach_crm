@@ -39,6 +39,11 @@
             background-size: 100% 100%;
         }
 
+        .boxDisable img
+        {
+            filter:grayscale(1);
+        }
+
     </style>
 @endsection
 @section('row1')
@@ -118,7 +123,7 @@
                                     <!-- Team member -->
                                     @foreach($coaches as $item)
 
-                                            <div class="col-lg-3 col-sm-6 listFriends mt-3" id="">
+                                            <div class="col-lg-3 col-sm-6 listFriends mt-3  @if($item->bookings->wherebetween('start_date',$month)->count()==0) boxDisable @endif" id="">
                                                 <div class="box shadow-lg p-1">
                                                     <a href="/coach/{{$item->username}}" >
                                                         @if(strlen($item->personal_image)>0)
@@ -133,6 +138,7 @@
                                                         <a href="/coach/{{$item->username}}" class="font-weight-bold  @if($item->confirm_faracoach==1) confirm_faracoach @endif">
                                                             {{$item->fname.' '.$item->lname}}
                                                         </a>
+
                                                     </div>
 
                                                     <div class="box-text mt-1" dir="ltr">
@@ -146,7 +152,7 @@
                                                     </div>
 
                                                     <div class="icons">
-                                                        <a class="btn btn-primary btn-sm d-block " data-toggle="tooltip" data-placement="bottom" href="/coach/{{$item->username}}" >
+                                                        <a class="btn @if($item->bookings->wherebetween('start_date',$month)->count()==0) btn-secondary    @else  btn-primary    @endif      btn-sm d-block " data-toggle="tooltip" data-placement="bottom" href="/coach/{{$item->username}}" >
                                                             مشاهده اطلاعات
                                                         </a>
                                                     </div>

@@ -76,6 +76,21 @@ class User extends Authenticatable implements MustVerifyEmail
             return $this->hasone('App\followup','user_id','id')->where('flag','=',1);
         }
 
+        //پیگیریهای هر ادمین
+        public function followupsAdmin()
+        {
+            return $this->hasMany('App\followup','insert_user_id','id');
+        }
+
+        //پیگیری های تاریخ گذشته هر ادمین
+        public function expireFollowupAdmin($date,$types)
+        {
+            return $this->hasMany('App\followup','insert_user_id','id')
+                            ->where('nextfollowup_date_fa','<',$date)
+                            ->wherenotin('status_followups',$types)
+                            ->where('flag','=',1);
+        }
+
 
         //دریافت معرف
         public function get_invitations()
@@ -104,6 +119,11 @@ class User extends Authenticatable implements MustVerifyEmail
         public function get_insertuserInfo()
         {
             return $this->belongsTo('App\User','insert_user_id','id');
+        }
+
+        public function get_insertUsers()
+        {
+            return $this->hasMany('App\User','insert_user_id','id');
         }
 
         public function checkouts()

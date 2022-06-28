@@ -104,8 +104,21 @@ class AdminController extends BaseController
 
             }
 
+            if(isset($request['start_date']))
+            {
+
+                $date_en=[$this->changeTimestampToMilad($request['start_date'][0]),$this->changeTimestampToMilad($request['start_date'][1])];
+            }
+            else
+            {
+
+                $date_en=[$this->changeTimestampToMilad($request['start_date'][0]),$this->changeTimestampToMilad($request['start_date'][1])];
+            }
+
+
             foreach ($usersEducation as $item)
             {
+
                 $condition=['followups.insert_user_id','=',$item->id];
                 $item->cancelfollowup=$this->get_usersByType(NULL,NULL,NULL,$request['start_date'],$condition,12)->count();
 
@@ -209,8 +222,9 @@ class AdminController extends BaseController
 //                        ->with('cancel',$cancel)
 //                        ->with('waiting',$waiting)
                         ->with('sumstudents',$sumstudents)
-//                        ->with('student',$student)
+                        ->with('date_en',$date_en)
                         ->with('dateNow',$dateNow)
+                        ->with('rangeDate',$request['start_date'])
                         ->with('followupToday',$followupToday)
                         ->with('expirefollowupToday',$expirefollowupToday)
                         ->with('countBookingReserve',$countBookingReserve)
