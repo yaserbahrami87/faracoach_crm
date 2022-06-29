@@ -122,7 +122,6 @@
                                     </div>
                                     <!-- Team member -->
                                     @foreach($coaches as $item)
-
                                             <div class="col-lg-3 col-sm-6 listFriends mt-3  @if($item->bookings->wherebetween('start_date',$month)->count()==0) boxDisable @endif" id="">
                                                 <div class="box shadow-lg p-1">
                                                     <a href="/coach/{{$item->username}}" >
@@ -152,7 +151,7 @@
                                                     </div>
 
                                                     <div class="icons">
-                                                        <a class="btn @if($item->bookings->wherebetween('start_date',$month)->count()==0) btn-secondary    @else  btn-primary    @endif      btn-sm d-block " data-toggle="tooltip" data-placement="bottom" href="/coach/{{$item->username}}" >
+                                                        <a class="btn @if($item->bookings->wherebetween('start_date',$month)->count()==0) btn-secondary text-dark   @else  btn-primary    @endif      btn-sm d-block " data-toggle="tooltip" data-placement="bottom" href="/coach/{{$item->username}}" >
                                                             مشاهده اطلاعات
                                                         </a>
                                                     </div>

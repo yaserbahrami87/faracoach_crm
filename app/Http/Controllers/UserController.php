@@ -1435,6 +1435,7 @@ class UserController extends BaseController
                 'date_fa'               =>$this->dateNow,
                 'time_fa'               =>$this->timeNow,
                 'comment'               =>" کاربر ارجاع داده شد به بخش $typing",
+                'status_followups'      =>$request['type'],
                 'datetime_fa'           =>$this->dateNow." ".$this->timeNow,
 
             ]);

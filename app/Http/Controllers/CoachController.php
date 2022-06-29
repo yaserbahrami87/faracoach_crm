@@ -438,6 +438,8 @@ class CoachController extends BaseController
     //نمایش همه کوچ ها
     public function viewAllCoaches(Request $request)
     {
+        $v=verta();
+        $month=[$v->startMonth()->format('Y/m/d'),$v->endMonth()->format('Y/m/d')];
 
         $users=coach::join('users','coaches.user_id','=','users.id')
             ->when($request['q'], function ($query,$request)
@@ -457,13 +459,11 @@ class CoachController extends BaseController
             {
                 return $query->where('coaches.category','LIKE',"%$request%");
             })
-            ->where('status_coach','=',1)
-            ->where('status','=',1)
-            ->orderby('users.id','desc')
+            ->where('users.status_coach','=',1)
+            ->where('coaches.status','=',1)
             ->get();
 
-        $v=verta();
-        $month=[$v->startMonth()->format('Y/m/d'),$v->endMonth()->format('Y/m/d')];
+
 
         $category_coaches=$this->get_categoryCoaches(NULL,NULL,1);
 

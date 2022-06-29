@@ -63,6 +63,9 @@
                                 <option  value="13" @if (old('status_followups') == '13') selected @endif>در انتظار تصمیم</option>
                                 <option  value="14" @if (old('status_followups') == '14') selected @endif>عدم پاسخگویی</option>
                                 <option  value="20" @if (old('status_followups') == '15') selected @endif>مشتری</option>
+                                <option  value="20" @if (old('status_followups') == '-1') selected @endif>مارکتینگ 1</option>
+                                <option  value="20" @if (old('status_followups') == '-2') selected @endif>مارکتینگ 2</option>
+                                <option  value="20" @if (old('status_followups') == '-3') selected @endif>مارکتینگ 3</option>
                                 <option  value="30" @if (old('status_followups') == '30') selected @endif>جلسات</option>
                                 <option  value="40" @if (old('status_followups') == '40') selected @endif>رویداد</option>
                             </select>
