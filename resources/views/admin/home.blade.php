@@ -104,14 +104,15 @@
                     <th scope="col">نام و نام خانوادگی</th>
                     <th scope="col">ثبت شده ها</th>
                     <th scope="col">پیگیری های انجام شده</th>
-
-
-
                     <th scope="col">تور پیگیری</th>
                     <th scope="col">در انتظار تصمیم</th>
                     <th scope="col">مشتری</th>
                     <th scope="col">عدم پاسخ</th>
                     <th scope="col">انصرافی ها</th>
+                    <th scope="col">مارکتینگ 1</th>
+                    <th scope="col">مارکتینگ 2</th>
+                    <th scope="col">مارکتینگ 3</th>
+                    <th scope="col">جلسات</th>
                     <th scope="col">مدت مکالمه روز</th>
                     <th scope="col">مدت مکالمه</th>
                 </tr>
@@ -132,7 +133,10 @@
                         <td scope="row">{{number_format($item->followupsAdmin->where('status_followups','=',20)->wherebetween('date_fa',$rangeDate)->count())}}</td>
                         <td scope="row">{{number_format($item->followupsAdmin->where('status_followups','=',14)->wherebetween('date_fa',$rangeDate)->count())}}</td>
                         <td scope="row">{{number_format($item->followupsAdmin->where('status_followups','=',12)->wherebetween('date_fa',$rangeDate)->count())}}</td>
-                        <td scope="row">{{number_format($item->talktimeToday)}}</td>
+                        <td scope="row">{{number_format($item->followupsAdmin->where('status_followups','=',-1)->wherebetween('date_fa',$rangeDate)->count())}}</td>
+                        <td scope="row">{{number_format($item->followupsAdmin->where('status_followups','=',-2)->wherebetween('date_fa',$rangeDate)->count())}}</td>
+                        <td scope="row">{{number_format($item->followupsAdmin->where('status_followups','=',-3)->wherebetween('date_fa',$rangeDate)->count())}}</td>
+                        <td scope="row">{{number_format($item->followupsAdmin->where('status_followups','=',30)->wherebetween('date_fa',$rangeDate)->count())}}</td>
                         <td scope="row">{{number_format($item->talktime)}}</td>
                     </tr>
                 @endforeach
