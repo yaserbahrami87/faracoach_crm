@@ -1645,7 +1645,9 @@ class UserController extends BaseController
     public function export_excel()
     {
         //خروجی اکسل
-        $list=user::where('introduced_verified','=',1)
+        $list=user::join('followups','users.id','=','followups.user_id')
+                    ->wherenotin('users.type',[-1,-2,-3,-4,20,0,1,2,3,4])
+                    ->where('followups.flag','=',1)
                     ->get();
 
 
@@ -1767,7 +1769,11 @@ class UserController extends BaseController
     //پیدا کردن و پاک کردن اطلاعات ناهمسان جداول باهمدیگر
     public function test()
     {
-        $users=User::get();
+        $user=User::innerjoin('followups','users.id','=','followups.user_id')
+                ->wherenotin('users.type',[-1,-2,-3,-4,20,0,1,2,3,4])
+                ->where('followups.flag','=',1)
+                ->get();
+
         foreach ($users as $item)
         {
             $user=User::find($item->id);
