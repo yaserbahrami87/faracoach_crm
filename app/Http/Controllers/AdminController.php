@@ -107,12 +107,12 @@ class AdminController extends BaseController
             if(isset($request['start_date']))
             {
 
-                $date_en=[$this->changeTimestampToMilad($request['start_date'][0]),$this->changeTimestampToMilad($request['start_date'][1])];
+                $date_en=[$this->changeTimestampToMilad($request['start_date'][0])." 00:00:00",$this->changeTimestampToMilad($request['start_date'][1])." 00:00:00"];
             }
             else
             {
 
-                $date_en=[$this->changeTimestampToMilad($request['start_date'][0]),$this->changeTimestampToMilad($request['start_date'][1])];
+                $date_en=[$this->changeTimestampToMilad($request['start_date'][0])." 00:00:00",$this->changeTimestampToMilad($request['start_date'][1])." 00:00:00"];
             }
 
 

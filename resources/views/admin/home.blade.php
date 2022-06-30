@@ -113,7 +113,7 @@
                     <th scope="col">مارکتینگ 2</th>
                     <th scope="col">مارکتینگ 3</th>
                     <th scope="col">جلسات</th>
-                    <th scope="col">مدت مکالمه روز</th>
+
                     <th scope="col">مدت مکالمه</th>
                 </tr>
                 </thead>
@@ -124,20 +124,20 @@
                 ?>
                 @foreach($usersEducation as $item)
                     <tr>
-                        <th scope="row">{{$i++}}</th>
-                        <td scope="row">{{$item->fname}} {{$item->lname}}</td>
-                        <td scope="row">{{number_format($item->get_insertUsers->wherebetween('created_at',$date_en)->count())}}</td>
-                        <td scope="row">{{number_format($item->followupsAdmin->wherebetween('date_fa',$rangeDate)->count())}}</td>
-                        <td scope="row">{{number_format($item->followupsAdmin->where('status_followups','=',11)->wherebetween('date_fa',$rangeDate)->count())}}</td>
-                        <td scope="row">{{number_format($item->followupsAdmin->where('status_followups','=',13)->wherebetween('date_fa',$rangeDate)->count())}}</td>
-                        <td scope="row">{{number_format($item->followupsAdmin->where('status_followups','=',20)->wherebetween('date_fa',$rangeDate)->count())}}</td>
-                        <td scope="row">{{number_format($item->followupsAdmin->where('status_followups','=',14)->wherebetween('date_fa',$rangeDate)->count())}}</td>
-                        <td scope="row">{{number_format($item->followupsAdmin->where('status_followups','=',12)->wherebetween('date_fa',$rangeDate)->count())}}</td>
-                        <td scope="row">{{number_format($item->followupsAdmin->where('status_followups','=',-1)->wherebetween('date_fa',$rangeDate)->count())}}</td>
-                        <td scope="row">{{number_format($item->followupsAdmin->where('status_followups','=',-2)->wherebetween('date_fa',$rangeDate)->count())}}</td>
-                        <td scope="row">{{number_format($item->followupsAdmin->where('status_followups','=',-3)->wherebetween('date_fa',$rangeDate)->count())}}</td>
-                        <td scope="row">{{number_format($item->followupsAdmin->where('status_followups','=',30)->wherebetween('date_fa',$rangeDate)->count())}}</td>
-                        <td scope="row">{{number_format($item->talktime)}}</td>
+                        <th >{{$i++}}</th>
+                        <td >{{$item->fname}} {{$item->lname}}</td>
+                        <td >{{number_format($item->get_insertUsers->wherebetween('created_at',$date_en)->count())}}</td>
+                        <td >{{number_format($item->followupsAdmin->wherebetween('date_fa',$rangeDate)->count())}}</td>
+                        <td >{{number_format($item->followupsAdmin->where('status_followups','=',11)->wherebetween('date_fa',$rangeDate)->count())}}</td>
+                        <td >{{number_format($item->followupsAdmin->where('status_followups','=',13)->wherebetween('date_fa',$rangeDate)->count())}}</td>
+                        <td >{{number_format($item->followupsAdmin->where('status_followups','=',20)->wherebetween('date_fa',$rangeDate)->count())}}</td>
+                        <td >{{number_format($item->followupsAdmin->where('status_followups','=',14)->wherebetween('date_fa',$rangeDate)->count())}}</td>
+                        <td >{{number_format($item->followupsAdmin->where('status_followups','=',12)->wherebetween('date_fa',$rangeDate)->count())}}</td>
+                        <td >{{number_format($item->followupsAdmin->where('status_followups','=',-1)->wherebetween('date_fa',$rangeDate)->count())}}</td>
+                        <td >{{number_format($item->followupsAdmin->where('status_followups','=',-2)->wherebetween('date_fa',$rangeDate)->count())}}</td>
+                        <td >{{number_format($item->followupsAdmin->where('status_followups','=',-3)->wherebetween('date_fa',$rangeDate)->count())}}</td>
+                        <td >{{number_format($item->followupsAdmin->where('status_followups','=',30)->wherebetween('date_fa',$rangeDate)->count())}}</td>
+                        <td >{{number_format($item->talktime)}}</td>
                     </tr>
                 @endforeach
                     <tr class="text-bold">
