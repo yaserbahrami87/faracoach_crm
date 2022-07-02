@@ -126,7 +126,7 @@
                     <tr>
                         <th >{{$i++}}</th>
                         <td >{{$item->fname}} {{$item->lname}}</td>
-                        <td >{{number_format($item->get_insertUsers->where('created_at','>=',$date_en[0])->where('created_at','<=',$date_en[1])->count())}}</td>
+                        <td >{{number_format($item->get_insertUsers->wherebetween('created_at',$date_en)->count())}}</td>
                         <td >{{number_format($item->followupsAdmin->wherebetween('date_fa',$rangeDate)->count())}}</td>
                         <td >{{number_format($item->followupsAdmin->where('status_followups','=',11)->wherebetween('date_fa',$rangeDate)->count())}}</td>
                         <td >{{number_format($item->followupsAdmin->where('status_followups','=',13)->wherebetween('date_fa',$rangeDate)->count())}}</td>
