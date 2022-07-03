@@ -17,10 +17,10 @@ const mix = require('laravel-mix');
 // mix.combine([
 //     'public/dashboard/plugins/fontawesome-free/css/all.min.css',
 //     'public/dashboard/plugins/overlayScrollbars/css/OverlayScrollbars.min.css',
-//     'public/dashboard/dist/css/adminlte.min.css',
+//     'public/dashboard/pizza_chart/css/adminlte.min.css',
 //     'public/vendor/file-manager/css/file-manager.css',
 //     'public/css/bootstrap-rtl.min.css',
-//     'public/dashboard/dist/css/style.css',
+//     'public/dashboard/pizza_chart/css/style.css',
 //
 // ],'public/css/app.css');
 
@@ -34,7 +34,7 @@ mix.combine([
     'public/dashboard/plugins/jquery/jquery.min.js',
     'public/dashboard/plugins/bootstrap/js/bootstrap.bundle.min.js',
     'public/dashboard/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js',
-    'public/dashboard/dist/js/adminlte.js',
+    'public/dashboard/pizza_chart/js/adminlte.js',
 
 ],'public/js/app.js');
 

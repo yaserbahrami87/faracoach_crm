@@ -120,7 +120,6 @@
                 <tbody>
                 <?php
                     $i=1;
-
                 ?>
                 @foreach($usersEducation as $item)
                     <tr>
@@ -157,6 +156,34 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+        <div class="col-12 border-bottom border-3 mb-3"></div>
+        <div class="col-12 mb-1">
+            <i class="ficon bx bx-user"></i>گزارش بانک اطلاعاتی
+        </div>
+        <div class="col-md-3">
+            <div class="card-counter primary">
+                <span class="count-numbers text-dark">{{$users->count()}} نفر </span>
+                <span class="count-name text-dark"> کل کاربرها</span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card-counter primary">
+                <span class="count-numbers text-dark">{{$users->where('type','=',1)->count()}} نفر </span>
+                <span class="count-name text-dark">کاربرهای پیگیری نشده</span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card-counter primary">
+                <span class="count-numbers text-dark">{{$users->where('type','=',11)->count()}} نفر </span>
+                <span class="count-name text-dark">کاربرهای در حال پیگیری</span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card-counter danger">
+                <span class="count-numbers text-white">{{$users->where('type','=',12)->count()}} نفر </span>
+                <span class="count-name text-white">کاربرهای انصراف</span>
+            </div>
         </div>
         <div class="col-md-3">
             <div class="card-counter primary">

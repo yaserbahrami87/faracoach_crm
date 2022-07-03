@@ -205,6 +205,8 @@ class AdminController extends BaseController
                             ->whereNotIn('type',[2,3])
                             ->count();
 
+            $users=User::get();
+
 
 
 
@@ -244,7 +246,8 @@ class AdminController extends BaseController
                         ->with('bookingsToday',$bookingsToday)
                         ->with('checkoutToday',$checkoutToday)
                         ->with('insertUserToday',$insertUserToday)
-                        ->with('loginUserToday',$loginUserToday);
+                        ->with('loginUserToday',$loginUserToday)
+                        ->with('users',$users);
 //                        ->with('sumtalktime',$sumtalktime);
             //return redirect()->route('panelAdmin');
         }
