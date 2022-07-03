@@ -32,6 +32,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/profile.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1009,7 +1010,9 @@
       <workItem from="1656391913315" duration="14488000" />
       <workItem from="1656446686633" duration="9286000" />
       <workItem from="1656526952575" duration="8479000" />
-      <workItem from="1656705329267" duration="3556000" />
+      <workItem from="1656705329267" duration="15125000" />
+      <workItem from="1656781206398" duration="1925000" />
+      <workItem from="1656825013933" duration="7014000" />
     </task>
     <servers />
   </component>

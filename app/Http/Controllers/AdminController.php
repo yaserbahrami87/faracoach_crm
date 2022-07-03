@@ -79,17 +79,17 @@ class AdminController extends BaseController
                         ->orwhere('type','=',4)
                         ->get();
 
-            $sumcancelfollowup=0;
-            $sumallFollowups=0;
-            $sumtodayFollowups=0;
-            $sumfollowedTodaybyID=0;
-            $sumcontinuefollowup=0;
-            $sumwaiting=0;
-            $sumstudents=0;
-            $sumnoanswering=0;
-            $suminsertuser=0;
-            $sumtalktimeToday=0;
-            $sumtalktime=0;
+//            $sumcancelfollowup=0;
+//            $sumallFollowups=0;
+//            $sumtodayFollowups=0;
+//            $sumfollowedTodaybyID=0;
+//            $sumcontinuefollowup=0;
+//            $sumwaiting=0;
+//            $sumstudents=0;
+//            $sumnoanswering=0;
+//            $suminsertuser=0;
+//            $sumtalktimeToday=0;
+//            $sumtalktime=0;
 
             if(isset($_GET['range']))
             {
@@ -118,63 +118,63 @@ class AdminController extends BaseController
 
 
 
-            foreach ($usersEducation as $item)
-            {
-
-                $condition=['followups.insert_user_id','=',$item->id];
-                $item->cancelfollowup=$this->get_usersByType(NULL,NULL,NULL,$request['start_date'],$condition,12)->count();
-
-                $sumcancelfollowup=$sumcancelfollowup+$item->cancelfollowup;
-
-                //پیگیریهای انجام شده در بازه تاریخی
-                $condition=['followups.insert_user_id','=',$item->id];
-                $item->allFollowups=$this->get_usersByType(NULL,NULL,NULL,$request['start_date'],$condition)->count();
-
-                $sumallFollowups=$sumallFollowups+$item->allFollowups;
-                $item->todayFollowups=count($this->get_todayFollowupbyID_withoutPaginate($item->id));
-                $sumtodayFollowups=$sumtodayFollowups+$item->todayFollowups;
-
-                $condition=['followups.date_fa','=',$this->dateNow];
-                $item->followedTodaybyID=$this->get_usersByType(NULL,$item->id,NULL,NULL, $condition)->count();
-                $sumfollowedTodaybyID=$sumfollowedTodaybyID+$item->followedTodaybyID;
-
-                $condition=['followups.insert_user_id','=',$item->id];
-                $item->continuefollowup=$this->get_usersByType(NULL,NULL,NULL,$request['start_date'],$condition,11)->count();
-                $sumcontinuefollowup=$sumcontinuefollowup+$item->continuefollowup;
-                $item->waiting=$this->get_usersByType(NULL,NULL,NULL,$request['start_date'],$condition,13)->count();
-                $sumwaiting=$sumwaiting+$item->waiting;
-
-                $condition=['followups.insert_user_id','=',$item->id];
-                $item->students=$this->get_usersByType(NULL,NULL,NULL,$request['start_date'],$condition,20)->count();                $sumstudents=$sumstudents+$item->students;
-                $item->noanswering=$this->get_usersByType(NULL,NULL,NULL,$request['start_date'],$condition,14)->count();
-                $sumnoanswering=$sumnoanswering+$item->noanswering;
-                if(!is_null($item->last_login_at))
-                {
-                    $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
-                }
-                //تبدیل تاریخ شمسی  به میلادی برای نمایش کاربرهای براساس فیلد created_at
-                if(isset($request['start_date']))
-                {
-
-                    $date_en=[$this->changeTimestampToMilad($request['start_date'][0]),$this->changeTimestampToMilad($request['start_date'][1])];
-                }
-                else
-                {
-
-                    $date_en=[$this->changeTimestampToMilad($request['start_date'][0]),$this->changeTimestampToMilad($request['start_date'][1])];
-                }
-
-                $item->insertuser=$this->get_user(NULL,NULL,NULL,NULL,NULL,$date_en,$item->id)->count();
-
-                $suminsertuser=$suminsertuser+$item->insertuser;
-                $item->talktimeToday=$this->get_talktimeTodayByID($item->id);
-                $sumtalktimeToday=$sumtalktimeToday+$item->talktimeToday;
-                $item->talktime=$this->get_talktimeByID($item->id,$request['start_date']);
-
-                //$item->talktime=$this->get_usersByType(NULL,$item->id,NULL,$request['start_date']);
-                //dd($this->get_usersByType(NULL,315,NULL,$request['start_date'])->sum('followups.talktime'));
-                $sumtalktime=$sumtalktime+$item->talktime;
-            }
+//            foreach ($usersEducation as $item)
+//            {
+//
+//                $condition=['followups.insert_user_id','=',$item->id];
+//                $item->cancelfollowup=$this->get_usersByType(NULL,NULL,NULL,$request['start_date'],$condition,12)->count();
+//
+//                $sumcancelfollowup=$sumcancelfollowup+$item->cancelfollowup;
+//
+//                //پیگیریهای انجام شده در بازه تاریخی
+//                $condition=['followups.insert_user_id','=',$item->id];
+//                $item->allFollowups=$this->get_usersByType(NULL,NULL,NULL,$request['start_date'],$condition)->count();
+//
+//                $sumallFollowups=$sumallFollowups+$item->allFollowups;
+//                $item->todayFollowups=count($this->get_todayFollowupbyID_withoutPaginate($item->id));
+//                $sumtodayFollowups=$sumtodayFollowups+$item->todayFollowups;
+//
+//                $condition=['followups.date_fa','=',$this->dateNow];
+//                $item->followedTodaybyID=$this->get_usersByType(NULL,$item->id,NULL,NULL, $condition)->count();
+//                $sumfollowedTodaybyID=$sumfollowedTodaybyID+$item->followedTodaybyID;
+//
+//                $condition=['followups.insert_user_id','=',$item->id];
+//                $item->continuefollowup=$this->get_usersByType(NULL,NULL,NULL,$request['start_date'],$condition,11)->count();
+//                $sumcontinuefollowup=$sumcontinuefollowup+$item->continuefollowup;
+//                $item->waiting=$this->get_usersByType(NULL,NULL,NULL,$request['start_date'],$condition,13)->count();
+//                $sumwaiting=$sumwaiting+$item->waiting;
+//
+//                $condition=['followups.insert_user_id','=',$item->id];
+//                $item->students=$this->get_usersByType(NULL,NULL,NULL,$request['start_date'],$condition,20)->count();                $sumstudents=$sumstudents+$item->students;
+//                $item->noanswering=$this->get_usersByType(NULL,NULL,NULL,$request['start_date'],$condition,14)->count();
+//                $sumnoanswering=$sumnoanswering+$item->noanswering;
+//                if(!is_null($item->last_login_at))
+//                {
+//                    $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
+//                }
+//                //تبدیل تاریخ شمسی  به میلادی برای نمایش کاربرهای براساس فیلد created_at
+//                if(isset($request['start_date']))
+//                {
+//
+//                    $date_en=[$this->changeTimestampToMilad($request['start_date'][0]),$this->changeTimestampToMilad($request['start_date'][1])];
+//                }
+//                else
+//                {
+//
+//                    $date_en=[$this->changeTimestampToMilad($request['start_date'][0]),$this->changeTimestampToMilad($request['start_date'][1])];
+//                }
+//
+//                $item->insertuser=$this->get_user(NULL,NULL,NULL,NULL,NULL,$date_en,$item->id)->count();
+//
+//                $suminsertuser=$suminsertuser+$item->insertuser;
+//                $item->talktimeToday=$this->get_talktimeTodayByID($item->id);
+//                $sumtalktimeToday=$sumtalktimeToday+$item->talktimeToday;
+//                $item->talktime=$this->get_talktimeByID($item->id,$request['start_date']);
+//
+//                //$item->talktime=$this->get_usersByType(NULL,$item->id,NULL,$request['start_date']);
+//                //dd($this->get_usersByType(NULL,315,NULL,$request['start_date'])->sum('followups.talktime'));
+//                $sumtalktime=$sumtalktime+$item->talktime;
+//            }
 
 
 //            $countSMSRecieve=$this->countSMSRecieve();
@@ -223,7 +223,7 @@ class AdminController extends BaseController
 //                        ->with('follow',$follow)
 //                        ->with('cancel',$cancel)
 //                        ->with('waiting',$waiting)
-                        ->with('sumstudents',$sumstudents)
+//                        ->with('sumstudents',$sumstudents)
                         ->with('date_en',$date_en)
                         ->with('dateNow',$dateNow)
                         ->with('rangeDate',$request['start_date'])
@@ -231,21 +231,21 @@ class AdminController extends BaseController
                         ->with('expirefollowupToday',$expirefollowupToday)
                         ->with('countBookingReserve',$countBookingReserve)
                         ->with('usersEducation',$usersEducation)
-                        ->with('sumcancelfollowup',$sumcancelfollowup)
-                        ->with('sumallFollowups',$sumallFollowups)
-                        ->with('sumtodayFollowups',$sumtodayFollowups)
-                        ->with('sumfollowedTodaybyID',$sumfollowedTodaybyID)
-                        ->with('sumcontinuefollowup',$sumcontinuefollowup)
-                        ->with('sumwaiting',$sumwaiting)
-                        ->with('sumnoanswering',$sumnoanswering)
-                        ->with('suminsertuser',$suminsertuser)
-                        ->with('sumtalktimeToday',$sumtalktimeToday)
+//                        ->with('sumcancelfollowup',$sumcancelfollowup)
+//                        ->with('sumallFollowups',$sumallFollowups)
+//                        ->with('sumtodayFollowups',$sumtodayFollowups)
+//                        ->with('sumfollowedTodaybyID',$sumfollowedTodaybyID)
+//                        ->with('sumcontinuefollowup',$sumcontinuefollowup)
+//                        ->with('sumwaiting',$sumwaiting)
+//                        ->with('sumnoanswering',$sumnoanswering)
+//                        ->with('suminsertuser',$suminsertuser)
+//                        ->with('sumtalktimeToday',$sumtalktimeToday)
                         ->with('countBookingReserve',$countBookingReserve)
                         ->with('bookingsToday',$bookingsToday)
                         ->with('checkoutToday',$checkoutToday)
                         ->with('insertUserToday',$insertUserToday)
-                        ->with('loginUserToday',$loginUserToday)
-                        ->with('sumtalktime',$sumtalktime);
+                        ->with('loginUserToday',$loginUserToday);
+//                        ->with('sumtalktime',$sumtalktime);
             //return redirect()->route('panelAdmin');
         }
         else if(Gate::allows('isUser'))

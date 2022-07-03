@@ -490,6 +490,25 @@
         </ul>
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="followups" role="tabpanel" aria-labelledby="followups-tab">
+
+                <div class="row">
+
+                    @if(!is_null($user->followups->groupby('course_id')))
+                        @foreach($user->followups->groupby('course_id') as $item)
+
+                            <div class="col-4">
+                                <div class="card text-white border border-3 border-danger  p-1" style="min-height: 70px">
+                                    <span class="text-dark text-center">
+                                        {{$item[0]->course['course']}}
+                                    </span>
+                                    <span class="text-dark"><i class="ficon bx bx-transfer-alt"></i>{{$item->count()}} پیگیری</span>
+                                    <span class="text-dark"><i class="ficon bx bx-time"></i>{{$item->sum('talktime')}} دقیقه مکالمه</span>
+
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
+                </div>
                 @if((Auth::user()->id==$user->followby_expert||is_null($user->followby_expert))&& $user->type!=-1&&$user->type!=-2&&$user->type!=-3 )
                     @include('admin.insertFollowUp')
                     <hr/>

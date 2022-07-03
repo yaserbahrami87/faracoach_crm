@@ -102,7 +102,7 @@
                 <tr>
                     <th scope="col" >#</th>
                     <th scope="col">نام و نام خانوادگی</th>
-                    <th scope="col">ثبت شده ها</th>
+                    <th scope="col"  >پیگیری های امروز</th>
                     <th scope="col">پیگیری های انجام شده</th>
                     <th scope="col">تور پیگیری</th>
                     <th scope="col">در انتظار تصمیم</th>
@@ -126,8 +126,8 @@
                     <tr>
                         <th >{{$i++}}</th>
                         <td >{{$item->fname}} {{$item->lname}}</td>
-                        <td >{{number_format($item->get_insertUsers->wherebetween('created_at',$date_en)->count())}}</td>
-                        <td >{{number_format($item->followupsAdmin->wherebetween('date_fa',$rangeDate)->count())}}</td>
+                        <td class="bg-warning text-center">{{number_format($item->followupsAdmin->where('nextfollowup_date_fa','=',$dateNow)->where('flag','=',1)->count())}}</td>
+                        <td class="bg-success text-center text-white">{{number_format($item->followupsAdmin->wherebetween('date_fa',$rangeDate)->count())}}</td>
                         <td >{{number_format($item->followupsAdmin->where('status_followups','=',11)->wherebetween('date_fa',$rangeDate)->count())}}</td>
                         <td >{{number_format($item->followupsAdmin->where('status_followups','=',13)->wherebetween('date_fa',$rangeDate)->count())}}</td>
                         <td >{{number_format($item->followupsAdmin->where('status_followups','=',20)->wherebetween('date_fa',$rangeDate)->count())}}</td>
@@ -143,17 +143,17 @@
                     <tr class="text-bold">
                         <td>{{$i++}}</td>
                         <td>جمع کل</td>
-                        <td>{{number_format($suminsertuser)}}</td>
-                        <td>{{number_format($sumallFollowups)}}</td>
-                        <td>{{number_format($sumtodayFollowups)}}</td>
-                        <td>{{number_format($sumfollowedTodaybyID)}}</td>
-                        <td>{{number_format($sumcontinuefollowup)}}</td>
-                        <td>{{number_format($sumwaiting)}}</td>
-                        <td>{{number_format($sumstudents)}}</td>
-                        <td>{{number_format($sumnoanswering)}}</td>
-                        <td>{{number_format($sumcancelfollowup)}}</td>
-                        <td>{{number_format($sumtalktimeToday)}}</td>
-                        <td>{{number_format($sumtalktime)}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
                 </tbody>
             </table>
