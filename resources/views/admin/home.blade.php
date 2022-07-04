@@ -125,7 +125,10 @@
                 @foreach($usersEducation as $item)
                     <tr>
                         <th >{{$i++}}</th>
-                        <td >{{$item->fname}} {{$item->lname}}</td>
+                        <td >
+                            <a href="/admin/reports/statistic/{{$item->id}}?start_date={{$rangeDate[0]}} ~ {{$rangeDate[1]}}&range=">{{$item->fname}} {{$item->lname}}</a>
+
+                        </td>
                         <td class="bg-warning text-center">{{number_format($item->followupsAdmin->where('nextfollowup_date_fa','=',$dateNow)->where('flag','=',1)->count())}}</td>
                         <td class="bg-success text-center text-white">{{number_format($item->followupsAdmin->wherebetween('date_fa',$rangeDate)->count())}}</td>
                         <td >{{number_format($item->followupsAdmin->where('status_followups','=',11)->wherebetween('date_fa',$rangeDate)->count())}}</td>

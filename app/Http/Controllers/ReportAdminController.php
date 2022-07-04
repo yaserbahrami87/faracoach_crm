@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
-class ReportAdminController extends Controller
+class ReportAdminController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -40,12 +41,46 @@ class ReportAdminController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user,Request $request)
     {
-        //
+        if(isset($_GET['range']))
+        {
+            $this->validate($request,[
+                'start_date'    =>'required|string',
+            ]);
+            $request['start_date']=explode(' ~ ',$request['start_date']);
+        }
+        else
+        {
+            $dateNow = verta();
+            $request['start_date']=[$dateNow->startMonth()->format('Y/m/d'),$dateNow->endMonth()->format('Y/m/d')];
+
+        }
+
+        if(isset($request['start_date']))
+        {
+
+            $date_en=[$this->changeTimestampToMilad($request['start_date'][0])." 00:00:00",$this->changeTimestampToMilad($request['start_date'][1])." 23:59:59"];
+        }
+        else
+        {
+
+            $date_en=[$this->changeTimestampToMilad($request['start_date'][0])." 00:00:00",$this->changeTimestampToMilad($request['start_date'][1])." 23:59:59"];
+        }
+
+
+
+
+
+//        $this->dateNow = $dateNow->format('Y/m/d');
+//        $this->timeNow = $dateNow->format('H:i:s');
+        return  view('admin.reports.reportUser')
+                    ->with('date_fa',$request['start_date'])
+                    ->with('date_en',$date_en)
+                    ->with('user',$user);
     }
 
     /**

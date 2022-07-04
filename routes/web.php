@@ -377,6 +377,9 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::get('/event/{event}/export','EventController@exportExcel');
     Route::resource('event','EventController');
 
+    //reportAdmin
+    Route::get('/reports/statistic/{user}','ReportAdminController@show');
+
 
     //Landing
     Route::get('/jashn/list','LandPageController@index');
