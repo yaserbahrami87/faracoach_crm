@@ -29,26 +29,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/public/pizza_chart/css/pizza.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/pizza_chart/css/vendor/foundation.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/pizza_chart/css/vendor/normalize.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/pizza_chart/js/pizza.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/pizza_chart/js/pizza.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/pizza_chart/js/vendor/dependencies.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/pizza_chart/js/vendor/modernizr.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/pizza_chart/js/vendor/snap.svg.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/reports/reportUser.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/VvvebJs-master/editor.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/VvvebJs-master/editor.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/dashboard/plugins/chart.js/Chart.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/dashboard/plugins/chart.js/Chart.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/dashboard/plugins/inputmask/inputmask.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/dashboard/plugins/inputmask/inputmask.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/dashboard/plugins/inputmask/inputmask.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/dashboard/plugins/inputmask/inputmask.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/dashboard/plugins/inputmask/jquery.inputmask.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/dashboard/plugins/inputmask/jquery.inputmask.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/dashboard/plugins/inputmask/jquery.inputmask.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/dashboard/plugins/inputmask/jquery.inputmask.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/dashboard/plugins/jszip/jszip.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/dashboard/plugins/jszip/jszip.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/dashboard/plugins/pdfmake/pdfmake.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/dashboard/plugins/pdfmake/pdfmake.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/dashboard2/gulpfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/dashboard2/gulpfile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/pizza_chart/css/pizza.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/pizza_chart/css/pizza.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.mix.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -236,7 +222,7 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/pizza_chart/js/vendor" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -249,11 +235,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\pizza_chart\js\vendor" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\resources\views\admin" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\images" />
       <recent name="C:\wamp64\www\faracoach_crm\public\js" />
-      <recent name="C:\wamp64\www\faracoach_crm\public\images" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\resources\views\user\booking" />
@@ -1028,7 +1014,9 @@
       <workItem from="1656526952575" duration="8479000" />
       <workItem from="1656705329267" duration="15125000" />
       <workItem from="1656781206398" duration="1925000" />
-      <workItem from="1656825013933" duration="13774000" />
+      <workItem from="1656825013933" duration="15883000" />
+      <workItem from="1656875374735" duration="1591000" />
+      <workItem from="1656910517245" duration="8579000" />
     </task>
     <servers />
   </component>

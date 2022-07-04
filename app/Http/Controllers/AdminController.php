@@ -604,6 +604,4 @@ class AdminController extends BaseController
                 ->with('user',$user);
 
     }
-
-
 }

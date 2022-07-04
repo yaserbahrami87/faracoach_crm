@@ -1,5 +1,6 @@
 @extends('admin.master.index')
 @section('headerScript')
+    <link href="{{asset('/pizza_chart/css/pizza.css')}}" rel="stylesheet" />
     <style>
         table th,table td
         {
@@ -187,12 +188,59 @@
         </div>
         <div class="col-md-3">
             <div class="card-counter primary">
-                <span class="count-numbers text-dark">{{$countBookingReserve->count()}} جلسه </span>
-                <span class="count-name text-dark"> رزرو شده در امروز</span>
+                <span class="count-numbers text-dark">{{$users->where('type','=',13)->count()}} نفر </span>
+                <span class="count-name text-dark">کاربرهای در انتظار تصمیم</span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card-counter primary">
+                <span class="count-numbers text-dark">{{$users->where('type','=',14)->count()}} نفر </span>
+                <span class="count-name text-dark">کاربرهای عدم پاسخگویی</span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card-counter success">
+                <span class="count-numbers text-white">{{$users->where('type','=',20)->count()}} نفر </span>
+                <span class="count-name text-white">دانشجو</span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card-counter primary">
+                <span class="count-numbers text-dark">{{$users->wherenotin('type',[-1,-2,-3])->count()}} نفر </span>
+                <span class="count-name text-dark">مارکتینگ</span>
             </div>
         </div>
 
 
+        <div class="col-12">
+            <div class="row">
+                <div class="col-4" >
+                    <ul data-pie-id="svg">
+                        <li data-value="{{$users->where('type','=',1)->count()}}">پیگیری نشده ({{$users->where('type','=',1)->count()}})</li>
+                        <li data-value="{{$users->where('type','=',11)->count()}}">در حال پیگیری ({{$users->where('type','=',11)->count()}})</li>
+                        <li data-value="{{$users->where('type','=',12)->count()}}">انصرافی ({{$users->where('type','=',12)->count()}})</li>
+                        <li data-value="{{$users->where('type','=',13)->count()}}">در انتظار تصمیم ({{$users->where('type','=',13)->count()}})</li>
+                        <li data-value="{{$users->where('type','=',14)->count()}}">عدم پاسخگویی({{$users->where('type','=',14)->count()}})</li>
+                        <li data-value="{{$users->where('type','=',20)->count()}}">دانشجو ({{$users->where('type','=',20)->count()}})</li>
+                        <li data-value="{{$users->wherenotin('type',[-1,-2,-3])->count()}}">مارکتینگ ({{$users->wherenotin('type',[-1,-2,-3])->count()}})</li>
+                    </ul>
+                </div>
+                <div class="col-4">
+                    <div id="svg"></div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="col-12 border-bottom border-3 mt-1 mb-1"></div>
+
+        <div class="col-md-3">
+            <div class="card-counter primary">
+                <span class="count-numbers text-dark">{{$countBookingReserve->count()}} جلسه </span>
+                <span class="count-name text-dark"> رزرو شده در امروز</span>
+            </div>
+        </div>
         <div class="col-md-3">
             <div class="card-counter warning text-dark">
                 <span class="count-numbers text-dark">{{$bookingsToday->count()}} جلسه</span>
@@ -224,6 +272,8 @@
                 <span class="count-name text-dark">تعداد ورود امروز</span>
             </div>
         </div>
+
+
 
         <!--
 
@@ -260,5 +310,15 @@
         });
 
 
+    </script>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="{{asset('/pizza_chart/js/vendor/snap.svg.js')}}" ></script>
+    <script src="{{asset('/pizza_chart/js/pizza.js')}}" ></script>
+    <script>
+        $(window).load(function() {
+            Pizza.init( );
+        })
     </script>
 @endsection
