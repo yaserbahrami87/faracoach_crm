@@ -75,9 +75,9 @@
 @section('content')
     <div class="col-12 col-sm-12 col-md-3 col-lg-3 text-center ">
         @if(is_null($user->personal_image))
-            <img src="{{asset('/documents/users/default-avatar.png')}}" width="100px"   class="rounded-circle border border-3"/>
+            <img src="{{asset('/documents/users/default-avatar.png')}}" width="100px" height="100px"  class="rounded-circle border border-3"/>
         @else
-            <img src="{{asset('/documents/users/'.$user->personal_image)}}" width="100px"  class="rounded-circle border border-3 " />
+            <img src="{{asset('/documents/users/'.$user->personal_image)}}" width="100px" height="100px" class="rounded-circle border border-3 " />
         @endif
         <p>{{$user->fname." ".$user->lname}}</p>
     </div>

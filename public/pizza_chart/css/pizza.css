@@ -5,22 +5,22 @@
 
 /* line 20, ../sass/pizza.scss */
 [data-pie-id] li:nth-child(1) {
-    color: #4d00ff;
+    color: #33ff33;
 }
 
 /* line 20, ../sass/pizza.scss */
 [data-pie-id] li:nth-child(2) {
-    color: #9900ff;
+    color: #ff751a;
 }
 
 /* line 20, ../sass/pizza.scss */
 [data-pie-id] li:nth-child(3) {
-    color: #e500ff;
+    color: #009933;
 }
 
 /* line 20, ../sass/pizza.scss */
 [data-pie-id] li:nth-child(4) {
-    color: #ff00cc;
+    color: #660066;
 }
 
 /* line 20, ../sass/pizza.scss */
