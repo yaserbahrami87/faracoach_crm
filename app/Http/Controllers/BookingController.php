@@ -736,9 +736,22 @@ class BookingController extends BaseController
                         ->orderby('start_date','desc')
                         ->get();
 
+
+
+        $date_en=[$this->changeTimestampToMilad($startDate)." 00:00:00",$this->changeTimestampToMilad($endDate)." 23:59:59"];
+
+
+
+
+
+        $appointments_booking=reserve::wherebetween('created_at',$date_en)
+                                        ->where('status','=',1)
+                                        ->get();
+
         return view('admin.booking.reportAllCoach')
                         ->with('reserveBooking',$reserveBooking)
                         ->with('successBooking',$successBooking)
+                        ->with('appointments_booking',$appointments_booking)
                         ->with('cancelBooking',$cancelBooking);
     }
 

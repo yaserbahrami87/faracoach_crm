@@ -30,6 +30,9 @@
             <li class="nav-item" role="presentation">
                 <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#cancel_reserve" role="tab" aria-controls="cancel_reserve" aria-selected="false"> جلسات کنسل شده <span class="badge  badge-danger">{{$cancelBooking->count()}}</span></a>
             </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="pills-Appointments-tab" data-toggle="pill" href="#appointments_booking" role="tab" aria-controls="appointments_booking" aria-selected="false"> جلسات رزرو شده دراین تاریخ <span class="badge  badge-danger">{{$appointments_booking->count()}}</span></a>
+            </li>
         </ul>
         <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
@@ -100,6 +103,44 @@
                     @endforeach
                 </table>
             </div>
+
+            <div class="tab-pane fade" id="appointments_booking" role="tabpanel" aria-labelledby="appointments_booking-tab">
+                <table class="table table-striped table-bordered table-danger">
+                    <tr>
+                        <th>#</th>
+                        <th>کوچ</th>
+                        <th>تاریخ جلسه</th>
+                        <th>ساعت جلسه</th>
+                        <th>مراجع</th>
+
+                    </tr>
+                    @foreach($appointments_booking as $item)
+                        <tr>
+                            <th>{{$loop->iteration}}</th>
+                            <td>
+
+                                <a href="/admin/booking/{{$item->booking->coach->user->id}}/report" target="_blank">
+                                    <img src="{{asset('/documents/users/'.$item->booking->coach->user->personal_image)}}" width="50px" height="50px" class="rounded-circle" />
+                                    {{$item->booking->coach->user->fname.' '.$item->booking->coach->user->lname}}
+                                </a>
+                            </td>
+                            <td>{{$item->booking->start_date}}</td>
+                            <td>{{$item->booking->start_time}}</td>
+                            <td dir="ltr">
+                                <a href="/admin/user/{{$item->user->id}}" target="_blank">
+
+                                    @if(is_null($item->user->fname)&&is_null($item->user->lname))
+                                        {{$item->user->tel}}
+                                    @else
+                                        {{$item->user->fname." ".$item->user->lname}}
+                                    @endif
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </table>
+            </div>
+
             <div class="tab-pane fade" id="cancel_reserve" role="tabpanel" aria-labelledby="cancel_reserve-tab">
                 <table class="table table-striped table-bordered table-danger">
                     <tr>
