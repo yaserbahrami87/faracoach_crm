@@ -324,6 +324,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::resource('coupon','CouponController');
 
     //reserve
+    Route::get('/reserve/notification/incomplete','ReserveController@sendNotificationIncomplete');
     Route::get('/reserve/waiting','ReserveController@waiting');
 
     //feedback Coach

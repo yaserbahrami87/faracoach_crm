@@ -9,6 +9,7 @@ use App\event;
 use App\eventreserve;
 use App\homework;
 use App\notification;
+use App\Notifications\IncompleteBooking;
 use App\Notifications\sendMessageNotification;
 use App\order;
 use App\reserve;
@@ -518,6 +519,25 @@ class ReserveController extends BaseController
         return view('admin.reserves')
                     ->with('booking',$reserve)
                     ->with('dateNow',$dateNow);
+    }
+
+    public function sendNotificationIncomplete()
+    {
+        $date_en=$this->changeTimestampToMilad($this->dateNow." 23:59:59");
+
+        $reserve=reserve::join('bookings','reserves.booking_id','=','bookings.id')
+            ->where('reserves.status','=',0)
+            ->wherebetween('reserves.created_at',[$date_en.' 00:00:00',$date_en.' 23:59:59'])
+            ->select('bookings.*','reserves.id as id_reserves','reserves.status as reserve_status')
+            ->orderby('reserves.id','desc')
+            ->get();
+
+        foreach ($reserve as $item)
+        {
+
+            $msg=$item->user->fname." ".$item->user->lname." عزیز\nاولین جلسه کوچینگ برای شما رایگان شد.\nبا کد تخفیف 'first' جلسه معارفه خود را رزرو کنید.\nکلینیک فراکوچ";
+            $item->user->notify(new IncompleteBooking($item->user->tel,$msg));
+        }
     }
 
     public function showCart()

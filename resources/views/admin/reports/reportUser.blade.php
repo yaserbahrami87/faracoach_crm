@@ -153,6 +153,20 @@
                 </table>
             </div>
             <div class="tab-pane fade" id="nav-expireFaktor" role="tabpanel" aria-labelledby="nav-expireFaktor-tab">
+                <div class="row">
+                    @foreach($user->followupsAdmin->wherebetween('date_fa',$date_fa)->groupby('course_id') as $item)
+                        <div class="col-4">
+                            <div class="card text-white border border-3 border-danger  p-1" style="min-height: 100px">
+                                        <span class="text-dark text-center">
+                                            {{$item[0]->course['course']}}
+                                        </span>
+                                <span class="text-dark"><i class="ficon bx bx-transfer-alt"></i>{{$item->count()}} پیگیری</span>
+                                <span class="text-dark"><i class="ficon bx bx-time"></i>{{$item->sum('talktime')}} دقیقه مکالمه</span>
+
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
                 <table class="dataTable table table-striped table-bordered" style="width:100%">
                     <thead>
                     <tr>
@@ -165,26 +179,28 @@
                     </thead>
                     <tbody>
                     @foreach($user->followupsAdmin->wherebetween('date_fa',$date_fa) as $item)
+
                         <tr class="" >
                             <td>{{$loop->iteration}}</td>
                             <td>
-                                <a href="{{route('showUserForAdmin',[$item->id])}}" target="_blank">
-                                    {{$item->fname." ".$item->lname}}
+                                <a href="{{route('showUserForAdmin',[$item->user->id])}}" target="_blank">
+                                    {{$item->user['fname']." ".$item->user['lname']}}
                                 </a>
                             </td>
                             <td>
-                                @if(!is_null($item->last_followupUser['course_id']))
-                                    {{$item->last_followupUser->course->course}}
+
+                                @if(!is_null($item->user->last_followupUser['course_id']))
+                                    {{$item->user->last_followupUser->course['course']}}
                                 @endif
                             </td>
                             <td>
-                                @if(!is_null($item->followups))
-                                    {{$item->followups->count()}}
+                                @if(!is_null($item->user->followups))
+                                    {{$item->user->followups->count()}}
                                 @endif
                             </td>
                             <td>
-                                @if(!is_null($item->last_followupUser['date_fa']))
-                                    {{$item->last_followupUser['date_fa']}}
+                                @if(!is_null($item->user->last_followupUser['date_fa']))
+                                    {{$item->user->last_followupUser['date_fa']}}
                                 @endif
                             </td>
 
