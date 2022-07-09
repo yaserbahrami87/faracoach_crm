@@ -64,7 +64,7 @@ class User extends Authenticatable implements MustVerifyEmail
         }
 
         //دریافت پیگیریها
-        public function followups()
+            public function followups()
         {
             return $this->hasMany('App\followup')->orderby('id','desc');
         }

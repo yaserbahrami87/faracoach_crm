@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\category_gettingknow;
 use App\followup;
 use App\landPage;
+use App\Notifications\LoginwithoutReserve;
+use App\reserve;
 use App\User;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Gate;
@@ -1823,6 +1825,38 @@ class UserController extends BaseController
             alert()->error('خطا در ورود به سایت')->persistent('بستن');
             return back();
         }
+
+    }
+
+    public function login_without_reserve()
+    {
+        $v = Verta::now();
+        $startMonth=($this->changeTimestampToMilad($v->startMonth()));
+        $endMonth=($this->changeTimestampToMilad($v->endMonth()));
+
+
+        $notReserve=[];
+
+        $user=User::wherebetween('last_login_at',[$startMonth,$endMonth])
+                    ->get();
+
+
+
+        foreach ($user as $item)
+        {
+            if($item->reserves->count()==0)
+            {
+                array_push($notReserve,$item);
+            }
+        }
+
+
+
+        foreach ($notReserve as $item)
+        {
+            $item->notify(new LoginwithoutReserve($item->tel,"این پیام صرفا جهت تست می باشد  \n فراکوچ"));
+        }
+
 
     }
 

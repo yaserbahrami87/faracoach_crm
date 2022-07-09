@@ -70,13 +70,6 @@ class ReportAdminController extends BaseController
 
             $date_en=[$this->changeTimestampToMilad($request['start_date'][0])." 00:00:00",$this->changeTimestampToMilad($request['start_date'][1])." 23:59:59"];
         }
-
-
-
-
-
-//        $this->dateNow = $dateNow->format('Y/m/d');
-//        $this->timeNow = $dateNow->format('H:i:s');
         return  view('admin.reports.reportUser')
                     ->with('date_fa',$request['start_date'])
                     ->with('date_en',$date_en)
@@ -115,5 +108,10 @@ class ReportAdminController extends BaseController
     public function destroy($id)
     {
         //
+    }
+
+    public function allReportsUsers()
+    {
+
     }
 }

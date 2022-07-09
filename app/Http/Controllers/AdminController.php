@@ -91,6 +91,8 @@ class AdminController extends BaseController
 //            $sumtalktimeToday=0;
 //            $sumtalktime=0;
 
+
+
             if(isset($_GET['range']))
             {
                 $this->validate($request,[
