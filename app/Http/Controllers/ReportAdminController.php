@@ -113,5 +113,6 @@ class ReportAdminController extends BaseController
     public function allReportsUsers()
     {
 
+        return view('admin.reports.allDatabase');
     }
 }

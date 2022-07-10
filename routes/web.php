@@ -383,6 +383,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
 
     //reportAdmin
     Route::get('/reports/statistic/{user}','ReportAdminController@show');
+    Route::get('/reports/allreport','ReportAdminController@allReportsUsers');
 
 
     //Landing

@@ -209,8 +209,26 @@
         </div>
         <div class="col-md-3">
             <div class="card-counter primary">
-                <span class="count-numbers text-dark">{{$users->wherenotin('type',[-1,-2,-3])->count()}} نفر </span>
+                <span class="count-numbers text-dark">{{$users->where('type',30)->count()}} نفر </span>
+                <span class="count-name text-dark">جلسات</span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card-counter primary">
+                <span class="count-numbers text-dark">{{$users->where('type',40)->count()}} نفر </span>
+                <span class="count-name text-dark">رویدادها</span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card-counter primary">
+                <span class="count-numbers text-dark">{{$users->wherein('type',[-1,-2,-3])->count()}} نفر </span>
                 <span class="count-name text-dark">مارکتینگ</span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card-counter primary">
+                <span class="count-numbers text-dark">{{$users->where('type','=',0)->count()}} نفر </span>
+                <span class="count-name text-dark">سطل زباله</span>
             </div>
         </div>
 
@@ -225,7 +243,10 @@
                         <li data-value="{{$users->where('type','=',13)->count()}}">در انتظار تصمیم ({{$users->where('type','=',13)->count()}})</li>
                         <li data-value="{{$users->where('type','=',14)->count()}}">عدم پاسخگویی({{$users->where('type','=',14)->count()}})</li>
                         <li data-value="{{$users->where('type','=',20)->count()}}">دانشجو ({{$users->where('type','=',20)->count()}})</li>
-                        <li data-value="{{$users->wherenotin('type',[-1,-2,-3])->count()}}">مارکتینگ ({{$users->wherenotin('type',[-1,-2,-3])->count()}})</li>
+                        <li data-value="{{$users->where('type','=',30)->count()}}">جلسات ({{$users->where('type','=',30)->count()}})</li>
+                        <li data-value="{{$users->where('type','=',40)->count()}}">رویدادها ({{$users->where('type','=',40)->count()}})</li>
+                        <li data-value="{{$users->wherein('type',[-1,-2,-3])->count()}}">مارکتینگ ({{$users->wherein('type',[-1,-2,-3])->count()}})</li>
+                        <li data-value="{{$users->where('type','=',0)->count()}}">لیست سیاه({{$users->where('type','=',0)->count()}})</li>
                     </ul>
                 </div>
                 <div class="col-4">
