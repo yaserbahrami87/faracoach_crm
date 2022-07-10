@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\followup;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -112,7 +113,10 @@ class ReportAdminController extends BaseController
 
     public function allReportsUsers()
     {
-
-        return view('admin.reports.allDatabase');
+        $users=User::get();
+        $followups=followup::get();
+        return view('admin.reports.allDatabase')
+                    ->with('followups',$followups)
+                    ->with('users',$users);
     }
 }

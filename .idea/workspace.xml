@@ -29,20 +29,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/public/iranMap/src/IranMapVue.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/iranMap/src/common/SvgMapIranIsland.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/iranMap/src/common/SvgMapIranLake.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/iranMap/src/common/SvgMapIranProvince.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/iranMap/src/common/SvgMapIranSea.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/iranMap/src/entry.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/reports/allDatabase.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReportAdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReportAdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/pizza_chart/css/pizza.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/pizza_chart/css/pizza.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/insertFollowUp.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/insertFollowUp.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/reports/allDatabase.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/reports/allDatabase.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1030,7 +1022,7 @@
       <workItem from="1657175078792" duration="2030000" />
       <workItem from="1657291191965" duration="6000" />
       <workItem from="1657345937716" duration="18004000" />
-      <workItem from="1657466408882" duration="3406000" />
+      <workItem from="1657466408882" duration="12945000" />
     </task>
     <servers />
   </component>

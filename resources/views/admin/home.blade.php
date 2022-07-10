@@ -228,7 +228,7 @@
         <div class="col-md-3">
             <div class="card-counter primary">
                 <span class="count-numbers text-dark">{{$users->where('type','=',0)->count()}} نفر </span>
-                <span class="count-name text-dark">سطل زباله</span>
+                <span class="count-name text-dark">لیست سیاه</span>
             </div>
         </div>
 
