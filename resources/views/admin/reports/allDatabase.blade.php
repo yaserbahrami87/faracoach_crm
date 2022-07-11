@@ -1,5 +1,8 @@
 @extends('admin.master.index')
 
+@section('headerScript')
+    <link href="{{asset('/pizza_chart/css/pizza.css')}}" rel="stylesheet" />
+@endsection
 @section('content')
     <div class="col-12 table-responsive mb-2 border border-bottom border-1">
         <table class="table table-striped">
@@ -93,7 +96,7 @@
     <div class="col-12">
         <p>گزارش نحوه آشنایی </p>
     </div>
-    <div class="col-12 table-responsive">
+    <div class="col-12 table-responsive mb-2">
         <table class="table table-striped">
             <tr>
                 <th class="text-center">نحوه آشنایی </th>
@@ -157,6 +160,52 @@
             @endforeach
         </table>
     </div>
+    <div class="col-12 border-top">
+        <p>تفکیک جنسیت </p>
+    </div>
+    <div class="col-12">
+        <div class="row">
+            <div class="col-4 " >
+                <ul data-pie-id="svg">
+
+                    @foreach($users->groupby('sex') as $item)
+
+                        @switch($item[0]->sex)
+                            @case ("1")
+                                <li data-value="{{count($item)}}"> مرد ({{count($item)}})</li>
+                            @break
+                            @case ("0")
+                                <li data-value="{{count($item)}}"> زن ({{count($item)}})</li>
+                            @break
+                            @default
+                                <li data-value="{{count($item)}}"> نامشخص ({{count($item)}})</li>
+                            @break
+                        @endswitch
+                    @endforeach
+                </ul>
+            </div>
+            <div class="col-4">
+                <div id="svg"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 border-top">
+        <p>تفکیک تحصیلات </p>
+    </div>
+    <div class="col-12">
+        <div class="row">
+            <div class="col-4 " >
+                <ul data-pie-id="svgEducation">
+                    @foreach($users->groupby('education') as $item)
+                            <li data-value="{{count($item)}}"> {{$item[0]->education."(".count($item).")"}}</li>
+                    @endforeach
+                </ul>
+            </div>
+            <div class="col-4">
+                <div id="svgEducation"></div>
+            </div>
+        </div>
+    </div>
 
 
 
@@ -164,6 +213,13 @@
 @endsection
 
 @section('footerScript')
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="{{asset('/pizza_chart/js/vendor/snap.svg.js')}}" ></script>
+    <script src="{{asset('/pizza_chart/js/pizza.js')}}" ></script>
+    <script>
+        $(window).load(function() {
+            Pizza.init( );
+        })
+    </script>
 
 @endsection

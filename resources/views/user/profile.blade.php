@@ -300,12 +300,12 @@
                                         <label>تحصیلات</label>
                                         <select class="custom-select @if(strlen($user->education)<>0) is-valid  @endif" name="education" id="education">
                                             <option selected disabled>انتخاب کنید</option>
-                                            <option @if($user->education=='سیکل') selected   @endif>سیکل</option>
-                                            <option @if($user->education=='دیپلم') selected   @endif>دیپلم</option>
-                                            <option @if($user->education=='فوق دیپلم') selected   @endif>فوق دیپلم</option>
-                                            <option @if($user->education=='لیسانس') selected   @endif>لیسانس</option>
-                                            <option @if($user->education=='فوق لیسانس') selected   @endif>فوق لیسانس</option>
-                                            <option @if($user->education=='دکتری و بالاتر') selected   @endif>دکتری و بالاتر</option>
+                                            <option {{ old('education',$user->education)=="زیردیپلم" ? 'selected='.'"'.'selected'.'"' : '' }}   >زیردیپلم</option>
+                                            <option {{ old('education',$user->education)=="دیپلم" ? 'selected='.'"'.'selected'.'"' : '' }}>دیپلم</option>
+                                            <option {{ old('education',$user->education)=="فوق دیپلم" ? 'selected='.'"'.'selected'.'"' : '' }}>فوق دیپلم</option>
+                                            <option {{ old('education',$user->education)=="لیسانس" ? 'selected='.'"'.'selected'.'"' : '' }}>لیسانس</option>
+                                            <option {{ old('education',$user->education)=="فوق لیسانس" ? 'selected='.'"'.'selected'.'"' : '' }}>فوق لیسانس</option>
+                                            <option {{ old('education',$user->education)=="دکتری و بالاتر" ? 'selected='.'"'.'selected'.'"' : '' }}>دکتری و بالاتر</option>
                                         </select>
                                     </div>
                                 </div>
