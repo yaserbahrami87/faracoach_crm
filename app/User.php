@@ -226,6 +226,11 @@ class User extends Authenticatable implements MustVerifyEmail
             return $this->hasOne('App\state','id','state');
         }
 
+        public function get_gettingknow()
+        {
+            return $this->hasOne('App\category_gettingknow','id','gettingknow');
+        }
+
 
 
 
