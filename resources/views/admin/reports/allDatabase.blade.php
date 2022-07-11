@@ -4,6 +4,32 @@
     <link href="{{asset('/pizza_chart/css/pizza.css')}}" rel="stylesheet" />
 @endsection
 @section('content')
+    <div class="col-12">
+        <div class="row">
+            <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 mb-3" id="app">
+                <form method="GET" action="/admin/reports/allreport">
+                    <div class="form-group">
+                        <label for="start_date">بازه نمایش را وارد کنید</label>
+                        <date-picker
+                            type="date"
+                            v-model="dates"
+                            range
+                            format="jYYYY-jMM-jDD"
+                            display-format="jYYYY/jMM/jDD"
+                            name="start_date"
+                            max="{{$dateNow}}"
+                            id="start_date"
+                        ></date-picker>
+                        <button type="submit" class="btn btn-success btn-sm" name="range">نمایش بده</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 border-top">
+        <p>تفکیک استان ها </p>
+    </div>
     <div class="col-12 table-responsive mb-2 border border-bottom border-1">
         <table class="table table-striped">
            <tr>
@@ -197,12 +223,36 @@
             <div class="col-4 " >
                 <ul data-pie-id="svgEducation">
                     @foreach($users->groupby('education') as $item)
-                            <li data-value="{{count($item)}}"> {{$item[0]->education."(".count($item).")"}}</li>
+                            <li data-value="{{count($item)}}"> @if(is_null($item[0]->education)) {{"نامشخص (".count($item).")"}} @else {{$item[0]->education."(".count($item).")"}} @endif </li>
                     @endforeach
                 </ul>
             </div>
             <div class="col-4">
                 <div id="svgEducation"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 border-top">
+        <p>تفکیک تاهل </p>
+    </div>
+    <div class="col-12">
+        <div class="row">
+            <div class="col-4 " >
+                <ul data-pie-id="svgMarried">
+                    @foreach($users->groupby('married') as $item)
+                        @switch($item[0]->married)
+                            @case ("1") <li data-value="{{count($item)}}"> {{" متاهل (".count($item).")"}}  </li>
+                                        @break
+                            @case ("0") <li data-value="{{count($item)}}"> {{" مجرد (".count($item).")"}}  </li>
+                                        @break
+                            @default <li data-value="{{count($item)}}"> {{" نامشخص (".count($item).")"}}  </li>
+                        @endswitch
+
+                    @endforeach
+                </ul>
+            </div>
+            <div class="col-4">
+                <div id="svgMarried"></div>
             </div>
         </div>
     </div>
@@ -213,6 +263,29 @@
 @endsection
 
 @section('footerScript')
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment-jalaali@0.7.4/build/moment-jalaali.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-persian-datetime-picker/dist/vue-persian-datetime-picker-browser.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            components: {
+                DatePicker: VuePersianDatetimePicker
+            },
+            data: {
+                time:"{{old('time')}}",
+                dates: [],
+                message:'asdasdasd'
+            }
+
+        });
+
+
+    </script>
+
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="{{asset('/pizza_chart/js/vendor/snap.svg.js')}}" ></script>
     <script src="{{asset('/pizza_chart/js/pizza.js')}}" ></script>

@@ -111,10 +111,30 @@ class ReportAdminController extends BaseController
         //
     }
 
-    public function allReportsUsers()
+    public function allReportsUsers(Request $request)
     {
-        $users=User::get();
-        $followups=followup::get();
+        if(isset($request['range']))
+        {
+            $this->validate($request,[
+                'start_date'    =>'required|string',
+            ]);
+            $request['start_date']=explode(' ~ ',$request['start_date']);
+            $date_en=[$this->changeTimestampToMilad($request['start_date'][0])." 00:00:00",$this->changeTimestampToMilad($request['start_date'][1])." 23:59:59"];
+            $users=User::wherebetween('created_at',$date_en)
+                            ->get();
+            $followups=followup::wherebetween('date_fa',$request['start_date'])
+                        ->get();
+        }
+        else
+        {
+            $users=User::get();
+            $followups=followup::get();
+        }
+
+
+
+
+
         return view('admin.reports.allDatabase')
                     ->with('followups',$followups)
                     ->with('users',$users);
