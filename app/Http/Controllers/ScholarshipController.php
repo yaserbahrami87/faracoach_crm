@@ -29,7 +29,7 @@ class ScholarshipController extends BaseController
     {
 //        session()->forget('status');
 //
-        return  view('scholarship.beforeRegister_scholarship');
+        return  view('scholarship.beforeRegister_Scholarship');
     }
 
     /**

@@ -29,19 +29,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/scholarship/_checkCode_scholarship.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/scholarship/_register_scholarship.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/scholarship/beforeRegister_Scholarship.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/scholarship/infoCoach_scholarship.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/VerifyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/VerifyController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/register.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/loginSMS.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/loginSMS.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1033,7 +1022,7 @@
       <workItem from="1657515496822" duration="15177000" />
       <workItem from="1657823064350" duration="3131000" />
       <workItem from="1657902072118" duration="23374000" />
-      <workItem from="1658047353508" duration="21531000" />
+      <workItem from="1658047353508" duration="22025000" />
     </task>
     <servers />
   </component>
