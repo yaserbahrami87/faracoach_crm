@@ -156,7 +156,7 @@
                                         <label for="reshteh" class="col-md-4 col-form-label text-md-right">رشته تحصیلی: <span class="text-danger">*</span></label>
 
                                         <div class="col-md-6">
-                                            <input id="reshteh" type="text" class="form-control @error('reshteh') is-invalid @enderror" name="reshteh" value="@if(!is_null(Auth::user()->reshteh)){{old('reshteh',Auth::user()->reshteh)}}@endif" required  @if(!is_null(Auth::user()->reshteh)) readonly @endif />
+                                            <input id="reshteh" type="text" class="form-control @error('reshteh') is-invalid @enderror" name="reshteh" value="@if((Auth::check())){{old('reshteh',Auth::user()->reshteh)}}@endif" required  @if(!is_null(Auth::user()->reshteh)) readonly @endif />
 
                                             @error('reshteh')
                                             <span class="invalid-feedback" role="alert">

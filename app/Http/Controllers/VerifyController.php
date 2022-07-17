@@ -858,9 +858,16 @@ class VerifyController extends BaseController
                     ->delete();
         $six_digit_random_number = mt_rand(100000, 999999);
         $verify=$this->get_user($request['tel'],NULL,NULL,NULL,true);
+        if($verify->count()!=0)
+        {
+            $scholarship=scholarship::where('user_id','=',$verify->id)
+                ->first();
+        }
+        else
+        {
+            $scholarship=NULL;
+        }
 
-        $scholarship=scholarship::where('user_id','=',$verify->id)
-                        ->first();
 
 
 
