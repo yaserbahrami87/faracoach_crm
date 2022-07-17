@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\landPage;
 use App\Notifications\LoginWithCode;
+use App\scholarship;
 use App\User;
 use App\verify;
 use Carbon\Carbon;
@@ -316,9 +317,10 @@ class VerifyController extends BaseController
     public function storeCodewithoutPass(Request $request)
     {
 
-        $this->validate($request,[
+       $this->validate($request,[
             'tel'   =>'required|string|iran_mobile'
         ]);
+
 //        if(preg_match('/^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}$/',$request['tel']))
 //        {
 
@@ -348,29 +350,25 @@ class VerifyController extends BaseController
                             'date_fa' => $this->dateNow,
                             'time_fa' => $this->timeNow
                         ]);
-                    if ($status) {
+                    if ($status)
+                    {
                         $message = "رمز یکبار مصرف شما در سیستم فراکوچ : " . $six_digit_random_number;
                         $this->sendSms($request['tel'], $message);
                         return back()->with('msg', 'رمز یکبار مصرف شما به شماره ' . $request['tel'] . ' ارسال شد')
                             ->with('errorStatus', 'success')
                             ->with('status', true);
-                    } else {
+                    } else
+                    {
                         return back()->with('msg', 'خطا در ارسال رمز یکبار مصرف')
                             ->with('errorStatus', 'danger');
                     }
-                } else {
+                } else
+                {
                     return back()->with('msg', 'رمز یکبار مصرف کمتر از 2 دقیقه به شماره ' . $request['tel'] . " ارسال شده است")
                         ->with('errorStatus', 'success')
                         ->with('status', true);
                 }
             }
-
-//        }
-//        else
-//        {
-//            return back()->with('msg','تلفن همراه وارد شده معتبر نمی باشد')
-//                         ->with('errorStatus','danger');
-//        }
 
     }
 
@@ -844,6 +842,126 @@ class VerifyController extends BaseController
             Auth::loginUsingId($user->id);
             echo "<div class='alert alert-success'>ورود با موفقیت انجام شد</div>";
             echo "<script>location.reload();</script>";
+        }
+    }
+
+
+
+    public function storeBeforeScholarship(Request $request)
+    {
+
+        $this->validate($request,[
+            'tel'   =>'required|string|iran_mobile'
+        ]);
+
+        verify::where('tel','=',$request['tel'])
+                    ->delete();
+        $six_digit_random_number = mt_rand(100000, 999999);
+        $verify=$this->get_user($request['tel'],NULL,NULL,NULL,true);
+
+        $scholarship=scholarship::where('user_id','=',$verify->id)
+                        ->first();
+
+
+
+        if(is_null($scholarship))
+        {
+
+//        if($verify->count()==0)
+//        {
+//            return view('scholarship.register_scholarship');
+//        }
+//        else
+//        {
+//            $created_at = ($verify['created_at']);
+//            $created_at_add = $created_at->addMinutes(30);
+//            if ($created_at_add < Carbon::now()) {
+            $status = verify::create(
+                [
+                    'tel' => $request['tel'],
+                    'code' => $six_digit_random_number,
+                    'date_fa' => $this->dateNow,
+                    'time_fa' => $this->timeNow
+                ]);
+            if ($status) {
+                $request->session()->put('scholarshipStatus', 'true');
+                $message = "رمز یکبار مصرف شما در سیستم بورسیه فراکوچ : " . $six_digit_random_number;
+                $this->sendSms($request['tel'], $message);
+                alert()->warning('رمز یکبار مصرف شما به شماره ' . $request['tel'] . " ارسال شد. ")->persistent('بستن');
+//                    return view('scholarship.checkCode_scholarship');
+                return back();
+            } else {
+                return back()->with('msg', 'خطا در ارسال رمز یکبار مصرف')
+                    ->with('errorStatus', 'danger');
+            }
+//            } else {
+//                return back()->with('msg', 'رمز یکبار مصرف کمتر از 30 دقیقه به شماره ' . $request['tel'] . " ارسال شده است")
+//                    ->with('errorStatus', 'success')
+//                    ->with('status', true);
+//            }
+//        }
+        }
+        else
+        {
+            alert()->warning('شما قبلا در سیستم بورسیه فراکوچ ثبت نام کرده اید')->persistent('بستن');
+            return back();
+        }
+
+    }
+
+
+
+
+    public function checkCode_Scholarship(Request $request)
+    {
+        $status=verify::where('code','=',$request['code'])
+            ->where('verify','=',0)
+            ->count();
+
+        if($status==1)
+        {
+            $verify=verify::where('code','=',$request['code'])
+                ->where('verify','=',0)
+                ->first();
+
+            $created_at=($verify['created_at']);
+            $created_at_add=$created_at->addMinutes(30);
+            if($created_at_add >Carbon::now())
+            {
+                $user=$this->get_user($verify->tel,NULL,NULL,NULL,true);
+
+                if($user->count()!=0)
+                {
+                    $user=$this->get_user($verify->tel,NULL,NULL,NULL,true);
+                    $request->session()->put('scholarshipStatus','infoUser');
+                    Auth::login($user);
+                    return back()
+                                ->with('user',$user)
+                                ->with('tel',$verify->tel);
+                }
+                else
+                {
+
+                    $user=User::create([
+                        'tel'   =>$verify->tel,
+                    ]);
+                    $request->session()->put('scholarshipStatus','infoUser');
+                    Auth::login($user);
+                    return back()->with('msg','کاربری با چنین تلفن همراه موجود نیست')
+                            ->with('errorStatus','danger');
+                }
+
+            }
+            else
+            {
+                alert()->error('رمز یکبار مصرف منقضی شده است')->persistent('بستن');
+                return back();
+            }
+        }
+        else
+        {
+            alert()->error('رمز یکبار مصرف اشتباه است')->persistent('بستن');
+            return back();
         }
     }
 }

@@ -449,7 +449,13 @@ Route::get('/register2',function()
 Route::post('/register/land','UserController@register_landing');
 Route::resource('landPage','LandPageController');
 
-
+//scholarship
+Route::get('/scholarship/register','ScholarshipController@create');
+Route::post('/scholarship/storeCodewithoutPass','VerifyController@storeBeforeScholarship');
+Route::post('/scholarship/checkCode_Scholarship','VerifyController@checkCode_Scholarship');
+Route::post('/scholarship/update/user','ScholarshipController@register_Scholarship');
+Route::post('/scholarship/register/final','ScholarshipController@store');
+Route::get('/scholarship/cleartel','ScholarshipController@cleartel');
 
 //checkout
 Route::get('/checkout/callback','CheckoutController@callback');

@@ -83,7 +83,6 @@
                                         </a>
                                     @endif
                                 </div>
-
                             </div>
                         </form>
                     @endif
