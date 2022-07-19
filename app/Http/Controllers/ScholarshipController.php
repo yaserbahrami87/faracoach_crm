@@ -7,6 +7,7 @@ use App\User;
 use Faker\Provider\Base;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class ScholarshipController extends BaseController
 {
@@ -17,7 +18,10 @@ class ScholarshipController extends BaseController
      */
     public function index()
     {
-        //
+        $scholarships=scholarship::where('status','=',0)
+                    ->get();
+        return view('admin.scholarship.users')
+                    ->with('scholarships',$scholarships);
     }
 
     /**
@@ -49,7 +53,9 @@ class ScholarshipController extends BaseController
             'description'   =>'nullable|string',
             'scientific'    =>'required|string',
             'executive'     =>'required|string',
-            'introduce'     =>'required|string',
+            'introduce'     =>'nullable|string',
+            'cooperation'   =>'required|string',
+            'applicant'     =>'required|numeric',
             'resume'        =>'required|mimes:jpeg,jpg,pdf,doc,png|max:600',
         ]);
 
@@ -70,12 +76,14 @@ class ScholarshipController extends BaseController
         [
             'user_id'       =>Auth::user()->id,
             'target'        =>$request->target,
-            'types'         =>implode($request->types),
+            'types'         =>implode(',',$request->types),
             'gettingknow'   =>$request->gettingknow,
             'description'   =>$request->description,
             'scientific'    =>$request->scientific,
             'executive'     =>$request->executive,
             'introduce'     =>$request->introduce,
+            'cooperation'   =>$request->cooperation,
+            'applicant'     =>$request->applicant,
             'resume'        =>$resume,
             'trackingcode'  =>$trackingCode,
         ]);
@@ -89,18 +97,23 @@ class ScholarshipController extends BaseController
             $request->session()->forget('scholarshipStatus');
             return back();
         }
-
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $scholarship
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(scholarship  $scholarship)
     {
-        //
+        $states=$this->states();
+        $city=$this->city($scholarship->user->city);
+        $scholarship->types=explode(',' ,$scholarship->types);
+       return view('admin.scholarship.scholarship')
+                    ->with('scholarship',$scholarship)
+                    ->with('city',$city)
+                    ->with('states',$states);
     }
 
     /**
@@ -140,19 +153,30 @@ class ScholarshipController extends BaseController
 
     public function register_Scholarship(Request $request)
     {
+
         $this->validate($request,[
-            'fname'     =>'required|string',
-            'lname'     =>'required|string',
-            'sex'       =>'required|in:1,0',
-            'email'     =>'required|email',
-            'tel'       =>'required|string',
-            'education' =>'required|string',
-            'reshteh'   =>'required|string',
+            'fname'                 =>'required|string',
+            'lname'                 =>'required|string',
+            'sex'                   =>'required|in:1,0',
+            'email'                 =>'required|email',
+            'tel'                   =>'required|string',
+            'education'             =>'required|string',
+            'reshteh'               =>'required|string',
+//            'password'              =>'required_with:password_confirmation|string',
+            'password'              =>'nullable|string|confirmed',
         ]);
+
+
         $user=User::where('tel','=',$request->tel)
             ->first();
 
         $status=$user->update($request->all());
+         if(!is_null($request['password']))
+         {
+             $user->password=Hash::make($request['password']);
+             $user->save();
+         }
+
         $request->session()->put('scholarshipStatus','infoScholarship');
 //        return view('scholarship.infoCoach_scholarship')
 

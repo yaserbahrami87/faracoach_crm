@@ -23,6 +23,9 @@ class CreateScholarshipsTable extends Migration
             $table->string('scientific',250)->nullable();
             $table->string('executive',250)->nullable();
             $table->string('introduce',250)->nullable();
+            $table->string('introduce',250)->nullable();
+            $table->string('cooperation',250)->nullable();
+            $table->tinyInteger('applicant')->nullable();
             $table->string('resume',250)->nullable();
             $table->tinyInteger('status')->default(0);
             $table->string('trackingcode',30)->nullable();

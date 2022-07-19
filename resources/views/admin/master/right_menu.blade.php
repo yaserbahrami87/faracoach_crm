@@ -111,6 +111,12 @@
                     <li><a href="/admin/event/create"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >ایجاد رویداد</span></a></li>
                 </ul>
             </li>
+            <li class=" nav-item"><a href="#"><span class="menu-title" >بورسیه ها</span></a>
+                <ul class="menu-content">
+                    <li><a href="/admin/scholarship"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >لیست درخواست ها</span></a></li>
+                    <li><a href="#"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >ایجاد رویداد</span></a></li>
+                </ul>
+            </li>
             <li class=" nav-item"><a href="#"><span class="menu-title" >پیامک ها</span></a>
                 <ul class="menu-content">
                     <li><a href="/admin/sms/recieve" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >آخرین پیامک های دریافتی</span></a></li>

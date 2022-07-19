@@ -166,7 +166,7 @@
                                         </div>
                                     </div>
 
-                                    @if(!Auth::check())
+                                    @if(!strlen(Auth::user()->password))
 
                                         <div class="form-group row">
                                             <label for="password" class="col-md-4 col-form-label text-md-right">رمز عبور: <span class="text-danger">*</span></label>
@@ -214,10 +214,10 @@
                                             <div class="input-group">
                                                 <select id="target" class="form-control p-0  @error('target') is-invalid @enderror" name="target">
                                                     <option selected disabled>انتخاب کنید</option>
-                                                    <option {{ old('target')=="زیردیپلم" ? 'selected='.'"'.'selected'.'"' : '' }}   >برای توسعه مهارت فردی در زندگی و کسب و کار (اثرگذار باشم)</option>
-                                                    <option {{ old('target')=="دیپلم" ? 'selected='.'"'.'selected'.'"' : '' }}>میخواهم کوچ حرفه ای شوم (بعنوان شغل دوم و یا اصلی)</option>
-                                                    <option {{ old('target')=="فوق دیپلم" ? 'selected='.'"'.'selected'.'"' : '' }}>در شغل و کسب و کار خودم از این مهارت استفاده کنم</option>
-                                                    <option {{ old('target')=="لیسانس" ? 'selected='.'"'.'selected'.'"' : '' }}>مایلم بعد از گذراندن دوره آموزشی با موسسه همکاری کنم</option>
+                                                    <option {{ old('target')==1 ? 'selected='.'"'.'selected'.'"' : '' }} value="1" >برای توسعه مهارت فردی در زندگی و کسب و کار (اثرگذار باشم)</option>
+                                                    <option {{ old('target')==2 ? 'selected='.'"'.'selected'.'"' : '' }} value="2">میخواهم کوچ حرفه ای شوم (بعنوان شغل دوم و یا اصلی)</option>
+                                                    <option {{ old('target')==3 ? 'selected='.'"'.'selected'.'"' : '' }} value="3">در شغل و کسب و کار خودم از این مهارت استفاده کنم</option>
+                                                    <option {{ old('target')==4 ? 'selected='.'"'.'selected'.'"' : '' }} value="4">مایلم بعد از گذراندن دوره آموزشی با موسسه همکاری کنم</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -247,9 +247,9 @@
                                             <div class="input-group">
                                                 <select id="gettingknow" class="form-control p-0  @error('gettingknow') is-invalid @enderror" name="gettingknow">
                                                     <option selected disabled>انتخاب کنید</option>
-                                                    <option {{ old('gettingknow')=="زیردیپلم" ? 'selected='.'"'.'selected'.'"' : '' }}   >اطلاعات کامل دارم </option>
-                                                    <option {{ old('gettingknow')=="دیپلم" ? 'selected='.'"'.'selected'.'"' : '' }}>آگاهی محتصری دارم</option>
-                                                    <option {{ old('gettingknow')=="فوق دیپلم" ? 'selected='.'"'.'selected'.'"' : '' }}>آشنایی ندارم</option>
+                                                    <option {{ old('gettingknow')==1 ? 'selected='.'"'.'selected'.'"' : ''}} value="1"  >اطلاعات کامل دارم </option>
+                                                    <option {{ old('gettingknow')==2 ? 'selected='.'"'.'selected'.'"' : ''}} value="2">آگاهی محتصری دارم</option>
+                                                    <option {{ old('gettingknow')==3 ? 'selected='.'"'.'selected'.'"' : ''}} value="3">آشنایی ندارم</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -268,8 +268,8 @@
 
                                             @error('scientific')
                                             <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                                <strong>{{ $message }}</strong>
+                                            </span>
                                             @enderror
                                         </div>
                                     </div>
@@ -282,18 +282,52 @@
 
                                             @error('executive')
                                             <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                                <strong>{{ $message }}</strong>
+                                            </span>
                                             @enderror
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="introduce" class="col-md-4 col-form-label text-md-right">نام فردی را  که عضو هیئت علمی و یا دانشپذیر موسسه  فراکوچ است، به عنوان معرف درج کنید: <span class="text-danger">*</span></label>
+                                        <label for="introduce" class="col-md-4 col-form-label text-md-right">نام فردی را  که عضو هیئت علمی و یا دانشپذیر موسسه  فراکوچ است، به عنوان معرف درج کنید: </label>
 
                                         <div class="col-md-6">
-                                            <input id="introduce" type="text" class="form-control @error('introduce') is-invalid @enderror"  name="introduce"  required autocomplete="introduce" autofocus  />
+                                            <input id="introduce" type="text" class="form-control @error('introduce') is-invalid @enderror"  name="introduce"    />
 
                                             @error('introduce')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="cooperation" class="col-md-4 col-form-label text-md-right"> چه علاقمندی  و یا  توانمندی  ویژه ای جهت  همکاری  با  آکادمی فراکوچ دارید ؟ (حین و بعد از اتمام دوره آموزشی):<span class="text-danger">*</span>    </label>
+
+                                        <div class="col-md-6">
+                                            <input id="cooperation" type="text" class="form-control @error('cooperation') is-invalid @enderror"  name="cooperation"  required autocomplete="cooperation" autofocus  />
+
+                                            @error('cooperation')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="applicant" class="col-md-4 col-form-label text-md-right">متقاضی کدام سطح اموزش هستید؟<span class="text-danger">*</span></label>
+
+                                        <div class="col-md-6">
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" id="gender1" name="applicant" class="custom-control-input"  value="1" />
+                                                <label class="custom-control-label" for="gender1" >سطح 1</label>
+                                            </div>
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" id="gender2" name="applicant" class="custom-control-input" value="2" />
+                                                <label class="custom-control-label" for="gender2" >سطح 2</label>
+                                            </div>
+
+                                            @error('applicant')
                                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -302,13 +336,14 @@
                                     </div>
                                     <div class="form-group row">
                                         <label for="resume" class="col-md-4 col-form-label text-md-right">رزومه  خورد را بارگزاری نمایید: <span class="text-danger">*</span></label>
-
                                         <div class="col-md-6">
                                             <input type="file" class="form-control-file" id="exampleFormControlFile1" name="resume">
+                                            <small class="text-muted ">فایل های قابل قبول: PDF , JPG , JPEG , DOC , PNG</small>
+                                            <small class="text-muted d-block">حداکثر حجم فایل: 600 کیلوبایت</small>
                                             @error('resume')
                                             <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                                <strong>{{ $message }}</strong>
+                                            </span>
                                             @enderror
                                         </div>
                                     </div>
@@ -321,6 +356,7 @@
 
                                     <div class="form-group row mb-0">
                                         <div class="col-md-6 offset-md-4">
+                                            <a href="/scholarship/cleartel">ویرایش تلفن</a>
                                             <button type="submit" class="btn btn-primary">
                                                 {{ __('مرحله بعد') }}
                                             </button>

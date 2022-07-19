@@ -205,6 +205,9 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::post('/users/storeExcel','UserController@storeExcel');
     Route::post('/user/ajax/search','UserController@userAjax');
 
+    //Route Scholarship
+    Route::resource('scholarship','ScholarshipController');
+
     //  ROUTE SETTINGS
     Route::prefix('settings/')->group(function ()
     {
