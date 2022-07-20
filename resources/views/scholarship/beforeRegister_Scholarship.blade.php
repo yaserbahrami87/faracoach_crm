@@ -219,13 +219,39 @@
 
                                         <div class="col-md-6">
                                             <div class="input-group">
-                                                <select id="target" class="form-control p-0  @error('target') is-invalid @enderror" name="target">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="1" id="target1" name="target[]" />
+                                                    <label class="form-check-label" for="target1">
+                                                        برای توسعه مهارت فردی در زندگی و کسب و کار (اثرگذار باشم)
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="2" id="target2" name="target[]" />
+                                                    <label class="form-check-label" for="target2">
+                                                        میخواهم کوچ حرفه ای شوم (بعنوان شغل دوم و یا اصلی)
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="3" id="target3" name="target[]" />
+                                                    <label class="form-check-label" for="target3">
+                                                        در شغل و کسب و کار خودم از این مهارت استفاده کنم
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="4" id="target4" name="target[]" />
+                                                    <label class="form-check-label" for="target4">
+                                                        مایلم بعد از گذراندن دوره آموزشی با موسسه همکاری کنم
+                                                    </label>
+                                                </div>
+                                                <!--
+                                                <select id="target" class="form-control p-0  @error('target') is-invalid @enderror" name="target[]" multiple>
                                                     <option selected disabled>انتخاب کنید</option>
                                                     <option {{ old('target')==1 ? 'selected='.'"'.'selected'.'"' : '' }} value="1" >برای توسعه مهارت فردی در زندگی و کسب و کار (اثرگذار باشم)</option>
                                                     <option {{ old('target')==2 ? 'selected='.'"'.'selected'.'"' : '' }} value="2">میخواهم کوچ حرفه ای شوم (بعنوان شغل دوم و یا اصلی)</option>
                                                     <option {{ old('target')==3 ? 'selected='.'"'.'selected'.'"' : '' }} value="3">در شغل و کسب و کار خودم از این مهارت استفاده کنم</option>
                                                     <option {{ old('target')==4 ? 'selected='.'"'.'selected'.'"' : '' }} value="4">مایلم بعد از گذراندن دوره آموزشی با موسسه همکاری کنم</option>
                                                 </select>
+                                                -->
                                             </div>
                                         </div>
                                     </div>
@@ -261,12 +287,14 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <!--
                                     <div class="form-group row">
-                                        <label for="description" class="col-md-4 col-form-label text-md-right">جهت افزایش کیفیت خدمات، توضیح بیشتری درباره خودتان و ویژگیها و توانمندی و علاقمندی خود مرقوم بفرمایید: </label>
+                                        <label for="description" class="col-md-4 col-form-label text-md-right"> توضیح بیشتری درباره  ویژگیها و توانمندی و علاقمندی خود مرقوم بفرمایید: </label>
                                         <div class="col-md-6">
                                             <textarea class="form-control" id="description" rows="3" name="description"></textarea>
                                         </div>
                                     </div>
+
                                     <div class="form-group row">
                                         <label for="scientific" class="col-md-4 col-form-label text-md-right">سوابق علمی خود را مرقوم فرمایید: <span class="text-danger">*</span></label>
 
@@ -280,6 +308,8 @@
                                             @enderror
                                         </div>
                                     </div>
+
+
 
                                     <div class="form-group row">
                                         <label for="executive" class="col-md-4 col-form-label text-md-right">سوابق اجرایی خود را مرقوم فرمایید: <span class="text-danger">*</span></label>
@@ -307,11 +337,13 @@
                                             @enderror
                                         </div>
                                     </div>
+                                    -->
                                     <div class="form-group row">
                                         <label for="cooperation" class="col-md-4 col-form-label text-md-right"> چه علاقمندی  و یا  توانمندی  ویژه ای جهت  همکاری  با  آکادمی فراکوچ دارید ؟ (حین و بعد از اتمام دوره آموزشی):<span class="text-danger">*</span>    </label>
 
                                         <div class="col-md-6">
-                                            <input id="cooperation" type="text" class="form-control @error('cooperation') is-invalid @enderror"  name="cooperation"  required autocomplete="cooperation" autofocus  />
+                                            <!-- <input id="cooperation" type="text" class="form-control @error('cooperation') is-invalid @enderror"  name="cooperation"  required autocomplete="cooperation" autofocus  /> -->
+                                            <textarea class="form-control" id="cooperation" rows="3" name="cooperation">{{old('cooperation')}}</textarea>
 
                                             @error('cooperation')
                                             <span class="invalid-feedback" role="alert">
@@ -326,11 +358,11 @@
 
                                         <div class="col-md-6">
                                             <div class="custom-control custom-radio custom-control-inline">
-                                                <input type="radio" id="gender1" name="applicant" class="custom-control-input"  value="1" />
+                                                <input type="radio" id="gender1" name="applicant" class="custom-control-input"  value="1"  @if(old('applicant')==1) checked @endif/>
                                                 <label class="custom-control-label" for="gender1" >سطح 1</label>
                                             </div>
                                             <div class="custom-control custom-radio custom-control-inline">
-                                                <input type="radio" id="gender2" name="applicant" class="custom-control-input" value="2" />
+                                                <input type="radio" id="gender2" name="applicant" class="custom-control-input" value="2" @if(old('applicant')==2) checked @endif />
                                                 <label class="custom-control-label" for="gender2" >سطح 2</label>
                                             </div>
 

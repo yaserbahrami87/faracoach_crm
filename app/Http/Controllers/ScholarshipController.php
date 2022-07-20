@@ -47,16 +47,15 @@ class ScholarshipController extends BaseController
      */
     public function store(Request $request)
     {
-
         $this->validate($request,[
             'user_id'       =>'required|numeric|',
-            'target'        =>'required|string',
+            'target'        =>'required|array',
             'types'         =>'required|array',
             'gettingknow'   =>'required|string',
-            'description'   =>'nullable|string',
-            'scientific'    =>'required|string',
-            'executive'     =>'required|string',
-            'introduce'     =>'nullable|string',
+//            'description'   =>'nullable|string',
+//            'scientific'    =>'required|string',
+//            'executive'     =>'required|string',
+//            'introduce'     =>'nullable|string',
             'cooperation'   =>'required|string',
             'applicant'     =>'required|numeric',
             'resume'        =>'required|mimes:jpeg,jpg,pdf,doc,png|max:600',
@@ -78,13 +77,13 @@ class ScholarshipController extends BaseController
         $status=scholarship::create(
         [
             'user_id'       =>Auth::user()->id,
-            'target'        =>$request->target,
+            'target'        =>implode(',',$request->target),
             'types'         =>implode(',',$request->types),
             'gettingknow'   =>$request->gettingknow,
-            'description'   =>$request->description,
-            'scientific'    =>$request->scientific,
-            'executive'     =>$request->executive,
-            'introduce'     =>$request->introduce,
+//            'description'   =>$request->description,
+//            'scientific'    =>$request->scientific,
+//            'executive'     =>$request->executive,
+//            'introduce'     =>$request->introduce,
             'cooperation'   =>$request->cooperation,
             'applicant'     =>$request->applicant,
             'resume'        =>$resume,
@@ -98,7 +97,7 @@ class ScholarshipController extends BaseController
             $this->sendSms(Auth::user()->tel,'شماره پیگیری شما در سامانه بورسیه فراکوچ:'.$trackingCode);
             alert()->success("ثبت نام شما در بورسیه فراکوچ با موفقیت انجام شد \nکد پیگیری شما $trackingCode")->persistent('بستن');
             $request->session()->forget('scholarshipStatus');
-            return back();
+            return redirect('/panel');
         }
     }
 
