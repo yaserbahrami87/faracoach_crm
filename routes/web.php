@@ -206,6 +206,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::post('/user/ajax/search','UserController@userAjax');
 
     //Route Scholarship
+    Route::post('/scholarship/{scholarship}/changestatus','ScholarshipController@changeStatus');
     Route::resource('scholarship','ScholarshipController');
 
     //  ROUTE SETTINGS

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\message;
 use App\scholarship;
 use App\User;
 use Faker\Provider\Base;
@@ -18,8 +19,8 @@ class ScholarshipController extends BaseController
      */
     public function index()
     {
-        $scholarships=scholarship::where('status','=',0)
-                    ->get();
+        //$scholarships=scholarship::wherein('status',[0,2,3,4])
+        $scholarships=scholarship::get();
         return view('admin.scholarship.users')
                     ->with('scholarships',$scholarships);
     }
@@ -33,6 +34,8 @@ class ScholarshipController extends BaseController
     {
 //        session()->forget('status');
 //
+
+
         return  view('scholarship.beforeRegister_Scholarship');
     }
 
@@ -107,12 +110,27 @@ class ScholarshipController extends BaseController
      */
     public function show(scholarship  $scholarship)
     {
+
         $states=$this->states();
         $city=$this->city($scholarship->user->city);
         $scholarship->types=explode(',' ,$scholarship->types);
+
+        $id=$scholarship->user_id;
+        $messages=message::where(function($query) use($id)
+                            {
+                                $query->orwhere('user_id_send','=',$id)
+                                    ->orwhere('user_id_recieve','=',$id);
+                            })
+                            ->where('type','=','scholarship')
+                            ->orderby('id','desc')
+                            ->get();
+
+
+
        return view('admin.scholarship.scholarship')
                     ->with('scholarship',$scholarship)
                     ->with('city',$city)
+                    ->with('messages',$messages)
                     ->with('states',$states);
     }
 
@@ -190,5 +208,35 @@ class ScholarshipController extends BaseController
     {
         session()->forget('scholarshipStatus');
         return back();
+    }
+
+    public function changestatus(Request $request,scholarship $scholarship)
+    {
+        $this->validate($request,[
+            'status'    =>'required|numeric',
+            'comment'   =>'required|string',
+        ]);
+
+        $scholarship->status=$request->status;
+        $scholarship->save();
+        $status=message::create([
+                'user_id_send'      =>Auth::user()->id,
+                'comment'           =>$request->comment,
+                'user_id_recieve'   =>$scholarship->user->id,
+                'type'              =>'scholarship',
+                'date_fa'           =>$this->dateNow,
+                'time_fa'           =>$this->timeNow,
+        ]);
+        if($status)
+        {
+            alert()->success('اطلاعات با موفقیت ثبت شد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در ثبت اطلاعات')->persistent('بستن');
+        }
+
+        return redirect('/admin/scholarship/');
+
     }
 }

@@ -1,5 +1,6 @@
 @extends('admin.master.index')
 @section('content')
+
     <div class="col-12 col-sm-12 col-md-3 col-lg-3 text-center ">
         @if(is_null($scholarship->user->personal_image))
             <img src="{{asset('/documents/users/default-avatar.png')}}" width="100px" height="100px"  class="rounded-circle border border-3"/>
@@ -7,6 +8,21 @@
             <img src="{{asset('/documents/users/'.$scholarship->user->personal_image)}}" width="100px" height="100px" class="rounded-circle border border-3 " />
         @endif
         <p>{{$scholarship->user->fname." ".$scholarship->user->lname}}</p>
+        <p>وضعیت:
+            @switch($scholarship->status)
+                @case(0)بررسی نشده
+                    @break
+                @case(1)قبول درخواست
+                    @break
+                @case(2)رد درخواست
+                    @break
+                @case(3)در حال بررسی
+                    @break
+                @case(4)اصلاح درخواست
+                    @break
+                @default خطا
+            @endswitch
+        </p>
     </div>
     <div class="col-12">
         <div class="row">
@@ -242,7 +258,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-12">
                 <div class="card card-user">
                     <div class="card-header bg-light">
                         <a class="row border-bottom" type="button" data-toggle="collapse" data-target="#infoScholarship" aria-expanded="false" aria-controls="infoScholarship">
@@ -347,6 +363,35 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label for="types" class="col-md-4 col-form-label text-md-right">به  کدام  حوزه اصلی کوچینگ علاقمندید: <span class="text-danger">*</span></label>
+                            <div class="col-md-6">
+
+                                @switch($scholarship->applicant)
+                                    @case('1')
+                                    سطح 1
+                                    @break
+                                    @case('2')
+                                    سطح 2
+                                    @break
+                                @endswitch
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="cooperation" class="col-md-4 col-form-label text-md-right"> چه علاقمندی  و یا  توانمندی  ویژه ای جهت  همکاری  با  آکادمی فراکوچ دارید ؟ (حین و بعد از اتمام دوره آموزشی):<span class="text-danger">*</span>    </label>
+
+                            <div class="col-md-6">
+                                <input id="cooperation" type="text" class="form-control @error('cooperation') is-invalid @enderror"  name="cooperation"  required autocomplete="cooperation" autofocus disabled value="{{$scholarship->cooperation}}"  />
+
+                                @error('cooperation')
+                                <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="resume" class="col-md-4 col-form-label text-md-right">رزومه  خورد را بارگزاری نمایید: <span class="text-danger">*</span></label>
 
                             <div class="col-md-6">
@@ -360,6 +405,33 @@
                         </div>
                     </div>
                 </div>
+                @foreach($messages as $item)
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">{{$item->date_fa.' '.$item->time_fa}}</label>
+                        <textarea class="form-control"  rows="3" disabled>{{$item->comment}}</textarea>
+                    </div>
+
+                @endforeach
+
+                <form method="post" action="/admin/scholarship/{{$scholarship->id}}/changestatus">
+                    {{csrf_field()}}
+                    <div class="form-group col-6">
+                        <label for="status">وضعیت</label>
+                        <select class="form-control" id="status" name="status">
+                            <option selected disabled>انتخاب کنید</option>
+                            <option value="1" @if($scholarship->status==1) selected @endif>قبول درخواست</option>
+                            <option value="2" @if($scholarship->status==2) selected @endif>رد درخواست</option>
+                            <option value="3" @if($scholarship->status==3) selected @endif>در حال بررسی</option>
+                            <option value="4" @if($scholarship->status==4) selected @endif>اصلاح درخواست</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="comment">توضیحات:</label>
+                        <textarea class="form-control" id="comment" rows="3" name="comment"></textarea>
+                    </div>
+                    <input type="submit" value="ارسال" class="btn btn-success">
+                </form>
+
             </div>
 
 

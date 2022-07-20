@@ -145,6 +145,13 @@
                 <p>ارزیابی گوش دادن موثر</p>
             </a>
         </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 text-center mt-1 items">
+            <a href="/panel/effectiveListenings/create" class="btn btn-success">
+                <i class="bi bi-ear-fill"></i>
+                <p>بورسیه فراکوچ</p>
+            </a>
+        </div>
+
 
         <div class="col-12 mt-2 border-bottom border-1">
             <h5>آخرین دوره های ثبت نام شده</h5>
