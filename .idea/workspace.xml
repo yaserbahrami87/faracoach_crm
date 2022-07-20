@@ -30,12 +30,7 @@
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/scholarship.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/scholarship.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/scholarship/scholarship.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/scholarship/scholarship.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/scholarship/users.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/scholarship/users.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/cardBox.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/cardBox.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/scholarship/beforeRegister_Scholarship.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/scholarship/beforeRegister_Scholarship.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1030,7 +1025,7 @@
       <workItem from="1658047353508" duration="22870000" />
       <workItem from="1658133197798" duration="12805000" />
       <workItem from="1658208054997" duration="20706000" />
-      <workItem from="1658294717125" duration="11169000" />
+      <workItem from="1658294717125" duration="12049000" />
     </task>
     <servers />
   </component>
