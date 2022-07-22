@@ -30,11 +30,14 @@ class ScholarshipController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
 //        session()->forget('status');
 //
-
+        if(isset($request->introduce))
+        {
+            $request->session()->put('introduce',$request->introduce);
+        }
 
         return  view('scholarship.beforeRegister_Scholarship');
     }
@@ -47,6 +50,7 @@ class ScholarshipController extends BaseController
      */
     public function store(Request $request)
     {
+
         $this->validate($request,[
             'user_id'       =>'required|numeric|',
             'target'        =>'required|array',
@@ -83,7 +87,7 @@ class ScholarshipController extends BaseController
 //            'description'   =>$request->description,
 //            'scientific'    =>$request->scientific,
 //            'executive'     =>$request->executive,
-//            'introduce'     =>$request->introduce,
+            'introduce'     =>session()->get('introduce'),
             'cooperation'   =>$request->cooperation,
             'applicant'     =>$request->applicant,
             'resume'        =>$resume,
@@ -94,7 +98,7 @@ class ScholarshipController extends BaseController
 
         if($status)
         {
-            $this->sendSms(Auth::user()->tel,'شماره پیگیری شما در سامانه بورسیه فراکوچ:'.$trackingCode);
+            $this->sendSms(Auth::user()->tel,'شماره پیگیری بورسیه فراکوچ:'.$trackingCode."\nلینک اختصاصی شما جهت دعوت در بورسیه فراکوچ:\n "."my.faracoach.com/scholarship/register?introduce=".Auth::user()->id);
             alert()->success("ثبت نام شما در بورسیه فراکوچ با موفقیت انجام شد \nکد پیگیری شما $trackingCode")->persistent('بستن');
             $request->session()->forget('scholarshipStatus');
             return redirect('/panel');
