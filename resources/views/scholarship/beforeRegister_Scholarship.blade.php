@@ -275,7 +275,7 @@
                                                 <select id="gettingknow" class="form-control p-0  @error('gettingknow') is-invalid @enderror" name="gettingknow">
                                                     <option selected disabled>انتخاب کنید</option>
                                                     <option {{ old('gettingknow')==1 ? 'selected='.'"'.'selected'.'"' : ''}} value="1"  >اطلاعات کامل دارم </option>
-                                                    <option {{ old('gettingknow')==2 ? 'selected='.'"'.'selected'.'"' : ''}} value="2">آگاهی محتصری دارم</option>
+                                                    <option {{ old('gettingknow')==2 ? 'selected='.'"'.'selected'.'"' : ''}} value="2">آگاهی مختصری دارم</option>
                                                     <option {{ old('gettingknow')==3 ? 'selected='.'"'.'selected'.'"' : ''}} value="3">آشنایی ندارم</option>
                                                 </select>
                                             </div>

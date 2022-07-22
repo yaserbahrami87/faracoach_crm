@@ -246,6 +246,10 @@ return [
         'product'               =>'محصول',
         'extra_presence'        =>'افزایش جلسات حضوری',
         'student_meeting'       =>'جلسات دانشجویی',
+        'target'                =>'هدف',
+        'types'                 =>'انواع',
+        'cooperation'           =>'علاقمندی و توانمندی',
+        'applicant'             =>'تقاضا دوره',
     ],
 
     'values' => [
