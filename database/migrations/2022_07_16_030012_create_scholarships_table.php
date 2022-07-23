@@ -17,6 +17,7 @@ class CreateScholarshipsTable extends Migration
             $table->id();
             $table->bigInteger('user_id')->nullable();
             $table->tinyInteger('target')->nullable();
+            $table->boolean('confirm_target')->default(0);
             $table->string('types',250)->nullable();
             $table->tinyInteger('gettingknow')->nullable();
             $table->string('description',250)->nullable();

@@ -5,7 +5,7 @@
             <div class="col-md-8 text-center">
                 <h3 class="d-block text-dark" style="line-height: 2">طرح اعطای بورسیه کوچینگ آکادمی بین المللی فراکوچ</h3>
                 <u style="line-height: 2">شناسایی و دعوت از افراد نخبه و با استعداد جهت حضور ویژه</u>
-                <p style="line-height: 2;text-align: justify">آکادمی بین المللی فراکوچ فرصت بی نظیری را در جهت ورود به دنیای حرفه ای کوچینگ را ویژه افراد مستعد، نخبه و فرهیخته جامعه به ویژه اساتید، پژوهشگران، اندیشمندان، مدیران و دانشجویان برتر تحت عنوان طرح اعطای بورسیه کوچینگ جهت  حضور در دوره های آموزش و تربیت کوچ حرفه ای، فراهم کرده است.</p>
+                <p style="line-height: 2;text-align: justify">آکادمی بین المللی فراکوچ فرصت بی نظیری را به منظور ورود و پیوستن جمع بیشتری از افراد مستعد ، نخبه و فرهیخته جامعه - به ویژه اساتید ،  پژوهشگران، اندیشمندان، مدیران و دانشجویان برتر - به دنیای حرفه ای کوچینگ از طریق ایجاد شرایط ویژه حضور آنان در دوره های آموزش و تربیت کوچ حرفه ای ، فراهم کرده است.</p>
                 <h5 class="text-dark mb-3">برای اطلاعات بیشتر و ثبت نام در طرح، فرم زیر را تکمیل کنید</h5>
                 <div class="card text-left">
                     <div class="card-header bg-info text-light">{{ __('ثبت نام') }}</div>
@@ -140,7 +140,7 @@
 
                                         <div class="col-md-6">
                                             <div class="input-group">
-                                                <select id="education" class="form-control p-0  @error('education') is-invalid @enderror" name="education" @if(!is_null(Auth::user()->education) )) readonly @endif>
+                                                <select id="education" class="form-control p-0  @error('education') is-invalid @enderror" name="education" @if(strlen(Auth::user()->education)>0 )) readonly @endif>
                                                     <option selected disabled>انتخاب کنید</option>
                                                     <option {{ old('education',Auth::user()->education)=="زیردیپلم" ? 'selected='.'"'.'selected'.'"' : '' }}   >زیردیپلم</option>
                                                     <option {{ old('education',Auth::user()->education)=="دیپلم" ? 'selected='.'"'.'selected'.'"' : '' }}>دیپلم</option>
@@ -157,7 +157,7 @@
                                         <label for="reshteh" class="col-md-4 col-form-label text-md-right">رشته تحصیلی: <span class="text-danger">*</span></label>
 
                                         <div class="col-md-6">
-                                            <input id="reshteh" type="text" class="form-control @error('reshteh') is-invalid @enderror" name="reshteh" value="@if((Auth::check())){{old('reshteh',Auth::user()->reshteh)}}@endif" required  @if(!is_null(Auth::user()->reshteh)) readonly @endif />
+                                            <input id="reshteh" type="text" class="form-control @error('reshteh') is-invalid @enderror" name="reshteh" value="@if((Auth::check())){{old('reshteh',Auth::user()->reshteh)}}@endif" required  @if(strlen(Auth::user()->reshteh)>0) readonly @endif />
 
                                             @error('reshteh')
                                             <span class="invalid-feedback" role="alert">
