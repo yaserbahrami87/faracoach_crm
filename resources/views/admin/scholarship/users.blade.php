@@ -34,15 +34,18 @@
                                     <td class="text-center" dir="ltr">{{$item->trackingcode}}</td>
                                     <td class="text-center">
                                         @switch($item->status)
-                                            @case(0)بررسی نشده
+                                            @case(0)<span class="text-info"> بررسی نشده</span>
                                             @break
-                                            @case(1)تائید شده
+                                            @case(1)<span class="text-success"> تائید شده</span>
                                             @break
-                                            @case(2)رد درخواست
+                                            @case(2)<span class="text-danger">رد درخواست</span>
                                             @break
-                                            @case(3)در حال بررسی
+                                            @case(3)<span class="text-dark">در حال بررسی</span>
                                             @break
-                                            @case(4)اصلاح درخواست
+                                            @case(4) <span class="text-primary">اصلاح درخواست</span>
+                                            @break
+                                            @case(5)<span class="text-warning">اصلاح شده</span>
+
                                             @break
                                             @default خطا
 
@@ -80,15 +83,18 @@
                                     <td class="text-center" dir="ltr">{{$item->trackingcode}}</td>
                                     <td class="text-center">
                                         @switch($item->status)
-                                            @case(0)بررسی نشده
+                                            @case(0)<span class="text-info"> بررسی نشده</span>
                                             @break
-                                            @case(1)تائید شده
+                                            @case(1)<span class="text-success"> تائید شده</span>
                                             @break
-                                            @case(2)رد درخواست
+                                            @case(2)<span class="text-danger">رد درخواست</span>
                                             @break
-                                            @case(3)در حال بررسی
+                                            @case(3)<span class="text-dark">در حال بررسی</span>
                                             @break
-                                            @case(4)اصلاح درخواست
+                                            @case(4) <span class="text-primary">اصلاح درخواست</span>
+                                            @break
+                                            @case(5)<span class="text-warning">اصلاح شده</span>
+
                                             @break
                                             @default خطا
 
@@ -127,24 +133,20 @@
                                     <td class="text-center" dir="ltr">{{$item->trackingcode}}</td>
                                     <td class="text-center">
                                         @switch($item->status)
-                                            @case(0)بررسی نشده
-                                                    @break
-                                            @case(1)تائید شده
-                                                    @break
-                                            @case(2)رد درخواست
-                                                    @break
-                                            @case(3)در حال بررسی
-                                                    @break
-                                            @case(4) اصلاح درخواست
-                                                    @break
+                                            @case(0)<span class="text-info"> بررسی نشده</span>
+                                            @break
+                                            @case(1)<span class="text-success"> تائید شده</span>
+                                            @break
+                                            @case(2)<span class="text-danger">رد درخواست</span>
+                                            @break
+                                            @case(3)<span class="text-dark">در حال بررسی</span>
+                                            @break
+                                            @case(4) <span class="text-primary">اصلاح درخواست</span>
+                                            @break
+                                            @case(5)<span class="text-warning">اصلاح شده</span>
+                                            @break
                                             @default خطا
-
                                         @endswitch
-                                        @if($item->status==0)
-                                            بررسی نشده
-                                        @elseif($item->status==1)
-                                            تایید شده
-                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

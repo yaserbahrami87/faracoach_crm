@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class scholarship extends Model
 {
     protected $fillable=[
-        'user_id','target','types','confirm_target','gettingknow','description','scientific','executive','introduce','cooperation','applicant','resume','status','trackingcode'
+        'user_id','target','confirm_target','types','confirm_types','gettingknow','confirm_gettingknow','description','scientific','executive','introduce','cooperation','confirm_cooperation','applicant','confirm_applicant','resume','confirm_resume','status','trackingcode'
     ];
 
     public function user()

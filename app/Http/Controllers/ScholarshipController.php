@@ -223,9 +223,23 @@ class ScholarshipController extends BaseController
             'status'    =>'required|numeric',
             'comment'   =>'required|string',
         ]);
-        dd($request);
-        $scholarship->update($request->all());
 
+
+//        if(!is_null($request->confirm_target))
+//        {
+//            $scholarship->confirm_target=implode($request->confirm_target);
+//        }
+        //برای اینمه تمام فیلدها ریست بشن و از اول مقدار برای کانفیرم بگیرن رسیت میشوند به روش زیر
+        $scholarship->confirm_target=0;
+        $scholarship->confirm_types=0;
+        $scholarship->confirm_gettingknow=0;
+        $scholarship->confirm_cooperation=0;
+        $scholarship->confirm_applicant=0;
+        $scholarship->confirm_resume=0;
+        $scholarship->save();
+
+
+        $scholarship->update($request->all());
 
         $scholarship->status=$request->status;
         $scholarship->save();
@@ -247,6 +261,103 @@ class ScholarshipController extends BaseController
         }
 
         return redirect('/admin/scholarship/');
+
+    }
+
+    public function me()
+    {
+        $scholarship=scholarship::where('user_id','=',Auth::user()->id)
+                    ->first();
+        if(is_null($scholarship))
+        {
+            alert()->warning('شما در بورسیه فراکوچ ثبت نام نکرده اید')->persistent('بستن');
+            return back();
+        }
+        else
+        {
+            $scholarship->target=explode(',',$scholarship->target);
+            $scholarship->types=explode(',',$scholarship->types);
+
+            $messages=message::where(function($query)
+            {
+                $query->orwhere('user_id_send','=',Auth::user()->id)
+                    ->orwhere('user_id_recieve','=',Auth::user()->id);
+            })
+                ->where('type','=','scholarship')
+                ->orderby('id','desc')
+                ->get();
+
+            return  view('user.scholarship.profile')
+                        ->with('messages',$messages)
+                        ->with('scholarship',$scholarship);
+        }
+    }
+
+    public function answerstatus(Request $request)
+    {
+        $this->validate($request,[
+            'target'        =>'nullable|array',
+            'types'         =>'nullable|array',
+            'gettingknow'   =>'nullable|string',
+            'cooperation'   =>'nullable|string',
+            'applicant'     =>'nullable|numeric',
+            'resume'        =>'nullable|mimes:jpeg,jpg,pdf,doc,png|max:600',
+        ]);
+
+        $scholarship=scholarship::where('user_id','=',Auth::user()->id)
+                        ->first();
+
+        $scholarship->update($request->all());
+
+        if ($request->has('resume') && $request->file('resume')->isValid()) {
+            $file = $request->file('resume');
+            $resume = "resume-" . Auth::user()->tel . "." . $request->file('resume')->extension();
+            $path = public_path('/documents/scholarship');
+            $files = $request->file('resume')->move($path, $resume);
+
+        }
+
+        if(isset($resume))
+        {
+            $scholarship->resume=$resume;
+        }
+
+        if(!is_null($request->target))
+        {
+            $scholarship->target=implode(',',$request->target);
+        }
+
+        if(!is_null($request->types))
+        {
+            $scholarship->types=implode(',',$request->types);
+        }
+
+        $scholarship->confirm_target=0;
+        $scholarship->confirm_types=0;
+        $scholarship->confirm_gettingknow=0;
+        $scholarship->confirm_cooperation=0;
+        $scholarship->confirm_applicant=0;
+        $scholarship->confirm_resume=0;
+        $scholarship->status=5;
+        $scholarship->save();
+
+        $status=message::create([
+            'user_id_send'      =>Auth::user()->id,
+            'comment'           =>$request->comment,
+            'user_id_recieve'   =>$scholarship->user->id,
+            'type'              =>'scholarship',
+            'date_fa'           =>$this->dateNow,
+            'time_fa'           =>$this->timeNow,
+        ]);
+        if($status)
+        {
+            alert()->success('اطلاعات با موفقیت ثبت شد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در ثبت اطلاعات')->persistent('بستن');
+        }
+        return back();
 
     }
 }

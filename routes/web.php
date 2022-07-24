@@ -89,6 +89,10 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
 
     Route::resource('coach','CoachController');
 
+    //scholarship
+    Route::get('/scholarship/me','ScholarshipController@me');
+    Route::post('/scholarship/answerstatus','ScholarshipController@answerstatus');
+
 
     //booking
     Route::get('/booking/accept','BookingController@acceptReserve');

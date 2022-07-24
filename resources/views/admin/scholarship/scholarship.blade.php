@@ -46,7 +46,7 @@
                         <div class="card-body collapse bg-secondary-light border-1 border-secondary show" id="infoScholarship">
                                 <div class="form-group row">
                                     <label for="target" class="col-md-4 col-form-label text-md-right">
-                                         <input type="checkbox" name="confirm_target[]" @if($scholarship->confirm_target) value="0" @else value="1" @endif>
+                                         <input type="checkbox" name="confirm_target"  value="1" >
                                         هدف شما از شرکت در دوره آموزش کوچینگ: </label>
                                     <div class="col-md-6">
                                         <div class="input-group">
@@ -62,7 +62,7 @@
                                 <div class="form-group row">
 
                                     <label for="types" class="col-md-4 col-form-label text-md-right">
-                                        <input type="checkbox" name="confirm_target[]" @if($scholarship->confirm_types) value="0" @else value="1" @endif>
+                                        <input type="checkbox" name="confirm_types" value="1" >
                                         به  کدام  حوزه اصلی کوچینگ علاقمندید:
                                     </label>
                                     <div class="col-md-6">
@@ -81,12 +81,12 @@
                                 <div class="form-group row">
 
                                     <label for="gettingknow" class="col-md-4 col-form-label text-md-right">
-                                        <input type="checkbox" name="confirm_target[]" @if($scholarship->confirm_types) value="0" @else value="1" @endif>
+                                        <input type="checkbox" name="confirm_gettingknow"  value="1" >
                                         میزان آشنایی شما با کوچینگ: </label>
 
                                     <div class="col-md-6">
                                         <div class="input-group">
-                                            <select id="gettingknow" class="form-control p-0  @error('gettingknow') is-invalid @enderror" name="gettingknow" disabled>
+                                            <select id="gettingknow" class="form-control p-0  " name="gettingknow" disabled>
                                                 <option selected disabled>انتخاب کنید</option>
                                                 <option {{ $scholarship->gettingknow==1 ? 'selected='.'"'.'selected'.'"' : '' }} >اطلاعات کامل دارم </option>
                                                 <option {{ $scholarship->gettingknow==2 ? 'selected='.'"'.'selected'.'"' : '' }} >آگاهی محتصری دارم</option>
@@ -98,7 +98,7 @@
 
                                 <div class="form-group row">
                                     <label for="types" class="col-md-4 col-form-label text-md-right">
-                                        <input type="checkbox" name="confirm_target[]" @if($scholarship->confirm_types) value="0" @else value="1" @endif>
+                                        <input type="checkbox" name="confirm_applicant" value="1">
                                         متقاضی کدام سطح اموزش هستید: </label>
                                     <div class="col-md-6">
 
@@ -115,17 +115,17 @@
                                 </div>
                                 <div class="form-group row">
                                     <label for="cooperation" class="col-md-4 col-form-label text-md-right">
-                                        <input type="checkbox" name="confirm_target[]" @if($scholarship->confirm_types) value="0" @else value="1" @endif>
+                                        <input type="checkbox" name="confirm_cooperation" value="1" >
                                         چه علاقمندی و یا توانمندی ویژه ای جهت همکاری با آکادمی فراکوچ دارید ؟ (حین و بعد از اتمام دوره آموزشی)</label>
 
                                     <div class="col-md-6">
-                                        <input id="cooperation" type="text" class="form-control @error('cooperation') is-invalid @enderror"  name="cooperation"   autocomplete="cooperation" autofocus disabled value="{{$scholarship->cooperation}}"  />
+                                        <input id="cooperation" type="text" class="form-control "  name="cooperation"   autofocus disabled value="{{$scholarship->cooperation}}"  />
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label for="resume" class="col-md-4 col-form-label text-md-right">
-                                        <input type="checkbox" name="confirm_target[]" @if($scholarship->confirm_types) value="0" @else value="1" @endif>
+                                        <input type="checkbox" name="confirm_resume" value="1">
                                         رزومه  خورد را بارگزاری نمایید: <span class="text-danger">*</span></label>
                                     <div class="col-md-6">
                                         <a href="{{asset('/documents/scholarship/'.$scholarship->resume)}}">رزومه</a>
@@ -155,7 +155,6 @@
                         <label for="exampleFormControlTextarea1">{{$item->date_fa.' '.$item->time_fa}}</label>
                         <textarea class="form-control"  rows="3" disabled>{{$item->comment}}</textarea>
                     </div>
-
                 @endforeach
 
             </div>
