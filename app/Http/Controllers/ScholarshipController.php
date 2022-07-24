@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\followup;
 use App\message;
 use App\scholarship;
 use App\User;
@@ -219,38 +220,79 @@ class ScholarshipController extends BaseController
     public function changestatus(Request $request,scholarship $scholarship)
     {
 
-        $this->validate($request,[
-            'status'    =>'required|numeric',
-            'comment'   =>'required|string',
+        $this->validate($request, [
+            'status' => 'required|numeric',
+            'comment' => 'required|string',
         ]);
-
-
-//        if(!is_null($request->confirm_target))
-//        {
-//            $scholarship->confirm_target=implode($request->confirm_target);
-//        }
         //برای اینمه تمام فیلدها ریست بشن و از اول مقدار برای کانفیرم بگیرن رسیت میشوند به روش زیر
-        $scholarship->confirm_target=0;
-        $scholarship->confirm_types=0;
-        $scholarship->confirm_gettingknow=0;
-        $scholarship->confirm_cooperation=0;
-        $scholarship->confirm_applicant=0;
-        $scholarship->confirm_resume=0;
+        $scholarship->confirm_target = 0;
+        $scholarship->confirm_types = 0;
+        $scholarship->confirm_gettingknow = 0;
+        $scholarship->confirm_cooperation = 0;
+        $scholarship->confirm_applicant = 0;
+        $scholarship->confirm_resume = 0;
         $scholarship->save();
 
 
         $scholarship->update($request->all());
 
-        $scholarship->status=$request->status;
+        $scholarship->status = $request->status;
+        if ($request->status == 2) {
+            $followups = followup::where('user_id', '=', $scholarship->user_id)
+                ->get();
+
+            foreach ($followups as $item) {
+                $t = followup::where('id', '=', $item->id)   //    $this->get_followup($item->followups_id,NULL,NULL,NULL,"first");
+                ->first();
+                $t->flag = 0;
+                $t->update();
+            }
+
+            followup::create([
+                'user_id' => $scholarship->user_id,
+                'insert_user_id' => Auth::user()->id,
+                'comment' => 'کاربر از بخش بورسیه به فروش منتقل شد',
+                'status_followups' => 11,
+                'nextfollowup_date_fa' => $this->dateNow,
+                'flag' => 1,
+                'date_fa' => $this->dateNow,
+                'time_fa' => $this->timeNow,
+
+            ]);
+
+            $user = User::where('id', '=', $scholarship->user_id)
+                ->first();
+            $user->type = 11;
+            $user->followby_expert = NULL;
+            $user->save();
+        }
         $scholarship->save();
-        $status=message::create([
-                'user_id_send'      =>Auth::user()->id,
-                'comment'           =>$request->comment,
-                'user_id_recieve'   =>$scholarship->user->id,
-                'type'              =>'scholarship',
-                'date_fa'           =>$this->dateNow,
-                'time_fa'           =>$this->timeNow,
+        $status = message::create([
+            'user_id_send' => Auth::user()->id,
+            'comment' => $request->comment,
+            'user_id_recieve' => $scholarship->user->id,
+            'type' => 'scholarship',
+            'date_fa' => $this->dateNow,
+            'time_fa' => $this->timeNow,
         ]);
+        switch ($request->status)
+        {
+            case(1):$status_scholarship= 'قبول';
+                            break;
+            case(2):$status_scholarship ='رد درخواست';
+                            break;
+            case(3):$status_scholarship='در حال بررسی';
+                            break;
+            case(4):$status_scholarship='اصلاح درخواست';
+                            break;
+
+        }
+
+
+        $msg="نتیجه درخواست بورسیه شما:".$status_scholarship."\n برای آگاهی بیشتر به پورتال فراکوچ مراجعه کنید";
+        $this->sendSms($scholarship->user->tel,$msg);
+
+
         if($status)
         {
             alert()->success('اطلاعات با موفقیت ثبت شد')->persistent('بستن');
@@ -264,6 +306,8 @@ class ScholarshipController extends BaseController
 
     }
 
+
+    //نمایش صفحه برای خود کاربر
     public function me()
     {
         $scholarship=scholarship::where('user_id','=',Auth::user()->id)
@@ -351,6 +395,9 @@ class ScholarshipController extends BaseController
         ]);
         if($status)
         {
+            $msg=Auth::user()->fname.' '.Auth::user()->lname."\n فرم بورسیه را اصلاح کرد";
+            $this->sendSms("09153159020",$msg);
+
             alert()->success('اطلاعات با موفقیت ثبت شد')->persistent('بستن');
         }
         else

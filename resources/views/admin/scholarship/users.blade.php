@@ -16,7 +16,7 @@
                             <tr class="text-center">
                                 <th>ردیف</th>
                                 <th>نام و نام خانوادگی</th>
-                                <th>کد ملی</th>
+                                <th class="d-none">کد ملی</th>
                                 <th>تلفن</th>
                                 <th>کد پیگیری</th>
                                 <th>وضعیت</th>
@@ -29,7 +29,7 @@
                                     <td class="text-center">
                                         <a href="/admin/scholarship/{{$item->id}}">{{$item->user->fname.' '.$item->user->lname}}</a>
                                     </td>
-                                    <td class="text-center" dir="ltr">{{$item->user->codemelli}}</td>
+                                    <td class="text-center d-none" dir="ltr">{{$item->user->codemelli}}</td>
                                     <td class="text-center" dir="ltr">{{$item->user->tel}}</td>
                                     <td class="text-center" dir="ltr">{{$item->trackingcode}}</td>
                                     <td class="text-center">
@@ -65,7 +65,7 @@
                             <tr class="text-center">
                                 <th>ردیف</th>
                                 <th>نام و نام خانوادگی</th>
-                                <th>کد ملی</th>
+                                <th class="d-none">کد ملی</th>
                                 <th>تلفن</th>
                                 <th>کد پیگیری</th>
                                 <th>وضعیت</th>
@@ -78,7 +78,7 @@
                                     <td class="text-center">
                                         <a href="/admin/scholarship/{{$item->id}}">{{$item->user->fname.' '.$item->user->lname}}</a>
                                     </td>
-                                    <td class="text-center" dir="ltr">{{$item->user->codemelli}}</td>
+                                    <td class="text-center d-none" dir="ltr">{{$item->user->codemelli}}</td>
                                     <td class="text-center" dir="ltr">{{$item->user->tel}}</td>
                                     <td class="text-center" dir="ltr">{{$item->trackingcode}}</td>
                                     <td class="text-center">
@@ -115,7 +115,7 @@
                             <tr class="text-center">
                                 <th>ردیف</th>
                                 <th>نام و نام خانوادگی</th>
-                                <th>کد ملی</th>
+                                <th class="d-none">کد ملی</th>
                                 <th>تلفن</th>
                                 <th>کد پیگیری</th>
                                 <th>وضعیت</th>
@@ -128,7 +128,7 @@
                                     <td class="text-center">
                                         <a href="/admin/scholarship/{{$item->id}}">{{$item->user->fname.' '.$item->user->lname}}</a>
                                     </td>
-                                    <td class="text-center" dir="ltr">{{$item->user->codemelli}}</td>
+                                    <td class="text-center d-none" dir="ltr">{{$item->user->codemelli}}</td>
                                     <td class="text-center" dir="ltr">{{$item->user->tel}}</td>
                                     <td class="text-center" dir="ltr">{{$item->trackingcode}}</td>
                                     <td class="text-center">

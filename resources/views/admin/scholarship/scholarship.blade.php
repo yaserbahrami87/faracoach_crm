@@ -7,7 +7,11 @@
         @else
             <img src="{{asset('/documents/users/'.$scholarship->user->personal_image)}}" width="100px" height="100px" class="rounded-circle border border-3 " />
         @endif
-        <p>{{$scholarship->user->fname." ".$scholarship->user->lname}}</p>
+        <p>
+            <a href="/admin/user/{{$scholarship->user_id}}">
+                {{$scholarship->user->fname." ".$scholarship->user->lname}}
+            </a>
+        </p>
         <p>وضعیت:
             @switch($scholarship->status)
                 @case(0)بررسی نشده
