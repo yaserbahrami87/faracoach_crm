@@ -141,6 +141,7 @@ class CoachController extends BaseController
      */
     public function show($coach)
     {
+
         //چک کردن یوزر کاربر وارد شده در لینک
         $user=$this->get_user_byUserName($coach);
 
@@ -151,10 +152,20 @@ class CoachController extends BaseController
         }
         else
         {
+
             //جوین کردن دو جدول برای بدست آوردن اطلاعات کوچ و کاربر موردنظر که ممکنه آیدی درست باشد ولی کوچ نباشد
             $coach = coach::join('users', 'coaches.user_id', '=', 'users.id')
                                 ->where('users.id', '=', $user->id)
                                 ->first();
+            if($coach->status==2)
+            {
+                alert()->error('لینک منقضی شده است')->persistent('بستن');
+                return redirect('/coaches/all');
+            }
+            else
+            {
+
+
 
 
             $feedbacks=coach::join('bookings', 'coaches.user_id', '=', 'bookings.user_id')
@@ -186,15 +197,13 @@ class CoachController extends BaseController
             }
             else
             {
-                if(!is_null($coach->city))
-                {
-                    $coach->city=$this->city($coach->city)->name;
+                if (!is_null($coach->city)) {
+                    $coach->city = $this->city($coach->city)->name;
                 }
 
                 $dateNow = verta();
 
-                if($coach->today_meeting==0)
-                {
+                if ($coach->today_meeting == 0) {
                     $dateNow->addDays(1);
                 }
 
@@ -207,9 +216,9 @@ class CoachController extends BaseController
                 $date_Miladi = $date_Miladi[0] . '-' . $date_Miladi[1] . '-' . $date_Miladi[2];
 
                 //چک کردن تعداد رزروهای ناقص کامل نشده در سبد خرید
-                $cart=$this->get_cartUser();
+                $cart = $this->get_cartUser();
 
-
+            }
                 return view('coach')
                     ->with('coach', $coach)
                     ->with('bookings', $bookings)

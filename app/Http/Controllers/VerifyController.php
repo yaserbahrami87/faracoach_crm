@@ -950,7 +950,8 @@ class VerifyController extends BaseController
                 {
 
                     $user=User::create([
-                        'tel'   =>$verify->tel,
+                        'tel'               =>$verify->tel,
+                        'detailsresource'   =>'بورسیه تحصیلی',
                     ]);
                     $request->session()->put('scholarshipStatus','infoUser');
                     Auth::login($user);
