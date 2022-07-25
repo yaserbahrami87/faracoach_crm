@@ -492,7 +492,7 @@
             <div class="tab-pane fade show active" id="followups" role="tabpanel" aria-labelledby="followups-tab">
 
                 <div class="row">
-                    
+
                     @if(!is_null($user->followups->groupby('course_id')))
                         @foreach($user->followups->groupby('course_id') as $item)
 

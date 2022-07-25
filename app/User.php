@@ -50,16 +50,16 @@ class User extends Authenticatable implements MustVerifyEmail
             'codemelli' => 'sometimes|required|melli_code|unique:users',
         ];
 
-
+        
         public function getIntroduced()
         {
             if($this->introduced<10)
             {
-                return ($this->belongsTo('App\User','introduced','id'));
+                return ($this->hasone('App\User','introduced','id'));
             }
             else
             {
-                return ($this->belongsTo('App\User','introduced','tel'));
+                return ($this->hasone('App\User','introduced','tel'));
             }
         }
 

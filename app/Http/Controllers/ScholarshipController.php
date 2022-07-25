@@ -10,6 +10,7 @@ use Faker\Provider\Base;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Throwable;
 
 class ScholarshipController extends BaseController
 {
@@ -197,9 +198,11 @@ class ScholarshipController extends BaseController
 
 
         try {
+
             $status=$user->update($request->all());
+
         } catch (Throwable $e) {
-            alert()->error($e->errorInfo[2],'خطا')->persistent('بستن');
+            alert()->error('ایمیل وارد شده تکراری می باشد','خطا')->persistent('بستن');
             return back();
         }
 
