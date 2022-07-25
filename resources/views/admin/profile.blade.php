@@ -443,7 +443,8 @@
                         <div class="col-md-6 px-1">
                             <div class="form-group">
                                 <label>معرف</label>
-                                <input type="text" class="form-control @if(strlen($user->introduced)==0) is-invalid  @else is-valid  @endif" value="{{$user->introduced }}"  id="introduced" />
+
+                                <input type="text" class="form-control @if(strlen($user->introduced)==0) is-invalid  @else is-valid  @endif"  @if(!is_null($user->getIntroduced))  value="{{$user->getIntroduced->fname.' '.$user->getIntroduced->lname }}" @endif  id="introduced" />
                                 <span id="feedback_introduced" ></span>
                             </div>
                         </div>
