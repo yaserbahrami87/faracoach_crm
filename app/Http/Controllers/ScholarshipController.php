@@ -195,7 +195,15 @@ class ScholarshipController extends BaseController
         $user=User::where('tel','=',$request->tel)
             ->first();
 
-        $status=$user->update($request->all());
+
+        try {
+            $status=$user->update($request->all());
+        } catch (Throwable $e) {
+            alert()->error($e->errorInfo[2],'خطا')->persistent('بستن');
+            return back();
+        }
+
+
          if(!is_null($request['password']))
          {
              $user->password=Hash::make($request['password']);
