@@ -5,7 +5,7 @@
     <style>
         .img_profile
         {
-            animation: images_effect 2s infinite;
+            animation: images_effect 1s infinite;
             animation-direction: alternate;
 
         }
@@ -220,13 +220,13 @@
                         <tbody>
                         @foreach($users as $item)
 
-                            <tr style="background-color: @if(!is_null($item->last_followupUser)) {{$item->last_followupUser->problemFollowup['color']}} @endif" >
+                            <tr style="background-color: @if(!is_null($item->last_followupUser)) {{$item->last_followupUser->problemFollowup['color']}} @endif  @if(!is_null($item->scholarship)) ;background-color:#ff4dff !important @endif "  >
                                 <td class="p-0">
                                     <a href="/admin/user/{{$item->id}}">
                                         @if(is_null($item->personal_image))
                                             <img src="{{asset('/documents/users/default-avatar.png')}}" class="rounded-circle "  width="50px" height="50px" />
                                         @else
-                                            <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="rounded-circle "  width="50px" height="50px" />
+                                            <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="rounded-circle  "  width="50px" height="50px" />
                                         @endif
                                     </a>
                                 </td>
