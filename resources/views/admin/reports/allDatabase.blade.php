@@ -256,6 +256,30 @@
             </div>
         </div>
     </div>
+    <div class="col-12 border-top">
+        <p>تفکیک سن </p>
+    </div>
+    <div class="col-12">
+        <div class="row">
+            <div class="col-4 " >
+                <ul data-pie-id="svgAges">
+                    <li data-value="{{$ages['ageTo20']}}">تا 20 سال:  {{$ages['ageTo20']}}  نفر</li>
+                    <li data-value="{{$ages['age21to30']}}">بین 21 تا 30 سال:  {{$ages['age21to30']}} نفر </li>
+                    <li data-value="{{$ages['age31to40']}}">بین 31 تا 40 سال:  {{$ages['age31to40']}} نفر </li>
+                    <li data-value="{{$ages['age41to50']}}">بین 41 تا 50 سال:  {{$ages['age41to50']}} نفر </li>
+                    <li data-value="{{$ages['age51to60']}}">بین 51 تا 60 سال:  {{$ages['age51to60']}} نفر </li>
+                    <li data-value="{{$ages['age61to70']}}">بین 61 تا 70 سال:  {{$ages['age61to70']}} نفر </li>
+                    <li data-value="{{$ages['age71to80']}}">بین 71 تا 80 سال:  {{$ages['age71to80']}} نفر </li>
+
+
+
+                </ul>
+            </div>
+            <div class="col-4">
+                <div id="svgAges"></div>
+            </div>
+        </div>
+    </div>
 
 
 
