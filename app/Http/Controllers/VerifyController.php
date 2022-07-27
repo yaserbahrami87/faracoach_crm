@@ -894,6 +894,7 @@ class VerifyController extends BaseController
                 $request->session()->put('scholarshipStatus', 'true');
                 $message = "رمز یکبار مصرف شما در سیستم بورسیه فراکوچ : " . $six_digit_random_number;
                 $this->sendSms($request['tel'], $message);
+                //$this->notify(new sendEmail())
                 alert()->warning('رمز یکبار مصرف شما به شماره ' . $request['tel'] . " ارسال شد. ")->persistent('بستن');
 //                    return view('scholarship.checkCode_scholarship');
                 return back();
