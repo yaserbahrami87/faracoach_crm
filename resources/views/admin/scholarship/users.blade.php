@@ -18,7 +18,8 @@
                                 <th>نام و نام خانوادگی</th>
                                 <th class="d-none">کد ملی</th>
                                 <th>تلفن</th>
-                                <th>کد پیگیری</th>
+                                <th>تاریخ ثبت نام</th>
+                                <th>ساعت ثبت نام</th>
                                 <th>وضعیت</th>
                             </tr>
                         </thead>
@@ -34,7 +35,8 @@
                                     </td>
                                     <td class="text-center d-none" dir="ltr">{{$item->user->codemelli}}</td>
                                     <td class="text-center" dir="ltr">{{$item->user->tel}}</td>
-                                    <td class="text-center" dir="ltr">{{$item->trackingcode}}</td>
+                                    <td class="text-center" dir="ltr">{{ substr($item->created_at,0,10)  }}</td>
+                                    <td class="text-center" dir="ltr">{{ substr($item->created_at,12,4)  }}</td>
                                     <td class="text-center">
                                         @switch($item->status)
                                             @case(0)<span class="text-info"> بررسی نشده</span>
@@ -48,7 +50,6 @@
                                             @case(4) <span class="text-primary">اصلاح درخواست</span>
                                             @break
                                             @case(5)<span class="text-warning">اصلاح شده</span>
-
                                             @break
                                             @default خطا
 
@@ -97,7 +98,6 @@
                                             @case(4) <span class="text-primary">اصلاح درخواست</span>
                                             @break
                                             @case(5)<span class="text-warning">اصلاح شده</span>
-
                                             @break
                                             @default خطا
 
