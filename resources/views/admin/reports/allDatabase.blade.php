@@ -270,6 +270,10 @@
                     <li data-value="{{$ages['age51to60']}}">بین 51 تا 60 سال:  {{$ages['age51to60']}} نفر </li>
                     <li data-value="{{$ages['age61to70']}}">بین 61 تا 70 سال:  {{$ages['age61to70']}} نفر </li>
                     <li data-value="{{$ages['age71to80']}}">بین 71 تا 80 سال:  {{$ages['age71to80']}} نفر </li>
+                    <!--
+                    <li data-value="{{$users->whereNULL('datebirth')->count()}}">نامشخص:  {{$users->whereNULL('datebirth')->count()}} نفر </li>
+                    -->
+
 
 
 
