@@ -6,6 +6,12 @@
 </head>
 <body>
 <style>
+.inner-body *{
+    direction: rtl ;
+    text-align: right !important;
+}
+
+
 @media only screen and (max-width: 600px) {
 .inner-body {
 width: 100% !important;
@@ -23,7 +29,7 @@ width: 100% !important;
 }
 </style>
 
-<table class="wrapper" width="100%" cellpadding="0" cellspacing="0" role="presentation">
+<table class="wrapper" width="100%" cellpadding="0" cellspacing="0" role="presentation" dir="rtl">
 <tr>
 <td align="center">
 <table class="content" width="100%" cellpadding="0" cellspacing="0" role="presentation">

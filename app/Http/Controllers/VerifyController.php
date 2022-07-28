@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\landPage;
 use App\Notifications\LoginWithCode;
+use App\Notifications\SendEmailLoginCode;
 use App\scholarship;
 use App\User;
 use App\verify;
@@ -894,8 +895,18 @@ class VerifyController extends BaseController
                 $request->session()->put('scholarshipStatus', 'true');
                 $message = "رمز یکبار مصرف شما در سیستم بورسیه فراکوچ : " . $six_digit_random_number;
                 $this->sendSms($request['tel'], $message);
-                //$this->notify(new sendEmail())
-                alert()->warning('رمز یکبار مصرف شما به شماره ' . $request['tel'] . " ارسال شد. ")->persistent('بستن');
+
+
+                if(is_null($status->user['email']))
+                {
+                    alert()->warning('رمز یکبار مصرف شما به شماره ' . $request['tel'] . " ارسال شد. ")->persistent('بستن');
+                }
+                else
+                {
+                    alert()->warning('رمز یکبار مصرف شما به شماره ' . $request['tel'] . " و ایمیل ".$status->user['email']." ارسال شد. ")->persistent('بستن');
+                    $status->user->notify(new SendEmailLoginCode($six_digit_random_number));
+                }
+
 //                    return view('scholarship.checkCode_scholarship');
                 return back();
             } else {

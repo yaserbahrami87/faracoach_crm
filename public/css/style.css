@@ -1498,7 +1498,11 @@ nav[aria-label='breadcrumb']
     }
 }
 
-
+.swal-text
+{
+    text-align: center;
+    direction: rtl;
+}
 
 
 

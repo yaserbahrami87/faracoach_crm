@@ -101,6 +101,7 @@ class ScholarshipController extends BaseController
             'applicant'     =>$request->applicant,
             'resume'        =>$resume,
             'trackingcode'  =>$trackingCode,
+
         ]);
 
 
@@ -114,6 +115,7 @@ class ScholarshipController extends BaseController
             alert()->success("ثبت نام شما در بورسیه فراکوچ با موفقیت انجام شد \nکد پیگیری شما $trackingCode")->persistent('بستن');
             $request->session()->forget('scholarshipStatus');
             return redirect('/panel');
+
         }
     }
 

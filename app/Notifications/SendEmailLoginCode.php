@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class SendEmail extends Notification
+class SendEmailLoginCode extends Notification
 {
     use Queueable;
 
@@ -16,9 +16,9 @@ class SendEmail extends Notification
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($code)
     {
-        //
+        $this->code=$code;
     }
 
     /**
@@ -29,6 +29,7 @@ class SendEmail extends Notification
      */
     public function via($notifiable)
     {
+
         return ['mail'];
     }
 
@@ -41,9 +42,11 @@ class SendEmail extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->line('کد ورود به سیستم فراکوچ:')
+                    ->line($this->code)
+                    ->subject('کد تایید فراکوچ');
+//                    ->action('Notification Action', url('/'))
+//                    ->line('Thank you for using our application!');
     }
 
     /**
