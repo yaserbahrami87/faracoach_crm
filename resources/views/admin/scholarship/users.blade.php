@@ -24,6 +24,10 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <a class="btn btn-primary" href="/admin/scholarship/exportExcel">
+                                <i class="bi bi-file-earmark-excel-fill"></i>
+                                خروجی اکسل
+                            </a>
                             @foreach($scholarships as $item)
                                 <tr>
                                     <td class="text-center">{{$loop->iteration}}</td>

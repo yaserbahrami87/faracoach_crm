@@ -147,7 +147,7 @@
         </div>
 
         <div class="col-lg-3 col-md-6 col-sm-6 text-center mt-1 items bg-success">
-            <a href="/user/" class="btn btn-success">
+            <a href="/panel/scholarship/me" class="btn btn-success">
                 <i class="bi bi-ear-fill"></i>
                 <p>بورسیه فراکوچ</p>
             </a>

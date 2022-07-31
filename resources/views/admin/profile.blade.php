@@ -50,7 +50,6 @@
                                         <p class="description text-dark"> پیگیری های انجام شده: <b> {{$user->followups->count()}} </b> نوبت</p>
 
                                         <p class="d-inline"> تعداد افراد معرفی شده:</p><b> {{$user->get_invitations->count()}} نفر</b>
-
                                     </div>
 
                                     <div class="col-12 col-md-12 col-sm-12 col-xl-12 col-lg-12 pt-1 text-center" >

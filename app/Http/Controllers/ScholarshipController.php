@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\followup;
 use App\message;
 use App\scholarship;
+use App\state;
 use App\User;
 use Faker\Provider\Base;
 use Illuminate\Http\Request;
@@ -115,7 +116,6 @@ class ScholarshipController extends BaseController
             alert()->success("ثبت نام شما در بورسیه فراکوچ با موفقیت انجام شد \nکد پیگیری شما $trackingCode")->persistent('بستن');
             $request->session()->forget('scholarshipStatus');
             return redirect('/panel');
-
         }
     }
 
@@ -125,9 +125,9 @@ class ScholarshipController extends BaseController
      * @param  int  $scholarship
      * @return \Illuminate\Http\Response
      */
+
     public function show(scholarship  $scholarship)
     {
-
         $states=$this->states();
         $city=$this->city($scholarship->user->city);
         $scholarship->types=explode(',' ,$scholarship->types);
@@ -351,8 +351,30 @@ class ScholarshipController extends BaseController
                 ->orderby('id','desc')
                 ->get();
 
+            $states=state::get();
+            //انتخاب شهر براساس کد
+            $city=$this->city($scholarship->user->city);
+
+            if(!is_null($scholarship->user->gettingknow))
+            {
+                $scholarship->user->gettingknow_parent_user=$this->get_categoryGettingknow($scholarship->user->gettingknow,NULL,NULL,NULL,'first')->parent_id;
+                $condition=['parent_id','=',$scholarship->user->gettingknow_parent_user];
+                $gettingKnow_child_list=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
+            }
+            else
+            {
+                $gettingKnow_child_list=NULL;
+            }
+
+            $condition=['parent_id','=','0'];
+            $gettingKnow_parent_list=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
+
             return  view('user.scholarship.profile')
                         ->with('messages',$messages)
+                        ->with('states',$states)
+                        ->with('city',$city)
+                        ->with('gettingKnow_child_list',$gettingKnow_child_list)
+                        ->with('gettingKnow_parent_list',$gettingKnow_parent_list)
                         ->with('scholarship',$scholarship);
         }
     }
@@ -426,5 +448,29 @@ class ScholarshipController extends BaseController
         }
         return back();
 
+    }
+
+    public function exportExcel()
+    {
+        $scholarship=scholarship::get();
+        foreach ($scholarship as $item)
+        {
+            $item->created_at=$this->changeTimestampToShamsi($item->created_at);
+        }
+
+
+        $list=[];
+        $fileName=time().".xlsx";
+        foreach ($scholarship as $item) {
+            array_push($list,['نام'=>$item->user->fname,'نام خانوادگی'=>$item->user->lname,'تلفن همراه'=>$item->user->tel,'تاریخ ثبت نام'=>substr($item->created_at,0,10)]);
+        }
+
+        $excel=fastexcel($list)->export($fileName);
+
+        if($excel)
+        {
+            return response()->download(public_path($fileName))
+                                ->deleteFileAfterSend(true);
+        }
     }
 }
