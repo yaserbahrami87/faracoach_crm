@@ -130,6 +130,8 @@ return array(
     'App\\Notifications\\IncompleteBooking' => $baseDir . '/app/Notifications/IncompleteBooking.php',
     'App\\Notifications\\LoginWithCode' => $baseDir . '/app/Notifications/LoginWithCode.php',
     'App\\Notifications\\LoginwithoutReserve' => $baseDir . '/app/Notifications/LoginwithoutReserve.php',
+    'App\\Notifications\\SendEmailLoginCode' => $baseDir . '/app/Notifications/SendEmailLoginCode.php',
+    'App\\Notifications\\SendMailBlank' => $baseDir . '/app/Notifications/SendMailBlank.php',
     'App\\Notifications\\channels\\KavenegarChannel' => $baseDir . '/app/Notifications/channels/KavenegarChannel.php',
     'App\\Notifications\\sendMessageNotification' => $baseDir . '/app/Notifications/sendMessageNotification.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',

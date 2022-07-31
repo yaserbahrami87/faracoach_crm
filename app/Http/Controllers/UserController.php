@@ -1228,6 +1228,7 @@ class UserController extends BaseController
     //اضافه کردن یوزر توسط سفیر
     public function addIntroducedUser(Request $request)
     {
+
             $request['tel']=$this->convertPersianNumber($request->tel);
             $this->validate(request(),
             [
@@ -1236,19 +1237,6 @@ class UserController extends BaseController
                 'tel'           =>'required|unique:users',
                 'sex'           =>'required|boolean',
                 'followby_id'   =>'required|numeric'
-            ],
-            [
-                'fname.required'    =>'نام اجباری است',
-                'fname.min'         =>'نام باید بیشتر از 3 حرف باشد',
-                'fname.max'         =>'نام باید کمتر از 15 حرف باشد',
-                'lname.required'    =>'نام خانوادگی اجباری است',
-                'lname.min'         =>'نام خانوادگی باید بیشتر از 3 حرف باشد',
-                'lname.max'         =>'نام خانوادگی باید کمتر از 15 حرف باشد',
-                'tel.required'      =>'تلفن اجباریست',
-                'tel.numeric'       =>'تلفن باید عدد باشد',
-                'tel.unique'        =>'تلفن قبلا ثبت شده است',
-                'sex.required'      =>'جنسیت اجباریست',
-                'sex.boolean'       =>'جنسیت را درست وارد کنید',
             ]);
 
             $check=user::where('tel','=',$request['tel'])

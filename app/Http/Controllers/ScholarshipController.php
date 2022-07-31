@@ -295,6 +295,7 @@ class ScholarshipController extends BaseController
             'date_fa' => $this->dateNow,
             'time_fa' => $this->timeNow,
         ]);
+
         switch ($request->status)
         {
             case(1):$status_scholarship= 'قبول';
@@ -311,6 +312,7 @@ class ScholarshipController extends BaseController
 
         $msg="نتیجه درخواست بورسیه شما:".$status_scholarship."\n برای آگاهی بیشتر به پورتال فراکوچ مراجعه کنید";
         $this->sendSms($scholarship->user->tel,$msg);
+
 
 
         if($status)
@@ -369,12 +371,15 @@ class ScholarshipController extends BaseController
             $condition=['parent_id','=','0'];
             $gettingKnow_parent_list=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
 
+            $getFollowbyCategory=$this->getFollowbyCategory();
+
             return  view('user.scholarship.profile')
                         ->with('messages',$messages)
                         ->with('states',$states)
                         ->with('city',$city)
                         ->with('gettingKnow_child_list',$gettingKnow_child_list)
                         ->with('gettingKnow_parent_list',$gettingKnow_parent_list)
+                        ->with('getFollowbyCategory',$getFollowbyCategory)
                         ->with('scholarship',$scholarship);
         }
     }

@@ -735,6 +735,8 @@ class ComposerStaticInitf54d8edf51459297346cdb00d8423a68
         'App\\Notifications\\IncompleteBooking' => __DIR__ . '/../..' . '/app/Notifications/IncompleteBooking.php',
         'App\\Notifications\\LoginWithCode' => __DIR__ . '/../..' . '/app/Notifications/LoginWithCode.php',
         'App\\Notifications\\LoginwithoutReserve' => __DIR__ . '/../..' . '/app/Notifications/LoginwithoutReserve.php',
+        'App\\Notifications\\SendEmailLoginCode' => __DIR__ . '/../..' . '/app/Notifications/SendEmailLoginCode.php',
+        'App\\Notifications\\SendMailBlank' => __DIR__ . '/../..' . '/app/Notifications/SendMailBlank.php',
         'App\\Notifications\\channels\\KavenegarChannel' => __DIR__ . '/../..' . '/app/Notifications/channels/KavenegarChannel.php',
         'App\\Notifications\\sendMessageNotification' => __DIR__ . '/../..' . '/app/Notifications/sendMessageNotification.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
