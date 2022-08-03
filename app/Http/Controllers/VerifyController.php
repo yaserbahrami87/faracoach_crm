@@ -963,8 +963,6 @@ class VerifyController extends BaseController
                     $request->session()->put('scholarshipStatus','infoUser');
                     Auth::login($user);
                     return back();
-
-
                 }
 
             }

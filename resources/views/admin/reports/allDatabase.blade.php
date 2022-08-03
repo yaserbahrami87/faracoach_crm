@@ -23,6 +23,11 @@
                         <button type="submit" class="btn btn-success btn-sm" name="range">نمایش بده</button>
                     </div>
                 </form>
+
+                <a class="btn btn-primary" href="/admin/reports/allreport/exportexcel{{ request()->has('start_date') ? "?start_date=".request()->get('start_date')[0]."&end_date=".request()->get('start_date')[1]."&range=" : '' }}">
+                    <i class="bi bi-file-earmark-excel-fill"></i>
+                    خروجی اکسل
+                </a>
             </div>
         </div>
     </div>

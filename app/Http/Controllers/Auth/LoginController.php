@@ -38,7 +38,7 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-        $this->redirectTo = url()->previous();
+//        $this->redirectTo = url()->previous();
     }
 
     //برای ریدایرکت کردن بعد از لاگین این تابع باید تغییر کند
@@ -65,10 +65,10 @@ class LoginController extends Controller
 
     public function showLoginForm()
     {
-        if(!session()->has('url.intended'))
-        {
-            session(['url.intended' => url()->previous()]);
-        }
+//        if(!session()->has('url.intended'))
+//        {
+//            session(['url.intended' => url()->previous()]);
+//        }
         return view('auth.login');
     }
 }

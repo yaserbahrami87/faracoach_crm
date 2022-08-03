@@ -67,28 +67,6 @@
             color: white;
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         .login-container{
             margin-top: 5%;
             margin-bottom: 5%;
