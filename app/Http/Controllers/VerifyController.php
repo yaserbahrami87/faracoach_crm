@@ -859,31 +859,21 @@ class VerifyController extends BaseController
                     ->delete();
         $six_digit_random_number = mt_rand(100000, 999999);
         $verify=$this->get_user($request['tel'],NULL,NULL,NULL,true);
-        if($verify->count()!=0)
-        {
-            $scholarship=scholarship::where('user_id','=',$verify->id)
-                ->first();
-        }
-        else
-        {
-            $scholarship=NULL;
-        }
-
-
-
-
-        if(is_null($scholarship))
-        {
-
-//        if($verify->count()==0)
+//        if($verify->count()!=0)
 //        {
-//            return view('scholarship.register_scholarship');
+//            $scholarship=scholarship::where('user_id','=',$verify->id)
+//                ->first();
 //        }
 //        else
 //        {
-//            $created_at = ($verify['created_at']);
-//            $created_at_add = $created_at->addMinutes(30);
-//            if ($created_at_add < Carbon::now()) {
+//            $scholarship=NULL;
+//        }
+
+
+
+
+//        if(is_null($scholarship))
+//        {
             $status = verify::create(
                 [
                     'tel' => $request['tel'],
@@ -913,18 +903,12 @@ class VerifyController extends BaseController
                 return back()->with('msg', 'خطا در ارسال رمز یکبار مصرف')
                     ->with('errorStatus', 'danger');
             }
-//            } else {
-//                return back()->with('msg', 'رمز یکبار مصرف کمتر از 30 دقیقه به شماره ' . $request['tel'] . " ارسال شده است")
-//                    ->with('errorStatus', 'success')
-//                    ->with('status', true);
-//            }
 //        }
-        }
-        else
-        {
-            alert()->warning('شما قبلا در سیستم بورسیه فراکوچ ثبت نام کرده اید')->persistent('بستن');
-            return back();
-        }
+//        else
+//        {
+//            alert()->warning('شما قبلا در سیستم بورسیه فراکوچ ثبت نام کرده اید')->persistent('بستن');
+//            return back();
+//        }
 
     }
 
@@ -954,9 +938,20 @@ class VerifyController extends BaseController
                     $user=$this->get_user($verify->tel,NULL,NULL,NULL,true);
                     $request->session()->put('scholarshipStatus','infoUser');
                     Auth::login($user);
-                    return back()
-                                ->with('user',$user)
-                                ->with('tel',$verify->tel);
+                    $scholarship=scholarship::where('user_id','=',Auth::user()->id)
+                                ->first();
+                    if(is_null($scholarship))
+                    {
+                        return back()
+                            ->with('user',$user)
+                            ->with('tel',$verify->tel);
+
+                    }
+                    else
+                    {
+                        return redirect('/panel/scholarship/me');
+                    }
+
                 }
                 else
                 {
@@ -967,8 +962,9 @@ class VerifyController extends BaseController
                     ]);
                     $request->session()->put('scholarshipStatus','infoUser');
                     Auth::login($user);
-                    return back()->with('msg','کاربری با چنین تلفن همراه موجود نیست')
-                            ->with('errorStatus','danger');
+                    return back();
+
+
                 }
 
             }

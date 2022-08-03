@@ -8,6 +8,7 @@
 @endsection
 
 @if($user->tel_verified==0)
+    <!--
     <div class="col-12">
 
         @if ($verifyStatus==false)
@@ -35,6 +36,7 @@
 
         @endif
     </div>
+    -->
 @endif
 
 @if((is_null(Auth::user()->fname))||(is_null(Auth::user()->lname))||(is_null(Auth::user()->username)))
@@ -90,12 +92,19 @@
 </div>
 <div class="container-fluid border-top " >
     <div class="row pt-3" id="board">
+
         <div class="col-12 border-bottom border-1">
             <h5>
                 <i class="bi bi-pen-fill"></i>
                 میز کار
             </h5>
         </div>
+        <div class="col-12 text-center mt-1">
+            <a href="/panel/scholarship/me" class="btn btn-block btn-primary">
+                <p>بورسیه فراکوچ</p>
+            </a>
+        </div>
+
         @if($user->status_coach==0)
             <div class="col-lg-3 col-md-6 col-sm-6 text-center mt-1 items">
                 <a href="panel/coach/create"  class="btn btn-info shadow-lg">
@@ -146,12 +155,7 @@
             </a>
         </div>
 
-        <div class="col-lg-3 col-md-6 col-sm-6 text-center mt-1 items bg-success">
-            <a href="/panel/scholarship/me" class="btn btn-success">
-                <i class="bi bi-ear-fill"></i>
-                <p>بورسیه فراکوچ</p>
-            </a>
-        </div>
+
 
         <div class="col-12 mt-2 border-bottom border-1">
             <h5>آخرین دوره های ثبت نام شده</h5>

@@ -49,6 +49,13 @@ class ScholarshipController extends BaseController
             $request->session()->put('introduce',$request->introduce);
         }
 
+
+        if((!$request->session()->has('scholarshipStatus')) && Auth::check())
+        {
+            $request->session()->put('scholarshipStatus','infoUser');
+        }
+
+
         return  view('scholarship.beforeRegister_Scholarship');
     }
 
@@ -336,8 +343,9 @@ class ScholarshipController extends BaseController
                     ->first();
         if(is_null($scholarship))
         {
+            session()->put('scholarshipStatus','infoUser');
             alert()->warning('شما در بورسیه فراکوچ ثبت نام نکرده اید')->persistent('بستن');
-            return back();
+            return redirect('/scholarship/register');
         }
         else
         {
