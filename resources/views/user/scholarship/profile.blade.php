@@ -583,13 +583,31 @@
                 </form>
             </div>
             <div class="tab-pane fade show" id="introduce" role="tabpanel" aria-labelledby="introduce-tab">
-                <div class="card-body text-center">
-                    <h5>لینک دعوت اختصاصی شما</h5>
+                <div class="card-body ">
+                    <p>یکی از مهمترین اهداف طرح بورسیه کوچینگ، شناسایی افراد اثرگذار، مستعد و نخبه جامعه و تسهیل فضای آموزش حرفه ای برای این افراد است. </p>
+                    <p>لذا با توجه به اینکه ظرفیت اطلاع رسانی ما محدود است، از شما درخواست میکنیم که دوستان واجد شرایط خود را به این برنامه دعوت کنید و طبعا ما نیز از این اقدام شما قدردانی مینماییم.</p>
+                    <p>چنانچه  فردی که معرفی میکنید و یا از طریق لینک شما  ثبت نام نموده است، تمام مراحل را با  موفقیت  طی کند (مثلا 50 امتیاز کسب کند) ، 10 درصد از امتیاز بورسیه آنها به امتیاز بورسیه  شما اضافه میگردد.</p>
+                    <p>استفاده از امتیاز معرفی دو مرحله دارد:</p>
+                    <p></p>
+                    <ol>
+                        <li>انتشار پوستر و ویدئو در یک پست 2 اسلایدی (اسلاید  اول عکس و اسلاید دوم ویدئوی معرفی) در صفحه اینستاگرام  شما  و  تگ  کردن  ایدی پیج آکادمی faracoach</li>
+                        <li>معرفی 5 نفر بصورت مستقیم از طریق  پورتال</li>
+                    </ol>
+                    <div class="row mt-2 mb-2 ">
+                        <div class="col-12 text-center">
+                            <a href="{{asset('/videos/بورسیه.mp4')}}" class="btn btn-success" target="_blank">دانلود فیلم</a>
+                            <a href="{{asset('/images/بورسیه-کاور-ویدئو.jpg')}}" class="btn btn-success" target="_blank">دانلود پوستر</a>
+                        </div>
+                    </div>
+
+                    <h5 class="text-center">لینک دعوت اختصاصی شما</h5>
                     <p class="text-light bg-secondary p-2 dir-rtl text-center"  id="personal_link">{{asset('/scholarship/register?introduce='.Auth::user()->id)}}</p>
+
                 </div>
 
-                @if(count($scholarship->user->get_invitations->where('resource','=','بورسیه تحصیلی'))<3)
-                    <form method="post" action="/panel/introduced/add">
+                @if(count($scholarship->user->get_invitations->where('resource','=','بورسیه تحصیلی'))<=5)
+                    <b>معرفی مستقیم افراد از طریق پورتال:</b>
+                    <form method="post" action="/panel/introduced/add" class=" border-bottom mb-3">
                         <div class="row pt-1 mt-1" id="formAddIntroduce">
                             {{csrf_field()}}
                             <input type="hidden" value="بورسیه تحصیلی" name="resource" />
@@ -633,17 +651,18 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-md-4 col-lg-4 col-xl-4 mt-1">
+                            <div class="col-xs-12 col-md-4 col-lg-4 col-xl-4 mt-1 invisible">
                                 <small>پیگیری توسط:<span class="text-danger">*</span></small>
                                 <div class="input-group mb-1">
                                     @foreach($getFollowbyCategory as $item)
                                         <div class="custom-control custom-radio">
-                                            <input type="radio" id="customRadio{{$item->id}}" name="followby_id" class="custom-control-input" value="{{$item->id}}">
+                                            <input type="radio" id="customRadio{{$item->id}}" name="followby_id" class="custom-control-input" value="{{$item->id}}" @if($item->id==1) checked  @endif  >
                                             <label class="custom-control-label  ml-1" for="customRadio{{$item->id}}">{{$item->followby}}</label>
                                         </div>
                                     @endforeach
                                 </div>
-                            </div><div class="col-xs-12 col-md-4 col-lg-4 col-xl-4 mt-1">
+                            </div>
+                            <div class="col-xs-12 col-md-4 col-lg-4 col-xl-4 mt-1 invisible">
                                 <small> ارسال پیامک دعوت</small>
                                 <div class="input-group mb-1">
                                     <div class="custom-control custom-radio">
@@ -662,13 +681,19 @@
                             <div class="col-12 ">
                                 <div class="input-group mb-2 btn-send">
                                     <!-- <button type="button" class="btn btn-primary" id="addFormIntroduce" title="اضافه کردن فرم جدید">+</button>-->
-                                    <button type="submit" class="btn btn-lg btn-secondary px-3">ثبت کاربر </button>
+                                    <button type="submit" class="btn btn-lg btn-secondary px-3">معرفی کاربر </button>
                                 </div>
                             </div>
                         </div>
                     </form>
+                @else
+                    <div class="alert alert-warning">
+                        شما 5 نفر افراد معرفی لیست خود را انجام داده اید
+                    </div>
                 @endif
-                <table class="table text-center">
+
+                <b >لیست افرادی که شما معرفی کرده اید:</b>
+                <table class="table text-center mt-1">
                     <tr>
                         <td>ردیف</td>
                         <td></td>

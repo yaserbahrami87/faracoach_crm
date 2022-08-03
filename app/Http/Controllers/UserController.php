@@ -1276,7 +1276,7 @@ class UserController extends BaseController
             }
             else
             {
-                alert()->error('شخص مورد نظر در گذشته توسط شما و یا شخص دیگر دعوت شده است','خطا')->persistent('بستن');
+                alert()->error('این شماره تلفن در حال حاضر عضو باشگاه مشتریان فراکوچ میباشد.','خطا')->persistent('بستن');
             }
 
             return back();
