@@ -18,8 +18,8 @@
                             خروجی اکسل
                         </button>
                     </form>
-
                     <table  class="table_data table table-striped table-bordered" style="width:100%">
+
                         <thead>
                             <tr class="text-center">
                                 <th>ردیف</th>
@@ -180,12 +180,7 @@
 @endsection
 
 @section('footerScript')
-<script>
-    import Buttons from "../../../../public/dashboard/pages/UI/buttons.html";
-    export default {
-        components: {Buttons}
-    }
-</script>
+    <script src="{{asset('/dashboard/assets/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('/dashboard/assets/js/dataTables.bootstrap4.min.js')}}"></script>
     <script>
         $(document).ready(function() {
