@@ -29,9 +29,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReportAdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReportAdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/reports/allDatabase.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/reports/allDatabase.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1043,7 +1041,7 @@
       <workItem from="1659243633343" duration="16401000" />
       <workItem from="1659293845194" duration="11528000" />
       <workItem from="1659502588211" duration="21862000" />
-      <workItem from="1659590237911" duration="6642000" />
+      <workItem from="1659590237911" duration="6897000" />
     </task>
     <servers />
   </component>

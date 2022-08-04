@@ -306,8 +306,9 @@ class ReportAdminController extends BaseController
             'تاهل'          => $list_married,
             'تفکیک سن'      => $list_ages,
         ]);
-        $excel=fastexcel($sheets)->export('list_state.xlsx');
-        return response()->download(public_path('list_state.xlsx'))
+        $fileName=time().".xlsx";
+        $excel=fastexcel($sheets)->export($fileName);
+        return response()->download(public_path($fileName))
                             ->deleteFileAfterSend(true);
 
     }
