@@ -474,6 +474,7 @@ class ScholarshipController extends BaseController
         }
 
         Artisan::call('cache:clear');
+        Artisan::call('view:clear');
         $dateNow = verta();
         $this->dateNow = $dateNow->format('Ymd');
         $this->timeNow = $dateNow->format('His');
