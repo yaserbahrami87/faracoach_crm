@@ -80,7 +80,6 @@
                 <th class="text-center"> رویداد</th>
             </tr>
             @foreach($followups->groupby('course_id') as $item)
-
                 <tr>
                     <td class="text-center">
                         @if(!is_null($item[0]->course))
