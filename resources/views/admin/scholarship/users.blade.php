@@ -11,6 +11,14 @@
         <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">
                 <div class="col-12 table-responsive">
+                    <form method="get" action="/admin/scholarship/exportExcel">
+                        {{csrf_field()}}
+                        <button class="btn btn-primary" type="submit">
+                            <i class="bi bi-file-earmark-excel-fill"></i>
+                            خروجی اکسل
+                        </button>
+                    </form>
+
                     <table  class="table_data table table-striped table-bordered" style="width:100%">
                         <thead>
                             <tr class="text-center">
@@ -25,10 +33,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <a class="btn btn-primary" href="/admin/scholarship/exportExcel">
-                                <i class="bi bi-file-earmark-excel-fill"></i>
-                                خروجی اکسل
-                            </a>
                             @foreach($scholarships as $item)
                                 <tr>
                                     <td class="text-center">{{$loop->iteration}}</td>
@@ -176,7 +180,12 @@
 @endsection
 
 @section('footerScript')
-    <script src="{{asset('/dashboard/assets/js/jquery.dataTables.min.js')}}"></script>
+<script>
+    import Buttons from "../../../../public/dashboard/pages/UI/buttons.html";
+    export default {
+        components: {Buttons}
+    }
+</script>
     <script src="{{asset('/dashboard/assets/js/dataTables.bootstrap4.min.js')}}"></script>
     <script>
         $(document).ready(function() {
