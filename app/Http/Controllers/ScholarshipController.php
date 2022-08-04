@@ -466,6 +466,7 @@ class ScholarshipController extends BaseController
 
     public function exportExcel()
     {
+
         $scholarship=scholarship::get();
         foreach ($scholarship as $item)
         {
