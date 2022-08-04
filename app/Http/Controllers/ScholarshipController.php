@@ -9,6 +9,7 @@ use App\state;
 use App\User;
 use Faker\Provider\Base;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Throwable;
@@ -471,6 +472,7 @@ class ScholarshipController extends BaseController
             $item->created_at=$this->changeTimestampToShamsi($item->created_at);
         }
 
+        Artisan::call('cache:clear');
         $dateNow = verta();
         $this->dateNow = $dateNow->format('Ymd');
         $this->timeNow = $dateNow->format('His');
