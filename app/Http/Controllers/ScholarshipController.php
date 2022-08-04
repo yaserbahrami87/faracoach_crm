@@ -471,9 +471,13 @@ class ScholarshipController extends BaseController
             $item->created_at=$this->changeTimestampToShamsi($item->created_at);
         }
 
+        $dateNow = verta();
+        $this->dateNow = $dateNow->format('Ymd');
+        $this->timeNow = $dateNow->format('His');
+        $fileName=$this->dateNow.$this->timeNow.".xlsx";
 
         $list=[];
-        $fileName=time().".xlsx";
+
         foreach ($scholarship as $item) {
             array_push($list,['نام'=>$item->user->fname,'نام خانوادگی'=>$item->user->lname,'تلفن همراه'=>$item->user->tel,'تاریخ ثبت نام'=>substr($item->created_at,0,10)]);
         }

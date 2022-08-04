@@ -299,11 +299,13 @@ class EventController extends BaseController
                 ->where('events.id','=',$event->id)
                 ->select('users.fname','users.lname','users.tel')
                 ->get();
-        $excel=fastexcel($users)->export($event->event.'.xlsx');
+
+        $fileName=time().".xlsx";
+        $excel=fastexcel($users)->export($fileName);
 
         if($excel)
         {
-            return response()->download(public_path($event->event.'.xlsx'))
+            return response()->download(public_path($fileName))
                 ->deleteFileAfterSend(true);
         }
         else
