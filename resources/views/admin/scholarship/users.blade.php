@@ -29,10 +29,12 @@
                                 <th>تاریخ ثبت نام</th>
                                 <th>ساعت ثبت نام</th>
                                 <th> افراد معرفی شده</th>
+                                <th> افراد ثبت نام بورسیه</th>
                                 <th>وضعیت پروفایل</th>
                                 <th>وضعیت درخواست</th>
                             </tr>
                         </thead>
+
                         <tbody>
                             @foreach($scholarships as $item)
                                 <tr>
@@ -48,6 +50,19 @@
                                     <td class="text-center" dir="ltr">{{substr($item->created_at,0,10)  }}</td>
                                     <td class="text-center" dir="ltr">{{substr($item->created_at,12,4)  }}</td>
                                     <td class="text-center" dir="ltr">{{($item->user->get_invitations->where('resource','=','بورسیه تحصیلی')->count())  }}</td>
+                                    <td class="text-center" dir="ltr">
+                                        @php
+                                        $i=0;
+                                        @endphp
+                                        @foreach($item->user->get_invitations->where('resource','=','بورسیه تحصیلی') as $item_invitation)
+                                            @if(!is_null($item_invitation->scholarship))
+                                                @php
+                                                  $i++;
+                                                @endphp
+                                            @endif
+                                        @endforeach
+                                        {{$i}}
+                                    </td>
                                     <td class="text-center" dir="ltr">
 
                                         @if(strlen($item->user->username)>0 &&strlen($item->user->email)>0&&strlen($item->user->fname)>0&&strlen($item->user->lname)>0&&strlen($item->user->datebirth)>0&&strlen($item->user->father)>0&&strlen($item->user->codemelli)>0&&strlen($item->user->sex)>0&&strlen($item->user->tel)>0&&strlen($item->user->shenasname)>0&&strlen($item->user->born)>0&&strlen($item->user->education)>0&&strlen($item->user->reshteh)>0&&strlen($item->user->job)>0&&strlen($item->user->state)>0&&strlen($item->user->city)>0&&strlen($item->user->address)>0&&strlen($item->user->personal_image)>0&&strlen($item->user->shenasnameh_image)>0&&strlen($item->user->cartmelli_image)>0&&strlen($item->user->education_image)>0&&strlen($item->user->resume)>0&&strlen($item->user->married)>0&&strlen($item->user->telegram)>0&&strlen($item->user->instagram)>0&&strlen($item->user->linkedin)>0)
