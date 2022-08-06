@@ -611,34 +611,7 @@
                         <div class="row pt-1 mt-1" id="formAddIntroduce">
                             {{csrf_field()}}
                             <input type="hidden" value="بورسیه تحصیلی" name="resource" />
-                            <div class="col-xs-12 col-md-4 col-lg-4 col-xl-4 ">
-                                <small>نام:<span class="text-danger">*</span></small>
-                                <div class="input-group mb-1">
-                                    <input type="text" class="form-control" placeholder="مثلا :علی  " name="fname" value="{{old('fname')}}"/>
-                                    <div class="input-group-prepend">
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-md-4 col-lg-4 col-xl-4 ">
-                                <small>نام خانوادگی:<span class="text-danger">*</span></small>
-                                <div class="input-group mb-1">
-                                    <input type="text" class="form-control" placeholder="مثلا: محمدی" name="lname" value="{{old('lname')}}" />
-                                    <div class="input-group-prepend">
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-md-4 col-lg-4 col-xl-4 ">
-                                <small>تلفن همراه:<span class="text-danger">*</span></small>
-                                <div class="input-group mb-1">
-                                    <input type="hidden" id="tel_org_introduce"  name="tel"/>
-                                    <input type="tel" dir="ltr" class="form-control" placeholder="تلفن تماس را وارد کنید"   id="tel_introduce"  />
-                                    <div class="input-group-prepend">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-md-4 col-lg-4 col-xl-4 mt-1">
+                            <div class="col-xs-12 col-md-2 col-lg-2 col-xl-2 mt-1">
                                 <small>جنسیت:<span class="text-danger">*</span></small>
                                 <div class="input-group mb-1">
                                     <div class="custom-control custom-radio">
@@ -651,7 +624,35 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-md-4 col-lg-4 col-xl-4 mt-1 invisible">
+                            <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 ">
+                                <small>نام:<span class="text-danger">*</span></small>
+                                <div class="input-group mb-1">
+                                    <input type="text" class="form-control" placeholder="مثلا :علی  " name="fname" value="{{old('fname')}}"/>
+                                    <div class="input-group-prepend">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 ">
+                                <small>نام خانوادگی:<span class="text-danger">*</span></small>
+                                <div class="input-group mb-1">
+                                    <input type="text" class="form-control" placeholder="مثلا: محمدی" name="lname" value="{{old('lname')}}" />
+                                    <div class="input-group-prepend">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 ">
+                                <small>تلفن همراه:<span class="text-danger">*</span></small>
+                                <div class="input-group mb-1">
+                                    <input type="hidden" id="tel_org_introduce"  name="tel"/>
+                                    <input type="tel" dir="ltr" class="form-control" placeholder="تلفن تماس را وارد کنید"   id="tel_introduce"  />
+                                    <div class="input-group-prepend">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-md-4 col-lg-4 col-xl-4 mt-1 d-none">
                                 <small>پیگیری توسط:<span class="text-danger">*</span></small>
                                 <div class="input-group mb-1">
                                     @foreach($getFollowbyCategory as $item)
@@ -662,7 +663,7 @@
                                     @endforeach
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-md-4 col-lg-4 col-xl-4 mt-1 invisible">
+                            <div class="col-xs-12 col-md-4 col-lg-4 col-xl-4 mt-1 d-none">
                                 <small> ارسال پیامک دعوت</small>
                                 <div class="input-group mb-1">
                                     <div class="custom-control custom-radio">
@@ -764,7 +765,13 @@
 
         $("#personal_link").click(function()
         {
-            navigator.clipboard.writeText($('#personal_link').text());
+            if (window.isSecureContext && navigator.clipboard) {
+                navigator.clipboard.writeText($('#personal_link').text());
+            } else {
+                unsecuredCopyToClipboard($('#personal_link').text());
+            }
+
+
             alert('لینک دعوت اختصاصی شما کپی شد');
         });
     </script>
