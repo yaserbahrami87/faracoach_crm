@@ -597,16 +597,17 @@
                         <div class="col-12 text-center">
                             <a href="{{asset('/videos/بورسیه.mp4')}}" class="btn btn-success" target="_blank">دانلود فیلم</a>
                             <a href="{{asset('/images/بورسیه-کاور-ویدئو.jpg')}}" class="btn btn-success" target="_blank">دانلود پوستر</a>
+                            <a href="{{asset('/images/بورسیه-اینستاگرام.jpg')}}" class="btn btn-success" target="_blank">استوری بورسیه</a>
                         </div>
                     </div>
 
-                    <h5 class="text-center">لینک دعوت اختصاصی شما</h5>
+                    <h5 class="text-center">لینک دعوت اختصاصی شما جهت اشتراک گذاری با دوستان:</h5>
                     <p class="text-light bg-secondary p-2 dir-rtl text-center"  id="personal_link">{{asset('/scholarship/register?introduce='.Auth::user()->id)}}</p>
 
                 </div>
 
                 @if(count($scholarship->user->get_invitations->where('resource','=','بورسیه تحصیلی'))<=5)
-                    <b>معرفی مستقیم افراد از طریق پورتال:</b>
+                    <b>معرفی مستقیم نفر {{($scholarship->user->get_invitations->where('resource','=','بورسیه تحصیلی')->count())+1}} از 5 افراد از طریق پورتال:</b>
                     <form method="post" action="/panel/introduced/add" class=" border-bottom mb-3">
                         <div class="row pt-1 mt-1" id="formAddIntroduce">
                             {{csrf_field()}}

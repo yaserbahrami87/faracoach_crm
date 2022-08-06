@@ -29,7 +29,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/public/images/بورسیه-اینستاگرام.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/master/right_menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/master/right_menu.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/scholarship/users.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/scholarship/users.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/user/scholarship/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/scholarship/profile.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -218,7 +221,7 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/videos" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/images" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -231,8 +234,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\videos" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\images" />
+      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\videos" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\iranMap" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\pizza_chart\js\vendor" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public" />
@@ -1044,7 +1047,7 @@
       <workItem from="1659502588211" duration="21862000" />
       <workItem from="1659590237911" duration="13052000" />
       <workItem from="1659604819208" duration="202000" />
-      <workItem from="1659765954985" duration="1106000" />
+      <workItem from="1659765954985" duration="4032000" />
     </task>
     <servers />
   </component>
