@@ -144,8 +144,7 @@ class CoachController extends BaseController
 
         //چک کردن یوزر کاربر وارد شده در لینک
         $user=$this->get_user_byUserName($coach);
-
-        if(is_null($user))
+        if(is_null($user->coach))
         {
             alert()->error('کوچ مورد نظر یافت نشد','خطا')->persistent('بستن');
             return redirect('/coaches/all');
@@ -154,11 +153,12 @@ class CoachController extends BaseController
         {
 
             //جوین کردن دو جدول برای بدست آوردن اطلاعات کوچ و کاربر موردنظر که ممکنه آیدی درست باشد ولی کوچ نباشد
+
             $coach = coach::join('users', 'coaches.user_id', '=', 'users.id')
                                 ->where('users.id', '=', $user->id)
                                 ->first();
 
-            if($coach->status==2)
+            if($user->coach->status==2)
             {
                 alert()->error('لینک منقضی شده است')->persistent('بستن');
                 return redirect('/coaches/all');
@@ -170,7 +170,7 @@ class CoachController extends BaseController
                         ->join('users','users.id','=','feedback_coachings.user_id')
                         ->where('coaches.user_id','=',$user->id)
                         ->paginate(10);
-                if($coach->today_meeting)
+                if($user->coach->today_meeting)
                 {
                     $condition=['start_date','>=',$this->dateNow];
                 }
@@ -179,7 +179,7 @@ class CoachController extends BaseController
                     $condition=['start_date','>',$this->dateNow];
                 }
 
-                $bookings=$this->get_booking(NULL,$coach->user_id,NULL,NULL,NULL,1,$condition,'get');
+                $bookings=$this->get_booking(NULL,$user->coach->user_id,NULL,NULL,NULL,1,$condition,'get');
 
                 //کامنت های گذاشته شده برای کوچ
                 $comments=$this->get_comments(NULL,NULL,$user->id,NULL,'coach');
@@ -187,20 +187,20 @@ class CoachController extends BaseController
 
 
 
-                if(is_null($coach))
+                if(is_null($user->coach))
                 {
                     alert()->error('شخص مورد نظر به عنوان کوچ تعریف نشده است','خطا')->persistent('بستن');
                     return redirect('/coaches/all');
                 }
                 else
                 {
-                    if (!is_null($coach->city)) {
-                        $coach->city = $this->city($coach->city)->name;
+                    if (!is_null($user->coach->city)) {
+                        $coach->city = $this->city($user->coach->city)->name;
                     }
 
                     $dateNow = verta();
 
-                    if ($coach->today_meeting == 0) {
+                    if ($user->coach->today_meeting == 0) {
                         $dateNow->addDays(1);
                     }
 
