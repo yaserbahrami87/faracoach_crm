@@ -192,7 +192,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
 
     Route::get('/users/search/','UserController@searchUsers');
     Route::get('/users/search/advance','UserController@advanceSearchUsers');
-        Route::get('/add','UserController@showRegister');
+    Route::get('/add','UserController@showRegister');
     Route::post('/register','UserController@register');
     Route::get('/user/{user}/delete','UserController@destroy');
     Route::get('/users/category/','UserController@showCategoryUsersAdmin');
@@ -393,7 +393,11 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     //reportAdmin
     Route::get('/reports/statistic/{user}','ReportAdminController@show');
     Route::get('/reports/allreport','ReportAdminController@allReportsUsers');
+    Route::get('/reports/advance','ReportAdminController@advance_report');
     Route::get('/reports/allreport/exportexcel','ReportAdminController@exportExcel_allReportsUsers');
+
+    //Tweets
+    Route::resource('tweet','TweetController');
 
 
     //Landing

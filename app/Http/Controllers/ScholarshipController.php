@@ -83,47 +83,55 @@ class ScholarshipController extends BaseController
             'resume'        =>'required|mimes:jpeg,jpg,pdf,doc,png|max:600',
         ]);
 
+        $check=scholarship::where('user_id','=',Auth::user()->id)
+                    ->first();
 
-        $file=$request->file('resume');
-        $resume="resume-".Auth::user()->tel.".".$request->file('resume')->extension();
-        $path=public_path('/documents/scholarship');
-        $files=$request->file('resume')->move($path, $resume);
-
-
-        $dateNow = verta();
-        $this->dateNow = $dateNow->format('Ymd');
-        $this->timeNow = $dateNow->format('His');
-        $trackingCode=$this->dateNow.$this->timeNow;
+        if(is_null($check))
+        {
+            $file = $request->file('resume');
+            $resume = "resume-" . Auth::user()->tel . "." . $request->file('resume')->extension();
+            $path = public_path('/documents/scholarship');
+            $files = $request->file('resume')->move($path, $resume);
 
 
-        $status=scholarship::create(
-        [
-            'user_id'       =>Auth::user()->id,
-            'target'        =>implode(',',$request->target),
-            'types'         =>implode(',',$request->types),
-            'gettingknow'   =>$request->gettingknow,
+            $dateNow = verta();
+            $this->dateNow = $dateNow->format('Ymd');
+            $this->timeNow = $dateNow->format('His');
+            $trackingCode = $this->dateNow . $this->timeNow;
+
+
+            $status = scholarship::create(
+                [
+                    'user_id' => Auth::user()->id,
+                    'target' => implode(',', $request->target),
+                    'types' => implode(',', $request->types),
+                    'gettingknow' => $request->gettingknow,
 //            'description'   =>$request->description,
 //            'scientific'    =>$request->scientific,
 //            'executive'     =>$request->executive,
-            'introduce'     =>session()->get('introduce'),
-            'cooperation'   =>$request->cooperation,
-            'applicant'     =>$request->applicant,
-            'resume'        =>$resume,
-            'trackingcode'  =>$trackingCode,
+                    'introduce' => session()->get('introduce'),
+                    'cooperation' => $request->cooperation,
+                    'applicant' => $request->applicant,
+                    'resume' => $resume,
+                    'trackingcode' => $trackingCode,
 
-        ]);
+                ]);
 
 
-
-        if($status)
-        {
-            $msg=Auth::user()->fname.' '.Auth::user()->lname." عزیز\nدرخواست شما ثبت شد\nمنتظر تایید اولیه اطلاعات باشید\nلینک دعوت از دوستان و کسب امتیاز معرفی: "."my.faracoach.com/scholarship/register?introduce=".Auth::user()->id;
-            $this->sendSms(Auth::user()->tel,$msg);
+            if ($status) {
+                $msg = Auth::user()->fname . ' ' . Auth::user()->lname . " عزیز\nدرخواست شما ثبت شد\nمنتظر تایید اولیه اطلاعات باشید\nلینک دعوت از دوستان و کسب امتیاز معرفی: " . "my.faracoach.com/scholarship/register?introduce=" . Auth::user()->id;
+                $this->sendSms(Auth::user()->tel, $msg);
 //            $this->sendSms(Auth::user()->tel,'شماره پیگیری بورسیه فراکوچ:'.$trackingCode."\nلینک اختصاصی شما جهت دعوت در بورسیه:\n "."my.faracoach.com/scholarship/register?introduce=".Auth::user()->id);
-            $this->sendSms('09153159020',$status->id.' بورسیه:'.Auth::user()->fname.' '.Auth::user()->lname."\nتحصیلات:\n ".Auth::user()->education);
-            alert()->success("ثبت نام شما در بورسیه فراکوچ با موفقیت انجام شد \nکد پیگیری شما $trackingCode")->persistent('بستن');
+                $this->sendSms('09153159020', $status->id . ' بورسیه:' . Auth::user()->fname . ' ' . Auth::user()->lname . "\nتحصیلات:\n " . Auth::user()->education);
+                alert()->success("ثبت نام شما در بورسیه فراکوچ با موفقیت انجام شد \nکد پیگیری شما $trackingCode")->persistent('بستن');
+                $request->session()->forget('scholarshipStatus');
+                return redirect('/panel');
+            }
+        }else
+        {
             $request->session()->forget('scholarshipStatus');
-            return redirect('/panel');
+            alert()->error('اطاعات شما در سامانه بورسیه کوچینگ قبلا ثبت شده است')->persistent('بستن');
+            return back();
         }
     }
 

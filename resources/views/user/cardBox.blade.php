@@ -101,7 +101,7 @@
         </div>
         <div class="col-12 text-center mt-1">
             <a href="/panel/scholarship/me" class="btn btn-block btn-primary">
-                <p>بورسیه فراکوچ</p>
+                <p>بورسیه کوچینگ</p>
             </a>
         </div>
 

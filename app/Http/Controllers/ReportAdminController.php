@@ -312,4 +312,10 @@ class ReportAdminController extends BaseController
                             ->deleteFileAfterSend(true);
 
     }
+
+
+    public function advance_report()
+    {
+        return view('admin.reports.report_advance');
+    }
 }

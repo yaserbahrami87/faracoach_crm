@@ -13,9 +13,14 @@ class TweetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $tweets=tweet::orderby('id','desc')
+                    ->paginate(10);
+        $tweets->appends(['tweets' => $request['tweets']]);
+        return view('admin.tweets.tweet_all')
+                    ->with('tweets',$tweets);
+
     }
 
     /**
@@ -99,6 +104,16 @@ class TweetController extends Controller
      */
     public function destroy(tweet $tweet)
     {
-        //
+        $status=$tweet->delete();
+        if($status)
+        {
+            alert()->success('دلنوشته با موفقیت پاک شد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->success('خطا در حذف دلنوشته')->persistent('بستن');
+        }
+
+        return back();
     }
 }

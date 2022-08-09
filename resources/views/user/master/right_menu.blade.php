@@ -8,9 +8,9 @@
                 <!--<div class="brand-logo"><img class="logo" src="{{ asset('/acckt/assets/img/logo.png') }}" width=""></div>-->
                     <div class="brand-logo">
                         @if(is_null(Auth::user()->personal_image))
-                            <img class="round" src="{{asset('/panel_assets/images/profile/user-profile-thumbnail.png')}}" width="40">
+                            <img class="round" src="{{asset('/panel_assets/images/profile/user-profile-thumbnail.png')}}" width="40px" height="40px">
                         @else
-                            <img class="round" src="{{asset('/documents/users/'.Auth::user()->personal_image)}}" width="40">
+                            <img class="round" src="{{asset('/documents/users/'.Auth::user()->personal_image)}}" width="40px" height="40px" >
                         @endif
                     </div>
                     <h5 class="brand-text mb-0" style="font-size: 1.2rem;">

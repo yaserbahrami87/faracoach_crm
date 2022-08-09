@@ -157,76 +157,73 @@ class CoachController extends BaseController
             $coach = coach::join('users', 'coaches.user_id', '=', 'users.id')
                                 ->where('users.id', '=', $user->id)
                                 ->first();
-            if($coach->status==2)
+
+            if($coach['status']==2)
             {
                 alert()->error('لینک منقضی شده است')->persistent('بستن');
                 return redirect('/coaches/all');
             }
             else
             {
-
-
-
-
-            $feedbacks=coach::join('bookings', 'coaches.user_id', '=', 'bookings.user_id')
-                    ->join('feedback_coachings','bookings.id','=','feedback_coachings.booking_id')
-                    ->join('users','users.id','=','feedback_coachings.user_id')
-                    ->where('coaches.user_id','=',$user->id)
-                    ->paginate(10);
-            if($coach->today_meeting)
-            {
-                $condition=['start_date','>=',$this->dateNow];
-            }
-            else
-            {
-                $condition=['start_date','>',$this->dateNow];
-            }
-
-            $bookings=$this->get_booking(NULL,$coach->user_id,NULL,NULL,NULL,1,$condition,'get');
-
-            //کامنت های گذاشته شده برای کوچ
-            $comments=$this->get_comments(NULL,NULL,$user->id,NULL,'coach');
-
-
-
-
-            if(is_null($coach))
-            {
-                alert()->error('شخص مورد نظر به عنوان کوچ تعریف نشده است','خطا')->persistent('بستن');
-                return redirect('/coaches/all');
-            }
-            else
-            {
-                if (!is_null($coach->city)) {
-                    $coach->city = $this->city($coach->city)->name;
+                $feedbacks=coach::join('bookings', 'coaches.user_id', '=', 'bookings.user_id')
+                        ->join('feedback_coachings','bookings.id','=','feedback_coachings.booking_id')
+                        ->join('users','users.id','=','feedback_coachings.user_id')
+                        ->where('coaches.user_id','=',$user->id)
+                        ->paginate(10);
+                if($coach->today_meeting)
+                {
+                    $condition=['start_date','>=',$this->dateNow];
+                }
+                else
+                {
+                    $condition=['start_date','>',$this->dateNow];
                 }
 
-                $dateNow = verta();
+                $bookings=$this->get_booking(NULL,$coach->user_id,NULL,NULL,NULL,1,$condition,'get');
 
-                if ($coach->today_meeting == 0) {
-                    $dateNow->addDays(1);
+                //کامنت های گذاشته شده برای کوچ
+                $comments=$this->get_comments(NULL,NULL,$user->id,NULL,'coach');
+
+
+
+
+                if(is_null($coach))
+                {
+                    alert()->error('شخص مورد نظر به عنوان کوچ تعریف نشده است','خطا')->persistent('بستن');
+                    return redirect('/coaches/all');
                 }
+                else
+                {
+                    if (!is_null($coach->city)) {
+                        $coach->city = $this->city($coach->city)->name;
+                    }
+
+                    $dateNow = verta();
+
+                    if ($coach->today_meeting == 0) {
+                        $dateNow->addDays(1);
+                    }
 
 
-                $dateShamsi = $dateNow->format('Y-m-d H:i:s');
+                    $dateShamsi = $dateNow->format('Y-m-d H:i:s');
 
 
-                $date_Miladi = Verta::getGregorian($dateNow->format('Y'), $dateNow->format('m'), $dateNow->format('d'));
+                    $date_Miladi = Verta::getGregorian($dateNow->format('Y'), $dateNow->format('m'), $dateNow->format('d'));
 
-                $date_Miladi = $date_Miladi[0] . '-' . $date_Miladi[1] . '-' . $date_Miladi[2];
+                    $date_Miladi = $date_Miladi[0] . '-' . $date_Miladi[1] . '-' . $date_Miladi[2];
 
-                //چک کردن تعداد رزروهای ناقص کامل نشده در سبد خرید
-                $cart = $this->get_cartUser();
+                    //چک کردن تعداد رزروهای ناقص کامل نشده در سبد خرید
+                    $cart = $this->get_cartUser();
 
-            }
-                return view('coach')
-                    ->with('coach', $coach)
-                    ->with('bookings', $bookings)
-                    ->with('dateNow', $dateShamsi)
-                    ->with('date_Miladi', $date_Miladi)
-                    ->with('feedbacks',$feedbacks)
-                    ->with('comments',$comments)
-                    ->with('cart',$cart);
+                }
+                    return view('coach')
+                        ->with('coach', $coach)
+                        ->with('bookings', $bookings)
+                        ->with('dateNow', $dateShamsi)
+                        ->with('date_Miladi', $date_Miladi)
+                        ->with('feedbacks',$feedbacks)
+                        ->with('comments',$comments)
+                        ->with('cart',$cart);
             }
         }
     }

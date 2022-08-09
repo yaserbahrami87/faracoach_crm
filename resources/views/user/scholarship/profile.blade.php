@@ -668,7 +668,7 @@
                                 <small> ارسال پیامک دعوت</small>
                                 <div class="input-group mb-1">
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="sms0" name="sms" class="custom-control-input" value="0" checked>
+                                        <input type="radio" id="sms0" name="sms" class="custom-control-input" value="0" checked >
                                         <label class="custom-control-label" for="sms0">ارسال شود</label>
                                     </div>
                                     <div class="custom-control custom-radio">
