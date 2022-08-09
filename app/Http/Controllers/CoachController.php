@@ -158,7 +158,7 @@ class CoachController extends BaseController
                                 ->where('users.id', '=', $user->id)
                                 ->first();
 
-            if($coach['status']==2)
+            if($coach->status==2)
             {
                 alert()->error('لینک منقضی شده است')->persistent('بستن');
                 return redirect('/coaches/all');
