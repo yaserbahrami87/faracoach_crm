@@ -22,8 +22,8 @@
 @endsection
 @section('row1')
     <body>
-    <div class="col-12 text-center mt-xl-5 mt-lg-5 mt-md-4 mt-sx-3 ">
-        <img src="{{asset('images/404.png')}} " id="img-403" alt="responsive img" />
+    <div class="col-12 text-center mt-xl-5 mt-lg-5 mt-md-4 mt-sx-3  pt-5 ">
+
         <p class=" text-bold mt-xl-5 mt-lg-5 mt-md-5 mt-sx-5">صفحه مورد نظر یافت نشد!</p>
         <a href= "/login" class="btn btn-primary mt-xl-5 mt-lg-5 mt-md-4 mt-sx-3 btn-lg" > بازگشت  به صفحه ورود </a>
     </div>

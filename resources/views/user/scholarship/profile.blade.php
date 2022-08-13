@@ -36,7 +36,7 @@
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                 <h3 class="d-block text-dark text-center" style="line-height: 2">طرح اعطای بورسیه کوچینگ آکادمی بین المللی فراکوچ</h3>
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body shadow shadow-sm">
                         <p style="line-height: 2" class="text-center">شناسایی و دعوت از افراد نخبه و با استعداد جهت حضور ویژه</p>
                         <p style="line-height: 2;text-align: justify">آکادمی بین المللی فراکوچ فرصت بی نظیری را به منظور ورود و پیوستن جمع بیشتری از افراد مستعد ، نخبه و فرهیخته جامعه - به ویژه اساتید ،  پژوهشگران، اندیشمندان، مدیران و دانشجویان برتر - به دنیای حرفه ای کوچینگ از طریق ایجاد شرایط ویژه حضور آنان در دوره های آموزش و تربیت کوچ حرفه ای ، فراهم کرده است.</p>
                     </div>
@@ -311,6 +311,7 @@
                                                 <input type="file" class="custom-file-input @if(!strlen($scholarship->user->personal_image)==0) is-valid  @endif" id="inputpersonal_image" name="personal_image"/>
                                                 <label class="custom-file-label" for="inputpersonal_image">انتخاب فایل</label>
                                             </div>
+                                            <small class="text-muted">فرمت فایل:jpg , jpeg , png  -;حجم حداکثر 600 کیلوبایت</small>
                                         </div>
                                     </div>
                                     <div class="col-md-12 px-1">
@@ -526,6 +527,7 @@
                                                 <input type="file" class="custom-file-input @if(strlen($scholarship->user->shenasnameh_image)==0) is-invalid  @else is-valid  @endif" id="inputshenasnameh_image" aria-describedby="inputshenasnameh_image" name="shenasnameh_image" @if(strlen($scholarship->user->shenasnameh_image)==0) required @endif />
                                                 <label class="custom-file-label" for="inputshenasnameh_image">Choose file</label>
                                             </div>
+                                            <small class="text-muted">فرمت فایل:jpg , jpeg , png  -;حجم حداکثر 600 کیلوبایت</small>
                                         </div>
                                     </div>
                                     <div class="col-md-6 px-1">
@@ -537,6 +539,7 @@
                                                 <input type="file" class="custom-file-input @if(strlen($scholarship->user->cartmelli_image)==0) is-invalid  @else is-valid  @endif" id="inputcartmelli_image" aria-describedby="inputcartmelli_image" name="cartmelli_image"  @if(strlen($scholarship->user->cartmelli_image)==0) required @endif />
                                                 <label class="custom-file-label" for="inputcartmelli_image">Choose file</label>
                                             </div>
+                                            <small class="text-muted">فرمت فایل:jpg , jpeg , png  -;حجم حداکثر 600 کیلوبایت</small>
                                         </div>
                                     </div>
                                     <div class="col-md-6 px-1">
@@ -548,6 +551,7 @@
                                                 <input type="file" class="custom-file-input @if(strlen($scholarship->user->education_image)==0) is-invalid  @else is-valid  @endif" id="inputeducation_image" aria-describedby="inputeducation_image" name="education_image" @if(strlen($scholarship->user->education_image)==0) required @endif />
                                                 <label class="custom-file-label" for="inputeducation_image">Choose file</label>
                                             </div>
+                                            <small class="text-muted">فرمت فایل:jpg , jpeg , png  -;حجم حداکثر 600 کیلوبایت</small>
                                         </div>
                                     </div>
                                     <div class="col-md-6 px-1">
@@ -559,6 +563,7 @@
                                                 <input type="file" class="custom-file-input @if(strlen($scholarship->user->resume)==0) is-invalid  @else is-valid  @endif " id="resume" aria-describedby="resume" name="resume" @if(strlen($scholarship->user->resume)==0) required @endif/>
                                                 <label class="custom-file-label" for="resume">Choose file</label>
                                             </div>
+                                            <small class="text-muted">فرمت فایل:jpg , jpeg , PDF , DOC  -;حجم حداکثر 600 کیلوبایت</small>
                                         </div>
                                     </div>
 
@@ -629,20 +634,6 @@
 
                                             <input type="text" class="form-control @if(strlen($scholarship->user->introduced)==0) is-invalid  @else is-valid  @endif"  @if(!is_null($scholarship->user->getIntroduced))  value="{{$scholarship->user->getIntroduced->fname.' '.$scholarship->user->getIntroduced->lname }}" @endif  id="introduced" />
                                             <span id="feedback_introduced" ></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 px-1">
-                                        <div class="form-group">
-                                            <label>نحوه ورود به فراکوچ</label>
-                                            <input type="text" class="form-control @if(strlen($scholarship->user->resource)==0) is-invalid  @else is-valid  @endif" disabled="disabled"  value="{{old('resource',$scholarship->user->resource)}}" name="resource"  />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 px-1">
-                                        <div class="form-group">
-                                            <label>عنوان ورود</label>
-                                            <div class="form-group">
-                                                <input type="text" class="form-control @if(strlen($scholarship->user->detailsresource)==0) is-invalid  @else is-valid  @endif" disabled="disabled" value="{{old('detailsresource',$scholarship->user->detailsresource)}} " name="detailsresource" />
-                                            </div>
                                         </div>
                                     </div>
                                 </div>

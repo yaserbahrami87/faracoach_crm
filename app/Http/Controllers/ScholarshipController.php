@@ -478,8 +478,15 @@ class ScholarshipController extends BaseController
         $scholarship=scholarship::get();
         foreach ($scholarship as $item)
         {
+            if($item->user->created_at>'2022-07-20 00:00:00')
+            {
+                $item->newUser='*';
+            }
+
             $item->created_at=$this->changeTimestampToShamsi($item->created_at);
         }
+
+
 
         Artisan::call('cache:clear');
         Artisan::call('view:clear');
@@ -491,7 +498,7 @@ class ScholarshipController extends BaseController
         $list=[];
 
         foreach ($scholarship as $item) {
-            array_push($list,['نام'=>$item->user->fname,'نام خانوادگی'=>$item->user->lname,'تلفن همراه'=>$item->user->tel,'تاریخ ثبت نام'=>substr($item->created_at,0,10)]);
+            array_push($list,['جدید'=>$item['newUser'],'نام'=>$item->user->fname,'نام خانوادگی'=>$item->user->lname,'تلفن همراه'=>$item->user->tel,'تاریخ ثبت نام'=>substr($item->created_at,0,10)]);
         }
 
         $excel=fastexcel($list)->export($fileName);
