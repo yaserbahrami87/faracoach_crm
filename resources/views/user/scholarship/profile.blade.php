@@ -1,4 +1,10 @@
 @extends('user.master.index')
+
+@section('headerScript')
+    <link href="{{asset('/css/kamadatepicker.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('/css/timepicker.min.css')}}" rel="stylesheet" />
+@endsection
+
 @section('content')
     <div class="col-md-12">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -28,9 +34,14 @@
         </ul>
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                <h3 class="d-block text-dark" style="line-height: 2">طرح اعطای بورسیه کوچینگ آکادمی بین المللی فراکوچ</h3>
-                <u style="line-height: 2">شناسایی و دعوت از افراد نخبه و با استعداد جهت حضور ویژه</u>
-                <p style="line-height: 2;text-align: justify">آکادمی بین المللی فراکوچ فرصت بی نظیری را به منظور ورود و پیوستن جمع بیشتری از افراد مستعد ، نخبه و فرهیخته جامعه - به ویژه اساتید ،  پژوهشگران، اندیشمندان، مدیران و دانشجویان برتر - به دنیای حرفه ای کوچینگ از طریق ایجاد شرایط ویژه حضور آنان در دوره های آموزش و تربیت کوچ حرفه ای ، فراهم کرده است.</p>
+                <h3 class="d-block text-dark text-center" style="line-height: 2">طرح اعطای بورسیه کوچینگ آکادمی بین المللی فراکوچ</h3>
+                <div class="card">
+                    <div class="card-body">
+                        <p style="line-height: 2" class="text-center">شناسایی و دعوت از افراد نخبه و با استعداد جهت حضور ویژه</p>
+                        <p style="line-height: 2;text-align: justify">آکادمی بین المللی فراکوچ فرصت بی نظیری را به منظور ورود و پیوستن جمع بیشتری از افراد مستعد ، نخبه و فرهیخته جامعه - به ویژه اساتید ،  پژوهشگران، اندیشمندان، مدیران و دانشجویان برتر - به دنیای حرفه ای کوچینگ از طریق ایجاد شرایط ویژه حضور آنان در دوره های آموزش و تربیت کوچ حرفه ای ، فراهم کرده است.</p>
+                    </div>
+                </div>
+
 
             </div>
             <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
@@ -237,19 +248,26 @@
                                 <div class="row">
                                     <div class="col-md-6 px-1">
                                         <div class="form-group">
-                                            <label>نام</label>
+                                            <label>
+                                                نام:
+                                                <span class="text-danger">*</span>
+                                            </label>
                                             <input type="text" class="form-control @if(!strlen($scholarship->user->fname)==0)  is-valid  @endif" placeholder="نام را وارد کنید"  value='{{old('fname',$scholarship->user->fname)}}'  name="fname" required  />
                                         </div>
                                     </div>
                                     <div class="col-md-6 px-1">
                                         <div class="form-group">
-                                            <label>نام خانوادگی</label>
+                                            <label>نام خانوادگی:
+                                                <span class="text-danger">*</span>
+                                            </label>
                                             <input type="text" class="form-control @if(!strlen($scholarship->user->lname)==0) is-valid  @endif" placeholder="نام خانوادگی را وارد کنید" value='{{old('lname',$scholarship->user->lname)}}'  name="lname"  required />
                                         </div>
                                     </div>
                                     <div class="col-md-6 px-1">
                                         <div class="form-group">
-                                            <label for="exampleFormControlSelect1">جنسیت</label>
+                                            <label for="exampleFormControlSelect1">جنسیت:
+                                                <span class="text-danger">*</span>
+                                            </label>
                                             <div class="form-group">
                                                 <select class="form-control p-0 @if(!strlen($scholarship->user->sex)==0) is-valid  @endif" id="exampleFormControlSelect1" name="sex" required >
                                                     <option selected disabled>انتخاب کنید</option>
@@ -261,20 +279,29 @@
                                     </div>
                                     <div class="col-md-6 px-1">
                                         <div class="form-group">
-                                            <label for="codemelli">کد ملی</label>
+                                            <label for="codemelli">کد ملی:
+                                                <span class="text-danger">*</span>
+                                            </label>
                                             <input type="text" class="form-control @if(!strlen($scholarship->user->codemelli)==0)  is-valid  @endif" placeholder="کد ملی را وارد کنید" value='{{old('codemelli',$scholarship->user->codemelli)}}'  id="codemelli" name="codemelli" {{strlen($scholarship->user->codemelli)===0?"": "disabled" }} required />
+                                            <small class="text-muted">به عنوان مثال:0941234567</small>
                                         </div>
                                     </div>
                                     <div class="col-md-6 px-1">
                                         <div class="form-group">
-                                            <label>شماره شناسنامه</label>
+                                            <label>شماره شناسنامه:
+                                                <span class="text-danger">*</span>
+                                            </label>
                                             <input type="text" class="form-control @if(!strlen($scholarship->user->shenasname)==0) is-valid  @endif" placeholder="شماره شناسنامه را وارد کنید"  value='{{old('shenasname',$scholarship->user->shenasname)}}' name="shenasname" required  />
+                                            <small class="text-muted">به عنوان مثال:1234</small>
                                         </div>
                                     </div>
                                     <div class="col-md-6 px-1">
                                         <div class="form-group">
-                                            <label>تاریخ تولد</label>
+                                            <label>تاریخ تولد:
+                                                <span class="text-danger">*</span>
+                                            </label>
                                             <input type="text" class="form-control @if(!strlen($scholarship->user->datebirth)==0)  is-valid  @endif" placeholder="تاریخ تولد را وارد کنید" value='{{old('datebirth',$scholarship->user->datebirth)}}' name="datebirth" id="datebirth" required />
+                                            <small class="text-muted">به عنوان مثال:1365/01/01</small>
                                         </div>
                                     </div>
                                     <div class="col-md-6 px-1">
@@ -288,9 +315,11 @@
                                     </div>
                                     <div class="col-md-12 px-1">
                                         <div class="form-group">
-                                            <label>نام کاربری</label>
+                                            <label>نام کاربری:
+                                                <span class="text-danger">*</span>
+                                            </label>
                                             <input type="text" class="form-control @if(!strlen($scholarship->user->username)==0) is-valid  @endif" placeholder="نام کاربری خود را وارد کنید" value='{{old('username',$scholarship->user->username)}}' name="username" @if(strlen($scholarship->user->username)>0) disabled @endif required  />
-                                            <small class="text-muted  float-left" dir="ltr">نام کاربری شما</small>
+                                            <small class="text-muted">به عنوان مثال: hesamaghaei</small>
                                         </div>
                                     </div>
                                 </div>
@@ -313,61 +342,82 @@
                                 <div class="row">
                                     <div class="col-md-6 px-1">
                                         <div class="form-group">
-                                            <label>تلفن تماس</label>
+                                            <label>تلفن تماس:
+                                                <span class="text-danger">*</span>
+                                            </label>
                                             <input type="hidden" id="tel_org" value="{{old('tel',$scholarship->user->tel)}}" name="tel"/>
                                             <input type="tel" class="form-control @if(strlen($scholarship->user->tel)==0) is-invalid  @else is-valid  @endif" placeholder="تلفن تماس را وارد کنید" value='{{old('tel',$scholarship->user->tel)}}'  id="tel"  @if(strlen($scholarship->user->tel)>0 ) disabled  @endif  />
+                                            <small class="text-muted">به عنوان مثال:09151234567</small>
                                         </div>
                                     </div>
                                     <div class="col-md-6 pr-1">
                                         <div class="form-group">
-                                            <label for="email">پست الکترونیکی</label>
+                                            <label for="email">پست الکترونیکی:
+                                                <span class="text-danger">*</span>
+                                            </label>
                                             <input type="email" class="form-control @if(strlen($scholarship->user->email)==0) is-invalid  @else is-valid  @endif" placeholder="پست الکترونیکی را وارد کنید" value='{{old('email',$scholarship->user->email)}}' name="email"  id="email"  @if(strlen($scholarship->user->email)>0) disabled  @endif  required />
+                                            <small class="text-muted">به عنوان مثال:faracoach@gmail.com</small>
                                         </div>
                                     </div>
                                     <div class="col-md-6 pl-1">
                                         <div class="form-group">
-                                            <label>استان</label>
-                                            <select class="custom-select @if(strlen($scholarship->user->state)==0) is-invalid  @else is-valid  @endif"  name="state"  id="state" required>
+                                            <label>استان:
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <select class="custom-select @if(strlen($scholarship->user->state)==0)   @else is-valid  @endif"  name="state"  id="state" required>
                                                 <option selected disabled>استان را انتخاب کنید</option>
                                                 @foreach($states as $item)
                                                     <option value="{{$item->id}}"   {{ old('state',$scholarship->user->state)==$item->id ? 'selected='.'"'.'selected'.'"' : '' }} >{{$item->name}}</option>
                                                 @endforeach
                                             </select>
+                                            <small class="text-muted">به عنوان مثال:خراسان رضوی</small>
                                         </div>
                                     </div>
                                     <div class="col-md-6 px-1">
                                         <div class="form-group">
-                                            <label>شهر</label>
+                                            <label>شهر:
+                                                <span class="text-danger">*</span>
+                                            </label>
 
-                                            <select class="custom-select @if(strlen($scholarship->user->city)==0) is-invalid  @else is-valid  @endif"  name="city"  id="city" required>
+                                            <select class="custom-select @if(strlen($scholarship->user->city)==0)   @else is-valid  @endif"  name="city"  id="city" required>
                                                 @if (!is_null($city))
-                                                    <option value="{{$city->id}}">@if(!is_null($city))  {{$city->name}}  @endif </option>
+                                                    <option value="{{$scholarship->user->city}}">@if(!is_null($city))  {{$city->name}}  @endif </option>
                                                 @endif
                                             </select>
+                                            <small class="text-muted">به عنوان مثال: مشهد</small>
                                         </div>
                                     </div>
                                     <div class="col-md-12 px-1">
                                         <div class="form-group">
-                                            <label>آدرس</label>
+                                            <label>آدرس:
+                                                <span class="text-danger">*</span>
+                                            </label>
                                             <input type="text" class="form-control @if(strlen($scholarship->user->address)==0) is-invalid  @else is-valid  @endif" placeholder="آدرس را وارد کنید"  value='{{old('address',$scholarship->user->address)}}' name="address"  required />
                                         </div>
                                     </div>
                                     <div class="col-md-6 px-1">
                                         <div class="form-group">
-                                            <label>اینستاگرام</label>
+                                            <label>اینستاگرام:
+                                                <span class="text-danger">*</span>
+                                            </label>
                                             <input type="text" class="form-control @if(strlen($scholarship->user->instagram)==0) is-invalid  @else is-valid  @endif" placeholder="صفحه اینستاگرام خود را وارد کنید"  value='{{old('instagram',$scholarship->user->instagram)}}' name="instagram" required  />
                                         </div>
                                     </div>
                                     <div class="col-md-6 px-1">
                                         <div class="form-group">
-                                            <label>تلگرام</label>
+                                            <label>تلگرام:
+                                                <span class="text-danger">*</span>
+                                            </label>
                                             <input type="text" class="form-control @if(strlen($scholarship->user->telegram)==0) is-invalid  @else is-valid  @endif" placeholder="آیدی تلگرام خود را وارد کنید" value='{{old('telegram',$scholarship->user->telegram)}}' name="telegram" required />
+
                                         </div>
                                     </div>
                                     <div class="col-md-6 px-1">
                                         <div class="form-group">
-                                            <label>لینکدین</label>
-                                            <input type="text" class="form-control @if(strlen($scholarship->user->linkedin)==0) is-invalid  @else is-valid  @endif" placeholder="آیدی لینکدین خود را وارد کنید"  value='{{old('linkedin',$scholarship->user->linkedin)}}' name="linkedin" required />
+                                            <label>لینکدین:
+
+                                            </label>
+                                            <input type="text" class="form-control @if(strlen($scholarship->user->linkedin)==0) is-invalid  @else is-valid  @endif" placeholder="آیدی لینکدین خود را وارد کنید"  value='{{old('linkedin',$scholarship->user->linkedin)}}' name="linkedin"  />
                                         </div>
                                     </div>
                                 </div>
@@ -388,41 +438,48 @@
                             </div>
                             <div class="card-body bg-secondary-light border-1 border-secondary" id="infoConstract">
                                 <div class="row">
-                                    <div class="col-12">
-                                        <div class="alert alert-warning" role="alert">
-                                            <small>این اطلاعات صرفاجهت عقد قراردادهای آموزشی و ارائه خدمات کوچینگ مورد نیاز است</small>
-                                        </div>
-                                    </div>
                                     <div class="col-md-6 px-1">
                                         <div class="form-group">
-                                            <label>نام پدر</label>
+                                            <label>نام پدر:
+                                                <span class="text-danger">*</span>
+                                            </label>
                                             <input type="text" class="form-control @if(strlen($scholarship->user->father)==0) is-invalid  @else is-valid  @endif" placeholder=" نام پدر را وارد کنید"  value='{{old('father',$scholarship->user->father)}}'  name="father" required />
+                                            <small class="text-muted">به عنوان مثال: علی</small>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6 px-1">
                                         <div class="form-group">
-                                            <label>تاهل</label>
+                                            <label>تاهل:
+                                                <span class="text-danger">*</span>
+                                            </label>
                                             <div class="form-group">
                                                 <select class="form-control p-0 @if(strlen($scholarship->user->married)==0) is-invalid  @else is-valid  @endif" id="exampleFormControlSelect1" name="married" required >
                                                     <option selected disabled>انتخاب کنید</option>
                                                     <option value="0" {{ old('married',$scholarship->user->married)=="0" ? 'selected='.'"'.'selected'.'"' : '' }} >مجرد</option>
                                                     <option value="1" {{ old('married',$scholarship->user->married)=="1" ? 'selected='.'"'.'selected'.'"' : '' }} >متاهل</option>
                                                 </select>
+                                                <small class="text-muted">به عنوان مثال: مجرد</small>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 pl-1">
                                         <div class="form-group">
-                                            <label>شهر تولد</label>
+                                            <label>شهر تولد:
+                                                <span class="text-danger">*</span>
+                                            </label>
                                             <input type="text" class="form-control @if(strlen($scholarship->user->born)==0) is-invalid  @else is-valid  @endif" placeholder="شهر تولد را وارد کنید"  value='{{old('born',$scholarship->user->born)}}' name="born" required />
+                                            <small class="text-muted">به عنوان مثال: مشهد</small>
                                         </div>
                                     </div>
                                     <div class="col-md-6 px-1">
                                         <div class="form-group">
-                                            <label>تحصیلات</label>
+                                            <label>تحصیلات:
+                                                <span class="text-danger">*</span>
+                                            </label>
                                             <select id="education" class="form-control p-0 @if(strlen($scholarship->user->education)==0) is-invalid  @else is-valid  @endif  @error('education') is-invalid @enderror" name="education" required >
                                                 <option selected disabled>انتخاب کنید</option>
                                                 <option {{ old('education',$scholarship->user->education)=="زیردیپلم" ? 'selected='.'"'.'selected'.'"' : '' }}   >زیردیپلم</option>
@@ -432,21 +489,28 @@
                                                 <option {{ old('education',$scholarship->user->education)=="فوق لیسانس" ? 'selected='.'"'.'selected'.'"' : '' }}>فوق لیسانس</option>
                                                 <option {{ old('education',$scholarship->user->education)=="دکتری و بالاتر" ? 'selected='.'"'.'selected'.'"' : '' }}>دکتری و بالاتر</option>
                                             </select>
+                                            <small class="text-muted">به عنوان مثال: لیسانس</small>
                                         </div>
                                     </div>
                                     <div class="col-md-6 pr-1">
                                         <div class="form-group">
-                                            <label>رشته</label>
+                                            <label>رشته:
+                                                <span class="text-danger">*</span>
+                                            </label>
                                             <div class="form-group">
                                                 <input type="text" class="form-control @if(strlen($scholarship->user->reshteh)==0) is-invalid  @else is-valid  @endif" placeholder="رشته را وارد کنید" value='{{old('reshteh',$scholarship->user->reshteh)}}'  name="reshteh" required />
+                                                <small class="text-muted">به عنوان مثال: روانشناسی</small>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6 pr-1">
                                         <div class="form-group">
-                                            <label>شغل</label>
+                                            <label>شغل:
+                                                <span class="text-danger">*</span>
+                                            </label>
                                             <div class="form-group">
                                                 <input type="text" class="form-control @if(strlen($scholarship->user->job)==0) is-invalid  @else is-valid  @endif" placeholder="شغل را وارد کنید" value='{{old('job',$scholarship->user->job)}}'  name="job" required />
+                                                <small class="text-muted">به عنوان مثال: مشاور</small>
                                             </div>
                                         </div>
                                     </div>
@@ -455,36 +519,44 @@
                                 <div class="row">
                                     <div class="col-md-6 px-1">
                                         <div class="form-group">
-                                            <label>عکس شناسنامه</label>
+                                            <label>عکس شناسنامه:
+                                                <span class="text-danger">*</span>
+                                            </label>
                                             <div class="custom-file">
-                                                <input type="file" class="custom-file-input @if(strlen($scholarship->user->shenasnameh_image)==0) is-invalid  @else is-valid  @endif" id="inputshenasnameh_image" aria-describedby="inputshenasnameh_image" name="shenasnameh_image" required />
+                                                <input type="file" class="custom-file-input @if(strlen($scholarship->user->shenasnameh_image)==0) is-invalid  @else is-valid  @endif" id="inputshenasnameh_image" aria-describedby="inputshenasnameh_image" name="shenasnameh_image" @if(strlen($scholarship->user->shenasnameh_image)==0) required @endif />
                                                 <label class="custom-file-label" for="inputshenasnameh_image">Choose file</label>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6 px-1">
                                         <div class="form-group">
-                                            <label>عکس کارت ملی</label>
+                                            <label>عکس کارت ملی:
+                                                <span class="text-danger">*</span>
+                                            </label>
                                             <div class="custom-file">
-                                                <input type="file" class="custom-file-input @if(strlen($scholarship->user->cartmelli_image)==0) is-invalid  @else is-valid  @endif" id="inputcartmelli_image" aria-describedby="inputcartmelli_image" name="cartmelli_image"  required  />
+                                                <input type="file" class="custom-file-input @if(strlen($scholarship->user->cartmelli_image)==0) is-invalid  @else is-valid  @endif" id="inputcartmelli_image" aria-describedby="inputcartmelli_image" name="cartmelli_image"  @if(strlen($scholarship->user->cartmelli_image)==0) required @endif />
                                                 <label class="custom-file-label" for="inputcartmelli_image">Choose file</label>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6 px-1">
                                         <div class="form-group">
-                                            <label>عکس مدرک تحصیلی</label>
+                                            <label>عکس مدرک تحصیلی:
+                                                <span class="text-danger">*</span>
+                                            </label>
                                             <div class="custom-file">
-                                                <input type="file" class="custom-file-input @if(strlen($scholarship->user->education_image)==0) is-invalid  @else is-valid  @endif" id="inputeducation_image" aria-describedby="inputeducation_image" name="education_image" required />
+                                                <input type="file" class="custom-file-input @if(strlen($scholarship->user->education_image)==0) is-invalid  @else is-valid  @endif" id="inputeducation_image" aria-describedby="inputeducation_image" name="education_image" @if(strlen($scholarship->user->education_image)==0) required @endif />
                                                 <label class="custom-file-label" for="inputeducation_image">Choose file</label>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6 px-1">
                                         <div class="form-group">
-                                            <label>رزومه</label>
+                                            <label>رزومه:
+                                                <span class="text-danger">*</span>
+                                            </label>
                                             <div class="custom-file">
-                                                <input type="file" class="custom-file-input @if(strlen($scholarship->user->resume)==0) is-invalid  @else is-valid  @endif " id="resume" aria-describedby="resume" name="resume" required />
+                                                <input type="file" class="custom-file-input @if(strlen($scholarship->user->resume)==0) is-invalid  @else is-valid  @endif " id="resume" aria-describedby="resume" name="resume" @if(strlen($scholarship->user->resume)==0) required @endif/>
                                                 <label class="custom-file-label" for="resume">Choose file</label>
                                             </div>
                                         </div>
@@ -511,8 +583,9 @@
                                 <div class="row">
                                     <div class="col-md-6 px-1">
                                         <div class="form-group">
-                                            <label>نحوه آشنایی</label>
-
+                                            <label>نحوه آشنایی:
+                                                <span class="text-danger">*</span>
+                                            </label>
                                             <select id="gettingknow_parent" class="form-control p-0 @if(strlen($scholarship->user->gettingknow)==0) is-invalid  @else is-valid  @endif  @error('gettingknow') is-invalid @enderror" name="gettingKnow_parent" required >
                                                 <option selected disabled>انتخاب کنید</option>
                                                 @foreach($gettingKnow_parent_list as $item)
@@ -526,7 +599,9 @@
                                     @if(!is_null($scholarship->user->gettingknow))
                                         <div class="col-md-6 px-1" id="gettingknow2" >
                                             <div class="form-group">
-                                                <label>عنوان آشنایی</label>
+                                                <label>عنوان آشنایی:
+                                                    <span class="text-danger">*</span>
+                                                </label>
                                                 <select id="gettingknow" class="form-control p-0 @if(strlen($scholarship->user->gettingknow)==0) is-invalid  @else is-valid  @endif  @error('gettingknow') is-invalid @enderror" name="gettingknow" required  >
                                                     <option selected disabled>انتخاب کنید</option>
                                                     @foreach($gettingKnow_child_list as $item)
@@ -584,11 +659,16 @@
             </div>
             <div class="tab-pane fade show" id="introduce" role="tabpanel" aria-labelledby="introduce-tab">
                 <div class="card-body ">
-                    <p>یکی از مهمترین اهداف طرح بورسیه کوچینگ، شناسایی افراد اثرگذار، مستعد و نخبه جامعه و تسهیل فضای آموزش حرفه ای برای این افراد است. </p>
-                    <p>لذا با توجه به اینکه ظرفیت اطلاع رسانی ما محدود است، از شما درخواست میکنیم که دوستان واجد شرایط خود را به این برنامه دعوت کنید و طبعا ما نیز از این اقدام شما قدردانی مینماییم.</p>
-                    <p>چنانچه  فردی که معرفی میکنید و یا از طریق لینک شما  ثبت نام نموده است، تمام مراحل را با  موفقیت  طی کند (مثلا 50 امتیاز کسب کند) ، 10 درصد از امتیاز بورسیه آنها به امتیاز بورسیه  شما اضافه میگردد.</p>
-                    <p>استفاده از امتیاز معرفی دو مرحله دارد:</p>
-                    <p></p>
+                    <div class="card">
+                        <div class="card-body border border-1 shadow-sm shadow">
+                            <p>یکی از مهمترین اهداف طرح بورسیه کوچینگ، شناسایی افراد اثرگذار، مستعد و نخبه جامعه و تسهیل فضای آموزش حرفه ای برای این افراد است. </p>
+                            <p>لذا با توجه به اینکه ظرفیت اطلاع رسانی ما محدود است، از شما درخواست میکنیم که دوستان واجد شرایط خود را به این برنامه دعوت کنید و طبعا ما نیز از این اقدام شما قدردانی مینماییم.</p>
+                            <p>چنانچه  فردی که معرفی میکنید و یا از طریق لینک شما  ثبت نام نموده است، تمام مراحل را با  موفقیت  طی کند (مثلا 50 امتیاز کسب کند) ، 10 درصد از امتیاز بورسیه آنها به امتیاز بورسیه  شما اضافه میگردد.</p>
+                            <p>استفاده از امتیاز معرفی دو مرحله دارد:</p>
+                            <p></p>
+                        </div>
+                    </div>
+
                     <ol>
                         <li>انتشار پوستر و ویدئو در یک پست 2 اسلایدی (اسلاید  اول عکس و اسلاید دوم ویدئوی معرفی) در صفحه اینستاگرام  شما  و  تگ  کردن  ایدی پیج آکادمی faracoach</li>
                         <li>معرفی 5 نفر بصورت مستقیم از طریق  پورتال</li>
@@ -600,9 +680,16 @@
                             <a href="{{asset('/images/بورسیه-اینستاگرام.jpg')}}" class="btn btn-success" target="_blank">استوری بورسیه</a>
                         </div>
                     </div>
+                    <div class="row  bg-secondary ">
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                            <h5 class="text-center text-light mt-2">لینک دعوت اختصاصی شما جهت اشتراک گذاری با دوستان:</h5>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                            <p class="text-light p-2 dir-rtl text-center"  id="personal_link">{{asset('/scholarship/register?introduce='.Auth::user()->id)}}</p>
+                        </div>
+                    </div>
 
-                    <h5 class="text-center">لینک دعوت اختصاصی شما جهت اشتراک گذاری با دوستان:</h5>
-                    <p class="text-light bg-secondary p-2 dir-rtl text-center"  id="personal_link">{{asset('/scholarship/register?introduce='.Auth::user()->id)}}</p>
+
 
                 </div>
 
@@ -745,6 +832,83 @@
 
 
 @section('footerScript')
+    <!--  DATE SHAMSI PICKER  --->
+    <script src="http://127.0.0.1:8000/js/kamadatepicker.min.js"></script>
+    <script src="http://127.0.0.1:8000/js/kamadatepicker.holidays.js"></script>
+    <script>
+        kamaDatepicker('datebirth',
+            {
+                markHolidays:true,
+                markToday:true,
+                twodigit:true,
+                closeAfterSelect:true,
+                nextButtonIcon: "fa fa-arrow-circle-right",
+                previousButtonIcon: "fa fa-arrow-circle-left"
+            });
+
+
+        var customOptions={
+            gotoToday: true,
+            markHolidays:true,
+            markToday:true,
+            twodigit:true,
+            closeAfterSelect:true,
+            highlightSelectedDay:true,
+            nextButtonIcon: "fa fa-arrow-circle-right",
+            previousButtonIcon: "fa fa-arrow-circle-left",
+            sync:true,
+        }
+        kamaDatepicker('dateFollow',customOptions);
+
+        kamaDatepicker('nextfollowup_date_fa',
+            {
+                markHolidays:true,
+                markToday:true,
+                twodigit:true,
+                closeAfterSelect:true,
+                nextButtonIcon: "fa fa-arrow-circle-right",
+                previousButtonIcon: "fa fa-arrow-circle-left"
+            });
+
+        kamaDatepicker('start',
+            {
+                gotoToday: true,
+                markHolidays:true,
+                markToday:true,
+                twodigit:true,
+                closeAfterSelect:true,
+                highlightSelectedDay:true,
+                nextButtonIcon: "fa fa-arrow-circle-right",
+                previousButtonIcon: "fa fa-arrow-circle-left",
+                sync:true,
+            });
+        kamaDatepicker('end',
+            {
+                gotoToday: true,
+                markHolidays:true,
+                markToday:true,
+                twodigit:true,
+                closeAfterSelect:true,
+                highlightSelectedDay:true,
+                nextButtonIcon: "fa fa-arrow-circle-right",
+                previousButtonIcon: "fa fa-arrow-circle-left",
+                sync:true,
+            });
+        kamaDatepicker('exam',
+            {
+                gotoToday: true,
+                markHolidays:true,
+                markToday:true,
+                twodigit:true,
+                closeAfterSelect:true,
+                highlightSelectedDay:true,
+                nextButtonIcon: "fa fa-arrow-circle-right",
+                previousButtonIcon: "fa fa-arrow-circle-left",
+                sync:true,
+            });
+
+    </script>
+
     <script>
 
         var input = document.querySelector("#tel_introduce");

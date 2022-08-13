@@ -116,7 +116,10 @@
                                       <div class="card-content">
                                           <div class="card-body">
                                               <div class="tab-content">
-                                                  <div role="tabpanel" class="tab-pane active" id="account-vertical-general" aria-labelledby="account-pill-general" aria-expanded="true">
+                                                  <div role="tabpanel" class="tab-pane active" id="account-vertical-general" aria-labelledby="account-pill-general" aria-expanded="true" >
+                                                      <div id="error_div">
+
+                                                      </div>
                                                       @if($errors->any())
                                                           <div class="col-12">
                                                               <div class="alert alert-danger" role="alert">

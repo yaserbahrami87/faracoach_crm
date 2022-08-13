@@ -115,5 +115,6 @@ class TweetController extends Controller
         }
 
         return back();
+
     }
 }

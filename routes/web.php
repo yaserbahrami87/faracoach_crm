@@ -393,7 +393,8 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     //reportAdmin
     Route::get('/reports/statistic/{user}','ReportAdminController@show');
     Route::get('/reports/allreport','ReportAdminController@allReportsUsers');
-    Route::get('/reports/advance','ReportAdminController@advance_report');
+    Route::get('/reports/advance/create','ReportAdminController@advanceReport_create');
+    Route::post('/reports/advance','ReportAdminController@advanceReport');
     Route::get('/reports/allreport/exportexcel','ReportAdminController@exportExcel_allReportsUsers');
 
     //Tweets

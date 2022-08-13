@@ -151,7 +151,6 @@ class CoachController extends BaseController
         }
         else
         {
-
             //جوین کردن دو جدول برای بدست آوردن اطلاعات کوچ و کاربر موردنظر که ممکنه آیدی درست باشد ولی کوچ نباشد
 
             $coach = coach::join('users', 'coaches.user_id', '=', 'users.id')
