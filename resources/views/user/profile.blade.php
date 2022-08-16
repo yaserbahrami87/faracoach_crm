@@ -232,7 +232,8 @@
                                 <div class="col-md-6 px-1">
                                     <div class="form-group">
                                         <label>معرف</label>
-                                        <input type="text" class="form-control @if(strlen($user->introduced)<>0) is-valid  @endif" @if(old('introduced')) value='{{old('introduced')}}' @else value="{{$user->introduced}}" @endif id="introduced" @if(strlen($user->introduced)>0) disabled @endif />
+                                        <input type="hidden" class="form-control"  @if(!is_null($user->getIntroduced))  value="{{$user->getIntroduced->fname.' '.$user->getIntroduced->lname }}" @endif  id="introduced" />
+                                        <input dir="ltr"  type="text" class="form-control @if(strlen($user->introduced)==0) is-invalid  @else is-valid  @endif"  @if(!is_null($user->getIntroduced)) disabled value="{{$user->getIntroduced->fname.' '.$user->getIntroduced->lname }}" @endif  id="introduced_profile" />
                                         <small class="text-muted">لطفا تلفن همراه معرف خود را وارد کنید</small>
                                         <span id="feedback_introduced" ></span>
                                     </div>
@@ -499,6 +500,45 @@
         $('#tel').change(function()
         {
             document.querySelector("#tel_org").value=intl.getNumber();
+        });
+
+
+
+
+        // تلفن معرف
+        var input = document.querySelector("#introduced_profile");
+        var intl=intlTelInput(input,{
+            formatOnDisplay:false,
+            separateDialCode:true,
+            preferredCountries:["ir", "gb"]
+        });
+
+        input.addEventListener("countrychange", function() {
+            document.querySelector("#introduced").value=intl.getNumber();
+        });
+
+        $('#introduced_profile').change(function()
+        {
+            document.querySelector("#introduced").value=intl.getNumber();
+            var loading='<div class="col-12 text-center"><div class="spinner-border text-primary text-center" role="status"><span class="sr-only">Loading...</span></div></div>';
+            $("#feedback_introduced").html(loading);
+            var data=$("#introduced").val();
+            if(data.length>0)
+            {
+                $.ajax({
+                    type:'GET',
+                    url:"/check/user/"+data,
+                    success:function(data)
+                    {
+                        $("#feedback_introduced").html(data);
+                    }
+                });
+            }
+            else
+            {
+                data="<input type='hidden' value='' name='introduced'/>";
+                $("#feedback_introduced").html(data);
+            }
         });
     </script>
 

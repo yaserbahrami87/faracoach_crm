@@ -357,7 +357,7 @@
                                             </div>
                                             <div class="custom-control custom-radio custom-control-inline">
                                                 <input type="radio" id="gender2" name="applicant" class="custom-control-input" value="2" @if(old('applicant')==2) checked @endif />
-                                                <label class="custom-control-label" for="gender2" >سطح 2</label>
+                                                <label class="custom-control-label" for="gender2" >سطح 2(ویژه کوچها و دانشپذیران سطح1)</label>
                                             </div>
 
                                             @error('applicant')

@@ -30,8 +30,13 @@
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/errors/404.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/errors/404.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/بورسیه-کاور-ویدئو.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/بورسیه-کاور-ویدئو.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/panel_assets/js/java.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/panel_assets/js/java.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/scholarship/users.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/scholarship/users.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/scholarship/beforeRegister_Scholarship.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/scholarship/beforeRegister_Scholarship.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/profile.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/user/scholarship/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/scholarship/profile.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -1057,7 +1062,12 @@
       <workItem from="1660156374113" duration="5580000" />
       <workItem from="1660196738166" duration="2163000" />
       <workItem from="1660326272773" duration="2965000" />
-      <workItem from="1660370367374" duration="6961000" />
+      <workItem from="1660370367374" duration="7653000" />
+      <workItem from="1660454819756" duration="7924000" />
+      <workItem from="1660488232864" duration="27000" />
+      <workItem from="1660542246499" duration="14098000" />
+      <workItem from="1660594090996" duration="640000" />
+      <workItem from="1660626799543" duration="15307000" />
     </task>
     <servers />
   </component>

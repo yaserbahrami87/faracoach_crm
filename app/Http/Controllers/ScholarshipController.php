@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\city;
 use App\followup;
 use App\message;
 use App\scholarship;
@@ -371,6 +372,12 @@ class ScholarshipController extends BaseController
                 ->get();
 
             $states=state::get();
+
+
+            $cities=city::where('state_id',$scholarship->user->state)
+                                ->get();
+
+
             //انتخاب شهر براساس کد
             $city=$this->city($scholarship->user->city);
 
@@ -394,6 +401,7 @@ class ScholarshipController extends BaseController
                         ->with('messages',$messages)
                         ->with('states',$states)
                         ->with('city',$city)
+                        ->with('cities',$cities)
                         ->with('gettingKnow_child_list',$gettingKnow_child_list)
                         ->with('gettingKnow_parent_list',$gettingKnow_parent_list)
                         ->with('getFollowbyCategory',$getFollowbyCategory)
