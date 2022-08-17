@@ -1,4 +1,8 @@
 @extends('admin.master.index')
+@section('headerScript')
+    <link href="{{asset('/dashboard/assets/css/buttons.dataTables.min.css')}}" rel="stylesheet" />
+@endsection
+
 @section('content')
     <div class="col-12">
         <nav>
@@ -200,9 +204,21 @@
 @section('footerScript')
     <script src="{{asset('/dashboard/assets/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('/dashboard/assets/js/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/dataTables.buttons.min.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/jszip.min.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/vfs_fonts.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/buttons.html5.min.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/buttons.print.min.js')}}"></script>
+
+
     <script>
         $(document).ready(function() {
-            $('.table_data').DataTable();
+            $('.table_data').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy',  'excel', 'print'
+                ]
+            } );
         } );
     </script>
 @endsection

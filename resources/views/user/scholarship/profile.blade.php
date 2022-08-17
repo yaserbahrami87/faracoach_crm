@@ -202,9 +202,9 @@
                             <small class="text-muted ">فایل های قابل قبول: PDF , JPG , JPEG , DOC , PNG</small>
                             <small class="text-muted d-block">حداکثر حجم فایل: 600 کیلوبایت</small>
                             @error('resume')
-                            <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                             @enderror
                         </div>
 
@@ -307,7 +307,7 @@
                                                     <label>شماره شناسنامه:
                                                         <span class="text-danger">*</span>
                                                     </label>
-                                                    <input type="text" class="form-control @if(!strlen($scholarship->user->shenasname)==0) is-valid  @endif" placeholder="شماره شناسنامه را وارد کنید"  value='{{old('shenasname',$scholarship->user->shenasname)}}' name="shenasname" required  />
+                                                    <input type="number" class="form-control @if(!strlen($scholarship->user->shenasname)==0) is-valid  @endif" placeholder="شماره شناسنامه را وارد کنید"  value='{{old('shenasname',$scholarship->user->shenasname)}}' name="shenasname" required  />
                                                     <small class="text-muted">به عنوان مثال:1234</small>
                                                 </div>
                                             </div>
@@ -688,7 +688,7 @@
                             <p>چنانچه  فردی که معرفی میکنید و یا از طریق لینک شما  ثبت نام نموده است، تمام مراحل را با  موفقیت  طی کند (مثلا 50 امتیاز کسب کند) ، 10 درصد از امتیاز بورسیه آنها به امتیاز بورسیه  شما <span class="text-danger">اضافه</span> میگردد.</p>
                         </div>
                     </div>
-                    <p>استفاده از امتیاز معرفی دو مرحله دارد:</p>
+                    <p>استفاده از امتیاز معرفی دو روش دارد:</p>
 
 
                     <ol>
@@ -722,10 +722,10 @@
                                 </div>
                             </div>
                             <div class="row  bg-success ">
-                                <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                <div class="col-12 col-sm-7 col-md-7 col-lg-7 col-xl-7">
                                     <h6 class="mt-2">لینک دعوت اختصاصی شما جهت اشتراک گذاری با دوستان:</h6>
                                 </div>
-                                <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                <div class="col-12 col-sm-5 col-md-5 col-lg-5 col-xl-5">
                                     <p class=" p-2 dir-rtl text-center"  id="personal_link">{{asset('/scholarship/register?introduce='.Auth::user()->id)}}</p>
                                 </div>
                             </div>
@@ -862,7 +862,21 @@
                             <td dir="ltr">-</td>
                         </tr>
                     @endforeach
+                    @for($i=(count($scholarship->user->get_invitations->where('resource','=','بورسیه تحصیلی'))+1);$i<=5;$i++)
+                        <tr>
+                            <td>{{$i}}</td>
+                            <td>
+                                <img class="rounded" src="{{asset('/documents/users/default-avatar.png')}}" width="50px" height="50px" />
+                            </td>
+                            <td></td>
+                            <td dir="ltr"></td>
+                            <td dir="ltr">-</td>
+                            <td dir="ltr">-</td>
+                        </tr>
+                    @endfor
                 </table>
+
+
             </div>
             <div class="tab-pane fade " id="interview" role="tabpanel" aria-labelledby="interview-tab">
                 <div class="card-body" >

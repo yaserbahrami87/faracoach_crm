@@ -2,6 +2,7 @@
 
 @section('headerScript')
 <link href="{{asset('/dashboard/assets/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
+<link href="{{asset('/dashboard/assets/css/buttons.dataTables.min.css')}}" rel="stylesheet" />
     <style>
         .img_profile
         {
@@ -346,9 +347,21 @@
 @section('footerScript')
 <script src="{{asset('/dashboard/assets/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('/dashboard/assets/js/dataTables.bootstrap4.min.js')}}"></script>
+
+<script src="{{asset('/panel_assets/js/scripts/datatables/dataTables.buttons.min.js')}}"></script>
+<script src="{{asset('/panel_assets/js/scripts/datatables/jszip.min.js')}}"></script>
+<script src="{{asset('/panel_assets/js/scripts/datatables/vfs_fonts.js')}}"></script>
+<script src="{{asset('/panel_assets/js/scripts/datatables/buttons.html5.min.js')}}"></script>
+<script src="{{asset('/panel_assets/js/scripts/datatables/buttons.print.min.js')}}"></script>
+
 <script>
     $(document).ready(function() {
-        $('#example').DataTable();
+        $('#example').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy',  'excel', 'print'
+            ]
+        } );
     } );
 </script>
 @endsection
