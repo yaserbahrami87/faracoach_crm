@@ -763,9 +763,12 @@ class UserController extends BaseController
                 $files = $request->file('resume')->move($path, $resume);
                 $request->resume = $resume;
             }
-            try {
+            try
+            {
                 $user->update($request->all());
-            } catch (Throwable $e) {
+            }
+            catch (Throwable $e)
+            {
 
 //                $msg = $e->errorInfo[2];
 //                $errorStatus = "danger";
@@ -1209,6 +1212,8 @@ class UserController extends BaseController
                 $item->personal_image="default-avatar.png";
             }
         }
+
+
 
 
         //تعداد افراد دعوت شده
@@ -1845,6 +1850,68 @@ class UserController extends BaseController
         }
 
 
+    }
+
+
+    //اضافه کردن یوزر توسط بورسیه کوچینگ
+    public function addIntroducedUser_Scholarship(Request $request)
+    {
+
+        $request['tel_introduced']=$this->convertPersianNumber($request->tel_introduced);
+        $this->validate(request(),
+            [
+                'fname_introduced'      =>'required|persian_alpha|min:3|max:15',
+                'lname_introduced'      =>'required|persian_alpha|min:3|max:15',
+                'tel_introduced'        =>'required|unique:users,tel',
+                'sex_introduced'        =>'required|boolean',
+                'followby_id'           =>'required|numeric'
+            ]);
+
+        $check=user::where('tel','=',$request['tel_introduced'])
+            ->count();
+
+
+        if($check==0)
+        {
+            //ثبت تلفن دعوت شده به همراه تلفن دعوت کننده و تاریخ
+            $status=User::create($request->all() +
+                [
+                    'fname'         =>$request->fname_introduced,
+                    'lname'         =>$request->lname_introduced,
+                    'tel'           =>$request->tel_introduced,
+                    'introduced'    =>Auth::user()->id,
+                    'date_fa'       =>$this->dateNow,
+                    'time_fa'       =>$this->timeNow,
+                    'password'      =>Hash::make('1234'),
+                ]);
+
+            if($status)
+            {
+                if($request['sms']==1) {
+                    if (is_null(Auth::user()->fname) || (is_null(Auth::user()->lname))) {
+                        $this->sendSms($request['tel'], "به فراکوچ خوش آمدید/ شما توسط " . Auth::user()->tel . " به فراکوچ دعوت شدید"." رمز عبور:1234 ");
+                        alert()->success("تلفن با موفقیت در سیستم فراکوچ ثبت شد", 'پیام')->persistent('بستن');
+                    } else {
+                        $this->sendSms($request['tel'], "به فراکوچ خوش آمدید/ شما توسط " . Auth::user()->fname . Auth::user()->lname . " به فراکوچ دعوت شدید" ." رمز عبور:1234 ");
+                        alert()->success("تلفن با موفقیت در سیستم فراکوچ ثبت شد", 'پیام')->persistent('بستن');
+                    }
+                }
+                else
+                {
+                    alert()->success("تلفن با موفقیت در سیستم فراکوچ ثبت شد", 'پیام')->persistent('بستن');
+                }
+            }
+            else
+            {
+                alert()->error("خطا در ثبت",'خطا')->persistent('بستن');
+            }
+        }
+        else
+        {
+            alert()->error('این شماره تلفن در حال حاضر عضو باشگاه مشتریان فراکوچ میباشد.','خطا')->persistent('بستن');
+        }
+
+        return back();
     }
 
 

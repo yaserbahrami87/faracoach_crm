@@ -92,6 +92,7 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     //scholarship
     Route::get('/scholarship/me','ScholarshipController@me');
     Route::post('/scholarship/answerstatus','ScholarshipController@answerstatus');
+    Route::post('/scholarship/addintroduced','UserController@addIntroducedUser_Scholarship');
 
 
     //booking

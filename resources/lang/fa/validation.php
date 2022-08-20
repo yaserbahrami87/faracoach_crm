@@ -250,6 +250,10 @@ return [
         'types'                 =>'انواع',
         'cooperation'           =>'علاقمندی و توانمندی',
         'applicant'             =>'تقاضا دوره',
+        'tel_introduced'        =>'تلفن دعوت شده',
+        'fname_introduced'      =>'نام دعوت شده',
+        'lname_introduced'      =>'نام خانوادگی دعوت شده',
+        'sex_introduced'      =>'جنسیت دعوت شده',
     ],
 
     'values' => [

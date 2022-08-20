@@ -742,7 +742,7 @@
                                 <!--
                                 <b>معرفی مستقیم نفر {{($scholarship->user->get_invitations->where('resource','=','بورسیه تحصیلی')->count())+1}} از 5 افراد از طریق پورتال:</b>
                                 -->
-                                <form method="post" action="/panel/introduced/add" class=" border-bottom mb-3">
+                                <form method="post" action="/panel/scholarship/addintroduced" class=" border-bottom mb-3">
                                     <div class="row pt-1 mt-1" id="formAddIntroduce">
                                         {{csrf_field()}}
                                         <input type="hidden" value="بورسیه تحصیلی" name="resource" />
@@ -750,12 +750,11 @@
                                             <small>جنسیت:<span class="text-danger">*</span></small>
                                             <div class="input-group mb-1">
                                                 <div class="custom-control custom-radio">
-
-                                                    <input type="radio" id="sex1" name="sex" class="custom-control-input" value="1" {{ old('sex')=="1" ? 'checked='.'"'.'checked'.'"' : '' }} >
+                                                    <input type="radio" id="sex1" name="sex_introduced" class="custom-control-input" value="1" {{ old('sex_introduced')=="1" ? 'checked='.'"'.'checked'.'"' : '' }} >
                                                     <label class="custom-control-label" for="sex1">آقا</label>
                                                 </div>
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" id="sex0" name="sex" class="custom-control-input" value="0" {{ old('sex')=="0" ? 'checked='.'"'.'checked'.'"' : '' }} >
+                                                    <input type="radio" id="sex0" name="sex_introduced" class="custom-control-input" value="0" {{ old('sex_introduced')=="0" ? 'checked='.'"'.'checked'.'"' : '' }} >
                                                     <label class="custom-control-label  ml-1" for="sex0">خانم</label>
                                                 </div>
                                             </div>
@@ -763,7 +762,7 @@
                                         <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 ">
                                             <small>نام:<span class="text-danger">*</span></small>
                                             <div class="input-group mb-1">
-                                                <input type="text" class="form-control" placeholder="مثلا :علی  " name="fname" value="{{old('fname')}}"/>
+                                                <input type="text" class="form-control" placeholder="مثلا :علی" name="fname_introduced" value="{{old('fname_introduced')}}"/>
                                                 <div class="input-group-prepend">
 
                                                 </div>
@@ -772,7 +771,7 @@
                                         <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 ">
                                             <small>نام خانوادگی:<span class="text-danger">*</span></small>
                                             <div class="input-group mb-1">
-                                                <input type="text" class="form-control" placeholder="مثلا: محمدی" name="lname" value="{{old('lname')}}" />
+                                                <input type="text" class="form-control" placeholder="مثلا: محمدی" name="lname_introduced" value="{{old('lname_introduced')}}" />
                                                 <div class="input-group-prepend">
 
                                                 </div>
@@ -781,8 +780,8 @@
                                         <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 ">
                                             <small>تلفن همراه:<span class="text-danger">*</span></small>
                                             <div class="input-group mb-1">
-                                                <input type="hidden" id="tel_org_introduce"  name="tel"/>
-                                                <input type="tel" dir="ltr" class="form-control" placeholder="تلفن تماس را وارد کنید"   id="tel_introduce"  />
+                                                <input type="hidden" id="tel_org_introduce"  name="tel_introduced"/>
+                                                <input type="tel" dir="ltr" class="form-control" placeholder="تلفن تماس را وارد کنید" id="tel_introduce" />
                                                 <div class="input-group-prepend">
                                                 </div>
                                             </div>
@@ -999,16 +998,17 @@
             document.querySelector("#tel_org_introduce").value=intl.getNumber();
         });
 
+
         // تلفن معرف
-        var input = document.querySelector("#introduced_profile");
-        var intl=intlTelInput(input,{
+        var input1 = document.querySelector("#introduced_profile");
+        var intl1=intlTelInput(input1,{
             formatOnDisplay:false,
             separateDialCode:true,
             preferredCountries:["ir", "gb"]
         });
 
-        input.addEventListener("countrychange", function() {
-            document.querySelector("#introduced").value=intl.getNumber();
+        input1.addEventListener("countrychange", function() {
+            document.querySelector("#introduced").value=intl1.getNumber();
         });
 
         $('#introduced_profile').change(function()

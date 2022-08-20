@@ -124,6 +124,7 @@ class ReportAdminController extends BaseController
             $followups = followup::get();
         }
 
+
         $v = verta();
         $ageTo20 = $users->wherebetween('datebirth', [$v->subYears(20), $v->now()]);
         $age21to30 = $users->wherebetween('datebirth', [$v->now()->subYears(30), $v->now()->subYears(21)]);
@@ -282,7 +283,7 @@ class ReportAdminController extends BaseController
     public function advanceReport_create()
     {
         $states = $this->states();
-        $userType=user_type::get();
+        $userType = user_type::get();
         return view('admin.reports.report_advance')
             ->with('states', $states)
             ->with('userType', $userType);
@@ -291,74 +292,58 @@ class ReportAdminController extends BaseController
     public function advanceReport(Request $request)
     {
 
-        $this->validate($request,[
-            'range_date'=>'nullable|string',
-            'gender'    =>'nullable|array',
-            'married'   =>'nullable|array',
-            'state'     =>'nullable|array',
-            'education' =>'nullable|array',
-            'social'    =>'nullable|array',
-            'types'     =>'nullable|array',
+        $this->validate($request, [
+            'range_date' => 'nullable|string',
+            'gender' => 'nullable|array',
+            'married' => 'nullable|array',
+            'state' => 'nullable|array',
+            'education' => 'nullable|array',
+            'social' => 'nullable|array',
+            'types' => 'nullable|array',
         ]);
 
-        if(isset($request->range_date))
-        {
-            $request['range']=explode(' ~ ',$request['range_date']);
-            $request['date_en']=[$this->changeTimestampToMilad($request['range'][0])." 00:00:00",$this->changeTimestampToMilad($request['range'][1])." 23:59:59"];
-        }
-        else
-        {
-            $request['range']=[$this->dateNow,$this->dateNow];
-            $request['date_en']=[$this->changeTimestampToMilad($request['range'][0])." 00:00:00",$this->changeTimestampToMilad($request['range'][1])." 23:59:59"];
+        if (isset($request->range_date)) {
+            $request['range'] = explode(' ~ ', $request['range_date']);
+            $request['date_en'] = [$this->changeTimestampToMilad($request['range'][0]) . " 00:00:00", $this->changeTimestampToMilad($request['range'][1]) . " 23:59:59"];
+        } else {
+            $request['range'] = [$this->dateNow, $this->dateNow];
+            $request['date_en'] = [$this->changeTimestampToMilad($request['range'][0]) . " 00:00:00", $this->changeTimestampToMilad($request['range'][1]) . " 23:59:59"];
         }
 
 
-
-        $users=User::when($request->gender , function($query)  use($request)
-        {
-            $query->where(function($query) use ($request)
-                {
-                    $query->wherein('sex',$request->gender)
-                        ->when(in_array('NULL',$request->gender),function($query) use ($request)
-                            {
-                                $query->orwhereNull('sex');
-                            });
-                });
-//            if(in_array('NULL',$request->gender))
-//            {
-//                  $query->orwhereNull('sex');
-//            }
+        $users = User::when($request->gender, function ($query) use ($request) {
+            $query->where(function ($query) use ($request) {
+                $query->wherein('sex', $request->gender)
+                    ->when(in_array('NULL', $request->gender), function ($query) use ($request) {
+                        $query->orwhereNull('sex');
+                    });
+            });
+            if (in_array('NULL', $request->gender)) {
+                $query->orwhereNull('sex');
+            }
             return $query;
         })
-        ->when($request->married,function($query) use($request)
-        {
-            return $query->wherein('married',$request->married);
-        })
-        ->when($request->state,function($query) use($request)
-        {
-            return $query->wherein('state',$request->state);
-        })
-        ->when($request->education,function($query) use($request)
-        {
-            return $query->wherein('education',$request->education);
-        })
-        ->when($request->types,function($query) use($request)
-        {
-            return $query->wherein('type',$request->types);
-        })
-        ->when($request->kind=='پیگیری',function($query)
-        {
+            ->when($request->married, function ($query) use ($request) {
+                return $query->wherein('married', $request->married);
+            })
+            ->when($request->state, function ($query) use ($request) {
+                return $query->wherein('state', $request->state);
+            })
+            ->when($request->education, function ($query) use ($request) {
+                return $query->wherein('education', $request->education);
+            })
+            ->when($request->types, function ($query) use ($request) {
+                return $query->wherein('type', $request->types);
+            })
+            ->when($request->kind == 'پیگیری', function ($query) {
            return $query->with('followups')
                        ->whereHas('followups', function($q) {
                            $q->where('status_followup', '13');
                        });
-        })
-        ->wherebetween('created_a',$request->date_en)
-        ->get();
-
-
-
-
+            })
+            ->wherebetween('created_at', $request->date_en)
+            ->get();
         dd($users);
     }
 }
+
