@@ -357,7 +357,7 @@
 <script>
     $(document).ready(function() {
         $('#example').DataTable({
-            dom: 'Bfrtip',
+            dom: 'Bfrltip',
             buttons: [
                 'copy',  'excel', 'print'
             ]

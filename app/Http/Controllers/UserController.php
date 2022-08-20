@@ -1849,7 +1849,6 @@ class UserController extends BaseController
             $item->notify(new LoginwithoutReserve($item->tel,"این پیام صرفا جهت تست می باشد  \n فراکوچ"));
         }
 
-
     }
 
 

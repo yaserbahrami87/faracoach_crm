@@ -30,6 +30,7 @@
                                 <th>نام و نام خانوادگی</th>
                                 <th class="d-none">کد ملی</th>
                                 <th>تلفن</th>
+                                <th>تحصیلات</th>
                                 <th>تاریخ ثبت نام</th>
                                 <th>ساعت ثبت نام</th>
                                 <th> افراد معرفی شده</th>
@@ -52,6 +53,7 @@
                                     </td>
                                     <td class="text-center d-none" dir="ltr">{{$item->user->codemelli}}</td>
                                     <td class="text-center" dir="ltr">{{$item->user->tel}}</td>
+                                    <td class="text-center" dir="ltr">{{$item->user->education}}</td>
                                     <td class="text-center" dir="ltr">{{substr($item->created_at,0,10)  }}</td>
                                     <td class="text-center" dir="ltr">{{substr($item->created_at,12,4)  }}</td>
                                     <td class="text-center" dir="ltr">{{($item->user->get_invitations->where('resource','=','بورسیه تحصیلی')->count())  }}</td>
@@ -214,9 +216,9 @@
     <script>
         $(document).ready(function() {
             $('.table_data').DataTable({
-                dom: 'Bfrtip',
+                dom: 'Bfrltip',
                 buttons: [
-                    'copy',  'excel', 'print'
+                    'copy',  'excel',
                 ]
             } );
         } );
