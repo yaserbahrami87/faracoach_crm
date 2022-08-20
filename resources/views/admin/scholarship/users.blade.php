@@ -28,6 +28,8 @@
                             <tr class="text-center">
                                 <th>ردیف</th>
                                 <th>نام و نام خانوادگی</th>
+                                <th>وضعیت پروفایل</th>
+                                <th>وضعیت درخواست</th>
                                 <th class="d-none">کد ملی</th>
                                 <th>تلفن</th>
                                 <th>تحصیلات</th>
@@ -35,8 +37,7 @@
                                 <th>ساعت ثبت نام</th>
                                 <th> افراد معرفی شده</th>
                                 <th> افراد ثبت نام بورسیه</th>
-                                <th>وضعیت پروفایل</th>
-                                <th>وضعیت درخواست</th>
+
                             </tr>
                         </thead>
 
@@ -50,25 +51,6 @@
                                         @endif
                                         <a href="/admin/scholarship/{{$item->id}}">{{$item->user->fname.' '.$item->user->lname}}</a>
 
-                                    </td>
-                                    <td class="text-center d-none" dir="ltr">{{$item->user->codemelli}}</td>
-                                    <td class="text-center" dir="ltr">{{$item->user->tel}}</td>
-                                    <td class="text-center" dir="ltr">{{$item->user->education}}</td>
-                                    <td class="text-center" dir="ltr">{{substr($item->created_at,0,10)  }}</td>
-                                    <td class="text-center" dir="ltr">{{substr($item->created_at,12,4)  }}</td>
-                                    <td class="text-center" dir="ltr">{{($item->user->get_invitations->where('resource','=','بورسیه تحصیلی')->count())  }}</td>
-                                    <td class="text-center" dir="ltr">
-                                        @php
-                                        $i=0;
-                                        @endphp
-                                        @foreach($item->user->get_invitations->where('resource','=','بورسیه تحصیلی') as $item_invitation)
-                                            @if(!is_null($item_invitation->scholarship))
-                                                @php
-                                                  $i++;
-                                                @endphp
-                                            @endif
-                                        @endforeach
-                                        {{$i}}
                                     </td>
                                     <td class="text-center" dir="ltr">
 
@@ -96,6 +78,26 @@
 
                                         @endswitch
                                     </td>
+                                    <td class="text-center d-none" dir="ltr">{{$item->user->codemelli}}</td>
+                                    <td class="text-center" dir="ltr">{{$item->user->tel}}</td>
+                                    <td class="text-center" dir="ltr">{{$item->user->education}}</td>
+                                    <td class="text-center" dir="ltr">{{substr($item->created_at,0,10)  }}</td>
+                                    <td class="text-center" dir="ltr">{{substr($item->created_at,12,4)  }}</td>
+                                    <td class="text-center" dir="ltr">{{($item->user->get_invitations->where('resource','=','بورسیه تحصیلی')->count())  }}</td>
+                                    <td class="text-center" dir="ltr">
+                                        @php
+                                        $i=0;
+                                        @endphp
+                                        @foreach($item->user->get_invitations->where('resource','=','بورسیه تحصیلی') as $item_invitation)
+                                            @if(!is_null($item_invitation->scholarship))
+                                                @php
+                                                  $i++;
+                                                @endphp
+                                            @endif
+                                        @endforeach
+                                        {{$i}}
+                                    </td>
+
                                 </tr>
                             @endforeach
                         </tbody>
@@ -216,6 +218,13 @@
     <script>
         $(document).ready(function() {
             $('.table_data').DataTable({
+                columnDefs: [
+                    {
+                        target: 6,
+                        visible: false,
+                        searchable: false,
+                    }
+                ],
                 dom: 'Bfrltip',
                 buttons: [
                     'copy',  'excel',
