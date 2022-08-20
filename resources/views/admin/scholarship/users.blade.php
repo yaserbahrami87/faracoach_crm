@@ -218,13 +218,13 @@
     <script>
         $(document).ready(function() {
             $('.table_data').DataTable({
-                columnDefs: [
-                    {
-                        target: 6,
-                        visible: false,
-                        searchable: false,
-                    }
-                ],
+                // columnDefs: [
+                //     {
+                //         target: 6,
+                //         visible: false,
+                //         searchable: false,
+                //     }
+                // ],
                 dom: 'Bfrltip',
                 buttons: [
                     'copy',  'excel',
