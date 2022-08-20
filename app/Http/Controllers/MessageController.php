@@ -59,6 +59,7 @@ class MessageController extends BaseController
                                     ->orwhere('user_id_recieve', '=', Auth::user()->type);
 
                             })
+
 //                            ->orwhere('user_id_send', '=', Auth::user()->type)
 //                            ->orwhere('user_id_recieve', '=', Auth::user()->type)
 //                            ->orwhere('user_id_send', '=', Auth::user()->id)

@@ -317,6 +317,7 @@ class ReportAdminController extends BaseController
                     ->when(in_array('NULL', $request->gender), function ($query) use ($request) {
                         $query->orwhereNull('sex');
                     });
+
             });
             if (in_array('NULL', $request->gender)) {
                 $query->orwhereNull('sex');
