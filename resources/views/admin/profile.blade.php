@@ -231,9 +231,10 @@
                                 <label>شهر</label>
 
                                 <select class="custom-select @if(strlen($user->city)==0) is-invalid  @else is-valid  @endif"  name="city"  id="city">
-                                    @if (!is_null($city))
-                                        <option value="{{$city->id}}">@if(!is_null($city))  {{$city->name}}  @endif </option>
-                                    @endif
+                                    @foreach($cities as $item_city)
+                                        <option value="{{$item_city->id}}" @if(!is_null($user->city) && ($user->city==$item_city->id)) selected  @endif >  {{$item_city->name}} </option>
+                                    @endforeach
+
                                 </select>
                             </div>
                         </div>

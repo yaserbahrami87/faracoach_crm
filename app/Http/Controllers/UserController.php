@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\category_gettingknow;
+use App\city;
 use App\followup;
 use App\landPage;
 use App\Notifications\LoginwithoutReserve;
@@ -600,8 +601,12 @@ class UserController extends BaseController
         $city = NULL;
         if (strlen($user->city) > 0) {
             //انتخاب شهر براساس کد
-            $city = $this->city($user->city);
+            //$city = $this->city($user->city);
+            $city=$this->city($user->city);
         }
+
+        $cities=city::where('state_id','=',$user->state)
+                        ->get();
 
         //تگ ها
         $tags = $this->get_tags();
@@ -659,6 +664,7 @@ class UserController extends BaseController
                     ->with('expert_followup',$expert_followup)
                     ->with('parentCategory',$parentCategory)
                     ->with('courses',$courses)
+                    ->with('cities',$cities)
                     ->with('gettingKnow_child_list',$gettingKnow_child_list)
                     ->with('gettingKnow_parent_list',$gettingKnow_parent_list);
 

@@ -63,9 +63,9 @@
                     <li><a href="/panel/checkout/transaction" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >تراکنش های مالی</span></a></li>
                 </ul>
             </li>
+            <!--
             <li class=" nav-item has-sub "><a href="#"><span class="menu-title" >بلاگ</span></a>
                 <ul class="menu-content">
-                    <!--<li><a href="/portal/inbox"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">نامه های وارده</span></a></li>-->
                     <li><a href="/{{Auth::user()->username}}" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >نمایش وبلاگ</span></a></li>
                     <li><a href="/panel/post" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item"  >نوشته های خودم</span></a></li>
                     <li><a href="/panel/categoryposts" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item"  >دسته بندی مطالب</span></a></li>
@@ -78,10 +78,10 @@
             <li class=" nav-item"><a href="#"><span class="menu-title" data-i18n="Chat">پیام ها</span></a>
                 <ul class="menu-content">
                     <li><a href="/panel/message"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">تیکت ها</span></a></li>
-                    <!-- <li><a href="/panel/message/create"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">ثبت تیکت</span></a></li> -->
 
                 </ul>
             </li>
+            -->
 
         </ul>
     </div>
