@@ -327,7 +327,14 @@ class ScholarshipController extends BaseController
         }
 
 
-        $msg="نتیجه درخواست بورسیه شما:".$status_scholarship."\n برای آگاهی بیشتر به پورتال فراکوچ مراجعه کنید";
+        if($request->status==1)
+        {
+            $msg=$scholarship->user->fname." ".$scholarship->user->lname." عزیز \n مرحله اول و دوم درخواست بورسیه کوچینگ با موفقیت ثبت شد\n"."دوره آموزشی مقدماتی 5 شنبه 10 شهریور";
+        }
+        else
+        {
+            $msg="نتیجه درخواست بورسیه شما:".$status_scholarship."\n برای آگاهی بیشتر به پورتال فراکوچ مراجعه کنید";
+        }
         $this->sendSms($scholarship->user->tel,$msg);
 
 
