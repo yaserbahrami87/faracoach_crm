@@ -29,6 +29,8 @@ class HomeController extends BaseController
      */
     public function index()
     {
+        return redirect('/panel');
+
         $posts=$this->get_post(NULL,1,'limit');
         if(Auth::check())
         {
