@@ -29,6 +29,7 @@ class HomeController extends BaseController
      */
     public function index()
     {
+        //redirect to LOGIN
         return redirect('/panel');
 
         $posts=$this->get_post(NULL,1,'limit');
