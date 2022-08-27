@@ -979,7 +979,6 @@ class UserController extends BaseController
 
     public function showCategoryTagsAdmin(Request $request)
     {
-
         if(is_null($request))
         {
             return redirect('/panel');
@@ -995,15 +994,29 @@ class UserController extends BaseController
                 alert()->error("حداقل یک گزینه برای اعمال فیلترها انتخاب کنید",'خطا')->persistent('بستن');
                 return back();
             } else {
-                $tags = implode(',', $request['tags']);
-                $users = user::join('followups', 'users.id', '=', 'followups.user_id')
-                    ->where('followups.tags', 'like', '%' . $tags . '%')
-                    ->where('followups.insert_user_id', '=', Auth::user()->id)
-                    ->select('users.*')
-                    ->groupby('users.id')
-                    ->orderby('date_fa', 'desc')
-//                    ->paginate($this->countPage());
-                    ->get();
+//                $tags = implode(',', $request['tags']);
+//                $users = user::join('followups', 'users.id', '=', 'followups.user_id')
+//                    ->where('followups.tags', 'like', '%' . $tags . '%')
+//                    ->where('followups.insert_user_id', '=', Auth::user()->id)
+//                    ->select('users.*')
+//                    ->groupby('users.id')
+//                    ->orderby('date_fa', 'desc')
+////                    ->paginate($this->countPage());
+//                    ->get();
+
+                $users=followup::wherein('tags',$request->tags)
+                        ->orwhere(function($query) use ($request)
+                        {
+                            for ($i=0;$i<count($request->tags);$i++)
+                            {
+                                $query->orwhere('tags','like',$request->tags[$i].',%')
+                                        ->orwhere('tags','like','%,'.$request->tags[$i])
+                                        ->orwhere('tag','like','%,'.$request->tags[$i].',%');
+                            }
+                        })
+                        ->get();
+
+                dd($users);
 
 
                 foreach ($users as $item)

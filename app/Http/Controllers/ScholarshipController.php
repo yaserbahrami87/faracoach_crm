@@ -148,7 +148,6 @@ class ScholarshipController extends BaseController
         $states=$this->states();
         $city=$this->city($scholarship->user->city);
         $scholarship->types=explode(',' ,$scholarship->types);
-
         $id=$scholarship->user_id;
         $messages=message::where(function($query) use($id)
                             {
@@ -159,11 +158,36 @@ class ScholarshipController extends BaseController
                             ->orderby('id','desc')
                             ->get();
 
+        $cities=city::where('state_id',$scholarship->user->state)
+            ->get();
+
+        if(!is_null($scholarship->user->gettingknow))
+        {
+            $scholarship->user->gettingknow_parent_user=$this->get_categoryGettingknow($scholarship->user->gettingknow,NULL,NULL,NULL,'first')->parent_id;
+            $condition=['parent_id','=',$scholarship->user->gettingknow_parent_user];
+            $gettingKnow_child_list=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
+        }
+        else
+        {
+            $gettingKnow_child_list=NULL;
+        }
+
+        $condition=['parent_id','=','0'];
+        $gettingKnow_parent_list=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
+
+        $getFollowbyCategory=$this->getFollowbyCategory();
+
+
+
 
 
        return view('admin.scholarship.scholarship')
                     ->with('scholarship',$scholarship)
+                    ->with('gettingKnow_child_list',$gettingKnow_child_list)
+                    ->with('gettingKnow_parent_list',$gettingKnow_parent_list)
+                    ->with('getFollowbyCategory',$getFollowbyCategory)
                     ->with('city',$city)
+                    ->with('cities',$cities)
                     ->with('messages',$messages)
                     ->with('states',$states);
     }

@@ -13,10 +13,10 @@
     <div class="col-md-12">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">توضیحات</button>
+                <button class="nav-link active @if(strlen($scholarship->user->fname)>0 ||strlen($scholarship->user->lname)>0||strlen($scholarship->user->sex)>0||strlen($scholarship->user->codemelli)>0||strlen($scholarship->user->lname)>0||strlen($scholarship->user->shenasname)>0||strlen($scholarship->user->datebirth)>0||strlen($scholarship->user->personal_image)>0) btn-danger @endif" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">توضیحات</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="contact-tab" data-toggle="tab" data-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">اطلاعات بورسیه</button>
+                <button class="nav-link " id="contact-tab" data-toggle="tab" data-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">اطلاعات بورسیه</button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">اطلاعات کاربر</button>
@@ -247,13 +247,13 @@
 
                     <ul class="nav nav-pills nav-fill">
                         <li class="nav-item">
-                            <a class="nav-link active" id="nav-infoUser-tab" data-toggle="tab" data-target="#nav-infoUser" type="button" role="tab" aria-controls="nav-home" aria-selected="true">اطلاعات شخصی</a>
+                            <a class="nav-link active @if(strlen($scholarship->user->fname)>0 && strlen($scholarship->user->lname)>0 && strlen($scholarship->user->sex)>0&&strlen($scholarship->user->codemelli)>0&&strlen($scholarship->user->shenasname)>0&&strlen($scholarship->user->datebirth)>0&&strlen($scholarship->user->personal_image)>0) btn-success  @else btn-danger @endif" id="nav-infoUser-tab" data-toggle="tab" data-target="#nav-infoUser" type="button" role="tab" aria-controls="nav-home" aria-selected="true">اطلاعات شخصی</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="nav-infoTelUser-tab" data-toggle="tab" data-target="#nav-infoTelUser" type="button" role="tab" aria-controls="nav-infoTelUser" aria-selected="false">اطلاعات تماس</a>
+                            <a class="nav-link @if(strlen($scholarship->user->tel)>0 && strlen($scholarship->user->email)>0 && strlen($scholarship->user->state)>0&&strlen($scholarship->user->city)>0&&strlen($scholarship->user->address)>0) btn-success  @else btn-danger @endif " id="nav-infoTelUser-tab" data-toggle="tab" data-target="#nav-infoTelUser" type="button" role="tab" aria-controls="nav-infoTelUser" aria-selected="false">اطلاعات تماس</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="nav-contract-tab" data-toggle="tab" data-target="#nav-contract" type="button" role="tab" aria-controls="nav-contract" aria-selected="false">اطلاعات قرارداد</a>
+                            <a class="nav-link @if(strlen($scholarship->user->father)>0 && strlen($scholarship->user->married)>0 && strlen($scholarship->user->born)>0&&strlen($scholarship->user->education)>0&&strlen($scholarship->user->reshteh)>0&&strlen($scholarship->user->job)>0&&strlen($scholarship->user->resume)>0) btn-success  @else btn-danger @endif" id="nav-contract-tab" data-toggle="tab" data-target="#nav-contract" type="button" role="tab" aria-controls="nav-contract" aria-selected="false">اطلاعات قرارداد</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="nav-introduce-tab" data-toggle="tab" data-target="#nav-introduce" type="button" role="tab" aria-controls="nav-introduce" aria-selected="false">اطلاعات آشنایی</a>

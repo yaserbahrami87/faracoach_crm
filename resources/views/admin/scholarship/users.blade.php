@@ -48,7 +48,7 @@
                                         @if($item->user->created_at>'2022-07-20 00:00:00')
                                             <span class="text-danger">*</span>
                                         @endif
-                                        <a href="/admin/scholarship/{{$item->id}}">{{$item->user->fname.' '.$item->user->lname}}</a>
+                                        <a href="/admin/scholarship/{{$item->id}}" target="_blank">{{$item->user->fname.' '.$item->user->lname}}</a>
 
                                     </td>
                                     <td class="text-center" dir="ltr">
