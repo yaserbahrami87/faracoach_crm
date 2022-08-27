@@ -187,6 +187,7 @@
                                 <a href="/admin/users/category/?categoryUsers=noanswering" class="mr-1  list-group-item p-0 border-0 ">عدم پاسخ<span class="text-danger"> {{$statics['noanswering']}} </span></a>
                                 <a href="/admin/users/category/?categoryUsers=myfollowup" class="mr-1  list-group-item  p-0 border-0 "> پیگیری های خودم<span class="text-danger"> {{$statics['myfollowup']}} </span></a>
                                 <a href="/admin/users/category/?categoryUsers=followedToday" class="mr-1  list-group-item  p-0 border-0 "> پیگیری شده های امروز<span class="text-danger"> {{$statics['followedToday']}} </span></a>
+                                <a href="/admin/users/category/?categoryUsers=scholarship" class="mr-1  list-group-item  p-0 border-0 "> بورسیه تحصیلی<span class="text-danger"> {{$statics['scholarship']}} </span></a>
                             @endif
                         </ul>
                     </div>
@@ -359,7 +360,7 @@
         $('#example').DataTable({
             dom: 'Bfrltip',
             buttons: [
-                'copy',  'excel', 'print'
+                'copy',  'excel'
             ]
         } );
     } );

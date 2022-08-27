@@ -186,6 +186,8 @@ class UserController extends BaseController
             $statics=$this->get_staticsCountUsers_admin();
 
 
+
+
             $tags=$this->get_tags();
             $parentCategory=$this->get_category('پیگیری');
 
@@ -938,6 +940,10 @@ class UserController extends BaseController
                 break;
             case 'followedToday':
                 $users = $this->get_followedToday();
+                break;
+            case 'scholarship':$users=User::where('resource','=','بورسیه تحصیلی')
+                                ->orderby('id','desc')
+                                ->get();
                 break;
             default:
                 return redirect('/admin/users/');

@@ -1591,6 +1591,8 @@ class BaseController extends Controller
                 $myfollowup = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
                 $condition=['date_fa','=',$this->dateNow];
                 $followedToday = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL )->count();
+                $scholarship=User::where('resource','=','بورسیه تحصیلی')
+                    ->count();
                 $trashuser=$this->get_usersByType(0,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
             }
         else
@@ -1662,7 +1664,10 @@ class BaseController extends Controller
                 $statics['trashuser']=Auth::user()
                                     ->get_followby_expert()
                                     ->where('users.type','=',0)
-                                    ->count();;
+                                    ->count();
+
+               $statics['scholarship']=User::where('resource','=','بورسیه تحصیلی')
+                    ->count();
 
                 return ($statics);
             }
