@@ -29,10 +29,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/public/fonts/Lalezar.woff2" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BaseController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/users.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/users.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/master/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/master/index.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -220,7 +219,7 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/panel_assets/js/scripts/datatables" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/fonts" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -233,11 +232,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\fonts" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\panel_assets\js\scripts\datatables" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\images" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\videos" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\iranMap" />
-      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\pizza_chart\js\vendor" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\dashboard\assets\css" />
@@ -1082,7 +1081,7 @@
       <workItem from="1661404930873" duration="70000" />
       <workItem from="1661412862781" duration="5869000" />
       <workItem from="1661499804849" duration="4117000" />
-      <workItem from="1661577806739" duration="12229000" />
+      <workItem from="1661577806739" duration="13789000" />
     </task>
     <servers />
   </component>
