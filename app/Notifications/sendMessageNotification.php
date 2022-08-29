@@ -66,7 +66,8 @@ class sendMessageNotification extends Notification implements ShouldQueue
     {
 
         return[
-            'text'  =>'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\nنام کاربری شماره همراه شما"."\n my.faracoach.com",
+//            'text'  =>'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\nنام کاربری شماره همراه شما"."\n my.faracoach.com",
+            'text'  =>$this->text,
             'tel'   =>$this->tel,
         ];
     }

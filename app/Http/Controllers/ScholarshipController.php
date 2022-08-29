@@ -571,9 +571,9 @@ class ScholarshipController extends BaseController
             $followups = followup::where('user_id', '=', $item->id)
                             ->get();
 
-            foreach ($followups as $item)
+            foreach ($followups as $item_followup)
             {
-                $t = followup::where('id', '=', $item->id)   //    $this->get_followup($item->followups_id,NULL,NULL,NULL,"first");
+                $t = followup::where('id', '=', $item_followup->id)   //    $this->get_followup($item->followups_id,NULL,NULL,NULL,"first");
                             ->first();
                 $t->flag = 0;
                 $t->update();
