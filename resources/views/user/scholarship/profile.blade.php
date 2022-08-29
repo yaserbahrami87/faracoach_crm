@@ -976,7 +976,7 @@
                         </div>
                         <div class="col-12 col-md-6">
                               <b class="d-block mb-2 text-center bg-primary text-white p-2">گام دوم: ثبت نام در وبینار</b>
-                              <a href="http://evand.com/events/schfara" target="_blank">
+                              <a href="https://evnd.co/dkf4a" target="_blank">
                                   <img src="{{asset('/images/scholarship_webinar.jpg')}}" class="img-fluid" />
                                   <p class="text-center btn btn-primary btn-block">ثبت نام</p>
                               </a>
