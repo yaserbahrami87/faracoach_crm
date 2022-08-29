@@ -3,6 +3,12 @@
 @section('headerScript')
     <link rel="stylesheet" href="{{asset('/css/bootstrap-multiselect.min.css')}}" type="text/css"/>
     <link href="{{asset('/dashboard/assets/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
+    <style>
+        .clickable-row
+        {
+            cursor: pointer;
+        }
+    </style>
 @endsection
 @section('content')
     <div class="col-12">
@@ -131,7 +137,7 @@
                     <input type="submit" class="btn btn-success" value="جستجو" id="btn_search">
                 </div>
                 <div class="col-12 mt-2 border border-top" id="result_search">
-                    <table class="dataTable table table-striped table-bordered" style="width:100%">
+                    <table class="dataTable table table-striped table-bordered table-hover" style="width:100%">
                         <thead>
                         <tr>
                             <th>ردیف</th>
@@ -141,12 +147,16 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>s1</td>
+                        @foreach($users as $item)
+                            <tr class='clickable-row' data-href='{{asset('/admin/user/'.$item->id)}}'>
+                                <td>
+                                    {{$item->fname}}
+                                </td>
                                 <td>s2</td>
                                 <td>s3</td>
                                 <td>s4</td>
                             </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -196,6 +206,12 @@
 
 
     <script>
+            $(document).ready(function() {
+                $(".clickable-row").click(function() {
+                    window.location = $(this).data("href");
+                });
+            });
+
             // $('#btn_search').click(function (e)
             // {
             //     e.preventDefault();

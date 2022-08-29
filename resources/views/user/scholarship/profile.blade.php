@@ -24,6 +24,12 @@
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="introduce-tab" data-toggle="tab" data-target="#introduce" type="button" role="tab" aria-controls="introduce" aria-selected="false">معرفی دوستان</button>
             </li>
+            <li class="nav-item" role="learn">
+                <button class="nav-link" id="learn-tab" data-toggle="tab" data-target="#learn" type="button" role="tab" aria-controls="learn" aria-selected="false">دوره آموزشی</button>
+            </li>
+            <li class="nav-item" role="introductionLetter">
+                <button class="nav-link disabled" id="introductionLetter-tab" data-toggle="tab" data-target="#introductionLetter" type="button" role="tab" aria-controls="introductionLetter" aria-selected="false">معرفی نامه</button>
+            </li>
             <li class="nav-item" role="interview">
                 <button class="nav-link disabled" id="interview-tab" data-toggle="tab" data-target="#interview" type="button" role="tab" aria-controls="interview" aria-selected="false">مصاحبه</button>
             </li>
@@ -32,6 +38,9 @@
             </li>
             <li class="nav-item" role="result">
                 <button class="nav-link disabled" id="result-tab" data-toggle="tab" data-target="#result" type="button" role="tab" aria-controls="result" aria-selected="false">نتیجه</button>
+            </li>
+            <li class="nav-item" role="rante">
+                <button class="nav-link disabled" id="result-tab" data-toggle="tab" data-target="#rante" type="button" role="tab" aria-controls="rante" aria-selected="false">وام دانشجویی</button>
             </li>
 
 
@@ -942,8 +951,46 @@
                         </tr>
                     @endfor
                 </table>
+            </div>
+            <div class="tab-pane fade " id="learn" role="tabpanel" aria-labelledby="learn-tab">
+                <div class="card-body" >
+                    <p>آکادمی بین المللی فراکوچ به  عنوان  اولین آموزشگاه مجاز کوچینگ در ایران و با اعتبار بین المللی تا کنون با پذیرش بیش از 1000 دانشپذیر در دوره های مختلف آموزش کوچینگ، بزرگترین  موسسه  آموزش کوچینگ در ایران محسوب می شود.</p>
+                    <p class="text-justify">پس از استقبال کم نظیر مشتاقان مسیر توسعه فردی و کسب و کار و کوچینگ از فرصت بی نظیر و البته محدود بورسیه کوچینگ جهت ورود به این اکوسیستم، بر آن شدیم که برای افراد مستعد، نخبه و توانمند جامعه به ویژه اساتید، پژوهشگران، اندیشمندان، مدیران و دانشجویان برتر علی الخصوص رشته های مدیریت، روانشاسی و مشاوره، علوم رفتاری و آموزشی، منابع انسانی و ... شناسایی کرده و تحت عنوان "بورسیه کوچینگ"  از آنها حمایت نماییم.                    </p>
+                    <p>سرفصل ها:</p>
+                    <ol>
+                        <li>باورهای بنیادین کوچینگ </li>
+                        <li>کاربرد علوم مختلف مثل روانشناسی ومدیریت در کوچینگ</li>
+                        <li>جایگاه کوچینگ در ایران و جهان</li>
+                        <li>کوچ کیست؟</li>
+                        <li>تعریف کوچینگ از دیدگاه سازمان جهانی کوچینگ ICF</li>
+                        <li>نظام ارزشها چیست و جایگاه آن در کوچینگ</li>
+                    </ol>
+                    <p>آزمون و گواهینامه بین المللی:</p>
+                    <p>در ادامه ارزیابی و بررسی رزومه های دریافتی، متقاضیان حضور در بورسیه پس از برگزاری وبینار، موظفند در آزمون ورود به دوره اصلی که از محتوای این وبینار طراحی شده است شرکت نموده و نمره قبولی را کسب نمایند. </p>
+                    <p>از طرف آکادمی فراکوچ برای قبول شدگان در این آزمون، گواهینامه معتبر بین المللی CCE که مورد تائید فدراسیون جهانی کوچینگ ICF می باشد صادر و اعطا خواهد شد.</p>
+
+                    <div class="row">
+                        <div class="col-12 col-md-6 mb-1">
+                            <b class="d-block mb-2 text-center bg-primary text-white p-2">گام اول: تماشا فیلم آموزشی</b>
+                            <style>.h_iframe-aparat_embed_frame{position:relative;}.h_iframe-aparat_embed_frame .ratio{display:block;width:100%;height:auto;}.h_iframe-aparat_embed_frame iframe{position:absolute;top:0;left:0;width:100%;height:100%;}</style><div class="h_iframe-aparat_embed_frame"><span style="display: block;padding-top: 57%"></span><iframe src="https://www.aparat.com/video/video/embed/videohash/yCEac/vt/frame" allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe></div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                              <b class="d-block mb-2 text-center bg-primary text-white p-2">گام دوم: ثبت نام در وبینار</b>
+                              <a href="http://evand.com/events/schfara" target="_blank">
+                                  <img src="{{asset('/images/scholarship_webinar.jpg')}}" class="img-fluid" />
+                                  <p class="text-center btn btn-primary btn-block">ثبت نام</p>
+                              </a>
+                        </div>
+
+                    </div>
+                </div>
 
 
+            </div>
+            <div class="tab-pane fade " id="introductionLetter" role="tabpanel" aria-labelledby="introductionLetter-tab">
+                <div class="card-body" >
+
+                </div>
             </div>
             <div class="tab-pane fade " id="interview" role="tabpanel" aria-labelledby="interview-tab">
                 <div class="card-body" >
@@ -963,6 +1010,13 @@
                 </div>
 
             </div>
+            <div class="tab-pane fade " id="rante" role="tabpanel" aria-labelledby="rante-tab">
+                <div class="card-body" >
+
+                </div>
+
+            </div>
+
 
 
         </div>

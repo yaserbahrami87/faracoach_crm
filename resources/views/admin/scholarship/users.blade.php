@@ -32,6 +32,7 @@
                                 <th>وضعیت درخواست</th>
                                 <th class="d-none">کد ملی</th>
                                 <th>تلفن</th>
+                                <th>مسئول پیگیری</th>
                                 <th>تحصیلات</th>
                                 <th >ساعت ثبت نام</th>
                                 <th> افراد معرفی شده</th>
@@ -79,6 +80,11 @@
                                     </td>
                                     <td class="text-center d-none" dir="ltr">{{$item->user->codemelli}}</td>
                                     <td class="text-center" dir="ltr">{{$item->user->tel}}</td>
+                                    <td class="text-center" dir="ltr">
+                                        @if(!is_null($item->user->get_followbyExpert))
+                                            {{$item->user->get_followbyExpert->fname.' '.$item->user->get_followbyExpert->lname}}
+                                        @endif
+                                    </td>
                                     <td class="text-center" dir="ltr">{{$item->user->education}}</td>
                                     <td class="text-center" dir="ltr">{{substr($item->created_at,0,10)  }}</td>
                                     <td class="text-center" dir="ltr">{{($item->user->get_invitations->where('resource','=','بورسیه تحصیلی')->count())  }}</td>

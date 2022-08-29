@@ -113,15 +113,26 @@ class ReportAdminController extends BaseController
             $this->validate($request, [
                 'start_date' => 'required|string',
             ]);
-            $request['start_date'] = explode(' ~ ', $request['start_date']);
-            $date_en = [$this->changeTimestampToMilad($request['start_date'][0]) . " 00:00:00", $this->changeTimestampToMilad($request['start_date'][1]) . " 23:59:59"];
+            $date_fa = explode(' ~ ', $request['start_date']);
+
+            $date_en = [$this->changeTimestampToMilad($date_fa[0]) . " 00:00:00", $this->changeTimestampToMilad($date_fa[1]) . " 23:59:59"];
+
             $users = User::wherebetween('created_at', $date_en)
-                ->get();
-            $followups = followup::wherebetween('date_fa', $request['start_date'])
-                ->get();
-        } else {
-            $users = User::get();
-            $followups = followup::get();
+                            ->get();
+
+            $followups = followup::wherebetween('date_fa', $date_fa)
+                            ->get();
+
+        } else
+        {
+            $v=verta();
+            $date_fa=[$v->startMonth()->format('Y/m/d'),$v->endMonth()->format('Y/m/d')];
+            $date_en = [$this->changeTimestampToMilad($date_fa[0]) . " 00:00:00", $this->changeTimestampToMilad($date_fa[1]). " 23:59:59"];
+            $users = User::wherebetween('created_at', $date_en)
+                            ->get();
+            $followups = followup::wherebetween('date_fa', [$v->now()->startMonth()->format('Y/m/d'),$v->now()->endMonth()->format('Y/m/d')])
+                            ->get();
+
         }
 
 
@@ -141,6 +152,7 @@ class ReportAdminController extends BaseController
             ->with('followups', $followups)
             ->with('date_jalali', $v->now())
             ->with('ages', $ages)
+            ->with('date_fa', $date_fa)
             ->with('users', $users);
     }
 
@@ -311,40 +323,96 @@ class ReportAdminController extends BaseController
         }
 
 
-        $users = User::when($request->gender, function ($query) use ($request) {
-            $query->where(function ($query) use ($request) {
-                $query->wherein('sex', $request->gender)
-                    ->when(in_array('NULL', $request->gender), function ($query) use ($request) {
-                        $query->orwhereNull('sex');
+        $users = User::when($request->gender, function ($query) use ($request)
+            {
+                $query->where(function ($query) use ($request) {
+                    $query->wherein('sex', $request->gender)
+                        ->when(in_array('NULL', $request->gender), function ($query) use ($request) {
+                            $query->orwhereNull('sex');
+                        });
+
+                });
+                if (in_array('NULL', $request->gender)) {
+                    $query->orwhereNull('sex');
+                }
+                return $query;
+            })
+            ->when($request->married, function ($query) use ($request)
+            {
+                $query->where(function ($query) use ($request) {
+                $query->wherein('married', $request->married)
+                    ->when(in_array('NULL', $request->married), function ($query) use ($request) {
+                        $query->orwhereNull('married');
                     });
 
-            });
-            if (in_array('NULL', $request->gender)) {
-                $query->orwhereNull('sex');
-            }
-            return $query;
-        })
-            ->when($request->married, function ($query) use ($request) {
-                return $query->wherein('married', $request->married);
+                });
+                if (in_array('NULL', $request->married)) {
+                    $query->orwhereNull('married');
+                }
+                return $query;
             })
-            ->when($request->state, function ($query) use ($request) {
-                return $query->wherein('state', $request->state);
+            ->when($request->state, function ($query) use ($request)
+            {
+                $query->where(function ($query) use ($request) {
+                    $query->wherein('state', $request->state)
+                        ->when(in_array('NULL', $request->state), function ($query) use ($request) {
+                            $query->orwhereNull('state');
+                        });
+
+                });
+                if (in_array('NULL', $request->state)) {
+                    $query->orwhereNull('state');
+                }
+                return $query;
             })
-            ->when($request->education, function ($query) use ($request) {
-                return $query->wherein('education', $request->education);
+            ->when($request->education, function ($query) use ($request)
+            {
+                $query->where(function ($query) use ($request) {
+                    $query->wherein('education', $request->education)
+                        ->when(in_array('NULL', $request->education), function ($query) use ($request) {
+                            $query->orwhereNull('education');
+                        });
+
+                });
+                if (in_array('NULL', $request->education)) {
+                    $query->orwhereNull('education');
+                }
+                return $query;
             })
-            ->when($request->types, function ($query) use ($request) {
-                return $query->wherein('type', $request->types);
+            ->when($request->types, function ($query) use ($request)
+            {
+                $query->where(function ($query) use ($request)
+                {
+
+                    $query->wherein('type', $request->types)
+                        ->when(in_array('NULL', $request->types), function ($query) use ($request) {
+                            $query->orwhereNull('type');
+                        });
+
+                });
+                if (in_array('NULL', $request->types)) {
+                    $query->orwhereNull('type');
+                }
+                return $query;
             })
-            ->when($request->kind == 'پیگیری', function ($query) {
-           return $query->with('followups')
-                       ->whereHas('followups', function($q) {
-                           $q->where('status_followup', '13');
-                       });
+            ->when($request->kind == 'پیگیری', function ($query)
+            {
+
+               return $query->with('followups')
+                           ->whereHas('followups', function($q) {
+                               $q->where('status_followup', '13');
+                           });
             })
             ->wherebetween('created_at', $request->date_en)
             ->get();
-        dd($users);
+
+
+            $states = $this->states();
+            $userType = user_type::get();
+        return view('admin.reports.report_advance')
+                            ->with('states',$states)
+                            ->with('userType',$userType)
+                            ->with('users',$users);
     }
 }
 

@@ -24,10 +24,15 @@
                     </div>
                 </form>
 
+
+
                 <a class="btn btn-primary" href="/admin/reports/allreport/exportexcel{{ request()->has('start_date') ? "?start_date=".request()->get('start_date')[0]."&end_date=".request()->get('start_date')[1]."&range=" : '' }}">
                     <i class="bi bi-file-earmark-excel-fill"></i>
                     خروجی اکسل
                 </a>
+            </div>
+            <div class="col-12">
+                <p>بازه تاریخی آمار: {{$date_fa[0]}} تا {{$date_fa[1]}}</p>
             </div>
         </div>
     </div>
