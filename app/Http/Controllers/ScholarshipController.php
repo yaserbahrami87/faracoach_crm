@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\city;
 use App\followup;
 use App\message;
+use App\Notifications\sendMessageNotification;
 use App\scholarship;
 use App\state;
 use App\User;
@@ -547,5 +548,82 @@ class ScholarshipController extends BaseController
             return response()->download(public_path($fileName))
                                 ->deleteFileAfterSend(true);
         }
+    }
+
+    public function sendSMS_incompleteProfile()
+    {
+        $scholarship=scholarship::get();
+        $user_incomplete=[];
+        foreach ($scholarship as $item)
+        {
+            if(strlen($item->user->email)==0||strlen($item->user->fname)==0||strlen($item->user->lname)==0||strlen($item->user->datebirth)==0|| strlen($item->user->father)==0|| strlen($item->user->codemelli)==0||strlen($item->user->sex)==0||strlen($item->user->tel)==0||strlen($item->user->shenasname)==0||strlen($item->user->born)==0||strlen($item->user->education)==0||strlen($item->user->reshteh)==0||strlen($item->user->job)==0||strlen($item->user->state)==0||strlen($item->user->city)==0||strlen($item->user->address)==0||strlen($item->user->personal_image)==0||strlen($item->user->resume)==0||strlen($item->user->married)==0)
+            {
+                array_push($user_incomplete,$item->user);
+            }
+
+        }
+
+        foreach ($user_incomplete as $item)
+        {
+            $msg="$item->fname $item->lname عزیز\n "."مرحله دوم پروفایل بورسیه شما کامل نشده است.\n"."لطفا هرچه سریعتر با استفاده از لینک زیر آن را تکمیل نمایید.\n"."b2n.ir/g42306";
+            $item->notify(new sendMessageNotification($item->tel,$msg));
+
+            $followups = followup::where('user_id', '=', $item->id)
+                            ->get();
+
+            foreach ($followups as $item)
+            {
+                $t = followup::where('id', '=', $item->id)   //    $this->get_followup($item->followups_id,NULL,NULL,NULL,"first");
+                            ->first();
+                $t->flag = 0;
+                $t->update();
+            }
+
+            followup::create([
+                'user_id' => $item->id,
+                'insert_user_id' => Auth::user()->id,
+                'comment' => "ارسال پیامک: $msg",
+                'status_followups' => 11,
+                'nextfollowup_date_fa' => NULL,
+                'flag' => 1,
+                'date_fa' => $this->dateNow,
+                'time_fa' => $this->timeNow,
+
+            ]);
+        }
+
+
+//                            with('User')
+//                            ->whereHas('User', function($q)
+//                            {
+//                                  $q->orWhereNull('state')
+//                                    ->orWhereNull('email')
+//                                    ->orWhereNull('fname')
+//                                    ->orWhereNull('lname')
+//                                    ->orWhereNull('datebirth')
+//                                    ->orWhereNull('father')
+//                                    ->orWhereNull('codemelli')
+//                                    ->orWhereNull('sex')
+//                                    ->orWhereNull('tel')
+//                                    ->orWhereNull('shenasname')
+//                                    ->orWhereNull('born')
+//                                    ->orWhereNull('education')
+//                                    ->orWhereNull('reshteh')
+//                                    ->orWhereNull('job')
+//                                    ->orWhereNull('city')
+//                                    ->orWhereNull('address')
+//                                    ->orWhereNull('personal_image')
+//                                    ->orWhereNull('resume')
+//                                    ->orWhereNull('marrie');
+//                            })
+//                            ->get();
+
+
+
+
+
+        alert()->success($user_incomplete->count(). " پیامک برای افرادی که پروفایل ناقص دارند ارسال شد")->persistent('بستن');
+        return back();
+
     }
 }

@@ -213,6 +213,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     //Route Scholarship
     Route::post('/scholarship/{scholarship}/changestatus','ScholarshipController@changeStatus');
     Route::get('/scholarship/exportExcel','ScholarshipController@exportExcel');
+    Route::get('/scholarship/sendSMS_incompleteProfile','ScholarshipController@sendSMS_incompleteProfile');
     Route::resource('scholarship','ScholarshipController');
 
     //  ROUTE SETTINGS
