@@ -325,7 +325,8 @@ class ReportAdminController extends BaseController
 
         $users = User::when($request->gender, function ($query) use ($request)
             {
-                $query->where(function ($query) use ($request) {
+                $query->where(function ($query) use ($request)
+                {
                     $query->wherein('sex', $request->gender)
                         ->when(in_array('NULL', $request->gender), function ($query) use ($request) {
                             $query->orwhereNull('sex');
@@ -339,11 +340,12 @@ class ReportAdminController extends BaseController
             })
             ->when($request->married, function ($query) use ($request)
             {
-                $query->where(function ($query) use ($request) {
-                $query->wherein('married', $request->married)
-                    ->when(in_array('NULL', $request->married), function ($query) use ($request) {
-                        $query->orwhereNull('married');
-                    });
+                $query->where(function ($query) use ($request)
+                {
+                    $query->wherein('married', $request->married)
+                        ->when(in_array('NULL', $request->married), function ($query) use ($request) {
+                            $query->orwhereNull('married');
+                        });
 
                 });
                 if (in_array('NULL', $request->married)) {
@@ -353,7 +355,8 @@ class ReportAdminController extends BaseController
             })
             ->when($request->state, function ($query) use ($request)
             {
-                $query->where(function ($query) use ($request) {
+                $query->where(function ($query) use ($request)
+                {
                     $query->wherein('state', $request->state)
                         ->when(in_array('NULL', $request->state), function ($query) use ($request) {
                             $query->orwhereNull('state');
@@ -367,7 +370,8 @@ class ReportAdminController extends BaseController
             })
             ->when($request->education, function ($query) use ($request)
             {
-                $query->where(function ($query) use ($request) {
+                $query->where(function ($query) use ($request)
+                {
                     $query->wherein('education', $request->education)
                         ->when(in_array('NULL', $request->education), function ($query) use ($request) {
                             $query->orwhereNull('education');

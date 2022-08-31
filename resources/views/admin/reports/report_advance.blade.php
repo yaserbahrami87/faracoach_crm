@@ -147,16 +147,19 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($users as $item)
-                            <tr class='clickable-row' data-href='{{asset('/admin/user/'.$item->id)}}'>
-                                <td>
-                                    {{$item->fname}}
-                                </td>
-                                <td>s2</td>
-                                <td>s3</td>
-                                <td>s4</td>
-                            </tr>
-                        @endforeach
+                            @isset($users)
+                                @foreach($users as $item)
+                                    <tr class='clickable-row' data-href='{{asset('/admin/user/'.$item->id)}}'>
+                                        <td>
+                                            <a href="{{asset('/admin/user/'.$item->id)}}">{{$item->fname}}</a>
+
+                                        </td>
+                                        <td>{{$item->lname}}</td>
+                                        <td>s3</td>
+                                        <td>s4</td>
+                                    </tr>
+                                @endforeach
+                            @endisset
                         </tbody>
                     </table>
                 </div>
@@ -209,6 +212,7 @@
             $(document).ready(function() {
                 $(".clickable-row").click(function() {
                     window.location = $(this).data("href");
+                    console.log($(this).data("href"));
                 });
             });
 

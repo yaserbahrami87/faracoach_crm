@@ -552,7 +552,8 @@ class ScholarshipController extends BaseController
 
     public function sendSMS_incompleteProfile()
     {
-        $scholarship=scholarship::get();
+        $scholarship=scholarship::where('status','<>','1')
+                        ->get();
         $user_incomplete=[];
         foreach ($scholarship as $item)
         {
@@ -579,7 +580,8 @@ class ScholarshipController extends BaseController
                 $t->update();
             }
 
-            followup::create([
+            followup::create(
+                [
                 'user_id' => $item->id,
                 'insert_user_id' => Auth::user()->id,
                 'comment' => "ارسال پیامک: $msg",
@@ -622,7 +624,7 @@ class ScholarshipController extends BaseController
 
 
 
-        alert()->success($user_incomplete->count(). " پیامک برای افرادی که پروفایل ناقص دارند ارسال شد")->persistent('بستن');
+        alert()->success(count($user_incomplete). " پیامک برای افرادی که پروفایل ناقص دارند ارسال شد")->persistent('بستن');
         return back();
 
     }

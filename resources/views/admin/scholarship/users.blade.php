@@ -86,6 +86,11 @@
                                         @endif
                                     </td>
                                     <td class="text-center" dir="ltr">{{$item->user->education}}</td>
+                                    <td class="text-center" dir="ltr">
+                                        @if(!is_null($item->user->state))
+                                            {{$item->user->get_state->name}}
+                                        @endif
+                                    </td>
                                     <td class="text-center" dir="ltr">{{substr($item->created_at,0,10)  }}</td>
                                     <td class="text-center" dir="ltr">{{($item->user->get_invitations->where('resource','=','بورسیه تحصیلی')->count())  }}</td>
                                     <td class="text-center" dir="ltr">
