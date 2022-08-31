@@ -13,7 +13,7 @@
             </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">
+             <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">
                 <div class="col-12 table-responsive">
                     <form method="get" action="/admin/scholarship/exportExcel">
                         {{csrf_field()}}
@@ -93,20 +93,11 @@
                                         @endif
                                     </td>
                                     <td class="text-center" dir="ltr">{{substr($item->created_at,0,10)  }}</td>
-                                    <td class="text-center" dir="ltr">{{($item->user->get_invitations->where('resource','=','بورسیه تحصیلی')->count())  }}</td>
                                     <td class="text-center" dir="ltr">
-                                        @php
-                                        $i=0;
-                                        @endphp
-
-                                        @foreach($item->user->get_invitations->where('resource','=','بورسیه تحصیلی') as $item_invitation)
-                                            @if(!is_null($item_invitation->scholarship))
-                                                @php
-                                                  $i++;
-                                                @endphp
-                                            @endif
-                                        @endforeach
-                                        {{$i}}
+                                        {{($item->user->get_invitations->where('created_at','>','2022-07-20 00:00:00')->where('resource','=','بورسیه تحصیلی')->count())  }}
+                                    </td>
+                                    <td class="text-center" dir="ltr">
+                                        {{$item->user->get_invitations->where('created_at','>','2022-07-20 00:00:00')->where('resource','=','بورسیه تحصیلی')->where('introduced','=',$item->user_id)->count()}}
                                     </td>
 
                                 </tr>
@@ -125,7 +116,6 @@
                                 <th>نام و نام خانوادگی</th>
                                 <th class="d-none">کد ملی</th>
                                 <th>تلفن</th>
-                                <th>کد پیگیری</th>
                                 <th>وضعیت</th>
                             </tr>
                             </thead>
@@ -138,7 +128,7 @@
                                     </td>
                                     <td class="text-center d-none" dir="ltr">{{$item->user->codemelli}}</td>
                                     <td class="text-center" dir="ltr">{{$item->user->tel}}</td>
-                                    <td class="text-center" dir="ltr">{{$item->trackingcode}}</td>
+
                                     <td class="text-center">
                                         @switch($item->status)
                                             @case(0)<span class="text-info"> بررسی نشده</span>
@@ -174,8 +164,6 @@
                                 <th>نام و نام خانوادگی</th>
                                 <th class="d-none">کد ملی</th>
                                 <th>تلفن</th>
-                                <th>کد پیگیری</th>
-                                <th>وضعیت</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -187,24 +175,7 @@
                                     </td>
                                     <td class="text-center d-none" dir="ltr">{{$item->user->codemelli}}</td>
                                     <td class="text-center" dir="ltr">{{$item->user->tel}}</td>
-                                    <td class="text-center" dir="ltr">{{$item->trackingcode}}</td>
-                                    <td class="text-center">
-                                        @switch($item->status)
-                                            @case(0)<span class="text-info"> بررسی نشده</span>
-                                            @break
-                                            @case(1)<span class="text-success"> تائید شده</span>
-                                            @break
-                                            @case(2)<span class="text-danger">رد درخواست</span>
-                                            @break
-                                            @case(3)<span class="text-dark">در حال بررسی</span>
-                                            @break
-                                            @case(4) <span class="text-primary">اصلاح درخواست</span>
-                                            @break
-                                            @case(5)<span class="text-warning">اصلاح شده</span>
-                                            @break
-                                            @default خطا
-                                        @endswitch
-                                    </td>
+
                                 </tr>
                             @endforeach
                             </tbody>

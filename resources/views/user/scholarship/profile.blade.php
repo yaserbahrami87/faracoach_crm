@@ -982,6 +982,15 @@
                               </a>
                         </div>
 
+                        <div class="d-sm-none d-md-block col-lg-4"></div>
+                        <div class="col-12 col-lg-4 d-sm-none d-md-block">
+                            <p class="text-center">کد حضور در وبینار</p>
+                            <form class="form-inline text-center">
+                                <input type="text" class="form-control" id="code"  max="6" />
+                                <button type="submit" class="btn btn-primary mb-2 d-block btn-block">Submit</button>
+                            </form>
+                        </div>
+                        <div class="d-sm-none d-md-block col-lg-4"></div>
                     </div>
                 </div>
 
@@ -1187,6 +1196,7 @@
 
             alert('لینک دعوت اختصاصی شما کپی شد');
         });
+
     </script>
 
 

@@ -33,7 +33,6 @@ class ScholarshipController extends BaseController
         }
 
 
-
         return view('admin.scholarship.users')
                     ->with('scholarships',$scholarships);
     }
