@@ -985,10 +985,31 @@
                         <div class="d-sm-none d-md-block col-lg-4"></div>
                         <div class="col-12 col-lg-4 d-sm-none d-md-block">
                             <p class="text-center">کد حضور در وبینار</p>
-                            <form class="form-inline text-center">
-                                <input type="text" class="form-control" id="code"  max="6" />
-                                <button type="submit" class="btn btn-primary mb-2 d-block btn-block">Submit</button>
-                            </form>
+                            <div id="result_checkCodeWebinar"></div>
+                            @if($scholarship->confirm_webinar==1)
+                                <div class="alert alert-success">کد شرکت در وبینار با موفقیت ثبت شده است</div>
+                            @elseif($scholarship->user->get_recieveCodeUsers->count()>=2)
+                                <div class="alert alert-danger">تعداد مجاز ورود دفعات کد وبینار بورسیه 2 بار می باشد</div>
+                            @else
+                                <form method="post" class="text-center"  id="frm_checkCodeWebinar">
+                                    {{csrf_field()}}
+                                    <div class="row">
+                                        <div class="col-4 col-md-4">
+                                            <label for="code1">کد سوم</label>
+                                            <input type="number" class="form-control code text-center" id="code3"  maxlength="2" name="code3"/>
+                                        </div>
+                                        <div class="col-4 col-md-4">
+                                            <label for="code2">کد دوم</label>
+                                            <input type="number" class="form-control code text-center" id="code2"   maxlength="2" name="code2"/>
+                                        </div>
+                                        <div class="col-4 col-md-4">
+                                            <label for="code3">کد اول</label>
+                                            <input type="number" class="form-control code text-center" id="code1"   maxlength="2" name="code1"/>
+                                        </div>
+                                        <button type="button" class="btn btn-primary mb-2 d-block btn-block mt-1 mb-1" onclick="checkCodeWebinar()">کد وبینار</button>
+                                    </div>
+                                </form>
+                            @endif
                         </div>
                         <div class="d-sm-none d-md-block col-lg-4"></div>
                     </div>
@@ -1197,6 +1218,50 @@
             alert('لینک دعوت اختصاصی شما کپی شد');
         });
 
+
+        function checkCodeWebinar()
+        {
+            var data=$('#frm_checkCodeWebinar').serialize();
+            data=
+                {
+                    "_token": "{{ csrf_token() }}",
+                    'code1':$('#code1').val(),
+                    'code2':$('#code2').val(),
+                    'code3':$('#code3').val(),
+                };
+           $.ajax(
+               {
+                   data:data,
+                   url:'/panel/scholarship/store_webinarCode',
+                   type:'POST',
+                   success: function (data) {
+                       $('#result_checkCodeWebinar').html(data);
+
+                       // $('#result_checkCodeWebinar').html("<div class='alert alert-success'>کد صحیح وارد شد</div>");
+                   },
+                   error : function(data)
+                   {
+                       $('#result_checkCodeWebinar').text(data.responseJSON.errors);
+                       errorsHtml='<div class="alert alert-danger text-left"><ul>';
+                       $.each( data.responseJSON.errors, function( key, value ) {
+                           errorsHtml += '<li>'+ value[0] + '</li>'; //showing only the first error.
+                       });
+                       errorsHtml += '</ul></div>';
+                       $( '#result_checkCodeWebinar' ).html( errorsHtml );
+                   }
+               }
+           );
+        };
+
+        //
+
+    </script>
+
+    <script src="{{asset('/js/jquery.autotab.min.js')}}"></script>
+    <script>
+        $(function () {
+            $('.code').autotab();
+        });
     </script>
 
 

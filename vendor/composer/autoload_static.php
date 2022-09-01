@@ -782,6 +782,7 @@ class ComposerStaticInitf54d8edf51459297346cdb00d8423a68
         'App\\post' => __DIR__ . '/../..' . '/app/post.php',
         'App\\problemfollowup' => __DIR__ . '/../..' . '/app/problemfollowup.php',
         'App\\psychological' => __DIR__ . '/../..' . '/app/psychological.php',
+        'App\\recievecodeusers' => __DIR__ . '/../..' . '/app/recievecodeusers.php',
         'App\\reserve' => __DIR__ . '/../..' . '/app/reserve.php',
         'App\\scholarship' => __DIR__ . '/../..' . '/app/scholarship.php',
         'App\\score' => __DIR__ . '/../..' . '/app/score.php',

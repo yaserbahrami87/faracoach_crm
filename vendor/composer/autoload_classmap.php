@@ -177,6 +177,7 @@ return array(
     'App\\post' => $baseDir . '/app/post.php',
     'App\\problemfollowup' => $baseDir . '/app/problemfollowup.php',
     'App\\psychological' => $baseDir . '/app/psychological.php',
+    'App\\recievecodeusers' => $baseDir . '/app/recievecodeusers.php',
     'App\\reserve' => $baseDir . '/app/reserve.php',
     'App\\scholarship' => $baseDir . '/app/scholarship.php',
     'App\\score' => $baseDir . '/app/score.php',

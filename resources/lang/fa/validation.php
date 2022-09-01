@@ -253,7 +253,10 @@ return [
         'tel_introduced'        =>'تلفن دعوت شده',
         'fname_introduced'      =>'نام دعوت شده',
         'lname_introduced'      =>'نام خانوادگی دعوت شده',
-        'sex_introduced'      =>'جنسیت دعوت شده',
+        'sex_introduced'        =>'جنسیت دعوت شده',
+        'code1'                 =>'کد اول',
+        'code2'                 =>'کد دوم',
+        'code3'                 =>'کد سوم',
     ],
 
     'values' => [

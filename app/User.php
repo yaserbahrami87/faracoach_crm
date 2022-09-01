@@ -237,6 +237,11 @@ class User extends Authenticatable implements MustVerifyEmail
             return $this->hasOne('App\scholarship','user_id','id');
         }
 
+        public function get_recieveCodeUsers()
+        {
+            return $this->hasMany('App\recievecodeusers');
+        }
+
 
 
 
