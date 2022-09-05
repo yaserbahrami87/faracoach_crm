@@ -23,7 +23,6 @@
                         </button>
                     </form>
                     <table  class="table_data table table-striped table-bordered" style="width:100%">
-
                         <thead>
                             <tr class="text-center">
                                 <th>ردیف</th>
@@ -35,9 +34,11 @@
                                 <th>مسئول پیگیری</th>
                                 <th>تحصیلات</th>
                                 <th>استان</th>
-                                <th >ساعت ثبت نام</th>
+                                <th >نتیجه آزمون</th>
+                                <!--
                                 <th> افراد معرفی شده</th>
                                 <th> افراد ثبت نام بورسیه</th>
+                                -->
 
                             </tr>
                         </thead>
@@ -92,13 +93,19 @@
                                             {{$item->user->get_state->name}}
                                         @endif
                                     </td>
-                                    <td class="text-center" dir="ltr">{{substr($item->created_at,0,10)  }}</td>
+                                    <td class="text-center" dir="ltr" >
+                                        @if(!is_null($item->user->get_scholarshipexam))
+                                            {{$item->user->get_scholarshipexam->score}}
+                                        @endif
+                                    </td>
+                                    <!--
                                     <td class="text-center" dir="ltr">
-                                        {{($item->user->get_invitations->where('created_at','>','2022-07-20 00:00:00')->where('resource','=','بورسیه تحصیلی')->count())  }}
+                                        {{--($item->user->get_invitations->where('created_at','>','2022-07-20 00:00:00')->where('resource','=','بورسیه تحصیلی')->count())--}}
                                     </td>
                                     <td class="text-center" dir="ltr">
-                                        {{$item->user->get_invitations->where('created_at','>','2022-07-20 00:00:00')->where('resource','=','بورسیه تحصیلی')->where('introduced','=',$item->user_id)->count()}}
+                                        {{--$item->user->get_invitations->where('created_at','>','2022-07-20 00:00:00')->where('resource','=','بورسیه تحصیلی')->where('introduced','=',$item->user_id)->count()--}}
                                     </td>
+                                    -->
 
                                 </tr>
                             @endforeach

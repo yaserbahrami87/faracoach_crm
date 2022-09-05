@@ -628,4 +628,33 @@ class ScholarshipController extends BaseController
         return back();
 
     }
+
+
+    public function webinar_accept()
+    {
+        $scholarships=scholarship::where('confirm_webinar','=',1)
+                        ->get();
+        foreach ($scholarships as $item)
+        {
+            $item->created_at=$this->changeTimestampToShamsi($item->created_at);
+        }
+
+
+        return view('admin.scholarship.users')
+            ->with('scholarships',$scholarships);
+    }
+
+    public function exam_accept()
+    {
+        $scholarships=scholarship::where('confirm_exam','=',1)
+            ->get();
+        foreach ($scholarships as $item)
+        {
+            $item->created_at=$this->changeTimestampToShamsi($item->created_at);
+        }
+
+
+        return view('admin.scholarship.users')
+            ->with('scholarships',$scholarships);
+    }
 }

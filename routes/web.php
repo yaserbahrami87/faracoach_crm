@@ -95,6 +95,10 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     Route::post('/scholarship/addintroduced','UserController@addIntroducedUser_Scholarship');
     Route::post('/scholarship/store_webinarCode','RecievecodeusersController@store_webinarCode');
 
+    //Scholarship Exam
+    Route::get('/scholarship/exam/create','ScholarshipExamController@create');
+    Route::post('/scholarship/exam','ScholarshipExamController@store');
+
 
     //booking
     Route::get('/booking/accept','BookingController@acceptReserve');
@@ -215,6 +219,8 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::post('/scholarship/{scholarship}/changestatus','ScholarshipController@changeStatus');
     Route::get('/scholarship/exportExcel','ScholarshipController@exportExcel');
     Route::get('/scholarship/sendSMS_incompleteProfile','ScholarshipController@sendSMS_incompleteProfile');
+    Route::get('/scholarship/webinar_accept','ScholarshipController@webinar_accept');
+    Route::get('/scholarship/exam_accept','ScholarshipController@exam_accept');
     Route::resource('scholarship','ScholarshipController');
 
     //  ROUTE SETTINGS
@@ -397,11 +403,12 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::get('/reports/statistic/{user}','ReportAdminController@show');
     Route::get('/reports/allreport','ReportAdminController@allReportsUsers');
     Route::get('/reports/advance/create','ReportAdminController@advanceReport_create');
-    Route::post('/reports/advance','ReportAdminController@advanceReport');
+    Route::get('/reports/advance','ReportAdminController@advanceReport');
     Route::get('/reports/allreport/exportexcel','ReportAdminController@exportExcel_allReportsUsers');
 
     //Tweets
     Route::resource('tweet','TweetController');
+
 
 
     //Landing

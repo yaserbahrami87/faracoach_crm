@@ -32,8 +32,6 @@
         <div class="row">
             <div class="col-12">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
-
-
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="contact-tab" data-toggle="tab" data-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">اطلاعات بورسیه</button>
                     </li>
@@ -41,14 +39,18 @@
                         <button class="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">اطلاعات کاربر</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="introduce-tab" data-toggle="tab" data-target="#introduce" type="button" role="tab" aria-controls="introduce" aria-selected="false">معرفی دوستان</button>
+                        <button class="nav-link " id="introduce-tab" data-toggle="tab" data-target="#introduce" type="button" role="tab" aria-controls="introduce" aria-selected="false">معرفی دوستان</button>
+                    </li>
+                    <li class="nav-item" role="learn">
+                        <button class="nav-link @if($scholarship->confirm_webinar)==1) bg-success @else  bg-danger  @endif" id="exam-tab" data-toggle="tab" data-target="#learn" type="button" role="tab" aria-controls="learn" aria-selected="false">آموزش</button>
+                    </li>
+                    <li class="nav-item" role="exam">
+                        <button class="nav-link @if(is_null($scholarship->user->get_scholarshipexam)) bg-warning @elseif($scholarship->user->get_scholarshipexam->score > 50) bg-success @elseif($scholarship->user->get_scholarshipexam->score  <50) bg-danger @endif" id="exam-tab" data-toggle="tab" data-target="#exam" type="button" role="tab" aria-controls="exam" aria-selected="false">آزمون</button>
                     </li>
                     <li class="nav-item" role="interview">
                         <button class="nav-link disabled" id="interview-tab" data-toggle="tab" data-target="#interview" type="button" role="tab" aria-controls="interview" aria-selected="false">مصاحبه</button>
                     </li>
-                    <li class="nav-item" role="exam">
-                        <button class="nav-link disabled" id="exam-tab" data-toggle="tab" data-target="#exam" type="button" role="tab" aria-controls="exam" aria-selected="false">آزمون</button>
-                    </li>
+
                     <li class="nav-item" role="result">
                         <button class="nav-link disabled" id="result-tab" data-toggle="tab" data-target="#result" type="button" role="tab" aria-controls="result" aria-selected="false">نتیجه</button>
                     </li>
@@ -723,6 +725,35 @@
                                 </tr>
                             @endfor
                         </table>
+                    </div>
+                    <div class="tab-pane fade " id="learn" role="tabpanel" aria-labelledby="learn-tab">
+                        @if($scholarship->confirm_webinar==1)
+                            <div class="alert alert-success">
+                                کد شرکت در وبینار به درستی وارد شده است
+                            </div>
+                        @elseif($scholarship->user->get_recieveCodeUsers->count()>=3)
+                             <div class="alert alert-danger">
+                                 کاربر تعداد مجاز برای وارد کردن کد را انجام داده است
+                             </div>
+                        @else
+                             <div class="alert alert-warning">
+                                 تعداد دفعات ورود کد {{$scholarship->user->get_recieveCodeUsers->count()}}  بار می باشد
+                             </div>
+                        @endif
+                    </div>
+                    <div class="tab-pane fade" id="exam" role="tabpanel" aria-labelledby="exam-tab">
+                        @if(is_null($scholarship->user->get_scholarshipexam))
+                            <div class="alert alert-warning">در آزمون شرکت نکرده است</div>
+                        @elseif($scholarship->user->get_scholarshipexam->score>50)
+                            <div class="alert alert-success">
+                                در آزمون با نتیجه {{$scholarship->user->get_scholarshipexam->score}} قبول شده است
+                            </div>
+                        @elseif($scholarship->user->get_scholarshipexam->score<50)
+                            <div class="alert alert-danger">
+                                در آزمون با نتیجه {{$scholarship->user->get_scholarshipexam->score}} رد شده است
+                            </div>
+                        @endif
+
                     </div>
 
                 </div>

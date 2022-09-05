@@ -12,7 +12,7 @@
 @endsection
 @section('content')
     <div class="col-12">
-        <form method="post" action="/admin/reports/advance/" id="advance_form">
+        <form method="get" action="/admin/reports/advance" id="advance_form">
             {{csrf_field()}}
             <div class="row">
                 <div class="col-3 mb-1" id="app">
@@ -154,7 +154,9 @@
                                             <a href="{{asset('/admin/user/'.$item->id)}}">{{$item->fname}}</a>
 
                                         </td>
-                                        <td>{{$item->lname}}</td>
+                                        <td>
+                                            <a href="{{asset('/admin/user/'.$item->id)}}">{{$item->lname}}</a>
+                                        </td>
                                         <td>s3</td>
                                         <td>s4</td>
                                     </tr>
@@ -194,7 +196,9 @@
     <script src="{{asset('/js/bootstrap-multiselect.min.js')}}"></script>
     <script type="text/javascript">
         $(function () {
-            $('.selectpicker').multiselect();
+            $('.selectpicker').multiselect({
+                enableFiltering: true
+            });
         });
     </script>
 
