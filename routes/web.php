@@ -94,10 +94,12 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     Route::post('/scholarship/answerstatus','ScholarshipController@answerstatus');
     Route::post('/scholarship/addintroduced','UserController@addIntroducedUser_Scholarship');
     Route::post('/scholarship/store_webinarCode','RecievecodeusersController@store_webinarCode');
+    Route::post('/scholarship/introductionletter','ScholarshipController@introductionletter');
 
     //Scholarship Exam
     Route::get('/scholarship/exam/create','ScholarshipExamController@create');
     Route::post('/scholarship/exam','ScholarshipExamController@store');
+
 
 
     //booking

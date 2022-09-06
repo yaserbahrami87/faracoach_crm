@@ -33,6 +33,9 @@ class CreateScholarshipsTable extends Migration
             $table->boolean('confirm_applicant')->default(0);
             $table->string('resume',250)->nullable();
             $table->boolean('confirm_resume')->default(0);
+            $table->boolean('confirm_webinar')->default(0);
+            $table->boolean('confirm_exam')->default(0);
+            $table->string('introductionletter',100)->nullable();
             $table->tinyInteger('status')->default(0);
             $table->string('trackingcode',30)->nullable();
             $table->timestamps();

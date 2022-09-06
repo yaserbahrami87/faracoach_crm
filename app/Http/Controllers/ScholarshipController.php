@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Intervention\Image\Facades\Image;
 use Throwable;
 
 class ScholarshipController extends BaseController
@@ -656,5 +657,33 @@ class ScholarshipController extends BaseController
 
         return view('admin.scholarship.users')
             ->with('scholarships',$scholarships);
+    }
+
+    public function introductionletter(Request $request)
+    {
+        $this->validate($request,[
+            'introductionletter'    =>'required|mimes:jpeg,jpg,bmp,png,pdf,doc|max:1024',
+        ]);
+
+        $scholarship=Auth::user()->scholarship;
+        if ($request->has('introductionletter') && $request->file('introductionletter')->isValid()) {
+            $file = $request->file('introductionletter');
+            $introductionletter = "introductionletter-" . Auth::user()->tel . "." . $request->file('introductionletter')->extension();
+            $path = public_path('documents/scholarship/');
+            $request->file('introductionletter')->move($path, $introductionletter);
+        }
+
+        $scholarship->introductionletter=$introductionletter;
+        $status=$scholarship->save();
+        if($status)
+        {
+            alert()->success('معرفی نامه با موفقیت بارگذاری شد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در بارگذاری معرفی نامه')->persistent('بستن');
+        }
+
+        return back();
     }
 }

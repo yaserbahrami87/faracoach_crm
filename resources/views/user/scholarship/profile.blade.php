@@ -97,7 +97,7 @@
                 <button class="nav-link" id="exam-tab" data-toggle="tab" data-target="#exam" type="button" role="tab" aria-controls="exam" aria-selected="false">آزمون</button>
             </li>
             <li class="nav-item" role="introductionLetter">
-                <button class="nav-link disabled" id="introductionLetter-tab" data-toggle="tab" data-target="#introductionLetter" type="button" role="tab" aria-controls="introductionLetter" aria-selected="false">معرفی نامه</button>
+                <button class="nav-link" id="introductionLetter-tab" data-toggle="tab" data-target="#introductionLetter" type="button" role="tab" aria-controls="introductionLetter" aria-selected="false">معرفی نامه</button>
             </li>
             <li class="nav-item" role="interview">
                 <button class="nav-link disabled" id="interview-tab" data-toggle="tab" data-target="#interview" type="button" role="tab" aria-controls="interview" aria-selected="false">مصاحبه</button>
@@ -1088,7 +1088,36 @@
                 <div class="card-body" >
                     <b>نمونه متن معرفی نامه:</b>
                     <p>نامه در سر برگ ان  موسسه  با شماره  و  تاریخ</p>
-                    <p></p>
+                    <p class="text-center">بسمه تعالی</p>
+                    <p>مدیریت محترم آکادمی بین المللی فراکوچ</p>
+                    <p>با سلام،</p>
+                    <p class="text-justify">با عنایت به فرصت ایجاد شده توسط آن  مجموعه در راستای گسترش فرهنگ کوچینگ، احتراما خانم / آقای ......................... دارای کد ملی ............................  را جهت شرکت در طرح بورسیه آموزش مهارت کوچینگ (ویژه نخبگان و اساتید) و همکاریهای آتی، معرفی می نماید.</p>
+                    <p>علت این معرفی دارا بودن صلاحیتهای زیر است:</p>
+                    <ol>
+                        <li>...</li>
+                        <li>...</li>
+                        <li>...</li>
+                    </ol>
+                    <p class="text-justify">صدور این معرفی نامه به منزله تایید صلاحیت های ایشان توسط این ...... شرکت /  موسسه/ سازمان / دانشگاه  ..... می باشد. خواهشمند است همکاری لازم را به عمل آورید.</p>
+                    <p>پیشاپیش از همراهی شما سپاسگزارم</p>
+                    <p  class="text-right">با احترام</p>
+                    <p  class="text-right">مدیر مربوطه/عامل</p>
+                    <p  class="text-right">مهر وامضا</p>
+
+                    @if(is_null($scholarship->introductionletter))
+                    <form method="POST" action="/panel/scholarship/introductionletter" enctype="multipart/form-data">
+                        {{csrf_field()}}
+                        <div class="form-group">
+                            <label for="introductionLetter_file">بارگذاری معرفی نامه:</label>
+                            <input type="file" class="form-control-file" id="introductionLetter_file" name="introductionletter">
+                        </div>
+                        <input type="submit" class="btn btn-success" value="ارسال معرفی نامه" />
+                    </form>
+                    @else
+                        <div class="alert alert-success">
+                            معرفی نامه شما بارگذاری شده است <a class="btn btn-primary" href="{{asset('/documents/scholarship/'.$scholarship->introductionletter)}}">دانلود</a>
+                        </div>
+                    @endif
                 </div>
             </div>
             <div class="tab-pane fade " id="interview" role="tabpanel" aria-labelledby="interview-tab">
