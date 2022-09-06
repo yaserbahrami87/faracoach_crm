@@ -1086,7 +1086,9 @@
             </div>
             <div class="tab-pane fade " id="introductionLetter" role="tabpanel" aria-labelledby="introductionLetter-tab">
                 <div class="card-body" >
-
+                    <b>نمونه متن معرفی نامه:</b>
+                    <p>نامه در سر برگ ان  موسسه  با شماره  و  تاریخ</p>
+                    <p></p>
                 </div>
             </div>
             <div class="tab-pane fade " id="interview" role="tabpanel" aria-labelledby="interview-tab">
@@ -1100,7 +1102,10 @@
                     @if(is_null($scholarship->user->get_scholarshipExam))
                         <div class="container pb-4 mt-5">
                             <div class="col-12 text-justify">
-                                <p>سلام ، تست پیش رو شامل 25 سوال است </p>
+                                <p>سلام به آزمون دوره  مقدماتی خوش آمدید </p>
+                                <p>این آزمون  هم از جهت  نمره  و امتیاز بورسیه اهمیت داره ( نمره زیر 50 بدون امتیاز ، 50 تا 70 ، فقط 10 و بالای 70 نمره  کامل  20 امتیاز ) و  هم برای صدور  گواهینامه  (فقط برای نمره  بالای 50 گواهینامه صادر میشه )</p>
+                                <p>این آزمون شامل 25 سواله که برای  جواب درست ، مناسب ترین گزینه را انتخاب نمایید.</p>
+                                <p>با آرزوی موفقیت، در مصاحبه میبینیمتون 🌺</p>
                             </div>
                         </div>
                         <div class="container pb-4 mt-5 " id="fff">
@@ -1133,9 +1138,9 @@
                                         </section>
                                         <section >
                                             <p>2- کدام گزینه در مورد کوچینگ صحیح <u>نمی باشد</u>?</p>
-                                            <input class="page-next" type="radio" id="vehicle2_5" name="vehicle2" value="0" required>
+                                            <input class="page-next" type="radio" id="vehicle2_5" name="vehicle2" value="4" required>
                                             <label for="vehicle2_5">در کوچینگ از طریق فرمول و پروتکل های از پیش تعیین شده مساله  مراجع حل می‌شود</label><br>
-                                            <input class="page-next" type="radio" id="vehicle2_4" name="vehicle2" value="4" required>
+                                            <input class="page-next" type="radio" id="vehicle2_4" name="vehicle2" value="0" required>
                                             <label for="vehicle2_4"> در کوچینگ تمرکز بر روی حال و آینده مراجع است  </label><br>
                                             <input class="page-next" type="radio" id="vehicle2_3" name="vehicle2" value="0" required>
                                             <label for="vehicle2_3">در کوچینگ به حل مشکلات گذشته مراجع پرداخته نمی‌شود</label><br/>
@@ -1163,7 +1168,7 @@
                                             </div>
                                         </section>
                                         <section >
-                                            <p>4- اگر مراجع درخواست کند که کوچ برای او معرفی کسب و کار بنویسد، کوچ چه کاری باید انجام دهد؟
+                                            <p>4- اگر مراجع درخواست کند که کوچ برای او طرح کسب و کار بنویسد، کوچ چه کاری باید انجام دهد؟
                                             </p>
                                             <input class="page-next"  type="radio" id="vehicle4_5" name="vehicle4" value="0" required>
                                             <label for="vehicle4_5">در ازای دریافت هزینه بنویسد</label><br>
@@ -1172,7 +1177,7 @@
                                             <input class="page-next"  type="radio" id="vehicle4_3" name="vehicle4" value="0" required>
                                             <label for="vehicle4_3">نپذیرد چرا که این کار مشاوره است و کوچینگ نیست</label><br/>
                                             <input class="page-next"  type="radio" id="vehicle4_2" name="vehicle4" value="4" required>
-                                            <label for="vehicle4_2"> با کمک کردن به مراجع تا موانع کسب درامد را پیدا کند با او همراهی کند</label><br>
+                                            <label for="vehicle4_2"> با همراهی با  مراجع به  او  کمک کند تا  موانع نوشتن طرح کسب و کار را پیدا کند </label><br>
 
                                             <div class="col-12 text-center mt-3">
                                                 <button type="button" class="page-prev btn btn-danger col-3 ">قبلی</button>
@@ -1201,7 +1206,7 @@
                                             <input class="page-next"  type="radio" id="vehicle6_5" name="vehicle6" value="0" required>
                                             <label for="vehicle6_5"> ارزش وابسته به زمان و مکان نیست </label><br>
                                             <input class="page-next"  type="radio" id="vehicle6_4" name="vehicle6" value="0" required>
-                                            <label for="vehicle6_4">ارزش قابل دست  یافتنی نیست </label><br>
+                                            <label for="vehicle6_4">ارزش قابل دست  یافتن نیست </label><br>
                                             <input class="page-next"  type="radio" id="vehicle6_3" name="vehicle6" value="0" required>
                                             <label for="vehicle6_3"> منشا ارزش ها از باور ماست </label><br/>
                                             <input class="page-next"  type="radio" id="vehicle6_2" name="vehicle6" value="4" required>
@@ -1234,7 +1239,7 @@
                                             <input  class="page-next" type="radio" id="vehicle8_5" name="vehicle8" value="0" required>
                                             <label for="vehicle8_5"> با هم تفاوتی ندارند </label><br>
                                             <input class="page-next"  type="radio" id="vehicle8_4" name="vehicle8" value="4" required>
-                                            <label for="vehicle8_4">تحقق اهداف مراجع/ حل مشکلات مراجع  </label><br>
+                                            <label for="vehicle8_4">تحقق اهداف مراجع/ حل مشکلات مراجع از ظریق ارائه راهکار  </label><br>
                                             <input  class="page-next" type="radio" id="vehicle8_3" name="vehicle8" value="0" required>
                                             <label for="vehicle8_3">تحقق اهداف مراجع/ انتقال تجربه </label><br/>
                                             <input  class="page-next" type="radio" id="vehicle8_2" name="vehicle8" value="0" required>
@@ -1245,7 +1250,7 @@
                                             </div>
                                         </section>
                                         <section >
-                                            <p>9- کوچینگ از دو بعد کلی با دیگر روشهای پشتیبان متفاوت است:
+                                            <p>9- به طور کلی کوچینگ از دو بعد کلی با دیگر روشهای پشتیبان متفاوت است:
                                             </p>
                                             <input class="page-next"  type="radio" id="vehicle9_5" name="vehicle9" value="4" required>
                                             <label for="vehicle9_5"> مخاطب/ رویکرد </label><br>
@@ -1378,16 +1383,16 @@
                                             </div>
                                         </section>
                                         <section >
-                                            <p>17- اگر مراجع درخواست کند که کوچ برای او معرفی کسب و کار بنویسد، کوچ چه کاری باید انجام دهد؟
+                                            <p>17- مراجع به جلسه می‌آید با این موضوع که «در بورس سرمایه گذاری کنم یا ملک بخرم؟» کوچ در این مورد چه باید بکند؟
                                             </p>
                                             <input  class="page-next" type="radio" id="vehicle17_5" name="vehicle17" value="0" required>
-                                            <label for="vehicle17_5">در ازای دریافت هزینه بنویسد</label><br>
+                                            <label for="vehicle17_5">او را به بیزینس کوچ ارجاع دهد </label><br>
                                             <input class="page-next" type="radio" id="vehicle17_4" name="vehicle17" value="0" required>
-                                            <label for="vehicle17_4">ننویسد چون کوچ هنوز تجربه ای ندارد </label><br>
+                                            <label for="vehicle17_4">اگر کوچ در این زمینه تخصص دارد به او در جلسه کمک کند  </label><br>
                                             <input  class="page-next" type="radio" id="vehicle17_3" name="vehicle17" value="0" required>
-                                            <label for="vehicle17_3">نپذیرد چرا که این کار مشاوره است و کوچینگ نیست</label><br/>
+                                            <label for="vehicle17_3">او را راهنمایی می کند و از او هزینه اضافه دریافت میکند </label><br/>
                                             <input class="page-next" type="radio" id="vehicle17_2" name="vehicle17" value="4" required>
-                                            <label for="vehicle17_2"> با کمک کردن به مراجع تا موانع کسب درامد را پیدا کند با او همراهی کند</label><br>
+                                            <label for="vehicle17_2">این گونه موارد نیاز به وزن دهی یا ارزیابی از سوی کارشناس در محیط عمل دارد و کوچ موظف به  ارجاع است</label><br>
 
                                             <div class="col-12 text-center mt-3">
                                                 <button type="button" class="page-prev btn btn-danger col-3 ">قبلی</button>
@@ -1535,7 +1540,7 @@
                                             <label for="ts"> I agree</label><br />
                                             -->
                                             <button type="button" class="page-prev btn btn-danger col-3">قبلی</button>
-                                            <button type="submit" class="page-next btn btn-success col-3" id="sendForm">تکمیل شد</button>
+                                            <button type="submit" class="page-next btn btn-success col-3" id="sendForm">پایان آزمون</button>
                                         </section>
                                         <!--
                                         <section class="page" style="margin:auto;text-align:center">
