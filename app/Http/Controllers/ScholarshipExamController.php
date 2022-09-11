@@ -62,7 +62,7 @@ class ScholarshipExamController extends BaseController
             $scholarship->save();
             $msg="نتیجه آزمون شما:$sum \n"."تبریک\n شما در آزمون مقدماتی بورسیه کوچینگ قبول شده اید"."\nفراکوچ ";
             $this->sendSms(Auth::user()->tel,$msg);
-            $msg=Auth::user()->fname.' '.Auth::user()->lname."در آزمون مقدماتی قبول شد."."\n امتیاز:$sum ";
+            $msg=Auth::user()->fname.' '.Auth::user()->lname." در آزمون مقدماتی قبول شد."."\n امتیاز:$sum ";
             $this->sendSms('09153159020',$msg);
             alert()->success('شما در آزمون مقدماتی بورسیه کوچینگ قبول شده اید')->persistent('بستن');
         }

@@ -244,7 +244,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
         public function get_scholarshipExam()
         {
-            return $this->hasOne('App\scholarshipExam');
+            return $this->hasMany('App\scholarshipExam')->orderBy('id');
         }
 
 

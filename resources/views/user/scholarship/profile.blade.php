@@ -1131,7 +1131,8 @@
             </div>
             <div class="tab-pane fade " id="exam" role="tabpanel" aria-labelledby="exam-tab">
                 <div class="card-body" >
-                    @if(is_null($scholarship->user->get_scholarshipExam))
+
+                    @if($scholarship->user->get_scholarshipExam->count()<2 && $scholarship->confirm_exam==0)
                         <div class="container pb-4 mt-5">
                             <div class="col-12 text-justify">
                                 <p>سلام به آزمون دوره  مقدماتی خوش آمدید </p>
@@ -1164,8 +1165,8 @@
                                             <label for="vehicle1_2"> کوچینگ گفتگوی هدفدار بین کوچ و مراجع، برای کشف راه‌حل توسط مراجع</label><br>
 
                                             <div class="col-12 text-center mt-3">
-                                                <button type="button" class="page-prev btn btn-danger col-3 ">قبلی</button>
-                                                <button type="button" class="page-next btn btn-primary col-3">بعدی</button>
+                                                <button type="button" class="page-prev btn btn-danger col-12 col-md-3">قبلی</button>
+                                                <button type="button" class="page-next btn btn-primary col-12 col-md-3">بعدی</button>
                                             </div>
                                         </section>
                                         <section >
@@ -1179,8 +1180,8 @@
                                             <input class="page-next" type="radio" id="vehicle2_2" name="vehicle2" value="0" required>
                                             <label for="vehicle2_2"> در کوچینگ منبع دانش مراجع است</label><br>
                                             <div class="col-12 text-center mt-3">
-                                                <button type="button" class="page-prev btn btn-danger col-3 ">قبلی</button>
-                                                <button type="button" class="page-next btn btn-primary col-3">بعدی</button>
+                                                <button type="button" class="page-prev btn btn-danger col-12 col-md-3">قبلی</button>
+                                                <button type="button" class="page-next btn btn-primary col-12 col-md-3">بعدی</button>
                                             </div>
                                         </section>
                                         <section >
@@ -1195,8 +1196,8 @@
                                             <input class="page-next"  type="radio" id="vehicle3_2" name="vehicle3" value="0" required>
                                             <label for="vehicle3_2"> کوچ میتواند مستقیما راهکار لازم را  هر موقع صلاح ببیند، ارائه دهد</label><br>
                                             <div class="col-12 text-center mt-3">
-                                                <button type="button" class="page-prev btn btn-danger col-3 ">قبلی</button>
-                                                <button type="button" class="page-next btn btn-primary col-3">بعدی</button>
+                                                <button type="button" class="page-prev btn btn-danger col-12 col-md-3">قبلی</button>
+                                                <button type="button" class="page-next btn btn-primary col-12 col-md-3">بعدی</button>
                                             </div>
                                         </section>
                                         <section >
@@ -1212,8 +1213,8 @@
                                             <label for="vehicle4_2"> با همراهی با  مراجع به  او  کمک کند تا  موانع نوشتن طرح کسب و کار را پیدا کند </label><br>
 
                                             <div class="col-12 text-center mt-3">
-                                                <button type="button" class="page-prev btn btn-danger col-3 ">قبلی</button>
-                                                <button type="button" class="page-next btn btn-primary col-3">بعدی</button>
+                                                <button type="button" class="page-prev btn btn-danger col-12 col-md-3">قبلی</button>
+                                                <button type="button" class="page-next btn btn-primary col-12 col-md-3">بعدی</button>
                                             </div>
                                         </section>
                                         <section >
@@ -1229,8 +1230,8 @@
                                             <label for="vehicle1"> افکار /عقاید / باورها / ارزش‌ها </label><br>
 
                                             <div class="col-12 text-center mt-3">
-                                                <button type="button" class="page-prev btn btn-danger col-3 ">قبلی</button>
-                                                <button type="button" class="page-next btn btn-primary col-3">بعدی</button>
+                                                <button type="button" class="page-prev btn btn-danger col-12 col-md-3">قبلی</button>
+                                                <button type="button" class="page-next btn btn-primary col-12 col-md-3">بعدی</button>
                                             </div>
                                         </section>
                                         <section >
@@ -1245,8 +1246,8 @@
                                             <label for="vehicle6_2"> توسعه و رشد یک ارزش محسوب می شود</label><br>
 
                                             <div class="col-12 text-center mt-3">
-                                                <button type="button" class="page-prev btn btn-danger col-3 ">قبلی</button>
-                                                <button type="button" class="page-next btn btn-primary col-3">بعدی</button>
+                                                <button type="button" class="page-prev btn btn-danger col-12 col-md-3">قبلی</button>
+                                                <button type="button" class="page-next btn btn-primary col-12 col-md-3">بعدی</button>
                                             </div>
                                         </section>
                                         <section >
@@ -1261,8 +1262,8 @@
                                             <input  class="page-next" type="radio" id="vehicle7_2" name="vehicle7" value="4" required>
                                             <label for="vehicle7_2"> کسب سود، دفع ضرر و رفتارهایی از سر عادت که عامل اصلی آن دیگر وجود ندارند </label><br>
                                             <div class="col-12 text-center mt-3">
-                                                <button type="button" class="page-prev btn btn-danger col-3 ">قبلی</button>
-                                                <button type="button" class="page-next btn btn-primary col-3">بعدی</button>
+                                                <button type="button" class="page-prev btn btn-danger col-12 col-md-3">قبلی</button>
+                                                <button type="button" class="page-next btn btn-primary col-12 col-md-3">بعدی</button>
                                             </div>
                                         </section>
                                         <section >
@@ -1277,8 +1278,8 @@
                                             <input  class="page-next" type="radio" id="vehicle8_2" name="vehicle8" value="0" required>
                                             <label for="vehicle8_2"> حل مشکلات ناشی از گذشته/ انتقال تجربه </label><br>
                                             <div class="col-12 text-center mt-3">
-                                                <button type="button" class="page-prev btn btn-danger col-3 ">قبلی</button>
-                                                <button type="button" class="page-next btn btn-primary col-3">بعدی</button>
+                                                <button type="button" class="page-prev btn btn-danger col-12 col-md-3">قبلی</button>
+                                                <button type="button" class="page-next btn btn-primary col-12 col-md-3">بعدی</button>
                                             </div>
                                         </section>
                                         <section >
@@ -1294,8 +1295,8 @@
                                             <label for="vehicle9_2"> رویکرد /  هدف </label><br>
 
                                             <div class="col-12 text-center mt-3">
-                                                <button type="button" class="page-prev btn btn-danger col-3 ">قبلی</button>
-                                                <button type="button" class="page-next btn btn-primary col-3">بعدی</button>
+                                                <button type="button" class="page-prev btn btn-danger col-12 col-md-3">قبلی</button>
+                                                <button type="button" class="page-next btn btn-primary col-12 col-md-3">بعدی</button>
                                             </div>
                                         </section>
                                         <section >
@@ -1311,8 +1312,8 @@
                                             <label for="vehicle10_2"> حل مشکلات ناشی از گذشته/ انتقال تجربه </label><br>
 
                                             <div class="col-12 text-center mt-3">
-                                                <button type="button" class="page-prev btn btn-danger col-3 ">قبلی</button>
-                                                <button type="button" class="page-next btn btn-primary col-3">بعدی</button>
+                                                <button type="button" class="page-prev btn btn-danger col-12 col-md-3">قبلی</button>
+                                                <button type="button" class="page-next btn btn-primary col-12 col-md-3">بعدی</button>
                                             </div>
                                         </section>
                                         <section >
@@ -1327,8 +1328,8 @@
                                             <label for="vehicle11_2"> بتواند  با  تکنیکهای حل مساله مشکل مراجع را حل نماید</label><br>
 
                                             <div class="col-12 text-center mt-3">
-                                                <button type="button" class="page-prev btn btn-danger col-3 ">قبلی</button>
-                                                <button type="button" class="page-next btn btn-primary col-3">بعدی</button>
+                                                <button type="button" class="page-prev btn btn-danger col-12 col-md-3">قبلی</button>
+                                                <button type="button" class="page-next btn btn-primary col-12 col-md-3">بعدی</button>
                                             </div>
                                         </section>
                                         <section >
@@ -1343,8 +1344,8 @@
                                             <input class="page-next"  type="radio" id="vehicle12_2" name="vehicle12" value="4" required>
                                             <label for="vehicle12_2"> تفاوت آنها  در نوع برگزاری جلسات حرفه ای است</label><br>
                                             <div class="col-12 text-center mt-3">
-                                                <button type="button" class="page-prev btn btn-danger col-3 ">قبلی</button>
-                                                <button type="button" class="page-next btn btn-primary col-3">بعدی</button>
+                                                <button type="button" class="page-prev btn btn-danger col-12 col-md-3">قبلی</button>
+                                                <button type="button" class="page-next btn btn-primary col-12 col-md-3">بعدی</button>
                                             </div>
                                         </section>
                                         <section >
@@ -1359,8 +1360,8 @@
                                             <input class="page-next"  type="radio" id="vehicle13_2" name="vehicle13" value="4" required >
                                             <label for="vehicle13_2"> الف و ج</label><br>
                                             <div class="col-12 text-center mt-3">
-                                                <button type="button" class="page-prev btn btn-danger col-3 ">قبلی</button>
-                                                <button type="button" class="page-next btn btn-primary col-3">بعدی</button>
+                                                <button type="button" class="page-prev btn btn-danger col-12 col-md-3">قبلی</button>
+                                                <button type="button" class="page-next btn btn-primary col-12 col-md-3">بعدی</button>
                                             </div>
                                         </section>
                                         <section >
@@ -1376,8 +1377,8 @@
                                             <label for="vehicle14_2"> مراجع  خودش برای خودش تصمیم میگیرد</label><br>
 
                                             <div class="col-12 text-center mt-3">
-                                                <button type="button" class="page-prev btn btn-danger col-3 ">قبلی</button>
-                                                <button type="button" class="page-next btn btn-primary col-3">بعدی</button>
+                                                <button type="button" class="page-prev btn btn-danger col-12 col-md-3">قبلی</button>
+                                                <button type="button" class="page-next btn btn-primary col-12 col-md-3">بعدی</button>
                                             </div>
                                         </section>
                                         <section >
@@ -1393,8 +1394,8 @@
                                             <label for="vehicle15_2">  تمرکز بر کسب دانش و مهارتهای شخصی</label><br>
 
                                             <div class="col-12 text-center mt-3">
-                                                <button type="button" class="page-prev btn btn-danger col-3 ">قبلی</button>
-                                                <button type="button" class="page-next btn btn-primary col-3">بعدی</button>
+                                                <button type="button" class="page-prev btn btn-danger col-12 col-md-3">قبلی</button>
+                                                <button type="button" class="page-next btn btn-primary col-12 col-md-3">بعدی</button>
                                             </div>
                                         </section>
                                         <section >
@@ -1410,8 +1411,8 @@
                                             <label for="vehicle16_2"> کوچ با درنظرگرفتن احساسات مراجع نظر خود را بیان می کند.</label><br>
 
                                             <div class="col-12 text-center mt-3">
-                                                <button type="button" class="page-prev btn btn-danger col-3 ">قبلی</button>
-                                                <button type="button" class="page-next btn btn-primary col-3">بعدی</button>
+                                                <button type="button" class="page-prev btn btn-danger col-12 col-md-3">قبلی</button>
+                                                <button type="button" class="page-next btn btn-primary col-12 col-md-3">بعدی</button>
                                             </div>
                                         </section>
                                         <section >
@@ -1427,8 +1428,8 @@
                                             <label for="vehicle17_2">این گونه موارد نیاز به وزن دهی یا ارزیابی از سوی کارشناس در محیط عمل دارد و کوچ موظف به  ارجاع است</label><br>
 
                                             <div class="col-12 text-center mt-3">
-                                                <button type="button" class="page-prev btn btn-danger col-3 ">قبلی</button>
-                                                <button type="button" class="page-next btn btn-primary col-3">بعدی</button>
+                                                <button type="button" class="page-prev btn btn-danger col-12 col-md-3">قبلی</button>
+                                                <button type="button" class="page-next btn btn-primary col-12 col-md-3">بعدی</button>
                                             </div>
                                         </section>
                                         <section >
@@ -1443,8 +1444,8 @@
                                             <input class="page-next"  type="radio" id="vehicle18_2" name="vehicle18" value="0" required>
                                             <label for="vehicle18_2"> کوچینگ را با هدف کاهش وزن آغاز کند</label><br>
                                             <div class="col-12 text-center mt-3">
-                                                <button type="button" class="page-prev btn btn-danger col-3 ">قبلی</button>
-                                                <button type="button" class="page-next btn btn-primary col-3">بعدی</button>
+                                                <button type="button" class="page-prev btn btn-danger col-12 col-md-3">قبلی</button>
+                                                <button type="button" class="page-next btn btn-primary col-12 col-md-3">بعدی</button>
                                             </div>
                                         </section>
                                         <section >
@@ -1460,8 +1461,8 @@
                                             <label for="vehicle19_2"> از مراجع بپرسد چه احساسی دارد</label><br>
 
                                             <div class="col-12 text-center mt-3">
-                                                <button type="button" class="page-prev btn btn-danger col-3 ">قبلی</button>
-                                                <button type="button" class="page-next btn btn-primary col-3">بعدی</button>
+                                                <button type="button" class="page-prev btn btn-danger col-12 col-md-3">قبلی</button>
+                                                <button type="button" class="page-next btn btn-primary col-12 col-md-3">بعدی</button>
                                             </div>
                                         </section>
                                         <section >
@@ -1477,8 +1478,8 @@
                                             <label for="vehicle20_2"> به او بگوید که افسرده است و او را به یک درمانگر ارجاع دهد</label><br>
 
                                             <div class="col-12 text-center mt-3">
-                                                <button type="button" class="page-prev btn btn-danger col-3 ">قبلی</button>
-                                                <button type="button" class="page-next btn btn-primary col-3">بعدی</button>
+                                                <button type="button" class="page-prev btn btn-danger col-12 col-md-3">قبلی</button>
+                                                <button type="button" class="page-next btn btn-primary col-12 col-md-3">بعدی</button>
                                             </div>
                                         </section>
                                         <section >
@@ -1494,8 +1495,8 @@
                                             <label for="vehicle21_2"> بررسی کند مراجع چه سودی از آن قالب فکری می برد</label><br>
 
                                             <div class="col-12 text-center mt-3">
-                                                <button type="button" class="page-prev btn btn-danger col-3 ">قبلی</button>
-                                                <button type="button" class="page-next btn btn-primary col-3">بعدی</button>
+                                                <button type="button" class="page-prev btn btn-danger col-12 col-md-3">قبلی</button>
+                                                <button type="button" class="page-next btn btn-primary col-12 col-md-3">بعدی</button>
                                             </div>
                                         </section>
                                         <section >
@@ -1511,8 +1512,8 @@
                                             <label for="vehicle22_2"> به مراجع اجازه دهد که درمورد زمانیکه به خوداگاهی رسید به کوچ اطلاع دهد</label><br>
 
                                             <div class="col-12 text-center mt-3">
-                                                <button type="button" class="page-prev btn btn-danger col-3 ">قبلی</button>
-                                                <button type="button" class="page-next btn btn-primary col-3">بعدی</button>
+                                                <button type="button" class="page-prev btn btn-danger col-12 col-md-3">قبلی</button>
+                                                <button type="button" class="page-next btn btn-primary col-12 col-md-3">بعدی</button>
                                             </div>
                                         </section>
                                         <section >
@@ -1528,8 +1529,8 @@
                                             <label for="vehicle23_2"> بپرسد بر مبنای مقیاس 10 چه رتبه ای به این گزینه ها می دهد</label><br>
 
                                             <div class="col-12 text-center mt-3">
-                                                <button type="button" class="page-prev btn btn-danger col-3 ">قبلی</button>
-                                                <button type="button" class="page-next btn btn-primary col-3">بعدی</button>
+                                                <button type="button" class="page-prev btn btn-danger col-12 col-md-3">قبلی</button>
+                                                <button type="button" class="page-next btn btn-primary col-12 col-md-3">بعدی</button>
                                             </div>
                                         </section>
                                         <section >
@@ -1544,8 +1545,8 @@
                                             <input class="page-next" type="radio" id="vehicle24_2" name="vehicle24" value="0" required>
                                             <label for="vehicle24_2"> از مراجع در مورد اینکه همکارانش چه احساسی درمورد رئیسشان دارند ،بپرسد</label><br>
                                             <div class="col-12 text-center mt-3">
-                                                <button type="button" class="page-prev btn btn-danger col-3 ">قبلی</button>
-                                                <button type="button" class="page-next btn btn-primary col-3">بعدی</button>
+                                                <button type="button" class="page-prev btn btn-danger col-12 col-md-3">قبلی</button>
+                                                <button type="button" class="page-next btn btn-primary col-12 col-md-3">بعدی</button>
                                             </div>
                                         </section>
                                         <section >
@@ -1561,8 +1562,8 @@
                                             <label for="vehicle25_2"> شخص کار می کند که زندگی کند</label><br>
 
                                             <div class="col-12 text-center mt-3">
-                                                <button type="button" class="page-prev btn btn-danger col-3 ">قبلی</button>
-                                                <button type="button" class="page-next btn btn-primary col-3">بعدی</button>
+                                                <button type="button" class="page-prev btn btn-danger col-12 col-md-3">قبلی</button>
+                                                <button type="button" class="page-next btn btn-primary col-12 col-md-3">بعدی</button>
                                             </div>
                                         </section>
 
@@ -1571,8 +1572,8 @@
                                             <input type="checkbox" id="ts" name="ts" value="1" required />
                                             <label for="ts"> I agree</label><br />
                                             -->
-                                            <button type="button" class="page-prev btn btn-danger col-3">قبلی</button>
-                                            <button type="submit" class="page-next btn btn-success col-3" id="sendForm">پایان آزمون</button>
+                                            <button type="button" class="page-prev btn btn-danger col-12 col-md-3">قبلی</button>
+                                            <button type="submit" class="page-next btn btn-success col-12 col-md-3" id="sendForm">پایان آزمون</button>
                                         </section>
                                         <!--
                                         <section class="page" style="margin:auto;text-align:center">
@@ -1584,15 +1585,23 @@
                             </div>
                         </div>
                     @else
-                        @if($scholarship->user->get_scholarshipExam->score>50)
+                        @if($scholarship->confirm_exam==1)
                             <div class="alert alert-success">
                                 تبریک شما در آزمون مقدماتی بورسیه کوچینگ قبول شده اید
                             </div>
+                            @foreach($scholarship->user->get_scholarshipExam as $item)
+                                <div class="alert alert-warning">نمره کسب شده در آزمون {{$item->score}}</div>
+                            @endforeach
                         @else
                             <div class="alert alert-danger">
                                 متاسفانه امتیاز شما در آزمون مقدماتی به حد نصاب ممکن نرسید
                             </div>
+                            @foreach($scholarship->user->get_scholarshipExam as $item)
+                                <div class="alert alert-warning">آزمون {{$loop->iteration}} نمره =  {{$item->score}}</div>
+                            @endforeach
                         @endif
+
+
                     @endif
 
                 </div>

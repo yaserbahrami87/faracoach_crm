@@ -94,8 +94,8 @@
                                         @endif
                                     </td>
                                     <td class="text-center" dir="ltr" >
-                                        @if(!is_null($item->user->get_scholarshipexam))
-                                            {{$item->user->get_scholarshipexam->score}}
+                                        @if(count($item->user->get_scholarshipexam)>0)
+                                            {{($item->user->get_scholarshipexam->last()->score)}}
                                         @endif
                                     </td>
                                     <!--

@@ -45,7 +45,7 @@
                         <button class="nav-link @if($scholarship->confirm_webinar)==1) bg-success @else  bg-danger  @endif" id="exam-tab" data-toggle="tab" data-target="#learn" type="button" role="tab" aria-controls="learn" aria-selected="false">آموزش</button>
                     </li>
                     <li class="nav-item" role="exam">
-                        <button class="nav-link @if(is_null($scholarship->user->get_scholarshipexam)) bg-warning @elseif($scholarship->user->get_scholarshipexam->score > 50) bg-success @elseif($scholarship->user->get_scholarshipexam->score  <50) bg-danger @endif" id="exam-tab" data-toggle="tab" data-target="#exam" type="button" role="tab" aria-controls="exam" aria-selected="false">آزمون</button>
+                        <button class="nav-link @if(count($scholarship->user->get_scholarshipexam)==0) bg-warning @elseif($scholarship->confirm_exam==1) bg-success @elseif($scholarship->confirm_exam==0) bg-danger @endif" id="exam-tab" data-toggle="tab" data-target="#exam" type="button" role="tab" aria-controls="exam" aria-selected="false">آزمون</button>
                     </li>
                     <li class="nav-item" role="interview">
                         <button class="nav-link disabled" id="interview-tab" data-toggle="tab" data-target="#interview" type="button" role="tab" aria-controls="interview" aria-selected="false">مصاحبه</button>
@@ -742,16 +742,18 @@
                         @endif
                     </div>
                     <div class="tab-pane fade" id="exam" role="tabpanel" aria-labelledby="exam-tab">
-                        @if(is_null($scholarship->user->get_scholarshipexam))
+
+                        @if(count($scholarship->user->get_scholarshipexam)==0)
                             <div class="alert alert-warning">در آزمون شرکت نکرده است</div>
-                        @elseif($scholarship->user->get_scholarshipexam->score>50)
+                        @elseif($scholarship->user->get_scholarshipexam->last()->score>50)
+
                             <div class="alert alert-success">
-                                در آزمون با نتیجه {{$scholarship->user->get_scholarshipexam->score}} قبول شده است
+                                در آزمون با نتیجه {{$scholarship->user->get_scholarshipexam->last()->score}} قبول شده است
                             </div>
-                        @elseif($scholarship->user->get_scholarshipexam->score<50)
-                            <div class="alert alert-danger">
-                                در آزمون با نتیجه {{$scholarship->user->get_scholarshipexam->score}} رد شده است
-                            </div>
+                        @elseif($scholarship->user->get_scholarshipexam->last()->score<50)
+                            @foreach($scholarship->user->get_scholarshipExam as $item)
+                                <div class="alert alert-warning">آزمون {{$loop->iteration}} نمره =  {{$item->score}}</div>
+                            @endforeach
                         @endif
 
                     </div>
