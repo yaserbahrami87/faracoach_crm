@@ -865,7 +865,7 @@
                                     <p>تا دعوت شما اثر بحش باشد و همچنین احتمال پذیرش و قبولی آنها در ساختار بورسیه زیاد باشد. 👌</p>
                                 </div>
                             </div>
-                            <div class="row  bg-success ">
+                            <div class="row  bg-warning ">
                                 <div class="col-12 col-sm-5 col-md-5 col-lg-5 col-xl-5">
                                     <h6 class="mt-2">لینک دعوت اختصاصی شما جهت اشتراک گذاری با دوستان:</h6>
                                 </div>
@@ -1073,7 +1073,7 @@
                                             <label for="code3">کد اول</label>
                                             <input type="number" class="form-control code text-center" id="code1"   maxlength="2" name="code1"/>
                                         </div>
-                                        <button type="button" class="btn btn-primary mb-2 d-block btn-block mt-1 mb-1" onclick="checkCodeWebinar()">کد وبینار</button>
+                                        <button type="button" class="btn btn-primary mb-2 d-block btn-block mt-1 mb-1" onclick="checkCodeWebinar()">ورود کد کلاسی و کسب امتیاز</button>
                                     </div>
                                 </form>
                             @endif
