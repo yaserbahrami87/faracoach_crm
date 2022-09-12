@@ -1113,6 +1113,7 @@
                         <div class="form-group">
                             <label for="introductionLetter_file">بارگذاری معرفی نامه:</label>
                             <input type="file" class="form-control-file" id="introductionLetter_file" name="introductionletter">
+                            <small>فرمت های معتبر:PDF , DOC , JPG , JPEG , BMP , PNG</small>
                         </div>
                         <input type="submit" class="btn btn-success" value="ارسال معرفی نامه" />
                     </form>
