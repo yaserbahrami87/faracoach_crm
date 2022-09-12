@@ -47,6 +47,9 @@
                     <li class="nav-item" role="exam">
                         <button class="nav-link @if(count($scholarship->user->get_scholarshipexam)==0) bg-warning @elseif($scholarship->confirm_exam==1) bg-success @elseif($scholarship->confirm_exam==0) bg-danger @endif" id="exam-tab" data-toggle="tab" data-target="#exam" type="button" role="tab" aria-controls="exam" aria-selected="false">آزمون</button>
                     </li>
+                    <li class="nav-item" role="introductionLetter">
+                        <button class="nav-link @if(!is_null($scholarship->introductionletter)) bg-success @endif " id="introductionLetter-tab" data-toggle="tab" data-target="#introductionLetter" type="button" role="tab" aria-controls="introductionLetter" aria-selected="false">معرفی نامه</button>
+                    </li>
                     <li class="nav-item" role="interview">
                         <button class="nav-link disabled" id="interview-tab" data-toggle="tab" data-target="#interview" type="button" role="tab" aria-controls="interview" aria-selected="false">مصاحبه</button>
                     </li>
@@ -756,6 +759,19 @@
                             @endforeach
                         @endif
 
+                    </div>
+                    <div class="tab-pane fade " id="introductionLetter" role="tabpanel" aria-labelledby="introductionLetter-tab">
+                        @if(is_null($scholarship->introductionletter))
+                            <div class="alert alert-warning">
+                                کاربر معرفی نامه ارسال نکرده است
+                            </div>
+                        @else
+                            <div class="alert alert-success">
+                                کاربر معرفی نامه ارسال کرده است
+                                <a href="{{'/documents/scholarship/'.$scholarship->introductionletter}}" class="btn btn-primary">دانلود</a>
+                            </div>
+
+                        @endif
                     </div>
 
                 </div>

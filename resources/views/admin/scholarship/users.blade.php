@@ -35,6 +35,7 @@
                                 <th>تحصیلات</th>
                                 <th>استان</th>
                                 <th >نتیجه آزمون</th>
+                                <th>معرفی نامه</th>
                                 <!--
                                 <th> افراد معرفی شده</th>
                                 <th> افراد ثبت نام بورسیه</th>
@@ -97,6 +98,12 @@
                                         @if(count($item->user->get_scholarshipexam)>0)
                                             {{($item->user->get_scholarshipexam->last()->score)}}
                                         @endif
+                                    </td>
+                                    <td class="text-center">
+                                        @if(!is_null($item->introductionletter))
+                                            ارسال شده
+                                        @endif
+
                                     </td>
                                     <!--
                                     <td class="text-center" dir="ltr">
