@@ -115,8 +115,9 @@
             <li class=" nav-item"><a href="#"><span class="menu-title" >بورسیه ها</span></a>
                 <ul class="menu-content">
                     <li><a href="/admin/scholarship"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >لیست درخواست ها</span></a></li>
-                    <li><a href="/admin/scholarship/webinar_accept"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >لیست قبول شده های وبینار</span></a></li>
-                    <li><a href="/admin/scholarship/exam_accept"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >لیست قبول شده های آزمون</span></a></li>
+                    <li><a href="/admin/scholarship/webinar_accept"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" > قبول شده های وبینار</span></a></li>
+                    <li><a href="/admin/scholarship/exam_accept"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" > قبول شده های آزمون</span></a></li>
+                    <li><a href="/admin/scholarship/dont_prticipate_in_the_test"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" > شرکت نکرده/قبول نشده آزمون</span></a></li>
                 </ul>
             </li>
             <li class=" nav-item"><a href="#"><span class="menu-title" >پیامک ها</span></a>

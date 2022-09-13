@@ -551,6 +551,8 @@ class ScholarshipController extends BaseController
         }
     }
 
+
+
     public function sendSMS_incompleteProfile()
     {
         $scholarship=scholarship::where('status','<>','1')
@@ -630,7 +632,7 @@ class ScholarshipController extends BaseController
 
     }
 
-
+    //لیست قبول شده های وبینار
     public function webinar_accept()
     {
         $scholarships=scholarship::where('confirm_webinar','=',1)
@@ -645,6 +647,7 @@ class ScholarshipController extends BaseController
             ->with('scholarships',$scholarships);
     }
 
+    //لیست قبول شده های آزمون
     public function exam_accept()
     {
         $scholarships=scholarship::where('confirm_exam','=',1)
@@ -659,6 +662,8 @@ class ScholarshipController extends BaseController
             ->with('scholarships',$scholarships);
     }
 
+
+    //معرفی نامه
     public function introductionletter(Request $request)
     {
         $this->validate($request,[
@@ -685,5 +690,22 @@ class ScholarshipController extends BaseController
         }
 
         return back();
+    }
+
+    //شرکت نکرده ها در آزمون
+    public function dontParticipateIntheTest()
+    {
+
+        $scholarships=scholarship::where('confirm_exam','=',0)
+            ->get();
+        foreach ($scholarships as $item)
+        {
+            $item->created_at=$this->changeTimestampToShamsi($item->created_at);
+        }
+
+
+        return view('admin.scholarship.users')
+            ->with('scholarships',$scholarships);
+
     }
 }
