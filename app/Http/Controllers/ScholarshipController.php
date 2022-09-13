@@ -693,7 +693,7 @@ class ScholarshipController extends BaseController
     }
 
     //شرکت نکرده ها در آزمون
-    public function dontParticipateIntheTest()
+    public function dontParticipateIntheExam()
     {
 
         $scholarships=scholarship::where('confirm_exam','=',0)

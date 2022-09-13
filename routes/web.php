@@ -223,7 +223,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::get('/scholarship/sendSMS_incompleteProfile','ScholarshipController@sendSMS_incompleteProfile');
     Route::get('/scholarship/webinar_accept','ScholarshipController@webinar_accept');
     Route::get('/scholarship/exam_accept','ScholarshipController@exam_accept');
-    Route::get('/scholarship/dont_prticipate_in_the_test','ScholarshipController@dontParticipateIntheTest');
+    Route::get('/scholarship/dont_prticipate_in_the_exam','ScholarshipController@dontParticipateIntheExam');
     Route::resource('scholarship','ScholarshipController');
 
     //  ROUTE SETTINGS
