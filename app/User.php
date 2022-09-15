@@ -247,6 +247,11 @@ class User extends Authenticatable implements MustVerifyEmail
             return $this->hasMany('App\scholarshipExam')->orderBy('id');
         }
 
+        public function get_scholarshipInterview()
+        {
+            return $this->hasOne('App\scholarship_interview');
+        }
+
 
 
 

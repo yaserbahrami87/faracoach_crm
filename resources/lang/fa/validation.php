@@ -258,6 +258,12 @@ return [
         'code2'                 =>'کد دوم',
         'code3'                 =>'کد سوم',
         'introductionletter'    =>'معرفی نامه',
+        'ability'               =>'توانایی',
+        'obligation'            =>'تعهد',
+        'impact'                =>'اثرگذاری',
+        'validity'              =>'اعتبار',
+        'motivation'            =>'انگیزه',
+
     ],
 
     'values' => [

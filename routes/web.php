@@ -226,6 +226,9 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::get('/scholarship/dont_prticipate_in_the_exam','ScholarshipController@dontParticipateIntheExam');
     Route::resource('scholarship','ScholarshipController');
 
+    //Route Scholarship Interview
+    Route::resource('scholarship_interview','ScholarshipInterviewController');
+
     //  ROUTE SETTINGS
     Route::prefix('settings/')->group(function ()
     {
