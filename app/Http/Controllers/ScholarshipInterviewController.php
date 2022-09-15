@@ -39,6 +39,7 @@ class ScholarshipInterviewController extends BaseController
      */
     public function store(scholarshipinterviewrequest $request)
     {
+
         $data=$request->validated();
         $status=scholarship_interview::create($data+[
            'insert_user_id'     =>Auth::user()->id,
@@ -68,9 +69,11 @@ class ScholarshipInterviewController extends BaseController
                 'flag' => 1,
                 'date_fa' => $this->dateNow,
                 'time_fa' => $this->timeNow,
-
             ]);
 
+            $user=User::find($data['user_id']);
+            $msg=$user->fname." ".$user->lname." عزیز\n"." شما ".$data['score']." امتیاز در مصاحبه بورسیه کوچینگ کسب کردید "."\n فراکوچ";         "$user->fname $user->lname عزیز ";
+            $this->sendSms($user->tel,$msg);
             alert()->success('مصاحبه با موفقیت ثبت شد')->persistent('بستن');
         }
         else

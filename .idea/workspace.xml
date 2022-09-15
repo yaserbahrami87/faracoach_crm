@@ -29,20 +29,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipInterviewController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/scholarship_interview.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2022_09_14_152807_create_scholarship_interviews_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/scholarship/contact.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/scholarship/interview.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/scholarship/introduce.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/scholarship/profile.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/user/scholarship/contact.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/user/scholarship/exam.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/user/scholarship/introduce.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/user/scholarship/introductionLetter.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/user/scholarship/learn.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/user/scholarship/profile_schoalrship.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/fa/validation.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/fa/validation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/scholarship/scholarship.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/scholarship/scholarship.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipInterviewController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipInterviewController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/scholarship/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/scholarship/profile.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1114,7 +1109,7 @@
       <workItem from="1663095996861" duration="1196000" />
       <workItem from="1663139639000" duration="6903000" />
       <workItem from="1663179950166" duration="11131000" />
-      <workItem from="1663221805139" duration="769000" />
+      <workItem from="1663221805139" duration="4912000" />
     </task>
     <servers />
   </component>
