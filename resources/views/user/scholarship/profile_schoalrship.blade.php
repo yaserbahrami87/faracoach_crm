@@ -66,6 +66,19 @@
                                 </div>
                                 <div class="col-md-6 px-1">
                                     <div class="form-group">
+                                        <label>نام انگلیسی<span class="text-danger font-weight-bold">*</span></label>
+                                        <input type="text" class="form-control @if(strlen($scholarship->user->fname_en)<>0) is-valid @endif" placeholder="نام انگلیسی را وارد کنید" @if(old('fname_en'))   value='{{old('fname_en')}}' @else value="{{old('fname_en',$scholarship->user->fname_en) }}" @endif name="fname_en"  autocomplete="autocomplete"  @if(strlen($scholarship->user->fname_en)<>0) disabled @endif />
+                                    </div>
+                                </div>
+                                <div class="col-md-6 px-1">
+                                    <div class="form-group">
+                                        <label>نام خانوادگی انگلیسی<span class="text-danger font-weight-bold">*</span></label>
+                                        <input type="text" class="form-control @if(strlen($scholarship->user->lname_en)<>0) is-valid @endif" placeholder="نام خانوادگی انگلیسی را وارد کنید" @if(old('lname_en')) value='{{old('lname_en')}}' @else value="{{old('lname_en',$scholarship->user->lname_en)}}" @endif name="lname_en"   autocomplete="autocomplete" @if(strlen($scholarship->user->lname_en)<>0) disabled @endif/>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 px-1">
+                                    <div class="form-group">
                                         <label for="exampleFormControlSelect1">جنسیت:
                                             <span class="text-danger">*</span>
                                         </label>

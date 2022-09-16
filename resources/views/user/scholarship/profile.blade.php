@@ -109,9 +109,6 @@
             <li class="nav-item" role="rante">
                 <button class="nav-link disabled" id="result-tab" data-toggle="tab" data-target="#rante" type="button" role="tab" aria-controls="rante" aria-selected="false">وام دانشجویی</button>
             </li>
-
-
-
         </ul>
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -124,6 +121,7 @@
                     </div>
                 </div>
                 <button class="btn btn-primary" id="contact-tab2" onclick="document.getElementById('contact-tab').click()">مرحله بعد</button>
+                
 
 
             </div>

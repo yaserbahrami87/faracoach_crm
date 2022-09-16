@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\certificate;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CertificateController extends Controller
 {
@@ -81,5 +83,20 @@ class CertificateController extends Controller
     public function destroy(certificate $certificate)
     {
         //
+    }
+
+
+    public function get_certificate()
+    {
+        if(is_null(Auth::user()->fname_en)||is_null(Auth::user()->lname_en))
+        {
+            alert()->error('نام و نام خانوادگی خود را به انگلیسی در پروفایل وارد کنید')->persistent('بستن');
+            return redirect('/panel/profile');
+        }
+
+        ini_set('max_execution_time', 0);
+        Pdf::setOption(['dpi' => 300])->loadView('user.blank-certificates.level1')->setPaper('a4', 'landscape')->save(Auth::user()->id.'.pdf');
+        return response()->download(public_path(Auth::user()->id.'.pdf'))
+                        ->deleteFileAfterSend(true);
     }
 }
