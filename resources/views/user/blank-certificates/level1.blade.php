@@ -15,7 +15,7 @@
         }
 
         .cls_pdf{
-            background-image: url("{{public_path('/images/blank-certificates/level1.jpg') }}");
+            background-image: url("{{asset('/images/blank-certificates/level1.jpg') }}");
             width: 100%;
             height: 100%;
             background-size: 100% 100%;

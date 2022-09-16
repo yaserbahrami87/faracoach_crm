@@ -30,6 +30,7 @@
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/5480.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/public/5480.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/user/blank-certificates/level1.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/blank-certificates/level1.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -1111,7 +1112,7 @@
       <workItem from="1663221805139" duration="5222000" />
       <workItem from="1663273530572" duration="885000" />
       <workItem from="1663334032361" duration="6000" />
-      <workItem from="1663353986840" duration="10366000" />
+      <workItem from="1663353986840" duration="10553000" />
     </task>
     <servers />
   </component>
