@@ -2,7 +2,7 @@
 <html lang="fa">
 <head>
     <meta charset="UTF-8">
-    <link href="{{public_path('/css/reset.css') }}" rel="stylesheet" />
+    <link href="{{asset('/css/reset.css') }}" rel="stylesheet" />
     <style>
 
 
