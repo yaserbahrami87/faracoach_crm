@@ -2,13 +2,15 @@
 <html lang="fa">
 <head>
     <meta charset="UTF-8">
-    <link href="{{asset('/css/reset.css') }}" rel="stylesheet" />
+    <link href="{{public_path('/css/reset.css') }}" rel="stylesheet" />
     <style>
+
+
 
 
         .cls
         {
-            background-image: url({{asset('images/blank-certificates/level1.jpg') }});
+            background-image: url({{public_path('/images/blank-certificates/ICF_Scholarship.jpg') }});
             /*
             background-image: url({{public_path('images/blank-certificates/level1.jpg') }});
              */
@@ -19,21 +21,20 @@
         }
 
         .cls_pdf{
-            background-image: url("{{asset('/images/blank-certificates/level1.jpg') }}");
+            background-image: url("{{public_path('/images/blank-certificates/ICF_Scholarship.jpg') }}");
             width: 100%;
             height: 100%;
             background-size: 100% 100%;
-            position: relative;
-
         }
 
         h1
         {
-            position: absolute;
-            top: 930px;
-            left: 270px;
+            position: relative;
+            text-align: center;
             font-size: 160px;
             color: #000000;
+            top: 1100px;
+            text-transform: capitalize;
         }
 
 
@@ -42,12 +43,14 @@
 <body>
 <div class="cls_pdf">
     @if(strlen(Auth::user()->fname_en.' '.Auth::user()->lname_en)>20 && strlen(Auth::user()->fname_en.' '.Auth::user()->lname_en)<26)
-        <h1 style="font-size: 112px">{{Str::upper(Auth::user()->fname_en).' '.Str::upper(Auth::user()->lname_en)}}</h1>
+        <h1 style="font-size: 120px">{{Auth::user()->fname_en.' '.Auth::user()->lname_en}}</h1>
     @elseif(strlen(Auth::user()->fname_en.' '.Auth::user()->lname_en)>=26)
-        <h1 style="font-size: 80px">{{Str::upper(Auth::user()->fname_en).' '.Str::upper(Auth::user()->lname_en)}}</h1>
+        <h1 style="font-size: 100px">{{Auth::user()->fname_en.' '.Auth::user()->lname_en}}</h1>
     @else
-        <h1>{{Str::upper(Auth::user()->fname_en).' '.Str::upper(Auth::user()->lname_en)}}</h1>
+        <h1>{{Auth::user()->fname_en.' '.Auth::user()->lname_en}}</h1>
     @endif
+
+
 </div>
 </body>
 </html>

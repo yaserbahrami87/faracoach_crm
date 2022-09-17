@@ -95,8 +95,10 @@ class CertificateController extends Controller
         }
 
         ini_set('max_execution_time', 0);
-        Pdf::setOption(['dpi' => 300])->loadView('user.blank-certificates.level1')->setPaper('a4', 'landscape')->save(Auth::user()->id.'.pdf');
+//        Pdf::setOption(['dpi' => 300])->loadView('user.blank-certificates.level1')->setPaper('a4', 'landscape')->save(Auth::user()->id.'.pdf');
+        Pdf::setOption(['dpi' => 300])->loadView('user.blank-certificates.icf_scholarship')->setPaper('a4', 'landscape')->save(Auth::user()->id.'.pdf');
         return response()->download(public_path(Auth::user()->id.'.pdf'))
                         ->deleteFileAfterSend(true);
+
     }
 }
