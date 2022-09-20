@@ -1,24 +1,32 @@
 @extends('admin.master.index')
 
+@section('headerScript')
+    <link href="{{asset('/dashboard/assets/css/buttons.dataTables.min.css')}}" rel="stylesheet" />
+@endsection
+
+
 @section('content')
     <div class="col-12 table-responsive">
         <a href="/admin/courses/{{$course->shortlink}}/students/add" class="btn btn-primary mb-2">اضافه کردن دانشجو</a>
-        <table class="table table-striped">
-            <tr>
-                <th></th>
-                <th class="text-center">نام و نام وخانوادگی</th>
-                <th class="text-center">شماره همراه</th>
-                <th class="text-center">تاریخ ثبت نام</th>
-                <th class="text-center">واریزی(تومان)</th>
-                <th class="text-center">تخفیف پرداخت نقدی(تومان)</th>
-                <th class="text-center">تعداد اقساط</th>
-                <th class="text-center">مبلغ قسط</th>
+        <table  class="table_data table table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th class="text-center">نام و نام وخانوادگی</th>
+                    <th class="text-center">شماره همراه</th>
+                    <th class="text-center">اینستاگرام</th>
+                    <th class="text-center">تاریخ ثبت نام</th>
+                    <th class="text-center">واریزی(تومان)</th>
+                    <th class="text-center">تخفیف پرداخت نقدی(تومان)</th>
+                    <th class="text-center">تعداد اقساط</th>
+                    <th class="text-center">مبلغ قسط</th>
 
-                <th class="text-center">قیمت ثبت نام شده</th>
-                <th class="text-center">کدرهگیری</th>
-                <th class="text-center"></th>
-            </tr>
-
+                    <th class="text-center">قیمت ثبت نام شده</th>
+                    <th class="text-center">کدرهگیری</th>
+                    <th class="text-center"></th>
+                </tr>
+            </thead>
+            <tbody>
             @foreach ($course->students as $item)
 
                 <tr>
@@ -38,6 +46,9 @@
                         <a href="/admin/user/{{$item->user->id}}" target="_blank">
                         {{$item->user->tel}}
                         </a>
+                    </td>
+                    <td class="text-center">
+                        {{$item->user->instagram}}
                     </td>
 
                     <td class="text-center">
@@ -82,6 +93,37 @@
                     </td>
                 </tr>
             @endforeach
+            </tbody>
         </table>
     </div>
+@endsection
+
+
+@section('footerScript')
+    <script src="{{asset('/dashboard/assets/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('/dashboard/assets/js/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/dataTables.buttons.min.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/jszip.min.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/vfs_fonts.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/buttons.html5.min.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/buttons.print.min.js')}}"></script>
+
+
+    <script>
+        $(document).ready(function() {
+            $('.table_data').DataTable({
+                // columnDefs: [
+                //     {
+                //         target: 6,
+                //         visible: false,
+                //         searchable: false,
+                //     }
+                // ],
+                dom: 'Bfrltip',
+                buttons: [
+                    'excel',
+                ]
+            } );
+        } );
+    </script>
 @endsection
