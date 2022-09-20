@@ -34,8 +34,10 @@
                                 <th>مسئول پیگیری</th>
                                 <th>تحصیلات</th>
                                 <th>استان</th>
+                                <th >تاریخ آزمون</th>
                                 <th >نتیجه آزمون</th>
                                 <th>معرفی نامه</th>
+                                <th>مصاحبه</th>
                                 <!--
                                 <th> افراد معرفی شده</th>
                                 <th> افراد ثبت نام بورسیه</th>
@@ -96,6 +98,11 @@
                                     </td>
                                     <td class="text-center" dir="ltr" >
                                         @if(count($item->user->get_scholarshipexam)>0)
+                                            {{($item->user->get_scholarshipexam->last()->datefa)}}
+                                        @endif
+                                    </td>
+                                    <td class="text-center" dir="ltr" >
+                                        @if(count($item->user->get_scholarshipexam)>0)
                                             {{($item->user->get_scholarshipexam->last()->score)}}
                                         @endif
                                     </td>
@@ -103,7 +110,11 @@
                                         @if(!is_null($item->introductionletter))
                                             ارسال شده
                                         @endif
-
+                                    </td>
+                                    <td>
+                                        @if(!is_null($item->get_scholarshipInterview) )
+                                            انجام شده است
+                                        @endif
                                     </td>
                                     <!--
                                     <td class="text-center" dir="ltr">
