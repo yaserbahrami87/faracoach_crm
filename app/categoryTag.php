@@ -14,4 +14,14 @@ class categoryTag extends Model
     {
         return 'id';
     }
+
+    public function get_subCategoryTags()
+    {
+        return $this->hasMany('App\categoryTag','parent_id','id');
+    }
+
+    public function tags()
+    {
+        return $this->hasMany('App\tag','category_tags_id','id');
+    }
 }

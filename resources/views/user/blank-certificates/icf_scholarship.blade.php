@@ -7,6 +7,11 @@
 
 
 
+        @font-face {
+            font-family: 'embassybt';
+            src: url({{asset('fonts/embassybt.ttf')}}) format("truetype");
+        }
+
 
         .cls
         {
@@ -25,9 +30,10 @@
             width: 100%;
             height: 100%;
             background-size: 100% 100%;
+
         }
 
-        h1
+        .tag_h1
         {
             position: relative;
             text-align: center;
@@ -35,6 +41,7 @@
             color: #000000;
             top: 1100px;
             text-transform: capitalize;
+            font-family: 'embassybt';
         }
 
 
@@ -43,14 +50,12 @@
 <body>
 <div class="cls_pdf">
     @if(strlen(Auth::user()->fname_en.' '.Auth::user()->lname_en)>20 && strlen(Auth::user()->fname_en.' '.Auth::user()->lname_en)<26)
-        <h1 style="font-size: 120px">{{Auth::user()->fname_en.' '.Auth::user()->lname_en}}</h1>
+        <h1 class="tag_h1" style="font-size: 120px">{{Auth::user()->fname_en.' '.Auth::user()->lname_en}}</h1>
     @elseif(strlen(Auth::user()->fname_en.' '.Auth::user()->lname_en)>=26)
-        <h1 style="font-size: 100px">{{Auth::user()->fname_en.' '.Auth::user()->lname_en}}</h1>
+        <h1 class="tag_h1" style="font-size: 100px">{{Auth::user()->fname_en.' '.Auth::user()->lname_en}}</h1>
     @else
-        <h1>{{Auth::user()->fname_en.' '.Auth::user()->lname_en}}</h1>
+        <h1 class="tag_h1">{{Auth::user()->fname_en.' '.Auth::user()->lname_en}}</h1>
     @endif
-
-
 </div>
 </body>
 </html>

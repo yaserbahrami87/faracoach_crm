@@ -96,6 +96,11 @@
             <li class="nav-item" role="exam">
                 <button class="nav-link" id="exam-tab" data-toggle="tab" data-target="#exam" type="button" role="tab" aria-controls="exam" aria-selected="false">آزمون</button>
             </li>
+            @if($scholarship->confirm_webinar==1 && $scholarship->confirm_exam==1)
+                <li class="nav-item" role="certificate">
+                    <button class="nav-link" id="certificate-tab" data-toggle="tab" data-target="#certificate" type="button" role="tab" aria-controls="certificate" aria-selected="false">مدرک</button>
+                </li>
+            @endif
             <li class="nav-item" role="introductionLetter">
                 <button class="nav-link" id="introductionLetter-tab" data-toggle="tab" data-target="#introductionLetter" type="button" role="tab" aria-controls="introductionLetter" aria-selected="false">معرفی نامه</button>
             </li>
@@ -121,7 +126,7 @@
                     </div>
                 </div>
                 <button class="btn btn-primary" id="contact-tab2" onclick="document.getElementById('contact-tab').click()">مرحله بعد</button>
-                
+
 
 
             </div>
@@ -147,6 +152,12 @@
                 @include('user.scholarship.exam')
 
             </div>
+
+            @if($scholarship->confirm_webinar==1 && $scholarship->confirm_exam==1)
+                <div class="tab-pane fade text-center" id="certificate" role="tabpanel" aria-labelledby="certificate-tab">
+                    <a href="{{asset('/panel/scholarship/certificate/download')}}" class="btn btn-primary">دانلود رزومه</a>
+                </div>
+            @endif
             <div class="tab-pane fade " id="interview" role="tabpanel" aria-labelledby="interview-tab">
                 <div class="card-body" >
                     @if(is_null($scholarship->user->get_scholarshipInterview))

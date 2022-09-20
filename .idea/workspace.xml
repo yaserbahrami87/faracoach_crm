@@ -30,7 +30,16 @@
   <component name="ChangeListManager">
     <list default="true" id="40ad4f5a-1b9f-4250-a3ce-73f612b7d4d0" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CertificateController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CertificateController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReportAdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReportAdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/categoryTag.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/categoryTag.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/dompdf.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/dompdf.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/5480.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/public/5480.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/profile.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/reports/report_advance.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/reports/report_advance.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/user/blank-certificates/icf_scholarship.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/blank-certificates/icf_scholarship.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/scholarship/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/scholarship/profile.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -224,7 +233,7 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/fonts" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/storage/fonts" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -237,11 +246,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\storage\fonts" />
+      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\vendor\dompdf\dompdf\lib\fonts" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\fonts" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\images\blank-certificates" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\js" />
-      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\panel_assets\js\scripts\datatables" />
-      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\images" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\css" />
@@ -1112,7 +1121,12 @@
       <workItem from="1663273530572" duration="885000" />
       <workItem from="1663334032361" duration="6000" />
       <workItem from="1663353986840" duration="15222000" />
-      <workItem from="1663410683821" duration="558000" />
+      <workItem from="1663410683821" duration="2370000" />
+      <workItem from="1663477018482" duration="15946000" />
+      <workItem from="1663524777416" duration="7239000" />
+      <workItem from="1663564319961" duration="17938000" />
+      <workItem from="1663612592632" duration="6151000" />
+      <workItem from="1663650570257" duration="5826000" />
     </task>
     <servers />
   </component>

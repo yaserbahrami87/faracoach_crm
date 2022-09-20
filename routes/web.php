@@ -101,7 +101,8 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     Route::post('/scholarship/exam','ScholarshipExamController@store');
 
     //Certificates
-    Route::get('/level1/certificate','CertificateController@get_certificate');
+    Route::get('/level1/certificate','CertificateController@get_certificate1');
+    Route::get('/scholarship/certificate/download','CertificateController@get_certificate');
 
 
 

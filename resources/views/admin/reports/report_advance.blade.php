@@ -133,6 +133,24 @@
                         </select>
                     </div>
                 </div>
+                @foreach($tagsParent as $item)
+                <div class="col-3  mb-1">
+                    <div class="input-group is-invalid">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="types">تگ {{$item->category}}</label>
+                        </div>
+                        <select class="custom-select selectpicker" id="types" name="tags[]" multiple>
+                                @foreach($item->tags as $item_tags)
+                                    <option value="{{$item_tags->id}}">{{$item_tags->tag}}</option>
+                                @endforeach
+
+                        </select>
+
+                    </div>
+                </div>
+                @endforeach
+
+
                 <div class="col-3  mb-1">
                     <input type="submit" class="btn btn-success" value="جستجو" id="btn_search">
                 </div>
@@ -197,7 +215,9 @@
     <script type="text/javascript">
         $(function () {
             $('.selectpicker').multiselect({
-                enableFiltering: true
+                includeSelectAllOption: true,
+                enableFiltering: true,
+                maxHeight: 150
             });
         });
     </script>

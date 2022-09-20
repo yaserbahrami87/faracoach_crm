@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\categoryTag;
 use App\followup;
 use App\User;
 use App\user_type;
@@ -296,6 +297,7 @@ class ReportAdminController extends BaseController
     {
         $states = $this->states();
         $userType = user_type::get();
+
         return view('admin.reports.report_advance')
             ->with('states', $states)
             ->with('userType', $userType);
@@ -303,6 +305,7 @@ class ReportAdminController extends BaseController
 
     public function advanceReport(Request $request)
     {
+
 
         $this->validate($request, [
             'range_date' => 'nullable|string',
@@ -399,23 +402,56 @@ class ReportAdminController extends BaseController
                 }
                 return $query;
             })
-            ->when($request->kind == 'پیگیری', function ($query)
+            ->when($request->tags,function ($query) use ($request)
             {
+                return $query->with('followups')
+                    ->whereHas('followups', function($query) use ($request)
+                    {
+                        $query->wherein('tags',$request->tags)
+                            ->where(function($query) use ($request)
+                            {
+                                for ($i=0;$i<count($request->tags);$i++)
+                                {
+                                    $query//->wherebetween('date_fa', $request->range)
+                                        ->where(function ($query) use ($request,$i)
+                                        {
+                                            return $query->orwhere('tags', 'like', $request->tags[$i] . ',%')
+                                                    ->orwhere('tags', 'like', '%,' . $request->tags[$i])
+                                                    ->orwhere('tags', 'like', '%,' . $request->tags[$i] . ',%');
 
+                                        });
+                                }
+                            });
+
+                    });
+
+            })
+            ->when($request->kind == 'پیگیری', function ($query) use ($request)
+            {
                return $query->with('followups')
-                           ->whereHas('followups', function($q) {
-                               $q->where('status_followup', '13');
+                           ->whereHas('followups', function($q) use ($request) {
+                               $q//->where('status_followups', '13')
+                                    ->wherebetween('date_fa',$request->range);
                            });
             })
-            ->wherebetween('created_at', $request->date_en)
+            ->when($request->kind == 'ثبت', function ($query) use ($request)
+            {
+                return $query->wherebetween('created_at', $request->date_en);
+            })
+
+
             ->get();
 
 
+
+            $categoryTag=categoryTag::where('category','=','پیگیری')
+                            ->first();
             $states = $this->states();
             $userType = user_type::get();
         return view('admin.reports.report_advance')
                             ->with('states',$states)
                             ->with('userType',$userType)
+                            ->with('tagsParent',$categoryTag->get_subCategoryTags)
                             ->with('users',$users);
     }
 }

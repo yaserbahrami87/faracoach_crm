@@ -48,7 +48,9 @@
                                             <p> معرفی شده توسط <a href="/admin/user/{{$user->getIntroduced->id}}"> {{$user->getIntroduced->fname}} {{$user->getIntroduced->lname}}</a></p>
                                         @endif
                                         <p class="description text-dark"> پیگیری های انجام شده: <b> {{$user->followups->count()}} </b> نوبت</p>
-
+                                        @if(!is_null($user->get_insertuserInfo))
+                                            <p>ثبت شده توسط: {{$user->get_insertuserInfo->fname .' '.$user->get_insertuserInfo->lname }}</p>
+                                        @endif
                                         <p class="d-inline"> تعداد افراد معرفی شده:</p><b> {{$user->get_invitations->count()}} نفر</b>
                                     </div>
 
