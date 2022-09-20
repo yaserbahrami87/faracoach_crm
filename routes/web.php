@@ -233,6 +233,9 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     //Route Scholarship Interview
     Route::resource('scholarship_interview','ScholarshipInterviewController');
 
+    //scholarship Exam
+    Route::get('/scholarship/certificate/{user}/download','CertificateController@get_certificateByAdmin');
+
     //  ROUTE SETTINGS
     Route::prefix('settings/')->group(function ()
     {

@@ -52,12 +52,18 @@
                     <li class="nav-item" role="exam">
                         <button class="nav-link @if(count($scholarship->user->get_scholarshipexam)==0) bg-warning @elseif($scholarship->confirm_exam==1) bg-success @elseif($scholarship->confirm_exam==0) bg-danger @endif" id="exam-tab" data-toggle="tab" data-target="#exam" type="button" role="tab" aria-controls="exam" aria-selected="false">آزمون</button>
                     </li>
+                    @if($scholarship->confirm_webinar==1 && $scholarship->confirm_exam==1)
+                        <li class="nav-item" role="certificate">
+                            <button class="nav-link" id="certificate-tab" data-toggle="tab" data-target="#certificate" type="button" role="tab" aria-controls="certificate" aria-selected="false">مدرک</button>
+                        </li>
+                    @endif
                     <li class="nav-item" role="introductionLetter">
                         <button class="nav-link @if(!is_null($scholarship->introductionletter)) bg-success @endif " id="introductionLetter-tab" data-toggle="tab" data-target="#introductionLetter" type="button" role="tab" aria-controls="introductionLetter" aria-selected="false">معرفی نامه</button>
                     </li>
                     <li class="nav-item" role="interview">
                         <button class="nav-link" id="interview-tab" data-toggle="tab" data-target="#interview" type="button" role="tab" aria-controls="interview" aria-selected="false">مصاحبه</button>
                     </li>
+
 
                     <li class="nav-item" role="result">
                         <button class="nav-link disabled" id="result-tab" data-toggle="tab" data-target="#result" type="button" role="tab" aria-controls="result" aria-selected="false">نتیجه</button>
@@ -106,6 +112,10 @@
                         @endif
 
                     </div>
+                    <div class="tab-pane fade " id="certificate" role="tabpanel" aria-labelledby="certificate-tab">
+                        <a href="{{asset('/admin/scholarship/certificate/'.$scholarship->user->id.'/download')}}" class="btn btn-primary">دانلود رزومه</a>
+                    </div>
+
                     <div class="tab-pane fade " id="introductionLetter" role="tabpanel" aria-labelledby="introductionLetter-tab">
                         @if(is_null($scholarship->introductionletter))
                             <div class="alert alert-warning">
@@ -119,6 +129,7 @@
 
                         @endif
                     </div>
+
                     <div class="tab-pane fade " id="interview" role="tabpanel" aria-labelledby="interview-tab">
                         @include('admin.scholarship.interview')
                     </div>
