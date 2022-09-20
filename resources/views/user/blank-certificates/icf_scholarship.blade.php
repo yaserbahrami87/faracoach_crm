@@ -8,8 +8,8 @@
 
 
         @font-face {
-            font-family: 'embassybt';
-            src: url({{asset('fonts/embassybt.ttf')}}) format("truetype");
+            font-family: embassybt;
+            src: url({{storage_path('fonts/embassybt.ttf')}}) format("truetype");
         }
 
 
