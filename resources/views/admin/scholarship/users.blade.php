@@ -98,7 +98,7 @@
                                     </td>
                                     <td class="text-center" dir="ltr" >
                                         @if(count($item->user->get_scholarshipexam)>0)
-                                            {{($item->user->get_scholarshipexam->last()->datefa)}}
+                                            {{($item->user->get_scholarshipexam->last()->date_fa)}}
                                         @endif
                                     </td>
                                     <td class="text-center" dir="ltr" >
