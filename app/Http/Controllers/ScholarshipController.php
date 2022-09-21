@@ -203,13 +203,13 @@ class ScholarshipController extends BaseController
 
         }
 
-        if(is_null($scholarship->confirm_webinar==1))
+        if($scholarship->confirm_webinar==1)
         {
-            $result_final=$result_final+0;
+            $result_final=$result_final+10;
         }
         else
         {
-            $result_final=$result_final+10;
+            $result_final=$result_final+0;
         }
 
         $result_final=$result_final+$count_scholarshipIntroduce;
