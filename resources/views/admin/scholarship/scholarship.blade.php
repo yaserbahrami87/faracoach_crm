@@ -127,9 +127,9 @@
                             </div>
                             <div class="row">
                                 <div class="mx-auto col-12 col-md-4 text-center">
-                                    @if(($scholarship->user->get_scholarshipexam->last()->score>50) >= 50 && ($scholarship->user->get_scholarshipexam->last()->score>50) <= 70)
+                                    @if(($scholarship->user->get_scholarshipexam->last()->score) >= 50 && ($scholarship->user->get_scholarshipexam->last()->score) <= 70)
                                         <p>امتیاز از آزمون :  10 امتیاز</p>
-                                    @elseif(($scholarship->user->get_scholarshipexam->last()->score>50) > 70)
+                                    @elseif(($scholarship->user->get_scholarshipexam->last()->score) > 70)
                                         <p>امتیاز از آزمون :  20 امتیاز</p>
                                     @endif
                                 </div>

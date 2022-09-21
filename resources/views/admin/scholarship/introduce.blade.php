@@ -42,7 +42,7 @@
             <td dir="ltr"></td>
             <td dir="ltr">-</td>
             <td dir="ltr">-</td>
-            <td dir="ltr">-</td>
+            <td dir="ltr">0</td>
         </tr>
     @endfor
 
