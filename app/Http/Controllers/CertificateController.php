@@ -100,53 +100,53 @@ class CertificateController extends Controller
 
             ini_set('max_execution_time', 0);
 
-            $font=public_path('/fonts/BRUSHSCI.TTF');
+//            $font=public_path('/fonts/BRUSHSCI.TTF');
+//
+//            $tmp="<!doctype html>
+//<html lang='fa'>
+//<head>
+//    <meta charset='UTF-8'>
+//    <link href='".public_path('/css/reset.css')." ' rel='stylesheet' />
+//    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Sofia'>
+//    <style>
+//
+//        .cls_pdf{
+//            background-image: url('".public_path('/images/blank-certificates/ICF_Scholarship.jpg')."');
+//            width: 100%;
+//            height: 100%;
+//            background-size: 100% 100%;
+//
+//        }
+//
+//        .tag_h1
+//        {
+//            position: relative;
+//            text-align: center;
+//            font-size: 160px;
+//            color: #000000;
+//            top: 1100px;
+//            text-transform: capitalize;
+//            font-family:'Sofia' !important;
+//        }
+//
+//
+//    </style>
+//</head>
+//<body>
+//<div class='cls_pdf'>
+//        <p>GOLNAZ GOLESTAni</p>
+//        <h1 class='tag_h1' style='font-size: 120px'>ALI Jafarkhani</h1>
+//</div>
+//</body>
+//</html>
+//";
 
-            $tmp="<!doctype html>
-<html lang='fa'>
-<head>
-    <meta charset='UTF-8'>
-    <link href='".public_path('/css/reset.css')." ' rel='stylesheet' />
-    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Sofia'>
-    <style>
-
-        .cls_pdf{
-            background-image: url('".public_path('/images/blank-certificates/ICF_Scholarship.jpg')."');
-            width: 100%;
-            height: 100%;
-            background-size: 100% 100%;
-
-        }
-
-        .tag_h1
-        {
-            position: relative;
-            text-align: center;
-            font-size: 160px;
-            color: #000000;
-            top: 1100px;
-            text-transform: capitalize;
-            font-family:'Sofia' !important;
-        }
 
 
-    </style>
-</head>
-<body>
-<div class='cls_pdf'>
-        <p>GOLNAZ GOLESTAni</p>
-        <h1 class='tag_h1' style='font-size: 120px'>ALI Jafarkhani</h1>
-</div>
-</body>
-</html>
-";
-
-
-
-        Pdf::setOption(['dpi' => 300])->loadView('user.blank-certificates.level1')->setPaper('a4', 'landscape')->save(Auth::user()->id.'.pdf');
+        Pdf::setOption(['dpi' => 300])->loadView('user.blank-certificates.icf_scholarship')->setPaper('a4', 'landscape')->save(Auth::user()->id.'.pdf');
 //            Pdf::setOption(['dpi' => 300, 'fontDir' => storage_path('/fonts'), 'font_cache' => storage_path('/fontsCache')])->loadHTML($tmp)->setPaper('a4', 'landscape')->save(Auth::user()->id . '.pdf');
-//            return response()->download(public_path(Auth::user()->id.'.pdf'))
-//                        ->deleteFileAfterSend(true);
+            return response()->download(public_path(Auth::user()->id.'.pdf'))
+                        ->deleteFileAfterSend(true);
 //            return view('user.blank-certificates.icf_scholarship');
         }
         else
