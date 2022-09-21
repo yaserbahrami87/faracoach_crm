@@ -92,11 +92,3 @@ hr {
 input, select {
     vertical-align:middle;
 }
-
-
-@font-face {
-    font-family: 'embassybt';
-    src: url('../fonts/embassybt.ttf') format('truetype');
-    font-style: normal;
-    font-weight: normal;
-}
