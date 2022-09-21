@@ -2,7 +2,7 @@
 <html lang='fa'>
 <head>
     <meta charset='UTF-8'>
-    <link href='{{public_path('/css/reset.css') }}' rel='stylesheet' />
+    <link href='{{asset('/css/reset.css') }}' rel='stylesheet' />
 
     <style>
 
@@ -13,7 +13,7 @@
 
         .cls
         {
-            background-image: url({{public_path('/images/blank-certificates/ICF_Scholarship.jpg') }});
+            background-image: url({{asset('/images/blank-certificates/ICF_Scholarship.jpg') }});
             /*
             background-image: url({{public_path('images/blank-certificates/level1.jpg') }});
              */
@@ -24,7 +24,7 @@
         }
 
         .cls_pdf{
-            background-image: url('{{public_path('/images/blank-certificates/ICF_Scholarship.jpg') }}');
+            background-image: url('{{asset('/images/blank-certificates/ICF_Scholarship.jpg') }}');
             width: 100%;
             height: 100%;
             background-size: 100% 100%;
