@@ -263,6 +263,7 @@ return [
         'impact'                =>'اثرگذاری',
         'validity'              =>'اعتبار',
         'motivation'            =>'انگیزه',
+        'score_profile'         =>'امتیاز پروفایل',
 
     ],
 

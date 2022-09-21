@@ -23,6 +23,13 @@
             <td dir="ltr">{{$item->tel}}</td>
             <td dir="ltr">-</td>
             <td dir="ltr">-</td>
+            <td dir="ltr">
+                @if(!is_null($item->scholarship))
+                    4
+                @else
+                    0
+                @endif
+            </td>
         </tr>
     @endforeach
     @for($i=(count($scholarship->user->get_invitations->where('resource','=','بورسیه تحصیلی'))+1);$i<=5;$i++)
@@ -35,6 +42,15 @@
             <td dir="ltr"></td>
             <td dir="ltr">-</td>
             <td dir="ltr">-</td>
+            <td dir="ltr">-</td>
         </tr>
     @endfor
+
 </table>
+<div class="row">
+    <div class="mx-auto col-12 col-md-4 text-center">
+
+        <p>امتیاز از دعوت دوستان: {{$count_scholarshipIntroduce}} امتیاز</p>
+    </div>
+</div>
+

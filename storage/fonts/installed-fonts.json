@@ -1,5 +1,11 @@
 {
     "embassybt": {
-        "normal": "embassybt_normal_72eccedb2c3b4a093c26cd7c5557f583"
+        "normal": "embassybt_normal_7d1ca75daf3dab2cb130f2e1f21b0430"
+    },
+    "faracoach": {
+        "normal": "faracoach_normal_dfc6e75f355bfdcef0080da0e4123c85"
+    },
+    "sofia": {
+        "normal": "sofia_normal_4f71eee52227d7aae4fba2d2c985e1e9"
     }
 }

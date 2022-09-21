@@ -100,11 +100,53 @@ class CertificateController extends Controller
 
             ini_set('max_execution_time', 0);
 
+            $font=public_path('/fonts/BRUSHSCI.TTF');
 
-//        Pdf::setOption(['dpi' => 300])->loadView('user.blank-certificates.level1')->setPaper('a4', 'landscape')->save(Auth::user()->id.'.pdf');
-            Pdf::setOption(['dpi' => 300, 'fontDir' => storage_path('/fonts'), 'font_cache' => storage_path('fontsCache/')])->loadView('user.blank-certificates.icf_scholarship')->setPaper('a4', 'landscape')->save(Auth::user()->id . '.pdf');
-            return response()->download(public_path(Auth::user()->id.'.pdf'))
-                        ->deleteFileAfterSend(true);
+            $tmp="<!doctype html>
+<html lang='fa'>
+<head>
+    <meta charset='UTF-8'>
+    <link href='".public_path('/css/reset.css')." ' rel='stylesheet' />
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Sofia'>
+    <style>
+
+        .cls_pdf{
+            background-image: url('".public_path('/images/blank-certificates/ICF_Scholarship.jpg')."');
+            width: 100%;
+            height: 100%;
+            background-size: 100% 100%;
+
+        }
+
+        .tag_h1
+        {
+            position: relative;
+            text-align: center;
+            font-size: 160px;
+            color: #000000;
+            top: 1100px;
+            text-transform: capitalize;
+            font-family:'Sofia' !important;
+        }
+
+
+    </style>
+</head>
+<body>
+<div class='cls_pdf'>
+        <p>GOLNAZ GOLESTAni</p>
+        <h1 class='tag_h1' style='font-size: 120px'>ALI Jafarkhani</h1>
+</div>
+</body>
+</html>
+";
+
+
+
+        Pdf::setOption(['dpi' => 300])->loadView('user.blank-certificates.level1')->setPaper('a4', 'landscape')->save(Auth::user()->id.'.pdf');
+//            Pdf::setOption(['dpi' => 300, 'fontDir' => storage_path('/fonts'), 'font_cache' => storage_path('/fontsCache')])->loadHTML($tmp)->setPaper('a4', 'landscape')->save(Auth::user()->id . '.pdf');
+//            return response()->download(public_path(Auth::user()->id.'.pdf'))
+//                        ->deleteFileAfterSend(true);
 //            return view('user.blank-certificates.icf_scholarship');
         }
         else
@@ -130,11 +172,58 @@ class CertificateController extends Controller
 
             ini_set('max_execution_time', 0);
 
+            $tmp="<!doctype html>
+<html lang='fa'>
+<head>
+    <meta charset='UTF-8'>
+    <link href='".public_path('/css/reset.css')." ' rel='stylesheet' />
+    <style>
 
-//        Pdf::setOption(['dpi' => 300])->loadView('user.blank-certificates.level1')->setPaper('a4', 'landscape')->save(Auth::user()->id.'.pdf');
-            Pdf::setOption(['dpi' => 300, 'fontDir' => storage_path('/fonts'), 'font_cache' => storage_path('fontsCache/')])->loadView('user.blank-certificates.icf_scholarship')->setPaper('a4', 'landscape')->save($user->id . '.pdf');
-            return response()->download(public_path($user->id.'.pdf'))
-                ->deleteFileAfterSend(true);
+
+
+        @font-face {
+            font-family: 'embassybt';
+            src: url('".storage_path('/fonts/embassybt.ttf')."') format('truetype');
+            font-style: normal;
+            font-weight: normal;
+        }
+
+        .cls_pdf{
+            background-image: url('".public_path('/images/blank-certificates/ICF_Scholarship.jpg')."');
+            width: 100%;
+            height: 100%;
+            background-size: 100% 100%;
+
+        }
+
+        .tag_h1
+        {
+            position: relative;
+            text-align: center;
+            font-size: 160px;
+            color: #000000;
+            top: 1100px;
+            text-transform: capitalize;
+            font-family:'embassybt';
+        }
+
+
+    </style>
+</head>
+<body>
+<div class='cls_pdf'>
+        <h1 class='tag_h1' style='font-size: 120px'>ALI</h1>
+</div>
+</body>
+</html>
+";
+
+//            Pdf::setOption(['dpi' => 300, 'fontDir' => storage_path('/fonts'), 'font_cache' => storage_path('fontsCache/'),'defaultFont'=>'embassybt'])->loadView('user.blank-certificates.icf_scholarship')->setPaper('a4', 'landscape')->save($user->id . '.pdf');
+            Pdf::setOption(['dpi' => 300, 'fontDir' => storage_path('/fonts'), 'font_cache' => storage_path('fontsCache/'),'defaultFont'=>'embassybt'])->loadHTML($tmp)->setPaper('a4', 'landscape')->save($user->id . '.pdf');
+
+
+//            return response()->download(public_path($user->id.'.pdf'))
+//                ->deleteFileAfterSend(true);
 //            return view('user.blank-certificates.icf_scholarship');
         }
         else
@@ -149,6 +238,7 @@ class CertificateController extends Controller
 
     public function get_certificate1()
     {
+
         if(is_null(Auth::user()->fname_en)||is_null(Auth::user()->lname_en))
         {
             alert()->error('نام و نام خانوادگی خود را به انگلیسی در پروفایل وارد کنید')->persistent('بستن');

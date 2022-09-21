@@ -95,20 +95,54 @@
                                  تعداد دفعات ورود کد {{$scholarship->user->get_recieveCodeUsers->count()}}  بار می باشد
                              </div>
                         @endif
+
+                        @if($scholarship->confirm_webinar==1)
+                            <div class="row">
+                                <div class="mx-auto col-12 col-md-4 text-center">
+                                    <p>امتیاز از آموزش :  10 امتیاز</p>
+                                </div>
+                            </div>
+                        @else
+                                <div class="row">
+                                    <div class="mx-auto col-12 col-md-4 text-center">
+                                        <p>امتیاز از آموزش :  0 امتیاز</p>
+                                    </div>
+                                </div>
+                        @endif
+
+
                     </div>
                     <div class="tab-pane fade" id="exam" role="tabpanel" aria-labelledby="exam-tab">
 
                         @if(count($scholarship->user->get_scholarshipexam)==0)
                             <div class="alert alert-warning">در آزمون شرکت نکرده است</div>
+                            <div class="row">
+                                <div class="mx-auto col-12 col-md-4 text-center">
+                                        <p>امتیاز از آزمون :  0 امتیاز</p>
+                                </div>
+                            </div>
                         @elseif($scholarship->user->get_scholarshipexam->last()->score>50)
-
                             <div class="alert alert-success">
                                 در آزمون با نتیجه {{$scholarship->user->get_scholarshipexam->last()->score}} قبول شده است
+                            </div>
+                            <div class="row">
+                                <div class="mx-auto col-12 col-md-4 text-center">
+                                    @if(($scholarship->user->get_scholarshipexam->last()->score>50) >= 50 && ($scholarship->user->get_scholarshipexam->last()->score>50) <= 70)
+                                        <p>امتیاز از آزمون :  10 امتیاز</p>
+                                    @elseif(($scholarship->user->get_scholarshipexam->last()->score>50) > 70)
+                                        <p>امتیاز از آزمون :  20 امتیاز</p>
+                                    @endif
+                                </div>
                             </div>
                         @elseif($scholarship->user->get_scholarshipexam->last()->score<50)
                             @foreach($scholarship->user->get_scholarshipExam as $item)
                                 <div class="alert alert-warning">آزمون {{$loop->iteration}} نمره =  {{$item->score}}</div>
                             @endforeach
+                            <div class="row">
+                                <div class="mx-auto col-12 col-md-4 text-center">
+                                    <p>امتیاز از آزمون :  0 امتیاز</p>
+                                </div>
+                            </div>
                         @endif
 
                     </div>
@@ -126,8 +160,23 @@
                                 کاربر معرفی نامه ارسال کرده است
                                 <a href="{{'/documents/scholarship/'.$scholarship->introductionletter}}" class="btn btn-primary">دانلود</a>
                             </div>
-
                         @endif
+
+                        <form method="post" action="/admin/scholarship/{{$scholarship->id}}/score_store">
+                            {{csrf_field()}}
+                            <div class="row">
+                                <div class="mx-auto col-12 col-md-4 text-center">
+                                    <small class="text-muted">امتیاز بین 0 تا 10</small>
+                                    <div class="input-group ">
+                                        <div class="input-group-prepend">
+                                            <button class="btn btn-outline-secondary" type="submit" id="button-addon1"> امتیاز معرفی نامه</button>
+                                        </div>
+                                        <input type="number" class="form-control" name="score_introductionletter" min="0" max="30" value="{{$scholarship->score_introductionletter}}"  />
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
                     </div>
 
                     <div class="tab-pane fade " id="interview" role="tabpanel" aria-labelledby="interview-tab">

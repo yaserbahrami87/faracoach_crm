@@ -146,6 +146,7 @@ class ScholarshipController extends BaseController
 
     public function show(scholarship  $scholarship)
     {
+
         $states=$this->states();
         $city=$this->city($scholarship->user->city);
         $scholarship->types=explode(',' ,$scholarship->types);
@@ -179,7 +180,16 @@ class ScholarshipController extends BaseController
         $getFollowbyCategory=$this->getFollowbyCategory();
 
 
+        $count_scholarshipIntroduce=0;
+        foreach ($scholarship->user->get_invitations->where('created_at','>','2022-07-20 00:00:00')->where('resource','=','بورسیه تحصیلی') as $item)
+        {
+            if(!is_null($item->scholarship))
+            {
+                $count_scholarshipIntroduce++;
+            }
+        }
 
+        $count_scholarshipIntroduce=$count_scholarshipIntroduce*4;
 
 
        return view('admin.scholarship.scholarship')
@@ -187,6 +197,7 @@ class ScholarshipController extends BaseController
                     ->with('gettingKnow_child_list',$gettingKnow_child_list)
                     ->with('gettingKnow_parent_list',$gettingKnow_parent_list)
                     ->with('getFollowbyCategory',$getFollowbyCategory)
+                    ->with('count_scholarshipIntroduce',$count_scholarshipIntroduce)
                     ->with('city',$city)
                     ->with('cities',$cities)
                     ->with('messages',$messages)
@@ -707,5 +718,18 @@ class ScholarshipController extends BaseController
         return view('admin.scholarship.users')
             ->with('scholarships',$scholarships);
 
+    }
+
+    public function scoreStore(Request $request,scholarship $scholarship)
+    {
+        $this->validate($request,
+        [
+           'score_profile'              =>'nullable|between:0,30',
+           'score_introductionletter'   =>'nullable|between:0,10',
+        ]);
+
+        $scholarship->update($request->all());
+        alert()->success('امتیاز با موفقیت ثبت شد')->persistent('بستن');
+        return back();
     }
 }
