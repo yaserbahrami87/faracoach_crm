@@ -196,7 +196,8 @@ class ScholarshipController extends BaseController
         if(is_null($scholarship->score_profile))
         {
             $result_final=$result_final+0;
-        }else
+        }
+        else
         {
             $result_final=$result_final+$scholarship->score_profile;
 
@@ -206,7 +207,8 @@ class ScholarshipController extends BaseController
         {
             $result_final=$result_final+0;
         }
-        else {
+        else
+        {
             $result_final=$result_final+10;
         }
 
@@ -216,7 +218,6 @@ class ScholarshipController extends BaseController
         {
             $result_final=$result_final+0;
         }
-
         elseif(($scholarship->user->get_scholarshipexam->last()->score) >= 50 && ($scholarship->user->get_scholarshipexam->last()->score) <= 70)
         {
             $result_final=$result_final+10;

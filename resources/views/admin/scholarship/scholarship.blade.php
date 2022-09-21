@@ -190,7 +190,7 @@
                                         <td class="text-center">رزومه و سوابق</td>
                                         <td class="text-center">
                                             @if(is_null($scholarship->score_profile))
-                                                0 امتیاز
+                                                0
                                             @else
                                                 {{$scholarship->score_profile}}
                                             @endif
@@ -199,10 +199,10 @@
                                     <tr>
                                         <td class="text-center">آموزش</td>
                                         <td class="text-center">
-                                            @if(is_null($scholarship->confirm_webinar==1))
-                                                0
+                                            @if($scholarship->confirm_webinar==1)
+                                                10
                                             @else
-                                                 10
+                                                 0
                                             @endif
                                         </td>
                                     </tr>
