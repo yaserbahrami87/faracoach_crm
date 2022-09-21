@@ -63,10 +63,8 @@
                     <li class="nav-item" role="interview">
                         <button class="nav-link" id="interview-tab" data-toggle="tab" data-target="#interview" type="button" role="tab" aria-controls="interview" aria-selected="false">مصاحبه</button>
                     </li>
-
-
                     <li class="nav-item" role="result">
-                        <button class="nav-link disabled" id="result-tab" data-toggle="tab" data-target="#result" type="button" role="tab" aria-controls="result" aria-selected="false">نتیجه</button>
+                        <button class="nav-link" id="result-tab" data-toggle="tab" data-target="#result" type="button" role="tab" aria-controls="result" aria-selected="false">نتیجه</button>
                     </li>
                 </ul>
 
@@ -109,8 +107,6 @@
                                     </div>
                                 </div>
                         @endif
-
-
                     </div>
                     <div class="tab-pane fade" id="exam" role="tabpanel" aria-labelledby="exam-tab">
 
@@ -181,6 +177,72 @@
 
                     <div class="tab-pane fade " id="interview" role="tabpanel" aria-labelledby="interview-tab">
                         @include('admin.scholarship.interview')
+                    </div>
+                    <div class="tab-pane fade " id="result" role="tabpanel" aria-labelledby="result-tab">
+                        <div class="row">
+                            <div class="col-12 col-md-4 mx-auto">
+                                <table class="table table-striped table-bordered text-center">
+                                    <tr>
+                                        <th class="text-center">عناوین</th>
+                                        <th class="text-center">امتیاز</th>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">رزومه و سوابق</td>
+                                        <td class="text-center">
+                                            @if(is_null($scholarship->score_profile))
+                                                0 امتیاز
+                                            @else
+                                                {{$scholarship->score_profile}}
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">آموزش</td>
+                                        <td class="text-center">
+                                            @if(is_null($scholarship->confirm_webinar==1))
+                                                0
+                                            @else
+                                                 10
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">امتیاز معرف</td>
+                                        <td class="text-center">{{$count_scholarshipIntroduce}} </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            آزمون
+                                        </td>
+                                        <td>
+                                            @if(count($scholarship->user->get_scholarshipexam)==0 || $scholarship->user->get_scholarshipexam->last()->score<50)
+                                                0
+                                            @elseif(($scholarship->user->get_scholarshipexam->last()->score) >= 50 && ($scholarship->user->get_scholarshipexam->last()->score) <= 70)
+                                                10
+                                            @elseif(($scholarship->user->get_scholarshipexam->last()->score) > 70)
+                                                20
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            مصاحبه
+                                        </td>
+                                        <td>
+                                            @if(is_null($scholarship->user->get_scholarshipInterview))
+                                                0
+                                            @else
+                                                {{$scholarship->user->get_scholarshipInterview->score}}
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>جمع امتیاز</th>
+                                        <th>{{$result_final}}</th>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
                     </div>
 
                 </div>

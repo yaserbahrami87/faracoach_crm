@@ -191,6 +191,49 @@ class ScholarshipController extends BaseController
 
         $count_scholarshipIntroduce=$count_scholarshipIntroduce*4;
 
+        //جمع امتیازات
+        $result_final=0;
+        if(is_null($scholarship->score_profile))
+        {
+            $result_final=$result_final+0;
+        }else
+        {
+            $result_final=$result_final+$scholarship->score_profile;
+
+        }
+
+        if(is_null($scholarship->confirm_webinar==1))
+        {
+            $result_final=$result_final+0;
+        }
+        else {
+            $result_final=$result_final+10;
+        }
+
+        $result_final=$result_final+$count_scholarshipIntroduce;
+
+        if(count($scholarship->user->get_scholarshipexam)==0 || $scholarship->user->get_scholarshipexam->last()->score<50)
+        {
+            $result_final=$result_final+0;
+        }
+
+        elseif(($scholarship->user->get_scholarshipexam->last()->score) >= 50 && ($scholarship->user->get_scholarshipexam->last()->score) <= 70)
+        {
+            $result_final=$result_final+10;
+        }
+        elseif(($scholarship->user->get_scholarshipexam->last()->score) > 70)
+        {
+            $result_final=$result_final+20;
+        }
+
+        if(is_null($scholarship->user->get_scholarshipInterview))
+        {
+            $result_final=$result_final+0;
+        }
+        else
+        {
+            $result_final=$result_final+$scholarship->user->get_scholarshipInterview->score;
+        }
 
        return view('admin.scholarship.scholarship')
                     ->with('scholarship',$scholarship)
@@ -201,6 +244,7 @@ class ScholarshipController extends BaseController
                     ->with('city',$city)
                     ->with('cities',$cities)
                     ->with('messages',$messages)
+                    ->with('result_final',$result_final)
                     ->with('states',$states);
     }
 
