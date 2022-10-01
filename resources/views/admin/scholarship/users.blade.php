@@ -112,7 +112,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        @if(!is_null($item->get_scholarshipInterview) )
+                                        @if(!is_null($item->user->get_scholarshipInterview) )
                                             انجام شده است
                                         @endif
                                     </td>

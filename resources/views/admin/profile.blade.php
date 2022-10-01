@@ -51,6 +51,7 @@
                                         @if(!is_null($user->get_insertuserInfo))
                                             <p>ثبت شده توسط: {{$user->get_insertuserInfo->fname .' '.$user->get_insertuserInfo->lname }}</p>
                                         @endif
+                                        <p>تاریخ ثبت نام:  <span dir="ltr">{{substr($user->created_at,0,10)}}</span></p>
                                         <p class="d-inline"> تعداد افراد معرفی شده:</p><b> {{$user->get_invitations->count()}} نفر</b>
                                     </div>
 

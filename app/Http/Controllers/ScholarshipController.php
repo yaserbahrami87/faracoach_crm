@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\city;
+use App\course;
 use App\followup;
 use App\message;
 use App\Notifications\sendMessageNotification;
@@ -146,7 +147,6 @@ class ScholarshipController extends BaseController
 
     public function show(scholarship  $scholarship)
     {
-
         $states=$this->states();
         $city=$this->city($scholarship->user->city);
         $scholarship->types=explode(',' ,$scholarship->types);
@@ -235,6 +235,8 @@ class ScholarshipController extends BaseController
         {
             $result_final=$result_final+$scholarship->user->get_scholarshipInterview->score;
         }
+
+
 
        return view('admin.scholarship.scholarship')
                     ->with('scholarship',$scholarship)
@@ -462,7 +464,6 @@ class ScholarshipController extends BaseController
 
             $states=state::get();
 
-
             $cities=city::where('state_id',$scholarship->user->state)
                                 ->get();
 
@@ -486,6 +487,99 @@ class ScholarshipController extends BaseController
 
             $getFollowbyCategory=$this->getFollowbyCategory();
 
+
+            if(!is_null($scholarship->user->get_scholarshipInterview))
+            {
+                $courses=course::where('start','>',$this->dateNow)
+                    ->where('id','<>',3)
+                    ->where('id','<>',15)
+                    ->when($scholarship->user->get_scholarshipInterview->type_holding==1,function($query)use($scholarship)
+                    {
+                        //حضوری ها در مصاحبه مقدار 1 دارند در جدول درس 2
+                        //آنلاین ها در مصاحبه مقدار 2 دارند در جدول درس 1
+
+                        $query->where('type_course','=',2);
+                    })
+                    ->when($scholarship->user->get_scholarshipInterview->type_holding==2,function($query)use($scholarship)
+                    {
+                        //حضوری ها در مصاحبه مقدار 1 دارند در جدول درس 2
+                        //آنلاین ها در مصاحبه مقدار 2 دارند در جدول درس 1
+
+                        $query->where('type_course','=',1);
+                    })
+                    ->orderby('id','desc')
+                    ->get();
+            }
+
+
+
+
+
+            //امتیاز
+            $count_scholarshipIntroduce=0;
+            foreach ($scholarship->user->get_invitations->where('created_at','>','2022-07-20 00:00:00')->where('resource','=','بورسیه تحصیلی') as $item)
+            {
+                if(!is_null($item->scholarship))
+                {
+                    $count_scholarshipIntroduce++;
+                }
+            }
+
+            $count_scholarshipIntroduce=$count_scholarshipIntroduce*4;
+
+            //جمع امتیازات
+            $result_final=0;
+
+            if(is_null($scholarship->score_profile))
+            {
+                $result_final=$result_final+0;
+            }
+            else
+            {
+                $result_final=$result_final+$scholarship->score_profile;
+
+            }
+
+            if($scholarship->confirm_webinar==1)
+            {
+                $result_final=$result_final+10;
+            }
+            else
+            {
+                $result_final=$result_final+0;
+            }
+
+            $result_final=$result_final+$count_scholarshipIntroduce;
+
+            if(count($scholarship->user->get_scholarshipexam)==0 || $scholarship->user->get_scholarshipexam->last()->score<50)
+            {
+                $result_final=$result_final+0;
+            }
+            elseif(($scholarship->user->get_scholarshipexam->last()->score) >= 50 && ($scholarship->user->get_scholarshipexam->last()->score) <= 70)
+            {
+                $result_final=$result_final+10;
+            }
+            elseif(($scholarship->user->get_scholarshipexam->last()->score) > 70)
+            {
+                $result_final=$result_final+20;
+            }
+
+            if(is_null($scholarship->user->get_scholarshipInterview))
+            {
+                $result_final=$result_final+0;
+            }
+            else
+            {
+                $result_final=$result_final+$scholarship->user->get_scholarshipInterview->score;
+            }
+
+
+
+
+
+
+
+
             return  view('user.scholarship.profile')
                         ->with('messages',$messages)
                         ->with('states',$states)
@@ -494,6 +588,8 @@ class ScholarshipController extends BaseController
                         ->with('gettingKnow_child_list',$gettingKnow_child_list)
                         ->with('gettingKnow_parent_list',$gettingKnow_parent_list)
                         ->with('getFollowbyCategory',$getFollowbyCategory)
+                        ->with('courses',$courses)
+                        ->with('result_final',$result_final)
                         ->with('scholarship',$scholarship);
         }
     }

@@ -189,7 +189,7 @@ class UserController extends BaseController
 
 
             $tags=$this->get_tags();
-            $parentCategory=$this->get_category('پیگیری');
+//            $parentCategory=$this->get_category('پیگیری');
 
             //دریافت کفیت های پیگیری
             $problem=$this->get_problemfollowup(NULL,1);
@@ -197,7 +197,7 @@ class UserController extends BaseController
             return view('admin.users')
                         ->with('users',$users)
                         ->with('tags',$tags)
-                        ->with('parentCategory',$parentCategory)
+//                        ->with('parentCategory',$parentCategory)
                         ->with('usersAdmin',$usersAdmin)
                         ->with('problem',$problem)
                         ->with('statics',$statics)
@@ -233,7 +233,7 @@ class UserController extends BaseController
                 ->get();
 
             $tags=$this->get_tags();
-            $parentCategory=$this->get_category('پیگیری');
+//            $parentCategory=$this->get_category('پیگیری');
 
             //دریافت کفیت های پیگیری
             $problem=$this->get_problemfollowup(NULL,1);
@@ -243,7 +243,7 @@ class UserController extends BaseController
                             ->with('usersAdmin',$usersAdmin)
                             ->with('tags',$tags)
                             ->with('problem',$problem)
-                            ->with('parentCategory',$parentCategory)
+//                            ->with('parentCategory',$parentCategory)
                             ->with('statics',$statics);
         }
     }
@@ -558,6 +558,7 @@ class UserController extends BaseController
     public function show(User $user)
     {
         $userAdmin=Auth::user();
+
         //تبدیل تگهای پیگیری
        foreach ($user->followups as $item)
        {
@@ -648,6 +649,8 @@ class UserController extends BaseController
 
         $condition=['parent_id','=','0'];
         $gettingKnow_parent_list=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
+
+        $user->created_at=$this->changeTimestampToShamsi($user->created_at);
 
 
 
@@ -958,7 +961,7 @@ class UserController extends BaseController
                         ->orwhere('type','=',3)
                         ->get();
         $tags=$this->get_tags();
-        $parentCategory=$this->get_category('پیگیری');
+//        $parentCategory=$this->get_category('پیگیری');
 
         if(isset($request['user']))
         {
@@ -975,7 +978,7 @@ class UserController extends BaseController
         return view('admin.users')
                     ->with('tags',$tags)
                     ->with('users',$users)
-                    ->with('parentCategory',$parentCategory)
+//                    ->with('parentCategory',$parentCategory)
                     ->with('usersAdmin',$usersAdmin)
                     ->with('statics',$statics)
                     ->with('user',$user)
@@ -985,90 +988,80 @@ class UserController extends BaseController
     }
 
 
-    public function showCategoryTagsAdmin(Request $request)
-    {
-        if(is_null($request))
-        {
-            return redirect('/panel');
-        }
-        else {
-            $this->validate($request,
-                [
-                    'tags'  =>'array|required'
-                ]);
-
-            if (!isset($request['tags']))
-            {
-                alert()->error("حداقل یک گزینه برای اعمال فیلترها انتخاب کنید",'خطا')->persistent('بستن');
-                return back();
-            } else {
-//                $tags = implode(',', $request['tags']);
-//                $users = user::join('followups', 'users.id', '=', 'followups.user_id')
-//                    ->where('followups.tags', 'like', '%' . $tags . '%')
-//                    ->where('followups.insert_user_id', '=', Auth::user()->id)
-//                    ->select('users.*')
-//                    ->groupby('users.id')
-//                    ->orderby('date_fa', 'desc')
-////                    ->paginate($this->countPage());
+//    public function showCategoryTagsAdmin(Request $request)
+//    {
+//        if(is_null($request))
+//        {
+//            return redirect('/panel');
+//        }
+//        else {
+//            $this->validate($request,
+//                [
+//                    'tags'  =>'array|required'
+//                ]);
+//
+//            if (!isset($request['tags']))
+//            {
+//                alert()->error("حداقل یک گزینه برای اعمال فیلترها انتخاب کنید",'خطا')->persistent('بستن');
+//                return back();
+//            } else {
+//
+//                $users=followup::wherein('tags',$request->tags)
+//                        ->orwhere(function($query) use ($request)
+//                        {
+//                            for ($i=0;$i<count($request->tags);$i++)
+//                            {
+//                                $query->orwhere('tags','like',$request->tags[$i].',%')
+//                                        ->orwhere('tags','like','%,'.$request->tags[$i])
+//                                        ->orwhere('tag','like','%,'.$request->tags[$i].',%');
+//                            }
+//                        })
+//                        ->get();
+//
+//
+//
+//
+//                foreach ($users as $item)
+//                {
+//                    $item=$this->changeNumberToData($item);
+//                }
+//
+//
+//                $tags = $this->get_tags();
+//                $parentCategory=$this->get_category('پیگیری');
+//
+//                $usersAdmin=user::orwhere('type','=','2')
+//                    ->orwhere('type','=',3)
 //                    ->get();
-
-                $users=followup::wherein('tags',$request->tags)
-                        ->orwhere(function($query) use ($request)
-                        {
-                            for ($i=0;$i<count($request->tags);$i++)
-                            {
-                                $query->orwhere('tags','like',$request->tags[$i].',%')
-                                        ->orwhere('tags','like','%,'.$request->tags[$i])
-                                        ->orwhere('tag','like','%,'.$request->tags[$i].',%');
-                            }
-                        })
-                        ->get();
-
-                dd($users);
-
-
-                foreach ($users as $item)
-                {
-                    $item=$this->changeNumberToData($item);
-                }
-
-//                $users->appends(['tags' => $request['tags']]);
-
-                $tags = $this->get_tags();
-                $parentCategory=$this->get_category('پیگیری');
-
-                $usersAdmin=user::orwhere('type','=','2')
-                    ->orwhere('type','=',3)
-                    ->get();
-
-                if(isset($request['user']))
-                {
-                    $user=$request['user'];
-                }
-                else
-                {
-                    $user="";
-                }
-
-                //لیست تعداد کاربرها
-                $statics=$this->get_staticsCountUsers_admin();
-
-                //دریافت کفیت های پیگیری
-                $problem=$this->get_problemfollowup(NULL,1);
-
-
-                return view('admin.users')
-                    ->with('tags',$tags)
-                    ->with('users',$users)
-                    ->with('parentCategory',$parentCategory)
-                    ->with('usersAdmin',$usersAdmin)
-                    ->with('user',$user)
-                    ->with('statics',$statics)
-                    ->with('parameter',$request['parameter'])
-                    ->with('problem',$problem);
-            }
-        }
-    }
+//
+//                if(isset($request['user']))
+//                {
+//                    $user=$request['user'];
+//                }
+//                else
+//                {
+//                    $user="";
+//                }
+//
+//                //لیست تعداد کاربرها
+//                $statics=$this->get_staticsCountUsers_admin();
+//
+//                //دریافت کفیت های پیگیری
+//                $problem=$this->get_problemfollowup(NULL,1);
+//
+//
+//                return view('admin.users')
+//                    ->with('tags',$tags)
+//                    ->with('users',$users)
+//                    ->with('parentCategory',$parentCategory)
+//                    ->with('usersAdmin',$usersAdmin)
+//                    ->with('user',$user)
+//                    ->with('statics',$statics)
+//                    ->with('parameter',$request['parameter'])
+//                    ->with('problem',$problem);
+//            }
+//        }
+//    }
 
     //نمایش لیست دعوت شده ها
     public function listIntroducedUser(Request $request)
@@ -1172,7 +1165,7 @@ class UserController extends BaseController
         }
 
         $tags=$this->get_tags();
-        $parentCategory=$this->get_category('پیگیری');
+//        $parentCategory=$this->get_category('پیگیری');
         $usersAdmin=user::orwhere('type','=',2)
                         ->orwhere('type','=',3)
                         ->get();
@@ -1197,7 +1190,7 @@ class UserController extends BaseController
         return view('admin.users')
                     ->with('users',$users)
                     ->with('tags',$tags)
-                    ->with('parentCategory',$parentCategory)
+//                    ->with('parentCategory',$parentCategory)
                     ->with('usersAdmin',$usersAdmin)
                     ->with('user',$user)
                     ->with('problem',$problem)
@@ -1509,88 +1502,88 @@ class UserController extends BaseController
         }
     }
 
-    public function advancesearch (Request $request)
-    {
-        $this->validate($request,[
-            'user'              =>'nullable|numeric',
-            'categorypeygiri'   =>'nullable|boolean',
-            'gettingknow'       =>'nullable|string'
-        ]);
-
-        if(!is_null($request['user']))
-        {
-            $user=$request['user'];
-        }
-        if(!is_null($request['categorypeygiri']))
-        {
-            $categorypeygiri=$request['categorypeygiri'];
-        }
-
-
-
-        $users = User:: join('followups', 'users.id', '=', 'followups.user_id')
-                    ->when(($request['categorypeygiri']=="1" && $request['user'] ),function($query) use ($request)
-                    {
-                        return $query->where('users.insert_user_id','=',$request->user);
-                    })
-                    ->when(($request['categorypeygiri']=="0" && $request['user']),function($query) use ($request)
-                    {
-                        return $query->where('users.followby_expert','=',$request->user);
-                    })
-                    ->when(($request['categorypeygiri']=="1"),function($query) use ($request)
-                    {
-                        return $query->whereNotNull('followups.insert_user_id');
-                    })
-                    ->when(($request['categorypeygiri']=="0"),function($query) use ($request)
-                    {
-                        return $query->whereNotNull('users.followby_expert');
-                    })
-                    ->when(($request['gettingknow']),function($query) use ($request)
-                    {
-                        return $query->where('users.gettingknow','=',$request->gettingknow);
-                    })
-                    ->when(($request['problem']),function($query) use ($request)
-                    {
-                        return $query->where('followups.problemfollowup_id','=',$request->problem);
-                    })
-                    ->where('flag','=',1)
-                    ->orderby('followups.id','desc')
-                    ->select('users.*')
-                    ->get();
-
-
-
-
-        foreach ($users as $item)
-        {
-            $item=$this->changeNumberToData($item);
-        }
-
-        $tags=$this->get_tags();
-        $parentCategory=$this->get_category('پیگیری');
-        $usersAdmin=user::orwhere('type','=',2)
-                ->orwhere('type','=',3)
-                ->get();
-
-
-        //لیست تعداد کاربرها
-        $statics=$this->get_staticsCountUsers_admin();
-
-        //دریافت کفیت های پیگیری
-        $problem=$this->get_problemfollowup(NULL,1);
-
-
-
-        return view('admin.users')
-            ->with('users',$users)
-            ->with('tags',$tags)
-            ->with('parentCategory',$parentCategory)
-            ->with('usersAdmin',$usersAdmin)
-            ->with('user',Auth::user()->id)
-            ->with('parameter',$request['parameter'])
-            ->with('statics',$statics)
-            ->with('problem',$problem);
-    }
+//    public function advancesearch (Request $request)
+//    {
+//        $this->validate($request,[
+//            'user'              =>'nullable|numeric',
+//            'categorypeygiri'   =>'nullable|boolean',
+//            'gettingknow'       =>'nullable|string'
+//        ]);
+//
+//        if(!is_null($request['user']))
+//        {
+//            $user=$request['user'];
+//        }
+//        if(!is_null($request['categorypeygiri']))
+//        {
+//            $categorypeygiri=$request['categorypeygiri'];
+//        }
+//
+//
+//
+//        $users = User:: join('followups', 'users.id', '=', 'followups.user_id')
+//                    ->when(($request['categorypeygiri']=="1" && $request['user'] ),function($query) use ($request)
+//                    {
+//                        return $query->where('users.insert_user_id','=',$request->user);
+//                    })
+//                    ->when(($request['categorypeygiri']=="0" && $request['user']),function($query) use ($request)
+//                    {
+//                        return $query->where('users.followby_expert','=',$request->user);
+//                    })
+//                    ->when(($request['categorypeygiri']=="1"),function($query) use ($request)
+//                    {
+//                        return $query->whereNotNull('followups.insert_user_id');
+//                    })
+//                    ->when(($request['categorypeygiri']=="0"),function($query) use ($request)
+//                    {
+//                        return $query->whereNotNull('users.followby_expert');
+//                    })
+//                    ->when(($request['gettingknow']),function($query) use ($request)
+//                    {
+//                        return $query->where('users.gettingknow','=',$request->gettingknow);
+//                    })
+//                    ->when(($request['problem']),function($query) use ($request)
+//                    {
+//                        return $query->where('followups.problemfollowup_id','=',$request->problem);
+//                    })
+//                    ->where('flag','=',1)
+//                    ->orderby('followups.id','desc')
+//                    ->select('users.*')
+//                    ->get();
+//
+//
+//
+//
+//        foreach ($users as $item)
+//        {
+//            $item=$this->changeNumberToData($item);
+//        }
+//
+//        $tags=$this->get_tags();
+//        $parentCategory=$this->get_category('پیگیری');
+//        $usersAdmin=user::orwhere('type','=',2)
+//                ->orwhere('type','=',3)
+//                ->get();
+//
+//
+//        //لیست تعداد کاربرها
+//        $statics=$this->get_staticsCountUsers_admin();
+//
+//        //دریافت کفیت های پیگیری
+//        $problem=$this->get_problemfollowup(NULL,1);
+//
+//
+//
+//        return view('admin.users')
+//            ->with('users',$users)
+//            ->with('tags',$tags)
+//            ->with('parentCategory',$parentCategory)
+//            ->with('usersAdmin',$usersAdmin)
+//            ->with('user',Auth::user()->id)
+//            ->with('parameter',$request['parameter'])
+//            ->with('statics',$statics)
+//            ->with('problem',$problem);
+//    }
 
     public function createExcel()
     {

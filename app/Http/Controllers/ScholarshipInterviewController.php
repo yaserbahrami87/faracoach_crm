@@ -73,7 +73,7 @@ class ScholarshipInterviewController extends BaseController
 
             $user=User::find($data['user_id']);
             $msg=$user->fname." ".$user->lname." عزیز\n"." شما ".$data['score']." امتیاز در مصاحبه بورسیه کوچینگ کسب کردید "."\n فراکوچ";         "$user->fname $user->lname عزیز ";
-            $this->sendSms($user->tel,$msg);
+//            $this->sendSms($user->tel,$msg);
             alert()->success('مصاحبه با موفقیت ثبت شد')->persistent('بستن');
         }
         else

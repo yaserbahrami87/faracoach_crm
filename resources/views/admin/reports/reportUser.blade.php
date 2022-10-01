@@ -101,6 +101,47 @@
         </form>
     </div>
     <div class="col-12 border border-bottom mt-2 mb-2"></div>
+    <div class="col-12 mb-3">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card-counter primary">
+                    <span class="count-numbers text-dark">{{$user->get_insertUsers->wherebetween('created_at',$date_en)->count()}} نفر </span>
+                    <span class="count-name text-dark"> تعداد ورودی ها</span>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card-counter primary">
+
+                        <span class="count-numbers text-dark">{{$user->followupsAdmin->wherebetween('date_fa',$date_fa)->count()}} نفر </span>
+                        <span class="count-name text-dark"> تعداد پیگیری ها
+                            <a data-toggle="collapse" href="#collapseGroupFollowup" role="button" aria-expanded="false" aria-controls="collapseGroupFollowup">جزئیات</a>
+                        </span>
+
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card-counter primary">
+                        <span class="count-numbers text-dark">{{$user->followupsAdmin->wherebetween('date_fa',$date_fa)->groupby('course_id')->count()}} نفر </span>
+                        <span class="count-name text-dark"> تعداد پیگیری ها</span>
+                </div>
+            </div>
+
+            <div class="collapse" id="collapseGroupFollowup">
+                <div class="card card-body">
+                    {{csrf_field()}}
+                    <div class="row">
+                        @foreach($user->followupsAdmin->wherebetween('date_fa',$date_fa)->groupby('course_id') as $item)
+                            <div class="col-xs-6 col-md-3 col-lg-3 col-xl-3 text-right">
+                                <span>{{count($item)}}</span>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
     <div class="col-12">
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -226,10 +267,10 @@
             $('.dataTable').DataTable();
         } );
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-    <script src="https://cdn.jsdelivr.net/npm/moment"></script>
-    <script src="https://cdn.jsdelivr.net/npm/moment-jalaali@0.7.4/build/moment-jalaali.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue-persian-datetime-picker/dist/vue-persian-datetime-picker-browser.js"></script>
+    <script src="{{asset('/js/vue@2.js')}}"></script>
+    <script src="{{asset('/js/moment.js')}}"></script>
+    <script src="{{asset('/js/moment-jalaali.js')}}"></script>
+    <script src="{{asset('/js/vue-persian-datetime-picker-browser.js')}}"></script>
     <script>
         var app = new Vue({
             el: '#app',

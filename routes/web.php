@@ -100,6 +100,9 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     Route::get('/scholarship/exam/create','ScholarshipExamController@create');
     Route::post('/scholarship/exam','ScholarshipExamController@store');
 
+    //Scholarship Payment
+    Route::resource('scholarship_payment','ScholarshipPaymentController');
+
     //Certificates
     Route::get('/level1/certificate','CertificateController@get_certificate1');
     Route::get('/scholarship/certificate/download','CertificateController@get_certificate');
@@ -208,10 +211,10 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::post('/register','UserController@register');
     Route::get('/user/{user}/delete','UserController@destroy');
     Route::get('/users/category/','UserController@showCategoryUsersAdmin');
-    Route::get('/users/categoryTags/','UserController@showCategoryTagsAdmin');
+//    Route::get('/users/categoryTags/','UserController@showCategoryTagsAdmin');
 //    Route::get('/users/categorybyAdmin/','UserController@categorybyAdmin');
 //    Route::get('/users/list_user_gettingknow','UserController@list_user_gettingknow');
-    Route::get('/users/advancesearch','UserController@advancesearch');
+//    Route::get('/users/advancesearch','UserController@advancesearch');
 //    Route::get('/users/export_excel','UserController@export_excel');
 
 

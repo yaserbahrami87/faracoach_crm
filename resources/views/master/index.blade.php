@@ -9,7 +9,7 @@
     <link href={{asset("css/bootstrap.min.css")}} rel="stylesheet" />
     <link href={{asset("css/bootstrap_cerulean.min.css")}} rel="stylesheet" />
     <link href={{asset("css/bootstrap-rtl.min.css")}} rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{{asset('/css/bootstrap-icons.css')}}">
     <link href={{asset("css/style.css")}} rel="stylesheet" />
     <link href={{asset("css/landing.css")}} rel="stylesheet" />
     <link href={{asset("css/stepwizard.css")}} rel="stylesheet" />
@@ -17,7 +17,7 @@
     <link href={{asset("slick-1.8.1/slick-1.8.1/slick/slick-theme.css")}} rel="stylesheet" type="text/css" />
     <link rel="icon" href="{{asset('images/logo.png')}}"  />
     <link rel="stylesheet" type="text/css" href="{{ asset('/panel_assets/intl_tel/css/intlTelInput.css') }}" />
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="{{asset('/js/sweetalert.min.js')}}"></script>
 
     @yield('headerscript')
     <script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="05ea1956-7561-4af6-a7ab-1c599909f103";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>

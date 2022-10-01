@@ -66,6 +66,9 @@
                     <li class="nav-item" role="result">
                         <button class="nav-link" id="result-tab" data-toggle="tab" data-target="#result" type="button" role="tab" aria-controls="result" aria-selected="false">نتیجه</button>
                     </li>
+                    <li class="nav-item" role="payment">
+                        <button class="nav-link" id="payment-tab" data-toggle="tab" data-target="#payment" type="button" role="tab" aria-controls="payment" aria-selected="false">ثبت نام</button>
+                    </li>
                 </ul>
 
                 <div class="tab-content" id="myTabContent">
@@ -244,6 +247,7 @@
                             </div>
                         </div>
                     </div>
+
 
                 </div>
 

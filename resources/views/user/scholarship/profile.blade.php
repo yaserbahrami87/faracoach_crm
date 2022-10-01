@@ -79,7 +79,7 @@
     <div class="col-md-12">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active @if(strlen($scholarship->user->fname)>0 ||strlen($scholarship->user->lname)>0||strlen($scholarship->user->sex)>0||strlen($scholarship->user->codemelli)>0||strlen($scholarship->user->lname)>0||strlen($scholarship->user->shenasname)>0||strlen($scholarship->user->datebirth)>0||strlen($scholarship->user->personal_image)>0) btn-danger @endif" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">توضیحات</button>
+                <button class="nav-link active " id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">توضیحات</button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link " id="contact-tab" data-toggle="tab" data-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">اطلاعات بورسیه</button>
@@ -105,13 +105,13 @@
             <li class="nav-item" role="interview">
                 <button class="nav-link" id="interview-tab" data-toggle="tab" data-target="#interview" type="button" role="tab" aria-controls="interview" aria-selected="false">مصاحبه</button>
             </li>
-
+            <li class="nav-item" role="payment">
+                <button class="nav-link" id="payment-tab" data-toggle="tab" data-target="#payment" type="button" role="tab" aria-controls="payment" aria-selected="false">ثبت نام</button>
+            </li>
             <li class="nav-item" role="result">
                 <button class="nav-link disabled" id="result-tab" data-toggle="tab" data-target="#result" type="button" role="tab" aria-controls="result" aria-selected="false">نتیجه</button>
             </li>
-            <li class="nav-item" role="rante">
-                <button class="nav-link disabled" id="result-tab" data-toggle="tab" data-target="#rante" type="button" role="tab" aria-controls="rante" aria-selected="false">وام دانشجویی</button>
-            </li>
+
         </ul>
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -187,6 +187,9 @@
 
                 </div>
 
+            </div>
+            <div class="tab-pane fade " id="payment" role="tabpanel" aria-labelledby="payment-tab">
+                @include('user.scholarship.payment')
             </div>
 
 

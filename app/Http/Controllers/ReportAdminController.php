@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\category_gettingknow;
 use App\categoryTag;
 use App\followup;
 use App\User;
@@ -298,6 +299,8 @@ class ReportAdminController extends BaseController
         $states = $this->states();
         $userType = user_type::get();
 
+
+
         return view('admin.reports.report_advance')
             ->with('states', $states)
             ->with('userType', $userType);
@@ -305,14 +308,13 @@ class ReportAdminController extends BaseController
 
     public function advanceReport(Request $request)
     {
-
-
         $this->validate($request, [
             'range_date' => 'nullable|string',
             'gender' => 'nullable|array',
             'married' => 'nullable|array',
             'state' => 'nullable|array',
             'education' => 'nullable|array',
+            'social' => 'nullable|array',
             'social' => 'nullable|array',
             'types' => 'nullable|array',
         ]);
@@ -328,17 +330,17 @@ class ReportAdminController extends BaseController
 
         $users = User::when($request->gender, function ($query) use ($request)
             {
+                // اگر در گزینه های اتخابی NUL وجود داشته باشد یک شرط فقط برای چک کردن NULL میذاریم
                 $query->where(function ($query) use ($request)
                 {
                     $query->wherein('sex', $request->gender)
                         ->when(in_array('NULL', $request->gender), function ($query) use ($request) {
                             $query->orwhereNull('sex');
                         });
-
                 });
-                if (in_array('NULL', $request->gender)) {
-                    $query->orwhereNull('sex');
-                }
+//                if (in_array('NULL', $request->gender)) {
+//                    $query->orwhereNull('sex');
+//                }
                 return $query;
             })
             ->when($request->married, function ($query) use ($request)
@@ -351,9 +353,9 @@ class ReportAdminController extends BaseController
                         });
 
                 });
-                if (in_array('NULL', $request->married)) {
-                    $query->orwhereNull('married');
-                }
+//                if (in_array('NULL', $request->married)) {
+//                    $query->orwhereNull('married');
+//                }
                 return $query;
             })
             ->when($request->state, function ($query) use ($request)
@@ -366,9 +368,9 @@ class ReportAdminController extends BaseController
                         });
 
                 });
-                if (in_array('NULL', $request->state)) {
-                    $query->orwhereNull('state');
-                }
+//                if (in_array('NULL', $request->state)) {
+//                    $query->orwhereNull('state');
+//                }
                 return $query;
             })
             ->when($request->education, function ($query) use ($request)
@@ -381,9 +383,9 @@ class ReportAdminController extends BaseController
                         });
 
                 });
-                if (in_array('NULL', $request->education)) {
-                    $query->orwhereNull('education');
-                }
+//                if (in_array('NULL', $request->education)) {
+//                    $query->orwhereNull('education');
+//                }
                 return $query;
             })
             ->when($request->types, function ($query) use ($request)
@@ -397,9 +399,9 @@ class ReportAdminController extends BaseController
                         });
 
                 });
-                if (in_array('NULL', $request->types)) {
-                    $query->orwhereNull('type');
-                }
+//                if (in_array('NULL', $request->types)) {
+//                    $query->orwhereNull('type');
+//                }
                 return $query;
             })
             ->when($request->tags,function ($query) use ($request)
@@ -407,50 +409,128 @@ class ReportAdminController extends BaseController
                 return $query->with('followups')
                     ->whereHas('followups', function($query) use ($request)
                     {
-                        $query->wherein('tags',$request->tags)
-                            ->where(function($query) use ($request)
+                        $query->wherebetween('date_fa', $request->range)
+                            ->where(function ($query)use ($request)
                             {
-                                for ($i=0;$i<count($request->tags);$i++)
+                                $query->orwherein('tags',$request->tags)
+                                ->orwhere(function($query) use ($request)
                                 {
-                                    $query//->wherebetween('date_fa', $request->range)
-                                        ->where(function ($query) use ($request,$i)
+                                    for ($i=0;$i<count($request->tags);$i++)
+                                    {
+                                        $query->where(function($query) use ($request,$i)
                                         {
-                                            return $query->orwhere('tags', 'like', $request->tags[$i] . ',%')
-                                                    ->orwhere('tags', 'like', '%,' . $request->tags[$i])
-                                                    ->orwhere('tags', 'like', '%,' . $request->tags[$i] . ',%');
-
+                                            $query->orwhere('tags', 'like', $request->tags[$i] . ',%')
+                                                ->orwhere('tags', 'like', '%,' . $request->tags[$i])
+                                                ->orwhere('tags', 'like', '%,' . $request->tags[$i] . ',%');
                                         });
-                                }
+                                    }
+                                });
                             });
-
                     });
+            })
 
+            ->when($request->social,function($query) use ($request)
+            {
+                $query->where(function($query) use ($request)
+                {
+                    foreach ($request->social as $item)
+                    {
+                        if($item=='instagram')
+                        {
+                            $query->orwherenotnull('instagram');
+                        }
+
+                        if($item=='telegram')
+                        {
+                            $query->orwherenotnull('telegram');
+                        }
+
+                        if($item=='telegram')
+                        {
+                            $query->orwherenotnull('telegram');
+                        }
+
+                        if($item=='linkedin')
+                        {
+                            $query->orwherenotnull('linkedin');
+                        }
+                    }
+                });
+
+
+//                  dd($request->wherein($request->social,['telegram']));
+//                  if($query->wherein($request->social,['telegram']))
+//                  {
+//                      $query->wherenotnull('telegram');
+//                  }
+            })
+            ->when($request->gettingKnow, function ($query) use ($request)
+            {
+                $query->where(function ($query) use ($request)
+                {
+
+                    $query->wherein('gettingKnow', $request->gettingKnow)
+                        ->when(in_array('NULL', $request->gettingKnow), function ($query) use ($request) {
+                            $query->orwhereNull('gettingKnow');
+                        });
+
+                });
+//                if (in_array('NULL', $request->types)) {
+//                    $query->orwhereNull('type');
+//                }
+                return $query;
+            })
+            ->when($request->insert_user, function ($query) use ($request)
+            {
+                $query->where(function ($query) use ($request)
+                {
+                    $query->wherein('insert_user_id', $request->insert_user)
+                        ->when(in_array('NULL', $request->insert_user), function ($query) use ($request) {
+                            $query->orwhereNull('insert_user');
+                        });
+
+                });
+//                if (in_array('NULL', $request->types)) {
+//                    $query->orwhereNull('type');
+//                }
+                return $query;
             })
             ->when($request->kind == 'پیگیری', function ($query) use ($request)
             {
-               return $query->with('followups')
-                           ->whereHas('followups', function($q) use ($request) {
-                               $q//->where('status_followups', '13')
-                                    ->wherebetween('date_fa',$request->range);
-                           });
+                $query->with('followups')
+                    ->whereHas('followups', function($query) use ($request)
+                    {
+                        $query->wherebetween('date_fa', $request->range);
+                    });
             })
             ->when($request->kind == 'ثبت', function ($query) use ($request)
             {
                 return $query->wherebetween('created_at', $request->date_en);
             })
-
-
             ->get();
 
+
+            $gettingKnow=category_gettingknow::where('parent_id','<>',0)
+                ->get();
 
 
             $categoryTag=categoryTag::where('category','=','پیگیری')
                             ->first();
             $states = $this->states();
             $userType = user_type::get();
+            $insert_user=User::wherein('type',[2,3,4])
+                        ->get();
+
+
+
+
+
+
         return view('admin.reports.report_advance')
                             ->with('states',$states)
                             ->with('userType',$userType)
+                            ->with('gettingKnow',$gettingKnow)
+                            ->with('insert_user',$insert_user)
                             ->with('tagsParent',$categoryTag->get_subCategoryTags)
                             ->with('users',$users);
     }

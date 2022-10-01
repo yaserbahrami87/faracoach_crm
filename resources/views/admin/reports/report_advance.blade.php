@@ -3,6 +3,8 @@
 @section('headerScript')
     <link rel="stylesheet" href="{{asset('/css/bootstrap-multiselect.min.css')}}" type="text/css"/>
     <link href="{{asset('/dashboard/assets/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('/dashboard/assets/css/buttons.dataTables.min.css')}}" rel="stylesheet" />
+
     <style>
         .clickable-row
         {
@@ -64,6 +66,7 @@
                             <label class="input-group-text" for="married">تاهل</label>
                         </div>
                         <select class="custom-select selectpicker" id="married" name="married[]" multiple>
+                            <option value="NULL">نامشخص</option>
                             <option value="0">مجرد</option>
                             <option value="1">متاهل</option>
                         </select>
@@ -75,6 +78,7 @@
                             <label class="input-group-text" for="state">استان</label>
                         </div>
                         <select class="custom-select selectpicker"  id="state" name="state[]" multiple>
+                            <option value="NULL">نامشخص</option>
                             @foreach($states as $item)
                                 <option value="{{$item->id}}">{{$item->name}}</option>
                             @endforeach
@@ -87,6 +91,7 @@
                             <label class="input-group-text" for="education">تحصیلات</label>
                         </div>
                         <select class="custom-select selectpicker" multiple="multiple" id="education" name="education[]" >
+                            <option value="NULL">نامشخص</option>
                             <option>زیردیپلم</option>
                             <option>دیپلم</option>
                             <option>فوق دیپلم</option>
@@ -114,10 +119,10 @@
                             <label class="input-group-text" for="social">شبکه های مجازی</label>
                         </div>
                         <select class="custom-select selectpicker" id="social" name="social[]" multiple>
+                            <option value="NULL">نامشخص</option>
                             <option value="instagram">اینستاگرام داشته باشد</option>
                             <option value="telegram">تلگرام داشته باشد</option>
                             <option value="linkedin">لینکدین داشته باشد</option>
-
                         </select>
                     </div>
                 </div>
@@ -129,6 +134,19 @@
                         <select class="custom-select selectpicker" id="types" name="types[]" multiple>
                             @foreach($userType as $item)
                                 <option value="{{$item->code}}">{{$item->type}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-3  mb-1">
+                    <div class="input-group is-invalid">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="gettingKnow">نحوه ورود</label>
+                        </div>
+                        <select class="custom-select selectpicker"  id="gettingKnow" name="gettingKnow[]" multiple>
+                            <option value="NULL">نامشخص</option>
+                            @foreach($gettingKnow as $item)
+                                <option value="{{$item->id}}">{{$item->category}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -150,6 +168,19 @@
                 </div>
                 @endforeach
 
+                <div class="col-3  mb-1">
+                    <div class="input-group is-invalid">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="insert_user">ثبت کننده</label>
+                        </div>
+                        <select class="custom-select selectpicker"  id="insert_user" name="insert_user[]" multiple>
+                            @foreach($insert_user as $item)
+                                <option value="{{$item->id}}">{{$item->fname.' '.$item->lname}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
 
                 <div class="col-3  mb-1">
                     <input type="submit" class="btn btn-success" value="جستجو" id="btn_search">
@@ -168,15 +199,18 @@
                             @isset($users)
                                 @foreach($users as $item)
                                     <tr class='clickable-row' data-href='{{asset('/admin/user/'.$item->id)}}'>
-                                        <td>
-                                            <a href="{{asset('/admin/user/'.$item->id)}}">{{$item->fname}}</a>
-
+                                        <td class="text-center">
+                                            {{$loop->iteration}}
                                         </td>
-                                        <td>
+                                        <td class="text-center">
+                                            <a href="{{asset('/admin/user/'.$item->id)}}">{{$item->fname}}</a>
+                                        </td>
+                                        <td class="text-center">
                                             <a href="{{asset('/admin/user/'.$item->id)}}">{{$item->lname}}</a>
                                         </td>
-                                        <td>s3</td>
-                                        <td>s4</td>
+                                        <td dir="ltr" class="text-center">
+                                            <a href="{{asset('/admin/user/'.$item->id)}}">{{$item->tel}}</a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             @endisset
@@ -189,10 +223,10 @@
 @endsection
 
 @section('footerScript')
-    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-    <script src="https://cdn.jsdelivr.net/npm/moment"></script>
-    <script src="https://cdn.jsdelivr.net/npm/moment-jalaali@0.7.4/build/moment-jalaali.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue-persian-datetime-picker/dist/vue-persian-datetime-picker-browser.js"></script>
+    <script src="{{asset('/js/vue@2.js')}}"></script>
+    <script src="{{asset('/js/moment.js')}}"></script>
+    <script src="{{asset('/js/moment-jalaali.js')}}"></script>
+    <script src="{{asset('/js/vue-persian-datetime-picker-browser.js')}}"></script>
     <script>
         var app = new Vue({
             el: '#app',
@@ -223,11 +257,24 @@
     </script>
 
 
+
     <script src="{{asset('/dashboard/assets/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('/dashboard/assets/js/dataTables.bootstrap4.min.js')}}"></script>
+
+    <script src="{{asset('/panel_assets/js/scripts/datatables/dataTables.buttons.min.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/jszip.min.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/vfs_fonts.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/buttons.html5.min.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/buttons.print.min.js')}}"></script>
+
     <script>
         $(document).ready(function() {
-            $('.dataTable').DataTable();
+            $('.dataTable').DataTable({
+                dom: 'Bfrltip',
+                buttons: [
+                    'excel'
+                ]
+            } );
         } );
     </script>
 
