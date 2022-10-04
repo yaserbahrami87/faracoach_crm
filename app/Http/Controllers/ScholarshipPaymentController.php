@@ -107,8 +107,7 @@ class ScholarshipPaymentController extends BaseController
         $gheymat_nahaei=($course->fi_off-($course->fi_off*$off_percent)/100);
         $boorsieh=($gheymat_nahaei*$result_final)/100;
         $pardakht=$gheymat_nahaei-$boorsieh;
-//        $prepaymant=5000000;
-        $prepaymant=500;
+        $prepaymant=5000000;
         $remaining=$pardakht-$prepaymant;
         $scholarship_payment= scholarship_payment::create([
                     'user_id'       =>Auth::user()->id,
