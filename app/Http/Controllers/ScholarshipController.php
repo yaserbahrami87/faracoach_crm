@@ -573,13 +573,6 @@ class ScholarshipController extends BaseController
                 $result_final=$result_final+$scholarship->user->get_scholarshipInterview->score;
             }
 
-
-
-
-
-
-
-
             return  view('user.scholarship.profile')
                         ->with('messages',$messages)
                         ->with('states',$states)
