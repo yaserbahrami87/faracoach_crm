@@ -510,6 +510,10 @@ class ScholarshipController extends BaseController
                     ->orderby('id','desc')
                     ->get();
             }
+            else
+            {
+                $courses=NULL;
+            }
 
 
 
