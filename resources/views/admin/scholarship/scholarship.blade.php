@@ -38,7 +38,7 @@
             <div class="col-12">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="contact-tab" data-toggle="tab" data-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">اطلاعات بورسیه</button>
+                        <button class="nav-link" id="contact-tab" data-toggle="tab" data-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">فرم اولیه بورسیه</button>
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">اطلاعات کاربر</button>
@@ -47,14 +47,14 @@
                         <button class="nav-link " id="introduce-tab" data-toggle="tab" data-target="#introduce" type="button" role="tab" aria-controls="introduce" aria-selected="false">معرفی دوستان</button>
                     </li>
                     <li class="nav-item" role="learn">
-                        <button class="nav-link @if($scholarship->confirm_webinar)==1) bg-success @else  bg-danger  @endif" id="exam-tab" data-toggle="tab" data-target="#learn" type="button" role="tab" aria-controls="learn" aria-selected="false">آموزش</button>
+                        <button class="nav-link @if($scholarship->confirm_webinar)==1) bg-success @else  bg-danger  @endif" id="learn-tab" data-toggle="tab" data-target="#learn" type="button" role="tab" aria-controls="learn" aria-selected="false">آموزش</button>
                     </li>
                     <li class="nav-item" role="exam">
                         <button class="nav-link @if(count($scholarship->user->get_scholarshipexam)==0) bg-warning @elseif($scholarship->confirm_exam==1) bg-success @elseif($scholarship->confirm_exam==0) bg-danger @endif" id="exam-tab" data-toggle="tab" data-target="#exam" type="button" role="tab" aria-controls="exam" aria-selected="false">آزمون</button>
                     </li>
                     @if($scholarship->confirm_webinar==1 && $scholarship->confirm_exam==1)
                         <li class="nav-item" role="certificate">
-                            <button class="nav-link" id="certificate-tab" data-toggle="tab" data-target="#certificate" type="button" role="tab" aria-controls="certificate" aria-selected="false">مدرک</button>
+                            <button class="nav-link" id="certificate-tab" data-toggle="tab" data-target="#certificate" type="button" role="tab" aria-controls="certificate" aria-selected="false">گواهینامه</button>
                         </li>
                     @endif
                     <li class="nav-item" role="introductionLetter">
@@ -150,102 +150,14 @@
                     </div>
 
                     <div class="tab-pane fade " id="introductionLetter" role="tabpanel" aria-labelledby="introductionLetter-tab">
-                        @if(is_null($scholarship->introductionletter))
-                            <div class="alert alert-warning">
-                                کاربر معرفی نامه ارسال نکرده است
-                            </div>
-                        @else
-                            <div class="alert alert-success">
-                                کاربر معرفی نامه ارسال کرده است
-                                <a href="{{'/documents/scholarship/'.$scholarship->introductionletter}}" class="btn btn-primary">دانلود</a>
-                            </div>
-                        @endif
-
-                        <form method="post" action="/admin/scholarship/{{$scholarship->id}}/score_store">
-                            {{csrf_field()}}
-                            <div class="row">
-                                <div class="mx-auto col-12 col-md-4 text-center">
-                                    <small class="text-muted">امتیاز بین 0 تا 10</small>
-                                    <div class="input-group ">
-                                        <div class="input-group-prepend">
-                                            <button class="btn btn-outline-secondary" type="submit" id="button-addon1"> امتیاز معرفی نامه</button>
-                                        </div>
-                                        <input type="number" class="form-control" name="score_introductionletter" min="0" max="30" value="{{$scholarship->score_introductionletter}}"  />
-                                    </div>
-                                </div>
-                            </div>
-
-                        </form>
+                        @include('admin.scholarship.introductionLetter')
                     </div>
 
                     <div class="tab-pane fade " id="interview" role="tabpanel" aria-labelledby="interview-tab">
                         @include('admin.scholarship.interview')
                     </div>
                     <div class="tab-pane fade " id="result" role="tabpanel" aria-labelledby="result-tab">
-                        <div class="row">
-                            <div class="col-12 col-md-4 mx-auto">
-                                <table class="table table-striped table-bordered text-center">
-                                    <tr>
-                                        <th class="text-center">عناوین</th>
-                                        <th class="text-center">امتیاز</th>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">رزومه و سوابق</td>
-                                        <td class="text-center">
-                                            @if(is_null($scholarship->score_profile))
-                                                0
-                                            @else
-                                                {{$scholarship->score_profile}}
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">آموزش</td>
-                                        <td class="text-center">
-                                            @if($scholarship->confirm_webinar==1)
-                                                10
-                                            @else
-                                                 0
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">امتیاز معرف</td>
-                                        <td class="text-center">{{$count_scholarshipIntroduce}} </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            آزمون
-                                        </td>
-                                        <td>
-                                            @if(count($scholarship->user->get_scholarshipexam)==0 || $scholarship->user->get_scholarshipexam->last()->score<50)
-                                                0
-                                            @elseif(($scholarship->user->get_scholarshipexam->last()->score) >= 50 && ($scholarship->user->get_scholarshipexam->last()->score) <= 70)
-                                                10
-                                            @elseif(($scholarship->user->get_scholarshipexam->last()->score) > 70)
-                                                20
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            مصاحبه
-                                        </td>
-                                        <td>
-                                            @if(is_null($scholarship->user->get_scholarshipInterview))
-                                                0
-                                            @else
-                                                {{$scholarship->user->get_scholarshipInterview->score}}
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>جمع امتیاز</th>
-                                        <th>{{$result_final}}</th>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
+                        @include('admin.scholarship.result')
                     </div>
 
 

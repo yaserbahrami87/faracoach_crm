@@ -148,7 +148,7 @@
             @if($scholarship->confirm_resume)
                 <input type="file" class="form-control-file" id="exampleFormControlFile1" name="resume">
             @else
-                <a href="{{asset('')}}">دانلود رزومه</a>
+                <a href="{{asset('')}}">نمایش رزومه</a>
             @endif
             <small class="text-muted ">فایل های قابل قبول: PDF , JPG , JPEG , DOC , PNG</small>
             <small class="text-muted d-block">حداکثر حجم فایل: 600 کیلوبایت</small>
@@ -161,9 +161,9 @@
 
     </div>
 
-    @if(count($messages)>0)
+    @if(count($messages->where('type','=','scholarship'))>0)
         <div class="form-group">
-            <label for="comment">توضیحات:</label>
+            <label for="comment">توضیحات: <span class="text-danger">*</span></label>
             <textarea class="form-control" id="comment" rows="3" name="comment"></textarea>
         </div>
 

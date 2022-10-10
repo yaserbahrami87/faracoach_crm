@@ -82,7 +82,7 @@
                 <button class="nav-link active " id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">توضیحات</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link " id="contact-tab" data-toggle="tab" data-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">اطلاعات بورسیه</button>
+                <button class="nav-link " id="contact-tab" data-toggle="tab" data-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">فرم اولیه بورسیه</button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">اطلاعات کاربر</button>
@@ -97,7 +97,7 @@
                 <button class="nav-link" id="exam-tab" data-toggle="tab" data-target="#exam" type="button" role="tab" aria-controls="exam" aria-selected="false">آزمون</button>
             </li>
             <li class="nav-item" role="certificate">
-                <button class="nav-link @if(($scholarship->confirm_webinar==1) && ($scholarship->confirm_exam==1))  @else disabled @endif" id="certificate-tab" data-toggle="tab" data-target="#certificate" type="button" role="tab" aria-controls="certificate" aria-selected="false">مدرک</button>
+                <button class="nav-link @if(($scholarship->confirm_webinar==1) && ($scholarship->confirm_exam==1))  @else disabled @endif" id="certificate-tab" data-toggle="tab" data-target="#certificate" type="button" role="tab" aria-controls="certificate" aria-selected="false">گواهینامه</button>
             </li>
             <li class="nav-item" role="introductionLetter">
                 <button class="nav-link" id="introductionLetter-tab" data-toggle="tab" data-target="#introductionLetter" type="button" role="tab" aria-controls="introductionLetter" aria-selected="false">معرفی نامه</button>
@@ -105,27 +105,27 @@
             <li class="nav-item" role="interview">
                 <button class="nav-link" id="interview-tab" data-toggle="tab" data-target="#interview" type="button" role="tab" aria-controls="interview" aria-selected="false">مصاحبه</button>
             </li>
+            <li class="nav-item" role="result">
+                <button class="nav-link" id="result-tab" data-toggle="tab" data-target="#result" type="button" role="tab" aria-controls="result" aria-selected="false">نتیجه</button>
+            </li>
             <li class="nav-item" role="payment">
                 <button class="nav-link @if(is_null($scholarship->user->get_scholarshipInterview)) disabled @endif" id="payment-tab" data-toggle="tab" data-target="#payment" type="button" role="tab" aria-controls="payment" aria-selected="false">ثبت نام</button>
             </li>
-            <li class="nav-item" role="result">
-                <button class="nav-link disabled" id="result-tab" data-toggle="tab" data-target="#result" type="button" role="tab" aria-controls="result" aria-selected="false">نتیجه</button>
-            </li>
+
 
         </ul>
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                 <h3 class="d-block text-dark text-center" style="line-height: 2">طرح اعطای بورسیه کوچینگ آکادمی بین المللی فراکوچ</h3>
                 <div class="card">
-                    <div class="card-body shadow shadow-sm">
+                    <div class="card-body shadow shadow-sm text-center">
                         <p style="line-height: 2" class="text-center">شناسایی و دعوت از افراد نخبه و با استعداد جهت حضور ویژه</p>
                         <p style="line-height: 2;text-align: justify">آکادمی بین المللی فراکوچ فرصت بی نظیری را به منظور ورود و پیوستن جمع بیشتری از افراد مستعد ، نخبه و فرهیخته جامعه - به ویژه اساتید ،  پژوهشگران، اندیشمندان، مدیران و دانشجویان برتر - به دنیای حرفه ای کوچینگ از طریق ایجاد شرایط ویژه حضور آنان در دوره های آموزش و تربیت کوچ حرفه ای ، فراهم کرده است.</p>
-
+                        <b class="d-block mb-2">نمونه مدرک </b>
+                        <img src="{{asset('/images/ICF_scholarship_example.jpg')}}" class="text-center" />
                     </div>
                 </div>
                 <button class="btn btn-primary" id="contact-tab2" onclick="document.getElementById('contact-tab').click()">مرحله بعد</button>
-
-
 
             </div>
             <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
@@ -178,7 +178,7 @@
             </div>
             <div class="tab-pane fade " id="result" role="tabpanel" aria-labelledby="result-tab">
                 <div class="card-body" >
-
+                    @include('user.scholarship.result')
                 </div>
 
             </div>

@@ -458,7 +458,11 @@
                 تبریک شما در آزمون مقدماتی بورسیه کوچینگ قبول شده اید
             </div>
             @foreach($scholarship->user->get_scholarshipExam as $item)
-                <div class="alert alert-warning">نمره کسب شده در آزمون {{$item->score}}</div>
+                @if($loop->iteration==1)
+                   <div class="alert alert-warning">نمره کسب شده در آزمون نوبت اول : {{$item->score}}</div>
+                @elseif($loop->iteration==2)
+                    <div class="alert alert-warning">نمره کسب شده در آزمون نوبت دوم : {{$item->score}}</div>
+                @endif
             @endforeach
         @else
             <div class="alert alert-danger">

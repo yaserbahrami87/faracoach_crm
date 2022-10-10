@@ -147,6 +147,7 @@ class ScholarshipController extends BaseController
 
     public function show(scholarship  $scholarship)
     {
+
         $states=$this->states();
         $city=$this->city($scholarship->user->city);
         $scholarship->types=explode(',' ,$scholarship->types);
@@ -156,7 +157,8 @@ class ScholarshipController extends BaseController
                                 $query->orwhere('user_id_send','=',$id)
                                     ->orwhere('user_id_recieve','=',$id);
                             })
-                            ->where('type','=','scholarship')
+                            ->orwhere('type','=','scholarship')
+                            ->orwhere('type','=','scholarship_introductionletter')
                             ->orderby('id','desc')
                             ->get();
 
@@ -235,6 +237,8 @@ class ScholarshipController extends BaseController
         {
             $result_final=$result_final+$scholarship->user->get_scholarshipInterview->score;
         }
+
+        $result_final=$result_final+$scholarship->score_introductionletter;
 
 
 
@@ -458,7 +462,8 @@ class ScholarshipController extends BaseController
                 $query->orwhere('user_id_send','=',Auth::user()->id)
                     ->orwhere('user_id_recieve','=',Auth::user()->id);
             })
-                ->where('type','=','scholarship')
+                ->orwhere('type','=','scholarship')
+                ->orwhere('type','=','scholarship_introductionletter')
                 ->orderby('id','desc')
                 ->get();
 
@@ -577,6 +582,13 @@ class ScholarshipController extends BaseController
                 $result_final=$result_final+$scholarship->user->get_scholarshipInterview->score;
             }
 
+            $result_final=$result_final+$scholarship->score_introductionletter;
+
+
+
+
+
+
             return  view('user.scholarship.profile')
                         ->with('messages',$messages)
                         ->with('states',$states)
@@ -587,6 +599,7 @@ class ScholarshipController extends BaseController
                         ->with('getFollowbyCategory',$getFollowbyCategory)
                         ->with('courses',$courses)
                         ->with('result_final',$result_final)
+                        ->with('count_scholarshipIntroduce',$count_scholarshipIntroduce)
                         ->with('scholarship',$scholarship);
         }
     }
@@ -660,6 +673,38 @@ class ScholarshipController extends BaseController
         }
         return back();
 
+    }
+
+    //جواب معرفی نامه
+    public function answerstatus_introduction(Request $request)
+    {
+        $this->validate($request,[
+            'comment'       =>'required|string',
+        ]);
+
+        $scholarship=scholarship::where('user_id','=',Auth::user()->id)
+            ->first();
+
+        $status=message::create([
+            'user_id_send'      =>Auth::user()->id,
+            'comment'           =>$request->comment,
+            'user_id_recieve'   =>$scholarship->user->id,
+            'type'              =>'scholarship_introductionletter',
+            'date_fa'           =>$this->dateNow,
+            'time_fa'           =>$this->timeNow,
+        ]);
+
+        if($status)
+        {
+            $msg=Auth::user()->fname.' '.Auth::user()->lname."\n معرفی نامه را اصلاح کرد";
+            $this->sendSms("09153159020",$msg);
+            alert()->success('اطلاعات با موفقیت ثبت شد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در ثبت اطلاعات')->persistent('بستن');
+        }
+        return back();
     }
 
     public function exportExcel()
@@ -869,5 +914,103 @@ class ScholarshipController extends BaseController
         $scholarship->update($request->all());
         alert()->success('امتیاز با موفقیت ثبت شد')->persistent('بستن');
         return back();
+    }
+
+    public  function changestatusIntroductionLetter(Request $request,scholarship $scholarship)
+    {
+
+        $this->validate($request, [
+            'confirm_introductionletter' => 'required|numeric',
+            'comment' => 'required|string',
+        ]);
+
+
+
+        $scholarship->confirm_introductionletter = $request->confirm_introductionletter;
+        $scholarship->save();
+        $status = message::create([
+            'user_id_send' => Auth::user()->id,
+            'comment' => $request->comment,
+            'user_id_recieve' => $scholarship->user->id,
+            'type' => 'scholarship_introductionletter',
+            'date_fa' => $this->dateNow,
+            'time_fa' => $this->timeNow,
+        ]);
+
+        switch ($request->confirm_introductionletter)
+        {
+            case(1):$status_scholarship= 'قبول';
+                break;
+            case(2):$status_scholarship ='رد معرفی نامه';
+                break;
+            case(3):$status_scholarship='در حال بررسی';
+                break;
+            case(4):$status_scholarship='اصلاح معرفی نامه';
+                break;
+
+        }
+
+
+        if($request->status==1)
+        {
+            $msg=$scholarship->user->fname." ".$scholarship->user->lname." عزیز \n معرفی نامه شما تائید شد\n";
+        }
+        else
+        {
+            $msg="نتیجه معرفی نامه شما:".$status_scholarship."\n برای آگاهی بیشتر به پورتال فراکوچ مراجعه کنید";
+        }
+        $this->sendSms($scholarship->user->tel,$msg);
+
+
+
+        if($status)
+        {
+            alert()->success('اطلاعات با موفقیت ثبت شد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در ثبت اطلاعات')->persistent('بستن');
+        }
+
+        return back();
+    }
+
+    public function sendSMSIntroduce(Request $request)
+    {
+
+        $this->validate($request,
+        [
+            'sendSMSIntroduce'  =>'required|array',
+            'exampleSendSms'    =>'required|numeric|in:1,2',
+        ]);
+
+        foreach ($request->sendSMSIntroduce as $item)
+        {
+            $user=User::where('id','=',$item)
+                        ->first();
+            if($request->exampleSendSms==1)
+            {
+                Auth::user()->tel=(str_replace("+98",0,Auth::user()->tel));
+                $sms=$user->fname.' '.$user->lname." عزیز\n".Auth::user()->fname.' '.Auth::user()->lname." شما را واجد شرایط دانسته، برای بورسیه کوچینگ آکادمی فراکوچ معرفی نمود\n"."پیشنهاد میکنم این فرصت بینظیر را از دست ندهید."." \nfaracoach.com/scholaship";
+
+            }
+            elseif($request->exampleSendSms==2)
+            {
+                Auth::user()->tel=(str_replace("+98",0,Auth::user()->tel));
+                $sms= $user->fname." ".$user->lname." عزیز\n".
+                    "من ".Auth::user()->fname.' '.Auth::user()->lname.
+                    "\nشما را واجد شرایط دانسته و برای بورسیه کوچینگ آکادمی فراکوچ معرفی نمودم ".
+                    "\nبرای اطلاعات بیشتر با من تماس بگیرید\n".
+                    Auth::user()->tel."\n".
+                    "faracoach.com/scholarship";
+            }
+
+            $this->sendSms($user->tel,$sms);
+        }
+
+        alert()->success('پیامها برای افراد مشخص شده ارسال شد')->persistent('بستن');
+        return back();
+
+
     }
 }

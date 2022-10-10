@@ -479,7 +479,7 @@
                 <small class="text-muted">امتیاز بین 0 تا 30</small>
                 <div class="input-group ">
                     <div class="input-group-prepend">
-                        <button class="btn btn-outline-secondary" type="submit" id="button-addon1"> امتیاز رزومه و سوابق</button>
+                        <button class="btn btn-outline-secondary" type="submit" id="button-addon1"> درج امتیاز رزومه و سوابق</button>
                     </div>
                     <input type="number" class="form-control" name="score_profile" min="0" max="30" value="{{$scholarship->score_profile}}"  />
                 </div>

@@ -95,6 +95,9 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     Route::post('/scholarship/addintroduced','UserController@addIntroducedUser_Scholarship');
     Route::post('/scholarship/store_webinarCode','RecievecodeusersController@store_webinarCode');
     Route::post('/scholarship/introductionletter','ScholarshipController@introductionletter');
+    Route::post('/scholarship/introduction/answerstatus_introduction','ScholarshipController@answerstatus_introduction');
+    Route::post('/scholarship/me/sendSMSIntroduce','ScholarshipController@sendSMSIntroduce');
+
 
     //Scholarship Exam
     Route::get('/scholarship/exam/create','ScholarshipExamController@create');
@@ -232,6 +235,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::get('/scholarship/exam_accept','ScholarshipController@exam_accept');
     Route::get('/scholarship/dont_prticipate_in_the_exam','ScholarshipController@dontParticipateIntheExam');
     Route::post('/scholarship/{scholarship}/score_store','ScholarshipController@scoreStore');
+    Route::post('/scholarship/{scholarship}/changestatusIntroductionLetter','ScholarshipController@changestatusIntroductionLetter');
     Route::resource('scholarship','ScholarshipController');
 
     //Route Scholarship Interview

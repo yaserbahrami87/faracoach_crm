@@ -52,10 +52,10 @@
                     </ul>
                 </li>
             @endif
-            <li class=" nav-item"><a href="#"><span class="menu-title" >بورسیه </span></a>
-                <ul class="menu-content">
-                    <li><a href="/panel/scholarship/me"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >نمایش درخواست</span></a></li>
-                </ul>
+            <li class="nav-item">
+                <a href="/panel/scholarship/me">
+                    <span class="menu-title" >بورسیه </span>
+                </a>
             </li>
             <li class="nav-item has-sub"><a href="#"><span class="menu-title" >مالی</span></a>
                 <ul class="menu-content">

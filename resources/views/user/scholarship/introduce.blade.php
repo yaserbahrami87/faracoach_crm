@@ -4,7 +4,7 @@
             <p>یکی از مهمترین اهداف طرح بورسیه کوچینگ، شناسایی افراد اثرگذار، مستعد و نخبه جامعه و تسهیل فضای آموزش حرفه ای برای این افراد است. </p>
             <p>لذا با توجه به اینکه ظرفیت اطلاع رسانی ما محدود است، از شما درخواست میکنیم که دوستان واجد شرایط خود را به این برنامه دعوت کنید و طبعا ما نیز از این اقدام شما قدردانی مینماییم.</p>
 
-            <p>چنانچه  فردی که معرفی میکنید و یا از طریق لینک شما  ثبت نام نموده است، تمام مراحل را با  موفقیت  طی کند (مثلا 50 امتیاز کسب کند) ، 10 درصد از امتیاز بورسیه آنها به امتیاز بورسیه  شما <span class="text-danger">اضافه</span> میگردد.</p>
+            <p>چنانچه  فردی که معرفی میکنید و یا از طریق لینک شما  ثبت نام نموده است، تمام مراحل را با  موفقیت  طی کند (مثلا 50 امتیاز کسب کند) ،<span class="text-danger">10 درصد از امتیاز بورسیه آنها به امتیاز بورسیه  شما اضافه میگردد.</span> </p>
         </div>
     </div>
     <p>استفاده از امتیاز معرفی دو روش دارد:</p>
@@ -164,43 +164,85 @@
 
 
 <b >لیست افرادی که شما معرفی کرده اید:</b>
-<table class="table text-center mt-1">
-    <tr>
-        <td>ردیف</td>
-        <td></td>
-        <td>نام و نام خانوادگی</td>
-        <td>تلفن</td>
-        <td>آخرین ورود</td>
-        <td>امتیاز بورسیه</td>
-        <td>امتیاز شما</td>
-
-    </tr>
-    @foreach($scholarship->user->get_invitations->where('resource','=','بورسیه تحصیلی') as $item)
+<form method="post" action="/panel/scholarship/me/sendSMSIntroduce">
+    {{csrf_field()}}
+    <table class="table text-center mt-1">
         <tr>
-            <td>{{$loop->iteration}}</td>
-            <td>
-                @if(is_null($item->personal_image))
-                    <img class="rounded" src="{{asset('/documents/users/default-avatar.png')}}" width="50px" height="50px" />
-                @else
-                    <img class="rounded" src="{{asset('/documnts/users/'.$item->personal_image)}}" width="50px" height="50px" />
-                @endif
-            </td>
-            <td>{{$item->fname.' '.$item->lname }}</td>
-            <td dir="ltr">{{$item->tel}}</td>
-            <td dir="ltr">-</td>
-            <td dir="ltr">-</td>
-        </tr>
-    @endforeach
-    @for($i=(count($scholarship->user->get_invitations->where('resource','=','بورسیه تحصیلی'))+1);$i<=5;$i++)
-        <tr>
-            <td>{{$i}}</td>
-            <td>
-                <img class="rounded" src="{{asset('/documents/users/default-avatar.png')}}" width="50px" height="50px" />
-            </td>
+            <td>ردیف</td>
             <td></td>
-            <td dir="ltr"></td>
-            <td dir="ltr">-</td>
-            <td dir="ltr">-</td>
+            <td>نام و نام خانوادگی</td>
+            <td>تلفن</td>
+            <td>آخرین ورود</td>
+            <td>امتیاز شما</td>
+
         </tr>
-    @endfor
-</table>
+        @foreach($scholarship->user->get_invitations->where('resource','=','بورسیه تحصیلی') as $item)
+            <tr>
+                <td>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="{{$item->id}}" id="sendSMS{{$loop->iteration}}" name="sendSMSIntroduce[]">
+                        <label class="form-check-label" for="sendSMS{{$loop->iteration}}">{{$loop->iteration}}</label>
+                    </div>
+
+                </td>
+                <td>
+                    @if(is_null($item->personal_image))
+                        <img class="rounded" src="{{asset('/documents/users/default-avatar.png')}}" width="50px" height="50px" for="sendSMS{{$loop->iteration}}" />
+                    @else
+                        <img class="rounded" src="{{asset('/documnts/users/'.$item->personal_image)}}" width="50px" height="50px" for="sendSMS{{$loop->iteration}}"  />
+                    @endif
+                </td>
+                <td>{{$item->fname.' '.$item->lname }}</td>
+                <td dir="ltr">{{$item->tel}}</td>
+                <td dir="ltr">{{$item->last_login_at}}</td>
+                <td dir="ltr">
+                    @if(is_null($item->scholarship))
+                        0
+                    @else
+                        4
+                    @endif
+                </td>
+            </tr>
+        @endforeach
+        @for($i=(count($scholarship->user->get_invitations->where('resource','=','بورسیه تحصیلی'))+1);$i<=5;$i++)
+            <tr>
+                <td>{{$i}}</td>
+                <td>
+                    <img class="rounded" src="{{asset('/documents/users/default-avatar.png')}}" width="50px" height="50px" />
+                </td>
+                <td></td>
+                <td dir="ltr"></td>
+                <td dir="ltr">-</td>
+                <td dir="ltr">-</td>
+            </tr>
+        @endfor
+    </table>
+
+
+    <div class="col-md-4 mx-auto">
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleSendSms" id="exampleSendSMS1" value="1" checked>
+                <label class="form-check-label" for="exampleSendSMS1">
+                    {نام و نام خانوادگی} عزیز<br/>
+                    من {{Auth::user()->fname.' '.Auth::user()->lname}} شما را واجد شرایط دانسته، برای بورسیه کوچینگ آکادمی فراکوچ معرفی نمودم
+                    پیشنهاد میکنم این فرصت بینظیر را از دست ندهید.
+                    faracoach.com/scholaship
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleSendSms" id="exampleSendSMS2" value="2" checked>
+                <label class="form-check-label" for="exampleSendSMS2">
+                    {نام و نام خانودگی} عزیز<br/>
+                    من {{Auth::user()->fname.' '.Auth::user()->lname}} ، شما را واجدشرایط دانسته و برای بورسیه کوچینگ آکادمی فراکوچ معرفی نمودم
+                    <br/>
+                    برای اطلاعات بیشتر با من تماس بگیرید <br/>
+                    {{Auth::user()->tel}}<br/>
+                    faracoach.com/scholarship
+                </label>
+            </div>
+
+            <input type="submit" class="btn btn-success" value="ارسال پیامک" />
+
+    </div>
+</form>
