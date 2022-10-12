@@ -85,7 +85,7 @@ class ScholarshipInterviewController extends BaseController
             $countInvitation=$user->get_invitations->where('created_at','>','2022-07-20 00:00:00')->where('resource','=','بورسیه تحصیلی')->count();
 
 //            $msg=$user->fname." ".$user->lname." عزیز\n"." شما ".$data['score']." امتیاز در مصاحبه بورسیه کوچینگ کسب کردید "."\n فراکوچ";         "$user->fname $user->lname عزیز ";
-            $msg=$user->fname." ".$user->lname." عزیز\n"." شما ".$data['score']." امتیاز مصاحبه شما ثبت شد. "."\n مشاهده در my.faracoach.com\n"."\nمعرفی نامه: $introductionletter \nتعداد معرفی:$countInvitation \n مرحله پایانی:\n دریافت گواهینامه\nثبت نام دوره";
+            $msg=$user->fname." ".$user->lname." عزیز\n"." امتیاز مصاحبه شما ثبت شد. "."\n مشاهده در my.faracoach.com\n"."\nمعرفی نامه: $introductionletter \nتعداد معرفی:$countInvitation \n مرحله پایانی:\n دریافت گواهینامه\nثبت نام دوره";
             $this->sendSms($user->tel,$msg);
             alert()->success('مصاحبه با موفقیت ثبت شد')->persistent('بستن');
         }
