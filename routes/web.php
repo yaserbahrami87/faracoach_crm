@@ -469,11 +469,10 @@ Route::get('/verify/active/tel', 'VerifyController@store_landings');
 Route::get('/verify/active/tel/check/{code}','VerifyController@checkCode_landings');
 
 // Landing Page
-Route::get('/landingPage','landingController@index');
+//Route::get('/landingPage','landingController@index');
+//Route::post('/landing/store','landingController@store_landing_gift');
+//Route::get('/showPackageDownload', 'landingController@showPackageDownload')->name('freePackageLanding');
 
-Route::post('/landing/store','landingController@store_landing_gift');
-
-Route::get('/showPackageDownload', 'landingController@showPackageDownload')->name('freePackageLanding');
 Route::get('/password/sendcode','VerifyController@sendResetCode');
 Route::post('/password/reset/update','VerifyController@checkResetCode');
 
@@ -529,7 +528,6 @@ Route::get('/booking/createajax','BookingController@createAjax');
 Route::get('/booking/showformreserve','BookingController@showFormReserve');
 Route::post('/booking/mohasebe','ReserveController@mohasebe');
 Route::resource('booking','BookingController');
-
 
 
 

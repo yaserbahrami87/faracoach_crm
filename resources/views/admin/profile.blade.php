@@ -29,7 +29,11 @@
                             <div class="media-body border border-1 p-1  shadow-lg">
                                 <div class="row ">
                                     <div class="col-12 col-md-12 col-sm-12 col-xl-12 col-lg-12 text-center mb-2 ">
-                                        <img src="{{asset('/documents/users/'.$user->personal_image)}}" class="border-2 border rounded-circle" width="124px" height="124px" />
+                                        @if(is_null($user->personal_image))
+                                            <img src="{{asset('/documents/users/default-avatar.png')}}" class="border-2 border rounded-circle" width="124px" height="124px" />
+                                        @else
+                                            <img src="{{asset('/documents/users/'.$user->personal_image)}}" class="border-2 border rounded-circle" width="124px" height="124px" />
+                                        @endif
                                     </div>
                                     <div class="col-12 col-md-12 col-sm-12 col-xl-12 col-lg-12 text-center">
                                         <h5 class="mt-0">{{$user->fname." ".$user->lname}}</h5>
