@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f3849cf8-ae8a-47cc-891c-72c8c9af69d2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipPaymentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipPaymentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/scholarship_payment.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/scholarship_payment.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/user/scholarship/payment.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/scholarship/payment.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -198,7 +195,7 @@
       <workItem from="1665430724569" duration="1188000" />
       <workItem from="1665468158824" duration="6615000" />
       <workItem from="1665556303926" duration="12928000" />
-      <workItem from="1665645690983" duration="6519000" />
+      <workItem from="1665645690983" duration="8516000" />
     </task>
     <servers />
   </component>
