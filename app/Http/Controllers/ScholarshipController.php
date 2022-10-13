@@ -443,7 +443,6 @@ class ScholarshipController extends BaseController
     //نمایش صفحه برای خود کاربر
     public function me()
     {
-
         $scholarship=scholarship::where('user_id','=',Auth::user()->id)
                     ->first();
         if(is_null($scholarship))

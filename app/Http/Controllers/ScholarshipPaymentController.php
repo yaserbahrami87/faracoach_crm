@@ -100,24 +100,29 @@ class ScholarshipPaymentController extends BaseController
             $result_final=$result_final+Auth::user()->get_scholarshipInterview->score;
         }
 
-
         $course=$this->get_coursesByID($request->course_id);
         $fi_off=$course->fi_off;
         $off_percent=10;
-        $gheymat_nahaei=($course->fi_off-($course->fi_off*$off_percent)/100);
-        $boorsieh=($gheymat_nahaei*$result_final)/100;
-        $pardakht=$gheymat_nahaei-$boorsieh;
+        $gheymat_nahaei=($course->fi_off-(($course->fi_off*$result_final)/100));
+
+
+
+
+
+
+//        $boorsieh=($gheymat_nahaei*$result_final)/100;
+//        $pardakht=$gheymat_nahaei-$boorsieh;
         $prepaymant=5000000;
-        $remaining=$pardakht-$prepaymant;
+        $remaining=$gheymat_nahaei-$prepaymant;
+
+
         $scholarship_payment= scholarship_payment::create([
                     'user_id'       =>Auth::user()->id,
                     'course_id'     =>$course->id,
                     'fi'            =>$fi_off,
                     'loan'          =>$off_percent,
-                    'after_loan'    =>$gheymat_nahaei,
                     'score'         =>$result_final,
-                    'fi_scholarship'=>$boorsieh,
-                    'fi_final'      =>$pardakht,
+                    'fi_final'      =>$gheymat_nahaei,
                     'pre_payment'   =>$prepaymant,
                     'remaining'     =>$remaining,
                     'date_fa'       =>$this->dateNow,
