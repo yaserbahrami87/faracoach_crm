@@ -67,7 +67,7 @@
                         <button class="nav-link" id="result-tab" data-toggle="tab" data-target="#result" type="button" role="tab" aria-controls="result" aria-selected="false">نتیجه</button>
                     </li>
                     <li class="nav-item" role="payment">
-                        <button class="nav-link" id="payment-tab" data-toggle="tab" data-target="#payment" type="button" role="tab" aria-controls="payment" aria-selected="false">ثبت نام</button>
+                        <button class="nav-link @if(!is_null($scholarship->financial)) bg-success @endif" id="payment-tab" data-toggle="tab" data-target="#payment" type="button" role="tab" aria-controls="payment" aria-selected="false">ثبت نام</button>
                     </li>
                 </ul>
 
@@ -158,6 +158,9 @@
                     </div>
                     <div class="tab-pane fade " id="result" role="tabpanel" aria-labelledby="result-tab">
                         @include('admin.scholarship.result')
+                    </div>
+                    <div class="tab-pane fade " id="payment" role="tabpanel" aria-labelledby="payment-tab">
+                        @include('admin.scholarship.payment')
                     </div>
 
 

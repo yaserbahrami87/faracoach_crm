@@ -497,6 +497,7 @@ class ScholarshipController extends BaseController
                 $courses=course::where('start','>',$this->dateNow)
                     ->where('id','<>',3)
                     ->where('id','<>',15)
+                    ->where('type','=',$scholarship->user->get_scholarshipInterview->level)
                     ->when($scholarship->user->get_scholarshipInterview->type_holding==1,function($query)use($scholarship)
                     {
                         //حضوری ها در مصاحبه مقدار 1 دارند در جدول درس 2
