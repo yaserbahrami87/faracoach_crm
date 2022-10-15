@@ -168,10 +168,17 @@
 
             <div class="tab-pane fade " id="interview" role="tabpanel" aria-labelledby="interview-tab">
                 <div class="card-body" >
-                    @if(is_null($scholarship->user->get_scholarshipInterview))
-                        <div class="alert alert-warning">شما هنوز در مصاحبه شرکت نکرده اید</div>
+
+                    @if($scholarship->view_score==1)
+                        @if(is_null($scholarship->user->get_scholarshipInterview))
+                            <div class="alert alert-warning">شما هنوز در مصاحبه شرکت نکرده اید</div>
+                        @else
+                            <div class="alert alert-primary">شما در مصاحبه بورسیه کوچینگ {{$scholarship->user->get_scholarshipInterview->score}} امتیاز کسب کرده اید</div>
+                        @endif
                     @else
-                        <div class="alert alert-primary">شما در مصاحبه بورسیه کوچینگ {{$scholarship->user->get_scholarshipInterview->score}} امتیاز کسب کرده اید</div>
+                        <div class="alert alert-warning">
+                            امتیاز بورسیه شما در سیستم ثبت شد
+                        </div>
                     @endif
                 </div>
 

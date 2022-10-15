@@ -273,9 +273,36 @@ class ScholarshipController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,scholarship $scholarship)
     {
-        //
+        $this->validate($request,[
+            'view_score'    =>'boolean|required',
+        ]);
+
+
+        if($scholarship->update($request->all()))
+        {
+            if($scholarship->confirm_introductionletter==1)
+            {
+                $introductionletter="دارد";
+            }
+            else
+            {
+                $introductionletter="ندارد";
+            }
+
+            $countInvitation=$scholarship->user->get_invitations->where('created_at','>','2022-07-20 00:00:00')->where('resource','=','بورسیه تحصیلی')->count();
+
+            $msg=$scholarship->user->fname." ".$scholarship->user->lname." عزیز\n"." امتیاز مصاحبه شما ثبت شد. "."\n مشاهده در my.faracoach.com\n"."\nمعرفی نامه: $introductionletter \nتعداد معرفی:$countInvitation \n مرحله پایانی:\n دریافت گواهینامه\nثبت نام دوره";
+            $this->sendSms($scholarship->user->tel,$msg);
+            alert()->success('اطلاعات با موفقیت بروزرسانی شد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در بروزرسانی')->persistent('بستن');
+        }
+
+        return back();
     }
 
     /**
@@ -461,10 +488,14 @@ class ScholarshipController extends BaseController
                 $query->orwhere('user_id_send','=',Auth::user()->id)
                     ->orwhere('user_id_recieve','=',Auth::user()->id);
             })
-                ->orwhere('type','=','scholarship')
-                ->orwhere('type','=','scholarship_introductionletter')
-                ->orderby('id','desc')
-                ->get();
+            ->where(function($query)
+            {
+                  $query->orwhere('type','=','scholarship')
+                        ->orwhere('type','=','scholarship_introductionletter');
+            })
+
+            ->orderby('id','desc')
+            ->get();
 
             $states=state::get();
 

@@ -85,5 +85,24 @@
                 <th>{{$result_final}}</th>
             </tr>
         </table>
+
+        <form method="post" action="/admin/scholarship/{{$scholarship->id}}">
+            {{csrf_field()}}
+            {{method_field('PATCH')}}
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">امتیاز برای کاربر</span>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="view_score" id="view_score1" value="1" @if($scholarship->view_score==1) checked  @endif >
+                    <label class="form-check-label" for="view_score1">نمایش دهد</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="view_score" id="view_score0" value="0" @if($scholarship->view_score==0) checked  @endif  />
+                    <label class="form-check-label" for="view_score0">نمایش ندهد</label>
+                </div>
+            </div>
+            <input type="submit" value="ثبت" class="btn btn-primary btn-block mt-1">
+        </form>
     </div>
 </div>

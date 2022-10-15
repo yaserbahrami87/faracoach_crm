@@ -1,3 +1,4 @@
+@if(($scholarship->view_score==1))
 <div class="row">
     <div class="col-12 col-md-4 mx-auto">
         <table class="table table-striped table-bordered text-center">
@@ -87,3 +88,6 @@
         </table>
     </div>
 </div>
+@else
+    <div class="alert alert-warning">امتیازات شما در سیستم ثبت نشده است</div>
+@endif
