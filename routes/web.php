@@ -104,7 +104,10 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     Route::post('/scholarship/exam','ScholarshipExamController@store');
 
     //Scholarship Payment
+    Route::post('/scholarship/ajax_payment','ScholarshipPaymentController@ajax_payment');
     Route::resource('scholarship_payment','ScholarshipPaymentController');
+
+
 
     //Certificates
     Route::get('/level1/certificate','CertificateController@get_certificate1');

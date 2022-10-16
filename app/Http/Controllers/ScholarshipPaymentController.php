@@ -188,4 +188,10 @@ class ScholarshipPaymentController extends BaseController
     {
         //
     }
+
+
+    public function ajax_payment(Request $request)
+    {
+        dd($request);
+    }
 }

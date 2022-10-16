@@ -615,6 +615,7 @@ class ScholarshipController extends BaseController
 
             $result_final=$result_final+$scholarship->score_introductionletter;
 
+            $nextMonth=verta()->addMonth(1)->format('Y/m/d');
 
 
 
@@ -631,6 +632,7 @@ class ScholarshipController extends BaseController
                         ->with('courses',$courses)
                         ->with('result_final',$result_final)
                         ->with('count_scholarshipIntroduce',$count_scholarshipIntroduce)
+                        ->with('nextMonth',$nextMonth)
                         ->with('scholarship',$scholarship);
         }
     }
@@ -1041,7 +1043,7 @@ class ScholarshipController extends BaseController
 
         alert()->success('پیامها برای افراد مشخص شده ارسال شد')->persistent('بستن');
         return back();
-
-
     }
+
+
 }

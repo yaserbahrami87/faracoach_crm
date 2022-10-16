@@ -406,7 +406,30 @@
            );
         };
 
-        //
+        //نمایش جدول پرداخت بورسیه
+
+        /*
+        $('[name="paymentCourse_radio"]').change(function()
+        {
+
+            var loading='<div class="col-12 text-center"><div class="spinner-border text-primary text-center" role="status"><span class="sr-only">Loading...</span></div></div>';
+            $("#show_payment_scholarship").html(loading);
+            var data=$(this).val();
+
+                $.ajax({
+                    type:'POST',
+                    url:"/panel/scholarship/ajax_payment",
+                     data:
+                     {
+                         'id':$(this).val(),
+                         '_token':"{{ csrf_token() }}",
+                     },
+                    success:function(data)
+                    {
+                        $("#show_payment_scholarship").html(data);
+                    }
+                });
+        });*/
 
     </script>
 
