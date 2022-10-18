@@ -94,11 +94,13 @@
                 <button class="nav-link" id="learn-tab" data-toggle="tab" data-target="#learn" type="button" role="tab" aria-controls="learn" aria-selected="false">دوره آموزشی</button>
             </li>
             <li class="nav-item" role="exam">
-                <button class="nav-link" id="exam-tab" data-toggle="tab" data-target="#exam" type="button" role="tab" aria-controls="exam" aria-selected="false">آزمون</button>
+                <button class="nav-link" id="exam-tab" data-toggle="tab" data-target="#exam" type="button" role="tab" aria-controls="exam" aria-selected="false">آزمون و گواهینامه</button>
             </li>
+            <!--
             <li class="nav-item" role="certificate">
                 <button class="nav-link @if(($scholarship->confirm_webinar==1) && ($scholarship->confirm_exam==1))  @else disabled @endif" id="certificate-tab" data-toggle="tab" data-target="#certificate" type="button" role="tab" aria-controls="certificate" aria-selected="false">گواهینامه</button>
             </li>
+            -->
             <li class="nav-item" role="introductionLetter">
                 <button class="nav-link" id="introductionLetter-tab" data-toggle="tab" data-target="#introductionLetter" type="button" role="tab" aria-controls="introductionLetter" aria-selected="false">معرفی نامه</button>
             </li>
@@ -151,7 +153,7 @@
 
             </div>
 
-
+            <!--
             <div class="tab-pane fade " id="certificate" role="tabpanel" aria-labelledby="certificate-tab">
                 <p>برای کسب مدرک ICF بورسیه کوچینگ باید مراحل زیر را طی کنید:</p>
                 <ul>
@@ -164,11 +166,11 @@
                 </div>
 
             </div>
+            -->
 
 
             <div class="tab-pane fade " id="interview" role="tabpanel" aria-labelledby="interview-tab">
                 <div class="card-body" >
-
                     @if($scholarship->view_score==1)
                         @if(is_null($scholarship->user->get_scholarshipInterview))
                             <div class="alert alert-warning">شما هنوز در مصاحبه شرکت نکرده اید</div>

@@ -464,6 +464,19 @@
                     <div class="alert alert-warning">نمره کسب شده در آزمون نوبت دوم : {{$item->score}}</div>
                 @endif
             @endforeach
+
+            @if(($scholarship->confirm_webinar==1) && ($scholarship->confirm_exam==1))
+                <p>برای کسب مدرک ICF بورسیه کوچینگ باید مراحل زیر را طی کنید:</p>
+                <ul>
+                    <li>شرکت در وبینار آموزشی بورسیه کوچینگ و وارد کرد کد های داده شده در بخش آموزش</li>
+                    <li>شرکت در آزمون بورسیه کوچینگ و کسب نمره قبولی در آزمون</li>
+                    <li>وارد کردن نام و نام خانوادگی خود به صورت انگلیسی در قسمت پروفایل</li>
+                </ul>
+                <div class="text-center">
+                        <a href="{{asset('/panel/scholarship/certificate/download')}}" class="btn btn-primary">دانلود گواهینامه</a>
+                </div>
+            @endif
+
         @else
             <div class="alert alert-danger">
                 متاسفانه امتیاز شما در آزمون مقدماتی به حد نصاب ممکن نرسید

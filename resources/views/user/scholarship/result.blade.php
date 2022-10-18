@@ -31,14 +31,6 @@
                 </td>
             </tr>
             <tr>
-                <td class="text-center">امتیاز معرف</td>
-                <td class="text-center">
-                    <button class="btn btn-secondary btn-block" onclick="document.getElementById('introduce-tab').click()">
-                        {{$count_scholarshipIntroduce}}
-                    </button>
-                </td>
-            </tr>
-            <tr>
                 <td>
                     آزمون
                 </td>
@@ -55,19 +47,6 @@
                 </td>
             </tr>
             <tr>
-                <td>معرفی نامه </td>
-                <td>
-                    <button class="btn btn-secondary btn-block" onclick="document.getElementById('introductionLetter-tab').click()">
-
-                        @if(is_null($scholarship->score_introductionletter))
-                            0
-                        @else
-                            {{$scholarship->score_introductionletter}}
-                        @endif
-                    </button>
-                </td>
-            </tr>
-            <tr>
                 <td>
                     مصاحبه
                 </td>
@@ -77,6 +56,27 @@
                             0
                         @else
                             {{$scholarship->user->get_scholarshipInterview->score}}
+                        @endif
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center">امتیاز معرف</td>
+                <td class="text-center">
+                    <button class="btn btn-secondary btn-block" onclick="document.getElementById('introduce-tab').click()">
+                        {{$count_scholarshipIntroduce}}
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>معرفی نامه </td>
+                <td>
+                    <button class="btn btn-secondary btn-block" onclick="document.getElementById('introductionLetter-tab').click()">
+
+                        @if(is_null($scholarship->score_introductionletter))
+                            0
+                        @else
+                            {{$scholarship->score_introductionletter}}
                         @endif
                     </button>
                 </td>

@@ -26,7 +26,7 @@
         <table class="table table-striped  table-bordered text-center">
             <tr>
                 <td colspan="3" class="p-2">اطلاعات دوره</td>
-                <td colspan="5" class="p-2">محاسبه بورسیه</td>
+                <td colspan="7" class="p-2">محاسبه بورسیه</td>
             </tr>
             <tr>
                 <th>عنوان دوره</th>
@@ -38,12 +38,61 @@
                 <th>پیش پرداخت</th>
                 <th>قسط دوم</th>
                 <th>موعد قسط دوم</th>
+                <th>جزئیات</th>
             </tr>
             @if(!is_null($courses))
                 @foreach($courses as $item)
                     <tr>
                         <td class="text-center">
-                            <a href="" data-toggle="modal" data-target="#ModalPaymentCourse{{$item->id}}">{{$item->course}}</a>
+                            {{$item->course}}
+                        </td>
+                        <td class="text-center">
+                            @if($item->type_course==1)
+                                انلاین
+                            @elseif($item->type_course==2)
+                                حضوری
+                            @endif
+
+                        </td>
+                        <td>
+                            {{$item->teacher->fname.' '.$item->teacher->lname}}
+                        </td>
+                        <td class="text-center">
+                            {{number_format($item->fi_off)}}
+                        </td>
+                        <td class="text-center">
+                            {{$result_final}}%
+                        </td>
+                        <td>
+                            @php
+                                $gheymat_nahaei=($item->fi_off-(($item->fi_off*$result_final)/100));
+                            @endphp
+
+                            {{number_format($gheymat_nahaei)}}
+                        </td>
+                        <td class="text-center">
+                            <form method="post" action="/panel/scholarship_payment">
+                                {{csrf_field()}}
+                                <input type="hidden" value="{{$item->id}}" name="course_id" />
+                                <button class="btn btn-primary btn-block">{{number_format(5000000)}} <br/>پرداخت کنید  </button>
+                            </form>
+                        </td>
+                        <td class="text-center">
+                            @php
+                                $pardakht_dovom=$gheymat_nahaei-5000000
+                            @endphp
+                            @if($pardakht_dovom<=0)
+                                @php
+                                    $pardakht_dovom=0;
+                                @endphp
+                            @endif
+                            {{number_format($pardakht_dovom) }}
+                        </td>
+                        <td>
+                            {{$nextMonth}}
+                        </td>
+                        <td>
+                            <a href="" class="btn btn-primary" data-toggle="modal" data-target="#ModalPaymentCourse{{$item->id}}">جزئیات پرداخت</a>
                             <!-- Modal -->
                             <div class="modal fade" id="ModalPaymentCourse{{$item->id}}" tabindex="-1" aria-labelledby="ModalPaymentCourse{{$item->id}}Label" aria-hidden="true">
                                 <div class="modal-dialog">
@@ -97,51 +146,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </td>
-                        <td class="text-center">
-                            @if($item->type_course==1)
-                                انلاین
-                            @elseif($item->type_course==2)
-                                حضوری
-                            @endif
-
-                        </td>
-                        <td>
-                            {{$item->teacher->fname.' '.$item->teacher->lname}}
-                        </td>
-                        <td class="text-center">
-                            {{number_format($item->fi_off)}}
-                        </td>
-                        <td class="text-center">
-                            {{$result_final}}%
-                        </td>
-                        <td>
-                            @php
-                                $gheymat_nahaei=($item->fi_off-(($item->fi_off*$result_final)/100));
-                            @endphp
-
-                            {{number_format($gheymat_nahaei)}}
-                        </td>
-                        <td class="text-center">
-                            <form method="post" action="/panel/scholarship_payment">
-                                {{csrf_field()}}
-                                <input type="hidden" value="{{$item->id}}" name="course_id" />
-                                <button class="btn btn-primary btn-block">{{number_format(5000000)}} <br/>پرداخت کنید  </button>
-                            </form>
-                        </td>
-                        <td class="text-center">
-                            @php
-                                $pardakht_dovom=$gheymat_nahaei-5000000
-                            @endphp
-                            @if($pardakht_dovom<=0)
-                                @php
-                                    $pardakht_dovom=0;
-                                @endphp
-                            @endif
-                            {{number_format($pardakht_dovom) }}
-                        </td>
-                        <td>
-                            {{$nextMonth}}
                         </td>
                     </tr>
                 @endforeach

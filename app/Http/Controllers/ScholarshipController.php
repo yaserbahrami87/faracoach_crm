@@ -157,8 +157,11 @@ class ScholarshipController extends BaseController
                                 $query->orwhere('user_id_send','=',$id)
                                     ->orwhere('user_id_recieve','=',$id);
                             })
-                            ->orwhere('type','=','scholarship')
-                            ->orwhere('type','=','scholarship_introductionletter')
+                            ->where(function($query)
+                            {
+                                $query->orwhere('type','=','scholarship')
+                                    ->orwhere('type','=','scholarship_introductionletter');
+                            })
                             ->orderby('id','desc')
                             ->get();
 
@@ -939,8 +942,33 @@ class ScholarshipController extends BaseController
     //متقتضیان دوره سطح 2
     public function inPerson()
     {
-        $scholarships=scholarship::where('applicant','=',2)
-                    ->get();
+        $scholarships=scholarship::with('scholarship_interviews')
+                                ->where('level','=',2)
+                                ->get();
+        dd($scholarships);
+        $users=[];
+        foreach ($scholarships as $item)
+        {
+            $item->created_at=$this->changeTimestampToShamsi($item->created_at);
+            if(!is_null($item->user->get_scholarshipInterview))
+            {
+                if($item->user->get_scholarshipInterview->level==2)
+                {
+                    array_push($users,$item);
+                }
+
+            }
+        }
+
+        return view('admin.scholarship.users')
+            ->with('scholarships',$users);
+    }
+
+    public function financial()
+    {
+        $scholarships=scholarship::whereNotNull('financial')
+            ->get();
+
         foreach ($scholarships as $item)
         {
             $item->created_at=$this->changeTimestampToShamsi($item->created_at);
