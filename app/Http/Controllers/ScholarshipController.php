@@ -29,10 +29,83 @@ class ScholarshipController extends BaseController
     {
         //$scholarships=scholarship::wherein('status',[0,2,3,4])
         $scholarships=scholarship::get();
-        foreach ($scholarships as $item)
+        foreach ($scholarships as $scholarship)
         {
-            $item->created_at=$this->changeTimestampToShamsi($item->created_at);
+            $scholarship->created_at=$this->changeTimestampToShamsi($scholarship->created_at);
+
+
+
+
+            //امتیاز
+            $count_scholarshipIntroduce=0;
+            foreach ($scholarship->user->get_invitations->where('created_at','>','2022-07-20 00:00:00')->where('resource','=','بورسیه تحصیلی') as $item)
+            {
+                if(!is_null($item->scholarship))
+                {
+                    $count_scholarshipIntroduce++;
+                }
+            }
+
+            $count_scholarshipIntroduce=$count_scholarshipIntroduce*4;
+
+            //جمع امتیازات
+            $result_final=0;
+
+            if(is_null($scholarship->score_profile))
+            {
+                $result_final=$result_final+0;
+            }
+            else
+            {
+                $result_final=$result_final+$scholarship->score_profile;
+
+            }
+
+            if($scholarship->confirm_webinar==1)
+            {
+                $result_final=$result_final+10;
+            }
+            else
+            {
+                $result_final=$result_final+0;
+            }
+
+            $result_final=$result_final+$count_scholarshipIntroduce;
+
+            if(count($scholarship->user->get_scholarshipexam)==0 || $scholarship->user->get_scholarshipexam->last()->score<50)
+            {
+                $result_final=$result_final+0;
+            }
+            elseif(($scholarship->user->get_scholarshipexam->last()->score) >= 50 && ($scholarship->user->get_scholarshipexam->last()->score) <= 70)
+            {
+                $result_final=$result_final+10;
+            }
+            elseif(($scholarship->user->get_scholarshipexam->last()->score) > 70)
+            {
+                $result_final=$result_final+20;
+            }
+
+            if(is_null($scholarship->user->get_scholarshipInterview))
+            {
+                $result_final=$result_final+0;
+            }
+            else
+            {
+                $result_final=$result_final+$scholarship->user->get_scholarshipInterview->score;
+            }
+
+            $scholarship->result_final=$result_final+$scholarship->score_introductionletter;
         }
+
+
+
+
+
+
+
+
+
+
 
 
         return view('admin.scholarship.users')
@@ -974,7 +1047,7 @@ class ScholarshipController extends BaseController
             $item->created_at=$this->changeTimestampToShamsi($item->created_at);
         }
 
-        return view('admin.scholarship.users')
+        return view('admin.scholarship.financial')
             ->with('scholarships',$scholarships);
     }
 

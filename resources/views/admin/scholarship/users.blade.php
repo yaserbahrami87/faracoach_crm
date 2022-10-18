@@ -34,10 +34,9 @@
                                 <th>مسئول پیگیری</th>
                                 <th>تحصیلات</th>
                                 <th>استان</th>
-                                <th >تاریخ آزمون</th>
-                                <th >نتیجه آزمون</th>
                                 <th>معرفی نامه</th>
                                 <th>مصاحبه</th>
+                                <th>امتیاز نهایی</th>
                                 <!--
                                 <th> افراد معرفی شده</th>
                                 <th> افراد ثبت نام بورسیه</th>
@@ -96,16 +95,6 @@
                                             {{$item->user->get_state->name}}
                                         @endif
                                     </td>
-                                    <td class="text-center" dir="ltr" >
-                                        @if(count($item->user->get_scholarshipexam)>0)
-                                            {{($item->user->get_scholarshipexam->last()->date_fa)}}
-                                        @endif
-                                    </td>
-                                    <td class="text-center" dir="ltr" >
-                                        @if(count($item->user->get_scholarshipexam)>0)
-                                            {{($item->user->get_scholarshipexam->last()->score)}}
-                                        @endif
-                                    </td>
                                     <td class="text-center">
                                         @if(!is_null($item->introductionletter))
                                             ارسال شده
@@ -115,6 +104,9 @@
                                         @if(!is_null($item->user->get_scholarshipInterview) )
                                             انجام شده است
                                         @endif
+                                    </td>
+                                    <td class="text-center">
+                                        {{$item->result_final}}
                                     </td>
                                     <!--
                                     <td class="text-center" dir="ltr">

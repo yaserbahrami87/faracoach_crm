@@ -1,6 +1,7 @@
 @if(($scholarship->view_score==1))
 <div class="row">
     <div class="col-12 col-md-4 mx-auto">
+        <div class="alert alert-danger">سقف بورسیه 80% مبلغ دوره می باشد</div>
         <table class="table table-striped table-bordered text-center">
             <tr>
                 <th class="text-center">عناوین</th>
