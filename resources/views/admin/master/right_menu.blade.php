@@ -118,6 +118,7 @@
                     <li><a href="/admin/scholarship/webinar_accept"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" > قبول شده های وبینار</span></a></li>
                     <li><a href="/admin/scholarship/exam_accept"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" > قبول شده های آزمون</span></a></li>
                     <li><a href="/admin/scholarship/dont_prticipate_in_the_exam"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" > شرکت نکرده/قبول نشده آزمون</span></a></li>
+                    <li><a href="/admin/scholarship/inperson"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" > متقاضی دوره حضوری</span></a></li>
                 </ul>
             </li>
             <li class=" nav-item"><a href="#"><span class="menu-title" >پیامک ها</span></a>

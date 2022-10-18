@@ -58,7 +58,7 @@
                                             <div class="container-fluid">
                                                 <div class="row">
                                                     <div class="col-12">
-                                                        <img src="{{$item->image}}" class="img-fluid" />
+                                                        <img src="{{(asset('/images/'.$item->image))}}" class="img-fluid" />
                                                         @php
                                                             $boorsieh=($item->fi_off*$result_final)/100;
                                                         @endphp
@@ -68,12 +68,22 @@
                                                                 <td class="p-2">{{number_format($boorsieh)}} تومان </td>
                                                             </tr>
                                                             <tr>
-                                                                <td class="p-2" >کسر 10% وام صندوق شکوفایی فراکوچ به ارزش</td>
-                                                                <td class="p-2" >{{number_format(($boorsieh*10)/100)  }} تومان </td>
+                                                                @if($result_final<50)
+                                                                    <td class="p-2" >کسر 0% وام صندوق شکوفایی فراکوچ به ارزش</td>
+                                                                    <td class="p-2" >{{number_format(($boorsieh*0)/100)  }} تومان </td>
+                                                                @else
+                                                                    <td class="p-2" >کسر 10% وام صندوق شکوفایی فراکوچ به ارزش</td>
+                                                                    <td class="p-2" >{{number_format(($boorsieh*10)/100)  }} تومان </td>
+                                                                @endif
+
                                                             </tr>
                                                             <tr>
                                                                 <td class="p-2" >مبلغ نهایی تعهد همکاری</td>
-                                                                <td class="p-2" >{{number_format($boorsieh-(($boorsieh*10)/100))}} تومان</td>
+                                                                @if($result_final<50)
+                                                                    <td class="p-2" >{{number_format($boorsieh-(($boorsieh*0)/100))}} تومان</td>
+                                                                @else
+                                                                    <td class="p-2" >{{number_format($boorsieh-(($boorsieh*10)/100))}} تومان</td>
+                                                                @endif
                                                             </tr>
                                                         </table>
                                                     </div>

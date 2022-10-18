@@ -936,6 +936,21 @@ class ScholarshipController extends BaseController
 
     }
 
+    //متقتضیان دوره سطح 2
+    public function inPerson()
+    {
+        $scholarships=scholarship::where('applicant','=',2)
+                    ->get();
+        foreach ($scholarships as $item)
+        {
+            $item->created_at=$this->changeTimestampToShamsi($item->created_at);
+        }
+
+        return view('admin.scholarship.users')
+            ->with('scholarships',$scholarships);
+    }
+
+
     public function scoreStore(Request $request,scholarship $scholarship)
     {
         $this->validate($request,

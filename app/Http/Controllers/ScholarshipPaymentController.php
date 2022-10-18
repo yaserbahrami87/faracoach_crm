@@ -102,7 +102,15 @@ class ScholarshipPaymentController extends BaseController
 
         $course=$this->get_coursesByID($request->course_id);
         $fi_off=$course->fi_off;
-        $off_percent=10;
+        if($result_final<50)
+        {
+            $off_percent=0;
+        }
+        else
+        {
+            $off_percent=10;
+        }
+
         $gheymat_nahaei=($course->fi_off-(($course->fi_off*$result_final)/100));
 
 

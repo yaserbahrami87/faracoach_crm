@@ -5,8 +5,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipPaymentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipPaymentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/master/right_menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/master/right_menu.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/user/scholarship/payment.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/scholarship/payment.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/scholarship/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/scholarship/profile.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -202,7 +202,9 @@
       <workItem from="1665645690983" duration="9708000" />
       <workItem from="1665743713478" duration="8000" />
       <workItem from="1665814002609" duration="17324000" />
-      <workItem from="1665899604568" duration="10232000" />
+      <workItem from="1665899604568" duration="13885000" />
+      <workItem from="1665936146152" duration="93000" />
+      <workItem from="1666075268862" duration="541000" />
     </task>
     <servers />
   </component>
