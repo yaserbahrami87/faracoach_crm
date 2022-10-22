@@ -36,65 +36,65 @@ class ScholarshipController extends BaseController
 
 
 
-            //امتیاز
-            $count_scholarshipIntroduce=0;
-            foreach ($scholarship->user->get_invitations->where('created_at','>','2022-07-20 00:00:00')->where('resource','=','بورسیه تحصیلی') as $item)
-            {
-                if(!is_null($item->scholarship))
-                {
-                    $count_scholarshipIntroduce++;
-                }
-            }
-
-            $count_scholarshipIntroduce=$count_scholarshipIntroduce*4;
-
-            //جمع امتیازات
-            $result_final=0;
-
-            if(is_null($scholarship->score_profile))
-            {
-                $result_final=$result_final+0;
-            }
-            else
-            {
-                $result_final=$result_final+$scholarship->score_profile;
-
-            }
-
-            if($scholarship->confirm_webinar==1)
-            {
-                $result_final=$result_final+10;
-            }
-            else
-            {
-                $result_final=$result_final+0;
-            }
-
-            $result_final=$result_final+$count_scholarshipIntroduce;
-
-            if(count($scholarship->user->get_scholarshipexam)==0 || $scholarship->user->get_scholarshipexam->last()->score<50)
-            {
-                $result_final=$result_final+0;
-            }
-            elseif(($scholarship->user->get_scholarshipexam->last()->score) >= 50 && ($scholarship->user->get_scholarshipexam->last()->score) <= 70)
-            {
-                $result_final=$result_final+10;
-            }
-            elseif(($scholarship->user->get_scholarshipexam->last()->score) > 70)
-            {
-                $result_final=$result_final+20;
-            }
-
-            if(is_null($scholarship->user->get_scholarshipInterview))
-            {
-                $result_final=$result_final+0;
-            }
-            else
-            {
-                $result_final=$result_final+$scholarship->user->get_scholarshipInterview->score;
-            }
-
-            $scholarship->result_final=$result_final+$scholarship->score_introductionletter;
+//            //امتیاز
+//            $count_scholarshipIntroduce=0;
+//            foreach ($scholarship->user->get_invitations->where('created_at','>','2022-07-20 00:00:00')->where('resource','=','بورسیه تحصیلی') as $item)
+//            {
+//                if(!is_null($item->scholarship))
+//                {
+//                    $count_scholarshipIntroduce++;
+//                }
+//            }
+//
+//            $count_scholarshipIntroduce=$count_scholarshipIntroduce*4;
+//
+//            //جمع امتیازات
+//            $result_final=0;
+//
+//            if(is_null($scholarship->score_profile))
+//            {
+//                $result_final=$result_final+0;
+//            }
+//            else
+//            {
+//                $result_final=$result_final+$scholarship->score_profile;
+//
+//            }
+//
+//            if($scholarship->confirm_webinar==1)
+//            {
+//                $result_final=$result_final+10;
+//            }
+//            else
+//            {
+//                $result_final=$result_final+0;
+//            }
+//
+//            $result_final=$result_final+$count_scholarshipIntroduce;
+//
+//            if(count($scholarship->user->get_scholarshipexam)==0 || $scholarship->user->get_scholarshipexam->last()->score<50)
+//            {
+//                $result_final=$result_final+0;
+//            }
+//            elseif(($scholarship->user->get_scholarshipexam->last()->score) >= 50 && ($scholarship->user->get_scholarshipexam->last()->score) <= 70)
+//            {
+//                $result_final=$result_final+10;
+//            }
+//            elseif(($scholarship->user->get_scholarshipexam->last()->score) > 70)
+//            {
+//                $result_final=$result_final+20;
+//            }
+//
+//            if(is_null($scholarship->user->get_scholarshipInterview))
+//            {
+//                $result_final=$result_final+0;
+//            }
+//            else
+//            {
+//                $result_final=$result_final+$scholarship->user->get_scholarshipInterview->score;
+//            }
+//
+//            $scholarship->result_final=$result_final+$scholarship->score_introductionletter;
         }
 
 
@@ -604,6 +604,8 @@ class ScholarshipController extends BaseController
                 $courses=course::where('start','>',$this->dateNow)
                     ->where('id','<>',3)
                     ->where('id','<>',15)
+
+                    //برای این شرط باید لول 2 یا در نظر گرفته بشه
                     ->where('type','=',$scholarship->user->get_scholarshipInterview->level)
                     ->when($scholarship->user->get_scholarshipInterview->type_holding==1,function($query)use($scholarship)
                     {
@@ -1012,30 +1014,6 @@ class ScholarshipController extends BaseController
 
     }
 
-    //متقتضیان دوره سطح 2
-    public function inPerson()
-    {
-        $scholarships=scholarship::with('scholarship_interviews')
-                                ->where('level','=',2)
-                                ->get();
-        dd($scholarships);
-        $users=[];
-        foreach ($scholarships as $item)
-        {
-            $item->created_at=$this->changeTimestampToShamsi($item->created_at);
-            if(!is_null($item->user->get_scholarshipInterview))
-            {
-                if($item->user->get_scholarshipInterview->level==2)
-                {
-                    array_push($users,$item);
-                }
-
-            }
-        }
-
-        return view('admin.scholarship.users')
-            ->with('scholarships',$users);
-    }
 
     public function financial()
     {

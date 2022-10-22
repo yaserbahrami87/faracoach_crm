@@ -40,4 +40,8 @@ class checkout extends Model
         return $this->hasOne('App\scholarship_payment','id','order_id');
     }
 
+    public function scholarship_course()
+    {
+        return $this->belongsTo('App\course','product_id','id');
+    }
 }

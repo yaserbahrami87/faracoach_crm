@@ -21,8 +21,6 @@
                                 <th>نام و نام خانوادگی</th>
                                 <th>تلفن</th>
                                 <th>مسئول پیگیری</th>
-                                <th >تحصیلات</th>
-                                <th >تاریخ ثبت نام</th>
                                 <th >دوره ثبت نامی</th>
                                 <th >کد رهگیری</th>
                             </tr>
@@ -45,16 +43,13 @@
                                         {{$item->user->get_followbyExpert->fname.' '.$item->user->get_followbyExpert->lname}}
                                     @endif
                                 </td>
-                                <td class="text-center" dir="ltr">{{$item->user->education}}</td>
-                                <td class="text-center" dir="ltr">
-                                    @if(!is_null($item->user->state))
-                                        {{$item->user->get_state->name}}
+                                <td class="text-center" dir="ltr" >
+                                    @if(!is_null($item->get_financial))
+                                        {{$item->get_financial->scholarship_course->course}}
                                     @endif
                                 </td>
-                                <td class="text-center" dir="ltr" >
-                                    @if(count($item->user->get_scholarshipexam)>0)
-                                        {{($item->user->get_scholarshipexam->last()->date_fa)}}
-                                    @endif
+                                <td>
+                                    {{$item->financial}}
                                 </td>
                             </tr>
                         @endforeach
