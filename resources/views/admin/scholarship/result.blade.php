@@ -29,14 +29,7 @@
                     </button>
                 </td>
             </tr>
-            <tr>
-                <td class="text-center">امتیاز معرف</td>
-                <td class="text-center">
-                    <button class="btn btn-secondary btn-block" onclick="document.getElementById('introduce-tab').click()">
-                    {{$count_scholarshipIntroduce}}
-                    </button>
-                </td>
-            </tr>
+
             <tr>
                 <td>
                     آزمون
@@ -77,6 +70,14 @@
                         @else
                             {{$scholarship->user->get_scholarshipInterview->score}}
                         @endif
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center">معرفی دوستان</td>
+                <td class="text-center">
+                    <button class="btn btn-secondary btn-block" onclick="document.getElementById('introduce-tab').click()">
+                        {{$count_scholarshipIntroduce}}
                     </button>
                 </td>
             </tr>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\checkout;
 use App\city;
 use App\course;
 use App\followup;
@@ -1017,6 +1018,12 @@ class ScholarshipController extends BaseController
 
     public function financial()
     {
+        $checkouts=checkout::where('status','=',1)
+                    ->where('type','=','scholarship_payment')
+                    ->get();
+
+
+
         $scholarships=scholarship::whereNotNull('financial')
             ->get();
 
@@ -1026,6 +1033,7 @@ class ScholarshipController extends BaseController
         }
 
         return view('admin.scholarship.financial')
+            ->with('checkouts',$checkouts)
             ->with('scholarships',$scholarships);
     }
 

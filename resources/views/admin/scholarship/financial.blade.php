@@ -4,6 +4,15 @@
 @endsection
 
 @section('content')
+    @foreach($checkouts->groupby('product_id') as $item)
+        <div class="col-md-3">
+            <div class="card text-dark border border-3 border-danger  p-1">
+                ثبت نام دوره :{{($item[0]->course->course)}}
+                <p>{{$item->count()}} نفر</p>
+
+            </div>
+        </div>
+    @endforeach
     <div class="col-12">
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
