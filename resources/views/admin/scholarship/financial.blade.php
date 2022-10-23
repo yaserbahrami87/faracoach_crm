@@ -9,7 +9,6 @@
             <div class="card text-dark border border-3 border-danger  p-1">
                 ثبت نام دوره :{{($item[0]->course->course)}}
                 <p>{{$item->count()}} نفر</p>
-
             </div>
         </div>
     @endforeach

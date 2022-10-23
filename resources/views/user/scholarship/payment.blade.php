@@ -22,6 +22,11 @@
 
 
     </div>
+    <div class="col-6 mx-auto text-center">
+        <div class="alert alert-primary">
+            تبریک وام بلاعوض صندوق فراکوچ به شما تعلق گرفته است . جهت اطلاع: این مبلغ از میزان تعهد همکاری شما کسر میگردد.برای اطلاعات بیشتر بر روی جزئیات پرداخت کلیک کنید.
+        </div>
+    </div>
     <div class="col-12 table-responsive">
         <table class="table table-striped  table-bordered text-center">
             <tr>
@@ -34,6 +39,7 @@
                 <th>مدرس</th>
                 <th>مبلغ پایه</th>
                 <th>امتیاز بورسیه</th>
+                <th>ارزش بورسیه</th>
                 <th>سهم پرداخت نقدی</th>
                 <th>پیش پرداخت</th>
                 <th>قسط دوم</th>
@@ -62,6 +68,9 @@
                         </td>
                         <td class="text-center">
                             {{$result_final}}%
+                        </td>
+                        <td>
+                            {{number_format(($item->fi_off*$result_final)/100) }}
                         </td>
                         <td>
                             @php
@@ -119,19 +128,19 @@
                                                             <tr>
                                                                 @if($result_final<50)
                                                                     <td class="p-2" >کسر 0% وام صندوق شکوفایی فراکوچ به ارزش</td>
-                                                                    <td class="p-2" >{{number_format(($boorsieh*0)/100)  }} تومان </td>
+                                                                    <td class="p-2" >{{number_format(($item->fi_off*0)/100)  }} تومان </td>
                                                                 @else
                                                                     <td class="p-2" >کسر 10% وام صندوق شکوفایی فراکوچ به ارزش</td>
-                                                                    <td class="p-2" >{{number_format(($boorsieh*10)/100)  }} تومان </td>
+                                                                    <td class="p-2" >{{number_format(($item->fi_off*10)/100)  }} تومان </td>
                                                                 @endif
 
                                                             </tr>
                                                             <tr>
                                                                 <td class="p-2" >مبلغ نهایی تعهد همکاری</td>
                                                                 @if($result_final<50)
-                                                                    <td class="p-2" >{{number_format($boorsieh-(($boorsieh*0)/100))}} تومان</td>
+                                                                    <td class="p-2" >{{number_format($boorsieh-(($item->fi_off*0)/100))}} تومان</td>
                                                                 @else
-                                                                    <td class="p-2" >{{number_format($boorsieh-(($boorsieh*10)/100))}} تومان</td>
+                                                                    <td class="p-2" >{{number_format($boorsieh-(($item->fi_off*10)/100))}} تومان</td>
                                                                 @endif
                                                             </tr>
                                                         </table>

@@ -199,7 +199,11 @@
                     @if(is_null($item->scholarship))
                         0
                     @else
-                        4
+                        @if($item->scholarship->get_score()>50)
+                            4
+                        @else
+                            0
+                        @endif
                     @endif
                 </td>
             </tr>

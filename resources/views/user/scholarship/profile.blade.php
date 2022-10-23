@@ -113,6 +113,9 @@
             <li class="nav-item" role="payment">
                 <button class="nav-link @if(is_null($scholarship->user->get_scholarshipInterview)) disabled @endif" id="payment-tab" data-toggle="tab" data-target="#payment" type="button" role="tab" aria-controls="payment" aria-selected="false">ثبت نام</button>
             </li>
+            <li class="nav-item" role="support">
+                <button class="nav-link" id="support-tab" data-toggle="tab" data-target="#support" type="button" role="tab" aria-controls="support" aria-selected="false">پشتیبان</button>
+            </li>
 
 
         </ul>
@@ -199,6 +202,9 @@
             </div>
             <div class="tab-pane fade " id="payment" role="tabpanel" aria-labelledby="payment-tab">
                 @include('user.scholarship.payment')
+            </div>
+            <div class="tab-pane fade " id="support" role="tabpanel" aria-labelledby="support-tab">
+                @include('user.scholarship.support')
             </div>
 
 

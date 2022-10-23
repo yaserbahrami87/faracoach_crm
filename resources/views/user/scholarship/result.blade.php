@@ -92,3 +92,5 @@
 @else
     <div class="alert alert-warning">امتیازات شما در سیستم ثبت نشده است</div>
 @endif
+
+

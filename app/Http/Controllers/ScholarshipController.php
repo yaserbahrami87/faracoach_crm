@@ -264,11 +264,15 @@ class ScholarshipController extends BaseController
         {
             if(!is_null($item->scholarship))
             {
-                $count_scholarshipIntroduce++;
+                if($item->scholarship->get_score()>50)
+                {
+                    $count_scholarshipIntroduce=$count_scholarshipIntroduce+4;
+                }
+
             }
         }
 
-        $count_scholarshipIntroduce=$count_scholarshipIntroduce*4;
+//        $count_scholarshipIntroduce=$count_scholarshipIntroduce*4;
 
         //جمع امتیازات
         $result_final=0;
@@ -607,7 +611,15 @@ class ScholarshipController extends BaseController
                     ->where('id','<>',15)
 
                     //برای این شرط باید لول 2 یا در نظر گرفته بشه
-                    ->where('type','=',$scholarship->user->get_scholarshipInterview->level)
+
+                    ->when($scholarship->user->get_scholarshipInterview->level==3,function($query)use($scholarship)
+                    {
+                        $query->where('type','=',1);
+                    })
+                    ->when($scholarship->user->get_scholarshipInterview->level!=3,function($query)use($scholarship)
+                    {
+                        $query->where('type','=',$scholarship->user->get_scholarshipInterview->level);
+                    })
                     ->when($scholarship->user->get_scholarshipInterview->type_holding==1,function($query)use($scholarship)
                     {
                         //حضوری ها در مصاحبه مقدار 1 دارند در جدول درس 2
@@ -640,11 +652,14 @@ class ScholarshipController extends BaseController
             {
                 if(!is_null($item->scholarship))
                 {
-                    $count_scholarshipIntroduce++;
+                    if($item->scholarship->get_score()>50)
+                    {
+                        $count_scholarshipIntroduce=$count_scholarshipIntroduce+4;
+                    }
                 }
             }
 
-            $count_scholarshipIntroduce=$count_scholarshipIntroduce*4;
+//            $count_scholarshipIntroduce=$count_scholarshipIntroduce*4;
 
             //جمع امتیازات
             $result_final=0;
@@ -1001,14 +1016,12 @@ class ScholarshipController extends BaseController
     //شرکت نکرده ها در آزمون
     public function dontParticipateIntheExam()
     {
-
         $scholarships=scholarship::where('confirm_exam','=',0)
             ->get();
         foreach ($scholarships as $item)
         {
             $item->created_at=$this->changeTimestampToShamsi($item->created_at);
         }
-
 
         return view('admin.scholarship.users')
             ->with('scholarships',$scholarships);
@@ -1021,8 +1034,6 @@ class ScholarshipController extends BaseController
         $checkouts=checkout::where('status','=',1)
                     ->where('type','=','scholarship_payment')
                     ->get();
-
-
 
         $scholarships=scholarship::whereNotNull('financial')
             ->get();
@@ -1145,6 +1156,23 @@ class ScholarshipController extends BaseController
 
         alert()->success('پیامها برای افراد مشخص شده ارسال شد')->persistent('بستن');
         return back();
+    }
+
+    public function confirm_webinar(Request $request,scholarship $scholarship)
+    {
+        $scholarship->confirm_webinar=1;
+        $status=$scholarship->save();
+        if($status)
+        {
+            alert()->success('کد دوره آموزشی مورد تایید قرار گرفت')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در تایید کد دوره آموزشی')->persistent('بستن');
+        }
+
+        return back();
+
     }
 
 

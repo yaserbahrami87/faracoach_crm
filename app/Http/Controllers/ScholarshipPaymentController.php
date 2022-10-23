@@ -48,11 +48,14 @@ class ScholarshipPaymentController extends BaseController
         {
             if(!is_null($item->scholarship))
             {
-                $count_scholarshipIntroduce++;
+                if($item->scholarship->get_score()>50)
+                {
+                    $count_scholarshipIntroduce=$count_scholarshipIntroduce+4;
+                }
             }
         }
 
-        $count_scholarshipIntroduce=$count_scholarshipIntroduce*4;
+//        $count_scholarshipIntroduce=$count_scholarshipIntroduce*4;
 
         //جمع امتیازات
         $result_final=0;
@@ -76,6 +79,8 @@ class ScholarshipPaymentController extends BaseController
             $result_final=$result_final+0;
         }
 
+
+
         $result_final=$result_final+$count_scholarshipIntroduce;
 
         if(count(Auth::user()->get_scholarshipexam)==0 || Auth::user()->get_scholarshipexam->last()->score<50)
@@ -91,6 +96,7 @@ class ScholarshipPaymentController extends BaseController
             $result_final=$result_final+20;
         }
 
+
         if(is_null(Auth::user()->get_scholarshipInterview))
         {
             $result_final=$result_final+0;
@@ -99,6 +105,9 @@ class ScholarshipPaymentController extends BaseController
         {
             $result_final=$result_final+Auth::user()->get_scholarshipInterview->score;
         }
+
+
+        $result_final=$result_final+(Auth::user()->scholarship->score_introductionletter);
 
         $course=$this->get_coursesByID($request->course_id);
         $fi_off=$course->fi_off;
