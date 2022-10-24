@@ -126,11 +126,23 @@ class ScholarshipPaymentController extends BaseController
 
 
 
+        if(Auth::user()->scholarship->type_payment==0)
+        {
 
 //        $boorsieh=($gheymat_nahaei*$result_final)/100;
 //        $pardakht=$gheymat_nahaei-$boorsieh;
-        $prepaymant=5000000;
-        $remaining=$gheymat_nahaei-$prepaymant;
+            $prepaymant=500;
+            $remaining=$gheymat_nahaei-$prepaymant;
+            $type_payment=0;
+
+        }
+        else
+        {
+            $prepaymant=350;
+            $remaining=$gheymat_nahaei-$prepaymant;
+            $type_payment=1;
+        }
+
 
 
         $scholarship_payment= scholarship_payment::create([
@@ -142,6 +154,7 @@ class ScholarshipPaymentController extends BaseController
                     'fi_final'      =>$gheymat_nahaei,
                     'pre_payment'   =>$prepaymant,
                     'remaining'     =>$remaining,
+                    'type_payment'  =>$type_payment,
                     'date_fa'       =>$this->dateNow,
                     'time_fa'       =>$this->timeNow,
         ]);

@@ -236,6 +236,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::get('/scholarship/sendSMS_incompleteProfile','ScholarshipController@sendSMS_incompleteProfile');
     Route::get('/scholarship/webinar_accept','ScholarshipController@webinar_accept');
     Route::post('/scholarship/{scholarship}/confirm_webinar','ScholarshipController@confirm_webinar');
+    Route::post('/scholarship/{scholarship}/type_payment','ScholarshipController@type_payment');
     Route::get('/scholarship/exam_accept','ScholarshipController@exam_accept');
     Route::get('/scholarship/dont_prticipate_in_the_exam','ScholarshipController@dontParticipateIntheExam');
     Route::get('/scholarship/financial','ScholarshipController@financial');

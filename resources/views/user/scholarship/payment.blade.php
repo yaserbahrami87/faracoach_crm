@@ -23,147 +23,298 @@
 
     </div>
     <div class="col-6 mx-auto text-center">
-        <div class="alert alert-primary">
-            تبریک وام بلاعوض صندوق فراکوچ به شما تعلق گرفته است . جهت اطلاع: این مبلغ از میزان تعهد همکاری شما کسر میگردد.برای اطلاعات بیشتر بر روی جزئیات پرداخت کلیک کنید.
+        <div class="alert alert-success">
+            تبریک وام بلاعوض صندوق فراکوچ به شما تعلق گرفته است . جهت اطلاع، این مبلغ از میزان تعهد همکاری شما کسر میگردد.برای اطلاعات بیشتر بر روی جزئیات پرداخت کلیک کنید.
         </div>
     </div>
     <div class="col-12 table-responsive">
-        <table class="table table-striped  table-bordered text-center">
-            <tr>
-                <td colspan="3" class="p-2">اطلاعات دوره</td>
-                <td colspan="7" class="p-2">محاسبه بورسیه</td>
-            </tr>
-            <tr>
-                <th>عنوان دوره</th>
-                <th>نحوه برگزاری</th>
-                <th>مدرس</th>
-                <th>مبلغ پایه</th>
-                <th>امتیاز بورسیه</th>
-                <th>ارزش بورسیه</th>
-                <th>سهم پرداخت نقدی</th>
-                <th>پیش پرداخت</th>
-                <th>قسط دوم</th>
-                <th>موعد قسط دوم</th>
-                <th>جزئیات</th>
-            </tr>
-            @if(!is_null($courses))
-                @foreach($courses as $item)
-                    <tr>
-                        <td class="text-center">
-                            {{$item->course}}
-                        </td>
-                        <td class="text-center">
-                            @if($item->type_course==1)
-                                انلاین
-                            @elseif($item->type_course==2)
-                                حضوری
-                            @endif
 
-                        </td>
-                        <td>
-                            {{$item->teacher->fname.' '.$item->teacher->lname}}
-                        </td>
-                        <td class="text-center">
-                            {{number_format($item->fi_off)}}
-                        </td>
-                        <td class="text-center">
-                            {{$result_final}}%
-                        </td>
-                        <td>
-                            {{number_format(($item->fi_off*$result_final)/100) }}
-                        </td>
-                        <td>
-                            @php
-                                $gheymat_nahaei=($item->fi_off-(($item->fi_off*$result_final)/100));
-                            @endphp
+        @if(Auth::user()->scholarship->type_payment==0)
+            <table class="table table-striped  table-bordered text-center">
+                <tr>
+                    <td colspan="3" class="p-2">اطلاعات دوره</td>
+                    <td colspan="7" class="p-2">محاسبه بورسیه</td>
+                </tr>
+                <tr>
+                    <th>عنوان دوره</th>
+                    <th>نحوه برگزاری</th>
+                    <th>مدرس</th>
+                    <th>مبلغ پایه</th>
+                    <th>امتیاز بورسیه</th>
+                    <th>ارزش بورسیه</th>
+                    <th>سهم پرداخت نقدی</th>
+                    <th>پیش پرداخت</th>
+                    <th>قسط دوم</th>
+                    <th>موعد قسط دوم</th>
+                    <th>جزئیات</th>
+                </tr>
+                @if(!is_null($courses))
+                    @foreach($courses as $item)
+                        <tr>
+                            <td class="text-center">
+                                {{$item->course}}
+                            </td>
+                            <td class="text-center">
+                                @if($item->type_course==1)
+                                    انلاین
+                                @elseif($item->type_course==2)
+                                    حضوری
+                                @endif
 
-                            {{number_format($gheymat_nahaei)}}
-                        </td>
-                        <td class="text-center">
-                            <form method="post" action="/panel/scholarship_payment">
-                                {{csrf_field()}}
-                                <input type="hidden" value="{{$item->id}}" name="course_id" />
-                                <button class="btn btn-primary btn-block">{{number_format(5000000)}} <br/>پرداخت کنید  </button>
-                            </form>
-                        </td>
-                        <td class="text-center">
-                            @php
-                                $pardakht_dovom=$gheymat_nahaei-5000000
-                            @endphp
-                            @if($pardakht_dovom<=0)
+                            </td>
+                            <td>
+                                {{$item->teacher->fname.' '.$item->teacher->lname}}
+                            </td>
+                            <td class="text-center">
+                                {{number_format($item->fi_off)}}
+                            </td>
+                            <td class="text-center">
+                                {{$result_final}}%
+                            </td>
+                            <td>
+                                {{number_format(($item->fi_off*$result_final)/100) }}
+                            </td>
+                            <td>
                                 @php
-                                    $pardakht_dovom=0;
+                                    $gheymat_nahaei=($item->fi_off-(($item->fi_off*$result_final)/100));
                                 @endphp
-                            @endif
-                            {{number_format($pardakht_dovom) }}
-                        </td>
-                        <td>
-                            {{$nextMonth}}
-                        </td>
-                        <td>
-                            <a href="" class="btn btn-primary" data-toggle="modal" data-target="#ModalPaymentCourse{{$item->id}}">جزئیات پرداخت</a>
-                            <!-- Modal -->
-                            <div class="modal fade" id="ModalPaymentCourse{{$item->id}}" tabindex="-1" aria-labelledby="ModalPaymentCourse{{$item->id}}Label" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">اطلاعات صندوق شکوفایی</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="container-fluid">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <img src="{{(asset('/images/'.$item->image))}}" class="img-fluid" />
-                                                        @php
-                                                            $boorsieh=($item->fi_off*$result_final)/100;
-                                                        @endphp
-                                                        <table class="table table-bordered">
-                                                            <tr >
-                                                                <td class="p-2">مبلغ تعهد همکاری</td>
-                                                                <td class="p-2">{{number_format($boorsieh)}} تومان </td>
-                                                            </tr>
-                                                            <tr>
-                                                                @if($result_final<50)
-                                                                    <td class="p-2" >کسر 0% وام صندوق شکوفایی فراکوچ به ارزش</td>
-                                                                    <td class="p-2" >{{number_format(($item->fi_off*0)/100)  }} تومان </td>
-                                                                @else
-                                                                    <td class="p-2" >کسر 10% وام صندوق شکوفایی فراکوچ به ارزش</td>
-                                                                    <td class="p-2" >{{number_format(($item->fi_off*10)/100)  }} تومان </td>
-                                                                @endif
 
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="p-2" >مبلغ نهایی تعهد همکاری</td>
-                                                                @if($result_final<50)
-                                                                    <td class="p-2" >{{number_format($boorsieh-(($item->fi_off*0)/100))}} تومان</td>
-                                                                @else
-                                                                    <td class="p-2" >{{number_format($boorsieh-(($item->fi_off*10)/100))}} تومان</td>
-                                                                @endif
-                                                            </tr>
-                                                        </table>
+                                {{number_format($gheymat_nahaei)}}
+                            </td>
+                            <td class="text-center">
+                                <form method="post" action="/panel/scholarship_payment">
+                                    {{csrf_field()}}
+                                    <input type="hidden" value="{{$item->id}}" name="course_id" />
+                                    <button class="btn btn-success btn-block">{{number_format(5000000)}} <br/>پرداخت کنید  </button>
+                                </form>
+                            </td>
+                            <td class="text-center">
+                                @php
+                                    $pardakht_dovom=$gheymat_nahaei-5000000
+                                @endphp
+                                @if($pardakht_dovom<=0)
+                                    @php
+                                        $pardakht_dovom=0;
+                                    @endphp
+                                @endif
+                                {{number_format($pardakht_dovom) }}
+                            </td>
+                            <td>
+                                {{$nextMonth}}
+                            </td>
+                            <td>
+                                <a href="" class="btn btn-primary" data-toggle="modal" data-target="#ModalPaymentCourse{{$item->id}}">جزئیات پرداخت</a>
+                                <!-- Modal -->
+                                <div class="modal fade" id="ModalPaymentCourse{{$item->id}}" tabindex="-1" aria-labelledby="ModalPaymentCourse{{$item->id}}Label" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">اطلاعات صندوق شکوفایی</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="container-fluid">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <img src="{{(asset('/images/'.$item->image))}}" class="img-fluid" />
+                                                            @php
+                                                                $boorsieh=($item->fi_off*$result_final)/100;
+                                                            @endphp
+                                                            <table class="table table-bordered">
+                                                                <tr >
+                                                                    <td class="p-2">مبلغ تعهد همکاری</td>
+                                                                    <td class="p-2">{{number_format($boorsieh)}} تومان </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    @if($result_final<50)
+                                                                        <td class="p-2" >کسر 0% وام صندوق شکوفایی فراکوچ به ارزش</td>
+                                                                        <td class="p-2" >{{number_format(($item->fi_off*0)/100)  }} تومان </td>
+                                                                    @else
+                                                                        <td class="p-2" >کسر 10% وام صندوق شکوفایی فراکوچ به ارزش</td>
+                                                                        <td class="p-2" >{{number_format(($item->fi_off*10)/100)  }} تومان </td>
+                                                                    @endif
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="p-2" >مبلغ نهایی تعهد همکاری</td>
+                                                                    @if($result_final<50)
+                                                                        <td class="p-2" >{{number_format($boorsieh-(($item->fi_off*0)/100))}} تومان</td>
+                                                                    @else
+                                                                        <td class="p-2" >{{number_format($boorsieh-(($item->fi_off*10)/100))}} تومان</td>
+                                                                    @endif
+                                                                </tr>
+                                                            </table>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
 
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </td>
-                    </tr>
-                @endforeach
-            @endif
-        </table>
-    </div>
-    <div class="col-12" id="show_payment_scholarship">
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
+            </table>
+        @else
+            <table class="table table-striped  table-bordered text-center">
+                <tr>
+                    <td colspan="3" class="p-2">اطلاعات دوره</td>
+                    <td colspan="7" class="p-2">محاسبه بورسیه</td>
+                </tr>
+                <tr>
+                    <th>عنوان دوره</th>
+                    <th>نحوه برگزاری</th>
+                    <th>مدرس</th>
+                    <th>مبلغ پایه</th>
+                    <th>امتیاز بورسیه</th>
+                    <th>ارزش بورسیه</th>
+                    <th>سهم پرداخت نقدی</th>
+                    <th>پیش پرداخت</th>
+                    <th>قسط دوم</th>
+                    <th>موعد قسط دوم</th>
+                    <th>قسط سوم</th>
+                    <th>موعد قسط سوم</th>
+                    <th>جزئیات</th>
+                </tr>
+                @if(!is_null($courses))
+                    @foreach($courses as $item)
+                        <tr>
+                            <td class="text-center">
+                                {{$item->course}}
+                            </td>
+                            <td class="text-center">
+                                @if($item->type_course==1)
+                                    انلاین
+                                @elseif($item->type_course==2)
+                                    حضوری
+                                @endif
 
+                            </td>
+                            <td>
+                                {{$item->teacher->fname.' '.$item->teacher->lname}}
+                            </td>
+                            <td class="text-center">
+                                {{number_format($item->fi_off)}}
+                            </td>
+                            <td class="text-center">
+                                {{$result_final}}%
+                            </td>
+                            <td>
+                                {{number_format(($item->fi_off*$result_final)/100) }}
+                            </td>
+                            <td>
+                                @php
+                                    $gheymat_nahaei=($item->fi_off-(($item->fi_off*$result_final)/100));
+                                @endphp
+
+                                {{number_format($gheymat_nahaei)}}
+                            </td>
+                            <td class="text-center">
+                                <form method="post" action="/panel/scholarship_payment">
+                                    {{csrf_field()}}
+                                    <input type="hidden" value="{{$item->id}}" name="course_id" />
+                                    <input type="hidden" value="1" name="type_payment" />
+                                    <button class="btn btn-success btn-block">{{number_format(3500000)}} <br/>پرداخت کنید  </button>
+                                </form>
+                            </td>
+                            <td class="text-center">
+                                @php
+                                    $pardakht_dovom=($gheymat_nahaei-3500000)/2
+                                @endphp
+                                @if($pardakht_dovom<=0)
+                                    @php
+                                        $pardakht_dovom=0;
+                                    @endphp
+                                @endif
+                                {{number_format($pardakht_dovom) }}
+                            </td>
+                            <td>
+                                {{$nextMonth}}
+                            </td>
+                            <td class="text-center">
+                                @php
+                                    $pardakht_dovom=($gheymat_nahaei-3500000)/2
+                                @endphp
+                                @if($pardakht_dovom<=0)
+                                    @php
+                                        $pardakht_dovom=0;
+                                    @endphp
+                                @endif
+                                {{number_format($pardakht_dovom) }}
+                            </td>
+                            <td>
+                                {{$secondMonth}}
+                            </td>
+                            <td>
+                                <a href="" class="btn btn-success" data-toggle="modal" data-target="#ModalPaymentCourse{{$item->id}}">جزئیات پرداخت</a>
+                                <!-- Modal -->
+                                <div class="modal fade" id="ModalPaymentCourse{{$item->id}}" tabindex="-1" aria-labelledby="ModalPaymentCourse{{$item->id}}Label" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">اطلاعات صندوق شکوفایی</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="container-fluid">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <img src="{{(asset('/images/'.$item->image))}}" class="img-fluid" />
+                                                            @php
+                                                                $boorsieh=($item->fi_off*$result_final)/100;
+                                                            @endphp
+                                                            <table class="table table-bordered">
+                                                                <tr >
+                                                                    <td class="p-2">مبلغ تعهد همکاری</td>
+                                                                    <td class="p-2">{{number_format($boorsieh)}} تومان </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    @if($result_final<50)
+                                                                        <td class="p-2" >کسر 0% وام صندوق شکوفایی فراکوچ به ارزش</td>
+                                                                        <td class="p-2" >{{number_format(($item->fi_off*0)/100)  }} تومان </td>
+                                                                    @else
+                                                                        <td class="p-2" >کسر 10% وام صندوق شکوفایی فراکوچ به ارزش</td>
+                                                                        <td class="p-2" >{{number_format(($item->fi_off*10)/100)  }} تومان </td>
+                                                                    @endif
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="p-2" >مبلغ نهایی تعهد همکاری</td>
+                                                                    @if($result_final<50)
+                                                                        <td class="p-2" >{{number_format($boorsieh-(($item->fi_off*0)/100))}} تومان</td>
+                                                                    @else
+                                                                        <td class="p-2" >{{number_format($boorsieh-(($item->fi_off*10)/100))}} تومان</td>
+                                                                    @endif
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
+            </table>
+        @endif
     </div>
+
 
 </div>
 @endif

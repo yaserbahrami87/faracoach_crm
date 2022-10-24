@@ -710,6 +710,15 @@ class ScholarshipController extends BaseController
             $result_final=$result_final+$scholarship->score_introductionletter;
 
             $nextMonth=verta()->addMonth(1)->format('Y/m/d');
+            if($scholarship->type_payment==1)
+            {
+                $secondMonth=verta()->addMonth(2)->format('Y/m/d');
+            }
+            else
+            {
+                $secondMonth=NULL;
+            }
+
 
 
 
@@ -727,9 +736,12 @@ class ScholarshipController extends BaseController
                         ->with('result_final',$result_final)
                         ->with('count_scholarshipIntroduce',$count_scholarshipIntroduce)
                         ->with('nextMonth',$nextMonth)
+                        ->with('secondMonth',$secondMonth)
                         ->with('scholarship',$scholarship);
         }
     }
+
+
 
     public function answerstatus(Request $request)
     {
@@ -1173,6 +1185,26 @@ class ScholarshipController extends BaseController
 
         return back();
 
+    }
+
+    public function type_payment(Request $request,scholarship $scholarship)
+    {
+        $this->validate($request,[
+           'type_payment'   =>'required|boolean'
+        ]);
+
+        $scholarship->type_payment=$request->type_payment;
+        $status=$scholarship->save();
+        if($status)
+        {
+            alert()->success('نحوه پرداخت تغییر کرد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا نحوه پرداخت ')->persistent('بستن');
+        }
+
+        return back();
     }
 
 
