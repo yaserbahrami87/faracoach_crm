@@ -449,9 +449,6 @@ class CheckoutController extends BaseController
                     }
 
 
-
-
-
                     $msg='<p>پرداخت با موفقیت انجام شد</p><p>شماره پیگیری: '.$item->authority.'</p>';
                     $alert='success';
                     return view('callBackCheckout')

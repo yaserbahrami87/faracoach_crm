@@ -131,14 +131,14 @@ class ScholarshipPaymentController extends BaseController
 
 //        $boorsieh=($gheymat_nahaei*$result_final)/100;
 //        $pardakht=$gheymat_nahaei-$boorsieh;
-            $prepaymant=500;
+            $prepaymant=5000000;
             $remaining=$gheymat_nahaei-$prepaymant;
             $type_payment=0;
 
         }
         else
         {
-            $prepaymant=350;
+            $prepaymant=3500000;
             $remaining=$gheymat_nahaei-$prepaymant;
             $type_payment=1;
         }
