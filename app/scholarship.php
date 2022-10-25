@@ -131,8 +131,6 @@ class scholarship extends Model
 
         }
 
-
-
         if($this->confirm_webinar==1)
         {
             $result_final=$result_final+10;

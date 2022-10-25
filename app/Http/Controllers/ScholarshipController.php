@@ -1210,6 +1210,11 @@ class ScholarshipController extends BaseController
     public function report_result()
     {
         $scholarships=scholarship::get();
+        foreach($scholarships as $item)
+        {
+            $item->score=$item->get_score_details();
+        }
+        dd($scholarships);
         return view('admin.scholarship.report_details')
                     ->with('scholarships',$scholarships);
     }
