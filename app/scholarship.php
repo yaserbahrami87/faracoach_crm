@@ -31,12 +31,6 @@ class scholarship extends Model
 
     public function get_score()
     {
-
-//        $this->created_at=$this->changeTimestampToShamsi($this->created_at);
-
-
-
-
         //امتیاز
         $count_scholarshipIntroduce=0;
         foreach ($this->user->get_invitations->where('created_at','>','2022-07-20 00:00:00')->where('resource','=','بورسیه تحصیلی') as $item)
@@ -44,11 +38,14 @@ class scholarship extends Model
 
             if(!is_null($item->scholarship))
             {
-                $count_scholarshipIntroduce++;
+                if($item->scholarship->get_score()>50)
+                {
+                    $count_scholarshipIntroduce=$count_scholarshipIntroduce+4;
+                }
             }
         }
 
-        $count_scholarshipIntroduce=$count_scholarshipIntroduce*4;
+
 
         //جمع امتیازات
         $result_final=0;
@@ -97,6 +94,88 @@ class scholarship extends Model
         }
 
         return ($result_final+$this->score_introductionletter);
+    }
+
+
+    public function get_score_details()
+    {
+        $result=[];
+        //امتیاز
+        $count_scholarshipIntroduce=0;
+        foreach ($this->user->get_invitations->where('created_at','>','2022-07-20 00:00:00')->where('resource','=','بورسیه تحصیلی') as $item)
+        {
+            if(!is_null($item->scholarship))
+            {
+                if($item->scholarship->get_score()>50)
+                {
+                    $count_scholarshipIntroduce=$count_scholarshipIntroduce+4;
+                }
+            }
+        }
+
+
+        $result+=["count_scholarshipIntroduce"=>$count_scholarshipIntroduce];
+
+        //جمع امتیازات
+        $result_final=0;
+
+        if(is_null($this->score_profile))
+        {
+            $result_final=$result_final+0;
+            $result+=["score_profile"=>0];
+        }
+        else
+        {
+            $result_final=$result_final+$this->score_profile;
+            $result+=["score_profile"=>$this->score_profile];
+
+        }
+
+
+
+        if($this->confirm_webinar==1)
+        {
+            $result_final=$result_final+10;
+            $result+=["confirm_webinar"=>10];
+        }
+        else
+        {
+            $result_final=$result_final+0;
+            $result+=["confirm_webinar"=>0];
+        }
+
+        $result_final=$result_final+$count_scholarshipIntroduce;
+
+        if(count($this->user->get_scholarshipexam)==0 || $this->user->get_scholarshipexam->last()->score<50)
+        {
+            $result_final=$result_final+0;
+            $result+=["scholarshipexam"=>0];
+        }
+        elseif(($this->user->get_scholarshipexam->last()->score) >= 50 && ($this->user->get_scholarshipexam->last()->score) <= 70)
+        {
+            $result_final=$result_final+10;
+            $result+=["scholarshipexam"=>10];
+        }
+        elseif(($this->user->get_scholarshipexam->last()->score) > 70)
+        {
+            $result+=["scholarshipexam"=>20];
+            $result_final=$result_final+20;
+        }
+
+        if(is_null($this->user->get_scholarshipInterview))
+        {
+            $result_final=$result_final+0;
+            $result+=["scholarshipInterview"=>0];
+        }
+        else
+        {
+            $result_final=$result_final+$this->user->get_scholarshipInterview->score;
+            $result+=["scholarshipInterview"=>$this->user->get_scholarshipInterview->score];
+        }
+        $result+=["score_introductionletter"=>$this->score_introductionletter];
+        $result_final=$result_final+$this->score_introductionletter;
+        $result+=["result_final"=>$result_final+$this->score_introductionletter];
+        return $result;
     }
 
 

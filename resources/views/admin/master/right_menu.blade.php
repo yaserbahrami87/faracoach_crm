@@ -119,9 +119,9 @@
                     <li><a href="/admin/scholarship/exam_accept"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" > قبول شده های آزمون</span></a></li>
                     <li><a href="/admin/scholarship/dont_prticipate_in_the_exam"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" > شرکت نکرده/قبول نشده آزمون</span></a></li>
                     <li><a href="/admin/scholarship/financial"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" > ثبت نام شده ها</span></a></li>
-                    <!--
-                    <li><a href="/admin/scholarship/inperson"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" > متقاضی دوره حضوری</span></a></li>
-                    -->
+
+                    <li><a href="/admin/scholarship/result/report"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >گزارش امتیاز کاربران</span></a></li>
+
                 </ul>
             </li>
             <li class=" nav-item"><a href="#"><span class="menu-title" >پیامک ها</span></a>

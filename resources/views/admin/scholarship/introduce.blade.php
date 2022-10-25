@@ -24,10 +24,14 @@
             <td dir="ltr">-</td>
             <td dir="ltr">-</td>
             <td dir="ltr">
-                @if(!is_null($item->scholarship))
-                    4
-                @else
+                @if(is_null($item->scholarship))
                     0
+                @else
+                    @if($item->scholarship->get_score()>50)
+                        4
+                    @else
+                        0
+                    @endif
                 @endif
             </td>
         </tr>
