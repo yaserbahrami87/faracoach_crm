@@ -36,7 +36,7 @@
                                 <th>استان</th>
                                 <th>معرفی نامه</th>
                                 <th>مصاحبه</th>
-                                <th>امتیاز نهایی</th>
+
                                 <!--
                                 <th> افراد معرفی شده</th>
                                 <th> افراد ثبت نام بورسیه</th>
@@ -105,9 +105,7 @@
                                             انجام شده است
                                         @endif
                                     </td>
-                                    <td class="text-center">
-                                        {{$item->get_score_details()['result_final']}}
-                                    </td>
+
                                     <!--
                                     <td class="text-center" dir="ltr">
                                         {{--($item->user->get_invitations->where('created_at','>','2022-07-20 00:00:00')->where('resource','=','بورسیه تحصیلی')->count())--}}
