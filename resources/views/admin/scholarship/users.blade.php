@@ -106,7 +106,7 @@
                                         @endif
                                     </td>
                                     <td class="text-center">
-
+                                        {{$item->get_score_details()['result_final']}}
                                     </td>
                                     <!--
                                     <td class="text-center" dir="ltr">

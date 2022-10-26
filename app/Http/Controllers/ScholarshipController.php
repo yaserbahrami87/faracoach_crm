@@ -1214,7 +1214,6 @@ class ScholarshipController extends BaseController
         {
             $item->score=$item->get_score_details();
         }
-        dd($scholarships);
         return view('admin.scholarship.report_details')
                     ->with('scholarships',$scholarships);
     }

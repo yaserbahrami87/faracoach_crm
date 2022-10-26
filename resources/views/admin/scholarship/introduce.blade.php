@@ -27,11 +27,7 @@
                 @if(is_null($item->scholarship))
                     0
                 @else
-                    @if($item->scholarship->get_score()>50)
-                        4
-                    @else
-                        0
-                    @endif
+                    {{floor(($item->scholarship->get_score()*10)/100)}}
                 @endif
             </td>
         </tr>

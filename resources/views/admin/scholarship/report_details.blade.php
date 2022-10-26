@@ -19,6 +19,7 @@
                                 <th>ردیف</th>
                                 <th>نام و نام خانوادگی</th>
                                 <th>تلفن همراه</th>
+                                <th>تحصیلات</th>
                                 <th>امتیاز پروفایل</th>
                                 <th>امتیاز معرف</th>
                                 <th>امتیاز آموزش</th>
@@ -26,42 +27,44 @@
                                 <th>امتیاز معرفی نامه</th>
                                 <th>امتیاز مصاحبه</th>
                                 <th>امتیاز کل</th>
+                                <th>وضعیت نمایش امتیاز</th>
                             </tr>
                         </thead>
 
                         <tbody>
                         @foreach($scholarships as $item)
-
                             <tr>
                                 <td class="text-center">{{$loop->iteration}}</td>
                                 <td class="text-center">
-                                    @if($item->user->created_at>'2022-07-20 00:00:00')
-                                        <span class="text-danger">*</span>
-                                    @endif
                                     <a href="/admin/scholarship/{{$item->id}}" target="_blank">{{$item->user->fname.' '.$item->user->lname}}</a>
 
                                 </td>
                                 <td class="text-center" dir="ltr">{{$item->user->tel}}</td>
-
+                                <td class="text-center" dir="ltr">{{$item->user->education}}</td>
                                 <td class="text-center" dir="ltr">
-                                    {{$item->get_score_details()['score_profile']}}
+                                    {{$item->score['score_profile']}}
                                 </td>
                                 <td class="text-center">
-                                    {{$item->get_score_details()['count_scholarshipIntroduce']}}
+                                    {{$item->score['count_scholarshipIntroduce']}}
                                 </td>
                                 <td class="text-center">
-                                    {{$item->get_score_details()['confirm_webinar']}}
+                                    {{$item->score['confirm_webinar']}}
                                 </td>
                                 <td class="text-center">
-                                    {{$item->get_score_details()['scholarshipexam']}}
+                                    {{$item->score['scholarshipexam']}}
                                 </td>
                                 <td class="text-center">
-                                    {{$item->get_score_details()['score_introductionletter']}}
+                                    {{$item->score['score_introductionletter']}}
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     {{($item->user->get_scholarshipInterview['score'])}}
                                 </td>
-                                <td>{{$item->get_score_details()['result_final']}}</td>
+                                <td class="text-center">{{$item->score['result_final']}}</td>
+                                <td class="text-center">
+                                    @if($item->view_score==1)
+                                        در حال نمایش
+                                    @endif
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>
