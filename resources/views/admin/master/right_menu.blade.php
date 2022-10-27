@@ -33,14 +33,13 @@
                     <li><a href="/admin/reports/allreport"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >گزارش کاربرها</span></a></li>
                 </ul>
             </li>
+            <!--
             <li class=" nav-item has-sub "><a href="#"><span class="menu-title">مدیریت فایل ها</span></a>
                 <ul class="menu-content">
-                    <!--<li><a href="/portal/inbox"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">نامه های وارده</span></a></li>-->
                     <li><a href="/admin/filemanager" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >مشاهده همه فایلها</span></a></li>
                     <li><a href="/admin/documents" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >لیست فایل های آموزشی</span></a></li>
                     <li><a href=" nav-item has-sub "><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >درخواست ها</span></a>
                         <ul class="menu-content">
-                            <!--<li><a href="/portal/coworking_space_request"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" data-i18n="Invoice List">فضای کار اشتراکی</span></a></li>-->
                             <li><a href="#" class="disabled"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >فضای کار اشتراکی</span></a></li>
                             <li><a href="#" class="disabled"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >جلسه منتورینگ و کوچینگ</span></a></li>
                             <li><a href="#" class="disabled"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >گواهینامه و معرفی نامه</span></a></li>
@@ -49,6 +48,7 @@
                     </li>
                 </ul>
             </li>
+            -->
             <li class=" nav-item"><a href="#"><span class="menu-title" >آموزش</span></a>
                 <ul class="menu-content">
                     <li><a href="/admin/education/students" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >لیست دانشجویان</span></a></li>
@@ -61,7 +61,7 @@
                     </li>
                 </ul>
             </li>
-            <li class=" nav-item"><a href="#"><span class="menu-title">مالی</span></a>
+            <li class="nav-item"><a href="#"><span class="menu-title">مالی</span></a>
                 <ul class="menu-content">
                     <li><a href="/admin/checkout" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >پرداختی ها</span></a></li>
                     <li><a href="/admin/faktor/all" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >فاکتورها</span></a></li>
@@ -150,6 +150,7 @@
 
                 </ul>
             </li>
+            <!--
             <li class=" nav-item"><a href="#"><span class="menu-title" >تماس با ما</span></a>
 
                 <ul class="menu-content">
@@ -160,7 +161,7 @@
 
             </li>
             <li class=" nav-item {% if this.page.id == 'panel-faq' %}sidebar-group-active{% endif %}"><a href="/portal/faq"><span class="menu-title" >سوالات متداول</span></a></li>
-            <!--<li class=" nav-item {% if this.page.id == 'panel-coming_soon' %}sidebar-group-active{% endif %}"><a href="/portal/coming_soon"><i class="menu-livicon" data-icon="loader-15"></i><span class="menu-title" data-i18n="Kanban">به زودی</span></a></li>-->
+            <li class=" nav-item {% if this.page.id == 'panel-coming_soon' %}sidebar-group-active{% endif %}"><a href="/portal/coming_soon"><i class="menu-livicon" data-icon="loader-15"></i><span class="menu-title" data-i18n="Kanban">به زودی</span></a></li>-->
         </ul>
     </div>
 </div>

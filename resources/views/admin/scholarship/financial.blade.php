@@ -30,6 +30,13 @@
                                 <th>تلفن</th>
                                 <th>مسئول پیگیری</th>
                                 <th >دوره ثبت نامی</th>
+                                <th>مبلغ دوره</th>
+                                <th>امتیاز اعمال شده</th>
+                                <th>تخفیف فراکوچ</th>
+                                <th>قیمت نهایی</th>
+                                <th>پیش پرداخت</th>
+                                <th>باقیمانده</th>
+                                <th>تاریخ ثبت نام</th>
                                 <th >کد رهگیری</th>
                             </tr>
                         </thead>
@@ -52,13 +59,37 @@
                                     @endif
                                 </td>
                                 <td class="text-center" dir="ltr" >
+
                                     @if(!is_null($item->get_financial))
                                         {{$item->get_financial->scholarship_course->course}}
                                     @endif
                                 </td>
-                                <td>
+                                <td class="text-center" >
+                                    {{number_format($item->get_financial->schoalrshipPayment->fi)}}
+                                </td>
+                                <td class="text-center" >
+                                    {{($item->get_financial->schoalrshipPayment->score)}}
+                                </td>
+                                <td class="text-center" >
+                                    {{($item->get_financial->schoalrshipPayment->loan)}}
+                                </td>
+
+                                <td class="text-center">
+                                    {{number_format($item->get_financial->schoalrshipPayment->fi_final)}}
+                                </td>
+                                <td class="text-center">
+                                    {{($item->get_financial->schoalrshipPayment->pre_payment)}}
+                                </td>
+                                <td class="text-center">
+                                    {{number_format($item->get_financial->schoalrshipPayment->remaining)}}
+                                </td>
+                                <td class="text-center">
+                                    {{($item->get_financial->schoalrshipPayment->date_fa)}}
+                                </td>
+                                <td class="text-center" >
                                     {{$item->financial}}
                                 </td>
+
                             </tr>
                         @endforeach
                         </tbody>
