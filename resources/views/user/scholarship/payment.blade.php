@@ -118,7 +118,7 @@
                                                 <div class="container-fluid">
                                                     <div class="row">
                                                         <div class="col-12">
-                                                            <img src="{{(asset('/images/'.$item->image))}}" class="img-fluid" />
+                                                            <img src="{{(asset('/documents/'.$item->image))}}" class="img-fluid" />
                                                             @php
                                                                 $boorsieh=($item->fi_off*$result_final)/100;
                                                             @endphp
