@@ -55,28 +55,52 @@
                                         @if(!is_null($user->get_insertuserInfo))
                                             <p>ثبت شده توسط: {{$user->get_insertuserInfo->fname .' '.$user->get_insertuserInfo->lname }}</p>
                                         @endif
-                                        <p>تاریخ ثبت نام:  <span dir="ltr">{{substr($user->created_at,0,10)}}</span></p>
-                                        <p class="d-inline"> تعداد افراد معرفی شده:</p><b> {{$user->get_invitations->count()}} نفر</b>
-                                            <!-- Modal invitation -->
-                                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            ...
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-primary">Save changes</button>
-                                                        </div>
+
+                                        <a href="#" data-toggle="modal" data-target="#invitationModal">
+                                            <p>تاریخ ثبت نام:  <span dir="ltr">{{substr($user->created_at,0,10)}}</span></p>
+                                            <p class="d-inline" > تعداد افراد معرفی شده:</p><b> {{$user->get_invitations->count()}} نفر</b>
+                                        </a>
+                                        <!-- Modal invitation -->
+                                        <div class="modal fade" id="invitationModal" tabindex="-1" aria-labelledby="invitationModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">دعوت شده ها</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <table class="table table-bordered table-striped table-striped">
+                                                            <tr>
+                                                                <th>ردیف</th>
+                                                                <th>عکس</th>
+                                                                <th>نام و نام خانوادگی</th>
+                                                                <th>تلفن</th>
+                                                            </tr>
+                                                            @foreach($user->get_invitations as $item)
+                                                                <tr>
+                                                                    <td>{{$loop->iteration}}</td>
+                                                                    <td>
+                                                                        <img src="{{asset('/documents/users/'.$item->personal_image)}}" width="50px" height="50px" class="rounded-circle" />
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="/admin/user/{{$item->id}}" target="_blank">
+                                                                            {{$item->fname.' '.$item->lname}}
+                                                                        </a>
+                                                                    </td>
+                                                                    <td dir="ltr">{{$item->tel}}</td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </table>
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
                                     </div>
 
                                     <div class="col-12 col-md-12 col-sm-12 col-xl-12 col-lg-12 pt-1 text-center" >
