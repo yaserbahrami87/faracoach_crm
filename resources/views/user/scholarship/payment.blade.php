@@ -49,9 +49,8 @@
                     <th>جزئیات</th>
                 </tr>
                 @if(!is_null($courses))
-                    {{dd($courses)}}
                     @foreach($courses as $item)
-                        <tr>
+                        <tr @if($item->type_course==2) class="text-primary" @endif >
                             <td class="text-center">
                                 {{$item->course}}
                             </td>
