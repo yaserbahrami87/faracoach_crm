@@ -190,13 +190,15 @@ class ScholarshipController extends BaseController
         {
             if(!is_null($item->scholarship))
             {
-                if($item->scholarship->get_score()>50)
+                if($item->scholarship->get_score()>0)
                 {
-                    $count_scholarshipIntroduce=$count_scholarshipIntroduce+4;
+
+                    $count_scholarshipIntroduce=$count_scholarshipIntroduce+(floor(($item->scholarship->get_score()*10)/100) );
                 }
 
             }
         }
+
 
 //        $count_scholarshipIntroduce=$count_scholarshipIntroduce*4;
 
@@ -578,9 +580,9 @@ class ScholarshipController extends BaseController
             {
                 if(!is_null($item->scholarship))
                 {
-                    if($item->scholarship->get_score()>50)
+                    if($item->scholarship->get_score()>0)
                     {
-                        $count_scholarshipIntroduce=$count_scholarshipIntroduce+4;
+                        $count_scholarshipIntroduce=$count_scholarshipIntroduce+(floor(($item->scholarship->get_score()*10)/100) );
                     }
                 }
             }

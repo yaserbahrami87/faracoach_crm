@@ -57,6 +57,26 @@
                                         @endif
                                         <p>تاریخ ثبت نام:  <span dir="ltr">{{substr($user->created_at,0,10)}}</span></p>
                                         <p class="d-inline"> تعداد افراد معرفی شده:</p><b> {{$user->get_invitations->count()}} نفر</b>
+                                            <!-- Modal invitation -->
+                                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            ...
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                     </div>
 
                                     <div class="col-12 col-md-12 col-sm-12 col-xl-12 col-lg-12 pt-1 text-center" >
