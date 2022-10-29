@@ -113,6 +113,9 @@
             <li class="nav-item" role="payment">
                 <button class="nav-link @if(is_null($scholarship->user->get_scholarshipInterview)) disabled @endif" id="payment-tab" data-toggle="tab" data-target="#payment" type="button" role="tab" aria-controls="payment" aria-selected="false">ثبت نام</button>
             </li>
+            <li class="nav-item" role="collabration">
+                <button class="nav-link" id="collabration-tab" data-toggle="tab" data-target="#collabration" type="button" role="tab" aria-controls="collabration" aria-selected="false">همکاری</button>
+            </li>
             <li class="nav-item" role="support">
                 <button class="nav-link" id="support-tab" data-toggle="tab" data-target="#support" type="button" role="tab" aria-controls="support" aria-selected="false">پشتیبان</button>
             </li>
@@ -128,7 +131,7 @@
                         <p style="line-height: 2" class="text-center">شناسایی و دعوت از افراد نخبه و با استعداد جهت حضور ویژه</p>
                         <p style="line-height: 2;text-align: justify">آکادمی بین المللی فراکوچ فرصت بی نظیری را به منظور ورود و پیوستن جمع بیشتری از افراد مستعد ، نخبه و فرهیخته جامعه - به ویژه اساتید ،  پژوهشگران، اندیشمندان، مدیران و دانشجویان برتر - به دنیای حرفه ای کوچینگ از طریق ایجاد شرایط ویژه حضور آنان در دوره های آموزش و تربیت کوچ حرفه ای ، فراهم کرده است.</p>
                         <b class="d-block mb-2">نمونه مدرک </b>
-                        <img src="{{asset('/images/ICF_scholarship_example.jpg')}}" class="text-center" />
+                        <img src="{{asset('/images/ICF_scholarship_example.jpg')}}" class="img-fluid text-center" />
                     </div>
                 </div>
                 <button class="btn btn-primary" id="contact-tab2" onclick="document.getElementById('contact-tab').click()">مرحله بعد</button>
@@ -206,6 +209,9 @@
             </div>
             <div class="tab-pane fade " id="support" role="tabpanel" aria-labelledby="support-tab">
                 @include('user.scholarship.support')
+            </div>
+            <div class="tab-pane fade " id="collabration" role="tabpanel" aria-labelledby="collabration-tab">
+                asdsad
             </div>
 
 

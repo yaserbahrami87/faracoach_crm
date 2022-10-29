@@ -444,7 +444,8 @@ class CheckoutController extends BaseController
                                         ->count();
                             $msg=$item->user->fname.' '.$item->user->lname."\n"."دوره:".$course->course."\n نفر:$student ";
                             $this->sendSms("09153159020",$msg);
-
+                            $this->sendSms("09198906540",$msg);
+                            $this->sendSms($item->user->get_followbyExpert->tel,$msg);
                         }
                     }
 

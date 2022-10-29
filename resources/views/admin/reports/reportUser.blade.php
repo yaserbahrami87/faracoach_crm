@@ -114,9 +114,44 @@
 
                         <span class="count-numbers text-dark">{{$user->followupsAdmin->wherebetween('date_fa',$date_fa)->count()}} نفر </span>
                         <span class="count-name text-dark"> تعداد پیگیری ها
-                            <a data-toggle="collapse" href="#collapseGroupFollowup" role="button" aria-expanded="false" aria-controls="collapseGroupFollowup">جزئیات</a>
+                            <a href="#" data-toggle="modal" data-target="#detailFollowupModal">جزئیات</a>
                         </span>
-
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="detailFollowupModal" tabindex="-1" aria-labelledby="detailFollowupModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <table class="table">
+                                    <tr>
+                                        <th>دوره</th>
+                                        <th>تعداد</th>
+                                    </tr>
+                                    @foreach($user->followupsAdmin->wherebetween('date_fa',$date_fa)->groupby('course_id') as $item)
+                                        <tr>
+                                            <td>
+                                                @if(!is_null($item[0]->course))
+                                                    {{$item[0]->course->course}}
+                                                @else
+                                                    نامشخص
+                                                @endif
+                                            </td>
+                                            <td>{{count($item)}}</td>
+                                        </tr>
+                                    @endforeach
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-md-3">
@@ -130,11 +165,7 @@
                 <div class="card card-body">
                     {{csrf_field()}}
                     <div class="row">
-                        @foreach($user->followupsAdmin->wherebetween('date_fa',$date_fa)->groupby('course_id') as $item)
-                            <div class="col-xs-6 col-md-3 col-lg-3 col-xl-3 text-right">
-                                <span>{{count($item)}}</span>
-                            </div>
-                        @endforeach
+
                     </div>
                 </div>
             </div>
