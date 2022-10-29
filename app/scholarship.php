@@ -115,6 +115,7 @@ class scholarship extends Model
             {
                 if($item->scholarship->get_score()>0)
                 {
+
                     $count_scholarshipIntroduce=$count_scholarshipIntroduce+(floor(($item->scholarship->get_score()*10)/100) );
                 }
             }
@@ -181,6 +182,11 @@ class scholarship extends Model
         $result_final=$result_final+$this->score_introductionletter;
         $result+=["result_final"=>$result_final];
         return $result;
+    }
+
+    public function get_score_test()
+    {
+
     }
 
 

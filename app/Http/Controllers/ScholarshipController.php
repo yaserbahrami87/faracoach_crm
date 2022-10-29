@@ -558,7 +558,10 @@ class ScholarshipController extends BaseController
                         //حضوری ها در مصاحبه مقدار 1 دارند در جدول درس 2
                         //آنلاین ها در مصاحبه مقدار 2 دارند در جدول درس 1
 
-                        $query->where('type_course','=',1);
+                        $query->orwhere('type_course','=',1);
+
+                        //برای نمایش دوره های انلاین برای همه
+                        $query->orwhere('type_course','=',2);
                     })
                     ->orderby('id','desc')
                     ->get();
