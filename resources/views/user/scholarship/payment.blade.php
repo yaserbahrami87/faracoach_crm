@@ -49,6 +49,7 @@
                     <th>جزئیات</th>
                 </tr>
                 @if(!is_null($courses))
+                    {{dd($courses)}}
                     @foreach($courses as $item)
                         <tr>
                             <td class="text-center">
