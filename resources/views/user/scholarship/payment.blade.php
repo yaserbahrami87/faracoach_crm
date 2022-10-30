@@ -52,8 +52,81 @@
                     @foreach($courses as $item)
                         <tr @if($item->type_course==2) class="text-primary" @endif >
                             <td class="text-center">
+                                <a href="#"  data-toggle="modal" data-target="#ModalPaymentCourseScholarship{{$item->id}}">
                                 {{$item->course}}
+                                </a>
+                                <!-- Modal courses -->
+                                <div class="modal fade" id="ModalPaymentCourseScholarship{{$item->id}}" tabindex="-1" aria-labelledby="ModalPaymentCourseScholarship{{$item->id}}" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">اطلاعات دوره</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="container-fluid">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <img src="{{(asset('/documents/'.$item->image))}}" class="img-fluid" />
+                                                            <table class="table table-bordered">
+                                                                <tr class="">
+                                                                    <td>دوره</td>
+                                                                    <td>
+                                                                        {{$item->course}}
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>مدرس</td>
+                                                                    <td>{{$item->teacher->fname.' '.$item->teacher->lname}}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>نحوه برگزاری</td>
+                                                                    <td>
+                                                                        @if($item->type_course==1)
+                                                                            انلاین
+                                                                        @elseif($item->type_course==2)
+                                                                            حضوری
+                                                                        @endif
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>طول دوره</td>
+                                                                    <td>{{$item->duration_date}} ساعت </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>تاریخ شروع دوره</td>
+                                                                    <td>
+                                                                        {{$item->start}}
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>ساعت کلاس</td>
+                                                                    <td>
+                                                                        {{$item->course_days}}
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>ساعت برگزاری</td>
+                                                                    <td>{{$item->course_times}}</td>
+                                                                </tr>
+                                                            </table>
+
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
+
                             <td class="text-center">
                                 @if($item->type_course==1)
                                     انلاین
@@ -65,7 +138,7 @@
                             <td>
                                 {{$item->teacher->fname.' '.$item->teacher->lname}}
                             </td>
-                            <td class="text-center">
+                            <td class ="text-center">
                                 {{number_format($item->fi_off)}}
                             </td>
                             <td class="text-center">
