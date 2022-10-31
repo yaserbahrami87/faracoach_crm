@@ -36,6 +36,7 @@
                                 <th>استان</th>
                                 <th>معرفی نامه</th>
                                 <th>مصاحبه</th>
+                                <th class="d-none">وضعیت ثبت نام</th>
 
                                 <!--
                                 <th> افراد معرفی شده</th>
@@ -103,6 +104,11 @@
                                     <td>
                                         @if(!is_null($item->user->get_scholarshipInterview) )
                                             انجام شده است
+                                        @endif
+                                    </td>
+                                    <td class="d-none">
+                                        @if(!is_null($item->financial))
+                                            ثبت نام کرده است
                                         @endif
                                     </td>
 
