@@ -39,8 +39,8 @@
                     <th>عنوان دوره</th>
                     <th>نحوه برگزاری</th>
                     <th>مدرس</th>
-                    <th>مبلغ پایه</th>
-                    <th>امتیاز بورسیه</th>
+                    <th >مبلغ پایه</th>
+                    <th >امتیاز بورسیه</th>
                     <th>ارزش بورسیه</th>
                     <th>سهم پرداخت نقدی</th>
                     <th>پیش پرداخت</th>
@@ -138,13 +138,13 @@
                             <td>
                                 {{$item->teacher->fname.' '.$item->teacher->lname}}
                             </td>
-                            <td class ="text-center">
+                            <td class ="text-center" >
                                 {{number_format($item->fi_off)}}
                             </td>
-                            <td class="text-center">
+                            <td class="text-center" style="background-color:  #9fff80;">
                                 {{$result_final}}%
                             </td>
-                            <td>
+                            <td style="background-color:  #9fff80;">
                                 {{number_format(($item->fi_off*$result_final)/100) }}
                             </td>
                             <td>

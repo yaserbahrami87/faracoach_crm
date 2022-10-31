@@ -29,7 +29,8 @@ class ScholarshipController extends BaseController
     public function index()
     {
         //$scholarships=scholarship::wherein('status',[0,2,3,4])
-        $scholarships=scholarship::get();
+        $scholarships=scholarship::orderby('financial')
+                ->get();
         foreach ($scholarships as $scholarship)
         {
             $scholarship->created_at=$this->changeTimestampToShamsi($scholarship->created_at);
