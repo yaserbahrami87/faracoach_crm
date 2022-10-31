@@ -47,7 +47,7 @@
 
                         <tbody>
                             @foreach($scholarships as $item)
-                                <tr>
+                                <tr style="@if(!is_null($item->financial)) background-color: #9fff80; @endif">
                                     <td class="text-center">{{$loop->iteration}}</td>
                                     <td class="text-center">
                                         @if($item->user->created_at>'2022-07-20 00:00:00')

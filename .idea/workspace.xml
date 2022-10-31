@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3849cf8-ae8a-47cc-891c-72c8c9af69d2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/views/user/scholarship/collabration.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/scholarship/users.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/scholarship/users.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/user/scholarship/payment.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/scholarship/payment.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/scholarship/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/scholarship/profile.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -226,7 +229,9 @@
       <workItem from="1666985686310" duration="4496000" />
       <workItem from="1667025747931" duration="18642000" />
       <workItem from="1667108760365" duration="644000" />
-      <workItem from="1667110443235" duration="6363000" />
+      <workItem from="1667110443235" duration="10852000" />
+      <workItem from="1667145750053" duration="52000" />
+      <workItem from="1667196498074" duration="1062000" />
     </task>
     <servers />
   </component>

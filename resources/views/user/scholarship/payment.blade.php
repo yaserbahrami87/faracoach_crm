@@ -22,7 +22,7 @@
 
 
     </div>
-    <div class="col-6 mx-auto text-center">
+    <div class="col-12 col-md-6  mx-auto text-center">
         <div class="alert alert-success">
             تبریک وام بلاعوض صندوق فراکوچ به شما تعلق گرفته است . جهت اطلاع، این مبلغ از میزان تعهد همکاری شما کسر میگردد.برای اطلاعات بیشتر بر روی جزئیات پرداخت کلیک کنید.
         </div>

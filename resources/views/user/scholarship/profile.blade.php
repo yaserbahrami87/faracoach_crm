@@ -211,7 +211,7 @@
                 @include('user.scholarship.support')
             </div>
             <div class="tab-pane fade " id="collabration" role="tabpanel" aria-labelledby="collabration-tab">
-                asdsad
+                @include('user.scholarship.collabration')
             </div>
 
 
