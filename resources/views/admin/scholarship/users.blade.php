@@ -109,6 +109,8 @@
                                     <td class="d-none">
                                         @if(!is_null($item->financial))
                                             ثبت نام کرده است
+                                        @else
+                                            ثبت نام نکرده است
                                         @endif
                                     </td>
 
