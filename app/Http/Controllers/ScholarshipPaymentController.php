@@ -136,11 +136,17 @@ class ScholarshipPaymentController extends BaseController
             $type_payment=0;
 
         }
-        else
+        elseif(Auth::user()->scholarship->type_payment==1)
         {
             $prepaymant=3500000;
             $remaining=$gheymat_nahaei-$prepaymant;
             $type_payment=1;
+        }
+        if(Auth::user()->scholarship->type_payment==2)
+        {
+            $prepaymant=2000000;
+            $remaining=$gheymat_nahaei-$prepaymant;
+            $type_payment=2;
         }
 
 

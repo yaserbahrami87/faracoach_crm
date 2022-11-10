@@ -2,8 +2,47 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3849cf8-ae8a-47cc-891c-72c8c9af69d2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/public/css/ajax-loader.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/fonts/slick.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/fonts/slick.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/fonts/slick.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/fonts/slick.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/slick-theme.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/slick-theme.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/slick-theme.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/slick.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/slick.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/slick.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/jquery.validate.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/slick.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/slick.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/scholarship/settings/category_edit.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/scholarship/settings/category_insert.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/scholarship/settings/details.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/scholarship/settings/details_edit.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/scholarship/settings/details_insert.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/faracoach_crm.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/faracoach_crm.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/reports/allDatabase.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/reports/allDatabase.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CheckoutController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CheckoutController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipPaymentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipPaymentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/coupon/coupon.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/coupon/coupon.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/master/right_menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/master/right_menu.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/scholarship/payment.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/scholarship/payment.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/master/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/master/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/scholarship/collabration.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/scholarship/collabration.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/scholarship/payment.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/scholarship/payment.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/scholarship/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/scholarship/profile.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/installed.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/installed.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/platform_check.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/platform_check.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -161,6 +200,10 @@
       <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
       <path value="$PROJECT_DIR$/vendor/masterminds/html5" />
       <path value="$PROJECT_DIR$/vendor/dompdf/dompdf" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/deprecations" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/event-manager" />
     </include_path>
   </component>
   <component name="ProjectId" id="2FxNSwT78MPesAn6ma3HHo1jrOv" />
@@ -172,7 +215,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/images" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/js" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -180,6 +223,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\js" />
+      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\css" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\images" />
     </key>
   </component>
@@ -228,7 +273,18 @@
       <workItem from="1667108760365" duration="644000" />
       <workItem from="1667110443235" duration="10852000" />
       <workItem from="1667145750053" duration="52000" />
-      <workItem from="1667196498074" duration="7426000" />
+      <workItem from="1667196498074" duration="8772000" />
+      <workItem from="1667293302159" duration="12126000" />
+      <workItem from="1667371151453" duration="18619000" />
+      <workItem from="1667424692432" duration="1482000" />
+      <workItem from="1667461627134" duration="5247000" />
+      <workItem from="1667629917019" duration="8022000" />
+      <workItem from="1667763241231" duration="2079000" />
+      <workItem from="1667804848485" duration="8814000" />
+      <workItem from="1667854642698" duration="596000" />
+      <workItem from="1667887374879" duration="2119000" />
+      <workItem from="1667977077526" duration="17633000" />
+      <workItem from="1668064667973" duration="10472000" />
     </task>
     <servers />
   </component>

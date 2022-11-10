@@ -4,12 +4,16 @@
     <link href="{{asset('/css/kamadatepicker.min.css')}}" rel="stylesheet" />
     <link href="{{asset('/css/timepicker.min.css')}}" rel="stylesheet" />
     <link src="{{asset('/css/jquery-book.css')}}"></link>
+    <link href="{{asset('/css/slick.css')}}" rel="stylesheet" />
+    <link href="{{asset('/css/slick-theme.css')}}" rel="stylesheet" />
     <style>
         #fff{
             border: 2px solid rgba(2,1,19,.81);
             border-radius:20px;
         }
-        .progress {position:relative;
+        .progress
+        {
+            position:relative;
         }
 
         .progress span {
@@ -77,7 +81,7 @@
 
 @section('content')
     <div class="col-md-12">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <ul class="nav nav-tabs d-none d-sm-flex " id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active " id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">توضیحات</button>
             </li>
@@ -113,14 +117,12 @@
             <li class="nav-item" role="payment">
                 <button class="nav-link @if(is_null($scholarship->user->get_scholarshipInterview)) disabled @endif" id="payment-tab" data-toggle="tab" data-target="#payment" type="button" role="tab" aria-controls="payment" aria-selected="false">ثبت نام</button>
             </li>
-            <li class="nav-item" role="collabration">
+            <li class="nav-item " role="collabration">
                 <button class="nav-link disabled" id="collabration-tab" data-toggle="tab" data-target="#collabration" type="button" role="tab" aria-controls="collabration" aria-selected="false">همکاری</button>
             </li>
             <li class="nav-item" role="support">
                 <button class="nav-link" id="support-tab" data-toggle="tab" data-target="#support" type="button" role="tab" aria-controls="support" aria-selected="false">پشتیبان</button>
             </li>
-
-
         </ul>
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -218,6 +220,45 @@
 
         </div>
     </div>
+
+    <div class="col-12 nav_position_bottom d-block d-sm-none " dir="ltr" style="position: fixed;bottom: 0px;background-color: #F2F4F4">
+        <div role="presentation" role="home">
+            <button class="btn btn-primary" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">توضیحات</button>
+        </div>
+        <div role="presentation">
+            <button class="btn btn-primary" id="contact-tab" data-toggle="tab" data-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">فرم اولیه بورسیه</button>
+        </div>
+        <div role="presentation">
+            <button class="btn btn-primary" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">اطلاعات کاربر</button>
+        </div>
+        <div  role="presentation">
+            <button class="btn btn-primary" id="introduce-tab" data-toggle="tab" data-target="#introduce" type="button" role="tab" aria-controls="introduce" aria-selected="false">معرفی دوستان</button>
+        </div>
+        <div  role="learn">
+            <button class="btn btn-primary" id="learn-tab" data-toggle="tab" data-target="#learn" type="button" role="tab" aria-controls="learn" aria-selected="false">دوره آموزشی</button>
+        </div>
+        <div  role="exam">
+            <button class="btn btn-primary" id="exam-tab" data-toggle="tab" data-target="#exam" type="button" role="tab" aria-controls="exam" aria-selected="false">آزمون و گواهینامه</button>
+        </div>
+        <div  role="introductionLetter">
+            <button class="btn btn-primary" id="introductionLetter-tab" data-toggle="tab" data-target="#introductionLetter" type="button" role="tab" aria-controls="introductionLetter" aria-selected="false">معرفی نامه</button>
+        </div>
+        <div  role="interview">
+            <button class="btn btn-primary" id="interview-tab" data-toggle="tab" data-target="#interview" type="button" role="tab" aria-controls="interview" aria-selected="false">مصاحبه</button>
+        </div>
+        <div  role="result">
+            <button class="btn btn-primary" id="result-tab" data-toggle="tab" data-target="#result" type="button" role="tab" aria-controls="result" aria-selected="false">نتیجه</button>
+        </div>
+        <div role="payment">
+            <button class="btn btn-primary @if(is_null($scholarship->user->get_scholarshipInterview)) disabled @endif" id="payment-tab" data-toggle="tab" data-target="#payment" type="button" role="tab" aria-controls="payment" aria-selected="false">ثبت نام</button>
+        </div>
+        <div role="collabration">
+            <button class="btn btn-primary disabled" id="collabration-tab" data-toggle="tab" data-target="#collabration" type="button" role="tab" aria-controls="collabration" aria-selected="false">همکاری</button>
+        </div>
+        <div role="support">
+            <button class="btn btn-primary" id="support-tab" data-toggle="tab" data-target="#support" type="button" role="tab" aria-controls="support" aria-selected="false">پشتیبان</button>
+        </div>
+    </div>
 @endsection
 
 
@@ -300,6 +341,23 @@
     </script>
 
     <script>
+        function collabration_category(id)
+        {
+
+            $.ajax({
+                url:'/panel/scholarship/me/collabration_category/'+id,
+                type:'GET',
+                success:function(data)
+                {
+                    $('#collabration_category').html(data);
+                }
+            })
+        }
+
+        function collabration_details(id)
+        {
+            alert('asdasd');
+        }
 
         var input = document.querySelector("#tel_introduce");
         var intl=intlTelInput(input,{
@@ -456,10 +514,10 @@
     </script>
 
 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="{{asset('/js/jquery-3.5.1.min.js')}}" ></script>
     <script src="{{asset('/js/jquery-ui.min.js')}}" ></script>
     <script src="{{asset('/js/jquery-book.js')}}" ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
+    <script src="{{asset('/js/jquery.validate.min.js')}}"></script>
 
     <script>
         $thing = $('#demo').book({
@@ -475,6 +533,45 @@
             //$('.progress span').text('Completed: '+Math.trunc(t)+'%');
             $('.progress-value').text(Math.trunc(t)+'%');
         }
+    </script>
+
+    <script src="{{asset('/js/slick.js')}}"></script>
+    <script>
+        $('.nav_position_bottom').slick({
+
+            autoplay:true,
+            speed: 300,
+            slidesToShow: 4,
+            slidesToScroll: 4,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        infinite: true,
+
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2,
+                        arrows:false,
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2,
+                        arrows:false,
+                    }
+                }
+
+            ]
+        });
     </script>
 
 

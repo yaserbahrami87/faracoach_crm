@@ -414,9 +414,27 @@ class CheckoutController extends BaseController
                                         'fi'                =>$item->schoalrshipPayment->remaining,
                                     ]);
                             }
-                            else
+                            elseif($item->schoalrshipPayment->type_payment==1)
                             {
                                 for ($i=1;$i<=2;$i++)
+                                {
+                                    $v=$v->addMonths(1);
+                                    $Date=$v->format('Y/m/d');
+                                    faktor::create(
+                                        [
+                                            'user_id'           =>Auth::user()->id,
+                                            'checkout_id'       =>$item->id,
+                                            'product_id'        =>$item->product_id,
+                                            'type'              =>'course',
+                                            'date_createfaktor' =>$this->dateNow,
+                                            'date_faktor'       =>$Date,
+                                            'fi'                =>($item->schoalrshipPayment->remaining)/2,
+                                        ]);
+                                }
+                            }
+                            elseif($item->schoalrshipPayment->type_payment==2)
+                            {
+                                for ($i=1;$i<=5;$i++)
                                 {
                                     $v=$v->addMonths(1);
                                     $Date=$v->format('Y/m/d');
@@ -445,7 +463,11 @@ class CheckoutController extends BaseController
                             $msg=$item->user->fname.' '.$item->user->lname."\n"."دوره:".$course->course."\n نفر:$student ";
                             $this->sendSms("09153159020",$msg);
                             $this->sendSms("09198906540",$msg);
-                            $this->sendSms($item->user->get_followbyExpert->tel,$msg);
+                            if(!is_null($item->user->get_followbyExpert))
+                            {
+                                $this->sendSms($item->user->get_followbyExpert->tel,$msg);
+                            }
+
                         }
                     }
 

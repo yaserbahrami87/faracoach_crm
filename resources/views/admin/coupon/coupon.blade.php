@@ -32,8 +32,8 @@
                     </td>
                     <td>
                         <form method="post" action="/panel/coupon/{{$item->id}}" onsubmit="return confirm('آیا از حذف کوپن تخفیف مطمئن هستید؟');">
-                            {{ method_field('DELETE') }}
-                            {{ csrf_field() }}
+                            {{method_field('DELETE')}}
+                            {{csrf_field()}}
                             <button  class="btn btn-danger" type="submit">
                                 <i class="bi bi-trash-fill"></i>
                             </button>

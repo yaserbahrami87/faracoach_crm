@@ -107,6 +107,9 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     Route::post('/scholarship/ajax_payment','ScholarshipPaymentController@ajax_payment');
     Route::resource('scholarship_payment','ScholarshipPaymentController');
 
+    // collabration_category
+    Route::get('/scholarship/me/collabration_category/{collabration_category}','CollabrationCategoryController@ajaxCategory');
+
 
 
     //Certificates
@@ -234,10 +237,10 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::post('/scholarship/{scholarship}/changestatus','ScholarshipController@changeStatus');
     Route::get('/scholarship/exportExcel','ScholarshipController@exportExcel');
     Route::get('/scholarship/sendSMS_incompleteProfile','ScholarshipController@sendSMS_incompleteProfile');
-    Route::get('/scholarship/webinar_accept','ScholarshipController@webinar_accept');
+//    Route::get('/scholarship/webinar_accept','ScholarshipController@webinar_accept');
     Route::post('/scholarship/{scholarship}/confirm_webinar','ScholarshipController@confirm_webinar');
     Route::post('/scholarship/{scholarship}/type_payment','ScholarshipController@type_payment');
-    Route::get('/scholarship/exam_accept','ScholarshipController@exam_accept');
+//    Route::get('/scholarship/exam_accept','ScholarshipController@exam_accept');
     Route::get('/scholarship/dont_prticipate_in_the_exam','ScholarshipController@dontParticipateIntheExam');
     Route::get('/scholarship/financial','ScholarshipController@financial');
     Route::get('/scholarship/result/report','ScholarshipController@report_result');
@@ -250,6 +253,13 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
 
     //scholarship Exam
     Route::get('/scholarship/certificate/{user}/download','CertificateController@get_certificateByAdmin');
+
+    //Scholarship setting
+
+    Route::resource('collabration_category','CollabrationCategoryController');
+    Route::resource('collabration_details','CollabrationDetailsController');
+
+
 
     //  ROUTE SETTINGS
     Route::prefix('settings/')->group(function ()

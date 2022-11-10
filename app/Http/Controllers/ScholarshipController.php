@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\checkout;
 use App\city;
+use App\collabration_category;
 use App\course;
 use App\followup;
 use App\message;
@@ -643,14 +644,22 @@ class ScholarshipController extends BaseController
             {
                 $secondMonth=verta()->addMonth(2)->format('Y/m/d');
             }
+            elseif($scholarship->type_payment==2)
+            {
+                $secondMonth=[];
+                for($i=1;$i<=5;$i++)
+                {
+                    array_push($secondMonth,verta()->addMonth($i)->format('Y/m/d'));
+                }
+            }
             else
             {
                 $secondMonth=NULL;
             }
 
 
-
-
+            $collabration_category=collabration_category::where('status','=',1)
+                                ->get();
 
 
             return  view('user.scholarship.profile')
@@ -666,6 +675,7 @@ class ScholarshipController extends BaseController
                         ->with('count_scholarshipIntroduce',$count_scholarshipIntroduce)
                         ->with('nextMonth',$nextMonth)
                         ->with('secondMonth',$secondMonth)
+                        ->with('collabration_category',$collabration_category)
                         ->with('scholarship',$scholarship);
         }
     }
@@ -895,34 +905,34 @@ class ScholarshipController extends BaseController
     }
 
     //لیست قبول شده های وبینار
-    public function webinar_accept()
-    {
-        $scholarships=scholarship::where('confirm_webinar','=',1)
-                        ->get();
-        foreach ($scholarships as $item)
-        {
-            $item->created_at=$this->changeTimestampToShamsi($item->created_at);
-        }
-
-
-        return view('admin.scholarship.users')
-            ->with('scholarships',$scholarships);
-    }
+//    public function webinar_accept()
+//    {
+//        $scholarships=scholarship::where('confirm_webinar','=',1)
+//                        ->get();
+//        foreach ($scholarships as $item)
+//        {
+//            $item->created_at=$this->changeTimestampToShamsi($item->created_at);
+//        }
+//
+//
+//        return view('admin.scholarship.users')
+//            ->with('scholarships',$scholarships);
+//    }
 
     //لیست قبول شده های آزمون
-    public function exam_accept()
-    {
-        $scholarships=scholarship::where('confirm_exam','=',1)
-            ->get();
-        foreach ($scholarships as $item)
-        {
-            $item->created_at=$this->changeTimestampToShamsi($item->created_at);
-        }
-
-
-        return view('admin.scholarship.users')
-            ->with('scholarships',$scholarships);
-    }
+//    public function exam_accept()
+//    {
+//        $scholarships=scholarship::where('confirm_exam','=',1)
+//            ->get();
+//        foreach ($scholarships as $item)
+//        {
+//            $item->created_at=$this->changeTimestampToShamsi($item->created_at);
+//        }
+//
+//
+//        return view('admin.scholarship.users')
+//            ->with('scholarships',$scholarships);
+//    }
 
 
     //معرفی نامه
@@ -1119,7 +1129,7 @@ class ScholarshipController extends BaseController
     public function type_payment(Request $request,scholarship $scholarship)
     {
         $this->validate($request,[
-           'type_payment'   =>'required|boolean'
+           'type_payment'   =>'required|numeric'
         ]);
 
         $scholarship->type_payment=$request->type_payment;

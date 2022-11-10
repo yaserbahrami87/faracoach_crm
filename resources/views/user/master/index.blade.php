@@ -38,12 +38,12 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('/panel_assets/css/pages/app-email.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/panel_assets/css/pages/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/panel_assets/intl_tel/css/intlTelInput.css') }}" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="{{asset('/css/bootstrap-icons.css')}}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lalezar">
     <!-- END: Page CSS-->
     <!--{% framework extras %}-->
     <link rel="stylesheet" property="stylesheet" href="/modules/system/assets/css/framework.extras.css">
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="{{asset('/js/sweetalert.min.js')}}"></script>
 
     <style>
         .main-menu.menu-dark .navigation li a {

@@ -33,6 +33,24 @@
                     <li><a href="/admin/reports/allreport"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >گزارش کاربرها</span></a></li>
                 </ul>
             </li>
+            <li class=" nav-item"><a href="#"><span class="menu-title" >بورسیه </span></a>
+                <ul class="menu-content">
+                    <li><a href="/admin/scholarship"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >لیست درخواست ها</span></a></li>
+                    <!--
+                    <li><a href="/admin/scholarship/webinar_accept"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" > قبول شده های وبینار</span></a></li>
+                    <li><a href="/admin/scholarship/exam_accept"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" > قبول شده های آزمون</span></a></li>
+                    -->
+                    <li><a href="/admin/scholarship/dont_prticipate_in_the_exam"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" > شرکت نکرده/قبول نشده آزمون</span></a></li>
+                    <li><a href="/admin/scholarship/financial"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" > ثبت نام شده ها</span></a></li>
+                    <li><a href="/admin/scholarship/result/report"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >گزارش امتیاز کاربران</span></a></li>
+                    <li><a href=" nav-item has-sub "><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >تنظیمات</span></a>
+                        <ul class="menu-content">
+                            <li><a href="/admin/collabration_category" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >زمینه های همکاری</span></a></li>
+                            <li><a href="/admin/collabration_details" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >عناوین همکاری</span></a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
             <!--
             <li class=" nav-item has-sub "><a href="#"><span class="menu-title">مدیریت فایل ها</span></a>
                 <ul class="menu-content">
@@ -112,18 +130,7 @@
                     <li><a href="/admin/event/create"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >ایجاد رویداد</span></a></li>
                 </ul>
             </li>
-            <li class=" nav-item"><a href="#"><span class="menu-title" >بورسیه ها</span></a>
-                <ul class="menu-content">
-                    <li><a href="/admin/scholarship"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >لیست درخواست ها</span></a></li>
-                    <li><a href="/admin/scholarship/webinar_accept"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" > قبول شده های وبینار</span></a></li>
-                    <li><a href="/admin/scholarship/exam_accept"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" > قبول شده های آزمون</span></a></li>
-                    <li><a href="/admin/scholarship/dont_prticipate_in_the_exam"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" > شرکت نکرده/قبول نشده آزمون</span></a></li>
-                    <li><a href="/admin/scholarship/financial"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" > ثبت نام شده ها</span></a></li>
 
-                    <li><a href="/admin/scholarship/result/report"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >گزارش امتیاز کاربران</span></a></li>
-
-                </ul>
-            </li>
             <li class=" nav-item"><a href="#"><span class="menu-title" >پیامک ها</span></a>
                 <ul class="menu-content">
                     <li><a href="/admin/sms/recieve" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >آخرین پیامک های دریافتی</span></a></li>
