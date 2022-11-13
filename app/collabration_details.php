@@ -14,4 +14,9 @@ class collabration_details extends Model
     {
         return $this->belongsTo('App\collabration_category');
     }
+
+    public function collabration_accept()
+    {
+        return $this->hasMany('App\collabration_accept');
+    }
 }

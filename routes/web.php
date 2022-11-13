@@ -109,6 +109,15 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
 
     // collabration_category
     Route::get('/scholarship/me/collabration_category/{collabration_category}','CollabrationCategoryController@ajaxCategory');
+    Route::get('/scholarship/me/collabration_details/{collabration_details}','CollabrationDetailsController@ajaxDetails');
+
+    //Collabration accept
+//    Route::post('/scholarship/me/collabration_details_accept','CollabrationDetailsController@collabration_details_accept');
+    Route::get('/scholarship/me/collabrationAccept_ajax','CollabrationAcceptController@collabrationAccept_ajax');
+    Route::get('/scholarship/me/collabrationAcceptEdit_ajax/{collabration_accept}','CollabrationAcceptController@collabrationAcceptEdit_ajax');
+    Route::resource('collabration_accept','CollabrationAcceptController');
+
+
 
 
 

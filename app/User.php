@@ -253,6 +253,13 @@ class User extends Authenticatable implements MustVerifyEmail
         }
 
 
+        public function collabration_accept()
+        {
+            return $this->hasMany('App\collabration_accept');
+        }
+
+
+
 
 
 

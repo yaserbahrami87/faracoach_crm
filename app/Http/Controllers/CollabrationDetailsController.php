@@ -121,4 +121,13 @@ class CollabrationDetailsController extends Controller
     {
         //
     }
+
+    public function ajaxDetails(collabration_details $collabration_details)
+    {
+            return view('user.scholarship.collabration_details_forms')
+                            ->with('collabration_details',$collabration_details);
+    }
+
+
+
 }

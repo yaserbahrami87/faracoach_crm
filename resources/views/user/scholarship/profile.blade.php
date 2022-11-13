@@ -118,7 +118,7 @@
                 <button class="nav-link @if(is_null($scholarship->user->get_scholarshipInterview)) disabled @endif" id="payment-tab" data-toggle="tab" data-target="#payment" type="button" role="tab" aria-controls="payment" aria-selected="false">ثبت نام</button>
             </li>
             <li class="nav-item " role="collabration">
-                <button class="nav-link disabled" id="collabration-tab" data-toggle="tab" data-target="#collabration" type="button" role="tab" aria-controls="collabration" aria-selected="false">همکاری</button>
+                <button class="nav-link" id="collabration-tab" data-toggle="tab" data-target="#collabration" type="button" role="tab" aria-controls="collabration" aria-selected="false">همکاری</button>
             </li>
             <li class="nav-item" role="support">
                 <button class="nav-link" id="support-tab" data-toggle="tab" data-target="#support" type="button" role="tab" aria-controls="support" aria-selected="false">پشتیبان</button>
@@ -228,7 +228,7 @@
         <div role="presentation">
             <button class="btn btn-primary" id="contact-tab" data-toggle="tab" data-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">فرم اولیه بورسیه</button>
         </div>
-        <div role="presentation">
+        <div role="profile">
             <button class="btn btn-primary" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">اطلاعات کاربر</button>
         </div>
         <div  role="presentation">
@@ -253,7 +253,7 @@
             <button class="btn btn-primary @if(is_null($scholarship->user->get_scholarshipInterview)) disabled @endif" id="payment-tab" data-toggle="tab" data-target="#payment" type="button" role="tab" aria-controls="payment" aria-selected="false">ثبت نام</button>
         </div>
         <div role="collabration">
-            <button class="btn btn-primary disabled" id="collabration-tab" data-toggle="tab" data-target="#collabration" type="button" role="tab" aria-controls="collabration" aria-selected="false">همکاری</button>
+            <button class="btn btn-primary" id="collabration-tab" data-toggle="tab" data-target="#collabration" type="button" role="tab" aria-controls="collabration" aria-selected="false">همکاری</button>
         </div>
         <div role="support">
             <button class="btn btn-primary" id="support-tab" data-toggle="tab" data-target="#support" type="button" role="tab" aria-controls="support" aria-selected="false">پشتیبان</button>
@@ -338,6 +338,19 @@
                 sync:true,
             });
 
+        kamaDatepicker('expire',
+            {
+                gotoToday: true,
+                markHolidays:true,
+                markToday:true,
+                twodigit:true,
+                closeAfterSelect:true,
+                highlightSelectedDay:true,
+                nextButtonIcon: "fa fa-arrow-circle-right",
+                previousButtonIcon: "fa fa-arrow-circle-left",
+                sync:true,
+            });
+
     </script>
 
     <script>
@@ -354,9 +367,18 @@
             })
         }
 
+
+
         function collabration_details(id)
         {
-            alert('asdasd');
+            $.ajax({
+                url:'/panel/scholarship/me/collabration_details/'+id,
+                type:'GET',
+                success:function(data)
+                {
+                    $('#collabration_category').html(data);
+                }
+            })
         }
 
         var input = document.querySelector("#tel_introduce");
@@ -572,6 +594,89 @@
 
             ]
         });
+
+
+        function details_calculate(vals)
+        {
+            $('#collabration_details_calculate').val(new Intl.NumberFormat().format(vals*$("#value").val().replace(/\,/g,'')));
+
+        }
+
+        function collabration_details_accept()
+        {
+            $.ajax(
+                {
+                    data:$('#collabration_details_accept').serialize(),
+                    url:'/panel/collabration_accept',
+                    type:'POST',
+                    success: function (data) {
+                        $('#collabration_category').html(data);
+                    },
+                    error : function(data)
+                    {
+                        $('#collabration_category').text(data.responseJSON.errors);
+                        errorsHtml='<div class="alert alert-danger text-left"><ul>';
+                        $.each( data.responseJSON.errors, function( key, value ) {
+                            errorsHtml += '<li>'+ value[0] + '</li>'; //showing only the first error.
+                        });
+                        errorsHtml += '</ul></div>';
+                        $( '#result_checkCodeWebinar' ).html( errorsHtml );
+                    }
+                }
+            );
+            return false;
+        };
+
+
+        function collabration_details_acceptShow()
+        {
+            $.ajax(
+                {
+                    url:'/panel/scholarship/me/collabrationAccept_ajax',
+                    type:'get',
+                    success: function (data) {
+                        $('#collabrationAccept_ajax').html(data);
+                    },
+                    error : function(data)
+                    {
+                        $('#collabrationAccept_ajax').text(data.responseJSON.errors);
+                        errorsHtml='<div class="alert alert-danger text-left"><ul>';
+                        $.each( data.responseJSON.errors, function( key, value ) {
+                            errorsHtml += '<li>'+ value[0] + '</li>'; //showing only the first error.
+                        });
+                        errorsHtml += '</ul></div>';
+                        $( '#result_checkCodeWebinar' ).html( errorsHtml );
+                    }
+                }
+            );
+            return false;
+        };
+
+        function collabration_details_acceptEdit(e)
+        {
+            var load='<div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div>';
+            console.log(e);
+            $.ajax(
+                {
+                    url:'/panel/scholarship/me/collabrationAcceptEdit_ajax/'+e,
+                    type:'get',
+                    success: function (data) {
+                        $('#collabration_category').html(data);
+                    },
+                    error : function(data)
+                    {
+                        $('#collabration_category').text(data.responseJSON.errors);
+                        errorsHtml='<div class="alert alert-danger text-left"><ul>';
+                        $.each( data.responseJSON.errors, function( key, value ) {
+                            errorsHtml += '<li>'+ value[0] + '</li>'; //showing only the first error.
+                        });
+                        errorsHtml += '</ul></div>';
+                        $( '#result_checkCodeWebinar' ).html( errorsHtml );
+                    }
+                }
+            );
+            return false;
+        };
     </script>
 
 
