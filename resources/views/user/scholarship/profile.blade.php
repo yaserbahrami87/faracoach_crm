@@ -86,19 +86,19 @@
                 <button class="nav-link active " id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">توضیحات</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link " id="contact-tab" data-toggle="tab" data-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">فرم اولیه بورسیه</button>
+                <button class="nav-link bg-success" id="contact-tab" data-toggle="tab" data-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">فرم اولیه بورسیه</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">اطلاعات کاربر</button>
+                <button class="nav-link @if(strlen($scholarship->user->fname)>0 && strlen($scholarship->user->lname)>0 && strlen($scholarship->user->sex)>0&&strlen($scholarship->user->codemelli)>0&&strlen($scholarship->user->shenasname)>0&&strlen($scholarship->user->datebirth)>0&&strlen($scholarship->user->personal_image)>0 && strlen($scholarship->user->tel)>0 && strlen($scholarship->user->email)>0 && strlen($scholarship->user->state)>0&&strlen($scholarship->user->city)>0&&strlen($scholarship->user->address)>0 && strlen($scholarship->user->father)>0 && strlen($scholarship->user->married)>0 && strlen($scholarship->user->born)>0 && strlen($scholarship->user->education)>0&&strlen($scholarship->user->reshteh)>0&&strlen($scholarship->user->job)>0&&strlen($scholarship->user->resume)>0 ) btn-success  @endif" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">اطلاعات کاربر</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="introduce-tab" data-toggle="tab" data-target="#introduce" type="button" role="tab" aria-controls="introduce" aria-selected="false">معرفی دوستان</button>
+                <button class="nav-link " id="introduce-tab" data-toggle="tab" data-target="#introduce" type="button" role="tab" aria-controls="introduce" aria-selected="false">معرفی دوستان</button>
             </li>
             <li class="nav-item" role="learn">
-                <button class="nav-link" id="learn-tab" data-toggle="tab" data-target="#learn" type="button" role="tab" aria-controls="learn" aria-selected="false">دوره آموزشی</button>
+                <button class="nav-link @if($scholarship->confirm_webinar==1) bg-success @endif" id="learn-tab" data-toggle="tab" data-target="#learn" type="button" role="tab" aria-controls="learn" aria-selected="false">دوره آموزشی</button>
             </li>
             <li class="nav-item" role="exam">
-                <button class="nav-link" id="exam-tab" data-toggle="tab" data-target="#exam" type="button" role="tab" aria-controls="exam" aria-selected="false">آزمون و گواهینامه</button>
+                <button class="nav-link @if($scholarship->confirm_exam==1) bg-success @endif " id="exam-tab" data-toggle="tab" data-target="#exam" type="button" role="tab" aria-controls="exam" aria-selected="false">آزمون و گواهینامه</button>
             </li>
             <!--
             <li class="nav-item" role="certificate">
@@ -106,16 +106,16 @@
             </li>
             -->
             <li class="nav-item" role="introductionLetter">
-                <button class="nav-link" id="introductionLetter-tab" data-toggle="tab" data-target="#introductionLetter" type="button" role="tab" aria-controls="introductionLetter" aria-selected="false">معرفی نامه</button>
+                <button class="nav-link @if(!is_null($scholarship->introductionletter)&&($scholarship->confirm_introductionletter!=0)&&($scholarship->confirm_introductionletter==2)&&($scholarship->confirm_introductionletter==4)) bg-success @endif " id="introductionLetter-tab" data-toggle="tab" data-target="#introductionLetter" type="button" role="tab" aria-controls="introductionLetter" aria-selected="false">معرفی نامه</button>
             </li>
             <li class="nav-item" role="interview">
-                <button class="nav-link" id="interview-tab" data-toggle="tab" data-target="#interview" type="button" role="tab" aria-controls="interview" aria-selected="false">مصاحبه</button>
+                <button class="nav-link @if(!is_null($scholarship->user->get_scholarshipInterview)) bg-success  @endif " id="interview-tab" data-toggle="tab" data-target="#interview" type="button" role="tab" aria-controls="interview" aria-selected="false">مصاحبه</button>
             </li>
             <li class="nav-item" role="result">
-                <button class="nav-link" id="result-tab" data-toggle="tab" data-target="#result" type="button" role="tab" aria-controls="result" aria-selected="false">نتیجه</button>
+                <button class="nav-link  @if(($scholarship->view_score==1)) bg-success @endif " id="result-tab" data-toggle="tab" data-target="#result" type="button" role="tab" aria-controls="result" aria-selected="false">نتیجه</button>
             </li>
             <li class="nav-item" role="payment">
-                <button class="nav-link @if(is_null($scholarship->user->get_scholarshipInterview)) disabled @endif" id="payment-tab" data-toggle="tab" data-target="#payment" type="button" role="tab" aria-controls="payment" aria-selected="false">ثبت نام</button>
+                <button class="nav-link @if(!is_null($scholarship->financial)) bg-success @endif  @if(is_null($scholarship->user->get_scholarshipInterview)) disabled @endif" id="payment-tab" data-toggle="tab" data-target="#payment" type="button" role="tab" aria-controls="payment" aria-selected="false">ثبت نام</button>
             </li>
             <li class="nav-item " role="collabration">
                 <button class="nav-link" id="collabration-tab" data-toggle="tab" data-target="#collabration" type="button" role="tab" aria-controls="collabration" aria-selected="false">همکاری</button>
@@ -560,7 +560,6 @@
     <script src="{{asset('/js/slick.js')}}"></script>
     <script>
         $('.nav_position_bottom').slick({
-
             autoplay:true,
             speed: 300,
             slidesToShow: 4,
@@ -598,7 +597,16 @@
 
         function details_calculate(vals)
         {
-            $('#collabration_details_calculate').val(new Intl.NumberFormat().format(vals*$("#value").val().replace(/\,/g,'')));
+            var check=parseInt($("#value").val().replace(/\,/g,''));
+
+            if(isNaN(check))
+            {
+                $('#collabration_details_calculate').val(new Intl.NumberFormat().format(vals));
+            }
+            else
+            {
+                $('#collabration_details_calculate').val(new Intl.NumberFormat().format(vals*$("#value").val().replace(/\,/g,'')));
+            }
 
         }
 
@@ -615,12 +623,12 @@
                     error : function(data)
                     {
                         $('#collabration_category').text(data.responseJSON.errors);
-                        errorsHtml='<div class="alert alert-danger text-left"><ul>';
+                        errorsHtml='<div class="col-6 col-md-4  mb-1"> <button type="button" class="collabration_category btn btn-primary btn-block" data="0" onclick="collabration_category(0)">بازگشت</button> </div>      <div class="alert alert-danger text-left"><ul>';
                         $.each( data.responseJSON.errors, function( key, value ) {
                             errorsHtml += '<li>'+ value[0] + '</li>'; //showing only the first error.
                         });
                         errorsHtml += '</ul></div>';
-                        $( '#result_checkCodeWebinar' ).html( errorsHtml );
+                        $( '#collabration_category' ).html( errorsHtml );
                     }
                 }
             );
@@ -645,17 +653,18 @@
                             errorsHtml += '<li>'+ value[0] + '</li>'; //showing only the first error.
                         });
                         errorsHtml += '</ul></div>';
-                        $( '#result_checkCodeWebinar' ).html( errorsHtml );
+                        $( '#collabrationAccept_ajax' ).html( errorsHtml );
                     }
                 }
             );
             return false;
         };
 
+
+
         function collabration_details_acceptEdit(e)
         {
             var load='<div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div>';
-            console.log(e);
             $.ajax(
                 {
                     url:'/panel/scholarship/me/collabrationAcceptEdit_ajax/'+e,
@@ -671,12 +680,32 @@
                             errorsHtml += '<li>'+ value[0] + '</li>'; //showing only the first error.
                         });
                         errorsHtml += '</ul></div>';
-                        $( '#result_checkCodeWebinar' ).html( errorsHtml );
+                        $( '#collabration_category' ).html( errorsHtml );
                     }
                 }
             );
             return false;
         };
+
+        function collabration_details_accept_update(e)
+        {
+            var load='<div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div>';
+            $('#collabration_category').html(load);
+             // var x=(e.getElementsByTagName('input')[2]);
+            x=document.getElementById('collabration_details_accept_update');
+            $.ajax(
+                {
+                    url:'/panel/scholarship/me/collabrationAcceptUpdate_ajax/',
+                    data:$('#collabration_details_accept_update').serialize(),
+                    type:'patch',
+                    success:function(data){
+                        $('#collabration_category').html(data);
+                    }
+                });
+            return false;
+        }
+
+
     </script>
 
 

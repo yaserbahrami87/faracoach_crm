@@ -2,11 +2,11 @@
     <button type='button' class='collabration_category btn btn-primary btn-block' data='0' onclick='collabration_category(0)'>بازگشت</button>
 </div>
 <div class="col-12 col-md-4 mx-auto">
-    <form id="collabration_details_accept_update" method="post" onsubmit="return collabration_details_accept_update(this)" >
+    <form id="collabration_details_accept_update" method="post" action="/panel/scholarship/me/collabrationAccept/{{$collabration_accept->id}}" >
         {{csrf_field()}}
         {{method_field('PATCH')}}
-        <input type="hidden" value="{{$collabration_details->id}}" name="collabration_detail_id">
-        <input type="hidden" value="{{$collabration_accept->id}}" name="collabration_detail_id">
+        <input type="hidden" value="{{$collabration_details->id}}" name="collabration_detail_id"  id="collabration_detail_id">
+        <input type="hidden" value="{{$collabration_accept->id}}" name="collabration_accept_id" id="collabration_accept_id">
         <div class="form-group">
             <label for="details">زمینه همکاری</label>
             <input type="text" class="form-control" value="{{$collabration_details->title}}"  disabled="disabled" id="details"/>
@@ -50,6 +50,6 @@
             <label for="calculate">محاسبه ارزش</label>
             <input type="text" class="form-control" id="collabration_details_calculate" name="calculate" readonly value="{{number_format($collabration_accept->calculate)}}" />
         </div>
-        <button type="submit" class="btn btn-primary"  >ثبت درخواست</button>
+        <button type="submit" class="btn btn-primary"  >بروزرسانی درخواست</button>
     </form>
 </div>

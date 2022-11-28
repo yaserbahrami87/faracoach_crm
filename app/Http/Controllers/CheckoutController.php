@@ -446,7 +446,7 @@ class CheckoutController extends BaseController
                                             'type'              =>'course',
                                             'date_createfaktor' =>$this->dateNow,
                                             'date_faktor'       =>$Date,
-                                            'fi'                =>($item->schoalrshipPayment->remaining)/2,
+                                            'fi'                =>($item->schoalrshipPayment->remaining)/5,
                                         ]);
                                 }
                             }

@@ -32,7 +32,7 @@
             <small class="text-muted">مبالغ به تومان می باشد</small>
         </div>
         <div class="form-group">
-            <label for="collabration_details_count">تعداد:
+            <label for="collabration_details_count">تعداد/مبلغ:
                 <span class="text-danger">*</span>
             </label>
             <input type="number" class="form-control" id="collabration_details_count" name="count" onchange="details_calculate(this.value)"  />

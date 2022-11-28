@@ -115,6 +115,7 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
 //    Route::post('/scholarship/me/collabration_details_accept','CollabrationDetailsController@collabration_details_accept');
     Route::get('/scholarship/me/collabrationAccept_ajax','CollabrationAcceptController@collabrationAccept_ajax');
     Route::get('/scholarship/me/collabrationAcceptEdit_ajax/{collabration_accept}','CollabrationAcceptController@collabrationAcceptEdit_ajax');
+    Route::patch('/scholarship/me/collabrationAccept/{collabration_accept}','CollabrationAcceptController@update');
     Route::resource('collabration_accept','CollabrationAcceptController');
 
 

@@ -2,19 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3849cf8-ae8a-47cc-891c-72c8c9af69d2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/user/scholarship/collabration_details_edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/user/scholarship/collabration_details_forms.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/user/scholarship/table_collabration_details.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AnswerlineController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AnswerlineController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CollabrationDetailsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CollabrationDetailsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/collabration_details.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/collabration_details.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CheckoutController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CheckoutController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CollabrationAcceptController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CollabrationAcceptController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/fa/validation.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/fa/validation.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/user/scholarship/collabration.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/scholarship/collabration.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/scholarship/collabration_details_edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/scholarship/collabration_details_edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/scholarship/collabration_details_forms.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/scholarship/collabration_details_forms.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/user/scholarship/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/scholarship/profile.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/scholarship/table_collabration_details.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/scholarship/table_collabration_details.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -262,7 +259,23 @@
       <workItem from="1668233527933" duration="24835000" />
       <workItem from="1668280826278" duration="7714000" />
       <workItem from="1668320218422" duration="6181000" />
-      <workItem from="1668330861463" duration="11803000" />
+      <workItem from="1668330861463" duration="12488000" />
+      <workItem from="1668495941692" duration="7161000" />
+      <workItem from="1668848248319" duration="1241000" />
+      <workItem from="1668869991363" duration="8942000" />
+      <workItem from="1668931825154" duration="4050000" />
+      <workItem from="1668978914066" duration="4308000" />
+      <workItem from="1669063713201" duration="4482000" />
+      <workItem from="1669106630880" duration="4221000" />
+      <workItem from="1669148817042" duration="1484000" />
+      <workItem from="1669239636162" duration="2029000" />
+      <workItem from="1669330504870" duration="2551000" />
+      <workItem from="1669395942690" duration="11938000" />
+      <workItem from="1669493247704" duration="1233000" />
+      <workItem from="1669535962350" duration="5715000" />
+      <workItem from="1669577600580" duration="1537000" />
+      <workItem from="1669619411634" duration="15000" />
+      <workItem from="1669619479814" duration="15075000" />
     </task>
     <servers />
   </component>

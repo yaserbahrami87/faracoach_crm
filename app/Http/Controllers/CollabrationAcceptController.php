@@ -36,6 +36,11 @@ class CollabrationAcceptController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request,
+            [
+                'count'     =>'required|string',
+                'expire'    =>'required|string',
+            ]);
         $collabration_accept=collabration_accept::where('user_id','=',Auth::user()->id)
                                 ->where('collabration_detail_id','=',$request->collabration_detail_id)
                                 ->first();
@@ -52,22 +57,19 @@ class CollabrationAcceptController extends Controller
         }
         else
         {
-            $status=collabration_accept::create(
-            [
-                'user_id'               =>Auth::user()->id,
-                'value'                 =>((int) str_replace(',', '', $request->value)),
-                'count'                 =>$request->count,
-                'expire'                =>$request->expire,
-                'calculate'             =>((int) str_replace(',', '', $request->calculate)),
-                'collabration_detail_id'=>$request->collabration_detail_id,
-            ]);
 
-            if($status)
+            $sum_calculate=Auth::user()->collabration_accept->sum('calculate');
+            $calculate=((int) str_replace(',', '', $request->calculate));
+            $fi=(Auth::user()->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->fi);
+            $score=(Auth::user()->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->score);
+            $loan=(Auth::user()->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->loan);
+
+            if(($sum_calculate+ $calculate) > ((($fi*$score)/100)-((($fi*$score)/100)* $loan)/100)+((($fi*$score/100)-((($fi*$score)/100)*$loan)/100))/2)
             {
-                ?>
 
-                <script>
-                    alert('با موفقیت ثبت شد');
+                ?>
+                <script >
+                    window.alert('مبلغ درخواستی بیش از سقف همکاری می باشد');
                     collabration_category(0);
                     collabration_details_acceptShow();
                 </script>
@@ -75,9 +77,37 @@ class CollabrationAcceptController extends Controller
             }
             else
             {
-                ?>
-                <div class="alert alert-danger">خطا در ثبت</div>
-                <?php
+
+                $status=collabration_accept::create(
+                [
+                    'user_id'               =>Auth::user()->id,
+                    'value'                 =>((int) str_replace(',', '', $request->value)),
+                    'count'                 =>$request->count,
+                    'expire'                =>$request->expire,
+                    'calculate'             =>((int) str_replace(',', '', $request->calculate)),
+                    'collabration_detail_id'=>$request->collabration_detail_id,
+                ]);
+
+
+
+
+                if($status)
+                {
+                    ?>
+
+                    <script>
+                        alert('با موفقیت ثبت شد');
+                        collabration_category(0);
+                        collabration_details_acceptShow();
+                    </script>
+                    <?php
+                }
+                else
+                {
+                    ?>
+                    <div class="alert alert-danger">خطا در ثبت</div>
+                    <?php
+                }
             }
         }
 
@@ -92,7 +122,7 @@ class CollabrationAcceptController extends Controller
      */
     public function show(collabration_accept $collabration_accept)
     {
-        //
+
     }
 
     /**
@@ -115,7 +145,21 @@ class CollabrationAcceptController extends Controller
      */
     public function update(Request $request, collabration_accept $collabration_accept)
     {
-        //
+        $collabration_accept->value=$request->value;
+        $collabration_accept->count=$request->count;
+        $collabration_accept->expire=$request->expire;
+        $collabration_accept->calculate=((int) str_replace(',', '', $request->calculate));
+        $status=$collabration_accept->update();
+        if($status)
+        {
+            alert()->success('زمینه همکاری بروزرسانی شد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در بروزرسانی') ->persistent('بستن');
+        }
+
+        return back();
     }
 
     /**
@@ -140,5 +184,11 @@ class CollabrationAcceptController extends Controller
         return view('user.scholarship.collabration_details_edit')
                         ->with('collabration_details',$collabration_details)
                         ->with('collabration_accept',$collabration_accept);
+    }
+
+
+    public function collabrationAcceptUpdate_ajax(collabration_accept $collabration_accept,Request $request)
+    {
+
     }
 }
