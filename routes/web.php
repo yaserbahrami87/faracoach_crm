@@ -97,6 +97,7 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     Route::post('/scholarship/introductionletter','ScholarshipController@introductionletter');
     Route::post('/scholarship/introduction/answerstatus_introduction','ScholarshipController@answerstatus_introduction');
     Route::post('/scholarship/me/sendSMSIntroduce','ScholarshipController@sendSMSIntroduce');
+    Route::post('/scholarship/me/sendAcceptCollabration','ScholarshipController@sendAcceptCollabration');
 
 
     //Scholarship Exam

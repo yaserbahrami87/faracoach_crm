@@ -7,6 +7,7 @@
         @foreach(Auth::user()->collabration_accept as $item_collabration_accept)
             <tr>
                 <td>
+
                     <button type='button' class="collabration_details_acceptEdit btn btn-outline-dark btn-sm" onclick="collabration_details_acceptEdit({{$item_collabration_accept->id}})"  >
                         @if(!is_null($item_collabration_accept->collabration_details))
                             {{($item_collabration_accept->collabration_details->title)}}

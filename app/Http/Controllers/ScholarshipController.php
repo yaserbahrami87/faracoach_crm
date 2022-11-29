@@ -1157,5 +1157,28 @@ class ScholarshipController extends BaseController
                     ->with('scholarships',$scholarships);
     }
 
+    public function sendAcceptCollabration()
+    {
+        $scholarship=scholarship::where('user_id','=',Auth::user()->id)
+                    ->first();
+        $scholarship->collabration=1;
+        $status=$scholarship->update();
+        if($status)
+        {
+            $this->sendSms(Auth::user()->tel,'درخواست های همکاری بورسیه شما جهت بررسی ارسال شد');
+            $this->sendSms('09153159020',Auth::user()->fname.' '.Auth::user()->lname." درخواست های همکاری خود را جهت بررسی ارسال کرد ");
+            alert()->success('درخواست جهت بررسی ارسال شد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در ارسال درخواست')->persistent('بستن');
+        }
+
+        return back();
+
+
+
+    }
+
 
 }
