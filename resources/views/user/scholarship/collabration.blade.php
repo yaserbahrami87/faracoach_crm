@@ -4,7 +4,7 @@
     <div class="col-12 col-md-9 mb-1">
             <div class="row" id="collabration_category">
                 @foreach($collabration_category as $item)
-                    <div class="col-6 col-md-4  mb-1">
+                    <div class="col-12 col-md-4  mb-1">
                         <button type="button" class="collabration_category btn btn-primary btn-block" data="{{$item->id}}" onclick="collabration_category({{$item->id}})" >{{$item->category}}</button>
                     </div>
                 @endforeach
@@ -85,14 +85,14 @@
             </table>
     </div>
     <div class="col-12 text-center">
-
-            @if(!is_null(Auth::user()->collabration_accept)||(Auth::user()->collabration_accept->sum('calculate')>=((Auth::user()->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->fi)*(Auth::user()->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->score)/100)&&(Auth::user()->scholarship->collabration==0)))
-                <form method="post" action="/panel/scholarship/me/sendAcceptCollabration" onsubmit="return window.confirm('بعد از ارسال درخواست جهت بررسی امکان ویرایش وجود ندارد. آیا از ارسال درخواست اطمینان دارید ؟')">
-                    {{csrf_field()}}
-                    <input type="submit" value="ارسال درخواست جهت بررسی" class="btn btn-success">
-                </form>
+            @if(!is_null(Auth::user()->scholarship->financial))
+                @if(!is_null(Auth::user()->collabration_accept)||(Auth::user()->collabration_accept->sum('calculate')>=((Auth::user()->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->fi)*(Auth::user()->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->score)/100)&&(Auth::user()->scholarship->collabration==0)))
+                    <form method="post" action="/panel/scholarship/me/sendAcceptCollabration" onsubmit="return window.confirm('بعد از ارسال درخواست جهت بررسی امکان ویرایش وجود ندارد. آیا از ارسال درخواست اطمینان دارید ؟')">
+                        {{csrf_field()}}
+                        <input type="submit" value="ارسال درخواست جهت بررسی" class="btn btn-success">
+                    </form>
+                @endif
             @endif
-
     </div>
 </div>
 
