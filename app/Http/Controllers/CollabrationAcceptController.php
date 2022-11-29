@@ -36,6 +36,7 @@ class CollabrationAcceptController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate($request,
             [
                 'count'     =>'required|string',
@@ -44,6 +45,8 @@ class CollabrationAcceptController extends Controller
         $collabration_accept=collabration_accept::where('user_id','=',Auth::user()->id)
                                 ->where('collabration_detail_id','=',$request->collabration_detail_id)
                                 ->first();
+
+
         if($collabration_accept)
         {
             ?>
@@ -57,7 +60,6 @@ class CollabrationAcceptController extends Controller
         }
         else
         {
-
             $sum_calculate=Auth::user()->collabration_accept->sum('calculate');
             $calculate=((int) str_replace(',', '', $request->calculate));
             $fi=(Auth::user()->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->fi);

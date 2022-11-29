@@ -1181,4 +1181,19 @@ class ScholarshipController extends BaseController
     }
 
 
+    public  function collabrations()
+    {
+        $scholarships=scholarship::where('collabration','=',1)
+                    ->orderby('financial')
+                    ->get();
+        foreach ($scholarships as $scholarship)
+        {
+            $scholarship->created_at=$this->changeTimestampToShamsi($scholarship->created_at);
+        }
+
+        return view('admin.scholarship.users_collabration')
+            ->with('scholarships',$scholarships);
+    }
+
+
 }

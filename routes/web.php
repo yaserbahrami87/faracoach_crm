@@ -266,11 +266,11 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::get('/scholarship/certificate/{user}/download','CertificateController@get_certificateByAdmin');
 
     //Scholarship setting
-
     Route::resource('collabration_category','CollabrationCategoryController');
     Route::resource('collabration_details','CollabrationDetailsController');
 
-
+    //scholarship collabration
+    Route::get('/users/collabrations','ScholarshipController@collabrations');
 
     //  ROUTE SETTINGS
     Route::prefix('settings/')->group(function ()
