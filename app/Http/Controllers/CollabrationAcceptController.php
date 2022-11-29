@@ -66,7 +66,6 @@ class CollabrationAcceptController extends Controller
 
             if(($sum_calculate+ $calculate) > ((($fi*$score)/100)-((($fi*$score)/100)* $loan)/100)+((($fi*$score/100)-((($fi*$score)/100)*$loan)/100))/2)
             {
-
                 ?>
                 <script >
                     window.alert('مبلغ درخواستی بیش از سقف همکاری می باشد');

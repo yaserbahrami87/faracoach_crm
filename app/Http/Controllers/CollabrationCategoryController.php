@@ -127,12 +127,12 @@ class CollabrationCategoryController extends Controller
                                             ->get();
 
             echo "<div class='col-6 col-md-4  mb-1'>
-                    <button type='button' class='collabration_category btn btn-primary btn-block btn-lg' data='0' onclick='collabration_category(0)'>بازگشت</button>
+                    <button type='button' class='collabration_category btn btn-primary btn-block' data='0' onclick='collabration_category(0)'>بازگشت</button>
                 </div>";
 
             foreach ($collabration_details as $item) {
                 echo "<div class='col-6 col-md-4  mb-1'>
-                    <button type='button' class='collabration_details btn btn-primary btn-block btn-lg' data='$item->id' onclick='collabration_details($item->id)' >$item->title</button>
+                    <button type='button' class='collabration_details btn btn-primary btn-block' data='$item->id' onclick='collabration_details($item->id)' >$item->title</button>
                 </div>";
             }
         }

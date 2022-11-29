@@ -1,11 +1,8 @@
 <form method="POST" action="/panel/scholarship/answerstatus" enctype="multipart/form-data">
     {{csrf_field()}}
-
     @if(count($messages)>0)
         <input type="hidden" value="{{$messages[0]->user_id_send}}" name="user_id_send"/>
     @endif
-
-
 
     <div class="form-group row">
         <label for="target" class="col-md-4 col-form-label text-md-right">هدف شما از شرکت در دوره آموزش کوچینگ: </label>

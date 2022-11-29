@@ -48,6 +48,8 @@
             <label for="calculate">محاسبه</label>
             <input type="text" class="form-control" id="collabration_details_calculate" name="calculate" readonly/>
         </div>
-        <button type="submit" class="btn btn-primary"  >ثبت درخواست</button>
+        @if(!is_null(Auth::user()->scholarship->financial))
+            <button type="submit" class="btn btn-primary"  >ثبت درخواست</button>
+        @endif
     </form>
 </div>

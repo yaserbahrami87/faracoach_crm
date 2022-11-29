@@ -1,7 +1,5 @@
-
 <div class="row">
     <div class="col-12 col-md-3">
-
     </div>
     <div class="col-12 col-md-9 mb-1">
             <div class="row" id="collabration_category">
@@ -62,7 +60,8 @@
                 <tr class="text-center">
                     <td>وام صندوق شکوفایی</td>
                     <td>
-                        @if(!(Auth::user()->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment))
+
+                        @if(!is_null(Auth::user()->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()))
                             %{{(Auth::user()->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->loan)}}
                         @endif
                     </td>
@@ -87,12 +86,13 @@
     </div>
     <div class="col-12 text-center">
 
-        @if(Auth::user()->collabration_accept->sum('calculate')>=((Auth::user()->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->fi)*(Auth::user()->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->score)/100)&&(Auth::user()->scholarship->collabration==0))
-            <form method="post" action="/panel/scholarship/me/sendAcceptCollabration" onsubmit="return window.confirm('بعد از ارسال درخواست جهت بررسی امکان ویرایش وجود ندارد. آیا از ارسال درخواست اطمینان دارید ؟')">
-                {{csrf_field()}}
-                <input type="submit" value="ارسال درخواست جهت بررسی" class="btn btn-success">
-            </form>
-        @endif
+            @if(!is_null(Auth::user()->collabration_accept)||(Auth::user()->collabration_accept->sum('calculate')>=((Auth::user()->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->fi)*(Auth::user()->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->score)/100)&&(Auth::user()->scholarship->collabration==0)))
+                <form method="post" action="/panel/scholarship/me/sendAcceptCollabration" onsubmit="return window.confirm('بعد از ارسال درخواست جهت بررسی امکان ویرایش وجود ندارد. آیا از ارسال درخواست اطمینان دارید ؟')">
+                    {{csrf_field()}}
+                    <input type="submit" value="ارسال درخواست جهت بررسی" class="btn btn-success">
+                </form>
+            @endif
+
     </div>
 </div>
 
