@@ -82,10 +82,10 @@ class CollabrationAcceptController extends Controller
                 $status=collabration_accept::create(
                 [
                     'user_id'               =>Auth::user()->id,
-                    'value'                 =>((int) str_replace(',', '', $request->value)),
+                    'value'                 =>((int)str_replace(',', '', $request->value)),
                     'count'                 =>$request->count,
                     'expire'                =>$request->expire,
-                    'calculate'             =>((int) str_replace(',', '', $request->calculate)),
+                    'calculate'             =>((int)str_replace(',', '', $request->calculate)),
                     'collabration_detail_id'=>$request->collabration_detail_id,
                 ]);
 

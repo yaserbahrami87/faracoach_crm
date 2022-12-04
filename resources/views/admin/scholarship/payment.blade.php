@@ -20,6 +20,25 @@
     <div class="alert alert-success">
         شماره فاکتور: {{$scholarship->financial}}
     </div>
+    <table class="table  table-striped table-hover table-bordered">
+        <tr class="text-center">
+            <th>دوره</th>
+            <th>واریزی (تومان) </th>
+            <th>وام</th>
+            <th>تاریخ ثبت نام</th>
+            <th>ساعت ثبت نام</th>
+            <th>پیگیری</th>
+        </tr>
+        <tr class="text-center">
+            <td>{{$scholarship->get_financial->scholarship_course->course}}</td>
+            <td>{{$scholarship->get_financial->schoalrshipPayment->pre_payment}}</td>
+            <td>%{{$scholarship->get_financial->schoalrshipPayment->loan}}</td>
+            <td>{{$scholarship->get_financial->schoalrshipPayment->date_fa}}</td>
+            <td>{{$scholarship->get_financial->schoalrshipPayment->time_fa}}</td>
+            <td>{{$scholarship->financial}}</td>
+        </tr>
+
+    </table>
 
 @endif
 

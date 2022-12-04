@@ -192,7 +192,6 @@
                         </div>
                     @endif
                 </div>
-
             </div>
             <div class="tab-pane fade " id="result" role="tabpanel" aria-labelledby="result-tab">
                 <div class="card-body" >

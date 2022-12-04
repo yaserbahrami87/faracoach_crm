@@ -184,11 +184,6 @@ class scholarship extends Model
         return $result;
     }
 
-    public function get_score_test()
-    {
-
-    }
-
 
 }
 

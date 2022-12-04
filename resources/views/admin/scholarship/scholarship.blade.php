@@ -69,6 +69,9 @@
                     <li class="nav-item" role="payment">
                         <button class="nav-link @if(!is_null($scholarship->financial)) bg-success @endif" id="payment-tab" data-toggle="tab" data-target="#payment" type="button" role="tab" aria-controls="payment" aria-selected="false">ثبت نام</button>
                     </li>
+                    <li class="nav-item " role="collabration">
+                        <button class="nav-link" id="collabration-tab" data-toggle="tab" data-target="#collabration" type="button" role="tab" aria-controls="collabration" aria-selected="false">همکاری</button>
+                    </li>
                 </ul>
 
                 <div class="tab-content" id="myTabContent">
@@ -135,8 +138,9 @@
                     <div class="tab-pane fade " id="payment" role="tabpanel" aria-labelledby="payment-tab">
                         @include('admin.scholarship.payment')
                     </div>
-
-
+                    <div class="tab-pane fade" id="collabration" role="tabpanel" aria-labelledby="collabration-tab">
+                        @include('admin.scholarship.collabration')
+                    </div>
                 </div>
 
             </div>
@@ -279,5 +283,14 @@
             var score=motivation+ability+obligation+impact+validity;
             $("#scholarship_score").val(score);
         });
+
+
+        $('#collabrationModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) ;
+            var recipient = button.data('whatever');
+            var modal = $(this)
+            modal.find('.modal-title').text('New message to ' + recipient);
+            modal.find('.modal-body input').val(recipient);
+        })
     </script>
 @endsection

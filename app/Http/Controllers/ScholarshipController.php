@@ -1176,8 +1176,6 @@ class ScholarshipController extends BaseController
 
         return back();
 
-
-
     }
 
 
