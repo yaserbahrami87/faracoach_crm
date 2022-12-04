@@ -10,6 +10,7 @@
                 <th>وام</th>
                 <th>امتیاز بورسیه</th>
                 <th>واریزی (تومان) </th>
+                <th>پرداخت نقدی</th>
                 <th>مبلغ همکاری</th>
                 <th>تاریخ ثبت نام</th>
                 <th>ساعت ثبت نام</th>
@@ -22,6 +23,7 @@
                 <td>%{{$scholarship->get_financial->schoalrshipPayment->score}}</td>
                 <td>{{number_format($scholarship->get_financial->schoalrshipPayment->pre_payment)}}</td>
                 <td>{{number_format($scholarship->get_financial->schoalrshipPayment->remaining)}}</td>
+                <td>{{number_format(($scholarship->get_financial->schoalrshipPayment->fi*$scholarship->get_financial->schoalrshipPayment->score)/100) }}</td>
                 <td>{{$scholarship->get_financial->schoalrshipPayment->date_fa}}</td>
                 <td>{{$scholarship->get_financial->schoalrshipPayment->time_fa}}</td>
                 <td>{{$scholarship->financial}}</td>
