@@ -1,5 +1,5 @@
 @if($scholarship->collabration==1)
-    <p>مبلغ همکاری: {{$scholarship->user->->collabration_accept->remaining}}</p>
+
     <table class="table-bordered table table-hover table-striped">
         <tr class="text-center">
             <th>#</th>
@@ -37,9 +37,11 @@
                 @endif
             </td>
             <td>
+                <!--
                 <button type="button" class="btn btn-primary collabrationModal" data-toggle="modal" data-target="#collabrationModal" data-whatever="{{$item->id}}">
                     <i class="bi bi-pencil-square"></i>
                 </button>
+                -->
             </td>
         </tr>
     @endforeach

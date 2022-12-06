@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\checkout;
 use App\city;
+use App\collabration_accept;
 use App\collabration_category;
 use App\course;
 use App\followup;
@@ -1162,6 +1163,11 @@ class ScholarshipController extends BaseController
         $scholarship=scholarship::where('user_id','=',Auth::user()->id)
                     ->first();
         $scholarship->collabration=1;
+        collabration_accept::where('user_id','=',Auth::user()->id)
+                            ->update([
+                                'status'    =>1,
+                            ]);
+
         $status=$scholarship->update();
         if($status)
         {
@@ -1173,9 +1179,7 @@ class ScholarshipController extends BaseController
         {
             alert()->error('خطا در ارسال درخواست')->persistent('بستن');
         }
-
         return back();
-
     }
 
 
