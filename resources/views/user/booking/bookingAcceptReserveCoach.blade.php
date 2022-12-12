@@ -332,7 +332,7 @@
                                 </td>
                                 <td>
                                     @if(!is_null($item->reserve))
-                                        <a class="btn-modal-introduced" href="{{$item->id}}"   >{{$item->reserve->user->fname}} {{$item->reserve->user->lname}}</a>
+                                         <a class="btn-modal-introduced" href="{{$item->id}}"   >{{$item->reserve->user->fname}} {{$item->reserve->user->lname}}</a>
                                     @endif
                                 </td>
 

@@ -375,8 +375,9 @@ class ReserveController extends BaseController
 
 
         alert()->success('رزرو با موفقیت انجام شد')->persistent('بستن');
-//        return $this->checkout(Auth::user()->id,$reserve->id,$reserve->final_off,'جلسه',Auth::user()->email,Auth::user()->tel,$duration.$user->fname . " " . $user->lname);
-        return '<script>window.location="/"</script>';
+
+//        return '<script>window.location="/"</script>';
+        return redirect('/panel/reserve/accept_reserve_user');
     }
 
 
