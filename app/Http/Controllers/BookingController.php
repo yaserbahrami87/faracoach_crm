@@ -68,7 +68,7 @@ class BookingController extends BaseController
                 })
                 ->orderby('start_date', 'desc')
                 ->orderby('start_time', 'desc')
-                ->paginate($this->countPage());
+                ->get();
 
             foreach ($booking as $item)
             {
@@ -510,7 +510,6 @@ class BookingController extends BaseController
 
         if(Auth::user()->type==2  || Auth::user()->type==3 || Auth::user()->type==4)
         {
-
             return view('admin.bookingAcceptReserveCoach')
 //        return view('panelUser.booking')
                 ->with('booking', $booking)
@@ -784,6 +783,13 @@ class BookingController extends BaseController
         return view('admin.InfoReserve')
             ->with('booking',$booking)
             ->with('history',$history);
+    }
+
+
+    //کنسلی جلسه
+    public function cancelReserve()
+    {
+
     }
 
 }

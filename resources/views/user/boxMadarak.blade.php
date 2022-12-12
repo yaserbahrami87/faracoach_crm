@@ -5,7 +5,7 @@
     </div>
     <div class="card-body">
         <ul class="list-unstyled team-members">
-            <li>
+            <li class="mb-1">
                 <div class="row">
                     <div class="col-md-2 col-2">
                         <btn class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-group"></i></btn>
@@ -30,6 +30,10 @@
                             <a class="btn btn-sm btn-primary" href="{{asset('/documents/users/'.$user->personal_image)}}" target="_blank" role="button" title="دانلود">
                                 <i class="bi bi-download"></i>
                             </a>
+                            <form method="post" action="/panel/profile/deleteImageProfile">
+                                {{csrf_field()}}
+                                <button type="submit" class="btn btn-danger btn-sm">حذف</button>
+                            </form>
                         @endif
                     </div>
                 </div>

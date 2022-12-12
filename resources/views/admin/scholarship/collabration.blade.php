@@ -37,11 +37,11 @@
                 @endif
             </td>
             <td>
-                <!--
+
                 <button type="button" class="btn btn-primary collabrationModal" data-toggle="modal" data-target="#collabrationModal" data-whatever="{{$item->id}}">
                     <i class="bi bi-pencil-square"></i>
                 </button>
-                -->
+
             </td>
         </tr>
     @endforeach
@@ -84,18 +84,26 @@
                 <div class="modal-body">
                     <form>
                         <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Recipient:</label>
-                            <input type="text" class="form-control" id="recipient-name">
+                            <label for="recipient-name" class="col-form-label">زمینه همکاری:</label>
+                            <input type="text" class="form-control" id="modal_collabration_details">
                         </div>
                         <div class="form-group">
-                            <label for="message-text" class="col-form-label">Message:</label>
-                            <textarea class="form-control" id="message-text"></textarea>
+                            <label for="message-text" class="col-form-label">ارزش واحد:</label>
+                            <input type="text" class="form-control" id="modal_collabration_value"  readonly />
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">تعداد</label>
+                            <input type="text" class="form-control" id="modal_collabration_count"  onchange="details_calculate(this.value)"  />
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">جمع</label>
+                            <input type="text" class="form-control" id="modal_collabration_calculate">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Send message</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
+                    <button type="button" class="btn btn-primary">بروزرسانی</button>
                 </div>
             </div>
         </div>

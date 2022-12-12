@@ -123,7 +123,7 @@ class CollabrationAcceptController extends Controller
      */
     public function show(collabration_accept $collabration_accept)
     {
-
+        return ($collabration_accept);
     }
 
     /**

@@ -3,8 +3,24 @@
   <component name="ChangeListManager">
     <list default="true" id="f3849cf8-ae8a-47cc-891c-72c8c9af69d2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BookingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BookingController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CollabrationAcceptController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CollabrationAcceptController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/StudentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/StudentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/courses.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/courses.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/scholarship/collabration.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/scholarship/collabration.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/scholarship/scholarship.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/scholarship/scholarship.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/students.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/students.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/coach.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/coach.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/InfoReserve.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/InfoReserve.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/booking/booking.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/booking/booking.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/booking/bookingAcceptReserveCoach.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/booking/bookingAcceptReserveCoach.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/boxMadarak.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/boxMadarak.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/reportCoach.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/reportCoach.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/scholarship/collabration.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/scholarship/collabration.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/showReserveUser.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/showReserveUser.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -276,6 +292,13 @@
       <workItem from="1670141232903" duration="7387000" />
       <workItem from="1670224217930" duration="2661000" />
       <workItem from="1670308348467" duration="5042000" />
+      <workItem from="1670398199258" duration="4080000" />
+      <workItem from="1670483163274" duration="8546000" />
+      <workItem from="1670655370377" duration="9518000" />
+      <workItem from="1670705964008" duration="780000" />
+      <workItem from="1670744834165" duration="11633000" />
+      <workItem from="1670788366275" duration="11692000" />
+      <workItem from="1670831273641" duration="11034000" />
     </task>
     <servers />
   </component>

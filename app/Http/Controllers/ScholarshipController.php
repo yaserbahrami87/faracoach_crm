@@ -1163,10 +1163,10 @@ class ScholarshipController extends BaseController
         $scholarship=scholarship::where('user_id','=',Auth::user()->id)
                     ->first();
         $scholarship->collabration=1;
-        collabration_accept::where('user_id','=',Auth::user()->id)
-                            ->update([
-                                'status'    =>1,
-                            ]);
+//        collabration_accept::where('user_id','=',Auth::user()->id)
+//                            ->update([
+//                                'status'    =>1,
+//                            ]);
 
         $status=$scholarship->update();
         if($status)

@@ -22,6 +22,8 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 
 
+
+
 class UserController extends BaseController
 {
     /**
@@ -1931,6 +1933,12 @@ class UserController extends BaseController
         }
 
         return back();
+    }
+
+    public function deleteImageProfile()
+    {
+        return back();
+        dd(File::delete('/documents/users/personal-09376578529.jpeg'));
     }
 
 

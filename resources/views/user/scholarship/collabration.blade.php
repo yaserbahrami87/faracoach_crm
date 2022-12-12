@@ -85,13 +85,11 @@
             </table>
     </div>
     <div class="col-12 text-center">
-            @if(!is_null(Auth::user()->scholarship->financial))
-                @if(!is_null(Auth::user()->collabration_accept)||(Auth::user()->collabration_accept->sum('calculate')>=((Auth::user()->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->fi)*(Auth::user()->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->score)/100)&&(Auth::user()->scholarship->collabration==0)))
+            @if((Auth::user()->scholarship->collabration==0))
                     <form method="post" action="/panel/scholarship/me/sendAcceptCollabration" onsubmit="return window.confirm('بعد از ارسال درخواست جهت بررسی امکان ویرایش وجود ندارد. آیا از ارسال درخواست اطمینان دارید ؟')">
                         {{csrf_field()}}
-                        <input type="submit" value="ارسال درخواست جهت بررسی" class="btn btn-success">
+                        <input type="submit" value="ارسال درخواست جهت بررسی" class="btn btn-success" />
                     </form>
-                @endif
             @endif
     </div>
 </div>

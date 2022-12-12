@@ -289,8 +289,32 @@
             var button = $(event.relatedTarget) ;
             var recipient = button.data('whatever');
             var modal = $(this)
-            modal.find('.modal-title').text('New message to ' + recipient);
-            modal.find('.modal-body input').val(recipient);
-        })
+            // modal.find('.modal-title').text('New message to ' + recipient);
+            // modal.find('.modal-body input').val(recipient);
+            $.ajax({
+                url:'/admin/collabration_accept/'+recipient,
+                success:function(data)
+                {
+                    $('#modal_collabration_value').val(data.value);
+                    $('#modal_collabration_count').val(data.count);
+                    $('#modal_collabration_calculate').val(data.count*data.value);
+                }
+
+            })
+
+        });
+
+       function details_calculate(vals)
+        {
+            var check=parseInt($("#modal_collabration_value").val().replace(/\,/g,''));
+            if(isNaN(check))
+            {
+                $('#modal_collabration_calculate').val(new Intl.NumberFormat().format(vals));
+            }
+            else
+            {
+                $('#modal_collabration_calculate').val(new Intl.NumberFormat().format(vals*$("#modal_collabration_value").val().replace(/\,/g,'')));
+            }
+        }
     </script>
 @endsection

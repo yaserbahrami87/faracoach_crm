@@ -7,11 +7,6 @@
 
     @if(Auth::user()->status_coach==1)
         <div id="app" class="col-md-4">
-           <!--  @{{message}}
-            @{{dates}}
-            @{{time}}-->
-
-        <!-- <date-picker :disable="['1397/05/07', '1397/05/08', 'Friday']" /> -->
             <p>اختصاص وقت جدید</p>
             <form method="post" action="/panel/booking" id="formBooking">
                 {{csrf_field()}}
@@ -33,21 +28,6 @@
                     :round-minute=true
                     name="start_time"
                 ></date-picker>
-
-                <!--
-                <div class="form-check form-check-inline pr-3">
-                    <input class="form-check-input" type="radio" name="duration_booking" id="duration_booking1" value="1">
-                    <label class="form-check-label" for="duration_booking1">معارفه 30 دقیقه ای</label>
-                </div>
-
-
-                <div class="form-check form-check-inline text-left">
-                    <input class="form-check-input" type="radio" name="duration_booking" id="duration_booking2" value="2">
-                    <label class="form-check-label" for="duration_booking2">کوچینگ 60 دقیقه ای</label>
-                </div>
-                -->
-
-
                 <button type="submit" class="btn btn-success">ایجاد رزرو</button>
             </form>
         </div>
@@ -55,88 +35,89 @@
 
 
     <div class="col-md-12 mt-3 table-responsive">
-        <table class="table border table-hover table-striped">
-            <tr>
-                <th>کد جلسه</th>
-                <th scope="col">تاریخ شروع</th>
-                <th scope="col">ساعت شروع</th>
-                <th scope="col">ساعت پایان</th>
-                @if(Auth::user()->status_coach==1)
-                    <th scope="col">وضعیت</th>
-                @endif
-                @if(Auth::user()->status_coach==1)
-                    <th scope="col">حذف</th>
-                @else
-                    <th>لغو جلسه</th>
-                @endif
-            </tr>
-
-            @foreach($booking as $item)
-
-                @switch($item['status'])
-                    @case('1')   <tr class="table-warning">
-                                @break
-                    @case('0')   <tr class="table-success">
-                                @break
-                    @case('4')   <tr class="table-danger">
-                                @break
-                    @default    <tr>
-                                @break
-                @endswitch
-
-                    <td class="text-center">
-                        @if($item->status==1  || ($item->caption_status=='باطل شده'))
-                            {{$item->id}}
-                        @else
-                            <a href="/panel/booking/{{$item->id}}">{{$item->id}}</a>
-                        @endif
-                    </td>
-                    <td class="text-center">
-
-                        @if(Auth::user()->status_coach==1 )
-
-                            @if($item->status==1  || ($item->caption_status=='باطل شده'))
-                                {{$item->start_date}}
-                            @else
-                                <a href="/panel/booking/{{$item->id}}">{{$item->start_date}}</a>
-                            @endif
-                        @else
-                            <a href="/panel/booking/{{$item->id}}">{{$item->booking->start_date}}</a>
-                        @endif
-                    </td>
-                    <td class="text-center">{{$item->start_time}}</td>
-                    <td class="text-center">{{$item->end_time}}</td>
-
+        <table  class="table_data table table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <th>کد جلسه</th>
+                    <th scope="col">تاریخ شروع</th>
+                    <th scope="col">ساعت شروع</th>
+                    <th scope="col">ساعت پایان</th>
                     @if(Auth::user()->status_coach==1)
-                        <td>{{$item->caption_status}}</td>
+                        <th scope="col">وضعیت</th>
                     @endif
-
-                    @if((($item->start_date>$dateNow && Auth::user()->status_coach==1) && (($item['status'])!=0)&&($item['status']!=4)))
-                        <td>
-                            <form method="post" action="/panel/booking/{{$item->id}}" onsubmit="return confirm('آیا از حذف زمان رزرو اطمینان دارید؟');">
-                                {{ method_field('DELETE') }}
-                                {{ csrf_field() }}
-                                <button  class="btn btn-danger" type="submit">
-                                    <i class="bi bi-trash-fill"></i>
-                                </button>
-                            </form>
-                        </td>
-                    @elseif($item->start_date>$dateNow && ($item['status']!=4))
-                        <td>
-                            <form method="POST" action="/panel/booking/{{$item->id}}" onsubmit="return confirm('آیا از لغو جلسه اطمینان دارید؟')">
-                                {{csrf_field()}}
-                                {{method_field('PATCH')}}
-                                <input type="hidden" name="status" value="4" />
-                                <button type="submit" class="btn btn-danger">لغو جلسه
-                                    <i class="bi bi-x-lg"></i>
-                                </button>
-                            </form>
-                        </td>
+                    @if(Auth::user()->status_coach==1)
+                        <th scope="col">حذف</th>
+                    @else
+                        <th>لغو جلسه</th>
                     @endif
                 </tr>
-            @endforeach
+            </thead>
+
+            <tbody>
+                @foreach($booking as $item)
+                    @switch($item['status'])
+                        @case('1')   <tr class="table-warning">
+                                    @break
+                        @case('0')   <tr class="table-success">
+                                    @break
+                        @case('4')   <tr class="table-danger">
+                                    @break
+                        @default    <tr>
+                                    @break
+                    @endswitch
+                        <td class="text-center">
+                            @if($item->status==1  || ($item->caption_status=='باطل شده'))
+                                {{$item->id}}
+                            @else
+                                <a href="/panel/booking/{{$item->id}}">{{$item->id}}</a>
+                            @endif
+                        </td>
+                        <td class="text-center">
+
+                            @if(Auth::user()->status_coach==1 )
+
+                                @if($item->status==1  || ($item->caption_status=='باطل شده'))
+                                    {{$item->start_date}}
+                                @else
+                                    <a href="/panel/booking/{{$item->id}}">{{$item->start_date}}</a>
+                                @endif
+                            @else
+                                <a href="/panel/booking/{{$item->id}}">{{$item->booking->start_date}}</a>
+                            @endif
+                        </td>
+                        <td class="text-center">{{$item->start_time}}</td>
+                        <td class="text-center">{{$item->end_time}}</td>
+
+                        @if(Auth::user()->status_coach==1)
+                            <td>{{$item->caption_status}}</td>
+                        @endif
+
+                        @if((($item->start_date>$dateNow && Auth::user()->status_coach==1) && (($item['status'])!=0)&&($item['status']!=4)))
+                            <td>
+                                <form method="post" action="/panel/booking/{{$item->id}}" onsubmit="return confirm('آیا از حذف زمان رزرو اطمینان دارید؟');">
+                                    {{ method_field('DELETE') }}
+                                    {{ csrf_field() }}
+                                    <button  class="btn btn-danger" type="submit">
+                                        <i class="bi bi-trash-fill"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        @elseif($item->start_date>$dateNow && ($item['status']!=4))
+                            <td>
+                                <form method="POST" action="/panel/booking/{{$item->id}}" onsubmit="return confirm('آیا از لغو جلسه اطمینان دارید؟')">
+                                    {{csrf_field()}}
+                                    {{method_field('PATCH')}}
+                                    <input type="hidden" name="status" value="4" />
+                                    <button type="submit" class="btn btn-danger">لغو جلسه
+                                        <i class="bi bi-x-lg"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        @endif
+                    </tr>
+                @endforeach
+            </tbody>
         </table>
-        {{$booking->links()}}
     </div>
 
 @endsection
@@ -166,4 +147,20 @@
 
 
 
+@endsection
+
+
+@section('footerScript')
+    <script src="{{asset('/dashboard/assets/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('/dashboard/assets/js/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/dataTables.buttons.min.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/jszip.min.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/vfs_fonts.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/buttons.html5.min.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/buttons.print.min.js')}}"></script>
+    <script>
+        $(document).ready(function() {
+            $('.table_data').DataTable();
+        } );
+    </script>
 @endsection

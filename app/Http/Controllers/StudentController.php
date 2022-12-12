@@ -16,13 +16,7 @@ class StudentController extends BaseController
     public function index()
     {
 
-        $students=User::join('followups','users.id','=','followups.user_id')
-            ->join('courses','followups.course_id','=','courses.id')
-            ->where('followups.status_followups','=','20')
-            ->select('users.*','courses.course')
-            ->orderby('followups.id','desc')
-            ->groupby('followups.user_id')
-            ->paginate(32);
+        $students=student::get();
 
         $course=$this->get_courses();
 

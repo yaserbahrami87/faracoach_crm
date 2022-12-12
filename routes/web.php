@@ -24,6 +24,7 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     // ROUTE USER
 
     Route::get('/profile','UserController@profile');
+    Route::post('/profile/deleteImageProfile','UserController@deleteImageProfile');
 //    Route::get('/user/contacts','UserController@contacts');
 //    Route::get('/user/introduction','UserController@introduction');
 //    Route::get('/user/contract','UserController@contract');
@@ -131,7 +132,7 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
 
     //booking
     Route::get('/booking/accept','BookingController@acceptReserve');
-
+    Route::get('/booking/cancel','BookingController@cancelReserve');
     Route::resource('booking','BookingController');
 
     //booking Setting
@@ -268,6 +269,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     //Scholarship setting
     Route::resource('collabration_category','CollabrationCategoryController');
     Route::resource('collabration_details','CollabrationDetailsController');
+    Route::resource('collabration_accept','CollabrationAcceptController');
 
     //scholarship collabration
     Route::get('/users/collabrations','ScholarshipController@collabrations');
