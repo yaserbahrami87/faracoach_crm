@@ -73,7 +73,7 @@
                 @endif
 
                 @if(($reserve->start_date<$dateNow)&&($reserve->status==3))
-                    <p>دانشپذیر گرامی</p>
+                    <p>مراجع گرامی</p>
                     <p class="text-justify">یکی از مهم ترین مهارت های یک کوچ ارائه بازخورد سازنده است که توام با صداقت، صراحت و صمیمیت است.</p>
                     <p class="text-justify">لذا از اینکه با نظرات ارزشمند خودتان ما را در ارائه با کیفیت تر خدمات یاری می نمایید، بی نهایت سپاسگزاریم.</p>
                     <form method="post" action="/panel/feedbackcoach" >

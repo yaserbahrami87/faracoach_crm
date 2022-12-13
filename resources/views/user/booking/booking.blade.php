@@ -1,4 +1,9 @@
 @extends('user.master.index')
+@section('headerScript')
+    <link href="{{asset('/dashboard/assets/css/buttons.dataTables.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('/dashboard/assets/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
+@endsection
+
 @section('content')
     <?php
 //    $roozha="'Sunday','Friday'";
@@ -91,29 +96,27 @@
                         @if(Auth::user()->status_coach==1)
                             <td>{{$item->caption_status}}</td>
                         @endif
+                        <td>
+                            @if((($item->start_date>$dateNow && Auth::user()->status_coach==1) && (($item['status'])!=0)&&($item['status']!=4)))
+                                    <form method="post" action="/panel/booking/{{$item->id}}" onsubmit="return confirm('آیا از حذف زمان رزرو اطمینان دارید؟');">
+                                        {{ method_field('DELETE') }}
+                                        {{ csrf_field() }}
+                                        <button  class="btn btn-danger" type="submit">
+                                            <i class="bi bi-trash-fill"></i>
+                                        </button>
+                                    </form>
+                            @elseif($item->start_date>$dateNow && ($item['status']!=4))
+                                    <form method="POST" action="/panel/booking/{{$item->id}}" onsubmit="return confirm('آیا از لغو جلسه اطمینان دارید؟')">
+                                        {{csrf_field()}}
+                                        {{method_field('PATCH')}}
+                                        <input type="hidden" name="status" value="4" />
+                                        <button type="submit" class="btn btn-danger">لغو جلسه
+                                            <i class="bi bi-x-lg"></i>
+                                        </button>
+                                    </form>
+                            @endif
+                        </td>
 
-                        @if((($item->start_date>$dateNow && Auth::user()->status_coach==1) && (($item['status'])!=0)&&($item['status']!=4)))
-                            <td>
-                                <form method="post" action="/panel/booking/{{$item->id}}" onsubmit="return confirm('آیا از حذف زمان رزرو اطمینان دارید؟');">
-                                    {{ method_field('DELETE') }}
-                                    {{ csrf_field() }}
-                                    <button  class="btn btn-danger" type="submit">
-                                        <i class="bi bi-trash-fill"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        @elseif($item->start_date>$dateNow && ($item['status']!=4))
-                            <td>
-                                <form method="POST" action="/panel/booking/{{$item->id}}" onsubmit="return confirm('آیا از لغو جلسه اطمینان دارید؟')">
-                                    {{csrf_field()}}
-                                    {{method_field('PATCH')}}
-                                    <input type="hidden" name="status" value="4" />
-                                    <button type="submit" class="btn btn-danger">لغو جلسه
-                                        <i class="bi bi-x-lg"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        @endif
                     </tr>
                 @endforeach
             </tbody>
@@ -145,12 +148,6 @@
 
     </script>
 
-
-
-@endsection
-
-
-@section('footerScript')
     <script src="{{asset('/dashboard/assets/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('/dashboard/assets/js/dataTables.bootstrap4.min.js')}}"></script>
     <script src="{{asset('/panel_assets/js/scripts/datatables/dataTables.buttons.min.js')}}"></script>
@@ -160,7 +157,11 @@
     <script src="{{asset('/panel_assets/js/scripts/datatables/buttons.print.min.js')}}"></script>
     <script>
         $(document).ready(function() {
-            $('.table_data').DataTable();
+            $('.table_data').DataTable({
+                order: [[1, 'desc']],
+            });
         } );
     </script>
+
+
 @endsection

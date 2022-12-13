@@ -132,7 +132,16 @@ class BookingController extends BaseController
 
         $tmp=(explode(' ~ ',$request->start_date));
         $tmp=Arr::sort($tmp);
-        foreach ($tmp as $item) {
+        foreach ($tmp as $item)
+        {
+            if(($item<=$this->dateNow)&&($request['start_time']<=$this->timeNow))
+            {
+                alert()->error('تاریخ و ساعت انتخاب شده گذشته')->persistent('بستن');
+                return back();
+            }
+
+
+
             $check = booking::where('start_date', '=', $item)
                 ->where('user_id','=',Auth::user()->id)
                 ->where('start_time', '=', $request['time'])

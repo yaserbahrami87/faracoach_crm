@@ -382,7 +382,9 @@
     <script src="{{asset('/panel_assets/js/scripts/datatables/buttons.print.min.js')}}"></script>
     <script>
         $(document).ready(function() {
-            $('.table_data').DataTable();
+            $('.table_data').DataTable({
+                order: [[2, 'desc']],
+            });
         } );
     </script>
 @endsection

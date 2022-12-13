@@ -97,6 +97,7 @@
                             <th>#</th>
                             <th>مشخصات</th>
                             <th>محصول</th>
+                            <th>تلفن</th>
                             <th>تاریخ ایجاد </th>
                             <th>موعد پرداخت</th>
                             <th>قیمت(تومان)</th>
@@ -117,6 +118,9 @@
                                     @if($item->type=='course')
                                         {{($item->course['course'])}}
                                     @endif
+                                </td>
+                                <td>
+                                    {{$item->user->tel}}
                                 </td>
                                 <td>{{$item->date_createfaktor}}</td>
                                 <td>{{$item->date_faktor}}</td>

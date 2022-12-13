@@ -152,8 +152,8 @@
                             <td class="d-none frm_insertReserve" >
                                 <form method="POST" action="/reserve/insert">
                                     {{csrf_field()}}
-                                    <button type="submit" class="btn btn-success btn-sm ">
-                                        پرداخت نقدی  <span class="glyphicon glyphicon-play"></span>
+                                    <button type="submit" class="btn btn-success  ">
+                                        پرداخت  <span class="glyphicon glyphicon-play"></span>
                                     </button>
                                 </form>
                             </td>
