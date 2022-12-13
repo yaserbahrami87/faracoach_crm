@@ -3,15 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f3849cf8-ae8a-47cc-891c-72c8c9af69d2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BookingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BookingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/financial/faktor-all.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/financial/faktor-all.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/cart.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/cart.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/booking/booking.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/booking/booking.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/booking/bookingAcceptReserveCoach.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/booking/bookingAcceptReserveCoach.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/booking/bookingAcceptReserveUser.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/booking/bookingAcceptReserveUser.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/coupon.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/coupon.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/editCoach.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/editCoach.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/showReserveUser.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/showReserveUser.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/scholarship/financial.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/scholarship/financial.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -292,7 +284,7 @@
       <workItem from="1670831273641" duration="15278000" />
       <workItem from="1670851739949" duration="118000" />
       <workItem from="1670877287534" duration="2458000" />
-      <workItem from="1670913780184" duration="9143000" />
+      <workItem from="1670913780184" duration="10109000" />
     </task>
     <servers />
   </component>
