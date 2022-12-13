@@ -221,9 +221,19 @@
 @section('footerScript')
     <script src="{{asset('/dashboard/assets/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('/dashboard/assets/js/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/dataTables.buttons.min.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/jszip.min.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/vfs_fonts.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/buttons.html5.min.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/buttons.print.min.js')}}"></script>
     <script>
         $(document).ready(function() {
-            $('.dataTable').DataTable();
+            $('.dataTable').DataTable({
+                dom: 'Bfrltip',
+                buttons: [
+                    'excel',
+                ]
+            } );
         } );
     </script>
 
