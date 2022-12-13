@@ -2,6 +2,7 @@
 
 @section('headerScript')
     <link href="{{asset('/dashboard/assets/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('/dashboard/assets/css/buttons.dataTables.min.css')}}" rel="stylesheet" />
 @endsection
 
 @section('content')
@@ -40,6 +41,7 @@
                             <th>#</th>
                             <th>مشخصات</th>
                             <th>محصول</th>
+                            <th>تلفن</th>
                             <th>تاریخ ایجاد </th>
                             <th>موعد پرداخت</th>
                             <th>قیمت(تومان)</th>
@@ -61,6 +63,7 @@
                                         {{($item->course['course'])}}
                                     @endif
                                 </td>
+                                <td>{{$item->user->tel}}</td>
                                 <td>{{$item->date_createfaktor}}</td>
                                 <td>{{$item->date_faktor}}</td>
                                 <td>{{number_format($item->fi)}}</td>
@@ -158,6 +161,7 @@
                             <th>#</th>
                             <th>مشخصات</th>
                             <th>محصول</th>
+                            <th>تلفن</th>
                             <th>تاریخ ایجاد </th>
                             <th>موعد پرداخت</th>
                             <th>قیمت(تومان)</th>
@@ -179,6 +183,7 @@
                                         {{($item->course['course'])}}
                                     @endif
                                 </td>
+                                <td>{{$item->user->tel}}</td>
                                 <td>{{$item->date_createfaktor}}</td>
                                 <td>{{$item->date_faktor}}</td>
                                 <td>{{number_format($item->fi)}}</td>
@@ -232,7 +237,8 @@
                 dom: 'Bfrltip',
                 buttons: [
                     'excel',
-                ]
+                ],
+                order: [[5, 'desc']],
             } );
         } );
     </script>

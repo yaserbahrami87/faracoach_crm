@@ -103,7 +103,7 @@ class FaktorController extends Controller
         else
         {
             $startMonth=verta();
-            $startMonth=($startMonth->startMonth())->format('Y/m/d');
+            $startMonth=($startMonth->startYear())->format('Y/m/d');
             $endtMonth=verta();
             $endtMonth=($endtMonth->endMonth())->format('Y/m/d');
 
