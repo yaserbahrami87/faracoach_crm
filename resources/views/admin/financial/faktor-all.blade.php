@@ -238,7 +238,7 @@
                 buttons: [
                     'excel',
                 ],
-                order: [[5, 'desc']],
+
             } );
         } );
     </script>

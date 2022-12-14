@@ -20,15 +20,13 @@
                     <th class="text-center">تخفیف پرداخت نقدی(تومان)</th>
                     <th class="text-center">تعداد اقساط</th>
                     <th class="text-center">مبلغ قسط</th>
-
                     <th class="text-center">قیمت ثبت نام شده</th>
                     <th class="text-center">کدرهگیری</th>
-                    <th class="text-center"></th>
+                    <th class="text-center">جذف</th>
                 </tr>
             </thead>
             <tbody>
             @foreach ($course->students as $item)
-
                 <tr>
                     <td>
 
@@ -74,22 +72,22 @@
                             {{number_format($item2->order['fi_ghest'])}}
                         @endforeach
                     </td>
-
-
-
                     <td class="text-center">
                         @foreach($item->user->checkouts->where('status','=',1)->where('product_id','=',$item->course_id)->where('type','=','course') as $item2)
                             {{number_format($item2->order['fi'])}}
                         @endforeach
                     </td>
-
                     <td class="text-center">
                         @foreach($item->user->checkouts->where('status','=',1)->where('product_id','=',$item->course_id)->where('type','=','course') as $item2)
                             {{$item2->authority}}
                         @endforeach
                     </td>
                     <td>
-                        <a href="" class="btn btn-primary" >ایجاد فاکتور</a>
+                        <form method="post" action="/admin/education/students/{{$item->id}}" onsubmit="return window.confirm('آیا از حذف دانشجو از دوره اطمینان داری؟')">
+                            {{csrf_field()}}
+                            {{method_field('DELETE')}}
+                            <button class="btn btn-danger" type="submit">حذف از دوره</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach
@@ -112,13 +110,7 @@
     <script>
         $(document).ready(function() {
             $('.table_data').DataTable({
-                // columnDefs: [
-                //     {
-                //         target: 6,
-                //         visible: false,
-                //         searchable: false,
-                //     }
-                // ],
+                order: [[4, 'desc']],
                 dom: 'Bfrltip',
                 buttons: [
                     'excel',

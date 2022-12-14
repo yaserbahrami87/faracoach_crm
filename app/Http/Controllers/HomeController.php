@@ -29,8 +29,6 @@ class HomeController extends BaseController
      */
     public function index()
     {
-        //redirect to LOGIN
-        return redirect('/panel');
 
         $posts=$this->get_post(NULL,1,'limit');
         if(Auth::check())
@@ -41,8 +39,6 @@ class HomeController extends BaseController
         {
             $tweets=$this->get_tweet(NULL,[1],'paginate');
         }
-
-
         foreach ($posts as $item)
         {
             $item->time=$this->diff($item->created_at_post,'Asia/Tehran');

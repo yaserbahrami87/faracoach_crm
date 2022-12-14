@@ -25,40 +25,7 @@ class BookingController extends BaseController
 
     public function index()
     {
-        if(Auth::user()->type==2) {
 
-            $booking = booking::where('user_id', '=', Auth::user()->id)
-                ->where('start_date','>=',$this->dateNow)
-                ->orderby('start_date', 'desc')
-                ->orderby('start_time', 'desc')
-                ->paginate($this->countPage());
-
-            foreach ($booking as $item) {
-
-                $item->caption_status=$this->get_statusBookings($item->status);
-
-                //تعیین وضعیت رزروهایی که تاریخ گذشته و رزرو نشده
-
-//                if (($item->status == 1) && ($item->start_date < $this->dateNow)) {
-////                    $item->status = 3;
-//                    $item->caption_status = 'باطل شده';
-//                }
-
-                switch ($item->duration_booking) {
-                    case '1':
-                        $item->duration_booking = 'معارفه 30 دقیقه ای';
-                        break;
-                    case '2':
-                        $item->duration_booking = 'کوچینگ 60 دقیقه ای';
-                        break;
-                }
-            }
-            return view('admin.booking')
-                ->with('booking', $booking)
-                ->with('dateNow', $this->dateNow);
-        }
-        else
-        {
            // وصعیت 1 برای رزرو های در حال رزرو و 0 رزرو شده هاست
             $booking = booking::where('user_id', '=', Auth::user()->id)
                 ->where(function($query)
@@ -88,7 +55,7 @@ class BookingController extends BaseController
             return view('user.booking.booking')
                 ->with('booking', $booking)
                 ->with('dateNow', $this->dateNow);
-        }
+
     }
 
     /**
@@ -484,7 +451,7 @@ class BookingController extends BaseController
             else
             {
                 $booking = booking::wherein('bookings.status', [0, 2, 3])
-                    ->orderby('bookings.id', 'desc')
+                    ->orderby('start_date', 'desc')
                     ->get();
             }
 
@@ -493,17 +460,12 @@ class BookingController extends BaseController
         {
             $booking = booking::where('user_id', '=', Auth::user()->id)
                         ->wherein('bookings.status', [0, 2, 3])
-                        ->orderby('bookings.id', 'desc')
+                        ->orderby('start_date', 'desc')
                         ->get();
         }
 
-
-
-
-
         foreach ($booking as $item)
         {
-
             switch ($item->duration_booking)
             {
                 case '1':
@@ -515,11 +477,9 @@ class BookingController extends BaseController
             }
         }
 
-
-
         if(Auth::user()->type==2  || Auth::user()->type==3 || Auth::user()->type==4)
         {
-            return view('admin.bookingAcceptReserveCoach')
+            return view('admin.booking.bookingAcceptReserveCoach')
 //        return view('panelUser.booking')
                 ->with('booking', $booking)
                 ->with('dateNow', $this->dateNow);
@@ -799,6 +759,40 @@ class BookingController extends BaseController
     public function cancelReserve()
     {
 
+    }
+
+    //نمایش جلسات برای ادمین
+    public function bookingListAdmin()
+    {
+        $booking = booking::where('user_id', '=', Auth::user()->id)
+            ->where('start_date','>=',$this->dateNow)
+            ->orderby('start_date', 'desc')
+            ->orderby('start_time', 'desc')
+            ->paginate($this->countPage());
+
+        foreach ($booking as $item) {
+
+            $item->caption_status=$this->get_statusBookings($item->status);
+
+            //تعیین وضعیت رزروهایی که تاریخ گذشته و رزرو نشده
+
+//                if (($item->status == 1) && ($item->start_date < $this->dateNow)) {
+////                    $item->status = 3;
+//                    $item->caption_status = 'باطل شده';
+//                }
+
+            switch ($item->duration_booking) {
+                case '1':
+                    $item->duration_booking = 'معارفه 30 دقیقه ای';
+                    break;
+                case '2':
+                    $item->duration_booking = 'کوچینگ 60 دقیقه ای';
+                    break;
+            }
+        }
+        return view('admin.booking')
+            ->with('booking', $booking)
+            ->with('dateNow', $this->dateNow);
     }
 
 }

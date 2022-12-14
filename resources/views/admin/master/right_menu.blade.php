@@ -110,7 +110,7 @@
                     </li>
                     <li><a href=" nav-item has-sub "><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >جلسات</span></a>
                         <ul class="menu-content">
-                            <li><a href="/admin/booking/"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >لیست جلسات</span></a></li>
+                            <li><a href="/admin/booking/bookingListAdmin"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >لیست جلسات</span></a></li>
                             <li><a href="/admin/booking/accept"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >جلسات رزرو شده</span></a></li>
                             <li><a href="/admin/reserve/waiting"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >رزروهای ناقص</span></a></li>
                             <li><a href="/admin/booking/reportallcoach"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >گزارش</span></a></li>

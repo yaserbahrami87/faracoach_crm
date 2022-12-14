@@ -108,12 +108,21 @@ class StudentController extends BaseController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int  $student
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(student $student)
     {
-        //
+        $status=$student->delete();
+        if($status)
+        {
+            alert()->success('دانشجو با موفقیت از دوره حذف شد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در حذف دانشجو')->persistent('بستن');
+        }
+        return back();
     }
 
     public function search(Request $request)

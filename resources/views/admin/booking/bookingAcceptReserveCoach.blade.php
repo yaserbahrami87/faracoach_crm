@@ -14,6 +14,17 @@
             width: 25px;
             height: 25px;
         }
+
+        .bg-warning2
+        {
+            background-color: #fff0b3 !important;
+        }
+
+        .bg-success2
+        {
+            background-color: #c6ffb3 !important;
+        }
+
     </style>
 @endsection
 @section('content')
@@ -83,7 +94,7 @@
                     </thead>
                     <tbody>
                         @foreach($booking as $item)
-                            <tr class="@if($item->status==0) bg-warning @elseif($item->status==4) bg-success @endif">
+                            <tr class="@if($item->status==0) bg-warning2 @elseif($item->status==3) bg-success2 @endif">
                                 <td>
                                     <a href="/admin/booking/{{$item->id}}/showadminbooking">
                                          {{$item->coach['user']['fname'].' '.$item->coach->user['lname'] }}
@@ -141,7 +152,9 @@
     <script src="{{asset('/dashboard/assets/js/dataTables.bootstrap4.min.js')}}"></script>
     <script>
         $(document).ready(function() {
-            $('.dataTable').DataTable();
+            $('.dataTable').DataTable({
+                order: [[3, 'desc']],
+            });
         } );
     </script>
 

@@ -386,6 +386,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
 
     //booking
     Route::get('/booking/{booking}/showadminbooking','BookingController@showAdminBooking');
+    Route::get('/booking/bookingListAdmin','BookingController@bookingListAdmin');
     Route::get('/booking/accept','BookingController@acceptReserve');
     Route::resource('booking','BookingController');
 
