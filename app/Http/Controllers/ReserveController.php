@@ -116,6 +116,7 @@ class ReserveController extends BaseController
      */
     public function update(Request $request, reserve $reserve)
     {
+
         //$reserve->booking->coach->user);
         $this->validate($request,[
             'presession'    =>'required|string|'
@@ -188,7 +189,9 @@ class ReserveController extends BaseController
 
         $reserve=reserve::where('booking_id','=',$request['booking_id'])
                             ->where('user_id','=',Auth::user()->id)
+                            ->where('status','=',1)
                             ->first();
+
 
         $booking=booking::where('id','=',$request['booking_id'])
                         ->first();
@@ -270,6 +273,9 @@ class ReserveController extends BaseController
 
         }
 
+
+
+
         if($status)
         {
             return "<script>window.location='/cart'</script>";
@@ -289,43 +295,29 @@ class ReserveController extends BaseController
 
         foreach ($cart as $item)
         {
-            $reserve = reserve::where('booking_id', '=', $item['booking_id'])
-                ->first();
+            $booking = booking::where('id', '=', $item['booking_id'])
+                                ->first();
 
-            if ($reserve->status == 0)
+            if ($booking->status == 1)
             {
-                $user = booking::join('users', 'bookings.user_id', '=', 'users.id')
-                    ->join('coaches', 'users.id', '=', 'coaches.user_id')
-                    ->where('bookings.id', '=', $item['booking_id'])
-                    ->first();
-
-
                 $fi = $item->final_off;
+
                 $off = 0;
                 $final_off = $fi - $off;
 
                 if($final_off==0)
                 {
-                    if ($reserve->duration_booking == 1) {
+                    if ($booking->reserve->duration_booking == 1) {
                         $duration = 'جلسه معارفه';
                     } else {
                         $duration = 'جلسه کوچینگ';
                     }
 
-                    $reserve->update(
-                        [
-                            'status' => 1,
-                        ]);
-                    $status = $reserve->save();
+                    $booking->status = 0;
+                    $status=$booking->save();
+                    $booking->reserve->status = 1;
+                    $booking->reserve->save();
 
-
-                    if ($status)
-                    {
-                        $booking = booking::where('id', '=', $reserve->booking->id)
-                            ->first();
-                        $booking->status = 0;
-                        $booking->save();
-                    }
                 }
 
                 elseif($final_off<100)
@@ -335,7 +327,7 @@ class ReserveController extends BaseController
                 }
                 else
                 {
-                    return  $this->checkoutStore($reserve->id,$final_off,Auth::user(),'reserve',NULL,'رزرو جلسه');
+                    return  $this->checkoutStore($booking->reserve->id,$final_off,Auth::user(),'reserve',NULL,'رزرو جلسه');
                 }
             } else
             {
@@ -346,26 +338,26 @@ class ReserveController extends BaseController
 
 
             if ($status) {
-                if ($reserve->duration_booking == 1) {
+                if ($booking->reserve->duration_booking == 1) {
                     $duration = 'جلسه معارفه';
                 } else {
                     $duration = 'جلسه کوچینگ';
                 }
 
                 //                //ارسال پیامک به کوچ
-                $msg =$duration . " \n " . $reserve->booking->start_date . " \n  " . $reserve->booking->start_time . "\n مراجع:" . Auth::user()->fname . " " . Auth::user()->lname . "\n تماس کوچ:" .  Auth::user()->tel;
-                $this->sendSms($reserve->booking->coach->user->tel, $msg);
+                $msg =$duration . " \n " . $booking->start_date . " \n  " . $booking->start_time . "\n مراجع:" . Auth::user()->fname . " " . Auth::user()->lname . "\n تماس کوچ:" .  Auth::user()->tel;
+                $this->sendSms($booking->reserve->booking->coach->user->tel, $msg);
 
                 //                //ارسال پیامک برای مراجع
-                $msg =$duration . " \n " . $reserve->booking->start_date . " \n " . $reserve->booking->start_time . "\n کوچ: " . $reserve->booking->coach->user->fname . " " . $reserve->booking->coach->user->lname . "\nتماس:" .$reserve->booking->coach->user->tel;
+                $msg =$duration . " \n " . $booking->start_date . " \n " . $booking->start_time . "\n کوچ: " . $booking->coach->user->fname . " " . $booking->coach->user->lname . "\nتماس:" .$booking->coach->user->tel;
                 $this->sendSms(Auth::user()->tel, $msg);
 
                 //ارسال پیامک برای حسام
-                $msg=$duration . " \n " . $booking->start_date . " \n  " . $booking->start_time . "\n کوچ:" . $user->fname . " " . $user->lname . "\n مراجع ".Auth::user()->fname . " " . Auth::user()->lname . "\nتماس:" .Auth::user()->tel;
+                $msg=$duration . " \n " . $booking->start_date . " \n  " . $booking->start_time . "\n کوچ:" . $booking->coach->user->fname . " " . $booking->coach->user->lname . "\n مراجع ".Auth::user()->fname . " " . Auth::user()->lname . "\nتماس:" .Auth::user()->tel;
                 $this->sendSms('+989101769020', $msg);
 
                 //ارسال پیامک برای یوسفی
-                $msg=$duration . " \n " . $booking->start_date . " \n  " . $booking->start_time . "\n کوچ:" . $user->fname . " " . $user->lname . "\n مراجع ".Auth::user()->fname . " " . Auth::user()->lname . "\nتماس:" .Auth::user()->tel;
+                $msg=$duration . " \n " . $booking->start_date . " \n  " . $booking->start_time . "\n کوچ:" . $booking->coach->user->fname . " " . $booking->coach->user->lname . "\n مراجع ".Auth::user()->fname . " " . Auth::user()->lname . "\nتماس:" .Auth::user()->tel;
                 $this->sendSms('+989151060792', $msg);
             } else {
                 alert()->error('خطا در محاسبه')->persistent('بستن');

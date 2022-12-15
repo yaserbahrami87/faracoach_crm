@@ -278,12 +278,12 @@
 
         .bg-success2
         {
-            background-color:  #c6ffb3;
+            background-color:  #c6ffb3 !important;
         }
 
         .bg-warning2
         {
-            background-color: #fff0b3;
+            background-color: #fff0b3 !important;
         }
     </style>
 @endsection

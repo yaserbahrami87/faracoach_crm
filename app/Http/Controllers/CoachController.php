@@ -561,7 +561,9 @@ class CoachController extends BaseController
         }
         else
         {
-            $request['start_date']=[$this->dateNow,$this->dateNow];
+            $v = verta();
+            $v = $v->startMonth()->format('Y/m/d');
+            $request['start_date']=[$v,$this->dateNow];
 
         }
 

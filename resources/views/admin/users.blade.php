@@ -108,7 +108,7 @@
                             <th> پیگیری بعد</th>
                             <th>وضعیت</th>
                             <th>اخرین ورود</th>
-
+                            <th>وضعیت بورسیه</th>
                             @if(Auth::user()->type==2)
                                 <th>حذف</th>
                             @endif
@@ -195,6 +195,12 @@
                                         {{$item->last_login_at}}
                                     </a>
                                 </td>
+                                <td>
+                                    @if((is_null($item->scholarship))&&($item->resource=='بورسیه تحصیلی'))
+                                        ثبت نام نشده
+                                    @endif
+                                </td>
+
 
                                 @if(Auth::user()->type==2)
 

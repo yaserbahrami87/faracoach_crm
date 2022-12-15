@@ -12,7 +12,7 @@ class booking extends Model
 
     public function reserve()
     {
-        return $this->hasOne('App\reserve', 'booking_id', 'id');
+        return $this->hasOne('App\reserve', 'booking_id', 'id')->latest();
     }
 
     public function reserveAccess()

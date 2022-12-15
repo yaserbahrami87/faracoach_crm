@@ -2,9 +2,50 @@
 @section('headerScript')
     <link href="{{asset('/dashboard/assets/css/buttons.dataTables.min.css')}}" rel="stylesheet" />
     <link href="{{asset('/dashboard/assets/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
+    <style>
+        #colors span
+        {
+            width: 25px;
+            height: 25px;
+        }
+        .bg-success2
+        {
+            background-color:  #c6ffb3 !important;
+        }
+
+        .bg-warning2
+        {
+            background-color: #fff0b3 !important;
+        }
+    </style>
 @endsection
 
 @section('content')
+    <div class="col-12" id="colors">
+        <div class="row">
+            <div class="col-6 col-sm-1 col-lg-1 col-md-1 col-xl-1 text-center p-0 m-0">
+                <span class="d-inline-block bg-success2 rounded-circle" ></span>
+            </div>
+            <div class="col-6 col-sm-11 col-lg-2 col-md-2 col-xl-2 p-0 m-0">
+                <p class=" p-0 m-0"> جلسات برگزار شده</p>
+            </div>
+            <div class="col-6 col-sm-1 col-lg-1 col-md-1 col-xl-1 text-center p-0 m-0">
+                <span class="d-inline-block bg-warning2 rounded-circle" ></span>
+            </div>
+            <div class="col-6 col-sm-11 col-lg-2 col-md-2 col-xl-2 p-0 m-0">
+                <p class=" p-0 m-0"> جلسات رزرو شده بلاتکلیف</p>
+            </div>
+            <div class="col-6 col-sm-1 col-lg-1 col-md-1 col-xl-1 text-center p-0 m-0">
+                <span class="d-inline-block bg-danger rounded-circle" ></span>
+            </div>
+            <div class="col-6 col-sm-11 col-lg-2 col-md-2 col-xl-2 p-0 m-0">
+                <p class=" p-0 m-0"> جلسات کنسل شده</p>
+            </div>
+
+
+        </div>
+
+    </div>
     <div class="col-md-12 mt-3 table-responsive">
         <table id="example" class="table table-striped table-bordered" style="width:100%">
             <thead>
@@ -28,9 +69,9 @@
             <tbody>
                 @foreach($reserves as $item)
                     @switch($item['status'])
-                        @case('1')   <tr class="table-warning clickable-row "  data-href='/panel/reserve/{{$item->id}}'>
+                        @case('1')   <tr class="bg-warning2 clickable-row "  data-href='/panel/reserve/{{$item->id}}'>
                         @break
-                        @case('0')   <tr class="table-success clickable-row"  data-href='/panel/reserve/{{$item->id}}'>
+                        @case('3')   <tr class="bg-success2 clickable-row"  data-href='/panel/reserve/{{$item->id}}'>
                         @break
                         @case('4')   <tr class="table-danger">
                         @break
