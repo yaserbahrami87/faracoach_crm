@@ -444,7 +444,7 @@ class CoachController extends BaseController
     public function viewAllCoaches(Request $request)
     {
         $v=verta();
-        $month=[$v->startMonth()->format('Y/m/d'),$v->endMonth()->format('Y/m/d')];
+        $month=[$this->dateNow,$v->endMonth()->format('Y/m/d')];
 
         $users=coach::join('users','coaches.user_id','=','users.id')
             ->when($request['q'], function ($query,$request)
