@@ -445,7 +445,7 @@ class CoachController extends BaseController
     {
         $v=verta();
         $month=[$this->dateNow,$v->endMonth()->format('Y/m/d')];
-
+        dd($month);
         $users=coach::join('users','coaches.user_id','=','users.id')
             ->when($request['q'], function ($query,$request)
             {

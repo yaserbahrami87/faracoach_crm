@@ -13,274 +13,67 @@
             height: 25px;
         }
 
-        table *
-        {
-            font-size:12px;
-        }
-
-        .listFriends .btn
-        {
-            border-radius: 5px;
-        }
-
-        .listFriends .btn
-        {
-            width: auto;
-            height: auto;
-        }
-
-        .listFriends .card .avatar
-        {
-            width: auto;
-            height: auto;
-        }
-
-        .listFriends .card {
-            padding-top: 20px;
-            margin: 10px 0 20px 0;
-            background-color: rgba(214, 224, 226, 0.2);
-            border-top-width: 0;
-            border-bottom-width: 2px;
-            -webkit-border-radius: 3px;
-            -moz-border-radius: 3px;
-            border-radius: 3px;
-            -webkit-box-shadow: none;
-            -moz-box-shadow: none;
-            box-shadow: none;
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
-        }
-
-        .listFriends .card .card-heading {
-            padding: 0 20px;
-            margin: 0;
-        }
-
-        .listFriends .card .card-heading.simple {
-            font-size: 20px;
-            font-weight: 300;
-            color: #777;
-            border-bottom: 1px solid #e5e5e5;
-        }
-
-        .listFriends .card .card-heading.image img {
-            display: inline-block;
-            width: 46px;
-            height: 46px;
-            margin-right: 15px;
-            vertical-align: top;
-            border: 0;
-            -webkit-border-radius: 50%;
-            -moz-border-radius: 50%;
-            border-radius: 50%;
-        }
-
-        .listFriends .card .card-heading.image .card-heading-header {
-            display: inline-block;
-            vertical-align: top;
-        }
-
-        .listFriends .card .card-heading.image .card-heading-header h3 {
-            margin: 0;
-            font-size: 14px;
-            line-height: 16px;
-            color: #262626;
-        }
-
-        .listFriends .card .card-heading.image .card-heading-header span {
-            font-size: 12px;
-            color: #999999;
-        }
-
-        .listFriends .card .card-body {
-            padding: 0 20px;
-            margin-top: 20px;
-        }
-
-        .listFriends .card .card-media {
-            padding: 0 20px;
-            margin: 0 -14px;
-        }
-
-        .listFriends .card .card-media img {
-            max-width: 100%;
-            max-height: 100%;
-        }
-
-        .listFriends .card .card-actions {
-            min-height: 30px;
-            padding: 0 20px 20px 20px;
-            margin: 20px 0 0 0;
-        }
-
-        .listFriends .card .card-comments {
-            padding: 20px;
-            margin: 0;
-            background-color: #f8f8f8;
-        }
-
-        .listFriends .card .card-comments .comments-collapse-toggle {
-            padding: 0;
-            margin: 0 20px 12px 20px;
-        }
-
-        .listFriends .card .card-comments .comments-collapse-toggle a,
-        .listFriends .card .card-comments .comments-collapse-toggle span {
-            padding-right: 5px;
-            overflow: hidden;
-            font-size: 12px;
-            color: #999;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .listFriends .card-comments .media-heading {
-            font-size: 13px;
-            font-weight: bold;
-        }
-
-        .listFriends .card.people {
-            position: relative;
-            display: inline-block;
-            width: 170px;
-            height: 300px;
-            padding-top: 0;
-            margin-left: 20px;
-            overflow: hidden;
-            vertical-align: top;
-        }
-
-        .listFriends .card.people:first-child {
-            margin-left: 0;
-        }
-
-        .listFriends .card.people .card-top {
-            position: absolute;
-            top: 0;
-            left: 0;
-            display: inline-block;
-            width: 170px;
-            height: 150px;
-            background-color: #ffffff;
-        }
-
-        .listFriends .card.people .card-top.green {
-            background-color: #53a93f;
-        }
-
-        .listFriends .card.people .card-top.blue {
-            background-color: #427fed;
-        }
-
-        .listFriends .card.people .card-info {
-            position: absolute;
-            top: 150px;
-            display: inline-block;
-            width: 100%;
-            height: 101px;
-            overflow: hidden;
-            background: #ffffff;
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
-        }
-
-        .listFriends .card.people .card-info .title {
-            display: block;
-            margin: 8px 14px 0 14px;
-            overflow: hidden;
-            font-size: 16px;
-            font-weight: bold;
-            line-height: 18px;
-            color: #404040;
-        }
-
-        .listFriends .card.people .card-info .desc {
-            display: block;
-            margin: 8px 14px 0 14px;
-            overflow: hidden;
-            font-size: 12px;
-            line-height: 16px;
-            color: #737373;
-            text-overflow: ellipsis;
-        }
-
-        .listFriends .card.people .card-bottom {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            display: inline-block;
-            width: 100%;
-            padding: 10px 20px;
-            line-height: 29px;
-            text-align: center;
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
-        }
-
-        .listFriends .card.hovercard {
-            position: relative;
-            padding-top: 0;
-            overflow: hidden;
-            text-align: center;
-            background-color: rgba(214, 224, 226, 0.2);
-        }
-
-        .listFriends .card.hovercard .cardheader {
-            background: url("http://lorempixel.com/850/280/nature/4/");
-            background-size: cover;
-            height: 135px;
-        }
-
-        .listFriends .card.hovercard .avatar {
-            position: relative;
-            top: -50px;
-            margin-bottom: -50px;
-        }
-
-        .listFriends .card.hovercard .avatar img {
-            width: 100px;
+        .card-counter{
+            box-shadow: 2px 2px 10px #DADADA;
+            margin: 5px;
+            padding: 20px 10px;
+            background-color: #fff;
             height: 100px;
-            max-width: 100px;
-            max-height: 100px;
-            -webkit-border-radius: 50%;
-            -moz-border-radius: 50%;
-            border-radius: 50%;
-            border: 5px solid rgba(255,255,255,0.5);
+            border-radius: 5px;
+            transition: .3s linear all;
         }
 
-        .listFriends .card.hovercard .info {
-            padding: 4px 8px 10px;
+        .card-counter:hover{
+            box-shadow: 4px 4px 20px #DADADA;
+            transition: .3s linear all;
         }
 
-        .listFriends .card.hovercard .info .title {
-            margin-bottom: 4px;
-            font-size: 16px;
-            line-height: 1;
-            color: #262626;
-            vertical-align: middle;
+        .card-counter.primary{
+            background-color: #99caff;
+            color: #000000;
         }
 
-        .listFriends .card.hovercard .info .desc {
-            overflow: hidden;
-            font-size: 12px;
-            line-height: 20px;
-            color: #737373;
-            text-overflow: ellipsis;
+        .card-counter.danger{
+            background-color: #ef5350;
+            color: #FFF;
         }
 
-        .listFriends .card.hovercard .bottom {
-            padding: 0 20px;
-            margin-bottom: 17px;
+        .card-counter.success{
+            background-color: #66bb6a;
+            color: #FFF;
         }
 
-        .listFriends .btn{
-            border-radius: 50%;
-            width:32px;
-            height:32px;
-            line-height:24px;
+        .card-counter.info{
+            background-color: #26c6da;
+            color: #FFF;
+        }
+
+        .card-counter.warning{
+            background-color: #e6e600;
+            color: #000000 ;
+        }
+
+        .card-counter i{
+            font-size: 5em;
+            opacity: 0.2;
+        }
+
+        .card-counter .count-numbers{
+            position: absolute;
+            right: 35px;
+            top: 20px;
+            font-size: 25px;
+            display: block;
+        }
+
+        .card-counter .count-name{
+            position: absolute;
+            right: 35px;
+            top: 65px;
+            text-transform: capitalize;
+            opacity: 0.5;
+            display: block;
+            font-size: 14px;
         }
     </style>
 @endsection
@@ -311,31 +104,65 @@
 
     <div class="col-md-12 mt-3 table-responsive">
         <p>گزارش عملکرد {{$coach->fname}} {{$coach->lname}}</p>
-        <table class="table border table-hover table-striped">
-            <tr>
-                <th scope="col" class="p-1">#</th>
-                <th scope="col" class="p-1">تعداد جلسات کوچینگ در انتظار رزرو</th>
-                <th scope="col" class="p-1">تعداد جلسات معارفه در انتظار رزرو</th>
-                <th scope="col" class="p-1">تعداد جلسات کوچینگ رزرو شده</th>
-                <th scope="col" class="p-1">تعداد جلسات معارفه رزرو شده</th>
-                <th scope="col" class="p-1">تعداد جلسات کوچینگ برگزار شده</th>
-                <th scope="col" class="p-1">تعداد جلسات معارفه برگزار شده</th>
-                <th scope="col" class="p-1">تعداد جلسات کوچینگ کنسل شده</th>
-                <th scope="col" class="p-1">تعداد جلسات معارفه کنسل شده</th>
-            </tr>
-            <tr>
-                <td>#</td>
-                <td>{{$reserveCoaching->count()}}</td>
-                <td>{{$reserveMoarefeh->count()}}</td>
-                <td>{{$waitingCoaching->count()}}</td>
-                <td>{{$waitingMoarefeh->count()}}</td>
-                <td>{{$heldCoaching->count()}}</td>
-                <td>{{$heldMoarefeh->count()}}</td>
-                <td>{{$cancelCoaching->count()}}</td>
-                <td>{{$cancelMoarefeh->count()}}</td>
-            </tr>
-        </table>
+
+
     </div>
+
+    <div class="col-md-3">
+        <div class="card-counter info">
+            <span class="count-numbers text-white">{{$reserveCoaching->count()}} جلسه </span>
+            <span class="count-name text-white">جلسه کوچینگ در انتظار رزرو</span>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card-counter info">
+            <span class="count-numbers text-white">{{$reserveMoarefeh->count()}} جلسه </span>
+            <span class="count-name text-white">جلسه معارفه در انتظار رزرو</span>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card-counter warning">
+            <span class="count-numbers text-dark">{{$waitingCoaching->count()}} جلسه </span>
+            <span class="count-name text-dark">جلسه کوچینگ رزرو شده</span>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card-counter warning">
+            <span class="count-numbers text-dark">{{$waitingMoarefeh->count()}} جلسه </span>
+            <span class="count-name text-dark">جلسه معارفه رزرو شده</span>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card-counter success">
+            <span class="count-numbers text-white">{{$heldCoaching->count()}} جلسه </span>
+            <span class="count-name text-white">جلسه کوچینگ برگزار شده</span>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card-counter success">
+            <span class="count-numbers text-white">{{$heldMoarefeh->count()}} جلسه </span>
+            <span class="count-name text-white">جلسه  معارفه برگزار شده</span>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card-counter danger">
+            <span class="count-numbers text-white">{{$cancelCoaching->count()}} جلسه </span>
+            <span class="count-name text-white">جلسه  کوچینگ کنسل شده</span>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card-counter danger">
+            <span class="count-numbers text-white">{{$cancelMoarefeh->count()}} جلسه </span>
+            <span class="count-name text-white">جلسه معارفه کنسل شده</span>
+        </div>
+    </div>
+
 
     <div class="container">
         <div class="row shadow-lg">

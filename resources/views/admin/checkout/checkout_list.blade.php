@@ -64,9 +64,9 @@
                                 </td>
                                 <td>
                                     @if($item->type=='course')
-                                        {{$item->course->course}}
+                                        {{$item->course['course']}}
                                     @elseif($item->type=='event')
-                                        {{$item->event->event}}
+                                        {{$item->event['event']}}
                                     @elseif($item->type=='reserve')
                                         جلسه کوچینگ {{$item->reserve['booking']['coach']['user']['fname'].' '.$item->reserve['booking']['coach']['user']['lname'].' - '.$item->reserve['booking']['start_date']}}
                                     @elseif($item->type=='ghest')
