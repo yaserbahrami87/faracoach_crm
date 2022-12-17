@@ -445,7 +445,6 @@ class CoachController extends BaseController
     {
         $v=verta();
         $month=[$this->dateNow,$v->endMonth()->format('Y/m/d')];
-        dd($month);
         $users=coach::join('users','coaches.user_id','=','users.id')
             ->when($request['q'], function ($query,$request)
             {
@@ -466,7 +465,11 @@ class CoachController extends BaseController
             })
             ->where('users.status_coach','=',1)
             ->where('coaches.status','=',1)
-            ->get();
+            ->get()
+            ->sortBydesc(function($coach)  use ($month)
+            {
+                return $coach->bookings->wherebetween('start_date',$month)->count();
+            });
 
 
 
