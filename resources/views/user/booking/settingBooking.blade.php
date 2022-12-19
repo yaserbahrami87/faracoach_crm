@@ -6,7 +6,7 @@
             {{method_field('PATCH')}}
             <div class="form-group">
                 <label for="fi">قیمت هر جلسه:</label>
-                <input type="text" class="form-control" id="fi" name="fi" value="{{old('fi',$settings->fi)}}" />
+                <input type="text" class="form-control" id="fi" name="fi" value="{{old('fi',$settings->fi)}}" @if(!is_null(Auth::user()->coach->expire_date_fi)) disabled @endif />
                 <small>در صورت رایگان بودن هر جلسه مقدار صفر وارد کنید</small>
             </div>
             <div class="form-group">

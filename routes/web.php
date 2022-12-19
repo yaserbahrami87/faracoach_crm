@@ -385,7 +385,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
 
 
     //booking
-    Route::get('/booking/{booking}/showadminbooking','BookingController@showAdminBooking');
+
     Route::get('/booking/bookingListAdmin','BookingController@bookingListAdmin');
     Route::get('/booking/accept','BookingController@acceptReserve');
     Route::resource('booking','BookingController');
@@ -394,6 +394,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::resource('coupon','CouponController');
 
     //reserve
+    Route::get('/booking/{reserve}/showadminbooking','ReserveController@showAdminBooking');
     Route::get('/reserve/notification/incomplete','ReserveController@sendNotificationIncomplete');
     Route::get('/reserve/waiting','ReserveController@waiting');
 

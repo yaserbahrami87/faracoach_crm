@@ -103,9 +103,9 @@
                             <div class="row">
                                 <div class="mx-auto col-12 col-md-4 text-center">
                                     @if(($scholarship->user->get_scholarshipexam->last()->score) >= 50 && ($scholarship->user->get_scholarshipexam->last()->score) <= 70)
-                                        <p>امتیاز از آزمون :  10 امتیاز</p>
+                                        <p>امتیاز از آزمون :  5 امتیاز</p>
                                     @elseif(($scholarship->user->get_scholarshipexam->last()->score) > 70)
-                                        <p>امتیاز از آزمون :  20 امتیاز</p>
+                                        <p>امتیاز از آزمون :  5 امتیاز</p>
                                     @endif
                                 </div>
                             </div>
@@ -115,7 +115,7 @@
                             @endforeach
                             <div class="row">
                                 <div class="mx-auto col-12 col-md-4 text-center">
-                                    <p>امتیاز از آزمون :  0 امتیاز</p>
+                                    <p>امتیاز از آزمون :  5 امتیاز</p>
                                 </div>
                             </div>
                         @endif

@@ -257,4 +257,9 @@ class User extends Authenticatable implements MustVerifyEmail
         {
             return $this->hasMany('App\collabration_accept');
         }
+
+        public function bookings()
+        {
+            return $this->hasMany('App\booking');
+        }
 }

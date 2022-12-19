@@ -43,7 +43,8 @@ class booking extends Model
 
     public function get_statusBookings($status)
     {
-        switch ($status) {
+        switch ($status)
+        {
             case '1':
                 return 'آماده رزرو';
                 break;
@@ -56,6 +57,13 @@ class booking extends Model
             case '4':
                 return 'کنسل شد';
                 break;
+            case '5':
+                return  'غیبت مراجع';
+                break;
+            case '6':
+                return  'غیبت کوچ';
+                break;
+            default: return 'خطا';
 
         }
     }

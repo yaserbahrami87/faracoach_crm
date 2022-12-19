@@ -14,8 +14,10 @@
 
 @if($scholarship->confirm_webinar==1)
     <div class="row">
+
         <div class="mx-auto col-12 col-md-4 text-center">
-            <p>امتیاز از آموزش :  10 امتیاز</p>
+
+            <p>امتیاز از آموزش :  5 امتیاز</p>
         </div>
     </div>
 @else

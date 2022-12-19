@@ -476,12 +476,12 @@
         {{csrf_field()}}
         <div class="row">
             <div class="mx-auto col-12 col-md-4 text-center">
-                <small class="text-muted">امتیاز بین 0 تا 30</small>
+                <small class="text-muted">امتیاز بین 0 تا 5</small>
                 <div class="input-group ">
                     <div class="input-group-prepend">
                         <button class="btn btn-outline-secondary" type="submit" id="button-addon1"> درج امتیاز رزومه و سوابق</button>
                     </div>
-                    <input type="number" class="form-control" name="score_profile" min="0" max="30" value="{{$scholarship->score_profile}}"  />
+                    <input type="number" class="form-control" name="score_profile" min="0" max="10" value="{{$scholarship->score_profile}}"  />
                 </div>
             </div>
         </div>

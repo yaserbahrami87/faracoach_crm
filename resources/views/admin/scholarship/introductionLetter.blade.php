@@ -13,7 +13,7 @@
     {{csrf_field()}}
     <div class="row">
         <div class="mx-auto col-12 col-md-4 text-center">
-            <small class="text-muted">امتیاز بین 0 تا 10</small>
+            <small class="text-muted">امتیاز بین 0 تا 5</small>
             <div class="input-group ">
                 <div class="input-group-prepend">
                     <button class="btn btn-outline-secondary" type="submit" id="button-addon1"> درج امتیاز معرفی نامه</button>

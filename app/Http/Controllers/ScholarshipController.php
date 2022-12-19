@@ -219,7 +219,7 @@ class ScholarshipController extends BaseController
 
         if($scholarship->confirm_webinar==1)
         {
-            $result_final=$result_final+10;
+            $result_final=$result_final+5;
         }
         else
         {
@@ -234,11 +234,11 @@ class ScholarshipController extends BaseController
         }
         elseif(($scholarship->user->get_scholarshipexam->last()->score) >= 50 && ($scholarship->user->get_scholarshipexam->last()->score) <= 70)
         {
-            $result_final=$result_final+10;
+            $result_final=$result_final+5;
         }
         elseif(($scholarship->user->get_scholarshipexam->last()->score) > 70)
         {
-            $result_final=$result_final+20;
+            $result_final=$result_final+5;
         }
 
         if(is_null($scholarship->user->get_scholarshipInterview))
@@ -607,7 +607,7 @@ class ScholarshipController extends BaseController
 
             if($scholarship->confirm_webinar==1)
             {
-                $result_final=$result_final+10;
+                $result_final=$result_final+5;
             }
             else
             {
@@ -622,11 +622,11 @@ class ScholarshipController extends BaseController
             }
             elseif(($scholarship->user->get_scholarshipexam->last()->score) >= 50 && ($scholarship->user->get_scholarshipexam->last()->score) <= 70)
             {
-                $result_final=$result_final+10;
+                $result_final=$result_final+5;
             }
             elseif(($scholarship->user->get_scholarshipexam->last()->score) > 70)
             {
-                $result_final=$result_final+20;
+                $result_final=$result_final+5;
             }
 
             if(is_null($scholarship->user->get_scholarshipInterview))
@@ -870,36 +870,6 @@ class ScholarshipController extends BaseController
             ]);
         }
 
-
-//                            with('User')
-//                            ->whereHas('User', function($q)
-//                            {
-//                                  $q->orWhereNull('state')
-//                                    ->orWhereNull('email')
-//                                    ->orWhereNull('fname')
-//                                    ->orWhereNull('lname')
-//                                    ->orWhereNull('datebirth')
-//                                    ->orWhereNull('father')
-//                                    ->orWhereNull('codemelli')
-//                                    ->orWhereNull('sex')
-//                                    ->orWhereNull('tel')
-//                                    ->orWhereNull('shenasname')
-//                                    ->orWhereNull('born')
-//                                    ->orWhereNull('education')
-//                                    ->orWhereNull('reshteh')
-//                                    ->orWhereNull('job')
-//                                    ->orWhereNull('city')
-//                                    ->orWhereNull('address')
-//                                    ->orWhereNull('personal_image')
-//                                    ->orWhereNull('resume')
-//                                    ->orWhereNull('marrie');
-//                            })
-//                            ->get();
-
-
-
-
-
         alert()->success(count($user_incomplete). " پیامک برای افرادی که پروفایل ناقص دارند ارسال شد")->persistent('بستن');
         return back();
 
@@ -1003,12 +973,12 @@ class ScholarshipController extends BaseController
 
     public function scoreStore(Request $request,scholarship $scholarship)
     {
+
         $this->validate($request,
         [
-           'score_profile'              =>'nullable|between:0,30',
-           'score_introductionletter'   =>'nullable|between:0,10',
+           'score_profile'              =>'nullable|numeric|between:0,5',
+           'score_introductionletter'   =>'nullable|numeric|between:0,5',
         ]);
-
         $scholarship->update($request->all());
         alert()->success('امتیاز با موفقیت ثبت شد')->persistent('بستن');
         return back();

@@ -556,6 +556,42 @@ class ReserveController extends BaseController
         }
     }
 
+
+    public function showAdminBooking(reserve $reserve)
+    {
+
+        //تاریخچه جلسات
+        $history=reserve::where('user_id','=',$reserve->user_id)
+                          ->wherehas('booking',function($query)use ($reserve)
+                            {
+                                $query->where('user_id','=',$reserve->booking->user_id);
+                            })
+                            ->get();
+
+
+        switch($reserve->type_booking)
+        {
+            case '1':$reserve->type_booking='حضوری';
+                break;
+            case '2':$reserve->type_booking='آنلاین';
+                break;
+            case '0':$reserve->type_booking='فرقی ندارد';
+                break;
+            default:$reserve->type_booking='خطا';
+                break;
+        }
+
+
+        $dateNow=$this->dateNow;
+        $timeNow=$this->timeNow;
+
+        return view('admin.InfoReserve')
+            ->with('reserve',$reserve)
+            ->with('history',$history);
+    }
+
+
+
     public function test()
     {
         $reserve=checkout::get();

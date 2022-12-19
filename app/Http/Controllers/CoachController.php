@@ -475,6 +475,8 @@ class CoachController extends BaseController
 
 
 
+
+
         $category_coaches=$this->get_categoryCoaches(NULL,NULL,1);
 
         return view('allCoaches')

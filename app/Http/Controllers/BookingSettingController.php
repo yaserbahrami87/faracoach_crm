@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 
-class BookingSettingController extends Controller
+class BookingSettingController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -104,7 +104,9 @@ class BookingSettingController extends Controller
         ]);
 
 
-        $status=$coach->update($request->all());
+        $status=$coach->update($request->all()+[
+                'expire_date_fi'    =>$this->dateNow,
+            ]);
         if($status)
         {
             alert()->success('تنظیمات جلسات با موفقیت بروزرسانی شد')->persistent('بستن');

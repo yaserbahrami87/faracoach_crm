@@ -275,7 +275,7 @@
                             @endif
 
                             @if(strlen($coach->telegram)>0)
-                                <a class="circle" href="https://www.{{$coach->telegram}}">
+                                <a class="circle" href="https://www.t.me/{{$coach->telegram}}" target="_blank">
                                     <i class="fa fa-paper-plane"></i>
                                 </a>
                             @endif

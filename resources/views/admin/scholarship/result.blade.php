@@ -22,7 +22,7 @@
                 <td class="text-center">
                     <button class="btn btn-secondary btn-block" onclick="document.getElementById('learn-tab').click()">
                         @if($scholarship->confirm_webinar==1)
-                            10
+                            5
                         @else
                             0
                         @endif
@@ -39,9 +39,9 @@
                         @if(count($scholarship->user->get_scholarshipexam)==0 || $scholarship->user->get_scholarshipexam->last()->score<50)
                             0
                         @elseif(($scholarship->user->get_scholarshipexam->last()->score) >= 50 && ($scholarship->user->get_scholarshipexam->last()->score) <= 70)
-                            10
+                            5
                         @elseif(($scholarship->user->get_scholarshipexam->last()->score) > 70)
-                            20
+                            5
                         @endif
                     </button>
                 </td>
