@@ -75,25 +75,13 @@ class ReserveController extends BaseController
         }
 
 
-        $booking=booking::leftjoin('feedback_coachings','bookings.id','=','feedback_coachings.booking_id')
-                    ->where('booking_id','=',$reserve['booking_id'])
-                    ->first();
-
-//        $user_coach=$this->get_user_byID($reserve->user_id);
-
-
         $homework=homework::where('booking_id','=',$reserve->booking_id)
             ->where('type','=','booking')
             ->orderby('id')
             ->get();
-
-//        $dateNow=$this->dateNow;
         return view('user.showReserveUser')
-                    ->with('reserve',$reserve)
-//                    ->with('dateNow',$dateNow)
-                    ->with('booking',$booking)
-                    ->with('homework',$homework);
-//                    ->with('user_coach',$user_coach);
+                        ->with('reserve',$reserve)
+                        ->with('homework',$homework);
     }
 
     /**
@@ -382,10 +370,12 @@ class ReserveController extends BaseController
             ->where(function($query){
                 $query->orwhere('status','=',1)
                     ->orwhere('status','=',3)
-                    ->orwhere('status','=',4);
+                    ->orwhere('status','=',4)
+                    ->orwhere('status','=',5)
+                    ->orwhere('status','=',6);
             })
             ->orderby('reserves.id','desc')
-            ->paginate($this->countPage());
+            ->get();
 
 
 
@@ -416,7 +406,7 @@ class ReserveController extends BaseController
         $this->validate($request, [
             'result_coach' => 'required|string|',
             'score' => 'required|numeric|between:1,5',
-            'status' => 'required|numeric|between:1,4'
+            'status' => 'required|numeric|between:1,6'
 
         ], [
             'result_coach.required' => 'نتیجه جلسه الزامی است',
@@ -426,7 +416,7 @@ class ReserveController extends BaseController
             'score.between' => 'وضعیت باید بین 1 تا 5 باشد',
             'status.required' => 'وضعیت  جلسه را وارد کنید',
             'status.numeric' => 'وضعیت جلسه باید عدد باشد',
-            'status.between' => 'وضعیت جلسه باید بین 1 تا 5 باشد'
+            'status.between' => 'وضعیت جلسه باید بین 1 تا 6 باشد'
         ]);
         $coach = coach::where('user_id','=',Auth::user()->id)
                         ->first();
@@ -436,8 +426,8 @@ class ReserveController extends BaseController
         $coach->save();
 
 
-        if ($coach) {
-
+        if ($coach)
+        {
             $status = $reserve->update($request->all());
             $booking = $reserve->booking;
             $user=User::join('reserves','reserves.user_id','=','users.id')

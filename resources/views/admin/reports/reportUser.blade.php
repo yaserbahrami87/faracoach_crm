@@ -241,17 +241,16 @@
                 </div>
                 <table class="dataTable table table-striped table-bordered" style="width:100%">
                     <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>مشخصات</th>
-                        <th>آخرین محصول پیگیری</th>
-                        <th>تعداد پیگیری</th>
-                        <th>تاریخ پیگیری </th>
-                    </tr>
+                        <tr>
+                            <th>#</th>
+                            <th>مشخصات</th>
+                            <th>آخرین محصول پیگیری</th>
+                            <th>تعداد پیگیری</th>
+                            <th>تاریخ پیگیری </th>
+                        </tr>
                     </thead>
                     <tbody>
                     @foreach($user->followupsAdmin->wherebetween('date_fa',$date_fa) as $item)
-
                         <tr class="" >
                             <td>{{$loop->iteration}}</td>
                             <td>

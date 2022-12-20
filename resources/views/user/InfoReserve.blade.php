@@ -9,6 +9,7 @@
 @endsection
 
 @section('content')
+
     <div class="col-md-6">
         @if(is_null($booking->reserve->presession))
             <div class="alert alert-warning">اطلاعات پیش از جلسه توسط مراجع تکمیل نشده است</div>
@@ -96,7 +97,8 @@
                             <select class="form-control" id="status" name="status" @if(!is_null($booking->reserve->result_coach)) disabled  @endif>
                                 <option disabled selected>انتخاب کنید</option>
                                 <option value="3" @if($booking->reserve->status==3) selected  @endif >برگزار شد</option>
-                                <option value="4" @if($booking->reserve->status==4) selected  @endif >کنسل شد</option>
+                                <option value="5" @if($booking->reserve->status==5) selected  @endif >غیبت مراجع</option>
+                                <option value="6" @if($booking->reserve->status==6) selected  @endif >غیبت کوچ</option>
                             </select>
                         </div>
                         <div class="form-group">

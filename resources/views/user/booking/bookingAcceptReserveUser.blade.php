@@ -27,20 +27,33 @@
                 <span class="d-inline-block bg-success2 rounded-circle" ></span>
             </div>
             <div class="col-6 col-sm-11 col-lg-2 col-md-2 col-xl-2 p-0 m-0">
-                <p class=" p-0 m-0"> جلسات برگزار شده</p>
+                <p class=" p-0 m-0">  برگزار شده</p>
             </div>
             <div class="col-6 col-sm-1 col-lg-1 col-md-1 col-xl-1 text-center p-0 m-0">
                 <span class="d-inline-block bg-warning2 rounded-circle" ></span>
             </div>
             <div class="col-6 col-sm-11 col-lg-2 col-md-2 col-xl-2 p-0 m-0">
-                <p class=" p-0 m-0"> جلسات رزرو شده بلاتکلیف</p>
+                <p class=" p-0 m-0">  رزرو شده بلاتکلیف</p>
             </div>
             <div class="col-6 col-sm-1 col-lg-1 col-md-1 col-xl-1 text-center p-0 m-0">
                 <span class="d-inline-block bg-danger rounded-circle" ></span>
             </div>
             <div class="col-6 col-sm-11 col-lg-2 col-md-2 col-xl-2 p-0 m-0">
-                <p class=" p-0 m-0"> جلسات کنسل شده</p>
+                <p class=" p-0 m-0"> کنسل شده</p>
             </div>
+            <div class="col-6 col-sm-1 col-lg-1 col-md-1 col-xl-1 text-center p-0 m-0">
+                <span class="d-inline-block bg-info rounded-circle" ></span>
+            </div>
+            <div class="col-6 col-sm-11 col-lg-2 col-md-2 col-xl-2 p-0 m-0">
+                <p class=" p-0 m-0"> غیبت مراجع</p>
+            </div>
+            <div class="col-6 col-sm-1 col-lg-1 col-md-1 col-xl-1 text-center p-0 m-0">
+                <span class="d-inline-block bg-secondary rounded-circle" ></span>
+            </div>
+            <div class="col-6 col-sm-11 col-lg-2 col-md-2 col-xl-2 p-0 m-0">
+                <p class=" p-0 m-0"> غیبت کوچ</p>
+            </div>
+
 
 
         </div>
@@ -75,6 +88,10 @@
                         @break
                         @case('4')   <tr class="table-danger">
                         @break
+                        @case('5')   <tr class="table-info">
+                        @break
+                        @case('6')   <tr class="table-secondary">
+                        @break
                         @default    <tr>
                             @break
                             @endswitch
@@ -89,12 +106,7 @@
 
                             </td>
                             <td>
-                                @if($item->status==1 || $item->status==3)
-                                    <a href="/panel/reserve/{{$item->id}}">{{$item->booking->coach->user->fname.' '.$item->booking->coach->user->lname}}</a>
-                                @else
-                                    {{$item->booking->coach->user->fname.' '.$item->booking->coach->user->lname}}
-                                @endif
-
+                               <a href="/panel/reserve/{{$item->id}}">{{$item->booking->coach->user->fname.' '.$item->booking->coach->user->lname}}</a>
                             </td>
                             <td class="text-center">
                                     @if($item->status==1 || $item->status==3)
@@ -136,7 +148,6 @@
                 @endforeach
             </tbody>
         </table>
-        {{$reserves->links()}}
     </div>
 
 @endsection

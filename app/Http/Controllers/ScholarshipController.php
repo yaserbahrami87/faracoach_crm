@@ -86,7 +86,7 @@ class ScholarshipController extends BaseController
 //            'introduce'     =>'nullable|string',
             'cooperation'   =>'required|string',
             'applicant'     =>'required|numeric',
-            'resume'        =>'required|mimes:jpeg,jpg,pdf,doc,png|max:600',
+            'resume'        =>'nullable|mimes:jpeg,jpg,pdf,doc,png|max:600',
         ]);
 
         $check=scholarship::where('user_id','=',Auth::user()->id)

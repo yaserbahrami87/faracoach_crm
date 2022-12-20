@@ -329,11 +329,16 @@
                             </div>
                         @endif
                     </form>
-                @elseif($reserve->status_reserve==4)
+                @elseif($reserve->status==4)
                     <div class="alert alert-warning">جلسه کوچینگ شما لغو شده است</div>
+                @elseif($reserve->status==5)
+                        <div class="alert alert-warning">جلسه به دلیل غیبت مراجع لغو شد</div>
+                @elseif($reserve->status==6)
+                        <div class="alert alert-warning">جلسه به دلیل غیبت مراجع لغو شد</div>
                 @else
                     <div class="alert alert-warning">جلسه کوچینک هنوز انجام نشده است</div>
                 @endif
+
                 @if($reserve->start_date>$dateNow && ($reserve->status_reserve!=4))
                     <form method="POST" action="/booking/{{$reserve->booking_id}}" onsubmit="return confirm('آیا از لغو جلسه اطمینان دارید؟')">
                         {{csrf_field()}}

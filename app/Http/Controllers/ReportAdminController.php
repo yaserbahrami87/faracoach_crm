@@ -51,7 +51,8 @@ class ReportAdminController extends BaseController
      */
     public function show(User $user, Request $request)
     {
-        if (isset($_GET['range'])) {
+        if (isset($_GET['range']))
+        {
             $this->validate($request, [
                 'start_date' => 'required|string',
             ]);
