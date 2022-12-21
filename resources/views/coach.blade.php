@@ -132,9 +132,6 @@
         }
         /*Media query*/
         @media only screen and (max-width: 900px) {
-            label span {
-                display: none;
-            }
 
             .tab_container {
                 width: 98%;

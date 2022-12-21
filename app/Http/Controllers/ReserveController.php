@@ -566,6 +566,20 @@ class ReserveController extends BaseController
         }
     }
 
+    public function destroy_cart(Request $request,reserve $reserve)
+    {
+        $status=$reserve->delete();
+        if($status)
+        {
+            alert()->success('جلسه با موفقیت حذف شد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در حذف جلسه')->persistent('بستن');
+        }
+        return back();
+    }
+
 
     public function showAdminBooking(reserve $reserve)
     {

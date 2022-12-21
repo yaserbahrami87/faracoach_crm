@@ -580,6 +580,7 @@ Route::post('/cart/payment','CartController@choosePaymant');
 Route::get('/cart/{cart}','CartController@destroy');
 Route::get('/cart','ReserveController@showCart');
 Route::post('/cart/mohasebeAghsat','CartController@mohasebeAghsat');
+Route::delete('/cart/{reserve}/destroy','ReserveController@destroy_cart');
 
 
 //Category GettingKnow

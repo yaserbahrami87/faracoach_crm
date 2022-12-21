@@ -106,10 +106,10 @@
 
                             </td>
                             <td>
-                                @if($item->status==1 || $item->status==3)
-                                    <a href="/panel/reserve/{{$item->id}}">{{$item->booking->coach->user->fname.' '.$item->booking->coach->user->lname}}</a>
-                                @else
+                                @if($item->status==4)
                                     {{$item->booking->coach->user->fname.' '.$item->booking->coach->user->lname}}
+                                @else
+                                    <a href="/panel/reserve/{{$item->id}}">{{$item->booking->coach->user->fname.' '.$item->booking->coach->user->lname}}</a>
                                 @endif
                             </td>
                             <td class="text-center">

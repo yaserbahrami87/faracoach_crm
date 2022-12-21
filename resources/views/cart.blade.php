@@ -66,7 +66,7 @@
                                     $sum_final_off=$sum_final_off+$item->final_off;
                                 @endphp
                                 <td class="col-sm-1 col-md-1">
-                                    <form method="post" action="/reserve/{{$item->reserves_id}}" onsubmit="return confirm('آیا از حذف زمان مطمئن هستید؟');">
+                                    <form method="post" action="/cart/{{$item->id}}/destroy" onsubmit="return confirm('آیا از حذف زمان مطمئن هستید؟');">
                                         {{csrf_field()}}
                                         {{method_field('DELETE')}}
                                         <button type="submit" class="btn btn-danger">

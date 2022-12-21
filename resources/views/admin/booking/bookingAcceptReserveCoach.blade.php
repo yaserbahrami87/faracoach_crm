@@ -121,7 +121,13 @@
                         @foreach($reserve as $item)
                             <tr class="@if($item->status==1) bg-warning2 @elseif($item->status==3) bg-success2 @elseif($item->status==4) bg-danger2 @elseif($item->status==5) bg-info @elseif($item->status==6) bg-secondary  @endif">
                                 <td>
-                                    {{$item->id}}
+                                    @if($item->status==4)
+                                        {{$item->id}}
+                                    @else
+                                        <a href="/admin/booking/{{$item->id}}/showadminbooking">
+                                            {{$item->id}}
+                                        </a>
+                                    @endif
                                 </td>
                                 <td>
                                     @if($item->status==4)
