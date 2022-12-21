@@ -93,20 +93,24 @@
                         @case('6')   <tr class="table-secondary">
                         @break
                         @default    <tr>
-                            @break
-                            @endswitch
+                        @break
+                    @endswitch
 
 
                             <td class="text-center">
                                 @if($item->status==1 || $item->status==3)
-                                    {{$item->booking->id}}
+                                    {{$item->id}}
                                 @else
-                                    {{$item->booking->id}}
+                                    {{$item->id}}
                                 @endif
 
                             </td>
                             <td>
-                               <a href="/panel/reserve/{{$item->id}}">{{$item->booking->coach->user->fname.' '.$item->booking->coach->user->lname}}</a>
+                                @if($item->status==1 || $item->status==3)
+                                    <a href="/panel/reserve/{{$item->id}}">{{$item->booking->coach->user->fname.' '.$item->booking->coach->user->lname}}</a>
+                                @else
+                                    {{$item->booking->coach->user->fname.' '.$item->booking->coach->user->lname}}
+                                @endif
                             </td>
                             <td class="text-center">
                                     @if($item->status==1 || $item->status==3)
@@ -121,8 +125,6 @@
                             @if(Auth::user()->status_coach==1)
                                 <td>{{$item->caption_status}}</td>
                             @endif
-
-
 
                             <td>
                                 @if((($item->booking->start_date>$dateNow && Auth::user()->status_coach==1) && (($item['status'])!=0)&&($item['status']!=4)))

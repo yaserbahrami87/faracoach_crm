@@ -79,9 +79,29 @@ class ReserveController extends BaseController
             ->where('type','=','booking')
             ->orderby('id')
             ->get();
-        return view('user.showReserveUser')
-                        ->with('reserve',$reserve)
-                        ->with('homework',$homework);
+
+
+        if($reserve->booking->user_id==Auth::user()->id)
+        {
+            //تاریخچه جلسات
+            $history=reserve::join('users','reserves.user_id','=','users.id')
+                ->join('bookings','reserves.booking_id','=','bookings.id')
+                ->where('bookings.user_id','=',Auth::user()->id)
+                ->where('reserves.user_id','=',$reserve->user_id)
+                ->get();
+
+            return view('user.InfoReserve')
+                ->with('reserve',$reserve)
+                ->with('history',$history)
+                ->with('homework',$homework);
+        }
+        else
+        {
+            return view('user.showReserveUser')
+                ->with('reserve',$reserve)
+                ->with('homework',$homework);
+        }
+
     }
 
     /**
@@ -595,6 +615,99 @@ class ReserveController extends BaseController
             {
                 echo "<script>console.log(USER=".$item.");</script>";
             }
+        }
+    }
+
+
+    public function acceptReserve(Request $request)
+    {
+
+        $this->validate($request,[
+            'start_date'    =>'nullable|string',
+            'type'          =>'nullable|string'
+        ]);
+
+
+        if(Auth::user()->type==2  || Auth::user()->type==3 || Auth::user()->type==4)
+        {
+            if($request->type=='روز برگزاری')
+            {
+                $request['start_date']=explode(' ~ ',$request['start_date']);
+                $reserve = reserve::wherein('status', [1, 2, 3])
+                    ->wherehas('booking',function($query)use($request)
+                    {
+                        $query->wherebetween('start_date',[$request['start_date'][0],$request['start_date'][1]])
+                                    ->orderby('start_date', 'desc');
+                    })
+                    ->get();
+            }
+            elseif($request->type=='رزرو شده')
+            {
+//                $request['start_date']=explode(' ~ ',$request['start_date']);
+//                $startMonth=$request['start_date'][0];
+//                $startMonth=($this->changeTimestampToMilad($startMonth).' 00:00:00');
+//                $endtMonth=$request['start_date'][1];
+//                $endtMonth=$this->changeTimestampToMilad($endtMonth).' 23:59:59';
+//                $booking = reserve::wherein('status', [1, 2, 3])
+//                            ->wherebetween('created_at',[$startMonth,$endtMonth])
+//                            ->orderby('id', 'desc')
+//                            ->get();
+//
+//                foreach ($booking as $item)
+//                {
+//                    $item=$item->booking;
+//                    dd($booking);
+//                }
+//
+//                dd($booking);
+            }
+            else
+            {
+                $reserve = reserve::wherein('status', [1, 3,4,5,6])
+                        ->wherehas('booking',function($query)
+                        {
+                            $query->orderby('start_date', 'desc');
+                        })
+                        ->get();
+            }
+
+        }
+        else
+        {
+            $reserve=reserve::wherein('status', [1, 3,4,5,6])
+                    ->wherehas('booking',function($query)
+                    {
+                        $query->where('user_id', '=', Auth::user()->id)
+                            ->orderby('start_date', 'desc');
+                    })
+                    ->get();
+
+        }
+
+        foreach ($reserve as $item)
+        {
+            switch ($item->duration_booking)
+            {
+                case '1':
+                    $item->duration_booking = 'معارفه 30 دقیقه ای';
+                    break;
+                case '2':
+                    $item->duration_booking = 'کوچینگ 60 دقیقه ای';
+                    break;
+            }
+        }
+
+        if(Auth::user()->type==2  || Auth::user()->type==3 || Auth::user()->type==4)
+        {
+            return view('admin.booking.bookingAcceptReserveCoach')
+//        return view('panelUser.booking')
+                ->with('reserve', $reserve)
+                ->with('dateNow', $this->dateNow);
+        }
+        else
+        {
+            return view('user.booking.bookingAcceptReserveCoach')
+                ->with('reserve', $reserve);
         }
     }
 

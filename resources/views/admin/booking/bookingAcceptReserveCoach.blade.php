@@ -25,6 +25,11 @@
             background-color: #c6ffb3 !important;
         }
 
+        .bg-danger2
+        {
+            background-color:  #ff9999 !important;
+        }
+
     </style>
 @endsection
 @section('content')
@@ -65,52 +70,86 @@
             <div class="col-12" id="colors">
                 <div class="row">
                     <div class="col-6 col-sm-1 col-lg-1 col-md-1 col-xl-1 text-center p-0 m-0">
-                        <span class="d-inline-block bg-success rounded-circle" ></span>
+                        <span class="d-inline-block bg-success2 rounded-circle" ></span>
                     </div>
                     <div class="col-6 col-sm-11 col-lg-2 col-md-2 col-xl-2 p-0 m-0">
-                        <p class=" p-0 m-0"> جلسات برگزار شده</p>
+                        <p class=" p-0 m-0">  برگزار شده</p>
                     </div>
                     <div class="col-6 col-sm-1 col-lg-1 col-md-1 col-xl-1 text-center p-0 m-0">
-                        <span class="d-inline-block bg-warning rounded-circle" ></span>
+                        <span class="d-inline-block bg-warning2 rounded-circle" ></span>
                     </div>
                     <div class="col-6 col-sm-11 col-lg-2 col-md-2 col-xl-2 p-0 m-0">
-                        <p class=" p-0 m-0"> جلسات رزرو شده بلاتکلیف</p>
+                        <p class=" p-0 m-0">  رزرو شده بلاتکلیف</p>
                     </div>
+                    <div class="col-6 col-sm-1 col-lg-1 col-md-1 col-xl-1 text-center p-0 m-0">
+                        <span class="d-inline-block bg-danger rounded-circle" ></span>
+                    </div>
+                    <div class="col-6 col-sm-11 col-lg-2 col-md-2 col-xl-2 p-0 m-0">
+                        <p class=" p-0 m-0"> کنسل شده</p>
+                    </div>
+                    <div class="col-6 col-sm-1 col-lg-1 col-md-1 col-xl-1 text-center p-0 m-0">
+                        <span class="d-inline-block bg-info rounded-circle" ></span>
+                    </div>
+                    <div class="col-6 col-sm-11 col-lg-2 col-md-2 col-xl-2 p-0 m-0">
+                        <p class=" p-0 m-0"> غیبت مراجع</p>
+                    </div>
+                    <div class="col-6 col-sm-1 col-lg-1 col-md-1 col-xl-1 text-center p-0 m-0">
+                        <span class="d-inline-block bg-secondary rounded-circle" ></span>
+                    </div>
+                    <div class="col-6 col-sm-11 col-lg-2 col-md-2 col-xl-2 p-0 m-0">
+                        <p class=" p-0 m-0"> غیبت کوچ</p>
+                    </div>
+
                 </div>
             </div>
             <div class="col-12">
                 <table class="dataTable table table-striped table-bordered" style="width:100%">
                     <thead>
-                    <tr>
-                        <th>کوچ</th>
-                        <th>مراجع</th>
-                        <th>نوع جلسه</th>
-                        <th>تاریخ</th>
-                        <th>ساعت</th>
-                        <th>پیش جلسه</th>
-                        <th>ارزیابی</th>
-                        <th>وضعیت</th>
-                    </tr>
+                        <tr>
+                            <th>کد جلسه</th>
+                            <th>کوچ</th>
+                            <th>مراجع</th>
+                            <th>نوع جلسه</th>
+                            <th>تاریخ</th>
+                            <th>ساعت</th>
+                            <th>پیش جلسه</th>
+                            <th>ارزیابی</th>
+                            <th>وضعیت</th>
+                        </tr>
                     </thead>
                     <tbody>
-                        @foreach($booking as $item)
-                            <tr class="@if($item->status==0) bg-warning2 @elseif($item->status==3) bg-success2 @endif">
+                        @foreach($reserve as $item)
+                            <tr class="@if($item->status==1) bg-warning2 @elseif($item->status==3) bg-success2 @elseif($item->status==4) bg-danger2 @elseif($item->status==5) bg-info @elseif($item->status==6) bg-secondary  @endif">
                                 <td>
-                                    <a href="/admin/booking/{{$item->id}}/showadminbooking">
-                                         {{$item->coach['user']['fname'].' '.$item->coach->user['lname'] }}
-                                    </a>
+                                    {{$item->id}}
                                 </td>
                                 <td>
-                                    <a href="/admin/booking/{{$item->id}}/showadminbooking">
+                                    @if($item->status==4)
+                                        {{$item->booking->coach['user']['fname'].' '.$item->booking->coach->user['lname'] }}
+                                    @else
+                                        <a href="/admin/booking/{{$item->id}}/showadminbooking">
+                                             {{$item->booking->coach['user']['fname'].' '.$item->booking->coach->user['lname'] }}
+                                        </a>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($item->status==4)
+                                        {{$item->user->fname.' '.$item->user->lname }}
+                                    @else
+                                        <a href="/admin/booking/{{$item->id}}/showadminbooking">
+                                            {{$item->user->fname.' '.$item->user->lname }}
+                                        </a>
+                                    @endif
 
-                                    {{$item->reserve['user']['fname'].' '.$item->reserve['user']['lname'] }}
-                                    </a>
+
                                 </td>
-                                <td></td>
-                                <td>{{$item->start_date}}</td>
-                                <td>{{$item->start_time}}</td>
                                 <td>
-                                    @if(is_null($item->feedback_coachings_id))
+                                    {{$item->duration_booking}}
+                                </td>
+                                <td>{{$item->booking->start_date}}</td>
+                                <td>{{$item->booking->start_time}}</td>
+                                <td>
+                                    @if(is_null($item->booking->feedback_coachings_id))
                                         <i class="bi bi-x-lg" ></i>
                                     @else
                                         <i class="bi bi-check-lg" ></i>
@@ -124,7 +163,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    @if($item->start_date>$dateNow)
+                                    @if($item->booking->start_date>$dateNow && $item->status!=4)
                                         <form class="d-inline-block" method="POST" action="/booking/{{$item->booking_id}}" onsubmit="return confirm('آیا از لغو جلسه اطمینان دارید؟')">
                                             {{csrf_field()}}
                                             {{method_field('PATCH')}}
@@ -153,7 +192,7 @@
     <script>
         $(document).ready(function() {
             $('.dataTable').DataTable({
-                order: [[3, 'desc']],
+                order: [[4, 'desc']],
             });
         } );
     </script>

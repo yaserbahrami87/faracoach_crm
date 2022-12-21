@@ -285,6 +285,11 @@
         {
             background-color: #fff0b3 !important;
         }
+
+        .bg-danger2
+        {
+            background-color:  #ff9999 !important;
+        }
     </style>
 @endsection
 @section('content')
@@ -337,39 +342,46 @@
                             <th>نوع جلسه</th>
                             <th>نمایش</th>
                             <th></th>
-
                         </tr>
                     </thead>
 
                     <tbody>
-                        @foreach($booking as $item)
-                            <tr class="text-center @if($item->status==0) bg-warning2 @elseif($item->status==3) bg-success2 @endif">
+                        @foreach($reserve as $item)
+
+                            <tr class="text-center @if($item->status==1) bg-warning2 @elseif($item->status==3) bg-success2   @elseif($item->status==4) bg-danger2 @elseif($item->status==5) bg-info @elseif($item->status==6) bg-secondary    @endif">
                                 <td>
                                     {{$item->id}}
                                 </td>
+
                                 <td>
-                                    @if(!is_null($item->reserve))
-                                         <a class="btn-modal-introduced" href="{{$item->id}}"   >{{$item->reserve->user->fname}} {{$item->reserve->user->lname}}</a>
+                                    @if($item->status==4)
+                                        {{$item->user->fname}} {{$item->user->lname}}
+                                    @else
+                                        <a class="btn-modal-introduced" href="{{$item->id}}" >{{$item->user->fname}} {{$item->user->lname}}</a>
                                     @endif
+
                                 </td>
 
                                 <td>
-                                    <p class="text-dark">{{$item->start_date}}</p>
+                                    <p class="text-dark">{{$item->booking->start_date}}</p>
                                 </td>
                                 <td>
-                                    <p class="text-dark">{{$item->start_time}}</p>
+                                    <p class="text-dark">{{$item->booking->start_time}}</p>
                                 </td>
                                 <td>
                                     <p class="text-dark">{{$item->duration_booking}}</p>
                                 </td>
                                 <td>
-                                    <a class="btn btn-primary btn-sm" href="/panel/booking/{{$item->id}}" title="نمایش" >
-                                        <i class="bi bi-eye-fill"></i>
-                                    </a>
+                                    @if($item->status!=4)
+                                        <a class="btn btn-primary btn-sm" href="/panel/reserve/{{$item->id}}" title="نمایش" >
+                                            <i class="bi bi-eye-fill"></i>
+                                        </a>
+                                    @endif
                                 </td>
+
                                 <td>
-                                    @if($item->start_date>$dateNow)
-                                        <form class="d-inline-block" method="POST" action="/panel/booking/{{$item->id}}" onsubmit="return confirm('آیا از لغو جلسه اطمینان دارید؟')">
+                                    @if($item->booking->start_date>$dateNow && $item->status!=4)
+                                        <form class="d-inline-block" method="POST" action="/panel/booking/{{$item->booking_id}}" onsubmit="return confirm('آیا از لغو جلسه اطمینان دارید؟')">
                                             {{csrf_field()}}
                                             {{method_field('PATCH')}}
                                             <input type="hidden" name="status" value="4" />
@@ -377,7 +389,6 @@
                                                 لغو جلسه
                                             </button>
                                         </form>
-
                                     @endif
                                 </td>
                             </tr>

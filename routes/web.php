@@ -131,7 +131,7 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
 
 
     //booking
-    Route::get('/booking/accept','BookingController@acceptReserve');
+    Route::get('/booking/accept','ReserveController@acceptReserve');
     Route::get('/booking/cancel','BookingController@cancelReserve');
     Route::resource('booking','BookingController');
 
@@ -387,7 +387,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     //booking
 
     Route::get('/booking/bookingListAdmin','BookingController@bookingListAdmin');
-    Route::get('/booking/accept','BookingController@acceptReserve');
+    Route::get('/booking/accept','ReserveController@acceptReserve');
     Route::resource('booking','BookingController');
 
     //coupon
