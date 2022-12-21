@@ -357,7 +357,7 @@
                                     @if($item->status==4)
                                         {{$item->user->fname}} {{$item->user->lname}}
                                     @else
-                                        <a class="btn-modal-introduced" href="{{$item->id}}" >{{$item->user->fname}} {{$item->user->lname}}</a>
+                                        <a class="btn-modal-introduced" href="/panel/reserve/{{$item->id}}" >{{$item->user->fname}} {{$item->user->lname}}</a>
                                     @endif
 
                                 </td>
