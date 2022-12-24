@@ -364,7 +364,7 @@
                 <div class="row">
 
                     <div class="col-12 text-center">
-                        <img src="{{asset('/documents/users/'.$reserve->booking->coach->personal_image)}}" width="150px" height="150px" class="img-circle" />
+                        <img src="{{asset('/documents/users/'.$reserve->booking->coach->user->personal_image)}}" width="150px" height="150px" class="img-circle" />
                         <p>
                             <a href="{{asset('/coach/'.    $reserve->booking->coach->username)}}">{{$reserve->booking->coach->fname}} {{$reserve->booking->coach->lname}}</a>
                         </p>

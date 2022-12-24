@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f3849cf8-ae8a-47cc-891c-72c8c9af69d2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FeedbackCoachingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FeedbackCoachingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/booking/bookingAcceptReserveUser.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/booking/bookingAcceptReserveUser.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/user/showReserveUser.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/showReserveUser.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -305,7 +303,7 @@
       <workItem from="1671519841934" duration="10203000" />
       <workItem from="1671603913455" duration="21172000" />
       <workItem from="1671802101809" duration="1449000" />
-      <workItem from="1671864791289" duration="4020000" />
+      <workItem from="1671864791289" duration="4818000" />
     </task>
     <servers />
   </component>
