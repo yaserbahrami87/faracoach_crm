@@ -113,10 +113,10 @@
                                 @endif
                             </td>
                             <td class="text-center">
-                                    @if($item->status==1 || $item->status==3)
-                                        <a href="/panel/booking/{{$item->id}}">{{$item->booking->start_date}}</a>
-                                    @else
+                                    @if($item->status==4)
                                         {{$item->booking->start_date}}
+                                    @else
+                                        <a href="/panel/booking/{{$item->id}}">{{$item->booking->start_date}}</a>
                                     @endif
                             </td>
                             <td class="text-center">{{$item->booking->start_time}}</td>
