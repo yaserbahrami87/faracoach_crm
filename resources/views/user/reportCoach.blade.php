@@ -195,6 +195,7 @@
     <div class="col-12 ">
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="reserveCoach" role="tabpanel" aria-labelledby="reserveCoach-tab">
+                <p>جمع مبلغ واریز شده جهت جلسات: {{ number_format($heldCoaching->sum('final_off')) }} تومان</p>
                 <table class="datatable table table-striped table-bordered" style="width:100%">
                     <thead>
                     <tr>
@@ -239,6 +240,7 @@
 
             </div>
             <div class="tab-pane fade" id="reserveMoarefeh" role="tabpanel" aria-labelledby="reserveMoarefeh-tab">
+                <p>جمع مبلغ واریز شده جهت جلسات: {{ number_format($heldMoarefeh->sum('final_off')) }} تومان</p>
                 <table class="datatable table table-striped table-bordered">
                     <thead>
                     <tr>
@@ -283,6 +285,7 @@
                 </table>
             </div>
             <div class="tab-pane fade" id="cancelMoarefeh" role="tabpanel" aria-labelledby="cancelMoarefeh-tab">
+                <p>جمع مبلغ واریز شده جهت جلسات: {{ number_format($cancelMoarefeh->sum('final_off')) }} تومان</p>
                 <table class="datatable table table-striped table-bordered">
                     <thead>
                     <tr>
@@ -332,6 +335,7 @@
                 </table>
             </div>
             <div class="tab-pane fade" id="cancelCoaching" role="tabpanel" aria-labelledby="cancelCoaching-tab">
+                <p>جمع مبلغ واریز شده جهت جلسات: {{ number_format($cancelCoaching->sum('final_off')) }} تومان</p>
                 <table class="datatable table table-striped table-bordered">
                     <thead>
                     <tr>
@@ -381,6 +385,7 @@
                 </table>
             </div>
             <div class="tab-pane fade" id="reserveCoaching" role="tabpanel" aria-labelledby="reserveCoaching-tab">
+                <p>جمع مبلغ واریز شده جهت جلسات: {{ number_format($reserveCoaching->sum('final_off')) }} تومان</p>
                 <table class="datatable table table-striped table-bordered">
                     <thead>
                     <tr>
@@ -419,6 +424,7 @@
                 </table>
             </div>
             <div class="tab-pane fade" id="reserveMoarefeh" role="tabpanel" aria-labelledby="reserveMoarefeh-tab">
+                <p>جمع مبلغ واریز شده جهت جلسات: {{ number_format($reserveMoarefeh->sum('final_off')) }} تومان</p>
                 <table class="datatable table table-striped table-bordered">
                     <thead>
                     <tr>
