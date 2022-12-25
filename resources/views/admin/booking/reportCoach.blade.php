@@ -234,6 +234,8 @@
             <div class="col-12 ">
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="reserveCoach" role="tabpanel" aria-labelledby="reserveCoach-tab">
+                        <p>جمع مبلغ واریز شده جهت جلسات: {{ number_format($heldCoaching->sum('fi')) }} تومان</p>
+
                         <table class="datatable table table-striped table-bordered" style="width:100%">
                             <thead>
                             <tr>
@@ -247,7 +249,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($heldCoaching as $item)
+                                    @foreach($heldCoaching as $item)
                                 <tr class="@if($item->caption_status=='رزرو شده') bg-warning @elseif($item->caption_status=='برگزار شد') bg-success @endif">
                                     <td>{{$loop->iteration}}</td>
                                     <td>
@@ -278,6 +280,8 @@
 
                     </div>
                     <div class="tab-pane fade" id="reserveMoarefeh" role="tabpanel" aria-labelledby="reserveMoarefeh-tab">
+                        <p>جمع مبلغ واریز شده جهت جلسات: {{ number_format($heldMoarefeh->sum('fi')) }} تومان</p>
+
                         <table class="datatable table table-striped table-bordered">
                             <thead>
                             <tr>
@@ -322,6 +326,7 @@
                         </table>
                     </div>
                     <div class="tab-pane fade" id="cancelMoarefeh" role="tabpanel" aria-labelledby="cancelMoarefeh-tab">
+                        <p>جمع مبلغ واریز شده جهت جلسات: {{ number_format($cancelMoarefeh->sum('fi')) }} تومان</p>
                         <table class="datatable table table-striped table-bordered">
                             <thead>
                             <tr>
@@ -371,6 +376,7 @@
                         </table>
                     </div>
                     <div class="tab-pane fade" id="cancelCoaching" role="tabpanel" aria-labelledby="cancelCoaching-tab">
+                        <p>جمع مبلغ واریز شده جهت جلسات: {{ number_format($cancelCoaching->sum('fi')) }} تومان</p>
                         <table class="datatable table table-striped table-bordered">
                             <thead>
                             <tr>
@@ -420,6 +426,7 @@
                         </table>
                     </div>
                     <div class="tab-pane fade" id="reserveCoaching" role="tabpanel" aria-labelledby="reserveCoaching-tab">
+                        <p>جمع مبلغ واریز شده جهت جلسات: {{ number_format($reserveCoaching->sum('fi')) }} تومان</p>
                         <table class="datatable table table-striped table-bordered">
                             <thead>
                             <tr>
@@ -458,6 +465,7 @@
                         </table>
                     </div>
                     <div class="tab-pane fade" id="reserveMoarefeh" role="tabpanel" aria-labelledby="reserveMoarefeh-tab">
+                        <p>جمع مبلغ واریز شده جهت جلسات: {{ number_format($reserveMoarefeh->sum('fi')) }} تومان</p>
                         <table class="datatable table table-striped table-bordered">
                             <thead>
                             <tr>
