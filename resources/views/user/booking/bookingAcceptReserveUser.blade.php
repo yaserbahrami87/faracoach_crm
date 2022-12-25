@@ -88,32 +88,36 @@
                         @break
                         @case('4')   <tr class="table-danger">
                         @break
+                        @case('41')   <tr class="table-danger">
+                        @break
+                        @case('42')   <tr class="table-danger">
+                        @break
                         @case('5')   <tr class="table-info">
                         @break
                         @case('6')   <tr class="table-secondary">
                         @break
-                        @default    <tr>
+                        @default     <tr>
                         @break
                     @endswitch
 
 
                             <td class="text-center">
-                                @if($item->status==1 || $item->status==3)
+                                @if(($item->status==4)||($item->status==41)||($item->status==42))
                                     {{$item->id}}
                                 @else
-                                    {{$item->id}}
+                                    <a href="/panel/reserve/{{$item->id}}">{{$item->id}}</a>
                                 @endif
 
                             </td>
                             <td>
-                                @if($item->status==4)
+                                @if(($item->status==4)||($item->status==41)||($item->status==42))
                                     {{$item->booking->coach->user->fname.' '.$item->booking->coach->user->lname}}
                                 @else
                                     <a href="/panel/reserve/{{$item->id}}">{{$item->booking->coach->user->fname.' '.$item->booking->coach->user->lname}}</a>
                                 @endif
                             </td>
                             <td class="text-center">
-                                    @if($item->status==4)
+                                    @if(($item->status==4)||($item->status==41)||($item->status==42))
                                         {{$item->booking->start_date}}
                                     @else
                                         <a href="/panel/booking/{{$item->id}}">{{$item->booking->start_date}}</a>
@@ -135,15 +139,19 @@
                                                 <i class="bi bi-trash-fill"></i>
                                             </button>
                                         </form>
-                                @elseif($item->booking->start_date>$dateNow && ($item['status']!=4))
+                                @elseif($item->booking->start_date>$dateNow && (($item['status']!=4)&&($item['status']!=41)&&($item['status']!=42)))
                                         <form method="POST" action="/panel/booking/{{$item->booking_id}}" onsubmit="return confirm('آیا از لغو جلسه اطمینان دارید؟')">
                                             {{csrf_field()}}
                                             {{method_field('PATCH')}}
-                                            <input type="hidden" name="status" value="4" />
+                                            <input type="hidden" name="status" value="41" />
                                             <button type="submit" class="btn btn-danger">لغو جلسه
                                                 <i class="bi bi-x-lg"></i>
                                             </button>
                                         </form>
+                                @elseif($item->status==41)
+                                    <p class="text-dark">کنسل توسط مراجع</p>
+                                @elseif($item->status==42)
+                                    <p class="text-dark">کنسل توسط کوچ</p>
                                 @endif
                             </td>
                         </tr>

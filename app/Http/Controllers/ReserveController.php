@@ -388,11 +388,7 @@ class ReserveController extends BaseController
     {
         $reserves=reserve::where('user_id','=',Auth::user()->id)
             ->where(function($query){
-                $query->orwhere('status','=',1)
-                    ->orwhere('status','=',3)
-                    ->orwhere('status','=',4)
-                    ->orwhere('status','=',5)
-                    ->orwhere('status','=',6);
+                $query->orwhereIn('status',[1,3,4,5,6,41,42]);
             })
             ->orderby('reserves.id','desc')
             ->get();
@@ -677,7 +673,7 @@ class ReserveController extends BaseController
             }
             else
             {
-                $reserve = reserve::wherein('status', [1, 3,4,5,6])
+                $reserve = reserve::wherein('status', [1, 3,4,5,6,41,42])
                         ->wherehas('booking',function($query)
                         {
                             $query->orderby('start_date', 'desc');
@@ -688,7 +684,7 @@ class ReserveController extends BaseController
         }
         else
         {
-            $reserve=reserve::wherein('status', [1, 3,4,5,6])
+            $reserve=reserve::wherein('status', [1, 3,4,5,6,41,42])
                     ->wherehas('booking',function($query)
                     {
                         $query->where('user_id', '=', Auth::user()->id)

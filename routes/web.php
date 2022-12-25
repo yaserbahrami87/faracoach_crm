@@ -86,7 +86,7 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     Route::patch('/coach/{coach}/newrequest','CoachController@newrequest');
     Route::patch('/coach/{coach}/updateCoach','CoachController@updateCoach');
     Route::get('/coach/profile','CoachController@profile_coach');
-    Route::get('/booking/report','CoachController@booking_report_byUser');
+    Route::get('/booking/report','BookingController@booking_report_byUser');
 
     Route::resource('coach','CoachController');
 

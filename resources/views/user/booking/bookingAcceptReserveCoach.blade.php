@@ -348,13 +348,13 @@
                     <tbody>
                         @foreach($reserve as $item)
 
-                            <tr class="text-center @if($item->status==1) bg-warning2 @elseif($item->status==3) bg-success2   @elseif($item->status==4) bg-danger2 @elseif($item->status==5) bg-info @elseif($item->status==6) bg-secondary    @endif">
+                            <tr class="text-center @if($item->status==1) bg-warning2 @elseif($item->status==3) bg-success2   @elseif($item->status==4 ||$item->status==41 ||$item->status==42) bg-danger2 @elseif($item->status==5) bg-info @elseif($item->status==6) bg-secondary    @endif">
                                 <td>
                                     {{$item->id}}
                                 </td>
 
                                 <td>
-                                    @if($item->status==4)
+                                    @if(($item->status==4)||($item->status==41)||($item->status==42))
                                         {{$item->user->fname}} {{$item->user->lname}}
                                     @else
                                         <a class="btn-modal-introduced" href="/panel/reserve/{{$item->id}}" >{{$item->user->fname}} {{$item->user->lname}}</a>
@@ -372,7 +372,7 @@
                                     <p class="text-dark">{{$item->duration_booking}}</p>
                                 </td>
                                 <td>
-                                    @if($item->status!=4)
+                                    @if(($item->status!=4)&&($item->status!=42)&&($item->status!=41))
                                         <a class="btn btn-primary btn-sm" href="/panel/reserve/{{$item->id}}" title="نمایش" >
                                             <i class="bi bi-eye-fill"></i>
                                         </a>
@@ -380,15 +380,19 @@
                                 </td>
 
                                 <td>
-                                    @if($item->booking->start_date>$dateNow && $item->status!=4)
+                                    @if(($item->booking->start_date>$dateNow) && (($item->status!=4)&&($dateNow && $item->status!=41)&&($dateNow && $item->status!=42)))
                                         <form class="d-inline-block" method="POST" action="/panel/booking/{{$item->booking_id}}" onsubmit="return confirm('آیا از لغو جلسه اطمینان دارید؟')">
                                             {{csrf_field()}}
                                             {{method_field('PATCH')}}
-                                            <input type="hidden" name="status" value="4" />
+                                            <input type="hidden" name="status" value="42" />
                                             <button type="submit" class="btn btn-danger">
                                                 لغو جلسه
                                             </button>
                                         </form>
+                                    @elseif($item->status==41)
+                                        <p class="text-dark">کنسل توسط مراجع</p>
+                                    @elseif($item->status==42)
+                                        <p class="text-dark">کنسل توسط کوچ</p>
                                     @endif
                                 </td>
                             </tr>

@@ -63,6 +63,12 @@ class booking extends Model
             case '6':
                 return  'غیبت کوچ';
                 break;
+            case '41':
+                return 'کنسل مراجع';
+                break;
+            case '42':
+                return 'کنسل کوچ';
+                break;
             default: return 'خطا';
 
         }

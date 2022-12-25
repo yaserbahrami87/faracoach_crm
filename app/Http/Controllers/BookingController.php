@@ -300,7 +300,6 @@ class BookingController extends BaseController
 
         if($status)
         {
-
             $booking->reserve->status=$request->status;
             $booking->reserve->save();
             if ($booking->reserve->duration_booking == 1) {
@@ -309,16 +308,16 @@ class BookingController extends BaseController
                 $duration = 'جلسه کوچینگ';
             }
 
-            $user = booking::join('users', 'bookings.user_id', '=', 'users.id')
-                            ->join('coaches', 'users.id', '=', 'coaches.user_id')
-                            ->where('bookings.id', '=', $booking->id)
-                            ->first();
+//            $user = booking::join('users', 'bookings.user_id', '=', 'users.id')
+//                            ->join('coaches', 'users.id', '=', 'coaches.user_id')
+//                            ->where('bookings.id', '=', $booking->id)
+//                            ->first();
 
             //ارسال پیامک برای کوچ
-            $msg =$duration . " \n " . $user->start_date . " \n " . $user->start_time . "\n " . Auth::user()->fname . " " . Auth::user()->lname . "\nلغو شد" ;
-            $this->sendSms($user->tel, $msg);
+            $msg =$duration . " \n " . $booking->start_date . " \n " . $booking->start_time . "\n " . Auth::user()->fname . " " . Auth::user()->lname . "\nلغو شد" ;
+            $this->sendSms($booking->coach->user->tel, $msg);
             //ارسال پیامک به مراجعه
-            $msg =$duration . " \n " . $user->start_date . " \n ساعت " . $user->start_time . "\n کوچ:" . $user->fname . " " . $user->lname . "\nلغو شد" ;
+            $msg =$duration . " \n " . $booking->start_date . " \n ساعت " . $booking->start_time . "\n کوچ:" . $booking->coach->fname . " " . $booking->coach->lname . "\nلغو شد" ;
             $this->sendSms(Auth::user()->tel, $msg);
             alert()->success('جلسه با موفقیت لغو شد')->persistent('بستن');
         }
@@ -327,7 +326,7 @@ class BookingController extends BaseController
             alert()->error('خطا در لغو جلسه')->persistent('بستن');
         }
 
-        return back();//('/panel/booking/accept_reserve_user');
+        return back();//('/panel/booking/accept_reserve_useraccept_reserve_user');
     }
 
     /**
@@ -455,59 +454,18 @@ class BookingController extends BaseController
                                 ->get();
 
 
-
-//            $reserveMoarefeh=booking::join('users','users.id','=','bookings.user_id')
-//                ->join('coaches','coaches.user_id','=','users.id')
-//                ->where('users.id','=',$coach->id)
-//                ->where('bookings.status','=',1)
-//                ->where('bookings.duration_booking','=',1)
-//                ->whereBetween('bookings.start_date', [$request['start_date'][0],$request['start_date'][1]])
-//                ->get();
-
-
-//            $reserveCoaching=booking::join('users','users.id','=','bookings.user_id')
-//                ->join('coaches','coaches.user_id','=','users.id')
-//                ->where('users.id','=',$coach->id)
-//                ->where('bookings.status','=',1)
-//                ->where('bookings.duration_booking','=',2)
-//                ->whereBetween('bookings.start_date', [$request['start_date'][0],$request['start_date'][1]])
-//                ->get();
-
-
-            $waitingCoaching=booking::where('status','=',0)
+            $waitingCoaching=booking::where('status','=',1)
                                     ->where('duration_booking','=',2)
                                     ->whereBetween('start_date', [$request['start_date'][0],$request['start_date'][1]])
                                     ->where('user_id','=',$coach->id)
                                     ->get();
 
 
-
-
-
-//            $waitingCoaching=booking::join('users','users.id','=','bookings.user_id')
-//                ->join('coaches','coaches.user_id','=','users.id')
-//                ->where('users.id','=',$coach->id)
-//                ->where('bookings.status','=',0)
-//                ->where('bookings.duration_booking','=',2)
-//                ->whereBetween('bookings.start_date', [$request['start_date'][0],$request['start_date'][1]])
-//                ->get();
-
-
-            $waitingMoarefeh=booking::where('status','=',0)
+            $waitingMoarefeh=booking::where('status','=',1)
                             ->where('bookings.duration_booking','=',1)
                             ->whereBetween('start_date', [$request['start_date'][0],$request['start_date'][1]])
                             ->where('user_id','=',$coach->id)
                             ->get();
-
-
-
-//            $waitingMoarefeh=booking::join('users','users.id','=','bookings.user_id')
-//                ->join('coaches','coaches.user_id','=','users.id')
-//                ->where('users.id','=',$coach->id)
-//                ->where('bookings.status','=',0)
-//                ->where('bookings.duration_booking','=',1)
-//                ->whereBetween('bookings.start_date', [$request['start_date'][0],$request['start_date'][1]])
-//                ->get();
 
 
 
@@ -519,18 +477,6 @@ class BookingController extends BaseController
                                                     ->where('user_id','=',$coach->id);
                                 })
                                 ->get();
-
-
-
-//            $heldCoaching=booking::join('reserves','reserves.booking_id','=','bookings.id')
-//                            ->join('users','reserves.user_id','=','users.id')
-//                            ->where('bookings.user_id','=',$coach->user_id)
-//                            ->where('bookings.status','=',3)
-//                            ->where('bookings.duration_booking','=',2)
-//                            ->whereBetween('bookings.start_date', [$request['start_date'][0],$request['start_date'][1]])
-//                            ->select('bookings.*','users.fname','users.lname','bookings.id as booking_id','users.personal_image')
-//                            ->get();
-
 
 
             foreach ($heldCoaching as $item)
@@ -595,10 +541,10 @@ class BookingController extends BaseController
                     $query->where('user_id','=',$coach->id)
                         ->whereBetween('start_date', [$request['start_date'][0],$request['start_date'][1]]);
                 })
-                ->get();;
+                ->get();
 
             $dateNow=$this->dateNow;
-            return view('admin.reportCoach')
+            return view('admin.booking.reportCoach')
                 ->with('dateNow',$dateNow)
                 ->with('reserveMoarefeh',$reserveMoarefeh)
                 ->with('reserveCoaching',$reserveCoaching)
@@ -616,6 +562,161 @@ class BookingController extends BaseController
             return back();
         }
     }
+
+
+    public function booking_report_byUser(Request $request)
+    {
+
+        $coach=coach::where('user_id','=',Auth::user()->id)
+                        ->first();
+
+        if(isset($request['start_date']))
+        {
+            $this->validate($request,[
+                'start_date'    =>'required|string',
+            ]);
+            $request['start_date']=explode(' ~ ',$request['start_date']);
+        }
+        else
+        {
+            $startDate=verta()->startMonth()->format('Y/m/d');
+            $endDate=verta()->format('Y/m/d');
+            $request['start_date']=[$startDate,$endDate];
+
+        }
+
+        if($coach)
+        {
+            $reserveMoarefeh=reserve::where('status','=',1)
+                ->where('duration_booking','=',1)
+                ->wherehas('booking',function($query)use($request,$coach)
+                {
+                    $query->whereBetween('start_date', [$request['start_date'][0],$request['start_date'][1]])
+                        ->where('user_id','=',$coach->user_id);
+                })
+                ->get();
+
+            $reserveCoaching=reserve::where('status','=',1)
+                ->where('duration_booking','=',2)
+                ->wherehas('booking',function($query)use($request,$coach)
+                {
+                    $query->whereBetween('start_date', [$request['start_date'][0],$request['start_date'][1]])
+                        ->where('user_id','=',$coach->user_id);
+                })
+                ->get();
+
+
+
+
+            $waitingCoaching=booking::where('status','=',1)
+                ->where('duration_booking','=',2)
+                ->whereBetween('start_date', [$request['start_date'][0],$request['start_date'][1]])
+                ->where('user_id','=',$coach->user_id)
+                ->get();
+
+
+            $waitingMoarefeh=booking::where('status','=',1)
+                ->where('bookings.duration_booking','=',1)
+                ->whereBetween('start_date', [$request['start_date'][0],$request['start_date'][1]])
+                ->where('user_id','=',$coach->user_id)
+                ->get();
+
+            $heldCoaching=reserve::where('status','=',3)
+                ->where('duration_booking','=',2)
+                ->wherehas('booking',function($query)use($request,$coach)
+                {
+                    $query->whereBetween('start_date', [$request['start_date'][0],$request['start_date'][1]])
+                        ->where('user_id','=',$coach->user_id);
+                })
+                ->get();
+
+            foreach ($heldCoaching as $item)
+            {
+                switch ($item->duration_booking)
+                {
+                    case '1':
+                        $item->duration_booking = 'معارفه 30 دقیقه ای';
+                        break;
+                    case '2':
+                        $item->duration_booking = 'کوچینگ 60 دقیقه ای';
+                        break;
+                }
+                $item->caption_status=$this->get_statusBookings($item->caption_status);
+
+            }
+
+
+            $heldMoarefeh=reserve::where('status','=',3)
+                ->where('duration_booking','=',1)
+                ->wherehas('booking',function($query)use($request,$coach)
+                {
+                    $query->whereBetween('start_date', [$request['start_date'][0],$request['start_date'][1]])
+                        ->where('user_id','=',$coach->user_id);
+                })
+                ->get();
+
+
+            foreach ($heldMoarefeh as $item)
+            {
+                switch ($item->duration_booking)
+                {
+                    case '1':
+                        $item->duration_booking = 'معارفه 30 دقیقه ای';
+                        break;
+                    case '2':
+                        $item->duration_booking = 'کوچینگ 60 دقیقه ای';
+                        break;
+                }
+
+
+                $item->caption_status=$this->get_statusBookings($item->status);
+
+            }
+
+
+
+            $cancelMoarefeh=reserve::wherein('status',[4,41,42])
+                ->where('duration_booking','=',1)
+                ->wherehas('booking',function($query) use ($coach,$request)
+                {
+                    $query->where('user_id','=',$coach->user_id)
+                        ->whereBetween('start_date', [$request['start_date'][0],$request['start_date'][1]]);
+                })
+                ->get();
+
+
+
+            $cancelCoaching=reserve::wherein('status',[4,41,42])
+                ->where('duration_booking','=',2)
+                ->wherehas('booking',function($query) use ($coach,$request)
+                {
+                    $query->where('user_id','=',$coach->user_id)
+                        ->whereBetween('start_date', [$request['start_date'][0],$request['start_date'][1]]);
+                })
+                ->get();
+
+            $dateNow=$this->dateNow;
+            return view('user.reportCoach')
+                ->with('dateNow',$dateNow)
+                ->with('reserveMoarefeh',$reserveMoarefeh)
+                ->with('reserveCoaching',$reserveCoaching)
+                ->with('waitingCoaching',$waitingCoaching)
+                ->with('waitingMoarefeh',$waitingMoarefeh)
+                ->with('heldCoaching',$heldCoaching)
+                ->with('heldMoarefeh',$heldMoarefeh)
+                ->with('cancelMoarefeh',$cancelMoarefeh)
+                ->with('cancelCoaching',$cancelCoaching)
+                ->with('coach',$coach);
+        }
+        else
+        {
+            alert()->error('کوچ مورد نظر یافت نشد')->persistent('بستن');
+            return back();
+        }
+    }
+
+
+
 
     public function get_statusBookings($status)
     {

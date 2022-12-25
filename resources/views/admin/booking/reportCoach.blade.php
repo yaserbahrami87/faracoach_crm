@@ -112,27 +112,28 @@
 
     <div class="col-md-3">
         <div class="card-counter info">
-            <span class="count-numbers text-white">{{$reserveCoaching->count()}} جلسه </span>
+            <span class="count-numbers text-white">{{$waitingCoaching->count()}}  جلسه </span>
             <span class="count-name text-white">جلسه کوچینگ در انتظار رزرو</span>
         </div>
     </div>
     <div class="col-md-3">
         <div class="card-counter info">
-            <span class="count-numbers text-white">{{$reserveMoarefeh->count()}} جلسه </span>
+            <span class="count-numbers text-white">{{$waitingMoarefeh->count()}} جلسه </span>
             <span class="count-name text-white">جلسه معارفه در انتظار رزرو</span>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card-counter warning">
-            <span class="count-numbers text-dark">{{$waitingCoaching->count()}} جلسه </span>
-            <span class="count-name text-dark">جلسه کوچینگ رزرو شده</span>
         </div>
     </div>
 
     <div class="col-md-3">
         <div class="card-counter warning">
-            <span class="count-numbers text-dark">{{$waitingMoarefeh->count()}} جلسه </span>
-            <span class="count-name text-dark">جلسه معارفه رزرو شده</span>
+            <span class="count-numbers text-white"> {{$reserveCoaching->count()}}جلسه </span>
+            <span class="count-name text-white">جلسه کوچینگ رزرو شده</span>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card-counter warning">
+            <span class="count-numbers text-white">{{$reserveMoarefeh->count()}} جلسه </span>
+            <span class="count-name text-white">جلسه معارفه رزرو شده</span>
         </div>
     </div>
 
@@ -211,6 +212,16 @@
                     <li class="nav-item" role="cancelCoaching">
                         <button class="nav-link " id="cancelCoaching-tab" data-toggle="tab" data-target="#cancelCoaching" type="button" role="tab" aria-controls="learn" aria-selected="false">جلسه کوچینگ کنسل شده
                             <span class="badge badge-danger">{{$cancelCoaching->count()}}</span>
+                        </button>
+                    </li>
+                    <li class="nav-item" role="reserveCoaching">
+                        <button class="nav-link " id="reserveCoaching-tab" data-toggle="tab" data-target="#reserveCoaching" type="button" role="tab" aria-controls="learn" aria-selected="false">جلسه کوچینگ بلاتکلیف
+                            <span class="badge badge-warning">{{$reserveCoaching->count()}}</span>
+                        </button>
+                    </li>
+                    <li class="nav-item" role="reserveMoarefeh">
+                        <button class="nav-link " id="reserveMoarefeh-tab" data-toggle="tab" data-target="#reserveMoarefeh" type="button" role="tab" aria-controls="learn" aria-selected="false">جلسه معارفه بلاتکلیف
+                            <span class="badge badge-warning">{{$reserveMoarefeh->count()}}</span>
                         </button>
                     </li>
                 </ul>
@@ -391,6 +402,82 @@
                                         {{$item->duration_booking}}
                                     </td>
 
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="reserveCoaching" role="tabpanel" aria-labelledby="reserveCoaching-tab">
+                        <table class="datatable table table-striped table-bordered">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>کد جلسه</th>
+                                <th>عکس</th>
+                                <th>مراجع</th>
+                                <th>تاریخ جلسه</th>
+                                <th>ساعت جلسه</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($reserveCoaching as $item)
+                                <tr class="@if($item->caption_status=='رزرو شده') bg-warning @elseif($item->caption_status=='برگزار شد') bg-success @endif">
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>
+                                        <a href="/panel/reserve/{{$item->id}}">
+                                            {{$item->id}}
+                                        </a>
+                                    </td>
+                                    <td class="p-0">
+                                        <img src="{{asset('/documents/users/'.$item->user->personal_image)}}" class="rounded-circle "  width="50px" height="50px" />
+                                    </td>
+                                    <td>
+                                        {{$item->user->fname.' '.$item->user->lname}}
+                                    </td>
+                                    <td>
+                                        {{$item->booking->start_date}}
+                                    </td>
+                                    <td>
+                                        {{$item->booking->start_time}}
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="tab-pane fade" id="reserveMoarefeh" role="tabpanel" aria-labelledby="reserveMoarefeh-tab">
+                        <table class="datatable table table-striped table-bordered">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>کد جلسه</th>
+                                <th>عکس</th>
+                                <th>مراجع</th>
+                                <th>تاریخ جلسه</th>
+                                <th>ساعت جلسه</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($reserveMoarefeh as $item)
+                                <tr class="@if($item->caption_status=='رزرو شده') bg-warning @elseif($item->caption_status=='برگزار شد') bg-success @endif">
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>
+                                        <a href="/panel/reserve/{{$item->id}}">
+                                            {{$item->id}}
+                                        </a>
+                                    </td>
+                                    <td class="p-0">
+                                        <img src="{{asset('/documents/users/'.$item->user->personal_image)}}" class="rounded-circle "  width="50px" height="50px" />
+                                    </td>
+                                    <td>
+                                        {{$item->user->fname.' '.$item->user->lname}}
+                                    </td>
+                                    <td>
+                                        {{$item->booking->start_date}}
+                                    </td>
+                                    <td>
+                                        {{$item->booking->start_time}}
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>

@@ -119,9 +119,9 @@
                     </thead>
                     <tbody>
                         @foreach($reserve as $item)
-                            <tr class="@if($item->status==1) bg-warning2 @elseif($item->status==3) bg-success2 @elseif($item->status==4) bg-danger2 @elseif($item->status==5) bg-info @elseif($item->status==6) bg-secondary  @endif">
+                            <tr class="@if($item->status==1) bg-warning2 @elseif($item->status==3) bg-success2 @elseif($item->status==4 || $item->status==41 ||$item->status==42 ) bg-danger2 @elseif($item->status==5) bg-info @elseif($item->status==6) bg-secondary  @endif">
                                 <td>
-                                    @if($item->status==4)
+                                    @if(($item->status==4)||($item->status==41)||($item->status==42))
                                         {{$item->id}}
                                     @else
                                         <a href="/admin/booking/{{$item->id}}/showadminbooking">
@@ -130,7 +130,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    @if($item->status==4)
+                                    @if(($item->status==4)||($item->status==41)||($item->status==42))
                                         {{$item->booking->coach['user']['fname'].' '.$item->booking->coach->user['lname'] }}
                                     @else
                                         <a href="/admin/booking/{{$item->id}}/showadminbooking">
@@ -139,7 +139,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    @if($item->status==4)
+                                    @if(($item->status==4)||($item->status==41)||($item->status==42))
                                         {{$item->user->fname.' '.$item->user->lname }}
                                     @else
                                         <a href="/admin/booking/{{$item->id}}/showadminbooking">
@@ -169,16 +169,35 @@
                                     @endif
                                 </td>
                                 <td>
-                                    @if($item->booking->start_date>$dateNow && $item->status!=4)
+                                    @if($item->booking->start_date>$dateNow && ($item->status!=4 && $item->status!=41 && $item->status!=42  ))
                                         <form class="d-inline-block" method="POST" action="/booking/{{$item->booking_id}}" onsubmit="return confirm('آیا از لغو جلسه اطمینان دارید؟')">
                                             {{csrf_field()}}
                                             {{method_field('PATCH')}}
                                             <input type="hidden" name="status" value="4" />
-                                            <button type="submit" class="btn btn-danger">
+                                            <button type="submit" class="btn btn-danger  btn-sm">
                                                 لغو جلسه
                                             </button>
                                         </form>
-
+                                        <form class="d-inline-block" method="POST" action="/booking/{{$item->booking_id}}" onsubmit="return confirm('آیا از لغو جلسه اطمینان دارید؟')">
+                                            {{csrf_field()}}
+                                            {{method_field('PATCH')}}
+                                            <input type="hidden" name="status" value="41" />
+                                            <button type="submit" class="btn btn-danger  btn-sm">
+                                                لغو مراجع
+                                            </button>
+                                        </form>
+                                        <form class="d-inline-block" method="POST" action="/booking/{{$item->booking_id}}" onsubmit="return confirm('آیا از لغو جلسه اطمینان دارید؟')">
+                                            {{csrf_field()}}
+                                            {{method_field('PATCH')}}
+                                            <input type="hidden" name="status" value="42" />
+                                            <button type="submit" class="btn btn-danger btn-sm">
+                                                لغو کوچ
+                                            </button>
+                                        </form>
+                                    @elseif($item->status==41)
+                                        <p class="text-dark">کنسل توسط مراجع</p>
+                                    @elseif($item->status==42)
+                                        <p class="text-dark">کنسل توسط کوچ</p>
                                     @endif
                                 </td>
                             </tr>
