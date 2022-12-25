@@ -331,7 +331,7 @@
                                 <th>مراجع</th>
                                 <th>تاریخ جلسه</th>
                                 <th>ساعت جلسه</th>
-                                <th>نوع جلسه</th>
+                                <th>نوع کنسل</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -356,7 +356,13 @@
                                         {{$item->booking->start_time}}
                                     </td>
                                     <td>
-                                        {{$item->duration_booking}}
+                                        @if($item->status==4)
+                                            کنسل شد
+                                        @elseif($item->status==41)
+                                            کنسل مراجع
+                                        @elseif($item->status==42)
+                                            کنسل کوچ
+                                        @endif
                                     </td>
 
                                 </tr>
@@ -374,7 +380,7 @@
                                 <th>مراجع</th>
                                 <th>تاریخ جلسه</th>
                                 <th>ساعت جلسه</th>
-                                <th>نوع جلسه</th>
+                                <th>نوع کنسل</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -399,7 +405,13 @@
                                         {{$item->booking->start_time}}
                                     </td>
                                     <td>
-                                        {{$item->duration_booking}}
+                                        @if($item->status==4)
+                                            کنسل شد
+                                        @elseif($item->status==41)
+                                            کنسل مراجع
+                                        @elseif($item->status==42)
+                                            کنسل کوچ
+                                        @endif
                                     </td>
 
                                 </tr>
