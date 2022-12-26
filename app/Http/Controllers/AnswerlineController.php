@@ -222,7 +222,7 @@ class AnswerlineController extends Controller
                         $user->type = $answerLine->user_type;
                         $user->save();
                         $v = verta();
-                        $tomorrow = $v->addDays(1);
+                        $tomorrow = $v->addDays(2);
                         $status = followup::create([
                             'user_id'               => $user->id,
                             'insert_user_id'        => $user->id,

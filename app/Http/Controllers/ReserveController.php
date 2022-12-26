@@ -75,25 +75,33 @@ class ReserveController extends BaseController
         }
 
 
-        $booking=booking::leftjoin('feedback_coachings','bookings.id','=','feedback_coachings.booking_id')
-                    ->where('booking_id','=',$reserve['booking_id'])
-                    ->first();
-
-//        $user_coach=$this->get_user_byID($reserve->user_id);
-
-
         $homework=homework::where('booking_id','=',$reserve->booking_id)
             ->where('type','=','booking')
             ->orderby('id')
             ->get();
 
-//        $dateNow=$this->dateNow;
-        return view('user.showReserveUser')
-                    ->with('reserve',$reserve)
-//                    ->with('dateNow',$dateNow)
-                    ->with('booking',$booking)
-                    ->with('homework',$homework);
-//                    ->with('user_coach',$user_coach);
+
+        if($reserve->booking->user_id==Auth::user()->id)
+        {
+            //تاریخچه جلسات
+            $history=reserve::join('users','reserves.user_id','=','users.id')
+                ->join('bookings','reserves.booking_id','=','bookings.id')
+                ->where('bookings.user_id','=',Auth::user()->id)
+                ->where('reserves.user_id','=',$reserve->user_id)
+                ->get();
+
+            return view('user.InfoReserve')
+                ->with('reserve',$reserve)
+                ->with('history',$history)
+                ->with('homework',$homework);
+        }
+        else
+        {
+            return view('user.showReserveUser')
+                ->with('reserve',$reserve)
+                ->with('homework',$homework);
+        }
+
     }
 
     /**
@@ -116,6 +124,7 @@ class ReserveController extends BaseController
      */
     public function update(Request $request, reserve $reserve)
     {
+
         //$reserve->booking->coach->user);
         $this->validate($request,[
             'presession'    =>'required|string|'
@@ -188,7 +197,9 @@ class ReserveController extends BaseController
 
         $reserve=reserve::where('booking_id','=',$request['booking_id'])
                             ->where('user_id','=',Auth::user()->id)
+                            ->where('status','=',1)
                             ->first();
+
 
         $booking=booking::where('id','=',$request['booking_id'])
                         ->first();
@@ -270,6 +281,9 @@ class ReserveController extends BaseController
 
         }
 
+
+
+
         if($status)
         {
             return "<script>window.location='/cart'</script>";
@@ -289,43 +303,29 @@ class ReserveController extends BaseController
 
         foreach ($cart as $item)
         {
-            $reserve = reserve::where('booking_id', '=', $item['booking_id'])
-                ->first();
+            $booking = booking::where('id', '=', $item['booking_id'])
+                                ->first();
 
-            if ($reserve->status == 0)
+            if ($booking->status == 1)
             {
-                $user = booking::join('users', 'bookings.user_id', '=', 'users.id')
-                    ->join('coaches', 'users.id', '=', 'coaches.user_id')
-                    ->where('bookings.id', '=', $item['booking_id'])
-                    ->first();
-
-
                 $fi = $item->final_off;
+
                 $off = 0;
                 $final_off = $fi - $off;
 
                 if($final_off==0)
                 {
-                    if ($reserve->duration_booking == 1) {
+                    if ($booking->reserve->duration_booking == 1) {
                         $duration = 'جلسه معارفه';
                     } else {
                         $duration = 'جلسه کوچینگ';
                     }
 
-                    $reserve->update(
-                        [
-                            'status' => 1,
-                        ]);
-                    $status = $reserve->save();
+                    $booking->status = 0;
+                    $status=$booking->save();
+                    $booking->reserve->status = 1;
+                    $booking->reserve->save();
 
-
-                    if ($status)
-                    {
-                        $booking = booking::where('id', '=', $reserve->booking->id)
-                            ->first();
-                        $booking->status = 0;
-                        $booking->save();
-                    }
                 }
 
                 elseif($final_off<100)
@@ -335,7 +335,7 @@ class ReserveController extends BaseController
                 }
                 else
                 {
-                    return  $this->checkoutStore($reserve->id,$final_off,Auth::user(),'reserve',NULL,'رزرو جلسه');
+                    return  $this->checkoutStore($booking->reserve->id,$final_off,Auth::user(),'reserve',NULL,'رزرو جلسه');
                 }
             } else
             {
@@ -346,26 +346,26 @@ class ReserveController extends BaseController
 
 
             if ($status) {
-                if ($reserve->duration_booking == 1) {
+                if ($booking->reserve->duration_booking == 1) {
                     $duration = 'جلسه معارفه';
                 } else {
                     $duration = 'جلسه کوچینگ';
                 }
 
                 //                //ارسال پیامک به کوچ
-                $msg =$duration . " \n " . $reserve->booking->start_date . " \n  " . $reserve->booking->start_time . "\n مراجع:" . Auth::user()->fname . " " . Auth::user()->lname . "\n تماس کوچ:" .  Auth::user()->tel;
-                $this->sendSms($reserve->booking->coach->user->tel, $msg);
+                $msg =$duration . " \n " . $booking->start_date . " \n  " . $booking->start_time . "\n مراجع:" . Auth::user()->fname . " " . Auth::user()->lname . "\n تماس کوچ:" .  Auth::user()->tel;
+                $this->sendSms($booking->reserve->booking->coach->user->tel, $msg);
 
                 //                //ارسال پیامک برای مراجع
-                $msg =$duration . " \n " . $reserve->booking->start_date . " \n " . $reserve->booking->start_time . "\n کوچ: " . $reserve->booking->coach->user->fname . " " . $reserve->booking->coach->user->lname . "\nتماس:" .$reserve->booking->coach->user->tel;
+                $msg =$duration . " \n " . $booking->start_date . " \n " . $booking->start_time . "\n کوچ: " . $booking->coach->user->fname . " " . $booking->coach->user->lname . "\nتماس:" .$booking->coach->user->tel;
                 $this->sendSms(Auth::user()->tel, $msg);
 
                 //ارسال پیامک برای حسام
-                $msg=$duration . " \n " . $booking->start_date . " \n  " . $booking->start_time . "\n کوچ:" . $user->fname . " " . $user->lname . "\n مراجع ".Auth::user()->fname . " " . Auth::user()->lname . "\nتماس:" .Auth::user()->tel;
+                $msg=$duration . " \n " . $booking->start_date . " \n  " . $booking->start_time . "\n کوچ:" . $booking->coach->user->fname . " " . $booking->coach->user->lname . "\n مراجع ".Auth::user()->fname . " " . Auth::user()->lname . "\nتماس:" .Auth::user()->tel;
                 $this->sendSms('+989101769020', $msg);
 
                 //ارسال پیامک برای یوسفی
-                $msg=$duration . " \n " . $booking->start_date . " \n  " . $booking->start_time . "\n کوچ:" . $user->fname . " " . $user->lname . "\n مراجع ".Auth::user()->fname . " " . Auth::user()->lname . "\nتماس:" .Auth::user()->tel;
+                $msg=$duration . " \n " . $booking->start_date . " \n  " . $booking->start_time . "\n کوچ:" . $booking->coach->user->fname . " " . $booking->coach->user->lname . "\n مراجع ".Auth::user()->fname . " " . Auth::user()->lname . "\nتماس:" .Auth::user()->tel;
                 $this->sendSms('+989151060792', $msg);
             } else {
                 alert()->error('خطا در محاسبه')->persistent('بستن');
@@ -375,8 +375,9 @@ class ReserveController extends BaseController
 
 
         alert()->success('رزرو با موفقیت انجام شد')->persistent('بستن');
-//        return $this->checkout(Auth::user()->id,$reserve->id,$reserve->final_off,'جلسه',Auth::user()->email,Auth::user()->tel,$duration.$user->fname . " " . $user->lname);
-        return '<script>window.location="/"</script>';
+
+//        return '<script>window.location="/"</script>';
+        return redirect('/panel/reserve/accept_reserve_user');
     }
 
 
@@ -387,12 +388,10 @@ class ReserveController extends BaseController
     {
         $reserves=reserve::where('user_id','=',Auth::user()->id)
             ->where(function($query){
-                $query->orwhere('status','=',1)
-                    ->orwhere('status','=',3)
-                    ->orwhere('status','=',4);
+                $query->orwhereIn('status',[1,3,4,5,6,41,42]);
             })
             ->orderby('reserves.id','desc')
-            ->paginate($this->countPage());
+            ->get();
 
 
 
@@ -423,7 +422,7 @@ class ReserveController extends BaseController
         $this->validate($request, [
             'result_coach' => 'required|string|',
             'score' => 'required|numeric|between:1,5',
-            'status' => 'required|numeric|between:1,4'
+            'status' => 'required|numeric|between:1,6'
 
         ], [
             'result_coach.required' => 'نتیجه جلسه الزامی است',
@@ -433,7 +432,7 @@ class ReserveController extends BaseController
             'score.between' => 'وضعیت باید بین 1 تا 5 باشد',
             'status.required' => 'وضعیت  جلسه را وارد کنید',
             'status.numeric' => 'وضعیت جلسه باید عدد باشد',
-            'status.between' => 'وضعیت جلسه باید بین 1 تا 5 باشد'
+            'status.between' => 'وضعیت جلسه باید بین 1 تا 6 باشد'
         ]);
         $coach = coach::where('user_id','=',Auth::user()->id)
                         ->first();
@@ -443,8 +442,8 @@ class ReserveController extends BaseController
         $coach->save();
 
 
-        if ($coach) {
-
+        if ($coach)
+        {
             $status = $reserve->update($request->all());
             $booking = $reserve->booking;
             $user=User::join('reserves','reserves.user_id','=','users.id')
@@ -563,6 +562,56 @@ class ReserveController extends BaseController
         }
     }
 
+    public function destroy_cart(Request $request,reserve $reserve)
+    {
+        $status=$reserve->delete();
+        if($status)
+        {
+            alert()->success('جلسه با موفقیت حذف شد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در حذف جلسه')->persistent('بستن');
+        }
+        return back();
+    }
+
+
+    public function showAdminBooking(reserve $reserve)
+    {
+
+        //تاریخچه جلسات
+        $history=reserve::where('user_id','=',$reserve->user_id)
+                          ->wherehas('booking',function($query)use ($reserve)
+                            {
+                                $query->where('user_id','=',$reserve->booking->user_id);
+                            })
+                            ->get();
+
+
+        switch($reserve->type_booking)
+        {
+            case '1':$reserve->type_booking='حضوری';
+                break;
+            case '2':$reserve->type_booking='آنلاین';
+                break;
+            case '0':$reserve->type_booking='فرقی ندارد';
+                break;
+            default:$reserve->type_booking='خطا';
+                break;
+        }
+
+
+        $dateNow=$this->dateNow;
+        $timeNow=$this->timeNow;
+
+        return view('admin.InfoReserve')
+            ->with('reserve',$reserve)
+            ->with('history',$history);
+    }
+
+
+
     public function test()
     {
         $reserve=checkout::get();
@@ -576,6 +625,99 @@ class ReserveController extends BaseController
             {
                 echo "<script>console.log(USER=".$item.");</script>";
             }
+        }
+    }
+
+
+    public function acceptReserve(Request $request)
+    {
+
+        $this->validate($request,[
+            'start_date'    =>'nullable|string',
+            'type'          =>'nullable|string'
+        ]);
+
+
+        if(Auth::user()->type==2  || Auth::user()->type==3 || Auth::user()->type==4)
+        {
+            if($request->type=='روز برگزاری')
+            {
+                $request['start_date']=explode(' ~ ',$request['start_date']);
+                $reserve = reserve::wherein('status', [1, 2, 3])
+                    ->wherehas('booking',function($query)use($request)
+                    {
+                        $query->wherebetween('start_date',[$request['start_date'][0],$request['start_date'][1]])
+                                    ->orderby('start_date', 'desc');
+                    })
+                    ->get();
+            }
+            elseif($request->type=='رزرو شده')
+            {
+//                $request['start_date']=explode(' ~ ',$request['start_date']);
+//                $startMonth=$request['start_date'][0];
+//                $startMonth=($this->changeTimestampToMilad($startMonth).' 00:00:00');
+//                $endtMonth=$request['start_date'][1];
+//                $endtMonth=$this->changeTimestampToMilad($endtMonth).' 23:59:59';
+//                $booking = reserve::wherein('status', [1, 2, 3])
+//                            ->wherebetween('created_at',[$startMonth,$endtMonth])
+//                            ->orderby('id', 'desc')
+//                            ->get();
+//
+//                foreach ($booking as $item)
+//                {
+//                    $item=$item->booking;
+//                    dd($booking);
+//                }
+//
+//                dd($booking);
+            }
+            else
+            {
+                $reserve = reserve::wherein('status', [1, 3,4,5,6,41,42])
+                        ->wherehas('booking',function($query)
+                        {
+                            $query->orderby('start_date', 'desc');
+                        })
+                        ->get();
+            }
+
+        }
+        else
+        {
+            $reserve=reserve::wherein('status', [1, 3,4,5,6,41,42])
+                    ->wherehas('booking',function($query)
+                    {
+                        $query->where('user_id', '=', Auth::user()->id)
+                            ->orderby('start_date', 'desc');
+                    })
+                    ->get();
+
+        }
+
+        foreach ($reserve as $item)
+        {
+            switch ($item->duration_booking)
+            {
+                case '1':
+                    $item->duration_booking = 'معارفه 30 دقیقه ای';
+                    break;
+                case '2':
+                    $item->duration_booking = 'کوچینگ 60 دقیقه ای';
+                    break;
+            }
+        }
+
+        if(Auth::user()->type==2  || Auth::user()->type==3 || Auth::user()->type==4)
+        {
+            return view('admin.booking.bookingAcceptReserveCoach')
+//        return view('panelUser.booking')
+                ->with('reserve', $reserve)
+                ->with('dateNow', $this->dateNow);
+        }
+        else
+        {
+            return view('user.booking.bookingAcceptReserveCoach')
+                ->with('reserve', $reserve);
         }
     }
 

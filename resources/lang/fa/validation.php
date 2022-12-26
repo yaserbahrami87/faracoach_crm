@@ -264,6 +264,8 @@ return [
         'validity'              =>'اعتبار',
         'motivation'            =>'انگیزه',
         'score_profile'         =>'امتیاز پروفایل',
+        'count'                 =>'تعداد/میزان',
+        'expire'                =>'تاریخ مهلت',
 
     ],
 

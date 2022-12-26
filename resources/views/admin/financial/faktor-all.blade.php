@@ -2,6 +2,7 @@
 
 @section('headerScript')
     <link href="{{asset('/dashboard/assets/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('/dashboard/assets/css/buttons.dataTables.min.css')}}" rel="stylesheet" />
 @endsection
 
 @section('content')
@@ -40,6 +41,7 @@
                             <th>#</th>
                             <th>مشخصات</th>
                             <th>محصول</th>
+                            <th>تلفن</th>
                             <th>تاریخ ایجاد </th>
                             <th>موعد پرداخت</th>
                             <th>قیمت(تومان)</th>
@@ -61,6 +63,7 @@
                                         {{($item->course['course'])}}
                                     @endif
                                 </td>
+                                <td>{{$item->user->tel}}</td>
                                 <td>{{$item->date_createfaktor}}</td>
                                 <td>{{$item->date_faktor}}</td>
                                 <td>{{number_format($item->fi)}}</td>
@@ -97,6 +100,7 @@
                             <th>#</th>
                             <th>مشخصات</th>
                             <th>محصول</th>
+                            <th>تلفن</th>
                             <th>تاریخ ایجاد </th>
                             <th>موعد پرداخت</th>
                             <th>قیمت(تومان)</th>
@@ -117,6 +121,9 @@
                                     @if($item->type=='course')
                                         {{($item->course['course'])}}
                                     @endif
+                                </td>
+                                <td>
+                                    {{$item->user->tel}}
                                 </td>
                                 <td>{{$item->date_createfaktor}}</td>
                                 <td>{{$item->date_faktor}}</td>
@@ -154,6 +161,7 @@
                             <th>#</th>
                             <th>مشخصات</th>
                             <th>محصول</th>
+                            <th>تلفن</th>
                             <th>تاریخ ایجاد </th>
                             <th>موعد پرداخت</th>
                             <th>قیمت(تومان)</th>
@@ -175,6 +183,7 @@
                                         {{($item->course['course'])}}
                                     @endif
                                 </td>
+                                <td>{{$item->user->tel}}</td>
                                 <td>{{$item->date_createfaktor}}</td>
                                 <td>{{$item->date_faktor}}</td>
                                 <td>{{number_format($item->fi)}}</td>
@@ -217,17 +226,31 @@
 @section('footerScript')
     <script src="{{asset('/dashboard/assets/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('/dashboard/assets/js/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/dataTables.buttons.min.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/jszip.min.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/vfs_fonts.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/buttons.html5.min.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/buttons.print.min.js')}}"></script>
     <script>
         $(document).ready(function() {
-            $('.dataTable').DataTable();
+            $('.dataTable').DataTable({
+                dom: 'Bfrltip',
+                buttons: [
+                    'excel',
+                ],
+
+            } );
         } );
     </script>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-    <script src="https://cdn.jsdelivr.net/npm/moment"></script>
-    <script src="https://cdn.jsdelivr.net/npm/moment-jalaali@0.7.4/build/moment-jalaali.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue-persian-datetime-picker/dist/vue-persian-datetime-picker-browser.js"></script>
+    <script src="{{asset('/js/vue@2.js')}}"></script>
+    <script src="{{asset('/js/moment.js')}}"></script>
+    <script src="{{asset('/js/moment-jalaali.js')}}"></script>
+    <script src="{{asset('/js/vue-persian-datetime-picker-browser.js')}}"></script><script src="{{asset('/js/vue@2.js')}}"></script>
+    <script src="{{asset('/js/moment.js')}}"></script>
+    <script src="{{asset('/js/moment-jalaali.js')}}"></script>
+    <script src="{{asset('/js/vue-persian-datetime-picker-browser.js')}}"></script>
     <script>
         var app = new Vue({
             el: '#app',

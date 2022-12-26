@@ -117,7 +117,7 @@
                                 <div class="card h-100">
                                     <div class="h-50 mb-2">
                                         <a href="{{asset('/event/'.$item->shortlink)}}">
-                                            <img src="{{asset('/documents/events/'.$item->image)}}" style="height: 180px !important;" class="img-fluid card-img-top" alt="...">
+                                            <img src="{{asset('/documents/events/'.$item->image)}}" style="height: 220px !important;" class="img-fluid card-img-top" alt="...">
                                         </a>
                                     </div>
                                     <div class="card-body ">
@@ -131,7 +131,6 @@
                                         </div>
                                         <div class="col-12 p-0">
                                             <p class="p-0  float-right  font-weight-bold d-inline">
-
                                                 <i class="bi bi-calendar-event-fill"></i> {{$item->eventDate}}
                                             </p>
                                             <p class="p-0  float-left font-weight-bold d-inline">
@@ -140,7 +139,6 @@
                                         </div>
 
                                         <div class="col-12 text-center">
-
                                             @if($item->status_event=='در حال ثبت نام')
                                                 <a href="{{asset('/event/'.$item->shortlink)}}" class=" btn btn-outline-primary">{{$item->status_event}}</a>
                                             @elseif($item->status_event=='تکمیل ظرفیت')

@@ -24,6 +24,7 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     // ROUTE USER
 
     Route::get('/profile','UserController@profile');
+    Route::post('/profile/deleteImageProfile','UserController@deleteImageProfile');
 //    Route::get('/user/contacts','UserController@contacts');
 //    Route::get('/user/introduction','UserController@introduction');
 //    Route::get('/user/contract','UserController@contract');
@@ -85,7 +86,7 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     Route::patch('/coach/{coach}/newrequest','CoachController@newrequest');
     Route::patch('/coach/{coach}/updateCoach','CoachController@updateCoach');
     Route::get('/coach/profile','CoachController@profile_coach');
-    Route::get('/booking/report','CoachController@booking_report_byUser');
+    Route::get('/booking/report','BookingController@booking_report_byUser');
 
     Route::resource('coach','CoachController');
 
@@ -95,10 +96,33 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     Route::post('/scholarship/addintroduced','UserController@addIntroducedUser_Scholarship');
     Route::post('/scholarship/store_webinarCode','RecievecodeusersController@store_webinarCode');
     Route::post('/scholarship/introductionletter','ScholarshipController@introductionletter');
+    Route::post('/scholarship/introduction/answerstatus_introduction','ScholarshipController@answerstatus_introduction');
+    Route::post('/scholarship/me/sendSMSIntroduce','ScholarshipController@sendSMSIntroduce');
+    Route::post('/scholarship/me/sendAcceptCollabration','ScholarshipController@sendAcceptCollabration');
+
 
     //Scholarship Exam
     Route::get('/scholarship/exam/create','ScholarshipExamController@create');
     Route::post('/scholarship/exam','ScholarshipExamController@store');
+
+    //Scholarship Payment
+    Route::post('/scholarship/ajax_payment','ScholarshipPaymentController@ajax_payment');
+    Route::resource('scholarship_payment','ScholarshipPaymentController');
+
+    // collabration_category
+    Route::get('/scholarship/me/collabration_category/{collabration_category}','CollabrationCategoryController@ajaxCategory');
+    Route::get('/scholarship/me/collabration_details/{collabration_details}','CollabrationDetailsController@ajaxDetails');
+
+    //Collabration accept
+//    Route::post('/scholarship/me/collabration_details_accept','CollabrationDetailsController@collabration_details_accept');
+    Route::get('/scholarship/me/collabrationAccept_ajax','CollabrationAcceptController@collabrationAccept_ajax');
+    Route::get('/scholarship/me/collabrationAcceptEdit_ajax/{collabration_accept}','CollabrationAcceptController@collabrationAcceptEdit_ajax');
+    Route::patch('/scholarship/me/collabrationAccept/{collabration_accept}','CollabrationAcceptController@update');
+    Route::resource('collabration_accept','CollabrationAcceptController');
+
+
+
+
 
     //Certificates
     Route::get('/level1/certificate','CertificateController@get_certificate1');
@@ -107,8 +131,8 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
 
 
     //booking
-    Route::get('/booking/accept','BookingController@acceptReserve');
-
+    Route::get('/booking/accept','ReserveController@acceptReserve');
+    Route::get('/booking/cancel','BookingController@cancelReserve');
     Route::resource('booking','BookingController');
 
     //booking Setting
@@ -208,10 +232,10 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::post('/register','UserController@register');
     Route::get('/user/{user}/delete','UserController@destroy');
     Route::get('/users/category/','UserController@showCategoryUsersAdmin');
-    Route::get('/users/categoryTags/','UserController@showCategoryTagsAdmin');
+//    Route::get('/users/categoryTags/','UserController@showCategoryTagsAdmin');
 //    Route::get('/users/categorybyAdmin/','UserController@categorybyAdmin');
 //    Route::get('/users/list_user_gettingknow','UserController@list_user_gettingknow');
-    Route::get('/users/advancesearch','UserController@advancesearch');
+//    Route::get('/users/advancesearch','UserController@advancesearch');
 //    Route::get('/users/export_excel','UserController@export_excel');
 
 
@@ -225,10 +249,15 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::post('/scholarship/{scholarship}/changestatus','ScholarshipController@changeStatus');
     Route::get('/scholarship/exportExcel','ScholarshipController@exportExcel');
     Route::get('/scholarship/sendSMS_incompleteProfile','ScholarshipController@sendSMS_incompleteProfile');
-    Route::get('/scholarship/webinar_accept','ScholarshipController@webinar_accept');
-    Route::get('/scholarship/exam_accept','ScholarshipController@exam_accept');
+//    Route::get('/scholarship/webinar_accept','ScholarshipController@webinar_accept');
+    Route::post('/scholarship/{scholarship}/confirm_webinar','ScholarshipController@confirm_webinar');
+    Route::post('/scholarship/{scholarship}/type_payment','ScholarshipController@type_payment');
+//    Route::get('/scholarship/exam_accept','ScholarshipController@exam_accept');
     Route::get('/scholarship/dont_prticipate_in_the_exam','ScholarshipController@dontParticipateIntheExam');
+    Route::get('/scholarship/financial','ScholarshipController@financial');
+    Route::get('/scholarship/result/report','ScholarshipController@report_result');
     Route::post('/scholarship/{scholarship}/score_store','ScholarshipController@scoreStore');
+    Route::post('/scholarship/{scholarship}/changestatusIntroductionLetter','ScholarshipController@changestatusIntroductionLetter');
     Route::resource('scholarship','ScholarshipController');
 
     //Route Scholarship Interview
@@ -236,6 +265,14 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
 
     //scholarship Exam
     Route::get('/scholarship/certificate/{user}/download','CertificateController@get_certificateByAdmin');
+
+    //Scholarship setting
+    Route::resource('collabration_category','CollabrationCategoryController');
+    Route::resource('collabration_details','CollabrationDetailsController');
+    Route::resource('collabration_accept','CollabrationAcceptController');
+
+    //scholarship collabration
+    Route::get('/users/collabrations','ScholarshipController@collabrations');
 
     //  ROUTE SETTINGS
     Route::prefix('settings/')->group(function ()
@@ -348,14 +385,16 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
 
 
     //booking
-    Route::get('/booking/{booking}/showadminbooking','BookingController@showAdminBooking');
-    Route::get('/booking/accept','BookingController@acceptReserve');
+
+    Route::get('/booking/bookingListAdmin','BookingController@bookingListAdmin');
+    Route::get('/booking/accept','ReserveController@acceptReserve');
     Route::resource('booking','BookingController');
 
     //coupon
     Route::resource('coupon','CouponController');
 
     //reserve
+    Route::get('/booking/{reserve}/showadminbooking','ReserveController@showAdminBooking');
     Route::get('/reserve/notification/incomplete','ReserveController@sendNotificationIncomplete');
     Route::get('/reserve/waiting','ReserveController@waiting');
 
@@ -462,11 +501,10 @@ Route::get('/verify/active/tel', 'VerifyController@store_landings');
 Route::get('/verify/active/tel/check/{code}','VerifyController@checkCode_landings');
 
 // Landing Page
-Route::get('/landingPage','landingController@index');
+//Route::get('/landingPage','landingController@index');
+//Route::post('/landing/store','landingController@store_landing_gift');
+//Route::get('/showPackageDownload', 'landingController@showPackageDownload')->name('freePackageLanding');
 
-Route::post('/landing/store','landingController@store_landing_gift');
-
-Route::get('/showPackageDownload', 'landingController@showPackageDownload')->name('freePackageLanding');
 Route::get('/password/sendcode','VerifyController@sendResetCode');
 Route::post('/password/reset/update','VerifyController@checkResetCode');
 
@@ -525,7 +563,6 @@ Route::resource('booking','BookingController');
 
 
 
-
 //reserve
 Route::post('/reserve/insert', 'ReserveController@insert');
 Route::resource('reserve','ReserveController');
@@ -543,6 +580,7 @@ Route::post('/cart/payment','CartController@choosePaymant');
 Route::get('/cart/{cart}','CartController@destroy');
 Route::get('/cart','ReserveController@showCart');
 Route::post('/cart/mohasebeAghsat','CartController@mohasebeAghsat');
+Route::delete('/cart/{reserve}/destroy','ReserveController@destroy_cart');
 
 
 //Category GettingKnow

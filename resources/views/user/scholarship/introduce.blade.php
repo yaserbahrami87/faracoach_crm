@@ -4,7 +4,7 @@
             <p>یکی از مهمترین اهداف طرح بورسیه کوچینگ، شناسایی افراد اثرگذار، مستعد و نخبه جامعه و تسهیل فضای آموزش حرفه ای برای این افراد است. </p>
             <p>لذا با توجه به اینکه ظرفیت اطلاع رسانی ما محدود است، از شما درخواست میکنیم که دوستان واجد شرایط خود را به این برنامه دعوت کنید و طبعا ما نیز از این اقدام شما قدردانی مینماییم.</p>
 
-            <p>چنانچه  فردی که معرفی میکنید و یا از طریق لینک شما  ثبت نام نموده است، تمام مراحل را با  موفقیت  طی کند (مثلا 50 امتیاز کسب کند) ، 10 درصد از امتیاز بورسیه آنها به امتیاز بورسیه  شما <span class="text-danger">اضافه</span> میگردد.</p>
+            <p>چنانچه  فردی که معرفی میکنید و یا از طریق لینک شما  ثبت نام نموده است، تمام مراحل را با  موفقیت  طی کند (مثلا 50 امتیاز کسب کند) ،<span class="text-danger">10 درصد از امتیاز بورسیه آنها به امتیاز بورسیه  شما اضافه میگردد.</span> </p>
         </div>
     </div>
     <p>استفاده از امتیاز معرفی دو روش دارد:</p>
@@ -59,104 +59,90 @@
                     <p class=" p-2 dir-rtl text-center"  id="personal_link">{{asset('/scholarship/register?introduce='.Auth::user()->id)}}</p>
                 </div>
             </div>
-
-
-
-
-
-
         </li>
 
-        <li class="mt-1">معرفی 5 نفر بصورت مستقیم
-        @if(count($scholarship->user->get_invitations->where('resource','=','بورسیه تحصیلی'))<=5)
-            <!--
-                                <b>معرفی مستقیم نفر {{($scholarship->user->get_invitations->where('resource','=','بورسیه تحصیلی')->count())+1}} از 5 افراد از طریق پورتال:</b>
-                                -->
-                <form method="post" action="/panel/scholarship/addintroduced" class=" border-bottom mb-3">
-                    <div class="row pt-1 mt-1" id="formAddIntroduce">
-                        {{csrf_field()}}
-                        <input type="hidden" value="بورسیه تحصیلی" name="resource" />
-                        <div class="col-xs-12 col-md-2 col-lg-2 col-xl-2 mt-1">
-                            <small>جنسیت:<span class="text-danger">*</span></small>
-                            <div class="input-group mb-1">
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="sex1" name="sex_introduced" class="custom-control-input" value="1" {{ old('sex_introduced')=="1" ? 'checked='.'"'.'checked'.'"' : '' }} >
-                                    <label class="custom-control-label" for="sex1">آقا</label>
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="sex0" name="sex_introduced" class="custom-control-input" value="0" {{ old('sex_introduced')=="0" ? 'checked='.'"'.'checked'.'"' : '' }} >
-                                    <label class="custom-control-label  ml-1" for="sex0">خانم</label>
-                                </div>
+        <li class="mt-1">معرفی بصورت مستقیم
+            <form method="post" action="/panel/scholarship/addintroduced" class=" border-bottom mb-3">
+                <div class="row pt-1 mt-1" id="formAddIntroduce">
+                    {{csrf_field()}}
+                    <input type="hidden" value="بورسیه تحصیلی" name="resource" />
+                    <div class="col-xs-12 col-md-2 col-lg-2 col-xl-2 mt-1">
+                        <small>جنسیت:<span class="text-danger">*</span></small>
+                        <div class="input-group mb-1">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="sex1" name="sex_introduced" class="custom-control-input" value="1" {{ old('sex_introduced')=="1" ? 'checked='.'"'.'checked'.'"' : '' }} >
+                                <label class="custom-control-label" for="sex1">آقا</label>
                             </div>
-                        </div>
-                        <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 ">
-                            <small>نام:<span class="text-danger">*</span></small>
-                            <div class="input-group mb-1">
-                                <input type="text" class="form-control" placeholder="مثلا :علی" name="fname_introduced" value="{{old('fname_introduced')}}"/>
-                                <div class="input-group-prepend">
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 ">
-                            <small>نام خانوادگی:<span class="text-danger">*</span></small>
-                            <div class="input-group mb-1">
-                                <input type="text" class="form-control" placeholder="مثلا: محمدی" name="lname_introduced" value="{{old('lname_introduced')}}" />
-                                <div class="input-group-prepend">
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 ">
-                            <small>تلفن همراه:<span class="text-danger">*</span></small>
-                            <div class="input-group mb-1">
-                                <input type="hidden" id="tel_org_introduce"  name="tel_introduced"/>
-                                <input type="tel" dir="ltr" class="form-control" placeholder="تلفن تماس را وارد کنید" id="tel_introduce" />
-                                <div class="input-group-prepend">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-12 col-md-4 col-lg-4 col-xl-4 mt-1 d-none">
-                            <small>پیگیری توسط:<span class="text-danger">*</span></small>
-                            <div class="input-group mb-1">
-                                @foreach($getFollowbyCategory as $item)
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" id="customRadio{{$item->id}}" name="followby_id" class="custom-control-input" value="{{$item->id}}" @if($item->id==1) checked  @endif  >
-                                        <label class="custom-control-label  ml-1" for="customRadio{{$item->id}}">{{$item->followby}}</label>
-                                    </div>
-                                @endforeach
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-md-4 col-lg-4 col-xl-4 mt-1 d-none">
-                            <small> ارسال پیامک دعوت</small>
-                            <div class="input-group mb-1">
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="sms0" name="sms" class="custom-control-input" value="0" checked >
-                                    <label class="custom-control-label" for="sms0">ارسال شود</label>
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="sms1" name="sms" class="custom-control-input" value="1" >
-                                    <label class="custom-control-label ml-1" for="sms1">ارسال نشود</label>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="row">
-                        <div class="col-12 ">
-                            <div class="input-group mb-2 btn-send text-center">
-                                <!-- <button type="button" class="btn btn-primary" id="addFormIntroduce" title="اضافه کردن فرم جدید">+</button>-->
-                                <button type="submit" class="btn btn-secondary d-block">ارسال دعوتنامه </button>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="sex0" name="sex_introduced" class="custom-control-input" value="0" {{ old('sex_introduced')=="0" ? 'checked='.'"'.'checked'.'"' : '' }} >
+                                <label class="custom-control-label  ml-1" for="sex0">خانم</label>
                             </div>
                         </div>
                     </div>
-                </form>
-            @else
-                <div class="alert alert-warning">
-                    شما 5 نفر افراد معرفی لیست خود را انجام داده اید
+                    <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 ">
+                        <small>نام:<span class="text-danger">*</span></small>
+                        <div class="input-group mb-1">
+                            <input type="text" class="form-control" placeholder="مثلا :علی" name="fname_introduced" value="{{old('fname_introduced')}}"/>
+                            <div class="input-group-prepend">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 ">
+                        <small>نام خانوادگی:<span class="text-danger">*</span></small>
+                        <div class="input-group mb-1">
+                            <input type="text" class="form-control" placeholder="مثلا: محمدی" name="lname_introduced" value="{{old('lname_introduced')}}" />
+                            <div class="input-group-prepend">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 ">
+                        <small>تلفن همراه:<span class="text-danger">*</span></small>
+                        <div class="input-group mb-1">
+                            <input type="hidden" id="tel_org_introduce"  name="tel_introduced"/>
+                            <input type="tel" dir="ltr" class="form-control" placeholder="تلفن تماس را وارد کنید" id="tel_introduce" />
+                            <div class="input-group-prepend">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-md-4 col-lg-4 col-xl-4 mt-1 d-none">
+                        <small>پیگیری توسط:<span class="text-danger">*</span></small>
+                        <div class="input-group mb-1">
+                            @foreach($getFollowbyCategory as $item)
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" id="customRadio{{$item->id}}" name="followby_id" class="custom-control-input" value="{{$item->id}}" @if($item->id==1) checked  @endif  >
+                                    <label class="custom-control-label  ml-1" for="customRadio{{$item->id}}">{{$item->followby}}</label>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-4 col-lg-4 col-xl-4 mt-1 d-none">
+                        <small> ارسال پیامک دعوت</small>
+                        <div class="input-group mb-1">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="sms0" name="sms" class="custom-control-input" value="0" checked >
+                                <label class="custom-control-label" for="sms0">ارسال شود</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="sms1" name="sms" class="custom-control-input" value="1" >
+                                <label class="custom-control-label ml-1" for="sms1">ارسال نشود</label>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-            @endif
+                <div class="row">
+                    <div class="col-12 ">
+                        <div class="input-group mb-2 btn-send text-center">
+                            <!-- <button type="button" class="btn btn-primary" id="addFormIntroduce" title="اضافه کردن فرم جدید">+</button>-->
+                            <button type="submit" class="btn btn-secondary d-block">ارسال دعوتنامه </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
         </li>
     </ol>
 </div>
@@ -164,43 +150,85 @@
 
 
 <b >لیست افرادی که شما معرفی کرده اید:</b>
-<table class="table text-center mt-1">
-    <tr>
-        <td>ردیف</td>
-        <td></td>
-        <td>نام و نام خانوادگی</td>
-        <td>تلفن</td>
-        <td>آخرین ورود</td>
-        <td>امتیاز بورسیه</td>
-        <td>امتیاز شما</td>
-
-    </tr>
-    @foreach($scholarship->user->get_invitations->where('resource','=','بورسیه تحصیلی') as $item)
+<form method="post" action="/panel/scholarship/me/sendSMSIntroduce">
+    {{csrf_field()}}
+    <table class="table text-center mt-1">
         <tr>
-            <td>{{$loop->iteration}}</td>
-            <td>
-                @if(is_null($item->personal_image))
-                    <img class="rounded" src="{{asset('/documents/users/default-avatar.png')}}" width="50px" height="50px" />
-                @else
-                    <img class="rounded" src="{{asset('/documnts/users/'.$item->personal_image)}}" width="50px" height="50px" />
-                @endif
-            </td>
-            <td>{{$item->fname.' '.$item->lname }}</td>
-            <td dir="ltr">{{$item->tel}}</td>
-            <td dir="ltr">-</td>
-            <td dir="ltr">-</td>
-        </tr>
-    @endforeach
-    @for($i=(count($scholarship->user->get_invitations->where('resource','=','بورسیه تحصیلی'))+1);$i<=5;$i++)
-        <tr>
-            <td>{{$i}}</td>
-            <td>
-                <img class="rounded" src="{{asset('/documents/users/default-avatar.png')}}" width="50px" height="50px" />
-            </td>
+            <td>ردیف</td>
             <td></td>
-            <td dir="ltr"></td>
-            <td dir="ltr">-</td>
-            <td dir="ltr">-</td>
+            <td>نام و نام خانوادگی</td>
+            <td>تلفن</td>
+            <td>آخرین ورود</td>
+            <td>امتیاز شما</td>
+
         </tr>
-    @endfor
-</table>
+        @foreach($scholarship->user->get_invitations->where('resource','=','بورسیه تحصیلی') as $item)
+            <tr>
+                <td>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="{{$item->id}}" id="sendSMS{{$loop->iteration}}" name="sendSMSIntroduce[]">
+                        <label class="form-check-label" for="sendSMS{{$loop->iteration}}">{{$loop->iteration}}</label>
+                    </div>
+
+                </td>
+                <td>
+                    @if(is_null($item->personal_image))
+                        <img class="rounded" src="{{asset('/documents/users/default-avatar.png')}}" width="50px" height="50px" for="sendSMS{{$loop->iteration}}" />
+                    @else
+                        <img class="rounded" src="{{asset('/documnts/users/'.$item->personal_image)}}" width="50px" height="50px" for="sendSMS{{$loop->iteration}}"  />
+                    @endif
+                </td>
+                <td>{{$item->fname.' '.$item->lname }}</td>
+                <td dir="ltr">{{$item->tel}}</td>
+                <td dir="ltr">{{$item->last_login_at}}</td>
+                <td dir="ltr">
+                    @if(is_null($item->scholarship))
+                        0
+                    @else
+                        {{floor(($item->scholarship->get_score()*10)/100)}}
+                    @endif
+                </td>
+            </tr>
+        @endforeach
+        @for($i=(count($scholarship->user->get_invitations->where('resource','=','بورسیه تحصیلی'))+1);$i<=5;$i++)
+            <tr>
+                <td>{{$i}}</td>
+                <td>
+                    <img class="rounded" src="{{asset('/documents/users/default-avatar.png')}}" width="50px" height="50px" />
+                </td>
+                <td></td>
+                <td dir="ltr"></td>
+                <td dir="ltr">-</td>
+                <td dir="ltr">-</td>
+            </tr>
+        @endfor
+    </table>
+
+
+    <div class="col-md-4 mx-auto">
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleSendSms" id="exampleSendSMS1" value="1" checked>
+                <label class="form-check-label" for="exampleSendSMS1">
+                    {نام و نام خانوادگی} عزیز<br/>
+                    من {{Auth::user()->fname.' '.Auth::user()->lname}} شما را واجد شرایط دانسته، برای بورسیه کوچینگ آکادمی فراکوچ معرفی نمودم
+                    پیشنهاد میکنم این فرصت بینظیر را از دست ندهید.
+                    faracoach.com/scholaship
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleSendSms" id="exampleSendSMS2" value="2" checked>
+                <label class="form-check-label" for="exampleSendSMS2">
+                    {نام و نام خانودگی} عزیز<br/>
+                    من {{Auth::user()->fname.' '.Auth::user()->lname}} ، شما را واجدشرایط دانسته و برای بورسیه کوچینگ آکادمی فراکوچ معرفی نمودم
+                    <br/>
+                    برای اطلاعات بیشتر با من تماس بگیرید <br/>
+                    {{Auth::user()->tel}}<br/>
+                    faracoach.com/scholarship
+                </label>
+            </div>
+
+            <input type="submit" class="btn btn-success" value="ارسال پیامک" />
+
+    </div>
+</form>

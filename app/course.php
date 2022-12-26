@@ -25,6 +25,9 @@ class course extends Model
         return $this->belongsTo('App\teacher','teacher_id','id');
     }
 
-
+    public function scholarship_course()
+    {
+        return $this->hasOne('App\checkout','product','id')->where('type','=','scholarship_payment');
+    }
 
 }

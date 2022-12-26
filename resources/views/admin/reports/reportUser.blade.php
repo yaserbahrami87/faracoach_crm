@@ -101,6 +101,78 @@
         </form>
     </div>
     <div class="col-12 border border-bottom mt-2 mb-2"></div>
+    <div class="col-12 mb-3">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card-counter primary">
+                    <span class="count-numbers text-dark">{{$user->get_insertUsers->wherebetween('created_at',$date_en)->count()}} نفر </span>
+                    <span class="count-name text-dark"> تعداد ورودی ها</span>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card-counter primary">
+
+                        <span class="count-numbers text-dark">{{$user->followupsAdmin->wherebetween('date_fa',$date_fa)->count()}} نفر </span>
+                        <span class="count-name text-dark"> تعداد پیگیری ها
+                            <a href="#" data-toggle="modal" data-target="#detailFollowupModal">جزئیات</a>
+                        </span>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="detailFollowupModal" tabindex="-1" aria-labelledby="detailFollowupModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <table class="table">
+                                    <tr>
+                                        <th>دوره</th>
+                                        <th>تعداد</th>
+                                    </tr>
+                                    @foreach($user->followupsAdmin->wherebetween('date_fa',$date_fa)->groupby('course_id') as $item)
+                                        <tr>
+                                            <td>
+                                                @if(!is_null($item[0]->course))
+                                                    {{$item[0]->course->course}}
+                                                @else
+                                                    نامشخص
+                                                @endif
+                                            </td>
+                                            <td>{{count($item)}}</td>
+                                        </tr>
+                                    @endforeach
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card-counter primary">
+                        <span class="count-numbers text-dark">{{$user->followupsAdmin->wherebetween('date_fa',$date_fa)->groupby('course_id')->count()}} نفر </span>
+                        <span class="count-name text-dark"> تعداد پیگیری ها</span>
+                </div>
+            </div>
+
+            <div class="collapse" id="collapseGroupFollowup">
+                <div class="card card-body">
+                    {{csrf_field()}}
+                    <div class="row">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
     <div class="col-12">
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -169,17 +241,16 @@
                 </div>
                 <table class="dataTable table table-striped table-bordered" style="width:100%">
                     <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>مشخصات</th>
-                        <th>آخرین محصول پیگیری</th>
-                        <th>تعداد پیگیری</th>
-                        <th>تاریخ پیگیری </th>
-                    </tr>
+                        <tr>
+                            <th>#</th>
+                            <th>مشخصات</th>
+                            <th>آخرین محصول پیگیری</th>
+                            <th>تعداد پیگیری</th>
+                            <th>تاریخ پیگیری </th>
+                        </tr>
                     </thead>
                     <tbody>
                     @foreach($user->followupsAdmin->wherebetween('date_fa',$date_fa) as $item)
-
                         <tr class="" >
                             <td>{{$loop->iteration}}</td>
                             <td>
@@ -226,10 +297,10 @@
             $('.dataTable').DataTable();
         } );
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-    <script src="https://cdn.jsdelivr.net/npm/moment"></script>
-    <script src="https://cdn.jsdelivr.net/npm/moment-jalaali@0.7.4/build/moment-jalaali.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue-persian-datetime-picker/dist/vue-persian-datetime-picker-browser.js"></script>
+    <script src="{{asset('/js/vue@2.js')}}"></script>
+    <script src="{{asset('/js/moment.js')}}"></script>
+    <script src="{{asset('/js/moment-jalaali.js')}}"></script>
+    <script src="{{asset('/js/vue-persian-datetime-picker-browser.js')}}"></script>
     <script>
         var app = new Vue({
             el: '#app',

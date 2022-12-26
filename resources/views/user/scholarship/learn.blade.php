@@ -20,7 +20,7 @@
             <style>.h_iframe-aparat_embed_frame{position:relative;}.h_iframe-aparat_embed_frame .ratio{display:block;width:100%;height:auto;}.h_iframe-aparat_embed_frame iframe{position:absolute;top:0;left:0;width:100%;height:100%;}</style><div class="h_iframe-aparat_embed_frame"><span style="display: block;padding-top: 57%"></span><iframe src="https://www.aparat.com/video/video/embed/videohash/yCEac/vt/frame" allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe></div>
         </div>
         <div class="col-12 col-md-6">
-            <b class="d-block mb-2 text-center bg-primary text-white p-2">گام دوم: ثبت نام در وبینار</b>
+            <b class="d-block mb-2 text-center bg-primary text-white p-2">گام دوم: ثبت نام در دوره آموزشی</b>
             <a href="https://evnd.co/dkf4a" target="_blank">
                 <img src="{{asset('/images/scholarship_webinar.jpg')}}" class="img-fluid" />
                 <p class="text-center btn btn-primary btn-block">ثبت نام</p>
@@ -29,12 +29,12 @@
 
         <div class="d-sm-none d-md-block col-lg-4"></div>
         <div class="col-12 col-lg-4 d-sm-none d-md-block">
-            <p class="text-center">کد حضور در وبینار</p>
+            <p class="text-center">کد حضور در دوره آموزشی</p>
             <div id="result_checkCodeWebinar"></div>
             @if($scholarship->confirm_webinar==1)
-                <div class="alert alert-success">کد شرکت در وبینار با موفقیت ثبت شده است</div>
+                <div class="alert alert-success">کد شرکت در دوره آموزشی با موفقیت ثبت شده است</div>
             @elseif($scholarship->user->get_recieveCodeUsers->count()>=3)
-                <div class="alert alert-danger">تعداد مجاز ورود دفعات کد وبینار بورسیه 3 بار می باشد</div>
+                <div class="alert alert-danger">تعداد مجاز ورود دفعات کد دوره آموزشی  3 بار می باشد</div>
             @else
                 <form method="post" class="text-center"  id="frm_checkCodeWebinar">
                     {{csrf_field()}}

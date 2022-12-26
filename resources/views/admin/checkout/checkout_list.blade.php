@@ -64,9 +64,9 @@
                                 </td>
                                 <td>
                                     @if($item->type=='course')
-                                        {{$item->course->course}}
+                                        {{$item->course['course']}}
                                     @elseif($item->type=='event')
-                                        {{$item->event->event}}
+                                        {{$item->event['event']}}
                                     @elseif($item->type=='reserve')
                                         جلسه کوچینگ {{$item->reserve['booking']['coach']['user']['fname'].' '.$item->reserve['booking']['coach']['user']['lname'].' - '.$item->reserve['booking']['start_date']}}
                                     @elseif($item->type=='ghest')
@@ -200,10 +200,10 @@
     </script>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-    <script src="https://cdn.jsdelivr.net/npm/moment"></script>
-    <script src="https://cdn.jsdelivr.net/npm/moment-jalaali@0.7.4/build/moment-jalaali.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue-persian-datetime-picker/dist/vue-persian-datetime-picker-browser.js"></script>
+    <script src="{{asset('/js/vue@2.js')}}"></script>
+    <script src="{{asset('/js/moment.js')}}"></script>
+    <script src="{{asset('/js/moment-jalaali.js')}}"></script>
+    <script src="{{asset('/js/vue-persian-datetime-picker-browser.js')}}"></script>
     <script>
         var app = new Vue({
             el: '#app',

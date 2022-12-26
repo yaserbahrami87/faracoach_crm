@@ -103,7 +103,7 @@ class FaktorController extends Controller
         else
         {
             $startMonth=verta();
-            $startMonth=($startMonth->startMonth())->format('Y/m/d');
+            $startMonth=($startMonth->startYear())->format('Y/m/d');
             $endtMonth=verta();
             $endtMonth=($endtMonth->endMonth())->format('Y/m/d');
 
@@ -112,15 +112,18 @@ class FaktorController extends Controller
 
         $faktors=faktor::orderby('id','desc')
                     ->wherebetween('date_faktor',[$startMonth,$endtMonth])
+                    ->orderby('date_faktor','desc')
                     ->get();
 
         $faktorsExpire=faktor::wherebetween('date_faktor',[$startMonth,$endtMonth])
                             ->where('status','=','0')
+                            ->orderby('date_faktor','desc')
                             ->get();
 
         $faktorsSuccess=faktor::wherebetween('date_faktor',[$startMonth,$endtMonth])
-            ->where('status','=','1')
-            ->get();
+                            ->where('status','=','1')
+                            ->orderby('date_faktor','desc')
+                            ->get();
 
         return view('admin.financial.faktor-all')
                         ->with('faktorsExpire',$faktorsExpire)

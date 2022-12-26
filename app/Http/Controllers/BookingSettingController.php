@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 
-class BookingSettingController extends Controller
+class BookingSettingController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -92,6 +92,7 @@ class BookingSettingController extends Controller
     public function update(Request $request,coach  $coach)
     {
         $request->validate([
+            'fi'                    =>'required|numeric',
             'type_holding'          =>'required|in:0,1,2',
             'address'               =>'required_if:type_holding,0,1',
             'online_platform'       =>'required_if:type_holding,0,2',
@@ -103,7 +104,9 @@ class BookingSettingController extends Controller
         ]);
 
 
-        $status=$coach->update($request->all());
+        $status=$coach->update($request->all()+[
+                'expire_date_fi'    =>$this->dateNow,
+            ]);
         if($status)
         {
             alert()->success('تنظیمات جلسات با موفقیت بروزرسانی شد')->persistent('بستن');

@@ -275,103 +275,148 @@
             width: 25px;
             height: 25px;
         }
+
+        .bg-success2
+        {
+            background-color:  #c6ffb3 !important;
+        }
+
+        .bg-warning2
+        {
+            background-color: #fff0b3 !important;
+        }
+
+        .bg-danger2
+        {
+            background-color:  #ff9999 !important;
+        }
     </style>
 @endsection
 @section('content')
-
-
             <div class="col-12 m-5 border-bottom">
                 <h3>لیست جلسات رزرو شده</h3>
             </div>
             <div class="col-12" id="colors">
                 <div class="row">
                     <div class="col-6 col-sm-1 col-lg-1 col-md-1 col-xl-1 text-center p-0 m-0">
-                        <span class="d-inline-block bg-success rounded-circle" ></span>
+                        <span class="d-inline-block bg-success2 rounded-circle" ></span>
                     </div>
                     <div class="col-6 col-sm-11 col-lg-2 col-md-2 col-xl-2 p-0 m-0">
                         <p class=" p-0 m-0"> جلسات برگزار شده</p>
                     </div>
                     <div class="col-6 col-sm-1 col-lg-1 col-md-1 col-xl-1 text-center p-0 m-0">
-                        <span class="d-inline-block bg-warning rounded-circle" ></span>
+                        <span class="d-inline-block bg-warning2 rounded-circle" ></span>
                     </div>
                     <div class="col-6 col-sm-11 col-lg-2 col-md-2 col-xl-2 p-0 m-0">
                         <p class=" p-0 m-0"> جلسات رزرو شده بلاتکلیف</p>
                     </div>
-
+                    <div class="col-6 col-sm-1 col-lg-1 col-md-1 col-xl-1 text-center p-0 m-0">
+                        <span class="d-inline-block bg-danger rounded-circle" ></span>
+                    </div>
+                    <div class="col-6 col-sm-11 col-lg-2 col-md-2 col-xl-2 p-0 m-0">
+                        <p class=" p-0 m-0"> کنسل شده</p>
+                    </div>
+                    <div class="col-6 col-sm-1 col-lg-1 col-md-1 col-xl-1 text-center p-0 m-0">
+                        <span class="d-inline-block bg-info rounded-circle" ></span>
+                    </div>
+                    <div class="col-6 col-sm-11 col-lg-2 col-md-2 col-xl-2 p-0 m-0">
+                        <p class=" p-0 m-0"> غیبت مراجع</p>
+                    </div>
+                    <div class="col-6 col-sm-1 col-lg-1 col-md-1 col-xl-1 text-center p-0 m-0">
+                        <span class="d-inline-block bg-secondary rounded-circle" ></span>
+                    </div>
+                    <div class="col-6 col-sm-11 col-lg-2 col-md-2 col-xl-2 p-0 m-0">
+                        <p class=" p-0 m-0"> غیبت کوچ</p>
+                    </div>
                 </div>
 
             </div>
             <div class="col-12 table-responsive">
-                <table class="table table-bordered table-striped">
-                    <tr>
-                        <th></th>
-                        <th>کدجلسه</th>
-                        <th>مشخصات</th>
-                        <th>تاریخ</th>
-                        <th>ساعت شروع</th>
-                        <th>نوع جلسه</th>
-                        <th>شرایط</th>
-                        <th>وضعیت</th>
-                        <th></th>
-                    </tr>
-                    @foreach($booking as $item)
-
-                        <tr class="@if($item->status==0) bg-warning @elseif($item->status==3) bg-success @endif">
-                            <td class="p-0">
-                                <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="rounded-circle "  width="50px" height="50px" />
-                            </td>
-                            <td>
-                                {{$item->id}}
-                            </td>
-                            <td>
-                                @if(isset($item->reserveAccess->user))
-                                    <a class="btn-modal-introduced" href="{{$item->id}}"   >{{$item->reserveAccess->user->fname}} {{$item->reserveAccess->user->lname}}</a>
-                                @endif
-                            </td>
-
-                            <td>
-                                <p class="text-dark">{{$item->start_date}}</p>
-                            </td>
-                            <td>
-                                <p class="text-dark">{{$item->start_time}}</p>
-                            </td>
-                            <td>
-                                <p class="text-dark">{{$item->duration_booking}}</p>
-                            </td>
-                            <td>
-                                <p class="text-dark">
-                                    <span class="float-right">ارزیابی  @if(is_null($item->feedback_coachings_id))<i class="bi bi-x-lg" ></i>@else <i class="bi bi-check-lg" ></i> @endif</span>
-                                    <span class="float-left">پیش جلسه  @if(is_null($item->presession))<i class="bi bi-x-lg"></i>@else <i class="bi bi-check-lg"></i> @endif</span>
-                                </p>
-
-                            </td>
-                            <td>
-                                <p class="text-dark">
-                                    {{$item->caption_status}}
-                                </p>
-                            </td>
-                            <td>
-                                <a class="btn btn-primary btn-sm" href="/panel/booking/{{$item->id}}" title="نمایش" >
-                                    <i class="bi bi-eye-fill"></i>
-                                </a>
-                            </td>
-                            <td>
-                                @if($item->start_date>$dateNow)
-                                    <form class="d-inline-block" method="POST" action="/panel/booking/{{$item->id}}" onsubmit="return confirm('آیا از لغو جلسه اطمینان دارید؟')">
-                                        {{csrf_field()}}
-                                        {{method_field('PATCH')}}
-                                        <input type="hidden" name="status" value="4" />
-                                        <button type="submit" class="btn btn-danger">
-                                            لغو جلسه
-                                        </button>
-                                    </form>
-
-                                @endif
-                            </td>
+                <table  class="table_data table table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr class="text-center">
+                            <th>کدجلسه</th>
+                            <th>مشخصات</th>
+                            <th>تاریخ</th>
+                            <th>ساعت شروع</th>
+                            <th>نوع جلسه</th>
+                            <th>نمایش</th>
+                            <th></th>
                         </tr>
-                    @endforeach
+                    </thead>
+
+                    <tbody>
+                        @foreach($reserve as $item)
+
+                            <tr class="text-center @if($item->status==1) bg-warning2 @elseif($item->status==3) bg-success2   @elseif($item->status==4 ||$item->status==41 ||$item->status==42) bg-danger2 @elseif($item->status==5) bg-info @elseif($item->status==6) bg-secondary    @endif">
+                                <td>
+                                    {{$item->id}}
+                                </td>
+
+                                <td>
+                                    @if(($item->status==4)||($item->status==41)||($item->status==42))
+                                        {{$item->user->fname}} {{$item->user->lname}}
+                                    @else
+                                        <a class="btn-modal-introduced" href="/panel/reserve/{{$item->id}}" >{{$item->user->fname}} {{$item->user->lname}}</a>
+                                    @endif
+
+                                </td>
+
+                                <td>
+                                    <p class="text-dark">{{$item->booking->start_date}}</p>
+                                </td>
+                                <td>
+                                    <p class="text-dark">{{$item->booking->start_time}}</p>
+                                </td>
+                                <td>
+                                    <p class="text-dark">{{$item->duration_booking}}</p>
+                                </td>
+                                <td>
+                                    @if(($item->status!=4)&&($item->status!=42)&&($item->status!=41))
+                                        <a class="btn btn-primary btn-sm" href="/panel/reserve/{{$item->id}}" title="نمایش" >
+                                            <i class="bi bi-eye-fill"></i>
+                                        </a>
+                                    @endif
+                                </td>
+
+                                <td>
+                                    @if(($item->booking->start_date>$dateNow) && (($item->status!=4)&&($dateNow && $item->status!=41)&&($dateNow && $item->status!=42)))
+                                        <form class="d-inline-block" method="POST" action="/panel/booking/{{$item->booking_id}}" onsubmit="return confirm('آیا از لغو جلسه اطمینان دارید؟')">
+                                            {{csrf_field()}}
+                                            {{method_field('PATCH')}}
+                                            <input type="hidden" name="status" value="42" />
+                                            <button type="submit" class="btn btn-danger">
+                                                لغو جلسه
+                                            </button>
+                                        </form>
+                                    @elseif($item->status==41)
+                                        <p class="text-dark">کنسل توسط مراجع</p>
+                                    @elseif($item->status==42)
+                                        <p class="text-dark">کنسل توسط کوچ</p>
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
                 </table>
             </div>
 
 
+@endsection
+
+@section('footerScript')
+    <script src="{{asset('/dashboard/assets/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('/dashboard/assets/js/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/dataTables.buttons.min.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/jszip.min.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/vfs_fonts.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/buttons.html5.min.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/buttons.print.min.js')}}"></script>
+    <script>
+        $(document).ready(function() {
+            $('.table_data').DataTable({
+                order: [[2, 'desc']],
+            });
+        } );
+    </script>
 @endsection

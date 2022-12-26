@@ -132,9 +132,6 @@
         }
         /*Media query*/
         @media only screen and (max-width: 900px) {
-            label span {
-                display: none;
-            }
 
             .tab_container {
                 width: 98%;
@@ -224,8 +221,6 @@
             position:relative;
         }
 
-
-
         .confirm_faracoach::after
         {
             background-image:url("{{asset('/images/tick.png')}}");
@@ -277,7 +272,7 @@
                             @endif
 
                             @if(strlen($coach->telegram)>0)
-                                <a class="circle" href="https://www.{{$coach->telegram}}">
+                                <a class="circle" href="https://www.t.me/{{$coach->telegram}}" target="_blank">
                                     <i class="fa fa-paper-plane"></i>
                                 </a>
                             @endif
@@ -298,7 +293,7 @@
                                 <span class="fa fa-star p-1"></span>
                             </div>
                             <div>
-                                <div class=" mt-3"> ارزش رزرو جلسه :
+                                <div class=" mt-3"> قیمت هر جلسه:
                                     @if($coach->fi==0 || $coach->fi=='')
                                         رایگان می باشد
                                     @else
@@ -324,21 +319,25 @@
                     <input id="tab4" type="radio" name="tabs">
                     <label for="tab4"><i class="fa fa-certificate"></i><br><span>مدارک</span></label>
 
-                    <input id="tab5" type="radio" name="tabs" >
-                    <label for="tab5"><i class="fa fa-book"></i><br><span>مقالات </span></label>
+                    @if(!is_null($coach->researches))
+                        <input id="tab5" type="radio" name="tabs" >
+                        <label for="tab5"><i class="fa fa-book"></i><br><span>مقالات </span></label>
+                    @endif
 
-                    <section id="content5" class="tab-content">
-                        <div class="row">
-                            <div class="col-lg-8 col-md-8 col-sm-12 col-xl-8">
-                                <h3>مقالات</h3><hr>
-                                <p>{!! $coach->researches !!} </p>
+                    @if(!is_null($coach->researches))
+                        <section id="content5" class="tab-content">
+                            <div class="row">
+                                <div class="col-lg-8 col-md-8 col-sm-12 col-xl-8">
+                                    <h3>مقالات</h3><hr>
+                                    <p>{!! $coach->researches !!} </p>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-xl-4">
+                                    <img src="{{asset('/images/researches.jpg')}}" alt="" width="100%" >
+                                </div>
                             </div>
-                            <div class="col-lg-4 col-md-4 col-xl-4">
-                                <img src="{{asset('/images/researches.jpg')}}" alt="" width="100%" >
-                            </div>
-                        </div>
 
-                    </section>
+                        </section>
+                    @endif
 
                     <section id="content4" class="tab-content">
                         <div class="row">

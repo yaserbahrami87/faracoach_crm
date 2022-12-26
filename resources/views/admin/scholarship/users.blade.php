@@ -34,10 +34,10 @@
                                 <th>مسئول پیگیری</th>
                                 <th>تحصیلات</th>
                                 <th>استان</th>
-                                <th >تاریخ آزمون</th>
-                                <th >نتیجه آزمون</th>
                                 <th>معرفی نامه</th>
                                 <th>مصاحبه</th>
+                                <th class="d-none">وضعیت ثبت نام</th>
+
                                 <!--
                                 <th> افراد معرفی شده</th>
                                 <th> افراد ثبت نام بورسیه</th>
@@ -48,7 +48,7 @@
 
                         <tbody>
                             @foreach($scholarships as $item)
-                                <tr>
+                                <tr style="@if(!is_null($item->financial)) background-color: #9fff80; @endif">
                                     <td class="text-center">{{$loop->iteration}}</td>
                                     <td class="text-center">
                                         @if($item->user->created_at>'2022-07-20 00:00:00')
@@ -96,26 +96,24 @@
                                             {{$item->user->get_state->name}}
                                         @endif
                                     </td>
-                                    <td class="text-center" dir="ltr" >
-                                        @if(count($item->user->get_scholarshipexam)>0)
-                                            {{($item->user->get_scholarshipexam->last()->date_fa)}}
-                                        @endif
-                                    </td>
-                                    <td class="text-center" dir="ltr" >
-                                        @if(count($item->user->get_scholarshipexam)>0)
-                                            {{($item->user->get_scholarshipexam->last()->score)}}
-                                        @endif
-                                    </td>
                                     <td class="text-center">
                                         @if(!is_null($item->introductionletter))
                                             ارسال شده
                                         @endif
                                     </td>
                                     <td>
-                                        @if(!is_null($item->get_scholarshipInterview) )
+                                        @if(!is_null($item->user->get_scholarshipInterview) )
                                             انجام شده است
                                         @endif
                                     </td>
+                                    <td class="d-none">
+                                        @if(!is_null($item->financial))
+                                            ثبت نام کرده است
+                                        @else
+                                            ثبت نام نکرده است
+                                        @endif
+                                    </td>
+
                                     <!--
                                     <td class="text-center" dir="ltr">
                                         {{--($item->user->get_invitations->where('created_at','>','2022-07-20 00:00:00')->where('resource','=','بورسیه تحصیلی')->count())--}}

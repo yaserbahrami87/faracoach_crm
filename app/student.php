@@ -25,4 +25,20 @@ class student extends Model
     {
         return $this->belongsTo('App\user','user_id','id');
     }
+
+    public function get_status($status)
+    {
+        switch ($status)
+        {
+            case '1':
+                return 'دانشجو';
+                break;
+            case '0':
+                return 'انصراف';
+                break;
+
+            default: return 'خطا';
+
+        }
+    }
 }

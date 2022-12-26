@@ -18,6 +18,7 @@ class CartController extends BaseController
     {
         $cart=cart::where('user_id','=',Auth::user()->id)
                     ->get();
+
         if($cart->count()==0)
         {
             alert()->warning('سبد خرید شما خالی می باشد')->persistent('بستن');

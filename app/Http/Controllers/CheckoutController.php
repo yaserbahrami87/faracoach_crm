@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\booking;
 use App\cart;
 use App\checkout;
+use App\course;
 use App\eventreserve;
 use App\faktor;
 use App\lib\zarinpal;
@@ -208,6 +209,7 @@ class CheckoutController extends BaseController
 
 
 
+
         if(($checkout)->count()>0)
         {
             //ما در اینجا مبلغ مورد نظر را بصورت دستی نوشتیم اما در پروژه های واقعی باید از دیتابیس بخوانیم
@@ -385,10 +387,89 @@ class CheckoutController extends BaseController
                                 ->with('alert',$alert);
 
                         }
-                    }
+                        else if($item->type=='scholarship_payment')
+                        {
+                            $status=student::create(
+                                [
+                                    'user_id'       =>Auth::user()->id,
+                                    'course_id'     =>$item->product_id,
+                                    'date_fa'       =>$this->dateNow,
+                                    'time_fa'       =>$this->timeNow,
+                                ]
+                            );
 
-                    cart::where('user_id','=',Auth::user()->id)
-                                    ->delete();
+                            $v=verta();
+                            if($item->schoalrshipPayment->type_payment==0)
+                            {
+                                $v=$v->addMonths(1);
+                                $Date=$v->format('Y/m/d');
+                                faktor::create(
+                                    [
+                                        'user_id'           =>Auth::user()->id,
+                                        'checkout_id'       =>$item->id,
+                                        'product_id'        =>$item->product_id,
+                                        'type'              =>'course',
+                                        'date_createfaktor' =>$this->dateNow,
+                                        'date_faktor'       =>$Date,
+                                        'fi'                =>$item->schoalrshipPayment->remaining,
+                                    ]);
+                            }
+                            elseif($item->schoalrshipPayment->type_payment==1)
+                            {
+                                for ($i=1;$i<=2;$i++)
+                                {
+                                    $v=$v->addMonths(1);
+                                    $Date=$v->format('Y/m/d');
+                                    faktor::create(
+                                        [
+                                            'user_id'           =>Auth::user()->id,
+                                            'checkout_id'       =>$item->id,
+                                            'product_id'        =>$item->product_id,
+                                            'type'              =>'course',
+                                            'date_createfaktor' =>$this->dateNow,
+                                            'date_faktor'       =>$Date,
+                                            'fi'                =>($item->schoalrshipPayment->remaining)/2,
+                                        ]);
+                                }
+                            }
+                            elseif($item->schoalrshipPayment->type_payment==2)
+                            {
+                                for ($i=1;$i<=5;$i++)
+                                {
+                                    $v=$v->addMonths(1);
+                                    $Date=$v->format('Y/m/d');
+                                    faktor::create(
+                                        [
+                                            'user_id'           =>Auth::user()->id,
+                                            'checkout_id'       =>$item->id,
+                                            'product_id'        =>$item->product_id,
+                                            'type'              =>'course',
+                                            'date_createfaktor' =>$this->dateNow,
+                                            'date_faktor'       =>$Date,
+                                            'fi'                =>($item->schoalrshipPayment->remaining)/5,
+                                        ]);
+                                }
+                            }
+
+
+                            $scholarship=$item->user->scholarship;
+                            $scholarship->financial=$Authority;
+                            $scholarship->save();
+                            $course=course::where('id','=',$item->product_id)
+                                        ->first();
+
+                            $student=student::where('course_id','=',$item->product_id)
+                                        ->count();
+                            $msg=$item->user->fname.' '.$item->user->lname."\n"."دوره:".$course->course."\n نفر:$student ";
+                            $this->sendSms("09153159020",$msg);
+                            $this->sendSms("09198906540",$msg);
+                            if(!is_null($item->user->get_followbyExpert))
+                            {
+                                $this->sendSms($item->user->get_followbyExpert->tel,$msg);
+                            }
+
+                        }
+                    }
 
 
                     $msg='<p>پرداخت با موفقیت انجام شد</p><p>شماره پیگیری: '.$item->authority.'</p>';
@@ -403,6 +484,7 @@ class CheckoutController extends BaseController
                     foreach ($checkout as $item) {
                         $item->description = 'خطا در انجام عملیات';
                         $item->save();
+
                     }
                     $msg='<p>خطا در انجام عملیات</p>';
                     $alert='danger';

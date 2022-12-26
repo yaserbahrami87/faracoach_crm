@@ -72,43 +72,56 @@
                 </div>
             @else
                 <div class="col-12 table-responsive">
-                    <table class="table table-striped table-bordered">
-                        <tr>
-                            <th>#</th>
-                            <th>عکس</th>
-                            <th>نام و نام خانوادگی</th>
-                            <th>تلفن</th>
-                            <th>گروه</th>
-                            <th>وضعیت</th>
-                        </tr>
-                        @foreach($students as $item)
+                    <table class="dataTable table table-striped table-bordered" style="width:100%">
+                        <thead>
                             <tr>
-                                <td>{{$loop->iteration}}</td>
-                                <td>
-                                    @if($item->getOriginal('personal_image'))
-                                        <img alt="" src="{{asset('documents/users/'.$item->personal_image)}}" class="rounded-circle" width="50px" height="50px">
-                                    @else
-                                        <img alt="" src="{{asset('documents/users/default-avatar.png')}}" class="rounded-circle" width="50px" height="50px">
-                                    @endif
-                                </td>
-                                <td>
-                                    {{$item->fname}} {{$item->lname}}
-                                </td>
-                                <td dir="ltr" class="text-center">
-                                    {{$item->tel}}
-                                </td>
-                                <td class="text-center">
-                                    {{$item->course}}
-                                </td>
-                                <td>
-                                    {{$item->caption_status}}
-                                </td>
+                                <th>#</th>
+                                <th>عکس</th>
+                                <th>نام و نام خانوادگی</th>
+                                <th>تلفن</th>
+                                <th>گروه</th>
+                                <th>وضعیت</th>
                             </tr>
-                        @endforeach
+                        </thead>
+                        <tbody>
+                            @foreach($students as $item)
 
+                                <tr class="text-center">
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>
+                                        @if($item->user->getOriginal('personal_image'))
+                                            <img alt="" src="{{asset('documents/users/'.$item->user->personal_image)}}" class="rounded-circle" width="50px" height="50px">
+                                        @else
+                                            <img alt="" src="{{asset('documents/users/default-avatar.png')}}" class="rounded-circle" width="50px" height="50px">
+                                        @endif
+                                    </td>
+                                    <td>
+                                        {{$item->user->fname}} {{$item->user->lname}}
+                                    </td>
+                                    <td dir="ltr" class="text-center">
+                                        {{$item->user->tel}}
+                                    </td>
+                                    <td >
+                                        {{$item->course->course}}
+                                    </td>
+                                    <td>
+                                        {{$item->course->status}}
+                                    </td>
+                                </tr>
+                            @endforeach
                     </table>
                 </div>
             @endif
         </div>
     </div>
+@endsection
+
+@section('footerScript')
+    <script src="{{asset('/dashboard/assets/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('/dashboard/assets/js/dataTables.bootstrap4.min.js')}}"></script>
+    <script>
+        $(document).ready(function() {
+            $('.dataTable').DataTable();
+        } );
+    </script>
 @endsection

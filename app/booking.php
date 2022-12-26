@@ -12,7 +12,7 @@ class booking extends Model
 
     public function reserve()
     {
-        return $this->hasOne('App\reserve', 'booking_id', 'id');
+        return $this->hasOne('App\reserve', 'booking_id', 'id')->latest();
     }
 
     public function reserveAccess()
@@ -43,7 +43,8 @@ class booking extends Model
 
     public function get_statusBookings($status)
     {
-        switch ($status) {
+        switch ($status)
+        {
             case '1':
                 return 'آماده رزرو';
                 break;
@@ -56,6 +57,19 @@ class booking extends Model
             case '4':
                 return 'کنسل شد';
                 break;
+            case '5':
+                return  'غیبت مراجع';
+                break;
+            case '6':
+                return  'غیبت کوچ';
+                break;
+            case '41':
+                return 'کنسل مراجع';
+                break;
+            case '42':
+                return 'کنسل کوچ';
+                break;
+            default: return 'خطا';
 
         }
     }

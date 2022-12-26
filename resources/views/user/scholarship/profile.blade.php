@@ -4,12 +4,16 @@
     <link href="{{asset('/css/kamadatepicker.min.css')}}" rel="stylesheet" />
     <link href="{{asset('/css/timepicker.min.css')}}" rel="stylesheet" />
     <link src="{{asset('/css/jquery-book.css')}}"></link>
+    <link href="{{asset('/css/slick.css')}}" rel="stylesheet" />
+    <link href="{{asset('/css/slick-theme.css')}}" rel="stylesheet" />
     <style>
         #fff{
             border: 2px solid rgba(2,1,19,.81);
             border-radius:20px;
         }
-        .progress {position:relative;
+        .progress
+        {
+            position:relative;
         }
 
         .progress span {
@@ -77,55 +81,62 @@
 
 @section('content')
     <div class="col-md-12">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <ul class="nav nav-tabs d-none d-sm-flex " id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active @if(strlen($scholarship->user->fname)>0 ||strlen($scholarship->user->lname)>0||strlen($scholarship->user->sex)>0||strlen($scholarship->user->codemelli)>0||strlen($scholarship->user->lname)>0||strlen($scholarship->user->shenasname)>0||strlen($scholarship->user->datebirth)>0||strlen($scholarship->user->personal_image)>0) btn-danger @endif" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">توضیحات</button>
+                <button class="nav-link active " id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">توضیحات</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link " id="contact-tab" data-toggle="tab" data-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">اطلاعات بورسیه</button>
+                <button class="nav-link bg-success" id="contact-tab" data-toggle="tab" data-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">فرم اولیه بورسیه</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">اطلاعات کاربر</button>
+                <button class="nav-link @if(strlen($scholarship->user->fname)>0 && strlen($scholarship->user->lname)>0 && strlen($scholarship->user->sex)>0&&strlen($scholarship->user->codemelli)>0&&strlen($scholarship->user->shenasname)>0&&strlen($scholarship->user->datebirth)>0&&strlen($scholarship->user->personal_image)>0 && strlen($scholarship->user->tel)>0 && strlen($scholarship->user->email)>0 && strlen($scholarship->user->state)>0&&strlen($scholarship->user->city)>0&&strlen($scholarship->user->address)>0 && strlen($scholarship->user->father)>0 && strlen($scholarship->user->married)>0 && strlen($scholarship->user->born)>0 && strlen($scholarship->user->education)>0&&strlen($scholarship->user->reshteh)>0&&strlen($scholarship->user->job)>0&&strlen($scholarship->user->resume)>0 ) btn-success  @endif" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">اطلاعات کاربر</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="introduce-tab" data-toggle="tab" data-target="#introduce" type="button" role="tab" aria-controls="introduce" aria-selected="false">معرفی دوستان</button>
+                <button class="nav-link " id="introduce-tab" data-toggle="tab" data-target="#introduce" type="button" role="tab" aria-controls="introduce" aria-selected="false">معرفی دوستان</button>
             </li>
             <li class="nav-item" role="learn">
-                <button class="nav-link" id="learn-tab" data-toggle="tab" data-target="#learn" type="button" role="tab" aria-controls="learn" aria-selected="false">دوره آموزشی</button>
+                <button class="nav-link @if($scholarship->confirm_webinar==1) bg-success @endif" id="learn-tab" data-toggle="tab" data-target="#learn" type="button" role="tab" aria-controls="learn" aria-selected="false">دوره آموزشی</button>
             </li>
             <li class="nav-item" role="exam">
-                <button class="nav-link" id="exam-tab" data-toggle="tab" data-target="#exam" type="button" role="tab" aria-controls="exam" aria-selected="false">آزمون</button>
+                <button class="nav-link @if($scholarship->confirm_exam==1) bg-success @endif " id="exam-tab" data-toggle="tab" data-target="#exam" type="button" role="tab" aria-controls="exam" aria-selected="false">آزمون و گواهینامه</button>
             </li>
+            <!--
             <li class="nav-item" role="certificate">
-                <button class="nav-link @if(($scholarship->confirm_webinar==1) && ($scholarship->confirm_exam==1))  @else disabled @endif" id="certificate-tab" data-toggle="tab" data-target="#certificate" type="button" role="tab" aria-controls="certificate" aria-selected="false">مدرک</button>
+                <button class="nav-link @if(($scholarship->confirm_webinar==1) && ($scholarship->confirm_exam==1))  @else disabled @endif" id="certificate-tab" data-toggle="tab" data-target="#certificate" type="button" role="tab" aria-controls="certificate" aria-selected="false">گواهینامه</button>
             </li>
+            -->
             <li class="nav-item" role="introductionLetter">
-                <button class="nav-link" id="introductionLetter-tab" data-toggle="tab" data-target="#introductionLetter" type="button" role="tab" aria-controls="introductionLetter" aria-selected="false">معرفی نامه</button>
+                <button class="nav-link @if(!is_null($scholarship->introductionletter)&&($scholarship->confirm_introductionletter!=0)&&($scholarship->confirm_introductionletter==2)&&($scholarship->confirm_introductionletter==4)) bg-success @endif " id="introductionLetter-tab" data-toggle="tab" data-target="#introductionLetter" type="button" role="tab" aria-controls="introductionLetter" aria-selected="false">معرفی نامه</button>
             </li>
             <li class="nav-item" role="interview">
-                <button class="nav-link" id="interview-tab" data-toggle="tab" data-target="#interview" type="button" role="tab" aria-controls="interview" aria-selected="false">مصاحبه</button>
+                <button class="nav-link @if(!is_null($scholarship->user->get_scholarshipInterview)) bg-success  @endif " id="interview-tab" data-toggle="tab" data-target="#interview" type="button" role="tab" aria-controls="interview" aria-selected="false">مصاحبه</button>
             </li>
-
             <li class="nav-item" role="result">
-                <button class="nav-link disabled" id="result-tab" data-toggle="tab" data-target="#result" type="button" role="tab" aria-controls="result" aria-selected="false">نتیجه</button>
+                <button class="nav-link  @if(($scholarship->view_score==1)) bg-success @endif " id="result-tab" data-toggle="tab" data-target="#result" type="button" role="tab" aria-controls="result" aria-selected="false">نتیجه</button>
             </li>
-            <li class="nav-item" role="rante">
-                <button class="nav-link disabled" id="result-tab" data-toggle="tab" data-target="#rante" type="button" role="tab" aria-controls="rante" aria-selected="false">وام دانشجویی</button>
+            <li class="nav-item" role="payment">
+                <button class="nav-link @if(!is_null($scholarship->financial)) bg-success @endif  @if(is_null($scholarship->user->get_scholarshipInterview)) disabled @endif" id="payment-tab" data-toggle="tab" data-target="#payment" type="button" role="tab" aria-controls="payment" aria-selected="false">ثبت نام</button>
+            </li>
+            <li class="nav-item " role="collabration">
+                <button class="nav-link" id="collabration-tab" data-toggle="tab" data-target="#collabration" type="button" role="tab" aria-controls="collabration" aria-selected="false">همکاری</button>
+            </li>
+            <li class="nav-item" role="support">
+                <button class="nav-link" id="support-tab" data-toggle="tab" data-target="#support" type="button" role="tab" aria-controls="support" aria-selected="false">پشتیبان</button>
             </li>
         </ul>
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                 <h3 class="d-block text-dark text-center" style="line-height: 2">طرح اعطای بورسیه کوچینگ آکادمی بین المللی فراکوچ</h3>
                 <div class="card">
-                    <div class="card-body shadow shadow-sm">
+                    <div class="card-body shadow shadow-sm text-center">
+                        <img src="{{asset('/images/info_boursieh_01.jpg')}}" class="img-fluid" />
                         <p style="line-height: 2" class="text-center">شناسایی و دعوت از افراد نخبه و با استعداد جهت حضور ویژه</p>
                         <p style="line-height: 2;text-align: justify">آکادمی بین المللی فراکوچ فرصت بی نظیری را به منظور ورود و پیوستن جمع بیشتری از افراد مستعد ، نخبه و فرهیخته جامعه - به ویژه اساتید ،  پژوهشگران، اندیشمندان، مدیران و دانشجویان برتر - به دنیای حرفه ای کوچینگ از طریق ایجاد شرایط ویژه حضور آنان در دوره های آموزش و تربیت کوچ حرفه ای ، فراهم کرده است.</p>
-
+                        <b class="d-block mb-2">نمونه مدرک </b>
+                        <img src="{{asset('/images/ICF_scholarship_example.jpg')}}" class="img-fluid text-center" />
                     </div>
                 </div>
                 <button class="btn btn-primary" id="contact-tab2" onclick="document.getElementById('contact-tab').click()">مرحله بعد</button>
-
-
 
             </div>
             <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
@@ -151,7 +162,7 @@
 
             </div>
 
-
+            <!--
             <div class="tab-pane fade " id="certificate" role="tabpanel" aria-labelledby="certificate-tab">
                 <p>برای کسب مدرک ICF بورسیه کوچینگ باید مراحل زیر را طی کنید:</p>
                 <ul>
@@ -164,21 +175,27 @@
                 </div>
 
             </div>
+            -->
 
 
             <div class="tab-pane fade " id="interview" role="tabpanel" aria-labelledby="interview-tab">
                 <div class="card-body" >
-                    @if(is_null($scholarship->user->get_scholarshipInterview))
-                        <div class="alert alert-warning">شما هنوز در مصاحبه شرکت نکرده اید</div>
+                    @if($scholarship->view_score==1)
+                        @if(is_null($scholarship->user->get_scholarshipInterview))
+                            <div class="alert alert-warning">شما هنوز در مصاحبه شرکت نکرده اید</div>
+                        @else
+                            <div class="alert alert-primary">شما در مصاحبه بورسیه کوچینگ {{$scholarship->user->get_scholarshipInterview->score}} امتیاز کسب کرده اید</div>
+                        @endif
                     @else
-                        <div class="alert alert-primary">شما در مصاحبه بورسیه کوچینگ {{$scholarship->user->get_scholarshipInterview->score}} امتیاز کسب کرده اید</div>
+                        <div class="alert alert-warning">
+                            امتیاز بورسیه شما در سیستم ثبت شد
+                        </div>
                     @endif
                 </div>
-
             </div>
             <div class="tab-pane fade " id="result" role="tabpanel" aria-labelledby="result-tab">
                 <div class="card-body" >
-
+                    @include('user.scholarship.result')
                 </div>
 
             </div>
@@ -188,9 +205,57 @@
                 </div>
 
             </div>
+            <div class="tab-pane fade " id="payment" role="tabpanel" aria-labelledby="payment-tab">
+                @include('user.scholarship.payment')
+            </div>
+            <div class="tab-pane fade " id="support" role="tabpanel" aria-labelledby="support-tab">
+                @include('user.scholarship.support')
+            </div>
+            <div class="tab-pane fade " id="collabration" role="tabpanel" aria-labelledby="collabration-tab">
+                @include('user.scholarship.collabration')
+            </div>
 
 
 
+        </div>
+    </div>
+
+    <div class="col-12 nav_position_bottom d-block d-sm-none " dir="ltr" style="position: fixed;bottom: 0px;background-color: #F2F4F4">
+        <div role="presentation" role="home">
+            <button class="btn btn-primary" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">توضیحات</button>
+        </div>
+        <div role="presentation">
+            <button class="btn btn-primary" id="contact-tab" data-toggle="tab" data-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">فرم اولیه بورسیه</button>
+        </div>
+        <div role="profile">
+            <button class="btn btn-primary" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">اطلاعات کاربر</button>
+        </div>
+        <div  role="presentation">
+            <button class="btn btn-primary" id="introduce-tab" data-toggle="tab" data-target="#introduce" type="button" role="tab" aria-controls="introduce" aria-selected="false">معرفی دوستان</button>
+        </div>
+        <div  role="learn">
+            <button class="btn btn-primary" id="learn-tab" data-toggle="tab" data-target="#learn" type="button" role="tab" aria-controls="learn" aria-selected="false">دوره آموزشی</button>
+        </div>
+        <div  role="exam">
+            <button class="btn btn-primary" id="exam-tab" data-toggle="tab" data-target="#exam" type="button" role="tab" aria-controls="exam" aria-selected="false">آزمون و گواهینامه</button>
+        </div>
+        <div  role="introductionLetter">
+            <button class="btn btn-primary" id="introductionLetter-tab" data-toggle="tab" data-target="#introductionLetter" type="button" role="tab" aria-controls="introductionLetter" aria-selected="false">معرفی نامه</button>
+        </div>
+        <div  role="interview">
+            <button class="btn btn-primary" id="interview-tab" data-toggle="tab" data-target="#interview" type="button" role="tab" aria-controls="interview" aria-selected="false">مصاحبه</button>
+        </div>
+        <div  role="result">
+            <button class="btn btn-primary" id="result-tab" data-toggle="tab" data-target="#result" type="button" role="tab" aria-controls="result" aria-selected="false">نتیجه</button>
+        </div>
+        <div role="payment">
+            <button class="btn btn-primary @if(is_null($scholarship->user->get_scholarshipInterview)) disabled @endif" id="payment-tab" data-toggle="tab" data-target="#payment" type="button" role="tab" aria-controls="payment" aria-selected="false">ثبت نام</button>
+        </div>
+        <div role="collabration">
+            <button class="btn btn-primary" id="collabration-tab" data-toggle="tab" data-target="#collabration" type="button" role="tab" aria-controls="collabration" aria-selected="false">همکاری</button>
+        </div>
+        <div role="support">
+            <button class="btn btn-primary" id="support-tab" data-toggle="tab" data-target="#support" type="button" role="tab" aria-controls="support" aria-selected="false">پشتیبان</button>
         </div>
     </div>
 @endsection
@@ -272,9 +337,48 @@
                 sync:true,
             });
 
+        kamaDatepicker('expire',
+            {
+                gotoToday: true,
+                markHolidays:true,
+                markToday:true,
+                twodigit:true,
+                closeAfterSelect:true,
+                highlightSelectedDay:true,
+                nextButtonIcon: "fa fa-arrow-circle-right",
+                previousButtonIcon: "fa fa-arrow-circle-left",
+                sync:true,
+            });
+
     </script>
 
     <script>
+        function collabration_category(id)
+        {
+
+            $.ajax({
+                url:'/panel/scholarship/me/collabration_category/'+id,
+                type:'GET',
+                success:function(data)
+                {
+                    $('#collabration_category').html(data);
+                }
+            })
+        }
+
+
+
+        function collabration_details(id)
+        {
+            $.ajax({
+                url:'/panel/scholarship/me/collabration_details/'+id,
+                type:'GET',
+                success:function(data)
+                {
+                    $('#collabration_category').html(data);
+                }
+            })
+        }
 
         var input = document.querySelector("#tel_introduce");
         var intl=intlTelInput(input,{
@@ -396,7 +500,30 @@
            );
         };
 
-        //
+        //نمایش جدول پرداخت بورسیه
+
+        /*
+        $('[name="paymentCourse_radio"]').change(function()
+        {
+
+            var loading='<div class="col-12 text-center"><div class="spinner-border text-primary text-center" role="status"><span class="sr-only">Loading...</span></div></div>';
+            $("#show_payment_scholarship").html(loading);
+            var data=$(this).val();
+
+                $.ajax({
+                    type:'POST',
+                    url:"/panel/scholarship/ajax_payment",
+                     data:
+                     {
+                         'id':$(this).val(),
+                         '_token':"{{ csrf_token() }}",
+                     },
+                    success:function(data)
+                    {
+                        $("#show_payment_scholarship").html(data);
+                    }
+                });
+        });*/
 
     </script>
 
@@ -408,10 +535,10 @@
     </script>
 
 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="{{asset('/js/jquery-3.5.1.min.js')}}" ></script>
     <script src="{{asset('/js/jquery-ui.min.js')}}" ></script>
     <script src="{{asset('/js/jquery-book.js')}}" ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
+    <script src="{{asset('/js/jquery.validate.min.js')}}"></script>
 
     <script>
         $thing = $('#demo').book({
@@ -427,6 +554,157 @@
             //$('.progress span').text('Completed: '+Math.trunc(t)+'%');
             $('.progress-value').text(Math.trunc(t)+'%');
         }
+    </script>
+
+    <script src="{{asset('/js/slick.js')}}"></script>
+    <script>
+        $('.nav_position_bottom').slick({
+            autoplay:true,
+            speed: 300,
+            slidesToShow: 4,
+            slidesToScroll: 4,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                        infinite: true,
+
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2,
+                        arrows:false,
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2,
+                        arrows:false,
+                    }
+                }
+
+            ]
+        });
+
+
+        function details_calculate(vals)
+        {
+            var check=parseInt($("#value").val().replace(/\,/g,''));
+
+            if(isNaN(check))
+            {
+                $('#collabration_details_calculate').val(new Intl.NumberFormat().format(vals));
+            }
+            else
+            {
+                $('#collabration_details_calculate').val(new Intl.NumberFormat().format(vals*$("#value").val().replace(/\,/g,'')));
+            }
+
+        }
+
+        function collabration_details_accept()
+        {
+            $.ajax(
+                {
+                    data:$('#collabration_details_accept').serialize(),
+                    url:'/panel/collabration_accept',
+                    type:'POST',
+                    success: function (data) {
+                        $('#collabration_category').html(data);
+                    },
+                    error : function(data)
+                    {
+                        $('#collabration_category').text(data.responseJSON.errors);
+                        errorsHtml='<div class="col-6 col-md-4  mb-1"> <button type="button" class="collabration_category btn btn-primary btn-block" data="0" onclick="collabration_category(0)">بازگشت</button> </div>      <div class="alert alert-danger text-left"><ul>';
+                        $.each( data.responseJSON.errors, function( key, value ) {
+                            errorsHtml += '<li>'+ value[0] + '</li>'; //showing only the first error.
+                        });
+                        errorsHtml += '</ul></div>';
+                        $( '#collabration_category' ).html( errorsHtml );
+                    }
+                }
+            );
+            return false;
+        };
+
+
+        function collabration_details_acceptShow()
+        {
+            $.ajax(
+                {
+                    url:'/panel/scholarship/me/collabrationAccept_ajax',
+                    type:'get',
+                    success: function (data) {
+                        $('#collabrationAccept_ajax').html(data);
+                    },
+                    error : function(data)
+                    {
+                        $('#collabrationAccept_ajax').text(data.responseJSON.errors);
+                        errorsHtml='<div class="alert alert-danger text-left"><ul>';
+                        $.each( data.responseJSON.errors, function( key, value ) {
+                            errorsHtml += '<li>'+ value[0] + '</li>'; //showing only the first error.
+                        });
+                        errorsHtml += '</ul></div>';
+                        $( '#collabrationAccept_ajax' ).html( errorsHtml );
+                    }
+                }
+            );
+            return false;
+        };
+
+
+
+        function collabration_details_acceptEdit(e)
+        {
+            var load='<div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div>';
+            $.ajax(
+                {
+                    url:'/panel/scholarship/me/collabrationAcceptEdit_ajax/'+e,
+                    type:'get',
+                    success: function (data) {
+                        $('#collabration_category').html(data);
+                    },
+                    error : function(data)
+                    {
+                        $('#collabration_category').text(data.responseJSON.errors);
+                        errorsHtml='<div class="alert alert-danger text-left"><ul>';
+                        $.each( data.responseJSON.errors, function( key, value ) {
+                            errorsHtml += '<li>'+ value[0] + '</li>'; //showing only the first error.
+                        });
+                        errorsHtml += '</ul></div>';
+                        $( '#collabration_category' ).html( errorsHtml );
+                    }
+                }
+            );
+            return false;
+        };
+
+        function collabration_details_accept_update(e)
+        {
+            var load='<div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div>';
+            $('#collabration_category').html(load);
+             // var x=(e.getElementsByTagName('input')[2]);
+            x=document.getElementById('collabration_details_accept_update');
+            $.ajax(
+                {
+                    url:'/panel/scholarship/me/collabrationAcceptUpdate_ajax/',
+                    data:$('#collabration_details_accept_update').serialize(),
+                    type:'patch',
+                    success:function(data){
+                        $('#collabration_category').html(data);
+                    }
+                });
+            return false;
+        }
+
+
     </script>
 
 

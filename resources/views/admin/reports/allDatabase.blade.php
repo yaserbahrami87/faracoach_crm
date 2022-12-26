@@ -36,7 +36,41 @@
             </div>
         </div>
     </div>
+    <div class="col-12 border-top">
+        <p>تفکیک مسئول ثبت کننده</p>
+    </div>
+    <div class="col-12 table-responsive mb-2 border border-bottom border-1">
+        <table class="table table-striped">
+            <tr>
+                <th>ثبت کننده</th>
+                <th>  تعداد</th>
 
+            </tr>
+            @foreach($users->groupby('insert_user_id') as $item)
+                <tr>
+                    <td>
+                        @if(is_null($item[0]->get_insertuserInfo))
+                            <img src="{{asset('/documents/users/default-avatar.png')}}" width="50px" height="50px" class="rounded-circle" />
+                            نامشخص
+                        @else
+                            <img src="{{asset('/documents/users/'.$item[0]->get_insertuserInfo->personal_image)}}" width="50px" height="50px" class="rounded-circle" />
+                            {{$item[0]->get_insertuserInfo->fname.' '.$item[0]->get_insertuserInfo->lname}}
+                        @endif
+                    </td>
+                    <td>
+                        {{count($item)}}
+                    </td>
+
+                </tr>
+            @endforeach
+            <tr>
+                <td>جمع کل</td>
+                <td>
+                    {{$users->count()}}
+                </td>
+            </tr>
+        </table>
+    </div>
     <div class="col-12 border-top">
         <p>تفکیک استان ها </p>
     </div>
@@ -300,10 +334,10 @@
 @endsection
 
 @section('footerScript')
-    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-    <script src="https://cdn.jsdelivr.net/npm/moment"></script>
-    <script src="https://cdn.jsdelivr.net/npm/moment-jalaali@0.7.4/build/moment-jalaali.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue-persian-datetime-picker/dist/vue-persian-datetime-picker-browser.js"></script>
+    <script src="{{asset('/js/vue@2.js')}}"></script>
+    <script src="{{asset('/js/moment.js')}}"></script>
+    <script src="{{asset('/js/moment-jalaali.js')}}"></script>
+    <script src="{{asset('/js/vue-persian-datetime-picker-browser.js')}}"></script>
     <script>
         var app = new Vue({
             el: '#app',

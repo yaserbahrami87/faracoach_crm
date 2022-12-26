@@ -72,7 +72,20 @@ class ScholarshipInterviewController extends BaseController
             ]);
 
             $user=User::find($data['user_id']);
-            $msg=$user->fname." ".$user->lname." عزیز\n"." شما ".$data['score']." امتیاز در مصاحبه بورسیه کوچینگ کسب کردید "."\n فراکوچ";         "$user->fname $user->lname عزیز ";
+
+            if($user->scholarship->confirm_introductionletter==1)
+            {
+                $introductionletter="دارد";
+            }
+            else
+            {
+                $introductionletter="ندارد";
+            }
+
+            $countInvitation=$user->get_invitations->where('created_at','>','2022-07-20 00:00:00')->where('resource','=','بورسیه تحصیلی')->count();
+
+//            $msg=$user->fname." ".$user->lname." عزیز\n"." شما ".$data['score']." امتیاز در مصاحبه بورسیه کوچینگ کسب کردید "."\n فراکوچ";         "$user->fname $user->lname عزیز ";
+            $msg=$user->fname." ".$user->lname." عزیز\n"." امتیاز مصاحبه شما ثبت شد. "."\n مشاهده در my.faracoach.com\n"."\nمعرفی نامه: $introductionletter \nتعداد معرفی:$countInvitation \n مرحله پایانی:\n دریافت گواهینامه\nثبت نام دوره";
             $this->sendSms($user->tel,$msg);
             alert()->success('مصاحبه با موفقیت ثبت شد')->persistent('بستن');
         }
@@ -114,9 +127,61 @@ class ScholarshipInterviewController extends BaseController
      * @param  \App\scholarship_interview  $scholarship_interview
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, scholarship_interview $scholarship_interview)
+    public function update(scholarshipinterviewrequest $request, scholarship_interview $scholarship_interview)
     {
-        //
+        $data=$request->validated();
+        $status=$scholarship_interview->update($data+[
+                'insert_user_id'     =>Auth::user()->id,
+                'date_fa'            =>$this->dateNow,
+                'time_fa'            =>$this->timeNow,
+            ]);
+
+
+        if($status)
+        {
+            $followups = followup::where('user_id', '=', $data['user_id'])
+                ->get();
+
+            foreach ($followups as $item) {
+                $t = followup::where('id', '=', $item->id)   //    $this->get_followup($item->followups_id,NULL,NULL,NULL,"first");
+                ->first();
+                $t->flag = 0;
+                $t->update();
+            }
+
+            followup::create([
+                'user_id' => $data['user_id'],
+                'insert_user_id' => Auth::user()->id,
+                'comment' => $data['description']."بورسیه:",
+                'status_followups' => 11,
+                'flag' => 1,
+                'date_fa' => $this->dateNow,
+                'time_fa' => $this->timeNow,
+            ]);
+
+            $user=User::find($data['user_id']);
+
+            if($user->scholarship->confirm_introductionletter==1)
+            {
+                $introductionletter="دارد";
+            }
+            else
+            {
+                $introductionletter="ندارد";
+            }
+
+            $countInvitation=$user->get_invitations->where('created_at','>','2022-07-20 00:00:00')->where('resource','=','بورسیه تحصیلی')->count();
+
+//            $msg=$user->fname." ".$user->lname." عزیز\n"." امتیاز مصاحبه شما ثبت شد. "."\n مشاهده در my.faracoach.com\n"."\nمعرفی نامه: $introductionletter \nتعداد معرفی:$countInvitation \n مرحله پایانی:\n دریافت گواهینامه\nثبت نام دوره";
+//            $this->sendSms($user->tel,$msg);
+            alert()->success('مصاحبه با موفقیت بروزرسانی شد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در ثبت مصاحبه')->persistent('بستن');
+        }
+
+        return  back();
     }
 
     /**

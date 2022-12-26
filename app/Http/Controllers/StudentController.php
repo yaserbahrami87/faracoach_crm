@@ -16,13 +16,7 @@ class StudentController extends BaseController
     public function index()
     {
 
-        $students=User::join('followups','users.id','=','followups.user_id')
-            ->join('courses','followups.course_id','=','courses.id')
-            ->where('followups.status_followups','=','20')
-            ->select('users.*','courses.course')
-            ->orderby('followups.id','desc')
-            ->groupby('followups.user_id')
-            ->paginate(32);
+        $students=student::get();
 
         $course=$this->get_courses();
 
@@ -114,12 +108,21 @@ class StudentController extends BaseController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int  $student
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(student $student)
     {
-        //
+        $status=$student->delete();
+        if($status)
+        {
+            alert()->success('دانشجو با موفقیت از دوره حذف شد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در حذف دانشجو')->persistent('بستن');
+        }
+        return back();
     }
 
     public function search(Request $request)

@@ -36,14 +36,10 @@
                         <li><a href="/panel/booking/accept" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item"  >لیست جلسات رزرو شده</span></a></li>
                         <li><a href="/panel/booking/report" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item"  >گزارش جلسات</span></a></li>
                         <li><a href="/panel/settings/booking/" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item"  >تتنظیمات جلسات</span></a></li>
+                        <li><a href="/panel/coupon" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item"  >کوپن</span></a></li>
                     </ul>
                 </li>
-                <li class=" nav-item has-sub "><a href="#"><span class="menu-title" >کوپن</span></a>
-                    <ul class="menu-content">
-                        <li><a href="/panel/coupon/" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >کوپن ها</span></a></li>
-                        <li><a href="/panel/coupon/create" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item"  >کوپن جدید</span></a></li>
-                    </ul>
-                </li>
+
             @else
                 <li class=" nav-item"><a href="/panel/coach/create"><span class="menu-title">همکاری به عنوان کوچ</span></a></li>
                 <li class="nav-item has-sub"><a href="#"><span class="menu-title" >جلسات</span></a>
@@ -52,10 +48,10 @@
                     </ul>
                 </li>
             @endif
-            <li class=" nav-item"><a href="#"><span class="menu-title" >بورسیه </span></a>
-                <ul class="menu-content">
-                    <li><a href="/panel/scholarship/me"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >نمایش درخواست</span></a></li>
-                </ul>
+            <li class="nav-item">
+                <a href="/panel/scholarship/me">
+                    <span class="menu-title" >بورسیه </span>
+                </a>
             </li>
             <li class="nav-item has-sub"><a href="#"><span class="menu-title" >مالی</span></a>
                 <ul class="menu-content">

@@ -24,10 +24,10 @@
             <td dir="ltr">-</td>
             <td dir="ltr">-</td>
             <td dir="ltr">
-                @if(!is_null($item->scholarship))
-                    4
-                @else
+                @if(is_null($item->scholarship))
                     0
+                @else
+                    {{floor(($item->scholarship->get_score()*10)/100)}}
                 @endif
             </td>
         </tr>

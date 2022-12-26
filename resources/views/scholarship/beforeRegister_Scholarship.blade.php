@@ -368,7 +368,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="resume" class="col-md-4 col-form-label text-md-right">رزومه  خورد را بارگزاری نمایید: <span class="text-danger">*</span></label>
+                                        <label for="resume" class="col-md-4 col-form-label text-md-right">رزومه  خورد را بارگزاری نمایید: </label>
                                         <div class="col-md-6">
                                             <input type="file" class="form-control-file" id="exampleFormControlFile1" name="resume">
                                             <small class="text-muted ">فایل های قابل قبول: PDF , JPG , JPEG , DOC , PNG</small>

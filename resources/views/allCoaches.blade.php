@@ -65,6 +65,7 @@
                     </div>
                 </div>
                 <div class="card mb-3" >
+
                     <div class="card-header bg-info text-light">فیلترها</div>
                     <div class="card-body">
                         <form method="get" action="/coaches/all/">
@@ -92,6 +93,13 @@
                         </form>
                     </div>
                 </div>
+
+                <div class="card mb-3" >
+                    <div class="card-header bg-info text-light">تماس با پشتیبان</div>
+                    <div class="card-body">
+                        <p> شماره تماس با پشتیبان <a href="tel:09198000747">09198000747</a></p>
+                    </div>
+                </div>
             </div>
             <div class="col-sm-12 col-md-9 col-lg-9 col-xl-9">
                 <div class="row">
@@ -107,9 +115,11 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col-12">
+                                        <!--
                                         <a class="btn btn-primary" data-toggle="collapse" href="#collapseFilter" role="button" aria-expanded="false" aria-controls="collapseFilter">
                                             فیلتر <i class="bi bi-filter"></i>
                                         </a>
+                                        -->
                                         <div class="collapse" id="collapseFilter">
                                             <div class="card card-body">
                                                 <div class="row">
