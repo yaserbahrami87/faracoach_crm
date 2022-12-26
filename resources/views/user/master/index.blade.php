@@ -50,8 +50,7 @@
 
         }
     </style>
-    <!-- END: Page CSS-->
-    <!--{% framework extras %}-->
+
     <link rel="stylesheet" property="stylesheet" href="/modules/system/assets/css/framework.extras.css">
     <script src="{{asset('/js/sweetalert.min.js')}}"></script>
 

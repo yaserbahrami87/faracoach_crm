@@ -116,7 +116,7 @@ class CollabrationCategoryController extends Controller
             $collabration_category=collabration_category::get();
             foreach ($collabration_category as $item)
             {
-                echo "<div class='col-6 col-md-4'>
+                echo "<div class='col-12 col-md-4'>
                     <button type='button' class='collabration_category btn btn-primary btn-block mb-1' data='$item->id' onclick='collabration_category($item->id)'>$item->category</button>
                 </div>";
             }
@@ -127,7 +127,7 @@ class CollabrationCategoryController extends Controller
                                             ->get();
 
             echo "<div class='col-6 col-md-4  mb-1'>
-                    <button type='button' class='collabration_category btn btn-primary btn-block' data='0' onclick='collabration_category(0)'>بازگشت</button>
+                    <button type='button' class='collabration_category btn btn-secondary btn-block' data='0' onclick='collabration_category(0)'>بازگشت</button>
                 </div>";
 
             foreach ($collabration_details as $item) {

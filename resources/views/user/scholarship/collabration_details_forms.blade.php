@@ -1,5 +1,5 @@
 <div class='col-6 col-md-4  mb-1'>
-    <button type='button' class='collabration_category btn btn-primary btn-block' data='0' onclick='collabration_category(0)'>بازگشت</button>
+    <button type='button' class='collabration_category btn btn-secondary ' data='0' onclick='collabration_category(0)'>بازگشت</button>
 </div>
 <div class="col-12 col-md-4 mx-auto">
     <form id="collabration_details_accept" method="post" onsubmit="return collabration_details_accept()" >
@@ -32,7 +32,7 @@
             <small class="text-muted">مبالغ به تومان می باشد</small>
         </div>
         <div class="form-group">
-            <label for="collabration_details_count">تعداد/مبلغ:
+            <label for="collabration_details_count">تعداد/مبلغ:(چنانچه پروژه توافقی بود مبلغ را وارد کنید)
                 <span class="text-danger">*</span>
             </label>
             <input type="number" class="form-control" id="collabration_details_count" name="count" onchange="details_calculate(this.value)"  />
