@@ -741,7 +741,6 @@ class BookingController extends BaseController
     //نمایش کامل لیست جلسات برای ادمین در ماه جاری
     public function reportAllCoach(Request $request)
     {
-
         if($request->start_date)
         {
                 $this->validate($request,[

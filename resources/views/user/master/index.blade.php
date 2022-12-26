@@ -36,10 +36,20 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('/panel_assets/css/pages/authentication.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/panel_assets/css/plugins/forms/wizard.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/panel_assets/css/pages/app-email.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/panel_assets/intl_tel/css/intlTelInput.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/panel_assets/css/pages/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/panel_assets/intl_tel/css/intlTelInput.css') }}" />
-    <link rel="stylesheet" href="{{asset('/css/bootstrap-icons.css')}}" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lalezar">
+    <link rel="stylesheet" href="{{asset('/css/bootstrap-icons.css')}}">
+
+    <style>
+        @font-face {
+            font-family: 'Lalezar';
+            font-style: normal;
+            font-weight: 400;
+            src: url('{{asset('/fonts/Lalezar.woff2')}}') format('woff2');
+
+        }
+    </style>
     <!-- END: Page CSS-->
     <!--{% framework extras %}-->
     <link rel="stylesheet" property="stylesheet" href="/modules/system/assets/css/framework.extras.css">
