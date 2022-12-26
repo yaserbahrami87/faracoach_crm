@@ -66,7 +66,7 @@ class CollabrationAcceptController extends Controller
             $score=(Auth::user()->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->score);
             $loan=(Auth::user()->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->loan);
 
-            if(($sum_calculate+ $calculate) > ((($fi*$score)/100)-((($fi*$score)/100)* $loan)/100)+((($fi*$score/100)-((($fi*$score)/100)*$loan)/100))/2)
+            if((($sum_calculate+ $calculate) > (((($fi*$score)/100)-((($fi*$score)/100)* $loan)/100)+((($fi*$score/100)-((($fi*$score)/100)*$loan)/100))/2)*2))
             {
                 ?>
                 <script >

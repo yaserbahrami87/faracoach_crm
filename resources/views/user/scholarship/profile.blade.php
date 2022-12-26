@@ -597,14 +597,22 @@
         function details_calculate(vals)
         {
             var check=parseInt($("#value").val().replace(/\,/g,''));
-
+            console.log(new Intl.NumberFormat().format(vals*$("#value").val().replace(/\,/g,'')));
             if(isNaN(check))
             {
                 $('#collabration_details_calculate').val(new Intl.NumberFormat().format(vals));
             }
             else
             {
-                $('#collabration_details_calculate').val(new Intl.NumberFormat().format(vals*$("#value").val().replace(/\,/g,'')));
+                if(isNaN(new Intl.NumberFormat().format(vals*$("#value").val().replace(/\,/g,''))))
+                {
+                    $('#collabration_details_calculate').val(new Intl.NumberFormat().format(vals));
+                }
+                else
+                {
+                    $('#collabration_details_calculate').val(new Intl.NumberFormat().format(vals*$("#value").val().replace(/\,/g,'')));
+                }
+
             }
 
         }
