@@ -113,7 +113,7 @@ class CollabrationCategoryController extends Controller
     {
         if($collabration_category==0)
         {
-            $collabration_category=collabration_category::get();
+            $collabration_category=collabration_category::where('status','=',1)->get();
             foreach ($collabration_category as $item)
             {
                 echo "<div class='col-12 col-md-4'>
@@ -124,6 +124,7 @@ class CollabrationCategoryController extends Controller
         else
         {
             $collabration_details=collabration_details::where('collabration_categories_id', '=', $collabration_category)
+                                            ->where('status','=',1)
                                             ->get();
 
             echo "<div class='col-6 col-md-4  mb-1'>
