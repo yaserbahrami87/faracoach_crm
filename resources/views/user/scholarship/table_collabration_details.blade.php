@@ -24,7 +24,9 @@
                             نامشخص
                         @endif
                     @endif
-
+                    <button type='button' class="btn btn-warning btn-sm" onclick="collabration_details_acceptEdit({{$item_collabration_accept->id}})" >
+                        <i class="bi bi-pencil-square"></i>
+                    </button>
                     <form method="post" action="/panel/collabration_accept/{{$item_collabration_accept->id}}" onsubmit="return (window.confirm('ایا از حذف زمینه همکاری اطمینان دارید؟'))">
                         {{csrf_field()}}
                         {{method_field('DELETE')}}

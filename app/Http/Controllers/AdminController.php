@@ -275,10 +275,10 @@ class AdminController extends BaseController
                         ->where('reserves.user_id','=',Auth::user()->id)
                         ->whereNull('feedback_coachings.created_at')
                         ->get();
-            if($reserve_notFeedback->count()>0)
-            {
-                alert()->warning(' برای تعداد '.$reserve_notFeedback->count()." جلسه برگزار شده بازخورد ثبت نشده است ")->persistent('بستن');
-            }
+//            if($reserve_notFeedback->count()>0)
+//            {
+//                alert()->warning(' برای تعداد '.$reserve_notFeedback->count()." جلسه برگزار شده بازخورد ثبت نشده است ")->persistent('بستن');
+//            }
 
             $courses=student::join('courses','students.course_id','=','courses.id')
                         ->where('students.user_id','=',Auth::user()->id)
