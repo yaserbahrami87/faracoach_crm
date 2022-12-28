@@ -46,6 +46,10 @@
                             <label for="max" >سقف همکاری</label>
                             <input type="text" class="form-control" id="max" name="max" value="{{old('max',$collabration_details->max)}}">
                         </div>
+                        <div class="form-group mb-2">
+                            <label for="description" >توضیحات</label>
+                            <input type="text" class="form-control" id="description" name="description" value="{{old('description',$collabration_details->description)}}">
+                        </div>
                         <div class="form-group">
                             <label for="status">وضعیت:</label>
                             <select class="form-control" id="status" name="status">

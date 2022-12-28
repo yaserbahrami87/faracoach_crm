@@ -2,6 +2,9 @@
     <button type='button' class='collabration_category btn btn-secondary ' data='0' onclick='collabration_category(0)'>بازگشت</button>
 </div>
 <div class="col-12 col-md-4 mx-auto">
+    <p style="line-height: 0">توضیحات: </p>
+    <p>{{$collabration_details->description}}</p>
+
     <form id="collabration_details_accept" method="post" onsubmit="return collabration_details_accept()" >
         {{csrf_field()}}
         <input type="hidden" value="{{$collabration_details->id}}" name="collabration_detail_id">

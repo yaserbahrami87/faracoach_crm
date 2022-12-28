@@ -171,7 +171,17 @@ class CollabrationAcceptController extends Controller
      */
     public function destroy(collabration_accept $collabration_accept)
     {
-        //
+        $status=$collabration_accept->delete();
+        if($status)
+        {
+            alert()->success('همکاری با موفقیت حذف شد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در حذف همکاری ')->persistent('بستن');
+        }
+
+        return back();
     }
 
     public function collabrationAccept_ajax()
