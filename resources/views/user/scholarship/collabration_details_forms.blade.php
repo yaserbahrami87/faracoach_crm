@@ -51,6 +51,10 @@
             <label for="calculate">محاسبه</label>
             <input type="text" class="form-control" id="collabration_details_calculate" name="calculate" readonly/>
         </div>
+        <div class="form-group">
+            <label for="description">توضیحات</label>
+            <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+        </div>
         @if(!is_null(Auth::user()->scholarship->financial))
             <button type="submit" class="btn btn-primary"  >ثبت درخواست</button>
         @endif

@@ -39,8 +39,9 @@ class CollabrationAcceptController extends Controller
 
         $this->validate($request,
             [
-                'count'     =>'required|string',
-                'expire'    =>'required|string',
+                'count'         =>'required|string',
+                'expire'        =>'required|string',
+                'description'   =>'nullable|string|max:200',
             ]);
         $collabration_accept=collabration_accept::where('user_id','=',Auth::user()->id)
                                 ->where('collabration_detail_id','=',$request->collabration_detail_id)
@@ -87,10 +88,8 @@ class CollabrationAcceptController extends Controller
                     'expire'                =>$request->expire,
                     'calculate'             =>((int)str_replace(',', '', $request->calculate)),
                     'collabration_detail_id'=>$request->collabration_detail_id,
+                    'description'           =>$request->description,
                 ]);
-
-
-
 
                 if($status)
                 {
@@ -150,6 +149,7 @@ class CollabrationAcceptController extends Controller
         $collabration_accept->count=$request->count;
         $collabration_accept->expire=$request->expire;
         $collabration_accept->calculate=((int) str_replace(',', '', $request->calculate));
+        $collabration_accept->description=$request->description;
         $status=$collabration_accept->update();
         if($status)
         {

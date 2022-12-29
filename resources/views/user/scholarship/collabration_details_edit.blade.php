@@ -50,6 +50,10 @@
             <label for="calculate">محاسبه ارزش</label>
             <input type="text" class="form-control" id="collabration_details_calculate" name="calculate" readonly value="{{number_format($collabration_accept->calculate)}}" />
         </div>
+        <div class="form-group">
+            <label for="description">توضیحات</label>
+            <textarea class="form-control" id="description" name="description" rows="3">{{$collabration_accept->description}}</textarea>
+        </div>
         <button type="submit" class="btn btn-primary"  >بروزرسانی درخواست</button>
     </form>
 </div>

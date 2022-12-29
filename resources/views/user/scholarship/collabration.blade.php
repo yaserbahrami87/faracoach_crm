@@ -15,6 +15,7 @@
                     <th>زمینه همکاری</th>
                     <th style="padding:1rem !important;">مبلغ (تومان)</th>
                     <th style="padding:1rem !important;">مهلت انجام</th>
+                    <th >حذف</th>
                 </tr>
 
                 @if(!is_null(Auth::user()->collabration_accept))
@@ -36,7 +37,10 @@
                                         نامشخص
                                     @endif
                                 @endif
-
+                            </td>
+                            <td>{{number_format($item_collabration_accept->calculate)}}</td>
+                            <td>{{$item_collabration_accept->expire}}</td>
+                            <td>
                                 <form method="post" action="/panel/collabration_accept/{{$item_collabration_accept->id}}" onsubmit="return (window.confirm('ایا از حذف زمینه همکاری اطمینان دارید؟'))">
                                     {{csrf_field()}}
                                     {{method_field('DELETE')}}
@@ -45,8 +49,6 @@
                                     </button>
                                 </form>
                             </td>
-                            <td>{{number_format($item_collabration_accept->calculate)}}</td>
-                            <td>{{$item_collabration_accept->expire}}</td>
                         </tr>
                     @endforeach
                     <tr>
