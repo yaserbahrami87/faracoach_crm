@@ -235,9 +235,8 @@ class CoachController extends BaseController
      */
     public function edit(coach $coach)
     {
-        if((Auth::user()->type==2) ||(Auth::user()->type==3))
+        if((Auth::user()->type==2) ||(Auth::user()->type==3)||(Auth::user()->type==4))
         {
-
             $coach=coach::join('users','coaches.user_id','=','users.id')
                 ->where('coaches.id','=',$coach->id)
                 ->select('coaches.*','users.fname','users.lname','users.personal_image')

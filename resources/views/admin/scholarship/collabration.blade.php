@@ -15,6 +15,7 @@
             <td>{{$loop->iteration}}</td>
             <td>{{$item->collabration_details->title}}</td>
             <td>
+
                 @if(is_numeric($item->value))
                     {{number_format($item->value)}}
                 @else
@@ -23,6 +24,7 @@
             </td>
             <td>{{$item->count}}</td>
             <td>
+
                 @if(is_numeric($item->calculate))
                     {{number_format($item->calculate)}}
                 @else
@@ -37,19 +39,19 @@
                 @endif
             </td>
             <td>
-
                 <button type="button" class="btn btn-primary collabrationModal" data-toggle="modal" data-target="#collabrationModal" data-whatever="{{$item->id}}">
                     <i class="bi bi-pencil-square"></i>
                 </button>
-
             </td>
         </tr>
     @endforeach
         <tr class="text-center">
             <td colspan="2">جمع کل</td>
             <td>
-                @if(is_numeric($scholarship->user->collabration_accept->sum('value')))
-                    {{number_format($scholarship->user->collabration_accept->sum('value'))}}
+
+
+                @if(is_numeric($scholarship->user->collabration_accept->where('value','not like','%%%')->sum('value')))
+                    {{number_format($scholarship->user->collabration_accept->where('value','not like','%%%')->sum('value'))}}
                 @else
                     {{$scholarship->user->collabration_accept->sum('value')}}
                 @endif

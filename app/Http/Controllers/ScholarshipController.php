@@ -94,10 +94,18 @@ class ScholarshipController extends BaseController
 
         if(is_null($check))
         {
-            $file = $request->file('resume');
-            $resume = "resume-" . Auth::user()->tel . "." . $request->file('resume')->extension();
-            $path = public_path('/documents/scholarship');
-            $files = $request->file('resume')->move($path, $resume);
+            if($request->has('resume')&&$request->file('resume')->isValid())
+            {
+                $file = $request->file('resume');
+                $resume = "resume-" . Auth::user()->tel . "." . $request->file('resume')->extension();
+                $path = public_path('/documents/scholarship');
+                $files = $request->file('resume')->move($path, $resume);
+            }
+            else
+            {
+                $resume=NULL;
+            }
+
 
 
             $dateNow = verta();
@@ -251,7 +259,9 @@ class ScholarshipController extends BaseController
         }
 
         $result_final=$result_final+$scholarship->score_introductionletter;
-
+        $s="\%";
+//        dd(collabration_accept::where('value','not like',"%$s")->get());
+//        dd($scholarship->user->collabration_accept->where('value','not like',"%$s"));
 
 
        return view('admin.scholarship.scholarship')
@@ -266,6 +276,9 @@ class ScholarshipController extends BaseController
                     ->with('result_final',$result_final)
                     ->with('states',$states);
     }
+
+
+
 
     /**
      * Show the form for editing the specified resource.

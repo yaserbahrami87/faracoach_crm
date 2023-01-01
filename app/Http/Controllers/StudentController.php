@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\course;
+use App\Http\Requests\StudentRequest;
 use App\student;
 use App\User;
 use Illuminate\Http\Request;
@@ -42,21 +44,15 @@ class StudentController extends BaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StudentRequest $request)
     {
-
-        $this->validate($request,[
-            'course_id' =>'required|numeric',
-            'user_id'   =>'required|numeric',
-            'date_fa'   =>'nullable|string',
-            'status'    =>'required|numeric',
-        ]);
-        $student=student::where('user_id','=',$request->user_id)
-                        ->where('course_id','=',$request->course_id)
+        $data=$request->validated();
+        $student=student::where('user_id','=',$data['user_id'])
+                        ->where('course_id','=',$data['course_id'])
                         ->first();
 
         if(is_null($student)) {
-            $status = student::create($request->all());
+            $status = student::create($data);
             if ($status) {
                 alert()->success('کاربر مورد نظر به لیست دانشجوها اضافه شد')->persistent('بستن');
             } else {
@@ -88,9 +84,13 @@ class StudentController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(student $student)
     {
-        //
+        $course=course::orderby('id','desc')
+                ->get();
+        return view('admin.education.course.courseEditStudent')
+                    ->with('course',$course)
+                    ->with('student',$student);
     }
 
     /**
@@ -100,9 +100,23 @@ class StudentController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StudentRequest $request, student $student)
     {
-        //
+        $data=$request->validated();
+        $student->status=$request['status'];
+        $check=$student->save();
+
+        if($check)
+        {
+            alert()->success('وضعیت دانشجو با موفقیت تغییر کرد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در تغییر وضعیت دانشچو')->persistent('بستن');
+        }
+
+        return back();
+
     }
 
     /**

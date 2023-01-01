@@ -22,7 +22,8 @@
                     <th class="text-center">مبلغ قسط</th>
                     <th class="text-center">قیمت ثبت نام شده</th>
                     <th class="text-center">کدرهگیری</th>
-                    <th class="text-center">جذف</th>
+                    <th class="text-center">ویرایش</th>
+                    <th class="text-center">حذف</th>
                 </tr>
             </thead>
             <tbody>
@@ -81,6 +82,12 @@
                         @foreach($item->user->checkouts->where('status','=',1)->where('product_id','=',$item->course_id)->where('type','=','course') as $item2)
                             {{$item2->authority}}
                         @endforeach
+                    </td>
+
+                    <td class="text-center">
+                        <a href="/admin/education/students/{{$item->id}}/edit" class="btn btn-warning" >
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
                     </td>
                     <td>
                         <form method="post" action="/admin/education/students/{{$item->id}}" onsubmit="return window.confirm('آیا از حذف دانشجو از دوره اطمینان داری؟')">
