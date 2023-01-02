@@ -55,6 +55,7 @@
         <tbody>
 
         @foreach($user->checkouts->where('status','=',1) as $item)
+
             <tr class="@if(($dateNow>$item->date_faktor)&&($item->status==0)) table-danger @elseif($item->status==1) table-success @endif" >
                 <td>{{$loop->iteration}}</td>
                 <td>
@@ -66,7 +67,13 @@
                         پرداخت قسط
                     @endif
                 </td>
-                <td>{{$item->date_faktor}}</td>
+                <td>
+                    @if($item->type=='scholarship_payment')
+                        {{($item->order->date_fa)}}
+                    @elseif($item->type=='ghest')
+                        {{$item->faktor->date_pardakht}}
+                    @endif
+                </td>
                 <td>{{number_format($item->price)}}</td>
 
             </tr>

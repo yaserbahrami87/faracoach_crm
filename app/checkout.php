@@ -44,4 +44,9 @@ class checkout extends Model
     {
         return $this->belongsTo('App\course','product_id','id');
     }
+
+    public function faktor()
+    {
+        return $this->hasOne('App\faktor','authority','authority');
+    }
 }
