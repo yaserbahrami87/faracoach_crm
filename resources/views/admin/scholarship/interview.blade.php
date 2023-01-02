@@ -61,7 +61,7 @@
                         </div>
                         <select class="form-control" name="motivation" id="scholarship_motivation"  >
                             <option disabled selected>انتخاب کنید</option>
-                            @for($i=0;$i<=1;$i++)
+                            @for($i=0;$i<=5;$i++)
                                 <option value="{{$i}}" @if($scholarship->user->get_scholarshipInterview['motivation']==$i) selected @endif>{{$i}}</option>
                             @endfor
                         </select>
@@ -72,7 +72,7 @@
                         </div>
                         <select class="form-control" name="ability" id="scholarship_ability"  >
                             <option disabled selected>انتخاب کنید</option>
-                            @for($i=0;$i<=1;$i++)
+                            @for($i=0;$i<=5;$i++)
                                 <option value="{{$i}}" @if($scholarship->user->get_scholarshipInterview['ability']==$i) selected @endif >{{$i}}</option>
                             @endfor
                         </select>
@@ -83,7 +83,7 @@
                         </div>
                         <select class="form-control" name="obligation" id="scholarship_obligation"  >
                             <option disabled selected>انتخاب کنید</option>
-                            @for($i=0;$i<=1;$i++)
+                            @for($i=0;$i<=5;$i++)
                                 <option value="{{$i}}" @if($scholarship->user->get_scholarshipInterview['obligation']==$i) selected @endif >{{$i}}</option>
                             @endfor
                         </select>
@@ -94,7 +94,7 @@
                         </div>
                         <select class="form-control" name="impact" id="scholarship_impact"  >
                             <option disabled selected>انتخاب کنید</option>
-                            @for($i=0;$i<=1;$i++)
+                            @for($i=0;$i<=5;$i++)
                                 <option value="{{$i}}" @if($scholarship->user->get_scholarshipInterview['impact']==$i) selected @endif >{{$i}}</option>
                             @endfor
                         </select>
@@ -105,7 +105,7 @@
                         </div>
                         <select class="form-control" name="validity" id="scholarship_validity" >
                             <option disabled selected>انتخاب کنید</option>
-                            @for($i=0;$i<=1;$i++)
+                            @for($i=0;$i<=5;$i++)
                                 <option value="{{$i}}" @if($scholarship->user->get_scholarshipInterview['validity']==$i) selected @endif >{{$i}}</option>
                             @endfor
                         </select>

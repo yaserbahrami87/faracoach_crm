@@ -989,7 +989,7 @@ class ScholarshipController extends BaseController
 
         $this->validate($request,
         [
-           'score_profile'              =>'nullable|numeric|between:0,5',
+           'score_profile'              =>'nullable|numeric|min:0',
            'score_introductionletter'   =>'nullable|numeric|between:0,5',
         ]);
         $scholarship->update($request->all());
