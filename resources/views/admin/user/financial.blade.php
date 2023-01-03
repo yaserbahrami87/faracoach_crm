@@ -55,7 +55,7 @@
         <tbody>
 
         @foreach($user->checkouts->where('status','=',1) as $item)
-            {{dd($item)}}
+
             <tr class="@if(($dateNow>$item->date_faktor)&&($item->status==0)) table-danger @elseif($item->status==1) table-success @endif" >
                 <td>{{$loop->iteration}}</td>
                 <td>
