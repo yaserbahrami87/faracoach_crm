@@ -59,7 +59,7 @@
             <tr class="@if(($dateNow>$item->date_faktor)&&($item->status==0)) table-danger @elseif($item->status==1) table-success @endif" >
                 <td>{{$loop->iteration}}</td>
                 <td>
-                    @if($item->type=='course')
+                    @if($item->type=='course'||$item->type=='scholarship_payment')
                         {{($item->course['course'])}}
                     @elseif($item->type=='event')
                         {{($item->event->event)}}
