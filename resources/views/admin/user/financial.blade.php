@@ -5,7 +5,7 @@
         <thead>
         <tr>
             <th>#</th>
-
+            <th>شماره فاکتور</th>
             <th>محصول</th>
             <th>تاریخ ایجاد </th>
             <th>موعد پرداخت</th>
@@ -18,6 +18,7 @@
         @foreach($user->faktors as $item)
             <tr class="@if(($dateNow>$item->date_faktor)&&($item->status==0)) table-danger @elseif($item->status==1) table-success @endif" >
                 <td>{{$loop->iteration}}</td>
+                <td>{{$item->id}}</td>
                 <td>
                     @if($item->type=='course')
                         {{($item->course['course'])}}
@@ -47,6 +48,7 @@
         <thead>
         <tr>
             <th>#</th>
+            <th>شماره فاکتور / رسید</th>
             <th>محصول</th>
             <th>تاریخ پرداخت</th>
             <th>قیمت(تومان)</th>
@@ -55,9 +57,18 @@
         <tbody>
 
         @foreach($user->checkouts->where('status','=',1) as $item)
-
             <tr class="@if(($dateNow>$item->date_faktor)&&($item->status==0)) table-danger @elseif($item->status==1) table-success @endif" >
                 <td>{{$loop->iteration}}</td>
+                <td class="text-center">
+                    @switch($item->type)
+                        @case('ghest')
+                            {{$item->faktor->id}}
+                            @break
+                        @case('scholarship_payment')
+                            {{$item->schoalrshipPayment->id}}
+                            @break
+                    @endswitch
+                </td>
                 <td>
                     @if($item->type=='course'||$item->type=='scholarship_payment')
                         {{($item->course['course'])}}
