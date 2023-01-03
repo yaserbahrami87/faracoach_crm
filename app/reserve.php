@@ -20,5 +20,10 @@ class reserve extends Model
         return $this->belongsTo('App\User');
     }
 
+    public function checkout()
+    {
+        return $this->belongsTo('App\checkout','id','product_id');
+    }
+
 
 }

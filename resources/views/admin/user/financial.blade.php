@@ -65,14 +65,24 @@
                         {{($item->event->event)}}
                     @elseif($item->type=='ghest')
                         پرداخت قسط
+                    @elseif($item->type=='reserve')
+                        جلسه {{$item->reserve->booking->coach->user['fname'].' '.$item->reserve->booking->coach->user['lname']}}
                     @endif
                 </td>
                 <td>
-                    @if($item->type=='scholarship_payment')
-                        {{($item->order['date_fa'])}}
-                    @elseif($item->type=='ghest')
-                        {{$item->faktor->date_pardakht}}
-                    @endif
+
+                    @switch($item->type)
+                        @case('scholarship_payment')
+                                {{($item->schoalrshipPayment['date_fa'])}}
+                                @break
+                        @case('ghest')
+                                {{$item->faktor->date_pardakht}}
+                                @break
+                        @case('reserve')
+                                {{number_format($item->reserve['final_off'])}}
+                                @break
+                    @endswitch
+
                 </td>
                 <td>{{number_format($item->price)}}</td>
 
