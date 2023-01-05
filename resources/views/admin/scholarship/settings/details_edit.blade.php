@@ -47,8 +47,12 @@
                             <input type="text" class="form-control" id="max" name="max" value="{{old('max',$collabration_details->max)}}">
                         </div>
                         <div class="form-group mb-2">
+                            <label for="max_faracoach" >سقف فراکوچ</label>
+                            <input type="text" class="form-control" id="max_faracoach" name="max_faracoach" value="{{old('max_faracoach',$collabration_details->max_faracoach)}}">
+                        </div>
+                        <div class="form-group mb-2">
                             <label for="description" >توضیحات</label>
-                            <input type="text" class="form-control" id="description" name="description" value="{{old('description',$collabration_details->description)}}">
+                            <textarea class="form-control" id="description" name="description" rows="3">{{old('description',$collabration_details->description)}}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="status">وضعیت:</label>

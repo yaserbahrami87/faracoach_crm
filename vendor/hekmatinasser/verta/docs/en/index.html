@@ -58,12 +58,12 @@
                 <h2 id="installation">Installation</h2>
                 <p>Enter the following command to install Verta</p>
                 <pre>$ composer require hekmatinasser/verta</pre>
-                <p>Now you have to add the package to your project by entering the following command</p>
+                <p>You can add the package to your project by entering the following command</p>
 
                 <pre>// config/app.php
 'providers' => [
     ...
-    Hekmatinasser\Verta\VertaServiceProvider::class,
+    Hekmatinasser\Verta\Laravel\VertaServiceProvider::class,
 ],
 
 'alias' => [
@@ -221,6 +221,7 @@ $v = $v->setTimeString('12:25:48');
 $v = verta();
 return $v->format('Y-n-j H:i'); // 1395-10-7 14:12
 return $v->format('%B %d، %Y'); // دی 07، 1395
+return $v->format('%Q %Y'); // زمستان 1395
 return $v; //1395-10-07 14:12:32
 </pre>
                 <p>Read the PHP manual to create the format you want</p>
@@ -389,7 +390,6 @@ return $v1->isLastMonth(); // false
 return $v1->isNextYear(); // false
 return $v1->isLastYear(); // false
 return $v1->isFuture(); // false
-return $v1->isPast(); // false
 return $v1->isPast(); // false
 
 return $v1->isCurrentYear(); // true
@@ -567,6 +567,22 @@ array:2 [
   ]
 ]
 </pre>
+
+
+<h2 id="traslation">Traslation</h2>
+<p>You can show weekdays, months , messages  in the languages available in Verta  To view supported languages, go to the folder <a href="https://github.com/hekmatinasser/verta/tree/master/src/Lang">langs</a></p>
+<p>To set locale, use the following command</p>
+<pre>
+Verta::setLocale('fa');
+</pre>
+<p>To get current locale, use the following command</p>
+<pre>
+Verta::getLocale(); // fa
+</pre>
+<p>To reset locale to fa, use the following command</p>
+<pre>
+Verta::resetLocale();
+</pre>
             </article>
         </div>
     </div>
@@ -574,7 +590,7 @@ array:2 [
 
 <footer id="footer">
     <div style="text-align: center;">
-        2020 &copy;
+        2017-2021 &copy;
     </div>
 </footer>
 </body>

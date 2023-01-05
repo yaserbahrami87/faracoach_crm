@@ -74,6 +74,7 @@ class FormatTest extends TestCase
 
     public function testFormatDifference()
     {
+        Verta::setLocale('fa');
         $target = Verta::parse('1398-10-10 21:30:50');
 
         $datetime = Verta::parse('1398-10-10 21:30:50');
@@ -115,8 +116,15 @@ class FormatTest extends TestCase
 
     public function testFormatWord()
     {
-        $datetime = Verta::parse('1398-10-11 21:32:35')->formatWord('l dS F');
+        $datetime = Verta::parse('1398-10-11 21:32:35')->formatWord('l d S F');
 
         $this->assertEquals('چهارشنبه یازده ام دی', $datetime);
+    }
+
+    public function testFormatQuarter()
+    {
+        $datetime = Verta::parse('1398-10-10 21:30:50')->formatWord('q');
+
+        $this->assertEquals('زمستان', $datetime);
     }
 }

@@ -3,7 +3,7 @@
 </div>
 <div class="col-12 col-md-4 mx-auto">
     <p style="line-height: 0">توضیحات: </p>
-    <p>{{$collabration_details->description}}</p>
+    <textarea class="form-control" disabled rows="3">{{$collabration_details->description}}</textarea>
 
     <form id="collabration_details_accept" method="post" onsubmit="return collabration_details_accept()" >
         {{csrf_field()}}
@@ -52,7 +52,7 @@
             <input type="text" class="form-control" id="collabration_details_calculate" name="calculate" readonly/>
         </div>
         <div class="form-group">
-            <label for="description">توضیحات</label>
+            <label for="description">توضیحات شما:</label>
             <textarea class="form-control" id="description" name="description" rows="3"></textarea>
         </div>
         @if(!is_null(Auth::user()->scholarship->financial))

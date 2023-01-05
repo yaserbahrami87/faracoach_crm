@@ -61,7 +61,7 @@
   array (
     'providers' => 
     array (
-      0 => 'Hekmatinasser\\Verta\\VertaServiceProvider',
+      0 => 'Hekmatinasser\\Verta\\Laravel\\VertaServiceProvider',
     ),
     'aliases' => 
     array (

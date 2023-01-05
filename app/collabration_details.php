@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class collabration_details extends Model
 {
     protected $fillable=[
-        'title','value','max','status','collabration_categories_id','unit','description'
+        'title','value','max','status','collabration_categories_id','unit','description','max_faracoach'
     ];
 
     public function collabration_category()

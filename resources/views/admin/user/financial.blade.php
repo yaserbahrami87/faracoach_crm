@@ -46,13 +46,13 @@
     <p>واریزی های انجام شده</p>
     <table class="dataTable table table-striped table-bordered" style="width:100%">
         <thead>
-        <tr>
-            <th>#</th>
-            <th>شماره فاکتور / رسید</th>
-            <th>محصول</th>
-            <th>تاریخ پرداخت</th>
-            <th>قیمت(تومان)</th>
-        </tr>
+            <tr>
+                <th>#</th>
+                <th>شماره فاکتور / رسید</th>
+                <th>محصول</th>
+                <th>تاریخ پرداخت</th>
+                <th>قیمت(تومان)</th>
+            </tr>
         </thead>
         <tbody>
 
