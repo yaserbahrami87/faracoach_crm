@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\collabration_accept;
+use App\collabration_details;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -60,48 +61,36 @@ class CollabrationAcceptController extends Controller
         }
         else
         {
-            $collabration_accept=collabration_accept::where('collabration_detail_id','=',$request->collabration_detail_id)
-                                        ->sum('calculate');
-
-
-
 
             $sum_calculate=Auth::user()->collabration_accept->sum('calculate');
             $calculate=((int) str_replace(',', '', $request->calculate));
-            $fi=(Auth::user()->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->fi);
-            $score=(Auth::user()->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->score);
-            $loan=(Auth::user()->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->loan);
 
-            if((($sum_calculate+ $calculate) > (((($fi*$score)/100)-((($fi*$score)/100)* $loan)/100)+((($fi*$score/100)-((($fi*$score)/100)*$loan)/100))/2)*2))
+            $sum_collabration_accept=collabration_accept::where('collabration_detail_id','=',$request->collabration_detail_id)
+                                    ->sum('calculate');
+            $collabration_detail=collabration_details::where('id','=',$request->collabration_detail_id)
+                                        ->first();
+            if(!is_null($collabration_detail->max_faracoach)&&(($sum_collabration_accept+$calculate)>$collabration_detail->max_faracoach))
             {
                 ?>
-                <script >
-                    window.alert('مبلغ درخواستی بیش از سقف همکاری می باشد');
+                <script>
+                    alert('حداکثر ظرفیت این زمینه پر شده است');
                     collabration_category(0);
                     collabration_details_acceptShow();
+
                 </script>
                 <?php
             }
             else
             {
+                $fi=(Auth::user()->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->fi);
+                $score=(Auth::user()->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->score);
+                $loan=(Auth::user()->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->loan);
 
-                $status=collabration_accept::create(
-                [
-                    'user_id'               =>Auth::user()->id,
-                    'value'                 =>((int)str_replace(',', '', $request->value)),
-                    'count'                 =>$request->count,
-                    'expire'                =>$request->expire,
-                    'calculate'             =>((int)str_replace(',', '', $request->calculate)),
-                    'collabration_detail_id'=>$request->collabration_detail_id,
-                    'description'           =>$request->description,
-                ]);
-
-                if($status)
+                if((($sum_calculate+ $calculate) > (((($fi*$score)/100)-((($fi*$score)/100)* $loan)/100)+((($fi*$score/100)-((($fi*$score)/100)*$loan)/100))/2)*2))
                 {
                     ?>
-
-                    <script>
-                        alert('با موفقیت ثبت شد');
+                    <script >
+                        window.alert('مبلغ درخواستی بیش از سقف همکاری می باشد');
                         collabration_category(0);
                         collabration_details_acceptShow();
                     </script>
@@ -109,9 +98,35 @@ class CollabrationAcceptController extends Controller
                 }
                 else
                 {
-                    ?>
-                    <div class="alert alert-danger">خطا در ثبت</div>
-                    <?php
+
+                    $status=collabration_accept::create(
+                    [
+                        'user_id'               =>Auth::user()->id,
+                        'value'                 =>((int)str_replace(',', '', $request->value)),
+                        'count'                 =>$request->count,
+                        'expire'                =>$request->expire,
+                        'calculate'             =>((int)str_replace(',', '', $request->calculate)),
+                        'collabration_detail_id'=>$request->collabration_detail_id,
+                        'description'           =>$request->description,
+                    ]);
+
+                    if($status)
+                    {
+                        ?>
+
+                        <script>
+                            alert('با موفقیت ثبت شد');
+                            collabration_category(0);
+                            collabration_details_acceptShow();
+                        </script>
+                        <?php
+                    }
+                    else
+                    {
+                        ?>
+                        <div class="alert alert-danger">خطا در ثبت</div>
+                        <?php
+                    }
                 }
             }
         }
