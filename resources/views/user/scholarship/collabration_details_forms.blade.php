@@ -3,7 +3,7 @@
 </div>
 <div class="col-12 col-md-4 mx-auto">
     <p style="line-height: 0">توضیحات: </p>
-    <textarea class="form-control" disabled rows="3">{{$collabration_details->description}}</textarea>
+    <textarea class="form-control" disabled  style="background-color: transparent;min-height: 250px !important;">{{$collabration_details->description}}</textarea>
 
     <form id="collabration_details_accept" method="post" onsubmit="return collabration_details_accept()" >
         {{csrf_field()}}

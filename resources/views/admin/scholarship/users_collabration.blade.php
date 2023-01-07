@@ -34,7 +34,7 @@
 
                         <tbody>
                         @foreach($scholarships as $item)
-                            <tr class="text-center" style="@if(!is_null($item->financial)) background-color: #9fff80; @endif">
+                            <tr class="text-center" >
                                 <td class="text-center">{{$loop->iteration}}</td>
                                 <td class="text-center">
                                     <a href="/admin/scholarship/{{$item->id}}" target="_blank">{{$item->user->fname.' '.$item->user->lname}}</a>
