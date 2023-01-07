@@ -26,6 +26,8 @@
                                                 <tr>
                                                     <th>عنوان</th>
                                                     <th>ویرایش</th>
+                                                    <th>تعداد ثبت</th>
+                                                    <th>کل مبلغ</th>
                                                 </tr>
                                                 @if(count($item->collabration_details)!=0)
                                                     @foreach($item->collabration_details as $item_details)
@@ -37,6 +39,12 @@
                                                                 <a href="/admin/collabration_details/{{$item_details->id}}/edit" class="btn btn-warning">
                                                                     <i class="bi bi-pencil-square"></i>
                                                                 </a>
+                                                            </td>
+                                                            <td>
+                                                                {{$item_details->collabration_accept->count()}} نفر
+                                                            </td>
+                                                            <td>
+                                                                {{number_format($item_details->collabration_accept->sum('calculate'))}} تومان
                                                             </td>
                                                         </tr>
                                                     @endforeach

@@ -136,7 +136,7 @@ class CollabrationCategoryController extends Controller
                 if($item->collabration_accept->sum('calculate')>=$item->max_faracoach)
                 {
                     echo "<div class='col-12 col-md-4  mb-1'>
-                        <button type='button' class='collabration_details btn btn-secondary btn-block'  onclick='window.alert(\"ظرفیت آکادمی در پذیرش این نوع همکاری تکمیل شده است از سایر زمینه ها استفاده بفرمایید\")' >$item->title</button>
+                        <button type='button' class='collabration_details btn btn-block' style='background-color:#d6d6c2'  onclick='window.alert(\"ظرفیت آکادمی در پذیرش این نوع همکاری تکمیل شده است از سایر زمینه ها استفاده بفرمایید\")' >$item->title</button>
                         </div>";
                 }
                 else
