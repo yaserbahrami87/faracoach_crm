@@ -6,6 +6,7 @@ use App\checkout;
 use App\city;
 use App\collabration_accept;
 use App\collabration_category;
+use App\collabration_details;
 use App\course;
 use App\followup;
 use App\message;
@@ -468,7 +469,7 @@ class ScholarshipController extends BaseController
 
         if($request->status==1)
         {
-            $msg=$scholarship->user->fname." ".$scholarship->user->lname." عزیز \n مرحله اول و دوم درخواست بورسیه کوچینگ با موفقیت ثبت شد\n"."دوره آموزشی مقدماتی 5 شنبه 10 شهریور";
+            $msg=$scholarship->user->fname." ".$scholarship->user->lname." عزیز \n مرحله اول و دوم درخواست بورسیه کوچینگ با موفقیت ثبت شد\n";
         }
         else
         {
@@ -1176,7 +1177,10 @@ class ScholarshipController extends BaseController
             $scholarship->created_at=$this->changeTimestampToShamsi($scholarship->created_at);
         }
 
+        $collabration_details=collabration_details::where('status','=','1')
+                                ->get();
         return view('admin.scholarship.users_collabration')
+            ->with('collabration_details',$collabration_details)
             ->with('scholarships',$scholarships);
     }
 

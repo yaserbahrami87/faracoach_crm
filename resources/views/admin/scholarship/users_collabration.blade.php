@@ -18,40 +18,51 @@
                         <tr class="text-center">
                             <th>ردیف</th>
                             <th>نام و نام خانوادگی</th>
-                            <th>وضعیت پروفایل</th>
-
                             <th>تلفن</th>
-                            <th>مسئول پیگیری</th>
-                            <th>تحصیلات</th>
+                            <th>دوره</th>
+                            <th>مبلغ دوره</th>
+                            <th>ثبت ناام اولیه (تومان)</th>
+                            <th>میزان بورسیه</th>
+                            <th>صندوق شکوفایی</th>
+                            <th>مبلغ باقیمانده</th>
+                            @foreach($collabration_details as $item)
+                                <th>{{($item->title)}}</th>
+                            @endforeach
+
                         </tr>
                         </thead>
 
                         <tbody>
                         @foreach($scholarships as $item)
-                            <tr style="@if(!is_null($item->financial)) background-color: #9fff80; @endif">
+                            <tr class="text-center" style="@if(!is_null($item->financial)) background-color: #9fff80; @endif">
                                 <td class="text-center">{{$loop->iteration}}</td>
                                 <td class="text-center">
-                                    @if($item->user->created_at>'2022-07-20 00:00:00')
-                                        <span class="text-danger">*</span>
-                                    @endif
                                     <a href="/admin/scholarship/{{$item->id}}" target="_blank">{{$item->user->fname.' '.$item->user->lname}}</a>
-
                                 </td>
-                                <td class="text-center" dir="ltr">
 
-                                    @if(strlen($item->user->email)>0&&strlen($item->user->fname)>0&&strlen($item->user->lname)>0&&strlen($item->user->datebirth)>0&&strlen($item->user->father)>0&&strlen($item->user->codemelli)>0&&strlen($item->user->sex)>0&&strlen($item->user->tel)>0&&strlen($item->user->shenasname)>0&&strlen($item->user->born)>0&&strlen($item->user->education)>0&&strlen($item->user->reshteh)>0&&strlen($item->user->job)>0&&strlen($item->user->state)>0&&strlen($item->user->city)>0&&strlen($item->user->address)>0&&strlen($item->user->personal_image)>0&&strlen($item->user->resume)>0&&strlen($item->user->married)>0)
-                                        <p class=" text-success">تکمیل شده</p>
-                                    @else
-                                        <p class=" text-danger">ناقص </p>
-                                    @endif
-                                </td>
                                 <td class="text-center" dir="ltr">{{$item->user->tel}}</td>
                                 <td class="text-center" dir="ltr">
-                                    @if(!is_null($item->user->get_followbyExpert))
-                                        {{$item->user->get_followbyExpert->fname.' '.$item->user->get_followbyExpert->lname}}
-                                    @endif
+                                    {{$item->get_financial->scholarship_course['course']}}
                                 </td>
-                                <td class="text-center" dir="ltr">{{$item->user->education}}</td>
+                                <td>
+                                    {{number_format($item->get_financial->schoalrshipPayment['fi'])}}
+                                </td>
+
+                                <td>
+                                    {{number_format($item->get_financial['price'])}}
+                                </td>
+                                <td>{{($item->get_financial->schoalrshipPayment['score'])}}</td>
+                                <td>{{($item->get_financial->schoalrshipPayment['loan'])}}</td>
+                                <td>{{number_format($item->get_financial->schoalrshipPayment['remaining'])}}</td>
+                                @foreach($collabration_details as $item_details)
+                                    <td>
+                                        @foreach($item->user->collabration_accept as $item_accept)
+                                            @if($item_accept->collabration_detail_id==$item_details->id)
+                                                {{number_format($item_accept->calculate)}}
+                                            @endif
+                                        @endforeach
+                                    </td>
+                                @endforeach
                             </tr>
                         @endforeach
                         </tbody>
