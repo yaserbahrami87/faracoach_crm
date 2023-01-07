@@ -17,6 +17,6 @@ class collabration_details extends Model
 
     public function collabration_accept()
     {
-        return $this->hasMany('App\collabration_accept');
+        return $this->hasMany('App\collabration_accept','collabration_detail_id','id');
     }
 }

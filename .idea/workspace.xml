@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="f3849cf8-ae8a-47cc-891c-72c8c9af69d2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CollabrationAcceptController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CollabrationAcceptController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CollabrationCategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CollabrationCategoryController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/collabration_details.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/collabration_details.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -314,7 +315,8 @@
       <workItem from="1672818137330" duration="2367000" />
       <workItem from="1672844428725" duration="43000" />
       <workItem from="1672902618384" duration="5180000" />
-      <workItem from="1672952296294" duration="2256000" />
+      <workItem from="1672952296294" duration="2585000" />
+      <workItem from="1673043441381" duration="2150000" />
     </task>
     <servers />
   </component>

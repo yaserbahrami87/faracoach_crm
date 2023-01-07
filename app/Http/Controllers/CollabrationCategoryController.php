@@ -131,10 +131,20 @@ class CollabrationCategoryController extends Controller
                     <button type='button' class='collabration_category btn btn-secondary btn-block' data='0' onclick='collabration_category(0)'>بازگشت</button>
                 </div>";
 
-            foreach ($collabration_details as $item) {
-                echo "<div class='col-12 col-md-4  mb-1'>
+            foreach ($collabration_details as $item)
+            {
+                if($item->collabration_accept->sum('calculate')>=$item->max_faracoach)
+                {
+                    echo "<div class='col-12 col-md-4  mb-1'>
+                        <button type='button' class='collabration_details btn btn-secondary btn-block'  onclick='window.alert(\"ظرفیت آکادمی در پذیرش این نوع همکاری تکمیل شده است از سایر زمینه ها استفاده بفرمایید\")' >$item->title</button>
+                        </div>";
+                }
+                else
+                {
+                    echo "<div class='col-12 col-md-4  mb-1'>
                     <button type='button' class='collabration_details btn btn-primary btn-block' data='$item->id' onclick='collabration_details($item->id)' >$item->title</button>
-                </div>";
+                    </div>";
+                }
             }
         }
     }
