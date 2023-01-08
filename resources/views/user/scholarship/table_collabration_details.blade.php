@@ -94,6 +94,8 @@
     </tr>
 </table>
 
+@include('admin.scholarship.table_collabration_details')
+
 
 
 

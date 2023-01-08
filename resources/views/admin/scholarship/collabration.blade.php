@@ -1,5 +1,4 @@
 @if($scholarship->collabration==1)
-
     <table class="table-bordered table table-hover table-striped">
         <tr class="text-center">
             <th>#</th>
@@ -46,23 +45,8 @@
         </tr>
     @endforeach
         <tr class="text-center">
-            <td colspan="2">جمع کل</td>
-            <td>
+            <td colspan="4">جمع کل</td>
 
-
-                @if(is_numeric($scholarship->user->collabration_accept->where('value','not like','%%%')->sum('value')))
-                    {{number_format($scholarship->user->collabration_accept->where('value','not like','%%%')->sum('value'))}}
-                @else
-                    {{$scholarship->user->collabration_accept->sum('value')}}
-                @endif
-            </td>
-            <td>
-                @if(is_numeric($scholarship->user->collabration_accept->sum('count')))
-                    {{number_format($scholarship->user->collabration_accept->sum('count'))}}
-                @else
-                    {{$scholarship->user->collabration_accept->sum('count')}}
-                @endif
-            </td>
             <td>
                 @if(is_numeric($scholarship->user->collabration_accept->sum('calculate')))
                     {{number_format($scholarship->user->collabration_accept->sum('calculate'))}}
@@ -73,6 +57,8 @@
             <td></td>
         </tr>
     </table>
+
+
 
     <div class="modal fade" id="collabrationModal" tabindex="-1" aria-labelledby="collabrationModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -109,6 +95,10 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="col-md-6 mx-auto">
+        @include('admin.scholarship.table_collabration_details')
     </div>
 @else
     <div class="alert alert-warning">

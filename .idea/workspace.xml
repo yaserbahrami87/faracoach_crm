@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3849cf8-ae8a-47cc-891c-72c8c9af69d2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/scholarship/table_collabration_details.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/scholarship/users_collabration.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/scholarship/users_collabration.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/scholarship/collabration.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/scholarship/collabration.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/scholarship/table_collabration_details.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/scholarship/table_collabration_details.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,7 +173,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/js" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/admin/scholarship" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -180,6 +181,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\resources\views\admin\scholarship" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\js" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\css" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\images" />
@@ -317,7 +319,7 @@
       <workItem from="1672902618384" duration="5180000" />
       <workItem from="1672952296294" duration="2585000" />
       <workItem from="1673043441381" duration="10711000" />
-      <workItem from="1673159900452" duration="6473000" />
+      <workItem from="1673159900452" duration="8391000" />
     </task>
     <servers />
   </component>
