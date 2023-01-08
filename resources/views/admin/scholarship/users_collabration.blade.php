@@ -20,6 +20,7 @@
                             <th>نام و نام خانوادگی</th>
                             <th>تلفن</th>
                             <th>دوره</th>
+                            <th>پشتیبان</th>
                             <th>مبلغ دوره</th>
                             <th>ثبت ناام اولیه (تومان)</th>
                             <th>میزان بورسیه</th>
@@ -43,6 +44,13 @@
                                 <td class="text-center" dir="ltr">{{$item->user->tel}}</td>
                                 <td class="text-center" dir="ltr">
                                     {{$item->get_financial->scholarship_course['course']}}
+                                </td>
+                                <td>
+                                    @if($item->user->get_followbyExpert->type!=3)
+                                        {{$item->user->followups[$item->user->followups->count()-1]->insertUser->fname.' '.$item->user->followups[$item->user->followups->count()-1]->insertUser->lname}}
+                                    @else
+                                        <p>{{$item->user->get_followbyExpert->fname.' '.$item->user->get_followbyExpert->lname}}</p>
+                                    @endif
                                 </td>
                                 <td>
                                     {{number_format($item->get_financial->schoalrshipPayment['fi'])}}

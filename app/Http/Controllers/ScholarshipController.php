@@ -519,7 +519,6 @@ class ScholarshipController extends BaseController
                   $query->orwhere('type','=','scholarship')
                         ->orwhere('type','=','scholarship_introductionletter');
             })
-
             ->orderby('id','desc')
             ->get();
 
