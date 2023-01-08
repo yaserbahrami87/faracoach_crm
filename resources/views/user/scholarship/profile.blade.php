@@ -597,9 +597,13 @@
         function details_calculate(vals)
         {
             var check=parseInt($("#value").val().replace(/\,/g,''));
-            vals=parseInt(vals);
 
-            if(isNaN(check))
+            vals=parseInt(vals);
+            if($("#value").val().indexOf('%')!=-1)
+            {
+                $('#collabration_details_calculate').val(new Intl.NumberFormat().format(vals/check));
+            }
+            else if(isNaN(check))
             {
                 $('#collabration_details_calculate').val(new Intl.NumberFormat().format(vals));
             }

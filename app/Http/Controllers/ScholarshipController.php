@@ -1180,8 +1180,8 @@ class ScholarshipController extends BaseController
         $collabration_details=collabration_details::where('status','=','1')
                                 ->get();
         return view('admin.scholarship.users_collabration')
-            ->with('collabration_details',$collabration_details)
-            ->with('scholarships',$scholarships);
+                        ->with('collabration_details',$collabration_details)
+                        ->with('scholarships',$scholarships);
     }
 
 
