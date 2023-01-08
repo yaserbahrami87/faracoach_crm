@@ -2,9 +2,22 @@
     <div class="col-12 mb-1">
             <div class="row" id="collabration_category">
                 @foreach($collabration_category as $item)
-                    <div class="col-12 col-md-4  mb-1">
-                        <button type="button" class="collabration_category btn btn-primary btn-block" data="{{$item->id}}" onclick="collabration_category({{$item->id}})" >{{$item->category}}</button>
-                    </div>
+                    @php
+                    $sw=0;
+                    @endphp
+                    @foreach($item->collabration_details as $item_collabration_details)
+                        @if($item_collabration_details->collabration_accept->sum('calculate')<$item_collabration_details->max_faracoach)
+                            @php
+                            $sw=1;
+                            @endphp
+                        @endif
+                    @endforeach
+
+                    @if($sw==1)
+                        <div class="col-12 col-md-4  mb-1">
+                            <button type="button" class="collabration_category btn btn-primary btn-block" data="{{$item->id}}" onclick="collabration_category({{$item->id}})" >{{$item->category}}</button>
+                        </div>
+                    @endif
                 @endforeach
             </div>
     </div>

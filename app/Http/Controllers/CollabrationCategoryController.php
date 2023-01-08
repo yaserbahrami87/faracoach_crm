@@ -116,9 +116,22 @@ class CollabrationCategoryController extends Controller
             $collabration_category=collabration_category::where('status','=',1)->get();
             foreach ($collabration_category as $item)
             {
-                echo "<div class='col-12 col-md-4'>
-                    <button type='button' class='collabration_category btn btn-primary btn-block mb-1' data='$item->id' onclick='collabration_category($item->id)'>$item->category</button>
-                </div>";
+                $sw=0;
+                foreach($item->collabration_details as $item_collabration_details)
+                {
+                    if($item_collabration_details->collabration_accept->sum('calculate')<$item_collabration_details->max_faracoach)
+                    {
+                        $sw=1;
+                    }
+                }
+
+                if($sw==1)
+                {
+                    echo "<div class='col-12 col-md-4'>
+                                    <button type='button' class='collabration_category btn btn-primary btn-block mb-1' data='$item->id' onclick='collabration_category($item->id)'>$item->category</button>
+                                </div>";
+                }
+
             }
         }
         else
@@ -136,7 +149,7 @@ class CollabrationCategoryController extends Controller
                 if($item->collabration_accept->sum('calculate')>=$item->max_faracoach)
                 {
                     echo "<div class='col-12 col-md-4  mb-1'>
-                        <button type='button' class='collabration_details btn btn-block' style='background-color:#d6d6c2'  onclick='window.alert(\"ظرفیت آکادمی در پذیرش این نوع همکاری تکمیل شده است از سایر زمینه ها استفاده بفرمایید\")' >$item->title</button>
+                        <button type='button' class='collabration_details btn btn-block d-none' style='background-color:#d6d6c2'  onclick='window.alert(\"ظرفیت آکادمی در پذیرش این نوع همکاری تکمیل شده است از سایر زمینه ها استفاده بفرمایید\")' >$item->title</button>
                         </div>";
                 }
                 else
