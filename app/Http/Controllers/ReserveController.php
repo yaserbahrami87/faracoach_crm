@@ -353,7 +353,7 @@ class ReserveController extends BaseController
                 }
 
                 //                //ارسال پیامک به کوچ
-                $msg =$duration . " \n " . $booking->start_date . " \n  " . $booking->start_time . "\n مراجع:" . Auth::user()->fname . " " . Auth::user()->lname . "\n تماس کوچ:" .  Auth::user()->tel;
+                $msg =$duration . " \n " . $booking->start_date . " \n  " . $booking->start_time . "\n مراجع:" . Auth::user()->fname . " " . Auth::user()->lname . "\n" .  Auth::user()->tel;
                 $this->sendSms($booking->reserve->booking->coach->user->tel, $msg);
 
                 //                //ارسال پیامک برای مراجع

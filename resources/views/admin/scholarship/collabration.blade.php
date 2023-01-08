@@ -6,6 +6,7 @@
             <th>قیمت پایه</th>
             <th>تعداد/تومان</th>
             <th>جمع</th>
+            <th>توضیحات</th>
             <th>وضعیت</th>
             <th>ویرایش</th>
         </tr>
@@ -29,6 +30,9 @@
                 @else
                     {{$item->calculate}}
                 @endif
+            </td>
+            <td>
+                {{$item->description}}
             </td>
             <td>
                 @if($item->status==0)
