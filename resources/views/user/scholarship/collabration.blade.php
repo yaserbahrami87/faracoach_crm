@@ -28,7 +28,10 @@
                     <th>زمینه همکاری</th>
                     <th style="padding:1rem !important;">مبلغ (تومان)</th>
                     <th style="padding:1rem !important;">مهلت انجام</th>
-                    <th >حذف</th>
+                    @if(Auth::user()->scholarship->collabration==0)
+                        <th>ویرایش</th>
+                        <th >حذف</th>
+                    @endif
                 </tr>
 
                 @if(!is_null(Auth::user()->collabration_accept))
@@ -53,15 +56,22 @@
                             </td>
                             <td>{{number_format($item_collabration_accept->calculate)}}</td>
                             <td>{{$item_collabration_accept->expire}}</td>
-                            <td>
-                                <form method="post" action="/panel/collabration_accept/{{$item_collabration_accept->id}}" onsubmit="return (window.confirm('ایا از حذف زمینه همکاری اطمینان دارید؟'))">
-                                    {{csrf_field()}}
-                                    {{method_field('DELETE')}}
-                                    <button class="btn btn-danger btn-sm">
-                                        <i class="bi bi-trash3-fill"></i>
+                            @if(Auth::user()->scholarship->collabration==0)
+                                <td>
+                                    <button type='button' class="btn btn-warning btn-sm" onclick="collabration_details_acceptEdit({{$item_collabration_accept->id}})" >
+                                        <i class="bi bi-pencil-square"></i>
                                     </button>
-                                </form>
-                            </td>
+                                </td>
+                                <td>
+                                    <form method="post" action="/panel/collabration_accept/{{$item_collabration_accept->id}}" onsubmit="return (window.confirm('ایا از حذف زمینه همکاری اطمینان دارید؟'))">
+                                        {{csrf_field()}}
+                                        {{method_field('DELETE')}}
+                                        <button class="btn btn-danger btn-sm">
+                                            <i class="bi bi-trash3-fill"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            @endif
                         </tr>
                     @endforeach
                     <tr>
@@ -122,7 +132,7 @@
         </table>
     </div>
     <div class="col-12 text-center">
-        @if(!is_null(Auth::user()->scholarship->financial))
+        @if(!is_null(Auth::user()->scholarship->financial) && (Auth::user()->scholarship->collabration==0))
             <form method="post" action="/panel/scholarship/me/sendAcceptCollabration" onsubmit="return window.confirm('بعد از ارسال درخواست جهت بررسی امکان ویرایش وجود ندارد. آیا از ارسال درخواست اطمینان دارید ؟')">
                 {{csrf_field()}}
                 <input type="submit" value="ارسال درخواست جهت بررسی" class="btn btn-success" />

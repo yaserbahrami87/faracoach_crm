@@ -3,6 +3,10 @@
         <th>زمینه همکاری</th>
         <th>مبلغ (تومان)</th>
         <th>مهلت انجام</th>
+        @if(Auth::user()->scholarship->collabration==0)
+            <th>ویرایش</th>
+            <th>حذف</th>
+        @endif
     </tr>
 
     @if(!is_null(Auth::user()->collabration_accept))
@@ -24,19 +28,27 @@
                             نامشخص
                         @endif
                     @endif
-                    <button type='button' class="btn btn-warning btn-sm" onclick="collabration_details_acceptEdit({{$item_collabration_accept->id}})" >
-                        <i class="bi bi-pencil-square"></i>
-                    </button>
-                    <form method="post" action="/panel/collabration_accept/{{$item_collabration_accept->id}}" onsubmit="return (window.confirm('ایا از حذف زمینه همکاری اطمینان دارید؟'))">
-                        {{csrf_field()}}
-                        {{method_field('DELETE')}}
-                        <button class="btn btn-danger btn-sm">
-                            <i class="bi bi-trash3-fill"></i>
-                        </button>
-                    </form>
+
+
                 </td>
                 <td>{{number_format($item_collabration_accept->calculate)}}</td>
                 <td>{{$item_collabration_accept->expire}}</td>
+                @if(Auth::user()->scholarship->collabration==0)
+                    <td>
+                        <button type='button' class="btn btn-warning btn-sm" onclick="collabration_details_acceptEdit({{$item_collabration_accept->id}})" >
+                            <i class="bi bi-pencil-square"></i>
+                        </button>
+                    </td>
+                    <td>
+                        <form method="post" action="/panel/collabration_accept/{{$item_collabration_accept->id}}" onsubmit="return (window.confirm('ایا از حذف زمینه همکاری اطمینان دارید؟'))">
+                            {{csrf_field()}}
+                            {{method_field('DELETE')}}
+                            <button class="btn btn-danger btn-sm">
+                                <i class="bi bi-trash3-fill"></i>
+                            </button>
+                        </form>
+                    </td>
+                @endif
             </tr>
         @endforeach
         <tr>
@@ -94,7 +106,7 @@
     </tr>
 </table>
 
-@include('admin.scholarship.table_collabration_details')
+
 
 
 
