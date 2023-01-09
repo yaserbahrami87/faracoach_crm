@@ -3,10 +3,8 @@
         <th>زمینه همکاری</th>
         <th>مبلغ (تومان)</th>
         <th>مهلت انجام</th>
-        @if(Auth::user()->scholarship->collabration==0)
-            <th>ویرایش</th>
-            <th>حذف</th>
-        @endif
+        <th>ویرایش</th>
+        <th>حذف</th>
     </tr>
 
     @if(!is_null(Auth::user()->collabration_accept))
@@ -33,22 +31,33 @@
                 </td>
                 <td>{{number_format($item_collabration_accept->calculate)}}</td>
                 <td>{{$item_collabration_accept->expire}}</td>
-                @if(Auth::user()->scholarship->collabration==0)
-                    <td>
-                        <button type='button' class="btn btn-warning btn-sm" onclick="collabration_details_acceptEdit({{$item_collabration_accept->id}})" >
+                <td>
+                    @if($item_collabration_accept->status==0)
+                        <button type='button' class="btn btn-warning " onclick="collabration_details_acceptEdit({{$item_collabration_accept->id}})" >
                             <i class="bi bi-pencil-square"></i>
                         </button>
-                    </td>
-                    <td>
+                    @endif
+                </td>
+                <td>
+                    @if($item_collabration_accept->status==0)
                         <form method="post" action="/panel/collabration_accept/{{$item_collabration_accept->id}}" onsubmit="return (window.confirm('ایا از حذف زمینه همکاری اطمینان دارید؟'))">
                             {{csrf_field()}}
                             {{method_field('DELETE')}}
-                            <button class="btn btn-danger btn-sm">
+                            <button class="btn btn-danger ">
                                 <i class="bi bi-trash3-fill"></i>
                             </button>
                         </form>
-                    </td>
-                @endif
+                    @endif
+                </td>
+
+                <td>
+                    @if($item_collabration_accept->status==0)
+                        در حال بررسی
+                    @else
+                        تائید
+                    @endif
+                </td>
+
             </tr>
         @endforeach
         <tr>
