@@ -5,6 +5,7 @@
         <th>مهلت انجام</th>
         <th>ویرایش</th>
         <th>حذف</th>
+        <th>وضعیت</th>
     </tr>
 
     @if(!is_null(Auth::user()->collabration_accept))
