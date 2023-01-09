@@ -1,4 +1,5 @@
-<table class="table table-bordered table-striped table-hover text-center" style="line-height: 2">
+<p class="text-center">اطلاعات زمینه همکاری شما تا زمان تایید نهایی قابل ویرایش و حذف شدن می باشد</p>
+<table class="table caption-top table-bordered table-striped table-hover text-center" style="line-height: 2">
     <tr>
         <th>زمینه همکاری</th>
         <th>مبلغ (تومان)</th>

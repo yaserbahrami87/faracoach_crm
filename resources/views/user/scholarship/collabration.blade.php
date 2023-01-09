@@ -21,7 +21,7 @@
                 @endforeach
             </div>
     </div>
-    <div class="col-12 col-md-6 mx-auto table-responsive" id="collabrationAccept_ajax">
+    <div class="col-12 col-md-8 mx-auto table-responsive" id="collabrationAccept_ajax">
         @include('user.scholarship.table_collabration_details')
 
     </div>
