@@ -575,8 +575,11 @@ class ScholarshipController extends BaseController
                     {
                         //حضوری ها در مصاحبه مقدار 1 دارند در جدول درس 2
                         //آنلاین ها در مصاحبه مقدار 2 دارند در جدول درس 1
-                        $query->where('type_course','=',1)
-                                ->orwhere('type_course','=',2);
+                        $query->where(function($query)
+                        {
+                                $query->orwhere('type_course','=',1)
+                                    ->orwhere('type_course','=',2);
+                        });
                     })
                     ->orderby('id','desc')
                     ->get();
@@ -585,10 +588,6 @@ class ScholarshipController extends BaseController
             {
                 $courses=NULL;
             }
-
-
-
-
 
             //امتیاز
             $count_scholarshipIntroduce=0;
