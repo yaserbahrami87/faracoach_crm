@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class collabration_accept extends Model
 {
     protected $fillable=[
-        'user_id','value','count','count','calculate','expire','collabration_detail_id','description'
+        'user_id','value','count','count','calculate','expire','collabration_detail_id','description','status'
     ];
 
     public function user()

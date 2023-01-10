@@ -9,8 +9,10 @@
             <th>توضیحات</th>
             <th>وضعیت</th>
             <th>ویرایش</th>
+            <th>حذف</th>
         </tr>
     @foreach($scholarship->user->collabration_accept as $item)
+
         <tr class="text-center">
             <td>{{$loop->iteration}}</td>
             <td>{{$item->collabration_details->title}}</td>
@@ -46,11 +48,20 @@
                     <i class="bi bi-pencil-square"></i>
                 </button>
             </td>
+            <td>
+                <form method="post" action="/admin/collabration_accept/{{$item->id}}" onsubmit="return window.confirm('آیا از حذف زمینه همکاری اطمینان دارید')" >
+                    {{csrf_field()}}
+                    {{method_field('DELETE')}}
+                    <button type="submit" class="btn btn-danger" >
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </form>
+            </td>
         </tr>
     @endforeach
+
         <tr class="text-center">
             <td colspan="4">جمع کل</td>
-
             <td>
                 @if(is_numeric($scholarship->user->collabration_accept->sum('calculate')))
                     {{number_format($scholarship->user->collabration_accept->sum('calculate'))}}
@@ -64,38 +75,53 @@
 
 
 
+
     <div class="modal fade" id="collabrationModal" tabindex="-1" aria-labelledby="collabrationModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">نمایش زمینه همکاری</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">زمینه همکاری:</label>
-                            <input type="text" class="form-control" id="modal_collabration_details">
-                        </div>
+                    <form method="post" action="#" id="modal_collabration_form">
+                        {{csrf_field()}}
+                        {{method_field('PATCH')}}
+                        <input type="hidden" value="" name="id" id="modal_collabration_id">
                         <div class="form-group">
                             <label for="message-text" class="col-form-label">ارزش واحد:</label>
-                            <input type="text" class="form-control" id="modal_collabration_value"  readonly />
+                            <input type="text" class="form-control" id="modal_collabration_value"  readonly name="value" />
                         </div>
                         <div class="form-group">
                             <label for="message-text" class="col-form-label">تعداد</label>
-                            <input type="text" class="form-control" id="modal_collabration_count"  onchange="details_calculate(this.value)"  />
+                            <input type="text" class="form-control" id="modal_collabration_count"  onchange="details_calculate(this.value)" name="count"  />
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">تاریخ مهلت</label>
+                            <input type="text" class="form-control" id="modal_collabration_expire" readonly name="expire" >
                         </div>
                         <div class="form-group">
                             <label for="message-text" class="col-form-label">جمع</label>
-                            <input type="text" class="form-control" id="modal_collabration_calculate">
+                            <input type="text" class="form-control" id="modal_collabration_calculate" readonly name="calculate" >
                         </div>
+                        <div class="form-group">
+                            <label for="modal_collabration_description">توضیحات</label>
+                            <textarea class="form-control" id="modal_collabration_description" name="modal_collabration_description" rows="3" disabled></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="modal_collabration_status">وضعیت</label>
+                            <select class="form-control" id="modal_collabration_status" name="status">
+                                <option value="1">تائید شد</option>
+                                <option value="0">تائید نشد</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">بروزرسانی</button>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
-                    <button type="button" class="btn btn-primary">بروزرسانی</button>
+
                 </div>
             </div>
         </div>

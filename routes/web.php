@@ -269,6 +269,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     //Scholarship setting
     Route::resource('collabration_category','CollabrationCategoryController');
     Route::resource('collabration_details','CollabrationDetailsController');
+    Route::patch('/scholarship/{collabration_accept}/update','CollabrationAcceptController@collabrationUpdate_byAdmin');
     Route::resource('collabration_accept','CollabrationAcceptController');
 
     //scholarship collabration

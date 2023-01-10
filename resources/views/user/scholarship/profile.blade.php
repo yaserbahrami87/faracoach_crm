@@ -601,7 +601,7 @@
             vals=parseInt(vals);
             if($("#value").val().indexOf('%')!=-1)
             {
-                $('#collabration_details_calculate').val(new Intl.NumberFormat().format(vals/check));
+                $('#collabration_details_calculate').val(new Intl.NumberFormat().format((vals*check)/100));
             }
             else if(isNaN(check))
             {

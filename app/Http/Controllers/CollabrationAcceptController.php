@@ -102,7 +102,7 @@ class CollabrationAcceptController extends Controller
                     $status=collabration_accept::create(
                     [
                         'user_id'               =>Auth::user()->id,
-                        'value'                 =>((int)str_replace(',', '', $request->value)),
+                        'value'                 =>(str_replace(',', '', $request->value)),
                         'count'                 =>$request->count,
                         'expire'                =>$request->expire,
                         'calculate'             =>((int)str_replace(',', '', $request->calculate)),
@@ -221,5 +221,31 @@ class CollabrationAcceptController extends Controller
     public function collabrationAcceptUpdate_ajax(collabration_accept $collabration_accept,Request $request)
     {
 
+    }
+
+    public function collabrationUpdate_byAdmin(Request $request,collabration_accept $collabration_accept)
+    {
+        $this->validate($request,[
+            'value'     =>'required|string',
+            'count'     =>'required|string',
+            'calculate' =>'required|string',
+            'status'    =>'required|between:0,3',
+        ]);
+
+        $collabration_accept->value=$request->value;
+        $collabration_accept->count=$request->count;
+        $collabration_accept->expire=$request->expire;
+        $collabration_accept->calculate=((int) str_replace(',', '', $request->calculate));
+        $status=$collabration_accept->update();
+        if($status)
+        {
+            alert()->success('زمینه با موفقیت بر.زرسانی شد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در برزورسانی زمینه')->persistent('بستن');
+        }
+
+        return back();
     }
 }

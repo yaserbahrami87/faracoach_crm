@@ -296,8 +296,13 @@
                 success:function(data)
                 {
                     $('#modal_collabration_value').val(data.value);
+                    $('#modal_collabration_id').val(data.id);
                     $('#modal_collabration_count').val(data.count);
-                    $('#modal_collabration_calculate').val(data.count*data.value);
+                    $('#modal_collabration_calculate').val(data.calculate);
+                    $('#modal_collabration_description').val(data.description);
+                    $('#modal_collabration_expire').val(data.expire);
+                    $('#modal_collabration_form').attr("action","/admin/scholarship/"+data.id+"/update");
+                    $("#modal_collabration_status option[value="+data.status+"]").prop('selected',true);
                 }
 
             })
@@ -306,15 +311,32 @@
 
        function details_calculate(vals)
         {
+            console.log(vals);
             var check=parseInt($("#modal_collabration_value").val().replace(/\,/g,''));
-            if(isNaN(check))
+
+            vals=parseInt(vals);
+            if($("#modal_collabration_value").val().indexOf('%')!=-1)
+            {
+                $('#modal_collabration_calculate').val(new Intl.NumberFormat().format((vals*check)/100));
+            }
+            else if(isNaN(check))
             {
                 $('#modal_collabration_calculate').val(new Intl.NumberFormat().format(vals));
             }
             else
             {
-                $('#modal_collabration_calculate').val(new Intl.NumberFormat().format(vals*$("#modal_collabration_value").val().replace(/\,/g,'')));
+                if(isNaN(vals*check))
+                {
+                    $('#modal_collabration_calculate').val(new Intl.NumberFormat().format(vals));
+                }
+                else
+                {
+                    $('#modal_collabration_calculate').val(new Intl.NumberFormat().format(vals*check));
+                }
+
             }
+
+
         }
     </script>
 @endsection
