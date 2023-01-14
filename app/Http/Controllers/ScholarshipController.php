@@ -264,6 +264,9 @@ class ScholarshipController extends BaseController
 //        dd(collabration_accept::where('value','not like',"%$s")->get());
 //        dd($scholarship->user->collabration_accept->where('value','not like',"%$s"));
 
+        $collabration_category=collabration_category::where('status','=',1)
+                                ->get();
+
 
        return view('admin.scholarship.scholarship')
                     ->with('scholarship',$scholarship)
@@ -275,6 +278,7 @@ class ScholarshipController extends BaseController
                     ->with('cities',$cities)
                     ->with('messages',$messages)
                     ->with('result_final',$result_final)
+                    ->with('collabration_category',$collabration_category)
                     ->with('states',$states);
     }
 

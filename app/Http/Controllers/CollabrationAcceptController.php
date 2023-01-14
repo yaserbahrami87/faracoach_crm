@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\collabration_accept;
 use App\collabration_details;
+use App\scholarship;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -225,6 +227,7 @@ class CollabrationAcceptController extends Controller
 
     public function collabrationUpdate_byAdmin(Request $request,collabration_accept $collabration_accept)
     {
+
         $this->validate($request,[
             'value'     =>'required|string',
             'count'     =>'required|string',
@@ -236,7 +239,9 @@ class CollabrationAcceptController extends Controller
         $collabration_accept->count=$request->count;
         $collabration_accept->expire=$request->expire;
         $collabration_accept->calculate=((int) str_replace(',', '', $request->calculate));
+        $collabration_accept->status=$request->status;
         $status=$collabration_accept->update();
+
         if($status)
         {
             alert()->success('زمینه با موفقیت بر.زرسانی شد')->persistent('بستن');
@@ -248,4 +253,56 @@ class CollabrationAcceptController extends Controller
 
         return back();
     }
+
+    public function store_addCollabration_bydAdmin(Request $request,User $user)
+    {
+
+        $this->validate($request,[
+            'collabration_detail_id'    =>'required|numeric',
+            'value'                     =>'required|string',
+            'count'                     =>'required|string',
+            'expire'                    =>'required|string',
+            'calculate'                 =>'required|string',
+            'description'               =>'nullable|string|max:200',
+        ]);
+
+        $check=collabration_accept::where('user_id','=',$request->user_id)
+                                ->where('collabration_detail_id','=',$request->collabration_detail_id)
+                                ->first();
+
+
+        if(is_null($check))
+        {
+            $status=collabration_accept::create(
+                [
+                    'user_id'               =>$request->user_id,
+                    'value'                 =>(str_replace(',', '', $request->value)),
+                    'count'                 =>$request->count,
+                    'expire'                =>$request->expire,
+                    'calculate'             =>((int)str_replace(',', '', $request->calculate)),
+                    'collabration_detail_id'=>$request->collabration_detail_id,
+                    'description'           =>$request->description,
+                ]);
+
+            if($status)
+            {
+                alert()->success('زمینه همکاری با موفقیت اضافه شد')->persistent('بستن');
+            }
+            else
+            {
+                alert()->error('خطا در اضافه کردن زمینه همکاری')->persistent('بستن');
+            }
+
+        }
+        else
+        {
+            alert()->error('این زمینه همکاری برای این کاربر قبلا ثبت شده است ')->persistent('بستن');
+        }
+
+        return redirect('/admin/scholarship/'.$user->scholarship['id']);
+
+
+    }
+
+
 }

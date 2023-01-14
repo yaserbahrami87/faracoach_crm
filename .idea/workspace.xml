@@ -2,11 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3849cf8-ae8a-47cc-891c-72c8c9af69d2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/scholarship/collabration_add.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CollabrationAcceptController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CollabrationAcceptController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/collabration_accept.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/collabration_accept.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CollabrationCategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CollabrationCategoryController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CollabrationDetailsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CollabrationDetailsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/collabration_details.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/collabration_details.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/scholarship/collabration.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/scholarship/collabration.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/scholarship/scholarship.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/scholarship/scholarship.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/user/scholarship/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/scholarship/profile.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
@@ -324,7 +327,10 @@
       <workItem from="1673043441381" duration="10711000" />
       <workItem from="1673159900452" duration="12981000" />
       <workItem from="1673248936417" duration="8057000" />
-      <workItem from="1673336886467" duration="14832000" />
+      <workItem from="1673336886467" duration="15251000" />
+      <workItem from="1673387946802" duration="2754000" />
+      <workItem from="1673429323789" duration="11902000" />
+      <workItem from="1673683257019" duration="5163000" />
     </task>
     <servers />
   </component>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\collabration_category;
 use App\collabration_details;
 use App\Http\Requests\CollabrationCategoryRequest;
+use App\scholarship;
 use Illuminate\Http\Request;
 
 class CollabrationCategoryController extends Controller
@@ -161,4 +162,6 @@ class CollabrationCategoryController extends Controller
             }
         }
     }
+
+
 }

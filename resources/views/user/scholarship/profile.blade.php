@@ -611,7 +611,6 @@
             {
                 if(isNaN(vals*check))
                 {
-                    console.log('AA');
                     $('#collabration_details_calculate').val(new Intl.NumberFormat().format(vals));
                 }
                 else

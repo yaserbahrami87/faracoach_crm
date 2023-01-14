@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\collabration_category;
 use App\collabration_details;
 use App\Http\Requests\CollabrationDetailsRequest;
+use App\scholarship;
 use Illuminate\Http\Request;
 
 class CollabrationDetailsController extends Controller
@@ -127,6 +128,17 @@ class CollabrationDetailsController extends Controller
             return view('user.scholarship.collabration_details_forms')
                             ->with('collabration_details',$collabration_details);
     }
+
+    public function create_addCollabration_byAdmin(scholarship $scholarship,collabration_details $collabration_details)
+    {
+
+        return view('admin.scholarship.collabration_add')
+            ->with('collabration_details',$collabration_details)
+            ->with('scholarship',$scholarship);
+
+    }
+
+
 
 
 

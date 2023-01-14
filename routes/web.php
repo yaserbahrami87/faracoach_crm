@@ -270,6 +270,8 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::resource('collabration_category','CollabrationCategoryController');
     Route::resource('collabration_details','CollabrationDetailsController');
     Route::patch('/scholarship/{collabration_accept}/update','CollabrationAcceptController@collabrationUpdate_byAdmin');
+    Route::get('/scholarship/{scholarship}/detail_collabration/{collabration_details}/create','CollabrationDetailsController@create_addCollabration_byAdmin');
+    Route::post('/scholarship/{user}/detail_collabration/{collabration_details}/store','CollabrationAcceptController@store_addCollabration_bydAdmin');
     Route::resource('collabration_accept','CollabrationAcceptController');
 
     //scholarship collabration

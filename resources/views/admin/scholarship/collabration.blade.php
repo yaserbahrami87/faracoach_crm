@@ -1,4 +1,25 @@
 @if($scholarship->collabration==1)
+    <a  class="btn btn-primary mb-2"  data-toggle="collapse" href="#collapseCollabrationDetails" role="button" aria-expanded="false" aria-controls="collapseCollabrationDetails"    >
+        افزودن همکاری
+    </a>
+    <div class="col-12 mb-1">
+        <div class="collapse mb-1" id="collapseCollabrationDetails">
+            @foreach($collabration_category as $item_category )
+                <a  class="btn btn-primary"   data-toggle="collapse" href="#collapseCollabrationDetails{{$item_category->id}}" role="button" aria-expanded="false" aria-controls="#collapseCollabrationDetails{{$item_category->id}}"     >{{$item_category->category}}</a>
+                <div class="collapse mb-1" id="collapseCollabrationDetails{{$item_category->id}}">
+                    @foreach($item_category->collabration_details as $item_category_details )
+                        <a  class="btn btn-secondary"  href="/admin/scholarship/{{$scholarship->id}}/detail_collabration/{{$item_category_details->id}}/create" >{{$item_category_details->title}}</a>
+                    @endforeach
+                </div>
+
+
+            @endforeach
+        </div>
+    </div>
+    <div class="col-12">
+
+    </div>
+
     <table class="table-bordered table table-hover table-striped">
         <tr class="text-center">
             <th>#</th>
