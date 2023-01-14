@@ -1,37 +1,70 @@
 <div class="card-body" >
+
     <div class="row">
-        <div class="col-12 col-md-6 mb-1">
+        <div class="col-12 text-center">
+            <h3>* دوره رایگان آموزش مقدماتی کوچینگ با ارائه مدرک بین المللی معتبر CCE *</h3>
+            <p class="text-left" >این دوره به مدت 3 ساعت می باشد که در طول دوره 3 کد معرفی می شود، این کدها در واقع رمز ورود شما به آزمون دوره برای دریافت مدرک می باشد. </p>
+            <p class="text-left">دوره رایگان آموزش مقدماتی کوچینگ شامل سرفصل های زیر می باشد: </p>
+        </div>
+        <div class="col-12 col-md-4 mb-1 mx-auto text-center ">
+
             <div id="73537936991"><script type="text/JavaScript" src="https://www.aparat.com/embed/Wc0pO?data[rnddiv]=73537936991&data[responsive]=yes"></script></div>
+            <p>فیلم آموزشی 1</p>
         </div>
-        <div class="col-12 col-md-6 mb-1">
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-4 mb-1 mx-auto text-center">
             <div id="16257999540"><script type="text/JavaScript" src="https://www.aparat.com/embed/Nwk1O?data[rnddiv]=16257999540&data[responsive]=yes"></script></div>
+            <p>فیلم آموزشی 2</p>
         </div>
-        <div class="col-12 col-md-6 mb-1">
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-4 mb-1 mx-auto text-center">
             <div id="87530883677"><script type="text/JavaScript" src="https://www.aparat.com/embed/vCr1x?data[rnddiv]=87530883677&data[responsive]=yes"></script></div>
+            <p>فیلم آموزشی 3</p>
         </div>
-        <div class="col-12 col-md-6 mb-1">
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-4 mb-1 mx-auto text-center">
             <div id="67615101056"><script type="text/JavaScript" src="https://www.aparat.com/embed/upJAF?data[rnddiv]=67615101056&data[responsive]=yes"></script></div>
+            <p>فیلم آموزشی 4</p>
         </div>
-        <div class="col-12 col-md-6 mb-1">
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-4 mb-1 mx-auto text-center">
             <div id="23081597774"><script type="text/JavaScript" src="https://www.aparat.com/embed/Nck3i?data[rnddiv]=23081597774&data[responsive]=yes"></script></div>
+            <p>فیلم آموزشی 5</p>
         </div>
-        <div class="col-12 col-md-6 mb-1">
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-4 mb-1 text-center mx-auto">
             <div id="75010188432"><script type="text/JavaScript" src="https://www.aparat.com/embed/vxCdX?data[rnddiv]=75010188432&data[responsive]=yes"></script></div>
+            <p>فیلم آموزشی 6</p>
         </div>
-        <div class="col-12 col-md-6 mb-1">
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-md-4 mb-1 mx-auto text-center">
             <div id="13820961865"><script type="text/JavaScript" src="https://www.aparat.com/embed/B4hYd?data[rnddiv]=13820961865&data[responsive]=yes"></script></div>
+            <p>فیلم آموزشی 7</p>
         </div>
-        <div class="col-12 col-md-6 mb-1">
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-md-4 mb-1 mx-auto text-center">
             <div id="27194948604"><script type="text/JavaScript" src="https://www.aparat.com/embed/NThJE?data[rnddiv]=27194948604&data[responsive]=yes"></script></div>
+            <p>فیلم آموزشی 8</p>
         </div>
-        <div class="col-12 col-md-6 mb-1">
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-md-4 mb-1 text-center mx-auto" >
             <div id="93265603336"><script type="text/JavaScript" src="https://www.aparat.com/embed/4LIhY?data[rnddiv]=93265603336&data[responsive]=yes"></script></div>
+            <p>فیلم آموزشی 9</p>
         </div>
     </div>
 
 
-    <p>آکادمی بین المللی فراکوچ به  عنوان  اولین آموزشگاه مجاز کوچینگ در ایران و با اعتبار بین المللی تا کنون با پذیرش بیش از 1000 دانشپذیر در دوره های مختلف آموزش کوچینگ، بزرگترین  موسسه  آموزش کوچینگ در ایران محسوب می شود.</p>
-    <p class="text-justify">پس از استقبال کم نظیر مشتاقان مسیر توسعه فردی و کسب و کار و کوچینگ از فرصت بی نظیر و البته محدود بورسیه کوچینگ جهت ورود به این اکوسیستم، بر آن شدیم که برای افراد مستعد، نخبه و توانمند جامعه به ویژه اساتید، پژوهشگران، اندیشمندان، مدیران و دانشجویان برتر علی الخصوص رشته های مدیریت، روانشاسی و مشاوره، علوم رفتاری و آموزشی، منابع انسانی و ... شناسایی کرده و تحت عنوان "بورسیه کوچینگ"  از آنها حمایت نماییم.                    </p>
     <p>سرفصل ها:</p>
     <ol>
         <li>باورهای بنیادین کوچینگ </li>
