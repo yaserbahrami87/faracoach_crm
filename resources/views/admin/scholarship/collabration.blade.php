@@ -1,7 +1,7 @@
+<a  class="btn btn-primary mb-2"  data-toggle="collapse" href="#collapseCollabrationDetails" role="button" aria-expanded="false" aria-controls="collapseCollabrationDetails"    >
+    افزودن همکاری
+</a>
 @if($scholarship->collabration==1)
-    <a  class="btn btn-primary mb-2"  data-toggle="collapse" href="#collapseCollabrationDetails" role="button" aria-expanded="false" aria-controls="collapseCollabrationDetails"    >
-        افزودن همکاری
-    </a>
     <div class="col-12 mb-1">
         <div class="collapse mb-1" id="collapseCollabrationDetails">
             @foreach($collabration_category as $item_category )
