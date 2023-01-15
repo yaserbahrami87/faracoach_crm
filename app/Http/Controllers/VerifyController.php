@@ -14,7 +14,7 @@ use Hekmatinasser\Verta\Verta;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Facades\Redirect;
 
 
 class VerifyController extends BaseController
@@ -917,6 +917,7 @@ class VerifyController extends BaseController
 
     public function checkCode_Scholarship(Request $request)
     {
+
         $status=verify::where('code','=',$request['code'])
             ->where('verify','=',0)
             ->count();
@@ -935,21 +936,26 @@ class VerifyController extends BaseController
 
                 if($user->count()!=0)
                 {
+
                     $user=$this->get_user($verify->tel,NULL,NULL,NULL,true);
                     $request->session()->put('scholarshipStatus','infoUser');
                     Auth::login($user);
                     $scholarship=scholarship::where('user_id','=',Auth::user()->id)
                                 ->first();
+
                     if(is_null($scholarship))
                     {
-                        return back()
-//                        return redirect('/panel/scholarship/me')
-                            ->with('user',$user)
-                            ->with('tel',$verify->tel);
+//                        return back()
+
+//                        return Redirect::to('/panel/scholarship/me');
+
+                        return redirect()->away('/panel/scholarship/me')
+                                        ->with('user',$user)
+                                        ->with('tel',$verify->tel);
                     }
                     else
                     {
-                        return redirect('/panel/scholarship/me');
+                        return redirect()->away('/panel/scholarship/me');
                     }
 
                 }
@@ -962,7 +968,8 @@ class VerifyController extends BaseController
                     ]);
                     $request->session()->put('scholarshipStatus','infoUser');
                     Auth::login($user);
-                    return back();
+//                    return back();
+                    return redirect()->away('/panel/scholarship/me');
                 }
 
             }
@@ -970,6 +977,7 @@ class VerifyController extends BaseController
             {
                 alert()->error('رمز یکبار مصرف منقضی شده است')->persistent('بستن');
                 return back();
+
             }
         }
         else
