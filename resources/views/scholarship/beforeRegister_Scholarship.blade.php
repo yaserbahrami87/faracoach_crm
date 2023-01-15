@@ -3,8 +3,8 @@
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-8 text-center">
-                <h2 class="d-block text-dark" style="line-height: 2">فرم ورود به دوره آمــوزش رایــگان کوچیــنگ</h2>
-                <h6 class="d-block text-dark" style="line-height: 3">(طرح اعطای بورسیه کوچینگ آکادمی بین المللی فراکوچ)</h6>
+                <h4 class="d-block text-dark" style="line-height: 2">فرم ورود به دوره آمــوزش رایــگان کوچیــنگ</h2>
+                <h5 class="d-block text-dark" style="line-height: 3">(طرح اعطای بورسیه کوچینگ آکادمی بین المللی فراکوچ)</h6>
                 <!-- <h6 class="text-dark mb-3">برای ورود به پورتال شماره تماس خود را وارد کنید</h6> -->
                 <div class="card text-left">
                     <!--
