@@ -947,11 +947,11 @@ class VerifyController extends BaseController
                     {
 //                        return back()
 
-//                        return Redirect::to('/panel/scholarship/me');
-
-                        return redirect()->away('/panel/scholarship/me')
-                                        ->with('user',$user)
-                                        ->with('tel',$verify->tel);
+                        return Redirect::to('/panel/scholarship/me');
+//                        echo "<script>window.open('".asset('/panel/scholarship/me')."','_blank')</script>";
+//                        return redirect()->away('/panel/scholarship/me')
+//                                        ->with('user',$user)
+//                                        ->with('tel',$verify->tel);
                     }
                     else
                     {
