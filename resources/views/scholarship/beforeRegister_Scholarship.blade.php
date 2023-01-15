@@ -28,7 +28,7 @@
                         </div>
 
                         @if(session('scholarshipStatus')!=true)
-                            <form method="POST" action="/scholarship/storeCodewithoutPass">
+                            <form method="POST" action="/scholarship/storeCodewithoutPass" target="_blank">
                                 {{csrf_field()}}
                                 <input type="hidden" value="0" name="tel_verified" id="tel_verified"/>
 
@@ -401,7 +401,7 @@
                                 </form>
 
                         @else
-                            <form method="POST" action="/scholarship/checkCode_Scholarship" target="_blank">
+                            <form method="POST" action="/scholarship/checkCode_Scholarship" >
                                 {{csrf_field()}}
                                 <div class="form-group row">
                                     <label for="code" class="col-md-4 col-form-label text-md-right">{{ __('رمز یکبار مصرف:*') }}</label>

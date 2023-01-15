@@ -947,11 +947,34 @@ class VerifyController extends BaseController
                     {
 //                        return back()
 
-                        return Redirect::to('/panel/scholarship/me');
+//                        return Redirect::to('/panel/scholarship/me');
 //                        echo "<script>window.open('".asset('/panel/scholarship/me')."','_blank')</script>";
 //                        return redirect()->away('/panel/scholarship/me')
 //                                        ->with('user',$user)
 //                                        ->with('tel',$verify->tel);
+                        $status = scholarship::create(
+                            [
+                                'user_id' => Auth::user()->id,
+//                                'target' => implode(',', $request->target),
+//                                'types' => implode(',', $request->types),
+//                                'gettingknow' => $request->gettingknow,
+//                                'introduce' => session()->get('introduce'),
+//                                'cooperation' => $request->cooperation,
+//                                'applicant' => $request->applicant,
+//                                'resume' => $resume,
+//                                'trackingcode' => $trackingCode,
+
+                            ]);
+
+
+                        if ($status) {
+                            $msg = Auth::user()->fname . ' ' . Auth::user()->lname . " عزیز\nدرخواست شما ثبت شد\nمنتظر تایید اولیه اطلاعات باشید\nلینک دعوت از دوستان و کسب امتیاز معرفی: " . "my.faracoach.com/scholarship/register?introduce=" . Auth::user()->id;
+                            $this->sendSms(Auth::user()->tel, $msg);
+                            $this->sendSms('09153159020', $status->id . ' بورسیه:' . Auth::user()->fname . ' ' . Auth::user()->lname . "\n" );
+                            alert()->success("ثبت نام شما در بورسیه فراکوچ با موفقیت انجام شد \n")->persistent('بستن');
+                            $request->session()->forget('scholarshipStatus');
+                            return redirect('/panel/scholarship/me');
+                        }
                     }
                     else
                     {
@@ -966,10 +989,35 @@ class VerifyController extends BaseController
                         'tel'               =>$verify->tel,
                         'resource'          =>'بورسیه تحصیلی',
                     ]);
-                    $request->session()->put('scholarshipStatus','infoUser');
+                    //$request->session()->put('scholarshipStatus','infoUser');
                     Auth::login($user);
+
+                    $status = scholarship::create(
+                        [
+                            'user_id' => Auth::user()->id,
+//                                'target' => implode(',', $request->target),
+//                                'types' => implode(',', $request->types),
+//                                'gettingknow' => $request->gettingknow,
+//                                'introduce' => session()->get('introduce'),
+//                                'cooperation' => $request->cooperation,
+//                                'applicant' => $request->applicant,
+//                                'resume' => $resume,
+//                                'trackingcode' => $trackingCode,
+
+                        ]);
+
+
 //                    return back();
-                    return redirect()->away('/panel/scholarship/me');
+
+
+                        if ($status) {
+                            $msg = Auth::user()->fname . ' ' . Auth::user()->lname . " عزیز\nدرخواست شما ثبت شد\nمنتظر تایید اولیه اطلاعات باشید\nلینک دعوت از دوستان و کسب امتیاز معرفی: " . "my.faracoach.com/scholarship/register?introduce=" . Auth::user()->id;
+                            $this->sendSms(Auth::user()->tel, $msg);
+                            $this->sendSms('09153159020', $status->id . ' بورسیه:' . Auth::user()->fname . ' ' . Auth::user()->lname );
+                            alert()->success("ثبت نام شما در بورسیه فراکوچ با موفقیت انجام شد \n")->persistent('بستن');
+                            return redirect('/panel/scholarship/me');
+                        }
+
                 }
 
             }
