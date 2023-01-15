@@ -894,7 +894,7 @@ class VerifyController extends BaseController
                 else
                 {
                     alert()->warning('رمز یکبار مصرف شما به شماره ' . $request['tel'] . " و ایمیل ".$status->user['email']." ارسال شد. ")->persistent('بستن');
-                    $status->user->notify(new SendEmailLoginCode($six_digit_random_number));
+//                    $status->user->notify(new SendEmailLoginCode($six_digit_random_number));
                 }
 
 //                    return view('scholarship.checkCode_scholarship');
@@ -943,9 +943,9 @@ class VerifyController extends BaseController
                     if(is_null($scholarship))
                     {
                         return back()
+//                        return redirect('/panel/scholarship/me')
                             ->with('user',$user)
                             ->with('tel',$verify->tel);
-
                     }
                     else
                     {
@@ -958,7 +958,7 @@ class VerifyController extends BaseController
 
                     $user=User::create([
                         'tel'               =>$verify->tel,
-                        'resource'   =>'بورسیه تحصیلی',
+                        'resource'          =>'بورسیه تحصیلی',
                     ]);
                     $request->session()->put('scholarshipStatus','infoUser');
                     Auth::login($user);
