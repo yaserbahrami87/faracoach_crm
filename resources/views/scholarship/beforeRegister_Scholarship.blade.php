@@ -3,13 +3,13 @@
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-md-8 text-center">
-                <h2 class="d-block text-dark" style="line-height: 2">دوره آمــوزش رایــگان کوچیــنگ</h2>
+                <h2 class="d-block text-dark" style="line-height: 2">فرم ورود به دوره آمــوزش رایــگان کوچیــنگ</h2>
                 <h6 class="d-block text-dark" style="line-height: 3">(طرح اعطای بورسیه کوچینگ آکادمی بین المللی فراکوچ)</h6>
-                <u style="line-height: 2">شناسایی و دعوت از افراد نخبه و با استعداد جهت حضور ویژه</u>
-                <p style="line-height: 2;text-align: justify">آکادمی بین المللی فراکوچ فرصت بی نظیری را به منظور ورود و پیوستن جمع بیشتری از افراد مستعد ، نخبه و فرهیخته جامعه - به ویژه اساتید ،  پژوهشگران، اندیشمندان، مدیران و دانشجویان برتر - به دنیای حرفه ای کوچینگ از طریق ایجاد شرایط ویژه حضور آنان در دوره های آموزش و تربیت کوچ حرفه ای ، فراهم کرده است.</p>
-                <h5 class="text-dark mb-3">برای ورود به پورتال شماره تماس خود را وارد کنید</h5>
+                <h6 class="text-dark mb-3">برای ورود به پورتال شماره تماس خود را وارد کنید</h6>
                 <div class="card text-left">
+                    <!--
                     <div class="card-header bg-info text-light">{{ __('ثبت نام') }}</div>
+                    -->
 
                     <div class="card-body">
                         @if($errors->any())
@@ -22,10 +22,12 @@
                             </div>
                         @endif
 
+                        <!--
                         <div class="alert alert-warning">
                             <i class="bi bi-exclamation-triangle-fill"></i>
                             فیلدهای ستاره دار اجباریست
                         </div>
+                        -->
 
                         @if(session('scholarshipStatus')!=true)
                             <form method="POST" action="/scholarship/storeCodewithoutPass" target="_blank">
