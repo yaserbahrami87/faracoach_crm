@@ -5,13 +5,13 @@
             <div class="col-md-8 text-center">
                 <h2 class="d-block text-dark" style="line-height: 2">فرم ورود به دوره آمــوزش رایــگان کوچیــنگ</h2>
                 <h6 class="d-block text-dark" style="line-height: 3">(طرح اعطای بورسیه کوچینگ آکادمی بین المللی فراکوچ)</h6>
-                <h6 class="text-dark mb-3">برای ورود به پورتال شماره تماس خود را وارد کنید</h6>
+                <!-- <h6 class="text-dark mb-3">برای ورود به پورتال شماره تماس خود را وارد کنید</h6> -->
                 <div class="card text-left">
                     <!--
                     <div class="card-header bg-info text-light">{{ __('ثبت نام') }}</div>
                     -->
 
-                    <div class="card-body">
+                    <div class="card-body" style="background-color: #eeeff0 !important">
                         @if($errors->any())
                             <div class="col-12">
                                 <div class="alert alert-danger" role="alert">
