@@ -63,9 +63,14 @@ class ScholarshipController extends BaseController
 
 //            $request->session()->put('scholarshipStatus','infoUser');
         }
-        if(!is_null(Auth::user()->scholarship))
+
+
+        if((Auth::check()))
         {
-            return redirect('/panel/scholarship/me');
+            if((!is_null(Auth::user()->scholarship)))
+            {
+                return redirect('/panel/scholarship/me');
+            }
         }
 
 
