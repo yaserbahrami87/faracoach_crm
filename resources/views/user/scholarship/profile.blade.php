@@ -101,12 +101,6 @@
                 <li class="nav-item" role="presentation">
                     <button class="nav-link " id="introduce-tab" data-toggle="tab" data-target="#introduce" type="button" role="tab" aria-controls="introduce" aria-selected="false">معرفی دوستان</button>
                 </li>
-
-                <!--
-                <li class="nav-item" role="certificate">
-                    <button class="nav-link @if(($scholarship->confirm_webinar==1) && ($scholarship->confirm_exam==1))  @else disabled @endif" id="certificate-tab" data-toggle="tab" data-target="#certificate" type="button" role="tab" aria-controls="certificate" aria-selected="false">گواهینامه</button>
-                </li>
-                -->
                 <li class="nav-item" role="introductionLetter">
                     <button class="nav-link @if(!is_null($scholarship->introductionletter)&&($scholarship->confirm_introductionletter!=0)&&($scholarship->confirm_introductionletter==2)&&($scholarship->confirm_introductionletter==4)) bg-success @endif " id="introductionLetter-tab" data-toggle="tab" data-target="#introductionLetter" type="button" role="tab" aria-controls="introductionLetter" aria-selected="false">معرفی نامه</button>
                 </li>
@@ -126,8 +120,6 @@
                     <button class="nav-link" id="support-tab" data-toggle="tab" data-target="#support" type="button" role="tab" aria-controls="support" aria-selected="false">پشتیبان</button>
                 </li>
             @elseif($scholarship->resource=='scholarship')
-
-
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">توضیحات بورسیه</button>
                 </li>
@@ -167,7 +159,8 @@
             @endif
         </ul>
         <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade @if($scholarship->resource='scholarship') show active  @endif" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+            <div class="tab-pane fade @if($scholarship->resource=='scholarship') show active     @endif" id="home" role="tabpanel" aria-labelledby="home-tab">
                 <h3 class="d-block text-dark text-center" style="line-height: 2">طرح اعطای بورسیه کوچینگ آکادمی بین المللی فراکوچ</h3>
                 <div class="card">
                     <div class="card-body shadow shadow-sm text-center">
