@@ -117,7 +117,7 @@
                         <tbody>
                         @foreach($users as $item)
 
-                            <tr style="background-color: @if(!is_null($item->last_followupUser)) {{$item->last_followupUser->problemFollowup['color']}} @endif  @if(!is_null($item->scholarship)) ;background-color:#ff4dff !important @endif "  >
+                            <tr style="background-color: @if(!is_null($item->last_followupUser)) {{$item->last_followupUser->problemFollowup['color']}} @endif  @if(!is_null($item->scholarship)) @if($item->scholarship->resource=='scholarship') ;background-color:#ff4dff !important   @elseif($item->scholarship->resource=='knot')  ;background-color: #cceeff!important    @endif   @endif "  >
                                 <td class="p-0">
                                     <a href="/admin/user/{{$item->id}}">
                                         @if(is_null($item->personal_image))

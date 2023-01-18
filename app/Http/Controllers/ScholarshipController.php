@@ -32,7 +32,8 @@ class ScholarshipController extends BaseController
     public function index()
     {
         //$scholarships=scholarship::wherein('status',[0,2,3,4])
-        $scholarships=scholarship::orderby('financial')
+        $scholarships=scholarship::where('resource','=','scholarship')
+                ->orderby('financial')
                 ->get();
         foreach ($scholarships as $scholarship)
         {
@@ -76,6 +77,9 @@ class ScholarshipController extends BaseController
 
         return  view('scholarship.beforeRegister_Scholarship');
     }
+
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -964,7 +968,8 @@ class ScholarshipController extends BaseController
     //شرکت نکرده ها در آزمون
     public function dontParticipateIntheExam()
     {
-        $scholarships=scholarship::where('confirm_exam','=',0)
+        $scholarships=where('resource','=','scholarship')
+            ->scholarship::where('confirm_exam','=',0)
             ->get();
         foreach ($scholarships as $item)
         {
@@ -983,8 +988,9 @@ class ScholarshipController extends BaseController
                     ->where('type','=','scholarship_payment')
                     ->get();
 
-        $scholarships=scholarship::whereNotNull('financial')
-            ->get();
+        $scholarships=scholarship::where('resource','=','scholarship')
+                        ->whereNotNull('financial')
+                        ->get();
 
         foreach ($scholarships as $item)
         {
@@ -1145,7 +1151,8 @@ class ScholarshipController extends BaseController
 
     public function report_result()
     {
-        $scholarships=scholarship::get();
+        $scholarships=scholarship::where('resource','=','scholarship')
+                            ->get();
         foreach($scholarships as $item)
         {
             $item->score=$item->get_score_details();
@@ -1195,6 +1202,29 @@ class ScholarshipController extends BaseController
                         ->with('collabration_details',$collabration_details)
                         ->with('scholarships',$scholarships);
     }
+
+
+
+    public function create_knot()
+    {
+        if(isset($request->introduce))
+        {
+            $request->session()->put('introduce',$request->introduce);
+        }
+
+
+        if((Auth::check()))
+        {
+            if((!is_null(Auth::user()->scholarship)))
+            {
+                return redirect('/panel/scholarship/me');
+            }
+        }
+
+
+        return  view('knot.knot');
+    }
+
 
 
 }
