@@ -82,51 +82,92 @@
 @section('content')
     <div class="col-md-12">
         <ul class="nav nav-tabs d-none d-sm-flex " id="myTab" role="tablist">
-            <li class="nav-item" role="learn">
-                <button class="nav-link active @if($scholarship->confirm_webinar==1) bg-success @endif" id="learn-tab" data-toggle="tab" data-target="#learn" type="button" role="tab" aria-controls="learn" aria-selected="false">دوره آموزشی</button>
-            </li>
-            <li class="nav-item" role="exam">
-                <button class="nav-link @if($scholarship->confirm_exam==1) bg-success @endif " id="exam-tab" data-toggle="tab" data-target="#exam" type="button" role="tab" aria-controls="exam" aria-selected="false">آزمون و گواهینامه</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link  " id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">توضیحات بورسیه</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link bg-success" id="contact-tab" data-toggle="tab" data-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">فرم ثبت نام</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link @if(strlen($scholarship->user->fname)>0 && strlen($scholarship->user->lname)>0 && strlen($scholarship->user->sex)>0&&strlen($scholarship->user->codemelli)>0&&strlen($scholarship->user->shenasname)>0&&strlen($scholarship->user->datebirth)>0&&strlen($scholarship->user->personal_image)>0 && strlen($scholarship->user->tel)>0 && strlen($scholarship->user->email)>0 && strlen($scholarship->user->state)>0&&strlen($scholarship->user->city)>0&&strlen($scholarship->user->address)>0 && strlen($scholarship->user->father)>0 && strlen($scholarship->user->married)>0 && strlen($scholarship->user->born)>0 && strlen($scholarship->user->education)>0&&strlen($scholarship->user->reshteh)>0&&strlen($scholarship->user->job)>0&&strlen($scholarship->user->resume)>0 ) btn-success  @endif" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">اطلاعات کاربر</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link " id="introduce-tab" data-toggle="tab" data-target="#introduce" type="button" role="tab" aria-controls="introduce" aria-selected="false">معرفی دوستان</button>
-            </li>
+            @if($scholarship->resource=='knot')
+                <li class="nav-item" role="learn">
+                    <button class="nav-link active @if($scholarship->confirm_webinar==1) bg-success @endif" id="learn-tab" data-toggle="tab" data-target="#learn" type="button" role="tab" aria-controls="learn" aria-selected="false">دوره آموزشی</button>
+                </li>
+                <li class="nav-item" role="exam">
+                    <button class="nav-link @if($scholarship->confirm_exam==1) bg-success @endif " id="exam-tab" data-toggle="tab" data-target="#exam" type="button" role="tab" aria-controls="exam" aria-selected="false">آزمون و گواهینامه</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link  " id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">توضیحات بورسیه</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link bg-success" id="contact-tab" data-toggle="tab" data-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">فرم ثبت نام</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link @if(strlen($scholarship->user->fname)>0 && strlen($scholarship->user->lname)>0 && strlen($scholarship->user->sex)>0&&strlen($scholarship->user->codemelli)>0&&strlen($scholarship->user->shenasname)>0&&strlen($scholarship->user->datebirth)>0&&strlen($scholarship->user->personal_image)>0 && strlen($scholarship->user->tel)>0 && strlen($scholarship->user->email)>0 && strlen($scholarship->user->state)>0&&strlen($scholarship->user->city)>0&&strlen($scholarship->user->address)>0 && strlen($scholarship->user->father)>0 && strlen($scholarship->user->married)>0 && strlen($scholarship->user->born)>0 && strlen($scholarship->user->education)>0&&strlen($scholarship->user->reshteh)>0&&strlen($scholarship->user->job)>0&&strlen($scholarship->user->resume)>0 ) btn-success  @endif" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">اطلاعات کاربر</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link " id="introduce-tab" data-toggle="tab" data-target="#introduce" type="button" role="tab" aria-controls="introduce" aria-selected="false">معرفی دوستان</button>
+                </li>
 
-            <!--
-            <li class="nav-item" role="certificate">
-                <button class="nav-link @if(($scholarship->confirm_webinar==1) && ($scholarship->confirm_exam==1))  @else disabled @endif" id="certificate-tab" data-toggle="tab" data-target="#certificate" type="button" role="tab" aria-controls="certificate" aria-selected="false">گواهینامه</button>
-            </li>
-            -->
-            <li class="nav-item" role="introductionLetter">
-                <button class="nav-link @if(!is_null($scholarship->introductionletter)&&($scholarship->confirm_introductionletter!=0)&&($scholarship->confirm_introductionletter==2)&&($scholarship->confirm_introductionletter==4)) bg-success @endif " id="introductionLetter-tab" data-toggle="tab" data-target="#introductionLetter" type="button" role="tab" aria-controls="introductionLetter" aria-selected="false">معرفی نامه</button>
-            </li>
-            <li class="nav-item" role="interview">
-                <button class="nav-link @if(!is_null($scholarship->user->get_scholarshipInterview)) bg-success  @endif " id="interview-tab" data-toggle="tab" data-target="#interview" type="button" role="tab" aria-controls="interview" aria-selected="false">مصاحبه</button>
-            </li>
-            <li class="nav-item" role="result">
-                <button class="nav-link  @if(($scholarship->view_score==1)) bg-success @endif " id="result-tab" data-toggle="tab" data-target="#result" type="button" role="tab" aria-controls="result" aria-selected="false">نتیجه</button>
-            </li>
-            <li class="nav-item" role="payment">
-                <button class="nav-link @if(!is_null($scholarship->financial)) bg-success @endif  @if(is_null($scholarship->user->get_scholarshipInterview)) disabled @endif" id="payment-tab" data-toggle="tab" data-target="#payment" type="button" role="tab" aria-controls="payment" aria-selected="false">ثبت نام</button>
-            </li>
-            <li class="nav-item " role="collabration">
-                <button class="nav-link" id="collabration-tab" data-toggle="tab" data-target="#collabration" type="button" role="tab" aria-controls="collabration" aria-selected="false">همکاری</button>
-            </li>
-            <li class="nav-item" role="support">
-                <button class="nav-link" id="support-tab" data-toggle="tab" data-target="#support" type="button" role="tab" aria-controls="support" aria-selected="false">پشتیبان</button>
-            </li>
+                <!--
+                <li class="nav-item" role="certificate">
+                    <button class="nav-link @if(($scholarship->confirm_webinar==1) && ($scholarship->confirm_exam==1))  @else disabled @endif" id="certificate-tab" data-toggle="tab" data-target="#certificate" type="button" role="tab" aria-controls="certificate" aria-selected="false">گواهینامه</button>
+                </li>
+                -->
+                <li class="nav-item" role="introductionLetter">
+                    <button class="nav-link @if(!is_null($scholarship->introductionletter)&&($scholarship->confirm_introductionletter!=0)&&($scholarship->confirm_introductionletter==2)&&($scholarship->confirm_introductionletter==4)) bg-success @endif " id="introductionLetter-tab" data-toggle="tab" data-target="#introductionLetter" type="button" role="tab" aria-controls="introductionLetter" aria-selected="false">معرفی نامه</button>
+                </li>
+                <li class="nav-item" role="interview">
+                    <button class="nav-link @if(!is_null($scholarship->user->get_scholarshipInterview)) bg-success  @endif " id="interview-tab" data-toggle="tab" data-target="#interview" type="button" role="tab" aria-controls="interview" aria-selected="false">مصاحبه</button>
+                </li>
+                <li class="nav-item" role="result">
+                    <button class="nav-link  @if(($scholarship->view_score==1)) bg-success @endif " id="result-tab" data-toggle="tab" data-target="#result" type="button" role="tab" aria-controls="result" aria-selected="false">نتیجه</button>
+                </li>
+                <li class="nav-item" role="payment">
+                    <button class="nav-link @if(!is_null($scholarship->financial)) bg-success @endif  @if(is_null($scholarship->user->get_scholarshipInterview)) disabled @endif" id="payment-tab" data-toggle="tab" data-target="#payment" type="button" role="tab" aria-controls="payment" aria-selected="false">ثبت نام</button>
+                </li>
+                <li class="nav-item " role="collabration">
+                    <button class="nav-link" id="collabration-tab" data-toggle="tab" data-target="#collabration" type="button" role="tab" aria-controls="collabration" aria-selected="false">همکاری</button>
+                </li>
+                <li class="nav-item" role="support">
+                    <button class="nav-link" id="support-tab" data-toggle="tab" data-target="#support" type="button" role="tab" aria-controls="support" aria-selected="false">پشتیبان</button>
+                </li>
+            @elseif($scholarship->resource=='scholarship')
+
+
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">توضیحات بورسیه</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link bg-success" id="contact-tab" data-toggle="tab" data-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">فرم ثبت نام</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link @if(strlen($scholarship->user->fname)>0 && strlen($scholarship->user->lname)>0 && strlen($scholarship->user->sex)>0&&strlen($scholarship->user->codemelli)>0&&strlen($scholarship->user->shenasname)>0&&strlen($scholarship->user->datebirth)>0&&strlen($scholarship->user->personal_image)>0 && strlen($scholarship->user->tel)>0 && strlen($scholarship->user->email)>0 && strlen($scholarship->user->state)>0&&strlen($scholarship->user->city)>0&&strlen($scholarship->user->address)>0 && strlen($scholarship->user->father)>0 && strlen($scholarship->user->married)>0 && strlen($scholarship->user->born)>0 && strlen($scholarship->user->education)>0&&strlen($scholarship->user->reshteh)>0&&strlen($scholarship->user->job)>0&&strlen($scholarship->user->resume)>0 ) btn-success  @endif" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">اطلاعات کاربر</button>
+                </li>
+                <li class="nav-item" role="learn">
+                    <button class="nav-link @if($scholarship->confirm_webinar==1) bg-success @endif" id="learn-tab" data-toggle="tab" data-target="#learn" type="button" role="tab" aria-controls="learn" aria-selected="false">دوره آموزشی</button>
+                </li>
+                <li class="nav-item" role="exam">
+                    <button class="nav-link @if($scholarship->confirm_exam==1) bg-success @endif " id="exam-tab" data-toggle="tab" data-target="#exam" type="button" role="tab" aria-controls="exam" aria-selected="false">آزمون و گواهینامه</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link " id="introduce-tab" data-toggle="tab" data-target="#introduce" type="button" role="tab" aria-controls="introduce" aria-selected="false">معرفی دوستان</button>
+                </li>
+                <li class="nav-item" role="introductionLetter">
+                    <button class="nav-link @if(!is_null($scholarship->introductionletter)&&($scholarship->confirm_introductionletter!=0)&&($scholarship->confirm_introductionletter==2)&&($scholarship->confirm_introductionletter==4)) bg-success @endif " id="introductionLetter-tab" data-toggle="tab" data-target="#introductionLetter" type="button" role="tab" aria-controls="introductionLetter" aria-selected="false">معرفی نامه</button>
+                </li>
+                <li class="nav-item" role="interview">
+                    <button class="nav-link @if(!is_null($scholarship->user->get_scholarshipInterview)) bg-success  @endif " id="interview-tab" data-toggle="tab" data-target="#interview" type="button" role="tab" aria-controls="interview" aria-selected="false">مصاحبه</button>
+                </li>
+                <li class="nav-item" role="result">
+                    <button class="nav-link  @if(($scholarship->view_score==1)) bg-success @endif " id="result-tab" data-toggle="tab" data-target="#result" type="button" role="tab" aria-controls="result" aria-selected="false">نتیجه</button>
+                </li>
+                <li class="nav-item" role="payment">
+                    <button class="nav-link @if(!is_null($scholarship->financial)) bg-success @endif  @if(is_null($scholarship->user->get_scholarshipInterview)) disabled @endif" id="payment-tab" data-toggle="tab" data-target="#payment" type="button" role="tab" aria-controls="payment" aria-selected="false">ثبت نام</button>
+                </li>
+                <li class="nav-item " role="collabration">
+                    <button class="nav-link" id="collabration-tab" data-toggle="tab" data-target="#collabration" type="button" role="tab" aria-controls="collabration" aria-selected="false">همکاری</button>
+                </li>
+                <li class="nav-item" role="support">
+                    <button class="nav-link" id="support-tab" data-toggle="tab" data-target="#support" type="button" role="tab" aria-controls="support" aria-selected="false">پشتیبان</button>
+                </li>
+            @endif
         </ul>
         <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade " id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="tab-pane fade @if($scholarship->resource='scholarship') show active  @endif" id="home" role="tabpanel" aria-labelledby="home-tab">
                 <h3 class="d-block text-dark text-center" style="line-height: 2">طرح اعطای بورسیه کوچینگ آکادمی بین المللی فراکوچ</h3>
                 <div class="card">
                     <div class="card-body shadow shadow-sm text-center">
@@ -148,10 +189,10 @@
                 @include('user.scholarship.profile_schoalrship')
                 <button class="btn btn-primary" id="contact-tab2" onclick="document.getElementById('introduce-tab').click()">مرحله بعد</button>
             </div>
-            <div class="tab-pane fade show" id="introduce" role="tabpanel" aria-labelledby="introduce-tab">
+            <div class="tab-pane fade" id="introduce" role="tabpanel" aria-labelledby="introduce-tab">
                 @include('user.scholarship.introduce')
             </div>
-            <div class="tab-pane fade show active" id="learn" role="tabpanel" aria-labelledby="learn-tab">
+            <div class="tab-pane fade @if($scholarship->resource='knot') show active  @endif" id="learn" role="tabpanel" aria-labelledby="learn-tab">
                 @include('user.scholarship.learn')
             </div>
             <div class="tab-pane fade " id="introductionLetter" role="tabpanel" aria-labelledby="introductionLetter-tab">
@@ -215,9 +256,6 @@
             <div class="tab-pane fade " id="collabration" role="tabpanel" aria-labelledby="collabration-tab">
                 @include('user.scholarship.collabration')
             </div>
-
-
-
         </div>
     </div>
 
