@@ -174,6 +174,10 @@ class UserController extends BaseController
                         ->orwhere('followby_expert','=',NULL);
                 })
                 ->whereNotIn('users.type',[-3,-2,-1,2,3,0,30])
+                ->when($request->resource ,function ($query) use ($request)
+                {
+                    $query->where('resource','=',$request->resource);
+                })
                 ->orderby('users.id','desc')
                 ->groupby('users.id')
                 ->get();
@@ -196,11 +200,15 @@ class UserController extends BaseController
             //دریافت کفیت های پیگیری
             $problem=$this->get_problemfollowup(NULL,1);
 
+            $resource=User::groupby('resource')
+                        ->get();
+
             return view('admin.users')
                         ->with('users',$users)
                         ->with('tags',$tags)
 //                        ->with('parentCategory',$parentCategory)
                         ->with('usersAdmin',$usersAdmin)
+                        ->with('resource',$resource)
                         ->with('problem',$problem)
                         ->with('statics',$statics)
                         ->with('dateNow',$this->dateNow)

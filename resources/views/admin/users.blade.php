@@ -65,6 +65,24 @@
                         </a>
                     </div>
 
+                    <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3" >
+                        <label for="resource">براساس ورودی </label>
+                        <form method="get" action="/admin/users">
+                            <div class="input-group">
+                                <select class="form-control" id="resource" name="resource">
+                                    @foreach($resource as $item)
+                                        <option id="{{$item['resource']}}">{{$item['resource']}}</option>
+                                    @endforeach
+                                </select>
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-outline-secondary text-light" type="submit">
+                                        <i class="bi bi-funnel-fill"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
                     <div class="col-12">
                         <label class="text-dark">دسترسی سریع</label>
                         <ul class="list-group list-group-horizontal" id="users_tags">

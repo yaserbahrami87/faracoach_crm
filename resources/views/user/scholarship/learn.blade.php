@@ -79,17 +79,11 @@
     <p>از طرف آکادمی فراکوچ برای قبول شدگان در این آزمون، گواهینامه معتبر بین المللی CCE که مورد تائید فدراسیون جهانی کوچینگ ICF می باشد صادر و اعطا خواهد شد.</p>
 
     <div class="row">
-        <div class="col-12 col-md-6 mb-1">
+        <div class="col-12 col-md-6 mb-1 mx-auto">
             <b class="d-block mb-2 text-center bg-primary text-white p-2">گام اول: تماشا فیلم آموزشی</b>
             <style>.h_iframe-aparat_embed_frame{position:relative;}.h_iframe-aparat_embed_frame .ratio{display:block;width:100%;height:auto;}.h_iframe-aparat_embed_frame iframe{position:absolute;top:0;left:0;width:100%;height:100%;}</style><div class="h_iframe-aparat_embed_frame"><span style="display: block;padding-top: 57%"></span><iframe src="https://www.aparat.com/video/video/embed/videohash/yCEac/vt/frame" allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe></div>
         </div>
-        <div class="col-12 col-md-6">
-            <b class="d-block mb-2 text-center bg-primary text-white p-2">گام دوم: ثبت نام در دوره آموزشی</b>
-            <a href="https://evnd.co/dkf4a" target="_blank">
-                <img src="{{asset('/images/scholarship_webinar.jpg')}}" class="img-fluid" />
-                <p class="text-center btn btn-primary btn-block">ثبت نام</p>
-            </a>
-        </div>
+
 
 
 
