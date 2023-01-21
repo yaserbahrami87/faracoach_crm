@@ -223,6 +223,10 @@ class UserController extends BaseController
                     $query->orwhere('followby_expert','=',Auth::user()->id);
                         //->orwhere('followby_expert','=',NULL);
                 })
+                ->when($request->resource ,function ($query) use ($request)
+                {
+                    $query->where('resource','=',$request->resource);
+                })
                 ->orderby('id','desc')
                 ->get();
 

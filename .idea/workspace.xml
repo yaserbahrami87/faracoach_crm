@@ -4,8 +4,6 @@
     <list default="true" id="f3849cf8-ae8a-47cc-891c-72c8c9af69d2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/users.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/users.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/scholarship/learn.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/scholarship/learn.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -330,7 +328,8 @@
       <workItem from="1673852502457" duration="5418000" />
       <workItem from="1673952015173" duration="7819000" />
       <workItem from="1674025034139" duration="10208000" />
-      <workItem from="1674116135280" duration="4187000" />
+      <workItem from="1674116135280" duration="4930000" />
+      <workItem from="1674287059318" duration="98000" />
     </task>
     <servers />
   </component>
