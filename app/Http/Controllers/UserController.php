@@ -993,6 +993,9 @@ class UserController extends BaseController
         //دریافت کفیت های پیگیری
         $problem=$this->get_problemfollowup(NULL,1);
 
+        $resource=User::groupby('resource')
+            ->get();
+
         return view('admin.users')
                     ->with('tags',$tags)
                     ->with('users',$users)
@@ -1002,6 +1005,7 @@ class UserController extends BaseController
                     ->with('user',$user)
                     ->with('parameter',$request['parameter'])
                     ->with('problem',$problem)
+                    ->with('resource',$resource)
                     ->with('categoryUsers',$request['categoryUsers']);
     }
 
