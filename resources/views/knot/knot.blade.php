@@ -48,7 +48,7 @@
                                 </div>
                             </form>
                         @else
-                            <form method="POST" action="/scholarship/checkCode_Scholarship" >
+                            <form method="POST" action="/knot/checkCode_knot" >
                                 {{csrf_field()}}
                                 <div class="form-group row">
                                     <label for="code" class="col-md-4 col-form-label text-md-right">{{ __('رمز یکبار مصرف:*') }}</label>

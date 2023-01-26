@@ -540,7 +540,7 @@ Route::get('/scholarship/cleartel','ScholarshipController@cleartel');
 
 //Knot
 Route::get('/knot/register','ScholarshipController@create_knot');
-Route::post('/scholarship/checkCode_Scholarship','VerifyController@checkCode_knot');
+Route::post('/knot/checkCode_knot','VerifyController@checkCode_knot');
 
 //checkout
 Route::get('/checkout/callback','CheckoutController@callback');
