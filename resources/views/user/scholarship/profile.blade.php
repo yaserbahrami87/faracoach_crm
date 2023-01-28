@@ -159,7 +159,6 @@
             @endif
         </ul>
         <div class="tab-content" id="myTabContent">
-
             <div class="tab-pane fade @if($scholarship->resource=='scholarship') show active     @endif" id="home" role="tabpanel" aria-labelledby="home-tab">
                 <h3 class="d-block text-dark text-center" style="line-height: 2">طرح اعطای بورسیه کوچینگ آکادمی بین المللی فراکوچ</h3>
                 <div class="card">
@@ -175,7 +174,12 @@
 
             </div>
             <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                @include('user.scholarship.contact')
+
+                @if($scholarship->resource=='knot')
+                    @include('user.knot.contact')
+                @elseif($scholarship->resource=='scholarship')
+                    @include('user.scholarship.contact')
+                @endif
                 <button class="btn btn-primary" id="contact-tab2" onclick="document.getElementById('profile-tab').click()">مرحله بعد</button>
             </div>
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">

@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3849cf8-ae8a-47cc-891c-72c8c9af69d2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/views/user/knot/contact.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/knot/knot.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/knot/knot.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/scholarship/users.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/scholarship/users.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/scholarship/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/scholarship/profile.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,7 +173,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/admin/scholarship" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/user/knot" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -180,6 +181,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\resources\views\user\knot" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\resources\views\admin\scholarship" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\js" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\css" />
@@ -332,7 +334,8 @@
       <workItem from="1674116135280" duration="4930000" />
       <workItem from="1674287059318" duration="1591000" />
       <workItem from="1674299535775" duration="1191000" />
-      <workItem from="1674648967800" duration="5218000" />
+      <workItem from="1674648967800" duration="8121000" />
+      <workItem from="1674889615713" duration="1044000" />
     </task>
     <servers />
   </component>
