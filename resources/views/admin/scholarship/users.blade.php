@@ -111,7 +111,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        {{$item->user->last_login_at}}
+                                        {{substr($item->user->last_login_at,0,10) }}
                                     </td>
 
                                     <!--
