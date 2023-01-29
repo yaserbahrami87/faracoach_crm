@@ -661,9 +661,8 @@ Route::resource('event','EventController');
 Route::get('/r/test','ReserveController@test');
 
 
-//Route::get('/test','FollowupController@test');
-Route::get('/test','UserController@test');
-
+//test User
+Route::get('/test1','UserController@test1');
 
 //blog
 Route::get('/{username}','PostController@blogHomePage');

@@ -92,7 +92,7 @@ class BookingSettingController extends BaseController
     public function update(Request $request,coach  $coach)
     {
         $request->validate([
-            'fi'                    =>'required|numeric',
+            'fi'                    =>'nullable|numeric',
             'type_holding'          =>'required|in:0,1,2',
             'address'               =>'required_if:type_holding,0,1',
             'online_platform'       =>'required_if:type_holding,0,2',

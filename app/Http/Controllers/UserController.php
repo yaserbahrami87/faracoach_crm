@@ -1968,6 +1968,28 @@ class UserController extends BaseController
 
     }
 
+    public function test1()
+    {
+        $test=User::join('scholarships','users.id','=','scholarships.user_id')
+                    ->whereNotNull('scholarships.financial')
+                    ->get();
+        foreach ($test as $item)
+        {
+            $followup=followup::where('user_id','=',$item->user_id)
+                        ->first();
+            $item->followups=$followup->insertuser->fname.' '.$followup->insertuser->lname;
+        }
+
+        $excel=fastexcel($test)->export('scholarship.xlsx');
+
+        if($excel)
+        {
+            return response()->download(public_path('scholarship.xlsx'))
+                                    ->deleteFileAfterSend(true);
+        }
+
+    }
+
 
 
 }
