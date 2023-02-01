@@ -25,7 +25,7 @@ class EffectivelisteningController extends BaseController
      */
     public function create()
     {
-        return view('panelUser.effectiveListenings');
+        return view('user.effectiveListenings');
     }
 
     /**
@@ -36,6 +36,7 @@ class EffectivelisteningController extends BaseController
      */
     public function store(Request $request)
     {
+
         $score=0;
         for ($i=1;$i<=15;$i++)
         {
@@ -50,9 +51,9 @@ class EffectivelisteningController extends BaseController
         ]);
         if($status)
         {
-            $tmp='امتیاز شما در ارزیابی گوش دادن موثر '.$status->score." می باشد \n فراکوچ";
+            $tmp='امتیاز شما در ارزیابی گوش دادن موثر '.$status->score." می باشد \n برای دریافت پاسخ و راهکارهای اختصاصی خود کلیک کنید \n"."b2n.ir/t49858";
             $this->sendSms(Auth::user()->tel,$tmp);
-            alert()->success('آزمون با موفقیت انجام شد'."\n امتیاز آزمون شما".$status->score." می باشد ")->persistent('بستن');
+            alert()->success("آزمون با موفقیت انجام شد\n"."\n امتیاز آزمون شما ".$status->score."\n می باشد ". " می باشد \n برای دریافت پاسخ و راهکارهای اختصاصی خود کلیک کنید \n" ."<a href='https://b2n.ir/t49858' class='btn btn-primary' target='_blank'>کلیک کنید</a>")->html()->persistent('بستن');
         }
         else
         {
