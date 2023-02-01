@@ -54,26 +54,40 @@
                             @endif
                         </td>
                         <td class="text-center" >
-                            {{number_format($item->get_financial->schoalrshipPayment->fi)}}
+                            @if(!is_null($item->get_financial))
+                                {{number_format($item->get_financial->schoalrshipPayment->fi)}}
+                            @endif
                         </td>
                         <td class="text-center" >
-                            {{($item->get_financial->schoalrshipPayment->score)}}
+                            @if(!is_null($item->get_financial))
+                                {{($item->get_financial->schoalrshipPayment->score)}}
+                            @endif
                         </td>
                         <td class="text-center" >
-                            {{($item->get_financial->schoalrshipPayment->loan)}}
+                            @if(!is_null($item->get_financial))
+                                {{($item->get_financial->schoalrshipPayment->loan)}}
+                            @endif
                         </td>
 
                         <td class="text-center">
-                            {{number_format($item->get_financial->schoalrshipPayment->fi_final)}}
+                            @if(!is_null($item->get_financial))
+                                {{number_format($item->get_financial->schoalrshipPayment->fi_final)}}
+                            @endif
                         </td>
                         <td class="text-center">
-                            {{($item->get_financial->schoalrshipPayment->pre_payment)}}
+                            @if(!is_null($item->get_financial))
+                                {{($item->get_financial->schoalrshipPayment->pre_payment)}}
+                            @endif
                         </td>
                         <td class="text-center">
-                            {{number_format($item->get_financial->schoalrshipPayment->remaining)}}
+                            @if(!is_null($item->get_financial))
+                                {{number_format($item->get_financial->schoalrshipPayment->remaining)}}
+                            @endif
                         </td>
                         <td class="text-center">
-                            {{($item->get_financial->schoalrshipPayment->date_fa)}}
+                            @if(!is_null($item->get_financial))
+                                {{($item->get_financial->schoalrshipPayment->date_fa)}}
+                            @endif
                         </td>
                         <td class="text-center" >
                             {{$item->financial}}
