@@ -1257,9 +1257,6 @@ class ScholarshipController extends BaseController
         $scholarship->resume = $resume;
         $status=$scholarship->save();
 
-
-
-
         if($status)
         {
             alert()->success('اطلاعات با موفقیت ثبت شد')->persistent('بستن');

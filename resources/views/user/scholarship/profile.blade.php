@@ -189,7 +189,7 @@
             <div class="tab-pane fade" id="introduce" role="tabpanel" aria-labelledby="introduce-tab">
                 @include('user.scholarship.introduce')
             </div>
-            <div class="tab-pane fade @if($scholarship->resource='knot') show active  @endif" id="learn" role="tabpanel" aria-labelledby="learn-tab">
+            <div class="tab-pane fade @if($scholarship->resource=='knot') show active  @endif" id="learn" role="tabpanel" aria-labelledby="learn-tab">
                 @include('user.scholarship.learn')
             </div>
             <div class="tab-pane fade " id="introductionLetter" role="tabpanel" aria-labelledby="introductionLetter-tab">
