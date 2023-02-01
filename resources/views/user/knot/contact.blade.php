@@ -1,4 +1,9 @@
-<form method="POST" action="/panel/scholarship/answerstatus" enctype="multipart/form-data">
+@if((is_null($scholarship->getoriginal('target')))&&(is_null($scholarship->getoriginal('types')))&&(is_null($scholarship->getoriginal('gettingknow')))&&(is_null($scholarship->getoriginal('cooperation')))&&((is_null($scholarship->getoriginal('applicant'))))&&($scholarship->resource=='knot') )
+    <form method="POST" action="/panel/knot/updateregister/{{$scholarship->id}}" enctype="multipart/form-data">
+        {{method_field('PATCH')}}
+@else
+    <form method="POST" action="/panel/scholarship/answerstatus" enctype="multipart/form-data">
+@endif
     {{csrf_field()}}
     @if(count($messages)>0)
         <input type="hidden" value="{{$messages[0]->user_id_send}}" name="user_id_send"/>
@@ -131,8 +136,10 @@
         @endforeach
     @endif
 
-    @if((is_null($scholarship->target))&&(is_null($scholarship->types))&&(is_null($scholarship->gettingknow))&&(is_null($scholarship->cooperation))&&((is_null($scholarship->applicant)))&&($scholarship->resource=='knot') )
-        adasd
-    @endif
+    <div class="col-12 text-center">
+        @if((is_null($scholarship->getoriginal('target')))&&(is_null($scholarship->getoriginal('types')))&&(is_null($scholarship->getoriginal('gettingknow')))&&(is_null($scholarship->getoriginal('cooperation')))&&((is_null($scholarship->getoriginal('applicant'))))&&($scholarship->resource=='knot') )
+            <input type="submit" value="ارسال" class="btn btn-success" />
+        @endif
+    </div>
 
 </form>

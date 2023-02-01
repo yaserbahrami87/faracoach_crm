@@ -1221,10 +1221,57 @@ class ScholarshipController extends BaseController
             }
         }
 
-
         return  view('knot.knot');
     }
 
+
+    public function updateregister(scholarship $scholarship,Request $request)
+    {
+        $this->validate($request,[
+           'target'     =>'required|array',
+           'types'      =>'required|array',
+           'gettingknow'=>'required|between:1,3',
+           'cooperation'=>'nullable|string',
+            'applicant' =>'required|between:1,2',
+            'resume'    =>'required|mimes:docx,doc,pdf,jpg,png|max:600',
+        ]);
+        $scholarship->update($request->all());
+        if($request->has('resume')&&$request->file('resume')->isValid())
+        {
+            $file = $request->file('resume');
+            $resume = "resume-" . Auth::user()->tel . "." . $request->file('resume')->extension();
+            $path = public_path('/documents/scholarship');
+            $files = $request->file('resume')->move($path, $resume);
+        }
+        else
+        {
+            $resume=NULL;
+        }
+
+
+        $scholarship->target = implode(',', $request->target);
+        $scholarship->types = implode(',', $request->types);
+        $scholarship->gettingknow = $request->gettingknow;
+        $scholarship->cooperation = $request->cooperation;
+        $scholarship->applicant = $request->applicant;
+        $scholarship->resume = $resume;
+        $status=$scholarship->save();
+
+
+
+
+        if($status)
+        {
+            alert()->success('اطلاعات با موفقیت ثبت شد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در اپدیت')->persistent('بستن');
+        }
+
+        return back();
+
+    }
 
 
 }

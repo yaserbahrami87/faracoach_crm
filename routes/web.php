@@ -121,7 +121,8 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     Route::resource('collabration_accept','CollabrationAcceptController');
 
 
-
+    //knot
+    Route::patch('/knot/updateregister/{scholarship}','ScholarshipController@updateregister');
 
 
     //Certificates
@@ -276,6 +277,8 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
 
     //scholarship collabration
     Route::get('/users/collabrations','ScholarshipController@collabrations');
+
+
 
     //  ROUTE SETTINGS
     Route::prefix('settings/')->group(function ()
@@ -541,6 +544,7 @@ Route::get('/scholarship/cleartel','ScholarshipController@cleartel');
 //Knot
 Route::get('/knot/register','ScholarshipController@create_knot');
 Route::post('/knot/checkCode_knot','VerifyController@checkCode_knot');
+
 
 //checkout
 Route::get('/checkout/callback','CheckoutController@callback');
