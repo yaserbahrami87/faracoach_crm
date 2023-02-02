@@ -32,7 +32,8 @@ class ScholarshipController extends BaseController
     public function index()
     {
         //$scholarships=scholarship::wherein('status',[0,2,3,4])
-        $scholarships=scholarship::where('resource','=','scholarship')
+        $scholarships=scholarship::orwhere('resource','=','scholarship')
+                ->orwhere('resource','=','knot')
                 ->orderby('financial')
                 ->get();
         foreach ($scholarships as $scholarship)
@@ -281,6 +282,8 @@ class ScholarshipController extends BaseController
         $collabration_category=collabration_category::where('status','=',1)
                                 ->get();
 
+        $courses=course::orderby('id','desc')
+                            ->get();
 
        return view('admin.scholarship.scholarship')
                     ->with('scholarship',$scholarship)
@@ -293,6 +296,7 @@ class ScholarshipController extends BaseController
                     ->with('messages',$messages)
                     ->with('result_final',$result_final)
                     ->with('collabration_category',$collabration_category)
+                    ->with('courses',$courses)
                     ->with('states',$states);
     }
 

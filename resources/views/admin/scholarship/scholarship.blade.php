@@ -166,6 +166,17 @@
                 previousButtonIcon: "fa fa-arrow-circle-left"
             });
 
+        kamaDatepicker('date_payment',
+            {
+                markHolidays:true,
+                markToday:true,
+                twodigit:true,
+                closeAfterSelect:true,
+                nextButtonIcon: "fa fa-arrow-circle-right",
+                previousButtonIcon: "fa fa-arrow-circle-left"
+            });
+
+
 
         var customOptions={
             gotoToday: true,
@@ -226,6 +237,8 @@
                 previousButtonIcon: "fa fa-arrow-circle-left",
                 sync:true,
             });
+
+
 
     </script>
 
@@ -338,5 +351,14 @@
 
 
         }
+    </script>
+
+    <script src="{{asset('js/timepicker.js')}}"></script>
+    <script>
+        $(document).ready(function()
+        {
+            jQuery.noConflict();
+            jQuery('#time_payment').timepicker();
+        });
     </script>
 @endsection

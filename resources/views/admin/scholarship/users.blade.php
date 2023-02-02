@@ -49,7 +49,7 @@
 
                         <tbody>
                             @foreach($scholarships as $item)
-                                <tr style="@if(!is_null($item->financial)) background-color: #9fff80; @endif">
+                                <tr style="@if(!is_null($item->financial)) background-color: #9fff80; @elseif($item->resource=='knot') background-color: #cceeff!important   @endif">
                                     <td class="text-center">{{$loop->iteration}}</td>
                                     <td class="text-center">
                                         <a href="/admin/scholarship/{{$item->id}}" target="_blank">{{$item->user->fname.' '.$item->user->lname}}</a>
