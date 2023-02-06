@@ -393,8 +393,7 @@ class SmsController extends BaseController
 //        $response=$this->client->request('GET','send.json?receptor=09376578529&sender=10004002002020&message=mobile=$clientnumber&keyword=$keyword&linenumber=$linenumber');
         $enddate = Carbon::now()->timestamp;
         $startdate = Carbon::yesterday()->timestamp;
-//        $response=$this->client->request('GET','receive.json?linenumber=10004002002020&isread=1&page=2&pageindex=200');
-        $response=$this->client->request('GET','receive.json?linenumber=10004002002020&isread=0&pageindex=1000');
+        $response=$this->client->request('GET','receive.json?linenumber=10004002002020&isread=1&page=2&pageindex=200');
         $response=json_decode($response->getBody()->getContents())->entries;
 
         if(!is_null($response)) {
