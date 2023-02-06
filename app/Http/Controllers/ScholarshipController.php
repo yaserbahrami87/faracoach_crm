@@ -8,13 +8,17 @@ use App\collabration_accept;
 use App\collabration_category;
 use App\collabration_details;
 use App\course;
+use App\faktor;
 use App\followup;
 use App\message;
 use App\Notifications\sendMessageNotification;
 use App\scholarship;
+use App\scholarship_payment;
 use App\state;
+use App\student;
 use App\User;
 use Faker\Provider\Base;
+use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
@@ -1274,5 +1278,108 @@ class ScholarshipController extends BaseController
 
     }
 
+    public function register_financial(Request $request,scholarship $scholarship)
+    {
+
+        $this->validate($request,[
+            'course_id'     =>'required|numeric',
+            'fi'            =>'required|numeric',
+            'score'         =>'required|numeric|between:0,100',
+            'fi_final'      =>'required|numeric',
+            'pre_payment'   =>'required|numeric',
+            'date_payment'  =>'required|string',
+            'type_payment'  =>'required|numeric|between:1,12',
+            'time_fa'       =>'required|string',
+            'authority'     =>'required|unique:scholarships,financial|string',
+        ]);
+
+        $scholarship->financial=$request->authority;
+        $scholarship->save();
+        if($request->score<50)
+        {
+            $loan=0;
+        }
+        else
+        {
+            $loan=10;
+        }
+
+
+        $status=scholarship_payment::create([
+            'user_id'     =>$scholarship->user_id,
+            'course_id'   =>$request->course_id,
+            'fi'          =>$request->fi,
+            'loan'        =>$loan,
+            'score'       =>$request->score,
+            'fi_final'    =>$request->fi_final,
+            'pre_payment' =>$request->pre_payment,
+            'remaining'   =>($request->fi_final-$request->pre_payment),
+            'date_fa'     =>$request->date_payment,
+            'time_fa'     =>$request->time_fa,
+            'type_payment'=>0,
+        ]);
+
+        if($status)
+        {
+            $status_checkout=checkout::create([
+                'user_id'   =>$scholarship->user_id,
+                'order_id'  =>$status->id,
+                'product_id'=>$request->course_id,
+                'price'     =>$request->pre_payment,
+                'type'      =>'scholarship_payment',
+                'authority' =>$request->authority,
+                'description'=>'خرید انجام شد',
+                'status'    =>1,
+
+            ]);
+
+            if($status_checkout)
+            {
+                $remaining=$request->fi_final-$request->pre_payment;
+                $newDate=Verta::parse(str_replace('/','-',$request->date_payment.' '.$request->time_fa));
+                for ($i=1;$i<=$request->type_payment;$i++)
+                {
+                    $newDate=$newDate->addMonth(1);
+                    faktor::create([
+                        'user_id'           =>$scholarship->user_id,
+                        'checkout_id'       =>$status_checkout->id,
+                        'product_id'        =>$request->course_id,
+                        'type'              =>'course',
+                        'date_createfaktor' =>$request->date_payment,
+                        'date_faktor'       =>$newDate->format('Y/m/d'),
+                        'fi'                =>$remaining/$request->type_payment,
+                    ]);
+                }
+                alert()->success('اطلاعات پرداخت با موفقیت ثبت شد')->persistent('بستن');
+                $student=student::where('user_id','=',$scholarship->user_id)
+                            ->where('course_id','=',$request->course_id)
+                            ->first();
+                if(is_null($student))
+                {
+                    student::create([
+                        'user_id'   =>$scholarship->user_id,
+                        'course_id' =>$request->course_id,
+                        'status'    =>1,
+                        'date_fa'   =>$request->date_payment,
+                        'time_fa'   =>$request->time_fa,
+                    ]);
+                }
+                
+            }
+            else
+            {
+                alert()->error('خطا در صبت اطلاعات درگاه')->persistent('بستن');
+            }
+        }
+        else
+        {
+            alert()->error('خطا در ثبت اطلاعات پرداخت بورسیه')->persistent('بستن');
+        }
+
+        return back();
+
+
+
+    }
 
 }

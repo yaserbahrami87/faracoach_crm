@@ -153,6 +153,12 @@
 
 @section('footerScript')
     <!--  DATE SHAMSI PICKER  --->
+<script>
+    import Lockscreen from "../../../../public/dashboard/pages/examples/lockscreen.html";
+    export default {
+        components: {Lockscreen}
+    }
+</script>
     <script src="{{asset('/js/kamadatepicker.min.js')}}"></script>
     <script src="{{asset('/js/kamadatepicker.holidays.js')}}"></script>
     <script>
@@ -353,6 +359,13 @@
         }
     </script>
 
+    <script>
+        $('#score_payment').change(function()
+        {
+            $('#fi_final_payment').val(($('#fi_payment').val())-((parseInt($('#fi_payment').val())* parseInt($(this).val()))/100));
+        });
+    </script>
+
     <script src="{{asset('js/timepicker.js')}}"></script>
     <script>
         $(document).ready(function()
@@ -361,4 +374,6 @@
             jQuery('#time_payment').timepicker();
         });
     </script>
+
+
 @endsection

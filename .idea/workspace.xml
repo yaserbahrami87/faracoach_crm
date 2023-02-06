@@ -4,9 +4,10 @@
     <list default="true" id="f3849cf8-ae8a-47cc-891c-72c8c9af69d2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/fa/validation.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/fa/validation.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/scholarship/payment.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/scholarship/payment.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/scholarship/scholarship.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/scholarship/scholarship.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/scholarship/users.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/scholarship/users.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -338,7 +339,11 @@
       <workItem from="1674648967800" duration="8121000" />
       <workItem from="1674889615713" duration="18923000" />
       <workItem from="1675154184316" duration="623000" />
-      <workItem from="1675235897021" duration="23279000" />
+      <workItem from="1675235897021" duration="27506000" />
+      <workItem from="1675432802601" duration="2028000" />
+      <workItem from="1675580932473" duration="12376000" />
+      <workItem from="1675627979097" duration="5381000" />
+      <workItem from="1675668359412" duration="3662000" />
     </task>
     <servers />
   </component>

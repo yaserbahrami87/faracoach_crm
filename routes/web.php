@@ -259,6 +259,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::get('/scholarship/result/report','ScholarshipController@report_result');
     Route::post('/scholarship/{scholarship}/score_store','ScholarshipController@scoreStore');
     Route::post('/scholarship/{scholarship}/changestatusIntroductionLetter','ScholarshipController@changestatusIntroductionLetter');
+    Route::post('/scholarship/{scholarship}/register/financial','ScholarshipController@register_financial');
     Route::resource('scholarship','ScholarshipController');
 
     //Route Scholarship Interview

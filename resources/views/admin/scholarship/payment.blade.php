@@ -6,59 +6,61 @@
         </a>
     </div>
     <div class="row">
-        <div class="col-md-4 mx-auto">
+        <div class="col-md-4 mx-auto mb-4">
             <div class="collapse" id="collapseFinancial">
-                <form>
+                <form method="post" action="/admin/scholarship/{{$scholarship->id}}/register/financial">
+                    {{csrf_field()}}
                     <div class="form-group">
                         <label for="course_id_payment">دوره  ثبت نام</label>
                         <select class="form-control" id="course_id_payment" name="course_id">
                             <option disabled selected>انتخاب کنید</option>
                             @foreach($courses as $item)
-                                <option value="{{$item->id}}">{{$item->course}}</option>
+                                <option value="{{$item->id}}" @if($item->id==old('course_id')) selected @endif >{{$item->course}}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="fi_payment">مبلغ دوره ثبت نام شده</label>
-                        <input type="text" class="form-control" id="fi_payment" name="fi">
+                        <input type="text" class="form-control" id="fi_payment" name="fi" value="{{old('fi')}}">
                         <small class="text-muted">قیمت به تومان می باشد</small>
                     </div>
                     <div class="form-group">
                         <label for="score_payment">امتیاز بورسیه</label>
-                        <input type="number" min="0" max="100" class="form-control" id="score_payment" name="score">
+                        <input type="number" min="0" max="100" class="form-control" id="score_payment" name="score" value="{{old('score')}}" />
                         <small class="text-muted">بین 0 تا 100 می باشد</small>
                     </div>
                     <div class="form-group">
                         <label for="fi_final_payment">قیمت نهایی</label>
-                        <input type="text"  class="form-control" id="fi_final_payment" name="fi_final">
+                        <input type="text"  class="form-control" id="fi_final_payment" name="fi_final" readonly value="{{old('fi_final')}}"  />
                         <small class="text-muted">قیمت به تومان می باشد</small>
                     </div>
                     <div class="form-group">
                         <label for="pre_payment">پیش پرداخت</label>
-                        <input type="text"  class="form-control" id="pre_payment" name="pre_payment">
+                        <input type="text"  class="form-control" id="pre_payment" name="pre_payment" value="{{old('pre_payment')}}"  />
                         <small class="text-muted">قیمت به تومان می باشد</small>
                     </div>
                     <div class="form-group">
                         <label for="date_payment">تاریخ واریز</label>
-                        <input type="text"  class="form-control" id="date_payment" name="date_fa" autocomplete="off" />
+                        <input type="text"  class="form-control" id="date_payment" name="date_payment" autocomplete="off" value="{{old('date_payment')}}" />
                     </div>
                     <div class="form-group">
                         <label for="time_payment">ساعت واریز</label>
-                        <input type="text"  class="form-control" id="time_payment" name="time_fa" autocomplete="off" />
+                        <input type="text"  class="form-control" id="time_payment" name="time_fa" autocomplete="off" value="{{old('time_fa')}}" />
                     </div>
                     <div class="form-group">
                         <label for="course_id_payment">تعداد قسط</label>
                         <select class="form-control"  name="type_payment">
                             <option disabled selected>انتخاب کنید</option>
                             @for($i=1;$i<=12;$i++)
-                                <option value="{{$i}}"> {{$i}} قسط</option>
+                                <option value="{{$i}}" @if(old('type_payment')==$i) selected  @endif> {{$i}} قسط</option>
                             @endfor
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="authority">کد پیگیری واریزی</label>
-                        <input type="text"  class="form-control" id="authority" name="authority"  />
+                        <label for="authority">کد واریزی</label>
+                        <input type="text"  class="form-control" id="authority" name="authority"  value="{{old('authority')}}" />
                     </div>
+                    <button type="submit" class="btn btn-success" >ثبت </button>
                 </form>
             </div>
         </div>
