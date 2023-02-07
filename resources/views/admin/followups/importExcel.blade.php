@@ -63,7 +63,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="nextfollowup_date_fa"> تاریخ پیگیری بعد<span class="text-danger">*</span></label>
+                    <label for="nextfollowup_date_fa"> تاریخ پیگیری بعد</label>
                     <div class="form-group">
                         <input type="text" class="form-control  @error('nextfollowup_date_fa') is-invalid @enderror" id="nextfollowup_date_fa" name="nextfollowup_date_fa" />
                     </div>

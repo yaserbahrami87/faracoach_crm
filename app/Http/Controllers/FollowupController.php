@@ -8,6 +8,7 @@ use App\problemfollowup;
 use App\User;
 use App\user_type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 
 class FollowupController extends BaseController
@@ -304,7 +305,7 @@ class FollowupController extends BaseController
             'comment'               =>'required|string',
             'date_fa'               =>'required|string',
             'time_fa'               =>'required|string',
-            'nextfollowup_date_fa'  =>'required|string',
+            'nextfollowup_date_fa'  =>'nullable|string',
         ]);
         $collection = fastexcel()->import($request->file('excel'));
         $i=0;
@@ -353,9 +354,13 @@ class FollowupController extends BaseController
             if($followup)
             {
                 $user->type=$request->type;
+                if(is_null($user->followby_expert))
+                    {
+                        $array1=['315','316','317'];
+                        $user->followby_expert=Arr::random($array1);
+                    }
                 $user->save();
             }
-
             $i++;
         }
 
