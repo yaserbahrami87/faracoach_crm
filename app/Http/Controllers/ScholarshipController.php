@@ -976,9 +976,8 @@ class ScholarshipController extends BaseController
     //شرکت نکرده ها در آزمون
     public function dontParticipateIntheExam()
     {
-        $scholarships=where('resource','=','scholarship')
-            ->scholarship::where('confirm_exam','=',0)
-            ->get();
+        $scholarships=scholarship::where('confirm_exam','=',0)
+                        ->get();
         foreach ($scholarships as $item)
         {
             $item->created_at=$this->changeTimestampToShamsi($item->created_at);
@@ -1364,7 +1363,7 @@ class ScholarshipController extends BaseController
                         'time_fa'   =>$request->time_fa,
                     ]);
                 }
-                
+
             }
             else
             {

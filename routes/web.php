@@ -333,6 +333,9 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     // Route Admin Followup
     Route::post('/followup/create','FollowupController@store');
 
+    Route::get('/followup/excel/create','FollowupController@createExcel');
+    Route::post('followup/excel/store','FollowupController@storeExcel');
+
     // File Manager
     Route::get('/filemanager',function()
     {
