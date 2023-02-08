@@ -523,6 +523,18 @@ class ReportAdminController extends BaseController
                         ->get();
 
 
+        $v = verta();
+        $ageTo20 = $users->wherebetween('datebirth', [$v->subYears(20), $v->now()]);
+        $age21to30 = $users->wherebetween('datebirth', [$v->now()->subYears(30), $v->now()->subYears(21)]);
+        $age31to40 = $users->wherebetween('datebirth', [$v->now()->subYears(40), $v->now()->subYears(31)]);
+        $age41to50 = $users->wherebetween('datebirth', [$v->now()->subYears(50), $v->now()->subYears(41)]);
+        $age51to60 = $users->wherebetween('datebirth', [$v->now()->subYears(60), $v->now()->subYears(50)]);
+        $age61to70 = $users->wherebetween('datebirth', [$v->now()->subYears(70), $v->now()->subYears(61)]);
+        $age71to80 = $users->wherebetween('datebirth', [$v->now()->subYears(80), $v->now()->subYears(71)]);
+        $age901to81 = $users->wherebetween('datebirth', [$v->now()->subYears(90), $v->now()->subYears(81)]);
+        $ages = ['ageTo20' => $ageTo20->count(), 'age21to30' => $age21to30->count(), 'age31to40' => $age31to40->count(), 'age41to50' => $age41to50->count(), 'age51to60' => $age51to60->count(), 'age61to70' => $age61to70->count(), 'age71to80' => $age71to80->count()];
+
+
 
 
 
@@ -532,6 +544,7 @@ class ReportAdminController extends BaseController
                             ->with('userType',$userType)
                             ->with('gettingKnow',$gettingKnow)
                             ->with('insert_user',$insert_user)
+                            ->with('ages',$ages)
                             ->with('tagsParent',$categoryTag->get_subCategoryTags)
                             ->with('users',$users);
     }
