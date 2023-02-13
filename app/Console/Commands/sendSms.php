@@ -44,7 +44,7 @@ class sendSms extends Command
         try {
             $sender = "10004002002020";
             $message = 'تست می باشد';
-            $tel='09158009312';
+            $tel='09376578529';
             $receptor = array($tel);
             $result = Kavenegar::Send($sender, $tel, $message);
             if ($result) {
