@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\assessment;
 use App\sms;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Auth;
@@ -80,6 +81,10 @@ class sendSms extends Command
             $msg['msg'] = $e->errorMessage();
             $msg['status']=false;
 
+            assessment::create([
+                'subject'=>$msg['msg']
+            ]);
+
 
         } catch (\Kavenegar\Exceptions\HttpException $e)
         {
@@ -87,6 +92,9 @@ class sendSms extends Command
             $msg=[];
             $msg['msg'] = $e->errorMessage();
             $msg['status'] =false;
+            assessment::create([
+                'subject'=>$msg['msg']
+            ]);
 
         }
     }
