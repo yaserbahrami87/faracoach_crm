@@ -106,7 +106,7 @@ class ScholarshipController extends BaseController
 //            'introduce'     =>'nullable|string',
             'cooperation'   =>'required|string',
             'applicant'     =>'required|numeric',
-            'resume'        =>'nullable|mimes:jpeg,jpg,pdf,doc,png|max:600',
+            'resume'        =>'nullable|mimes:jpeg,jpg,pdf,doc,png|max:1024',
         ]);
 
         $check=scholarship::where('user_id','=',Auth::user()->id)
@@ -729,7 +729,7 @@ class ScholarshipController extends BaseController
             'gettingknow'   =>'nullable|string',
             'cooperation'   =>'nullable|string',
             'applicant'     =>'nullable|numeric',
-            'resume'        =>'nullable|mimes:jpeg,jpg,pdf,doc,png|max:600',
+            'resume'        =>'nullable|mimes:jpeg,jpg,pdf,doc,png|max:1024',
         ]);
 
         $scholarship=scholarship::where('user_id','=',Auth::user()->id)
@@ -1239,8 +1239,8 @@ class ScholarshipController extends BaseController
            'types'      =>'required|array',
            'gettingknow'=>'required|between:1,3',
            'cooperation'=>'nullable|string',
-            'applicant' =>'required|between:1,2',
-            'resume'    =>'required|mimes:docx,doc,pdf,jpg,png|max:600',
+           'applicant' =>'required|between:1,2',
+           'resume'    =>'required|mimes:docx,doc,pdf,jpg,png|max:1024',
         ]);
         $scholarship->update($request->all());
         if($request->has('resume')&&$request->file('resume')->isValid())

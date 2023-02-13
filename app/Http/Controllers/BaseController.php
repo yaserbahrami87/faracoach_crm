@@ -103,7 +103,8 @@ class BaseController extends Controller
                 return $msg;
             }
 
-        } catch (\Kavenegar\Exceptions\ApiException $e) {
+        } catch (\Kavenegar\Exceptions\ApiException $e)
+        {
             // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
             if(Auth::check())
             {
