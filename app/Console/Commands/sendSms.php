@@ -46,7 +46,7 @@ class sendSms extends Command
             $message = 'تست می باشد';
             $tel='09376578529';
             $receptor = array($tel);
-            $result = Kavenegar::Send($sender, $tel, $message);
+            $result =NULL; //Kavenegar::Send($sender, $tel, $message);
             if ($result) {
                 foreach ($result as $r) {
                     $messageid = $r->messageid;
