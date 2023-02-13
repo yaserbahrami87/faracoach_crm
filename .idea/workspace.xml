@@ -2,9 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3849cf8-ae8a-47cc-891c-72c8c9af69d2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/financial/faktor_edit.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/financial/faktor_insert.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReportAdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReportAdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/reports/report_advance.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/reports/report_advance.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FaktorController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FaktorController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/faktor.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/faktor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/financial/faktor-all.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/financial/faktor-all.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/user/financial.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/user/financial.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -187,6 +192,7 @@
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\css" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\resources\views\admin\financial" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\resources\views\admin\booking" />
     </key>
   </component>
@@ -343,7 +349,9 @@
       <workItem from="1675668359412" duration="8461000" />
       <workItem from="1675753674864" duration="13617000" />
       <workItem from="1675778848301" duration="38000" />
-      <workItem from="1675840670991" duration="2626000" />
+      <workItem from="1675840670991" duration="11779000" />
+      <workItem from="1675927799877" duration="5757000" />
+      <workItem from="1676270130758" duration="8772000" />
     </task>
     <servers />
   </component>

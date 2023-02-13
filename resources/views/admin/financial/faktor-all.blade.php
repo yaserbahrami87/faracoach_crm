@@ -39,6 +39,7 @@
                         <thead>
                         <tr>
                             <th>#</th>
+                            <th>فاکتور</th>
                             <th>مشخصات</th>
                             <th>محصول</th>
                             <th>تلفن</th>
@@ -53,6 +54,7 @@
                         @foreach($faktors as $item)
                             <tr class="@if(($dateNow>$item->date_faktor)&&($item->status==0)) table-danger @elseif($item->status==1) table-success @endif" >
                                 <td>{{$loop->iteration}}</td>
+                                <td>{{$item->id}}</td>
                                 <td>
                                     <a href="{{route('showUserForAdmin',[$item->user->id])}}" target="_blank">
                                         {{$item->user->fname." ".$item->user->lname}}

@@ -427,6 +427,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
 
     //faktor
     route::get('/faktor/all','FaktorController@faktorAdmin');
+    Route::get('/faktor/{user}/create','FaktorController@create');
     route::resource('faktor','FaktorController');
 
     // Page Builder

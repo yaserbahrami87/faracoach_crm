@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\course;
 use App\faktor;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class FaktorController extends Controller
+class FaktorController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -27,9 +29,14 @@ class FaktorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(User $user)
     {
-        //
+        $courses=course::orderby('id','desc')
+                    ->get();
+        return view('admin.financial.faktor_insert')
+                    ->with('user',$user)
+                    ->with('courses',$courses);
+
     }
 
     /**
@@ -40,7 +47,33 @@ class FaktorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'user_id'       =>'required|numeric',
+            'product_id'     =>'required|numeric',
+            'date_faktor'   =>'required|string|max:11',
+            'fi'            =>'required|numeric',
+            'status'        =>'boolean|in:0,1',
+            'authority'     =>'required_unless:status,0',
+            'date_pardakht' =>'required_unless:status,0',
+            'time_pardakht' =>'required_unless:status,0',
+        ]);
+
+        $faktor=faktor::create($request->all()+[
+                'type'              =>'course',
+                'date_createfaktor' =>$this->dateNow,
+                'insert_user_id'    =>Auth::user()->id,
+            ]);
+
+        if($faktor)
+        {
+            alert()->success('فاکتور با موفقیت ایجاد شد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در ایجاد فاکتور')->persistent('بستن');
+        }
+
+        return redirect('/admin/user/'.$request->user_id);
     }
 
     /**
@@ -62,7 +95,8 @@ class FaktorController extends Controller
      */
     public function edit(faktor $faktor)
     {
-        //
+        return view('admin.financial.faktor_edit')
+                        ->with('faktor',$faktor);
     }
 
     /**
@@ -74,7 +108,29 @@ class FaktorController extends Controller
      */
     public function update(Request $request, faktor $faktor)
     {
-        //
+
+        $this->validate($request,[
+            'date_faktor'   =>'required|string',
+            'fi'            =>'required|string',
+            'status'        =>'required|in:0,1',
+            'authority'     =>'required_unless:status,0',
+            'date_pardakht' =>'required_unless:status,0',
+            'time_pardakht' =>'required_unless:status,0',
+        ]);
+        $status=$faktor->update($request->all());
+        if($status)
+        {
+            alert()->success('بروزرسانی با موفقیت انجام شد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در بروزرسانی')->persistent('بستن');
+        }
+
+        return back();
+
+
+
     }
 
     /**

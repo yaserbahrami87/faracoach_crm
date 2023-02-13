@@ -1,5 +1,6 @@
 
 <div class="col-12 table-responsive mb-3">
+    <a href="/admin/faktor/{{$user->id}}/create" class="btn btn-primary">ایجاد فاکتور</a>
     <p>فاکتورهای ایجاد شده</p>
     <table class="dataTable table table-striped table-bordered" style="width:100%">
         <thead>
@@ -11,6 +12,7 @@
             <th>موعد پرداخت</th>
             <th>قیمت(تومان)</th>
             <th>وضعیت</th>
+            <th>ویرایش</th>
 
         </tr>
         </thead>
@@ -32,6 +34,13 @@
                         پرداخت نشده
                     @else
                         تسویه شد
+                    @endif
+                </td>
+                <td class="text-center">
+                    @if(($dateNow>$item->date_faktor)&&($item->status==0))
+                        <a href="/admin/faktor/{{$item->id}}/edit" class="btn btn-warning">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
                     @endif
                 </td>
             </tr>
