@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\sendSms::class,
+        Commands\todayBirthday::class,
     ];
 
     /**
@@ -25,6 +26,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
          $schedule->command('send:sms_debt_financial')->dailyAt('15:30');
+         $schedule->command('sendSms:todayBirthday')->dailyAt('10:00');
     }
 
     /**
