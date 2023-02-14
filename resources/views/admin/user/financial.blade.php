@@ -37,7 +37,7 @@
                     @endif
                 </td>
                 <td class="text-center">
-                    @if(($dateNow>$item->date_faktor)&&($item->status==0))
+                    @if(($item->status==0))
                         <a href="/admin/faktor/{{$item->id}}/edit" class="btn btn-warning">
                             <i class="bi bi-pencil-square"></i>
                         </a>

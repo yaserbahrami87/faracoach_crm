@@ -3,9 +3,11 @@
 namespace App\Console\Commands;
 
 use App\assessment;
+use App\faktor;
 use App\sms;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Auth;
+use Hekmatinasser\Verta\Verta;
 use Kavenegar;
 
 class sendSms extends Command
@@ -41,12 +43,29 @@ class sendSms extends Command
      */
     public function handle()
     {
+        $date = verta();
+        $dateNow = $date->format('Y/m/d');
+        $faktors=faktor::where('date_faktor','<',$dateNow)
+                    ->where('status','=',0)
+                    ->limit(10)
+                    ->get();
+
+        foreach($faktors as $item)
+        {
+
+            $msg=$item->user->fname.' '.$item->user->lname." عزیز\n"."با توجه به گذشت تاریخ واریزی شما به مبلغ ".number_format($item->fi) ." تومان در تاریخ ".$item->date_faktor." لطفا نسبت به واریز مبلغ اقدام نمایید\nفراکوچ";
+
+        }
+        $this->sendSms('09376578529',$msg);
+    }
+
+    public function sendSms($tel,$message)
+    {
+
         try {
             $sender = "10004002002020";
-            $message = 'تست می باشد';
-            $tel='09376578529';
             $receptor = array($tel);
-            $result =NULL; //Kavenegar::Send($sender, $tel, $message);
+            $result =Kavenegar::Send($sender, $tel, $message);
             if ($result) {
                 foreach ($result as $r) {
                     $messageid = $r->messageid;

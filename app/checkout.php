@@ -43,6 +43,7 @@ class checkout extends Model
     public function scholarship_course()
     {
         return $this->belongsTo('App\course','product_id','id');
+
     }
 
     public function faktor()
