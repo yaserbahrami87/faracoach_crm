@@ -24,8 +24,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
-         $schedule->command('send:sms')->everyMinute();
+         $schedule->command('send:sms_debt_financial')->dailyAt('15:30');
     }
 
     /**
