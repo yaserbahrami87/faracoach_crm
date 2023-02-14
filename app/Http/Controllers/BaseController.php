@@ -53,7 +53,7 @@ class BaseController extends Controller
         $this->dateNow = $dateNow->format('Y/m/d');
         $this->timeNow = $dateNow->format('H:i:s');
         //ایجاد لاگ در سیستم
-        visitor()->visit();
+//        visitor()->visit();
 
 
     }
