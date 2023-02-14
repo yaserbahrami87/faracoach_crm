@@ -52,6 +52,7 @@ class todayBirthday extends Command
         }
         $msg="تعداد ".$users->count()." پیامک برای تولد اعضای سایت ارسال شد";
         $this->sendSms('09153159020',$msg);
+        $this->sendSms('09376578529',$msg);
     }
 
     public function sendSms($tel,$message)
