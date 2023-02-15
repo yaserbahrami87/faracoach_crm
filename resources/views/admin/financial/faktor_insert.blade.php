@@ -15,7 +15,7 @@
                 <input id="fname" type="text" class="form-control" value="{{$user->fname.' '.$user->lname}}" disabled  />
             </div>
             <div class="form-group">
-                <label for="product_id">مورد فاکتور:
+                <label for="product_id">عنوان فاکتور:
                     <span class="text-danger text-bold">*</span>
                 </label>
                 <select class="form-control" id="product_id" name="product_id">

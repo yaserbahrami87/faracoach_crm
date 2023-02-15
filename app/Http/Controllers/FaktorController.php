@@ -95,7 +95,10 @@ class FaktorController extends BaseController
      */
     public function edit(faktor $faktor)
     {
+        $courses=course::orderby('id','desc')
+                        ->get();
         return view('admin.financial.faktor_edit')
+                        ->with('courses',$courses)
                         ->with('faktor',$faktor);
     }
 
@@ -116,6 +119,7 @@ class FaktorController extends BaseController
             'authority'     =>'required_unless:status,0',
             'date_pardakht' =>'required_unless:status,0',
             'time_pardakht' =>'required_unless:status,0',
+            'product_id'    =>'required|numeric',
         ]);
         $status=$faktor->update($request->all());
         if($status)
@@ -141,7 +145,17 @@ class FaktorController extends BaseController
      */
     public function destroy(faktor $faktor)
     {
-        //
+        $status= $faktor->delete();
+        if($status)
+        {
+            alert()->success('فاکتور با موفقیت حذف شد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در حذف فاکتور')->persistent('بستن');
+        }
+
+        return back();
     }
 
     //نمایش فاکتورها برای ادمین

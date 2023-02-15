@@ -19,8 +19,13 @@
                 <input id="fname" type="text" class="form-control"  value="{{$faktor->user->fname.' '.$faktor->user->lname}}" disabled  />
             </div>
             <div class="form-group">
-                <label for="course">صاحب فاکتور:</label>
-                <input id="course" type="text" class="form-control"  value="{{$faktor->course->course}}" disabled  />
+                <label for="product_id">عنوان فاکتور:</label>
+                <select class="form-control" id="product_id" name="product_id">
+                    <option disabled selected>انتخاب کنید</option>
+                    @foreach($courses as $item)
+                        <option value="{{$item->id}}" @if(old('product_id',$faktor->product_id)==$item->id) selected @endif>{{$item->course}}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="form-group">
                 <label for="date_createfaktor">تاریخ ایجاد فاکتور:</label>

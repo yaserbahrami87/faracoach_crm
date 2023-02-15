@@ -13,6 +13,7 @@
             <th>قیمت(تومان)</th>
             <th>وضعیت</th>
             <th>ویرایش</th>
+            <th>حذف</th>
 
         </tr>
         </thead>
@@ -41,6 +42,17 @@
                         <a href="/admin/faktor/{{$item->id}}/edit" class="btn btn-warning">
                             <i class="bi bi-pencil-square"></i>
                         </a>
+                    @endif
+                </td>
+                <td class="text-center">
+                    @if(($item->status==0))
+                        <form action="/admin/faktor/{{$item->id}}" method="post" onsubmit="return window.confirm('آیا از حذف فاکتور اطمینان دارید؟')">
+                            {{csrf_field()}}
+                            {{method_field('DELETE')}}
+                            <button class="btn btn-danger" type="submit">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </form>
                     @endif
                 </td>
             </tr>
