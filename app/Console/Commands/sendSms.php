@@ -52,11 +52,11 @@ class sendSms extends Command
         foreach($faktors as $item)
         {
             $msg=$item->user->fname.' '.$item->user->lname." عزیز\n"."با توجه به گذشت تاریخ واریزی شما به مبلغ ".number_format($item->fi) ." تومان در تاریخ ".$item->date_faktor." لطفا نسبت به واریز مبلغ اقدام نمایید\nفراکوچ";
-            $this->sendSms($item->user->tel,$msg);
+//            $this->sendSms($item->user->tel,$msg);
         }
         $msg="تعداد ".$faktors->count()." پیامک برای افراد بدهکار به فراکوچ ارسال شد";
-        $this->sendSms('09153159020',$msg);
-        $this->sendSms('09197136078',$msg);
+//        $this->sendSms('09153159020',$msg);
+//        $this->sendSms('09197136078',$msg);
     }
 
     public function sendSms($tel,$message)

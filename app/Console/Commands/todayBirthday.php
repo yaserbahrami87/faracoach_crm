@@ -48,10 +48,10 @@ class todayBirthday extends Command
         foreach ($users as $user)
         {
             $msg=$user->fname." ".$user->lname." عزیز\n"."زادروزت شیرین، پر عشق و نور آفرین باد.\n"."قهقهه هایی آسمانی و آرامش زلال زندگی را برایت آرزو داریم . . .\n"."موسسه بین المللی فراکوچ\n"."لغو: 9";
-            $this->sendSms($user->tel,$msg);
+            //$this->sendSms($user->tel,$msg);
         }
         $msg="تعداد ".$users->count()." پیامک برای تولد اعضای سایت ارسال شد";
-        $this->sendSms('09153159020',$msg);
+//        $this->sendSms('09153159020',$msg);
         $this->sendSms('09376578529',$msg);
     }
 
