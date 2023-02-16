@@ -131,7 +131,8 @@ class FaktorController extends BaseController
             alert()->error('خطا در بروزرسانی')->persistent('بستن');
         }
 
-        return back();
+        return redirect('/admin/user/'.$faktor->user_id);
+
 
 
 

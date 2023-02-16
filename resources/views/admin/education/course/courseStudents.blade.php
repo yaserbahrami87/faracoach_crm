@@ -62,12 +62,19 @@
                 </tr>
                 <tr class="collapse" id="collaps{{$item->user->id}}">
                     <td colspan="7">
-
+                        @if($item->user->checkouts->where('status','=',1)->count()!=0)
+                            @foreach($item->user->checkouts->where('status','=',1) as $item_checkout)
+                                {{$item_checkout->authority}}
+                            @endforeach
+                        @endif
                     </td>
                 </tr>
             @endforeach
             </tbody>
         </table>
+    </div>
+    <div class="col-12">
+
     </div>
 @endsection
 

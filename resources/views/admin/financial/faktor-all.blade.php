@@ -47,14 +47,20 @@
                             <th>موعد پرداخت</th>
                             <th>قیمت(تومان)</th>
                             <th>وضعیت</th>
+                            <th>ویرایش</th>
+                            <th>حذف</th>
                             <th></th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($faktors as $item)
-                            <tr class="@if(($dateNow>$item->date_faktor)&&($item->status==0)) table-danger @elseif($item->status==1) table-success @endif" >
+                            <tr class="text-center @if(($dateNow>$item->date_faktor)&&($item->status==0)) table-danger @elseif($item->status==1) table-success @endif" >
                                 <td>{{$loop->iteration}}</td>
-                                <td>{{$item->id}}</td>
+                                <td>
+                                    <a href="{{route('showUserForAdmin',[$item->user->id])}}" target="_blank">
+                                    {{$item->id}}
+                                    </a>
+                                </td>
                                 <td>
                                     <a href="{{route('showUserForAdmin',[$item->user->id])}}" target="_blank">
                                         {{$item->user->fname." ".$item->user->lname}}
@@ -77,6 +83,24 @@
                                     @endif
                                 </td>
                                 <td>
+                                    @if(($item->status==0))
+                                        <a href="/admin/faktor/{{$item->id}}/edit" class="btn btn-warning">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </a>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if(($item->status==0))
+                                        <form action="/admin/faktor/{{$item->id}}" method="post" onsubmit="return window.confirm('آیا از حذف فاکتور اطمینان دارید؟')">
+                                            {{csrf_field()}}
+                                            {{method_field('DELETE')}}
+                                            <button class="btn btn-danger" type="submit">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </form>
+                                    @endif
+                                </td>
+                                <td>
                                     @if($item->status==0)
                                         <form method="post" action="/panel/faktor/checkout/pardakhtaghsat">
                                             {{csrf_field()}}
@@ -93,6 +117,7 @@
                     </table>
                 </div>
             </div>
+
             <div class="tab-pane fade" id="nav-expireFaktor" role="tabpanel" aria-labelledby="nav-expireFaktor-tab">
                 <p>جمع مبالغ: {{number_format($faktorsExpire->sum('fi'))}} تومان</p>
                 <div class="col-12 table-responsive">
@@ -107,12 +132,14 @@
                             <th>موعد پرداخت</th>
                             <th>قیمت(تومان)</th>
                             <th>وضعیت</th>
+                            <th>ویرایش</th>
+                            <th>حذف</th>
                             <th></th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($faktorsExpire as $item)
-                            <tr class="@if(($dateNow>$item->date_faktor)&&($item->status==0)) table-danger @elseif($item->status==1) table-success @endif" >
+                            <tr class="text-center @if(($dateNow>$item->date_faktor)&&($item->status==0)) table-danger @elseif($item->status==1) table-success @endif" >
                                 <td>{{$loop->iteration}}</td>
                                 <td>
                                     <a href="{{route('showUserForAdmin',[$item->user->id])}}" target="_blank">
@@ -138,6 +165,24 @@
                                     @endif
                                 </td>
                                 <td>
+                                    @if(($item->status==0))
+                                        <a href="/admin/faktor/{{$item->id}}/edit" class="btn btn-warning">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </a>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if(($item->status==0))
+                                        <form action="/admin/faktor/{{$item->id}}" method="post" onsubmit="return window.confirm('آیا از حذف فاکتور اطمینان دارید؟')">
+                                            {{csrf_field()}}
+                                            {{method_field('DELETE')}}
+                                            <button class="btn btn-danger" type="submit">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </form>
+                                    @endif
+                                </td>
+                                <td>
                                     @if($item->status==0)
                                         <form method="post" action="/panel/faktor/checkout/pardakhtaghsat" >
                                             {{csrf_field()}}
@@ -154,6 +199,7 @@
                     </table>
                 </div>
             </div>
+
             <div class="tab-pane fade" id="nav-acceptFaktor" role="tabpanel" aria-labelledby="nav-acceptFaktor-tab">
                 <p>جمع مبالغ: {{number_format($faktorsSuccess->sum('fi'))}} تومان</p>
                 <div class="col-12 table-responsive">
@@ -168,6 +214,8 @@
                             <th>موعد پرداخت</th>
                             <th>قیمت(تومان)</th>
                             <th>وضعیت</th>
+                            <th>ویرایش</th>
+                            <th>حذف</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -197,6 +245,24 @@
                                     @endif
                                 </td>
                                 <td>
+                                    @if(($item->status==0))
+                                        <a href="/admin/faktor/{{$item->id}}/edit" class="btn btn-warning">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </a>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if(($item->status==0))
+                                        <form action="/admin/faktor/{{$item->id}}" method="post" onsubmit="return window.confirm('آیا از حذف فاکتور اطمینان دارید؟')">
+                                            {{csrf_field()}}
+                                            {{method_field('DELETE')}}
+                                            <button class="btn btn-danger" type="submit">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </form>
+                                    @endif
+                                </td>
+                                <td>
                                     @if($item->status==0)
                                         <form method="post" action="/panel/faktor/checkout/pardakhtaghsat">
                                             {{csrf_field()}}
@@ -205,7 +271,6 @@
                                         </form>
                                     @endif
                                 </td>
-
                             </tr>
                         @endforeach
                         </tbody>
@@ -215,11 +280,6 @@
             </div>
         </div>
     </div>
-
-
-
-
-
 @endsection
 
 
