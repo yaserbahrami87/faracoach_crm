@@ -166,7 +166,7 @@
             <td>امتیاز شما</td>
 
         </tr>
-        @foreach($scholarship->user->get_invitations->where('resource','=','بورسیه تحصیلی') as $item)
+        @foreach($scholarship->user->get_invitations->wherein('resource',['بورسیه تحصیلی','کمپین گره']) as $item)
             <tr>
                 <td>
                     <div class="form-check">
