@@ -575,6 +575,7 @@
                 @include('admin.followups')
             </div>
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <a href="/admin/faktor/{{$user->id}}/create" class="btn btn-primary">ایجاد فاکتور</a>
                 @if($user->faktors->count()==0 && ($user->checkouts->where('status','=',1)->count()==0) )
                     <div class="alert alert-warning">
                         فاکتور مالی وجود ندارد

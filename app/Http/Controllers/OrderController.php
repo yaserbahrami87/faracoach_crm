@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\cart;
 use App\checkout;
 use App\course;
+use App\faktor;
 use App\lib\zarinpal;
 use App\order;
 use App\student;
@@ -82,6 +83,8 @@ class OrderController extends BaseController
                     'authority'     => $res,
                 ]);
 
+
+
                 if($status) {
                     $status = checkout::create([
                         'user_id'       => Auth::user()->id,
@@ -101,6 +104,25 @@ class OrderController extends BaseController
             if ($status) {
                 if($sum_final_off==0)
                 {
+
+//                    faktor::create(
+//                        [
+//                        'user_id'               =>Auth::user()->id,
+//                        'checkout_id'           =>$item->checkout_id,
+//                        'product_id'            =>$item->product_id,
+//                        'type'                  =>$item->type,
+//                        'date_createfaktor'     =>$this->dateNow,
+//                        'date_faktor'           =>$this->dateNow,
+//                        'fi'                    =>$sum_final_off,
+//                        'authority'             =>time(),
+//                        'description'           =>'پرداخت شده',
+//                        'date_pardakht'         =>$this->dateNow,
+//                        'time_pardakht'         =>$this->timeNow,
+//                        'checkout_id_pardakht'  =>$item->checkout_id,
+//                        'insert_user_id'        =>Auth::user()->id,
+//                    ]);
+
+
                     if ($item->type == 'course')
                     {
                         $status=student::create(

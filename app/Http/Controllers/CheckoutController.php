@@ -241,17 +241,27 @@ class CheckoutController extends BaseController
 
                 if ($result['Status'] == 100)
                 {
-                    foreach ($checkout as $item) {
+                    foreach ($checkout as $item)
+                    {
+                        faktor::create([
+                            'user_id'               =>Auth::user()->id,
+                            'checkout_id'           =>$item->checkout_id,
+                            'product_id'            =>$item->product_id,
+                            'type'                  =>$item->type,
+                            'date_createfaktor'     =>$this->dateNow,
+                            'date_faktor'           =>$this->dateNow,
+                            'fi'                    =>$item->price,
+                            'authortity'            =>$item->authortity,
+                            'description'           =>'پرداخت شده',
+                            'date_pardakht'         =>$this->dateNow,
+                            'time_pardakht'         =>$this->timeNow,
+                            'checkout_id_pardakht'  =>$item->id,
+                            'insert_user_id'        =>Auth::user()->id,
+                        ]);
 
                         $item->status = 1;
                         $item->description = 'خرید انجام شد';
                         $item->save();
-
-//                        $check = checkout::where('authority', '=', $request->get('Authority'))
-//                                        ->get();
-
-
-
                         if ($item->type == 'event')
                         {
                             $event = $this->get_events($item->product_id, NULL, NULL, NULL, NULL, NULL, 'first');
@@ -470,6 +480,8 @@ class CheckoutController extends BaseController
 
                         }
                     }
+
+
 
 
                     $msg='<p>پرداخت با موفقیت انجام شد</p><p>شماره پیگیری: '.$item->authority.'</p>';

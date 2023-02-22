@@ -116,6 +116,12 @@
                 <li class="nav-item " role="collabration">
                     <button class="nav-link" id="collabration-tab" data-toggle="tab" data-target="#collabration" type="button" role="tab" aria-controls="collabration" aria-selected="false">همکاری</button>
                 </li>
+                <!--
+                <li class="nav-item " role="contract">
+                    <button class="nav-link" id="contract-tab" data-toggle="tab" data-target="#contract" type="button" role="tab" aria-controls="contract" aria-selected="false">تعهدنامه</button>
+                </li>
+                -->
+
                 <li class="nav-item" role="support">
                     <button class="nav-link" id="support-tab" data-toggle="tab" data-target="#support" type="button" role="tab" aria-controls="support" aria-selected="false">پشتیبان</button>
                 </li>
@@ -153,6 +159,11 @@
                 <li class="nav-item " role="collabration">
                     <button class="nav-link" id="collabration-tab" data-toggle="tab" data-target="#collabration" type="button" role="tab" aria-controls="collabration" aria-selected="false">همکاری</button>
                 </li>
+                <!--
+                <li class="nav-item " role="contract">
+                    <button class="nav-link" id="contract-tab" data-toggle="tab" data-target="#contract" type="button" role="tab" aria-controls="contract" aria-selected="false">تعهدنامه</button>
+                </li>
+                -->
                 <li class="nav-item" role="support">
                     <button class="nav-link" id="support-tab" data-toggle="tab" data-target="#support" type="button" role="tab" aria-controls="support" aria-selected="false">پشتیبان</button>
                 </li>
@@ -247,6 +258,9 @@
             <div class="tab-pane fade " id="payment" role="tabpanel" aria-labelledby="payment-tab">
                 @include('user.scholarship.payment')
             </div>
+            <div class="tab-pane fade " id="contract" role="tabpanel" aria-labelledby="contract-tab">
+                @include('user.scholarship.contract')
+            </div>
             <div class="tab-pane fade " id="support" role="tabpanel" aria-labelledby="support-tab">
                 @include('user.scholarship.support')
             </div>
@@ -303,6 +317,16 @@
     <script src="{{asset('/js/kamadatepicker.holidays.js')}}"></script>
     <script>
         kamaDatepicker('datebirth',
+            {
+                markHolidays:true,
+                markToday:true,
+                twodigit:true,
+                closeAfterSelect:true,
+                nextButtonIcon: "fa fa-arrow-circle-right",
+                previousButtonIcon: "fa fa-arrow-circle-left"
+            });
+
+        kamaDatepicker('tarikh_zemanat',
             {
                 markHolidays:true,
                 markToday:true,

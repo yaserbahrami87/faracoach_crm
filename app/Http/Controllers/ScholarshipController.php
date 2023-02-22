@@ -1212,11 +1212,12 @@ class ScholarshipController extends BaseController
 
 
 
-    public function create_knot()
+    public function create_knot(Request $request)
     {
         if(isset($request->introduce))
         {
-            $request->session()->put('introduce',$request->introduce);
+            session()->put('introduce',$request->introduce);
+
         }
 
 

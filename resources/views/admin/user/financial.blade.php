@@ -1,6 +1,6 @@
 
 <div class="col-12 table-responsive mb-3">
-    <a href="/admin/faktor/{{$user->id}}/create" class="btn btn-primary">ایجاد فاکتور</a>
+
     <p>فاکتورهای ایجاد شده</p>
     <table class="dataTable table table-striped table-bordered" style="width:100%">
         <thead>

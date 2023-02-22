@@ -56,7 +56,11 @@
                     <h6 class="mt-2">لینک دعوت اختصاصی شما جهت اشتراک گذاری با دوستان:</h6>
                 </div>
                 <div class="col-12 col-sm-7 col-md-55 col-lg-7 col-xl-7">
-                    <p class=" p-2 dir-rtl text-center"  id="personal_link">{{asset('/scholarship/register?introduce='.Auth::user()->id)}}</p>
+                    @if($scholarship->resource=='knot')
+                        <p class=" p-2 dir-rtl text-center"  id="personal_link">{{asset('/knot/register?introduce='.Auth::user()->id)}}</p>
+                    @else
+                        <p class=" p-2 dir-rtl text-center"  id="personal_link">{{asset('/scholarship/register?introduce='.Auth::user()->id)}}</p>
+                    @endif
                 </div>
             </div>
         </li>
