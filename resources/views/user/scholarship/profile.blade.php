@@ -76,6 +76,11 @@
         @keyframes animate-positive{
             0% { width: 0; }
         }
+
+        #bd-root-tarikh_zemanat
+        {
+            display: inline !important;
+        }
     </style>
 @endsection
 
@@ -116,11 +121,9 @@
                 <li class="nav-item " role="collabration">
                     <button class="nav-link" id="collabration-tab" data-toggle="tab" data-target="#collabration" type="button" role="tab" aria-controls="collabration" aria-selected="false">همکاری</button>
                 </li>
-                <!--
                 <li class="nav-item " role="contract">
                     <button class="nav-link" id="contract-tab" data-toggle="tab" data-target="#contract" type="button" role="tab" aria-controls="contract" aria-selected="false">تعهدنامه</button>
                 </li>
-                -->
 
                 <li class="nav-item" role="support">
                     <button class="nav-link" id="support-tab" data-toggle="tab" data-target="#support" type="button" role="tab" aria-controls="support" aria-selected="false">پشتیبان</button>
@@ -159,11 +162,9 @@
                 <li class="nav-item " role="collabration">
                     <button class="nav-link" id="collabration-tab" data-toggle="tab" data-target="#collabration" type="button" role="tab" aria-controls="collabration" aria-selected="false">همکاری</button>
                 </li>
-                <!--
                 <li class="nav-item " role="contract">
                     <button class="nav-link" id="contract-tab" data-toggle="tab" data-target="#contract" type="button" role="tab" aria-controls="contract" aria-selected="false">تعهدنامه</button>
                 </li>
-                -->
                 <li class="nav-item" role="support">
                     <button class="nav-link" id="support-tab" data-toggle="tab" data-target="#support" type="button" role="tab" aria-controls="support" aria-selected="false">پشتیبان</button>
                 </li>
@@ -266,6 +267,9 @@
             </div>
             <div class="tab-pane fade " id="collabration" role="tabpanel" aria-labelledby="collabration-tab">
                 @include('user.scholarship.collabration')
+            </div>
+            <div class="tab-pane fade " id="contract" role="tabpanel" aria-labelledby="contract-tab">
+                @include('user.scholarship.contract')
             </div>
         </div>
     </div>

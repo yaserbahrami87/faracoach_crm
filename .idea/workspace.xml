@@ -2,16 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3849cf8-ae8a-47cc-891c-72c8c9af69d2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/user/scholarship/contract.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Console/Commands/todayBirthday.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Commands/todayBirthday.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CheckoutController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CheckoutController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/VerifyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/VerifyController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/profile.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/user/financial.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/user/financial.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/scholarship/introduce.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/scholarship/introduce.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/scholarship/introduce.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/scholarship/introduce.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/scholarship/contract.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/scholarship/contract.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/user/scholarship/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/scholarship/profile.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -371,7 +364,7 @@
       <workItem from="1676960903284" duration="2145000" />
       <workItem from="1676973190678" duration="2364000" />
       <workItem from="1676980659301" duration="3709000" />
-      <workItem from="1677050577080" duration="7071000" />
+      <workItem from="1677050577080" duration="10564000" />
     </task>
     <servers />
   </component>
