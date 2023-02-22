@@ -1,7 +1,8 @@
 @if(!is_null($scholarship->financial))
               <div class="card-body" >
                   <div class="border border-1 p-1 mb-2 mt-1 shadow-sm shadow">
-                      <form method="post" action="" enctype="multipart/form-data">
+                      <form method="post" action="/panel/warrany" enctype="multipart/form-data">
+                          {{csrf_field()}}
                           <p class="text-center">تعهدنامه آموزشی</p>
                           <p class="text-center"> «دوره آموزش کوچینگ و تربیت کوچ (سطح 1) آکادمی بین المللی فراکوچ»</p>
                           <p>فرهیخته گرامی، ضمن عرض سلام و خوش آمد، شرایط و تعهدات حضور شما در دوره به شرح ذیل می باشد. لطفا قبل از حضور، این برگه را پرینت، مطالعه و تکمیل بفرمایید.</p>

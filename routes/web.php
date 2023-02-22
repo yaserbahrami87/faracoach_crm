@@ -120,6 +120,9 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     Route::patch('/scholarship/me/collabrationAccept/{collabration_accept}','CollabrationAcceptController@update');
     Route::resource('collabration_accept','CollabrationAcceptController');
 
+    //warranty
+    Route::resource('warrany','WarranyController');
+
 
     //knot
     Route::patch('/knot/updateregister/{scholarship}','ScholarshipController@updateregister');

@@ -116,7 +116,7 @@
                     <button class="nav-link  @if(($scholarship->view_score==1)) bg-success @endif " id="result-tab" data-toggle="tab" data-target="#result" type="button" role="tab" aria-controls="result" aria-selected="false">نتیجه</button>
                 </li>
                 <li class="nav-item" role="payment">
-                    <button class="nav-link @if(!is_null($scholarship->financial)) bg-success @endif  @if(is_null($scholarship->user->get_scholarshipInterview)) disabled @endif" id="payment-tab" data-toggle="tab" data-target="#payment" type="button" role="tab" aria-controls="payment" aria-selected="false">ثبت نام</button>
+                    <button class="nav-link @if(!is_null($scholarship->financial)) bg-success @endif " id="payment-tab" data-toggle="tab" data-target="#payment" type="button" role="tab" aria-controls="payment" aria-selected="false">ثبت نام</button>
                 </li>
                 <li class="nav-item " role="collabration">
                     <button class="nav-link" id="collabration-tab" data-toggle="tab" data-target="#collabration" type="button" role="tab" aria-controls="collabration" aria-selected="false">همکاری</button>
@@ -157,7 +157,7 @@
                     <button class="nav-link  @if(($scholarship->view_score==1)) bg-success @endif " id="result-tab" data-toggle="tab" data-target="#result" type="button" role="tab" aria-controls="result" aria-selected="false">نتیجه</button>
                 </li>
                 <li class="nav-item" role="payment">
-                    <button class="nav-link @if(!is_null($scholarship->financial)) bg-success @endif  @if(is_null($scholarship->user->get_scholarshipInterview)) disabled @endif" id="payment-tab" data-toggle="tab" data-target="#payment" type="button" role="tab" aria-controls="payment" aria-selected="false">ثبت نام</button>
+                    <button class="nav-link @if(!is_null($scholarship->financial)) bg-success @endif  " id="payment-tab" data-toggle="tab" data-target="#payment" type="button" role="tab" aria-controls="payment" aria-selected="false">ثبت نام</button>
                 </li>
                 <li class="nav-item " role="collabration">
                     <button class="nav-link" id="collabration-tab" data-toggle="tab" data-target="#collabration" type="button" role="tab" aria-controls="collabration" aria-selected="false">همکاری</button>
