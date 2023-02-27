@@ -148,7 +148,7 @@
                           <p>کل مبلغ قرارداد {{number_format($scholarship->get_financial->scholarship_course->fi)}} تومان می¬باشد؛ که مبلغ {{number_format($scholarship->get_financial->schoalrshipPayment->prepayment)}} تومان به‌عنوان پیش‌پرداخت در تاریخ  {{$scholarship->get_financial->schoalrshipPayment->date_fa}} واریز گردید؛</p>
                           <p> شرایط پرداخت الباقی مبلغ قرارداد با توافق طرفین به‌صورت نقد/ اقساط/تهاتر بورسیه به شرح زیر توافق گردید؛</p>
                           <p>مانده مبلغ قابل پرداخت {{number_format($scholarship->get_financial->schoalrshipPayment->remaining)}} تومان می باشد؛</p>
-                          <p>درصورت نیاز توافق با واحد ثبت نام ، درخواست گواهینامه زودتر از موعد یا شرایط خاص ( دانش پذیر یک فقره چک ضمانت/ سفته ) به شماره <input type="number" name="shomare_zemanat"  /> به تاریخ <input type="text" name="tarikh_zemanat" id="tarikh_zemanat"  /> عهده بانک
+                          <p>درصورت نیاز (توافق با واحد ثبت نام ، درخواست گواهینامه زودتر از موعد یا شرایط خاص ) دانش پذیر یک فقره چک ضمانت/ سفته به شماره <input type="number" name="shomare_zemanat"  /> به تاریخ <input type="text" name="tarikh_zemanat" id="tarikh_zemanat"  /> عهده بانک
                               <select name="bak_zemanat">
                                   <option>بانک ملی</option>
                                   <option>بانک صادرات</option>
@@ -181,20 +181,24 @@
                               <input type="number" name="fi_zemanat"  />
                               تومان) در اختیار آموزشگاه قرار میدهد که در صورت انجام به موقع تعهدات پس از پایان دوره به دانش پذیر عودت خواهد شد.</p>
                           <p>الباقی مبلغ قرارداد به‌صورت اقساطی در تعداد {{$scholarship->get_financial->get_faktors->count()}}  قسط به شرح زیر پرداخت می‌شود:</p>
-                          <table class="table table-striped table-bordered text-center">
-                              <tr>
-                                  <th>#</th>
-                                  <th>تاریخ فاکتور</th>
-                                  <th>مبلغ فاکتور</th>
-                              </tr>
-                              @foreach($scholarship->get_financial->get_faktors as $faktor)
-                              <tr>
-                                  <td>{{$loop->iteration}}</td>
-                                  <td>{{$faktor->date_faktor}}</td>
-                                  <td>{{number_format($faktor->fi)}} تومان</td>
-                              </tr>
-                              @endforeach
-                          </table>
+                          <div class="row">
+                              <div class="col-12 col-md-8 mx-auto">
+                                  <table class="table table-striped table-bordered text-center">
+                                      <tr>
+                                          <th>#</th>
+                                          <th>تاریخ فاکتور</th>
+                                          <th>مبلغ فاکتور</th>
+                                      </tr>
+                                      @foreach($scholarship->get_financial->get_faktors as $faktor)
+                                      <tr>
+                                          <td>{{$loop->iteration}}</td>
+                                          <td>{{$faktor->date_faktor}}</td>
+                                          <td>{{number_format($faktor->fi)}} تومان</td>
+                                      </tr>
+                                      @endforeach
+                                  </table>
+                              </div>
+                          </div>
 
 
 
@@ -207,11 +211,15 @@
                                   <div class="form-group">
                                       <label for="signature_zemanat">امضا</label>
                                       <input type="file" class="form-control-file" id="signature_zemanat" name="signature_zemanat">
-                                      <small>لطفا عکس امضا خود را بارگذاری کنید</small>
+                                      <small class="d-block">لطفا عکس امضا خود را بارگذاری کنید</small>
+                                      <small class="d-block">حداکثر 1024 کیلوبایت</small>
+                                      <small class="d-block"> فرمت های مورد قبول : jpeg , jpg , png</small>
+
                                   </div>
                               </div>
                               <div class="col-12 col-md-3">
                                   <img src="{{asset('/images/signature.png')}}" class="img-fluid" />
+                                  <small class="text-muted">نمونه امضا مورد قبول</small>
                               </div>
                           </div>
                           <button class="btn btn-success">تعهدنامه آموزشی فوق را میپذیرم</button>
