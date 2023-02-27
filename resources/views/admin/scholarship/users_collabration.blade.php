@@ -46,7 +46,7 @@
                                     {{$item->get_financial->scholarship_course['course']}}
                                 </td>
                                 <td>
-                                    @if($item->user->get_followbyExpert->type!=3)
+                                    @if($item->user->get_followbyExpert['type']!=3)
                                         {{$item->user->followups[$item->user->followups->count()-1]->insertUser->fname.' '.$item->user->followups[$item->user->followups->count()-1]->insertUser->lname}}
                                     @else
                                         <p>{{$item->user->get_followbyExpert->fname.' '.$item->user->get_followbyExpert->lname}}</p>
