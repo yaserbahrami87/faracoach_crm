@@ -8,7 +8,7 @@
                           <input type="hidden" name="type" value="scholarship_payment" />
                           <p class="text-center">تعهدنامه آموزشی</p>
                           <p class="text-center"> «دوره آموزش کوچینگ و تربیت کوچ (سطح 1) آکادمی بین المللی فراکوچ»</p>
-                          <p>فرهیخته گرامی، ضمن عرض سلام و خوش آمد، شرایط و تعهدات حضور شما در دوره به شرح ذیل می باشد. لطفا قبل از حضور، این برگه را پرینت، مطالعه و تکمیل بفرمایید.</p>
+                          <p>فرهیخته گرامی، ضمن عرض سلام و خوش آمد، شرایط و تعهدات حضور شما در دوره به شرح ذیل می باشد. لطفا قبل از حضور در دوره، تعهدنامه را به دقت مطالعه و با بارگذاری نمونه امضا خود تایید بفرمایید.</p>
 
                           <b>1.	مشخصات دانش پذیر:</b>
                           <table class="table table-bordered table-striped table-hover text-left" style="line-height: 0;margin-top: 15px;">
@@ -148,7 +148,7 @@
                           <p>کل مبلغ قرارداد {{number_format($scholarship->get_financial->scholarship_course->fi)}} تومان می¬باشد؛ که مبلغ {{number_format($scholarship->get_financial->schoalrshipPayment->prepayment)}} تومان به‌عنوان پیش‌پرداخت در تاریخ  {{$scholarship->get_financial->schoalrshipPayment->date_fa}} واریز گردید؛</p>
                           <p> شرایط پرداخت الباقی مبلغ قرارداد با توافق طرفین به‌صورت نقد/ اقساط/تهاتر بورسیه به شرح زیر توافق گردید؛</p>
                           <p>مانده مبلغ قابل پرداخت {{number_format($scholarship->get_financial->schoalrshipPayment->remaining)}} تومان می باشد؛</p>
-                          <p>دانش پذیر یک فقره چک ضمانت/ سفته ( به شماره <input type="number" name="shomare_zemanat"  /> به تاریخ <input type="text" name="tarikh_zemanat" id="tarikh_zemanat"  /> عهده بانک
+                          <p>درصورت نیاز توافق با واحد ثبت نام ، درخواست گواهینامه زودتر از موعد یا شرایط خاص ( دانش پذیر یک فقره چک ضمانت/ سفته ) به شماره <input type="number" name="shomare_zemanat"  /> به تاریخ <input type="text" name="tarikh_zemanat" id="tarikh_zemanat"  /> عهده بانک
                               <select name="bak_zemanat">
                                   <option>بانک ملی</option>
                                   <option>بانک صادرات</option>
@@ -214,7 +214,7 @@
                                   <img src="{{asset('/images/signature.png')}}" class="img-fluid" />
                               </div>
                           </div>
-                          <button class="btn btn-success">ثبت درخواست</button>
+                          <button class="btn btn-success">تعهدنامه آموزشی فوق را میپذیرم</button>
                       </form>
                   </div>
               </div>
