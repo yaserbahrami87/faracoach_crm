@@ -50,4 +50,9 @@ class checkout extends Model
     {
         return $this->hasOne('App\faktor','authority','authority');
     }
+
+    public function get_faktors()
+    {
+        return $this->hasMany('App\faktor','checkout_id','id');
+    }
 }

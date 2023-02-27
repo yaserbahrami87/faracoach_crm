@@ -43,12 +43,10 @@
                     <li><a href="/admin/scholarship/dont_prticipate_in_the_exam"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" > شرکت نکرده/قبول نشده آزمون</span></a></li>
                     <li><a href="/admin/scholarship/financial"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" > ثبت نام شده ها</span></a></li>
                     <li><a href="/admin/scholarship/result/report"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >گزارش امتیاز کاربران</span></a></li>
+                    <li><a href="/admin/users/collabrations" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >درخواست های تهاتر</span></a></li>
+                    <li><a href="/admin/warrany" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >ارسال تعهدنامه</span></a></li>
 
-                    <li><a href=" nav-item has-sub "><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >درخواست ها</span></a>
-                        <ul class="menu-content">
-                            <li><a href="/admin/users/collabrations" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >درخواست های ارسالی</span></a></li>
-                        </ul>
-                    </li>
+
                     <li><a href=" nav-item has-sub "><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >تنظیمات</span></a>
                         <ul class="menu-content">
                             <li><a href="/admin/collabration_category" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >زمینه های همکاری</span></a></li>

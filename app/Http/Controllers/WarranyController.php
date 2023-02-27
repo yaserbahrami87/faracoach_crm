@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\scholarship;
 use App\warrany;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 
-class WarranyController extends Controller
+class WarranyController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +17,12 @@ class WarranyController extends Controller
      */
     public function index()
     {
-        //
+        $warranies=warrany::get();
+
+        return view('admin.warrany.warrany_list')
+            ->with('warranies',$warranies);
+
+
     }
 
     /**
@@ -41,7 +49,54 @@ class WarranyController extends Controller
             'tarikh_zemanat'    =>'nullable|string|max:20',
             'bak_zemanat'       =>'nullable|string',
             'fi_zemanat'        =>'nullable|numeric',
+            'signature_zemanat' =>'nullable|mimes:docx,doc,pdf,jpg,png|max:1024',
         ]);
+
+        $warrany=warrany::create([
+            'user_id'       =>Auth::user()->id,
+            'product_id'    =>$request->product_id,
+            'type'          =>$request->type,
+            'receipt'       =>$request->shomare_zemanat,
+            'date_fa'       =>$request->tarikh_zemanat,
+            'fi'            =>$request->fi_zemanat,
+            'bank'          =>$request->bak_zemanat,
+        ]);
+
+        $scholarship=scholarship::where('user_id','=',Auth::user()->id)
+            ->first();
+
+        if ($request->has('signature_zemanat') && $request->file('signature_zemanat')->isValid()) {
+            $file = $request->file('signature_zemanat');
+            $personal_image = "signature-scholarship-" . $scholarship->user->tel . "." . $request->file('signature_zemanat')->extension();
+            $path = public_path('documents/signatures/');
+            $files = $request->file('signature_zemanat')->move($path, $personal_image);
+//            $img=Image::make($files->getRealPath());
+//            $img->resize(350,350);
+//            $img->save($path.'small-'.$personal_image);
+            $warrany->signature = $personal_image;
+            $warrany->save();
+        }
+
+        $scholarship->warrany_id=$warrany->id;
+        $status=$scholarship->save();
+        if($status)
+        {
+            $msg=$scholarship->user->fname.' '.$scholarship->user->lname." عزیز\n"."دزخواست تعهدنامه شما در سیستم ثبت شد";
+            $this->sendSms($scholarship->user->tel,$msg);
+            $msg=$scholarship->user->fname.' '.$scholarship->user->lname."درخواست تعهدنامه خود را درسیستم ثبت کرد";
+            $this->sendSms('09153159020',$msg);
+            alert()->success('تعهدنامه با موفقیت ذخیره شد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در ثبت تعهدنامه')->persistent('بستن');
+        }
+
+        return back();
+
+
+
+
 
 
     }

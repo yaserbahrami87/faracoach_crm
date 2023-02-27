@@ -1,8 +1,11 @@
 @if(!is_null($scholarship->financial))
+    @if(is_null($scholarship->warrany_id))
               <div class="card-body" >
                   <div class="border border-1 p-1 mb-2 mt-1 shadow-sm shadow">
                       <form method="post" action="/panel/warrany" enctype="multipart/form-data">
                           {{csrf_field()}}
+                          <input type="hidden" name="product_id" value="{{$scholarship->get_financial->product_id}}" />
+                          <input type="hidden" name="type" value="scholarship_payment" />
                           <p class="text-center">تعهدنامه آموزشی</p>
                           <p class="text-center"> «دوره آموزش کوچینگ و تربیت کوچ (سطح 1) آکادمی بین المللی فراکوچ»</p>
                           <p>فرهیخته گرامی، ضمن عرض سلام و خوش آمد، شرایط و تعهدات حضور شما در دوره به شرح ذیل می باشد. لطفا قبل از حضور، این برگه را پرینت، مطالعه و تکمیل بفرمایید.</p>
@@ -47,9 +50,9 @@
                               </tr>
                               <tr>
                                   <th>تلفن تماس ثابت</th>
-                                  <td class="text-center">{{$scholarship->user->tel}}</td>
+                                  <td class="text-center" dir="ltr">{{$scholarship->user->tel}}</td>
                                   <th>تلفن همراه	</th>
-                                  <td class="text-center">{{$scholarship->user->tel}}</td>
+                                  <td class="text-center" dir="ltr">{{$scholarship->user->tel}}</td>
                               </tr>
                               <tr>
                                   <th>نشانی محل سکونت</th>
@@ -81,7 +84,7 @@
                               </tr>
                               <tr>
                                   <th>مدت زمان دوره</th>
-                                  <td class="text-center">از تاریخ {{$scholarship->get_financial->scholarship_course->start}}  لغایت   {{$scholarship->get_financial->scholarship_course->end}}  به مدت   {{$scholarship->get_financial->scholarship_course->duration_date}}</td>
+                                  <td class="text-center" colspan="3">از تاریخ {{$scholarship->get_financial->scholarship_course->start}}  لغایت   {{$scholarship->get_financial->scholarship_course->end}}  به مدت   {{$scholarship->get_financial->scholarship_course->duration_date}}</td>
                               </tr>
                           </table>
                           <b>	3.	تعهدات موسسه:</b>
@@ -142,7 +145,7 @@
                           <p>در صورت عدم انجام تعهدات مالی توسط دانش‌پذیر، ارائه خدمات آموزشی به وی مقدور نمیباشد.</p>
                           <p>چنانچه وقوع فورس ماژور اعم از بروز هرگونه رخداد طبیعی و غیرطبیعی و قهری که  انجام تعهدنامه را غیرممکن نماید یا باعث تعلیق انجام تعهدات طرفین برای مدت بیشتر از 1 ماه شوند، هریک از طرفین حق فسخ تعهدنامه را خواهند داشت.</p>
                           <b>7.	شرایط پرداخت شهریه:</b>
-                          <p>کل مبلغ قرارداد {{number_format($scholarship->get_financial->scholarship_course->fi)}} تومان می¬باشد؛ که مبلغ {{number_format($scholarship->get_financial->scholarship_course->prepayment)}} تومان به‌عنوان پیش‌پرداخت در تاریخ  {{$scholarship->get_financial->schoalrshipPayment->date_fa}} واریز گردید؛</p>
+                          <p>کل مبلغ قرارداد {{number_format($scholarship->get_financial->scholarship_course->fi)}} تومان می¬باشد؛ که مبلغ {{number_format($scholarship->get_financial->schoalrshipPayment->prepayment)}} تومان به‌عنوان پیش‌پرداخت در تاریخ  {{$scholarship->get_financial->schoalrshipPayment->date_fa}} واریز گردید؛</p>
                           <p> شرایط پرداخت الباقی مبلغ قرارداد با توافق طرفین به‌صورت نقد/ اقساط/تهاتر بورسیه به شرح زیر توافق گردید؛</p>
                           <p>مانده مبلغ قابل پرداخت {{number_format($scholarship->get_financial->schoalrshipPayment->remaining)}} تومان می باشد؛</p>
                           <p>دانش پذیر یک فقره چک ضمانت/ سفته ( به شماره <input type="number" name="shomare_zemanat"  /> به تاریخ <input type="text" name="tarikh_zemanat" id="tarikh_zemanat"  /> عهده بانک
@@ -177,20 +180,47 @@
                               به مبلغ
                               <input type="number" name="fi_zemanat"  />
                               تومان) در اختیار آموزشگاه قرار میدهد که در صورت انجام به موقع تعهدات پس از پایان دوره به دانش پذیر عودت خواهد شد.</p>
-                          <p>الباقی مبلغ قرارداد به‌صورت اقساطی در تعداد {{$scholarship->get_financial->faktor}}  قسط به شرح زیر پرداخت می‌شود:</p>
+                          <p>الباقی مبلغ قرارداد به‌صورت اقساطی در تعداد {{$scholarship->get_financial->get_faktors->count()}}  قسط به شرح زیر پرداخت می‌شود:</p>
+                          <table class="table table-striped table-bordered text-center">
+                              <tr>
+                                  <th>#</th>
+                                  <th>تاریخ فاکتور</th>
+                                  <th>مبلغ فاکتور</th>
+                              </tr>
+                              @foreach($scholarship->get_financial->get_faktors as $faktor)
+                              <tr>
+                                  <td>{{$loop->iteration}}</td>
+                                  <td>{{$faktor->date_faktor}}</td>
+                                  <td>{{number_format($faktor->fi)}} تومان</td>
+                              </tr>
+                              @endforeach
+                          </table>
+
+
 
                           <p><b>تبصره 9:</b> بدیهیست فقط چکهای ثبت  شده در سامانه صیاد امکان پذیرش دارند.</p>
                           <p> <b>تبصره 10:</b> شرکت در آزمون پایان دوره و همچنین صدور و دریافت گواهینامه، منوط به تسویه حساب کامل دانش پذیر می باشد؛</p>
+
                           <p class="mt-3">اینجانب {{Auth::user()->fname.' '.Auth::user()->lname}} با امضاء این تعهدنامه تایید مینمایم که کلیه مندرجات آن را مطالعه نموده و قبول مینمایم.</p>
-                          <div class="form-group">
-                              <label for="signature_zemanat">امضا</label>
-                              <input type="file" class="form-control-file" id="signature_zemanat" name="signature_zemanat">
-                              <small>لطفا عکس امضا خود را بارگذاری کنید</small>
+                          <div class="row">
+                              <div class="col-12 col-md-9">
+                                  <div class="form-group">
+                                      <label for="signature_zemanat">امضا</label>
+                                      <input type="file" class="form-control-file" id="signature_zemanat" name="signature_zemanat">
+                                      <small>لطفا عکس امضا خود را بارگذاری کنید</small>
+                                  </div>
+                              </div>
+                              <div class="col-12 col-md-3">
+                                  <img src="{{asset('/images/signature.png')}}" class="img-fluid" />
+                              </div>
                           </div>
                           <button class="btn btn-success">ثبت درخواست</button>
                       </form>
                   </div>
-
-
               </div>
+    @else
+        <div class="alert alert-success">
+            تعهدنامه شما با موفقیت در سیستم ثبت شده است
+        </div>
+    @endif
 @endif

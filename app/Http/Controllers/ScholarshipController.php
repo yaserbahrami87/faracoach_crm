@@ -568,14 +568,15 @@ class ScholarshipController extends BaseController
                 $gettingKnow_child_list=NULL;
             }
 
+
             $condition=['parent_id','=','0'];
             $gettingKnow_parent_list=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
 
             $getFollowbyCategory=$this->getFollowbyCategory();
 
 
-            if(!is_null($scholarship->user->get_scholarshipInterview))
-            {
+//            if(!is_null($scholarship->user->get_scholarshipInterview))
+//            {
                 $courses=course::where('start','>',$this->dateNow)
                     ->where('id','<>',3)
                     ->where('id','<>',15)
@@ -609,11 +610,11 @@ class ScholarshipController extends BaseController
 //                    })
                     ->orderby('id','desc')
                     ->get();
-            }
-            else
-            {
-                $courses=NULL;
-            }
+//            }
+//            else
+//            {
+//                $courses=NULL;
+//            }
 
             //امتیاز
             $count_scholarshipIntroduce=0;
@@ -1378,8 +1379,8 @@ class ScholarshipController extends BaseController
 
         return back();
 
-
-
     }
+
+
 
 }

@@ -282,6 +282,9 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     //scholarship collabration
     Route::get('/users/collabrations','ScholarshipController@collabrations');
 
+    //warranty
+    Route::resource('warrany','WarranyController');
+
 
 
     //  ROUTE SETTINGS

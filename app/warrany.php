@@ -9,4 +9,14 @@ class warrany extends Model
     protected $fillable=[
         'user_id','product_id','type','receipt','date_fa','bank','fi','signature','description','status'
     ];
+
+    public function scholarship()
+    {
+        return $this->hasOne('App\scholarship');
+    }
+
+    public function user()
+    {
+        $this->hasOne('App\User');
+    }
 }
