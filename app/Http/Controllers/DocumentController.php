@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\document;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class DocumentController extends BaseController
 {
@@ -38,55 +41,86 @@ class DocumentController extends BaseController
      */
     public function store(Request $request)
     {
-        if(!file_exists(public_path('documents/files/'.$request->file('file')->getClientOriginalName()))) {
-            $this->validate($request, [
-                'title'         => ['required','string', 'max:30'],
-                'shortlink'     => ['required','string','max:250','unique:documents'],
-                'content'       => ['required','string'],
-                'permission'    => ['required','numeric'],
-                'file'          => ['required','max:40000'],
-            ]);
-            $image = $request->file('file')->getClientOriginalName();
-            $path = public_path('/documents/files/');
-            $file = $request->file('file')->move($path, $image);
-            $request['file']=$image;
-            $request['date_fa']=$this->dateNow;
-            $request['time_fa']=$this->timeNow;
+        $this->validate($request,[
+           'title'      =>'required|string|max:200',
+            'shortlink' =>'required|string|unique:documents,shortlink',
+            'content'   =>'required|string',
+            'file'      =>'required|',
+        ]);
 
-            $status = document::create([
-                'title'                     => $request['title'],
-                'shortlink'                 => $request['shortlink'],
-                'content'                   => $request['content'],
-                'permission'                => $request['permission'],
-                'file'                      => $image,
-                'date_fa'                   => $request['date_fa'],
-                'time_fa'                   => $request['time_fa'],
-            ]);
-            if($status)
-            {
-                $msg="فایل با موفقیت در سیستم ثبت شد";
-                $errorStatus="success";
-                return back()
-                    ->with('msg',$msg)
-                    ->with('errorStatus',$errorStatus);
-            }
-            else
-            {
-                $msg="خطا در ثبت فایل";
-                $errorStatus="danger";
-                return back()
-                    ->with('msg',$msg)
-                    ->with('errorStatus',$errorStatus);
-            }
+        $document=document::create($request->all());
+        if ($request->has('file') && $request->file('file')->isValid()) {
+            $file = $request->file('file');
+            $file_name = $request->title . "." . $request->file('file')->extension();
+            $path = 'public/'.$file_name;
+            $status=Storage::disk('local')->put($path,file_get_contents($request->file));
+        }
+
+        $document->file=$file_name;
+        $status=$document->save();
+
+        if($status)
+        {
+            alert()->success('فایل با موفقیت بارگذاری شد')->persistent('بستن');
         }
         else
         {
-            $msg="فایلی با این نام موجود است";
-            $errorStatus="danger";
-            return back()
-                ->with('msg',$msg)
-                ->with('errorStatus',$errorStatus);
+            alert()->error('خطا در بارگذاری فایل')->persistent('بستن');
         }
+
+        return back();
+
+
+
+//        if(!file_exists(public_path('documents/files/'.$request->file('file')->getClientOriginalName()))) {
+//            $this->validate($request, [
+//                'title'         => ['required','string', 'max:30'],
+//                'shortlink'     => ['required','string','max:250','unique:documents'],
+//                'content'       => ['required','string'],
+//                'permission'    => ['required','numeric'],
+//                'file'          => ['required','max:40000'],
+//            ]);
+//            $image = $request->file('file')->getClientOriginalName();
+//            $path = public_path('/documents/files/');
+//            $file = $request->file('file')->move($path, $image);
+//            $request['file']=$image;
+//            $request['date_fa']=$this->dateNow;
+//            $request['time_fa']=$this->timeNow;
+//
+//            $status = document::create([
+//                'title'                     => $request['title'],
+//                'shortlink'                 => $request['shortlink'],
+//                'content'                   => $request['content'],
+//                'permission'                => $request['permission'],
+//                'file'                      => $image,
+//                'date_fa'                   => $request['date_fa'],
+//                'time_fa'                   => $request['time_fa'],
+//            ]);
+//            if($status)
+//            {
+//                $msg="فایل با موفقیت در سیستم ثبت شد";
+//                $errorStatus="success";
+//                return back()
+//                    ->with('msg',$msg)
+//                    ->with('errorStatus',$errorStatus);
+//            }
+//            else
+//            {
+//                $msg="خطا در ثبت فایل";
+//                $errorStatus="danger";
+//                return back()
+//                    ->with('msg',$msg)
+//                    ->with('errorStatus',$errorStatus);
+//            }
+//        }
+//        else
+//        {
+//            $msg="فایلی با این نام موجود است";
+//            $errorStatus="danger";
+//            return back()
+//                ->with('msg',$msg)
+//                ->with('errorStatus',$errorStatus);
+//        }
 
     }
 
@@ -96,12 +130,15 @@ class DocumentController extends BaseController
      * @param  \App\document  $document
      * @return \Illuminate\Http\Response
      */
-    public function show($document)
+    public function show(document $document)
     {
-        $document=document::where('shortlink','=',$document)
-                        ->first();
-        return view('panelAdmin.showDocument')
-                        ->with('document',$document);
+        $document->clicks++;
+        $document->save();
+        return Storage::disk('local')->download('public/'.$document->file);
+//        $document=document::where('shortlink','=',$document)
+//                        ->first();
+//        return view('panelAdmin.showDocument')
+//                        ->with('document',$document);
     }
 
     /**
@@ -112,7 +149,7 @@ class DocumentController extends BaseController
      */
     public function edit(document $document)
     {
-        return view('panelAdmin.editDocument')
+        return view('admin.documents.editDocument')
                     ->with('document',$document);
     }
 
@@ -127,43 +164,31 @@ class DocumentController extends BaseController
     {
         $this->validate($request, [
             'title'         => ['nullable','string', 'max:30'],
-            'shortlink'     => ['nullable','string','max:250'],
+            'shortlink'     => ['nullable','string','max:250',Rule::unique('documents')->ignore($document->id)],
             'content'       => ['nullable','string'],
             'permission'    => ['nullable','numeric'],
             'file'          => ['nullable'],
         ]);
+        $status=$document->update($request->all());
         if ($request->has('file') && $request->file('file')->isValid()) {
-            if(!file_exists(public_path('documents/files/'.$request->file('file')->getClientOriginalName()))) {
-                $image = $request->file('file')->getClientOriginalName();
-                $path = public_path('/documents/files/');
-                $file = $request->file('file')->move($path, $image);
-                $request['file'] = $image;
-                $request['date_fa'] = $this->dateNow;
-                $request['time_fa'] = $this->timeNow;
-            }
-        }
-        try {
-            $document->update($request->all());
-            $document['file']=$request->file('file')->getClientOriginalName();
-            $document->update();
-        } catch (Throwable $e) {
-
-            $msg = $e->errorInfo[2];
-            $errorStatus = "danger";
-            return back()->with('msg', $msg)
-                ->with('errorStatus', $errorStatus);
+            $file = $request->file('file');
+            $file_name = $request->title . "." . $request->file('file')->extension();
+            $path = 'public/'.$file_name;
+            $status=Storage::disk('local')->put($path,file_get_contents($request->file));
+            $document->file=$file_name;
+            $document->save();
         }
 
-        if (isset($image)) {
-            $document['file'] = $image;
+        if($status)
+        {
+            alert()->success('فایل بروزرسانی شد')->persistent('بستن');
         }
-        $document->save();
-        $msg = "فایل با موفقیت به روزرسانی شد";
-        $errorStatus = "success";
+        else
+        {
+            alert()->error('خطا در بروزرسانی')->persistent('بستن');
+        }
 
-        return redirect('/admin/documents')
-                ->with('msg', $msg)
-                ->with('errorStatus', $errorStatus);
+        return back();
     }
 
     /**
@@ -174,21 +199,17 @@ class DocumentController extends BaseController
      */
     public function destroy(document $document)
     {
+        Storage::disk('local')->delete('public/'.$document->file);
         $status=$document->delete();
         if($status)
         {
-            $msg = "فایل با موفقیت حذف شد";
-            $errorStatus = "success";
-            return back()->with('msg', $msg)
-                ->with('errorStatus', $errorStatus);
+            alert()->success('فایل با موفقیت حف شد')->persistent('بستن');
         }
         else
         {
-            $msg = "خطا در حذف فایل";
-            $errorStatus = "danger";
-            return back()->with('msg', $msg)
-                ->with('errorStatus', $errorStatus);
+            alert()->error('خطا در حذف فایل')->persistent('بستن');
         }
+        return back();
     }
 
     public function indexUser()
@@ -201,6 +222,7 @@ class DocumentController extends BaseController
 
     public function showUser($document)
     {
+
         $document=document::where('shortlink','=',$document)
             ->first();
         return view('panelUser.showDocument')

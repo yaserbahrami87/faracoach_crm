@@ -8,6 +8,7 @@ use App\collabration_accept;
 use App\collabration_category;
 use App\collabration_details;
 use App\course;
+use App\document;
 use App\faktor;
 use App\followup;
 use App\message;
@@ -289,6 +290,10 @@ class ScholarshipController extends BaseController
         $courses=course::orderby('id','desc')
                             ->get();
 
+        $documents=document::where('type','=','scholarship')
+                            ->where('status','=',1)
+                            ->get();
+
        return view('admin.scholarship.scholarship')
                     ->with('scholarship',$scholarship)
                     ->with('gettingKnow_child_list',$gettingKnow_child_list)
@@ -301,6 +306,7 @@ class ScholarshipController extends BaseController
                     ->with('result_final',$result_final)
                     ->with('collabration_category',$collabration_category)
                     ->with('courses',$courses)
+                    ->with('documents',$documents)
                     ->with('states',$states);
     }
 
@@ -701,6 +707,11 @@ class ScholarshipController extends BaseController
             $collabration_category=collabration_category::where('status','=',1)
                                 ->get();
 
+            $documents=document::where('type','=','scholarship')
+                                ->where('status','=',1)
+                                ->get();
+
+
 
             return  view('user.scholarship.profile')
                         ->with('messages',$messages)
@@ -716,6 +727,7 @@ class ScholarshipController extends BaseController
                         ->with('nextMonth',$nextMonth)
                         ->with('secondMonth',$secondMonth)
                         ->with('collabration_category',$collabration_category)
+                        ->with('documents',$documents)
                         ->with('scholarship',$scholarship);
         }
     }

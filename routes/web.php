@@ -65,8 +65,9 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     Route::get('/freepackages','AdminController@showFreePackages');
 
     //documents
-    Route::get('/documents','DocumentController@indexUser');
-    Route::get('/documents/{document}','DocumentController@showUser');
+//    Route::get('/documents','DocumentController@indexUser');
+//    Route::get('/documents/{document}','DocumentController@showUser');
+    Route::resource('documents','DocumentController');
 
     //POSTS
     Route::resource('post','PostController');

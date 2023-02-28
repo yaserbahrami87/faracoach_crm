@@ -124,7 +124,9 @@
                 <li class="nav-item " role="contract">
                     <button class="nav-link" id="contract-tab" data-toggle="tab" data-target="#contract" type="button" role="tab" aria-controls="contract" aria-selected="false">تعهدنامه</button>
                 </li>
-
+                <li class="nav-item " role="documents">
+                    <button class="nav-link" id="documents-tab" data-toggle="tab" data-target="#documents" type="button" role="tab" aria-controls="documents" aria-selected="false">محتوی</button>
+                </li>
                 <li class="nav-item" role="support">
                     <button class="nav-link" id="support-tab" data-toggle="tab" data-target="#support" type="button" role="tab" aria-controls="support" aria-selected="false">پشتیبان</button>
                 </li>
@@ -164,6 +166,9 @@
                 </li>
                 <li class="nav-item " role="contract">
                     <button class="nav-link" id="contract-tab" data-toggle="tab" data-target="#contract" type="button" role="tab" aria-controls="contract" aria-selected="false">تعهدنامه</button>
+                </li>
+                <li class="nav-item " role="documents">
+                    <button class="nav-link" id="documents-tab" data-toggle="tab" data-target="#documents" type="button" role="tab" aria-controls="documents" aria-selected="false">محتوی</button>
                 </li>
                 <li class="nav-item" role="support">
                     <button class="nav-link" id="support-tab" data-toggle="tab" data-target="#support" type="button" role="tab" aria-controls="support" aria-selected="false">پشتیبان</button>
@@ -212,23 +217,6 @@
                 @include('user.scholarship.exam')
 
             </div>
-
-            <!--
-            <div class="tab-pane fade " id="certificate" role="tabpanel" aria-labelledby="certificate-tab">
-                <p>برای کسب مدرک ICF بورسیه کوچینگ باید مراحل زیر را طی کنید:</p>
-                <ul>
-                    <li>شرکت در وبینار آموزشی بورسیه کوچینگ و وارد کرد کد های داده شده در بخش آموزش</li>
-                    <li>شرکت در آزمون بورسیه کوچینگ و کسب نمره قبولی در آزمون</li>
-                    <li>وارد کردن نام و نام خانوادگی خود به صورت انگلیسی در قسمت پروفایل</li>
-                </ul>
-                <div class="text-center">
-                    <a href="{{asset('/panel/scholarship/certificate/download')}}" class="btn btn-primary">دانلود مدرک</a>
-                </div>
-
-            </div>
-            -->
-
-
             <div class="tab-pane fade " id="interview" role="tabpanel" aria-labelledby="interview-tab">
                 <div class="card-body" >
                     @if($scholarship->view_score==1)
@@ -267,6 +255,9 @@
             </div>
             <div class="tab-pane fade " id="collabration" role="tabpanel" aria-labelledby="collabration-tab">
                 @include('user.scholarship.collabration')
+            </div>
+            <div class="tab-pane fade " id="documents" role="tabpanel" aria-labelledby="documents-tab">
+                @include('user.scholarship.documents')
             </div>
             <div class="tab-pane fade " id="contract" role="tabpanel" aria-labelledby="contract-tab">
                 @include('user.scholarship.contract')
@@ -307,6 +298,9 @@
         </div>
         <div role="collabration">
             <button class="btn btn-primary" id="collabration-tab" data-toggle="tab" data-target="#collabration" type="button" role="tab" aria-controls="collabration" aria-selected="false">همکاری</button>
+        </div>
+        <div role="documents">
+            <button class="btn btn-primary" id="documents-tab" data-toggle="tab" data-target="#documents" type="button" role="tab" aria-controls="collabration" aria-selected="false">محتوی</button>
         </div>
         <div role="support">
             <button class="btn btn-primary" id="support-tab" data-toggle="tab" data-target="#support" type="button" role="tab" aria-controls="support" aria-selected="false">پشتیبان</button>
