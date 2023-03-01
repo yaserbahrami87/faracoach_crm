@@ -42,7 +42,6 @@ class HomeController extends BaseController
         foreach ($posts as $item)
         {
             $item->time=$this->diff($item->created_at_post,'Asia/Tehran');
-
         }
 
         foreach ($tweets as $item)
@@ -67,12 +66,10 @@ class HomeController extends BaseController
             ->get();
 
         //آخرین کوچ های فعال
-        $last_coaches=User::join('coaches','users.id','=','coaches.user_id')
-                //->wherenotin('users.type',['2','3','4'])
-                ->where('users.status_coach','=',1)
-                ->orderby('users.last_login_at','desc')
-                ->limit(12)
-                ->get();
+        $last_coaches=User::where('status_coach','=',1)
+                    ->orderby('last_login_at','desc')
+                    ->limit(12)
+                    ->get();
 
 
         //متولدین ای ماه

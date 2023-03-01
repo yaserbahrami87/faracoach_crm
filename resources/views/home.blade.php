@@ -174,7 +174,7 @@
 @section('row1')
     <div class="row" id="">
         <div class="col-md-12 back">
-
+            <!--
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
@@ -192,6 +192,7 @@
                     <span class="sr-only">Next</span>
                 </button>
             </div>
+            -->
 
         </div>
     </div>
@@ -369,9 +370,9 @@
                         <div class="avatar pb-3 d-inline">
                             <a href="/coach/{{$item->username}}">
                                 @if(strlen($item->personal_image)>0)
-                                    <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="mr-3 rounded-circle border"  width="50px" height="50px"  alt="{{$item->fname}} {{$item->lname}}" data-toggle="tooltip" data-placement="top" title="{{$item->fname}} {{$item->lname}}" />
+                                    <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="mr-3 rounded-circle border"  width="50px" height="50px"  alt="{{$item->fname.' '.$item->lname}}" data-toggle="tooltip" data-placement="top" title="{{$item->fname.' '.$item->lname}}" />
                                 @else
-                                    <img src="{{asset('/documents/users/default-avatar.png')}}" class="mr-3 rounded-circle border"  width="50px" height="50px"  alt="{{$item->fname}} {{$item->lname}}" title="{{$item->fname}} {{$item->lname}}" data-toggle="tooltip" data-placement="top" />
+                                    <img src="{{asset('/documents/users/default-avatar.png')}}" class="mr-3 rounded-circle border"  width="50px" height="50px"  alt="{{$item->fname.' '.$item->lname}}" title="{{$item->fname.' '.$item->lname}}" data-toggle="tooltip" data-placement="top" />
                                 @endif
                             </a>
                         </div>
