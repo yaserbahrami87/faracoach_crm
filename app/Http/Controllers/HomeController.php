@@ -101,7 +101,8 @@ class HomeController extends BaseController
         $courses=course::where('start','>',$this->dateNow)
             ->where('id','<>',3)
             ->where('id','<>',15)
-            ->paginate(20);
+            ->limit(5)
+            ->get();
 
 
         return view('home')

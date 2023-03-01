@@ -53,9 +53,8 @@ class DocumentController extends BaseController
            'title'      =>'required|string|max:200',
             'shortlink' =>'required|string|unique:documents,shortlink',
             'content'   =>'required|string',
-            'file'      =>'required|max:10240',
+            'file'      =>'required',
         ]);
-
 
         $document=document::create($request->all());
         if ($request->has('file') && $request->file('file')->isValid()) {
