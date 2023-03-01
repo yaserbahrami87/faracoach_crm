@@ -15,7 +15,8 @@
                         <td>{{$loop->iteration}}</td>
                         <td>{{$document->title}}</td>
                         <td>{{$document->extension}}</td>
-                        <td>{{round(number_format($document->size/1024) )}}</td>
+                        <td>{{$document->clicks}}</td>
+                        <td>{{round(number_format($document->size/1024) )}} مگابایت</td>
                         <td>
                             <a href="/admin/documents/{{$document->id}}/edit" class="btn btn-warning">
                                 <i class="bi bi-pencil-square"></i>

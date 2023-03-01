@@ -707,9 +707,7 @@ class ScholarshipController extends BaseController
             $collabration_category=collabration_category::where('status','=',1)
                                 ->get();
 
-            $documents=document::where('type','=','scholarship')
-                                ->where('status','=',1)
-                                ->get();
+
 
 
 
@@ -727,7 +725,6 @@ class ScholarshipController extends BaseController
                         ->with('nextMonth',$nextMonth)
                         ->with('secondMonth',$secondMonth)
                         ->with('collabration_category',$collabration_category)
-                        ->with('documents',$documents)
                         ->with('scholarship',$scholarship);
         }
     }

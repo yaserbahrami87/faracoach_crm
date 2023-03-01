@@ -22,7 +22,7 @@
                         {{$document->extension}}
                     </td>
                     <td>
-                        {{$document->size}}
+                        {{round(number_format($document->size/1024) )}} مگابایت
                     </td>
                     <td>{{$document->clicks}}</td>
                     <td>

@@ -124,9 +124,6 @@
                 <li class="nav-item " role="contract">
                     <button class="nav-link" id="contract-tab" data-toggle="tab" data-target="#contract" type="button" role="tab" aria-controls="contract" aria-selected="false">تعهدنامه</button>
                 </li>
-                <li class="nav-item " role="documents">
-                    <button class="nav-link" id="documents-tab" data-toggle="tab" data-target="#documents" type="button" role="tab" aria-controls="documents" aria-selected="false">محتوی</button>
-                </li>
                 <li class="nav-item" role="support">
                     <button class="nav-link" id="support-tab" data-toggle="tab" data-target="#support" type="button" role="tab" aria-controls="support" aria-selected="false">پشتیبان</button>
                 </li>
@@ -167,9 +164,7 @@
                 <li class="nav-item " role="contract">
                     <button class="nav-link" id="contract-tab" data-toggle="tab" data-target="#contract" type="button" role="tab" aria-controls="contract" aria-selected="false">تعهدنامه</button>
                 </li>
-                <li class="nav-item " role="documents">
-                    <button class="nav-link" id="documents-tab" data-toggle="tab" data-target="#documents" type="button" role="tab" aria-controls="documents" aria-selected="false">محتوی</button>
-                </li>
+
                 <li class="nav-item" role="support">
                     <button class="nav-link" id="support-tab" data-toggle="tab" data-target="#support" type="button" role="tab" aria-controls="support" aria-selected="false">پشتیبان</button>
                 </li>
@@ -256,9 +251,7 @@
             <div class="tab-pane fade " id="collabration" role="tabpanel" aria-labelledby="collabration-tab">
                 @include('user.scholarship.collabration')
             </div>
-            <div class="tab-pane fade " id="documents" role="tabpanel" aria-labelledby="documents-tab">
-                @include('user.scholarship.documents')
-            </div>
+
             <div class="tab-pane fade " id="contract" role="tabpanel" aria-labelledby="contract-tab">
                 @include('user.scholarship.contract')
             </div>
@@ -299,9 +292,7 @@
         <div role="collabration">
             <button class="btn btn-primary" id="collabration-tab" data-toggle="tab" data-target="#collabration" type="button" role="tab" aria-controls="collabration" aria-selected="false">همکاری</button>
         </div>
-        <div role="documents">
-            <button class="btn btn-primary" id="documents-tab" data-toggle="tab" data-target="#documents" type="button" role="tab" aria-controls="collabration" aria-selected="false">محتوی</button>
-        </div>
+
         <div role="support">
             <button class="btn btn-primary" id="support-tab" data-toggle="tab" data-target="#support" type="button" role="tab" aria-controls="support" aria-selected="false">پشتیبان</button>
         </div>

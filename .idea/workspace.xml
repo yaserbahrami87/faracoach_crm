@@ -3,12 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="f3849cf8-ae8a-47cc-891c-72c8c9af69d2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DocumentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DocumentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/document.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/document.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/documents.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/documents/documents.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/master/right_menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/master/right_menu.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/master/right_menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/master/right_menu.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/scholarship/documents.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/documents/documents.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/documents/documents.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/documents/documents.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/scholarship/documents.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/scholarship/scholarship.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/scholarship/scholarship.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/documents/documents.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/documents/documents.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/scholarship/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/scholarship/profile.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -380,7 +380,7 @@
       <workItem from="1677526528246" duration="1181000" />
       <workItem from="1677568932401" duration="17106000" />
       <workItem from="1677612037710" duration="20000" />
-      <workItem from="1677655042160" duration="6551000" />
+      <workItem from="1677655042160" duration="8572000" />
     </task>
     <servers />
   </component>

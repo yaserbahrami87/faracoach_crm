@@ -72,9 +72,6 @@
                     <li class="nav-item " role="collabration">
                         <button class="nav-link" id="collabration-tab" data-toggle="tab" data-target="#collabration" type="button" role="tab" aria-controls="collabration" aria-selected="false">همکاری</button>
                     </li>
-                    <li class="nav-item " role="documents">
-                        <button class="nav-link" id="documents-tab" data-toggle="tab" data-target="#documents" type="button" role="tab" aria-controls="documents" aria-selected="false">محتوی</button>
-                    </li>
                 </ul>
 
                 <div class="tab-content" id="myTabContent">
@@ -144,9 +141,7 @@
                     <div class="tab-pane fade" id="collabration" role="tabpanel" aria-labelledby="collabration-tab">
                         @include('admin.scholarship.collabration')
                     </div>
-                    <div class="tab-pane fade " id="documents" role="tabpanel" aria-labelledby="documents-tab">
-                        @include('admin.scholarship.documents')
-                    </div>
+
                 </div>
 
             </div>
