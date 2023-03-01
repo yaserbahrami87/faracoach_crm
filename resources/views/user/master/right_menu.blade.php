@@ -53,6 +53,11 @@
                     <span class="menu-title" >بورسیه </span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="/panel/documents">
+                    <span class="menu-title" >دانلودها </span>
+                </a>
+            </li>
             <li class="nav-item has-sub"><a href="#"><span class="menu-title" >مالی</span></a>
                 <ul class="menu-content">
                     <li><a href="/panel/faktor" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >فاکتورها</span></a></li>

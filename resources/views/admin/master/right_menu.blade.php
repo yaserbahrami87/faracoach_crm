@@ -125,6 +125,7 @@
             </li>
 
             <!--<li class=" nav-item"><a href="/portal/news"><i class="menu-livicon" data-icon="notebook"></i><span class="menu-title" data-i18n="Chat">اخبار</span></a></li>-->
+            <li class=" nav-item"><a href="/admin/documents" ><span class="menu-title" >فایل ها</span></a></li>
             <li class=" nav-item"><a href="/admin/tweet" ><span class="menu-title" >دلنوشته ها</span></a></li>
             <li class=" nav-item"><a href="#" class="disabled"><span class="menu-title" >اخبار</span></a></li>
 

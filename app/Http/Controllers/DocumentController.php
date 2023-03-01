@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\document;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
@@ -18,9 +19,16 @@ class DocumentController extends BaseController
     public function index()
     {
         $documents=document::get();
-        return view('admin.documents')
-                    ->with('documents',$documents);
-
+        if(Gate::allows('isAdmin'))
+        {
+            return view('admin.documents.documents')
+                ->with('documents',$documents);
+        }
+        else
+        {
+            return view('user.documents.documents')
+                ->with('documents',$documents);
+        }
     }
 
     /**
@@ -45,8 +53,9 @@ class DocumentController extends BaseController
            'title'      =>'required|string|max:200',
             'shortlink' =>'required|string|unique:documents,shortlink',
             'content'   =>'required|string',
-            'file'      =>'required|',
+            'file'      =>'required|max:10240',
         ]);
+
 
         $document=document::create($request->all());
         if ($request->has('file') && $request->file('file')->isValid()) {
@@ -57,6 +66,8 @@ class DocumentController extends BaseController
         }
 
         $document->file=$file_name;
+        $document->size=$request->file('file')->getSize();
+        $document->extension=$request->file('file')->getClientOriginalExtension();
         $status=$document->save();
 
         if($status)
