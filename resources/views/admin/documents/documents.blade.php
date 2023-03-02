@@ -44,7 +44,7 @@
                         <td>{{$document->clicks}}</td>
 
                         <td>
-                            @if($document->size<1024)
+                            @if(($document->size/1024)<1024)
                                 {{$document->size}}   کیلوبایت
                             @else
                                 {{ceil(number_format($document->size/1024))}} مگابایت
