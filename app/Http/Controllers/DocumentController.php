@@ -50,7 +50,7 @@ class DocumentController extends BaseController
     public function store(Request $request)
     {
         $this->validate($request,[
-           'title'      =>'required|string|max:200',
+            'title'      =>'required|string|max:200',
             'shortlink' =>'required|string|unique:documents,shortlink',
             'content'   =>'required|string',
             'file'      =>'required',
@@ -179,6 +179,7 @@ class DocumentController extends BaseController
             'permission'    => ['nullable','numeric'],
             'file'          => ['nullable'],
         ]);
+
         $status=$document->update($request->all());
         if ($request->has('file') && $request->file('file')->isValid()) {
             $file = $request->file('file');
