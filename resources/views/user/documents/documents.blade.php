@@ -1,6 +1,6 @@
 @extends('user.master.index')
 @section('content')
-    <div class="col-12">
+    <div class="col-12 table-responsive">
         <table class="table table-striped table-bordered text-center">
             <tr>
                 <th>#</th>
