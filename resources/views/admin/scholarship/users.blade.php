@@ -29,21 +29,12 @@
                                 <th>نام و نام خانوادگی</th>
                                 <th>وضعیت پروفایل</th>
                                 <th>وضعیت درخواست</th>
-                                <th class="d-none">کد ملی</th>
                                 <th>تلفن</th>
                                 <th>مسئول پیگیری</th>
-                                <th>تحصیلات</th>
-                                <th>استان</th>
-                                <th>معرفی نامه</th>
-                                <th>مصاحبه</th>
+                                <th>وضعیت آزمون</th>
+                                <th>وضعیت آموزش</th>
                                 <th class="d-none">وضعیت ثبت نام</th>
                                 <th >تاریخ ثبت نام</th>
-
-                                <!--
-                                <th> افراد معرفی شده</th>
-                                <th> افراد ثبت نام بورسیه</th>
-                                -->
-
                             </tr>
                         </thead>
 
@@ -80,27 +71,20 @@
 
                                         @endswitch
                                     </td>
-                                    <td class="text-center d-none" dir="ltr">{{$item->user->codemelli}}</td>
                                     <td class="text-center" dir="ltr">{{$item->user->tel}}</td>
                                     <td class="text-center" dir="ltr">
                                         @if(!is_null($item->user->get_followbyExpert))
                                             {{$item->user->get_followbyExpert->fname.' '.$item->user->get_followbyExpert->lname}}
                                         @endif
                                     </td>
-                                    <td class="text-center" dir="ltr">{{$item->user->education}}</td>
-                                    <td class="text-center" dir="ltr">
-                                        @if(!is_null($item->user->state))
-                                            {{$item->user->get_state->name}}
-                                        @endif
-                                    </td>
-                                    <td class="text-center">
-                                        @if(!is_null($item->introductionletter))
-                                            ارسال شده
+                                    <td>
+                                        @if($item->user->get_scholarshipExam->count()>0)
+                                             انجام شده است
                                         @endif
                                     </td>
                                     <td>
-                                        @if(!is_null($item->user->get_scholarshipInterview) )
-                                            انجام شده است
+                                        @if($item->confirm_webinar==1)
+                                             انجام شده است
                                         @endif
                                     </td>
                                     <td class="d-none">
@@ -114,14 +98,7 @@
                                         {{substr($item->created_at,0,10) }}
                                     </td>
 
-                                    <!--
-                                    <td class="text-center" dir="ltr">
-                                        {{--($item->user->get_invitations->where('created_at','>','2022-07-20 00:00:00')->where('resource','=','بورسیه تحصیلی')->count())--}}
-                                    </td>
-                                    <td class="text-center" dir="ltr">
-                                        {{--$item->user->get_invitations->where('created_at','>','2022-07-20 00:00:00')->where('resource','=','بورسیه تحصیلی')->where('introduced','=',$item->user_id)->count()--}}
-                                    </td>
-                                    -->
+
 
                                 </tr>
                             @endforeach
@@ -177,6 +154,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="tab-pane fade" id="nav-accept" role="tabpanel" aria-labelledby="nav-accept-tab">
                 <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">
                     <div class="col-12 table-responsive">

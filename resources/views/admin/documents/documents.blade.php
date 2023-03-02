@@ -42,11 +42,12 @@
                         <td>{{$document->title}}</td>
                         <td>{{$document->extension}}</td>
                         <td>{{$document->clicks}}</td>
-                        <td>{{ceil(number_format($document->size/1024) )}}
+
+                        <td>
                             @if($document->size<1024)
-                                کیلوبایت
+                                {{$document->size}}کیلوبایت
                             @else
-                                مگابایت
+                                {{ceil(number_format($document->size/1024) )}} مگابایت
                             @endif
                         </td>
                         <td>
