@@ -243,21 +243,21 @@ class CheckoutController extends BaseController
                 {
                     foreach ($checkout as $item)
                     {
-                        faktor::create([
-                            'user_id'               =>Auth::user()->id,
-                            'checkout_id'           =>$item->checkout_id,
-                            'product_id'            =>$item->product_id,
-                            'type'                  =>$item->type,
-                            'date_createfaktor'     =>$this->dateNow,
-                            'date_faktor'           =>$this->dateNow,
-                            'fi'                    =>$item->price,
-                            'authortity'            =>$item->authortity,
-                            'description'           =>'پرداخت شده',
-                            'date_pardakht'         =>$this->dateNow,
-                            'time_pardakht'         =>$this->timeNow,
-                            'checkout_id_pardakht'  =>$item->id,
-                            'insert_user_id'        =>Auth::user()->id,
-                        ]);
+//                        faktor::create([
+//                            'user_id'               =>Auth::user()->id,
+//                            'checkout_id'           =>$item->checkout_id,
+//                            'product_id'            =>$item->product_id,
+//                            'type'                  =>$item->type,
+//                            'date_createfaktor'     =>$this->dateNow,
+//                            'date_faktor'           =>$this->dateNow,
+//                            'fi'                    =>$item->price,
+//                            'authortity'            =>$item->authortity,
+//                            'description'           =>'پرداخت شده',
+//                            'date_pardakht'         =>$this->dateNow,
+//                            'time_pardakht'         =>$this->timeNow,
+//                            'checkout_id_pardakht'  =>$item->id,
+//                            'insert_user_id'        =>Auth::user()->id,
+//                        ]);
 
                         $item->status = 1;
                         $item->description = 'خرید انجام شد';
