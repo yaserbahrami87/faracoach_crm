@@ -23,10 +23,10 @@
                     </td>
                     <td>
                         @if(($document->size/1024)<1024)
-                            {{substr((string)$document->size,0,3)}}   کیلوبایت
+                            {{substr((string)$document->size,0,3)}}   KB
 
                         @else
-                            {{ceil(number_format($document->size/1024))}} مگابایت
+                            {{ceil(number_format($document->size/1024))}} MB
                         @endif
                     </td>
                     <td>{{$document->clicks}}</td>
