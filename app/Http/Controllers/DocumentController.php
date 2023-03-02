@@ -173,7 +173,7 @@ class DocumentController extends BaseController
     public function update(Request $request, document $document)
     {
         $this->validate($request, [
-            'title'         => ['nullable','string', 'max:30'],
+            'title'         => ['nullable','string', 'max:200'],
             'shortlink'     => ['nullable','string','max:250',Rule::unique('documents')->ignore($document->id)],
             'content'       => ['nullable','string'],
             'permission'    => ['nullable','numeric'],
