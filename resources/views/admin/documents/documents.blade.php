@@ -45,9 +45,9 @@
 
                         <td>
                             @if($document->size<1024)
-                                {{$document->size}}کیلوبایت
+                                {{$document->size}}   کیلوبایت
                             @else
-                                {{ceil(number_format($document->size/1024) )}} مگابایت
+                                {{ceil(number_format($document->size/1024))}} مگابایت
                             @endif
                         </td>
                         <td>

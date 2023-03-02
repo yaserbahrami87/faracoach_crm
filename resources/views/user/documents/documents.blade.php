@@ -22,7 +22,11 @@
                         {{$document->extension}}
                     </td>
                     <td>
-                        {{round(number_format($document->size/1024) )}} مگابایت
+                        @if($document->size<1024)
+                            {{$document->size}}   کیلوبایت
+                        @else
+                            {{ceil(number_format($document->size/1024))}} مگابایت
+                        @endif
                     </td>
                     <td>{{$document->clicks}}</td>
                     <td>

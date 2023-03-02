@@ -97,9 +97,6 @@
                                     <td>
                                         {{substr($item->created_at,0,10) }}
                                     </td>
-
-
-
                                 </tr>
                             @endforeach
                         </tbody>
