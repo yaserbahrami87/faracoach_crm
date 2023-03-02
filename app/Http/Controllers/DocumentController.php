@@ -187,6 +187,8 @@ class DocumentController extends BaseController
             $path = 'public/'.$file_name;
             $status=Storage::disk('local')->put($path,file_get_contents($request->file));
             $document->file=$file_name;
+            $document->size=$request->file('file')->getSize();
+            $document->extension=$request->file('file')->getClientOriginalExtension();
             $document->save();
         }
 
