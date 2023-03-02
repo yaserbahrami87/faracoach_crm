@@ -23,7 +23,8 @@
                     </td>
                     <td>
                         @if(($document->size/1024)<1024)
-                            {{number_format($document->size)}}   کیلوبایت
+                            {{substr((string)$document->size,0,3)}}   کیلوبایت
+
                         @else
                             {{ceil(number_format($document->size/1024))}} مگابایت
                         @endif
