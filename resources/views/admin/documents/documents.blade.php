@@ -45,7 +45,7 @@
 
                         <td>
                             @if(($document->size/1024)<1024)
-                                {{number_format($document->size)}}    KB
+                                {{substr((string)$document->size,0,3)}}   KB
                             @else
                                 {{ceil(number_format($document->size/1024))}}  MB
                             @endif
