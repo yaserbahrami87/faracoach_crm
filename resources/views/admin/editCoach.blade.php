@@ -191,6 +191,16 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label for="type">دسته </label>
+                        <select class="form-control" id="type" name="type">
+                            <option disabled selected>انتخاب کنید</option>
+                            <option value="1" @if($coach->type==1) selected @endif>مدرس</option>
+                            <option value="2" @if($coach->type==2) selected @endif>کوچ سطح 2</option>
+                            <option value="2" @if($coach->type==3) selected @endif>کوچ سطح 1</option>
+                            <option value="2" @if($coach->type==4) selected @endif>فارغ التحصیل</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="status">وضعیت </label>
                         <select class="form-control" id="status" name="status">
                             <option disabled selected>انتخاب کنید</option>

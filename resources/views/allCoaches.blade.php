@@ -39,6 +39,16 @@
             background-size: 100% 100%;
         }
 
+        .student_meeting::before
+        {
+            background-image:url("{{asset('/images/green-tik.png')}}");
+            content: '';
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            background-size: 100% 100%;
+        }
+
         .boxDisable img
         {
             filter:grayscale(1);
@@ -144,7 +154,7 @@
 
 
                                                     <div class="box-title mt-2">
-                                                        <a href="/coach/{{$item->username}}" class="font-weight-bold  @if($item->confirm_faracoach==1) confirm_faracoach @endif">
+                                                        <a href="/coach/{{$item->username}}" class="font-weight-bold  @if($item->student_meeting==1) student_meeting  @elseif($item->confirm_faracoach==1) confirm_faracoach @endif">
                                                             {{$item->fname.' '.$item->lname}}
                                                         </a>
 

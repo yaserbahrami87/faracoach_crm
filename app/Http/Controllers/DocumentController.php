@@ -202,6 +202,7 @@ class DocumentController extends BaseController
         }
 
         return back();
+
     }
 
     /**
@@ -210,6 +211,9 @@ class DocumentController extends BaseController
      * @param  \App\document  $document
      * @return \Illuminate\Http\Response
      */
+
+
+
     public function destroy(document $document)
     {
         Storage::disk('local')->delete('public/'.$document->file);

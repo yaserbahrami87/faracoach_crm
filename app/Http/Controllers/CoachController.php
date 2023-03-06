@@ -315,7 +315,6 @@ class CoachController extends BaseController
      */
     public function update(Request $request, coach $coach)
     {
-
         $this->validate($request,[
             'education_background'  =>'required|string',
             'certificates'          =>'required|string',
@@ -331,6 +330,7 @@ class CoachController extends BaseController
             'fi'                    =>'nullable|numeric',
             'confirm_faracoach'     =>'nullable|boolean',
             'student_meeting'       =>'nullable|boolean',
+            'type'                  =>'required|numeric',
             'status'                =>'required|numeric|between:-2,5'
         ],[
             'education_background.required' =>'سوابق تحصیلی اجباریست',
@@ -464,17 +464,12 @@ class CoachController extends BaseController
             })
             ->where('users.status_coach','=',1)
             ->where('coaches.status','=',1)
+            ->orderby('coaches.type')
             ->get()
             ->sortBydesc(function($coach)  use ($month)
             {
                 return $coach->bookings->wherebetween('start_date',$month)->count();
             });
-
-
-
-
-
-
 
         $category_coaches=$this->get_categoryCoaches(NULL,NULL,1);
 
