@@ -465,12 +465,12 @@ class CoachController extends BaseController
             })
             ->where('users.status_coach','=',1)
             ->where('coaches.status','=',1)
-            ->orderby('coaches.typecoach_id')
-            ->get()
-            ->sortBydesc(function($coach)  use ($month)
-            {
-                return $coach->bookings->wherebetween('start_date',$month)->count();
-            });
+            ->orderby('coaches.typecoach_id','desc')
+            ->get();
+//            ->sortBydesc(function($coach)  use ($month)
+//            {
+//                return $coach->bookings->wherebetween('start_date',$month)->count();
+//            });
 
         $category_coaches=$this->get_categoryCoaches(NULL,NULL,1);
 
