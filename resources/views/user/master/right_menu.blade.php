@@ -25,7 +25,13 @@
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
             <li class=" navigation-header"><span>پورتال فراکوچ</span></li>
             <li class=" nav-item"><a href="/panel"><span class="menu-title">داشبورد</span></a></li>
+
             <li class=" nav-item"><a href="/panel/profile"><span class="menu-title" > حساب کاربری </span></a> </li>
+            <li class="nav-item">
+                <a href="/panel/scholarship/me">
+                    <span class="menu-title" >آموزش رایگان </span>
+                </a>
+            </li>
             <li class=" nav-item"><a href="/panel/introduced"><span class="menu-title">سفیر کوچینگ</span></a></li>
             <li class=" nav-item"><a href="/coaches/all"><span class="menu-title">لیست کوچ ها</span></a></li>
             <!-- <li class=" nav-item"><a href="/panel/teachers"><span class="menu-title">اساتید</span></a></li> -->
@@ -48,11 +54,7 @@
                     </ul>
                 </li>
             @endif
-            <li class="nav-item">
-                <a href="/panel/scholarship/me">
-                    <span class="menu-title" >آموزش رایگان </span>
-                </a>
-            </li>
+
             <li class="nav-item">
                 <a href="/panel/documents">
                     <span class="menu-title" >دانلودها </span>
