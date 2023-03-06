@@ -586,6 +586,7 @@ class ScholarshipController extends BaseController
                 $courses=course::where('start','>',$this->dateNow)
                     ->where('id','<>',3)
                     ->where('id','<>',15)
+                    ->where('id','<>',65)
 
                     //برای این شرط باید لول 2 یا در نظر گرفته بشه
 
