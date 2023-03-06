@@ -375,7 +375,8 @@ class CoachController extends BaseController
 
             switch ($request->status)
             {
-                case '1':$this->sendSms($user->tel,'درخواست همکاری شما به عنوان کوچ در فراکوچ تائید شد');
+
+                case '1'://$this->sendSms($user->tel,'درخواست همکاری شما به عنوان کوچ در فراکوچ تائید شد');
                             break;
                 case '-2':$this->sendSms($user->tel,'درخواست همکاری شما به عنوان کوچ در فراکوچ رد شد');
                             break;
