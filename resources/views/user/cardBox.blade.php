@@ -101,7 +101,7 @@
         </div>
         <div class="col-12 text-center mt-1">
             <a href="/panel/scholarship/me" class="btn btn-block btn-primary">
-                <p>بورسیه کوچینگ</p>
+                <p>پنل آموزش رایگان کوچینگ + گواهینامه</p>
             </a>
         </div>
 

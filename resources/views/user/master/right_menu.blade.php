@@ -50,7 +50,7 @@
             @endif
             <li class="nav-item">
                 <a href="/panel/scholarship/me">
-                    <span class="menu-title" >بورسیه </span>
+                    <span class="menu-title" >آموزش رایگان </span>
                 </a>
             </li>
             <li class="nav-item">

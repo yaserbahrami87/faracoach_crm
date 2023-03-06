@@ -55,6 +55,7 @@
 @endsection
 
 @section('content')
+
     <div class="col-xs-12 col-md-4 col-lg-4 col-xl-4">
         @include('user.boxProfile')
     </div>
