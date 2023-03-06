@@ -465,7 +465,7 @@ class CoachController extends BaseController
             })
             ->where('users.status_coach','=',1)
             ->where('coaches.status','=',1)
-            ->orderby('coaches.type')
+            ->orderby('coaches.typecoach_id')
             ->get()
             ->sortBydesc(function($coach)  use ($month)
             {
