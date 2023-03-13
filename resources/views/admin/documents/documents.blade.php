@@ -19,6 +19,14 @@
                             <textarea class="form-control" id="content" rows="3" name="content"></textarea>
                         </div>
                         <div class="form-group">
+                            <label for="permission">سطح دسترسی</label>
+                            <select id="permission" class="form-control p-0 @error('permission') is-invalid @enderror" name="permission">
+                                <option selected disabled>انتخاب کنید</option>
+                                <option value="0" >همه کاربرها</option>
+                                <option value="1" >دانشجویان</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="file">فایل ضمیمه:</label>
                             <input type="file" class="form-control-file" id="file" name="file">
                         </div>
