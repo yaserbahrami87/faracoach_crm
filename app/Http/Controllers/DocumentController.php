@@ -18,14 +18,25 @@ class DocumentController extends BaseController
      */
     public function index()
     {
-        $documents=document::get();
+
         if(Gate::allows('isAdmin'))
         {
+            $documents=document::get();
             return view('admin.documents.documents')
                 ->with('documents',$documents);
         }
         else
         {
+            if(Auth::user()->students->count()==0)
+            {
+                $documents=document::where('permission','=',0)
+                            ->get();
+            }
+            else
+            {
+                $documents=document::wherein('permission',[0,1])
+                                    ->get();
+            }
             return view('user.documents.documents')
                 ->with('documents',$documents);
         }

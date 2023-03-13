@@ -32,7 +32,9 @@
                     <label for="permission">سطح دسترسی</label>
                     <select id="permission" class="form-control p-0 @error('permission') is-invalid @enderror" name="permission">
                         <option selected disabled>انتخاب کنید</option>
-                        <option value="0" @if($document->permission==0) selected @endif>همه کاربرها</option>
+                        @foreach($document->permissions() as $key=>$permission)
+                            <option value="{{$key}}" @if($document->permission==$key) selected @endif>{{$permission}}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="form-group">

@@ -33,6 +33,7 @@
                     <th>نوع فایل</th>
                     <th>تعداد دانلود</th>
                     <th>حجم فایل</th>
+                    <th>سطح دسترسی</th>
                     <th>ویرایش</th>
                     <th>حذف</th>
                 </tr>
@@ -49,6 +50,9 @@
                             @else
                                 {{ceil(number_format($document->size/1024))}}  MB
                             @endif
+                        </td>
+                        <td>
+                            {{$document->get_permission()}}
                         </td>
                         <td>
                             <a href="/admin/documents/{{$document->id}}/edit" class="btn btn-warning">
