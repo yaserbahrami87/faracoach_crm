@@ -262,4 +262,10 @@ class User extends Authenticatable implements MustVerifyEmail
         {
             return $this->hasMany('App\booking');
         }
+
+        public function scientificsupport()
+        {
+
+            return $this->hasOne('App\scientific_support','user_id','id');
+        }
 }

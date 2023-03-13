@@ -135,6 +135,12 @@
                     <li><a href="/admin/event/create"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >ایجاد رویداد</span></a></li>
                 </ul>
             </li>
+            <li class=" nav-item"><a href="#"><span class="menu-title" >پشتیبان علمی</span></a>
+                <ul class="menu-content">
+                    <li><a href="/admin/scientific_support"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >همه درخواست ها</span></a></li>
+                    <li><a href="/admin/event/create"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >ایجاد رویداد</span></a></li>
+                </ul>
+            </li>
 
             <li class=" nav-item"><a href="#"><span class="menu-title" >پیامک ها</span></a>
                 <ul class="menu-content">

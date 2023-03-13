@@ -133,7 +133,8 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     Route::get('/level1/certificate','CertificateController@get_certificate1');
     Route::get('/scholarship/certificate/download','CertificateController@get_certificate');
 
-
+    //scientific supports
+    Route::resource('scientific_support','ScientificSupportController');
 
     //booking
     Route::get('/booking/accept','ReserveController@acceptReserve');
@@ -325,6 +326,10 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
 
         Route::resource('answerline','AnswerlineController');
     });
+
+    //scientific_support
+    Route::patch('/scientific_support/{scientific_support}/changestatus','ScientificSupportController@changeStatus');
+    Route::resource('scientific_support','ScientificSupportController');
 
 
 
