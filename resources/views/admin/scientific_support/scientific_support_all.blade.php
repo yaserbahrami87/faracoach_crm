@@ -1,4 +1,8 @@
 @extends('admin.master.index')
+
+@section('headerScript')
+    <link href="{{asset('/dashboard/assets/css/buttons.dataTables.min.css')}}" rel="stylesheet" />
+@endsection
 @section('content')
     <div class="col-12 table-responsive">
 
