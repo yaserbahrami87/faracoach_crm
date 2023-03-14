@@ -17,6 +17,6 @@ class warrany extends Model
 
     public function user()
     {
-        $this->hasOne('App\User');
+        return $this->belongsTo('App\User');
     }
 }

@@ -27,15 +27,15 @@
                         </thead>
 
                         <tbody>
-
-
-
                         @foreach($warranies as $warrany)
+
                             <tr>
                                 <td class="text-center">{{$loop->iteration}}</td>
                                 <td class="text-center">
+
                                     <a href="/admin/scholarship/{{$warrany->id}}" target="_blank">{{$warrany->user->fname.' '.$warrany->user->lname}}</a>
                                 </td>
+
                                 <td class="text-center" dir="ltr">{{$warrany->user->tel}}</td>
                                 <td class="text-center" dir="ltr">
 
@@ -43,7 +43,7 @@
                                         {{$item->user->get_followbyExpert->fname.' '.$item->user->get_followbyExpert->lname}}
                                     @endif
                                 </td>
-                                <td class="text-center" dir="ltr">{{$item->user->education}}</td>
+                                <td class="text-center" dir="ltr">{{$warrany->user->education}}</td>
                             </tr>
                         @endforeach
                         </tbody>

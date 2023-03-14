@@ -268,4 +268,9 @@ class User extends Authenticatable implements MustVerifyEmail
 
             return $this->hasOne('App\scientific_support','user_id','id');
         }
+
+        public function warrany()
+        {
+            return $this->hasMany('App\warrany');
+        }
 }
