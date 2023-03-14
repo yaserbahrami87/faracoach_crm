@@ -31,7 +31,7 @@
 
 
                         @foreach($warranies as $warrany)
-                            <tr style="@if(!is_null($item->financial)) background-color: #9fff80; @elseif($item->resource=='knot') background-color: #cceeff!important   @endif">
+                            <tr>
                                 <td class="text-center">{{$loop->iteration}}</td>
                                 <td class="text-center">
                                     <a href="/admin/scholarship/{{$warrany->id}}" target="_blank">{{$warrany->user->fname.' '.$warrany->user->lname}}</a>

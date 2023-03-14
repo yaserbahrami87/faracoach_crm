@@ -31,7 +31,9 @@
                             <input type="file" class="form-control-file" id="file" name="file">
                         </div>
                         <input type="submit" class="btn btn-success" value="بارگذاری">
+
                     </form>
+
                 </div>
             </div>
             <table class="table table-striped table-bordered text-center">
