@@ -49,7 +49,8 @@ class ScientificSupportController extends BaseController
     {
         $this->validate($request,[
             'level'                 =>'required|numeric|between:1,2',
-            'experience'            =>'required|numeric|between:1,2',
+            'students_experience'   =>'required|numeric|',
+            'external_experience'   =>'required|numeric|',
             'certificates'          =>'required|string|max:200',
             'resume'                =>'required|string',
             'educational_activity'  =>'required|string',

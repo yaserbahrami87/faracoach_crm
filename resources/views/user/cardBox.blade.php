@@ -142,8 +142,8 @@
         </div>
 
         <div class="col-lg-3 col-md-6 col-sm-6 text-center mt-1 items">
-            <a href="/panel/scientific_support/create"  class="btn btn-secondary">
-                <i class="bi bi-pentagon-half" ></i>
+            <a href="/panel/scientific_support/create"  class="btn btn-success">
+                <i class="bi bi-person-circle" ></i>
                 <p>همکاری به عنوان پشتیبان علمی </p>
             </a>
         </div>

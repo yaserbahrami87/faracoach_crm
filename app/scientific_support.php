@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class scientific_support extends Model
 {
     protected $fillable=[
-        'level','experience','certificates','resume','educational_activity','know_icdl','free_time','blooming_experience','status','user_id'
+        'level','students_experience','certificates','resume','educational_activity','know_icdl','free_time','blooming_experience','status','user_id','external_experience'
     ];
 
     public function user()

@@ -33,7 +33,7 @@
                                 <td class="text-center">{{$loop->iteration}}</td>
                                 <td class="text-center">
 
-                                    <a href="/admin/scholarship/{{$warrany->id}}" target="_blank">{{$warrany->user->fname.' '.$warrany->user->lname}}</a>
+                                    <a href="/admin/warrany/{{$warrany->id}}" target="_blank">{{$warrany->user->fname.' '.$warrany->user->lname}}</a>
                                 </td>
 
                                 <td class="text-center" dir="ltr">{{$warrany->user->tel}}</td>
