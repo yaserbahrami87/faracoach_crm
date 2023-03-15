@@ -28,19 +28,12 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="experience">تجربه برگزاری کدام یک از جلسات کوچینگ را دارید؟</label>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="experience" id="experience" value="1" @if(old('experience',$scientific_support->experience)==1) checked  @endif disabled >
-                        <label class="form-check-label" for="experience">
-                            جلسات دانشجویی
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="experience" id="experience1" value="2"  @if(old('experience',$scientific_support->experience)==2) checked  @endif disabled >
-                        <label class="form-check-label" for="experience1">
-                            جلسات بیرونی
-                        </label>
-                    </div>
+                    <label for="students_experience">تعداد جلسات دانشجویی برگزار شده:</label>
+                    <input type="number" class="form-control" id="students_experience" name="students_experience" value="{{old('students_experience',$scientific_support->students_experience)}}" disabled />
+                </div>
+                <div class="form-group">
+                    <label for="external_experience">تعداد جلسات بیرونی برگزار شده:</label>
+                    <input type="number" class="form-control" id="external_experience" name="external_experience" value="{{old('external_experience',$scientific_support->external_experience)}}"  disabled />
                 </div>
                 <div class="form-group">
                     <label for="certificates">گواهینامه های خود را ذکر کنید:</label>
