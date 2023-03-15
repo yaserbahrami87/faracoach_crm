@@ -29,4 +29,9 @@ class document extends Model
                     break;
         }
     }
+
+    public function  category_document()
+    {
+        return $this->belongsTo('App\category_document');
+    }
 }

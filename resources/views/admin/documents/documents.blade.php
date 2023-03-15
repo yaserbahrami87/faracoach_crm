@@ -19,6 +19,16 @@
                             <textarea class="form-control" id="content" rows="3" name="content"></textarea>
                         </div>
                         <div class="form-group">
+                            <label for="category_document_id">دسته بندی</label>
+                            <select id="permission" class="form-control p-0 @error('category_document_id') is-invalid @enderror" name="category_document_id">
+                                <option selected disabled>انتخاب کنید</option>
+                                @foreach($category_documents as $category_document )
+                                    <option value="{{$category_document->id}}" >{{$category_document->category}}</option>
+                                @endforeach
+
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="permission">سطح دسترسی</label>
                             <select id="permission" class="form-control p-0 @error('permission') is-invalid @enderror" name="permission">
                                 <option selected disabled>انتخاب کنید</option>
@@ -26,6 +36,7 @@
                                 <option value="1" >دانشجویان</option>
                             </select>
                         </div>
+
                         <div class="form-group">
                             <label for="file">فایل ضمیمه:</label>
                             <input type="file" class="form-control-file" id="file" name="file">
@@ -41,6 +52,7 @@
                     <th>#</th>
                     <th>عنوان</th>
                     <th>نوع فایل</th>
+                    <th>دسته بندی</th>
                     <th>تعداد دانلود</th>
                     <th>حجم فایل</th>
                     <th>سطح دسترسی</th>
@@ -52,6 +64,9 @@
                         <td>{{$loop->iteration}}</td>
                         <td>{{$document->title}}</td>
                         <td>{{$document->extension}}</td>
+                        <td>
+                            {{$document->category_document['category']}}
+                        </td>
                         <td>{{$document->clicks}}</td>
 
                         <td>

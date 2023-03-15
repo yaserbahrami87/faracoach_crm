@@ -9,4 +9,9 @@ class category_document extends Model
     protected $fillable=[
         'category','status'
     ];
+
+    public function document()
+    {
+        return $this->hasMany('App\document');
+    }
 }

@@ -29,6 +29,17 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label for="category_document_id">دسته بندی</label>
+
+                    <select id="permission" class="form-control p-0 @error('category_document_id') is-invalid @enderror" name="category_document_id">
+                        <option selected disabled>انتخاب کنید</option>
+                        @foreach($category_documents as $category_document)
+                            <option value="{{$category_document->id}}" @if($category_document->id==$document->category_document_id)  selected @endif >{{$category_document->category}}</option>
+                        @endforeach
+
+                    </select>
+                </div>
+                <div class="form-group">
                     <label for="permission">سطح دسترسی</label>
                     <select id="permission" class="form-control p-0 @error('permission') is-invalid @enderror" name="permission">
                         <option selected disabled>انتخاب کنید</option>

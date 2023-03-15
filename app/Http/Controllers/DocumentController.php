@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\category_document;
 use App\document;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,8 +22,11 @@ class DocumentController extends BaseController
 
         if(Gate::allows('isAdmin'))
         {
+            $category_documents=category_document::where('status','=',1)
+                                ->get();
             $documents=document::get();
             return view('admin.documents.documents')
+                ->with('category_documents',$category_documents)
                 ->with('documents',$documents);
         }
         else
@@ -170,8 +174,11 @@ class DocumentController extends BaseController
      */
     public function edit(document $document)
     {
+        $category_documents=category_document::where('status','=',1)
+                                    ->get();
         return view('admin.documents.editDocument')
-                    ->with('document',$document);
+                    ->with('document',$document)
+                    ->with('category_documents',$category_documents);
     }
 
     /**
@@ -184,11 +191,12 @@ class DocumentController extends BaseController
     public function update(Request $request, document $document)
     {
         $this->validate($request, [
-            'title'         => ['nullable','string', 'max:200'],
-            'shortlink'     => ['nullable','string','max:250',Rule::unique('documents')->ignore($document->id)],
-            'content'       => ['nullable','string'],
-            'permission'    => ['nullable','numeric'],
-            'file'          => ['nullable'],
+            'title'                 => ['nullable','string', 'max:200'],
+            'shortlink'             => ['nullable','string','max:250',Rule::unique('documents')->ignore($document->id)],
+            'content'               => ['nullable','string'],
+            'permission'            => ['nullable','numeric'],
+            'file'                  => ['nullable'],
+            'category_document_id'  => ['nullable','numeric'],
         ]);
 
         $status=$document->update($request->all());

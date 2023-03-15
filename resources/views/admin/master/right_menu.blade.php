@@ -125,7 +125,13 @@
             </li>
 
             <!--<li class=" nav-item"><a href="/portal/news"><i class="menu-livicon" data-icon="notebook"></i><span class="menu-title" data-i18n="Chat">اخبار</span></a></li>-->
-            <li class=" nav-item"><a href="/admin/documents" ><span class="menu-title" >فایل ها</span></a></li>
+            <li class=" nav-item"><a href="#"><span class="menu-title" >فایل ها</span></a>
+                <ul class="menu-content">
+                    <li><a href="/admin/documents"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >همه فایل ها</span></a></li>
+                    <li><a href="/admin/category_document"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >دسته بندی فایل</span></a></li>
+                </ul>
+            </li>
+
             <li class=" nav-item"><a href="/admin/tweet" ><span class="menu-title" >دلنوشته ها</span></a></li>
             <li class=" nav-item"><a href="#" class="disabled"><span class="menu-title" >اخبار</span></a></li>
 

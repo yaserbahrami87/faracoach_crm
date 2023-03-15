@@ -64,6 +64,11 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     //Packages
     Route::get('/freepackages','AdminController@showFreePackages');
 
+
+    //category_document
+    Route::get('/category_document','CategoryDocumentController@list');
+
+
     //documents
 //    Route::get('/documents','DocumentController@indexUser');
 //    Route::get('/documents/{document}','DocumentController@showUser');
@@ -120,6 +125,9 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     Route::get('/scholarship/me/collabrationAcceptEdit_ajax/{collabration_accept}','CollabrationAcceptController@collabrationAcceptEdit_ajax');
     Route::patch('/scholarship/me/collabrationAccept/{collabration_accept}','CollabrationAcceptController@update');
     Route::resource('collabration_accept','CollabrationAcceptController');
+
+
+
 
     //warranty
     Route::resource('warrany','WarranyController');
@@ -332,6 +340,8 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::resource('scientific_support','ScientificSupportController');
 
 
+    Route::resource('category_document','CategoryDocumentController');
+
 
     //Route Messages
 //    Route::get('/messages/','MessageController@index');
@@ -393,6 +403,11 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
 
     //score
     Route::resource('settingscore','SettingscoreController');
+
+
+
+
+
 
     //documents
     Route::resource('documents','DocumentController');

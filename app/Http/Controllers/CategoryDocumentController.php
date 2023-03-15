@@ -14,7 +14,11 @@ class CategoryDocumentController extends Controller
      */
     public function index()
     {
-        //
+        $category_documents=category_document::orderby('id','desc')
+                            ->get();
+        return view('admin.category_documents.category_documents_all')
+                                    ->with('category_documents',$category_documents);
+
     }
 
     /**
@@ -24,7 +28,8 @@ class CategoryDocumentController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.category_documents.category_document_insert');
+
     }
 
     /**
@@ -35,7 +40,24 @@ class CategoryDocumentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'category'  =>'required|string|max:200|unique:category_documents,category',
+            'status'    =>'required|boolean',
+        ]);
+
+        $status=category_document::create($request->all());
+        if($status)
+        {
+            alert()->success('دسته با موفقیت اضافه شد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در اضافه کردن دسته')->persistent('بستن');
+        }
+
+        return redirect('/admin/category_document');
+
+
     }
 
     /**
@@ -81,5 +103,10 @@ class CategoryDocumentController extends Controller
     public function destroy(category_document $category_document)
     {
         //
+    }
+
+    public  function list()
+    {
+        dd('asdasd');
     }
 }
