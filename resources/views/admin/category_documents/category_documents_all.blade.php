@@ -21,12 +21,12 @@
                     <td>{{$category_document->document->count()}}</td>
                     <td>{{$category_document->status}}</td>
                     <td>
-                        <a href="/admin/documents/{{$category_document->id}}/edit" class="btn btn-warning">
+                        <a href="/admin/category_document/{{$category_document->id}}/edit" class="btn btn-warning">
                             <i class="bi bi-pencil-square"></i>
                         </a>
                     </td>
                     <td>
-                        <form method="post" action="/admin/documents/{{$category_document->id}}" onsubmit="return window.confirm('ایا از حذف دسته بندی اطمینان دارید؟')">
+                        <form method="post" action="/admin/category_document/{{$category_document->id}}" onsubmit="return window.confirm('ایا از حذف دسته بندی اطمینان دارید؟')">
                             {{csrf_field()}}
                             {{method_field('DELETE')}}
                             <button type="submit" class="btn btn-danger">
@@ -37,6 +37,8 @@
                 </tr>
             @endforeach
         </table>
+
+
 
 
     </div>

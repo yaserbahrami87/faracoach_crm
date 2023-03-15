@@ -79,7 +79,8 @@ class CategoryDocumentController extends Controller
      */
     public function edit(category_document $category_document)
     {
-        //
+        return view('admin.category_documents.category_document_edit')
+                            ->with('category_document',$category_document);
     }
 
     /**
@@ -91,7 +92,23 @@ class CategoryDocumentController extends Controller
      */
     public function update(Request $request, category_document $category_document)
     {
-        //
+        $this->validate($request,[
+            'category'  =>'required|string|max:200|unique:category_documents,category',
+            'status'    =>'required|boolean',
+        ]);
+
+        $status=$category_document->update($request->all());
+        if($status)
+        {
+            alert()->success('دسته بندی با موفقیت ویرایش شد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در بروزرسانی')->persistent('بستن');
+        }
+
+        return redirect('/admin/category_document');
+
     }
 
     /**
@@ -102,7 +119,17 @@ class CategoryDocumentController extends Controller
      */
     public function destroy(category_document $category_document)
     {
-        //
+        $status=$category_document->delete();
+        if($status)
+        {
+            alert()->success('دسته بندی با موفقیت حذف شد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در حذف دسته بندی')->persistent('بستن');
+        }
+
+        return back();
     }
 
     public  function list()
