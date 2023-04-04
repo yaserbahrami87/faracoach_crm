@@ -56,7 +56,7 @@
             @endif
 
             <li class="nav-item">
-                <a href="/panel/documents">
+                <a href="/panel/category_document">
                     <span class="menu-title" >دانلودها </span>
                 </a>
             </li>

@@ -159,7 +159,17 @@ class DocumentController extends BaseController
     {
         $document->clicks++;
         $document->save();
-        return Storage::disk('local')->download('public/'.$document->file);
+
+        if(Storage::disk('local')->exists('public/'.$document->file))
+        {
+            return Storage::disk('local')->download('public/'.$document->file);
+        }
+        else
+        {
+            alert()->error('فایل مورد نظر یافت نشد')->persistent('بستن');
+            return back();
+        }
+
 //        $document=document::where('shortlink','=',$document)
 //                        ->first();
 //        return view('panelAdmin.showDocument')

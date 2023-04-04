@@ -14,4 +14,9 @@ class category_document extends Model
     {
         return $this->hasMany('App\document');
     }
+
+//    public function getRouteKeyName()
+//    {
+//        return 'category';
+//    }
 }

@@ -66,12 +66,13 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
 
 
     //category_document
+    Route::get('/category_document/{category_document}/show','CategoryDocumentController@category_document_show');
     Route::get('/category_document','CategoryDocumentController@list');
 
 
     //documents
 //    Route::get('/documents','DocumentController@indexUser');
-//    Route::get('/documents/{document}','DocumentController@showUser');
+//    Route::get('/documents/{document}/show','DocumentController@showUser');
     Route::resource('documents','DocumentController');
 
     //POSTS

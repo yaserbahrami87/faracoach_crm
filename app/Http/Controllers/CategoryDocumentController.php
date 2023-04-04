@@ -134,6 +134,14 @@ class CategoryDocumentController extends Controller
 
     public  function list()
     {
-        dd('asdasd');
+        $category_documents=category_document::get();
+        return view('user.documents.category_documents.category_documents')
+                        ->with('category_documents',$category_documents);
+    }
+
+    public function category_document_show(category_document $category_document)
+    {
+        return view('user.documents.category_documents.category_single')
+                            ->with('category_document',$category_document);
     }
 }

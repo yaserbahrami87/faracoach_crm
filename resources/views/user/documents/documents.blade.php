@@ -6,6 +6,7 @@
                 <th>#</th>
                 <th>عنوان</th>
                 <th>توضیحات</th>
+                <th>دسته بندی</th>
                 <th>نوع فایل</th>
                 <th>حجم فایل</th>
                 <th>تعداد دانلود</th>
@@ -18,6 +19,7 @@
                     <td>
                         {{$document->content}}
                     </td>
+                    <td>{{$document->category_document['category']}}</td>
                     <td>
                         {{$document->extension}}
                     </td>
