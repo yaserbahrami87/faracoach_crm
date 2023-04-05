@@ -2,16 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3849cf8-ae8a-47cc-891c-72c8c9af69d2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/public/images/folder.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/user/documents/category_documents/category_documents.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/user/documents/category_documents/category_single.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/motahedin_emza-2.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CategoryDocumentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CategoryDocumentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/DocumentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/DocumentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/category_document.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/category_document.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/documents/documents.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/documents/documents.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/master/right_menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/master/right_menu.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/WarranyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/WarranyController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/master/navbarTop.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/master/navbarTop.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/documents/category_documents/category_documents.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/documents/category_documents/category_documents.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/scholarship/contract.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/scholarship/contract.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -399,7 +395,8 @@
       <workItem from="1678892657964" duration="78000" />
       <workItem from="1680514818507" duration="9047000" />
       <workItem from="1680548691467" duration="6000" />
-      <workItem from="1680599150542" duration="3282000" />
+      <workItem from="1680599150542" duration="4253000" />
+      <workItem from="1680678469133" duration="1944000" />
     </task>
     <servers />
   </component>

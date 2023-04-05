@@ -14,9 +14,12 @@
                 </a>
             </li>
             <li class="nav-item ">
+                <!--
                 <a class="nav-link" href="/blogs/newposts" id="navbarDropdownMenuLink" role="button">
                     بلاگ کوچ
                 </a>
+                -->
+
                 <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                   <a class="dropdown-item" href="#">پکیج رایگان آموزش کوچینگ</a>
                   <a class="dropdown-item" href="#">درخواست کوچینگ سازمانی</a>

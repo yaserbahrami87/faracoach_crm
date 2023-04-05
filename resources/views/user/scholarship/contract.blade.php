@@ -182,7 +182,7 @@
                               تومان) در اختیار آموزشگاه قرار میدهد که در صورت انجام به موقع تعهدات پس از پایان دوره به دانش پذیر عودت خواهد شد.</p>
                           <p>الباقی مبلغ قرارداد به‌صورت اقساطی در تعداد {{$scholarship->get_financial->get_faktors->count()}}  قسط به شرح زیر پرداخت می‌شود:</p>
                           <div class="row">
-                              <div class="col-12 col-md-8 mx-auto">
+                              <div class="col-12 col-md-8 mx-auto table-responsive">
                                   <table class="table table-striped table-bordered text-center">
                                       <tr>
                                           <th>#</th>
@@ -218,7 +218,7 @@
                                   </div>
                               </div>
                               <div class="col-12 col-md-3">
-                                  <img src="{{asset('/images/signature.png')}}" class="img-fluid" />
+                                  <img src="{{asset('/images/motahedin_emza-2.png')}}" class="img-fluid" />
                                   <small class="text-muted">نمونه امضا مورد قبول</small>
                               </div>
                           </div>
