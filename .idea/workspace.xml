@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3849cf8-ae8a-47cc-891c-72c8c9af69d2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/blank-certificates/acsth.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/blank-certificates/acsth.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -393,7 +392,7 @@
       <workItem from="1680548691467" duration="6000" />
       <workItem from="1680599150542" duration="4253000" />
       <workItem from="1680678469133" duration="18349000" />
-      <workItem from="1680762740613" duration="3863000" />
+      <workItem from="1680762740613" duration="4058000" />
     </task>
     <servers />
   </component>

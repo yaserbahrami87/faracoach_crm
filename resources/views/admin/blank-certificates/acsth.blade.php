@@ -11,12 +11,12 @@
         @font-face
         {
             font-family: 'BRITANIC';
-            src: url("{{asset('/fonts/other/BRITANIC.ttf')}}");
+            src: url("{{asset('/fonts/other/BRITANIC.TTF')}}");
         }
 
         @font-face {
             font-family: 'Lato-Regular';
-            src: url("{{asset('/fonts/other/Lato-Regular.TTF')}}");
+            src: url("{{asset('/fonts/other/Lato-Regular.ttf')}}");
         }
 
         *{
