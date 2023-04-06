@@ -11,14 +11,7 @@
         @font-face
         {
             font-family: 'BRITANIC';
-            src: url("{{asset('/fonts/other/BRITANIC.TTF')}}");
-            /*font-family: "Britannic Bold";*/
-            /*src: url("//db.onlinewebfonts.com/t/8be4a2f403c2dc27187d892cca388e24.eot");*/
-            /*src: url("//db.onlinewebfonts.com/t/8be4a2f403c2dc27187d892cca388e24.eot?#iefix") format("embedded-opentype"),*/
-            /*url("//db.onlinewebfonts.com/t/8be4a2f403c2dc27187d892cca388e24.woff2") format("woff2"),*/
-            /*url("//db.onlinewebfonts.com/t/8be4a2f403c2dc27187d892cca388e24.woff") format("woff"),*/
-            /*url("//db.onlinewebfonts.com/t/8be4a2f403c2dc27187d892cca388e24.ttf") format("truetype"),*/
-            /*url("//db.onlinewebfonts.com/t/8be4a2f403c2dc27187d892cca388e24.svg#Britannic Bold") format("svg");*/
+            src: url("{{asset('/fonts/other/BRITANIC.ttf')}}");
         }
 
         @font-face {
