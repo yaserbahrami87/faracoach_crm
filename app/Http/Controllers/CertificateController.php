@@ -255,4 +255,29 @@ class CertificateController extends Controller
         return view('user.blank-certificates.icf_scholarship');
 
     }
+
+    public function get_certificate_acsth(Request $request)
+    {
+        if(is_null(Auth::user()->fname_en)||is_null(Auth::user()->lname_en))
+        {
+            alert()->error('نام و نام خانوادگی خود را به انگلیسی در پروفایل وارد کنید')->persistent('بستن');
+            return redirect('/panel/profile');
+        }
+
+        ini_set('max_execution_time', 0);
+        Pdf::setOption([
+                        'dpi' => 300,
+                        'fontDir'=>public_path('fonts/'),
+                        'defaultFont'=>'Britannic Bold'
+                        ])
+                        ->loadView('admin.blank-certificates.acsth')
+                        ->setPaper('a4', 'landscape')
+                        ->save(Auth::user()->id.'.pdf');
+
+        return view('admin.blank-certificates.acsth');
+    }
+
+
+
+
 }

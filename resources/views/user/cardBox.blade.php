@@ -47,6 +47,8 @@
     </div>
 @endif
 
+<!--
+
 <div class="col-lg-3 col-md-6 col-sm-6">
     <div class="info-box">
         <span class="info-box-icon bg-info elevation-1"><i class="fas fa-envelope"></i></span>
@@ -90,7 +92,11 @@
         </div>
     </div>
 </div>
-<div class="container-fluid border-top " >
+-->
+
+
+
+<div class="container-fluid  " >
     <div class="row pt-3" id="board">
 
         <div class="col-12 border-bottom border-1">
