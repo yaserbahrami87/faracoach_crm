@@ -260,7 +260,7 @@ class CertificateController extends Controller
     public function get_certificate_acsth(student $student)
     {
 
-        if(is_null(Auth::user()->fname_en)||is_null(Auth::user()->lname_en))
+        if(is_null($student->student->fname_en)||is_null($student->student->lname_en))
         {
             alert()->error('نام و نام خانوادگی خود را به انگلیسی در پروفایل وارد کنید')->persistent('بستن');
             return redirect('/panel/profile');
