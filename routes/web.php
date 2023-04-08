@@ -277,7 +277,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::resource('scholarship','ScholarshipController');
 
     //Certificates
-    Route::get('/certificates/acsth','CertificateController@get_certificate_acsth');
+    Route::post('/certificates/acsth/{student}','CertificateController@get_certificate_acsth');
 
     //Route Scholarship Interview
     Route::resource('scholarship_interview','ScholarshipInterviewController');

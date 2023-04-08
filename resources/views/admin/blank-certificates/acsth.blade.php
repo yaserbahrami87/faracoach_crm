@@ -80,17 +80,18 @@
     </style>
 </head>
 <body>
+
 <div class="cls_pdf">
-    @if(strlen(Auth::user()->fname_en.' '.Auth::user()->lname_en)>20 && strlen(Auth::user()->fname_en.' '.Auth::user()->lname_en)<26)
-        <p class="h1_size" style="font-size: 112px; font-family: BRITANIC">{{Str::upper(Auth::user()->fname_en).' '.Str::upper(Auth::user()->lname_en)}}</p>
-    @elseif(strlen(Auth::user()->fname_en.' '.Auth::user()->lname_en)>=26)
-        <p class="h1_size" style="font-size: 80px;font-family: BRITANIC">{{Str::upper(Auth::user()->fname_en).' '.Str::upper(Auth::user()->lname_en)}}</p>
+    @if(strlen($student->user->fname_en.' '.$student->user->lname_en)>20 && strlen($student->user->fname_en.' '.$student->user->lname_en)<26)
+        <p class="h1_size" style="font-size: 112px; font-family: BRITANIC">{{Str::upper($student->user->fname_en).' '.Str::upper($student->user->lname_en)}}</p>
+    @elseif(strlen($student->user->fname_en.' '.$student->user->lname_en)>=26)
+        <p class="h1_size" style="font-size: 80px;font-family: BRITANIC">{{Str::upper($student->user->fname_en).' '.Str::upper($student->user->lname_en)}}</p>
     @else
-        <p class="h1_size" style="font-family: BRITANIC">{{Str::upper(Auth::user()->fname_en).' '.Str::upper(Auth::user()->lname_en)}}</p>
+        <p class="h1_size" style="font-family: BRITANIC">{{Str::upper($student->user->fname_en).' '.Str::upper($student->user->lname_en)}}</p>
     @endif
 
-    <p id="number_certificates">3216541</p>
-    <p id="date_certificates">04/05/2023</p>
+    <p id="number_certificates">{{$student->code}}</p>
+    <p id="date_certificates">{{$student->date_gratudate}}</p>
 
 </div>
 </body>

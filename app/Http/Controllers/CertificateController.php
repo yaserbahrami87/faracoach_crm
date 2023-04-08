@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\certificate;
+use App\student;
 use App\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
@@ -256,8 +257,9 @@ class CertificateController extends Controller
 
     }
 
-    public function get_certificate_acsth(Request $request)
+    public function get_certificate_acsth(student $student)
     {
+
         if(is_null(Auth::user()->fname_en)||is_null(Auth::user()->lname_en))
         {
             alert()->error('نام و نام خانوادگی خود را به انگلیسی در پروفایل وارد کنید')->persistent('بستن');
@@ -270,11 +272,12 @@ class CertificateController extends Controller
                         'fontDir'=>public_path('fonts/'),
                         'defaultFont'=>'Britannic Bold'
                         ])
-                        ->loadView('admin.blank-certificates.acsth')
+                        ->loadView('admin.blank-certificates.acsth', array('student' => $student))
                         ->setPaper('a4', 'landscape')
-                        ->save(Auth::user()->id.'.pdf');
+                        ->save($student->id.'.pdf');
 
-        return view('admin.blank-certificates.acsth');
+        return view('admin.blank-certificates.acsth')
+                                ->with('student',$student);
     }
 
 
