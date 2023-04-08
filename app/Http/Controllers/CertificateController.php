@@ -6,8 +6,11 @@ use App\certificate;
 use App\student;
 use App\User;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
+
 
 class CertificateController extends Controller
 {
@@ -260,9 +263,11 @@ class CertificateController extends Controller
     public function get_certificate_acsth(student $student)
     {
 
+        $date_jalali=(Verta::parse(str_replace('/','-',$student->date_gratudate).' 00:00:00')->datetime()->format('Y/n/j'));
+        $student->date_jalali=$date_jalali;
         if(is_null($student->user->fname_en)||is_null($student->user->lname_en))
         {
-            alert()->error('نام و نام خانوادگی خود را به انگلیسی در پروفایل وارد کنید')->persistent('بستن');
+            alert()->error('نام و نام خانوادگی را به انگلیسی در پروفایل وارد کنید')->persistent('بستن');
             return redirect('/panel/profile');
         }
 

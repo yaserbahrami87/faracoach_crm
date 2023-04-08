@@ -91,7 +91,7 @@
     @endif
 
     <p id="number_certificates">{{$student->code}}</p>
-    <p id="date_certificates">{{$student->date_gratudate}}</p>
+    <p id="date_certificates">{{$student->date_jalali}}</p>
 
 </div>
 </body>
