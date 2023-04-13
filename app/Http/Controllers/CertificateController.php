@@ -286,6 +286,32 @@ class CertificateController extends Controller
 //                                ->with('student',$student);
     }
 
+    public function get_fcc(student $student)
+    {
+        if(is_null($student->user->fname_en)||is_null($student->user->lname_en))
+        {
+            alert()->error('نام و نام خانوادگی را به انگلیسی در پروفایل وارد کنید')->persistent('بستن');
+            return redirect('/panel/profile');
+        }
+        $customPaper = array(0,0,300,312);
+
+        ini_set('max_execution_time', 0);
+        Pdf::setOption([
+            'dpi' => 300,
+            'fontDir'=>public_path('fonts/'),
+            'defaultFont'=>'Britannic Bold'
+        ])
+            ->loadView('admin.blank-certificates.fcc_blank', array('student' => $student))
+            ->setPaper($customPaper, 'landscape')
+
+            ->save($student->id.'.pdf');
+
+        return view('admin.blank-certificates.fcc_blank')
+                        ->with('student',$student);
+//        return response()->download(public_path($student->id.'.pdf'))
+//            ->deleteFileAfterSend(true);
+    }
+
 
 
 

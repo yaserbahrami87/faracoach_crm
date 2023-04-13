@@ -623,6 +623,8 @@ class ScholarshipController extends BaseController
 //                $courses=NULL;
 //            }
 
+
+
             //امتیاز
             $count_scholarshipIntroduce=0;
             foreach ($scholarship->user->get_invitations->where('created_at','>','2022-07-20 00:00:00')->where('resource','=','بورسیه تحصیلی') as $item)
@@ -695,6 +697,14 @@ class ScholarshipController extends BaseController
             {
                 $secondMonth=[];
                 for($i=1;$i<=5;$i++)
+                {
+                    array_push($secondMonth,verta()->addMonth($i)->format('Y/m/d'));
+                }
+            }
+            elseif($scholarship->type_payment==3)
+            {
+                $secondMonth=[];
+                for($i=1;$i<=2;$i++)
                 {
                     array_push($secondMonth,verta()->addMonth($i)->format('Y/m/d'));
                 }

@@ -2,9 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3849cf8-ae8a-47cc-891c-72c8c9af69d2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/public/images/blank-certificates/FCC_blank.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/blank-certificates/fcc_blank.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CertificateController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CertificateController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/1574.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipPaymentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipPaymentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/education/course/courseStudents.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/education/course/courseStudents.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/scholarship/payment.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/scholarship/payment.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/user/financial.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/user/financial.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/aghsat_single.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/aghsat_single.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/scholarship/payment.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/scholarship/payment.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,7 +182,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/fonts/other" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/images/blank-certificates" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -180,8 +190,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\fonts\other" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\images\blank-certificates" />
+      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\fonts\other" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\resources\views\admin\blank-certificates" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\resources\views\admin" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\images" />
@@ -396,7 +406,14 @@
       <workItem from="1680678469133" duration="18349000" />
       <workItem from="1680762740613" duration="9420000" />
       <workItem from="1680865595699" duration="646000" />
-      <workItem from="1680936144251" duration="20895000" />
+      <workItem from="1680936144251" duration="21321000" />
+      <workItem from="1680983348033" duration="48000" />
+      <workItem from="1681024760439" duration="10074000" />
+      <workItem from="1681121650160" duration="7624000" />
+      <workItem from="1681196117638" duration="12733000" />
+      <workItem from="1681242876105" duration="1344000" />
+      <workItem from="1681295049440" duration="597000" />
+      <workItem from="1681369724210" duration="4355000" />
     </task>
     <servers />
   </component>

@@ -74,6 +74,9 @@
                     <option value="0" @if($scholarship->type_payment==0) selected @endif >پرداخت عادی</option>
                     <option value="1" @if($scholarship->type_payment==1) selected @endif >پرداخت ویژه</option>
                     <option value="2" @if($scholarship->type_payment==2) selected @endif >پرداخت 5 قسط</option>
+                    <option value="3" @if($scholarship->type_payment==3) selected @endif >پرداخت یک سوم با 2 قسط</option>
+                    <option value="4" @if($scholarship->type_payment==4) selected @endif >پرداخت یک سوم با 3 قسط</option>
+                    <option value="5" @if($scholarship->type_payment==5) selected @endif >پرداخت یک سوم با 5 قسط</option>
                 </select>
                 <input type="submit" class="btn btn-primary" value="ثبت نحوه پرداخت">
             </form>

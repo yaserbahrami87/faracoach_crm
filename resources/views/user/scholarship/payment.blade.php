@@ -75,6 +75,7 @@
                     <th>موعد قسط دوم</th>
                     <th>جزئیات</th>
                 </tr>
+
                 @if(!is_null($courses))
                     @foreach($courses as $item)
                         <tr @if($item->type_course==2) class="text-primary" @endif >

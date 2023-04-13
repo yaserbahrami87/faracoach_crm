@@ -78,6 +78,7 @@
         <tbody>
 
         @foreach($user->checkouts->where('status','=',1) as $item)
+
             <tr class="@if(($dateNow>$item->date_faktor)&&($item->status==0)) table-danger @elseif($item->status==1) table-success @endif" >
                 <td>{{$loop->iteration}}</td>
                 <td class="text-center">
@@ -111,12 +112,22 @@
                                 {{$item->faktor->date_pardakht}}
                                 @break
                         @case('reserve')
-                                {{number_format($item->reserve['final_off'])}}
+                                {{substr($item->reserve->created_at,0,10)}}
                                 @break
                     @endswitch
 
                 </td>
-                <td>{{number_format($item->price)}}</td>
+                <td>
+
+                    @switch($item->type)
+                        @case('reserve')
+                            {{number_format($item->reserve['final_off'])}}
+                            @break
+                        @default
+                            {{number_format($item->price)}}
+                    @endswitch
+
+                </td>
 
             </tr>
         @endforeach

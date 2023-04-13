@@ -158,8 +158,8 @@ class OrderController extends BaseController
         elseif ($request->payment_type=='اقساط')
         {
             $cart=cart::where('user_id', '=', Auth::user()->id)
-                    ->orwhere('type_payment_id','=',[2,3])
-                    ->first();
+                        ->orwhere('type_payment_id','=',[2,3])
+                        ->first();
 
             switch($cart->type)
             {
