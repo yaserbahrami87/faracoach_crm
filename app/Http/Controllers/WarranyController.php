@@ -111,7 +111,8 @@ class WarranyController extends BaseController
      */
     public function show(warrany $warrany)
     {
-        //
+       return view('admin.warrany.warrany')
+                        ->with('warrany',$warrany);
     }
 
     /**
