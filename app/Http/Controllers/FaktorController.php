@@ -47,7 +47,7 @@ class FaktorController extends BaseController
      */
     public function store(Request $request)
     {
-        dd($request);
+
 
         $this->validate($request,[
             'user_id'       =>'required|numeric',

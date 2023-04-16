@@ -7,7 +7,7 @@
 
 @section('content')
     <div class="col-6">
-        <form method="post" action="/admin/faktor/">
+        <form method="post" action="/admin/faktor">
             {{csrf_field()}}
             <input type="hidden" value="{{$user->id}}" name="user_id">
             <div class="form-group">
