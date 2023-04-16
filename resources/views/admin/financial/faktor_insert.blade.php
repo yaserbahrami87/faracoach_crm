@@ -29,7 +29,7 @@
                 <label for="date_faktor">موعد پرداخت فاکتور:
                     <span class="text-danger text-bold">*</span>
                 </label>
-                <input id="date_faktor" type="text" class="form-control"  name="date_faktor"  />
+                <input id="date_faktor" type="text" class="form-control"  name="date_faktor" autocomplete="off"  />
             </div>
             <div class="form-group">
                 <label for="fi">مبلغ فاکتور:</label>

@@ -49,7 +49,7 @@ class FaktorController extends BaseController
     {
         $this->validate($request,[
             'user_id'       =>'required|numeric',
-            'product_id'     =>'required|numeric',
+            'product_id'    =>'required|numeric',
             'date_faktor'   =>'required|string|max:11',
             'fi'            =>'required|numeric',
             'status'        =>'boolean|in:0,1',
@@ -58,6 +58,7 @@ class FaktorController extends BaseController
             'time_pardakht' =>'required_unless:status,0',
         ]);
 
+        dd($request);
         $faktor=faktor::create($request->all()+[
                 'type'              =>'course',
                 'date_createfaktor' =>$this->dateNow,

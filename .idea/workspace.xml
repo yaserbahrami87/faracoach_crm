@@ -2,19 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3849cf8-ae8a-47cc-891c-72c8c9af69d2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/public/images/blank-certificates/FCC_blank.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/blank-certificates/fcc_blank.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CertificateController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CertificateController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipPaymentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipPaymentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/education/course/courseStudents.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/education/course/courseStudents.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/scholarship/payment.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/scholarship/payment.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/user/financial.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/user/financial.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/aghsat_single.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/aghsat_single.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/scholarship/payment.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/scholarship/payment.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/FaktorController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/FaktorController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/financial/faktor_insert.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/financial/faktor_insert.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -413,7 +403,11 @@
       <workItem from="1681196117638" duration="12733000" />
       <workItem from="1681242876105" duration="1344000" />
       <workItem from="1681295049440" duration="597000" />
-      <workItem from="1681369724210" duration="4355000" />
+      <workItem from="1681369724210" duration="6192000" />
+      <workItem from="1681421894907" duration="22000" />
+      <workItem from="1681555066060" duration="1610000" />
+      <workItem from="1681557962538" duration="455000" />
+      <workItem from="1681627257013" duration="1975000" />
     </task>
     <servers />
   </component>
