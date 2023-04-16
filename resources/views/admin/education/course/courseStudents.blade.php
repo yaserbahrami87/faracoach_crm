@@ -82,8 +82,8 @@
                 </tr>
                 <tr class="collapse" id="collaps{{$item->user->id}}">
                     <td colspan="7">
-                        @if($item->user->checkouts->where('status','=',1)->count()!=0)
-                            @foreach($item->user->checkouts->where('status','=',1) as $item_checkout)
+                        @if($item->user->checkouts->where('status','=',1)->where('product_id','=',$item->course_id)->count()!=0)
+                            @foreach($item->user->checkouts->where('status','=',1)->where('product_id','=',$item->product_id) as $item_checkout)
                                 {{$item_checkout->authority}}
                             @endforeach
                         @endif
@@ -92,6 +92,8 @@
             @endforeach
             </tbody>
         </table>
+
+
     </div>
     <div class="col-12">
 

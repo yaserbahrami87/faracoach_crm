@@ -38,9 +38,8 @@
 
                                 <td class="text-center" dir="ltr">{{$warrany->user->tel}}</td>
                                 <td class="text-center" dir="ltr">
-
                                     @if(!is_null($warrany->user->get_followbyExpert))
-                                        {{$item->user->get_followbyExpert->fname.' '.$item->user->get_followbyExpert->lname}}
+                                        {{$warrany->user->get_followbyExpert->fname.' '.$warrany->user->get_followbyExpert->lname}}
                                     @endif
                                 </td>
                                 <td class="text-center" dir="ltr">{{$warrany->user->education}}</td>
