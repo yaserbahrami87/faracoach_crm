@@ -53,12 +53,12 @@ class FaktorController extends BaseController
             'date_faktor'   =>'required|string|max:11',
             'fi'            =>'required|numeric',
             'status'        =>'boolean|in:0,1',
-            'authority'     =>'required_unless:status,0',
-            'date_pardakht' =>'required_unless:status,0',
-            'time_pardakht' =>'required_unless:status,0',
+            'authority'     =>'required_if:status,1',
+            'date_pardakht' =>'required_if:status,1',
+            'time_pardakht' =>'required_if:status,1',
         ]);
 
-        dd($request);
+
         $faktor=faktor::create($request->all()+[
                 'type'              =>'course',
                 'date_createfaktor' =>$this->dateNow,

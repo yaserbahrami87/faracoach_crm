@@ -45,6 +45,7 @@
                     <option value="1" @if(old('status')==1) selected @endif >پرداخت شده</option>
                 </select>
             </div>
+
             <div class="form-group">
                 <label for="authority">کد پیگیری پرداخت:</label>
                 <input id="authority" type="text" class="form-control"  value="{{old('authority')}}" name="authority"  />
