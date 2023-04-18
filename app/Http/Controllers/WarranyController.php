@@ -69,7 +69,7 @@ class WarranyController extends BaseController
 
         if ($request->has('signature_zemanat') && $request->file('signature_zemanat')->isValid()) {
             $file = $request->file('signature_zemanat');
-            $personal_image = "signature-scholarship-" . $scholarship->user->tel . "." . $request->file('signature_zemanat')->extension();
+            $personal_image = "signature-scholarship-" . str_replace('+','',Auth::user()->tel) . "." . $request->file('signature_zemanat')->extension();
             $path = public_path('documents/signatures/');
             $files = $request->file('signature_zemanat')->move($path, $personal_image);
 //            $img=Image::make($files->getRealPath());
