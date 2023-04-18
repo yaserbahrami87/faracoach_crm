@@ -131,12 +131,15 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
 
 
     //warranty
-    Route::resource('warrany','WarranyController');
-
+    Route::get('/warrany','WarranyController@show_list');
+    Route::get('/warrany/{course}/create','WarranyController@create_warrany');
+    Route::post('/warrany/{course}/store','WarranyController@store_warrany');
+    Route::get('/warrany/{warrany}/show','WarranyController@show_warrany');
+    //Route::get('/warrany','WarranyController@show_warrany');
+    Route::resource('warrany','WarranyController')->only(['store']);
 
     //knot
     Route::patch('/knot/updateregister/{scholarship}','ScholarshipController@updateregister');
-
 
     //Certificates
     Route::get('/level1/certificate','CertificateController@get_certificate1');
@@ -157,6 +160,7 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
 
     //Homework
     Route::resource('homework','HomeworkController');
+
 
 
 

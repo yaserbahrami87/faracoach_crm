@@ -1,4 +1,4 @@
-@extends('admin.master.index')
+@extends('user.master.index')
 @section('content')
     <div class="col-6">
 

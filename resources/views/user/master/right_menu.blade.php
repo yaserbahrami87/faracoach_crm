@@ -64,6 +64,7 @@
                 <ul class="menu-content">
                     <li><a href="/panel/faktor" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >فاکتورها</span></a></li>
                     <li><a href="/panel/checkout/transaction" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >تراکنش های مالی</span></a></li>
+                    <li><a href="/panel/warrany" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >تعهدنامه</span></a></li>
                 </ul>
             </li>
             <!--

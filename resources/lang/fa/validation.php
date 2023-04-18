@@ -267,6 +267,10 @@ return [
         'count'                 =>'تعداد/میزان',
         'expire'                =>'تاریخ مهلت',
         'authority'             =>'کد واریزی',
+        'shomare_zemanat'       =>'شماره ضمانت',
+        'tarikh_zemanat'        =>'تاریخ ضمانت',
+        'fi_zemanat'            =>'مبلغ ضمانت',
+        'signature_zemanat'     =>'امضا ضمانت',
 
     ],
 

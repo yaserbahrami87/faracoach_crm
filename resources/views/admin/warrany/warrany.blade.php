@@ -17,7 +17,7 @@
                     <td>{{$warrany->bank}}</td>
                     <td>{{number_format($warrany->fi) }} تومان</td>
                     <td>
-                        <img src="{{asset('/documents/signatures/'.$warrany->signature)}}" class="img-fluid" />
+                        <img src="{{asset('/documents/signatures/'.$warrany->signature)}}"  width="150px" />
                     </td>
                 </tr>
             </table>

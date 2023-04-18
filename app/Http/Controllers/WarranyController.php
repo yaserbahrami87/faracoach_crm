@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\course;
 use App\scholarship;
 use App\warrany;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
@@ -21,8 +23,6 @@ class WarranyController extends BaseController
 
         return view('admin.warrany.warrany_list')
             ->with('warranies',$warranies);
-
-
     }
 
     /**
@@ -147,5 +147,85 @@ class WarranyController extends BaseController
     public function destroy(warrany $warrany)
     {
         //
+    }
+
+    public function show_list()
+    {
+        $warrany=(Auth::user()->checkouts->where('status','=',1)->where('type','=','course'));
+        return view('user.warranty.warranty_list')
+                        ->with('warrany',$warrany);
+    }
+
+    public function show_warrany(warrany $warrany)
+    {
+        if(Auth::user()->id==$warrany->user_id)
+        {
+            alert()->warning('ای تعهدنامه یک بار توسط شما پر شده است')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('این تعهدنامه مربوط به شما نمی باشد')->persistent('بستن');
+
+        }
+        return back();
+
+    }
+
+    public function create_warrany(course $course)
+    {
+
+        return view('user.warranty.warranty')
+                            ->with('course',$course);
+    }
+
+    public function store_warrany(course $course,Request $request)
+    {
+
+        $this->validate($request,[
+            'shomare_zemanat'   =>'required|string|',
+            'tarikh_zemanat'    =>'required|string|max:20',
+            'bak_zemanat'       =>'required|string',
+            'fi_zemanat'        =>'required|numeric',
+            'signature_zemanat' =>'required|mimes:docx,doc,pdf,jpg,png|max:1024',
+        ]);
+
+        $warrany=warrany::create([
+            'user_id'       =>Auth::user()->id,
+            'product_id'    =>$course->id,
+            'type'          =>'course',
+            'receipt'       =>$request->shomare_zemanat,
+            'date_fa'       =>$request->tarikh_zemanat,
+            'fi'            =>$request->fi_zemanat,
+            'bank'          =>$request->bak_zemanat,
+        ]);
+
+        $student=Auth::user()->students->where('course_id','=',$course->id)->first();
+
+        if ($request->has('signature_zemanat') && $request->file('signature_zemanat')->isValid()) {
+            $file = $request->file('signature_zemanat');
+            $personal_image = "signature" . str_replace('+','',Auth::user()->tel) . "." . $request->file('signature_zemanat')->extension();
+            $path = public_path('documents/signatures/');
+            $files = $request->file('signature_zemanat')->move($path, $personal_image);
+            $warrany->signature = $personal_image;
+            $warrany->save();
+        }
+
+        $student->warrany_id=$warrany->id;
+        $status=$student->save();
+
+        if($status)
+        {
+            $msg=Auth::user()->fname.' '.Auth::user()->lname." عزیز\n"."دزخواست تعهدنامه شما در سیستم ثبت شد";
+            $this->sendSms(Auth::user()->tel,$msg);
+            $msg=Auth::user()->fname.' '.Auth::user()->lname."درخواست تعهدنامه خود را درسیستم ثبت کرد";
+            $this->sendSms('09153159020',$msg);
+            alert()->success('تعهدنامه با موفقیت ذخیره شد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در ثبت تعهدنامه')->persistent('بستن');
+        }
+
+        return redirect('/panel/warrany');
     }
 }
