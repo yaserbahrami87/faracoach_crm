@@ -91,7 +91,7 @@
                         @endif
                     </td>
                     <th style="width: 200px">شماره گروه دانشجویی</th>
-                    <td  class="text-center">{{Auth::user()->students->where('course_id','=',$course->id)->first()->warrany_id}} </td>
+                    <td  class="text-center">{{Auth::user()->students->where('course_id','=',$course->id)->first()['warrany_id']}} </td>
                 </tr>
                 <tr>
                     <th>مدت زمان دوره</th>
