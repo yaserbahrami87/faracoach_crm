@@ -2,8 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3849cf8-ae8a-47cc-891c-72c8c9af69d2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/financial/invoice/invoice.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/user/financial/invoice/invoice.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/warranty/warranty.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/warranty/warranty.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CheckoutController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CheckoutController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/checkout.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/checkout.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/course.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/course.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/profile.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/financial/listFaktors.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/financial/listFaktors.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/master/right_menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/master/right_menu.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -409,7 +420,15 @@
       <workItem from="1681627257013" duration="12952000" />
       <workItem from="1681679719424" duration="437000" />
       <workItem from="1681715159845" duration="20939000" />
-      <workItem from="1681801424597" duration="14900000" />
+      <workItem from="1681801424597" duration="15538000" />
+      <workItem from="1681853245757" duration="2120000" />
+      <workItem from="1681888916834" duration="15869000" />
+      <workItem from="1681933173680" duration="20000" />
+      <workItem from="1681973865447" duration="4783000" />
+      <workItem from="1681979813519" duration="6514000" />
+      <workItem from="1682073668641" duration="15000" />
+      <workItem from="1682174474488" duration="6000" />
+      <workItem from="1682292943781" duration="4229000" />
     </task>
     <servers />
   </component>

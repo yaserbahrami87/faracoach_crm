@@ -8,6 +8,7 @@ use App\checkout;
 use App\course;
 use App\eventreserve;
 use App\faktor;
+use App\invoice;
 use App\lib\zarinpal;
 use App\reserve;
 use App\student;
@@ -345,6 +346,41 @@ class CheckoutController extends BaseController
                             }
 
                         }
+                        else if($item->type=='invoice')
+                        {
+                            $status=student::create(
+                                [
+                                    'user_id'       =>Auth::user()->id,
+                                    'course_id'     =>$item->product_id,
+                                    'date_fa'       =>$this->dateNow,
+                                    'time_fa'       =>$this->timeNow,
+                                ]
+                            );
+
+
+                            if(!is_null($item->invoice->count_installment))
+                            {
+                                $v=verta();
+                                for ($i=0;$i<$item->invoice->count_installment;$i++)
+                                {
+
+                                    $v=$v->addMonths(1);
+                                    $Date=$v->format('Y/m/d');
+                                    faktor::create([
+                                        'user_id'           =>Auth::user()->id,
+                                        'checkout_id'       =>$item->id,
+                                        'product_id'        =>$item->product_id,
+                                        'type'              =>'course',
+                                        'date_createfaktor' =>$this->dateNow,
+                                        'date_faktor'       =>$Date,
+                                        'fi'                =>$item->invoice->fi_installment,
+                                    ]);
+                                }
+
+                                $invoice=$item->invoice;
+                                $invoice->delete();
+                            }
+                        }
                         else if ($item->type == 'reserve')
                         {
                             $reserve=reserve::where('id','=',$item->product_id)
@@ -569,7 +605,37 @@ class CheckoutController extends BaseController
                 return redirect('/');
             }
         }
+    }
 
+    //پرداخت ییش فاکتور
+    public function storeInvoice(invoice $invoice,Request $request)
+    {
+        if(Auth::user()->id==$invoice->user_id) {
+                $order = new zarinpal();
+                $res = $order->pay($invoice->pre_payment, Auth::user()->email, Auth::user()->tel, 'پرداخت پیش فاکتور');
+                $status = checkout::create([
+                    'user_id' => Auth::user()->id,
+                    'order_id' => $invoice->id,
+                    'product_id' => $invoice->course_id,
+                    'price' => $invoice->pre_payment,
+                    'type' => 'invoice',
+                    'authority' => $res,
+                    'description' => 'انتقال به درگاه',
+                ]);
+
+                if ($status) {
+                    return redirect('https://www.zarinpal.com/pg/StartPay/' . $res);
+                } else {
+                    alert()->error('خطا در پرداخت فاکتور اقساط')->persistent('بستن');
+                    return redirect('/');
+                }
+
+        }
+        else
+        {
+            alert()->error('فاکتور مربوط به شما نمیباشد')->persistent('بستن');
+            return back();
+        }
     }
 
 

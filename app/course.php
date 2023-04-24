@@ -30,4 +30,9 @@ class course extends Model
         return $this->hasOne('App\checkout','product','id')->where('type','=','scholarship_payment');
     }
 
+    public function invoice()
+    {
+        return $this->hasMany('App\invoice');
+    }
+
 }

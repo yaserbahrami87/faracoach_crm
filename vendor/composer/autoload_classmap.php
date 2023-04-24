@@ -187,6 +187,7 @@ return array(
     'App\\followup' => $baseDir . '/app/followup.php',
     'App\\homework' => $baseDir . '/app/homework.php',
     'App\\integrityTest' => $baseDir . '/app/integrityTest.php',
+    'App\\invoice' => $baseDir . '/app/invoice.php',
     'App\\landPage' => $baseDir . '/app/landPage.php',
     'App\\lib\\zarinpal' => $baseDir . '/app/lib/zarinpal.php',
     'App\\like' => $baseDir . '/app/like.php',

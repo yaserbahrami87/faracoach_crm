@@ -823,6 +823,7 @@ class ComposerStaticInitf54d8edf51459297346cdb00d8423a68
         'App\\followup' => __DIR__ . '/../..' . '/app/followup.php',
         'App\\homework' => __DIR__ . '/../..' . '/app/homework.php',
         'App\\integrityTest' => __DIR__ . '/../..' . '/app/integrityTest.php',
+        'App\\invoice' => __DIR__ . '/../..' . '/app/invoice.php',
         'App\\landPage' => __DIR__ . '/../..' . '/app/landPage.php',
         'App\\lib\\zarinpal' => __DIR__ . '/../..' . '/app/lib/zarinpal.php',
         'App\\like' => __DIR__ . '/../..' . '/app/like.php',

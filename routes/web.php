@@ -138,6 +138,13 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     //Route::get('/warrany','WarranyController@show_warrany');
     Route::resource('warrany','WarranyController')->only(['store']);
 
+
+    //invoice
+
+    Route::resource('invoice','InvoiceController')->except('index');
+    Route::get('/invoice','InvoiceController@showinvoiceUser');
+    Route::post('/invoice/checkout/{invoice}','CheckoutController@storeInvoice');
+
     //knot
     Route::patch('/knot/updateregister/{scholarship}','ScholarshipController@updateregister');
 
@@ -303,6 +310,13 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
 
     //warranty
     Route::resource('warrany','WarranyController');
+
+    //invoice
+    Route::get('/invoice/{user}/create','InvoiceController@create');
+    Route::post('/invoice/{user}/store','InvoiceController@store');
+    Route::get('/invoice/course/{course}','InvoiceController@course');
+    Route::resource('invoice','InvoiceController');
+
 
 
 
