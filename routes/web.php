@@ -424,8 +424,12 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     //Setting SMS
     Route::resource('settingsms','SettingsmsController');
 
+
+
     //score
     Route::resource('settingscore','SettingscoreController');
+
+
 
 
 

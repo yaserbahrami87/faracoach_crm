@@ -1,5 +1,5 @@
-@extends('panelAdmin.master.index')
-@section('rowcontent')
+@extends('admin.master.index')
+@section('content')
     <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
         <form method="post" action="/admin/settingsms/{{$settingsms->id}}" >
             {{csrf_field()}}
@@ -29,6 +29,7 @@
                 <button type="button" class="btn btn-primary btn-sm" id="sex_btn" onclick="add_parametersSMS('{sex}')">جنسیت</button>
                 <button type="button" class="btn btn-primary btn-sm" id="nextDate_btn" onclick="add_parametersSMS('{nextDate}')">تاریخ پیگیری بعد</button>
                 <button type="button" class="btn btn-primary btn-sm" id="expert_btn" onclick="add_parametersSMS('{followby_expert}')">مسئول پیگیری</button>
+                <button type="button" class="btn btn-primary btn-sm" id="expert_btn" onclick="add_parametersSMS('{telegram}')">تلگرام</button>
                 <textarea class="form-control" id="commentSMS" rows="3" name="comment">{{$settingsms->comment}}</textarea>
             </div>
             <div class="form-group">

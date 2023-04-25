@@ -2,19 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3849cf8-ae8a-47cc-891c-72c8c9af69d2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/resources/views/admin/financial/invoice/invoice.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/user/financial/invoice/invoice.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/settingsSms.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CheckoutController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CheckoutController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/checkout.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/checkout.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/course.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/course.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/profile.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/financial/listFaktors.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/financial/listFaktors.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/master/right_menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/master/right_menu.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SettingsmsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SettingsmsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/editSms.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/editSms.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/panelAdmin/settingsSms.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/panelAdmin/settingsSms.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,7 +177,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/images/blank-certificates" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/admin" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -190,10 +185,10 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\resources\views\admin" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\images\blank-certificates" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\fonts\other" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\resources\views\admin\blank-certificates" />
-      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\resources\views\admin" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\images" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -429,6 +424,9 @@
       <workItem from="1682073668641" duration="15000" />
       <workItem from="1682174474488" duration="6000" />
       <workItem from="1682292943781" duration="4229000" />
+      <workItem from="1682319964134" duration="38000" />
+      <workItem from="1682322321882" duration="1210000" />
+      <workItem from="1682404684929" duration="4839000" />
     </task>
     <servers />
   </component>

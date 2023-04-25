@@ -357,7 +357,6 @@ class CheckoutController extends BaseController
                                 ]
                             );
 
-
                             if(!is_null($item->invoice->count_installment))
                             {
                                 $v=verta();

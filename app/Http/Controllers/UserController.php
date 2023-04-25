@@ -654,6 +654,8 @@ class UserController extends BaseController
            $item->comment=str_replace('{fname}',$user->fname,$item->comment);
            $item->comment=str_replace('{lname}',$user->lname,$item->comment);
            $item->comment=str_replace('{datebirth}',$user->datebirth,$item->comment);
+           $item->comment=str_replace('{telegram}',$user->telegram,$item->comment);
+
            if($user->sex==0)
            {
                $item->comment=str_replace('{sex}','سرکارخانم ',$item->comment);
