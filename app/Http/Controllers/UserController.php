@@ -655,6 +655,7 @@ class UserController extends BaseController
            $item->comment=str_replace('{lname}',$user->lname,$item->comment);
            $item->comment=str_replace('{datebirth}',$user->datebirth,$item->comment);
            $item->comment=str_replace('{telegram}',Auth::user()->telegram,$item->comment);
+           $item->comment=str_replace('{admin_tel}',Auth::user()->tel,$item->comment);
 
            if($user->sex==0)
            {
