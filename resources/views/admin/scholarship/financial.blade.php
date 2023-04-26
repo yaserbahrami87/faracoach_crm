@@ -1,4 +1,5 @@
 @extends('admin.master.index')
+
 @section('headerScript')
     <link href="{{asset('/dashboard/assets/css/buttons.dataTables.min.css')}}" rel="stylesheet" />
 @endsection

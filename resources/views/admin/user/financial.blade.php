@@ -1,6 +1,4 @@
-
 <div class="col-12 table-responsive mb-3">
-
     <p>فاکتورهای ایجاد شده</p>
     <table class="dataTable table table-striped table-bordered" style="width:100%">
         <thead>
@@ -87,7 +85,7 @@
                             {{$item->faktor->id}}
                             @break
                         @case('scholarship_payment')
-                            {{$item->schoalrshipPayment->id}}
+                            {{$item->schoalrshipPayment['id']}}
                             @break
                     @endswitch
                 </td>
