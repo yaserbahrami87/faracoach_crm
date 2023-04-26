@@ -151,7 +151,7 @@ class WarranyController extends BaseController
 
     public function show_list()
     {
-        $warrany=(Auth::user()->checkouts->where('status','=',1)->orwhere('type','=','course')->orwhere('type','=','invoice'));
+        $warrany=(Auth::user()->checkouts->where('status','=',1)->wherein('type',['course','invoice']));
         return view('user.warranty.warranty_list')
                         ->with('warrany',$warrany);
     }
