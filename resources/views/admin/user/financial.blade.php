@@ -101,7 +101,6 @@
                     @endif
                 </td>
                 <td>
-
                     @switch($item->type)
                         @case('scholarship_payment')
                                 {{($item->schoalrshipPayment['date_fa'])}}
