@@ -82,7 +82,7 @@
                 <td class="text-center">
                     @switch($item->type)
                         @case('ghest')
-                            {{$item->faktor->id}}
+                            {{$item->faktor['id']}}
                             @break
                         @case('scholarship_payment')
                             {{$item->schoalrshipPayment['id']}}
