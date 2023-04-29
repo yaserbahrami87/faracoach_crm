@@ -145,7 +145,8 @@
                           <p>در صورت عدم انجام تعهدات مالی توسط دانش‌پذیر، ارائه خدمات آموزشی به وی مقدور نمیباشد.</p>
                           <p>چنانچه وقوع فورس ماژور اعم از بروز هرگونه رخداد طبیعی و غیرطبیعی و قهری که  انجام تعهدنامه را غیرممکن نماید یا باعث تعلیق انجام تعهدات طرفین برای مدت بیشتر از 1 ماه شوند، هریک از طرفین حق فسخ تعهدنامه را خواهند داشت.</p>
                           <b>7.	شرایط پرداخت شهریه:</b>
-                          <p>کل مبلغ قرارداد {{number_format($scholarship->get_financial->scholarship_course->fi)}} تومان می¬باشد؛ که مبلغ {{number_format($scholarship->get_financial->schoalrshipPayment->prepayment)}} تومان به‌عنوان پیش‌پرداخت در تاریخ  {{$scholarship->get_financial->schoalrshipPayment->date_fa}} واریز گردید؛</p>
+
+                          <p>کل مبلغ قرارداد {{number_format($scholarship->get_financial->scholarship_course->fi)}} تومان می¬باشد؛ که مبلغ {{number_format($scholarship->get_financial->schoalrshipPayment->pre_payment)}} تومان به‌عنوان پیش‌پرداخت در تاریخ  {{$scholarship->get_financial->schoalrshipPayment->date_fa}} واریز گردید؛</p>
                           <p> شرایط پرداخت الباقی مبلغ قرارداد با توافق طرفین به‌صورت نقد/ اقساط/تهاتر بورسیه به شرح زیر توافق گردید؛</p>
                           <p>مانده مبلغ قابل پرداخت {{number_format($scholarship->get_financial->schoalrshipPayment->remaining)}} تومان می باشد؛</p>
                           <p>درصورت نیاز (توافق با واحد ثبت نام ، درخواست گواهینامه زودتر از موعد یا شرایط خاص ) دانش پذیر یک فقره چک ضمانت/ سفته به شماره <input type="number" name="shomare_zemanat"  /> به تاریخ <input type="text" name="tarikh_zemanat" id="tarikh_zemanat"  /> عهده بانک
@@ -188,12 +189,20 @@
                                           <th>#</th>
                                           <th>تاریخ فاکتور</th>
                                           <th>مبلغ فاکتور</th>
+                                          <th>وضعیت</th>
                                       </tr>
                                       @foreach($scholarship->get_financial->get_faktors as $faktor)
                                       <tr>
                                           <td>{{$loop->iteration}}</td>
                                           <td>{{$faktor->date_faktor}}</td>
                                           <td>{{number_format($faktor->fi)}} تومان</td>
+                                          <td >
+                                              @if($faktor->status==1)
+                                                  پرداخت شده
+                                              @else
+                                                  پرداخت نشده
+                                              @endif
+                                          </td>
                                       </tr>
                                       @endforeach
                                   </table>
