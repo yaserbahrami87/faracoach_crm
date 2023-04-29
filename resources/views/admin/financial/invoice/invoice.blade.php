@@ -12,7 +12,7 @@
             <div class="card-header bg-secondary text-light">
                 ایجاد پیش فاکتور
             </div>
-            <div class="card-body border">
+            <div class="card-body border mb-5">
                     <form method="post" action="/admin/invoice/{{$user->id}}/store">
                         {{csrf_field()}}
                         <input type="hidden" name="user_id" value="{{$user->id}}">
@@ -83,13 +83,13 @@
                             <div class="input-group-prepend">
                                 <div class="input-group-text">تاریخ اولین فاکتور</div>
                             </div>
-                            <input type="text" id="date_installment" name="date_installment" class="form-control"   />
+                            <input type="text" id="date_installment" name="date_installment" class="form-control" autocomplete="off"  />
                         </div>
                         <div class="input-group mb-1">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">مهلت پرداخت پیش فاکتور</div>
                             </div>
-                            <input type="text" id="expire_date" name="expire_date" class="form-control"   />
+                            <input type="text" id="expire_date" name="expire_date" class="form-control"  autocomplete="off"  />
                         </div>
                         <button class="btn btn-success">ایجاد پیش فاکتور</button>
                     </form>
