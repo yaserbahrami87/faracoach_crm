@@ -20,14 +20,14 @@
                 <tr>
                     <td>{{($invoice->user->fname.' '.$invoice->user->lname)}}</td>
                     <td>{{($invoice->course->course)}}</td>
-                    <td>{{($invoice->fi)}}</td>
+                    <td>{{number_format($invoice->fi)}}</td>
                     <td>{{($invoice->off)}}</td>
                     <td>{{($invoice->score)}}</td>
-                    <td>{{($invoice->fi_final)}}</td>
-                    <td>{{($invoice->pre_payment)}}</td>
-                    <td>{{($invoice->remaining)}}</td>
+                    <td>{{number_format($invoice->fi_final)}}</td>
+                    <td>{{number_format($invoice->pre_payment)}}</td>
+                    <td>{{number_format($invoice->remaining)}}</td>
                     <td>{{($invoice->count_installment)}}</td>
-                    <td>{{($invoice->fi_installment)}}</td>
+                    <td>{{number_format($invoice->fi_installment)}}</td>
                     <td>
                         <form method="post" action="/admin/invoice/{{$invoice->id}}" onsubmit="return window.confirm('ایا از حذف پیش فاکتور اطمینان دارید؟')">
                             {{csrf_field()}}
