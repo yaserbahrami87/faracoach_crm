@@ -17,7 +17,10 @@ class InvoiceController extends BaseController
      */
     public function index()
     {
-        //
+        $invoices=invoice::get();
+        return view('admin.financial.invoice.invoice_all')
+                        ->with('invoices',$invoices);
+
     }
 
     /**
@@ -122,7 +125,15 @@ class InvoiceController extends BaseController
      */
     public function destroy(invoice $invoice)
     {
-        //
+        if($invoice->delete())
+        {
+            alert()->success('پیش فاکتور با موفقیت حذف شد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در حذف پیش فاکتور')->persistent('بستن');
+        }
+        return back();
     }
 
     public function course(course $course)

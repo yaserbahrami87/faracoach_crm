@@ -309,7 +309,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::get('/users/collabrations','ScholarshipController@collabrations');
 
     //warranty
-    Route::resource('warrany','WarranyController');
+    Route::resource('invoice','InvoiceController');
 
     //invoice
     Route::get('/invoice/{user}/create','InvoiceController@create');

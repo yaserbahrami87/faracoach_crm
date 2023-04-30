@@ -87,6 +87,7 @@
                 <ul class="menu-content">
                     <li><a href="/admin/checkout" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >پرداختی ها</span></a></li>
                     <li><a href="/admin/faktor/all" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >فاکتورها</span></a></li>
+                    <li><a href="/admin/invoice" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >پیش فاکتورها</span></a></li>
                 </ul>
             </li>
             <li class=" nav-item"><a href="#"><span class="menu-title" >کلینیک</span></a>
