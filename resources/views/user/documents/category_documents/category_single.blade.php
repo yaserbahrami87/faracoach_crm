@@ -19,31 +19,59 @@
                         <th>حذف</th>
                     </tr>
                     @foreach($category_document->document as $document)
-                        <tr>
-                            <td>{{$loop->iteration}}</td>
-                            <td>{{$document->title}}</td>
-                            <td>
-                                {{$document->content}}
-                            </td>
-                            <td>{{$document->category_document['category']}}</td>
-                            <td>
-                                {{$document->extension}}
-                            </td>
-                            <td>
-                                @if(($document->size/1024)<1024)
-                                    {{substr((string)$document->size,0,3)}}   KB
+                        @if(($document->permission==1) && (Auth::user()->students->count()>0))
+                            <tr>
+                                <td>{{$loop->iteration}}</td>
+                                <td>{{$document->title}}</td>
+                                <td>
+                                    {{$document->content}}
+                                </td>
+                                <td>{{$document->category_document['category']}}</td>
+                                <td>
+                                    {{$document->extension}}
+                                </td>
+                                <td>
+                                    @if(($document->size/1024)<1024)
+                                        {{substr((string)$document->size,0,3)}}   KB
 
-                                @else
-                                    {{ceil(number_format($document->size/1024))}} MB
-                                @endif
-                            </td>
-                            <td>{{$document->clicks}}</td>
-                            <td>
-                                <a href="/panel/documents/{{$document->id}}" class="btn btn-primary"target="_blank" >
-                                    دانلود
-                                </a>
-                            </td>
-                        </tr>
+                                    @else
+                                        {{ceil(number_format($document->size/1024))}} MB
+                                    @endif
+                                </td>
+                                <td>{{$document->clicks}}</td>
+                                <td>
+                                    <a href="/panel/documents/{{$document->id}}" class="btn btn-primary"target="_blank" >
+                                        دانلود
+                                    </a>
+                                </td>
+                            </tr>
+                        @elseif($document->permission==0)
+                            <tr>
+                                <td>{{$loop->iteration}}</td>
+                                <td>{{$document->title}}</td>
+                                <td>
+                                    {{$document->content}}
+                                </td>
+                                <td>{{$document->category_document['category']}}</td>
+                                <td>
+                                    {{$document->extension}}
+                                </td>
+                                <td>
+                                    @if(($document->size/1024)<1024)
+                                        {{substr((string)$document->size,0,3)}}   KB
+
+                                    @else
+                                        {{ceil(number_format($document->size/1024))}} MB
+                                    @endif
+                                </td>
+                                <td>{{$document->clicks}}</td>
+                                <td>
+                                    <a href="/panel/documents/{{$document->id}}" class="btn btn-primary"target="_blank" >
+                                        دانلود
+                                    </a>
+                                </td>
+                            </tr>
+                        @endif
                     @endforeach
                 </table>
             </div>

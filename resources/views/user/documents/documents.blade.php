@@ -13,6 +13,7 @@
                 <th>حذف</th>
             </tr>
             @foreach($documents as $document)
+
                 <tr>
                     <td>{{$loop->iteration}}</td>
                     <td>{{$document->title}}</td>
