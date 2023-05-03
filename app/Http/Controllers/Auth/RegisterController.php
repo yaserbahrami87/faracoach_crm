@@ -90,6 +90,11 @@ class RegisterController extends BaseController
             $data['introduced']=NULL;
         }
 
+        if(session()->has('introduce'))
+        {
+            $data['introduced']=session('introduce');
+        }
+
         if(!isset($data['organization']))
         {
             $data['organization']=NULL;

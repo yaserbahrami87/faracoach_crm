@@ -43,9 +43,12 @@ class OrderController extends BaseController
     public function store(Request $request)
     {
 
+
+
         $cart = cart::where('user_id', '=', Auth::user()->id)
             ->get();
-        if($request->payment_type=='نقدی') {
+        if($request->payment_type=='نقدی')
+        {
             $order = new zarinpal();
 
             $sum_final_off = 0;
@@ -82,6 +85,7 @@ class OrderController extends BaseController
                     'description'   => 'انتقال به درگاه',
                     'authority'     => $res,
                 ]);
+
 
 
 
@@ -151,7 +155,8 @@ class OrderController extends BaseController
                     return redirect('https://www.zarinpal.com/pg/StartPay/' . $res);
                 }
 
-            } else {
+            }
+            else {
                 return redirect('/');
             }
         }
@@ -182,6 +187,53 @@ class OrderController extends BaseController
                         ->with('cart',$cart);
 
 
+        }
+        elseif ($request->payment_type=='کیف پول')
+        {
+            $order = new zarinpal();
+
+            dd($request);
+
+
+            $res = $order->pay($request->amount, Auth::user()->email, Auth::user()->tel, implode(',', $typeOrders));
+
+
+            if ($status) {
+                if($sum_final_off==0)
+                {
+
+                    if ($item->type == 'course')
+                    {
+                        $status=student::create(
+                            [
+                                'user_id'       =>Auth::user()->id,
+                                'course_id'    =>$item->product_id,
+                                'date_fa'       =>$this->dateNow,
+                                'time_fa'       =>$this->timeNow,
+                            ]
+                        );
+
+                        if($status)
+                        {
+                            alert()->success('ثبت نام در دوره با موفقیت انجام شد')->persistent('بستن');
+                        }
+                        else
+                        {
+                            alert()->error('خطا در ثبت نام دانشجو')->persistent('بستن');
+                        }
+
+                        return redirect('/');
+                    }
+                }
+                else
+                {
+                    return redirect('https://www.zarinpal.com/pg/StartPay/' . $res);
+                }
+
+            }
+            else {
+                return redirect('/');
+            }
         }
 
 

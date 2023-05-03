@@ -114,8 +114,15 @@ class EventController extends BaseController
      * @param \App\event $event
      * @return \Illuminate\Http\Response
      */
-    public function show(event $event)
+    public function show(event $event,Request $request)
     {
+        if(isset($request->q))
+        {
+            $request->session()->put('introduce',$request->q);
+        }
+
+
+
         $d = explode('/', $event->start_date);
         $t = explode(':', $event->start_time);
         $v = (Verta::createJalali($d[0], $d[1], $d[2], $t[0], $t[1], 0));

@@ -140,10 +140,12 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
 
 
     //invoice
-
     Route::resource('invoice','InvoiceController')->except('index');
     Route::get('/invoice','InvoiceController@showinvoiceUser');
     Route::post('/invoice/checkout/{invoice}','CheckoutController@storeInvoice');
+
+    //wallet
+    Route::resource('wallet','WalletController');
 
     //knot
     Route::patch('/knot/updateregister/{scholarship}','ScholarshipController@updateregister');
@@ -309,7 +311,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::get('/users/collabrations','ScholarshipController@collabrations');
 
     //warranty
-    Route::resource('invoice','InvoiceController');
+    Route::resource('warrany','InvoiceController');
 
     //invoice
     Route::get('/invoice/{user}/create','InvoiceController@create');

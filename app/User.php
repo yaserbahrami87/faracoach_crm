@@ -218,7 +218,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
         public function wallet()
         {
-            return $this->belongsTo('App\wallet');
+            return $this->hasOne('App\wallet');
         }
 
         public function get_state()
