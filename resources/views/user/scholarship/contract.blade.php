@@ -1,4 +1,4 @@
-@if(!is_null($scholarship->financial))
+@if(!is_null($scholarship->financial))ِ
     @if(is_null($scholarship->warrany_id))
               <div class="card-body" >
                   <div class="border border-1 p-1 mb-2 mt-1 shadow-sm shadow">
@@ -87,6 +87,7 @@
                                   <td class="text-center" colspan="3">از تاریخ {{$scholarship->get_financial->scholarship_course->start}}  لغایت   {{$scholarship->get_financial->scholarship_course->end}}  به مدت   {{$scholarship->get_financial->scholarship_course->duration_date}}</td>
                               </tr>
                           </table>
+
                           <b>	3.	تعهدات موسسه:</b>
                           <p style="margin-top: 15px;">آموزش مهارت‌های استاندارد کوچینگ طبق سرفصل اعلام‌شده توسط آموزشگاه؛</p>
                           <p>ارائه طرح درس دوره و معرفی منابع آموزشی و کمک‌آموزشی موردنیاز؛</p>
@@ -146,9 +147,10 @@
                           <p>چنانچه وقوع فورس ماژور اعم از بروز هرگونه رخداد طبیعی و غیرطبیعی و قهری که  انجام تعهدنامه را غیرممکن نماید یا باعث تعلیق انجام تعهدات طرفین برای مدت بیشتر از 1 ماه شوند، هریک از طرفین حق فسخ تعهدنامه را خواهند داشت.</p>
                           <b>7.	شرایط پرداخت شهریه:</b>
 
-                          <p>کل مبلغ قرارداد {{number_format($scholarship->get_financial->scholarship_course->fi)}} تومان می¬باشد؛ که مبلغ {{number_format($scholarship->get_financial->schoalrshipPayment->pre_payment)}} تومان به‌عنوان پیش‌پرداخت در تاریخ  {{$scholarship->get_financial->schoalrshipPayment->date_fa}} واریز گردید؛</p>
+                          <p>کل مبلغ قرارداد <b class="text-success">{{number_format($scholarship->get_financial->scholarship_course->fi)}}</b> تومان می¬باشد؛ که مبلغ <b class="text-success">{{number_format($scholarship->get_financial->schoalrshipPayment->pre_payment)}}</b> تومان به‌عنوان پیش‌پرداخت در تاریخ  {{$scholarship->get_financial->schoalrshipPayment->date_fa}} واریز گردید؛</p>
                           <p> شرایط پرداخت الباقی مبلغ قرارداد با توافق طرفین به‌صورت نقد/ اقساط/تهاتر بورسیه به شرح زیر توافق گردید؛</p>
-                          <p>مانده مبلغ قابل پرداخت {{number_format($scholarship->get_financial->schoalrshipPayment->remaining)}} تومان می باشد؛</p>
+                          <p>مانده مبلغ قابل پرداخت <b class="text-success">{{number_format($scholarship->get_financial->schoalrshipPayment->remaining)}}</b> تومان می باشد؛</p>
+                          <p>کل مبلغ بورسیه تعلق گرفته: <b class="text-success">{{number_format(($scholarship->get_financial->schoalrshipPayment->fi*$scholarship->get_financial->schoalrshipPayment->score)/100)}}</b> تومان می باشد.</p>
                           <p>درصورت نیاز (توافق با واحد ثبت نام ، درخواست گواهینامه زودتر از موعد یا شرایط خاص ) دانش پذیر یک فقره چک ضمانت/ سفته به شماره <input type="number" name="shomare_zemanat"  /> به تاریخ <input type="text" name="tarikh_zemanat" id="tarikh_zemanat"  /> عهده بانک
                               <select name="bak_zemanat">
                                   <option>بانک ملی</option>
