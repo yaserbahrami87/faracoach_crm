@@ -51,7 +51,7 @@ class WarranyController extends BaseController
             'tarikh_zemanat'    =>'nullable|string|max:20',
             'bak_zemanat'       =>'nullable|string',
             'fi_zemanat'        =>'nullable|numeric',
-            'signature_zemanat' =>'nullable|mimes:docx,doc,pdf,jpg,png|max:1024',
+            'signature_zemanat' =>'required|mimes:docx,doc,pdf,jpg,png|max:1024',
         ]);
 
         $warrany=warrany::create([
