@@ -27,9 +27,14 @@
             <li class=" nav-item"><a href="/panel"><span class="menu-title">داشبورد</span></a></li>
 
             <li class=" nav-item"><a href="/panel/profile"><span class="menu-title" > حساب کاربری </span></a> </li>
+
             <li class="nav-item">
                 <a href="/panel/scholarship/me">
-                    <span class="menu-title" >آموزش رایگان </span>
+                    @if(is_null(Auth::user()->scholarship))
+                        <span class="menu-title" >آموزش رایگان </span>
+                    @else
+                        <span class="menu-title" >بورسیه</span>
+                    @endif
                 </a>
             </li>
             <li class=" nav-item"><a href="/panel/introduced"><span class="menu-title">سفیر کوچینگ</span></a></li>
