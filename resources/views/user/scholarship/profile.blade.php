@@ -252,6 +252,7 @@
                 @include('user.scholarship.collabration')
             </div>
 
+
             <div class="tab-pane fade " id="contract" role="tabpanel" aria-labelledby="contract-tab">
                 @include('user.scholarship.contract')
             </div>
@@ -291,6 +292,9 @@
         </div>
         <div role="collabration">
             <button class="btn btn-primary" id="collabration-tab" data-toggle="tab" data-target="#collabration" type="button" role="tab" aria-controls="collabration" aria-selected="false">همکاری</button>
+        </div>
+        <div role="contract">
+            <button class="btn btn-primary" id="contract-tab" data-toggle="tab" data-target="#contract" type="button" role="tab" aria-controls="contract" aria-selected="false">تعهدنامه</button>
         </div>
 
         <div role="support">
