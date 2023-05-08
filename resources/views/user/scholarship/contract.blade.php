@@ -2,7 +2,7 @@
     @if(is_null($scholarship->warrany_id))
               <div class="card-body" >
                   <div class="border border-1 p-1 mb-2 mt-1 shadow-sm shadow">
-                      <ul method="post" action="/panel/warrany" enctype="multipart/form-data">
+                      <form method="post" action="/panel/warrany" enctype="multipart/form-data">
                           {{csrf_field()}}
                           <input type="hidden" name="product_id" value="{{$scholarship->get_financial->product_id}}" />
                           <input type="hidden" name="type" value="scholarship_payment" />
@@ -106,7 +106,7 @@
                           </ul>
                           <h4 class="text-danger">	ضمانت بازگشت کامل وجه:</h4>
                           <p style="margin-top: 15px">به این معنی است که چنانچه هریک از شرایط زیر محقق نشود، حق مطالبه کامل وجه شهریه برای دانشپذیر محفوظ است:</p>
-                          
+
                           <p>1.	دوره در موعد مقرر برگزار نشود و این امر موجب انصراف دانش پذیر از شرکت در دوره گردد؛</p>
                           <p>2.	موسسه به تعهدات خود به دانش پذیر به طور کامل عمل نکرده باشد؛</p>
                           <p>3.	دانش پذیر پس از اتمام دوره و انجام تمام تکالیف و مسئولیت های محوله از طرف اساتید، به ۸ ویژگی یک کوچ از دیدگاه ICF مسلط نشده باشد و قادر به برگزاری و اداره یک جلسه کوچینگ نباشد؛</p>
@@ -232,7 +232,7 @@
                                   </div>
                               </div>
 
-                      </ul>
+
 
 
 
