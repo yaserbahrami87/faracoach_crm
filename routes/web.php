@@ -311,7 +311,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::get('/users/collabrations','ScholarshipController@collabrations');
 
     //warranty
-    Route::resource('warrany','InvoiceController');
+    Route::resource('warrany','WarranyController');
 
     //invoice
     Route::get('/invoice/{user}/create','InvoiceController@create');

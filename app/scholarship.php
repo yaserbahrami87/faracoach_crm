@@ -184,6 +184,11 @@ class scholarship extends Model
         return $result;
     }
 
+    public function warrany()
+    {
+        return $this->belongsTo('App\warrany');
+    }
+
 
 }
 

@@ -47,10 +47,10 @@ class WarranyController extends BaseController
     {
 
         $this->validate($request,[
-            'shomare_zemanat'   =>'required|string|',
-            'tarikh_zemanat'    =>'required|string|max:20',
-            'bak_zemanat'       =>'required|string',
-            'fi_zemanat'        =>'required|numeric',
+            'shomare_zemanat'   =>'nullable|string|',
+            'tarikh_zemanat'    =>'nullable|string|max:20',
+            'bak_zemanat'       =>'nullable|string',
+            'fi_zemanat'        =>'nullable|numeric',
             'signature_zemanat' =>'required|mimes:docx,doc,pdf,jpg,png|max:1024',
         ]);
 
