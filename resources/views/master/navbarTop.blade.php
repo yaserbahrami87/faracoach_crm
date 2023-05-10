@@ -125,7 +125,7 @@
 
 
 
-<!--
+
 <div slass="row" dir="rtl">
     <div class="col-md-12">
         <div class="modal fade mt-5" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel-regester" aria-hidden="true">
@@ -224,4 +224,4 @@
         </div>
     </div>
 </div>
--->
+
