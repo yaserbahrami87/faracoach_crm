@@ -45,7 +45,7 @@
                                 </td>
                                 <td class="text-center" dir="ltr">{{$warrany->user->education}}</td>
                                 <td class="text-center" dir="ltr">
-                                    @if(!is_null($warrany->scholarship->get_financial))
+                                    @if(!is_null($warrany->scholarship))
                                         {{($warrany->scholarship->get_financial->scholarship_course['course'])}}
                                     @endif
                                 </td>
