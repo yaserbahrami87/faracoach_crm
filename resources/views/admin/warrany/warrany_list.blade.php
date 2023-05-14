@@ -44,7 +44,11 @@
                                     @endif
                                 </td>
                                 <td class="text-center" dir="ltr">{{$warrany->user->education}}</td>
-                                <td class="text-center" dir="ltr">{{($warrany->scholarship->get_financial->scholarship_course['course'])}}</td>
+                                <td class="text-center" dir="ltr">
+                                    @if(!is_null($warrany->scholarship->get_financial))
+                                        {{($warrany->scholarship->get_financial->scholarship_course['course'])}}
+                                    @endif
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>
