@@ -176,6 +176,7 @@
             <b class="text-success">{{$warrany->scholarship->warrany->fi}}</b>
             تومان) در اختیار آموزشگاه قرار میدهد که در صورت انجام به موقع تعهدات پس از پایان دوره به دانش پذیر عودت خواهد شد.</li>
         <li>الباقی مبلغ قرارداد به‌صورت اقساطی در تعداد {{$warrany->scholarship->get_financial->get_faktors->count()}}  قسط به شرح زیر پرداخت می‌شود:</li>
+        <li>مبلغ باقیمانده قابل پرداخت به صورت نقدی <b class="text-success">{{number_format($warrany->scholarship->get_financial->schoalrshipPayment->remaining)}}</b> تومان می باشد که به شرح ذیل پرداخت خواهد شد:</li>
     </ul>
     <div class="row">
         <div class="col-12 col-md-8 mx-auto table-responsive">

@@ -440,7 +440,6 @@
             <ul style="line-height: 2">
                 <li>کل مبلغ قرارداد <b class="text-success">{{number_format($scholarship->get_financial->scholarship_course->fi)}}</b> تومان می¬باشد؛ که مبلغ <b class="text-success">{{number_format($scholarship->get_financial->schoalrshipPayment->pre_payment)}}</b> تومان به‌عنوان پیش‌پرداخت در تاریخ  {{$scholarship->get_financial->schoalrshipPayment->date_fa}} واریز گردید؛</li>
                 <li> شرایط پرداخت الباقی مبلغ قرارداد با توافق طرفین به‌صورت نقد/ اقساط/تهاتر بورسیه به شرح زیر توافق گردید؛</li>
-                <li>مانده مبلغ قابل پرداخت <b class="text-success">{{number_format($scholarship->get_financial->schoalrshipPayment->remaining)}}</b> تومان می باشد؛</li>
 
                 <li>   مبلغ <b class="text-success">{{number_format(($scholarship->get_financial->schoalrshipPayment->fi*$scholarship->get_financial->schoalrshipPayment->score)/100)}}</b> تومان از هزینه دوره به عنوان بورسیه (نعهد همکاری علمی، فنی و تجاری) در نظر گرفته شده است که با همکاری های آتی دانشپذیر با موسسه فراکوچ،  طی مدت 12 ماه از تاریخ شروع دوره ، تهاتر و از بدهی وی کسر خواهد شد. بدیهی است پس از پایان این مدت چنانچه تسویه حساب کامل انجام  نشده باشد، دانشپذیر موظف است الباقی مبلغ بدهی خود را به صورت نقدی (یا از محل چک تسلیمی) تسویه نماید تا مجاز به در یافت گواهینامه خود گردد.</li>
                 <li>درصورت نیاز (توافق با واحد ثبت نام ، درخواست گواهینامه زودتر از موعد یا شرایط خاص ) دانش پذیر یک فقره چک ضمانت/ سفته به شماره <b class="text-success">{{$scholarship->warrany->receipt}}</b> به تاریخ {{$scholarship->warrany->date_fa}} عهده بانک
@@ -448,7 +447,8 @@
                     به مبلغ
                     <b class="text-success">{{$scholarship->warrany->fi}}</b>
                     تومان) در اختیار آموزشگاه قرار میدهد که در صورت انجام به موقع تعهدات پس از پایان دوره به دانش پذیر عودت خواهد شد.</li>
-                <li>الباقی مبلغ قرارداد به‌صورت اقساطی در تعداد {{$scholarship->get_financial->get_faktors->count()}}  قسط به شرح زیر پرداخت می‌شود:</li>
+                <li>مبلغ باقیمانده قابل پرداخت به صورت نقدی <b class="text-success">{{number_format($scholarship->get_financial->schoalrshipPayment->remaining)}}</b> تومان می باشد که به شرح ذیل پرداخت خواهد شد:</li>
+
             </ul>
             <div class="row">
                 <div class="col-12 col-md-8 mx-auto table-responsive">

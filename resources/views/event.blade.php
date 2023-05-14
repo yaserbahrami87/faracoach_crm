@@ -487,6 +487,7 @@
 
                     success: function (data) {
                         $('#result_login').html("<div class='alert alert-success'>ورود با موفقیت انجام شد</div>");
+                        alert('شما با موفقیت وارد سایت شده اید برای ادامه ثبت نام در رویداد اقدام نمایید');
                         location.reload();
                     },
                     error : function(data)

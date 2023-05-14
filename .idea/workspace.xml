@@ -3,8 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="f3849cf8-ae8a-47cc-891c-72c8c9af69d2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/warrany/warrany.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/warrany/warrany.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/event.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/event.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/loginAjax.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/loginAjax.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/master/navbarTop.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/master/navbarTop.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/master/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/master/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/scholarship/contract.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/scholarship/contract.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -439,7 +442,8 @@
       <workItem from="1683550370070" duration="376000" />
       <workItem from="1683551683513" duration="228000" />
       <workItem from="1683710631545" duration="1844000" />
-      <workItem from="1683717397434" duration="831000" />
+      <workItem from="1683717397434" duration="2328000" />
+      <workItem from="1684047964242" duration="1055000" />
     </task>
     <servers />
   </component>
