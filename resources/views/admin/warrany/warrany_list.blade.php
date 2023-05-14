@@ -23,6 +23,7 @@
                             <th>تلفن</th>
                             <th>مسئول پیگیری</th>
                             <th>تحصیلات</th>
+                            <th>دوره</th>
                         </tr>
                         </thead>
 
@@ -43,6 +44,7 @@
                                     @endif
                                 </td>
                                 <td class="text-center" dir="ltr">{{$warrany->user->education}}</td>
+                                <td class="text-center" dir="ltr">{{($warrany->scholarship->get_financial->scholarship_course['course'])}}</td>
                             </tr>
                         @endforeach
                         </tbody>
