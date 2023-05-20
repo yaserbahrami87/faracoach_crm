@@ -106,7 +106,7 @@
                                 {{($item->schoalrshipPayment['date_fa'])}}
                                 @break
                         @case('ghest')
-                                {{$item->faktor->date_pardakht}}
+                                {{$item->faktor['date_pardakht']}}
                                 @break
                         @case('reserve')
                                 {{substr($item->reserve->created_at,0,10)}}
