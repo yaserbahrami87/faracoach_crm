@@ -913,13 +913,18 @@ class VerifyController extends BaseController
             $created_at_add=$created_at->addMinutes(30);
             if($created_at_add >Carbon::now())
             {
-                $user=$this->get_user($verify->tel,NULL,NULL,NULL,true);
-
-                if($user->count()!=0)
+                //$user=$this->get_user($verify->tel,NULL,NULL,NULL,true);
+                $user=User::where('tel','=',$verify->tel)
+                            ->first();
+                if(!is_null($user))
                 {
-                    $user=$this->get_user($verify->tel,NULL,NULL,NULL,true);
+//                    $user=$this->get_user($verify->tel,NULL,NULL,NULL,true);
+                    $user=User::where('tel','=',$verify->tel)
+                        ->first();
+
                     $request->session()->put('scholarshipStatus','infoUser');
-                    Auth::login($user);
+                    Auth::loginUsingId($user->id);
+                    //Auth::login($user);
                     $scholarship=scholarship::where('user_id','=',Auth::user()->id)
                                 ->first();
                     return back();
@@ -935,6 +940,8 @@ class VerifyController extends BaseController
                     {
                         $introduce=NULL;
                     }
+
+
 
                     $user=User::create([
                         'tel'               =>$verify->tel,

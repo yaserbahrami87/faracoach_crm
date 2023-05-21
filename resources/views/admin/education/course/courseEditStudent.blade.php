@@ -33,12 +33,15 @@
                     <option value="4" @if($student->status==4) selected @endif >مرخصی</option>
                     <option value="5" @if($student->status==5) selected @endif >بلاتکلیف</option>
                 </select>
+            </div>
+            <div class="form-group" >
+                <div class="form-group">
+                    <label for="code">شماره دانشجویی</label>
+                    <input type="text" class="form-control" id="code" name="code" value="{{$student->code}}"/>
+                </div>
 
                 <div class="collapse @if($student->status==3) show @endif" id="collapseStatus">
-                    <div class="form-group">
-                        <label for="code">شماره دانشجویی</label>
-                        <input type="text" class="form-control" id="code" name="code" value="{{$student->code}}"/>
-                    </div>
+
                     <div class="form-group">
                         <label for="date_gratudate">تاریخ فارغ التحصیلی</label>
                         <input type="text" class="form-control" id="date_gratudate" name="date_gratudate"  value="{{$student->date_gratudate}}" />

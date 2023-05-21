@@ -80,7 +80,6 @@ class ScholarshipController extends BaseController
             }
         }
 
-
         return  view('scholarship.beforeRegister_Scholarship');
     }
 

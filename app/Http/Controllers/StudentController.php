@@ -102,6 +102,8 @@ class StudentController extends BaseController
      */
     public function update(StudentRequest $request, student $student)
     {
+
+
         $data=$request->validated();
         $student->update($request->all());
         $student->status=$request['status'];

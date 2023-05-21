@@ -1,7 +1,9 @@
 <!doctype html>
-<html lang="fa">
+<html>
 <head>
-    <meta charset="UTF-8">
+
+    <meta charset="utf-8" />
+
 
     <link href="{{public_path('css/reset.css') }}" rel="stylesheet" />
     <!--
@@ -15,12 +17,17 @@
         }
 
         @font-face {
+            font-family: 'Anjoman-Bold';
+            src: url("{{public_path('fonts/other/AnjomanMaxFN-Bold.ttf')}}");
+        }
+
+        @font-face {
             font-family: 'Lato-Regular';
             src: url("{{public_path('fonts/other/Lato-Regular.ttf')}}");
         }
 
         *{
-            font-family: Lato-Regular;
+            font-family: Lato-Regular,DejaVu Sans;
         }
 
 
@@ -49,7 +56,7 @@
         .h1_size
         {
             position: absolute;
-            top: 735px;
+            top: 710px;
             left: 180px;
             font-size: 60px;
             color: #FFFFFF;
@@ -84,14 +91,22 @@
 
 <div class="cls_pdf">
     @if(strlen($student->user->fname_en.' '.$student->user->lname_en)>20 && strlen($student->user->fname_en.' '.$student->user->lname_en)<26)
-        <p class="h1_size" style="font-size: 112px; font-family: BRITANIC">{{Str::upper($student->user->instagram)}}</p>s
+        <p class="h1_size" style="font-size: 112px; font-family: BRITANIC">{{Str::upper($student->user->instagram)}}</p>
+        <p class="h1_size" style="font-size: 112px; font-family: Anjoman-Bold">{{$student->user->fname.' '.$student->user->lname}}</p>s
     @elseif(strlen($student->user->fname_en.' '.$student->user->lname_en)>=26)
         <p class="h1_size" style="font-size: 40px;font-family: BRITANIC">{{Str::upper($student->user->instagram)}}</p>
+        <p class="h1_size" style="font-size: 40px;font-family: Anjoman-Bold">{{$student->user->fname.' '.$student->user->lname}}</p>
     @else
         <p class="h1_size" style="font-family: BRITANIC">{{Str::upper($student->user->instagram)}}</p>
+        <p class="h1_size" style="font-family: Anjoman-Bold">{{$student->user->fname.' '.$student->user->lname}}</p>
     @endif
 
-    <img src="{{public_path('documents/users/'.$student->user->personal_image) }}" width="360px" height="420px" />
+    @if(is_null($student->user->personal_image))
+            <img src="{{public_path('documents/users/default-avatar.png') }}" width="360px" height="420px" />
+    @else
+            <img src="{{public_path('documents/users/'.$student->user->personal_image) }}" width="360px" height="420px" />
+    @endif
+
 
     <p id="number_certificates">{{$student->code}}</p>
 

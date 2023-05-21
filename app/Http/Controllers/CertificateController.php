@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 
 
+
 class CertificateController extends Controller
 {
     /**
@@ -288,6 +289,7 @@ class CertificateController extends Controller
 
     public function get_fcc(student $student)
     {
+
         if(is_null($student->user->fname_en)||is_null($student->user->lname_en))
         {
             alert()->error('نام و نام خانوادگی را به انگلیسی در پروفایل وارد کنید')->persistent('بستن');
@@ -296,21 +298,39 @@ class CertificateController extends Controller
         $customPaper = array(0,0,300,312);
 
         ini_set('max_execution_time', 0);
-        Pdf::setOption([
-            'dpi' => 300,
-            'fontDir'=>public_path('fonts/'),
-            'defaultFont'=>'Britannic Bold'
-        ])
-            ->loadView('admin.blank-certificates.fcc_blank', array('student' => $student))
-            ->setPaper($customPaper, 'landscape')
+//
+//        Pdf::setOption([
+//            'dpi'                   => 300,
+////            'fontDir'               =>public_path('fonts/'),
+////            'defaultFont'           =>'Britannic Bold',
+//            'isRemoteEnabled'          =>false,
+//
+//        ])
+//            ->loadView('admin.blank-certificates.fcc_blank', array('student' => $student))
+//            ->setPaper($customPaper, 'landscape')
+//            ->save($student->id.'.pdf');
+        $data=[
+            'student' => $student
+        ];
 
-            ->save($student->id.'.pdf');
+        $config=['instanceConfigurator' => function($mpdf) {
+            $mpdf->dpi(300);
+        }];
+
+        $pdf=PDF::loadView('admin.blank-certificates.fcc_blank', $data,[],$config)
+                            ->setPaper($customPaper, 'landscape');
+        $pdf->save($student->id.'_.pdf');
+
 
         return view('admin.blank-certificates.fcc_blank')
                         ->with('student',$student);
 //        return response()->download(public_path($student->id.'.pdf'))
 //            ->deleteFileAfterSend(true);
+
+
     }
+
+
 
 
 
