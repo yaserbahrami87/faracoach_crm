@@ -726,6 +726,13 @@ Route::resource('event','EventController');
 Route::get('/r/test','ReserveController@test');
 
 
+Route::get('/v2/home',function(){
+    return view('v2.index-logout');
+});
+
+
+
+
 //test User
 //Route::get('/test1','UserController@test1');
 

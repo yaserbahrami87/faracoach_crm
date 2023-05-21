@@ -2,7 +2,229 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3849cf8-ae8a-47cc-891c-72c8c9af69d2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ScholarshipController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/css/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/css/style.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/fonts/Iconsax/iconsax.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/fonts/Iconsax/iconsax.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/fonts/Iconsax/iconsax.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/fonts/Iconsax/iconsax.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/fonts/Iconsax/iconsax.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/fonts/YekanBakh/YekanBakh-Black.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/fonts/YekanBakh/YekanBakh-Black.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/fonts/YekanBakh/YekanBakh-Black.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/fonts/YekanBakh/YekanBakh-Black.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/fonts/YekanBakh/YekanBakh-Bold.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/fonts/YekanBakh/YekanBakh-Bold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/fonts/YekanBakh/YekanBakh-Bold.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/fonts/YekanBakh/YekanBakh-Bold.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/fonts/YekanBakh/YekanBakh-ExtraBlack.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/fonts/YekanBakh/YekanBakh-ExtraBlack.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/fonts/YekanBakh/YekanBakh-ExtraBlack.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/fonts/YekanBakh/YekanBakh-ExtraBlack.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/fonts/YekanBakh/YekanBakh-ExtraBold.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/fonts/YekanBakh/YekanBakh-ExtraBold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/fonts/YekanBakh/YekanBakh-ExtraBold.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/fonts/YekanBakh/YekanBakh-ExtraBold.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/fonts/YekanBakh/YekanBakh-Light.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/fonts/YekanBakh/YekanBakh-Light.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/fonts/YekanBakh/YekanBakh-Light.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/fonts/YekanBakh/YekanBakh-Light.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/fonts/YekanBakh/YekanBakh-Regular.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/fonts/YekanBakh/YekanBakh-Regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/fonts/YekanBakh/YekanBakh-Regular.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/fonts/YekanBakh/YekanBakh-Regular.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/fonts/YekanBakh/YekanBakh-SemiBold.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/fonts/YekanBakh/YekanBakh-SemiBold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/fonts/YekanBakh/YekanBakh-SemiBold.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/fonts/YekanBakh/YekanBakh-SemiBold.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/fonts/YekanBakh/YekanBakh-Thin.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/fonts/YekanBakh/YekanBakh-Thin.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/fonts/YekanBakh/YekanBakh-Thin.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/fonts/YekanBakh/YekanBakh-Thin.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/blog/article-image.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/blog/category-01.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/blog/category-02.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/blog/category-03.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/blog/category-04.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/blog/category-05.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/blog/category-06.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/blog/hero-01.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/blog/hero-02.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/blog/hero-03.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/blog/single-article.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/blog/star-empty.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/blog/star-fill.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/blog/video-square.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/events/event-image-01.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/events/event-image-02.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/events/event-image-03.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/events/event-image-04.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/events/hero-background.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/events/hero-event.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/footer/aparat.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/footer/enamad.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/footer/instagram.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/footer/linkedin.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/footer/samandehi.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/footer/telegram.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/footer/youtube.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/header/header01.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/header/header02.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/header/header03.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/header/header04.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/header/header05.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/header/header06.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/header/header07.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/list_of_coaches/arrow-down.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/list_of_coaches/check.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/list_of_coaches/coach-image-01.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/list_of_coaches/coach-image-02.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/list_of_coaches/coach-image-03.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/list_of_coaches/coach-image-04.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/list_of_coaches/floating-images-01.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/list_of_coaches/floating-images-02.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/list_of_coaches/floating-images-03.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/list_of_coaches/floating-images-04.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/list_of_coaches/hero-background.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/list_of_coaches/hero-group.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/list_of_coaches/hero-image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/list_of_courses/coach-01.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/list_of_courses/coach-02.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/list_of_courses/coach-03.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/list_of_courses/coach-04.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/list_of_courses/discount-shape.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/list_of_courses/icon-01.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/list_of_courses/icon-02.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/list_of_courses/icon-03.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/list_of_courses/list-item-01.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/list_of_courses/list-item-02.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/list_of_courses/list-item-03.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/list_of_courses/list-item-04.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/list_of_courses/special-offer.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/list_of_courses/special-offers-background.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/list_of_courses/suggested-course-01.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/list_of_courses/suggested-course-02.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/list_of_courses/suggested-course-03.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/main/about-us-bg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/main/about-us-video-bg.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/main/blog.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/main/book-icon.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/main/coach-profile.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/main/coaches-carousel-icon.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/main/coaches-videos-01.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/main/coaches-videos-02.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/main/coaches-videos-03.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/main/coaches-videos-04.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/main/coaches-videos-05.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/main/counter-briefcase.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/main/counter-people.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/main/counter-profile-tick.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/main/course-1677932017.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/main/course-1681128626.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/main/course-1681985274.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/main/courses_carousel.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/main/header-background.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/main/info-circle.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/main/login-icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/main/login.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/main/medal.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/main/messages-icon.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/main/play-circle.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/main/play-icon.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/main/quote-icon.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/main/register-icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/main/register.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/main/sample-video.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/main/special-events.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/main/teacher-icon.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/main/testimonial.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/main/ticket-icon.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/main/verify-icon.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/main/video-circle.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/product/add-circle.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/product/add-to-cart.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/product/discount-shape.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/product/hero-background.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/product/hero-image.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/product/product-image-01.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/product/product-image-02.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/product/product-image-03.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/product/product-image-04.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/product/single-product-01.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_coach/Reply.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_coach/brifecase-timer.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_coach/calendar-01.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_coach/calendar-2.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_coach/clock.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_coach/close-circle.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_coach/dislike.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_coach/envelope.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_coach/facebook.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_coach/hero-background.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_coach/hero-image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_coach/instagram-01.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_coach/instagram.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_coach/like.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_coach/location.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_coach/phone.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_coach/profile-01.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_coach/profile-02.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_coach/profile-03.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_coach/reply-arrow.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_coach/whatsapp.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_course/aside-icon-01.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_course/aside-icon-02.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_course/aside-icon-03.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_course/aside-icon-04.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_course/aside-icon-05.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_course/aside-icon-06.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_course/aside-icon-07.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_course/course-coach-01.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_course/main-icon-01.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_course/main-icon-02.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_course/main-icon-03.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_course/main-icon-04.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_course/main-icon-05.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_course/main-icon-06.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_course/main-icon-07.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_course/main-icon-08.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_course/welcome-background.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_course/welcome-course-video.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_course/welcome-icon-01.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_course/welcome-icon-02.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_course/welcome-icon-03.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_course/welcome-image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_event/calendar-2.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_event/clock.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_event/hero-background.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_event/hero-image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_event/location.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/single_event/people.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/users/hesam aghaei.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/users/mahshid karkhanechi.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/users/nahid zamani.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/images/users/yaser mottahedin.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/js/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/js/main.js.LICENSE.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/js/main.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/js/swiper.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/scss/_bootstrap.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/scss/_fonts.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/scss/_variables.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/scss/abstracts/custom.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/scss/abstracts/utilities.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/scss/components/blob.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/scss/components/register-btn-group.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/scss/components/slider.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/scss/components/tab-info.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/scss/libraries/iconsax.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/scss/main.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/v2/scss/mixins/google-fonts.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/v2/index-logout.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/v2/single-course.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/VerifyController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/VerifyController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,7 +397,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/fonts/other" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/v2" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -183,11 +405,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\resources\views\v2" />
+      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\v2" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\fonts\other" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\resources\views\admin" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\images\blank-certificates" />
-      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\resources\views\admin\blank-certificates" />
-      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\images" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\images\blank-certificates" />
@@ -455,7 +677,9 @@
       <workItem from="1684578036231" duration="729000" />
       <workItem from="1684582806686" duration="381000" />
       <workItem from="1684654488788" duration="1196000" />
-      <workItem from="1684658013574" duration="1613000" />
+      <workItem from="1684658013574" duration="1748000" />
+      <workItem from="1684665988975" duration="3827000" />
+      <workItem from="1684672821426" duration="1095000" />
     </task>
     <servers />
   </component>
