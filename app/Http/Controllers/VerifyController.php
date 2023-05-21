@@ -947,6 +947,7 @@ class VerifyController extends BaseController
                         'tel'               =>$verify->tel,
                         'resource'          =>'بورسیه تحصیلی',
                         'introduced'        =>$introduce,
+                        'password'          =>Hash::make('1234'),
                     ]);
 
 
