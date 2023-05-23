@@ -41,117 +41,6 @@ class UserController extends BaseController
 
     public function index(Request $request)
     {
-//        if(Auth::user()->type==2)
-//        {
-//
-//            $users=User::where('users.type','<>',0)
-//                    ->where('users.type','=',1)
-//                    ->orderby('id','desc')
-//                    ->select('users.*')
-////                    ->paginate($this->countPage());
-//                    ->get();
-//
-//
-//            foreach ($users as $item)
-//            {
-//                if($item->followups->where('flag','=',1)->first())
-//                {
-//                    $lastFollowup=$item->followups->where('flag','=',1)->first();
-//                    $item->status_followups=$this->userType($lastFollowup->status_followups);
-//                    $quality=($lastFollowup->problemfollowup);
-//                    $item->lastFollowupCourse=$lastFollowup->courses['course'];
-//
-//                }
-//
-//
-//                if(isset($quality))
-//                {
-//                    $item->quality=$quality['problem'];
-//                    $item->quality_color=$quality['color'];
-//                    $item->lastDateFollowup=$lastFollowup['date_fa'];
-//                    $item->countFollowup=$item->followups->count();
-//                }
-//                else
-//                {
-//                    $item->quality=NULL;
-//                    $item->quality_color=NULL;
-//                    $item->lastDateFollowup=NULL;
-//                    $item->lastFollowupCourse=NULL;
-//                    $item->countFollowup=NULL;
-//                }
-//
-//                $item->created_at = $this->changeTimestampToShamsi($item->created_at);
-//                if (!is_null($item->last_login_at)) {
-//                    $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
-//                }
-//
-//                $expert=$this->get_user_byID($item->followby_expert);
-//                if(!is_null($expert))
-//                {
-//                    $item->followby_expert=$expert->fname." ".$expert->lname;
-//                }
-//
-//
-//
-//
-//                if(is_null($item->personal_image))
-//                {
-//                    $item->personal_image="default-avatar.png";
-//                }
-//                if(!is_null($item->introduced))
-//                {
-//                    if ($this->get_user(NULL, $item->introduced, NULL, NULL, true)->count()>0)
-//                    {
-//                        $item->introduced = $this->get_user(NULL, $item->introduced, NULL, NULL, true)->fname.' '.$this->get_user(NULL, $item->introduced, NULL, NULL, true)->lname ;
-//                    }
-//                    else if ($this->get_user($item->introduced, NULL, NULL, NULL, true)->count()>0)
-//                    {
-//                        $item->introduced=$this->get_user($item->introduced, NULL, NULL, NULL, true)->fname.' '.$this->get_user($item->introduced, NULL, NULL, NULL, true)->lname;
-//                    }
-//                }
-//
-//
-//                $item->gettingknow=($item->categoryGettingKnow['category']);
-//                if(!is_null($item->insert_user_id))
-//                {
-//                    $item->insert_user=$item->get_insertuserInfo('insert_user_id')->first()->fname." ".$item->get_insertuserInfo('insert_user_id')->first()->lname;
-//                }
-//                //$item=$this->changeNumberToData($item);
-//            }
-//
-//
-//            $tags=$this->get_tags();
-//            $parentCategory=$this->get_category('پیگیری');
-//            $usersAdmin=user::orwhere('type'    ,'=',2)
-//                        ->orwhere('type','=',3)
-//                        ->get();
-//
-//            //لیست تعداد کاربرها
-//            $statics=$this->get_staticsCountUsers_admin();
-//
-//            if(isset($request['user']))
-//            {
-//                $user=$request['user'];
-//            }
-//            else
-//            {
-//                $user="";
-//            }
-//
-//            //دریافت کفیت های پیگیری
-//            $problem=$this->get_problemfollowup(NULL,1);
-//
-//            return view('admin.users')
-//                ->with('users',$users)
-//                ->with('tags',$tags)
-//                ->with('parentCategory',$parentCategory)
-//                ->with('usersAdmin',$usersAdmin)
-//                ->with('user',$user)
-//                ->with('problem',$problem)
-//                ->with('statics',$statics)
-//                ->with('dateNow',$this->dateNow)
-//                ->with('parameter',$request['parameter']);
-//        }
 
         //نیروهای فروش
         if(Auth::user()->type==3||Auth::user()->type==2)
@@ -181,38 +70,6 @@ class UserController extends BaseController
                 ->orderby('users.id','desc')
                 ->groupby('users.id')
                 ->get();
-
-
-
-
-            $usersAdmin=user::orwhere('type','=',2)
-                ->orwhere('type','=',3)
-                ->get();
-            // دریافت تعداد کاربرها بر اساس دسته بندی ها
-            $statics=$this->get_staticsCountUsers_admin();
-
-
-
-
-            $tags=$this->get_tags();
-//            $parentCategory=$this->get_category('پیگیری');
-
-            //دریافت کفیت های پیگیری
-            $problem=$this->get_problemfollowup(NULL,1);
-
-            $resource=User::groupby('resource')
-                        ->get();
-
-            return view('admin.users')
-                        ->with('users',$users)
-                        ->with('tags',$tags)
-//                        ->with('parentCategory',$parentCategory)
-                        ->with('usersAdmin',$usersAdmin)
-                        ->with('resource',$resource)
-                        ->with('problem',$problem)
-                        ->with('statics',$statics)
-                        ->with('dateNow',$this->dateNow)
-                        ->with('parameter',$request['parameter']);
         }
         //نیروهای کلینیک
         elseif(Auth::user()->type==4)
@@ -229,7 +86,10 @@ class UserController extends BaseController
                 })
                 ->orderby('id','desc')
                 ->get();
+        }
 
+
+            // دریافت تعداد کاربرها بر اساس دسته بندی ها
             $statics=$this->get_staticsCountUsers_admin();
 
 
@@ -263,7 +123,52 @@ class UserController extends BaseController
                             ->with('resource',$resource)
 //                            ->with('parentCategory',$parentCategory)
                             ->with('statics',$statics);
-        }
+
+    }
+
+
+    public function showAll()
+    {
+
+        $users=User::orderby('id','desc')
+            ->paginate(20);
+
+
+
+        // دریافت تعداد کاربرها بر اساس دسته بندی ها
+        $statics=$this->get_staticsCountUsers_admin();
+
+
+        $dateNow=$this->dateNow;
+        $todayFollowup=User::where('followby_expert','=',Auth::user()->id)
+            ->whereHas("followups" , function ($query) use ($dateNow)
+            {
+                $query->where('nextfollowup_date_fa','=',$dateNow)
+                    ->where('flag','=',1);
+            })
+            ->get();
+
+        $usersAdmin=user::orwhere('type','=',2)
+            ->orwhere('type','=',3)
+            ->get();
+
+        $tags=$this->get_tags();
+//            $parentCategory=$this->get_category('پیگیری');
+
+        //دریافت کفیت های پیگیری
+        $problem=$this->get_problemfollowup(NULL,1);
+
+        $resource=User::groupby('resource')
+            ->get();
+
+        return  view('admin.user.user_all')
+            ->with('users',$users)
+            ->with('usersAdmin',$usersAdmin)
+            ->with('tags',$tags)
+            ->with('problem',$problem)
+            ->with('resource',$resource)
+//                            ->with('parentCategory',$parentCategory)
+            ->with('statics',$statics);
     }
 
     /**
@@ -570,6 +475,7 @@ class UserController extends BaseController
                         ->with('gettingKnow_child_list',$gettingKnow_child_list)
                         ->with('city',$city);
     }
+
 
 
     // نمایش پروفایل کاربر توسط ادمین
@@ -899,9 +805,128 @@ class UserController extends BaseController
     {
     }
 
+    public function showCategoryAllUsers(Request $request)
+    {
+        $dateNow=$this->dateNow;
+
+        switch ($request['categoryUsers'])
+        {
+            case '0':
+                return redirect('/admin/users/');
+                break;
+            case 'lead':
+                $users = user::orwhere('type','=',-1)
+                    ->orwhere('type','=',-2)
+                    ->orwhere('type','=',-3)
+                    ->orderby('id','desc')
+                    ->get();
+                break;
+            case 'notfollowup':
+                $users = user::where('type','=',1)
+                    ->orderby('id','desc')
+                    ->get();
+                break;
+            case 'continuefollowup_all':
+                $users=user::where('type','=',11)
+                    ->orderby('id','desc')
+                    ->paginate(20);
+                break;
+            case 'cancelfollowup_all':
+                $users=user::where('type','=',12)
+                    ->orderby('id','desc')
+                    ->paginate(20);
+                break;
+            case 'waiting_all' :
+                $users=user::where('type','=',13)
+                        ->orderby('id','desc')
+                        ->paginate(20);
+                break;
+            case 'noanswering_all':
+                $users=user::where('type','=',14)
+                    ->orderby('id','desc')
+                    ->paginate(20);
+                break;
+            case 'students_all':
+                $users=user::where('type','=',20)
+                    ->orderby('id','desc')
+                    ->paginate(20);
+                break;
+            case 'todayFollowup_all':
+                $condition=['nextfollowup_date_fa','=',$this->dateNow];
+                $users=User::whereNotIn('type',['-1','-2','-3','12'])
+                    ->whereHas('followups',function($query) use ($dateNow)
+                    {
+                        $query->where('flag','=',1)
+                            ->where('nextfollowup_date_fa','=',$dateNow);
+                    })
+                    ->paginate(20);
+                break;
+            case 'expireFollowup_all':
+
+                $users=User::whereHas('followups',function($query) use ($dateNow)
+                    {
+                        $query->where('flag','=',1)
+                            ->where('nextfollowup_date_fa','<',$dateNow);
+                    })
+                    ->paginate(20);
+                break;
+            case 'myfollowup':
+                $users =$this->get_usersByType(NULL,Auth::user()->id);
+                break;
+            case 'followedToday':
+                $users = $this->get_followedToday();
+                break;
+            case 'scholarship':$users=User::where('resource','=','بورسیه تحصیلی')
+                ->orderby('id','desc')
+                ->get();
+                break;
+            default:
+                return redirect('/admin/users/');
+                break;
+        }
+
+        $users->appends(['categoryUsers' => $request['categoryUsers']]);
+
+        $statics=$this->get_staticsCountUsers_admin();
+
+        $usersAdmin=user::orwhere('type','=',2)
+            ->orwhere('type','=',3)
+            ->get();
+        $tags=$this->get_tags();
+//        $parentCategory=$this->get_category('پیگیری');
+
+        if(isset($request['user']))
+        {
+            $user=$request['user'];
+        }
+        else
+        {
+            $user="";
+        }
+
+        //دریافت کفیت های پیگیری
+        $problem=$this->get_problemfollowup(NULL,1);
+
+        $resource=User::groupby('resource')
+            ->get();
+
+        return view('admin.user.user_all')
+            ->with('tags',$tags)
+            ->with('users',$users)
+//                    ->with('parentCategory',$parentCategory)
+            ->with('usersAdmin',$usersAdmin)
+            ->with('statics',$statics)
+            ->with('user',$user)
+            ->with('parameter',$request['parameter'])
+            ->with('problem',$problem)
+            ->with('resource',$resource)
+            ->with('categoryUsers',$request['categoryUsers']);
+    }
+
     // نمایش اعضای سایت براساس دسته بندی برای ادمین
     public function showCategoryUsersAdmin(Request $request)
     {
+
         $dateNow=$this->dateNow;
         switch ($request['categoryUsers'])
         {
@@ -924,7 +949,11 @@ class UserController extends BaseController
                 $users=Auth::user()->get_followby_expert()
                             ->where('type','=',11)
                             ->get();
-
+                break;
+            case 'continuefollowup_all':
+                $users=user::where('type','=',11)
+                    ->orderby('id','desc')
+                    ->paginate(20);
                 break;
             case 'cancelfollowup':
                 $users=Auth::user()->get_followby_expert()

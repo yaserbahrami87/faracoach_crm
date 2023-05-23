@@ -273,7 +273,9 @@ class CertificateController extends Controller
         }
 
         ini_set('max_execution_time', 0);
-        Pdf::setOption([
+
+
+        $pdf=Pdf::setOption([
                         'dpi' => 300,
                         'fontDir'=>public_path('fonts/'),
                         'defaultFont'=>'Britannic Bold'
@@ -281,8 +283,11 @@ class CertificateController extends Controller
                         ->loadView('admin.blank-certificates.acsth', array('student' => $student))
                         ->setPaper('a4', 'landscape')
                         ->save($student->id.'.pdf');
-        return response()->download(public_path($student->id.'.pdf'))
-                                        ->deleteFileAfterSend(true);
+
+        dd($pdf);
+
+//        return response()->download(public_path($student->id.'.pdf'))
+//                                        ->deleteFileAfterSend(true);
 //        return view('admin.blank-certificates.acsth')
 //                                ->with('student',$student);
     }
@@ -317,7 +322,7 @@ class CertificateController extends Controller
             $mpdf->dpi(300);
         }];
 
-        $pdf=PDF::loadView('admin.blank-certificates.fcc_blank', $data,[],$config)
+        $pdf=PDF::loadView('admin.blank-certificates.fcc_blank', $data,[])
                             ->setPaper($customPaper, 'landscape');
         $pdf->save($student->id.'_.pdf');
 

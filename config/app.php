@@ -165,7 +165,7 @@ return [
         Anetwork\Validation\PersianValidationServiceProvider::class,
         Kavenegar\Laravel\ServiceProvider::class,
         UxWeb\SweetAlert\SweetAlertServiceProvider::class,
-        niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
+
 
 
 
@@ -242,7 +242,7 @@ return [
         'Kavenegar' => Kavenegar\Laravel\Facade::class,
         'Alert' => UxWeb\SweetAlert\SweetAlert::class,
         'Image' => Intervention\Image\Facades\Image::class,
-        'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class
+
     ],
 
 ];

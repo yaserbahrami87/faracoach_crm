@@ -122,17 +122,6 @@
       0 => 'Carbon\\Laravel\\ServiceProvider',
     ),
   ),
-  'niklasravnsborg/laravel-pdf' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'niklasravnsborg\\LaravelPdf\\PdfServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'PDF' => 'niklasravnsborg\\LaravelPdf\\Facades\\Pdf',
-    ),
-  ),
   'nunomaduro/collision' => 
   array (
     'providers' => 

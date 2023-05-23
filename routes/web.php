@@ -251,6 +251,9 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::patch('/profile/update/{user}','UserController@update');
     Route::patch('/user/{id}/changeType','UserController@changeType');
     Route::get('/user/{user}/login','UserController@loginWithUser');
+    Route::get('/users/all','UserController@showAll');
+    Route::get('/users/all/category/','UserController@showCategoryAllUsers');
+
 
 
 
