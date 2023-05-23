@@ -284,10 +284,8 @@ class CertificateController extends Controller
                         ->setPaper('a4', 'landscape')
                         ->save($student->id.'.pdf');
 
-        dd($pdf);
-
-//        return response()->download(public_path($student->id.'.pdf'))
-//                                        ->deleteFileAfterSend(true);
+        return response()->download(public_path($student->id.'.pdf'))
+                                        ->deleteFileAfterSend(true);
 //        return view('admin.blank-certificates.acsth')
 //                                ->with('student',$student);
     }
