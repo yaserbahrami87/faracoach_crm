@@ -1,11 +1,12 @@
 <div class="row">
     <div class="col-12 mb-1">
             <div class="row" id="collabration_category">
+
                 @foreach($collabration_category as $item)
                     @php
                     $sw=0;
                     @endphp
-                    @foreach($item->collabration_details as $item_collabration_details)
+                    @foreach($item->collabration_details->where('status','=',1) as $item_collabration_details)
                         @if($item_collabration_details->collabration_accept->sum('calculate')<$item_collabration_details->max_faracoach)
                             @php
                             $sw=1;
