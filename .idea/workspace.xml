@@ -3,15 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f3849cf8-ae8a-47cc-891c-72c8c9af69d2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CheckoutController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CheckoutController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/wallet.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/wallet.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/financial/invoice/invoice.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/financial/invoice/invoice.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/financial/listFaktors.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/financial/listFaktors.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/financial/wallet/wallet.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/financial/wallet/wallet.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/master/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/master/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/master/right_menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/master/right_menu.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -479,7 +471,7 @@
       <workItem from="1685390588069" duration="18225000" />
       <workItem from="1685465430947" duration="3757000" />
       <workItem from="1685516363517" duration="1628000" />
-      <workItem from="1685524842838" duration="10120000" />
+      <workItem from="1685524842838" duration="11213000" />
     </task>
     <servers />
   </component>

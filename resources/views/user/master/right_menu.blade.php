@@ -67,6 +67,7 @@
             </li>
             <li class="nav-item has-sub"><a href="#"><span class="menu-title" >مالی</span></a>
                 <ul class="menu-content">
+                    <li><a href="/panel/wallet" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >کیف پول</span></a></li>
                     <li><a href="/panel/invoice" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >پیش فاکتورها</span></a></li>
                     <li><a href="/panel/faktor" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >فاکتورها</span></a></li>
                     <li><a href="/panel/checkout/transaction" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >تراکنش های مالی</span></a></li>
