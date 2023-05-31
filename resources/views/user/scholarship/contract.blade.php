@@ -167,7 +167,8 @@
                           <hr/>
                           <h4 class="text-danger">7.	شرایط پرداخت شهریه:</h4>
                               <ul style="line-height: 2">
-                                  <li>کل مبلغ قرارداد <b class="text-success">{{number_format($scholarship->get_financial->scholarship_course->fi)}}</b> تومان می¬باشد؛ که مبلغ <b class="text-success">{{number_format($scholarship->get_financial->schoalrshipPayment->pre_payment)}}</b> تومان به‌عنوان پیش‌پرداخت در تاریخ  {{$scholarship->get_financial->schoalrshipPayment->date_fa}} واریز گردید؛</li>
+
+                                  <li>کل مبلغ قرارداد <b class="text-success">{{number_format($scholarship->get_financial->schoalrshipPayment->fi)}}</b> تومان می¬باشد؛ که مبلغ <b class="text-success">{{number_format($scholarship->get_financial->schoalrshipPayment->pre_payment)}}</b> تومان به‌عنوان پیش‌پرداخت در تاریخ  {{$scholarship->get_financial->schoalrshipPayment->date_fa}} واریز گردید؛</li>
                                   <li> شرایط پرداخت الباقی مبلغ قرارداد با توافق طرفین به‌صورت نقد/ اقساط/تهاتر بورسیه به شرح زیر توافق گردید؛</li>
                                   <li>مانده مبلغ قابل پرداخت <b class="text-success">{{number_format($scholarship->get_financial->schoalrshipPayment->remaining)}}</b> تومان می باشد؛</li>
 
