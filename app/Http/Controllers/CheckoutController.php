@@ -12,6 +12,8 @@ use App\invoice;
 use App\lib\zarinpal;
 use App\reserve;
 use App\student;
+use App\wallet;
+use App\wallet_transaction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -516,6 +518,38 @@ class CheckoutController extends BaseController
                             }
 
                         }
+                        else if($item->type=='wallet')
+                        {
+                            if(is_null(Auth::user()->wallet))
+                            {
+                                $wallet=wallet::create([
+                                    'user_id'   =>Auth::user()->id,
+                                    'amount'    =>$item->price
+                                ]);
+                            }
+                            else
+                            {
+                                Auth::user()->wallet->amount=Auth::user()->wallet->amount+$item->price;
+                                Auth::user()->wallet->save();
+                                $wallet=Auth::user()->wallet;
+                            }
+
+                            wallet_transaction::create([
+                                    'wallet_id'     =>$wallet->id,
+                                    'user_id'       =>Auth::user()->id,
+                                    'amount'        =>$item->price,
+                                    'inventory'     =>($wallet->amount),
+                                    'type'          =>'شارژ کیف',
+                                    'description'   =>"کیف پول به مبلغ ".$item->price." شارژ شد ",
+                                    'date_fa'       =>$this->dateNow,
+                                    'time_fa'       =>$this->timeNow,
+                                    'authority'     =>$item->authority,
+                                    'status'        =>1,
+                                    'checkout_id'   =>$item->id,
+                            ]);
+                            alert()->success('کیف پول با موفقیت شارژ شد')->persistent('بستن');
+                        }
+
                     }
 
 
@@ -523,7 +557,7 @@ class CheckoutController extends BaseController
 
                     $msg='<p>پرداخت با موفقیت انجام شد</p><p>شماره پیگیری: '.$item->authority.'</p>';
                     $alert='success';
-                    return view('callBackCheckout')
+                    return redirect('/panel/wallet')
                                 ->with('msg',$msg)
                                 ->with('alert',$alert);
 
@@ -583,28 +617,116 @@ class CheckoutController extends BaseController
         }
         else
         {
-            $order = new zarinpal();
-            $res = $order->pay($faktor->fi, Auth::user()->email, Auth::user()->tel,'پرداخت قسط');
-            $status=checkout::create([
-                'user_id'       =>Auth::user()->id,
-                //شماره آیدی فاکتور بجای order_id در اقساط ساب میشود
-                'order_id'      =>$faktor->id,
-                'product_id'    =>$faktor->product_id,
-                'price'         =>$faktor->fi,
-                'type'          =>'ghest',
-                'authority'     =>$res,
-                'description'   =>'انتقال به درگاه',
-            ]);
-
-            if($status)
+            if($request->has('wallet'))
             {
-                return redirect('https://www.zarinpal.com/pg/StartPay/' . $res);
+                if(is_null(Auth::user()->wallet))
+                {
+                    $wallet_amount=0;
+                }
+                else
+                {
+                    $wallet_amount=(Auth::user()->wallet->amount);
+                }
+
+
+
+                $faktor=faktor::where('id','=',$request->faktor_id)
+                                    ->where('user_id','=',Auth::user()->id)
+                                    ->first();
+                if(is_null($faktor))
+                {
+                    $msg='<p>خطا در بروزرسانی فاکتور اقساط</p>';
+                    $alert='danger';
+                    alert()->error('خطا در بروزرسانی فاکتور اقساط')->persistent('بستن');
+
+                    return back()
+                        ->with('msg',$msg)
+                        ->with('alert',$alert);
+                }
+                else
+                {
+
+                    if($wallet_amount<$faktor->fi)
+                    {
+                        alert()->error('موجودی کیف پول از مبلغ فاکتور کمتراست')->persistent('بستن');
+                        return back();
+                    }
+                    else
+                    {
+                        $authority=time();
+                        $checkout=checkout::create([
+                            'price'      =>$faktor->fi,
+                            'type'       =>'wallet',
+                            'authority'  =>$authority,
+                            'description'=>'خرید انجام شد',
+                            'status'     =>1,
+                        ]);
+
+
+                        $wallet_transaction=wallet_transaction::create([
+                            'wallet_id'     =>Auth::user()->wallet->id,
+                            'user_id'       =>Auth::user()->id,
+                            'amount'        =>$faktor->fi,
+                            'inventory'     =>(Auth::user()->wallet->amount-$faktor->fi),
+                            'type'          =>'پرداخت فاکتور',
+                            'checkout_id'   =>$checkout->id,
+                            'description'   =>'پرداخت فاکتور به شماره'.$faktor->id,
+                            'date_fa'       =>$this->dateNow,
+                            'time_fa'       =>$this->timeNow,
+                            'authority'     =>$authority,
+                            'status'        =>0,
+                        ]);
+
+                        Auth::user()->wallet->amount=Auth::user()->wallet->amount-$faktor->fi;
+                        Auth::user()->wallet->update();
+
+
+                        $faktor->description='پرداخت شده';
+                        $faktor->date_pardakht=$this->dateNow;
+                        $faktor->time_pardakht=$this->timeNow;
+                        $faktor->checkout_id_pardakht=$checkout->id;
+                        $faktor->status=1;
+                        $faktor->save();
+                    }
+
+                    $msg='<p>پرداخت با موفقیت انجام شد</p><p>شماره پیگیری: '.$checkout->authority.'</p>';
+                    $alert='success';
+
+                    alert()->success('فاکتور با مبلغ '.$faktor->fi.' پرداخت شد ')->persistent('بستن');
+                    return back()
+                        ->with('msg',$msg)
+                        ->with('alert',$alert);
+                }
+
+
+
             }
             else
             {
-                alert()->error('خطا در پرداخت فاکتور اقساط')->persistent('بستن');
-                return redirect('/');
+                $order = new zarinpal();
+                $res = $order->pay($faktor->fi, Auth::user()->email, Auth::user()->tel,'پرداخت قسط');
+                $status=checkout::create([
+                    'user_id'       =>Auth::user()->id,
+                    //شماره آیدی فاکتور بجای order_id در اقساط ساب میشود
+                    'order_id'      =>$faktor->id,
+                    'product_id'    =>$faktor->product_id,
+                    'price'         =>$faktor->fi,
+                    'type'          =>'ghest',
+                    'authority'     =>$res,
+                    'description'   =>'انتقال به درگاه',
+                ]);
+
+                if($status)
+                {
+                    return redirect('https://www.zarinpal.com/pg/StartPay/' . $res);
+                }
+                else
+                {
+                    alert()->error('خطا در پرداخت فاکتور اقساط')->persistent('بستن');
+                    return redirect('/');
+                }
             }
+
         }
     }
 
@@ -612,6 +734,113 @@ class CheckoutController extends BaseController
     public function storeInvoice(invoice $invoice,Request $request)
     {
         if(Auth::user()->id==$invoice->user_id) {
+            if($request->has('wallet'))
+            {
+                if(is_null(Auth::user()->wallet))
+                {
+                    $wallet_amount=0;
+                }
+                else
+                {
+                    $wallet_amount=(Auth::user()->wallet->amount);
+                }
+
+
+
+
+                if(is_null($invoice))
+                {
+                    $msg='<p>خطا در بروزرسانی پیش فاکتور</p>';
+                    $alert='danger';
+                    alert()->error('خطا در بروزرسانی پیش فاکتور ')->persistent('بستن');
+
+                    return back()
+                        ->with('msg',$msg)
+                        ->with('alert',$alert);
+                }
+                else
+                {
+
+                    if($wallet_amount<$invoice->pre_payment)
+                    {
+                        alert()->error('موجودی کیف پول از مبلغ پیش فاکتور کمتراست')->persistent('بستن');
+                        return back();
+                    }
+                    else
+                    {
+                        $authority=time();
+                        $checkout=checkout::create([
+                            'price'      =>$invoice->pre_payment,
+                            'type'       =>'wallet',
+                            'authority'  =>$authority,
+                            'description'=>'خرید انجام شد',
+                            'status'     =>1,
+                        ]);
+
+
+                        $wallet_transaction=wallet_transaction::create([
+                            'wallet_id'     =>Auth::user()->wallet->id,
+                            'user_id'       =>Auth::user()->id,
+                            'amount'        =>$invoice->pre_payment,
+                            'inventory'     =>(Auth::user()->wallet->amount-$invoice->pre_payment),
+                            'type'          =>'پرداخت پیش فاکتور',
+                            'checkout_id'   =>$checkout->id,
+                            'description'   =>'پرداخت پیش فاکتور به شماره'.$invoice->id,
+                            'date_fa'       =>$this->dateNow,
+                            'time_fa'       =>$this->timeNow,
+                            'authority'     =>$authority,
+                            'status'        =>0,
+                        ]);
+
+                        Auth::user()->wallet->amount=Auth::user()->wallet->amount-$invoice->pre_payment;
+                        Auth::user()->wallet->update();
+
+                        $status=student::create(
+                            [
+                                'user_id'       =>Auth::user()->id,
+                                'course_id'     =>$invoice->course_id,
+                                'date_fa'       =>$this->dateNow,
+                                'time_fa'       =>$this->timeNow,
+                            ]
+                        );
+
+                        if(!is_null($invoice->count_installment))
+                        {
+                            $v=verta();
+                            for ($i=0;$i<$invoice->count_installment;$i++)
+                            {
+
+                                $v=$v->addMonths(1);
+                                $Date=$v->format('Y/m/d');
+                                faktor::create([
+                                    'user_id'           =>Auth::user()->id,
+                                    'checkout_id'       =>$checkout->id,
+                                    'product_id'        =>$invoice->course_id,
+                                    'type'              =>'course',
+                                    'date_createfaktor' =>$this->dateNow,
+                                    'date_faktor'       =>$Date,
+                                    'fi'                =>$invoice->fi_installment,
+                                ]);
+                            }
+                        }
+
+                        $invoice->status=1;
+                        $invoice->delete();
+
+
+                    }
+
+                    $msg='<p>پرداخت با موفقیت انجام شد</p><p>شماره پیگیری: '.$checkout->authority.'</p>';
+                    $alert='success';
+
+                    alert()->success('فاکتور با مبلغ '.number_format($invoice->pre_payment) .' پرداخت شد ')->persistent('بستن');
+                    return back()
+                        ->with('msg',$msg)
+                        ->with('alert',$alert);
+                }
+            }
+            else
+            {
                 $order = new zarinpal();
                 $res = $order->pay($invoice->pre_payment, Auth::user()->email, Auth::user()->tel, 'پرداخت پیش فاکتور');
                 $status = checkout::create([
@@ -630,7 +859,7 @@ class CheckoutController extends BaseController
                     alert()->error('خطا در پرداخت فاکتور اقساط')->persistent('بستن');
                     return redirect('/');
                 }
-
+            }
         }
         else
         {

@@ -20,7 +20,7 @@
             </thead>
             <tbody>
             @foreach($faktors as $item)
-                <tr class="@if(($dateNow>$item->date_faktor)&&($item->status==0)) table-danger @elseif($item->status==1) table-success @endif" >
+                <tr class="border @if(($dateNow>$item->date_faktor)&&($item->status==0)) table-danger @elseif($item->status==1) table-success @endif" >
                     <td>{{$loop->iteration}}</td>
                     <td>
                         @if($item->type=='course')
@@ -37,12 +37,35 @@
                             تسویه شد
                         @endif
                     </td>
-                    <td>
+                    <td class="text-center">
                         @if($item->status==0)
-                            <form method="post" action="/panel/faktor/checkout/pardakhtaghsat">
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect1">روش پرداخت</label>
+                                <select class="form-control frm_pardakht_select" id="exampleFormControlSelect1" onchange="frm_pardakht_select(this.value)">
+                                    <option selected disabled>انتخاب کنید</option>
+                                    <option value="frm_pardakht{{$item->id}}"> پرداخت از درگاه</option>
+                                    <option value="frm_wallet{{$item->id}}">پرداخت با کیف پول</option>
+                                </select>
+                            </div>
+
+
+                            <form class="collapse pardakht" method="post" action="/panel/faktor/checkout/pardakhtaghsat" id="frm_pardakht{{$item->id}}">
                                 {{csrf_field()}}
                                 <input type="hidden" value="{{$item->id}}" name="faktor_id" />
-                                <input type="submit" class="btn btn-primary btn-sm" value="پرداخت نشده" />
+                                <input type="submit" class="btn btn-primary btn-sm" value="هدایت به درگاه" />
+                            </form>
+
+                            <form class="collapse wallet" method="post" action="/panel/faktor/checkout/pardakhtaghsat" id="frm_wallet{{$item->id}}">
+                                {{csrf_field()}}
+                                <input type="hidden" value="wallet" name="wallet" />
+                                <input type="hidden" value="{{$item->id}}" name="faktor_id" />
+                                @if(is_null(Auth::user()->wallet))
+                                    0
+                                @else
+
+                                    <input type="submit" class="btn btn-primary btn-sm" value="{{number_format(Auth::user()->wallet->amount)}} تومان پرداخت با کیف پول" />
+                                @endif
+
                             </form>
                         @endif
                     </td>
@@ -58,6 +81,26 @@
 
 
 @section('footerScript')
+    <script>
+        function frm_pardakht_select(val)
+        {
+            let pardakhts=document.querySelectorAll('.pardakht');
+            pardakhts.forEach(function (item)
+            {
+                item.classList.remove('show');
+            });
+
+            let wallets=document.querySelectorAll('.wallet');
+            wallets.forEach(function (item)
+            {
+                item.classList.remove('show');
+            });
+            let content=document.querySelector('#'+val);
+            document.querySelector('#'+val).classList.add('show');
+        }
+
+    </script>
+
     <script src="{{asset('/dashboard/assets/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('/dashboard/assets/js/dataTables.bootstrap4.min.js')}}"></script>
     <script>

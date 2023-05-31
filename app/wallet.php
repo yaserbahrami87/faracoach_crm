@@ -14,4 +14,10 @@ class wallet extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    public function wallet_transactions()
+    {
+        return $this->hasMany('App\wallet_transaction','wallet_id','id')
+                            ->orderby('id','desc');
+    }
 }

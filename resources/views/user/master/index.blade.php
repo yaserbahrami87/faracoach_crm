@@ -168,8 +168,8 @@
 
 
 <!-- BEGIN: Vendor JS -->
-<script src="{{ asset('/acckt/js/jquery.min.js') }}"></script>
-<!--<script src="{{ asset('/acckt/js/bootstrap.min.js') }}"></script>-->
+<script src="{{ asset('/panel_assets/js/jquery.min.js') }}"></script>
+<!--<script src="{{ asset('/panel_assets/js/bootstrap.min.js') }}"></script>-->
 <script src="{{ asset('/panel_assets/vendors/js/vendors.min.js') }}"></script>
 
 <script src="{{ asset('/panel_assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.min.js') }}"></script>

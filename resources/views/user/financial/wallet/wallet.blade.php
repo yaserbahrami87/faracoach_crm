@@ -1,6 +1,13 @@
-@extends('admin.master.index')
+@extends('user.master.index')
 
 @section('headerScript')
+    <link href="{{asset('/dashboard/assets/css/buttons.dataTables.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('/dashboard/assets/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
+
+
+
+
+
     <style>
         .card-counter{
             box-shadow: 2px 2px 10px #DADADA;
@@ -68,13 +75,13 @@
 @endsection
 @section('content')
 
-    <div class="col-md-3">
+    <div class="col-md-3 mb-3">
         <div class="card-counter primary">
             <span class="count-numbers text-dark">
                 @if(is_null(Auth::user()->wallet))
                     0
                 @else
-                    {{Auth::user()->wallet->amount}}
+                    {{number_format(Auth::user()->wallet->amount)}}
                 @endif
                 تومان
             </span>
@@ -91,5 +98,57 @@
             <button type="submit" class="btn btn-primary">شارژ کیف پول</button>
         </form>
     </div>
+    <div class="col-12 table-responsive">
+        <table class="table table-bordered table-striped table-hover text-center" id="dataTable">
+            <thead>
+                <tr>
+                    <td>نوع تراکنش</td>
+                    <td>مبلغ</td>
+                    <td>مانده کیف پول</td>
+                    <td>محصول مرتبط</td>
+                    <td>توضیحات</td>
+                    <td>تاریخ</td>
+                    <td>ساعت</td>
+                    <td>شماره تراکنش</td>
+                    <td>کد تراکنش</td>
+                </tr>
+            </thead>
+            <tbody>
+                @if(!is_null(Auth::user()->wallet))
+                    @foreach( Auth::user()->wallet->wallet_transactions as $transaction)
+                        <tr>
+                            <td>{{$transaction->status()}}</td>
+                            <td>{{number_format($transaction->amount) }} تومان </td>
+                            <td>{{number_format($transaction->inventory) }}</td>
+                            <td>{{$transaction->product_id}}</td>
+                            <td>{{$transaction->description}}</td>
+                            <td>{{$transaction->date_fa}}</td>
+                            <td>{{$transaction->time_fa}}</td>
+                            <td>{{$transaction->authority}}</td>
+                            <td>{{$transaction->checkout_id}}</td>
+                        </tr>
+                    @endforeach
+                @endif
+            </tbody>
+        </table>
+    </div>
 
+@endsection
+
+
+@section('footerScript')
+    <script src="{{asset('/dashboard/assets/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('/dashboard/assets/js/dataTables.bootstrap4.min.js')}}"></script>
+
+    <script src="{{asset('/panel_assets/js/scripts/datatables/dataTables.buttons.min.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/jszip.min.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/vfs_fonts.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/buttons.html5.min.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/buttons.print.min.js')}}"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#dataTable').DataTable();
+        } );
+    </script>
 @endsection

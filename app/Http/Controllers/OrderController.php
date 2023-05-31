@@ -46,7 +46,7 @@ class OrderController extends BaseController
 
 
         $cart = cart::where('user_id', '=', Auth::user()->id)
-            ->get();
+                            ->get();
         if($request->payment_type=='نقدی')
         {
             $order = new zarinpal();
@@ -192,48 +192,46 @@ class OrderController extends BaseController
         {
             $order = new zarinpal();
 
-            dd($request);
+            $res = $order->pay($request->amount, Auth::user()->email, Auth::user()->tel, 'شارژ کیف پول');
 
 
-            $res = $order->pay($request->amount, Auth::user()->email, Auth::user()->tel, implode(',', $typeOrders));
+            if ($res) {
+                $status = order::create([
+                    'user_id'       => Auth::user()->id,
+                    'fi'            => $request->amount,
+                    'type'          => 'wallet',
+                    'payment_type'  => 'کیف پول',
+                    'date_fa'       => $this->dateNow,
+                    'time_fa'       => $this->timeNow,
+                    'description'   => 'انتقال به درگاه',
+                    'authority'     => $res,
+                ]);
 
 
-            if ($status) {
-                if($sum_final_off==0)
-                {
 
-                    if ($item->type == 'course')
-                    {
-                        $status=student::create(
-                            [
-                                'user_id'       =>Auth::user()->id,
-                                'course_id'    =>$item->product_id,
-                                'date_fa'       =>$this->dateNow,
-                                'time_fa'       =>$this->timeNow,
-                            ]
-                        );
 
-                        if($status)
-                        {
-                            alert()->success('ثبت نام در دوره با موفقیت انجام شد')->persistent('بستن');
-                        }
-                        else
-                        {
-                            alert()->error('خطا در ثبت نام دانشجو')->persistent('بستن');
-                        }
+                if($status) {
+                    $status = checkout::create([
+                        'user_id'       => Auth::user()->id,
+                        'order_id'      => $status->id,
+                        'price'         => $request->amount,
+                        'type'          => 'wallet',
+                        'authority'     => $res,
+                        'description'   => 'انتقال به درگاه',
+                    ]);
 
-                        return redirect('/');
-                    }
-                }
-                else
-                {
                     return redirect('https://www.zarinpal.com/pg/StartPay/' . $res);
+                } else
+                {
+                    alert()->error('خطا')->persistent('بستن');
+                    return back();
                 }
 
             }
-            else {
-                return redirect('/');
-            }
+
+        }
+        else {
+            return redirect('/');
         }
 
 
