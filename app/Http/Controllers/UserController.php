@@ -1721,20 +1721,21 @@ class UserController extends BaseController
                     ->wherenotin('users.type',[-1,-2,-3,-4,20,0,1,2,3,4])
                     ->where('followups.flag','=',1)
                     ->get();
-        $students=student::wherebetween('date_fa',['1401/08/01','1402/01/31'])
+        $students=User::wherebetween('created_at',['2022-10-23 00:00:00','2023-06-01 00:00:00'])
                         ->get();
 
+//        dd($students);
 
 
-        foreach ($students as $student)
-        {
-            $student->fname=$student->user->fname;
-            $student->lname=$student->user->lname;
-            $student->tel=$student->user->tel;
-            $student->get_gettingknow=$student->user->get_gettingknow['category'];
-            $student->product=$student->course->course;
-            $student->fi_off=$student->course->fi_off;
-        }
+//        foreach ($students as $student)
+//        {
+//            $student->fname=$student->user->fname;
+//            $student->lname=$student->user->lname;
+//            $student->tel=$student->user->tel;
+//            $student->product=$student->course->course;
+//            $student->fi_off=$student->course->fi_off;
+//        }
+
 
         Artisan::call('cache:clear');
 
