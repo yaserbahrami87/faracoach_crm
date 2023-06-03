@@ -1721,8 +1721,7 @@ class UserController extends BaseController
                     ->wherenotin('users.type',[-1,-2,-3,-4,20,0,1,2,3,4])
                     ->where('followups.flag','=',1)
                     ->get();
-        $students=User::wherebetween('created_at',['2022-10-23 00:00:00','2023-06-01 00:00:00'])
-                        ->where('resource','=','کمپین گره')
+        $students=User::where('resource','=','کمپین گره')
                         ->get();
 
 //        dd($students);
