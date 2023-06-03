@@ -2,8 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3849cf8-ae8a-47cc-891c-72c8c9af69d2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/public/images/wallet.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/OrderController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/scholarship/collabration.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/scholarship/collabration.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/cart_all.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/cart_all.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/loginSMS.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/loginSMS.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,7 +176,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/v2" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/images" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -179,11 +184,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\images" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\resources\views\v2" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\v2" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\fonts\other" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\resources\views\admin" />
-      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\images\blank-certificates" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\images\blank-certificates" />
@@ -472,7 +477,8 @@
       <workItem from="1685465430947" duration="3757000" />
       <workItem from="1685516363517" duration="1628000" />
       <workItem from="1685524842838" duration="12540000" />
-      <workItem from="1685602663083" duration="2213000" />
+      <workItem from="1685602663083" duration="7052000" />
+      <workItem from="1685769533565" duration="2688000" />
     </task>
     <servers />
   </component>

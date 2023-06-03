@@ -1722,6 +1722,7 @@ class UserController extends BaseController
                     ->where('followups.flag','=',1)
                     ->get();
         $students=User::wherebetween('created_at',['2022-10-23 00:00:00','2023-06-01 00:00:00'])
+                        ->where('resource','=','کمپین گره')
                         ->get();
 
 //        dd($students);

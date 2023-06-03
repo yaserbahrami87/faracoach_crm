@@ -134,8 +134,20 @@
                                     <p>در صورت پرداخت نقدی میزان {{$cart[0]->peymant_off}}% تخفیف اعمال خواهد شد </p>
                                 </div>
                             </div>
+                            <div class="form-check mb-5">
+                                <input class="form-check-input payment" type="radio" name="payment_type"  id="payment3" value="wallet" />
+                                <label class="form-check-label font-weight-bold" for="payment3" data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample3">
+                                    <img src="{{asset('/images/wallet.png')}}" width="50px" />
+                                    کیف پول
+                                </label>
+
+                                <div class="collapse" id="collapseExample3">
+                                    <p>در صورت پرداخت نقدی میزان {{$cart[0]->peymant_off}}% تخفیف اعمال خواهد شد </p>
+                                </div>
+                            </div>
 
                             <div class="collapse" id="payment_ghest">
+
 
                             </div>
                             <input type="submit" class="btn btn-success" id="btn_payment" value="ثبت و پرداخت نهایی">

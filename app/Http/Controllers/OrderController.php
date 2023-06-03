@@ -42,15 +42,13 @@ class OrderController extends BaseController
      */
     public function store(Request $request)
     {
-
-
+        dd($request);
 
         $cart = cart::where('user_id', '=', Auth::user()->id)
                             ->get();
         if($request->payment_type=='نقدی')
         {
             $order = new zarinpal();
-
             $sum_final_off = 0;
             $typeOrders = [];
 
