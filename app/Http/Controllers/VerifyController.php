@@ -630,6 +630,7 @@ class VerifyController extends BaseController
                 ->where('verify','=',0)
                 ->latest()
                 ->first();
+
         if($verify)
         {
             return $verify;

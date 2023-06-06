@@ -61,9 +61,11 @@ class EventreserveController extends BaseController
                     $msg = Auth::user()->lname . " عزیز \nثبت نام شما در " . $event->event . " با موفقیت انجام شد\n فراکوچ ";
                     $this->sendSms(Auth::user()->tel, $msg);
                     alert()->success('رزرو دوره با موفقیت انجام شد')->persistent('بستن');
-                    return $status;
+                    return back();
+//                    return $status;
                 } else {
-                    return $status;
+                    return back();
+//                    return $status;
                 }
             }
             else
