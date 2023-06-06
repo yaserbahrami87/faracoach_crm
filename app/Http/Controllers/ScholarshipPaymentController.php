@@ -153,7 +153,7 @@ class ScholarshipPaymentController extends BaseController
 
         }
 
-        dd(Auth::user()->scholarship);
+
 
 
         $scholarship_payment= scholarship_payment::create([
@@ -169,6 +169,9 @@ class ScholarshipPaymentController extends BaseController
                     'date_fa'       =>$this->dateNow,
                     'time_fa'       =>$this->timeNow,
         ]);
+
+        //dd($request);
+
 
         $order = new zarinpal();
         $res = $order->pay($prepaymant, Auth::user()->email, Auth::user()->tel,'schoalrship');

@@ -180,11 +180,35 @@
                                 {{number_format($gheymat_nahaei)}}
                             </td>
                             <td class="text-center">
-                                <form method="post" action="/panel/scholarship_payment">
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">روش پرداخت</label>
+                                    <select class="form-control frm_pardakht_select" id="exampleFormControlSelect1" onchange="frm_pardakht_select(this.value)">
+                                        <option selected disabled>انتخاب کنید</option>
+                                        <option value="frm_pardakht{{$item->id}}"> پرداخت از درگاه</option>
+                                        <option value="frm_wallet{{$item->id}}">پرداخت با کیف پول</option>
+                                    </select>
+                                </div>
+
+                                <form class="collapse pardakht"  method="post" action="/panel/scholarship_payment" id="frm_pardakht{{$item->id}}" >
                                     {{csrf_field()}}
                                     <input type="hidden" value="{{$item->id}}" name="course_id" />
-                                    <button class="btn btn-success btn-block">{{number_format(5000000)}} <br/>پرداخت کنید  </button>
+                                    <button class="btn btn-success btn-block">{{number_format(5000000)}} <br/>هدایت به درگاه  </button>
                                 </form>
+
+                                <form class="collapse wallet" method="post" action="/panel/scholarship_payment" id="frm_wallet{{$item->id}}">
+                                    {{csrf_field()}}
+                                    <input type="hidden" value="wallet" name="wallet" />
+                                    <input type="hidden" value="{{$item->id}}" name="course_id" />
+                                    @if(is_null(Auth::user()->wallet))
+                                        <input type="submit" class="btn btn-primary btn-sm" value="0 تومان پرداخت با کیف پول" />
+                                    @else
+
+                                        <input type="submit" class="btn btn-primary btn-sm" value="{{number_format(Auth::user()->wallet->amount)}} تومان پرداخت با کیف پول" />
+                                    @endif
+
+
+                                </form>
+
                             </td>
                             <td class="text-center">
                                 @php
@@ -561,4 +585,6 @@
 
 </div>
 @endif
+
+
 

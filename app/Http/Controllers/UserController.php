@@ -809,10 +809,13 @@ class UserController extends BaseController
 
     public function showCategoryAllUsers(Request $request)
     {
+
         $dateNow=$this->dateNow;
+
 
         switch ($request['categoryUsers'])
         {
+
             case '0':
                 return redirect('/admin/users/');
                 break;
@@ -823,10 +826,30 @@ class UserController extends BaseController
                     ->orderby('id','desc')
                     ->get();
                 break;
-            case 'notfollowup':
-                $users = user::where('type','=',1)
-                    ->orderby('id','desc')
-                    ->get();
+            case 'notfollowup_all':
+                $users =user::where('type','=',1)
+                            ->orwhere(function($query)
+                            {
+                                $query->orwherenull('fname')
+                                    ->orwherenull('lname')
+                                    ->orwherenull('sex')
+                                    ->orwherenull('email')
+                                    ->orwherenull('datebirth')
+                                    ->orwherenull('father')
+                                    ->orwherenull('codemelli')
+                                    ->orwherenull('education')
+                                    ->orwherenull('reshteh')
+                                    ->orwherenull('job');
+                            })
+                            ->orderby('id','desc')
+                            ->paginate();
+
+//                $users=[];
+//                foreach($users_tmp as $user)
+//                {
+//                    $users=array_push($users,$user);;
+//                    dd($users);
+//                }
                 break;
             case 'continuefollowup_all':
                 $users=user::where('type','=',11)
@@ -881,6 +904,18 @@ class UserController extends BaseController
             case 'scholarship':$users=User::where('resource','=','بورسیه تحصیلی')
                 ->orderby('id','desc')
                 ->get();
+                break;
+            case 'marketing1':$users=User::where('type','=','-1')
+                    ->orderby('id','desc')
+                    ->paginate(20);
+                    break;
+            case 'marketing2':$users=User::where('type','=','-2')
+                        ->orderby('id','desc')
+                        ->paginate(20);
+                break;
+            case 'marketing3':$users=User::where('type','=','-3')
+                        ->orderby('id','desc')
+                        ->paginate(20);
                 break;
             default:
                 return redirect('/admin/users/');
@@ -944,6 +979,17 @@ class UserController extends BaseController
                 break;
             case 'notfollowup':
                 $users = user::where('type','=',1)
+                            ->wherenotnull('fname')
+                            ->wherenotnull('lname')
+                            ->wherenotnull('sex')
+                            ->wherenotnull('email')
+                            ->wherenotnull('datebirth')
+                            ->wherenotnull('father')
+                            ->wherenotnull('codemelli')
+                            ->wherenotnull('codemelli')
+                            ->wherenotnull('education')
+                            ->wherenotnull('reshteh')
+                            ->wherenotnull('job')
                             ->orderby('id','desc')
                             ->get();
                 break;
@@ -1721,6 +1767,7 @@ class UserController extends BaseController
                     ->wherenotin('users.type',[-1,-2,-3,-4,20,0,1,2,3,4])
                     ->where('followups.flag','=',1)
                     ->get();
+
         $students=User::where('resource','=','کمپین گره')
                         ->get();
 

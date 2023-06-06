@@ -771,6 +771,23 @@
         }
 
 
+        function frm_pardakht_select(val)
+        {
+            let pardakhts=document.querySelectorAll('.pardakht');
+            pardakhts.forEach(function (item)
+            {
+                item.classList.remove('show');
+            });
+
+            let wallets=document.querySelectorAll('.wallet');
+            wallets.forEach(function (item)
+            {
+                item.classList.remove('show');
+            });
+            let content=document.querySelector('#'+val);
+            document.querySelector('#'+val).classList.add('show');
+        }
+
     </script>
 
 
