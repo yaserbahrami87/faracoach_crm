@@ -26,7 +26,7 @@
             @foreach ($course->students as $item)
                 <tr>
                     <td>
-                        <a  data-toggle="collapse" href="#collaps{{$item->user->id}}" role="button" aria-expanded="false" aria-controls="collaps{{$item->user->id}}">
+                        <a  href="/admin/user/{{$item->user->id}}">
                             @if(is_null($item->user->personal_image))
                                 <img src="{{asset('/documents/users/default-avatar.png')}}"  width="50px" height="50px" class="rounded-circle "/>
                             @else
@@ -78,15 +78,6 @@
                             {{method_field('DELETE')}}
                             <button class="btn btn-danger" type="submit">حذف از دوره</button>
                         </form>
-                    </td>
-                </tr>
-                <tr class="collapse" id="collaps{{$item->user->id}}">
-                    <td colspan="7">
-                        @if($item->user->checkouts->where('status','=',1)->where('product_id','=',$item->course_id)->count()!=0)
-                            @foreach($item->user->checkouts->where('status','=',1)->where('product_id','=',$item->product_id) as $item_checkout)
-                                {{$item_checkout->authority}}
-                            @endforeach
-                        @endif
                     </td>
                 </tr>
             @endforeach
