@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\landPage;
+use App\Notifications\EmailLoginWithCode;
 use App\Notifications\LoginWithCode;
 use App\Notifications\SendEmailLoginCode;
 use App\scholarship;
@@ -327,9 +328,14 @@ class VerifyController extends BaseController
 
 
             $six_digit_random_number = mt_rand(100000, 999999);
-            $verify=$this->get_user($request['tel'],NULL,NULL,NULL,true);    //verify::where('tel','=',$request['tel'])
+
+            $verify=User::where('tel','=',$request['tel'])
+                            ->first();
+//            $verify=$this->get_user($request['tel'],NULL,NULL,NULL,true);    //verify::where('tel','=',$request['tel'])
 //                        ->latest()
 //                        ->first();
+
+
 
             if($verify->count()==0)
             {
@@ -355,6 +361,7 @@ class VerifyController extends BaseController
                     {
                         $message = "رمز یکبار مصرف شما در سیستم فراکوچ : " . $six_digit_random_number;
                         $this->sendSms($request['tel'], $message);
+                        $verify->notify(new EmailLoginWithCode($six_digit_random_number));
                         return back()->with('msg', 'رمز یکبار مصرف شما به شماره ' . $request['tel'] . ' ارسال شد')
                             ->with('errorStatus', 'success')
                             ->with('status', true);
@@ -376,6 +383,7 @@ class VerifyController extends BaseController
     //چک کردن کد ارسال شده به موبایل برای لاگین
     public function checkCodewithoutPass(Request $request)
     {
+
         $status=verify::where('code','=',$request['code'])
                     ->where('verify','=',0)
                     ->count();
