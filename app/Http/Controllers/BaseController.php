@@ -1595,6 +1595,15 @@ class BaseController extends Controller
                 $scholarship=User::where('resource','=','بورسیه تحصیلی')
                     ->count();
                 $trashuser=$this->get_usersByType(0,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
+                $marketing1=User::where('type','=','-1')
+                    ->orderby('id','desc')
+                    ->get();
+                $marketing2=User::where('type','=','-2')
+                    ->orderby('id','desc')
+                    ->get();
+                $marketing3=User::where('type','=','-3')
+                    ->orderby('id','desc')
+                    ->get();
             }
         else
             {
@@ -1669,6 +1678,18 @@ class BaseController extends Controller
 
                $statics['scholarship']=User::where('resource','=','بورسیه تحصیلی')
                     ->count();
+
+
+                $statics['marketing1']=User::where('type','=','-1')
+                        ->orderby('id','desc')
+                        ->count();
+                $statics['marketing2']=User::where('type','=','-2')
+                        ->orderby('id','desc')
+                        ->count();
+                $statics['marketing3']=User::where('type','=','-3')
+                        ->orderby('id','desc')
+                        ->count();
+
 
                 return ($statics);
             }

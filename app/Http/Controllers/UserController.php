@@ -141,6 +141,7 @@ class UserController extends BaseController
         $statics=$this->get_staticsCountUsers_admin();
 
 
+
         $dateNow=$this->dateNow;
         $todayFollowup=User::where('followby_expert','=',Auth::user()->id)
             ->whereHas("followups" , function ($query) use ($dateNow)

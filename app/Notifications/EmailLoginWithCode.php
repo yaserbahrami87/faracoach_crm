@@ -46,6 +46,7 @@ class EmailLoginWithCode extends Notification
                     ->subject('کد تایید فراکوچ')
                     ->line('کد ورود به پورتال فراکوچ')
                     ->line($this->code);
+
     }
 
     /**
