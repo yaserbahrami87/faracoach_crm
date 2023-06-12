@@ -21,7 +21,7 @@
                 <select class="form-control" id="product_id" name="product_id">
                     <option disabled selected>انتخاب کنید</option>
                     @foreach($courses as $item)
-                        <option value="{{$item->id}}" @if(old('course_id')==$item->id) selected @endif>{{$item->course}}</option>
+                        <option value="{{$item->id}}" @if(old('product_id')==$item->id) selected @endif>{{$item->course}}</option>
                     @endforeach
                 </select>
             </div>
@@ -29,7 +29,7 @@
                 <label for="date_faktor">موعد پرداخت فاکتور:
                     <span class="text-danger text-bold">*</span>
                 </label>
-                <input id="date_faktor" type="text" class="form-control"  name="date_faktor" autocomplete="off"  />
+                <input id="date_faktor" type="text" class="form-control"  name="date_faktor" autocomplete="off"  value="{{old('date_faktor')}}" />
             </div>
             <div class="form-group">
                 <label for="fi">مبلغ فاکتور:</label>
@@ -43,6 +43,7 @@
                     <option disabled selected>انتخاب کنید</option>
                     <option value="0" @if(old('status')==0) selected @endif>پرداخت نشده </option>
                     <option value="1" @if(old('status')==1) selected @endif >پرداخت شده</option>
+                    <option value="2" @if(old('status')==2) selected @endif >تسویه تهاتر</option>
                 </select>
             </div>
 

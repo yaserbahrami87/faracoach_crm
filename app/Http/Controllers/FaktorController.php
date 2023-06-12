@@ -47,14 +47,12 @@ class FaktorController extends BaseController
      */
     public function store(Request $request)
     {
-
-
         $this->validate($request,[
             'user_id'       =>'required|numeric',
             'product_id'    =>'required|numeric',
             'date_faktor'   =>'required|string|max:11',
             'fi'            =>'required|numeric',
-            'status'        =>'boolean|in:0,1',
+            'status'        =>'numeric|in:0,1,2',
             'authority'     =>'required_if:status,1',
             'date_pardakht' =>'required_if:status,1',
             'time_pardakht' =>'required_if:status,1',

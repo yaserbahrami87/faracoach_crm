@@ -1690,7 +1690,6 @@ class BaseController extends Controller
                         ->orderby('id','desc')
                         ->count();
 
-
                 return ($statics);
             }
     }

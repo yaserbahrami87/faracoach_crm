@@ -39,6 +39,28 @@
             @endif
         </td>
     </tr>
+    <tr class="text bg-success">
+        <td>مبلغ تسویه شده</td>
+        <td>
+
+            @if(is_null($scholarship->user->faktors->where('status','=',2)))
+                0 تومان
+            @else
+                {{number_format($scholarship->user->faktors->where('status','=',2)->sum('fi'))}}
+            @endif
+        </td>
+    </tr>
+    <tr class="text bg-warning">
+        <td>باقیمانده</td>
+        <td>
+
+            @if(is_null($scholarship->user->faktors->where('status','=',2)))
+            {{$scholarship->user->collabration_accept->sum('calculate')}} تومان
+            @else
+                {{number_format($scholarship->user->collabration_accept->sum('calculate')-$scholarship->user->faktors->where('status','=',2)->sum('fi'))}}
+            @endif
+        </td>
+    </tr>
 </table>
 
 
