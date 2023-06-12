@@ -28,8 +28,6 @@
                             نامشخص
                         @endif
                     @endif
-
-
                 </td>
                 <td>{{number_format($item_collabration_accept->calculate)}}</td>
                 <td>{{$item_collabration_accept->expire}}</td>
@@ -112,6 +110,28 @@
         <td>
             @if(!is_null(Auth::user()->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()))
                 <span id="collabration_fi">{{number_format((((Auth::user()->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->fi)*(Auth::user()->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->score)/100)-((Auth::user()->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->fi)*((Auth::user()->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->score)/100)*       (Auth::user()->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->loan)/100))+((((Auth::user()->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->fi)*(Auth::user()->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->score)/100)-((Auth::user()->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->fi)*((Auth::user()->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->score)/100)*       (Auth::user()->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->loan)/100))/2))}}</span>
+            @endif
+        </td>
+    </tr>
+    <tr class="text-center bg-success">
+        <td>مبلغ تسویه شده</td>
+        <td>
+            @if(is_null(Auth::user()->faktors->where('status','=',2)))
+                0 تومان
+            @else
+
+                {{number_format(Auth::user()->faktors->where('status','=',2)->sum('fi'))}} تومان
+            @endif
+        </td>
+    </tr>
+    <tr class="text-center bg-danger text-light">
+        <td>مبلغ باقیمانده</td>
+        <td>
+            @if(is_null(Auth::user()->faktors->where('status','=',2)))
+                0 تومان
+            @else
+
+                {{number_format(Auth::user()->collabration_accept->sum('calculate')-Auth::user()->faktors->where('status','=',2)->sum('fi'))}} تومان
             @endif
         </td>
     </tr>

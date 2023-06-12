@@ -7,7 +7,6 @@
                     $sw=0;
                     @endphp
                     @foreach($item->collabration_details->where('status','=',1) as $item_collabration_details)
-
                         @if($item_collabration_details->collabration_accept->sum('calculate')<$item_collabration_details->max_faracoach)
                             @php
                             $sw=1;
