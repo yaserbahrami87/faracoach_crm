@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f3849cf8-ae8a-47cc-891c-72c8c9af69d2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/scholarship/collabration.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/scholarship/collabration.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/scholarship/table_collabration_details.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/scholarship/table_collabration_details.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/user/scholarship/table_collabration_details.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/scholarship/table_collabration_details.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -485,7 +485,8 @@
       <workItem from="1686474404826" duration="4741000" />
       <workItem from="1686524862142" duration="10000" />
       <workItem from="1686552986984" duration="4000" />
-      <workItem from="1686554700471" duration="8282000" />
+      <workItem from="1686554700471" duration="10225000" />
+      <workItem from="1686643425536" duration="2146000" />
     </task>
     <servers />
   </component>

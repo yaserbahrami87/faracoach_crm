@@ -131,7 +131,7 @@
                 0 تومان
             @else
 
-                {{number_format(Auth::user()->collabration_accept->sum('calculate')-Auth::user()->faktors->where('status','=',2)->sum('fi'))}} تومان
+                {{number_format((((Auth::user()->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->fi)*(Auth::user()->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->score)/100)-((Auth::user()->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->fi)*((Auth::user()->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->score)/100)*       (Auth::user()->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->loan)/100))-Auth::user()->faktors->where('status','=',2)->sum('fi'))}} تومان
             @endif
         </td>
     </tr>

@@ -53,11 +53,10 @@
     <tr class="text bg-warning">
         <td>باقیمانده</td>
         <td>
-
             @if(is_null($scholarship->user->faktors->where('status','=',2)))
             {{$scholarship->user->collabration_accept->sum('calculate')}} تومان
             @else
-                {{number_format($scholarship->user->collabration_accept->sum('calculate')-$scholarship->user->faktors->where('status','=',2)->sum('fi'))}}
+                {{number_format(((($scholarship->user->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->fi)*($scholarship->user->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->score)/100)-(($scholarship->user->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->fi)*(($scholarship->user->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->score)/100)* ($scholarship->user->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->loan)/100))-$scholarship->user->faktors->where('status','=',2)->sum('fi'))}}
             @endif
         </td>
     </tr>
