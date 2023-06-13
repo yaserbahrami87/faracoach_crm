@@ -67,6 +67,8 @@ class FaktorController extends BaseController
 
         if($faktor)
         {
+            $msg=$faktor->user->fname.' '.$faktor->user->lname. " عزیز\nمبلغ ".$request->fi." تومان ".$request->description." از حساب تهاتر شما کسر گردید\nفراکوچ ";
+            $this->sendSms($faktor->user->tel,$msg);
             alert()->success('فاکتور با موفقیت ایجاد شد')->persistent('بستن');
         }
         else
