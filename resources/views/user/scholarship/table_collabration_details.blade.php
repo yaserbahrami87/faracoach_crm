@@ -136,6 +136,7 @@
                     0تومان
                 @endif
             @endif
+            
         </td>
     </tr>
 </table>

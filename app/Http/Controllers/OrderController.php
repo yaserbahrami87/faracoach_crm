@@ -42,7 +42,7 @@ class OrderController extends BaseController
      */
     public function store(Request $request)
     {
-        dd($request);
+
 
         $cart = cart::where('user_id', '=', Auth::user()->id)
                             ->get();
