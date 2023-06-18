@@ -9,6 +9,10 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Anam\PhantomMagick\Converter;
+
+
+
 
 
 
@@ -284,8 +288,8 @@ class CertificateController extends Controller
                         ->setPaper('a4', 'landscape')
                         ->save($student->id.'.pdf');
 
-        return response()->download(public_path($student->id.'.pdf'))
-                                        ->deleteFileAfterSend(true);
+//        return response()->download(public_path($student->id.'.pdf'))
+//                                        ->deleteFileAfterSend(true);
 //        return view('admin.blank-certificates.acsth')
 //                                ->with('student',$student);
     }
@@ -320,9 +324,9 @@ class CertificateController extends Controller
             $mpdf->dpi(300);
         }];
 
-        $pdf=PDF::loadView('admin.blank-certificates.fcc_blank', $data,[])
-                            ->setPaper($customPaper, 'landscape');
-        $pdf->save($student->id.'_.pdf');
+        $pdf=PDF::loadView('admin.blank-certificates.fcc_blank', $data);
+        return $pdf->stream($student->id.'_.pdf');
+//        $pdf->save($student->id.'_.pdf');
 
 
         return view('admin.blank-certificates.fcc_blank')

@@ -268,7 +268,7 @@
                         <img src="{{asset('/documents/users/'.Auth::user()->personal_image)}}" class="mr-3 rounded-circle"  width="50px" height="50px" alt="...">
                         <div class="media-body pt-3">
                             <div class="custom-file">
-                                <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#exampleModal" >نوشته جدید</button>
+                                <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#newTweet" >نوشته جدید</button>
                             </div>
                         </div>
                     </div>
@@ -276,7 +276,7 @@
 
 
                 <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="newTweet" tabindex="-1" aria-labelledby="examplenewTweet" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">

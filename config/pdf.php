@@ -11,5 +11,14 @@ return [
 	'tempDir'               => base_path('../temp/'),
 	'pdf_a'                 => false,
 	'pdf_a_auto'            => false,
-	'icc_profile_path'      => ''
+	'icc_profile_path'      => '',
+    'font_path' => base_path('resources/fonts/'),
+    'font_data' => [
+        'IRANSans' => [
+            'R'  => 'IRANSansWebFaNum.ttf',
+            'B'  => 'IRANSansWebFaNum_Bold.ttf',
+            'useOTL' => 0xFF,
+            'useKashida' => 75,
+        ]
+    ]
 ];

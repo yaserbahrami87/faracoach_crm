@@ -1,11 +1,11 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
 <head>
 
     <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-
-    <link href="{{public_path('css/reset.css') }}" rel="stylesheet" />
+    <link href="{{asset('css/reset.css') }}" rel="stylesheet" />
     <!--
     <link href="//db.onlinewebfonts.com/c/8be4a2f403c2dc27187d892cca388e24?family=Britannic+Bold" rel="stylesheet" type="text/css"/>
     -->
@@ -13,17 +13,17 @@
         @font-face
         {
             font-family: 'BRITANIC';
-            src: url("{{public_path('fonts/other/BRITANIC.TTF')}}");
+            src: url("/fonts/other/BRITANIC.TTF");
         }
 
         @font-face {
             font-family: 'Anjoman-Bold';
-            src: url("{{public_path('fonts/other/AnjomanMaxFN-Bold.ttf')}}");
+            src: url("/fonts/other/iransansweb.ttf");
         }
 
         @font-face {
             font-family: 'Lato-Regular';
-            src: url("{{public_path('fonts/other/Lato-Regular.ttf')}}");
+            src: url("/fonts/other/Lato-Regular.ttf");
         }
 
         *{
@@ -59,7 +59,7 @@
             top: 710px;
             left: 180px;
             font-size: 60px;
-            color: #FFFFFF;
+            color: silver;
 
         }
 
@@ -92,13 +92,13 @@
 <div class="cls_pdf">
     @if(strlen($student->user->fname_en.' '.$student->user->lname_en)>20 && strlen($student->user->fname_en.' '.$student->user->lname_en)<26)
         <p class="h1_size" style="font-size: 112px; font-family: BRITANIC">{{Str::upper($student->user->instagram)}}</p>
-        <p class="h1_size" style="font-size: 112px; font-family: Anjoman-Bold">{{$student->user->fname.' '.$student->user->lname}}</p>s
+        <p class="h1_size" style="font-size: 112px; font-family: IRANSans">{{$student->user->fname.' '.$student->user->lname}}</p>s
     @elseif(strlen($student->user->fname_en.' '.$student->user->lname_en)>=26)
         <p class="h1_size" style="font-size: 40px;font-family: BRITANIC">{{Str::upper($student->user->instagram)}}</p>
-        <p class="h1_size" style="font-size: 40px;font-family: Anjoman-Bold">{{$student->user->fname.' '.$student->user->lname}}</p>
+        <p class="h1_size" style="font-size: 40px;font-family: IRANSans">{{$student->user->fname.' '.$student->user->lname}}</p>
     @else
         <p class="h1_size" style="font-family: BRITANIC">{{Str::upper($student->user->instagram)}}</p>
-        <p class="h1_size" style="font-family: Anjoman-Bold">{{$student->user->fname.' '.$student->user->lname}}</p>
+        <p class="h1_size" style="font-family: IRANSans">{{$student->user->fname.' '.$student->user->lname}}</p>
     @endif
 
     @if(is_null($student->user->personal_image))
