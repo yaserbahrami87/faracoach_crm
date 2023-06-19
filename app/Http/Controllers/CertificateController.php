@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use App\certificate;
 use App\student;
 use App\User;
-use Barryvdh\DomPDF\Facade\Pdf;
+//use Barryvdh\DomPDF\Facade\Pdf;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Anam\PhantomMagick\Converter;
+use PDF;
+
 
 
 
@@ -325,7 +326,7 @@ class CertificateController extends Controller
         }];
 
         $pdf=PDF::loadView('admin.blank-certificates.fcc_blank', $data);
-        return $pdf->stream($student->id.'_.pdf');
+        $pdf->save($student->id.'_.pdf');
 //        $pdf->save($student->id.'_.pdf');
 
 

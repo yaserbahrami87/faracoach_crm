@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html >
 <head>
 
-    <meta charset="utf-8" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-    <link href="{{asset('css/reset.css') }}" rel="stylesheet" />
+
+
+    <link href="{{asset('/css/reset.css') }}" rel="stylesheet" />
     <!--
     <link href="//db.onlinewebfonts.com/c/8be4a2f403c2dc27187d892cca388e24?family=Britannic+Bold" rel="stylesheet" type="text/css"/>
     -->
@@ -13,17 +13,17 @@
         @font-face
         {
             font-family: 'BRITANIC';
-            src: url("/fonts/other/BRITANIC.TTF");
+            src: url("{{public_path('fonts/other/BRITANIC.TTF')}}");
         }
 
         @font-face {
             font-family: 'Anjoman-Bold';
-            src: url("/fonts/other/iransansweb.ttf");
+            src: url("{{public_path('fonts/iransansweb.woff')}}");
         }
 
         @font-face {
             font-family: 'Lato-Regular';
-            src: url("/fonts/other/Lato-Regular.ttf");
+            src: url("{{public_path('fonts/other/Lato-Regular.ttf')}}");
         }
 
         *{
@@ -91,13 +91,13 @@
 
 <div class="cls_pdf">
     @if(strlen($student->user->fname_en.' '.$student->user->lname_en)>20 && strlen($student->user->fname_en.' '.$student->user->lname_en)<26)
-        <p class="h1_size" style="font-size: 112px; font-family: BRITANIC">{{Str::upper($student->user->instagram)}}</p>
+
         <p class="h1_size" style="font-size: 112px; font-family: IRANSans">{{$student->user->fname.' '.$student->user->lname}}</p>s
     @elseif(strlen($student->user->fname_en.' '.$student->user->lname_en)>=26)
-        <p class="h1_size" style="font-size: 40px;font-family: BRITANIC">{{Str::upper($student->user->instagram)}}</p>
+
         <p class="h1_size" style="font-size: 40px;font-family: IRANSans">{{$student->user->fname.' '.$student->user->lname}}</p>
     @else
-        <p class="h1_size" style="font-family: BRITANIC">{{Str::upper($student->user->instagram)}}</p>
+
         <p class="h1_size" style="font-family: IRANSans">{{$student->user->fname.' '.$student->user->lname}}</p>
     @endif
 
