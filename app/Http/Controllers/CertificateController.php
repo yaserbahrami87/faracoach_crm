@@ -113,9 +113,9 @@ class CertificateController extends Controller
 
         Pdf::setOption(['dpi' => 300])->loadView('user.blank-certificates.icf_scholarship')->setPaper('a4', 'landscape')->save(Auth::user()->id.'.pdf');
 //            Pdf::setOption(['dpi' => 300, 'fontDir' => storage_path('/fonts'), 'font_cache' => storage_path('/fontsCache')])->loadHTML($tmp)->setPaper('a4', 'landscape')->save(Auth::user()->id . '.pdf');
-//            return response()->download(public_path(Auth::user()->id.'.pdf'))
-//                        ->deleteFileAfterSend(true);
-            return view('user.blank-certificates.icf_scholarship');
+            return response()->download(public_path(Auth::user()->id.'.pdf'))
+                        ->deleteFileAfterSend(true);
+//            return view('user.blank-certificates.icf_scholarship');
         }
         else
         {
