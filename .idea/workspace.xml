@@ -2,8 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3849cf8-ae8a-47cc-891c-72c8c9af69d2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/storage/fonts/Vazir.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/faracoach_crm.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/faracoach_crm.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CertificateController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CertificateController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bootstrap/cache/packages.php" beforeDir="false" afterPath="$PROJECT_DIR$/bootstrap/cache/packages.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bootstrap/cache/services.php" beforeDir="false" afterPath="$PROJECT_DIR$/bootstrap/cache/services.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/dompdf.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/dompdf.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/pdf.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/pdf.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/5480.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/fonts/installed-fonts.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/fonts/installed-fonts.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/blank-certificates/fcc_blank.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/blank-certificates/fcc_blank.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/fonts/installed-fonts.json" beforeDir="false" afterPath="$PROJECT_DIR$/storage/fonts/installed-fonts.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_files.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_files.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/installed.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/installed.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,6 +179,11 @@
       <path value="$PROJECT_DIR$/vendor/doctrine/deprecations" />
       <path value="$PROJECT_DIR$/vendor/doctrine/event-manager" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php81" />
+      <path value="$PROJECT_DIR$/vendor/paragonie/random_compat" />
+      <path value="$PROJECT_DIR$/vendor/mpdf/psr-log-aware-trait" />
+      <path value="$PROJECT_DIR$/vendor/mpdf/mpdf" />
+      <path value="$PROJECT_DIR$/vendor/niklasravnsborg/laravel-pdf" />
+      <path value="$PROJECT_DIR$/vendor/setasign/fpdi" />
     </include_path>
   </component>
   <component name="ProjectId" id="2FxNSwT78MPesAn6ma3HHo1jrOv" />
@@ -171,7 +195,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/fonts" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/storage/fonts" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -179,11 +203,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\storage\fonts" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\fonts" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\resources\fonts" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\images" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\resources\views\v2" />
-      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\v2" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\images\blank-certificates" />
@@ -492,7 +516,7 @@
       <workItem from="1687073917618" duration="16594000" />
       <workItem from="1687161525938" duration="6716000" />
       <workItem from="1687213904881" duration="3000" />
-      <workItem from="1687244787376" duration="5533000" />
+      <workItem from="1687244787376" duration="11632000" />
     </task>
     <servers />
   </component>

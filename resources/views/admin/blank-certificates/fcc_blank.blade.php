@@ -7,6 +7,7 @@
 
 
 
+
     <!--
     <link href="//db.onlinewebfonts.com/c/8be4a2f403c2dc27187d892cca388e24?family=Britannic+Bold" rel="stylesheet" type="text/css"/>
     -->
@@ -127,7 +128,7 @@
         }
 
         *{
-            font-family: Lato-Regular,DejaVu Sans;
+            font-family: Vazir,Lato-Regular,DejaVu Sans;
         }
 
 
@@ -196,21 +197,21 @@
             top: 710px;
             left: 180px;
             font-size: 60px;
-            color: silver;font-size: 150px; font-family: vazir">{{$student->user->fname.' '.$student->user->lname}}</p>s
+            color: silver;font-size: 150px; font-family: Vazir">{{$student->user->fname.' '.$student->user->lname}}</p>
     @elseif(strlen($student->user->fname_en.' '.$student->user->lname_en)>=26)
 
         <p style=" position: absolute;
             top: 710px;
             left: 180px;
             font-size: 60px;
-            color: silver;font-size: 60px;font-family: vazir">{{$student->user->fname.' '.$student->user->lname}}</p>
+            color: silver;font-size: 60px;font-family: Arial">{{$student->user->fname.' '.$student->user->lname}}</p>
     @else
 
         <p  style=" position: absolute;
             top: 710px;
             left: 180px;
             font-size: 60px;
-            color: silver;font-family: vazir">{{$student->user->fname.' '.$student->user->lname}}</p>
+            color: silver;">علی حسینی</p>
     @endif
 
     @if(is_null($student->user->personal_image))

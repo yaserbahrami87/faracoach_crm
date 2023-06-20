@@ -5,17 +5,13 @@ namespace App\Http\Controllers;
 use App\certificate;
 use App\student;
 use App\User;
-use Barryvdh\DomPDF\Facade\Pdf;
+//use Barryvdh\DomPDF\Facade\Pdf;
+
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
-
-
-
-
-
-
-
+use niklasravnsborg\LaravelPdf\Facades\Pdf;
 
 
 class CertificateController extends Controller
@@ -279,11 +275,9 @@ class CertificateController extends Controller
             'student' => $student
         ];
 
-        $config=['instanceConfigurator' => function($mpdf) {
-            $mpdf->dpi(300);
-        }];
 
-        $pdf=PDF::loadView('admin.blank-certificates.fcc_blank', $data);
+
+        $pdf=Pdf::loadView('admin.blank-certificates.fcc_blank', $data);
         $pdf->save($student->id.'_.pdf');
 //        $pdf->save($student->id.'_.pdf');
 
