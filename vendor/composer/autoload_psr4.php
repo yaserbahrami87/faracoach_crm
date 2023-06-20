@@ -7,7 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'voku\\' => array($vendorDir . '/voku/portable-ascii/src/voku'),
-    'setasign\\Fpdi\\' => array($vendorDir . '/setasign/fpdi/src'),
     'Whoops\\' => array($vendorDir . '/filp/whoops/src/Whoops'),
     'UxWeb\\SweetAlert\\' => array($vendorDir . '/uxweb/sweet-alert/src/SweetAlert'),
     'UAParser\\' => array($vendorDir . '/ua-parser/uap-php/src'),
@@ -59,10 +58,7 @@ return array(
     'PhpOption\\' => array($vendorDir . '/phpoption/phpoption/src/PhpOption'),
     'Opis\\Closure\\' => array($vendorDir . '/opis/closure/src'),
     'NunoMaduro\\Collision\\' => array($vendorDir . '/nunomaduro/collision/src'),
-    'Mpdf\\PsrLogAwareTrait\\' => array($vendorDir . '/mpdf/psr-log-aware-trait/src'),
-    'Mpdf\\' => array($vendorDir . '/mpdf/mpdf/src'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
-    'Mccarlosen\\LaravelMpdf\\' => array($vendorDir . '/carlos-meneses/laravel-mpdf/src'),
     'Masterminds\\' => array($vendorDir . '/masterminds/html5/src'),
     'League\\MimeTypeDetection\\' => array($vendorDir . '/league/mime-type-detection/src'),
     'League\\Flysystem\\Cached\\' => array($vendorDir . '/league/flysystem-cached-adapter/src'),

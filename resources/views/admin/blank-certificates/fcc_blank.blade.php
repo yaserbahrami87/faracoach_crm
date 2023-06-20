@@ -1,15 +1,115 @@
 <!DOCTYPE html>
-<html >
+<html>
 <head>
 
+    <meta charset="utf-8">
 
 
 
-    <link href="{{asset('/css/reset.css') }}" rel="stylesheet" />
+
     <!--
     <link href="//db.onlinewebfonts.com/c/8be4a2f403c2dc27187d892cca388e24?family=Britannic+Bold" rel="stylesheet" type="text/css"/>
     -->
     <style>
+        html, body, div, span, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        abbr, address, cite, code,
+        del, dfn, em, img, ins, kbd, q, samp,
+        small, strong, sub, sup, var,
+        b, i,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, canvas, details, figcaption, figure,
+        footer, header, hgroup, menu, nav, section, summary,
+        time, mark, audio, video {
+            margin:0;
+            padding:0;
+            border:0;
+            outline:0;
+            font-size:100%;
+            vertical-align:baseline;
+            background:transparent;
+        }
+
+        body {
+            line-height:1;
+            font-family:'vazir';
+        }
+
+        article,aside,details,figcaption,figure,
+        footer,header,hgroup,menu,nav,section {
+            display:block;
+        }
+
+        nav ul {
+            list-style:none;
+        }
+
+        blockquote, q {
+            quotes:none;
+        }
+
+        blockquote:before, blockquote:after,
+        q:before, q:after {
+            content:'';
+            content:none;
+        }
+
+        a {
+            margin:0;
+            padding:0;
+            font-size:100%;
+            vertical-align:baseline;
+            background:transparent;
+        }
+
+        /* change colours to suit your needs */
+        ins {
+            background-color:#ff9;
+            color:#000;
+            text-decoration:none;
+        }
+
+        /* change colours to suit your needs */
+        mark {
+            background-color:#ff9;
+            color:#000;
+            font-style:italic;
+            font-weight:bold;
+        }
+
+        del {
+            text-decoration: line-through;
+        }
+
+        abbr[title], dfn[title] {
+            border-bottom:1px dotted;
+            cursor:help;
+        }
+
+        table {
+            border-collapse:collapse;
+            border-spacing:0;
+        }
+
+        /* change border colour to suit your needs */
+        hr {
+            display:block;
+            height:1px;
+            border:0;
+            border-top:1px solid #cccccc;
+            margin:1em 0;
+            padding:0;
+        }
+
+        input, select {
+            vertical-align:middle;
+        }
+
+
+
+
         @font-face
         {
             font-family: 'BRITANIC';
@@ -18,7 +118,7 @@
 
         @font-face {
             font-family: 'Anjoman-Bold';
-            src: url("{{public_path('fonts/iransansweb.woff')}}");
+            src: url("{{public_path('fonts/Vazir-Bold-FD-WOL.ttf')}}");
         }
 
         @font-face {
@@ -58,7 +158,7 @@
             position: absolute;
             top: 710px;
             left: 180px;
-            font-size: 60px;
+            font-size: 80px;
             color: silver;
 
         }
@@ -89,16 +189,28 @@
 </head>
 <body>
 
-<div class="cls_pdf">
+<div  style="background-image: url({{public_path('images/blank-certificates/FCC_blank.jpg') }});width: 100%;height: 100%;background-size: 100% 100%;position: relative;">
     @if(strlen($student->user->fname_en.' '.$student->user->lname_en)>20 && strlen($student->user->fname_en.' '.$student->user->lname_en)<26)
 
-        <p class="h1_size" style="font-size: 112px; font-family: IRANSans">{{$student->user->fname.' '.$student->user->lname}}</p>s
+        <p  style=" position: absolute;
+            top: 710px;
+            left: 180px;
+            font-size: 60px;
+            color: silver;font-size: 150px; font-family: vazir">{{$student->user->fname.' '.$student->user->lname}}</p>s
     @elseif(strlen($student->user->fname_en.' '.$student->user->lname_en)>=26)
 
-        <p class="h1_size" style="font-size: 40px;font-family: IRANSans">{{$student->user->fname.' '.$student->user->lname}}</p>
+        <p style=" position: absolute;
+            top: 710px;
+            left: 180px;
+            font-size: 60px;
+            color: silver;font-size: 60px;font-family: vazir">{{$student->user->fname.' '.$student->user->lname}}</p>
     @else
 
-        <p class="h1_size" style="font-family: IRANSans">{{$student->user->fname.' '.$student->user->lname}}</p>
+        <p  style=" position: absolute;
+            top: 710px;
+            left: 180px;
+            font-size: 60px;
+            color: silver;font-family: vazir">{{$student->user->fname.' '.$student->user->lname}}</p>
     @endif
 
     @if(is_null($student->user->personal_image))
