@@ -122,6 +122,7 @@
                             <th>مسئول پیگیری</th>
                             <th>تعداد پیگیری</th>
                             <th>آخرین محصول پیگیری شده</th>
+                            <th>تاریخ ثبت نام</th>
                             <th>آخرین پیگیری</th>
                             <th> پیگیری بعد</th>
                             <th>وضعیت</th>
@@ -192,10 +193,14 @@
                                         {{$item->last_followupUser->course['course']}}
                                     @endif
                                 </td>
+                                <td>
+                                    {{substr($item->created_at,0,10)}}
+                                </td>
                                 <td class="p-0 text-center">
                                     @if(!is_null($item->last_followupUser))
                                         {{$item->last_followupUser['date_fa']}}
-                                    @endif</td>
+                                    @endif
+                                </td>
                                 <td class="p-0">
                                     <a href="/admin/user/{{$item->id}}" class="text-dark d-block">
                                         @if(!is_null($item->last_followupUser))
