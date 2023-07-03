@@ -200,6 +200,7 @@ class AnswerlineController extends Controller
     {
         $response=$this->client->request('GET','receive.json?linenumber=10004002002020&isread=0');
         $response=json_decode($response->getBody()->getContents())->entries;
+        dd($response);
         if(!is_null($response)) {
             foreach ($response as $item) {
                 $answerLine=answerline::where('keyword','=',$item->message)
