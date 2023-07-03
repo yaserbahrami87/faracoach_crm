@@ -299,6 +299,10 @@ class ReportAdminController extends BaseController
     {
         $states = $this->states();
         $userType = user_type::get();
+        $users=User::groupby('resource')
+            ->get();
+
+
 
 
 
@@ -465,6 +469,16 @@ class ReportAdminController extends BaseController
 //                      $query->wherenotnull('telegram');
 //                  }
             })
+            ->when($request->resource, function ($query) use ($request)
+            {
+                $query->where(function ($query) use ($request)
+                {
+                    $query->wherein('resource', $request->resource)
+                        ->when(in_array('NULL', $request->resource), function ($query) use ($request) {
+                            $query->orwhereNull('resource');
+                        });
+                });
+            })
             ->when($request->gettingKnow, function ($query) use ($request)
             {
                 $query->where(function ($query) use ($request)
@@ -534,6 +548,8 @@ class ReportAdminController extends BaseController
         $age901to81 = $users->wherebetween('datebirth', [$v->now()->subYears(90), $v->now()->subYears(81)]);
         $ages = ['ageTo20' => $ageTo20->count(), 'age21to30' => $age21to30->count(), 'age31to40' => $age31to40->count(), 'age41to50' => $age41to50->count(), 'age51to60' => $age51to60->count(), 'age61to70' => $age61to70->count(), 'age71to80' => $age71to80->count()];
 
+        $resources=User::groupby('resource')
+                            ->get();
 
 
 
@@ -545,6 +561,7 @@ class ReportAdminController extends BaseController
                             ->with('gettingKnow',$gettingKnow)
                             ->with('insert_user',$insert_user)
                             ->with('ages',$ages)
+                            ->with('resources',$resources)
                             ->with('tagsParent',$categoryTag->get_subCategoryTags)
                             ->with('users',$users);
     }

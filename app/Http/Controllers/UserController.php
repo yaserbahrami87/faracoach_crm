@@ -105,8 +105,8 @@ class UserController extends BaseController
                                 ->get();
 
             $usersAdmin=user::orwhere('type','=',2)
-                ->orwhere('type','=',3)
-                ->get();
+                        ->orwhere('type','=',3)
+                        ->get();
 
             $tags=$this->get_tags();
 //            $parentCategory=$this->get_category('پیگیری');

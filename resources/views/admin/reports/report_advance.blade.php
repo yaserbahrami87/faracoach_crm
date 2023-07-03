@@ -152,6 +152,23 @@
                         </select>
                     </div>
                 </div>
+                <div class="col-3  mb-1">
+                    <div class="input-group is-invalid">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="resource">مبدا ورود</label>
+                        </div>
+                        <select class="custom-select selectpicker"  id="resource" name="resource[]" multiple>
+                            <option value="NULL">نامشخص</option>
+                            @foreach($resources as $resource)
+                                @if(!is_null($resource->resource))
+                                    <option value="{{$resource->resource}}">{{$resource->resource}}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+
                 @foreach($tagsParent as $item)
                 <div class="col-3  mb-1">
                     <div class="input-group is-invalid">
