@@ -675,6 +675,7 @@ Route::get('/courses','CourseController@showCourses');
 Route::get('/courses/{course}','CourseController@show');
 
 
+
 //LiKE
 Route::resource('like','LikeController');
 

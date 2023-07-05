@@ -14,6 +14,7 @@
             </thead>
             <tbody>
 
+
             @foreach($response as $item)
                 <tr class="text-center">
                     <td>{{$loop->iteration}}</td>
