@@ -6,7 +6,6 @@
       <path value="$PROJECT_DIR$/vendor/alexusmai/laravel-file-manager" />
       <path value="$PROJECT_DIR$/vendor/anetwork/validation" />
       <path value="$PROJECT_DIR$/vendor/asm89/stack-cors" />
-      <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-dompdf" />
       <path value="$PROJECT_DIR$/vendor/barryvdh/elfinder-flysystem-driver" />
       <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-elfinder" />
       <path value="$PROJECT_DIR$/vendor/box/spout" />

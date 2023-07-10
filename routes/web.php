@@ -735,8 +735,6 @@ Route::get('/v2/home',function(){
 });
 
 
-
-
 //test User
 //Route::get('/test1','UserController@test1');
 

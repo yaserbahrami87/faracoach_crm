@@ -211,7 +211,6 @@ class ComposerStaticInitf54d8edf51459297346cdb00d8423a68
             'Box\\Spout\\' => 10,
             'Barryvdh\\elFinderFlysystemDriver\\' => 33,
             'Barryvdh\\Elfinder\\' => 18,
-            'Barryvdh\\DomPDF\\' => 16,
         ),
         'A' => 
         array (
@@ -628,10 +627,6 @@ class ComposerStaticInitf54d8edf51459297346cdb00d8423a68
         array (
             0 => __DIR__ . '/..' . '/barryvdh/laravel-elfinder/src',
         ),
-        'Barryvdh\\DomPDF\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/barryvdh/laravel-dompdf/src',
-        ),
         'Asm89\\Stack\\' => 
         array (
             0 => __DIR__ . '/..' . '/asm89/stack-cors/src',
@@ -889,9 +884,6 @@ class ComposerStaticInitf54d8edf51459297346cdb00d8423a68
         'Asm89\\Stack\\Cors' => __DIR__ . '/..' . '/asm89/stack-cors/src/Cors.php',
         'Asm89\\Stack\\CorsService' => __DIR__ . '/..' . '/asm89/stack-cors/src/CorsService.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
-        'Barryvdh\\DomPDF\\Facade\\Pdf' => __DIR__ . '/..' . '/barryvdh/laravel-dompdf/src/Facade/Pdf.php',
-        'Barryvdh\\DomPDF\\PDF' => __DIR__ . '/..' . '/barryvdh/laravel-dompdf/src/PDF.php',
-        'Barryvdh\\DomPDF\\ServiceProvider' => __DIR__ . '/..' . '/barryvdh/laravel-dompdf/src/ServiceProvider.php',
         'Barryvdh\\Elfinder\\Connector' => __DIR__ . '/..' . '/barryvdh/laravel-elfinder/src/Connector.php',
         'Barryvdh\\Elfinder\\Console\\PublishCommand' => __DIR__ . '/..' . '/barryvdh/laravel-elfinder/src/Console/PublishCommand.php',
         'Barryvdh\\Elfinder\\Elfinder' => __DIR__ . '/..' . '/barryvdh/laravel-elfinder/src/Elfinder.php',

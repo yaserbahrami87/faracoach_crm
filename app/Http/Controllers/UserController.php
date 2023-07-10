@@ -986,12 +986,8 @@ class UserController extends BaseController
                             ->wherenotnull('sex')
                             ->wherenotnull('email')
                             ->wherenotnull('datebirth')
-                            ->wherenotnull('father')
-                            ->wherenotnull('codemelli')
-                            ->wherenotnull('codemelli')
                             ->wherenotnull('education')
                             ->wherenotnull('reshteh')
-                            ->wherenotnull('job')
                             ->orderby('id','desc')
                             ->get();
                 break;
@@ -1027,7 +1023,17 @@ class UserController extends BaseController
                 break;
             case 'todayFollowup':
                 $condition=['nextfollowup_date_fa','=',$this->dateNow];
-                $users=$this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL,1);
+
+                $users=User::with('followups')
+                    ->whereHas('followups', function($query) use ($request) {
+                            $query->where('nextfollowup_date_fa', '=', $this->dateNow)
+                                ->where('followby_expert', '=', Auth::user()->id)
+                                ->where('flag', '=', 1);
+
+                    })
+                    ->get();
+
+                            //$this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL,1);
                 break;
             case 'expireFollowup':
 

@@ -1,44 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-
-
-
-    <!--
-    <link href="//db.onlinewebfonts.com/c/8be4a2f403c2dc27187d892cca388e24?family=Britannic+Bold" rel="stylesheet" type="text/css"/>
-    -->
-
-
-
     <style>
-        @font-face
-        {
-            font-family: 'BRITANIC';
-            src: url("{{public_path('fonts/other/BRITANIC.TTF')}}");
-        }
-
-        @font-face {
-            font-family: 'Anjoman-Bold';
-            src: url("{{public_path('fonts/Vazir-Bold-FD-WOL.ttf')}}");
-        }
-
-        @font-face {
-            font-family: 'Lato-Regular';
-            src: url("{{public_path('fonts/other/Lato-Regular.ttf')}}");
-        }
-
-        *{
-            font-family: Vazir,Lato-Regular,DejaVu Sans;
-        }
-
-
-
-
         .cls
         {
             background-image: url({{public_path('images/blank-certificates/FCC_blank.jpg') }});
@@ -57,8 +22,6 @@
 
         }
 
-
-
         .h1_size
         {
             position: absolute;
@@ -69,8 +32,6 @@
 
         }
 
-
-
         #number_certificates
         {
             position: absolute;
@@ -80,9 +41,6 @@
             color: #38383a;
         }
 
-
-
-
         img
         {
             position: absolute;
@@ -91,6 +49,15 @@
             border-radius: 20px;
             box-shadow: 1px 1px 20px #828387;
         }
+
+
+
+        *{
+            font-family: vazir;
+        }
+
+
+
     </style>
 </head>
 <body>
@@ -115,7 +82,7 @@
         <p  style=" position: absolute;
             top: 710px;
             left: 180px;
-            font-size: 60px;
+
             color: silver;">علی حسینی</p>
     @endif
 

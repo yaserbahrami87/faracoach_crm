@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '814e6662efbb0c188f99f159c1bcbc73f32bcd59',
+        'reference' => 'df9cbcf73e2c325ec8397ce603c52f9c72306321',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -44,15 +44,6 @@
             'install_path' => __DIR__ . '/../barryvdh/elfinder-flysystem-driver',
             'aliases' => array(),
             'reference' => '5a6c893dfb97e9848d7b1e5e990e943af7bc3550',
-            'dev_requirement' => false,
-        ),
-        'barryvdh/laravel-dompdf' => array(
-            'pretty_version' => 'v2.0.1',
-            'version' => '2.0.1.0',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../barryvdh/laravel-dompdf',
-            'aliases' => array(),
-            'reference' => '9843d2be423670fb434f4c978b3c0f4dd92c87a6',
             'dev_requirement' => false,
         ),
         'barryvdh/laravel-elfinder' => array(
@@ -579,7 +570,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '814e6662efbb0c188f99f159c1bcbc73f32bcd59',
+            'reference' => 'df9cbcf73e2c325ec8397ce603c52f9c72306321',
             'dev_requirement' => false,
         ),
         'laravel/tinker' => array(

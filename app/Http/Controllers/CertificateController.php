@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\certificate;
 use App\student;
 use App\User;
-//use Barryvdh\DomPDF\Facade\Pdf;
+
 
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
@@ -276,9 +276,8 @@ class CertificateController extends Controller
         ];
 
 
-
         $pdf=Pdf::loadView('admin.blank-certificates.fcc_blank', $data);
-        $pdf->save($student->id.'_.pdf');
+        $pdf->save(time().'_.pdf');
 //        $pdf->save($student->id.'_.pdf');
 
 
@@ -286,6 +285,7 @@ class CertificateController extends Controller
                         ->with('student',$student);
 //        return response()->download(public_path($student->id.'.pdf'))
 //            ->deleteFileAfterSend(true);
+
 
 
     }

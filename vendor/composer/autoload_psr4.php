@@ -107,7 +107,6 @@ return array(
     'Box\\Spout\\' => array($vendorDir . '/box/spout/src/Spout'),
     'Barryvdh\\elFinderFlysystemDriver\\' => array($vendorDir . '/barryvdh/elfinder-flysystem-driver/src'),
     'Barryvdh\\Elfinder\\' => array($vendorDir . '/barryvdh/laravel-elfinder/src'),
-    'Barryvdh\\DomPDF\\' => array($vendorDir . '/barryvdh/laravel-dompdf/src'),
     'Asm89\\Stack\\' => array($vendorDir . '/asm89/stack-cors/src'),
     'App\\' => array($baseDir . '/app'),
     'Anetwork\\Validation\\' => array($vendorDir . '/anetwork/validation/src'),
