@@ -211,6 +211,7 @@
                             <th>نام</th>
                             <th>نام خانوادگی</th>
                             <th>شماره تماس</th>
+                            <th>پست الکترونیکی</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -228,6 +229,9 @@
                                         </td>
                                         <td dir="ltr" class="text-center">
                                             <a href="{{asset('/admin/user/'.$item->id)}}">{{$item->tel}}</a>
+                                        </td>
+                                        <td dir="ltr" class="text-center">
+                                            <a href="{{asset('/admin/user/'.$item->id)}}">{{$item->email}}</a>
                                         </td>
                                     </tr>
                                 @endforeach
