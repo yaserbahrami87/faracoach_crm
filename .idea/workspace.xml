@@ -2,96 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3849cf8-ae8a-47cc-891c-72c8c9af69d2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/faracoach_crm.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/faracoach_crm.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CertificateController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CertificateController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bootstrap/cache/packages.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bootstrap/cache/services.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/pdf.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/1651_.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/blank-certificates/fcc_blank.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/blank-certificates/fcc_blank.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/EventController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/EventController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/event.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/event.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/events.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/events.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/events/organizers.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/events/organizers.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/insertEvent.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/insertEvent.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/master/right_menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/master/right_menu.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/EmbassyBT-Regular.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/Times-Bold.afm.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/Times-Roman.afm.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/anjoman_bold_normal_2452537ca8004d92358dcb01595a906a.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/anjoman_bold_normal_2452537ca8004d92358dcb01595a906a.ufm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/anjoman_bold_normal_2452537ca8004d92358dcb01595a906a.ufm.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/anjoman_bold_normal_cd2ce57112212ac4b9a381f008cc0361.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/anjoman_bold_normal_cd2ce57112212ac4b9a381f008cc0361.ufm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/anjoman_bold_normal_cd2ce57112212ac4b9a381f008cc0361.ufm.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/anjoman_bold_normal_d6582aeed4a3eb06b270ee41e69899b5.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/anjoman_bold_normal_d6582aeed4a3eb06b270ee41e69899b5.ufm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/anjoman_bold_normal_e8b5bdcf37eb9f61d482c926ce008064.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/anjoman_bold_normal_e8b5bdcf37eb9f61d482c926ce008064.ufm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/anjoman_bold_normal_e8b5bdcf37eb9f61d482c926ce008064.ufm.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/anjoman_bold_normal_faeb558efe02075f6d810a23f8213bdd.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/anjoman_bold_normal_faeb558efe02075f6d810a23f8213bdd.ufm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/britanic_normal_1646a2cdddb4aea9d9cd440ba1980aa6.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/britanic_normal_1646a2cdddb4aea9d9cd440ba1980aa6.ufm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/britanic_normal_1646a2cdddb4aea9d9cd440ba1980aa6.ufm.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/embassybt.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/embassybt_normal_23bc8c00f094b928c9157cef266f5e4f.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/embassybt_normal_23bc8c00f094b928c9157cef266f5e4f.ufm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/embassybt_normal_72eccedb2c3b4a093c26cd7c5557f583.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/embassybt_normal_72eccedb2c3b4a093c26cd7c5557f583.ufm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/embassybt_normal_7d1ca75daf3dab2cb130f2e1f21b0430.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/embassybt_normal_7d1ca75daf3dab2cb130f2e1f21b0430.ufm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/embassybt_normal_fbe521ed7ac7493cf0606ab4ec1dd1bb.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/embassybt_normal_fbe521ed7ac7493cf0606ab4ec1dd1bb.ufm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/faracoach_normal_72eccedb2c3b4a093c26cd7c5557f583.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/faracoach_normal_72eccedb2c3b4a093c26cd7c5557f583.ufm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/faracoach_normal_dfc6e75f355bfdcef0080da0e4123c85.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/faracoach_normal_dfc6e75f355bfdcef0080da0e4123c85.ufm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/installed-fonts.json" beforeDir="false" afterPath="$PROJECT_DIR$/storage/fonts/installed-fonts.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/lato_regular_normal_5cbb0c5306e4470ef58eeb01585f96ec.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/lato_regular_normal_5cbb0c5306e4470ef58eeb01585f96ec.ufm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/lato_regular_normal_5cbb0c5306e4470ef58eeb01585f96ec.ufm.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/sg_normal_0f439d952db1085642ab9af8fe64692f.ufm.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/sg_normal_7d1ca75daf3dab2cb130f2e1f21b0430.ufm.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/sg_normal_dfc6e75f355bfdcef0080da0e4123c85.ufm.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/sofia_normal_4f71eee52227d7aae4fba2d2c985e1e9.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fonts/sofia_normal_4f71eee52227d7aae4fba2d2c985e1e9.ufm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fontsCache/Times-Bold.afm.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fontsCache/Times-Roman.afm.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/fontsCache/embassybt_normal_72eccedb2c3b4a093c26cd7c5557f583.ufm.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/temp/mpdf/ttfontdata/dejavuserifcondensed.cw.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/temp/mpdf/ttfontdata/dejavuserifcondensed.cw127.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/temp/mpdf/ttfontdata/dejavuserifcondensed.gid.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/temp/mpdf/ttfontdata/dejavuserifcondensed.mtx.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/temp/mpdf/ttfontdata/vazir.GDEFdata.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/temp/mpdf/ttfontdata/vazir.GPOSdata.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/temp/mpdf/ttfontdata/vazir.GSUB.arab.DFLT.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/temp/mpdf/ttfontdata/vazir.GSUB.arab.KUR .json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/temp/mpdf/ttfontdata/vazir.GSUB.arab.SND .json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/temp/mpdf/ttfontdata/vazir.GSUB.arab.URD .json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/temp/mpdf/ttfontdata/vazir.GSUBGPOStables.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/temp/mpdf/ttfontdata/vazir.GSUBdata.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/temp/mpdf/ttfontdata/vazir.cgm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/temp/mpdf/ttfontdata/vazir.cw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/temp/mpdf/ttfontdata/vazir.cw.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/temp/mpdf/ttfontdata/vazir.gid.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/temp/mpdf/ttfontdata/vazir.mtx.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/temp/mpdf/ttfontdata/vazir.ps.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/temp/mpdf/ttfontdata/vazir.ps.z" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/barryvdh/laravel-dompdf/CHANGELOG.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/barryvdh/laravel-dompdf/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/barryvdh/laravel-dompdf/composer.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/barryvdh/laravel-dompdf/config/dompdf.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/barryvdh/laravel-dompdf/readme.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/barryvdh/laravel-dompdf/src/Facade/Pdf.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/barryvdh/laravel-dompdf/src/PDF.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/barryvdh/laravel-dompdf/src/ServiceProvider.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/installed.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/installed.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -597,7 +516,11 @@
       <workItem from="1688808129345" duration="4525000" />
       <workItem from="1688888898580" duration="1827000" />
       <workItem from="1688909109884" duration="596000" />
-      <workItem from="1688970805678" duration="5763000" />
+      <workItem from="1688970805678" duration="18949000" />
+      <workItem from="1689063624361" duration="2814000" />
+      <workItem from="1689070092914" duration="94000" />
+      <workItem from="1689071686826" duration="6594000" />
+      <workItem from="1689143315939" duration="5124000" />
     </task>
     <servers />
   </component>

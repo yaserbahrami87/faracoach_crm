@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\event;
+use App\User;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -46,7 +47,10 @@ class EventController extends BaseController
      */
     public function create()
     {
-        return view('admin.insertEvent');
+        $users=User::where('is_event','=',1)
+                ->get();
+        return view('admin.insertEvent')
+                    ->with('users',$users);
     }
 
     /**
@@ -59,25 +63,26 @@ class EventController extends BaseController
     {
 
         $this->validate($request, [
-            'event' => 'required|persian_alpha_num|min:3',
-            'shortlink' => 'required|string|min:3|unique:events',
-            'description' => 'required|string|min:3|',
-            'capacity' => 'required|numeric|',
-            'type' => 'required|numeric|',
-            'address' => 'required_with:type,1|string|',
-            'image' => 'required|mimes:jpeg,jpg,png,gif|max:600',
-            'video' => 'nullable|string|min:3|',
-            'start_date' => 'required|string|max:11|',
-            'start_time' => 'required|string|max:6|',
-            'end_date' => 'required|string|max:11|',
-            'end_time' => 'required|string|max:6|',
-            'duration' => 'required|string|min:3|',
-            'expire_date' => 'required|string|max:11|',
-            'event_text' => 'required|string|min:10|',
-            'heading' => 'nullable|string|min:10|',
-            'contacts' => 'nullable|string|min:10|',
-            'faq' => 'nullable|string|min:10|',
-            'links' => 'nullable|string|min:10|',
+            'event'         => 'required|persian_alpha_num|min:3',
+            'shortlink'     => 'required|string|min:3|unique:events',
+            'user_id'       => 'required|numeric',
+            'description'   => 'required|string|min:3|',
+            'capacity'      => 'required|numeric|',
+            'type'          => 'required|numeric|',
+            'address'       => 'required_with:type,1|string|',
+            'image'         => 'required|mimes:jpeg,jpg,png,gif|max:600',
+            'video'         => 'nullable|string|min:3|',
+            'start_date'    => 'required|string|max:11|',
+            'start_time'    => 'required|string|max:6|',
+            'end_date'      => 'required|string|max:11|',
+            'end_time'      => 'required|string|max:6|',
+            'duration'      => 'required|string|min:3|',
+            'expire_date'   => 'required|string|max:11|',
+            'event_text'    => 'required|string|min:10|',
+            'heading'       => 'nullable|string|min:10|',
+            'contacts'      => 'nullable|string|min:10|',
+            'faq'           => 'nullable|string|min:10|',
+            'links'         => 'nullable|string|min:10|',
         ]);
 
 
@@ -104,7 +109,6 @@ class EventController extends BaseController
             alert()->error($e->errorInfo[2], 'خطا')->persistent('بستن');
             return back();
         }
-
 
     }
 
@@ -319,6 +323,63 @@ class EventController extends BaseController
         {
             return back();
         }
+
+    }
+
+    public function organizers()
+    {
+        $users=User::where('is_event','=',1)
+                ->get();
+        return view('admin.events.organizers')
+                        ->with('users',$users);
+    }
+
+    public  function organizers_store(Request $request)
+    {
+        $this->validate($request,[
+            'user_id'   =>'required|numeric'
+        ]);
+
+        $user=User::where('id','=',$request->user_id)
+                    ->first();
+
+        if(is_null($user))
+        {
+            alert()->error('کاربر مورد نظر یافت نشد')->persistent('بستن');
+        }
+        else
+        {
+            $user->is_event=1;
+
+            $status=$user->save();
+
+            if($status)
+            {
+                alert()->success('کاربر به لیست برگزارکننده های رویداد اضافه شد')->persistent('بستن');
+            }
+            else
+            {
+                alert()->error('خطا در اضافه کردن برگزارکننده رویداد')->persistent('بستن');
+            }
+
+            return back();
+        }
+    }
+
+    public function organizers_destroy(User $user,Request $request)
+    {
+        $user->is_event=0;
+        $status=$user->save();
+
+        if($status)
+        {
+            alert()->success('کاربر از لیست برگزارکننده های دوره حذف شد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در حذف برگزارکننده')->persistent('بستن');
+        }
+        return back();
 
     }
 

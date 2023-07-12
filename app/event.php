@@ -21,4 +21,9 @@ class event extends Model
     {
         return $this->hasMany('App\eventreserve','event_id','id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

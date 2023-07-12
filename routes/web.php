@@ -520,6 +520,11 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::get('/event/all','EventController@eventsListAdmin');
     Route::get('/event/{event}/users','EventController@usersEvent');
     Route::get('/event/{event}/export','EventController@exportExcel');
+    Route::get('/event/organizers','EventController@organizers');
+    Route::post('/event/organizers/store','EventController@organizers_store');
+    Route::post('/event/organizers/{user}/destroy','EventController@organizers_destroy');
+
+
     Route::resource('event','EventController');
 
     //reportAdmin

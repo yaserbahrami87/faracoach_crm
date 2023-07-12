@@ -145,6 +145,7 @@
                 <ul class="menu-content">
                     <li><a href="/admin/event/all"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >همه رویدادها</span></a></li>
                     <li><a href="/admin/event/create"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >ایجاد رویداد</span></a></li>
+                    <li><a href="/admin/event/organizers"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >برگزارکننده ها</span></a></li>
                 </ul>
             </li>
             <li class=" nav-item"><a href="#"><span class="menu-title" >پشتیبان علمی</span></a>

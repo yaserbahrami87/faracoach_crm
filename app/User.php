@@ -18,7 +18,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'username','fname', 'lname', 'codemelli','sex','tel','shenasname','datebirth','father','born','married','type','education','reshteh','job','organization','jobside','state','city','address','personal_image','shenasnameh_image','cartmelli_image','education_image','email','password','resource','detailsresource','introduced','gettingknow','gettingknow_child','followby_id','tel_verified','last_login_at','insert_user_id','telegram','instagram','linkedin','aboutme','status_coach','fname_en','lname_en'
+        'username','fname', 'lname', 'codemelli','sex','tel','shenasname','datebirth','father','born','married','type','education','reshteh','job','organization','jobside','state','city','address','personal_image','shenasnameh_image','cartmelli_image','education_image','email','password','resource','detailsresource','introduced','gettingknow','gettingknow_child','followby_id','tel_verified','last_login_at','insert_user_id','telegram','instagram','linkedin','aboutme','status_coach','fname_en','lname_en','is_event'
     ];
 
     /**
@@ -156,6 +156,11 @@ class User extends Authenticatable implements MustVerifyEmail
         public function faktors()
         {
             return $this->hasMany('App\faktor','user_id','id');
+        }
+
+        public function events()
+        {
+            return $this->hasMany('App\event','user_id','id');
         }
 
         public function reserveEvent()

@@ -28,12 +28,26 @@
                             <label for="event">موضوع رویداد<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="event" name="event" value="{{old('event')}}"  autocomplete="off"/>
                         </div>
+
                         <div class="form-group">
                             <label for="shortlink">لینک اختصاصی<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="shortlink" name="shortlink" value="{{old('shortlink')}}" autocomplete="off" />
-                            <small>لینک اختصاصی نباید تکراری باشد</small>
+                            <small class="d-block">لینک اختصاصی نباید تکراری باشد</small>
                             <small>لینک اختصاصی باید انگلیسی باشد</small>
                         </div>
+
+                        <div class="form-group">
+                            <label for="user_id">برگزارکننده<span class="text-danger">*</span></label>
+                            <select class="form-control" id="user_id" name="user_id">
+                                <option selected disabled>انتخاب کنید</option>
+                                @foreach($users as $user)
+
+                                    <option value="{{$user->id}}">{{$user->fname.' '.$user->lname}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+
                         <div class="form-group">
                             <label for="description">توضیح کوتاه<span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="description" name="description" value="{{old('description')}}" />
