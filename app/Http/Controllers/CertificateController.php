@@ -277,6 +277,7 @@ class CertificateController extends Controller
 
 
         $pdf=Pdf::loadView('admin.blank-certificates.fcc_blank', $data);
+        $pdf->set_base_path('127.0.0.1:8000/css/reset.css');
         $pdf->save(time().'_.pdf');
 //        $pdf->save($student->id.'_.pdf');
 

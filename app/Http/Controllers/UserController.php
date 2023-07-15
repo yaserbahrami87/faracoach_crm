@@ -842,6 +842,7 @@ class UserController extends BaseController
                                     ->orwherenull('reshteh')
                                     ->orwherenull('job');
                             })
+
                             ->orderby('id','desc')
                             ->paginate();
 
@@ -981,13 +982,21 @@ class UserController extends BaseController
                 break;
             case 'notfollowup':
                 $users = user::where('type','=',1)
-                            ->wherenotnull('fname')
-                            ->wherenotnull('lname')
-                            ->wherenotnull('sex')
-                            ->wherenotnull('email')
-                            ->wherenotnull('datebirth')
-                            ->wherenotnull('education')
-                            ->wherenotnull('reshteh')
+                            ->where(function($query)
+                            {
+                                $query->wherenotnull('fname')
+                                        ->wherenotnull('lname')
+                                        ->wherenotnull('sex')
+                                        ->wherenotnull('email')
+                                        ->wherenotnull('datebirth')
+                                        ->wherenotnull('education')
+                                        ->wherenotnull('reshteh');
+                            })
+                            ->orwhere(function($query)
+                            {
+                                $query->with('event');
+
+                            })
                             ->orderby('id','desc')
                             ->get();
                 break;
