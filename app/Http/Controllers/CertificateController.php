@@ -94,6 +94,8 @@ class CertificateController extends Controller
 
     public function get_certificate()
     {
+        alert()->warning('گواهینامه در حال تغییر و بازنویسی مجدد می باشد.چندروز دیگر دوباره امتحان کنید')->persistent('بستن');
+        return back();
         if(Auth::user()->scholarship->confirm_exam==1 && Auth::user()->scholarship->confirm_webinar==1 )
         {
 
