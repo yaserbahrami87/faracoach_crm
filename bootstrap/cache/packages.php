@@ -20,6 +20,17 @@
       0 => 'Barryvdh\\Elfinder\\ElfinderServiceProvider',
     ),
   ),
+  'carlos-meneses/laravel-mpdf' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Mccarlosen\\LaravelMpdf\\LaravelMpdfServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'PDF' => 'Mccarlosen\\LaravelMpdf\\Facades\\LaravelMpdf',
+    ),
+  ),
   'facade/ignition' => 
   array (
     'providers' => 
@@ -108,17 +119,6 @@
     'providers' => 
     array (
       0 => 'Carbon\\Laravel\\ServiceProvider',
-    ),
-  ),
-  'niklasravnsborg/laravel-pdf' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'niklasravnsborg\\LaravelPdf\\PdfServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'PDF' => 'niklasravnsborg\\LaravelPdf\\Facades\\Pdf',
     ),
   ),
   'nunomaduro/collision' => 

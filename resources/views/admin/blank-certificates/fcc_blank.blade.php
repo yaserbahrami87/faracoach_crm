@@ -1,11 +1,14 @@
-<!DOCTYPE html>
 <html>
-<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
-    <link rel="stylesheet" type="text/css" href="{{asset('/css/reset.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{public_path('css/reset.css')}}">
 
     <style>
+
+
         body {
             font-family: 'vazir';
             padding:0px;
@@ -16,6 +19,7 @@
         {
             margin:0px;
             padding:0px;
+            font-family: 'vazir';
         }
 
         .cls
@@ -57,15 +61,14 @@
 
         body .image
         {
-            position: absolute;
+            position: fixed;
             top: 570px;
             left: 800px;
             border-radius: 20px;
             box-shadow: 1px 1px 20px #828387;
-            width: 360px;
-            height: 420px;
-            margin-right: 900px;
-            margin-top: 200px;
+            width: 460px;
+            height: 520px;
+
         }
 
         body .test
@@ -74,8 +77,7 @@
             top: 710px;
             left: 180px;
             color: silver;
-            margin-top:100px;
-            margin-left: 180px;
+
         }
 
         .relative{
@@ -107,13 +109,14 @@
     @endif
 
     @if(is_null($student->user->personal_image))
-            <img src="{{public_path('documents/users/default-avatar.png') }}" class="image" />
+            <img src="{{public_path('documents/users/default-avatar.png') }}" style="width:200px;border-radius: 50%"/>
     @else
-            <img src="{{public_path('documents/users/default-avatar.png') }}" class="image" />
+            <img src="{{public_path('documents/users/default-avatar.png') }}" style="width:200px;border-radius: 50%" />
     @endif
 
 
     <p id="number_certificates">{{$student->code}}</p>
+
 
 </div>
 </body>

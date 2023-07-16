@@ -24,7 +24,7 @@
         </td>
     </tr>
     <tr class="text-center">
-        <td>مانده بورسیه</td>
+        <td>کل (مانده بورسیه)</td>
         <td>
             @if(!is_null($scholarship->user->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()))
                 <span id="collabration_fi">{{number_format((($scholarship->user->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->fi)*($scholarship->user->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->score)/100)-(($scholarship->user->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->fi)*(($scholarship->user->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->score)/100)* ($scholarship->user->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->loan)/100))}}</span>

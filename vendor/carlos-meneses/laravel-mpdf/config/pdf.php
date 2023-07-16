@@ -3,8 +3,8 @@
 return [
     'mode'                     => '',
     'format'                   => 'A4',
-    'default_font_size'        => '14',
-    'default_font'             => 'vazir',
+    'default_font_size'        => '12',
+    'default_font'             => 'sans-serif',
     'margin_left'              => 10,
     'margin_right'             => 10,
     'margin_top'               => 10,
@@ -25,18 +25,8 @@ return [
     'watermark_image_alpha'    => 0.2,
     'watermark_image_size'     => 'D',
     'watermark_image_position' => 'P',
-    'custom_font_dir'  => base_path('public/fonts'), // don't forget the trailing slash!
-    'custom_font_data' => [
-        'vazir' => [ // must be lowercase and snake_case
-            'R'  => 'iransansweb.ttf',    // regular font
-            'B'  => 'iransansweb.ttf',       // optional: bold font
-            'I'  => 'iransansweb.ttf',     // optional: italic font
-            'BI' => 'iransansweb.ttf' ,// optional: bold-italic font
-
-            'useKashida' => 75
-        ]
-        // ...add as many as you want.
-    ],
+    'custom_font_dir'          => '',
+    'custom_font_data'         => [],
     'auto_language_detection'  => false,
     'temp_dir'                 => storage_path('app'),
     'pdfa'                     => false,

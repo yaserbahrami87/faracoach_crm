@@ -224,7 +224,7 @@
                                               <td>{{$loop->iteration}}</td>
                                               <td>{{$faktor->date_faktor}}</td>
                                               <td>{{number_format($faktor->fi)}} تومان</td>
-                                              <td >
+                                              <td>
                                                   @if($faktor->status==1)
                                                       پرداخت شده
                                                   @else
