@@ -63,7 +63,11 @@
                                 </td>
                                 <td>{{($item->get_financial->schoalrshipPayment['score'])}}</td>
                                 <td>{{($item->get_financial->schoalrshipPayment['loan'])}}</td>
-                                <td>{{number_format($item->get_financial->schoalrshipPayment['remaining'])}}</td>
+                                <td>
+                                    @if(!is_null($item->user->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()))
+                                        <span id="collabration_fi">{{number_format((($item->user->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->fi)*($item->user->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->score)/100)-(($item->user->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->fi)*(($item->user->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->score)/100)* ($item->user->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()->schoalrshipPayment->loan)/100))}}</span>
+                                    @endif
+                                </td>
                                 <td>
 
                                     @if(!is_null($item->user->checkouts->where('status','=',1)->where('type','=','scholarship_payment')->last()))

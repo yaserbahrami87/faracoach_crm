@@ -33,7 +33,7 @@ return [
             'I'  => 'iransansweb.ttf',     // optional: italic font
             'BI' => 'iransansweb.ttf' ,// optional: bold-italic font
 
-            'useKashida' => 75
+
         ]
         // ...add as many as you want.
     ],

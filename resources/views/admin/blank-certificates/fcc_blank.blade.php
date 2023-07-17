@@ -1,4 +1,4 @@
-<html>
+<html lang="fa">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 
@@ -105,7 +105,7 @@
             color: silver;font-size: 60px;font-family: Arial">{{$student->user->fname.' '.$student->user->lname}}</p>
     @else
 
-        <p  class="test" >یاسر حسینی</p>
+        <p  class="test" >$fname_fa</p>
     @endif
 
     @if(is_null($student->user->personal_image))

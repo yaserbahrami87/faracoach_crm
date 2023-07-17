@@ -285,6 +285,18 @@ class CertificateController extends Controller
 
         $pdf->charset_in='UTF-8';
         $pdf->save(time().'_.pdf');
+
+
+        $template = file_get_contents(resource_path('views/admin/blank-certificates/fcc_blank.blade.php'));
+        $fname=$student->fname_fa ;
+
+            $mpdf=PDF::loadView('admin.blank-certificates.fcc_blank', $data);
+            $final = str_replace('$fname_fa', $fname, $template);
+            $mpdf->WriteHTML($final);
+            $mpdf->save(time()."-".rand(0,555555).".pdf", 'F');
+
+
+
 //        $pdf->save($student->id.'_.pdf');
 
 
