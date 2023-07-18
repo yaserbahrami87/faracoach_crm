@@ -212,6 +212,7 @@
                             <th>نام خانوادگی</th>
                             <th>شماره تماس</th>
                             <th>پست الکترونیکی</th>
+                            <th>تاریخ ثبت نام</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -232,6 +233,9 @@
                                         </td>
                                         <td dir="ltr" class="text-center">
                                             <a href="{{asset('/admin/user/'.$item->id)}}">{{$item->email}}</a>
+                                        </td>
+                                        <td dir="ltr" class="text-center">
+                                            <a href="{{asset('/admin/user/'.$item->id)}}">{{$item->created_at}}</a>
                                         </td>
                                     </tr>
                                 @endforeach
