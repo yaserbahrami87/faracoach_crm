@@ -11,7 +11,9 @@ use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
-use PDF;
+
+use niklasravnsborg\LaravelPdf\Facades\Pdf;
+
 
 class CertificateController extends Controller
 {
@@ -276,28 +278,16 @@ class CertificateController extends Controller
             'student' => $student
         ];
 
+        $pdf=Pdf::loadView('admin.blank-certificates.fcc_blank', $data);
 
+        $pdf->allow_charset_conversion=false;  // Set by default to TRUE
 
-
-
-        $pdf=PDF::loadView('admin.blank-certificates.fcc_blank', $data);
-        $pdf->allow_charset_conversion=true;  // Set by default to TRUE
 
         $pdf->charset_in='UTF-8';
+
+
+
         $pdf->save(time().'_.pdf');
-
-
-        $template = file_get_contents(resource_path('views/admin/blank-certificates/fcc_blank.blade.php'));
-        $fname=$student->fname_fa ;
-
-            $mpdf=PDF::loadView('admin.blank-certificates.fcc_blank', $data);
-            $final = str_replace('$fname_fa', $fname, $template);
-            $mpdf->WriteHTML($final);
-            $mpdf->save(time()."-".rand(0,555555).".pdf", 'F');
-
-
-
-//        $pdf->save($student->id.'_.pdf');
 
 
         return view('admin.blank-certificates.fcc_blank')

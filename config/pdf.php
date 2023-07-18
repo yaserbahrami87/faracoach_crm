@@ -28,12 +28,10 @@ return [
     'custom_font_dir'  => base_path('public/fonts'), // don't forget the trailing slash!
     'custom_font_data' => [
         'vazir' => [ // must be lowercase and snake_case
-            'R'  => 'iransansweb.ttf',    // regular font
-            'B'  => 'iransansweb.ttf',       // optional: bold font
-            'I'  => 'iransansweb.ttf',     // optional: italic font
-            'BI' => 'iransansweb.ttf' ,// optional: bold-italic font
-
-
+            'R'  => 'Vazir-Bold-FD-WOL.ttf',    // regular font
+            'B'  => 'Vazir-Bold-FD-WOL.ttf',       // optional: bold font
+            'I'  => 'Vazir-Bold-FD-WOL.ttf',     // optional: italic font
+            'BI' => 'Vazir-Bold-FD-WOL.ttf' ,// optional: bold-italic font
         ]
         // ...add as many as you want.
     ],

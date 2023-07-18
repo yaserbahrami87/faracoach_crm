@@ -8,6 +8,10 @@
 
     <style>
 
+        @font-face {
+            src: url("{{public_path('fonts/Vazir-Bold-FD-WOL.ttf')}}");
+            font-family: 'vazir';
+        }
 
         body {
             font-family: 'vazir';
@@ -73,39 +77,46 @@
 
         body .test
         {
-            position: absolute;
-            top: 710px;
-            left: 180px;
-            color: silver;
-
+            position:absolute  ;
+            top: 250px;
+            right:250px;
+            color: red;
         }
 
-        .relative{
-            position: relative !important;
+        .reset{
+            margin:0px;
+            padding: 0px;
         }
+
+
+        body .div_main
+        {
+            background-image: url({{public_path('images/blank-certificates/FCC_blank.jpg') }});
+            width: 100%;
+            height: 100%;
+            background-size: 100% 100%;
+        }
+
 
     </style>
 </head>
-<body >
+<body class="reset">
 
-<div class="relative" style="background-image: url({{public_path('images/blank-certificates/FCC_blank.jpg') }});width: 100%;height: 100%;background-size: 100% 100%;position: relative;">
+<div  class="reset div_main">
     @if(strlen($student->user->fname_en.' '.$student->user->lname_en)>20 && strlen($student->user->fname_en.' '.$student->user->lname_en)<26)
-
         <p  style=" position: absolute;
             top: 710px;
             left: 180px;
             font-size: 60px;
             color: silver;font-size: 150px; font-family: Vazir">{{$student->user->fname.' '.$student->user->lname}}</p>
     @elseif(strlen($student->user->fname_en.' '.$student->user->lname_en)>=26)
-
         <p style=" position: absolute;
             top: 710px;
             left: 180px;
             font-size: 60px;
             color: silver;font-size: 60px;font-family: Arial">{{$student->user->fname.' '.$student->user->lname}}</p>
     @else
-
-        <p  class="test" >$fname_fa</p>
+        <p  class="test"  style="">یساسر</p>
     @endif
 
     @if(is_null($student->user->personal_image))

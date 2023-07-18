@@ -50,6 +50,10 @@ class ComposerStaticInitf54d8edf51459297346cdb00d8423a68
         array (
             'setasign\\Fpdi\\' => 14,
         ),
+        'n' => 
+        array (
+            'niklasravnsborg\\LaravelPdf\\' => 27,
+        ),
         'W' => 
         array (
             'Whoops\\' => 7,
@@ -128,7 +132,6 @@ class ComposerStaticInitf54d8edf51459297346cdb00d8423a68
             'Mpdf\\PsrLogAwareTrait\\' => 22,
             'Mpdf\\' => 5,
             'Monolog\\' => 8,
-            'Mccarlosen\\LaravelMpdf\\' => 23,
         ),
         'L' => 
         array (
@@ -221,6 +224,10 @@ class ComposerStaticInitf54d8edf51459297346cdb00d8423a68
         'setasign\\Fpdi\\' => 
         array (
             0 => __DIR__ . '/..' . '/setasign/fpdi/src',
+        ),
+        'niklasravnsborg\\LaravelPdf\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/niklasravnsborg/laravel-pdf/src/LaravelPdf',
         ),
         'Whoops\\' => 
         array (
@@ -429,10 +436,6 @@ class ComposerStaticInitf54d8edf51459297346cdb00d8423a68
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
-        ),
-        'Mccarlosen\\LaravelMpdf\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/carlos-meneses/laravel-mpdf/src',
         ),
         'League\\MimeTypeDetection\\' => 
         array (
@@ -3667,10 +3670,6 @@ class ComposerStaticInitf54d8edf51459297346cdb00d8423a68
         'League\\MimeTypeDetection\\GeneratedExtensionToMimeTypeMap' => __DIR__ . '/..' . '/league/mime-type-detection/src/GeneratedExtensionToMimeTypeMap.php',
         'League\\MimeTypeDetection\\MimeTypeDetector' => __DIR__ . '/..' . '/league/mime-type-detection/src/MimeTypeDetector.php',
         'League\\MimeTypeDetection\\OverridingExtensionToMimeTypeMap' => __DIR__ . '/..' . '/league/mime-type-detection/src/OverridingExtensionToMimeTypeMap.php',
-        'Mccarlosen\\LaravelMpdf\\Facades\\LaravelMpdf' => __DIR__ . '/..' . '/carlos-meneses/laravel-mpdf/src/Facades/LaravelMpdf.php',
-        'Mccarlosen\\LaravelMpdf\\LaravelMpdf' => __DIR__ . '/..' . '/carlos-meneses/laravel-mpdf/src/LaravelMpdf.php',
-        'Mccarlosen\\LaravelMpdf\\LaravelMpdfServiceProvider' => __DIR__ . '/..' . '/carlos-meneses/laravel-mpdf/src/LaravelMpdfServiceProvider.php',
-        'Mccarlosen\\LaravelMpdf\\LaravelMpdfWrapper' => __DIR__ . '/..' . '/carlos-meneses/laravel-mpdf/src/LaravelMpdfWrapper.php',
         'Mobile_Detect' => __DIR__ . '/..' . '/mobiledetect/mobiledetectlib/Mobile_Detect.php',
         'Mockery' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery.php',
         'Mockery\\Adapter\\Phpunit\\MockeryPHPUnitIntegration' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryPHPUnitIntegration.php',
@@ -6320,6 +6319,10 @@ class ComposerStaticInitf54d8edf51459297346cdb00d8423a68
         'elFinderVolumeSFTPphpseclib' => __DIR__ . '/..' . '/studio-42/elfinder/php/elFinderVolumeSFTPphpseclib.class.php',
         'elFinderVolumeTrash' => __DIR__ . '/..' . '/studio-42/elfinder/php/elFinderVolumeTrash.class.php',
         'elFinderVolumeTrashMySQL' => __DIR__ . '/..' . '/studio-42/elfinder/php/elFinderVolumeTrashMySQL.class.php',
+        'niklasravnsborg\\LaravelPdf\\Facades\\Pdf' => __DIR__ . '/..' . '/niklasravnsborg/laravel-pdf/src/LaravelPdf/Facades/Pdf.php',
+        'niklasravnsborg\\LaravelPdf\\Pdf' => __DIR__ . '/..' . '/niklasravnsborg/laravel-pdf/src/LaravelPdf/Pdf.php',
+        'niklasravnsborg\\LaravelPdf\\PdfServiceProvider' => __DIR__ . '/..' . '/niklasravnsborg/laravel-pdf/src/LaravelPdf/PdfServiceProvider.php',
+        'niklasravnsborg\\LaravelPdf\\PdfWrapper' => __DIR__ . '/..' . '/niklasravnsborg/laravel-pdf/src/LaravelPdf/PdfWrapper.php',
         'nusoap_base' => __DIR__ . '/..' . '/econea/nusoap/src/nusoap.php',
         'nusoap_client' => __DIR__ . '/..' . '/econea/nusoap/src/nusoap.php',
         'nusoap_fault' => __DIR__ . '/..' . '/econea/nusoap/src/nusoap.php',

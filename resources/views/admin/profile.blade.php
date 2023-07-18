@@ -455,13 +455,24 @@
                     <div class="row">
                         <div class="col-md-6 px-1">
                             <div class="form-group">
+
                                 <label>نحوه آشنایی</label>
+
+
 
                                 <select id="gettingknow_parent" class="form-control p-0 @if(strlen($user->gettingknow)==0) is-invalid  @else is-valid  @endif  @error('gettingknow') is-invalid @enderror" name="gettingKnow_parent">
                                     <option selected disabled>انتخاب کنید</option>
-                                    @foreach($gettingKnow_parent_list as $item)
-                                        <option value="{{$item->id}}"  {{ old('gettingKnow_parent',$user->gettingknow_parent_user)==$item->id ? 'selected='.'"'.'selected'.'"' : '' }} >{{$item->category}}</option>
-                                    @endforeach
+
+                                    @if(!is_null($user->get_gettingknow))
+                                        @foreach($gettingKnow_parent_list as $item)
+                                            <option value="{{$item->id}}"  {{ old('gettingKnow_parent',$user->get_gettingknow->parent->id)==$item->id ? 'selected='.'"'.'selected'.'"' : '' }} >{{$item->category}}</option>
+                                        @endforeach
+                                    @else
+                                        @foreach($gettingKnow_parent_list as $item)
+                                            <option value="{{$item->id}}"  {{ old('gettingKnow_parent')==$item->id ? 'selected='.'"'.'selected'.'"' : '' }} >{{$item->category}}</option>
+                                        @endforeach
+                                    @endif
+
                                 </select>
                             </div>
                         </div>
@@ -473,11 +484,12 @@
                                     <label>عنوان آشنایی</label>
                                     <select id="gettingknow" class="form-control p-0 @if(strlen($user->gettingknow)==0) is-invalid  @else is-valid  @endif  @error('gettingknow') is-invalid @enderror" name="gettingknow">
                                         <option selected disabled>انتخاب کنید</option>
-                                        @foreach($gettingKnow_child_list as $item)
-                                            <option value="{{$item->id}}"  {{ old('gettingknow',$user->gettingknow)==$item->id ? 'selected='.'"'.'selected'.'"' : '' }}   >{{$item->category}}</option>
-                                        @endforeach
+                                        @if(!is_null($user->get_gettingknow))
+                                            @foreach($user->get_gettingknow->parent->child_lists as $item)
+                                                <option value="{{$item->id}}"  {{ old('gettingknow',$user->gettingknow)==$item->id ? 'selected='.'"'.'selected'.'"' : '' }}   >{{$item->category}}</option>
+                                            @endforeach
+                                        @endif
                                     </select>
-
                                 </div>
                             </div>
                         @else

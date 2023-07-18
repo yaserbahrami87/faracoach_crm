@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'voku\\' => array($vendorDir . '/voku/portable-ascii/src/voku'),
     'setasign\\Fpdi\\' => array($vendorDir . '/setasign/fpdi/src'),
+    'niklasravnsborg\\LaravelPdf\\' => array($vendorDir . '/niklasravnsborg/laravel-pdf/src/LaravelPdf'),
     'Whoops\\' => array($vendorDir . '/filp/whoops/src/Whoops'),
     'UxWeb\\SweetAlert\\' => array($vendorDir . '/uxweb/sweet-alert/src/SweetAlert'),
     'UAParser\\' => array($vendorDir . '/ua-parser/uap-php/src'),
@@ -60,7 +61,6 @@ return array(
     'Mpdf\\PsrLogAwareTrait\\' => array($vendorDir . '/mpdf/psr-log-aware-trait/src'),
     'Mpdf\\' => array($vendorDir . '/mpdf/mpdf/src'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
-    'Mccarlosen\\LaravelMpdf\\' => array($vendorDir . '/carlos-meneses/laravel-mpdf/src'),
     'League\\MimeTypeDetection\\' => array($vendorDir . '/league/mime-type-detection/src'),
     'League\\Flysystem\\Cached\\' => array($vendorDir . '/league/flysystem-cached-adapter/src'),
     'League\\Flysystem\\' => array($vendorDir . '/league/flysystem/src'),
