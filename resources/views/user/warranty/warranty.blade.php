@@ -158,10 +158,11 @@
             <b>7.	شرایط پرداخت شهریه:</b>
             <p>کل مبلغ قرارداد
                 @if(Auth::user()->checkouts->where('status','=',1)->where('product_id','=',$course->id)->first()['type']=='invoice')
-                    {{number_format(Auth::user()->checkouts->where('status','=',1)->where('product_id','=',$course->id)->first()->invoice['pre_payment']) }} تومان می¬باشد؛ که مبلغ
+                    {{number_format(Auth::user()->checkouts->where('status','=',1)->where('product_id','=',$course->id)->first()->invoice['fi']) }} تومان می¬باشد؛ که مبلغ
                 @else
                     {{number_format(Auth::user()->checkouts->where('status','=',1)->where('product_id','=',$course->id)->first()->order['final_off']) }} تومان می¬باشد؛ که مبلغ
                 @endif
+
                 @if(is_null(Auth::user()->checkouts->where('status','=',1)->where('product_id','=',$course->id)->first()->order['pre_paymant']))
                     {{number_format(Auth::user()->checkouts->where('status','=',1)->where('product_id','=',$course->id)->first()->order['final_off'])}}
                 @else
