@@ -2,32 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3849cf8-ae8a-47cc-891c-72c8c9af69d2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/faracoach_crm.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/faracoach_crm.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CertificateController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CertificateController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/category_gettingknow.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/category_gettingknow.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bootstrap/cache/packages.php" beforeDir="false" afterPath="$PROJECT_DIR$/bootstrap/cache/packages.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bootstrap/cache/services.php" beforeDir="false" afterPath="$PROJECT_DIR$/bootstrap/cache/services.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/pdf.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/pdf.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/blank-certificates/fcc_blank.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/blank-certificates/fcc_blank.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/profile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/profile.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/carlos-meneses/laravel-mpdf/.github/FUNDING.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/carlos-meneses/laravel-mpdf/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/carlos-meneses/laravel-mpdf/composer.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/carlos-meneses/laravel-mpdf/config/pdf.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/carlos-meneses/laravel-mpdf/readme.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/carlos-meneses/laravel-mpdf/src/Facades/LaravelMpdf.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/carlos-meneses/laravel-mpdf/src/LaravelMpdf.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/carlos-meneses/laravel-mpdf/src/LaravelMpdfServiceProvider.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/carlos-meneses/laravel-mpdf/src/LaravelMpdfWrapper.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/installed.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/installed.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/warranty/warranty.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/warranty/warranty.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -543,7 +521,8 @@
       <workItem from="1689499830604" duration="8970000" />
       <workItem from="1689575717649" duration="607000" />
       <workItem from="1689576945399" duration="16559000" />
-      <workItem from="1689663674163" duration="7429000" />
+      <workItem from="1689663674163" duration="18585000" />
+      <workItem from="1689840547772" duration="1264000" />
     </task>
     <servers />
   </component>

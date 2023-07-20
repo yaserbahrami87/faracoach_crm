@@ -156,7 +156,17 @@
             <p>در صورت عدم انجام تعهدات مالی توسط دانش‌پذیر، ارائه خدمات آموزشی به وی مقدور نمیباشد.</p>
             <p>چنانچه وقوع فورس ماژور اعم از بروز هرگونه رخداد طبیعی و غیرطبیعی و قهری که  انجام تعهدنامه را غیرممکن نماید یا باعث تعلیق انجام تعهدات طرفین برای مدت بیشتر از 1 ماه شوند، هریک از طرفین حق فسخ تعهدنامه را خواهند داشت.</p>
             <b>7.	شرایط پرداخت شهریه:</b>
-            <p>کل مبلغ قرارداد {{number_format(Auth::user()->checkouts->where('status','=',1)->where('product_id','=',$course->id)->first()->order['final_off']) }} تومان می¬باشد؛ که مبلغ @if(is_null(Auth::user()->checkouts->where('status','=',1)->where('product_id','=',$course->id)->first()->order['pre_paymant'])) {{number_format(Auth::user()->checkouts->where('status','=',1)->where('product_id','=',$course->id)->first()->order['final_off'])}} @else {{number_format(Auth::user()->checkouts->where('status','=',1)->where('product_id','=',$course->id)->first()->order['pre_paymant'])}}  @endif تومان به‌عنوان پیش‌پرداخت در تاریخ  {{Auth::user()->checkouts->where('status','=',1)->where('product_id','=',$course->id)->first()->order['date_fa']}} واریز گردید؛</p>
+            <p>کل مبلغ قرارداد
+                @if(Auth::user()->checkouts->where('status','=',1)->where('product_id','=',$course->id)->first()=='invoice')
+                    {{number_format(Auth::user()->checkouts->where('status','=',1)->where('product_id','=',$course->id)->first()->invoice['pre_payment']) }} تومان می¬باشد؛ که مبلغ
+                @else
+                    {{number_format(Auth::user()->checkouts->where('status','=',1)->where('product_id','=',$course->id)->first()->order['final_off']) }} تومان می¬باشد؛ که مبلغ
+                @endif
+                @if(is_null(Auth::user()->checkouts->where('status','=',1)->where('product_id','=',$course->id)->first()->order['pre_paymant']))
+                    {{number_format(Auth::user()->checkouts->where('status','=',1)->where('product_id','=',$course->id)->first()->order['final_off'])}}
+                @else
+                    {{number_format(Auth::user()->checkouts->where('status','=',1)->where('product_id','=',$course->id)->first()->order['pre_paymant'])}}
+                @endif تومان به‌عنوان پیش‌پرداخت در تاریخ  {{Auth::user()->checkouts->where('status','=',1)->where('product_id','=',$course->id)->first()->order['date_fa']}} واریز گردید؛</p>
             <p> شرایط پرداخت الباقی مبلغ قرارداد با توافق طرفین به‌صورت نقد/ اقساط/تهاتر بورسیه به شرح زیر توافق گردید؛</p>
             <p>مانده مبلغ قابل پرداخت {{number_format((Auth::user()->checkouts->where('status','=',1)->where('product_id','=',$course->id)->first()->order['baghimandeh_batakhfif']))}} تومان می باشد؛</p>
             <p>درصورت نیاز (توافق با واحد ثبت نام ، درخواست گواهینامه زودتر از موعد یا شرایط خاص ) دانش پذیر یک فقره چک ضمانت/ سفته به شماره <input type="number" name="shomare_zemanat"  /> به تاریخ <input type="text" name="tarikh_zemanat" id="tarikh_zemanat"  /> عهده بانک

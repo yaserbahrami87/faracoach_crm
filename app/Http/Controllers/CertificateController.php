@@ -284,6 +284,7 @@ class CertificateController extends Controller
 
 
         $pdf->charset_in='UTF-8';
+        $pdf->format='A5-L';
 
 
 

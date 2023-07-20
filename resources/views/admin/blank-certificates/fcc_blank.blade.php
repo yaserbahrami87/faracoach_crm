@@ -16,6 +16,9 @@
         body {
             font-family: 'vazir';
             padding:0px;
+            background-image: url("{{public_path('images/blank-certificates/FCC_blank.jpg')}}");
+            background-size: 100% 100%;
+            width:450px;
 
         }
 
@@ -26,107 +29,52 @@
             font-family: 'vazir';
         }
 
-        .cls
+        .fname
         {
-            background-image: url({{public_path('images/blank-certificates/FCC_blank.jpg') }});
-            width: 100%;
-            height: 150vh;
-            background-size: 100% 100%;
-
+            position:absolute;
+            top:200px;
+            left:350px;
         }
 
-        .cls_pdf{
-            background-image: url({{public_path('images/blank-certificates/FCC_blank.jpg') }});
-            width: 100%;
-            height: 100%;
-            background-size: 100% 100%;
-            position: relative;
-
-        }
-
-        .h1_size
+        .images
         {
-            position: absolute;
-            top: 710px;
-            left: 180px;
-            font-size: 80px;
-            color: silver;
-
+            border-radius: 30px;
+            width:100px;
+            position:absolute;
+            top:200px;
+            left:300px;
         }
 
-        #number_certificates
+        .table_pdf
         {
-            position: absolute;
-            top: 952px;
-            left: 920px;
-            font-size: 35px;
-            color: #38383a;
-        }
-
-        body .image
-        {
-            position: fixed;
-            top: 570px;
-            left: 800px;
-            border-radius: 20px;
-            box-shadow: 1px 1px 20px #828387;
-            width: 460px;
-            height: 520px;
-
-        }
-
-        body .test
-        {
-            position:absolute  ;
-            top: 250px;
-            right:250px;
-            color: red;
-        }
-
-        .reset{
-            margin:0px;
-            padding: 0px;
-        }
-
-
-        body .div_main
-        {
-            background-image: url({{public_path('images/blank-certificates/FCC_blank.jpg') }});
-            width: 100%;
-            height: 100%;
-            background-size: 100% 100%;
+            width:100%;
+            border:1px solid;
         }
 
 
     </style>
 </head>
-<body class="reset">
-
-<div  class="reset div_main">
-    @if(strlen($student->user->fname_en.' '.$student->user->lname_en)>20 && strlen($student->user->fname_en.' '.$student->user->lname_en)<26)
-        <p  style=" position: absolute;
-            top: 710px;
-            left: 180px;
-            font-size: 60px;
-            color: silver;font-size: 150px; font-family: Vazir">{{$student->user->fname.' '.$student->user->lname}}</p>
-    @elseif(strlen($student->user->fname_en.' '.$student->user->lname_en)>=26)
-        <p style=" position: absolute;
-            top: 710px;
-            left: 180px;
-            font-size: 60px;
-            color: silver;font-size: 60px;font-family: Arial">{{$student->user->fname.' '.$student->user->lname}}</p>
-    @else
-        <p  class="test"  style="">یساسر</p>
-    @endif
-
-    @if(is_null($student->user->personal_image))
-            <img src="{{public_path('documents/users/default-avatar.png') }}" style="width:200px;border-radius: 50%"/>
-    @else
-            <img src="{{public_path('documents/users/default-avatar.png') }}" style="width:200px;border-radius: 50%" />
-    @endif
+<body class="container-fluid position-relative" >
+    <table class="table_pdf">
+        <tr>
+            <td>
+                <h1 class="fname ">یاسر بهرامی</h1>
+            </td>
+            <td>
+                <img src="{{public_path('documents/users/personal-09376578527.jpeg')}}" class="images" />
+            </td>
+        </tr>
+    </table>
+    <div class="row">
+        <div class="col-12">
 
 
-    <p id="number_certificates">{{$student->code}}</p>
+        </div>
+    </div>
+<div  class="div_main">
+
+
+
 
 
 </div>
