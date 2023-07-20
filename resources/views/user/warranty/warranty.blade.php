@@ -157,7 +157,7 @@
             <p>چنانچه وقوع فورس ماژور اعم از بروز هرگونه رخداد طبیعی و غیرطبیعی و قهری که  انجام تعهدنامه را غیرممکن نماید یا باعث تعلیق انجام تعهدات طرفین برای مدت بیشتر از 1 ماه شوند، هریک از طرفین حق فسخ تعهدنامه را خواهند داشت.</p>
             <b>7.	شرایط پرداخت شهریه:</b>
             <p>کل مبلغ قرارداد
-                @if(Auth::user()->checkouts->where('status','=',1)->where('product_id','=',$course->id)->first()=='invoice')
+                @if(Auth::user()->checkouts->where('status','=',1)->where('product_id','=',$course->id)->first()['type']=='invoice')
                     {{number_format(Auth::user()->checkouts->where('status','=',1)->where('product_id','=',$course->id)->first()->invoice['pre_payment']) }} تومان می¬باشد؛ که مبلغ
                 @else
                     {{number_format(Auth::user()->checkouts->where('status','=',1)->where('product_id','=',$course->id)->first()->order['final_off']) }} تومان می¬باشد؛ که مبلغ

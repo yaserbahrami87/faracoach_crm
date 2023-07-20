@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="f3849cf8-ae8a-47cc-891c-72c8c9af69d2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CertificateController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CertificateController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/blank-certificates/fcc_blank.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/blank-certificates/fcc_blank.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/user/warranty/warranty.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/warranty/warranty.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -522,7 +520,7 @@
       <workItem from="1689575717649" duration="607000" />
       <workItem from="1689576945399" duration="16559000" />
       <workItem from="1689663674163" duration="18585000" />
-      <workItem from="1689840547772" duration="1264000" />
+      <workItem from="1689840547772" duration="1493000" />
     </task>
     <servers />
   </component>
