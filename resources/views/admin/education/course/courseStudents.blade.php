@@ -16,7 +16,7 @@
                     <th class="text-center">شماره همراه</th>
                     <th class="text-center">اینستاگرام</th>
                     <th class="text-center">تاریخ ثبت نام</th>
-                    <th class="text-center">FCC</th>
+                    <th class="text-center">مدرک شناسایی</th>
                     <th class="text-center">مدرک</th>
                     <th class="text-center">ویرایش</th>
                     <th class="text-center">حذف</th>
@@ -50,13 +50,13 @@
                         {{$item->date_fa}}
                     </td>
                     <td class="text-center">
-                        @if(!is_null($item->code) )
+
                             <form method="post" action="/admin/certificates/fcc/{{$item->id}}">
                                 {{csrf_field()}}
                                 <input type="hidden" value="{{$item->id}}" name="student" />
-                                <button class="btn btn-success"> FCC</button>
+                                <button class="btn btn-success"> مدرک شناسایی</button>
                             </form>
-                        @endif
+
                     </td>
                     <td class="text-center">
                         @if(!is_null($item->code) && !is_null($item->date_gratudate) )

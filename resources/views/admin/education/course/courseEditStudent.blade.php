@@ -27,7 +27,7 @@
                     <option disabled selected>انتخاب کنید</option>
                     <option value="1" @if($student->status==1) selected @endif>دانشجو</option>
                     <option value="2" @if($student->status==2) selected @endif >انصراف</option>
-                    <option value="3" @if($student->status==3) selected @endif data-toggle="collapse" aria-controls="collapseStatus" href="#collapseStatus"  >
+                    <option value="3" @if($student->status==3) selected @endif  >
                         فارغ التحصیل
                     </option>
                     <option value="4" @if($student->status==4) selected @endif >مرخصی</option>
@@ -40,13 +40,11 @@
                     <input type="text" class="form-control" id="code" name="code" value="{{$student->code}}"/>
                 </div>
 
-                <div class="collapse @if($student->status==3) show @endif" id="collapseStatus">
-
-                    <div class="form-group">
-                        <label for="date_gratudate">تاریخ فارغ التحصیلی</label>
-                        <input type="text" class="form-control" id="date_gratudate" name="date_gratudate"  value="{{$student->date_gratudate}}" />
-                    </div>
+                <div class="form-group">
+                    <label for="date_gratudate">تاریخ فارغ التحصیلی</label>
+                    <input type="text" class="form-control" id="date_gratudate" name="date_gratudate"  value="{{$student->date_gratudate}}" />
                 </div>
+
             </div>
             <button type="submit" class="btn btn-primary">ویرایش</button>
         </form>
@@ -80,18 +78,6 @@
                 previousButtonIcon: "fa fa-arrow-circle-left"
             });
 
-            $('#status').change(function()
-            {
-                if($('#status').val()==3)
-                {
-                    $('#collapseStatus').attr('class','form-group');
-                }
-                else
-                {
-                    $('#collapseStatus').attr('class','form-group d-none');
-                }
 
-
-            });
     </script>
 @endsection

@@ -255,11 +255,11 @@ class CertificateController extends Controller
     public function get_fcc(student $student)
     {
 
-        if(is_null($student->user->fname_en)||is_null($student->user->lname_en))
-        {
-            alert()->error('نام و نام خانوادگی را به انگلیسی در پروفایل وارد کنید')->persistent('بستن');
-            return redirect('/panel/profile');
-        }
+//        if(is_null($student->user->instagram))
+//        {
+//            alert()->error(' اینستاگرام را به انگلیسی در پروفایل وارد کنید')->persistent('بستن');
+//            return redirect('/panel/profile');
+//        }
         $customPaper = array(0,0,300,312);
 
         ini_set('max_execution_time', 0);
@@ -278,15 +278,16 @@ class CertificateController extends Controller
             'student' => $student
         ];
 
-        $pdf=Pdf::loadView('admin.blank-certificates.fcc_blank', $data);
+        $pdf=Pdf::loadView('admin.blank-certificates.fcc_blank',$data,[],[
+            'format'    =>[280,280],
+
+        ]);
 
         $pdf->allow_charset_conversion=false;  // Set by default to TRUE
 
 
         $pdf->charset_in='UTF-8';
         $pdf->format='A5-L';
-
-
 
         $pdf->save(time().'_.pdf');
 
