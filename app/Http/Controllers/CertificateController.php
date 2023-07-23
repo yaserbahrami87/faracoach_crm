@@ -283,19 +283,21 @@ class CertificateController extends Controller
 
         ]);
 
+        $fileName=time().'_.pdf';
+
         $pdf->allow_charset_conversion=false;  // Set by default to TRUE
 
 
         $pdf->charset_in='UTF-8';
         $pdf->format='A5-L';
 
-        $pdf->save(time().'_.pdf');
+        $pdf->save($fileName);
 
 
-        return view('admin.blank-certificates.fcc_blank')
-                        ->with('student',$student);
-//        return response()->download(public_path($student->id.'.pdf'))
-//            ->deleteFileAfterSend(true);
+//        return view('admin.blank-certificates.fcc_blank')
+//                        ->with('student',$student);
+        return response()->download(public_path($fileName))
+            ->deleteFileAfterSend(true);
 
 
 
