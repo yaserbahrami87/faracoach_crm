@@ -550,17 +550,18 @@
                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">مالی</a>
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">#</a>
+                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">جلسات</a>
+
+
+
             </li>
         </ul>
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="followups" role="tabpanel" aria-labelledby="followups-tab">
 
                 <div class="row">
-
                     @if(!is_null($user->followups->groupby('course_id')))
                         @foreach($user->followups->groupby('course_id') as $item)
-
                             <div class="col-4">
                                 <div class="card text-white border border-3 border-danger  p-1" style="min-height: 70px">
                                     <span class="text-dark text-center">
@@ -599,7 +600,9 @@
                 @endif
 
             </div>
-            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                @include('admin.user.booking')
+            </div>
         </div>
 
     </div>
