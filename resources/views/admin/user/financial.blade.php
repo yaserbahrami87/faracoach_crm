@@ -10,6 +10,7 @@
             <th>موعد پرداخت</th>
             <th>قیمت(تومان)</th>
             <th>وضعیت</th>
+            <th>توضیحات</th>
             <th>ویرایش</th>
             <th>حذف</th>
 
@@ -35,6 +36,9 @@
                         تسویه شد
                     @endif
                 </td>
+                <td>
+                    {{$item->description}}
+                </td>
                 <td class="text-center">
                     @if(($item->status==0))
                         <a href="/admin/faktor/{{$item->id}}/edit" class="btn btn-warning">
@@ -42,6 +46,7 @@
                         </a>
                     @endif
                 </td>
+
                 <td class="text-center">
                     @if(($item->status==0))
                         <form action="/admin/faktor/{{$item->id}}" method="post" onsubmit="return window.confirm('آیا از حذف فاکتور اطمینان دارید؟')">
@@ -71,6 +76,7 @@
                 <th>محصول</th>
                 <th>تاریخ پرداخت</th>
                 <th>قیمت(تومان)</th>
+                <th>توضیحات</th>
             </tr>
         </thead>
         <tbody>
@@ -124,6 +130,9 @@
                             {{number_format($item->price)}}
                     @endswitch
 
+                </td>
+                <td>
+                    {{$item->description}}
                 </td>
 
             </tr>
