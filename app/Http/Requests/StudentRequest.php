@@ -30,7 +30,8 @@ class StudentRequest extends FormRequest
             'user_id'           =>'required|numeric',
             'date_fa'           =>'nullable|string',
             'status'            =>'required|numeric',
-            'code'              =>['required_if:status,==,3|unique:students,code|',Rule::unique('students')->ignore($this->student)],
+            'code'              =>'required|unique:students,code,' . $this->id,
+            //'code'              =>['required_if:status,==,3|unique:students,code|',Rule::unique('students')->ignore($this->student)],
             'date_gratudate'    =>'required_if:status,==,3|max:11',
         ];
     }

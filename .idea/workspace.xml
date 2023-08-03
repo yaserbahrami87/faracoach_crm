@@ -2,16 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3849cf8-ae8a-47cc-891c-72c8c9af69d2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/storage/fonts/BRITANIC.TTF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/storage/fonts/Lato-Regular.ttf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CertificateController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CertificateController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/checkout.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/checkout.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/pdf.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/pdf.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/blank-certificates/acsth.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/blank-certificates/acsth.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/blank-certificates/fcc_blank.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/blank-certificates/fcc_blank.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/blank-certificates/icf_scholarship.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/blank-certificates/icf_scholarship.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/StudentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/StudentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/StudentRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/StudentRequest.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -544,7 +537,7 @@
       <workItem from="1690353641769" duration="2579000" />
       <workItem from="1690614642244" duration="6615000" />
       <workItem from="1690789364574" duration="3563000" />
-      <workItem from="1691045382571" duration="2976000" />
+      <workItem from="1691045382571" duration="4530000" />
     </task>
     <servers />
   </component>

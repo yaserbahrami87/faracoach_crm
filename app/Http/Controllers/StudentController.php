@@ -100,11 +100,22 @@ class StudentController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StudentRequest $request, student $student)
+    public function update(Request $request, student $student)
     {
 
+        $this->validate($request,[
+            'course_id'         =>'required|numeric',
+            'user_id'           =>'required|numeric',
+            'date_fa'           =>'nullable|string',
+            'status'            =>'required|numeric',
+            'code'              =>'required|unique:students,code,' . $student->id,
+            'date_gratudate'    =>'required_if:status,==,3|max:11',
+        ]);
 
-        $data=$request->validated();
+
+
+        //$data=$request->validated();
+
         $student->update($request->all());
         $student->status=$request['status'];
         $check=$student->save();
