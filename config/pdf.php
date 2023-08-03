@@ -42,6 +42,15 @@ return [
             'I' => 'Lato-Regular.ttf', // optional: italic font
             'BI' => 'Lato-Regular.ttf', // optional: bold-italic font
 
+        ],
+        'embassybt' => [
+            'R' => 'embassybt.ttf', // regular font
+            'B' => 'embassybt.ttf', // optional: bold font
+            'I' => 'embassybt.ttf', // optional: italic font
+            'BI' => 'embassybt.ttf', // optional: bold-italic font
+
         ]// ...add as many as you want.
+
+
     ]
 ];

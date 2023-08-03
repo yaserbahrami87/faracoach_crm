@@ -60,7 +60,7 @@
 
     </style>
 </head>
-<body class="cls_pdf container-fluid" style="background-image:url('{{public_path('images/blank-certificates/acsth_blank.jpg')}}');background-size: 100% 100%;position: relative">
+<body class="cls_pdf " style="background-image:url('{{public_path('images/blank-certificates/acsth_blank.jpg')}}');background-size: 100% 100%;position: relative">
 
 
     @if(strlen($student->user->fname_en.' '.$student->user->lname_en)>20 && strlen($student->user->fname_en.' '.$student->user->lname_en)<26)
