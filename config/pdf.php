@@ -28,6 +28,20 @@ return [
             'I' => 'AnjomanBoldIt.ttf', // optional: italic font
             'BI' => 'AnjomanBoldIt.ttf', // optional: bold-italic font
 
+        ],
+        'britanic' => [
+            'R' => 'BRITANIC.TTF', // regular font
+            'B' => 'BRITANIC.TTF', // optional: bold font
+            'I' => 'BRITANIC.TTF', // optional: italic font
+            'BI' => 'BRITANIC.TTF', // optional: bold-italic font
+
+        ],
+        'LatoRegular' => [
+            'R' => 'Lato-Regular.ttf', // regular font
+            'B' => 'Lato-Regular.ttf', // optional: bold font
+            'I' => 'Lato-Regular.ttf', // optional: italic font
+            'BI' => 'Lato-Regular.ttf', // optional: bold-italic font
+
         ]// ...add as many as you want.
     ]
 ];

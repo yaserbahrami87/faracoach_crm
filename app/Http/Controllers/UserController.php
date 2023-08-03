@@ -516,6 +516,8 @@ class UserController extends BaseController
             $gettingKnow_child_list=NULL;
         }
 
+
+
         // دریافت لیست مسئولین پیگیری
         $expert_followup = user::where(function ($query) {
             $query->orwhere('type', '=', 2)

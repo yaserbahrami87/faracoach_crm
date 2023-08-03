@@ -3,40 +3,18 @@
 <head>
     <meta charset="UTF-8">
 
-    <link href="{{asset('/css/reset.css') }}" rel="stylesheet" />
-    <!--
-    <link href="//db.onlinewebfonts.com/c/8be4a2f403c2dc27187d892cca388e24?family=Britannic+Bold" rel="stylesheet" type="text/css"/>
-    -->
+    <link rel="stylesheet" type="text/css" href="{{public_path('css/reset.css')}}">
+
     <style>
-        @font-face
-        {
-            font-family: 'BRITANIC';
-            src: url("{{asset('/fonts/other/BRITANIC.TTF')}}");
-        }
-
-        @font-face {
-            font-family: 'Lato-Regular';
-            src: url("{{asset('/fonts/other/Lato-Regular.ttf')}}");
-        }
-
-        *{
-            font-family: Lato-Regular;
-        }
 
 
-
-
-        .cls
-        {
-            background-image: url({{asset('/images/blank-certificates/acsth_blank.jpg') }});
-            width: 100%;
-            height: 100vh;
-            background-size: 100% 100%;
-
+        body{
+            font-family: 'britanic';
+            position: relative;
         }
 
         .cls_pdf{
-            background-image: url({{asset('/images/blank-certificates/acsth_blank.jpg') }});
+            background-image: url({{public_path('images/blank-certificates/acsth_blank.jpg') }});
             width: 100%;
             height: 100%;
             background-size: 100% 100%;
@@ -49,19 +27,21 @@
         .h1_size
         {
             position: absolute;
-            top: 950px;
+            top: 1000px;
             left: 270px;
             font-size: 160px;
             color: #000000;
+            font-family: 'BRITANIC';
 
         }
+
 
 
 
         #number_certificates
         {
             position: absolute;
-            top: 2050px;
+            top: 2060px;
             left: 1010px;
             font-size: 35px;
             color: #38383a;
@@ -71,28 +51,29 @@
         #date_certificates
         {
             position: absolute;
-            top: 2095px;
+            top: 2105px;
             left: 870px;
             font-size: 35px;
             color: #38383a;
         }
 
+
     </style>
 </head>
-<body>
+<body class="cls_pdf container-fluid" style="background-image:url('{{public_path('images/blank-certificates/acsth_blank.jpg')}}');background-size: 100% 100%;position: relative">
 
-<div class="cls_pdf">
+
     @if(strlen($student->user->fname_en.' '.$student->user->lname_en)>20 && strlen($student->user->fname_en.' '.$student->user->lname_en)<26)
-        <p class="h1_size" style="font-size: 112px; font-family: BRITANIC">{{Str::upper($student->user->fname_en).' '.Str::upper($student->user->lname_en)}}</p>
+        <p class="h1_size" style="font-size: 112px; font-family: 'britanic';font-weight: bold">{{Str::upper($student->user->fname_en).' '.Str::upper($student->user->lname_en)}}</p>
     @elseif(strlen($student->user->fname_en.' '.$student->user->lname_en)>=26)
-        <p class="h1_size" style="font-size: 80px;font-family: BRITANIC">{{Str::upper($student->user->fname_en).' '.Str::upper($student->user->lname_en)}}</p>
+        <p class="h1_size" style="font-size: 80px;font-family: 'britanic';font-weight: bold">{{Str::upper($student->user->fname_en).' '.Str::upper($student->user->lname_en)}}</p>
     @else
-        <p class="h1_size" style="font-family: BRITANIC">{{Str::upper($student->user->fname_en).' '.Str::upper($student->user->lname_en)}}</p>
+        <p class="h1_size" style="font-family: 'britanic';font-weight: bold">{{Str::upper($student->user->fname_en).' '.Str::upper($student->user->lname_en)}}</p>
     @endif
 
     <p id="number_certificates">{{$student->code}}</p>
     <p id="date_certificates">{{$student->date_jalali}}</p>
 
-</div>
+
 </body>
 </html>

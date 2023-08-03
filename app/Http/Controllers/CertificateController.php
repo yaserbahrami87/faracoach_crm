@@ -96,8 +96,7 @@ class CertificateController extends Controller
 
     public function get_certificate()
     {
-        alert()->warning('گواهینامه در حال تغییر و بازنویسی مجدد می باشد.چندروز دیگر دوباره امتحان کنید')->persistent('بستن');
-        return back();
+
         if(Auth::user()->scholarship->confirm_exam==1 && Auth::user()->scholarship->confirm_webinar==1 )
         {
 
@@ -111,9 +110,12 @@ class CertificateController extends Controller
 
 
         Pdf::setOption(['dpi' => 300])->loadView('user.blank-certificates.icf_scholarship')->setPaper('a4', 'landscape')->save(Auth::user()->id.'.pdf');
-//            Pdf::setOption(['dpi' => 300, 'fontDir' => storage_path('/fonts'), 'font_cache' => storage_path('/fontsCache')])->loadHTML($tmp)->setPaper('a4', 'landscape')->save(Auth::user()->id . '.pdf');
-            return response()->download(public_path(Auth::user()->id.'.pdf'))
-                        ->deleteFileAfterSend(true);
+
+//            return response()->download(public_path(Auth::user()->id.'.pdf'))
+//                        ->deleteFileAfterSend(true);
+
+
+            //            Pdf::setOption(['dpi' => 300, 'fontDir' => storage_path('/fonts'), 'font_cache' => storage_path('/fontsCache')])->loadHTML($tmp)->setPaper('a4', 'landscape')->save(Auth::user()->id . '.pdf');
 //            return view('user.blank-certificates.icf_scholarship');
         }
         else
@@ -225,7 +227,7 @@ class CertificateController extends Controller
 
     public function get_certificate_acsth(student $student)
     {
-        dd($student);
+
         $date_jalali=(Verta::parse(str_replace('/','-',$student->date_gratudate).' 00:00:00')->datetime()->format('Y/n/j'));
         $student->date_jalali=$date_jalali;
         if(is_null($student->user->fname_en)||is_null($student->user->lname_en))
@@ -237,19 +239,27 @@ class CertificateController extends Controller
         ini_set('max_execution_time', 0);
 
 
-        $pdf=Pdf::setOption([
-                        'dpi' => 300,
-                        'fontDir'=>public_path('fonts/'),
-                        'defaultFont'=>'Britannic Bold'
-                        ])
-                        ->loadView('admin.blank-certificates.acsth', array('student' => $student))
-                        ->setPaper('a4', 'landscape')
-                        ->save($student->id.'.pdf');
 
-//        return response()->download(public_path($student->id.'.pdf'))
-//                                        ->deleteFileAfterSend(true);
-//        return view('admin.blank-certificates.acsth')
-//                                ->with('student',$student);
+
+        $pdf=Pdf::loadView('admin.blank-certificates.acsth', array('student' => $student),[],[
+            'format'    =>[900,655],
+
+        ]);
+
+
+
+        $fileName=time().'_.pdf';
+
+        $pdf->allow_charset_conversion=false;  // Set by default to TRUE
+
+
+        $pdf->charset_in='UTF-8';
+
+        $pdf->save($fileName);
+
+        return response()->download(public_path($fileName))
+                         ->deleteFileAfterSend(true);
+
     }
 
     public function get_fcc(student $student)

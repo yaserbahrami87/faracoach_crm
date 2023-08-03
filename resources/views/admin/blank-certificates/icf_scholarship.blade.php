@@ -41,7 +41,7 @@
     </style>
 </head>
 <body>
-<div class='cls_pdf'>
+<div class='cls_pdf'  style="background-image:url('{{public_path('images/blank-certificates/ICF_Scholarship.jpg')}}');background-size: 100% 100% ">
     @if(strlen(Auth::user()->fname_en.' '.Auth::user()->lname_en)>20 && strlen(Auth::user()->fname_en.' '.Auth::user()->lname_en)<26)
         <h1 class='tag_h1' style='font-size: 120px'>{{Auth::user()->fname_en.' '.Auth::user()->lname_en}}</h1>
     @elseif(strlen(Auth::user()->fname_en.' '.Auth::user()->lname_en)>=26)
