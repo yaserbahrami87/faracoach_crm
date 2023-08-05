@@ -361,7 +361,7 @@ class VerifyController extends BaseController
                     {
                         $message = "رمز یکبار مصرف شما در سیستم فراکوچ : " . $six_digit_random_number;
                         $this->sendSms($request['tel'], $message);
-                        $verify->notify(new EmailLoginWithCode($six_digit_random_number));
+                        //$verify->notify(new EmailLoginWithCode($six_digit_random_number));
                         return back()->with('msg', 'رمز یکبار مصرف شما به شماره ' . $request['tel'] . ' ارسال شد')
                             ->with('errorStatus', 'success')
                             ->with('status', true);
@@ -769,7 +769,7 @@ class VerifyController extends BaseController
                 ]);
             }
 
-            $user->notify(new LoginWithCode($email,$six_digit_random_number));
+            //$user->notify(new LoginWithCode($email,$six_digit_random_number));
             echo "<div class='alert alert-warning'>کد یکبار مصرف ارسال شد</div>";
         }
         else
