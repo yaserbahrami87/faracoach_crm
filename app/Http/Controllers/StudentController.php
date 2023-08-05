@@ -44,15 +44,26 @@ class StudentController extends BaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StudentRequest $request)
+    public function store(Request $request)
     {
-        $data=$request->validated();
-        $student=student::where('user_id','=',$data['user_id'])
-                        ->where('course_id','=',$data['course_id'])
+
+
+        //$data=$request->validated();
+        $this->validate($request,[
+            'course_id'         =>'required|numeric',
+            'user_id'           =>'required|numeric',
+            'date_fa'           =>'nullable|string',
+            'status'            =>'required|numeric',
+            //'code'              =>'required|unique:students,code,' . $this->id,
+            //'code'              =>['required_if:status,==,3|unique:students,code|',Rule::unique('students')->ignore($this->student)],
+            'date_gratudate'    =>'required_if:status,==,3|max:11',
+        ]);
+        $student=student::where('user_id','=',$request['user_id'])
+                        ->where('course_id','=',$request['course_id'])
                         ->first();
 
         if(is_null($student)) {
-            $status = student::create($data);
+            $status = student::create($request);
             if ($status) {
                 alert()->success('کاربر مورد نظر به لیست دانشجوها اضافه شد')->persistent('بستن');
             } else {
