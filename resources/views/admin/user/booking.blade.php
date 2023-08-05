@@ -9,6 +9,7 @@
 
             <th>تاریخ جلسه </th>
             <th>ساعت جلسه </th>
+            <th>وضعیت جلسه </th>
 
         </tr>
         </thead>
@@ -25,10 +26,12 @@
                 </td>
                 <td>{{$item->booking->start_date}}</td>
                 <td>{{$item->booking->start_time}}</td>
+                <td>{{$item->get_statusReserve()}}</td>
 
             </tr>
         @endforeach
         </tbody>
+
 
     </table>
 </div>

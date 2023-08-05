@@ -25,5 +25,39 @@ class reserve extends Model
         return $this->belongsTo('App\checkout','id','product_id');
     }
 
+    public function get_statusReserve()
+    {
+
+        switch ($this->status)
+        {
+            case '1':
+                return 'آماده رزرو';
+                break;
+            case '0':
+                return 'رزرو شد';
+                break;
+            case '3':
+                return 'برگزارشد';
+                break;
+            case '4':
+                return 'کنسل شد';
+                break;
+            case '5':
+                return  'غیبت مراجع';
+                break;
+            case '6':
+                return  'غیبت کوچ';
+                break;
+            case '41':
+                return 'کنسل مراجع';
+                break;
+            case '42':
+                return 'کنسل کوچ';
+                break;
+            default: return 'خطا';
+
+        }
+    }
+
 
 }
