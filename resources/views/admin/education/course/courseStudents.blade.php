@@ -18,6 +18,7 @@
                     <th class="text-center">تاریخ ثبت نام</th>
                     <th class="text-center">مدرک شناسایی</th>
                     <th class="text-center">مدرک</th>
+                    <th class="text-center">وضعیت</th>
                     <th class="text-center">ویرایش</th>
                     <th class="text-center">حذف</th>
                 </tr>
@@ -49,6 +50,7 @@
                     <td class="text-center">
                         {{$item->date_fa}}
                     </td>
+
                     <td class="text-center">
 
                             <form method="post" action="/admin/certificates/fcc/{{$item->id}}">
@@ -67,6 +69,10 @@
                             </form>
                         @endif
                     </td>
+                    <td>
+                        {{$item->get_status()}}
+                    </td>
+
                     <td class="text-center">
                         <a href="/admin/education/students/{{$item->id}}/edit" class="btn btn-warning" >
                             <i class="bi bi-pencil-square"></i>

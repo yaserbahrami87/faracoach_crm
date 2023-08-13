@@ -30,6 +30,7 @@
                         <option value="3">فارغ التحصیل</option>
                         <option value="4">مرخصی</option>
                         <option value="5">بلاتکلیف</option>
+                        <option value="6">اخراج</option>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary">اضافه</button>

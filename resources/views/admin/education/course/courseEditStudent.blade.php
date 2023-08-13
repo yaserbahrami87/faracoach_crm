@@ -32,6 +32,7 @@
                     </option>
                     <option value="4" @if($student->status==4) selected @endif >مرخصی</option>
                     <option value="5" @if($student->status==5) selected @endif >بلاتکلیف</option>
+                    <option value="5" @if($student->status==6) selected @endif >اخراج</option>
                 </select>
             </div>
             <div class="form-group" >
