@@ -46,6 +46,9 @@ class student extends Model
             case 5:
                 return ('بلاتکلیف');
                 break;
+            case 6:
+                return ('اخراج');
+                break;
             default: return ('خطا');
 
         }
