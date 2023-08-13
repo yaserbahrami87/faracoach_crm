@@ -58,12 +58,15 @@ class StudentController extends BaseController
             //'code'              =>['required_if:status,==,3|unique:students,code|',Rule::unique('students')->ignore($this->student)],
             'date_gratudate'    =>'required_if:status,==,3|max:11',
         ]);
+
+
+
         $student=student::where('user_id','=',$request['user_id'])
                         ->where('course_id','=',$request['course_id'])
                         ->first();
 
         if(is_null($student)) {
-            $status = student::create($request);
+            $status = student::create($request->all());
             if ($status) {
                 alert()->success('کاربر مورد نظر به لیست دانشجوها اضافه شد')->persistent('بستن');
             } else {

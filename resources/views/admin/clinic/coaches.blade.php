@@ -11,55 +11,47 @@
                     <thead>
                         <tr>
                             <th scope="col"></th>
+                            <th scope="col">عنوان درخواست</th>
                             <th scope="col">نام </th>
                             <th scope="col">نام خانوادگی</th>
+                            <th scope="col">تاریخ درخواست</th>
                             <th scope="col">وضعیت</th>
                             <th scope="col">ویرایش</th>
-                            <!--
-                            <th scope="col">حذف</th>
-                            -->
-                            <th scope="col">گزارش</th>
-                        </tr>
+
                     </thead>
                     <tbody>
 
-                    @foreach($coaches as $item)
+                    @foreach($coach_requests as $item)
+
                         <tr>
+
                             <td>
                                 <a href="/admin/user/{{$item->id_user_table}}">
                                     <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="rounded-circle"  width="50px" height="50px"/>
                                 </a>
                             </td>
                             <td>
-                                <a href="/admin/user/{{$item->id_user_table}}" class="d-block" target="_blank" >{{$item->fname}}</a>
+                                {{$item->clinic_basic_info->title}}
                             </td>
                             <td>
-                                <a href="/admin/user/{{$item->id_user_table}}" class="d-block" target="_blank" >{{$item->lname}}</a>
+                                <a href="/admin/user/{{$item->id_user_table}}" class="d-block" target="_blank" >{{$item->user->fname}}</a>
                             </td>
                             <td>
-                                <a href="/admin/user/{{$item->id_user_table}}" class="d-block" target="_blank" >{{$item->status}}</a>
+                                <a href="/admin/user/{{$item->id_user_table}}" class="d-block" target="_blank" >{{$item->user->lname}}</a>
+                            </td>
+                            <td>
+                                {{$item->create_date}}
+                            </td>
+                            <td>
+                                <a href="/admin/user/{{$item->id_user_table}}" class="d-block" target="_blank" >{{$item->status()}}</a>
                             </td>
                             <td>
                                 <a href="/admin/coach/{{$item->id}}/edit" class="btn btn-primary">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
                             </td>
-                            <!--
-                            <td>
-                                <form method="post" action="/admin/coach/{{$item->id}}" onsubmit="return confirm('آیا از حذف دوره اطمینان دارید؟(در صورت حذف تمام اطلاعات مربوط به آن از بانک حذف می شود)')">
-                                    {{ method_field('DELETE') }}
-                                    {{ csrf_field() }}
-                                    <button  class="btn btn-danger" type="submit">
-                                        <i class="bi bi-trash-fill"></i>
-                                    </button>
-                                </form>
-                            </td>
-                            -->
-                            <td>
-                                <a href="/admin/booking/{{$item->id_user_table}}/report" class="btn btn-success">
-                                    <i class="bi bi-bar-chart-line-fill"></i>
-                                </a>
-                            </td>
+
+
                         </tr>
                     @endforeach
                     </tbody>
