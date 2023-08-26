@@ -61,11 +61,16 @@
 
                     </td>
                     <td class="text-center">
-                        @if(!is_null($item->code) && !is_null($item->date_gratudate) )
+                        @if(!is_null($item->code) && !is_null($item->date_gratudate) && ($item->status==3) )
                             <form method="post" action="/admin/certificates/acsth/{{$item->id}}">
                                 {{csrf_field()}}
                                 <input type="hidden" value="{{$item->id}}" name="student" />
-                                <button class="btn btn-success"> مدرک</button>
+                                <button class="btn btn-success"> مدرک ACSTH</button>
+                            </form>
+                        @elseif(!is_null($item->code) && !is_null($item->date_gratudate) && ($item->status==31))
+                            <form method="post"  action="/admin/certificates/fc1/{{$item->id}}">
+                                {{csrf_field()}}
+                                <button class="btn btn-success" >مدرک FC1</button>
                             </form>
                         @endif
                     </td>

@@ -230,6 +230,14 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     //faktors
     Route::resource('faktor','FaktorController');
 
+    //Clinic
+    route::get('/coach_request/requests','CoachRequestController@requests');
+    route::get('/coach_request/requests/{coach_request}/pending','CoachRequestController@pending_user');
+    route::resource('coach_request','CoachRequestController');
+
+    Route::get('/clinic_basic_info/speciality/{clinic_basic_info}','ClinicBasicInfoController@ajax');
+
+
 
 
 });
@@ -295,6 +303,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     //Certificates
     Route::post('/certificates/acsth/{student}','CertificateController@get_certificate_acsth');
     Route::post('/certificates/fcc/{student}','CertificateController@get_fcc');
+    Route::post('/certificates/fc1/{student}','CertificateController@get_fc1byAdmin');
 
     //Route Scholarship Interview
     Route::resource('scholarship_interview','ScholarshipInterviewController');
@@ -536,6 +545,29 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
 
     //Tweets
     Route::resource('tweet','TweetController');
+
+
+    //clinic ajax route
+    route::get('/clinic_basic_info/create_orientations','ClinicBasicInfoController@ajax_data');
+
+    //Clinic _ admin route
+    Route::get('/clinic_basic_info/create_speciality','ClinicBasicInfoController@create_speciality');
+    Route::post('/clinic_basic_info/store_speciality','ClinicBasicInfoController@store_speciality');
+    Route::get('/clinic_basic_info/create_orientation','ClinicBasicInfoController@create_orientation');
+    Route::get('/clinic_basic_info/edit_speciality/{ClinicBasicInfo}/edit','ClinicBasicInfoController@edit_speciality');
+    Route::get('/clinic_basic_info/edit_orientation/{ClinicBasicInfo}/edit','ClinicBasicInfoController@edit_orientation');
+    Route::patch('/clinic_basic_info/update_speciality/{ClinicBasicInfo}','ClinicBasicInfoController@update_speciality');
+    Route::patch('/clinic_basic_info/update_orientation/{ClinicBasicInfo}','ClinicBasicInfoController@update_orientation');
+
+    //request coach
+    route::resource('coach_request','CoachRequestController');
+
+
+
+
+    Route::resource('clinic_basic_info','ClinicBasicInfoController');
+
+    //clinic _ User route
 
 
 

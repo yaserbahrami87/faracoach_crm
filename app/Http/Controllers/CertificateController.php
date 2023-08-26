@@ -331,6 +331,42 @@ class CertificateController extends Controller
 
     }
 
+    public function get_fc1byAdmin(student $student)
+    {
+
+        $date_jalali=(Verta::parse(str_replace('/','-',$student->date_gratudate).' 00:00:00')->datetime()->format('Y/n/j'));
+        $student->date_jalali=$date_jalali;
+        if(is_null($student->user->fname_en)||is_null($student->user->lname_en))
+        {
+            alert()->error('نام و نام خانوادگی را به انگلیسی در پروفایل وارد کنید')->persistent('بستن');
+            return redirect('/panel/profile');
+        }
+
+        ini_set('max_execution_time', 0);
+
+
+
+
+        $pdf=Pdf::loadView('admin.blank-certificates.FC1_logo', array('student' => $student),[],[
+            'format'    =>[900,655],
+
+        ]);
+
+
+
+        $fileName=time().'_.pdf';
+
+        $pdf->allow_charset_conversion=false;  // Set by default to TRUE
+
+
+        $pdf->charset_in='UTF-8';
+
+        $pdf->save($fileName);
+
+        return response()->download(public_path($fileName))
+            ->deleteFileAfterSend(true);
+    }
+
 
 
 

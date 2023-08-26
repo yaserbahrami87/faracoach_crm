@@ -38,7 +38,10 @@ class student extends Model
                 return ('انصراف');
                 break;
             case 3:
-                return ('فارغ التحصیل');
+                return ('فارغ التحصیل ACSTH');
+                break;
+            case 31:
+                return ('فارغ التحصیل FC1');
                 break;
             case 4:
                 return ('مرخصی');

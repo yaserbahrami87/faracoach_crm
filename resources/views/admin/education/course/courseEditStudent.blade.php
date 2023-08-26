@@ -4,7 +4,7 @@
     <link href="{{asset('/css/kamadatepicker.min.css')}}" rel="stylesheet" />
 @endsection
 @section('content')
-    <div class="col-6">
+    <div class="col-6 pb-5  mb-5">
         <div class="form-group">
             <label for="user">دانشجو:</label>
             <input id="user" type="text" class="form-control "  value="{{$student->user->fname.' '.$student->user->lname}}" disabled    />
@@ -27,9 +27,8 @@
                     <option disabled selected>انتخاب کنید</option>
                     <option value="1" @if($student->status==1) selected @endif>دانشجو</option>
                     <option value="2" @if($student->status==2) selected @endif >انصراف</option>
-                    <option value="3" @if($student->status==3) selected @endif  >
-                        فارغ التحصیل
-                    </option>
+                    <option value="3" @if($student->status==3) selected @endif >فارغ التحصیل ACSTH</option>
+                    <option value="31" @if($student->status==31) selected @endif >فارغ التحصیل FC1</option>
                     <option value="4" @if($student->status==4) selected @endif >مرخصی</option>
                     <option value="5" @if($student->status==5) selected @endif >بلاتکلیف</option>
                     <option value="5" @if($student->status==6) selected @endif >اخراج</option>
@@ -43,11 +42,11 @@
 
                 <div class="form-group">
                     <label for="date_gratudate">تاریخ فارغ التحصیلی</label>
-                    <input type="text" class="form-control" id="date_gratudate" name="date_gratudate"  value="{{$student->date_gratudate}}" />
+                    <input type="text" class="form-control" id="date_gratudate" name="date_gratudate"  value="{{$student->date_gratudate}}" autocomplete="off" />
                 </div>
 
             </div>
-            <button type="submit" class="btn btn-primary">ویرایش</button>
+            <button type="submit" class="btn btn-primary  mb-5">ویرایش</button>
         </form>
     </div>
 @endsection
