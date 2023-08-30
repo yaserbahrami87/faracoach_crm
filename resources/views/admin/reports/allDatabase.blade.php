@@ -229,6 +229,78 @@
             @endforeach
         </table>
     </div>
+
+
+    <div class="col-12">
+        <p>گزارش کمپین ها </p>
+    </div>
+    <div class="col-12 table-responsive mb-2">
+        <table class="table table-striped">
+            <tr>
+                <th class="text-center">نام کمپین </th>
+                <th class="text-center">  تعداد </th>
+                <th class="text-center"> دانشجو</th>
+                <th class="text-center"> پیگیری نشده</th>
+                <th class="text-center"> تور پیگیری</th>
+                <th class="text-center"> انصراف</th>
+                <th class="text-center"> در انتظار تصمیم</th>
+                <th class="text-center"> عدم پاسخگویی</th>
+                <th class="text-center"> مارکتینگ</th>
+                <th class="text-center"> جلسات</th>
+                <th class="text-center"> رویداد</th>
+                <th class="text-center"> لیست سیاه</th>
+            </tr>
+
+
+
+            @foreach($users->groupby('resource') as $item)
+
+                <tr>
+                    <td class="text-center">
+                            {{$item[0]->resource}}
+                    </td>
+
+                    <td class="text-center">
+                        {{count($item)}}
+                    </td>
+
+                    <td class="text-center">
+
+                        {{$item->where('type','=',20) ->count() }}
+                    </td>
+                    <td class="text-center">
+                        {{$item->where('type','=',1) ->count() }}
+                    </td>
+                    <td class="text-center">
+                        {{$item->where('type','=',11) ->count() }}
+                    </td>
+                    <td class="text-center">
+                        {{$item->where('type','=',12) ->count() }}
+                    </td>
+                    <td class="text-center">
+                        {{$item->where('type','=',13) ->count() }}
+                    </td>
+                    <td class="text-center">
+                        {{$item->where('type','=',14) ->count() }}
+                    </td>
+                    <td class="text-center">
+                        {{$item->wherein('type',[-1,-2,-3])->count() }}
+                    </td>
+                    <td class="text-center">
+                        {{$item->where('type','=',30)->count() }}
+                    </td>
+                    <td class="text-center">
+                        {{$item->where('type','=',40)->count() }}
+                    </td>
+                    <td class="text-center">
+                        {{$item->where('type','=',0)->count() }}
+                    </td>
+                </tr>
+            @endforeach
+        </table>
+    </div>
+
+
     <div class="col-12 border-top">
         <p>تفکیک جنسیت </p>
     </div>

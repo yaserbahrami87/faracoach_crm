@@ -1,3 +1,4 @@
+
 @extends('admin.master.index')
 
 @section('headerScript')
@@ -11,7 +12,9 @@
         {
             cursor: pointer;
         }
-    </style>
+
+
+
 @endsection
 @section('content')
     <div class="col-12">
