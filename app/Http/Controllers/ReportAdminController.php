@@ -139,6 +139,13 @@ class ReportAdminController extends BaseController
         }
 
 
+        $campaign=$users->groupby('resource');
+
+        foreach($campaign as $item)
+        {
+
+        }
+
         $v = verta();
         $ageTo20 = $users->wherebetween('datebirth', [$v->subYears(20), $v->now()]);
         $age21to30 = $users->wherebetween('datebirth', [$v->now()->subYears(30), $v->now()->subYears(21)]);
@@ -151,11 +158,14 @@ class ReportAdminController extends BaseController
         $ages = ['ageTo20' => $ageTo20->count(), 'age21to30' => $age21to30->count(), 'age31to40' => $age31to40->count(), 'age41to50' => $age41to50->count(), 'age51to60' => $age51to60->count(), 'age61to70' => $age61to70->count(), 'age71to80' => $age71to80->count()];
 
 
+
+
         return view('admin.reports.allDatabase')
             ->with('followups', $followups)
             ->with('date_jalali', $v->now())
             ->with('ages', $ages)
             ->with('date_fa', $date_fa)
+            ->with('campaign', $campaign)
             ->with('users', $users);
     }
 
