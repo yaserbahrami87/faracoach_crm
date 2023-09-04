@@ -238,7 +238,8 @@
         <table class="table table-striped">
             <tr>
                 <th class="text-center">نام کمپین </th>
-                <th class="text-center">  تعداد </th>
+                <th class="text-center">  تعداد نفر </th>
+                <th class="text-center">  تعداد پیگیری </th>
                 <th class="text-center"> دانشجو</th>
                 <th class="text-center"> پیگیری نشده</th>
                 <th class="text-center"> تور پیگیری</th>
@@ -253,16 +254,25 @@
 
 
 
-            @foreach($users->groupby('resource') as $item)
+            @foreach($campaign as $item)
 
-                <tr>
+                <tr class="text-center">
                     <td class="text-center">
+                        @if(is_null($item[0]->resource))
+                            نامشخص
+                        @else
                             {{$item[0]->resource}}
+                        @endif
+                    </td>
+                    <td>
+
+                        {{$item->count()}}
                     </td>
 
                     <td class="text-center">
-                        {{count($item)}}
+                        {{$item->count_followups}}
                     </td>
+
 
                     <td class="text-center">
 

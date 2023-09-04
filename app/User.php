@@ -283,4 +283,10 @@ class User extends Authenticatable implements MustVerifyEmail
         {
             return $this->hasMany('App\invoice');
         }
+
+        public function clinic_request()
+        {
+            return $this->hasMany('App\coach_request');
+        }
+
 }
