@@ -126,15 +126,19 @@ class ReportAdminController extends BaseController
             $followups = followup::wherebetween('date_fa', $date_fa)
                             ->get();
 
+            $campaign=User::wherebetween('created_at', $date_en)
+                            ->groupby('resource')
+                            ->get();
 
-            $followups_compaign=followup::wherebetween('date_fa', $date_fa)
-//                ->where(function())
-//                $query->with('followups')
-//                    ->whereHas('followups', function($query) use ($request)
-//                    {
-//                        $query->wherebetween('date_fa', $request->range);
-//                    });
-                ->get();
+
+//            $followups_compaign=followup::wherebetween('date_fa', $date_fa)
+////                ->where(function())
+////                $query->with('followups')
+////                    ->whereHas('followups', function($query) use ($request)
+////                    {
+////                        $query->wherebetween('date_fa', $request->range);
+////                    });
+//                ->get();
 
         } else
         {
@@ -146,9 +150,14 @@ class ReportAdminController extends BaseController
             $followups = followup::wherebetween('date_fa', [$v->now()->startMonth()->format('Y/m/d'),$v->now()->endMonth()->format('Y/m/d')])
                             ->get();
 
-            $followups_compaign=followup::wherebetween('date_fa', [$v->now()->startMonth()->format('Y/m/d'),$v->now()->endMonth()->format('Y/m/d')])
-                ->with('users')
-                ->get();
+            $campaign=User::wherebetween('created_at', $date_en)
+                            ->groupby('resource')
+                            ->get();
+
+
+//            $followups_compaign=followup::wherebetween('date_fa', [$v->now()->startMonth()->format('Y/m/d'),$v->now()->endMonth()->format('Y/m/d')])
+//                ->with('users')
+//                ->get();
 
         }
 
@@ -156,7 +165,7 @@ class ReportAdminController extends BaseController
 
 
 
-        $campaign=$users->groupby('resource');
+
         foreach ($campaign as $item)
         {
             $item->count_followups=0;
