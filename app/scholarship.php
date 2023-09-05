@@ -29,6 +29,7 @@ class scholarship extends Model
         return $this->hasOne('App\checkout','authority','financial');
     }
 
+
     public function get_score($status=true)
     {
         if($status)

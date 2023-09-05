@@ -12,7 +12,15 @@
         {
             font-size: 14px;
         }
+
+        .trumbowyg-editor
+        {
+            background-color: white;
+        }
     </style>
+
+
+    <link href="/trumbowyg-2.25.1/dist/ui/trumbowyg.min.css" rel="stylesheet" />
 @endsection
 @section('content')
 
@@ -33,14 +41,15 @@
             <li class="nav-item" role="presentation">
                 <a class="nav-link" id="pills-contacts-tab" data-toggle="pill" href="#pills-contacts" role="tab" aria-controls="pills-contacts" aria-selected="false">اطلاعات تماس</a>
             </li>
-            <li class="nav-item" role="presentation">
-                <a class="nav-link" id="pills-introduction-tab" data-toggle="pill" href="#pills-introduction" role="tab" aria-controls="pills-introduction" aria-selected="false">رزومه و سوابق</a>
-            </li>
+
             <li class="nav-item" role="presentation">
                 <a class="nav-link" id="pills-contract-tab" data-toggle="pill" href="#pills-contract" role="tab" aria-controls="pills-contract" aria-selected="false">اطلاعات قرارداد</a>
             </li>
             <li class="nav-item" role="presentation">
                 <a class="nav-link" id="pills-collabration-tab" data-toggle="pill" href="#pills-collabration" role="tab" aria-controls="pills-collabration" aria-selected="false">اطلاعات همکاری</a>
+            </li>
+            <li class="nav-item" role="conversation">
+                <a class="nav-link" id="pills-conversation-tab" data-toggle="pill" href="#pills-conversation" role="tab" aria-controls="pills-conversation" aria-selected="false">مکاتبات  <span class="badge badge-warning">{{$messages->count()}}</span> </a>
             </li>
         </ul>
         <div class="tab-content" id="pills-tabContent">
@@ -220,8 +229,49 @@
                     <div class="card card-user " id="infogettingKnow">
                         <div class="card-body bg-secondary-light">
                             <div class="row">
-                                <div class="col-md-6 px-1">
+
+                                <!--
+
+                                <div class="col-12 mb-2">
+                                    <label for="education_background">سوابق تحصیلی <span class="text-danger">*</span></label>
+                                    <div class="form-group">
+                                        <textarea class="form-control textarea  bg-light" name="education_background" id="education_background" rows="3"></textarea>
+                                    </div>
                                 </div>
+
+                                <div class="col-12 mb-2">
+                                    <label for="experience">سوابق شغلی <span class="text-danger">*</span></label>
+                                    <div class="form-group">
+                                        <textarea class="form-control textarea  bg-light" name="experience" id="experience" rows="3"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 mb-2">
+                                    <label for="skills">مهارت ها <span class="text-danger">*</span></label>
+
+                                    <div class="form-group">
+                                        <textarea class="form-control textarea  bg-light" name="skills" id="skills" rows="3"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 mb-2">
+                                    <label for="certificates">گواهینامه ها <span class="text-danger">*</span></label>
+                                    <div class="form-group">
+                                        <textarea class="form-control textarea  bg-light" name="certificates" id="certificates" rows="3"></textarea>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-12 mb-2">
+                                    <label for="researches">گواهینامه ها <span class="text-danger">*</span></label>
+                                    <div class="form-group">
+                                        <textarea class="form-control textarea  bg-light" name="researches" id="researches" rows="3"></textarea>
+                                    </div>
+                                </div>
+                                -->
+
+
+
                             </div>
                         </div>
                     </div>
@@ -360,46 +410,73 @@
             </div>
             <div class="tab-pane fade" id="pills-collabration" role="tabpanel" aria-labelledby="pills-collabration-tab">
 
-                    <form method="post" action="/panel/profile/update/{{Auth::user()->id}}" enctype="multipart/form-data">
+                    <form method="post" action="/panel/coach_request" >
                         {{csrf_field()}}
-                        {{method_field('PATCH')}}
                         <div class="card card-user " id="collabration">
                             <div class="card-body bg-secondary-light">
                                 <div class="row">
                                     <div class="col-md-12 px-1">
                                         <div class="form-group">
                                             <label for="service" class="d-block">انتخاب خدمت :</label>
-                                            @foreach($services as $services)
-                                                <div class="form-check form-check-inline">
-                                                        <input class="form-check-input services" type="checkbox" id="inlineCheckbox{{$services->id}}" value="{{$services->id}}">
-                                                        <label class="form-check-label" for="inlineCheckbox{{$services->id}}">{{$services->title}}</label>
-                                                </div>
-                                            @endforeach
+                                            <select class="custom-select  services"  name="services" id="services">
+                                                <option selected disabled>خدمت را انتخاب کنید</option>
+                                                @foreach($services as $service)
+                                                    <option value="{{$service->id}}" >{{$service->title}}</option>
+                                                @endforeach
+                                            </select>
+
                                             <label for="service" class="d-block">انتخاب تخصص :</label>
-                                            @foreach($speciality as $speciality_item)
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox{{$speciality_item->id}}" value="{{$speciality_item->id}}">
-                                                    <label class="form-check-label" for="inlineCheckbox{{$speciality_item->id}}">{{$speciality_item->title}}</label>
-                                                </div>
-                                            @endforeach
+                                            <div id="speciality"></div>
+
                                             <label for="service" class="d-block">انتخاب گرایش :</label>
-                                            @foreach($orientation as $orientation_item)
-                                                <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox{{$orientation_item->id}}" value="{{$orientation_item->id}}">
-                                                    <label class="form-check-label" for="inlineCheckbox{{$orientation_item->id}}">{{$orientation_item->title}}</label>
-                                                </div>
-                                            @endforeach
+                                            <div id="orientation"></div>
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <button class="btn btn-warning " type="button">+</button>
                         </div>
-                        <button type="submit" class="btn btn-success mb-5">ذخیره</button>
 
+                        <button type="submit" class="btn btn-success mb-5">ذخیره</button>
                     </form>
 
             </div>
+
+            <div class="tab-pane fade" id="pills-conversation" role="tabpanel" aria-labelledby="pills-conversation-tab">
+                <h3>سابقه پیام ها</h3>
+                @foreach($messages as $item)
+                    <div class="form-group shadow-lg @if($item->user_id_send==Auth::user()->id) bg-success @else bg-warning @endif">
+                        @if($item->user_id_send==Auth::user()->id)
+                            <label for="comment"> پیام ارسال شده:</label>
+                        @else
+                            <label for="comment"> پیام دریافت شده:</label>
+                        @endif
+                        <textarea class="form-control" id="comment" name="comment" rows="3" disabled readonly>{{$item->comment }}</textarea>
+                        <small class="font-weight-bold float-left">{{$item->time_fa.' '.$item->date_fa}}</small>
+                    </div>
+                @endforeach
+
+                <form method="post" action="/panel/message/send">
+                    {{csrf_field()}}
+                    <input type="hidden" value="coach" name="type">
+                    <input type="hidden" value="{{Auth::user()->id}}" name="user_id_recieve">
+                    <div class="form-group">
+                        <label for="comment">ارسال پیام:<span class="text-danger">*</span></label>
+                        <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="col-4 mx-auto btn btn-primary" >ارسال پیام</button>
+                </form>
+            </div>
+
+
+
         </div>
+
+
+
+
+
     </div>
 @endsection
 
@@ -408,33 +485,12 @@
 
 @section('footerScript')
 
-    <script>
-        $(".services").click(function()
-        {
-            if($(this).prop('checked'))
-            {
-                console.log( $(this).val());
-            }
-
-            // var loading='<div class="col-12 text-center"><div class="spinner-border text-primary text-center" role="status"><span class="sr-only">Loading...</span></div></div>';
-            //
-            // var content=$(this).val();
-            // $.ajax({
-            //     type:'GET',
-            //     url:"/showListChildGettingKnow/"+content,
-            //     success:function(data)
-            //     {
-            //         $("#gettingknow2").css('display','flex');
-            //         $("#gettingknow").html(data);
-            //     }
-            // });
-        })
-    </script>
-
     <!--  DATE SHAMSI PICKER  --->
     <script src="{{asset('js/kamadatepicker.min.js')}}"></script>
     <script src="{{asset('js/kamadatepicker.holidays.js')}}"></script>
     <script>
+
+
         kamaDatepicker('datebirth',
             {
                 markHolidays:true,
@@ -445,119 +501,82 @@
                 previousButtonIcon: "fa fa-arrow-circle-left"
             });
 
-        var customOptions={
-            gotoToday: true,
-            markHolidays:true,
-            markToday:true,
-            twodigit:true,
-            closeAfterSelect:true,
-            highlightSelectedDay:true,
-            nextButtonIcon: "fa fa-arrow-circle-right",
-            previousButtonIcon: "fa fa-arrow-circle-left",
-            sync:true,
-        }
-        kamaDatepicker('dateFollow',customOptions);
+    $('#services').change(function()
+    {
+        $('#orientation').html("");
 
-        kamaDatepicker('nextfollowup_date_fa',
-            {
-                markHolidays:true,
-                markToday:true,
-                twodigit:true,
-                closeAfterSelect:true,
-                nextButtonIcon: "fa fa-arrow-circle-right",
-                previousButtonIcon: "fa fa-arrow-circle-left"
-            });
+       $.ajax({
+           url:'/panel/clinic_basic_info/speciality/'+$(this).val(),
+           type:'get',
+           success(data)
+           {
+               //errorsHtml='<option disabled selected>انتخاب کنید</option>';
+               errorsHtml='';
+               $.each( data, function( key, value ) {
+                   errorsHtml += '<div class="form-check form-check-inline"> <input class="form-check-input speciality" type="checkbox" value="'+value.id+'" id="speciality'+value.id+'" onclick="speciality_change()"><label class="form-check-label" for="speciality'+value.id+'">'+value.title+'</label></div>'
 
-        kamaDatepicker('start',
-            {
-                gotoToday: true,
-                markHolidays:true,
-                markToday:true,
-                twodigit:true,
-                closeAfterSelect:true,
-                highlightSelectedDay:true,
-                nextButtonIcon: "fa fa-arrow-circle-right",
-                previousButtonIcon: "fa fa-arrow-circle-left",
-                sync:true,
-            });
-        kamaDatepicker('end',
-            {
-                gotoToday: true,
-                markHolidays:true,
-                markToday:true,
-                twodigit:true,
-                closeAfterSelect:true,
-                highlightSelectedDay:true,
-                nextButtonIcon: "fa fa-arrow-circle-right",
-                previousButtonIcon: "fa fa-arrow-circle-left",
-                sync:true,
-            });
-        kamaDatepicker('exam',
-            {
-                gotoToday: true,
-                markHolidays:true,
-                markToday:true,
-                twodigit:true,
-                closeAfterSelect:true,
-                highlightSelectedDay:true,
-                nextButtonIcon: "fa fa-arrow-circle-right",
-                previousButtonIcon: "fa fa-arrow-circle-left",
-                sync:true,
-            });
+               });
+               $( '#speciality' ).html( errorsHtml );
 
-    </script>
+           }
+       })
+    });
 
-    <script>
-        var input = document.querySelector("#tel");
-        var intl=intlTelInput(input,{
-            formatOnDisplay:false,
-            separateDialCode:true,
-            autoPlaceholder:'off',
-            preferredCountries:["ir", "gb"]
-        });
-
-        input.addEventListener("countrychange", function() {
-            document.querySelector("#tel_org").value=intl.getNumber();
-        });
-
-        $('#tel').change(function()
+        function speciality_change()
         {
-            document.querySelector("#tel_org").value=intl.getNumber();
-        });
-
-        // تلفن معرف
-        var input = document.querySelector("#introduced_profile");
-
-        var intl=intlTelInput(input,{
-            formatOnDisplay:false,
-            separateDialCode:true,
-            preferredCountries:["ir", "gb"]
-        });
-
-        input.addEventListener("countrychange", function() {
-            document.querySelector("#introduced").value=intl.getNumber();
-        });
-        $('#introduced_profile').change(function()
-        {
-            document.querySelector("#introduced").value=intl.getNumber();
-            var loading='<div class="col-12 text-center"><div class="spinner-border text-primary text-center" role="status"><span class="sr-only">Loading...</span></div></div>';
-            $("#feedback_introduced").html(loading);
-            var data=$("#introduced").val();
-            if(data.length>0)
+            if($('.speciality:checked').length>0)
             {
-                $.ajax({
-                    type:'GET',
-                    url:"/check/user/"+data,
-                    success:function(data)
+                errorsHtml='';
+                $('.speciality').each(function (){
+                    if($(this).is(':checked'))
                     {
-                        $("#feedback_introduced").html(data);
+                        $.ajax({
+                            url:'/panel/clinic_basic_info/speciality/'+$(this).val(),
+                            type:'get',
+                            success(data)
+                            {
+
+                                $.each( data, function( key, value ) {
+                                    errorsHtml += '<div class="form-check form-check-inline"> <input class="form-check-input" type="checkbox" value="'+value.id+'" id="orientation'+value.id+'" name="fk_orientations[]"><label class="form-check-label" for="orientation'+value.id+'">'+value.title+'</label></div>'
+
+                                });
+
+                                $( '#orientation' ).html(errorsHtml);
+
+                            }
+                        })
                     }
                 });
             }
             else
             {
-                data="<input type='hidden' value='' name='introduced'/>";
-                $("#feedback_introduced").html(data);
+                $( '#orientation' ).html('');
             }
-        });
+
+
+            // console.log($('.speciality').val());
+
+        }
+
     </script>
+
+    <script src="/trumbowyg-2.25.1/dist/trumbowyg.min.js"></script>
+    <script src="/trumbowyg-2.25.1/dist/langs/fa.js"></script>
+    <script>
+        $('.textarea').trumbowyg({
+            lang:'fa',
+            btns: [
+                ['undo', 'redo'], // Only supported in Blink browsers
+                ['formatting'],
+                ['strong', 'em', 'del'],
+                ['superscript', 'subscript'],
+                //['link'],
+                ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+                ['unorderedList', 'orderedList'],
+                ['horizontalRule'],
+                ['removeformat'],
+                ['fullscreen']
+            ]
+        })
+    </script>
+@endsection

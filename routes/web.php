@@ -684,6 +684,7 @@ Route::resource('reserve','ReserveController');
 
 //coaches
 Route::get('/coaches/all','CoachController@viewAllCoaches');
+Route::get('/coaches/category/{clinic_basic_info}','ClinicBasicInfoController@category');
 Route::get('/coach/{coach}','CoachController@show');
 
 //Cart
@@ -711,6 +712,8 @@ Route::resource('tweets','TweetController');
 Route::get('/courses','CourseController@showCourses');
 Route::get('/courses/{course}','CourseController@show');
 
+//clinic
+Route::resource('/clinic','ClinicController');
 
 
 //LiKE

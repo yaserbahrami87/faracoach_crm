@@ -465,10 +465,11 @@ class MessageController extends BaseController
 
     public function sendMessage(Request $request)
     {
+
         $this->validate($request,[
             'subject'   =>'nullable|string',
             'comment'   =>'required|string',
-            'attach'    =>'nullable|mimes:jpeg,jpg,pdf|max:600',
+            'attach'    =>'nullable|mimes:jpeg,jpg,pdf|max:1024',
         ]);
 
         $status=message::create($request->all()+

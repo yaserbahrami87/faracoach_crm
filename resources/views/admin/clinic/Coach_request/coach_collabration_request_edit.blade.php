@@ -60,55 +60,56 @@
                     <div class="card card-user">
                         <div class="card-body bg-secondary-light" id="infoProfile">
                             <div class="row">
+
                                 <div class="col-md-6 px-1">
                                     <div class="form-group">
                                         <label>نام<span class="text-danger font-weight-bold">*</span></label>
-                                        <input type="text" class="form-control @if(strlen(Auth::user()->fname)<>0) is-valid @endif" placeholder="نام را وارد کنید" @if(old('fname')) value='{{old('fname')}}' @else value="{{old('fname',Auth::user()->fname) }}" @endif name="fname"  autocomplete="autocomplete"  />
+                                        <input type="text" class="form-control @if(strlen($coach_request->user->fname)<>0) is-valid @endif" placeholder="نام را وارد کنید" @if(old('fname')) value='{{old('fname')}}' @else value="{{old('fname',$coach_request->user->fname) }}" @endif name="fname"  autocomplete="autocomplete"  />
                                     </div>
                                 </div>
                                 <div class="col-md-6 px-1">
                                     <div class="form-group">
                                         <label>نام خانوادگی<span class="text-danger font-weight-bold">*</span></label>
-                                        <input type="text" class="form-control @if(strlen(Auth::user()->lname)<>0) is-valid @endif" placeholder="نام خانوادگی را وارد کنید" @if(old('lname')) value='{{old('lname')}}' @else value="{{old('lname',Auth::user()->lname)}}" @endif name="lname"   autocomplete="autocomplete" />
+                                        <input type="text" class="form-control @if(strlen($coach_request->user->lname)<>0) is-valid @endif" placeholder="نام خانوادگی را وارد کنید" @if(old('lname')) value='{{old('lname')}}' @else value="{{old('lname',$coach_request->user->lname)}}" @endif name="lname"   autocomplete="autocomplete" />
                                     </div>
                                 </div>
 
                                 <div class="col-md-6 px-1">
                                     <div class="form-group">
                                         <label>نام انگلیسی<span class="text-danger font-weight-bold">*</span></label>
-                                        <input type="text" class="form-control @if(strlen(Auth::user()->fname_en)<>0) is-valid @endif" placeholder="نام انگلیسی را وارد کنید" @if(old('fname_en')) value='{{old('fname_en')}}' @else value="{{old('fname_en',Auth::user()->fname_en) }}" @endif name="fname_en"  autocomplete="autocomplete" @if(strlen(Auth::user()->fname_en)<>0) disabled @endif />
+                                        <input type="text" class="form-control @if(strlen($coach_request->user->fname_en)<>0) is-valid @endif" placeholder="نام انگلیسی را وارد کنید" @if(old('fname_en')) value='{{old('fname_en')}}' @else value="{{old('fname_en',$coach_request->user->fname_en) }}" @endif name="fname_en"  autocomplete="autocomplete" @if(strlen($coach_request->user->fname_en)<>0) disabled @endif />
                                     </div>
                                 </div>
                                 <div class="col-md-6 px-1">
                                     <div class="form-group">
                                         <label>نام خانوادگی انگلیسی<span class="text-danger font-weight-bold">*</span></label>
-                                        <input type="text" class="form-control @if(strlen(Auth::user()->lname_en)<>0) is-valid @endif" placeholder="نام خانوادگی انگلیسی را وارد کنید" @if(old('lname_en')) value='{{old('lname_en')}}' @else value="{{old('lname_en',Auth::user()->lname_en)}}" @endif name="lname_en"   autocomplete="autocomplete" @if(strlen(Auth::user()->lname_en)<>0) disabled @endif />
+                                        <input type="text" class="form-control @if(strlen($coach_request->user->lname_en)<>0) is-valid @endif" placeholder="نام خانوادگی انگلیسی را وارد کنید" @if(old('lname_en')) value='{{old('lname_en')}}' @else value="{{old('lname_en',$coach_request->user->lname_en)}}" @endif name="lname_en"   autocomplete="autocomplete" @if(strlen($coach_request->user->lname_en)<>0) disabled @endif />
                                     </div>
                                 </div>
 
                                 <div class="col-md-6 px-1">
                                     <div class="form-group">
                                         <label for="codemelli">کد ملی</label>
-                                        <input type="text" class="form-control  @if(strlen(Auth::user()->codemelli)<>0) is-valid @endif" placeholder="کد ملی را وارد کنید" @if(strlen(Auth::user()->codemelli)>0) value="{{old('codemelli',Auth::user()->codemelli)}}" disabled @endif id="codemelli" name="codemelli"  autocomplete="off" />
+                                        <input type="text" class="form-control  @if(strlen($coach_request->user->codemelli)<>0) is-valid @endif" placeholder="کد ملی را وارد کنید" @if(strlen($coach_request->user->codemelli)>0) value="{{old('codemelli',$coach_request->user->codemelli)}}" disabled @endif id="codemelli" name="codemelli"  autocomplete="off" />
                                     </div>
                                 </div>
                                 <div class="col-md-6 px-1">
                                     <div class="form-group">
                                         <label>شماره شناسنامه</label>
-                                        <input type="text" class="form-control  @if(strlen(Auth::user()->shenasname)<>0) is-valid @endif" placeholder="شماره شناسنامه را وارد کنید" value='{{old('shenasname',Auth::user()->shenasname)}}'  name="shenasname"  autocomplete="off" />
+                                        <input type="text" class="form-control  @if(strlen($coach_request->user->shenasname)<>0) is-valid @endif" placeholder="شماره شناسنامه را وارد کنید" value='{{old('shenasname',$coach_request->user->shenasname)}}'  name="shenasname"  autocomplete="off" />
                                     </div>
                                 </div>
                                 <div class="col-md-6 px-1">
                                     <div class="form-group">
                                         <label>تاریخ تولد</label>
-                                        <input type="text" class="form-control @if(strlen(Auth::user()->datebirth)<>0) is-valid @endif" placeholder="تاریخ تولد را وارد کنید"  value='{{old('datebirth',Auth::user()->datebirth)}}' name="datebirth" id="datebirth" autocomplete="off" />
+                                        <input type="text" class="form-control @if(strlen($coach_request->user->datebirth)<>0) is-valid @endif" placeholder="تاریخ تولد را وارد کنید"  value='{{old('datebirth',$coach_request->user->datebirth)}}' name="datebirth" id="datebirth" autocomplete="off" />
                                     </div>
                                 </div>
                                 <div class="col-md-6 px-1">
                                     <div class="form-group">
                                         <label>عکس پروفایل</label>
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input @if(is_null(Auth::user()->getOriginal('personal_image'))) is-valid @endif" id="inputpersonal_image" aria-describedby="inputpersonal_image" name="personal_image"/>
+                                            <input type="file" class="custom-file-input @if(is_null($coach_request->user->getOriginal('personal_image'))) is-valid @endif" id="inputpersonal_image" aria-describedby="inputpersonal_image" name="personal_image"/>
                                             <label class="custom-file-label" for="inputpersonal_image">Choose file</label>
                                         </div>
                                         <small class="text-muted">فایل های مجاز: JPG و PNG و حداکثر اندازه مجاز: 600KB</small>
@@ -125,7 +126,7 @@
                                             </svg>
                                         </label>
 
-                                        <input type="text" class="form-control @if(strlen(Auth::user()->username)<>0) is-valid @endif" placeholder="نام کاربری خود را وارد کنید" @if(old('username')) value='{{old('username')}}' @else value="{{Auth::user()->username}}" @endif name="username" @if(strlen(Auth::user()->username)>0) disabled @endif/>
+                                        <input type="text" class="form-control @if(strlen($coach_request->user->username)<>0) is-valid @endif" placeholder="نام کاربری خود را وارد کنید" @if(old('username')) value='{{old('username')}}' @else value="{{$coach_request->user->username}}" @endif name="username" @if(strlen($coach_request->user->username)>0) disabled @endif/>
 
 
                                     </div>
@@ -133,7 +134,7 @@
                                 <div class="col-md-12 px-1">
                                     <div class="form-group">
                                         <label>درباره من</label>
-                                        <textarea class="form-control @if(strlen(Auth::user()->aboutme)<>0) is-valid @endif" id="aboutme" name="aboutme" rows="3">@if(old('aboutme')) {{old('aboutme')}} @else {{Auth::user()->aboutme}} @endif</textarea>
+                                        <textarea class="form-control @if(strlen($coach_request->user->aboutme)<>0) is-valid @endif" id="aboutme" name="aboutme" rows="3">@if(old('aboutme')) {{old('aboutme')}} @else {{$coach_request->user->aboutme}} @endif</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -145,7 +146,7 @@
                 </form>
             </div>
             <div class="tab-pane fade" id="pills-contacts" role="tabpanel" aria-labelledby="pills-contacts-tab">
-                <form method="post" action="/panel/profile/update/{{Auth::user()->id}}" enctype="multipart/form-data">
+                <form method="post" action="/panel/profile/update/{{$coach_request->user->id}}" enctype="multipart/form-data">
                     {{csrf_field()}}
                     {{method_field('PATCH')}}
                     <div class="card card-user">
@@ -159,24 +160,24 @@
                                 <div class="col-md-6 px-1">
                                     <div class="form-group">
                                         <label>تلفن تماس</label>
-                                        <input type="hidden" id="tel_org" value="{{old('tel',Auth::user()->tel)}}" name="tel"/>
-                                        <input type="tel" dir="ltr" class="form-control @if(strlen(Auth::user()->tel)==0) is-invalid  @else is-valid  @endif" placeholder="تلفن تماس را وارد کنید" value='{{old('tel',Auth::user()->tel)}}'  id="tel"  @if(strlen(Auth::user()->tel)>0 ) disabled  @endif  />
+                                        <input type="hidden" id="tel_org" value="{{old('tel',$coach_request->user->tel)}}" name="tel"/>
+                                        <input type="tel" dir="ltr" class="form-control @if(strlen($coach_request->user->tel)==0) is-invalid  @else is-valid  @endif" placeholder="تلفن تماس را وارد کنید" value='{{old('tel',$coach_request->user->tel)}}'  id="tel"  @if(strlen($coach_request->user->tel)>0 ) disabled  @endif  />
                                     </div>
                                 </div>
                                 <div class="col-md-6 pr-1">
                                     <div class="form-group">
                                         <label for="email">پست الکترونیکی</label>
-                                        <input type="email" class="form-control @if(strlen(Auth::user()->email)<>0) is-valid @endif" placeholder="پست الکترونیکی را وارد کنید" @if(strlen(Auth::user()->email)>0) value="{{Auth::user()->email}}" disabled @endif name="email"  id="email"  />
+                                        <input type="email" class="form-control @if(strlen($coach_request->user->email)<>0) is-valid @endif" placeholder="پست الکترونیکی را وارد کنید" @if(strlen($coach_request->user->email)>0) value="{{$coach_request->user->email}}" disabled @endif name="email"  id="email"  />
                                     </div>
                                 </div>
                                 <div class="col-md-6 pl-1">
                                     <div class="form-group">
 
                                         <label>استان</label>
-                                        <select class="custom-select @if(strlen(Auth::user()->state)<>0) is-valid @endif"  name="state" id="state">
+                                        <select class="custom-select @if(strlen($coach_request->user->state)<>0) is-valid @endif"  name="state" id="state">
                                             <option selected disabled>استان را انتخاب کنید</option>
                                             @foreach ($states as $item)
-                                                <option value="{{$item->id}}" @if($item->id==Auth::user()->state) selected @endif>{{$item->name}}</option>
+                                                <option value="{{$item->id}}" @if($item->id==$coach_request->user->state) selected @endif>{{$item->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -184,9 +185,9 @@
                                 <div class="col-md-6 px-1">
                                     <div class="form-group">
                                         <label>شهر</label>
-                                        <select class="custom-select @if(strlen(Auth::user()->city)<>0) is-valid @endif" name="city" id="city">
+                                        <select class="custom-select @if(strlen($coach_request->user->city)<>0) is-valid @endif" name="city" id="city">
                                             @foreach($cities as $city)
-                                                 <option value="{{Auth::user()->city}}" @if (Auth::user()->city==$city->id) selected="selected" @endif> {{$city->name}}  </option>
+                                                 <option value="{{$coach_request->user->city}}" @if ($coach_request->user->city==$city->id) selected="selected" @endif> {{$city->name}}  </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -195,25 +196,25 @@
                                 <div class="col-md-12 px-1">
                                     <div class="form-group">
                                         <label>آدرس</label>
-                                        <input type="text" class="form-control @if(strlen(Auth::user()->address)<>0) is-valid  @endif" placeholder="آدرس را وارد کنید"  @if(old('address')) value='{{old('address')}}' @else value="{{Auth::user()->address}}" @endif name="address"  lang="fa" />
+                                        <input type="text" class="form-control @if(strlen($coach_request->user->address)<>0) is-valid  @endif" placeholder="آدرس را وارد کنید"  @if(old('address')) value='{{old('address')}}' @else value="{{$coach_request->user->address}}" @endif name="address"  lang="fa" />
                                     </div>
                                 </div>
                                 <div class="col-md-4 px-1">
                                     <div class="form-group">
                                         <label>اینستاگرام</label>
-                                        <input type="text" class="form-control @if(strlen(Auth::user()->instagram)<>0) is-valid  @endif" placeholder="صفحه اینستاگرام خود را وارد کنید" @if(old('instagram')) value='{{old('instagram')}}' @else value="{{Auth::user()->instagram}}" @endif name="instagram"  />
+                                        <input type="text" class="form-control @if(strlen($coach_request->user->instagram)<>0) is-valid  @endif" placeholder="صفحه اینستاگرام خود را وارد کنید" @if(old('instagram')) value='{{old('instagram')}}' @else value="{{$coach_request->user->instagram}}" @endif name="instagram"  />
                                     </div>
                                 </div>
                                 <div class="col-md-4 px-1">
                                     <div class="form-group">
                                         <label>تلگرام</label>
-                                        <input type="text" class="form-control @if(strlen(Auth::user()->telegram)<>0) is-valid  @endif" placeholder="آیدی تلگرام خود را وارد کنید" @if(old('telegram')) value='{{old('telegram')}}' @else value="{{Auth::user()->telegram}}" @endif name="telegram"  />
+                                        <input type="text" class="form-control @if(strlen($coach_request->user->telegram)<>0) is-valid  @endif" placeholder="آیدی تلگرام خود را وارد کنید" @if(old('telegram')) value='{{old('telegram')}}' @else value="{{$coach_request->user->telegram}}" @endif name="telegram"  />
                                     </div>
                                 </div>
                                 <div class="col-md-4 px-1">
                                     <div class="form-group">
                                         <label>لینکدین</label>
-                                        <input type="text" class="form-control @if(strlen(Auth::user()->linkedin)<>0) is-valid  @endif" placeholder="آیدی لینکدین خود را وارد کنید" @if(old('linkedin')) value='{{old('linkedin')}}' @else value="{{Auth::user()->linkedin}}" @endif name="linkedin"  />
+                                        <input type="text" class="form-control @if(strlen($coach_request->user->linkedin)<>0) is-valid  @endif" placeholder="آیدی لینکدین خود را وارد کنید" @if(old('linkedin')) value='{{old('linkedin')}}' @else value="{{$coach_request->user->linkedin}}" @endif name="linkedin"  />
                                     </div>
                                 </div>
                             </div>
@@ -223,7 +224,7 @@
                 </form>
             </div>
             <div class="tab-pane fade" id="pills-introduction" role="tabpanel" aria-labelledby="pills-introduction-tab">
-                <form method="post" action="/panel/profile/update/{{Auth::user()->id}}" enctype="multipart/form-data">
+                <form method="post" action="/panel/profile/update/{{$coach_request->user->id}}" enctype="multipart/form-data">
                     {{csrf_field()}}
                     {{method_field('PATCH')}}
                     <div class="card card-user " id="infogettingKnow">
@@ -280,7 +281,7 @@
                 </form>
             </div>
             <div class="tab-pane fade" id="pills-contract" role="tabpanel" aria-labelledby="pills-contract-tab">
-                <form method="post" action="/panel/profile/update/{{Auth::user()->id}}" enctype="multipart/form-data">
+                <form method="post" action="/panel/profile/update/{{$coach_request->user->id}}" enctype="multipart/form-data">
                     {{csrf_field()}}
                     {{method_field('PATCH')}}
                     <div class="card card-user">
@@ -294,17 +295,17 @@
                                 <div class="col-md-4 pl-1">
                                     <div class="form-group">
                                         <label>نام پدر</label>
-                                        <input type="text" class="form-control @if(strlen(Auth::user()->father)<>0) is-valid  @endif" placeholder=" نام پدر را وارد کنید" @if(old('father')) value='{{old('father')}}' @else value="{{Auth::user()->father}}" @endif name="father"  lang="fa" />
+                                        <input type="text" class="form-control @if(strlen($coach_request->user->father)<>0) is-valid  @endif" placeholder=" نام پدر را وارد کنید" @if(old('father')) value='{{old('father')}}' @else value="{{$coach_request->user->father}}" @endif name="father"  lang="fa" />
                                     </div>
                                 </div>
                                 <div class="col-md-4 px-1">
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect1">جنسیت</label>
                                         <div class="form-group">
-                                            <select class="form-control p-0 @if(strlen(Auth::user()->sex)<>0) is-valid  @endif" id="exampleFormControlSelect1" name="sex" >
+                                            <select class="form-control p-0 @if(strlen($coach_request->user->sex)<>0) is-valid  @endif" id="exampleFormControlSelect1" name="sex" >
                                                 <option selected disabled>انتخاب کنید</option>
-                                                <option value="0"  {{ Auth::user()->sex =="0" ? 'selected='.'"'.'selected'.'"' : '' }}>زن</option>
-                                                <option value="1" {{ Auth::user()->sex =="1" ? 'selected='.'"'.'selected'.'"' : '' }}>مرد</option>
+                                                <option value="0"  {{ $coach_request->user->sex =="0" ? 'selected='.'"'.'selected'.'"' : '' }}>زن</option>
+                                                <option value="1" {{ $coach_request->user->sex =="1" ? 'selected='.'"'.'selected'.'"' : '' }}>مرد</option>
                                             </select>
                                         </div>
                                     </div>
@@ -313,10 +314,10 @@
                                     <div class="form-group">
                                         <label>تاهل</label>
                                         <div class="form-group">
-                                            <select class="form-control p-0 @if(strlen(Auth::user()->married)<>0) is-valid  @endif" id="exampleFormControlSelect1" name="married" >
+                                            <select class="form-control p-0 @if(strlen($coach_request->user->married)<>0) is-valid  @endif" id="exampleFormControlSelect1" name="married" >
                                                 <option selected disabled>انتخاب کنید</option>
-                                                <option value="0" {{ Auth::user()->married =="0" ? 'selected='.'"'.'selected'.'"' : '' }}>مجرد</option>
-                                                <option value="1" {{ Auth::user()->married =="1" ? 'selected='.'"'.'selected'.'"' : '' }}>متاهل</option>
+                                                <option value="0" {{ $coach_request->user->married =="0" ? 'selected='.'"'.'selected'.'"' : '' }}>مجرد</option>
+                                                <option value="1" {{ $coach_request->user->married =="1" ? 'selected='.'"'.'selected'.'"' : '' }}>متاهل</option>
                                             </select>
                                         </div>
                                     </div>
@@ -326,20 +327,20 @@
                                 <div class="col-md-4 pl-1">
                                     <div class="form-group">
                                         <label>شهر تولد</label>
-                                        <input type="text" class="form-control @if(strlen(Auth::user()->born)<>0) is-valid  @endif" placeholder="شهر تولد را وارد کنید" @if(old('born')) value='{{old('born')}}' @else value="{{Auth::user()->born}}" @endif name="born"   lang="fa"/>
+                                        <input type="text" class="form-control @if(strlen($coach_request->user->born)<>0) is-valid  @endif" placeholder="شهر تولد را وارد کنید" @if(old('born')) value='{{old('born')}}' @else value="{{$coach_request->user->born}}" @endif name="born"   lang="fa"/>
                                     </div>
                                 </div>
                                 <div class="col-md-4 px-1">
                                     <div class="form-group">
                                         <label>تحصیلات</label>
-                                        <select class="custom-select @if(strlen(Auth::user()->education)<>0) is-valid  @endif" name="education" id="education">
+                                        <select class="custom-select @if(strlen($coach_request->user->education)<>0) is-valid  @endif" name="education" id="education">
                                             <option selected disabled>انتخاب کنید</option>
-                                            <option {{ old('education',Auth::user()->education)=="زیردیپلم" ? 'selected='.'"'.'selected'.'"' : '' }}   >زیردیپلم</option>
-                                            <option {{ old('education',Auth::user()->education)=="دیپلم" ? 'selected='.'"'.'selected'.'"' : '' }}>دیپلم</option>
-                                            <option {{ old('education',Auth::user()->education)=="فوق دیپلم" ? 'selected='.'"'.'selected'.'"' : '' }}>فوق دیپلم</option>
-                                            <option {{ old('education',Auth::user()->education)=="لیسانس" ? 'selected='.'"'.'selected'.'"' : '' }}>لیسانس</option>
-                                            <option {{ old('education',Auth::user()->education)=="فوق لیسانس" ? 'selected='.'"'.'selected'.'"' : '' }}>فوق لیسانس</option>
-                                            <option {{ old('education',Auth::user()->education)=="دکتری و بالاتر" ? 'selected='.'"'.'selected'.'"' : '' }}>دکتری و بالاتر</option>
+                                            <option {{ old('education',$coach_request->user->education)=="زیردیپلم" ? 'selected='.'"'.'selected'.'"' : '' }}   >زیردیپلم</option>
+                                            <option {{ old('education',$coach_request->user->education)=="دیپلم" ? 'selected='.'"'.'selected'.'"' : '' }}>دیپلم</option>
+                                            <option {{ old('education',$coach_request->user->education)=="فوق دیپلم" ? 'selected='.'"'.'selected'.'"' : '' }}>فوق دیپلم</option>
+                                            <option {{ old('education',$coach_request->user->education)=="لیسانس" ? 'selected='.'"'.'selected'.'"' : '' }}>لیسانس</option>
+                                            <option {{ old('education',$coach_request->user->education)=="فوق لیسانس" ? 'selected='.'"'.'selected'.'"' : '' }}>فوق لیسانس</option>
+                                            <option {{ old('education',$coach_request->user->education)=="دکتری و بالاتر" ? 'selected='.'"'.'selected'.'"' : '' }}>دکتری و بالاتر</option>
                                         </select>
                                     </div>
                                 </div>
@@ -347,7 +348,7 @@
                                     <div class="form-group">
                                         <label>رشته</label>
                                         <div class="form-group">
-                                            <input type="text" class="form-control @if(strlen(Auth::user()->reshteh)<>0) is-valid  @endif" placeholder="رشته را وارد کنید" @if(old('reshteh')) value='{{old('reshteh')}}' @else value="{{Auth::user()->reshteh}}" @endif name="reshteh"   lang="fa"/>
+                                            <input type="text" class="form-control @if(strlen($coach_request->user->reshteh)<>0) is-valid  @endif" placeholder="رشته را وارد کنید" @if(old('reshteh')) value='{{old('reshteh')}}' @else value="{{$coach_request->user->reshteh}}" @endif name="reshteh"   lang="fa"/>
                                         </div>
                                     </div>
                                 </div>
@@ -355,7 +356,7 @@
                                     <div class="form-group">
                                         <label>شغل</label>
                                         <div class="form-group">
-                                            <input type="text" class="form-control @if(strlen(Auth::user()->job)<>0) is-valid  @endif" placeholder="شغل را وارد کنید" @if(old('job')) value='{{old('job')}}' @else value="{{Auth::user()->job}}" @endif name="job" />
+                                            <input type="text" class="form-control @if(strlen($coach_request->user->job)<>0) is-valid  @endif" placeholder="شغل را وارد کنید" @if(old('job')) value='{{old('job')}}' @else value="{{$coach_request->user->job}}" @endif name="job" />
                                         </div>
                                     </div>
                                 </div>
@@ -366,7 +367,7 @@
                                     <div class="form-group">
                                         <label>عکس شناسنامه</label>
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input @if(strlen(Auth::user()->shenasnameh_image)<>0) is-valid  @endif" id="inputshenasnameh_image" aria-describedby="inputshenasnameh_image" name="shenasnameh_image" />
+                                            <input type="file" class="custom-file-input @if(strlen($coach_request->user->shenasnameh_image)<>0) is-valid  @endif" id="inputshenasnameh_image" aria-describedby="inputshenasnameh_image" name="shenasnameh_image" />
                                             <label class="custom-file-label" for="inputshenasnameh_image">Choose file</label>
                                         </div>
                                         <small class="text-muted"> فایل های مجاز: JPG و PNG و حداکثر اندازه مجاز: 600KB</small>
@@ -376,7 +377,7 @@
                                     <div class="form-group">
                                         <label>عکس کارت ملی</label>
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input @if(strlen(Auth::user()->cartmelli_image)<>0) is-valid  @endif" id="inputcartmelli_image" aria-describedby="inputcartmelli_image" name="cartmelli_image">
+                                            <input type="file" class="custom-file-input @if(strlen($coach_request->user->cartmelli_image)<>0) is-valid  @endif" id="inputcartmelli_image" aria-describedby="inputcartmelli_image" name="cartmelli_image">
                                             <label class="custom-file-label" for="inputcartmelli_image">Choose file</label>
                                         </div>
                                         <small class="text-muted"> فایل های مجاز: JPG و PNG و حداکثر اندازه مجاز: 600KB</small>
@@ -386,7 +387,7 @@
                                     <div class="form-group">
                                         <label>عکس مدرک تحصیلی</label>
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input @if(strlen(Auth::user()->education_image)<>0) is-valid  @endif" id="inputeducation_image" aria-describedby="inputeducation_image" name="education_image" />
+                                            <input type="file" class="custom-file-input @if(strlen($coach_request->user->education_image)<>0) is-valid  @endif" id="inputeducation_image" aria-describedby="inputeducation_image" name="education_image" />
                                             <label class="custom-file-label" for="inputeducation_image">Choose file</label>
                                         </div>
                                         <small class="text-muted"> فایل های مجاز: JPG و PNG و حداکثر اندازه مجاز: 600KB</small>
@@ -396,7 +397,7 @@
                                     <div class="form-group">
                                         <label>رزومه</label>
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input @if(strlen(Auth::user()->resume)<>0) is-valid  @endif" id="resume" aria-describedby="resume" name="resume" />
+                                            <input type="file" class="custom-file-input @if(strlen($coach_request->user->resume)<>0) is-valid  @endif" id="resume" aria-describedby="resume" name="resume" />
                                             <label class="custom-file-label" for="resume">Choose file</label>
                                         </div>
                                         <small class="text-muted"> فایل های مجاز: JPG , DOC و PDF و حداکثر اندازه مجاز: 600KB</small>
@@ -410,35 +411,55 @@
             </div>
             <div class="tab-pane fade" id="pills-collabration" role="tabpanel" aria-labelledby="pills-collabration-tab">
 
-                    <form method="post" action="/panel/coach_request" >
+                    <form method="post" action="/panel/coach_request/{{$coach_request->id}}" >
                         {{csrf_field()}}
+                        {{method_field('PATCH')}}
                         <div class="card card-user " id="collabration">
                             <div class="card-body bg-secondary-light">
                                 <div class="row">
                                     <div class="col-md-12 px-1">
                                         <div class="form-group">
                                             <label for="service" class="d-block">انتخاب خدمت :</label>
+
                                             <select class="custom-select  services"  name="services" id="services">
                                                 <option selected disabled>خدمت را انتخاب کنید</option>
                                                 @foreach($services as $service)
-                                                    <option value="{{$service->id}}" >{{$service->title}}</option>
+                                                    <option value="{{$service->id}}"  @if($coach_request->clinic_basic_info->parent->parent->id==$service->id) selected  @endif disabled  >{{$service->title}}</option>
                                                 @endforeach
                                             </select>
 
                                             <label for="service" class="d-block">انتخاب تخصص :</label>
-                                            <div id="speciality"></div>
+                                            <div id="speciality">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input speciality" type="checkbox"  id="speciality" onclick="speciality_change()" checked disabled>
+                                                    <label class="form-check-label" for="speciality">{{$coach_request->clinic_basic_info->parent->title}}</label>
+                                                </div>
+                                            </div>
 
                                             <label for="service" class="d-block">انتخاب گرایش :</label>
-                                            <div id="orientation"></div>
+                                            <div id="orientation">
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input speciality" type="checkbox"  id="speciality" onclick="speciality_change()" checked disabled>
+                                                    <label class="form-check-label" for="speciality">{{$coach_request->clinic_basic_info->title}}</label>
+                                                </div>
+                                            </div>
+
+                                            <label for="status" class="d-block">وضعیت درخواست :</label>
+                                            <select class="custom-select  services"  name="status" id="status">
+                                                <option selected disabled>وضعیت را انتخاب کنید</option>
+                                                <option value="NULL">در حال بررسی</option>
+                                                <option value="0">رد درخواست</option>
+                                                <option value="1">قبول درخواست</option>
+                                            </select>
 
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-warning " type="button">+</button>
+
                         </div>
 
-                        <button type="submit" class="btn btn-success mb-5">ذخیره</button>
+                        <button type="submit" class="btn btn-success mb-5">بروزرسانی</button>
                     </form>
 
             </div>
@@ -446,11 +467,11 @@
             <div class="tab-pane fade" id="pills-conversation" role="tabpanel" aria-labelledby="pills-conversation-tab">
                 <h3>سابقه پیام ها</h3>
                 @foreach($messages as $item)
-                    <div class="form-group shadow-lg @if($item->user_id_send==Auth::user()->id) bg-success @else bg-warning @endif">
-                        @if($item->user_id_send==Auth::user()->id)
-                            <label for="comment"> پیام ارسال شده:</label>
-                        @else
+                    <div class="form-group shadow-lg @if($item->user_id_send==$coach_request->user->id) bg-success @else bg-warning @endif">
+                        @if($item->user_id_send==$coach_request->user->id)
                             <label for="comment"> پیام دریافت شده:</label>
+                        @else
+                            <label for="comment"> پیام ارسال شده:</label>
                         @endif
                         <textarea class="form-control" id="comment" name="comment" rows="3" disabled readonly>{{$item->comment }}</textarea>
                         <small class="font-weight-bold float-left">{{$item->time_fa.' '.$item->date_fa}}</small>
@@ -460,7 +481,7 @@
                 <form method="post" action="/panel/message/send">
                     {{csrf_field()}}
                     <input type="hidden" value="coach" name="type">
-                    <input type="hidden" value="{{Auth::user()->id}}" name="user_id_recieve">
+                    <input type="hidden" value="{{$coach_request->user->id}}" name="user_id_recieve">
                     <div class="form-group">
                         <label for="comment">ارسال پیام:<span class="text-danger">*</span></label>
                         <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>

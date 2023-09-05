@@ -45,13 +45,12 @@
                             <td>
                                 <a href="/admin/user/{{$item->id_user_table}}" class="d-block" target="_blank" >{{$item->status()}}</a>
                             </td>
+
                             <td>
-                                <a href="/admin/coach/{{$item->id}}/edit" class="btn btn-primary">
+                                <a href="/admin/coach_request/{{$item->id}}/edit" class="btn btn-primary">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
                             </td>
-
-
                         </tr>
                     @endforeach
                     </tbody>

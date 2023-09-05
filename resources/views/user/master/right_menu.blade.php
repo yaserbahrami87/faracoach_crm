@@ -6,13 +6,13 @@
             <li class="nav-item mr-auto">
                 <a class="navbar-brand" href="/panel/profile">
                 <!--<div class="brand-logo"><img class="logo" src="{{ asset('/acckt/assets/img/logo.png') }}" width=""></div>-->
-                    <div class="brand-logo">
+<!--                    <div class="brand-logo">
                         @if(is_null(Auth::user()->personal_image))
                             <img class="round" src="{{asset('/panel_assets/images/profile/user-profile-thumbnail.png')}}" width="40px" height="40px">
                         @else
                             <img class="round" src="{{asset('/documents/users/'.Auth::user()->personal_image)}}" width="40px" height="40px" >
                         @endif
-                    </div>
+                    </div>-->
                     <h5 class="brand-text mb-0" style="font-size: 1.2rem;">
                         {{Auth::user()->fname." ".Auth::user()->lname}}
                     </h5>
@@ -52,7 +52,17 @@
                 </li>
 
             @else
-                <li class=" nav-item"><a href="/panel/coach/create"><span class="menu-title">همکاری به عنوان کوچ</span></a></li>
+                <li class=" nav-item has-sub">
+                    <a href="#"><span class="menu-title">کلینیک</span></a>
+                    <ul class="menu-content">
+                        <li>
+                            <a href="/panel/coach_request/create"><span class="menu-title">همکاری به عنوان کوچ</span></a>
+                        </li>
+                        <li>
+                            <a href="/panel/coach_request/requests"><span class="menu-title">وضعیت درخواست ها</span></a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="nav-item has-sub"><a href="#"><span class="menu-title" >جلسات</span></a>
                     <ul class="menu-content">
                         <li><a href="/panel/reserve/accept_reserve_user" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >جلسات رزرو شده</span></a></li>
@@ -98,3 +108,4 @@
     </div>
 </div>
 <!-- END: Main Menu-->
+

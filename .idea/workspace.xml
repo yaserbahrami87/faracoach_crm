@@ -3,8 +3,26 @@
   <component name="ChangeListManager">
     <list default="true" id="f3849cf8-ae8a-47cc-891c-72c8c9af69d2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/reserve.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/reserve.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/CoachController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/CoachController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MessageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MessageController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ReportAdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ReportAdminController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/scholarship.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/scholarship.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/clinic.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/clinic.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/clinic/Coach_request/coach_collabration_request_edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/clinic/Coach_request/coach_collabration_request_edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/clinic/Coach_request/request_coaches.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/clinic/Coach_request/request_coaches.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/master/right_menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/master/right_menu.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/user/booking.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/user/booking.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/clinic/clinic_coaches.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/clinic/clinic_coaches.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/clinic/clinic_home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/clinic/clinic_home.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/clinic/master/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/clinic/master/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/master/navbarTop.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/master/navbarTop.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/clinic/coach_collabration_request.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/clinic/coach_collabration_request.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/clinic/coach_collabration_request_edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/clinic/coach_collabration_request_edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/clinic/coach_request_status.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/clinic/coach_request_status.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/user/master/right_menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/master/right_menu.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,7 +189,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/storage/fonts" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/images/clinic" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -179,18 +197,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\storage\fonts" />
-      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\fonts" />
-      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\resources\fonts" />
-      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\images" />
-      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\resources\views\v2" />
+      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\images\clinic" />
+      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\images\blank-certificates" />
+      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\resources\views\admin\clinic\Coach_request" />
+      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\resources\views\admin" />
+      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\resources\views\admin\master" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\resources\views\admin\blank-certificates" />
+      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\resources\views\admin\clinic\Coach_request" />
+      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\resources\views\admin\clinic" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\public\images\blank-certificates" />
       <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\resources\views\user\documents" />
-      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\resources\views\admin\documents" />
-      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\resources\views\admin\scholarship" />
-      <recent name="C:\wamp64\www\faracoach_crm\faracoach_crm\resources\views\admin\financial" />
     </key>
   </component>
   <component name="RunManager">
@@ -540,7 +558,47 @@
       <workItem from="1691045382571" duration="5606000" />
       <workItem from="1691053552817" duration="102000" />
       <workItem from="1691053686105" duration="2585000" />
-      <workItem from="1691213484503" duration="7031000" />
+      <workItem from="1691213484503" duration="7898000" />
+      <workItem from="1691301160588" duration="3170000" />
+      <workItem from="1691394418406" duration="15380000" />
+      <workItem from="1691479097214" duration="9532000" />
+      <workItem from="1691563215553" duration="14411000" />
+      <workItem from="1691580258203" duration="4888000" />
+      <workItem from="1691651445116" duration="647000" />
+      <workItem from="1691826059773" duration="8257000" />
+      <workItem from="1691910950136" duration="3258000" />
+      <workItem from="1691998452390" duration="166000" />
+      <workItem from="1691998646379" duration="2990000" />
+      <workItem from="1692178120359" duration="3684000" />
+      <workItem from="1692258926739" duration="1427000" />
+      <workItem from="1692445605203" duration="1533000" />
+      <workItem from="1692522552482" duration="8296000" />
+      <workItem from="1692601288712" duration="10040000" />
+      <workItem from="1692685955311" duration="6162000" />
+      <workItem from="1692776650458" duration="7055000" />
+      <workItem from="1692860601699" duration="2598000" />
+      <workItem from="1692907388512" duration="1417000" />
+      <workItem from="1692977213376" duration="1805000" />
+      <workItem from="1693033015962" duration="10148000" />
+      <workItem from="1693122666790" duration="6026000" />
+      <workItem from="1693205690404" duration="15882000" />
+      <workItem from="1693256703965" duration="1175000" />
+      <workItem from="1693258749300" duration="4830000" />
+      <workItem from="1693288331540" duration="2802000" />
+      <workItem from="1693294710972" duration="5952000" />
+      <workItem from="1693309054233" duration="6724000" />
+      <workItem from="1693377711154" duration="19409000" />
+      <workItem from="1693464577751" duration="5264000" />
+      <workItem from="1693579513893" duration="2338000" />
+      <workItem from="1693640239100" duration="4064000" />
+      <workItem from="1693658798872" duration="597000" />
+      <workItem from="1693694450559" duration="595000" />
+      <workItem from="1693727038632" duration="5059000" />
+      <workItem from="1693811578565" duration="13865000" />
+      <workItem from="1693899188733" duration="2595000" />
+      <workItem from="1693901838030" duration="106000" />
+      <workItem from="1693901977878" duration="186000" />
+      <workItem from="1693902199611" duration="449000" />
     </task>
     <servers />
   </component>

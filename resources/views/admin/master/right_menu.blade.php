@@ -97,10 +97,19 @@
             </li>
             <li class=" nav-item"><a href="#"><span class="menu-title" >کلینیک</span></a>
                 <ul class="menu-content">
+                    <li><a href=" nav-item has-sub "><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >تنظیمات اولیه </span></a>
+                        <ul class="menu-content">
+                            <li><a href="/admin/clinic_basic_info/create" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >مدیریت خدمت ها </span></a></li>
+                            <li><a href="/admin/clinic_basic_info/create_speciality" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >مدیریت تخصص ها</span></a></li>
+                            <li><a href="/admin/clinic_basic_info/create_orientation" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >مدیریت گرایش ها</span></a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/admin/coach_request" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >درخواست های همکاری</span></a></li>
+
                     <li><a href=" nav-item has-sub "><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >کوچ ها</span></a>
                         <ul class="menu-content">
                             <li><a href="/admin/coach" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >همه کوچ ها</span></a></li>
-                            <li><a href="/admin/coach/request" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >درخواست های همکاری</span></a></li>
+
                             <li><a href="/admin/coach/reject" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >درخواست های رد شده</span></a></li>
                         </ul>
                     </li>
@@ -145,7 +154,6 @@
                 <ul class="menu-content">
                     <li><a href="/admin/event/all"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >همه رویدادها</span></a></li>
                     <li><a href="/admin/event/create"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >ایجاد رویداد</span></a></li>
-                    <li><a href="/admin/event/organizers"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >برگزارکننده ها</span></a></li>
                 </ul>
             </li>
             <li class=" nav-item"><a href="#"><span class="menu-title" >پشتیبان علمی</span></a>

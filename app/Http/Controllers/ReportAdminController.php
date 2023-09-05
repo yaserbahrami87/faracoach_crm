@@ -126,10 +126,6 @@ class ReportAdminController extends BaseController
             $followups = followup::wherebetween('date_fa', $date_fa)
                             ->get();
 
-            $campaign=User::wherebetween('created_at', $date_en)
-                            ->groupby('resource')
-                            ->get();
-
 
 //            $followups_compaign=followup::wherebetween('date_fa', $date_fa)
 ////                ->where(function())
@@ -150,9 +146,6 @@ class ReportAdminController extends BaseController
             $followups = followup::wherebetween('date_fa', [$v->now()->startMonth()->format('Y/m/d'),$v->now()->endMonth()->format('Y/m/d')])
                             ->get();
 
-            $campaign=User::wherebetween('created_at', $date_en)
-                            ->groupby('resource')
-                            ->get();
 
 
 //            $followups_compaign=followup::wherebetween('date_fa', [$v->now()->startMonth()->format('Y/m/d'),$v->now()->endMonth()->format('Y/m/d')])
@@ -165,21 +158,17 @@ class ReportAdminController extends BaseController
 
 
 
+        $campaign=($users->groupby('resource'));
 
         foreach ($campaign as $item)
         {
+
             $item->count_followups=0;
-
-            for ($i=0;$i<count($item);$i++)
+            for ($i=0;$i<$item->count();$i++)
             {
-                $item->count_followups=$item->count_followups+count($item[$i]->followups);
-
+                $item->count_followups=$item->count_followups+($item[$i]->followups)->count();
             }
         }
-
-
-
-
 
 
         $v = verta();
