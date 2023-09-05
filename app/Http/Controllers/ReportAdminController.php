@@ -126,6 +126,16 @@ class ReportAdminController extends BaseController
             $followups = followup::wherebetween('date_fa', $date_fa)
                             ->get();
 
+
+            $followups_compaign=followup::wherebetween('date_fa', $date_fa)
+//                ->where(function())
+//                $query->with('followups')
+//                    ->whereHas('followups', function($query) use ($request)
+//                    {
+//                        $query->wherebetween('date_fa', $request->range);
+//                    });
+                ->get();
+
         } else
         {
             $v=verta();
@@ -136,15 +146,32 @@ class ReportAdminController extends BaseController
             $followups = followup::wherebetween('date_fa', [$v->now()->startMonth()->format('Y/m/d'),$v->now()->endMonth()->format('Y/m/d')])
                             ->get();
 
+            $followups_compaign=followup::wherebetween('date_fa', [$v->now()->startMonth()->format('Y/m/d'),$v->now()->endMonth()->format('Y/m/d')])
+                ->with('users')
+                ->get();
+
         }
+
+        $v=verta();
+
 
 
         $campaign=$users->groupby('resource');
-
-        foreach($campaign as $item)
+        foreach ($campaign as $item)
         {
+            $item->count_followups=0;
 
+            for ($i=0;$i<count($item);$i++)
+            {
+                $item->count_followups=$item->count_followups+count($item[$i]->followups);
+
+            }
         }
+
+
+
+
+
 
         $v = verta();
         $ageTo20 = $users->wherebetween('datebirth', [$v->subYears(20), $v->now()]);
