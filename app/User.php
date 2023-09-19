@@ -169,10 +169,6 @@ class User extends Authenticatable implements MustVerifyEmail
         }
 
 
-
-
-
-
         public function userType()
         {
 
@@ -188,9 +184,15 @@ class User extends Authenticatable implements MustVerifyEmail
                     break;
                 case "2":return "مدیر";
                     break;
-                case "3":return "آموزش";
+                case "3":return "فروش";
                     break;
                 case "4":return "کلینیک";
+                    break;
+                case "5":return "آموزش";
+                    break;
+                case "6":return "بخش لید خام";
+                    break;
+                case "7":return "سوشیال";
                     break;
                 case "11": return "تور پیگیری";
                     break;
@@ -288,5 +290,13 @@ class User extends Authenticatable implements MustVerifyEmail
         {
             return $this->hasMany('App\coach_request');
         }
+
+        public function comments_coach()
+        {
+            return $this->hasMany('App\comment','post_id','id')
+                                ->where('type','=','coach');
+        }
+
+
 
 }
