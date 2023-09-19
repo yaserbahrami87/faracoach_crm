@@ -112,7 +112,7 @@
             <div class="col-md-3">
                 <div class="card-counter primary">
 
-                        <span class="count-numbers text-dark">{{$user->followupsAdmin->wherebetween('date_fa',$date_fa)->count()}} نفر </span>
+                        <span class="count-numbers text-dark">{{$user->followupsAdmin->wherebetween('date_fa',$date_fa)->count()}} پیگیری </span>
                         <span class="count-name text-dark"> تعداد پیگیری ها
                             <a href="#" data-toggle="modal" data-target="#detailFollowupModal">جزئیات</a>
                         </span>
@@ -156,10 +156,24 @@
             </div>
             <div class="col-md-3">
                 <div class="card-counter primary">
-                        <span class="count-numbers text-dark">{{$user->followupsAdmin->wherebetween('date_fa',$date_fa)->groupby('course_id')->count()}} نفر </span>
-                        <span class="count-name text-dark"> تعداد پیگیری ها</span>
+                    <span class="count-numbers text-dark">{{$user->followupsAdmin->wherebetween('date_fa',$date_fa)->groupby('user_id')->count()}} نفر </span>
+                    <span class="count-name text-dark"> تعداد نفر</span>
                 </div>
             </div>
+            <div class="col-md-3">
+                <div class="card-counter primary">
+                    <span class="count-numbers text-dark">{{round($user->followupsAdmin->wherebetween('date_fa',$date_fa)->sum('talktime')/60)}} ساعت </span>
+                    <span class="count-name text-dark"> مدت مکالمه</span>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card-counter primary">
+                    <span class="count-numbers text-dark">{{$user->followupsAdmin->wherebetween('date_fa',$date_fa)->where('status_followups','=',20)->count()}} نفر </span>
+                    <span class="count-name text-dark"> تعداد مشتری</span>
+                </div>
+            </div>
+
+
 
             <div class="collapse" id="collapseGroupFollowup">
                 <div class="card card-body">
