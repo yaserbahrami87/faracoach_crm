@@ -131,16 +131,11 @@ class UserController extends BaseController
 
     public function showAll()
     {
-
         $users=User::orderby('id','desc')
             ->paginate(20);
 
-
-
         // دریافت تعداد کاربرها بر اساس دسته بندی ها
         $statics=$this->get_staticsCountUsers_admin();
-
-
 
         $dateNow=$this->dateNow;
         $todayFollowup=User::where('followby_expert','=',Auth::user()->id)
@@ -526,9 +521,9 @@ class UserController extends BaseController
         })
         ->get();
 
+
+
         $states = $this->states();
-
-
 
         $city = NULL;
         if (strlen($user->city) > 0) {
@@ -583,7 +578,6 @@ class UserController extends BaseController
         $gettingKnow_parent_list=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
 
         $user->created_at=$this->changeTimestampToShamsi($user->created_at);
-
 
 
 
@@ -745,6 +739,9 @@ class UserController extends BaseController
 
             $user->save();
             alert()->success('پروفایل با موفقیت به روزرسانی شد','پیام')->persistent('بستن');
+
+            session()->forget('complete_profile');
+
             return back();
     }
 

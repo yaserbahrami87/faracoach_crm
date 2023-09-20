@@ -116,6 +116,9 @@
                                                         <option value="2" {{$user->type===2 ? "selected":""  }} >مدیر</option>
                                                         <option value="3" {{$user->type===3 ? "selected":""  }}>آموزش</option>
                                                         <option value="4" {{$user->type===4 ? "selected":""  }}>کلینیک</option>
+                                                        <option value="5" {{$user->type===5 ? "selected":""  }}>آموزش</option>
+                                                        <option value="6" {{$user->type===6 ? "selected":""  }}>قبل فروش</option>
+                                                        <option value="7" {{$user->type===7 ? "selected":""  }}>سوشیال</option>
                                                         <option value="1" {{$user->type===1 ? "selected":""  }}>کاربر ساده</option>
                                                     </select>
                                                     <div class="col-12 text-center">
@@ -132,23 +135,27 @@
                                             </div>
                                         </form>
 
-                                        <form method="post" action="/admin/user/{{$user->id}}/changeType">
-                                            {{csrf_field()}}
-                                            {{method_field('PATCH')}}
-                                            <input type="hidden" value="NULL" name="followby_expert">
-                                            <div class="input-group mt-1 ">
-                                                <select class="form-control p-0" name="type" >
-                                                    <option selected disabled>یک گزینه را انتخاب کنید</option>
-                                                    <option value="-1" {{$user->type===-1 ? "selected":"" }} >مارکتینگ 1</option>
-                                                    <option value="-2" {{$user->type===-2 ? "selected":"" }} >مارکتینگ 2</option>
-                                                    <option value="-3" {{$user->type===-3 ? "selected":"" }} >مارکتینگ 3</option>
-                                                    <option value="11" {{$user->type===1 ? "selected":"" }}>فروش</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-12 text-center">
-                                                <button class="btn btn-danger text-center mt-1" type="submit" id="button-addon1">تغییر دسته بندی</button>
-                                            </div>
-                                        </form>
+
+
+                                        @if((Auth::user()->id==$user->followby_expert||is_null($user->followby_expert)))
+                                            <form method="post" action="/admin/user/{{$user->id}}/changeType">
+                                                {{csrf_field()}}
+                                                {{method_field('PATCH')}}
+                                                <input type="hidden" value="NULL" name="followby_expert">
+                                                <div class="input-group mt-1 ">
+                                                    <select class="form-control p-0" name="type" >
+                                                        <option selected disabled>یک گزینه را انتخاب کنید</option>
+                                                        <option value="-1" {{$user->type===-1 ? "selected":"" }} >مارکتینگ 1</option>
+                                                        <option value="-2" {{$user->type===-2 ? "selected":"" }} >مارکتینگ 2</option>
+                                                        <option value="-3" {{$user->type===-3 ? "selected":"" }} >مارکتینگ 3</option>
+                                                        <option value="11" {{$user->type===1 ? "selected":"" }}>فروش</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-12 text-center">
+                                                    <button class="btn btn-danger text-center mt-1" type="submit" id="button-addon1">تغییر دسته بندی</button>
+                                                </div>
+                                            </form>
+                                        @endif
                                         <hr>
                                     </div>
                                 </div>
@@ -551,10 +558,11 @@
             </li>
             <li class="nav-item" role="presentation">
                 <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">جلسات</a>
-
-
-
             </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="event-tab" data-toggle="tab" href="#events" role="tab" aria-controls="events" aria-selected="false">رویدادها</a>
+            </li>
+
         </ul>
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="followups" role="tabpanel" aria-labelledby="followups-tab">
@@ -602,6 +610,9 @@
             </div>
             <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                 @include('admin.user.booking')
+            </div>
+            <div class="tab-pane fade" id="events" role="tabpanel" aria-labelledby="events-tab">
+                @include('admin.user.events')
             </div>
         </div>
 
