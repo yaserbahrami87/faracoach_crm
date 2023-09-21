@@ -274,30 +274,10 @@
                                     @endif
 
 
-                                    @if(is_null(Auth::user()->telegram)&&($i!=2))
-                                        <div class="col-md-6 px-1">
-                                            <div class="form-group">
-                                                <label>تلگرام</label>
-                                                <input type="text" class="form-control @if(strlen(Auth::user()->telegram)==0) is-invalid  @else is-valid  @endif" placeholder="آیدی تلگرام خود را وارد کنید" value='{{old('telegram',Auth::user()->telegram)}}' name="telegram"  />
-                                            </div>
-                                        </div>
-                                        @php
-                                            $i++;
-                                        @endphp
-                                    @endif
 
 
-                                    @if(is_null(Auth::user()->linkedin)&&($i!=2))
-                                        <div class="col-md-6 px-1">
-                                            <div class="form-group">
-                                                <label>لینکدین</label>
-                                                <input type="text" class="form-control @if(strlen(Auth::user()->linkedin)==0) is-invalid  @else is-valid  @endif" placeholder="آیدی لینکدین خود را وارد کنید"  value='{{old('linkedin',Auth::user()->linkedin)}}' name="linkedin"  />
-                                            </div>
-                                        </div>
-                                        @php
-                                            $i++;
-                                        @endphp
-                                    @endif
+
+
 
 
                                     @if(is_null(Auth::user()->father)&&($i!=2))
@@ -393,7 +373,6 @@
 @endsection
 
 @section('footerScript')
-
     @if(session('complete_profile')==true)
         <script>
             $('#staticBackdrop').modal('show')
