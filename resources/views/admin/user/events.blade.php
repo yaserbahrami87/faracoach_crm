@@ -5,22 +5,22 @@
         <tr>
             <th>#</th>
             <th>رویداد</th>
+            <th>تاریخ برگزاری</th>
+            <th>ساعت برگزاری</th>
+
         </tr>
         </thead>
         <tbody>
-        @foreach($user->reserves as $item)
+
+        @foreach($user->reserveEvent as $item)
             <tr>
                 <td>{{$loop->iteration}}</td>
-                <td>
-                    <a href="/admin/booking/{{$item->id}}/showadminbooking">{{$item->id}}</a>
 
-                </td>
                 <td>
-                    {{$item->booking->coach->user->fname.' '.$item->booking->coach->user->lname}}
+                    {{$item->event->event}}
                 </td>
-                <td>{{$item->booking->start_date}}</td>
-                <td>{{$item->booking->start_time}}</td>
-                <td>{{$item->get_statusReserve()}}</td>
+                <td>{{$item->event->start_date}}</td>
+                <td>{{$item->event->start_time}}</td>
 
             </tr>
         @endforeach

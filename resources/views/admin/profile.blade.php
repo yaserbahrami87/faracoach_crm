@@ -560,7 +560,10 @@
                 <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">جلسات</a>
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link" id="event-tab" data-toggle="tab" href="#events" role="tab" aria-controls="events" aria-selected="false">رویدادها</a>
+                <a class="nav-link" id="events-tab" data-toggle="tab" href="#events" role="tab" aria-controls="events" aria-selected="false">رویدادها</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="courses-tab" data-toggle="tab" href="#courses" role="tab" aria-controls="courses" aria-selected="false">دوره ها</a>
             </li>
 
         </ul>
@@ -613,6 +616,9 @@
             </div>
             <div class="tab-pane fade" id="events" role="tabpanel" aria-labelledby="events-tab">
                 @include('admin.user.events')
+            </div>
+            <div class="tab-pane fade" id="courses" role="tabpanel" aria-labelledby="courses-tab">
+                @include('admin.user.courses')
             </div>
         </div>
 
