@@ -24,6 +24,9 @@
                 <td>{{$item->course->start}}</td>
                 <td>{{$item->course->teacher->user->fname.' '.$item->course->teacher->user->lname}}</td>
                 <td>{{$item->get_status()}}</td>
+
+
+
             </tr>
         @endforeach
         </tbody>
