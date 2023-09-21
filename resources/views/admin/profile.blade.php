@@ -619,6 +619,8 @@
             </div>
             <div class="tab-pane fade" id="courses" role="tabpanel" aria-labelledby="courses-tab">
                 @include('admin.user.courses')
+
+
             </div>
         </div>
 
