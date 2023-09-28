@@ -22,7 +22,13 @@
                     {{$item->course->course}}
                 </td>
                 <td>{{$item->course->start}}</td>
-                <td>{{$item->course->teacher->user->fname.' '.$item->course->teacher->user->lname}}</td>
+
+
+                <td>
+                    @if(!is_null($item->course->teacher))
+                        {{$item->course->teacher->user->fname.' '.$item->course->teacher->user->lname}}
+                    @endif
+                </td>
                 <td>{{$item->get_status()}}</td>
 
 
