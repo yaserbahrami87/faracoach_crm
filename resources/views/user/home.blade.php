@@ -273,13 +273,6 @@
                                         @endphp
                                     @endif
 
-
-
-
-
-
-
-
                                     @if(is_null(Auth::user()->father)&&($i!=2))
                                         <div class="col-md-6 px-1">
                                             <div class="form-group">
@@ -375,7 +368,10 @@
 @section('footerScript')
     @if(session('complete_profile')==true)
         <script>
+
+        @if(is_null(Auth::user()->fname) || is_null(Auth::user()->lname) || is_null(Auth::user()->reshteh) || is_null(Auth::user()->education)|| is_null(Auth::user()->born)|| is_null(Auth::user()->married)|| is_null(Auth::user()->father)|| is_null(Auth::user()->instagram)|| is_null(Auth::user()->address)|| is_null(Auth::user()->city)|| is_null(Auth::user()->state)|| is_null(Auth::user()->email)|| is_null(Auth::user()->tel)|| is_null(Auth::user()->username)|| is_null(Auth::user()->personal_image)|| is_null(Auth::user()->datebirth)|| is_null(Auth::user()->shenasname)|| is_null(Auth::user()->codemelli)|| is_null(Auth::user()->sex))
             $('#staticBackdrop').modal('show')
-        </script>
-    @endif
+        @endif
+    </script>
+@endif
 @endsection
