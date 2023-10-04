@@ -130,7 +130,7 @@
                                         </form>
 
 
-                                        @if($user->type!=2 && $user->type!=3 && $user->type!=4 && $user->type!=5 && $user->type!=6 && $user->type!=7)
+                                        @if( $user->type!=3 && $user->type!=4 && $user->type!=5 && $user->type!=6 && $user->type!=7)
                                             <form method="get" action="/admin/user/{{$user->id}}/login" onsubmit="return window.confirm('آیا میخواهید با اکانت کاربر وارد سایت شوید؟')">
                                                 {{csrf_field()}}
                                                 <div class="input-group mb-1 mt-1 border-bottom border-1 pb-1 ">
