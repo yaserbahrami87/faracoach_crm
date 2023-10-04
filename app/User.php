@@ -44,7 +44,7 @@ class User extends Authenticatable implements MustVerifyEmail
 //    {
 //        return 'tel';
 //    }
-        use Loggable;
+        //use Loggable;
 
 
 
