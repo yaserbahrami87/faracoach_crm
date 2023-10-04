@@ -11,6 +11,7 @@ use App\reserve;
 use App\student;
 use App\User;
 use GuzzleHttp\Client;
+use Haruncpi\LaravelUserActivity\Models\Log;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
@@ -36,6 +37,7 @@ class UserController extends BaseController
 
     public function __construct()
     {
+
         $dateNow = verta();
         $this->dateNow = $dateNow->format('Y/m/d');
         $this->timeNow = $dateNow->format('H:i:s');
@@ -44,8 +46,8 @@ class UserController extends BaseController
     public function index(Request $request)
     {
 
-        //نیروهای فروش
-        if(Auth::user()->type==3||Auth::user()->type==2)
+        //نیروهای مدیر
+        if(Auth::user()->type==2)
         {
             $users=User::where(function($query)
                         {
@@ -73,6 +75,60 @@ class UserController extends BaseController
                 ->groupby('users.id')
                 ->get();
         }
+        //نیروی فروش
+        else if(Auth::user()->type==3)
+        {
+            $users=User::where(function($query)
+            {
+                $query->orwhere('followby_expert','=',Auth::user()->id)
+                    ->orwhere('followby_expert','=',NULL);
+            })
+                ->whereNotIn('users.type',[-3,-2,-1,2,3,0,30])
+                ->orderby('id','desc')
+                ->get();
+
+            $statics=$this->get_staticsCountUsers_admin();
+
+
+            $users=User::where(function($query)
+            {
+                $query->orwhere('followby_expert','=',Auth::user()->id)
+                    ->orwhere('followby_expert','=',NULL);
+            })
+                ->whereNotIn('users.type',[-3,-2,-1,2,3,0,30])
+                ->when($request->resource ,function ($query) use ($request)
+                {
+                    $query->where('resource','=',$request->resource);
+                })
+                ->orderby('users.id','desc')
+                ->groupby('users.id')
+                ->get();
+        }
+        //نیروی مسئول لیدهای صفر
+        else if(Auth::user()->type==6)
+        {
+
+            $statics=$this->get_staticsCountUsers_admin();
+
+
+            $users=User::where(function($query)
+            {
+                $query->orwhere('followby_expert','=',Auth::user()->id)
+                    ->orwhere('followby_expert','=',NULL);
+            })
+            ->whereNotIn('users.type',[-3,-2,-1,2,3,4,5,7,0,30])
+            ->when($request->resource ,function ($query) use ($request)
+            {
+                $query->where('resource','=',$request->resource);
+            })
+            ->orderby('users.id','desc')
+            ->groupby('users.id')
+            ->get();
+
+
+        }
+
+
         //نیروهای کلینیک
         elseif(Auth::user()->type==4)
         {
@@ -480,6 +536,7 @@ class UserController extends BaseController
     public function show(User $user)
     {
         $userAdmin=Auth::user();
+
 
         //تبدیل تگهای پیگیری
        foreach ($user->followups as $item)

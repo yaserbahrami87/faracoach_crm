@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Haruncpi\LaravelUserActivity\Traits\Loggable;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -43,6 +44,10 @@ class User extends Authenticatable implements MustVerifyEmail
 //    {
 //        return 'tel';
 //    }
+        use Loggable;
+
+
+
 
         protected $rules = [
             'email'     => 'sometimes|required|email|unique:users',

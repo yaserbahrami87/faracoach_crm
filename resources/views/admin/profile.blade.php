@@ -79,6 +79,7 @@
                                                                 <th>نام و نام خانوادگی</th>
                                                                 <th>تلفن</th>
                                                             </tr>
+
                                                             @foreach($user->get_invitations as $item)
                                                                 <tr>
                                                                     <td>{{$loop->iteration}}</td>
@@ -114,7 +115,7 @@
                                                     <select class="form-control p-0" name="type" >
                                                         <option selected disabled>یک گزینه را انتخاب کنید</option>
                                                         <option value="2" {{$user->type===2 ? "selected":""  }} >مدیر</option>
-                                                        <option value="3" {{$user->type===3 ? "selected":""  }}>آموزش</option>
+                                                        <option value="3" {{$user->type===3 ? "selected":""  }}>فروش</option>
                                                         <option value="4" {{$user->type===4 ? "selected":""  }}>کلینیک</option>
                                                         <option value="5" {{$user->type===5 ? "selected":""  }}>آموزش</option>
                                                         <option value="6" {{$user->type===6 ? "selected":""  }}>قبل فروش</option>
@@ -586,13 +587,19 @@
                         @endforeach
                     @endif
                 </div>
-                @if((Auth::user()->id==$user->followby_expert||is_null($user->followby_expert))&& $user->type!=-1&&$user->type!=-2&&$user->type!=-3 )
+                @if((Auth::user()->type==2))
+                    @include('admin.insertFollowUp')
+                     <hr/>
+                @elseif(((Auth::user()->type==3)||(Auth::user()->type==4)||(Auth::user()->type==5)||(Auth::user()->type==7)) &&(Auth::user()->id==$user->followby_expert))
+                    @include('admin.insertFollowUp')
+                    <hr/>
+                @elseif((Auth::user()->type==6)&&(Auth::user()->id==$user->followby_expert||is_null($user->followby_expert)))
                     @include('admin.insertFollowUp')
                     <hr/>
                 @elseif((Auth::user()->id==$user->followby_expert||is_null($user->followby_expert))&& $user->type!=5)
                     <div class="alert alert-warning">
                         <i class="bi bi-exclamation-triangle-fill"></i>
-                        کاربر مربوط به بخش مارکتینگ می باشد
+                        کاربر مربوط به شما یا بخش شما نمی باشد
                     </div>
                     <hr/>
                 @endif
