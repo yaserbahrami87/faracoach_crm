@@ -92,8 +92,8 @@ class UserController extends BaseController
 
             $users=User::where(function($query)
             {
-                $query->orwhere('followby_expert','=',Auth::user()->id)
-                    ->orwhere('followby_expert','=',NULL);
+                $query->orwhere('followby_expert','=',Auth::user()->id);
+                    //->orwhere('followby_expert','=',NULL);
             })
                 ->whereNotIn('users.type',[-3,-2,-1,2,3,0,30])
                 ->when($request->resource ,function ($query) use ($request)
