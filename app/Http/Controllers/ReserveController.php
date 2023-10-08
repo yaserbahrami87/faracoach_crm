@@ -463,7 +463,7 @@ class ReserveController extends BaseController
                     $coach->count_meeting=$coach->count_meeting+1;
                     $coach->save();
 
-                    $msg='لطفا نسبت به تکمیل فرم ارزیابی جلسه '.$booking->start_date." اقدام نمایید \n فراکوچ ";
+                    $msg=' تکمیل فرم ارزیابی جلسه '.$booking->start_date."\n B2n.ir/p94427 \n فراکوچ ";
                     $this->sendSms($user->tel,$msg);
 
                 }
