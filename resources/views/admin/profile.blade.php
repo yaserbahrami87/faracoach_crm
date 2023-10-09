@@ -597,7 +597,7 @@
                         @endforeach
                     @endif
                 </div>
-                @if((Auth::user()->type==2)||(Auth::user()->type==6))
+                @if((Auth::user()->type==2)||(Auth::user()->type==4))
                     @include('admin.insertFollowUp')
                      <hr/>
                 @elseif(((Auth::user()->type==3)||(Auth::user()->type==4)||(Auth::user()->type==5)||(Auth::user()->type==7)) &&(Auth::user()->id==$user->followby_expert))
