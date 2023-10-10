@@ -78,6 +78,10 @@ class AdminController extends BaseController
 
             $usersEducation=user::orwhere('type','=',3)
                         ->orwhere('type','=',4)
+                        ->orwhere('type','=',2)
+                        ->orwhere('type','=',5)
+                        ->orwhere('type','=',6)
+                        ->orwhere('type','=',7)
                         ->get();
 
 //            $sumcancelfollowup=0;
@@ -145,16 +149,6 @@ class AdminController extends BaseController
                             ->count();
 
             $users=User::get();
-
-
-
-
-
-
-
-
-
-
 
 
 
