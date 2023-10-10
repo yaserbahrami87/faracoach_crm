@@ -157,7 +157,7 @@
             <div class="col-md-3">
                 <div class="card-counter primary">
                     <span class="count-numbers text-dark">{{$user->followupsAdmin->wherebetween('date_fa',$date_fa)->groupby('user_id')->count()}} نفر </span>
-                    <span class="count-name text-dark"> تعداد نفر</span>
+                    <span class="count-name text-dark">  تعداد نفر پیگیری</span>
                 </div>
             </div>
             <div class="col-md-3">
@@ -243,15 +243,77 @@
                     @foreach($user->followupsAdmin->wherebetween('date_fa',$date_fa)->groupby('course_id') as $item)
                         <div class="col-4">
                             <div class="card text-white border border-3 border-danger  p-1" style="min-height: 100px">
-                                        <span class="text-dark text-center">
-                                            {{$item[0]->course['course']}}
-                                        </span>
+                                <span class="text-dark text-center">
+                                    {{$item[0]->course['course']}}
+                                </span>
                                 <span class="text-dark"><i class="ficon bx bx-transfer-alt"></i>{{$item->count()}} پیگیری</span>
                                 <span class="text-dark"><i class="ficon bx bx-time"></i>{{$item->sum('talktime')}} دقیقه مکالمه</span>
 
                             </div>
                         </div>
                     @endforeach
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-3">
+                        <div class="card text-white border border-3 mb-3" >
+                            <div class="card-body text-center">
+                                <h5 class="card-title">مارکتینگ 3</h5>
+                                <span class="text-dark d-block"><i class="ficon bx bx-transfer-alt"></i>{{$user->followupsAdmin->wherebetween('date_fa',$date_fa)->where('status_followups','-3')->count()}} پیگیری</span>
+                                <span class="text-dark d-block"><i class="ficon bx bx-user"></i>{{$user->followupsAdmin->wherebetween('date_fa',$date_fa)->where('status_followups','-3')->groupby('user_id')->count()}} نفر پیگیری</span>
+                                <span class="text-dark d-block"><i class="ficon bx bx-time"></i>{{$user->followupsAdmin->wherebetween('date_fa',$date_fa)->where('status_followups','-3')->sum('talktime')}} دقیقه مکالمه</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <div class="card text-white border border-3 mb-3" >
+                            <div class="card-body text-center">
+                                <h5 class="card-title">مارکتینگ 2</h5>
+                                <span class="text-dark d-block"><i class="ficon bx bx-transfer-alt"></i>{{$user->followupsAdmin->wherebetween('date_fa',$date_fa)->where('status_followups','-2')->count()}} پیگیری</span>
+                                <span class="text-dark d-block"><i class="ficon bx bx-user"></i>{{$user->followupsAdmin->wherebetween('date_fa',$date_fa)->where('status_followups','-2')->groupby('user_id')->count()}} نفر پیگیری</span>
+                                <span class="text-dark d-block"><i class="ficon bx bx-time"></i>{{round($user->followupsAdmin->wherebetween('date_fa',$date_fa)->where('status_followups','-2')->sum('talktime')/60)}} ساعت مکالمه</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <div class="card text-white border border-3 mb-3" >
+                            <div class="card-body text-center">
+                                <h5 class="card-title">مارکتینگ 1</h5>
+                                <span class="text-dark d-block"><i class="ficon bx bx-transfer-alt"></i>{{$user->followupsAdmin->wherebetween('date_fa',$date_fa)->where('status_followups','-1')->count()}} پیگیری</span>
+                                <span class="text-dark d-block"><i class="ficon bx bx-user"></i>{{$user->followupsAdmin->wherebetween('date_fa',$date_fa)->where('status_followups','-21')->groupby('user_id')->count()}} نفر پیگیری</span>
+                                <span class="text-dark d-block"><i class="ficon bx bx-time"></i>{{round($user->followupsAdmin->wherebetween('date_fa',$date_fa)->where('status_followups','-1')->sum('talktime')/60)}} ساعت مکالمه</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <div class="card text-white border border-3 mb-3" >
+                            <div class="card-body text-center">
+                                <h5 class="card-title">مشتری</h5>
+                                <span class="text-dark d-block"><i class="ficon bx bx-transfer-alt"></i>{{$user->followupsAdmin->wherebetween('date_fa',$date_fa)->where('status_followups','20')->count()}} پیگیری</span>
+                                <span class="text-dark d-block"><i class="ficon bx bx-user"></i>{{$user->followupsAdmin->wherebetween('date_fa',$date_fa)->where('status_followups','20')->groupby('user_id')->count()}} نفر پیگیری</span>
+                                <span class="text-dark d-block"><i class="ficon bx bx-time"></i>{{round($user->followupsAdmin->wherebetween('date_fa',$date_fa)->where('status_followups','20')->sum('talktime')/60)}} ساعت مکالمه</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <div class="card text-white border border-3 mb-3" >
+                            <div class="card-body text-center">
+                                <h5 class="card-title">تور پیگیری</h5>
+                                <span class="text-dark d-block"><i class="ficon bx bx-transfer-alt"></i>{{$user->followupsAdmin->wherebetween('date_fa',$date_fa)->where('status_followups','11')->count()}} پیگیری</span>
+                                <span class="text-dark d-block"><i class="ficon bx bx-user"></i>{{$user->followupsAdmin->wherebetween('date_fa',$date_fa)->where('status_followups','11')->groupby('user_id')->count()}} نفر پیگیری</span>
+                                <span class="text-dark d-block"><i class="ficon bx bx-time"></i>{{round($user->followupsAdmin->wherebetween('date_fa',$date_fa)->where('status_followups','11')->sum('talktime')/60)}} ساعت مکالمه</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <div class="card text-white border border-3 mb-3" >
+                            <div class="card-body text-center">
+                                <h5 class="card-title">انصراف</h5>
+                                <span class="text-dark d-block"><i class="ficon bx bx-transfer-alt"></i>{{$user->followupsAdmin->wherebetween('date_fa',$date_fa)->where('status_followups','20')->count()}} پیگیری</span>
+                                <span class="text-dark d-block"><i class="ficon bx bx-user"></i>{{$user->followupsAdmin->wherebetween('date_fa',$date_fa)->where('status_followups','20')->groupby('user_id')->count()}} نفر پیگیری</span>
+                                <span class="text-dark d-block"><i class="ficon bx bx-time"></i>{{round($user->followupsAdmin->wherebetween('date_fa',$date_fa)->where('status_followups','20')->sum('talktime')/60)}} ساعت مکالمه</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <table class="dataTable table table-striped table-bordered" style="width:100%">
                     <thead>
@@ -264,34 +326,33 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach($user->followupsAdmin->wherebetween('date_fa',$date_fa) as $item)
-                        <tr class="" >
-                            <td>{{$loop->iteration}}</td>
-                            <td>
-                                <a href="{{route('showUserForAdmin',[$item->user->id])}}" target="_blank">
-                                    {{$item->user['fname']." ".$item->user['lname']}}
-                                </a>
-                            </td>
-                            <td>
 
-                                @if(!is_null($item->user->last_followupUser['course_id']))
-                                    {{$item->user->last_followupUser->course['course']}}
-                                @endif
-                            </td>
-                            <td>
-                                @if(!is_null($item->user->followups))
-                                    {{$item->user->followups->count()}}
-                                @endif
-                            </td>
-                            <td>
-                                @if(!is_null($item->user->last_followupUser['date_fa']))
-                                    {{$item->user->last_followupUser['date_fa']}}
-                                @endif
-                            </td>
+                        @foreach($user->followupsAdmin->wherebetween('date_fa',$date_fa) as $item)
+                            <tr >
+                                <td>{{$loop->iteration}}</td>
+                                <td>
+                                    <a href="{{route('showUserForAdmin',[$item->user->id])}}" target="_blank">
+                                        {{$item->user['fname']." ".$item->user['lname']}}
+                                    </a>
+                                </td>
+                                <td>
 
-
-                        </tr>
-                    @endforeach
+                                    @if(!is_null($item->user->last_followupUser['course_id']))
+                                        {{$item->user->last_followupUser->course['course']}}
+                                    @endif
+                                </td>
+                                <td>
+                                    @if(!is_null($item->user->followups->wherebetween('date_fa',$date_fa)))
+                                        {{$item->user->followups->wherebetween('date_fa',$date_fa)->count()}} پیگیری از {{$item->user->followups->count()}} پیگیری
+                                    @endif
+                                </td>
+                                <td>
+                                    @if(!is_null($item->user->last_followupUser['date_fa']))
+                                        {{$item->user->last_followupUser['date_fa']}}
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
 
                 </table>
