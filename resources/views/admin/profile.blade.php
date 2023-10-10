@@ -597,6 +597,7 @@
                         @endforeach
                     @endif
                 </div>
+
                 @if((Auth::user()->type==2)||(Auth::user()->type==4))
                     @include('admin.insertFollowUp')
                      <hr/>

@@ -105,7 +105,7 @@ class UserController extends BaseController
                 ->get();
         }
         //نیروی مسئول لیدهای صفر
-        else if(Auth::user()->type==6)
+        else if(Auth::user()->type==6 || Auth::user()->type==4)
         {
 
             $statics=$this->get_staticsCountUsers_admin();
@@ -574,6 +574,9 @@ class UserController extends BaseController
         $expert_followup = user::where(function ($query) {
             $query->orwhere('type', '=', 2)
                     ->orwhere('type', '=', 3)
+                    ->orwhere('type', '=', 5)
+                    ->orwhere('type', '=', 6)
+                    ->orwhere('type', '=', 7)
                     ->orwhere('type', '=', 4);
         })
         ->get();

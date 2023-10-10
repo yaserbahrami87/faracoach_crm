@@ -265,14 +265,12 @@
                         @endif
                     </td>
                     <td>
-
                         {{$item->count()}}
                     </td>
 
                     <td class="text-center">
                         {{$item->count_followups}}
                     </td>
-
 
                     <td class="text-center">
 
