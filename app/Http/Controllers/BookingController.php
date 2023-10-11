@@ -785,10 +785,31 @@ class BookingController extends BaseController
                                         ->where('status','=',1)
                                         ->get();
 
+        $absent_customer_booking=reserve::wherebetween('created_at',$date_en)
+                                        ->where('status','=',5)
+                                        ->get();
+
+        $absent_coach_booking=reserve::wherebetween('created_at',$date_en)
+                                        ->where('status','=',6)
+                                        ->get();
+
+        $cancel_customer_booking=reserve::wherebetween('created_at',$date_en)
+                                        ->where('status','=',41)
+                                        ->get();
+        $cancel_coach_booking=reserve::wherebetween('created_at',$date_en)
+                                        ->where('status','=',42)
+                                        ->get();
+
+
+
         return view('admin.booking.reportAllCoach')
                         ->with('reserveBooking',$reserveBooking)
                         ->with('successBooking',$successBooking)
                         ->with('appointments_booking',$appointments_booking)
+                        ->with('absent_customer_booking',$absent_customer_booking)
+                        ->with('absent_coach_booking',$absent_coach_booking)
+                        ->with('cancel_customer_booking',$cancel_customer_booking)
+                        ->with('cancel_coach_booking',$cancel_coach_booking)
                         ->with('cancelBooking',$cancelBooking);
     }
 

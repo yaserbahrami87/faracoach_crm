@@ -77,6 +77,20 @@
 
         <div class="col-12">
             <div class="row">
+                <div class="col-12" >
+                    <small>جستجو اعضا</small>
+                    <form method="GET" action="/admin/users/search/">
+                        {{csrf_field()}}
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="جستجو..." name="q" lang="fa"/>
+                            <div class="input-group-prepend">
+                                <button class="btn btn-outline-secondary text-light" type="submit">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
                 <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 mb-3" id="app">
                     <form method="GET" action="/panel">
                         <div class="form-group">
