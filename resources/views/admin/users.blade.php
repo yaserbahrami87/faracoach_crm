@@ -194,7 +194,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    {{substr($item->created_at,0,10)}}
+                                    {{$item->changeTimestampToShamsi(substr($item->created_at,0,10))}}
                                 </td>
                                 <td class="p-0 text-center">
                                     @if(!is_null($item->last_followupUser))
@@ -215,7 +215,7 @@
                                 </td>
                                 <td class="p-0">
                                     <a href="/admin/user/{{$item->id}}" class="text-dark d-block">
-                                        {{$item->last_login_at}}
+                                        {{$item->changeTimestampToShamsi($item->last_login_at)}}
                                     </a>
                                 </td>
                                 <td>

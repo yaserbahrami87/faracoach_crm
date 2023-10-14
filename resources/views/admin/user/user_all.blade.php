@@ -218,7 +218,7 @@
                                 </td>
                                 <td class="p-0">
                                     <a href="/admin/user/{{$item->id}}" class="text-dark d-block">
-                                        {{$item->last_login_at}}
+                                        {{$item->changeTimestampToShamsi($item->last_login_at)}}
                                     </a>
                                 </td>
                                 <td>

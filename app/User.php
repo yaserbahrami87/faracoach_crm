@@ -304,5 +304,35 @@ class User extends Authenticatable implements MustVerifyEmail
         }
 
 
+    //تبدیل تاریخ شمسی به میلادی
+    public function changeTimestampToMilad($date)
+    {
+
+        $dateShamsi=Verta::parse(str_replace('-','/',$date));
+
+        $dateMiladi= (Verta::getGregorian($dateShamsi->year,$dateShamsi->month,$dateShamsi->day));
+
+
+        if(($dateMiladi[1]>0) && ($dateMiladi[1]<10))
+        {
+            $dateMiladi[1]='0'.$dateMiladi[1];
+        }
+        if(($dateMiladi[2]>0) && ($dateMiladi[2]<10))
+        {
+            $dateMiladi[2]='0'.$dateMiladi[2];
+        }
+
+        $dateMiladi=($dateMiladi[0].'-'.$dateMiladi[1].'-'.$dateMiladi[2]);
+        return $dateMiladi;
+    }
+
+    //تبدیل تاریخ میلادی به شمسی
+    public function changeTimestampToShamsi($date)
+    {
+        $dateMiladi=new verta($date);
+        return ($dateMiladi->hour.":".$dateMiladi->minute."  ".$dateMiladi->year."/".$dateMiladi->month."/".$dateMiladi->day);
+    }
+
+
 
 }

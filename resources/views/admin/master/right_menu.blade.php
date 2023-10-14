@@ -27,11 +27,8 @@
             <li class=" nav-item"><a href="/panel"><span class="menu-title">داشبورد</span></a></li>
             <li class=" nav-item has-sub"><a href="#"><span class="menu-title" >کاربرها</span></a>
                 <ul class="menu-content">
-                    <li><a href=" nav-item has-sub "><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >همه کاربرها</span></a>
-                        <ul class="menu-content">
-                            <li><a href="/admin/users/all" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >همه کاربرها</span></a></li>
-                        </ul>
-                    </li>
+                    <li><a href="/admin/users/all" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >همه کاربرها</span></a></li>
+
                     <li><a href="/admin/users"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" > کاربرهای {{Auth::user()->fname}}</span></a></li>
                     <li><a href="/admin/add"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >کاربر جدید</span></a></li>
                     <li><a href="/admin/users/excel"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >اضافه کردن از طریق اکسل</span></a></li>

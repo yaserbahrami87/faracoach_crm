@@ -74,6 +74,7 @@
                     <h5 class="modal-title" id="staticBackdropLabel">تکمیل پروفایل</h5>
                 </div>
                 <div class="modal-body">
+                    <p>لطفا جهت ادامه اطلاعات زیر را تکمیل نمایید:</p>
                     <form method="post" action="/panel/profile/update/{{Auth::user()->id}}" enctype="multipart/form-data">
                         {{csrf_field()}}
                         {{method_field('PATCH')}}

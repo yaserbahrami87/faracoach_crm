@@ -767,7 +767,7 @@ Route::resource('event','EventController');
 
 
 //reserve test
-Route::get('/r/test','ReserveController@test');
+//Route::get('/r/test','ReserveController@test');
 
 
 Route::get('/v2/home',function(){
@@ -776,7 +776,7 @@ Route::get('/v2/home',function(){
 
 
 //test User
-Route::get('/test1','UserController@test1');
+//Route::get('/test1','UserController@test1');
 
 //blog
 Route::get('/{username}','PostController@blogHomePage');
