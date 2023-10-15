@@ -249,7 +249,8 @@ Route::middleware('can:isEducation')->group(function () {
 
 
 
-Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
+Route::middleware('can:isAdmin')->prefix('admin')->group(function ()
+{
 //Route::group(['middleware' => ['can:isEducation','can:isAdmin']], function() {
 
     // user
@@ -477,6 +478,8 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function () {
     Route::get('/reserve/waiting','ReserveController@waiting');
 
     //Notification
+    Route::resource('notification','NotificationController');
+
     Route::get('user/notification/login_without_reserve','UserController@login_without_reserve');
 
     //feedback Coach

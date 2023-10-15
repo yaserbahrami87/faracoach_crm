@@ -46,6 +46,7 @@ use nusoap_client;
 
 
 
+
 class BaseController extends Controller
 {
     public function __construct() {
@@ -54,6 +55,8 @@ class BaseController extends Controller
         $this->timeNow = $dateNow->format('H:i:s');
         //ایجاد لاگ در سیستم
 //        visitor()->visit();
+
+
 
 
     }
@@ -2076,7 +2079,7 @@ class BaseController extends Controller
         }
     }
 
-    public function send_notification($user,$notification)
+    public function send_notification($user,$notification,$post_id=NULL,$type=NULL)
     {
         notification::create([
             'user_id'           =>$user,
@@ -2084,6 +2087,8 @@ class BaseController extends Controller
             'notification'      =>$notification,
             'date_fa'           =>$this->dateNow,
             'time_fa'           =>$this->timeNow,
+            'post_id'           =>$post_id,
+            'type'              =>$type,
         ]);
     }
 

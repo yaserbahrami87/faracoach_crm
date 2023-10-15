@@ -150,7 +150,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
         public function notifications()
         {
-            return $this->hasMany('App\notification');
+            return $this->hasMany('App\notification')->orderby('id','desc');
         }
 
         public function coach()

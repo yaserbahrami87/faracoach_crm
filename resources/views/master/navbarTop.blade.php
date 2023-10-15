@@ -46,7 +46,7 @@
             @if(request()->is('coach/*') &&(Auth::check()))
                 <li class="nav-item ">
                     <a class="nav-link"  href="/cart" >
-                        <span class="badge badge-light">{{$cart->count()}}</span>
+                        <span class="badge badge-light"></span>
                         <i class="bi bi-cart-fill"></i>
                     </a>
                 </li>

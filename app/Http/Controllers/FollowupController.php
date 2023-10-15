@@ -51,7 +51,6 @@ class FollowupController extends BaseController
      */
     public function store(Request $request)
     {
-
         $this->validate($request,[
             'insert_user_id'        =>'required|numeric',
             'course_id'             =>'required|numeric',
@@ -89,6 +88,14 @@ class FollowupController extends BaseController
 
         $data=$this->get_user_byID($request['user_id']);
         $data->type=$request['status_followups'];
+
+
+        if($request['followby_expert']!=$data->followby_expert)
+        {
+            $this->send_notification($request['followby_expert'],$data->fname." ".$data->lname." به شما توسط  ".Auth::user()->fname.' '.Auth::user()->lname." ارجاع داده شد ",$data->id,'user');
+        }
+
+
         $data->followby_expert=$request['followby_expert'];
         $data->tel_verified=1;
         $data->save();
