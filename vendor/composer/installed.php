@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '3948e2b3d8fc12a50e427fca8ba5e4f121688ca1',
+        'reference' => '8f4893a9531f812fb1cd8f018e1b25371fbbc762',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -285,6 +285,15 @@
             'reference' => '8c3d0a3f6af734494ad8f6fbbee0ba92422859f3',
             'dev_requirement' => true,
         ),
+        'haruncpi/laravel-user-activity' => array(
+            'pretty_version' => 'v1.0.6',
+            'version' => '1.0.6.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../haruncpi/laravel-user-activity',
+            'aliases' => array(),
+            'reference' => '5055fd4a03edc39a1eea8d2d1cbdef3ed007da52',
+            'dev_requirement' => false,
+        ),
         'hekmatinasser/notowo' => array(
             'pretty_version' => 'v1.0.1',
             'version' => '1.0.1.0',
@@ -561,7 +570,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '3948e2b3d8fc12a50e427fca8ba5e4f121688ca1',
+            'reference' => '8f4893a9531f812fb1cd8f018e1b25371fbbc762',
             'dev_requirement' => false,
         ),
         'laravel/tinker' => array(

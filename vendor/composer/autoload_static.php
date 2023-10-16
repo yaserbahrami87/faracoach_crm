@@ -162,6 +162,7 @@ class ComposerStaticInitf54d8edf51459297346cdb00d8423a68
         array (
             'Hekmatinasser\\Verta\\' => 20,
             'Hekmatinasser\\Notowo\\' => 21,
+            'Haruncpi\\LaravelUserActivity\\' => 29,
         ),
         'G' => 
         array (
@@ -498,6 +499,10 @@ class ComposerStaticInitf54d8edf51459297346cdb00d8423a68
         array (
             0 => __DIR__ . '/..' . '/hekmatinasser/notowo/src',
         ),
+        'Haruncpi\\LaravelUserActivity\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/haruncpi/laravel-user-activity/src',
+        ),
         'GuzzleHttp\\Psr7\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
@@ -708,6 +713,7 @@ class ComposerStaticInitf54d8edf51459297346cdb00d8423a68
         'App\\Http\\Controllers\\CheckoutController' => __DIR__ . '/../..' . '/app/Http/Controllers/CheckoutController.php',
         'App\\Http\\Controllers\\CityController' => __DIR__ . '/../..' . '/app/Http/Controllers/CityController.php',
         'App\\Http\\Controllers\\ClinicBasicInfoController' => __DIR__ . '/../..' . '/app/Http/Controllers/ClinicBasicInfoController.php',
+        'App\\Http\\Controllers\\ClinicController' => __DIR__ . '/../..' . '/app/Http/Controllers/ClinicController.php',
         'App\\Http\\Controllers\\CoachController' => __DIR__ . '/../..' . '/app/Http/Controllers/CoachController.php',
         'App\\Http\\Controllers\\CoachRequestController' => __DIR__ . '/../..' . '/app/Http/Controllers/CoachRequestController.php',
         'App\\Http\\Controllers\\CollabrationAcceptController' => __DIR__ . '/../..' . '/app/Http/Controllers/CollabrationAcceptController.php',
@@ -748,6 +754,7 @@ class ComposerStaticInitf54d8edf51459297346cdb00d8423a68
         'App\\Http\\Controllers\\ScholarshipPaymentController' => __DIR__ . '/../..' . '/app/Http/Controllers/ScholarshipPaymentController.php',
         'App\\Http\\Controllers\\ScientificSupportController' => __DIR__ . '/../..' . '/app/Http/Controllers/ScientificSupportController.php',
         'App\\Http\\Controllers\\ScoreController' => __DIR__ . '/../..' . '/app/Http/Controllers/ScoreController.php',
+        'App\\Http\\Controllers\\SessionSettingController' => __DIR__ . '/../..' . '/app/Http/Controllers/SessionSettingController.php',
         'App\\Http\\Controllers\\SettingbookingController' => __DIR__ . '/../..' . '/app/Http/Controllers/SettingbookingController.php',
         'App\\Http\\Controllers\\SettingscoreController' => __DIR__ . '/../..' . '/app/Http/Controllers/SettingscoreController.php',
         'App\\Http\\Controllers\\SettingsmsController' => __DIR__ . '/../..' . '/app/Http/Controllers/SettingsmsController.php',
@@ -845,6 +852,7 @@ class ComposerStaticInitf54d8edf51459297346cdb00d8423a68
         'App\\scholarship_payment' => __DIR__ . '/../..' . '/app/scholarship_payment.php',
         'App\\scientific_support' => __DIR__ . '/../..' . '/app/scientific_support.php',
         'App\\score' => __DIR__ . '/../..' . '/app/score.php',
+        'App\\session_setting' => __DIR__ . '/../..' . '/app/session_setting.php',
         'App\\settingbooking' => __DIR__ . '/../..' . '/app/settingbooking.php',
         'App\\settingscore' => __DIR__ . '/../..' . '/app/settingscore.php',
         'App\\settingsms' => __DIR__ . '/../..' . '/app/settingsms.php',
@@ -2326,6 +2334,15 @@ class ComposerStaticInitf54d8edf51459297346cdb00d8423a68
         'Hamcrest\\Type\\IsString' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Type/IsString.php',
         'Hamcrest\\Util' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Util.php',
         'Hamcrest\\Xml\\HasXPath' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Xml/HasXPath.php',
+        'Haruncpi\\LaravelUserActivity\\Console\\UserActivityDelete' => __DIR__ . '/..' . '/haruncpi/laravel-user-activity/src/Console/UserActivityDelete.php',
+        'Haruncpi\\LaravelUserActivity\\Console\\UserActivityInstall' => __DIR__ . '/..' . '/haruncpi/laravel-user-activity/src/Console/UserActivityInstall.php',
+        'Haruncpi\\LaravelUserActivity\\Controllers\\ActivityController' => __DIR__ . '/..' . '/haruncpi/laravel-user-activity/src/Controllers/ActivityController.php',
+        'Haruncpi\\LaravelUserActivity\\EventServiceProvider' => __DIR__ . '/..' . '/haruncpi/laravel-user-activity/src/EventServiceProvider.php',
+        'Haruncpi\\LaravelUserActivity\\Listeners\\LockoutListener' => __DIR__ . '/..' . '/haruncpi/laravel-user-activity/src/Listeners/LockoutListener.php',
+        'Haruncpi\\LaravelUserActivity\\Listeners\\LoginListener' => __DIR__ . '/..' . '/haruncpi/laravel-user-activity/src/Listeners/LoginListener.php',
+        'Haruncpi\\LaravelUserActivity\\Models\\Log' => __DIR__ . '/..' . '/haruncpi/laravel-user-activity/src/Models/Log.php',
+        'Haruncpi\\LaravelUserActivity\\ServiceProvider' => __DIR__ . '/..' . '/haruncpi/laravel-user-activity/src/ServiceProvider.php',
+        'Haruncpi\\LaravelUserActivity\\Traits\\Loggable' => __DIR__ . '/..' . '/haruncpi/laravel-user-activity/src/Traits/Loggable.php',
         'Hekmatinasser\\Notowo\\Notowo' => __DIR__ . '/..' . '/hekmatinasser/notowo/src/Notowo.php',
         'Hekmatinasser\\Notowo\\NotowoServiceProvider' => __DIR__ . '/..' . '/hekmatinasser/notowo/src/NotowoServiceProvider.php',
         'Hekmatinasser\\Verta\\Facades\\Verta' => __DIR__ . '/..' . '/hekmatinasser/verta/src/Facades/Verta.php',
