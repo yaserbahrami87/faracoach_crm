@@ -580,6 +580,9 @@
             <li class="nav-item" role="presentation">
                 <a class="nav-link" id="courses-tab" data-toggle="tab" href="#courses" role="tab" aria-controls="courses" aria-selected="false">دوره ها</a>
             </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="logs-tab" data-toggle="tab" href="#logs" role="tab" aria-controls="logs" aria-selected="false">تاریخچه</a>
+            </li>
 
         </ul>
         <div class="tab-content" id="myTabContent">
@@ -620,6 +623,8 @@
                 @endif
                 @include('admin.followups')
             </div>
+
+
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                 <a href="/admin/faktor/{{$user->id}}/create" class="btn btn-primary">ایجاد فاکتور</a>
                 <a href="/admin/invoice/{{$user->id}}/create" class="btn btn-primary">ایجاد پیش فاکتور</a>
@@ -641,9 +646,11 @@
             </div>
             <div class="tab-pane fade" id="courses" role="tabpanel" aria-labelledby="courses-tab">
                 @include('admin.user.courses')
-
-
             </div>
+            <div class="tab-pane fade" id="logs" role="tabpanel" aria-labelledby="logs-tab">
+                @include('admin.user.logs')
+            </div>
+
         </div>
 
     </div>

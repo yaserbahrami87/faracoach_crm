@@ -333,6 +333,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return ($dateMiladi->hour.":".$dateMiladi->minute."  ".$dateMiladi->year."/".$dateMiladi->month."/".$dateMiladi->day);
     }
 
+    public function logs()
+    {
+        return $this->hasMany('App\log')->orderby('id','desc');
+    }
+
 
 
 }
