@@ -90,7 +90,7 @@ class FollowupController extends BaseController
         $data->type=$request['status_followups'];
 
 
-        if($request['followby_expert']!=$data->followby_expert)
+        if(($request['followby_expert']!=$data->followby_expert)&&(!is_null($data->followby_expert)))
         {
             $this->send_notification($request['followby_expert'],$data->fname." ".$data->lname." به شما توسط  ".Auth::user()->fname.' '.Auth::user()->lname." ارجاع داده شد ",$data->id,'user');
         }
@@ -131,25 +131,21 @@ class FollowupController extends BaseController
             $t['flag']="1";
             $t->update();
 
-            $msg="پیگیری با موفقیت ثبت شد";
-            $errorStatus="success";
+            alert()->success('پیگیری با موفقیت ثبت شد')->persistent('بستن');
         }
         else
         {
-            $msg="خطا در ثبت";
-            $errorStatus="danger";
+            alert()->error('خطا در ثبت')->persistent('بستن');
         }
 
 
         if($request['followby_expert']==Auth::user()->id)
         {
-            return back()->with('msg',$msg)
-                ->with('errorStatus',$errorStatus);
+            return back();
         }
         else
         {
-            return redirect('/admin/users')->with('msg',$msg)
-                ->with('errorStatus',$errorStatus);
+            return redirect('/admin/users');
         }
 
     }
@@ -264,27 +260,27 @@ class FollowupController extends BaseController
     }
 
 //    این بخش برای پیدا کردن و پیاده سازی آخرین پیگیری های انجام شده در جدول است
-    public function test()
-    {
-        $follow=followup::get();
-        foreach ($follow as $item)
-        {
-            $t=followup::where('id','=',$item->id)   //    $this->get_followup($item->followups_id,NULL,NULL,NULL,"first");
-                        ->first();
-            $t->flag=0;
-            $t->update();
-        }
-
-        $follow=followup::get();
-        foreach ($follow as $item)
-        {
-            $t=followup::where('user_id','=',$item->user_id)
-                            ->orderby('id','desc')
-                            ->first();
-            $t->flag=1;
-            $t->update();
-        }
-    }
+//    public function test()
+//    {
+//        $follow=followup::get();
+//        foreach ($follow as $item)
+//        {
+//            $t=followup::where('id','=',$item->id)   //    $this->get_followup($item->followups_id,NULL,NULL,NULL,"first");
+//                        ->first();
+//            $t->flag=0;
+//            $t->update();
+//        }
+//
+//        $follow=followup::get();
+//        foreach ($follow as $item)
+//        {
+//            $t=followup::where('user_id','=',$item->user_id)
+//                            ->orderby('id','desc')
+//                            ->first();
+//            $t->flag=1;
+//            $t->update();
+//        }
+//    }
 
     public function createExcel()
     {
