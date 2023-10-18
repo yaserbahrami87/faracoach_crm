@@ -97,7 +97,8 @@ class CertificateController extends Controller
     public function get_certificate()
     {
 
-        if(Auth::user()->scholarship->confirm_exam==1 && Auth::user()->scholarship->confirm_webinar==1 )
+//        if(Auth::user()->scholarship->confirm_exam==1 && Auth::user()->scholarship->confirm_webinar==1 )
+        if(Auth::user()->scholarship->confirm_exam==1  )
         {
 
             if (is_null(Auth::user()->fname_en) || is_null(Auth::user()->lname_en)) {

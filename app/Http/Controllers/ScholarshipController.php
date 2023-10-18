@@ -1254,6 +1254,26 @@ class ScholarshipController extends BaseController
         return  view('knot.knot');
     }
 
+    public function create_exam(Request $request)
+    {
+        if(isset($request->introduce))
+        {
+            session()->put('introduce',$request->introduce);
+
+        }
+
+
+        if((Auth::check()))
+        {
+            if((!is_null(Auth::user()->scholarship)))
+            {
+                return redirect('/panel/scholarship/me');
+            }
+        }
+
+        return  view('exam.exam');
+    }
+
 
     public function updateregister(scholarship $scholarship,Request $request)
     {

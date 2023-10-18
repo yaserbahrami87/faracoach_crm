@@ -649,6 +649,9 @@ Route::get('/scholarship/cleartel','ScholarshipController@cleartel');
 Route::get('/knot/register','ScholarshipController@create_knot');
 Route::post('/knot/checkCode_knot','VerifyController@checkCode_knot');
 
+//exam
+Route::get('/exam/register','ScholarshipController@create_exam');
+Route::post('/exam/checkCode_knot','VerifyController@checkCode_exam');
 
 //checkout
 Route::get('/checkout/callback','CheckoutController@callback');

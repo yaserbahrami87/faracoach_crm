@@ -441,7 +441,7 @@
                             <label for="ts"> I agree</label><br />
                             -->
                             <button type="button" class="page-prev btn btn-danger col-12 col-md-3">قبلی</button>
-                            <button type="submit" class="page-next btn btn-success col-12 col-md-3" id="sendForm">پایان آزمون</button>
+                            <button type="submit" class="page-next btn btn-success col-12 col-md-3" id="sendForm">ارسال پاسخ ها</button>
                         </section>
                         <!--
                         <section class="page" style="margin:auto;text-align:center">
@@ -465,13 +465,40 @@
                 @endif
             @endforeach
 
-            @if(($scholarship->confirm_webinar==1) && ($scholarship->confirm_exam==1))
+            <h3 class="text-center">برای صدور مدرک آزمون باید نام و نام خانوادگی خود را به انگلیسی وارد کنید</h3>
+
+
+
+
+            {{-- @if(($scholarship->confirm_webinar==1) && ($scholarship->confirm_exam==1)) --}}
+            @if( ($scholarship->confirm_exam==1))
                 <p>برای کسب مدرک ICF بورسیه کوچینگ باید مراحل زیر را طی کنید:</p>
                 <ul>
+                    <!--
                     <li>شرکت در وبینار آموزشی بورسیه کوچینگ و وارد کرد کد های داده شده در بخش آموزش</li>
+                    -->
                     <li>شرکت در آزمون بورسیه کوچینگ و کسب نمره قبولی در آزمون</li>
                     <li>وارد کردن نام و نام خانوادگی خود به صورت انگلیسی در قسمت پروفایل</li>
                 </ul>
+
+                <form method="post" action="/panel/profile/update/{{$scholarship->user->id}}" enctype="multipart/form-data" class="mb-4">
+                    {{method_field('PATCH')}}
+                    {{csrf_field()}}
+                    <div class="col-md-6 px-1">
+                        <div class="form-group">
+                            <label>نام انگلیسی<span class="text-danger font-weight-bold">*</span></label>
+                            <input type="text" class="form-control @if(strlen($scholarship->user->fname_en)<>0) is-valid @endif" placeholder="نام انگلیسی را وارد کنید" @if(old('fname_en'))   value='{{old('fname_en')}}' @else value="{{old('fname_en',$scholarship->user->fname_en) }}" @endif name="fname_en"  autocomplete="autocomplete"  @if(strlen($scholarship->user->fname_en)<>0) disabled @endif />
+                        </div>
+                    </div>
+                    <div class="col-md-6 px-1">
+                        <div class="form-group">
+                            <label>نام خانوادگی انگلیسی<span class="text-danger font-weight-bold">*</span></label>
+                            <input type="text" class="form-control @if(strlen($scholarship->user->lname_en)<>0) is-valid @endif" placeholder="نام خانوادگی انگلیسی را وارد کنید" @if(old('lname_en')) value='{{old('lname_en')}}' @else value="{{old('lname_en',$scholarship->user->lname_en)}}" @endif name="lname_en"   autocomplete="autocomplete" @if(strlen($scholarship->user->lname_en)<>0) disabled @endif/>
+                        </div>
+                    </div>
+                    <input type="submit" class="btn btn-success " value="بروزرسانی">
+                </form>
+
                 <div class="text-center">
                         <a href="{{asset('/panel/scholarship/certificate/download')}}" class="btn btn-primary">دانلود گواهینامه</a>
                 </div>

@@ -86,14 +86,15 @@
 
 @section('content')
     <div class="col-md-12">
-        <ul class="nav nav-tabs d-none d-sm-flex " id="myTab" role="tablist">
+        <ul class="nav nav-tabs  " id="myTab" role="tablist">
             @if($scholarship->resource=='knot')
-                <li class="nav-item" role="learn">
-                    <button class="nav-link active @if($scholarship->confirm_webinar==1) bg-success @endif" id="learn-tab" data-toggle="tab" data-target="#learn" type="button" role="tab" aria-controls="learn" aria-selected="false">دوره آموزشی</button>
-                </li>
                 <li class="nav-item" role="exam">
-                    <button class="nav-link @if($scholarship->confirm_exam==1) bg-success @endif " id="exam-tab" data-toggle="tab" data-target="#exam" type="button" role="tab" aria-controls="exam" aria-selected="false">آزمون و گواهینامه</button>
+                    <button class="nav-link active @if($scholarship->confirm_exam==1) bg-success @endif " id="exam-tab" data-toggle="tab" data-target="#exam" type="button" role="tab" aria-controls="exam" aria-selected="false">آزمون و گواهینامه</button>
                 </li>
+                <li class="nav-item" role="learn">
+                    <button class="nav-link  @if($scholarship->confirm_webinar==1) bg-success @endif" id="learn-tab" data-toggle="tab" data-target="#learn" type="button" role="tab" aria-controls="learn" aria-selected="false">دوره آموزشی</button>
+                </li>
+
                 <li class="nav-item" role="presentation">
                     <button class="nav-link  " id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">توضیحات بورسیه</button>
                 </li>
@@ -201,16 +202,15 @@
             <div class="tab-pane fade" id="introduce" role="tabpanel" aria-labelledby="introduce-tab">
                 @include('user.scholarship.introduce')
             </div>
-            <div class="tab-pane fade @if($scholarship->resource=='knot') show active  @endif" id="learn" role="tabpanel" aria-labelledby="learn-tab">
+            <div class="tab-pane fade " id="learn" role="tabpanel" aria-labelledby="learn-tab">
                 @include('user.scholarship.learn')
             </div>
             <div class="tab-pane fade " id="introductionLetter" role="tabpanel" aria-labelledby="introductionLetter-tab">
                 @include('user.scholarship.introductionLetter')
             </div>
 
-            <div class="tab-pane fade " id="exam" role="tabpanel" aria-labelledby="exam-tab">
+            <div class="tab-pane fade @if($scholarship->resource=='knot') show active  @endif " id="exam" role="tabpanel" aria-labelledby="exam-tab">
                 @include('user.scholarship.exam')
-
             </div>
             <div class="tab-pane fade " id="interview" role="tabpanel" aria-labelledby="interview-tab">
                 <div class="card-body" >
@@ -259,6 +259,8 @@
         </div>
     </div>
 
+
+    {{--
     <div class="col-12 nav_position_bottom d-block d-sm-none " dir="ltr" style="position: fixed;bottom: 0px;background-color: #F2F4F4">
         <div role="presentation" role="home">
             <button class="btn btn-primary" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">توضیحات</button>
@@ -301,6 +303,7 @@
             <button class="btn btn-primary" id="support-tab" data-toggle="tab" data-target="#support" type="button" role="tab" aria-controls="support" aria-selected="false">پشتیبان</button>
         </div>
     </div>
+    --}}
 @endsection
 
 
