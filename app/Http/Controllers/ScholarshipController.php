@@ -158,7 +158,7 @@ class ScholarshipController extends BaseController
                 $msg = Auth::user()->fname . ' ' . Auth::user()->lname . " عزیز\nدرخواست شما ثبت شد\nمنتظر تایید اولیه اطلاعات باشید\nلینک دعوت از دوستان و کسب امتیاز معرفی: " . "my.faracoach.com/scholarship/register?introduce=" . Auth::user()->id;
                 $this->sendSms(Auth::user()->tel, $msg);
 //            $this->sendSms(Auth::user()->tel,'شماره پیگیری بورسیه فراکوچ:'.$trackingCode."\nلینک اختصاصی شما جهت دعوت در بورسیه:\n "."my.faracoach.com/scholarship/register?introduce=".Auth::user()->id);
-                $this->sendSms('09153159020', $status->id . ' بورسیه:' . Auth::user()->fname . ' ' . Auth::user()->lname . "\nتحصیلات:\n " . Auth::user()->education);
+                //$this->sendSms('09153159020', $status->id . ' بورسیه:' . Auth::user()->fname . ' ' . Auth::user()->lname . "\nتحصیلات:\n " . Auth::user()->education);
                 alert()->success("ثبت نام شما در بورسیه فراکوچ با موفقیت انجام شد \nکد پیگیری شما $trackingCode")->persistent('بستن');
                 $request->session()->forget('scholarshipStatus');
                 return redirect('/panel');
