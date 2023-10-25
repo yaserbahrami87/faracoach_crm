@@ -63,6 +63,7 @@ class statistics extends Command
         $checkoutToday=checkout::where('created_at','like','%'.$date_jalali.'%')
                             ->where('status','=',1)
                             ->sum('price');
+        $checkoutToday=number_format($checkoutToday);
 
         $msg="گره:$knot_users \nبورسیه:$scholarship_users \nسایر:$other_users \nمشتری:$customer \nواریز:$checkoutToday";
 
