@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\checkout;
+use App\followup;
 use App\Http\Controllers\BaseController;
 use App\User;
 use Illuminate\Console\Command;
@@ -53,7 +54,8 @@ class statistics extends Command
             ->where('created_at','like',$date_jalali.'%')
             ->count();
 
-        $customer=User::where('type','=',20)
+        $customer=followup::where('status_followups','=',20)
+            ->where('created_at','like',$date_jalali.'%')
             ->count();
 
 
