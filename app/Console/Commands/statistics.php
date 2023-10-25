@@ -67,7 +67,7 @@ class statistics extends Command
         $msg="گره:$knot_users \nبورسیه:$scholarship_users \nسایر:$other_users \nمشتری:$customer \nواریز:$checkoutToday";
 
         $BaseController->sendSms('09376578529',$msg);
-        $BaseController->sendSms('09153159020',$msg);
+        $BaseController->sendSms('09120769020',$msg);
 
     }
 }
