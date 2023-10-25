@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\sendSms::class,
         Commands\todayBirthday::class,
+        Commands\statistics::class,
     ];
 
     /**

@@ -78,7 +78,6 @@ class sendSms extends Command
                     $cost = $r->cost;
                 }
 
-
                 $msg=[];
 
             }
