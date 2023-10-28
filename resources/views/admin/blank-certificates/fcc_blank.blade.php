@@ -120,7 +120,7 @@
         <img src="{{public_path('documents/users/'.$student->user->personal_image)}}" class="images" style="width:300px;height:360px;position:absolute;margin-top:260px;padding-left:605px;border-radius:20px 20px 20px 20px" />
     @endif
 
-    <p class="code" >{{$student->code}}</p>
+    <p class="code" >{{$student->identify_code}}</p>
 
     <div class="row">
         <div class="col-12">

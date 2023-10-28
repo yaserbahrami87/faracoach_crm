@@ -8,7 +8,7 @@ class student extends Model
 {
     protected $fillable=
         [
-            'user_id','course_id','type','status','date_fa','time_fa','code','date_gratudate'
+            'user_id','course_id','type','status','date_fa','time_fa','code','date_gratudate','identify_code'
         ];
 
     public function course()

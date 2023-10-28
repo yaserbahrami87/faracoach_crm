@@ -39,6 +39,10 @@
                     <label for="code">شماره دانشجویی</label>
                     <input type="text" class="form-control" id="code" name="code" value="{{$student->code}}"/>
                 </div>
+                <div class="form-group">
+                    <label for="code">کد کارت شناسایی</label>
+                    <input type="text" class="form-control" id="code" name="identify_code" value="{{$student->identify_code}}"/>
+                </div>
 
                 <div class="form-group">
                     <label for="date_gratudate">تاریخ فارغ التحصیلی</label>
