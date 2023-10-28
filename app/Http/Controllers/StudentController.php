@@ -123,7 +123,7 @@ class StudentController extends BaseController
             'date_fa'           =>'nullable|string',
             'status'            =>'required|numeric',
             'code'              =>'required|unique:students,code,' . $student->id,
-            'identify_code'     =>'required|unique:students,identify_code,' . $student->id,
+            'identify_code'     =>'nullable|unique:students,identify_code,' . $student->id,
             'date_gratudate'    =>'required_if:status,==,3|max:11',
         ]);
 
