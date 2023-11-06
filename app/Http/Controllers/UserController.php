@@ -47,7 +47,7 @@ class UserController extends BaseController
     {
 
         //نیروهای مدیر
-        if(Auth::user()->type==2)
+        if(Auth::user()->type==2 ||Auth::user()->type==5 )
         {
             $users=User::where(function($query)
                         {
@@ -127,7 +127,6 @@ class UserController extends BaseController
 
 
         }
-
 
         //نیروهای کلینیک
         elseif(Auth::user()->type==4)
