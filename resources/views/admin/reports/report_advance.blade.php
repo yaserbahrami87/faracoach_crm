@@ -13,7 +13,6 @@
         }
 
     </style>
-
 @endsection
 @section('content')
     <div class="col-12">

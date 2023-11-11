@@ -28,7 +28,7 @@ class AuthServiceProvider extends ServiceProvider
 
         $gate->define('isUser',function($user)
         {
-            return $user->type <>2 || $user->type <>3 || $user->type!=4 || $user->type!=5|| $user->type!=6;
+            return $user->type !=2 || $user->type !=3 || $user->type!=4 || $user->type!=5|| $user->type!=6 ||$user->type!=7;
         });
 
 //        $gate->define('isEducation',function($user)
@@ -37,7 +37,7 @@ class AuthServiceProvider extends ServiceProvider
 //        });
         $gate->define('isAdmin',function($user)
         {
-            return $user->type==2 || $user->type==3 || $user->type==4 || $user->type==5|| $user->type==6;
+            return $user->type==2 || $user->type==3 || $user->type==4 || $user->type==5|| $user->type==6 || $user->type==7;
         });
 
 

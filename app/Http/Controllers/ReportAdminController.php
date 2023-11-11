@@ -51,16 +51,17 @@ class ReportAdminController extends BaseController
      */
     public function show(User $user, Request $request)
     {
+
         if (isset($_GET['range']))
         {
             $this->validate($request, [
                 'start_date' => 'required|string',
             ]);
             $request['start_date'] = explode(' ~ ', $request['start_date']);
+
         } else {
             $dateNow = verta();
             $request['start_date'] = [$dateNow->startMonth()->format('Y/m/d'), $dateNow->endMonth()->format('Y/m/d')];
-
         }
 
         if (isset($request['start_date'])) {
@@ -112,6 +113,7 @@ class ReportAdminController extends BaseController
 
     public function allReportsUsers(Request $request)
     {
+
         if (isset($request['range'])) {
             $this->validate($request, [
                 'start_date' => 'required|string',
@@ -332,11 +334,12 @@ class ReportAdminController extends BaseController
 
     public function advanceReport_create()
     {
+
+
         $states = $this->states();
         $userType = user_type::get();
         $users=User::groupby('resource')
             ->get();
-
 
 
 
@@ -348,6 +351,7 @@ class ReportAdminController extends BaseController
 
     public function advanceReport(Request $request)
     {
+
         $this->validate($request, [
             'range_date' => 'nullable|string',
             'gender' => 'nullable|array',

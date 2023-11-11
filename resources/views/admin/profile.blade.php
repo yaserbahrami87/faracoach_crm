@@ -606,15 +606,19 @@
                 </div>
 
                 @if((Auth::user()->type==2)||(Auth::user()->type==4))
+
                     @include('admin.insertFollowUp')
                      <hr/>
                 @elseif(((Auth::user()->type==3)||(Auth::user()->type==4)||(Auth::user()->type==5)||(Auth::user()->type==7)) &&(Auth::user()->id==$user->followby_expert))
+
                     @include('admin.insertFollowUp')
                     <hr/>
                 @elseif((Auth::user()->type==6)&&((Auth::user()->id==$user->followby_expert)||is_null($user->followby_expert)))
+
                     @include('admin.insertFollowUp')
                     <hr/>
                 @elseif((Auth::user()->id==$user->followby_expert||is_null($user->followby_expert))&& $user->type!=5)
+
                     <div class="alert alert-warning">
                         <i class="bi bi-exclamation-triangle-fill"></i>
                         کاربر مربوط به شما یا بخش شما نمی باشد
