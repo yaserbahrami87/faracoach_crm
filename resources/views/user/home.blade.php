@@ -215,7 +215,7 @@
                                         @endphp
                                     @endif
 
-                                    @if(is_null(Auth::user()->state)&&($i!=2))
+                                    @if((is_null(Auth::user()->state)||is_null(Auth::user()->city)) &&($i!=2))
                                         <div class="col-md-6 pl-1">
                                             <div class="form-group">
                                                 <label>استان</label>
@@ -227,13 +227,6 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        @php
-                                            $i++;
-                                        @endphp
-                                    @endif
-
-
-                                    @if(is_null(Auth::user()->city)&&($i!=2))
 
                                         <div class="col-md-6 px-1">
                                             <div class="form-group">
