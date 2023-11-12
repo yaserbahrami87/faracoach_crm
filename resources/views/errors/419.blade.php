@@ -1,5 +1,5 @@
-@extends('errors::minimal')
+@extends('master.index')
 
-@section('title', __('Page Expired'))
-@section('code', '419')
-@section('message', __('Page Expired'))
+@section('row1')
+    <script>window.location = "/";</script>
+@endsection
