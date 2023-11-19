@@ -803,7 +803,7 @@ class ScholarshipController extends BaseController
         if($status)
         {
             $msg=Auth::user()->fname.' '.Auth::user()->lname."\n فرم بورسیه را اصلاح کرد";
-            $this->sendSms("09153159020",$msg);
+//            $this->sendSms("09153159020",$msg);
 
             alert()->success('اطلاعات با موفقیت ثبت شد')->persistent('بستن');
         }
@@ -837,7 +837,7 @@ class ScholarshipController extends BaseController
         if($status)
         {
             $msg=Auth::user()->fname.' '.Auth::user()->lname."\n معرفی نامه را اصلاح کرد";
-            $this->sendSms("09153159020",$msg);
+//            $this->sendSms("09153159020",$msg);
             alert()->success('اطلاعات با موفقیت ثبت شد')->persistent('بستن');
         }
         else
@@ -1205,7 +1205,7 @@ class ScholarshipController extends BaseController
         if($status)
         {
             $this->sendSms(Auth::user()->tel,'درخواست های همکاری بورسیه شما جهت بررسی ارسال شد');
-            $this->sendSms('09153159020',Auth::user()->fname.' '.Auth::user()->lname." درخواست های همکاری خود را جهت بررسی ارسال کرد ");
+//            $this->sendSms('09153159020',Auth::user()->fname.' '.Auth::user()->lname." درخواست های همکاری خود را جهت بررسی ارسال کرد ");
             alert()->success('درخواست جهت بررسی ارسال شد')->persistent('بستن');
         }
         else
