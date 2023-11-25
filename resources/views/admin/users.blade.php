@@ -127,7 +127,7 @@
                             <th> پیگیری بعد</th>
                             <th>وضعیت</th>
                             <th>اخرین ورود</th>
-                            <th>وضعیت بورسیه</th>
+                            <th>تعداد ورود</th>
                             @if(Auth::user()->type==2)
                                 <th>حذف</th>
                             @endif
@@ -219,9 +219,7 @@
                                     </a>
                                 </td>
                                 <td>
-                                    @if((is_null($item->scholarship))&&($item->resource=='بورسیه تحصیلی'))
-                                        ثبت نام نشده
-                                    @endif
+                                    {{$item->logs->where('log_type','=','login')->count()}}
                                 </td>
 
 

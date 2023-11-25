@@ -10,6 +10,7 @@ use App\Notifications\LoginwithoutReserve;
 use App\reserve;
 use App\student;
 use App\User;
+use App\user_type;
 use GuzzleHttp\Client;
 use Haruncpi\LaravelUserActivity\Models\Log;
 use Illuminate\Support\Facades\Artisan;
@@ -580,6 +581,10 @@ class UserController extends BaseController
         })
         ->get();
 
+        $user_type=user_type::whereBetween('code',[1,10])
+                        ->get();
+
+
 
 
         $states = $this->states();
@@ -655,6 +660,7 @@ class UserController extends BaseController
                     ->with('parentCategory',$parentCategory)
                     ->with('courses',$courses)
                     ->with('cities',$cities)
+                    ->with('user_type',$user_type)
                     ->with('gettingKnow_child_list',$gettingKnow_child_list)
                     ->with('gettingKnow_parent_list',$gettingKnow_parent_list);
 
@@ -1324,22 +1330,19 @@ class UserController extends BaseController
                 'q.required'=>'برای جستجو یک مقدار وارد کنید'
             ]);
 
+        $users=User::orwhere('fname','like','%'.$request['q'].'%')
+                        ->orwhere('lname','like','%'.$request['q'].'%')
+                        ->orwhere('tel','like','%'.$request['q'].'%')
+                        ->orwhere('email','like','%'.$request['q'].'%')
+                        ->orderby('id','desc')
+                        ->get();
 
-        $users=User::leftjoin('followups','users.id','=','followups.user_id')
-                    ->orwhere('fname','like','%'.$request['q'].'%')
-                    ->orwhere('lname','like','%'.$request['q'].'%')
-                    ->orwhere('tel','like','%'.$request['q'].'%')
-                    ->orwhere('email','like','%'.$request['q'].'%')
-                    ->select('users.*')
-                    ->groupby('users.id')
-                    ->orderby('users.id','desc')
-//                    ->paginate($this->countPage());
-                    ->get();
 
-        foreach ($users as $item)
-        {
-            $item=$this->changeNumberToData($item);
-        }
+
+//        foreach ($users as $item)
+//        {
+//            $item=$this->changeNumberToData($item);
+//        }
 
         $tags=$this->get_tags();
 //        $parentCategory=$this->get_category('پیگیری');
