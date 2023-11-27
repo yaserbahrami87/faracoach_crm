@@ -101,7 +101,7 @@
                             <li><a href="/admin/clinic_basic_info/create_orientation" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >مدیریت گرایش ها</span></a></li>
                         </ul>
                     </li>
-                    <li><a href="/admin/coach_request" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >درخواست های همکاری</span></a></li>
+                    <li><a href="/admin/coach/request" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >درخواست های همکاری</span></a></li>
 
                     <li><a href=" nav-item has-sub "><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >کوچ ها</span></a>
                         <ul class="menu-content">
