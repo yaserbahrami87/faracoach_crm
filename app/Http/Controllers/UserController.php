@@ -377,6 +377,7 @@ class UserController extends BaseController
     //Register User by Admin
     public function register(Request $request)
     {
+
         $request['tel']=$this->convertPersianNumber($request->tel);
         $this->validate($request, [
             'fname'             => ['nullable','persian_alpha', 'string', 'max:30'],
@@ -419,6 +420,25 @@ class UserController extends BaseController
             'type'              =>$request['type']
 
         ]);
+
+        if(!is_null($request->description))
+        {
+            followup::create([
+                'user_id'               =>$status->id,
+                'course_id'             =>3,
+                'comment'               =>$request['description'],
+                'talktime'              =>0,
+                'problemfollowup_id'    =>12,
+                'status_followups'      =>11,
+                'tags'                  =>4,
+                'date_fa'               =>$this->dateNow,
+                'insert_user_id'        =>auth()->user()->id,
+                'nextfollowup_date_fa'  =>NULL,
+                'sms'                   =>NULL,
+                'time_fa'               =>$this->timeNow,
+                'datetime_fa'           =>$this->dateNow." ".$this->timeNow,
+            ]);
+        }
 
         if($status)
         {
