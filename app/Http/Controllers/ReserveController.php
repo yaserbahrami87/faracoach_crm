@@ -366,7 +366,7 @@ class ReserveController extends BaseController
 
                 //ارسال پیامک برای یوسفی
                 $msg=$duration . " \n " . $booking->start_date . " \n  " . $booking->start_time . "\n کوچ:" . $booking->coach->user->fname . " " . $booking->coach->user->lname . "\n مراجع ".Auth::user()->fname . " " . Auth::user()->lname . "\nتماس:" .Auth::user()->tel;
-                $this->sendSms('+989151060792', $msg);
+                $this->sendSms('+989198000747', $msg);
             } else {
                 alert()->error('خطا در محاسبه')->persistent('بستن');
                 return back();
@@ -467,8 +467,6 @@ class ReserveController extends BaseController
                     $this->sendSms($user->tel,$msg);
 
                 }
-
-
 
                 alert()->success('گزارش جلسه با موفقیت ثبت شد', 'پیام')->persistent('بستن');
             } else {
