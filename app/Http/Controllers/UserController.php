@@ -383,7 +383,7 @@ class UserController extends BaseController
             'fname'             => ['nullable','persian_alpha', 'string', 'max:30'],
             'lname'             => ['nullable','persian_alpha', 'string', 'max:30'],
             'email'             => ['nullable', 'string', 'email', 'max:150', 'unique:users'],
-            'sex'               => ['required','numeric'],
+            'sex'               => ['nullable','numeric'],
             'tel'               => ['required','unique:users'],
             'password'          => ['required', 'string', 'confirmed'],
             'tel_verified'      => ['required','boolean'],
@@ -391,7 +391,8 @@ class UserController extends BaseController
             'gettingknow'       => ['nullable','numeric'],
             'organization'      => ['nullable','persian_alpha'],
             'jobside'           => ['nullable','persian_alpha'],
-            'type'              => ['required','string']
+            'type'              => ['required','string'],
+            'instagram'         => ['nullable','string']
         ]);
 
         if(!isset($request['gettingknow']))
@@ -417,7 +418,8 @@ class UserController extends BaseController
             'insert_user_id'    =>Auth::user()->id,
             'organization'      => $request['organization'],
             'jobside'           => $request['jobside'],
-            'type'              =>$request['type']
+            'type'              =>$request['type'],
+            'instagram'         =>$request['instagram']
 
         ]);
 
