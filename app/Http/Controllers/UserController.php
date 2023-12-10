@@ -915,20 +915,6 @@ class UserController extends BaseController
                 break;
             case 'notfollowup_all':
                 $users =user::where('type','=',1)
-                            ->orwhere(function($query)
-                            {
-                                $query->orwherenull('fname')
-                                    ->orwherenull('lname')
-                                    ->orwherenull('sex')
-                                    ->orwherenull('email')
-                                    ->orwherenull('datebirth')
-                                    ->orwherenull('father')
-                                    ->orwherenull('codemelli')
-                                    ->orwherenull('education')
-                                    ->orwherenull('reshteh')
-                                    ->orwherenull('job');
-                            })
-
                             ->orderby('id','desc')
                             ->paginate();
 
