@@ -506,7 +506,7 @@
                                     <label>عنوان آشنایی</label>
                                     <select id="gettingknow" class="form-control p-0 @if(strlen($user->gettingknow)==0) is-invalid  @else is-valid  @endif  @error('gettingknow') is-invalid @enderror" name="gettingknow">
                                         <option selected disabled>انتخاب کنید</option>
-                                        @if(!is_null($user->get_gettingknow))
+                                        @if(!is_null($user->get_gettingknow) && (!is_null($user->get_gettingknow->parent)))
                                             @foreach($user->get_gettingknow->parent->child_lists as $item)
                                                 <option value="{{$item->id}}"  {{ old('gettingknow',$user->gettingknow)==$item->id ? 'selected='.'"'.'selected'.'"' : '' }}   >{{$item->category}}</option>
                                             @endforeach
