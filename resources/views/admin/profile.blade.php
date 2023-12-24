@@ -487,7 +487,7 @@
 
                                     @if(!is_null($user->get_gettingknow))
                                         @foreach($gettingKnow_parent_list as $item)
-                                            <option value="{{$item->id}}"  {{ old('gettingKnow_parent',$user->get_gettingknow->parent->id)==$item->id ? 'selected='.'"'.'selected'.'"' : '' }} >{{$item->category}}</option>
+                                            <option value="{{$item['id']}}"  {{ old('gettingKnow_parent',$user->get_gettingknow->parent['id'])==$item['id'] ? 'selected='.'"'.'selected'.'"' : '' }} >{{$item->category}}</option>
                                         @endforeach
                                     @else
                                         @foreach($gettingKnow_parent_list as $item)
