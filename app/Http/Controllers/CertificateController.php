@@ -370,7 +370,34 @@ class CertificateController extends Controller
 
 
 
+    public function attendance_certificate($user)
+    {
+        $user=User::where('id',$user)
+                    ->first();
+        if(!is_null($user))
+        {
+            ini_set('max_execution_time', 0);
+            $pdf=Pdf::loadView('admin.blank-certificates.attendance_certificate', array('student' => $user),[],[
+                'format'    =>[900,655],
 
+            ]);
+            $fileName=time().'_.pdf';
+
+//            $pdf->allow_charset_conversion=false;  // Set by default to TRUE
+
+
+            //$pdf->charset_in='UTF-8';
+
+            $pdf->save($fileName);
+
+            return response()->download(public_path($fileName))
+                             ->deleteFileAfterSend(true);
+        }
+        else
+        {
+            alert()->error('کاربر مورد نظر یافت نشد')->persistent('بستن');
+        }
+    }
 
 
 }

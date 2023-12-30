@@ -19,7 +19,8 @@ Route::post('/signupAjax', 'UserController@signupAjax');
 
 
 //Route::middleware(['can:isUser','verified'])->prefix('panel')->group(function () {
-Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
+Route::middleware(['can:isUser'])->prefix('panel')->group(function ()
+{
 
     // ROUTE USER
 
@@ -194,6 +195,14 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     // communication skill
     Route::get('/communication_skill','AssessmentController@communicationSkill_create');
 
+    //session_setting
+    route::resource('session_setting','SessionSettingController');
+    route::post('session_setting/store_counseling','SessionSettingController@store_Counseling');
+    route::post('session_setting/store_exam','SessionSettingsController@store_exam');
+
+
+
+
     //Download video webinar Integrity
     Route::get('/integrity/files',function()
     {
@@ -236,6 +245,13 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function () {
     route::resource('coach_request','CoachRequestController');
 
     Route::get('/clinic_basic_info/speciality/{clinic_basic_info}','ClinicBasicInfoController@ajax');
+
+
+    //Reports
+    Route::resource('report','ReportController');
+
+    Route::get('/clinic/show_all_meeting_request_reference','ReserveController@show_all_meeting_request_reference');
+    Route::get('/clinic/{tracking_code}/show','ReserveController@single_meeting_request');
 
 
 
@@ -305,6 +321,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function ()
     Route::post('/certificates/acsth/{student}','CertificateController@get_certificate_acsth');
     Route::post('/certificates/fcc/{student}','CertificateController@get_fcc');
     Route::post('/certificates/fc1/{student}','CertificateController@get_fc1byAdmin');
+    Route::get('/certificates/attendance/{user}','CertificateController@attendance_certificate');
 
     //Route Scholarship Interview
     Route::resource('scholarship_interview','ScholarshipInterviewController');
@@ -570,6 +587,15 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function ()
 
     Route::resource('clinic_basic_info','ClinicBasicInfoController');
 
+
+    //session_settings
+    route::resource('session_setting','SessionSettingsController');
+    route::get('/session_setting/admin_edit/{Session_settings}/edit','SessionSettingController@admin_edit');
+    route::get('/session_setting/admin_show/{Session_settings}','SessionSettingController@admin_show');
+    route::patch('/session_setting/admin_update/{Session_settings}','SessionSettingController@admin_update');
+    //clinic _ price_settings
+    route::resource('price_setting','PriceSettingController');
+
     //clinic _ User route
 
 
@@ -579,6 +605,12 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function ()
     Route::get('/jashn/list/exportexcel','LandPageController@exportExcel');
     Route::get('/jashn/user/options/{landPage}','LandPageController@optionsUser');
     Route::patch('/jashn/user/options/{landPage}/update','LandPageController@optionsUserUpdate');
+
+    //Porsline
+    Route::prefix('porsline')->group(function()
+    {
+        Route::get('/','PorslineController@index');
+    });
 
 
 });
@@ -684,6 +716,8 @@ Route::resource('booking','BookingController');
 
 //reserve
 Route::post('/reserve/insert', 'ReserveController@insert');
+Route::post('/reserve/insert/{User}/insert_introduction', 'ReserveController@insert_introduction');
+Route::post('/reserve/insert/{User}', 'ReserveController@insert');
 Route::resource('reserve','ReserveController');
 
 
@@ -710,6 +744,7 @@ Route::get('/showListChildGettingKnow/{id}','CategoryGettingknowController@showL
 Route::post('/coupon/check','CouponController@check');
 Route::post('/coupon/checkoff','CouponController@checkOff');
 Route::post('/coupon/checkCoupon','CouponController@checkCoupon');
+Route::post('/coupon/destroy','CouponController@destroySession');
 
 //TWEETS
 Route::resource('tweets','TweetController');
