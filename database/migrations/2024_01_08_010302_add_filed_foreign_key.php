@@ -31,7 +31,7 @@ class AddFiledForeignKey extends Migration
      */
     public function down()
     {
-        Schema::table('=exams', function (Blueprint $table) {
+        Schema::table('exams', function (Blueprint $table) {
             $table->dropForeign('certificate_id');
         });
     }

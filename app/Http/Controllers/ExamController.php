@@ -172,11 +172,11 @@ class ExamController extends BaseController
     {
         $this->validate($request,
             [
-                'title'     =>'required|string|max:200',
-                'answer1'   =>'required|string|max:200',
-                'answer2'   =>'required|string|max:200',
-                'answer3'   =>'required|string|max:200',
-                'answer4'   =>'required|string|max:200',
+                'title'     =>'required|string',
+                'answer1'   =>'required|string',
+                'answer2'   =>'required|string',
+                'answer3'   =>'required|string',
+                'answer4'   =>'required|string',
                 'correct'   =>'required|numeric|between:1,4',
                 'score'     =>'required|numeric|between:0,100',
             ]);
