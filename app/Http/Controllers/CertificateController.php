@@ -24,7 +24,10 @@ class CertificateController extends Controller
      */
     public function index()
     {
+        $certificates=certificate::get();
 
+        return view('admin.Certificates.Certificates')
+                        ->with('certificates',$certificates);
     }
 
     /**
@@ -262,6 +265,7 @@ class CertificateController extends Controller
 
         $pdf=Pdf::loadView('admin.blank-certificates.acsth', array('student' => $student),[],[
             'format'    =>[900,655],
+            'dpi'       =>300
 
         ]);
 

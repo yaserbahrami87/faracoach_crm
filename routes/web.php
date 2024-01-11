@@ -152,6 +152,7 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function ()
     Route::patch('/knot/updateregister/{scholarship}','ScholarshipController@updateregister');
 
     //Certificates
+
     Route::get('/level1/certificate','CertificateController@get_certificate1');
     Route::get('/scholarship/certificate/download','CertificateController@get_certificate');
 
@@ -239,6 +240,12 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function ()
     //faktors
     Route::resource('faktor','FaktorController');
 
+    //exams
+    Route::get('/exam/{exam}','ExamController@show');
+    Route::post('/exam/{exam}','ExamController@answer_store');
+
+
+
     //Clinic
     route::get('/coach_request/requests','CoachRequestController@requests');
     route::get('/coach_request/requests/{coach_request}/pending','CoachRequestController@pending_user');
@@ -322,12 +329,26 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function ()
     Route::post('/certificates/fcc/{student}','CertificateController@get_fcc');
     Route::post('/certificates/fc1/{student}','CertificateController@get_fc1byAdmin');
     Route::get('/certificates/attendance/{user}','CertificateController@attendance_certificate');
+    Route::resource('/certificate','CertificateController');
+
+    //exams
+    Route::get('/exam/{exam}/questions','ExamController@ExamQuetions_show');
+    Route::post('/exam/{exam}/questions','ExamController@ExamQuetions_store');
+
+    Route::get('/exam/{exam}/questions/create','ExamController@ExamQuetions_create');
+    Route::resource('exam','ExamController');
+
+    //exam Questions
+    Route::resource('examQuestion','ExamQuestionController');
 
     //Route Scholarship Interview
     Route::resource('scholarship_interview','ScholarshipInterviewController');
 
     //scholarship Exam
     Route::get('/scholarship/certificate/{user}/download','CertificateController@get_certificateByAdmin');
+
+    //Take Exam
+    Route::resource('takeExam','TakeExamController');
 
     //Scholarship setting
     Route::resource('collabration_category','CollabrationCategoryController');
@@ -348,6 +369,8 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function ()
     Route::post('/invoice/{user}/store','InvoiceController@store');
     Route::get('/invoice/course/{course}','InvoiceController@course');
     Route::resource('invoice','InvoiceController');
+
+
 
 
 
@@ -460,12 +483,6 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function ()
 
     //score
     Route::resource('settingscore','SettingscoreController');
-
-
-
-
-
-
 
 
     //documents
