@@ -297,7 +297,7 @@ class ExamController extends BaseController
         else
         {
             $statusExam=0;
-            $status_msg="رد";
+            $status_msg="عدم قبولی";
         }
 
         $takeExam=Auth::user()->takeExams()->create(
@@ -321,9 +321,9 @@ class ExamController extends BaseController
         }
         else
         {
-            $msg=Auth::user()->fname.' '.Auth::user()->lname." عزیز "."\n"."نتیجه آزمون شما: $score "."\n"."وضعیت: $status_msg"."\n"."آکادمی بین المللی فراکوچ";
+            $msg=Auth::user()->fname.' '.Auth::user()->lname." عزیز "."\n"."نمره شما: $score "."\n"."وضعیت: $status_msg"."\n"."برای آزمون مجدد با پشتیبانی روابط عمومی ارتباط بگیرید. 09197060068"."آکادمی بین المللی فراکوچ";
             Auth::user()->notify(new sendMessageNotification(Auth::user()->tel,$msg));
-            alert()->warning('نمر شما در آزمون '.$score.' می باشد. متاسفانه شما حداقل نمره قبولی در آزمون رو کسب نکردید')->persistent('بستن');
+            alert()->warning('نمره شما: '.$score.' می باشد. متاسفانه شما حداقل نمره قبولی در آزمون را کسب نکرده اید.برای آزمون مجدد با پشتیبانی روابط عمومی ارتباط بگیرید.09197060068')->persistent('بستن');
         }
 
 
