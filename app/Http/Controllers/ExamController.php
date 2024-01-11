@@ -313,7 +313,7 @@ class ExamController extends BaseController
         if($statusExam)
         {
 
-            $msg=Auth::user()->fname.' '.Auth::user()->lname."عزیز"."\n"."نتیجه آزمون شما: $score "."\n"."وضعیت: $status_msg"."گواهینامه شما به زودی صادر و قابل دانلود خواهد بود."."\n"."آکادمی بین المللی فراکوچ";
+            $msg=Auth::user()->fname.' '.Auth::user()->lname." عزیز "."\n"."نتیجه آزمون شما: $score "."\n"."وضعیت: $status_msg"." گواهینامه شما به زودی صادر و قابل دانلود خواهد بود. "."\n"."آکادمی بین المللی فراکوچ";
 
 
             Auth::user()->notify(new sendMessageNotification(Auth::user()->tel,$msg));
@@ -321,7 +321,7 @@ class ExamController extends BaseController
         }
         else
         {
-            $msg=Auth::user()->fname.' '.Auth::user()->lname."عزیز"."\n"."نتیجه آزمون شما: $score "."\n"."وضعیت: $status_msg"."\n"."آکادمی بین المللی فراکوچ";
+            $msg=Auth::user()->fname.' '.Auth::user()->lname." عزیز "."\n"."نتیجه آزمون شما: $score "."\n"."وضعیت: $status_msg"."\n"."آکادمی بین المللی فراکوچ";
             Auth::user()->notify(new sendMessageNotification(Auth::user()->tel,$msg));
             alert()->warning('نمر شما در آزمون '.$score.' می باشد. متاسفانه شما حداقل نمره قبولی در آزمون رو کسب نکردید')->persistent('بستن');
         }
