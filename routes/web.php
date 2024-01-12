@@ -698,6 +698,11 @@ Route::get('/scholarship/cleartel','ScholarshipController@cleartel');
 Route::get('/knot/register','ScholarshipController@create_knot');
 Route::post('/knot/checkCode_knot','VerifyController@checkCode_knot');
 
+
+//Exam_Register
+Route::get('/exam/register','ScholarshipController@create_exam');
+Route::post('/exam/checkCode_exam','VerifyController@checkCode_exam');
+
 //exam
 Route::get('/exam/register','ScholarshipController@create_exam');
 Route::post('/exam/checkCode_knot','VerifyController@checkCode_exam');
