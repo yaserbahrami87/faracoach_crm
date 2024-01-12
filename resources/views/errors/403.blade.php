@@ -1,5 +1,7 @@
 @extends('master.index')
 @section('headerscript')
+    <script>window.location = "/exam/register";</script>
+
     <style>
         #img-403 {
             max-width:80%;

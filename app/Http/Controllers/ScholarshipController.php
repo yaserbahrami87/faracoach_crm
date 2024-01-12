@@ -1266,13 +1266,12 @@ class ScholarshipController extends BaseController
 
         if((Auth::check()))
         {
-            if((!is_null(Auth::user()->scholarship)))
-            {
-                return redirect('/panel/scholarship/me');
-            }
+
+            return redirect('/panel/exam/1');
+
         }
 
-        return  view('exam.exam');
+        return  view('exam.exam1');
     }
 
 
