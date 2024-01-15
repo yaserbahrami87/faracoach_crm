@@ -233,7 +233,7 @@
                     @foreach($last_users as $item)
                     <div class="avatar pb-3 d-inline">
                         @if(strlen($item->personal_image)>0)
-                            <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="border mr-3 rounded-circle"  width="50px" height="50px"  alt="{{$item->fname}} {{$item->lname}}" data-toggle="tooltip" data-placement="top" title="{{$item->fname}} {{$item->lname}}" />
+                            <img src="{{asset('/documents/users/small-'.$item->personal_image)}}" class="border mr-3 rounded-circle"  width="50px" height="50px"  alt="{{$item->fname}} {{$item->lname}}" data-toggle="tooltip" data-placement="top" title="{{$item->fname}} {{$item->lname}}" />
                         @else
                             <img src="{{asset('/documents/users/default-avatar.png')}}" class="border mr-3 rounded-circle"  width="50px" height="50px"  alt="{{$item->fname}} {{$item->lname}}" title="{{$item->fname}} {{$item->lname}}" data-toggle="tooltip" data-placement="top" />
                         @endif
@@ -252,7 +252,7 @@
                     @foreach($birthday as $item)
                         <div class="avatar pb-3 d-inline">
                             @if(strlen($item->personal_image)>0)
-                                <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="border mr-3 rounded-circle"  width="50px" height="50px"  alt="{{$item->fname}} {{$item->lname}} " data-toggle="tooltip" data-placement="top" title="{{$item->fname}} {{$item->lname}}" />
+                                <img src="{{asset('/documents/users/small-'.$item->personal_image)}}" class="border mr-3 rounded-circle"  width="50px" height="50px"  alt="{{$item->fname}} {{$item->lname}} " data-toggle="tooltip" data-placement="top" title="{{$item->fname}} {{$item->lname}}" />
                             @else
                                 <img src="{{asset('/documents/users/default-avatar.png')}}" class="border mr-3 rounded-circle"  width="50px" height="50px"  alt="{{$item->fname}} {{$item->lname}}" title="{{$item->fname}} {{$item->lname}} " data-toggle="tooltip" data-placement="top" />
                             @endif
@@ -265,7 +265,7 @@
         @if(Auth::check())
                 <div class="card-body p-0">
                     <div class="media pb-2 pt-2">
-                        <img src="{{asset('/documents/users/'.Auth::user()->personal_image)}}" class="mr-3 rounded-circle"  width="50px" height="50px" alt="...">
+                        <img src="{{asset('/documents/users/small-'.Auth::user()->personal_image)}}" class="mr-3 rounded-circle"  width="50px" height="50px" alt="...">
                         <div class="media-body pt-3">
                             <div class="custom-file">
                                 <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#newTweet" >نوشته جدید</button>
@@ -318,7 +318,7 @@
                 <div class="card-body">
                     <div class="media pb-2 pt-2">
                         @if(strlen($item->personal_image)>0)
-                        <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="mr-3 rounded-circle border"  width="50px" height="50px" alt="...">
+                        <img src="{{asset('/documents/users/small-'.$item->personal_image)}}" class="mr-3 rounded-circle border"  width="50px" height="50px" alt="...">
                         @else
                             <img src="{{asset('/documents/users/default-avatar.png')}}" class="mr-3 rounded-circle border"  width="50px" height="50px" alt="...">
                         @endif
@@ -370,7 +370,7 @@
                         <div class="avatar pb-3 d-inline">
                             <a href="/coach/{{$item->username}}">
                                 @if(strlen($item->personal_image)>0)
-                                    <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="mr-3 rounded-circle border"  width="50px" height="50px"  alt="{{$item->fname.' '.$item->lname}}" data-toggle="tooltip" data-placement="top" title="{{$item->fname.' '.$item->lname}}" />
+                                    <img src="{{asset('/documents/users/small-'.$item->personal_image)}}" class="mr-3 rounded-circle border"  width="50px" height="50px"  alt="{{$item->fname.' '.$item->lname}}" data-toggle="tooltip" data-placement="top" title="{{$item->fname.' '.$item->lname}}" />
                                 @else
                                     <img src="{{asset('/documents/users/default-avatar.png')}}" class="mr-3 rounded-circle border"  width="50px" height="50px"  alt="{{$item->fname.' '.$item->lname}}" title="{{$item->fname.' '.$item->lname}}" data-toggle="tooltip" data-placement="top" />
                                 @endif
