@@ -32,7 +32,7 @@
                                         @if(is_null($user->personal_image))
                                             <img src="{{asset('/documents/users/default-avatar.png')}}" class="border-2 border rounded-circle" width="124px" height="124px" />
                                         @else
-                                            <img src="{{asset('/documents/users/'.$user->personal_image)}}" class="border-2 border rounded-circle" width="124px" height="124px" />
+                                            <img src="{{asset('/documents/users/thumbnail-'.$user->personal_image)}}" class="border-2 border rounded-circle" width="124px" height="124px" />
                                         @endif
                                     </div>
                                     <div class="col-12 col-md-12 col-sm-12 col-xl-12 col-lg-12 text-center">

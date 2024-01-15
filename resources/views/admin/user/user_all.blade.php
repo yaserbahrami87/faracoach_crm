@@ -149,7 +149,7 @@
                                         @if(is_null($item->personal_image))
                                             <img src="{{asset('/documents/users/default-avatar.png')}}" class="rounded-circle "  width="50px" height="50px" />
                                         @else
-                                            <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="rounded-circle  "  width="50px" height="50px" />
+                                            <img src="{{asset('/documents/users/thumbnail-'.$item->personal_image)}}" class="rounded-circle  "  width="50px" height="50px" />
                                         @endif
                                     </a>
                                 </td>
