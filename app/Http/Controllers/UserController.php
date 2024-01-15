@@ -746,14 +746,23 @@ class UserController extends BaseController
                 ]);
 
 
-            if ($request->has('personal_image') && $request->file('personal_image')->isValid()) {
+            if ($request->has('personal_image') && $request->file('personal_image')->isValid())
+            {
+
                 $file = $request->file('personal_image');
                 $personal_image = "personal-" . $user->tel . "." . $request->file('personal_image')->extension();
                 $path = public_path('documents/users/');
                 $files = $request->file('personal_image')->move($path, $personal_image);
-                $img=Image::make($files->getRealPath());
-                $img->resize(350,350);
-                $img->save($path.'small-'.$personal_image);
+                $img=Image::make($files->getRealPath())
+                    ->resize(300,null,function ($constraint) {
+                        $constraint->aspectRatio();
+                    })
+                    ->save($path.'small-'.$personal_image);
+                $img=Image::make($files->getRealPath())
+                    ->resize(50,null,function ($constraint) {
+                        $constraint->aspectRatio();
+                    })
+                    ->save($path.'thumbnail-'.$personal_image);
                 $request->personal_image = $personal_image;
             }
 
@@ -2153,18 +2162,54 @@ class UserController extends BaseController
 
     public function test1()
     {
-        $users=User::where('followby_expert','=',317)
+//        $users=User::where('followby_expert','=',317)
+//                    ->get();
+//        $a=[315,316];
+//
+//        $test=(array_rand($a));
+//        foreach ($users as $user)
+//        {
+//            $user->followby_expert=$a[$test];
+//            $user->save();
+//        }
+//
+//        echo " OK";
+
+        $users=User::WhereNotNull('personal_image')
                     ->get();
-        $a=[315,316];
+       foreach ($users as $user)
+       {
 
-        $test=(array_rand($a));
-        foreach ($users as $user)
-        {
-            $user->followby_expert=$a[$test];
-            $user->save();
-        }
+//           $file = $request->file('personal_image');
+//           $personal_image = "personal-" . $user->tel . "." . $request->file('personal_image')->extension();
+           $files=(public_path("documents/users/".$user->personal_image));
 
-        echo " OK";
+           $path = public_path('documents/users/');
+//           $files = $request->file('personal_image')->move($path, $personal_image);
+//           $img=Image::make($files->getRealPath())
+//               ->resize(300,null,function ($constraint) {
+//                   $constraint->aspectRatio();
+//               })
+//               ->save($path.'small-'.$personal_image);
+           if(file_exists(public_path('documents/users/').$user->personal_image))
+           {
+               $extension=pathinfo(public_path("documents/users/".$user->personal_image))['extension'];
+               if($extension=='jpg'||$extension=='jpeg'||$extension=='bmp' || $extension=='png' || $extension=='gif')
+               {
+                   $img=Image::make($files)
+                       ->resize(100,null,function ($constraint) {
+                           $constraint->aspectRatio();
+                       })
+                       ->save($path.'thumbnail-'.$user->personal_image);
+               }
+
+
+           }
+
+       }
+
+
+
 
     }
 
