@@ -156,6 +156,7 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function ()
     Route::get('/level1/certificate','CertificateController@get_certificate1');
     Route::get('/scholarship/certificate/download','CertificateController@get_certificate');
 
+
     //scientific supports
     Route::resource('scientific_support','ScientificSupportController');
 
@@ -240,9 +241,7 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function ()
     //faktors
     Route::resource('faktor','FaktorController');
 
-    //exams
-    Route::get('/exam/{exam}','ExamController@show');
-    Route::post('/exam/{exam}','ExamController@answer_store');
+
 
 
 
@@ -331,15 +330,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function ()
     Route::get('/certificates/attendance/{user}','CertificateController@attendance_certificate');
     Route::resource('/certificate','CertificateController');
 
-    //exams
-    Route::get('/exam/{exam}/questions','ExamController@ExamQuetions_show');
-    Route::post('/exam/{exam}/questions','ExamController@ExamQuetions_store');
 
-    Route::get('/exam/{exam}/questions/create','ExamController@ExamQuetions_create');
-    Route::resource('exam','ExamController');
-
-    //exam Questions
-    Route::resource('examQuestion','ExamQuestionController');
 
     //Route Scholarship Interview
     Route::resource('scholarship_interview','ScholarshipInterviewController');
@@ -347,8 +338,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function ()
     //scholarship Exam
     Route::get('/scholarship/certificate/{user}/download','CertificateController@get_certificateByAdmin');
 
-    //Take Exam
-    Route::resource('takeExam','TakeExamController');
+
 
     //Scholarship setting
     Route::resource('collabration_category','CollabrationCategoryController');
@@ -478,6 +468,10 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function ()
 
     //Setting SMS
     Route::resource('settingsms','SettingsmsController');
+
+    //introduced
+    Route::get('/introduced','UserController@introducedList');
+    Route::patch('/introduced/{User}','UserController@introduced');
 
 
 
@@ -699,13 +693,6 @@ Route::get('/knot/register','ScholarshipController@create_knot');
 Route::post('/knot/checkCode_knot','VerifyController@checkCode_knot');
 
 
-//Exam_Register
-Route::get('/exam/register','ScholarshipController@create_exam');
-Route::post('/exam/checkCode_exam','VerifyController@checkCode_exam');
-
-//exam
-Route::get('/exam/register','ScholarshipController@create_exam');
-Route::post('/exam/checkCode_knot','VerifyController@checkCode_exam');
 
 //checkout
 Route::get('/checkout/callback','CheckoutController@callback');
@@ -776,7 +763,7 @@ Route::get('/courses','CourseController@showCourses');
 Route::get('/courses/{course}','CourseController@show');
 
 //clinic
-Route::resource('/clinic','ClinicController');
+//Route::resource('/clinic','ClinicController');
 
 
 //LiKE
