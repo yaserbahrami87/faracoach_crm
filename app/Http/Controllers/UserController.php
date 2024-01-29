@@ -7,6 +7,7 @@ use App\city;
 use App\followup;
 use App\landPage;
 use App\Notifications\LoginwithoutReserve;
+use App\option;
 use App\reserve;
 use App\student;
 use App\User;
@@ -1268,13 +1269,7 @@ class UserController extends BaseController
     {
         $user=Auth::user();
         //چک کردن کاربر که آیا توافقنامه را تایید کردند
-        if($user->introduced_verified==0)
-        {
-            $options=$this->get_options();
-            return view('user.IntroducedVerified')
-                    ->with('options',$options);
-        }
-        else {
+
 
             if ($request->has('category')) {
                 //نمایش براساس دسته بندی افراد دعوت شده توسط کاربر
@@ -1323,18 +1318,19 @@ class UserController extends BaseController
                 }
             }
 
-            //تعداد افراد دعوت شده
-            $countIntroducedUser = User::where('introduced', '=', $user->id)
-                ->count();
+
 
             $listIntroducedUser->appends(['category' => $request['category']]);
             $getFollowbyCategory = $this->getFollowbyCategory();
+            $options=option::where('option_name','introduced_verify')
+                            ->first();
 
-            return view('user.listIntroducedUser')
+
+            return view('user.IntroducedVerified')
                 ->with('listIntroducedUser', $listIntroducedUser)
-                ->with('countIntroducedUser', $countIntroducedUser)
+                ->with('options', $options)
                 ->with('getFollowbyCategory', $getFollowbyCategory);
-        }
+
     }
 
     public function searchUsers(Request $request)
@@ -1833,19 +1829,49 @@ class UserController extends BaseController
             'introduced_verified'   =>'required|boolean'
         ]);
 
-        $user=Auth::user();
-        $user->introduced_verified=1;
-        $status=$user->save();
+        Auth::user()->introduced_verified=1;
+        $status=Auth::user()->save();
+
         if($status)
         {
-            alert()->success("شرایط و ضوابط بطور کامل توسط شما پذیرفته شد",'پیام')->persistent('بستن');
-            return redirect('/panel/introduced');
+            alert()->success("شرایط و ضوابط بطور کامل توسط شما پذیرفته شد. به زودی درخواست شما توسط مدیریت بررسی می شود.",'پیام')->persistent('بستن');
+            return redirect('/panel');
         }
         else
         {
             alert()->error("خطا در پذیرفتن شرایط و ضوابط ",'خطا')->persistent('بستن');
             return back();
         }
+    }
+
+    public function introducedList()
+    {
+        $users=User::whereIn('introduced_verified',[1,2])
+                    ->get();
+        return view('admin.IntroducedList')
+                        ->with('users',$users);
+    }
+
+    public function introduced(Request $request,User $User)
+    {
+
+        $request->validate([
+           'introduced_verified'    =>'required|numeric|between:0,2'
+        ]);
+
+        $User->introduced_verified=$request->introduced_verified;
+        $status=$User->save();
+        if($status)
+        {
+            alert()->success('با موفقیت تغییر کرد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در تغییر وضعیت')->persistent('بستن');
+        }
+
+        return back();
+
     }
 
     //نمایش اعضا براساس نحوه آشنایی برای ادمین
@@ -2202,8 +2228,6 @@ class UserController extends BaseController
                        })
                        ->save($path.'thumbnail-'.$user->personal_image);
                }
-
-
            }
 
        }

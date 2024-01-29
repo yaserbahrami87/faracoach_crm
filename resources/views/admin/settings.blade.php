@@ -99,3 +99,10 @@
 @include('panelAdmin.settingGettingknow')
 
 @endsection
+
+@section('footerScript')
+    <script src="http://127.0.0.1:8000/ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace( 'ckeditor' );
+    </script>
+@endsection
