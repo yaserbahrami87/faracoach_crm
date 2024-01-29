@@ -84,6 +84,11 @@
                         </ul>
                     </li>
                 </ul>
+                @foreach(Module::collections() as $module)
+                    @if(View::exists("{$module->getLowerName()}::admin.master.sidebar-item"))
+                        @include("{$module->getLowerName()}::admin.master.sidebar-item")
+                    @endif
+                @endforeach
             </li>
             <li class="nav-item"><a href="#"><span class="menu-title">مالی</span></a>
                 <ul class="menu-content">
@@ -102,6 +107,7 @@
                         </ul>
                     </li>
                     <li><a href="/admin/coach/request" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >درخواست های همکاری</span></a></li>
+                    <li><a href="/admin/introduced" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >درخواست های سفیرها</span></a></li>
 
                     <li><a href=" nav-item has-sub "><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >کوچ ها</span></a>
                         <ul class="menu-content">
