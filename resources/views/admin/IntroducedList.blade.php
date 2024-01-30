@@ -11,32 +11,74 @@
         <table class="table table-striped" id="example">
             <thead>
             <tr class="text-center">
-
+                <th>ردیف</th>
                 <th>نام و نام خانوادگی</th>
-                <th>تلفن</th>
-                <th>وضعیت</th>
+                <th >تلفن</th>
+
+                <th>تعداد دعوت</th>
+                <th>گروه</th>
                 <th>تغییر وضعیت</th>
             </tr>
             </thead>
             <tbody>
             @foreach($users as $user)
                 <tr class="text-center">
-
+                    <td>{{$loop->iteration}}</td>
                     <td >
                         <a href="/admin/user/{{$user->id}}">{{$user->fname.' '.$user->lname}}</a>
 
                     </td>
-                    <td>{{$user->tel}}</td>
+                    <td dir="ltr">{{$user->tel}}</td>
                     <td>
-                        @if($user->introduced_verified==1)
-                            در انتظار تایید
-                        @elseif($user->introduced_verified==2)
-                            تایید شده
-                        @endif
+                        <a href="#" data-toggle="modal" data-target="#invitationModal{{$user->id}}">
+                            <b> {{$user->get_invitations->count()}} نفر</b>
+                        </a>
+                        <!-- Modal invitation -->
+                        <div class="modal fade" id="invitationModal{{$user->id}}" tabindex="-1" aria-labelledby="invitationModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">دعوت شده ها</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table class="table table-bordered table-striped table-striped">
+                                            <tr>
+                                                <th>ردیف</th>
+                                                <th>عکس</th>
+                                                <th>نام و نام خانوادگی</th>
+                                                <th>تلفن</th>
+                                            </tr>
+
+                                            @foreach($user->get_invitations as $item)
+                                                <tr>
+                                                    <td>{{$loop->iteration}}</td>
+                                                    <td>
+                                                        <img src="{{asset('/documents/users/'.$item->personal_image)}}" width="50px" height="50px" class="rounded-circle" />
+                                                    </td>
+                                                    <td>
+                                                        <a href="/admin/user/{{$item->id}}" target="_blank">
+                                                            {{$item->fname.' '.$item->lname}}
+                                                        </a>
+                                                    </td>
+                                                    <td dir="ltr">{{$item->tel}}</td>
+                                                </tr>
+                                            @endforeach
+                                        </table>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </td>
 
 
-
+                    <td>{{$user->userType()}}</td>
                     <td>
                         <form method="post" action="/admin/introduced/{{$user->id}}">
                             {{csrf_field()}}
@@ -58,6 +100,7 @@
             @endforeach
             </tbody>
         </table>
+
     </div>
 @endsection
 

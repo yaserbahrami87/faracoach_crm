@@ -27,7 +27,7 @@
     display:flex;
 }
 .container .card .left-side{
-    width:35%;
+    width:25%;
     background-color:#304767;
     min-height:780px;
     border-top-right-radius:20px;
@@ -130,7 +130,7 @@
 }
 /*left-side-end*/
 .container .card .right-side{
-    width:65%;
+    width:75%;
     background-color:#fff;
     min-height:780px;
     border-top-left-radius:20px;
