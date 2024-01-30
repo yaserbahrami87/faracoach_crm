@@ -85,6 +85,7 @@
                             @foreach($user->students() as $student)
                                 <p> دوره {{$student->course->course}}</p>
                             @endforeach
+
                         @endif
                     </td>
                     <td>
