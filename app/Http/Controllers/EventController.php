@@ -120,38 +120,47 @@ class EventController extends BaseController
      */
     public function show(event $event,Request $request)
     {
-        if(isset($request->q))
+        if($event->start_date<=$this->dateNow)
         {
-            $request->session()->put('introduce',$request->q);
+            if(isset($request->q))
+            {
+                $request->session()->put('introduce',$request->q);
+            }
+
+
+
+            $d = explode('/', $event->start_date);
+            $t = explode(':', $event->start_time);
+            $v = (Verta::createJalali($d[0], $d[1], $d[2], $t[0], $t[1], 0));
+            $event->eventDate = ($v->format('%d %B Y  '));
+
+            $eventReserve = NULL;
+            if (Auth::check()) {
+                $eventReserve = $this->get_eventReserve(NULL, Auth::user()->id, $event->id, NULL, NULL, 'first');
+            }
+
+
+            if ($event->start_date < $this->dateNow) {
+                $event->status_event = "برگزار شد";
+            } else if (($event->start_date >= $this->dateNow) && ($event->capacity > 0)) {
+                $event->status_event = "در حال ثبت نام";
+            } else if ($event->start_date >= $this->dateNow && ($event->capacity == 0)) {
+                $event->status_event = "تکمیل ظرفیت";
+            }
+
+            $comments=$this->get_comments(NULL,NULL,$event->id,NULL,'event');
+
+            return view('event')
+                ->with('event', $event)
+                ->with('comments', $comments)
+                ->with('eventReserve', $eventReserve);
+        }
+        else
+        {
+            alert()->error('زمان ثبت نام در این رویداد به اتمام رسیده است')->persistent('بستن');
+            return back();
         }
 
-
-
-        $d = explode('/', $event->start_date);
-        $t = explode(':', $event->start_time);
-        $v = (Verta::createJalali($d[0], $d[1], $d[2], $t[0], $t[1], 0));
-        $event->eventDate = ($v->format('%d %B Y  '));
-
-        $eventReserve = NULL;
-        if (Auth::check()) {
-            $eventReserve = $this->get_eventReserve(NULL, Auth::user()->id, $event->id, NULL, NULL, 'first');
-        }
-
-
-        if ($event->start_date < $this->dateNow) {
-            $event->status_event = "برگزار شد";
-        } else if (($event->start_date >= $this->dateNow) && ($event->capacity > 0)) {
-            $event->status_event = "در حال ثبت نام";
-        } else if ($event->start_date >= $this->dateNow && ($event->capacity == 0)) {
-            $event->status_event = "تکمیل ظرفیت";
-        }
-
-        $comments=$this->get_comments(NULL,NULL,$event->id,NULL,'event');
-
-        return view('event')
-            ->with('event', $event)
-            ->with('comments', $comments)
-            ->with('eventReserve', $eventReserve);
     }
 
     /**
