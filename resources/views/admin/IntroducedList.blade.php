@@ -16,7 +16,7 @@
                 <th >تلفن</th>
 
                 <th>تعداد دعوت</th>
-                <th>گروه</th>
+                <th>دوره</th>
                 <th>تغییر وضعیت</th>
             </tr>
             </thead>
@@ -78,7 +78,15 @@
                     </td>
 
 
-                    <td>{{$user->userType()}}</td>
+                    <td>
+                        @if($user->students()->count()==0)
+                            کاربر عادی
+                        @else
+                            @foreach($user->students() as $student)
+                                <p> دوره {{$student->course->course}}</p>
+                            @endforeach
+                        @endif
+                    </td>
                     <td>
                         <form method="post" action="/admin/introduced/{{$user->id}}">
                             {{csrf_field()}}
