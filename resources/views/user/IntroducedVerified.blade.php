@@ -33,14 +33,7 @@
         {
             width: 950px;
         }
-        .container .card .left-side
-        {
-            width: 25%;
-        }
-        .container .card .right-side
-        {
-            width: 75%;
-        }
+
         .text p
         {
             color:#6a6c70;
@@ -77,6 +70,7 @@
                             <h6>  عزیزانتان را به مسیر شکوفایی دعوت کنید. </h6>
 
                             <p class="text-left"> طرح سفیران کوچینگ، جهت گسترش فرهنگ کوچینگ در جامعه و آشنایی افراد نخبه و مستعد جامعه و فارسی‌زبانان دنیا، به تمامیت همه کوچ‌های حرفه‌ای نیاز دارد.؛ افرادی که جایشان خالی است و به شدت مشتاق دیدارشان هستیم. کسانی هستند که هم وجود آنها برای کوچینگ و جامعه فرهیختگان کوچ¬های حرفه‌ای مناسب است و هم کوچینگ می‌تواند در سطوح مختلف به کمک آنها بیاید.</p>
+                            <img src="https://my.faracoach.com/images/introduced.jpg" width="50%" />
                             <h5 class="text-left"> 6 گروه عمده که کوچینگ برای آنها بسیار مفید است: </h5>
                             <b class="text-left d-block mb-1">دسته اول (دیدگاه توسعه غیرمالی و فردی):</b>
                             <ol class="text-left ml-2 " >
@@ -121,8 +115,9 @@
                                         <label class="d-inline form-check text-dark" for="introduced_verified">
                                             شرایط و قوانین  بالا را مطالعه کردم و قبول دارم
                                         </label>
-                                        <button type="submit" class="btn btn-success">موافقم</button>
+
                                     </div>
+                                    <button type="submit" class="btn btn-success d-block">موافقم</button>
                                 </form>
                             @endif
                         </div>
