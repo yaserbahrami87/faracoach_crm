@@ -120,7 +120,7 @@ class EventController extends BaseController
      */
     public function show(event $event,Request $request)
     {
-        if($event->start_date<=$this->dateNow)
+        if($event->start_date>=$this->dateNow)
         {
             if(isset($request->q))
             {
