@@ -82,8 +82,9 @@
                         @if($user->students()->count()==0)
                             کاربر عادی
                         @else
-                            @foreach($user->students() as $student)
-                                <p> دوره {{$student->course->course}}</p>
+
+                            @foreach($user->students as $student)
+                                <p> {{$student->course->course}}</p>
                             @endforeach
 
                         @endif
