@@ -2231,8 +2231,8 @@ class UserController extends BaseController
     public function test1()
     {
         DB::table('users')
-
-            ->update(['introduced_verified' => 0]);
+            ->where('created_at','like','%2024-02-27%')
+            ->update(['resource' => 'تست خودارزیابی']);
 
         return back();
 
