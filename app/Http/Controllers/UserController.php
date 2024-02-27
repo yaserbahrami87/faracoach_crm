@@ -15,6 +15,7 @@ use App\user_type;
 use GuzzleHttp\Client;
 use Haruncpi\LaravelUserActivity\Models\Log;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -1800,15 +1801,15 @@ class UserController extends BaseController
                 $item['email']=NULL;
             }
 
-            $item['tel']=$this->convertPersianNumber($item['tel']);
-            $count=user::orwhere('tel','=',$item['tel'])
+            $item['tel']="+98".$this->convertPersianNumber($item['tel']);
+            $user=user::orwhere('tel','=',$item['tel'])
                         ->when($item['email'],function($query,$item)
                         {
                             return $query->orwhere('email', '=', $item);
                         })
-                        ->count();
+                        ->first();
 
-            if($count==0)
+            if(is_null($user))
             {
                 $item['password']=Hash::make('1234');
                 $status=user::create($item);
@@ -1816,7 +1817,47 @@ class UserController extends BaseController
                 {
                     $i++;
                 }
+            }
+            else
+            {
+                $check=followup::create(
+                    [
+                        'user_id'               =>$user->id,
+                        'insert_user_id'        =>1,
+                        'course_id'             =>3,
+                        'comment'               =>'حضور در آزمون تست ارزیابی',
+                        'talktime'              =>0,
+                        'problemfollowup_id'    =>6,
+                        'status_followups'      =>11,
+                        'date_fa'               =>$this->dateNow,
+                        'insert_user_id'        =>auth()->user()->id,
+                        'nextfollowup_date_fa'  =>$this->dateNow,
+                        'time_fa'               =>$this->dateNow,
+                        'datetime_fa'           =>$this->dateNow." ".$this->timeNow
+                    ]);
+                    $user->type=11;
+                    $user->tel_verified=1;
+                    $user->save();
 
+
+                    $tmp=followup::where('user_id','=',$user->id)
+                                        ->get();
+
+                    if($tmp)
+                    {
+                        foreach ($tmp as $item)
+                        {
+                            $t=followup::where('id','=',$item->id)   //    $this->get_followup($item->followups_id,NULL,NULL,NULL,"first");
+                                        ->first();
+                            $t->flag=0;
+                            $t->update();
+                        }
+                    }
+                    $t=followup::where('id','=',$check->id)
+                                    ->first();
+
+                    $t['flag']="1";
+                    $t->update();
             }
         }
         alert()->success("تعداد".$i."نفر وارد بانک اطلاعاتی شدند",'پیام')->persistent('بستن');
@@ -1834,6 +1875,7 @@ class UserController extends BaseController
 
         if($status)
         {
+			$this->sendSms('09153159020', Auth::user()->tel. "درخواست به عنوان سفیر را ثبت کرد. ");
             alert()->success("شرایط و ضوابط بطور کامل توسط شما پذیرفته شد. به زودی درخواست شما توسط مدیریت بررسی می شود.",'پیام')->persistent('بستن');
             return redirect('/panel');
         }
@@ -2188,6 +2230,13 @@ class UserController extends BaseController
 
     public function test1()
     {
+        DB::table('users')
+
+            ->update(['introduced_verified' => 0]);
+
+        return back();
+
+
 //        $users=User::where('followby_expert','=',317)
 //                    ->get();
 //        $a=[315,316];
@@ -2205,18 +2254,10 @@ class UserController extends BaseController
                     ->get();
        foreach ($users as $user)
        {
-
-//           $file = $request->file('personal_image');
-//           $personal_image = "personal-" . $user->tel . "." . $request->file('personal_image')->extension();
            $files=(public_path("documents/users/".$user->personal_image));
 
            $path = public_path('documents/users/');
-//           $files = $request->file('personal_image')->move($path, $personal_image);
-//           $img=Image::make($files->getRealPath())
-//               ->resize(300,null,function ($constraint) {
-//                   $constraint->aspectRatio();
-//               })
-//               ->save($path.'small-'.$personal_image);
+
            if(file_exists(public_path('documents/users/').$user->personal_image))
            {
                $extension=pathinfo(public_path("documents/users/".$user->personal_image))['extension'];
