@@ -66,9 +66,9 @@
                                                         </td>
                                                         <td dir="ltr">{{$item->tel}}</td>
                                                         <td>
-                                                            @if($item->type==20)
-                                                                تبدیل به مشتری
-                                                            @endif
+                                                            {{$item->userType()}}
+
+
                                                         </td>
                                                         <td>{{$item->created_at}}</td>
                                                     </tr>
