@@ -1875,7 +1875,7 @@ class UserController extends BaseController
 
         if($status)
         {
-			$this->sendSms('09153159020', Auth::user()->tel. "درخواست به عنوان سفیر را ثبت کرد. ");
+			$this->sendSms('09153159020', Auth::user()->fname.' '.Auth::user()->lname. " درخواست به عنوان سفیر را ثبت کرد. ");
             alert()->success("شرایط و ضوابط بطور کامل توسط شما پذیرفته شد. به زودی درخواست شما توسط مدیریت بررسی می شود.",'پیام')->persistent('بستن');
             return redirect('/panel');
         }

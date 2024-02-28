@@ -32,7 +32,7 @@
 
                         <td>
                             <a href="#" data-toggle="modal" data-target="#invitationModal{{$user->id}}">
-                                <b> {{$user->get_invitations->count()}} نفر</b>
+                                <b>تعداد {{$user->get_invitations->where('type',20)->count()}} مشتری از   {{$user->get_invitations->count()}} نفر</b>
                             </a>
                             <!-- Modal invitation -->
                             <div class="modal fade modal" id="invitationModal{{$user->id}}" tabindex="-1" aria-labelledby="invitationModalLabel" aria-hidden="true">
