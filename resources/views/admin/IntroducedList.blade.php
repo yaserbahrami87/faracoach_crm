@@ -13,7 +13,7 @@
             <tr class="text-center">
                 <th>ردیف</th>
                 <th>نام و نام خانوادگی</th>
-                <th >تلفن</th>
+
                 <th>تعداد دعوت</th>
 
                 <th>دوره</th>
@@ -29,7 +29,7 @@
                             <a href="/admin/user/{{$user->id}}">{{$user->fname.' '.$user->lname}}</a>
 
                         </td>
-                        <td dir="ltr">{{$user->tel}}</td>
+
                         <td>
                             <a href="#" data-toggle="modal" data-target="#invitationModal{{$user->id}}">
                                 <b> {{$user->get_invitations->count()}} نفر</b>
