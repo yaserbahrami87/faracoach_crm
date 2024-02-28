@@ -35,8 +35,8 @@
                                 <b> {{$user->get_invitations->count()}} نفر</b>
                             </a>
                             <!-- Modal invitation -->
-                            <div class="modal fade" id="invitationModal{{$user->id}}" tabindex="-1" aria-labelledby="invitationModalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-lg">
+                            <div class="modal fade modal" id="invitationModal{{$user->id}}" tabindex="-1" aria-labelledby="invitationModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-xl">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="exampleModalLabel">دعوت شده ها</h5>
@@ -52,6 +52,9 @@
                                                     <th>نام و نام خانوادگی</th>
                                                     <th>وضعیت</th>
                                                     <th>تاریخ عضویت</th>
+                                                    <th>تعداد پیگیری</th>
+                                                    <th>تعداد ورود</th>
+                                                    <th>آخرین ورود</th>
                                                 </tr>
 
                                                 @foreach($user->get_invitations as $item)
@@ -68,7 +71,10 @@
                                                         <td>
                                                             {{$item->userType()}}
                                                         </td>
-                                                        <td>{{$item->created_at}}</td>
+                                                        <td>{{substr($item->changeTimestampToShamsi($item->created_at),7) }}</td>
+                                                        <td>{{$item->followups->count()}}</td>
+                                                        <td>{{$item->logs->where('log_type','login')->count()}}</td>
+                                                        <td>{{substr($item->changeTimestampToShamsi($item->last_login_at),7) }}</td>
                                                     </tr>
                                                 @endforeach
                                             </table>
