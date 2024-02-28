@@ -13,11 +13,11 @@
             <tr class="text-center">
                 <th>ردیف</th>
                 <th>نام و نام خانوادگی</th>
-
                 <th>تعداد دعوت</th>
+                <th>خرید</th>
                 <th>آخرین دعوت شده</th>
                 <th>دوره</th>
-
+                <th>امتیاز</th>
                 <th>تغییر وضعیت</th>
             </tr>
             </thead>
@@ -87,6 +87,7 @@
                                 </div>
                             </div>
                         </td>
+                        <td></td>
                         <td>
                             @if(!is_null($user->get_invitations->last()))
                                 {{substr($user->get_invitations->last()->changeTimestampToShamsi($user->get_invitations->last()->created_at),7)}}
@@ -140,6 +141,7 @@
                                     </div>
                             @endif
                         </td>
+                        <td></td>
 
 
                         <td>
