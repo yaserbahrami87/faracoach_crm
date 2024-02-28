@@ -82,7 +82,7 @@
                             </div>
                         </td>
                         <td>
-                            @if(!is_null($user->get_invitations))
+                            @if(!is_null($user->get_invitations->last()))
                                 {{substr($user->get_invitations->last()->changeTimestampToShamsi($user->get_invitations->last()->created_at),7)}}
                             @endif
                         </td>
