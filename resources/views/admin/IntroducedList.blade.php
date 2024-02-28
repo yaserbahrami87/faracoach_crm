@@ -14,7 +14,8 @@
                 <th>ردیف</th>
                 <th>نام و نام خانوادگی</th>
                 <th>تعداد دعوت</th>
-                <th>خرید</th>
+                <th>تعداد مشتری</th>
+                <th>مبلغ خرید</th>
                 <th>آخرین دعوت شده</th>
                 <th>دوره</th>
                 <th>امتیاز</th>
@@ -32,7 +33,7 @@
 
                         <td>
                             <a href="#" data-toggle="modal" data-target="#invitationModal{{$user->id}}">
-                                <b>تعداد {{$user->get_invitations->where('type',20)->count()}} مشتری از   {{$user->get_invitations->count()}} نفر</b>
+                                <b>{{$user->get_invitations->count()}} نفر</b>
                             </a>
                             <!-- Modal invitation -->
                             <div class="modal fade modal" id="invitationModal{{$user->id}}" tabindex="-1" aria-labelledby="invitationModalLabel" aria-hidden="true">
@@ -87,6 +88,7 @@
                                 </div>
                             </div>
                         </td>
+                        <td>{{$user->get_invitations->where('type',20)->count()}}</td>
                         <td></td>
                         <td>
                             @if(!is_null($user->get_invitations->last()))
