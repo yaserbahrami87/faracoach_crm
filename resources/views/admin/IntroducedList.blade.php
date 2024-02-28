@@ -14,100 +14,145 @@
                 <th>ردیف</th>
                 <th>نام و نام خانوادگی</th>
                 <th >تلفن</th>
-
                 <th>تعداد دعوت</th>
                 <th>دوره</th>
                 <th>تغییر وضعیت</th>
             </tr>
             </thead>
             <tbody>
-            @foreach($users as $user)
-                <tr class="text-center">
-                    <td>{{$loop->iteration}}</td>
-                    <td >
-                        <a href="/admin/user/{{$user->id}}">{{$user->fname.' '.$user->lname}}</a>
+                @foreach($users as $user)
+                    <tr class="text-center">
+                        <td>{{$loop->iteration}}</td>
+                        <td >
+                            <a href="/admin/user/{{$user->id}}">{{$user->fname.' '.$user->lname}}</a>
 
-                    </td>
-                    <td dir="ltr">{{$user->tel}}</td>
-                    <td>
-                        <a href="#" data-toggle="modal" data-target="#invitationModal{{$user->id}}">
-                            <b> {{$user->get_invitations->count()}} نفر</b>
-                        </a>
-                        <!-- Modal invitation -->
-                        <div class="modal fade" id="invitationModal{{$user->id}}" tabindex="-1" aria-labelledby="invitationModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">دعوت شده ها</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <table class="table table-bordered table-striped table-striped">
-                                            <tr>
-                                                <th>ردیف</th>
-                                                <th>عکس</th>
-                                                <th>نام و نام خانوادگی</th>
-                                                <th>تلفن</th>
-                                            </tr>
-
-                                            @foreach($user->get_invitations as $item)
+                        </td>
+                        <td dir="ltr">{{$user->tel}}</td>
+                        <td>
+                            <a href="#" data-toggle="modal" data-target="#invitationModal{{$user->id}}">
+                                <b> {{$user->get_invitations->count()}} نفر</b>
+                            </a>
+                            <!-- Modal invitation -->
+                            <div class="modal fade" id="invitationModal{{$user->id}}" tabindex="-1" aria-labelledby="invitationModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">دعوت شده ها</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body table-responsive">
+                                            <table class="table table-bordered table-striped table-striped">
                                                 <tr>
-                                                    <td>{{$loop->iteration}}</td>
-                                                    <td>
-                                                        <img src="{{asset('/documents/users/'.$item->personal_image)}}" width="50px" height="50px" class="rounded-circle" />
-                                                    </td>
-                                                    <td>
-                                                        <a href="/admin/user/{{$item->id}}" target="_blank">
-                                                            {{$item->fname.' '.$item->lname}}
-                                                        </a>
-                                                    </td>
-                                                    <td dir="ltr">{{$item->tel}}</td>
+                                                    <th>ردیف</th>
+                                                    <th>عکس</th>
+                                                    <th>نام و نام خانوادگی</th>
+                                                    <th>تلفن</th>
+                                                    <th>وضعیت</th>
+                                                    <th>تاریخ عضویت</th>
                                                 </tr>
-                                            @endforeach
-                                        </table>
 
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
+                                                @foreach($user->get_invitations as $item)
+                                                    <tr>
+                                                        <td>{{$loop->iteration}}</td>
+                                                        <td>
+                                                            <img src="{{asset('/documents/users/'.$item->personal_image)}}" width="50px" height="50px" class="rounded-circle" />
+                                                        </td>
+                                                        <td>
+                                                            <a href="/admin/user/{{$item->id}}" target="_blank">
+                                                                {{$item->fname.' '.$item->lname}}
+                                                            </a>
+                                                        </td>
+                                                        <td dir="ltr">{{$item->tel}}</td>
+                                                        <td>
+                                                            @if($item->type==20)
+                                                                تبدیل به مشتری
+                                                            @endif
+                                                        </td>
+                                                        <td>{{$item->created_at}}</td>
+                                                    </tr>
+                                                @endforeach
+                                            </table>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </td>
+                        </td>
 
 
-                    <td>
-                        @if($user->students()->count()==0)
-                            کاربر عادی
-                        @else
+                        <td>
+                            @if($user->students()->count()==0)
+                                کاربر عادی
+                            @else
+                                <a href="#" data-toggle="modal" data-target="#courseModal{{$user->id}}">
+                                    <i class="bi bi-eye-fill"></i>
 
-                            @foreach($user->students as $student)
-                                <p> {{$student->course->course}}</p>
-                            @endforeach
+                                </a>
+                                <!-- Modal invitation -->
+                                    <div class="modal fade" id="courseModal{{$user->id}}" tabindex="-1" aria-labelledby="courseModalModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">دوره ها</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <table class="table table-bordered table-striped table-striped">
+                                                        <tr>
+                                                            <th>ردیف</th>
+                                                            <th>دوره</th>
 
-                        @endif
-                    </td>
-                    <td>
-                        <form method="post" action="/admin/introduced/{{$user->id}}">
-                            {{csrf_field()}}
-                            {{method_field('PATCH')}}
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <button class="btn btn-outline-secondary" type="submit">اعمال</button>
+                                                        </tr>
+
+                                                        @foreach($user->students as $student)
+                                                            <tr>
+                                                                <td>{{$loop->iteration}}</td>
+                                                                <td>
+                                                                    {{$student->course->course}}
+                                                                </td>
+
+                                                            </tr>
+                                                        @endforeach
+                                                    </table>
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            @endif
+                        </td>
+
+
+                        <td>
+                            <form method="post" action="/admin/introduced/{{$user->id}}">
+                                {{csrf_field()}}
+                                {{method_field('PATCH')}}
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <button class="btn btn-outline-secondary" type="submit">اعمال</button>
+                                    </div>
+                                    <select class="custom-select @if($user->introduced_verified==1) bg-warning @elseif($user->introduced_verified==2) bg-success @elseif($user->introduced_verified==0) bg-danger @endif " id="Introduced_verified" name="introduced_verified">
+                                        <option selected>انتخاب کنید</option>
+                                        <option value="1" @if($user->introduced_verified==1)  selected @endif >در انتظار تایید</option>
+                                        <option value="2" @if($user->introduced_verified==2) selected @endif >تایید شده</option>
+                                        <option value="0" @if($user->introduced_verified==0) selected @endif >رد شد</option>
+                                    </select>
                                 </div>
-                                <select class="custom-select @if($user->introduced_verified==1) bg-warning @elseif($user->introduced_verified==2) bg-success  @endif " id="Introduced_verified" name="introduced_verified">
-                                    <option selected>انتخاب کنید</option>
-                                    <option value="1" @if($user->introduced_verified==1)  selected @endif >در انتظار تایید</option>
-                                    <option value="2" @if($user->introduced_verified==2) selected @endif >تایید شده</option>
-                                </select>
-                            </div>
-                        </form>
+                            </form>
 
-                    </td>
-                </tr>
-            @endforeach
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
 

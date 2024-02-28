@@ -1888,8 +1888,10 @@ class UserController extends BaseController
 
     public function introducedList()
     {
+
         $users=User::whereIn('introduced_verified',[1,2])
                     ->get();
+
         return view('admin.IntroducedList')
                         ->with('users',$users);
     }
