@@ -1889,7 +1889,7 @@ class UserController extends BaseController
     public function introducedList()
     {
 
-        $users=User::whereIn('introduced_verified',[1,2])
+        $users=User::whereIn('introduced_verified',[1,2,3])
                     ->get();
 
         return view('admin.IntroducedList')
@@ -1900,7 +1900,7 @@ class UserController extends BaseController
     {
 
         $request->validate([
-           'introduced_verified'    =>'required|numeric|between:0,2'
+           'introduced_verified'    =>'required|numeric|between:1,3'
         ]);
 
         $User->introduced_verified=$request->introduced_verified;

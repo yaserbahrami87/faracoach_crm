@@ -139,11 +139,11 @@
                                     <div class="input-group-prepend">
                                         <button class="btn btn-outline-secondary" type="submit">اعمال</button>
                                     </div>
-                                    <select class="custom-select @if($user->introduced_verified==1) bg-warning @elseif($user->introduced_verified==2) bg-success @elseif($user->introduced_verified==0) bg-danger @endif " id="Introduced_verified" name="introduced_verified">
+                                    <select class="custom-select @if($user->introduced_verified==1) bg-warning @elseif($user->introduced_verified==2) bg-success @elseif($user->introduced_verified==3) bg-danger @endif " id="Introduced_verified" name="introduced_verified">
                                         <option selected>انتخاب کنید</option>
                                         <option value="1" @if($user->introduced_verified==1)  selected @endif >در انتظار تایید</option>
                                         <option value="2" @if($user->introduced_verified==2) selected @endif >تایید شده</option>
-                                        <option value="0" @if($user->introduced_verified==0) selected @endif >رد شد</option>
+                                        <option value="3" @if($user->introduced_verified==3) selected @endif >رد شد</option>
                                     </select>
                                 </div>
                             </form>
