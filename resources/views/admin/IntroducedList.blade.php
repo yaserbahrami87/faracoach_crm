@@ -15,6 +15,7 @@
                 <th>نام و نام خانوادگی</th>
                 <th >تلفن</th>
                 <th>تعداد دعوت</th>
+                <th>آخرین دعوت</th>
                 <th>دوره</th>
                 <th>تغییر وضعیت</th>
             </tr>
@@ -48,7 +49,6 @@
                                                     <th>ردیف</th>
                                                     <th>عکس</th>
                                                     <th>نام و نام خانوادگی</th>
-                                                    <th>تلفن</th>
                                                     <th>وضعیت</th>
                                                     <th>تاریخ عضویت</th>
                                                 </tr>
@@ -64,11 +64,8 @@
                                                                 {{$item->fname.' '.$item->lname}}
                                                             </a>
                                                         </td>
-                                                        <td dir="ltr">{{$item->tel}}</td>
                                                         <td>
                                                             {{$item->userType()}}
-
-
                                                         </td>
                                                         <td>{{$item->created_at}}</td>
                                                     </tr>
@@ -83,6 +80,7 @@
                                 </div>
                             </div>
                         </td>
+                        <td>{{$user->get_invitations->last()->created_at}}</td>
 
 
                         <td>
