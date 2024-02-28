@@ -15,7 +15,7 @@
                 <th>نام و نام خانوادگی</th>
 
                 <th>تعداد دعوت</th>
-
+                <th>آخرین دعوت شده</th>
                 <th>دوره</th>
 
                 <th>تغییر وضعیت</th>
@@ -80,6 +80,11 @@
                                     </div>
                                 </div>
                             </div>
+                        </td>
+                        <td>
+                            @if(!is_null($user->get_invitations))
+                                {{$user->get_invitations->last()->created_at}}
+                            @endif
                         </td>
 
 
