@@ -791,6 +791,16 @@ class VerifyController extends BaseController
             'code'  =>'required|numeric|digits:6',
         ]);
 
+        if(session()->has('introduce'))
+        {
+            $introduce=session('introduce');
+        }
+        else
+        {
+            $introduce=NULL;
+        }
+
+
         $status=verify::where('code','=',$request->code)
                     ->where('type','=','login/store')
                     ->where('verify','=',0)
@@ -836,7 +846,8 @@ class VerifyController extends BaseController
                 $user=User::create([
                     'tel'           =>$tel,
                     'email'         =>$email,
-                    'tel_verified'  =>1
+                    'tel_verified'  =>1,
+                    'introduced'    =>$introduce
                 ]);
 
 
@@ -878,7 +889,7 @@ class VerifyController extends BaseController
             if ($status)
             {
                 $request->session()->put('scholarshipStatus', 'true');
-                $message = "رمز یکبار مصرف شما در سیستم بورسیه فراکوچ : " . $six_digit_random_number;
+                $message = "رمز یکبار مصرف شما در سیستم فراکوچ : " . $six_digit_random_number;
                 $this->sendSms($request['tel'], $message);
 
 
