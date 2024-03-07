@@ -44,67 +44,74 @@ class EventreserveController extends BaseController
         ]);
         $event=$this->get_events($request->event_id,NULL,NULL,NULL,NULL,NULL,'first');
 
-        if($event->capacity!=0)
+        if(is_null(eventreserve::where('user_id',Auth::user()->id)->where('event_id',$event->id)->first()))
         {
-            if($event->fi==0 || is_null($event->fi)|| $event->fi=='')
+
+            if($event->capacity!=0)
             {
-                $status = eventreserve::create([
-                    'user_id' => Auth::user()->id,
-                    'event_id' => $event->id,
-                    'date_fa' => $this->dateNow,
-                    'time_fa' => $this->timeNow,
-                ]);
-
-                if ($status) {
-                    $event->capacity--;
-                    $event->save();
-                    $msg = Auth::user()->lname . " عزیز \nثبت نام شما در " . $event->event . " با موفقیت انجام شد\n فراکوچ ";
-                    $this->sendSms(Auth::user()->tel, $msg);
-                    alert()->success('رزرو دوره با موفقیت انجام شد')->persistent('بستن');
-                    return back();
-//                    return $status;
-                } else {
-                    return back();
-//                    return $status;
-                }
-            }
-            else
-            {
-                $order = new zarinpal();
-
-                $res = $order->pay($event->fi,Auth::user()->email,Auth::user()->tel,$event->event);
-
-                $status=checkout::create([
-                    'user_id'       =>Auth::user()->id,
-                    'product_id'    =>$event->id,
-                    'price'         =>$event->fi,
-                    'type'          =>'event',
-                    'authority'     =>$res,
-                    'description'   =>'انتقال به درگاه',
-                ]);
-
-                if($status)
+                if($event->fi==0 || is_null($event->fi)|| $event->fi=='')
                 {
-                    return redirect('https://www.zarinpal.com/pg/StartPay/' . $res);
+                    $status = eventreserve::create([
+                        'user_id' => Auth::user()->id,
+                        'event_id' => $event->id,
+                        'date_fa' => $this->dateNow,
+                        'time_fa' => $this->timeNow,
+                    ]);
+
+                    if ($status) {
+                        $event->capacity--;
+                        $event->save();
+                        $msg = Auth::user()->lname . " عزیز \nثبت نام شما در " . $event->event . " با موفقیت انجام شد\n فراکوچ ";
+                        $this->sendSms(Auth::user()->tel, $msg);
+                        alert()->success('رزرو دوره با موفقیت انجام شد')->persistent('بستن');
+                        return back();
+//                    return $status;
+                    } else {
+                        return back();
+//                    return $status;
+                    }
                 }
                 else
                 {
-                    return redirect('/');
+                    $order = new zarinpal();
+
+                    $res = $order->pay($event->fi,Auth::user()->email,Auth::user()->tel,$event->event);
+
+                    $status=checkout::create([
+                        'user_id'       =>Auth::user()->id,
+                        'product_id'    =>$event->id,
+                        'price'         =>$event->fi,
+                        'type'          =>'event',
+                        'authority'     =>$res,
+                        'description'   =>'انتقال به درگاه',
+                    ]);
+
+                    if($status)
+                    {
+                        return redirect('https://www.zarinpal.com/pg/StartPay/' . $res);
+                    }
+                    else
+                    {
+                        return redirect('/');
+                    }
+
+
+                    //$this->checkout(Auth::user()->id,$event->id,$event->fi,'event',Auth::user()->email,Auth::user()->tel,$event->event);
                 }
 
 
-                //$this->checkout(Auth::user()->id,$event->id,$event->fi,'event',Auth::user()->email,Auth::user()->tel,$event->event);
             }
-
-
+            else
+            {
+                alert()->error('ظرفیت دوره تکمیل شد')->persistent('بستن');
+                echo "<script>location.reload(); </script>";
+            }
         }
         else
         {
-            alert()->error('ظرفیت دوره تکمیل شد')->persistent('بستن');
-            echo "<script>location.reload(); </script>";
+            alert()->error('شما در این رویداد قبلا ثبت نام کرده اید')->persistent('بستن');
+            return back();
         }
-
-
     }
 
     /**
