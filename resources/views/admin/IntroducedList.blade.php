@@ -28,7 +28,6 @@
                         <td>{{$loop->iteration}}</td>
                         <td >
                             <a href="/admin/user/{{$user->id}}">{{$user->fname.' '.$user->lname}}</a>
-
                         </td>
 
                         <td>
@@ -105,6 +104,7 @@
                                     <i class="bi bi-eye-fill"></i>
 
                                 </a>
+                                {{--
                                 <!-- Modal invitation -->
                                     <div class="modal fade" id="courseModal{{$user->id}}" tabindex="-1" aria-labelledby="courseModalModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
@@ -141,6 +141,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    --}}
                             @endif
                         </td>
                         <td></td>
