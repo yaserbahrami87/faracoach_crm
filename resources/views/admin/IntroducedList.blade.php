@@ -34,6 +34,7 @@
                             <a href="#" data-toggle="modal" data-target="#invitationModal{{$user->id}}">
                                 <b>{{$user->get_invitations->count()}} نفر</b>
                             </a>
+                            {{--
                             <!-- Modal invitation -->
                             <div class="modal fade modal" id="invitationModal{{$user->id}}" tabindex="-1" aria-labelledby="invitationModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-xl">
@@ -86,6 +87,7 @@
                                     </div>
                                 </div>
                             </div>
+                            --}}
                         </td>
                         <td>{{$user->get_invitations->where('type',20)->count()}}</td>
                         <td></td>
