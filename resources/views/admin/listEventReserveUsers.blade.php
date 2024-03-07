@@ -30,6 +30,8 @@
                                 <th>شماره تماس</th>
                                 <th>تاریخ</th>
                                 <th>ساعت</th>
+                                <th>نوع کاربر</th>
+                                <th>واریزی</th>
                             </tr>
                             @foreach($eventreserves as $item)
 
@@ -38,9 +40,30 @@
                                         <img class="rounded-circle" src="{{asset('documents/users/'.$item->user->personal_image)}}" width="50px" height="50px">
                                     </td>
                                     <td>{{$item->user->fname}} {{$item->user->lname}}</td>
-                                    <td>{{$item->user->tel}}</td>
+                                    <td dir="ltr">{{$item->user->tel}}</td>
                                     <td>{{$item->date_fa}}</td>
                                     <td>{{$item->time_fa}}</td>
+                                    <td class="text-center">
+                                        @if($item->user->created_at>=$event->created_at)
+                                            کاربر جدید
+                                        @elseif($item->user->created_at<=$event->created_at)
+                                            @if($item->user->type==20)
+                                                دانشجو
+                                            @else
+                                                کاربر قدیمی
+                                            @endif
+                                        @endif
+
+                                    </td>
+                                    <td>
+
+                                        @if(is_null($item->user->checkout))
+                                            رایگان
+                                        @else
+                                            {{$item->user->checkout->where('type','event')->where('product_id',$event->id)->where('description','خرید
+                                            انجام شد')->price}}
+                                        @endif
+                                    </td>
                                 </tr>
                             @endforeach
                         </table>
