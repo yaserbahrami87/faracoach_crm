@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\category_gettingknow;
 use App\city;
+use App\followbyCategory;
 use App\followup;
 use App\landPage;
 use App\Notifications\LoginwithoutReserve;
@@ -1272,65 +1273,91 @@ class UserController extends BaseController
         //چک کردن کاربر که آیا توافقنامه را تایید کردند
 
 
-            if ($request->has('category')) {
-                //نمایش براساس دسته بندی افراد دعوت شده توسط کاربر
-                switch ($request['category']) {
-                    case '0':
-                        return redirect('/panel/introduced');
-                        break;
-                    case 'notfollowup':
-                        $listIntroducedUser = User::where('type', '=', '1')
-                            ->where('introduced', '=', $user->id)
-                            ->orderby('id', 'desc')
-                            ->groupby('id')
-                            ->paginate($this->countPage());
-                        break;
-                    case 'continuefollowup':
-                        $listIntroducedUser = User::where('type', '=', '11')
-                            ->where('introduced', '=', $user->id)
-                            ->orderby('id', 'desc')
-                            ->paginate($this->countPage());
-                        break;
-                    case 'cancelfollowup':
-                        $listIntroducedUser = User::where('type', '=', '12')
-                            ->where('introduced', '=', $user->id)
-                            ->orderby('id', 'desc')
-                            ->paginate($this->countPage());
-                        break;
-                    case 'students':
-                        $listIntroducedUser = User::where('type', '=', '20')
-                            ->where('introduced', '=', $user->id)
-                            ->orderby('id', 'desc')
-                            ->paginate($this->countPage());
-                        break;
-                    default:
-                        return back();
-                        break;
-                }
-            } else {
-                //لیست همه افراد معرفی کرده
-                $listIntroducedUser = User::where('introduced', '=', $user->id)
-                    ->paginate(20);
+        if ($request->has('category')) {
+            //نمایش براساس دسته بندی افراد دعوت شده توسط کاربر
+            switch ($request['category']) {
+                case '0':
+                    return redirect('/panel/introduced');
+                    break;
+                case 'notfollowup':
+                    $listIntroducedUser = User::where('type', '=', '1')
+                        ->where('introduced', '=', $user->id)
+                        ->orderby('id', 'desc')
+                        ->groupby('id')
+                        ->paginate($this->countPage());
+                    break;
+                case 'continuefollowup':
+                    $listIntroducedUser = User::where('type', '=', '11')
+                        ->where('introduced', '=', $user->id)
+                        ->orderby('id', 'desc')
+                        ->paginate($this->countPage());
+                    break;
+                case 'cancelfollowup':
+                    $listIntroducedUser = User::where('type', '=', '12')
+                        ->where('introduced', '=', $user->id)
+                        ->orderby('id', 'desc')
+                        ->paginate($this->countPage());
+                    break;
+                case 'students':
+                    $listIntroducedUser = User::where('type', '=', '20')
+                        ->where('introduced', '=', $user->id)
+                        ->orderby('id', 'desc')
+                        ->paginate($this->countPage());
+                    break;
+                default:
+                    return back();
+                    break;
             }
+        } else {
+            //لیست همه افراد معرفی کرده
+            $listIntroducedUser = User::where('introduced', '=', $user->id)
+                ->get();
+        }
 
-            foreach ($listIntroducedUser as $item) {
-                if (strlen($item->personal_image) == 0) {
-                    $item->personal_image = "default-avatar.png";
-                }
+        $followbyCategories=followbyCategory::where('status',1)
+            ->get();
+
+        foreach ($listIntroducedUser as $item) {
+            if (strlen($item->personal_image) == 0) {
+                $item->personal_image = "default-avatar.png";
             }
+        }
+
+        /*   $listIntroducedUser->appends(['category' => $request['category']]);*/
+        $getFollowbyCategory = $this->getFollowbyCategory();
+        $options=option::where('option_name','introduced_verify')
+            ->first();
+
+        $getAmbassador=User::where('introduced_verified','=','2')
+            ->paginate(20);
+
+        $getAmbassador_tmp=User::where('introduced_verified','=','2')
+            ->get();
+
+        $currentPosition=0;
+        $i=0;
+//            foreach($getAmbassador_tmp as $item)
+//            {
+//                $i++;
+//                if($item->id==Auth::user()->id)
+//                {
+//                    $currentPosition=$i;
+//                }
+//
+//
+//            }
 
 
 
-            $listIntroducedUser->appends(['category' => $request['category']]);
-            $getFollowbyCategory = $this->getFollowbyCategory();
-            $options=option::where('option_name','introduced_verify')
-                            ->first();
 
-
-            return view('user.IntroducedVerified')
-                ->with('listIntroducedUser', $listIntroducedUser)
-                ->with('options', $options)
-                ->with('getFollowbyCategory', $getFollowbyCategory);
+        return view('user.IntroducedVerified')
+            ->with('listIntroducedUser', $listIntroducedUser)
+            ->with('options', $options)
+            ->with('getFollowbyCategory', $getFollowbyCategory)
+            ->with('followbyCategories', $followbyCategories)
+            ->with('getAmbassador_tmp', $getAmbassador_tmp)
+            ->with('currentPosition', $currentPosition)
+            ->with('getAmbassador',$getAmbassador);
 
     }
 
@@ -1449,7 +1476,6 @@ class UserController extends BaseController
     //اضافه کردن یوزر توسط سفیر
     public function addIntroducedUser(Request $request)
     {
-
             $request['tel']=$this->convertPersianNumber($request->tel);
             $this->validate(request(),
             [
@@ -1474,26 +1500,44 @@ class UserController extends BaseController
                         'password'      =>Hash::make('1234'),
                     ]);
 
+                $msg=NULL;
                 if($status)
                 {
                     if($request['sms']==1) {
                         if (is_null(Auth::user()->fname) || (is_null(Auth::user()->lname))) {
-                            $this->sendSms($request['tel'], "به فراکوچ خوش آمدید/ شما توسط " . Auth::user()->tel . " به فراکوچ دعوت شدید"." رمز عبور:1234 ");
+                            $msg= "به فراکوچ خوش آمدید/ شما توسط " . Auth::user()->fname . Auth::user()->lname . " به فراکوچ دعوت شدید" ." رمز عبور:1234 ";
+                            $this->sendSms($request['tel'], $msg);
                             alert()->success("تلفن با موفقیت در سیستم فراکوچ ثبت شد", 'پیام')->persistent('بستن');
                         } else {
-                            $this->sendSms($request['tel'], "به فراکوچ خوش آمدید/ شما توسط " . Auth::user()->fname . Auth::user()->lname . " به فراکوچ دعوت شدید" ." رمز عبور:1234 ");
+                            $msg=NULL;
+                            //$this->sendSms($request['tel'], "به فراکوچ خوش آمدید/ شما توسط " . Auth::user()->fname . Auth::user()->lname . " به فراکوچ دعوت شدید" ." رمز عبور:1234 ");
                             alert()->success("تلفن با موفقیت در سیستم فراکوچ ثبت شد", 'پیام')->persistent('بستن');
                         }
                     }
                     else
                     {
+
                         alert()->success("تلفن با موفقیت در سیستم فراکوچ ثبت شد", 'پیام')->persistent('بستن');
                     }
                 }
                 else
                 {
+
                     alert()->error("خطا در ثبت",'خطا')->persistent('بستن');
                 }
+                followup::create
+                (
+                    [
+                        'user_id'           =>$status->id,
+                        'insert_user_id'    =>Auth::user()->id,
+                        'comment'           =>$request->comment,
+                        'problemfollowup_id'=>11,
+                        'status_followups'  =>10,
+                        'sms'               =>$msg,
+                        'date_fa'           =>$this->dateNow,
+                        'time_fa'           =>$this->timeNow,
+                    ]
+                );
             }
             else
             {
