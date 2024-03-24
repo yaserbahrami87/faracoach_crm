@@ -825,6 +825,10 @@ Route::get('/v2/home',function(){
 });
 
 
+// ScoreAmbassador
+Route::get('/test','UserController@ScoreAmbassador');
+
+
 //test User
 Route::get('/test1','UserController@test1');
 

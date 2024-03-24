@@ -2325,5 +2325,15 @@ class UserController extends BaseController
     }
 
 
+    public function ScoreAmbassador()
+    {
+        Auth::loginUsingId(318);
+
+        $score=resolve('Score')->invitation(Auth::user());
+        return view('user.IntroducedVerified')
+            ->with('score',$score);
+    }
+
+
 
 }
