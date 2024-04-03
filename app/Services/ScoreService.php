@@ -6,6 +6,7 @@ namespace App\Services;
 use App\Setting;
 use App\User;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class ScoreService
 {
@@ -71,12 +72,13 @@ class ScoreService
         }
         public function invitation( User $user)
         {
+            session()->put('totalIntroduced',0);
             $this->introduced=($user->get_invitations->count());
 
             $this->totalIntroduced=$this->introduced*$this->setting->where('setting','score_introduced')->first()->value;
             $this->totalscores= $this->totalscores+$this->totalIntroduced;
             $this->total_Ambassador+=['totalIntroduced'=> $this->totalIntroduced];
-//            $this->Product_purchase=$this->Product_purchase+($user->checkouts->where('status','=','1')->sum('price')/$this->setting->where('setting','score_product_purchase')->first()->value);
+            $this->Product_purchase=$this->Product_purchase+($user->checkouts->where('status','=','1')->sum('price')/$this->setting->where('setting','score_product_purchase')->first()->value);
 
 
 //            foreach ($user->get_invitations as $invites)
@@ -96,8 +98,8 @@ class ScoreService
 
 //            $this->totalpurchase=$this->totalpurchase+($this->Product_purchase/$this->setting->where('setting','score_product_purchase')->first()->value);
 
-            session()->put('totalIntroduced',session('totalIntroduced')+$this->totalscores);
+            session()->put('totalIntroduced',session('totalIntroduced')+($this->totalscores+$this->Product_purchase));
 
-            return $this->totalscores  ;
+            return $this->totalscores;
         }
 }
