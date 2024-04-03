@@ -453,7 +453,7 @@
                                                                         </td>
                                                                         <td>
                                                                             <div class="icons">
-                                                                                <div class="box-title">{{(resolve('Score')->invitation($item))+($item->checkouts->where('status','=','1')->sum('price')/10000)}}</div>
+                                                                                <div class="box-title">{{(resolve('Score')->invitation($item))}}</div>
                                                                             </div>
                                                                         </td>
                                                                     </tr>
