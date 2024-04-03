@@ -378,7 +378,7 @@
                                                                         <td>
                                                                             <div class="icons">
                                                                                 <div class="box-title">
-                                                                                    {{(resolve('Score')->invitation($item))}}
+                                                                                    {{implode(',',resolve('Score')->invitation($item))}}
                                                                                 </div>
                                                                             </div>
                                                                         </td>
@@ -453,7 +453,7 @@
                                                                         </td>
                                                                         <td>
                                                                             <div class="icons">
-                                                                                <div class="box-title">{{(resolve('Score')->invitation($item))}}</div>
+                                                                                <div class="box-title">{{implode(',',resolve('Score')->invitation($item))}}</div>
                                                                             </div>
                                                                         </td>
                                                                     </tr>
@@ -725,7 +725,7 @@
                                               *  جایگاه شما در فصل اخیر نفر <mark><bold>{{$currentPosition}}</bold></mark> از {{$getAmbassador_tmp->count()}} نفر است  *
                                               --}}
                                             مجموع امتیاز به دست آماده شما
-                                            {{resolve('Score')->invitation(Auth::user())+(session('totalIntroduced')/10)}}
+                                            {{--resolve('Score')->invitation(Auth::user())+(session('totalIntroduced')/10)--}}
                                             می باشد
                                         </h5>
 
