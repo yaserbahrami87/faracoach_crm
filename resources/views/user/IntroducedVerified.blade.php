@@ -140,7 +140,7 @@
                         <div class="text" >
 
                             {!! $options->option_value !!}
-                            @if(Auth::user()->introduced_verified!=0 || `Auth::user()->introduced_verified==3`)
+                            @if(Auth::user()->introduced_verified!=0 || Auth::user()->introduced_verified==3)
                                 <input class="d-inline form-check text-success" type="checkbox" value="1" id="introduced_verified" name="introduced_verified" checked disabled >
                                 <label class="d-inline form-check text-success" for="introduced_verified">
                                     شرایط و قوانین  بالا را مطالعه کردم و قبول دارم
@@ -378,10 +378,7 @@
                                                                         <td>
                                                                             <div class="icons">
                                                                                 <div class="box-title">
-
                                                                                     {{(resolve('Score')->invitation($item))}}
-
-
                                                                                 </div>
                                                                             </div>
                                                                         </td>
