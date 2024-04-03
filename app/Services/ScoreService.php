@@ -72,6 +72,7 @@ class ScoreService
         }
         public function invitation( User $user)
         {
+
             session()->put('totalIntroduced',0);
             $this->introduced=($user->get_invitations->count());
 
@@ -79,7 +80,7 @@ class ScoreService
             $this->totalscores= $this->totalscores+$this->totalIntroduced;
             $this->total_Ambassador+=['totalIntroduced'=> $this->totalIntroduced];
             $this->Product_purchase=$this->Product_purchase+($user->checkouts->where('status','=','1')->sum('price')/$this->setting->where('setting','score_product_purchase')->first()->value);
-
+            $this->total_Ambassador+=['Product_purchase'=>$this->Product_purchase];
 
 //            foreach ($user->get_invitations as $invites)
 //            {
@@ -100,6 +101,6 @@ class ScoreService
 
             session()->put('totalIntroduced',session('totalIntroduced')+($this->totalscores+$this->Product_purchase));
 
-            return $this->totalscores;
+            return $this->total_Ambassador;
         }
 }
