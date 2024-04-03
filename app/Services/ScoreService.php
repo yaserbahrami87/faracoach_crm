@@ -74,6 +74,8 @@ class ScoreService
         {
 
             session()->put('totalIntroduced',0);
+
+
             $this->introduced=($user->get_invitations->count());
 
             $this->totalIntroduced=$this->introduced*$this->setting->where('setting','score_introduced')->first()->value;
