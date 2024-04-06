@@ -370,6 +370,8 @@
                                                                             <div class="icons">
                                                                                 <div class="box-title">
                                                                                     @if(! is_null($item->get_followbyExpert))
+
+
                                                                                         {{$item->get_followbyExpert->fname. ' '.$item->get_followbyExpert->lname}}
                                                                                     @endif
                                                                                 </div>
