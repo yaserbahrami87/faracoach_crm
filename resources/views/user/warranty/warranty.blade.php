@@ -170,9 +170,9 @@
                         {{number_format(Auth::user()->checkouts->where('status','=',1)->where('product_id','=',$course->id)->first()->order['pre_paymant'])}}
                     @endif
                 @else
-
                     @if(is_null(Auth::user()->checkouts->where('status','=',1)->where('product_id','=',$course->id)->first()->order['pre_paymant']))
-                        {{number_format(Auth::user()->checkouts->where('status','=',1)->where('product_id','=',$course->id)->first()->order['final_off'])}}
+{{--                        {{number_format(Auth::user()->checkouts->where('status','=',1)->where('product_id','=',$course->id)->first()->order['final_off'])}}--}}
+                        {{number_format(Auth::user()->checkouts->where('status','=',1)->where('product_id','=',$course->id)->first()->price)}}
                     @else
                         {{number_format(Auth::user()->checkouts->where('status','=',1)->where('product_id','=',$course->id)->first()->order['pre_paymant'])}}
                     @endif
