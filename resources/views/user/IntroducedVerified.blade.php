@@ -66,6 +66,11 @@
         {
             margin-left: 40px!important;
         }
+        #btn_followup
+        {
+            width: 100px;
+            margin-right: 5px;
+        }
 
     </style>
     <link href="/trumbowyg-2.25.1/dist/ui/trumbowyg.min.css" rel="stylesheet" />
@@ -332,7 +337,8 @@
                                                                     <th scope="col"> آخرین ورود</th>
                                                                     <th scope="col">مسئول پیگیری</th>
                                                                     <th scope="col">امتیاز</th>
-                                                                    <th scop="col"></th>
+                                                                    <th scope="col"></th>
+                                                                    <th scope="col"></th>
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -380,7 +386,8 @@
                                                                         <td>
                                                                             <div class="icons">
                                                                                 <div class="box-title">
-                                                                                    {{implode(',',resolve('Score')->invitation($item))}}
+
+                                                                                    {{resolve('Score')->invitation($item)['totalscores']}}
                                                                                 </div>
                                                                             </div>
                                                                         </td>
@@ -390,6 +397,9 @@
                                                                                 <input type="hidden" value="-1" name="type"/>
                                                                                 <button type="submit" class="btn btn-warning">انصراف</button>
                                                                             </form>
+                                                                        </td>
+                                                                        <td>
+                                                                            <button  class="btn btn-info " id="btn_followup"><a href="followup/{{$item->id}}" >ثبت پیگیری</a></button>
                                                                         </td>
                                                                     </tr>
                                                                 @endforeach
@@ -455,8 +465,10 @@
                                                                         </td>
                                                                         <td>
                                                                             <div class="icons">
-                                                                                <div class="box-title">{{implode(',',resolve('Score')->invitation($item))}}</div>
+                                                                                <div class="box-title">{{resolve('Score')->invitation($item)['totalscores']}}</div>
                                                                             </div>
+
+
                                                                         </td>
                                                                     </tr>
                                                                 @endforeach
@@ -520,7 +532,7 @@
                                                                         </td>
                                                                         <td>
                                                                                 <span>
-                                                                                   00 امتیاز
+                                                                                   {{implode(',',resolve('Score')->invitation($item))}}
                                                                                 </span>
                                                                         </td>
                                                                         <td>
@@ -529,6 +541,7 @@
                                                                                 <input type="hidden" value="11" name="type"/>
                                                                                 <button type="submit" class="btn btn-warning">پیگیری مجدد</button>
                                                                             </form>
+
                                                                         </td>
                                                                     </tr>
                                                                 @endforeach
@@ -595,7 +608,8 @@
                                                                     <th scope="col"> آخرین ورود</th>
                                                                     <th scope="col">مسئول پیگیری</th>
                                                                     <th scope="col">امتیاز</th>
-                                                                    <th scop="col"></th>
+                                                                    <th scope="col"></th>
+
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -727,7 +741,8 @@
                                               *  جایگاه شما در فصل اخیر نفر <mark><bold>{{$currentPosition}}</bold></mark> از {{$getAmbassador_tmp->count()}} نفر است  *
                                               --}}
                                             مجموع امتیاز به دست آماده شما
-                                            {{--resolve('Score')->invitation(Auth::user())+(session('totalIntroduced')/10)--}}
+                                            {{session('totalscoreUser')}}
+
                                             می باشد
                                         </h5>
 
@@ -794,6 +809,14 @@
 
 
                                     </div>
+
+
+
+                                    @if(Auth::user()->introduced_verified==2)
+                                        <div class="buttons button_space">
+                                            <button class="back_button">مرحله قبل</button>
+                                        </div>
+                                    @endif
                                 </div>
 
                             </div>

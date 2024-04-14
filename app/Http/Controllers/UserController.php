@@ -1347,7 +1347,7 @@ class UserController extends BaseController
 //
 //            }
 
-
+        session()->put('totalscoreUser',0);
 
 
         return view('user.IntroducedVerified')
