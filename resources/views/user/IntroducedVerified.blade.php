@@ -391,7 +391,8 @@
                                                                             <div class="icons">
                                                                                 <div class="box-title">
 
-                                                                                    {{resolve('Score')->invitation($item)['totalscores']}}
+                                                                                    {{\App\Services\ScoreService::invitation($item)['totalscores']}}
+
                                                                                 </div>
                                                                             </div>
                                                                         </td>
@@ -469,7 +470,7 @@
                                                                         </td>
                                                                         <td>
                                                                             <div class="icons">
-                                                                                <div class="box-title">{{resolve('Score')->invitation($item)['totalscores']}}</div>
+                                                                                <div class="box-title">{{\App\Services\ScoreService::invitation($item)['totalscores']}}</div>
                                                                             </div>
 
 
@@ -536,7 +537,7 @@
                                                                         </td>
                                                                         <td>
                                                                                 <span>
-                                                                                   {{implode(',',resolve('Score')->invitation($item))}}
+                                                                                   {{\App\Services\ScoreService::invitation($item)['totalscores']}}
                                                                                 </span>
                                                                         </td>
                                                                         <td>
