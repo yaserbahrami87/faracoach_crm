@@ -334,6 +334,7 @@
                                                                     <th scope="col">شماره تماس</th>
                                                                     <th scope="col">تاریخ ثبت</th>
                                                                     <th scope="col"> تعداد پیگیری</th>
+                                                                    <th scope="col"> تعداد دعوت</th>
                                                                     <th scope="col"> آخرین ورود</th>
                                                                     <th scope="col">مسئول پیگیری</th>
                                                                     <th scope="col">امتیاز</th>
@@ -354,9 +355,9 @@
                                                                             <div class="box-title">{{$item->fname.' '.$item->lname}}</div>
                                                                         </td>
                                                                         <td>
-                                                                                <span>
-                                                                                    <a href="tel:{{$item->tel}} " dir="ltr">{{$item->tel}}</a>
-                                                                                </span>
+                                                                            <span>
+                                                                                <a href="tel:{{$item->tel}} " dir="ltr">{{$item->tel}}</a>
+                                                                            </span>
                                                                         </td>
 
                                                                         <td>
@@ -366,6 +367,9 @@
                                                                             <div class="icons">
                                                                                 <div class="box-title">{{$item->followups()->count()}}</div>
                                                                             </div>
+                                                                        </td>
+                                                                        <td>
+                                                                               {{$item->get_invitations->count()}}
                                                                         </td>
                                                                         <td>
                                                                             <div class="icons">
