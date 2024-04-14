@@ -9,7 +9,9 @@ use App\followup;
 use App\landPage;
 use App\Notifications\LoginwithoutReserve;
 use App\option;
+use App\Providers\ScoreProvider;
 use App\reserve;
+use App\Services\ScoreService;
 use App\student;
 use App\User;
 use App\user_type;
@@ -2332,6 +2334,19 @@ class UserController extends BaseController
         $score=resolve('Score')->invitation(Auth::user());
         return view('user.IntroducedVerified')
             ->with('score',$score);
+    }
+
+    public function changeTypeIntroduced(Request $request,User $User)
+    {
+        $this->validate($request,[
+            'type'   =>'required|in:-1,11'
+        ]);
+
+        $User->type=$request->type;
+        $User->save();
+        alert()->success('درخواست شما موفقیت اعمال شد')->persistent('بستن');
+        return back();
+
     }
 
 

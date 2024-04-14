@@ -50,6 +50,7 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function ()
     Route::get('/introduced','UserController@listIntroducedUser');
     Route::get('/introduced/search','UserController@searchUsersIntroduced');
     Route::post('/introduced/add','UserController@addIntroducedUser');
+    Route::post('/introduced/changeType/{User}','UserController@changeTypeIntroduced');
 
     //Products
     Route::get('/products','AdminController@showProducts');
