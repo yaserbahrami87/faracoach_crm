@@ -176,7 +176,7 @@
 
                         <!------------------------------- CAPTION ----------------------------->
                         <!------------------------------- Form ----------------------------->
-                        <section class="col-12 mt-1">
+                        <div class="col-12 mt-1">
                             <div class="col-12 border mt-1">
                                 <!___________________________ top main tab -------------------------->
                                 <nav>
@@ -391,7 +391,7 @@
                                                                             <div class="icons">
                                                                                 <div class="box-title">
 
-                                                                                    {{\App\Services\ScoreService::invitation($item)['totalscores']}}
+                                                                                    {{ceil(\App\Services\ScoreService::invitation($item)['totalscores'])}}
 
                                                                                 </div>
                                                                             </div>
@@ -470,9 +470,8 @@
                                                                         </td>
                                                                         <td>
                                                                             <div class="icons">
-                                                                                <div class="box-title">{{\App\Services\ScoreService::invitation($item)['totalscores']}}</div>
+                                                                                <div class="box-title">{{ceil(\App\Services\ScoreService::invitation($item)['totalscores'])}}</div>
                                                                             </div>
-
 
                                                                         </td>
                                                                     </tr>
@@ -537,7 +536,7 @@
                                                                         </td>
                                                                         <td>
                                                                                 <span>
-                                                                                   {{\App\Services\ScoreService::invitation($item)['totalscores']}}
+                                                                                   {{ceil(\App\Services\ScoreService::invitation($item)['totalscores'])}}
                                                                                 </span>
                                                                         </td>
                                                                         <td>
@@ -745,23 +744,49 @@
                                             {{--
                                               *  جایگاه شما در فصل اخیر نفر <mark><bold>{{$currentPosition}}</bold></mark> از {{$getAmbassador_tmp->count()}} نفر است  *
                                               --}}
-                                            مجموع امتیاز به دست آماده شما
-                                            {{session('totalscoreUser')}}
+                                             مجموع امتیاز به دست آماده شما
+                                            <b>
+                                            {{ceil(\App\Services\ScoreService::invitation(Auth::user())['totalscores'])}}
+                                            </b>
+                                             می باشد
 
-                                            می باشد
                                         </h5>
-
-
                                         <section class="col-12 table-responsive">
-                                            <table class="table table-striped">
+                                            <table class="table table-striped table-bordered mb-2">
                                                 <thead>
                                                 <tr class="text-center">
-                                                    <th scope="col">ردیف</th>
-                                                    <th scope="col">  </th>
-                                                    <th scope="col">نام و نام خانوادگی </th>
-                                                    <th scope="col">تعداد معرفی</th>
-                                                    <th scope="col">امتیاز</th>
+                                                    <th scope="col">امتیاز معرفی</th>
+                                                    <th scope="col">امتیاز ورود به سایت </th>
+                                                    <th scope="col">امتیاز خرید</th>
                                                 </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="text-center">
+                                                        <td>
+                                                             {{\App\Services\ScoreService::invitation(Auth::user())['totalIntroduced']}}
+                                                        </td>
+                                                        <td>
+                                                            {{\App\Services\ScoreService::invitation(Auth::user())['totalre_entry']}}
+                                                        </td>
+                                                        <td>
+                                                            {{\App\Services\ScoreService::invitation(Auth::user())['Product_purchase']}}
+                                                        </td>
+
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </section>
+
+                                        <div class="table-responsive overflow-auto">
+                                            <table id="example1" class="table table-striped table-bordered" style="width:100%">
+                                                <thead>
+                                                    <tr class="text-center">
+                                                        <th scope="col">ردیف</th>
+                                                        <th scope="col">  </th>
+                                                        <th scope="col">نام و نام خانوادگی </th>
+                                                        <th scope="col">تعداد معرفی</th>
+                                                        <th scope="col">امتیاز</th>
+                                                    </tr>
                                                 </thead>
                                                 <tbody>
                                                 @foreach ($getAmbassador as $items )
@@ -770,7 +795,7 @@
                                                             {{$loop->iteration}}
                                                         </td>
                                                         <td>
-                                                            <img class="profile rounde" src="{{asset('documents/users/'.$item->personal_image)}}" alt="" width="25px"/>
+                                                            <img class="profile rounde" src="{{asset('documents/users/'.$items->personal_image)}}" alt="" width="25px"/>
                                                         </td>
                                                         <td>
                                                             <div class="box-title">{{$items->fname.' '.$items->lname}}</div>
@@ -779,13 +804,13 @@
                                                             <div class="box-title"><b>{{($items->get_invitations->count())}}</b></div>
                                                         </td>
                                                         <td>
-                                                            <div class="box-title"></div>
+                                                            <div class="box-title">{{ceil(\App\Services\ScoreService::invitation($items)['totalscores'])}}</div>
                                                         </td>
                                                     </tr>
                                                 @endforeach
                                                 </tbody>
                                             </table>
-                                        {{$getAmbassador->links()}}
+
                                         <!------------------------------------------ Modal ------------------------->
                                             <div class="modal fade" id="modal_introduced_profile" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" dir="rtl">
                                                 <div class="modal-dialog">
@@ -809,7 +834,7 @@
                                             <div class="col-12 text-center">
 
                                             </div>
-                                        </section>
+                                        </div>
 
 
 
@@ -825,7 +850,7 @@
                                 </div>
 
                             </div>
-                        </section>
+                        </div>
 
                         <!------------------------------- FOLLWO UP ----------------------------->
 
@@ -839,7 +864,21 @@
 
 @endsection
 
+
+
+
 @section('footerScript')
+    <script src="{{asset('/dashboard/assets/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('/dashboard/assets/js/dataTables.bootstrap4.min.js')}}"></script>
+
+    <!--   --------------------------data table -->
+    <script>
+
+        $('#example1').DataTable();
+
+    </script>
+
+
     <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('vendor/jquery-validation/dist/jquery.validate.min.js')}}"></script>
     <script src="{{asset('vendor/jquery-validation/dist/additional-methods.min.js')}}"></script>
@@ -849,8 +888,10 @@
     <script src="{{asset('vendor/wnumb/wNumb.js')}}"></script>
     <script src="{{asset('js/main.js')}}"></script>
 
-    <script src="{{asset('/panel_assets/intl_tel/js/intlTelInput.js')}}"></script>
-    <script src="{{asset('/panel_assets/intl_tel/js/utils.js')}}"></script>
+
+
+
+
     <!--_________________Time line Step by step    -->
     <script>
         var next_click=document.querySelectorAll(".next_button");
@@ -1099,4 +1140,5 @@
         }
 
     </script>
+
 @endsection

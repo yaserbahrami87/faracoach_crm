@@ -1567,7 +1567,7 @@ class UserController extends BaseController
                 foreach ($followUps as $item)
                 {
                     $item->status_followups=$this->userType($item->status_followups);
-                    $item->course_id=$this->get_coursesByID($item->course_id)->course;
+//                    $item->course_id=$this->get_coursesByID($item->course_id)->course;
                 }
 
                 $problemFollowup = $this->get_problemfollowup(NULL,1,NULL,'get');

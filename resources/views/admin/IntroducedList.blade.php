@@ -48,61 +48,8 @@
                                 </td>
 
                                 <td>
-                                    <a href="#" data-toggle="modal" data-target="#invitationModal{{$user->id}}">
+
                                         <b>{{$user->get_invitations->count()}} </b>
-                                    </a>
-                                    <!-- Modal invitation -->
-                                    <div class="modal fade modal" id="invitationModal{{$user->id}}" tabindex="-1" aria-labelledby="invitationModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-xl">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">دعوت شده ها</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body table-responsive">
-                                                    <table class="table table-bordered table-striped table-striped">
-                                                        <tr>
-                                                            <th>ردیف</th>
-                                                            <th>عکس</th>
-                                                            <th>نام و نام خانوادگی</th>
-                                                            <th>وضعیت</th>
-                                                            <th>تاریخ عضویت</th>
-                                                            <th>تعداد پیگیری</th>
-                                                            <th>تعداد ورود</th>
-                                                            <th>آخرین ورود</th>
-                                                        </tr>
-
-                                                        @foreach($user->get_invitations as $item)
-                                                            <tr>
-                                                                <td>{{$loop->iteration}}</td>
-                                                                <td>
-                                                                    <img src="{{asset('/documents/users/'.$item->personal_image)}}" width="50px" height="50px" class="rounded-circle" />
-                                                                </td>
-                                                                <td>
-                                                                    <a href="/admin/user/{{$item->id}}" target="_blank">
-                                                                        {{$item->fname.' '.$item->lname}}
-                                                                    </a>
-                                                                </td>
-                                                                <td>
-                                                                    {{$item->userType()}}
-                                                                </td>
-                                                                <td>{{substr($item->changeTimestampToShamsi($item->created_at),7) }}</td>
-                                                                <td>{{$item->followups->count()}}</td>
-                                                                <td>{{$item->logs->where('log_type','login')->count()}}</td>
-                                                                <td>{{substr($item->changeTimestampToShamsi($item->last_login_at),7) }}</td>
-                                                            </tr>
-                                                        @endforeach
-                                                    </table>
-
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </td>
                                 <td>{{$user->get_invitations->where('type',20)->count()}}</td>
                                 <td></td>
@@ -111,15 +58,12 @@
                                         {{substr($user->get_invitations->last()->changeTimestampToShamsi($user->get_invitations->last()->created_at),7)}}
                                     @endif
                                 </td>
-
-
                                 <td>
                                     @if($user->students()->count()==0)
                                         کاربر عادی
                                     @else
                                         <a href="#" data-toggle="modal" data-target="#courseModal{{$user->id}}">
                                             <i class="bi bi-eye-fill"></i>
-
                                         </a>
                                         <!-- Modal invitation -->
                                         <div class="modal fade" id="courseModal{{$user->id}}" tabindex="-1" aria-labelledby="courseModalModalLabel" aria-hidden="true">
@@ -159,7 +103,9 @@
                                         </div>
                                     @endif
                                 </td>
-                                <td></td>
+                                <td>
+                                    {{ceil(\App\Services\ScoreService::invitation($user)['totalscores'])}}
+                                </td>
 
 
                                 <td>
@@ -214,61 +160,9 @@
                                 </td>
 
                                 <td>
-                                    <a href="#" data-toggle="modal" data-target="#invitationModal{{$user->id}}">
-                                        <b>{{$user->get_invitations->count()}} نفر</b>
-                                    </a>
+                                        <b>{{$user->get_invitations->count()}} </b>
                                     <!-- Modal invitation -->
-                                    <div class="modal fade modal" id="invitationModal{{$user->id}}" tabindex="-1" aria-labelledby="invitationModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-xl">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">دعوت شده ها</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body table-responsive">
-                                                    <table class="table table-bordered table-striped table-striped">
-                                                        <tr>
-                                                            <th>ردیف</th>
-                                                            <th>عکس</th>
-                                                            <th>نام و نام خانوادگی</th>
-                                                            <th>وضعیت</th>
-                                                            <th>تاریخ عضویت</th>
-                                                            <th>تعداد پیگیری</th>
-                                                            <th>تعداد ورود</th>
-                                                            <th>آخرین ورود</th>
-                                                        </tr>
 
-                                                        @foreach($user->get_invitations as $item)
-                                                            <tr>
-                                                                <td>{{$loop->iteration}}</td>
-                                                                <td>
-                                                                    <img src="{{asset('/documents/users/'.$item->personal_image)}}" width="50px" height="50px" class="rounded-circle" />
-                                                                </td>
-                                                                <td>
-                                                                    <a href="/admin/user/{{$item->id}}" target="_blank">
-                                                                        {{$item->fname.' '.$item->lname}}
-                                                                    </a>
-                                                                </td>
-                                                                <td>
-                                                                    {{$item->userType()}}
-                                                                </td>
-                                                                <td>{{substr($item->changeTimestampToShamsi($item->created_at),7) }}</td>
-                                                                <td>{{$item->followups->count()}}</td>
-                                                                <td>{{$item->logs->where('log_type','login')->count()}}</td>
-                                                                <td>{{substr($item->changeTimestampToShamsi($item->last_login_at),7) }}</td>
-                                                            </tr>
-                                                        @endforeach
-                                                    </table>
-
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </td>
                                 <td>{{$user->get_invitations->where('type',20)->count()}}</td>
                                 <td></td>
@@ -325,7 +219,9 @@
                                         </div>
                                     @endif
                                 </td>
-                                <td></td>
+                                <td>
+                                    {{ceil(\App\Services\ScoreService::invitation($user)['totalscores'])}}
+                                </td>
 
 
                                 <td>
@@ -380,71 +276,18 @@
                                 </td>
 
                                 <td>
-                                    <a href="#" data-toggle="modal" data-target="#invitationModal{{$user->id}}">
-                                        <b>{{$user->get_invitations->count()}} نفر</b>
-                                    </a>
+                                    <b>{{$user->get_invitations->count()}}</b>
                                     <!-- Modal invitation -->
-                                    <div class="modal fade modal" id="invitationModal{{$user->id}}" tabindex="-1" aria-labelledby="invitationModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-xl">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">دعوت شده ها</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body table-responsive">
-                                                    <table class="table table-bordered table-striped table-striped">
-                                                        <tr>
-                                                            <th>ردیف</th>
-                                                            <th>عکس</th>
-                                                            <th>نام و نام خانوادگی</th>
-                                                            <th>وضعیت</th>
-                                                            <th>تاریخ عضویت</th>
-                                                            <th>تعداد پیگیری</th>
-                                                            <th>تعداد ورود</th>
-                                                            <th>آخرین ورود</th>
-                                                        </tr>
-
-                                                        @foreach($user->get_invitations as $item)
-                                                            <tr>
-                                                                <td>{{$loop->iteration}}</td>
-                                                                <td>
-                                                                    <img src="{{asset('/documents/users/'.$item->personal_image)}}" width="50px" height="50px" class="rounded-circle" />
-                                                                </td>
-                                                                <td>
-                                                                    <a href="/admin/user/{{$item->id}}" target="_blank">
-                                                                        {{$item->fname.' '.$item->lname}}
-                                                                    </a>
-                                                                </td>
-                                                                <td>
-                                                                    {{$item->userType()}}
-                                                                </td>
-                                                                <td>{{substr($item->changeTimestampToShamsi($item->created_at),7) }}</td>
-                                                                <td>{{$item->followups->count()}}</td>
-                                                                <td>{{$item->logs->where('log_type','login')->count()}}</td>
-                                                                <td>{{substr($item->changeTimestampToShamsi($item->last_login_at),7) }}</td>
-                                                            </tr>
-                                                        @endforeach
-                                                    </table>
-
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </td>
                                 <td>{{$user->get_invitations->where('type',20)->count()}}</td>
-                                <td></td>
+                                <td>
+
+                                </td>
                                 <td>
                                     @if(!is_null($user->get_invitations->last()))
                                         {{substr($user->get_invitations->last()->changeTimestampToShamsi($user->get_invitations->last()->created_at),7)}}
                                     @endif
                                 </td>
-
-
                                 <td>
                                     @if($user->students()->count()==0)
                                         کاربر عادی
@@ -491,7 +334,9 @@
                                         </div>
                                     @endif
                                 </td>
-                                <td></td>
+                                <td>
+                                    {{ceil(\App\Services\ScoreService::invitation($user)['totalscores'])}}
+                                </td>
 
 
                                 <td>

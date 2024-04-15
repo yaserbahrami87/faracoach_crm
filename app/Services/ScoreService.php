@@ -73,7 +73,7 @@ class ScoreService
         public static function invitation( User $user)
         {
             $setting=Setting::where('setting','like','%score_%')
-                            ->get();
+                ->get();
             $totalIntroduced=0;
             $introducedscore=0;
             $total_Ambassador=[];
@@ -87,85 +87,84 @@ class ScoreService
             $subtotalscores=0;
             $subProduct_purchase=0;
             $subtotal_allscore=0;
+            $total_re_introducedscore=0;
 
             session()->put('totalscore',0);
             /*  **********introduced*************************/
 
-                $introduced=($user->get_invitations->count());
-                $totalIntroduced=$introduced*$setting->where('setting','score_introduced')->first()->value;
-                $introducedscore+=$totalIntroduced;
-                $total_Ambassador+=['totalIntroduced'=> $introducedscore];
+            $introduced=($user->get_invitations->count());
+            $totalIntroduced=$introduced*$setting->where('setting','score_introduced')->first()->value;
+            $introducedscore+=$totalIntroduced;
+            $total_Ambassador+=['totalIntroduced'=>$introducedscore];
 
             /*  ********** Product_purchase *************************/
 
-                $Product_purchase+=($user->checkouts->where('status','=','1')->sum('price')/$setting->where('setting','score_product_purchase')->first()->value);
-                $Product_purchase+=($user->faktors->where('status','=',1)->sum('fi')/$setting->where('setting','score_product_purchase')->first()->value);
-                $totalpurchase+=$Product_purchase;
-                $total_Ambassador+=['Product_purchase'=>$totalpurchase];
+            $Product_purchase+=($user->checkouts->where('status','=','1')->sum('price')/$setting->where('setting','score_product_purchase')->first()->value);
+            $Product_purchase+=($user->faktors->where('status','=',1)->sum('fi')/$setting->where('setting','score_product_purchase')->first()->value);
+            $totalpurchase+=$Product_purchase;
+            $total_Ambassador+=['Product_purchase'=>$totalpurchase];
 
             /*  ********** Re Entry *************************/
 
-                if(!is_null($user->logs()->where('log_type','like','login')->orderBy('log_date','desc')->first()))
+            if(!is_null($user->logs()->where('log_type','like','login')->orderBy('log_date','desc')->first()))
+            {
+                $re_entry=($user->logs()->where('log_type','like','login')->orderBy('log_date','desc')->first()->log_date);
+                $now = Carbon::now();
+                $month = $now->format('m');
+                if(substr($re_entry,5,2)==$month)
                 {
-                    $re_entry=($user->logs()->where('log_type','like','login')->orderBy('log_date','desc')->first()->log_date);
-                    $now = Carbon::now();
-                    $month = $now->format('m');
-                    if(substr($re_entry,5,2)==$month)
-                    {
-                        $totalre_entry+=$setting->where('setting','score_re_entry')->first()->value;
-                        $totalscores+=$totalre_entry;
-                        $total_Ambassador+=['totalre_entry'=>$totalre_entry];
-                        /* dd($this->total);*/
-                    }
+                    $totalre_entry+=$setting->where('setting','score_re_entry')->first()->value;
+                    $totalscores+=$totalre_entry;
+                    $total_Ambassador+=['totalre_entry'=>$totalre_entry];
+                    /* dd($this->total);*/
                 }
-                else
-                {
-                    $total_Ambassador+=['totalre_entry'=>0];
-                }
+            }
+            else
+            {
+                $total_Ambassador+=['totalre_entry'=>0];
+            }
 
             /*  ********** Re introduced *************************/
 
-            foreach ($user->get_invitations as $invites)
-            {
-                /*  **********introduced*************************/
-                $subintroduced=($invites->get_invitations->count());
-                $subtotalIntroduced=$subintroduced*$setting->where('setting','score_introduced')->first()->value;
-                $subtotalscores+=$subtotalIntroduced;
-                $subtotal_Ambassador+=['subtotalIntroduced'=> $subtotalIntroduced];
-                /*  ********** Product_purchase *************************/
-                $subProduct_purchase+=($invites->checkouts->where('status','=','1')->sum('price')/$setting->where('setting','score_product_purchase')->first()->value);
-                $subProduct_purchase+=($invites->faktors->where('status','=',1)->sum('fi')/$setting->where('setting','score_product_purchase')->first()->value);
-                $subtotalpurchase+=$subtotalpurchase;
-                $subtotalscores+=$subtotalpurchase;
-                $subtotal_Ambassador+=['subProduct_purchase'=>$subtotalpurchase];
-                /*  ********** Re Entry *************************/
-                if(!is_null($invites->logs()->where('log_type','like','login')->orderBy('log_date','desc')->first()))
-                {
-                    $subre_entry=($invites->logs()->where('log_type','like','login')->orderBy('log_date','desc')->first()->log_date);
-                    $now = Carbon::now();
-                    $month = $now->format('m');
-                    if(substr($subre_entry,5,2)==$month)
-                    {
-                        $subtotalre_entry+=$setting->where('setting','score_re_entry')->first()->value;
-                        $subtotalscores+=$subtotalre_entry;
-                        $subtotal_Ambassador+=['subtotalre_entry'=>$subtotalre_entry];
-                        /* dd($this->total);*/
-                    }
-                }
-                else
-                {
-                    $subtotal_Ambassador+=['subtotalre_entry'=>0];
-                }
-                $subtotal_allscore+=$subtotalscores;
-            }
+//            foreach ($user->get_invitations as $invites)
+//            {
+//                /*  **********introduced*************************/
+//                $subintroduced=($invites->get_invitations->count());
+//                $subtotalIntroduced=$subintroduced*$setting->where('setting','score_introduced')->first()->value;
+//                $subtotalscores+=$subtotalIntroduced;
+//                $subtotal_Ambassador+=['subtotalIntroduced'=> $subtotalIntroduced];
+//                /*  ********** Product_purchase *************************/
+//                $subProduct_purchase+=($invites->checkouts->where('status','=','1')->sum('price')/$setting->where('setting','score_product_purchase')->first()->value);
+//                $subProduct_purchase+=($invites->faktors->where('status','=',1)->sum('fi')/$setting->where('setting','score_product_purchase')->first()->value);
+//                $subtotalpurchase+=$subProduct_purchase;
+//                $subtotalscores+=$subtotalpurchase;
+//                $subtotal_Ambassador+=['subProduct_purchase'=>$subtotalpurchase];
+//                /*  ********** Re Entry *************************/
+//                if(!is_null($invites->logs()->where('log_type','like','login')->orderBy('log_date','desc')->first()))
+//                {
+//                    $subre_entry=($invites->logs()->where('log_type','like','login')->orderBy('log_date','desc')->first()->log_date);
+//                    $now = Carbon::now();
+//                    $month = $now->format('m');
+//                    if(substr($subre_entry,5,2)==$month)
+//                    {
+//                        $subtotalre_entry+=$setting->where('setting','score_re_entry')->first()->value;
+//                        $subtotalscores+=$subtotalre_entry;
+//                        $subtotal_Ambassador+=['subtotalre_entry'=>$subtotalre_entry];
+//                        /* dd($this->total);*/
+//                    }
+//                }
+//                else
+//                {
+//                    $subtotal_Ambassador+=['subtotalre_entry'=>0];
+//                }
+//                $subtotal_allscore+=$subtotalscores;
+//            }
+//
+//                $total_re_introducedscore=$subtotal_allscore/10;
+//                $total_Ambassador+=['total_re_introducedscore'=>$total_re_introducedscore];
 
-
-                $total_re_introducedscore=$subtotal_allscore/10;
-                $total_Ambassador+=['total_re_introducedscore'=>$total_re_introducedscore];
-                $totalscores+=$totalre_entry+$totalIntroduced+$totalpurchase+$total_re_introducedscore;
-
-                $total_Ambassador+=['totalscores'=>$totalscores];
-
+            $totalscores=$totalre_entry+$totalIntroduced+$totalpurchase;
+            $total_Ambassador+=['totalscores'=>$totalscores];
             session()->put('totalscoreUser',session('totalscoreUser')+$totalscores);
             return $total_Ambassador;
         }
