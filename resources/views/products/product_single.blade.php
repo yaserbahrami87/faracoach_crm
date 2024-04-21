@@ -22,39 +22,16 @@
                     <h1 class="font-weight-bold">{{$product->course}}</h1>
                     <div class="fs-5 mb-2 mt-4">
                         قیمت:
-                        <!--
+
                         <span class="text-decoration-line-through mr-5">{{number_format($product->fi)}} تومان</span>
-                        -->
+
                         <p class="font-weight-bold d-inline">{{number_format($product->fi_off)}} تومان</p>
                     </div>
 
                     <div>
 
                     </div>
-                    <div>
-                        <p>
-                            مدت زمان دوره (ساعت):
-                            <span class="font-weight-bold">{{$product->duration}}  ساعت</span>
-                        </p>
-                    </div>
-                    <div>
-                        <p>
-                            مدت دوره (روز/هفته/ماه):
-                            <span class="font-weight-bold">{{$product->duration_date}}</span>
-                        </p>
-                    </div>
-                    <div>
-                        <p>
-                            تاریخ شروع دوره:
-                            <span class="font-weight-bold">{{$product->start}}</span>
-                        </p>
-                    </div>
-                    <div>
-                        <p>
-                            تاریخ اتمام دوره:
-                            <span class="font-weight-bold">{{$product->end}}</span>
-                        </p>
-                    </div>
+
                     <div class="d-flex mt-5 mb-5">
 
                         <div class="row">
@@ -70,7 +47,6 @@
                                         <i class="bi-cart-fill me-1"></i>
                                         خرید / اقساط
                                     </button>
-                                    <p class="font-weight-bold">میزان {{$product->peymant_off}}% تخفیف در صورت پرداخت نقدی </p>
                                 </form>
                                 <div class="card mt-4" >
                                     <div class="card-body">

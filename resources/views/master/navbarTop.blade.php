@@ -42,6 +42,11 @@
                     دوره ها
                 </a>
             </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link " href="/products" id="navbarDropdownMenuLink1" >
+                    محصولات
+                </a>
+            </li>
 
             @if(request()->is('coach/*') &&(Auth::check()))
                 <li class="nav-item ">
