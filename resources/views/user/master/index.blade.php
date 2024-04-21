@@ -125,6 +125,10 @@
                                         <div class="card-body">
                                             <div class="tab-content">
                                                 <div role="tabpanel" class="tab-pane active" id="account-vertical-general" aria-labelledby="account-pill-general" aria-expanded="true">
+                                                    <div class="col-12" id="error_ajax">
+
+                                                    </div>
+
                                                     @if($errors->any())
                                                         <div class="col-12">
                                                             <div class="alert alert-danger" role="alert">

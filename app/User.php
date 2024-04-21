@@ -361,22 +361,27 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function exam_insert()
     {
-        return $this->hasMany('App\Exam');
+        return $this->hasMany('Modules\Exam\Entities\Exam');
     }
 
     public function examQuestion_insert()
     {
-        return $this->hasMany('App\ExamQuestion');
+        return $this->hasMany('Modules\Exam\Entities\ExamQuestion');
     }
 
     public function examResult_insert()
     {
-        return $this->hasMany('App\ExamResult');
+        return $this->hasMany('Modules\Exam\Entities\ExamResult');
     }
 
     public function takeExams()
     {
-        return $this->hasMany('App\TakeExam');
+        return $this->hasMany('Modules\Exam\Entities\TakeExam');
+    }
+
+    public function purchases()
+    {
+        return $this->hasMany(Purchase::class);
     }
 
 }

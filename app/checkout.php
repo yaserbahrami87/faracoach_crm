@@ -15,6 +15,11 @@ class checkout extends Model
         return $this->belongsTo('App\User');
     }
 
+    public function coach_reserve()
+    {
+        return $this->belongsTo('App\User','product_id','id');
+    }
+
     public function course()
     {
         return $this->belongsTo('App\course','product_id','id');

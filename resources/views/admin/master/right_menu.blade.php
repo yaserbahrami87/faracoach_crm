@@ -151,6 +151,8 @@
             </li>
 
             <li class=" nav-item"><a href="/admin/tweet" ><span class="menu-title" >دلنوشته ها</span></a></li>
+            <li class=" nav-item"><a href="/admin/introduced" ><span class="menu-title" >سفیرها</span></a></li>
+
             <li class=" nav-item"><a href="#" class="disabled"><span class="menu-title" >اخبار</span></a></li>
 
             <li class=" nav-item"><a href="#"><span class="menu-title" >رویدادها</span></a>

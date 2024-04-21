@@ -155,7 +155,6 @@ class UserController extends BaseController
             // دریافت تعداد کاربرها بر اساس دسته بندی ها
             $statics=$this->get_staticsCountUsers_admin();
 
-
             $dateNow=$this->dateNow;
             $todayFollowup=User::where('followby_expert','=',Auth::user()->id)
                                 ->whereHas("followups" , function ($query) use ($dateNow)
@@ -193,7 +192,7 @@ class UserController extends BaseController
     public function showAll()
     {
         $users=User::orderby('id','desc')
-            ->paginate(20);
+            ->get();
 
         // دریافت تعداد کاربرها بر اساس دسته بندی ها
         $statics=$this->get_staticsCountUsers_admin();
@@ -218,9 +217,9 @@ class UserController extends BaseController
         $problem=$this->get_problemfollowup(NULL,1);
 
         $resource=User::groupby('resource')
-            ->get();
+                ->get();
 
-        return  view('admin.user.user_all')
+        return  view('admin.users')
             ->with('users',$users)
             ->with('usersAdmin',$usersAdmin)
             ->with('tags',$tags)

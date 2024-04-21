@@ -38,6 +38,7 @@
                 </a>
             </li>
             <li class=" nav-item"><a href="/panel/introduced"><span class="menu-title">سفیر کوچینگ</span></a></li>
+            <li class=" nav-item"><a href="/panel/purchases"><span class="menu-title">محصولات</span></a></li>
             <li class=" nav-item"><a href="/coaches/all"><span class="menu-title">لیست کوچ ها</span></a></li>
             <!-- <li class=" nav-item"><a href="/panel/teachers"><span class="menu-title">اساتید</span></a></li> -->
             @if(Auth::user()->status_coach==1)

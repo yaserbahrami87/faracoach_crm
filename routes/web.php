@@ -53,6 +53,7 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function ()
     Route::post('/introduced/changeType/{User}','UserController@changeTypeIntroduced');
 
     //Products
+    Route::get('/purchases','PurchaseController@show_all');
     Route::get('/products','AdminController@showProducts');
 
     //followup
@@ -331,7 +332,13 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function ()
     Route::get('/certificates/attendance/{user}','CertificateController@attendance_certificate');
     Route::resource('/certificate','CertificateController');
 
-
+    //Products
+    Route::get('/product/create','ProductController@create');
+    Route::get('/product/{product}/edit','ProductController@edit');
+    Route::patch('/product/{product}','ProductController@update');
+    Route::delete('/product/{product}','ProductController@destroy');
+    Route::post('/product','ProductController@store');
+    Route::get('/products','ProductController@index');
 
     //Route Scholarship Interview
     Route::resource('scholarship_interview','ScholarshipInterviewController');
@@ -693,7 +700,9 @@ Route::get('/scholarship/cleartel','ScholarshipController@cleartel');
 Route::get('/knot/register','ScholarshipController@create_knot');
 Route::post('/knot/checkCode_knot','VerifyController@checkCode_knot');
 
-
+//Products
+Route::get('/products','ProductController@showAll');
+Route::get('/product/{product}','ProductController@show');
 
 //checkout
 Route::get('/checkout/callback','CheckoutController@callback');

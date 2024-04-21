@@ -60,7 +60,7 @@ class AdminController extends BaseController
         {
 
             $dateNow=$this->dateNow;
-
+            /*
             $followupToday=User::join('followups','users.id','=','followups.user_id')
                     ->where('nextfollowup_date_fa','=',$dateNow)
                     ->where('flag','=',1)
@@ -73,8 +73,8 @@ class AdminController extends BaseController
                     ->where('nextfollowup_date_fa','<',$dateNow)
                     ->where('flag','=',1)
                     ->where('followby_expert','=',Auth::user()->id)
-//                    ->wherenotIn('users.type',[2,12])
                     ->count();
+            */
 
             $usersEducation=user::orwhere('type','=',3)
                         ->orwhere('type','=',4)
@@ -83,18 +83,6 @@ class AdminController extends BaseController
                         ->orwhere('type','=',6)
                         ->orwhere('type','=',7)
                         ->get();
-
-//            $sumcancelfollowup=0;
-//            $sumallFollowups=0;
-//            $sumtodayFollowups=0;
-//            $sumfollowedTodaybyID=0;
-//            $sumcontinuefollowup=0;
-//            $sumwaiting=0;
-//            $sumstudents=0;
-//            $sumnoanswering=0;
-//            $suminsertuser=0;
-//            $sumtalktimeToday=0;
-//            $sumtalktime=0;
 
 
 
@@ -122,6 +110,7 @@ class AdminController extends BaseController
                 $date_en=[$this->changeTimestampToMilad($request['start_date'][0])." 00:00:00",$this->changeTimestampToMilad($request['start_date'][1])." 23:59:59"];
             }
 
+            /*
             //جلسات رزرو شده در امروز
             $condition=['created_at','like',$this->changeTimestampToMilad($this->dateNow).'%'];
             $countBookingReserve=$this->get_reserve(NULL,NULL,NULL,NULL,$condition,NULL,'get');
@@ -148,24 +137,25 @@ class AdminController extends BaseController
                             ->whereNotIn('type',[2,3])
                             ->count();
 
+
+            */
             $users=User::get();
 
 
 
-//            $countUnreadMessages=$this->countUnreadMessages();
             return view('admin.home')
                         ->with('date_en',$date_en)
                         ->with('dateNow',$dateNow)
                         ->with('rangeDate',$request['start_date'])
-                        ->with('followupToday',$followupToday)
-                        ->with('expirefollowupToday',$expirefollowupToday)
-                        ->with('countBookingReserve',$countBookingReserve)
+//                        ->with('followupToday',$followupToday)
+//                        ->with('expirefollowupToday',$expirefollowupToday)
+//                        ->with('countBookingReserve',$countBookingReserve)
                         ->with('usersEducation',$usersEducation)
-                        ->with('countBookingReserve',$countBookingReserve)
-                        ->with('bookingsToday',$bookingsToday)
-                        ->with('checkoutToday',$checkoutToday)
-                        ->with('insertUserToday',$insertUserToday)
-                        ->with('loginUserToday',$loginUserToday)
+//                        ->with('countBookingReserve',$countBookingReserve)
+//                        ->with('bookingsToday',$bookingsToday)
+//                        ->with('checkoutToday',$checkoutToday)
+//                        ->with('insertUserToday',$insertUserToday)
+//                        ->with('loginUserToday',$loginUserToday)
                         ->with('users',$users);
         }
         else if(Gate::allows('isUser'))

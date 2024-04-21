@@ -189,7 +189,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         App\Providers\JalaliDateServiceProvider::class,
-        App\Providers\ScoreProvider::class,
+//        App\Providers\ScoreProvider::class,
 
 
     ],
@@ -250,6 +250,7 @@ return [
         'Image' => Intervention\Image\Facades\Image::class,
         'Share' => Jorenvh\Share\ShareFacade::class,
         'JalaliDate'=>App\Services\JalaliDate::class,
+        'Score'=>App\Services\ScoreService::class,
 
 
 

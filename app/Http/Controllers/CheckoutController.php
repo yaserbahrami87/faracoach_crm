@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\booking;
 use App\cart;
 use App\checkout;
+use App\clinic_reserve;
 use App\course;
 use App\eventreserve;
 use App\faktor;
 use App\invoice;
 use App\lib\zarinpal;
+use App\Purchase;
 use App\reserve;
 use App\student;
 use App\wallet;
@@ -248,21 +250,6 @@ class CheckoutController extends BaseController
                 {
                     foreach ($checkout as $item)
                     {
-//                        faktor::create([
-//                            'user_id'               =>Auth::user()->id,
-//                            'checkout_id'           =>$item->checkout_id,
-//                            'product_id'            =>$item->product_id,
-//                            'type'                  =>$item->type,
-//                            'date_createfaktor'     =>$this->dateNow,
-//                            'date_faktor'           =>$this->dateNow,
-//                            'fi'                    =>$item->price,
-//                            'authortity'            =>$item->authortity,
-//                            'description'           =>'پرداخت شده',
-//                            'date_pardakht'         =>$this->dateNow,
-//                            'time_pardakht'         =>$this->timeNow,
-//                            'checkout_id_pardakht'  =>$item->id,
-//                            'insert_user_id'        =>Auth::user()->id,
-//                        ]);
 
                         $item->status = 1;
                         $item->description = 'خرید انجام شد';
@@ -384,8 +371,30 @@ class CheckoutController extends BaseController
                                 $invoice->delete();
                             }
                         }
-                        else if ($item->type == 'reserve')
+                        else if ($item->type == 'reserve_introduction' || $item->type == 'reserve')
                         {
+                            if($item->type == 'reserve_introduction')
+                            {
+                                $duration = 1;
+                            }
+                            else
+                            {
+                                $duration=2;
+                            }
+                            dd($item->coach_reserve);
+
+                            $reserve=reserve::create([
+                                'user_id'       =>Auth::user()->id,
+                                'duration_booking'  =>$duration,
+                                'fi'                =>$User->coach->fi,
+                                'off'               =>$off,
+                                'type_discount'     =>$type_discount,
+                                'coupon'            =>$coupon,
+                                'final_off'         =>$fi_final,
+                            ]);
+
+
+
                             $reserve=reserve::where('id','=',$item->product_id)
                                             ->first();
                             $reserve->update(
@@ -434,6 +443,24 @@ class CheckoutController extends BaseController
                             return view('callBackCheckout')
                                 ->with('msg',$msg)
                                 ->with('alert',$alert);
+
+                        }
+                        else if($item->type=='product')
+                        {
+                            $status=Purchase::create([
+                                'user_id'    =>Auth::user()->id,
+                                'product_id' =>$item->product_id,
+                                'type'       =>'product',
+                                'checkout_id'=>$item->id,
+                                'date_fa'    =>$this->dateNow,
+                                'time_fa'    =>$this->timeNow,
+                            ]);
+
+                            $msg="خرید دوره با موفقیت انجام شد\n فراکوچ";
+                            $this->sendSms(Auth::user()->tel,$msg);
+                            $msg=Auth::user()->fname.' '.Auth::user()->lname.' محصول خریداری کرد ';
+                            $this->sendSms('09153159020',$msg);
+
 
                         }
                         else if($item->type=='scholarship_payment')
@@ -548,6 +575,33 @@ class CheckoutController extends BaseController
                                     'checkout_id'   =>$item->id,
                             ]);
                             alert()->success('کیف پول با موفقیت شارژ شد')->persistent('بستن');
+                            return redirect('/panel/wallet')
+                                ->with('msg',$msg);
+                        }
+                        else if($item->type=='booking_introduction')
+                        {
+                            for ($i=1;$i<=$item->order->capacity;$i++)
+                            {
+                                $clinic_reserve=clinic_reserve::create([
+                                    'user_id'       =>Auth::user()->id,
+                                    'coach_id'      =>$item->product_id,
+                                    'type'          =>2, //جلسات معارفه
+                                    'checkout_id'   =>$item->id,
+                                ]);
+
+
+                            }
+
+                            if($clinic_reserve)
+                            {
+                                alert()->success('رزرو جلسه معارفه با موفقیت انجام شد')->persistent('بستن');
+                            }
+                            else
+                            {
+                                alert()->error('خطا در ثبت رزرو')->persistent('بستن');
+                            }
+
+
                         }
 
                     }
@@ -557,9 +611,10 @@ class CheckoutController extends BaseController
 
                     $msg='<p>پرداخت با موفقیت انجام شد</p><p>شماره پیگیری: '.$item->authority.'</p>';
                     $alert='success';
-                    return redirect('/panel/wallet')
-                                ->with('msg',$msg)
-                                ->with('alert',$alert);
+                    return view('callBackCheckout')
+                        ->with('msg',$msg)
+                        ->with('alert',$alert);
+
 
                 }
                 else

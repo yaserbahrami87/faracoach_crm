@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\cart;
+use App\coach;
 use App\course;
+use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,10 +33,30 @@ class CartController extends BaseController
                 switch($item->type)
                 {
                     case 'course':$course=course::where('id','=',$item->product_id)
-                        ->first();
-                        $item->product=$course->course;
-                        $item->fi=$course->fi_off;
-                        $item->peymant_off=$course->peymant_off;
+                                        ->first();
+                            $item->product=$course->course;
+                            $item->fi=$course->fi_off;
+                            $item->peymant_off=$course->peymant_off;
+                            break;
+
+                    case 'booking_introduction':$product=coach::where('user_id','=',$item->product_id)
+                                             ->first();
+
+                                $item->product=$product->user->fname;
+                                $item->fi=$product->fi;
+
+//                                $item->off=$product->introduction_discount;
+                                $item->final_off=$product->fi-(($product->fi*$product->introduction_discount)/100);
+
+                                //$item->final_off=$item->final_off-(($item->final_off*$item->off)/100);
+                                break;
+                    case 'product':$product=Product::where('id','=',$item->product_id)
+                                                    ->first();
+
+                                $item->product=$product->product;
+                                $item->fi=$product->fi;
+                                $item->final_off=$product->fi_off;
+                                break;
                 }
             }
             return view('cart_all')
@@ -60,11 +82,10 @@ class CartController extends BaseController
      */
     public function store(Request $request)
     {
-
         if(Auth::check())
         {
             cart::where('user_id','=',Auth::user()->id)
-                ->where('product_id','<>',$request->product_id)
+                //->where('product_id','<>',$request->product_id)
                 ->delete();
 
             $this->validate($request,
@@ -74,15 +95,17 @@ class CartController extends BaseController
                 ]
             );
 
+
+
+
             $cart = cart::where('product_id', '=', $request->product_id)
                 ->where('type', '=', $request->type)
                 ->where('user_id', '=', Auth::user()->id)
                 ->first();
 
-
-
             if ($cart)
             {
+
                 if ($request->capacity)
                 {
                     $cart->off=NULL;
@@ -96,6 +119,7 @@ class CartController extends BaseController
                         //alert()->error('خطا به اضافه کردن تعدا محصول مورد نظر ')->persistent('بستن');
                     }
                 } else {
+
                     switch ($request->type)
                     {
                         case 'course': $product=course::where('id','=',$request->product_id)
@@ -103,18 +127,43 @@ class CartController extends BaseController
                                         //برای اینکه مقدار فیلد نهایی قیمت همه در یک فیلد باشد در فیلد زیر میریزم
                                         $product->final_off=$product->fi_off;
                                         break;
+                        case 'booking_introduction':$product=coach::where('user_id','=',$request->product_id)
+                                                        ->first();
+                                        break;
+                        case 'booking_coaching':$product=coach::where('user_id','=',$request->product_id)
+                                        ->first();
+                                        break;
                         default: alert()->error('خطا در بروزرسانی محصول')->persistent('بستن');
                                         return back();
                     }
-                    $cart->fi=$product->fi;
-                    $cart->final_off=$product->final_off;
-                    $cart->off=NULL;
+
+                    if($request->type=='booking_introduction')
+                    {
+                        $cart->fi=$product->fi;
+                        $cart->final_off=$product->fi-(($product->fi*$product->introduction_discount)/100);
+                        $cart->off=$product->introduction_discount;
+                    }
+                    else
+                    {
+                        $cart->fi=$product->fi;
+                        $cart->final_off=$product->final_off;
+                        if($cart->capacity!=1)
+                        {
+                            $cart->final_off=$product->final_off*$cart->capacity;
+                        }
+                        $cart->off=NULL;
+                    }
+
+
+
+
                     $cart->coupon=NULL;
                     $cart->type_payment_id=$product->type_peymant_id;
                     $cart->save();
                     //alert()->warning('محصول مورد نظر در سبد شما وجود دارد')->persistent('بستن');
                 }
             } else {
+
                 switch($request->type)
                 {
                     case 'course':$product=course::where('id','=',$request->product_id)
@@ -122,6 +171,19 @@ class CartController extends BaseController
                                     //برای اینکه مقدار فیلد نهایی قیمت همه در یک فیلد باشد در فیلد زیر میریزم
                                     $product->final_off=$product->fi_off;
                                     break;
+                    case 'booking_introduction':$product=coach:: where('user_id','=',$request->product_id)
+                                                ->first();
+                                            $product->final_off=$product->fi;
+                                            break;
+                    case 'booking_coaching':$product=coach:: where('user_id','=',$request->product_id)
+                                            ->first();
+                                            $product->final_off=$product->fi;
+                                            break;
+                    case 'product':$product=Product::where('id','=',$request->product_id)
+                                            ->first();
+                                            $product->final_off=$product->fi_off;
+                                            $product->capacity=1;
+                                            break;
 
                     default:    alert()->error('محصولی با این مشخصات پیدا نشد')->persistent('بستن');
                                 return back();
@@ -129,15 +191,23 @@ class CartController extends BaseController
 
 
 
+                if(!$request->has('capacity'))
+                {
+                    $request['capacity']=1;
+                }
+
                 $cart = cart::create($request->all() +
                     [
                         'user_id'           => Auth::user()->id,
                         'date_fa'           => $this->dateNow,
                         'time_fa'           => $this->timeNow,
                         'fi'                =>$product->fi,
-                        'final_off'         =>$product->final_off,
+                        'capacity'          =>$request->capacity,
+                        'final_off'         =>$product->final_off*$product->capacity,
                         'type_payment_id'   =>$product->type_peymant_id,
                     ]);
+
+
 
                 if ($cart) {
                     alert()->success('محصول به سبد شما اضافه شد')->persistent('بستن');
