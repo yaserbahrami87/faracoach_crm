@@ -93,7 +93,7 @@
             <li class=" nav-item"><a href="#"><span class="menu-title" >محصولات</span></a>
                 <ul class="menu-content">
                     <li><a href="/admin/products" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >لیست محصولات</span></a></li>
-                    <li><a href="/admin/create" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >ایجاد محصول</span></a></li>
+                    <li><a href="/admin/product/create" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >ایجاد محصول</span></a></li>
                     <li><a href=" nav-item has-sub "><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >دسته بندی ها</span></a>
                         <ul class="menu-content">
                             <li><a href="/admin/categories" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >همه دسته بندی ها</span></a></li>
