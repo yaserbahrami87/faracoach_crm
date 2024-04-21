@@ -14,7 +14,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories=Category::where('status',1)
+                    ->get();
+        return view('admin.categories.categories')
+                        ->with('categories',$categories);
     }
 
     /**
@@ -24,7 +27,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.categories.category-insert');
     }
 
     /**
@@ -35,7 +38,24 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'category'  =>'required|unique:categories,category',
+            'type'      =>'required|in:product',
+            'status'    =>'required|boolean',
+        ]);
+
+        $category=Category::create($request->all());
+        if($category)
+        {
+            alert()->success('دسته بندی با موفقیت ارسال شد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در ایجاد دسته بندی')->persistent('بستن');
+        }
+
+        return back();
+
     }
 
     /**
@@ -57,7 +77,8 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('admin.categories.category-edit')
+                            ->with('category',$category);
     }
 
     /**
@@ -69,7 +90,24 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $this->validate($request,[
+            'category'  =>'required|unique:categories,category,'.$category->id,
+            'type'      =>'required|in:product|',
+            'status'    =>'required|boolean',
+        ]);
+
+        $status=$category->update($request->all());
+        if($status)
+        {
+            alert()->success('بروزرسانی با موفقیت بروز شد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در بروزرسانی')->persistent('بستن');
+        }
+
+        return back();
+
     }
 
     /**
@@ -80,6 +118,16 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $status=$category->delete();
+        if($status)
+        {
+            alert()->success('دسته با موفقیت حذف شد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در بروزرسانی دسته')->persistent('بستن');
+        }
+
+        return back();
     }
 }

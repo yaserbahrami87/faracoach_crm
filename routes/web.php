@@ -56,6 +56,8 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function ()
     Route::get('/purchases','PurchaseController@show_all');
     Route::get('/products','AdminController@showProducts');
 
+
+
     //followup
     Route::get('/followup/{followup}','UserController@showFollowupIntroduced');
     Route::post('/followup/create','FollowupController@store_user');
@@ -339,6 +341,14 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function ()
     Route::delete('/product/{product}','ProductController@destroy');
     Route::post('/product','ProductController@store');
     Route::get('/products','ProductController@index');
+
+    //Category
+    Route::get('/categories','CategoryController@index');
+    Route::get('/category/create','CategoryController@create');
+    Route::post('/category','CategoryController@store');
+    Route::get('/category/{category}/edit','CategoryController@edit');
+    Route::patch('/category/{category}','CategoryController@update');
+    Route::delete('/category/{category}','CategoryController@destroy');
 
     //Route Scholarship Interview
     Route::resource('scholarship_interview','ScholarshipInterviewController');
