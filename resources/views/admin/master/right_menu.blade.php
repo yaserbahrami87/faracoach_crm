@@ -89,6 +89,7 @@
                         @include("{$module->getLowerName()}::admin.master.sidebar-item")
                     @endif
                 @endforeach
+
             </li>
             <li class=" nav-item"><a href="#"><span class="menu-title" >محصولات</span></a>
                 <ul class="menu-content">
