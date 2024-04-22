@@ -62,7 +62,7 @@ class UserController extends BaseController
                         })
                         ->whereNotIn('users.type',[-3,-2,-1,2,3,0,30])
                         ->orderby('id','desc')
-                        ->get();
+                        ->paginate(25);
 
             $statics=$this->get_staticsCountUsers_admin();
 
@@ -79,7 +79,7 @@ class UserController extends BaseController
                 })
                 ->orderby('users.id','desc')
                 ->groupby('users.id')
-                ->get();
+                ->paginate(25);
         }
         //نیروی فروش
         else if(Auth::user()->type==3)
@@ -91,7 +91,7 @@ class UserController extends BaseController
             })
                 ->whereNotIn('users.type',[-3,-2,-1,2,3,0,30])
                 ->orderby('id','desc')
-                ->get();
+                ->paginate(25);
 
             $statics=$this->get_staticsCountUsers_admin();
 
@@ -108,7 +108,7 @@ class UserController extends BaseController
                 })
                 ->orderby('users.id','desc')
                 ->groupby('users.id')
-                ->get();
+                ->paginate(25);
         }
         //نیروی مسئول لیدهای صفر
         else if(Auth::user()->type==6 || Auth::user()->type==4)
@@ -129,7 +129,7 @@ class UserController extends BaseController
             })
             ->orderby('users.id','desc')
             ->groupby('users.id')
-            ->get();
+            ->paginate(25);
 
 
         }
@@ -148,7 +148,7 @@ class UserController extends BaseController
                     $query->where('resource','=',$request->resource);
                 })
                 ->orderby('id','desc')
-                ->get();
+                ->paginate(25);
         }
 
 
@@ -192,7 +192,7 @@ class UserController extends BaseController
     public function showAll()
     {
         $users=User::orderby('id','desc')
-            ->get();
+            ->paginate(25);
 
         // دریافت تعداد کاربرها بر اساس دسته بندی ها
         $statics=$this->get_staticsCountUsers_admin();
@@ -1192,81 +1192,6 @@ class UserController extends BaseController
     }
 
 
-//    public function showCategoryTagsAdmin(Request $request)
-//    {
-//        if(is_null($request))
-//        {
-//            return redirect('/panel');
-//        }
-//        else {
-//            $this->validate($request,
-//                [
-//                    'tags'  =>'array|required'
-//                ]);
-//
-//            if (!isset($request['tags']))
-//            {
-//                alert()->error("حداقل یک گزینه برای اعمال فیلترها انتخاب کنید",'خطا')->persistent('بستن');
-//                return back();
-//            } else {
-//
-//                $users=followup::wherein('tags',$request->tags)
-//                        ->orwhere(function($query) use ($request)
-//                        {
-//                            for ($i=0;$i<count($request->tags);$i++)
-//                            {
-//                                $query->orwhere('tags','like',$request->tags[$i].',%')
-//                                        ->orwhere('tags','like','%,'.$request->tags[$i])
-//                                        ->orwhere('tag','like','%,'.$request->tags[$i].',%');
-//                            }
-//                        })
-//                        ->get();
-//
-//
-//
-//
-//                foreach ($users as $item)
-//                {
-//                    $item=$this->changeNumberToData($item);
-//                }
-//
-//
-//                $tags = $this->get_tags();
-//                $parentCategory=$this->get_category('پیگیری');
-//
-//                $usersAdmin=user::orwhere('type','=','2')
-//                    ->orwhere('type','=',3)
-//                    ->get();
-//
-//                if(isset($request['user']))
-//                {
-//                    $user=$request['user'];
-//                }
-//                else
-//                {
-//                    $user="";
-//                }
-//
-//                //لیست تعداد کاربرها
-//                $statics=$this->get_staticsCountUsers_admin();
-//
-//                //دریافت کفیت های پیگیری
-//                $problem=$this->get_problemfollowup(NULL,1);
-//
-//
-//                return view('admin.users')
-//                    ->with('tags',$tags)
-//                    ->with('users',$users)
-//                    ->with('parentCategory',$parentCategory)
-//                    ->with('usersAdmin',$usersAdmin)
-//                    ->with('user',$user)
-//                    ->with('statics',$statics)
-//                    ->with('parameter',$request['parameter'])
-//                    ->with('problem',$problem);
-//            }
-//        }
-//    }
-
     //نمایش لیست دعوت شده ها
     public function listIntroducedUser(Request $request)
     {
@@ -1377,7 +1302,9 @@ class UserController extends BaseController
                         ->orwhere('tel','like','%'.$request['q'].'%')
                         ->orwhere('email','like','%'.$request['q'].'%')
                         ->orderby('id','desc')
-                        ->get();
+                        ->paginate(25);
+
+        $users->appends(['q' => $request['q']]);
 
 
 
@@ -1743,88 +1670,6 @@ class UserController extends BaseController
         }
     }
 
-//    public function advancesearch (Request $request)
-//    {
-//        $this->validate($request,[
-//            'user'              =>'nullable|numeric',
-//            'categorypeygiri'   =>'nullable|boolean',
-//            'gettingknow'       =>'nullable|string'
-//        ]);
-//
-//        if(!is_null($request['user']))
-//        {
-//            $user=$request['user'];
-//        }
-//        if(!is_null($request['categorypeygiri']))
-//        {
-//            $categorypeygiri=$request['categorypeygiri'];
-//        }
-//
-//
-//
-//        $users = User:: join('followups', 'users.id', '=', 'followups.user_id')
-//                    ->when(($request['categorypeygiri']=="1" && $request['user'] ),function($query) use ($request)
-//                    {
-//                        return $query->where('users.insert_user_id','=',$request->user);
-//                    })
-//                    ->when(($request['categorypeygiri']=="0" && $request['user']),function($query) use ($request)
-//                    {
-//                        return $query->where('users.followby_expert','=',$request->user);
-//                    })
-//                    ->when(($request['categorypeygiri']=="1"),function($query) use ($request)
-//                    {
-//                        return $query->whereNotNull('followups.insert_user_id');
-//                    })
-//                    ->when(($request['categorypeygiri']=="0"),function($query) use ($request)
-//                    {
-//                        return $query->whereNotNull('users.followby_expert');
-//                    })
-//                    ->when(($request['gettingknow']),function($query) use ($request)
-//                    {
-//                        return $query->where('users.gettingknow','=',$request->gettingknow);
-//                    })
-//                    ->when(($request['problem']),function($query) use ($request)
-//                    {
-//                        return $query->where('followups.problemfollowup_id','=',$request->problem);
-//                    })
-//                    ->where('flag','=',1)
-//                    ->orderby('followups.id','desc')
-//                    ->select('users.*')
-//                    ->get();
-//
-//
-//
-//
-//        foreach ($users as $item)
-//        {
-//            $item=$this->changeNumberToData($item);
-//        }
-//
-//        $tags=$this->get_tags();
-//        $parentCategory=$this->get_category('پیگیری');
-//        $usersAdmin=user::orwhere('type','=',2)
-//                ->orwhere('type','=',3)
-//                ->get();
-//
-//
-//        //لیست تعداد کاربرها
-//        $statics=$this->get_staticsCountUsers_admin();
-//
-//        //دریافت کفیت های پیگیری
-//        $problem=$this->get_problemfollowup(NULL,1);
-//
-//
-//
-//        return view('admin.users')
-//            ->with('users',$users)
-//            ->with('tags',$tags)
-//            ->with('parentCategory',$parentCategory)
-//            ->with('usersAdmin',$usersAdmin)
-//            ->with('user',Auth::user()->id)
-//            ->with('parameter',$request['parameter'])
-//            ->with('statics',$statics)
-//            ->with('problem',$problem);
-//    }
 
     public function createExcel()
     {

@@ -109,7 +109,7 @@
 
                 <div class="table-responsive overflow-auto">
 
-                    <table id="example" class="table table-striped table-bordered" style="width:100%">
+                    <table id="" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                         <tr>
                             <th></th>
@@ -134,8 +134,8 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($users as $item)
 
+                        @foreach($users as $item)
                             <tr style="background-color: @if(!is_null($item->last_followupUser)) {{$item->last_followupUser->problemFollowup['color']}} @endif  @if(!is_null($item->scholarship)) @if($item->scholarship->resource=='scholarship') ;background-color:#ff4dff !important   @elseif($item->scholarship->resource=='knot')  ;background-color: #cceeff!important    @endif   @endif "  >
                                 <td class="p-0">
                                     <a href="/admin/user/{{$item->id}}">
@@ -259,6 +259,7 @@
                         </tr>
                         </tfoot>
                     </table>
+                    {{$users->links()}}
 
                 </div>
             </div>
