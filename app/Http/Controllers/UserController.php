@@ -53,7 +53,7 @@ class UserController extends BaseController
     {
 
 
-        return view('admin.alaki');
+
         //نیروهای مدیر
         if(Auth::user()->type==2 ||Auth::user()->type==5 )
         {
@@ -193,7 +193,7 @@ class UserController extends BaseController
 
     public function showAll()
     {
-        return view('admin.alaki');
+
         $users=User::orderby('id','desc')
             ->paginate(25);
 
