@@ -204,7 +204,7 @@ class UserController extends BaseController
                 $query->where('nextfollowup_date_fa','=',$dateNow)
                     ->where('flag','=',1);
             })
-            ->get();
+            ->paginate(25);
 
         $usersAdmin=user::orwhere('type','=',2)
             ->orwhere('type','=',3)
