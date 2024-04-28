@@ -8,7 +8,7 @@
 
         .cls
         {
-            background-image: url({{public_path('images/blank-certificates/ICF_Scholarship.jpg') }});
+            background-image: url({{public_path('images/blank-certificates/ambassador.jpg') }});
             /*
             background-image: url({{public_path('images/blank-certificates/level1.jpg') }});
              */
@@ -19,7 +19,7 @@
         }
 
         .cls_pdf{
-            background-image: url('{{public_path('images/blank-certificates/ICF_Scholarship.jpg') }}');
+            background-image: url('{{public_path('images/blank-certificates/ambassador.jpg') }}');
             width: 100%;
             height: 100%;
             background-size: 100% 100%;
@@ -30,25 +30,45 @@
         {
             position: absolute;
             text-align: center;
-            font-size: 180px;
-            color: #000000;
-            top: 1100px;
-            left:1200px;
-            text-transform: capitalize;
-            font-family:'embassybt';
+            font-size: 60px;
+            color: #fa9416;
+            top: 1250px;
+            left:400px;
             font-weight: bold;
+        }
+
+        body {
+            font-family: 'vazir';
+
+        }
+
+        .images
+        {
+            border-radius: 30px;
+            width:100px;
+            position:absolute;
+            top:200px;
+            left:20px;
+        }
+
+
+        @font-face {
+            src: url("{{public_path('fonts/iransansweb.ttf')}}");
+            font-family: 'iransans';
         }
 
 
     </style>
+
 </head>
-<body class='cls_pdf container-fluid' style="background-image:url('{{public_path('images/blank-certificates/ICF_Scholarship.jpg')}}');background-size: 100% 100%;position: relative"     >
-    @if(strlen(Auth::user()->fname_en.' '.Auth::user()->lname_en)>20 && strlen(Auth::user()->fname_en.' '.Auth::user()->lname_en)<26)
-        <h1 class='tag_h1' style='font-size: 160px'>{{Auth::user()->fname_en.' '.Auth::user()->lname_en}}</h1>
-    @elseif(strlen(Auth::user()->fname_en.' '.Auth::user()->lname_en)>=26)
-        <h1 class='tag_h1' style='font-size: 100px'>{{Auth::user()->fname_en.' '.Auth::user()->lname_en}}</h1>
-    @else
-        <h1 class='tag_h1'>{{Auth::user()->fname_en.' '.Auth::user()->lname_en}}</h1>
-    @endif
+<body class='cls_pdf container-fluid' style="background-image:url('{{public_path('images/blank-certificates/ambassador.jpg')}}');background-size: 100% 100%;position: relative"     >
+
+        @if(is_null(Auth::user()->personal_image))
+            <img src="{{public_path('documents/users/default-avatar.png')}}" class="images" style="width:410px;height:460px;position:absolute;margin-top:635px;padding-left:290px;border-radius:20px 20px 20px 20px" />
+        @else
+            <img src="{{public_path('documents/users/'.Auth::user()->personal_image)}}" class="images" style="width:410px;height:460px;position:absolute;margin-top:635px;padding-left:290px;border-radius:20px 20px 20px 20px" />
+        @endif
+        <p class="tag_h1" style='font-family:iransans;font-size: 60px'>{{Auth::user()->fname.' '.Auth::user()->lname}}</p>
+
 </body>
 </html>
