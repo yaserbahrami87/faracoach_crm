@@ -68,7 +68,13 @@
         @else
             <img src="{{public_path('documents/users/'.Auth::user()->personal_image)}}" class="images" style="width:410px;height:460px;position:absolute;margin-top:635px;padding-left:290px;border-radius:20px 20px 20px 20px" />
         @endif
-        <p class="tag_h1" style='font-family:iransans;font-size: 60px'>{{Auth::user()->fname.' '.Auth::user()->lname}}</p>
+        @if(mb_strlen(Auth::user()->fname.' '.Auth::user()->lname)>15  && mb_strlen(Auth::user()->fname.' '.Auth::user()->lname)<20)
+            <p class="tag_h1" style='font-family:iransans;font-size: 60px;left:300px;'>{{Auth::user()->fname.' '.Auth::user()->lname}}</p>
+        @elseif(mb_strlen(Auth::user()->fname.' '.Auth::user()->lname)>20)
+            <p class="tag_h1" style='font-family:iransans;font-size: 60px;left:250px;'>{{Auth::user()->fname.' '.Auth::user()->lname}}</p>
+        @else
+            <p class="tag_h1" style='font-family:iransans;font-size: 60px'>{{Auth::user()->fname.' '.Auth::user()->lname}}</p>
+        @endif
 
 </body>
 </html>
