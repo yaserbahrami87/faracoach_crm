@@ -100,7 +100,6 @@ class CertificateController extends Controller
     public function get_certificate()
     {
 
-//        if(Auth::user()->scholarship->confirm_exam==1 && Auth::user()->scholarship->confirm_webinar==1 )
         if(Auth::user()->scholarship->confirm_exam==1  )
         {
 
@@ -402,6 +401,53 @@ class CertificateController extends Controller
             alert()->error('کاربر مورد نظر یافت نشد')->persistent('بستن');
         }
     }
+
+    public function get_ambassador()
+    {
+
+        if(!is_null(Auth::user()->fname)||!is_null(Auth::user()->lname)  )
+        {
+
+            ini_set('max_execution_time', 0);
+
+
+
+
+            $pdf=Pdf::loadView('user.blank-certificates.ambassador', [],[],[
+                'format'    =>[285,510],
+
+            ]);
+
+
+
+            $fileName=time().'_.pdf';
+
+            $pdf->allow_charset_conversion=false;  // Set by default to TRUE
+
+
+            $pdf->charset_in='UTF-8';
+
+            $pdf->save($fileName);
+
+            return response()->download(public_path($fileName))
+                ->deleteFileAfterSend(true);
+
+
+
+
+
+
+        }
+        else
+        {
+            alert()->error('لطفا نام و نام خانوادگی خود را وارد کنید')->persistent('بستن');
+            return back();
+        }
+
+    }
+
+
+
 
 
 }

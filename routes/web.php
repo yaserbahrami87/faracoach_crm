@@ -159,6 +159,7 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function ()
 
     Route::get('/level1/certificate','CertificateController@get_certificate1');
     Route::get('/scholarship/certificate/download','CertificateController@get_certificate');
+    Route::get('/certificate/ambassador','CertificateController@get_ambassador');
 
 
     //scientific supports
@@ -488,6 +489,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function ()
     Route::resource('settingsms','SettingsmsController');
 
     //introduced
+
     Route::get('/introduced','UserController@introducedList');
     Route::patch('/introduced/{User}','UserController@introduced');
 
