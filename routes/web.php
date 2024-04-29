@@ -160,6 +160,11 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function ()
     Route::get('/level1/certificate','CertificateController@get_certificate1');
     Route::get('/scholarship/certificate/download','CertificateController@get_certificate');
     Route::get('/certificate/ambassador','CertificateController@get_ambassador');
+    Route::get('/certificates','CertificateController@certificates_all');
+//    Route::post('/certificates/acsth/{student}','CertificateController@get_certificate_acsth');
+//    Route::post('/certificates/fcc/{student}','CertificateController@get_fcc');
+//    Route::post('/certificates/fc1/{student}','CertificateController@get_fc1byAdmin');
+//    Route::get('/certificates/attendance/{user}','CertificateController@attendance_certificate');
 
 
     //scientific supports

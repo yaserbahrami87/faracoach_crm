@@ -446,6 +446,11 @@ class CertificateController extends Controller
 
     }
 
+    public function certificates_all()
+    {
+         return view('user.certificates.certificates-all');
+    }
+
 
 
 

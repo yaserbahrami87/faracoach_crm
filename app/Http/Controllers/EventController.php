@@ -276,7 +276,7 @@ class EventController extends BaseController
     public function usersEvent(event $event)
     {
         $eventreserves=$event->eventreserves()
-                        ->paginate(25);
+                        ->get();
 
 //        $users = event::join('eventreserves', 'events.id', '=', 'eventreserves.event_id')
 //            ->join('users', 'eventreserves.user_id', '=', 'users.id')

@@ -85,6 +85,7 @@
                     <li><a href="/panel/warrany" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >تعهدنامه</span></a></li>
                 </ul>
             </li>
+            <li class=" nav-item"><a href="/certificates"><span class="menu-title">مدارک صادرشده</span></a></li>
             <!--
             <li class=" nav-item has-sub "><a href="#"><span class="menu-title" >بلاگ</span></a>
                 <ul class="menu-content">
