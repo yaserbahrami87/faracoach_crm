@@ -23,7 +23,9 @@
                         <div class="col-12 col-sm-6 col-md-3 col-lg-3 col-xl-3 mb-5">
                             <div class="card h-100">
                                 <!-- Product image-->
-                                <img class="card-img-top" src="{{$item->image}}" alt="{{$item->shortlink}}" style="height: 300px"/>
+                                <a href="/product/{{$item->shortlink}}">
+                                    <img class="card-img-top" src="{{$item->image}}" alt="{{$item->shortlink}}" style="height: 300px"/>
+                                </a>
                                 <!-- Product details-->
                                 <div class="card-body p-4">
                                     <div class="text-center">
@@ -37,6 +39,15 @@
                                         <del class="float-right text-muted">{{number_format($item->fi)}} تومان</del>
                                     </div>
                                 </div>
+
+                                <!-- Product description-->
+                                <div class="card-footer p-2 pt-0 border-top-0 bg-transparent">
+                                    <div class="text-center">
+                                        <h5>توضیحات</h5>
+                                        <p>{{$item->description}}</p>
+                                    </div>
+                                </div>
+
                                 <!-- Product actions-->
                                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                     <div class="text-center">

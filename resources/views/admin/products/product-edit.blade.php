@@ -33,15 +33,19 @@
                         </div>
                     </div>
                     <div class="form-group">
+{{--                        {{dd($product->categories->wherein('id',[2]))}}--}}
                         <label for="teacher">دسته بندی<span class="text text-danger">*</span></label>
                         <select id="category_id" class="form-control p-0 @error('category_id') is-invalid @enderror" name="category_id[]" multiple>
                             <option selected disabled>انتخاب کنید</option>
-                            @foreach($categories as $catgeory)
-                                <option value="{{$catgeory->id}}" >{{$catgeory->category}}</option>
+                            @foreach($categories as $category)
+                                <option value="{{$category->id}}" @if($product->categories->wherein('id',$category->id)->count()>0) selected @endif >{{$category->category}}</option>
                             @endforeach
                         </select>
                     </div>
-
+                    <div class="form-group ml-2">
+                        <input class="form-check-input text-dark " type="checkbox" value="1" name="is_scholarship"@if($product->is_scholarship==1) checked @endif >
+                        <label class="form-check-label" for="tag">بورسیه</label>
+                    </div>
                     <div class="form-group">
                         <label for="fi">هزینه دوره (تومان)<span class="text text-danger">*</span></label>
                         <input type="text" class="form-control @error('fi') is-invalid @enderror" id="fi" name="fi" value="{{old('fi',$product->fi)}}"  />
@@ -50,7 +54,10 @@
                         <label for="fi_off"> هزینه دوره با تخفیف (تومان)<span class="text text-danger">*</span></label>
                         <input type="text" class="form-control @error('fi_off') is-invalid @enderror" id="fi_off" name="fi_off" value="{{old('fi_off',$product->fi_off)}}" />
                     </div>
-
+                    <div class="form-group">
+                        <label for="description">توضیحات مختصر : </label>
+                        <input type="text" class="form-control" id="description" name="description" value="{{old('description',$product->description)}}" />
+                    </div>
                     <div class="form-group">
                         <label for="info">مطالب دوره<span class="text text-danger">*</span></label>
                         <textarea id="info" name="info" class="@error('info') is-invalid @enderror">{{old('info',$product->info)}}</textarea>

@@ -19,7 +19,7 @@
                     <tbody>
                         @foreach($products as $product)
                             <tr>
-                                <td class="text-center">{{$product->product}}</td>
+                                <td class="text-center"><a href="/product/{{$product->shortlink}}">{{$product->product}}</a></td>
                                 <td>
                                     <a href="/admin/product/{{$product->shortlink}}/edit" class="btn btn-warning">
                                         <i class="bi bi-pencil-square"></i>

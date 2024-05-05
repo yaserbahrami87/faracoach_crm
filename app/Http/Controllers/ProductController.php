@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-class ProductController extends Controller
+class ProductController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -53,7 +53,9 @@ class ProductController extends Controller
            'fi'         =>'required|numeric',
            'fi_off'     =>'required|numeric',
            'info'       =>'required|',
-           'category_id'=>'required|array'
+           'category_id'=>'required|array',
+            'description' =>'nullable|string|max:250',
+            'is_scholarship'=>'nullable|boolean'
         ]);
 
         $product=Product::create($request->all()+
@@ -83,8 +85,10 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
+        $comments=$this->get_comments(NULL,NULL,$product->id,NULL,'product');
         return view('products.product_single')
-                            ->with('product',$product);
+                            ->with('product',$product)
+                            ->with('comments',$comments);
     }
 
     /**
@@ -118,7 +122,9 @@ class ProductController extends Controller
             'fi'         =>'required|numeric',
             'fi_off'     =>'required|numeric',
             'info'       =>'required|',
-            'category_id'=>'required|array'
+            'category_id'=>'required|array',
+            'description' =>'nullable|string|max:250',
+            'is_scholarship'=>'nullable|boolean'
         ]);
 
         $status=$product->update($request->all());

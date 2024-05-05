@@ -38,7 +38,10 @@
                             @endforeach
                         </select>
                     </div>
-
+                    <div class="form-group ml-2">
+                        <input class="form-check-input text-dark " type="checkbox" value="1" name="is_scholarship" >
+                        <label class="form-check-label" for="tag">بورسیه</label>
+                    </div>
                     <div class="form-group">
                         <label for="fi">هزینه دوره (تومان)<span class="text text-danger">*</span></label>
                         <input type="text" class="form-control @error('fi') is-invalid @enderror" id="fi" name="fi" value="{{old('fi')}}" />
@@ -48,6 +51,10 @@
                         <input type="text" class="form-control @error('fi_off') is-invalid @enderror" id="fi_off" name="fi_off" value="{{old('fi_off')}}" />
                     </div>
 
+                    <div class="form-group">
+                        <label for="description">توضیحات مختصر : </label>
+                        <input type="text" class="form-control" id="description" name="description" value="{{old('description')}}" />
+                    </div>
                     <div class="form-group">
                         <label for="info">مطالب دوره<span class="text text-danger">*</span></label>
                         <textarea id="info" name="info" class="@error('info') is-invalid @enderror">{{old('info')}}</textarea>
