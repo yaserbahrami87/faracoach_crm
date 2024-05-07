@@ -1177,5 +1177,120 @@ class VerifyController extends BaseController
 
 
 
+    //scholarship 2024
+    public function checkCode_sch2024(Request $request)
+    {
 
+        $status=verify::where('code','=',$request['code'])
+            ->where('verify','=',0)
+            ->count();
+
+        if($status==1)
+        {
+            $verify=verify::where('code','=',$request['code'])
+                ->where('verify','=',0)
+                ->first();
+
+            $created_at=($verify['created_at']);
+            $created_at_add=$created_at->addMinutes(30);
+            if($created_at_add >Carbon::now())
+            {
+                $user=$this->get_user($verify->tel,NULL,NULL,NULL,true);
+
+                if(session()->has('introduce'))
+                {
+                    $introduce=session('introduce');
+                }
+                else
+                {
+                    $introduce=NULL;
+                }
+
+
+                if($user->count()!=0)
+                {
+                    $user=$this->get_user($verify->tel,NULL,NULL,NULL,true);
+                    $request->session()->put('scholarshipStatus','infoUser');
+                    Auth::login($user);
+                    $scholarship=scholarship::where('user_id','=',Auth::user()->id)
+                        ->where('resource','sch2024')
+                        ->first();
+
+
+
+                    if(is_null($scholarship))
+                    {
+                        $status = scholarship::create(
+                            [
+                                'user_id' => Auth::user()->id,
+                                'resource'=>'sch2024',
+                                'introduced'        =>$introduce,
+                            ]);
+
+                        if ($status) {
+                            $msg = Auth::user()->fname . ' ' . Auth::user()->lname . " عزیز\nبه فراکوچ خوش آمدید\nمشاهده دوره:\n" . "my.faracoach.com/panel/sch2024/me";
+                            $this->sendSms(Auth::user()->tel, $msg);
+                            alert()->success("ثبت نام شما در سایت فراکوچ با موفقیت انجام شد \n")->persistent('بستن');
+                            $request->session()->forget('scholarshipStatus');
+                            return redirect('/panel/sch2024/me');
+                        }
+                    }
+                    else
+                    {
+                        return redirect()->away('/panel/sch2024/me');
+                    }
+
+                }
+                else
+                {
+                    if(session()->has('introduce'))
+                    {
+                        $introduce=session('introduce');
+                    }
+                    else
+                    {
+                        $introduce=NULL;
+                    }
+
+                    $user=User::create([
+                        'tel'               =>$verify->tel,
+                        'resource'          =>'بورسیه 1403',
+                        'password'          =>Hash::make('1234'),
+                        'introduced'        =>$introduce,
+                    ]);
+
+                    Auth::login($user);
+
+                    $status = scholarship::create(
+                        [
+                            'user_id' => Auth::user()->id,
+                            'resource'=>'sch2024',
+                            'introduced'        =>$introduce,
+                        ]);
+
+                    if ($status)
+                    {
+                        $msg = Auth::user()->fname . ' ' . Auth::user()->lname . " عزیز\nبه فراکوچ خوش آمدید\nمشاهده دوره:\n" . "my.faracoach.com/panel/sch2024/me";
+                        $this->sendSms(Auth::user()->tel, $msg);
+//                              $this->sendSms('09153159020', $status->id . ' بورسیه:' . Auth::user()->fname . ' ' . Auth::user()->lname );
+                        alert()->success("ثبت نام شما در سایت فراکوچ با موفقیت انجام شد \n")->persistent('بستن');
+                        return redirect('/panel/sch2024/me');
+                    }
+
+                }
+
+            }
+            else
+            {
+                alert()->error('رمز یکبار مصرف منقضی شده است')->persistent('بستن');
+                return back();
+
+            }
+        }
+        else
+        {
+            alert()->error('رمز یکبار مصرف اشتباه است')->persistent('بستن');
+            return back();
+        }
+    }
 }

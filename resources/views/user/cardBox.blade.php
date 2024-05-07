@@ -57,6 +57,10 @@
                 میز کار
             </h5>
         </div>
+        <div class="col-12 alert alert-dark">
+            <p>لینک اختصاصی شما برای دعوت به بورسیه 1403:</p>
+            <b>{{asset('/sch2024/register?introduce='.Auth::user()->id)}}</b>
+        </div>
         <div class="col-12 text-center mt-1">
             <a href="/panel/scholarship/me" class="btn btn-block btn-primary">
                 <p>پنل آموزش رایگان کوچینگ + گواهینامه</p>

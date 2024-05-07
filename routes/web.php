@@ -717,6 +717,11 @@ Route::get('/scholarship/cleartel','ScholarshipController@cleartel');
 Route::get('/knot/register','ScholarshipController@create_knot');
 Route::post('/knot/checkCode_knot','VerifyController@checkCode_knot');
 
+//scholarship 2024
+Route::get('/sch2024/register','ScholarshipController@create_sch2024');
+Route::post('/sch2024/checkCode_sch2024','VerifyController@checkCode_sch2024');
+
+
 //Products
 Route::get('/products','ProductController@showAll');
 Route::get('/product/{product}','ProductController@show');

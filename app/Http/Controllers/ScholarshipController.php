@@ -1424,4 +1424,28 @@ class ScholarshipController extends BaseController
 
 
 
+
+    //Scholarship 2024
+    public function create_sch2024(Request $request)
+    {
+        if(isset($request->introduce))
+        {
+            session()->put('introduce',$request->introduce);
+
+        }
+
+
+        if((Auth::check()))
+        {
+            if((!is_null(Auth::user()->scholarship)))
+            {
+                return redirect('/panel/scholarship/me');
+            }
+        }
+
+        return  view('scholarship.sch2024.sch2024');
+    }
+
+
+
 }
