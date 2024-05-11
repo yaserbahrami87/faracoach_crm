@@ -2378,16 +2378,16 @@ class UserController extends BaseController
         $this->validate(request(),
             [
 
-                'fname'             =>'required|persian_alpha',
-                'lname'             =>'required|persian_alpha',
+                'fname'             =>'nullable|persian_alpha',
+                'lname'             =>'nullable|persian_alpha',
                 'fname_en'          =>'nullable|regex:/[a-zA-Z]/',
                 'lname_en'          =>'nullable|regex:/[a-zA-Z]/',
-                'datebirth'         =>'required|max:11|string',
-                'codemelli'         =>'required|numeric|unique:users,codemelli,'.Auth::user()->id,
-                'shenasname'        =>'required|numeric|',
-                'sex'               =>'required|boolean',
-                'personal_image'    =>'required|mimes:jpeg,jpg,bmp,png|max:600',
-                'resume'            =>'required|mimes:docx,doc,pdf,jpg,png|max:1024',
+                'datebirth'         =>'nullable|max:11|string',
+                'codemelli'         =>'nullable|numeric|unique:users,codemelli,'.Auth::user()->id,
+                'shenasname'        =>'nullable|numeric|',
+                'sex'               =>'nullable|boolean',
+                'personal_image'    =>'nullable|mimes:jpeg,jpg,bmp,png|max:600',
+                'resume'            =>'nullable|mimes:docx,doc,pdf,jpg,png|max:1024',
             ]);
 
 
@@ -2448,12 +2448,12 @@ class UserController extends BaseController
 
         $this->validate(request(),
             [
-                'state'             =>'required|numeric',
-                'city'              =>'required|numeric',
-                'address'           =>'required|min:4|string',
-                'email'             =>'required|email|unique:users,email,'.Auth::user()->id,
-                'telegram'          =>'required|max:50|regex:/^[a-zA-Z0-9._]+$/u',
-                'instagram'         =>'required|max:50|regex:/^[a-zA-Z0-9._]+$/u',
+                'state'             =>'nullable|numeric',
+                'city'              =>'nullable|numeric',
+                'address'           =>'nullable|min:4|string',
+                'email'             =>'nullable|email|unique:users,email,'.Auth::user()->id,
+                'telegram'          =>'nullable|max:50|regex:/^[a-zA-Z0-9._]+$/u',
+                'instagram'         =>'nullable|max:50|regex:/^[a-zA-Z0-9._]+$/u',
                 'linkedin'          =>'nullable|string|max:250',
 
 
@@ -2478,12 +2478,12 @@ class UserController extends BaseController
     {
         $this->validate(request(),
             [
-                'father'            =>'required|persian_alpha|',
-                'married'           =>'required|boolean',
-                'born'              =>'required|persian_alpha|',
-                'education'         =>'required|',
-                'reshteh'           =>'required|',
-                'job'               =>'required|',
+                'father'            =>'nullable|persian_alpha|',
+                'married'           =>'nullable|boolean',
+                'born'              =>'nullable|persian_alpha|',
+                'education'         =>'nullable|',
+                'reshteh'           =>'nullable|',
+                'job'               =>'nullable|',
                 'shenasnameh_image' =>'nullable|mimes:jpeg,jpg,bmp,png|max:600',
                 'cartmelli_image'   =>'nullable|mimes:jpeg,jpg,bmp,png|max:600',
                 'education_image'   =>'nullable|mimes:jpeg,jpg,bmp,png|max:600',
@@ -2543,8 +2543,8 @@ class UserController extends BaseController
 
         $this->validate(request(),
             [
-                'gettingKnow_parent'=>'required|numeric',
-                'gettingknow'       =>'required|numeric',
+                'gettingKnow_parent'=>'nullable|numeric',
+                'gettingknow'       =>'nullable|numeric',
                 'introduced'        =>'nullable|numeric',
             ]);
         $status=Auth::user()->update($request->all());
