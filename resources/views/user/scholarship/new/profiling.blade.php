@@ -41,7 +41,7 @@
                                             <label>نام خانوادگی:
                                                 <span>*</span>
                                             </label>
-                                            <input type="text" class="form-control " placeholder="نام خانوادگی را وارد کنید" name="lname" value="{{old('lname',Auth::user()->lname)}}"  required />
+                                            <input type="text" class="form-control " placeholder="نام خانوادگی را وارد کنید" name="lname" value="{{old('lname',Auth::user()->lname)}}"   />
                                             @error('lname')
                                                 <p class="text-danger">
                                                     <strong>{{ $message }}</strong>
@@ -55,7 +55,7 @@
                                                 <span >*</span>
                                             </label>
                                             <div class="form-group">
-                                                <select class="form-control p-0 " id="exampleFormControlSelect1" name="sex" required  >
+                                                <select class="form-control p-0 " id="exampleFormControlSelect1" name="sex"   >
                                                     <option selected disabled>انتخاب کنید</option>
                                                     <option value="0" {{old('sex',Auth::user()->sex)==0?'selected':''}} >زن</option>
                                                     <option value="1" {{old('sex',Auth::user()->sex)==1?'selected':''}}>مرد</option>
@@ -80,7 +80,7 @@
                                             <label>تاریخ تولد:
                                                 <span>*</span><small > نمونه:1365/01/01</small>
                                             </label>
-                                            <input type="text" class="form-control " placeholder="تاریخ تولد را وارد کنید" value='{{old('datebirth',Auth::user()->datebirth)}}' name="datebirth" id="datebirth" required />
+                                            <input type="text" class="form-control " placeholder="تاریخ تولد را وارد کنید" value='{{old('datebirth',Auth::user()->datebirth)}}' name="datebirth" id="datebirth"  />
 
                                         </div>
                                     </div>
@@ -89,7 +89,7 @@
                                             <label for="codemelli">کد ملی:
                                                 <span>*</span>
                                             </label>
-                                            <input type="text" class="form-control" placeholder="کد ملی را وارد کنید" value='{{old('codemelli',Auth::user()->codemelli)}}'  id="codemelli" name="codemelli"  required />
+                                            <input type="text" class="form-control" placeholder="کد ملی را وارد کنید" value='{{old('codemelli',Auth::user()->codemelli)}}'  id="codemelli" name="codemelli"   />
                                         </div>
                                     </div>
                                     <div class="col-md-4 px-1">
@@ -97,7 +97,7 @@
                                             <label>شماره شناسنامه:
                                                 <span >*</span>
                                             </label>
-                                            <input type="number" class="form-control " placeholder="شماره شناسنامه را وارد کنید"  value='{{old('shenasname',Auth::user()->shenasname)}}' name="shenasname" required  />
+                                            <input type="number" class="form-control " placeholder="شماره شناسنامه را وارد کنید"  value='{{old('shenasname',Auth::user()->shenasname)}}' name="shenasname"   />
 
                                         </div>
                                     </div>
