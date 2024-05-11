@@ -152,8 +152,8 @@
                                 <div class="card-body shadow shadow-sm text-center">
                                     <p style="line-height: 2" class="text-center">شناسایی و دعوت از افراد نخبه و با استعداد جهت حضور ویژه</p>
                                     <p style="line-height: 2;text-align: justify">آکادمی بین المللی فراکوچ فرصت بی نظیری را به منظور ورود و پیوستن جمع بیشتری از افراد مستعد ، نخبه و فرهیخته جامعه - به ویژه اساتید ،  پژوهشگران، اندیشمندان، مدیران و دانشجویان برتر - به دنیای حرفه ای کوچینگ از طریق ایجاد شرایط ویژه حضور آنان در دوره های آموزش و تربیت کوچ حرفه ای ، فراهم کرده است.</p>
-                                    <b class="d-block mb-2">نمونه مدرک </b>
-                                    <img src="{{asset('/images/ICF_scholarship_example.jpg')}}" class="img-fluid text-center" />
+
+                                    <img src="/images/scholarship/info_sch.jpg')}}" class="img-fluid text-center" />
                                 </div>
                             </div>
                         </div>
