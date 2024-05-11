@@ -1437,7 +1437,7 @@ class ScholarshipController extends BaseController
         {
             if((!is_null(Auth::user()->scholarship)))
             {
-                return redirect('/panel/scholarship/me');
+                return redirect('/panel/sch2024/me');
             }
         }
 
