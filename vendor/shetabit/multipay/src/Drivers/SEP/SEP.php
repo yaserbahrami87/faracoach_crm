@@ -64,7 +64,7 @@ class SEP extends Driver
         $data = array(
             'action' => 'token',
             'TerminalId' => $this->settings->terminalId,
-            'Amount' => $this->invoice->getAmount() * 10, // convert to rial
+            'Amount' => $this->invoice->getAmount() * ($this->settings->currency == 'T' ? 10 : 1), // convert to rial
             'ResNum' => $this->invoice->getUuid(),
             'RedirectUrl' => $this->settings->callbackUrl,
             'CellNumber' => $this->invoice->getDetail('mobile') ?? '',
@@ -233,9 +233,9 @@ class SEP extends Driver
         );
 
         if (array_key_exists($status, $translations)) {
-            throw new InvalidPaymentException($translations[$status]);
+            throw new InvalidPaymentException($translations[$status], (int)$status);
         } else {
-            throw new InvalidPaymentException('خطای ناشناخته ای رخ داده است.');
+            throw new InvalidPaymentException('خطای ناشناخته ای رخ داده است.', (int)$status);
         }
     }
 }

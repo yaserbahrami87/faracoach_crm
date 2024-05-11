@@ -155,6 +155,16 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function ()
     //knot
     Route::patch('/knot/updateregister/{scholarship}','ScholarshipController@updateregister');
 
+
+
+    //scholarship new design
+    Route::get('/sch2024/me','ScholarshipController@show_sch2024');
+    Route::Patch('/profile/update_sch2024_part1/{User}','UserController@update_sch2024_part1');
+    Route::Patch('/profile/update_sch2024_part2/{User}','UserController@update_sch2024_part2');
+    Route::Patch('/profile/update_sch2024_part3/{User}','UserController@update_sch2024_part3');
+    Route::Patch('/profile/update_sch2024_part4/{User}','UserController@update_sch2024_part4');
+
+
     //Certificates
 
     Route::get('/level1/certificate','CertificateController@get_certificate1');
@@ -863,6 +873,8 @@ Route::get('/test','UserController@ScoreAmbassador');
 
 //test User
 Route::get('/test1','UserController@test1');
+
+
 
 //blog
 Route::get('/{username}','PostController@blogHomePage');

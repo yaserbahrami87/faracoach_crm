@@ -384,4 +384,16 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Purchase::class);
     }
 
+    public function sch2024()
+    {
+        return $this->hasOne(scholarship::class,'user_id','id')
+                                ->where('resource','sch2024');
+    }
+
+    public function sch2024_introduced()
+    {
+        return $this->hasMany(scholarship::class,'introduced','id')
+                            ->where('resource','sch2024');
+    }
+
 }

@@ -44,6 +44,7 @@ class UserController extends BaseController
     public function __construct()
     {
 
+
         $dateNow = verta();
         $this->dateNow = $dateNow->format('Y/m/d');
         $this->timeNow = $dateNow->format('H:i:s');
@@ -1462,9 +1463,6 @@ class UserController extends BaseController
             }
         }
 
-
-
-
         //تعداد افراد دعوت شده
         $countIntroducedUser=User::where('introduced','=',$user->tel)
                         ->count();
@@ -2370,6 +2368,197 @@ class UserController extends BaseController
         alert()->success('درخواست شما موفقیت اعمال شد')->persistent('بستن');
         return back();
 
+    }
+
+
+
+    public function update_sch2024_part1(Request $request,User $user)
+    {
+
+        $this->validate(request(),
+            [
+
+                'fname'             =>'required|persian_alpha',
+                'lname'             =>'required|persian_alpha',
+                'fname_en'          =>'nullable|regex:/[a-zA-Z]/',
+                'lname_en'          =>'nullable|regex:/[a-zA-Z]/',
+                'datebirth'         =>'required|max:11|string',
+                'codemelli'         =>'required|numeric|unique:users,codemelli,'.Auth::user()->id,
+                'shenasname'        =>'required|numeric|',
+                'sex'               =>'required|boolean',
+                'personal_image'    =>'required|mimes:jpeg,jpg,bmp,png|max:600',
+                'resume'            =>'required|mimes:docx,doc,pdf,jpg,png|max:1024',
+            ]);
+
+
+        if ($request->has('personal_image') && $request->file('personal_image')->isValid())
+        {
+
+            $file = $request->file('personal_image');
+            $personal_image = "personal-" . $user->tel . "." . $request->file('personal_image')->extension();
+            $path = public_path('documents/users/');
+            $files = $request->file('personal_image')->move($path, $personal_image);
+            $img=Image::make($files->getRealPath())
+                ->resize(300,null,function ($constraint) {
+                    $constraint->aspectRatio();
+                })
+                ->save($path.'small-'.$personal_image);
+            $img=Image::make($files->getRealPath())
+                ->resize(50,null,function ($constraint) {
+                    $constraint->aspectRatio();
+                })
+                ->save($path.'thumbnail-'.$personal_image);
+            $request->personal_image = $personal_image;
+        }
+
+
+        if ($request->has('resume') && $request->file('resume')->isValid()) {
+            $file = $request->file('resume');
+            $resume = "resume-" . $user->tel . "." . $request->file('resume')->extension();
+            $path = public_path('/documents/users/');
+            $files = $request->file('resume')->move($path, $resume);
+            $request->resume = $resume;
+        }
+        try
+        {
+            $user->update($request->all());
+        }
+        catch (Throwable $e)
+        {
+            alert()->error($e->errorInfo[2],'خطا')->persistent('بستن');
+            return back();
+        }
+
+        if (isset($personal_image)) {
+            $user->personal_image = $personal_image;
+        }
+
+        if (isset($resume)) {
+            $user->resume = $resume;
+        }
+
+        $user->save();
+        alert()->success('اطلاعات شخصی با موفقیت به روزرسانی شد','پیام')->persistent('بستن');
+
+        return redirect('/panel/scholarship_new#step-2');
+    }
+
+    public function update_sch2024_part2(Request $request,User $user)
+    {
+
+        $this->validate(request(),
+            [
+                'state'             =>'required|numeric',
+                'city'              =>'required|numeric',
+                'address'           =>'required|min:4|string',
+                'email'             =>'required|email|',
+                'telegram'          =>'required|max:50|regex:/^[a-zA-Z0-9._]+$/u',
+                'instagram'         =>'required|max:50|regex:/^[a-zA-Z0-9._]+$/u',
+                'linkedin'          =>'nullable|string|max:250',
+
+
+            ]);
+
+        $status=Auth::user()->update($request->all());
+
+        if($status)
+        {
+            alert()->success('اطلاعات تماس با موفقیت به روزرسانی شد','پیام')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در بروزرسانی اطلاعات تماس')->persistent('بستن');
+        }
+
+
+        return redirect('/panel/scholarship_new#step-2');
+    }
+
+    public function update_sch2024_part3(Request $request,User $user)
+    {
+        $this->validate(request(),
+            [
+                'father'            =>'required|persian_alpha|',
+                'married'           =>'required|boolean',
+                'born'              =>'required|persian_alpha|',
+                'education'         =>'required|',
+                'reshteh'           =>'required|',
+                'job'               =>'required|',
+                'shenasnameh_image' =>'nullable|mimes:jpeg,jpg,bmp,png|max:600',
+                'cartmelli_image'   =>'nullable|mimes:jpeg,jpg,bmp,png|max:600',
+                'education_image'   =>'nullable|mimes:jpeg,jpg,bmp,png|max:600',
+            ]);
+
+        if ($request->has('shenasnameh_image') && $request->file('shenasnameh_image')->isValid()) {
+            $file = $request->file('shenasnameh_image');
+            $shenasnameh_image = "shenasnameh-" . $user->tel . "." . $request->file('shenasnameh_image')->extension();
+            $path = public_path('/documents/users/');
+            $files = $request->file('shenasnameh_image')->move($path, $shenasnameh_image);
+            $request->shenasnameh_image = $shenasnameh_image;
+
+        }
+
+        if ($request->has('cartmelli_image') && $request->file('cartmelli_image')->isValid()) {
+            $file = $request->file('cartmelli_image');
+            $cartmelli_image = "cartmelli-" . $user->tel . "." . $request->file('cartmelli_image')->extension();
+            $path = public_path('/documents/users/');
+            $files = $request->file('cartmelli_image')->move($path, $cartmelli_image);
+            $request->cartmelli_image = $cartmelli_image;
+        }
+
+        if ($request->has('education_image') && $request->file('education_image')->isValid()) {
+            $file = $request->file('education_image');
+            $education_image = "education-" . $user->tel . "." . $request->file('education_image')->extension();
+            $path = public_path('/documents/users/');
+            $files = $request->file('education_image')->move($path, $education_image);
+            $request->education_image = $education_image;
+        }
+
+
+        Auth::user()->update($request->all());
+
+
+
+        if (isset($shenasnameh_image)) {
+            Auth::user()->shenasnameh_image = $shenasnameh_image;
+        }
+
+        if (isset($cartmelli_image)) {
+            Auth::user()->cartmelli_image = $cartmelli_image;
+        }
+
+        if (isset($education_image)) {
+            Auth::user()->education_image = $education_image;
+        }
+
+
+        Auth::user()->save();
+        alert()->success('اطلاعات تکمیلی با موفقیت به روزرسانی شد','پیام')->persistent('بستن');
+
+        return redirect('/panel/scholarship_new#step-2');
+    }
+
+    public function update_sch2024_part4(Request $request,User $user)
+    {
+
+        $this->validate(request(),
+            [
+                'gettingKnow_parent'=>'required|numeric',
+                'gettingknow'       =>'required|numeric',
+                'introduced'        =>'nullable|numeric',
+            ]);
+        $status=Auth::user()->update($request->all());
+
+        if($status)
+        {
+            alert()->success('اطلاعات آشنایی با موفقیت به روزرسانی شد','پیام')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در بروزرسانی اطلاعات اشنایی')->persistent('بستن');
+        }
+
+        return redirect('/panel/scholarship_new#step-2');
     }
 
 

@@ -65,7 +65,7 @@ class Payfa extends Driver
         $cardNumber = $this->extractDetails('cardNumber');
 
         $data = array(
-            'amount' => ($this->invoice->getAmount() * 10), // convert rial to toman
+            'amount' => $this->invoice->getAmount() * ($this->settings->currency == 'T' ? 10 : 1), // convert to rial
             'callbackUrl' => $this->settings->callbackUrl,
             'mobileNumber' => $mobile,
             'invoiceId' => $this->invoice->getUuid(),
@@ -137,7 +137,7 @@ class Payfa extends Driver
         $body = json_decode($response->getBody()->getContents(), true);
 
         if ($response->getStatusCode() != 200) {
-            $this->notVerified($body["message"]);
+            $this->notVerified($body["message"], $response->getStatusCode());
         }
 
         return $this->createReceipt($body['transactionId']);
@@ -154,12 +154,12 @@ class Payfa extends Driver
      * @param $message
      * @throws InvalidPaymentException
      */
-    private function notVerified($message)
+    private function notVerified($message, $status)
     {
         if (empty($message)) {
-            throw new InvalidPaymentException('خطای ناشناخته ای رخ داده است.');
+            throw new InvalidPaymentException('خطای ناشناخته ای رخ داده است.', (int)$status);
         } else {
-            throw new InvalidPaymentException($message);
+            throw new InvalidPaymentException($message, (int)$status);
         }
     }
 }

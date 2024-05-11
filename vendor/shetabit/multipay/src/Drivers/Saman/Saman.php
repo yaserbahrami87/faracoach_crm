@@ -53,7 +53,7 @@ class Saman extends Driver
         $data = array(
             'MID' => $this->settings->merchantId,
             'ResNum' => $this->invoice->getUuid(),
-            'Amount' => $this->invoice->getAmount() * 10, // convert to rial
+            'Amount' => $this->invoice->getAmount() * ($this->settings->currency == 'T' ? 10 : 1), // convert to rial
             'CellNumber' => ''
         );
 
@@ -232,9 +232,9 @@ class Saman extends Driver
         );
 
         if (array_key_exists($status, $translations)) {
-            throw new InvalidPaymentException($translations[$status]);
+            throw new InvalidPaymentException($translations[$status], (int)$status);
         } else {
-            throw new InvalidPaymentException('خطای ناشناخته ای رخ داده است.');
+            throw new InvalidPaymentException('خطای ناشناخته ای رخ داده است.', (int)$status);
         }
     }
 }

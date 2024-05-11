@@ -722,8 +722,6 @@ class ScholarshipController extends BaseController
 
 
 
-
-
             return  view('user.scholarship.profile')
                         ->with('messages',$messages)
                         ->with('states',$states)
@@ -1444,6 +1442,50 @@ class ScholarshipController extends BaseController
         }
 
         return  view('scholarship.sch2024.sch2024');
+    }
+
+    //SHow
+    public function show_sch2024()
+    {
+
+        if(!is_null(Auth::user()->sch2024))
+        {
+            $states=state::get();
+            if(!is_null(Auth::user()->city))
+            {
+                $cities=city::where('state_id',Auth::user()->state)
+                            ->get();
+            }
+            else{
+                $cities=[];
+            }
+
+            if(!is_null(Auth::user()->gettingknow))
+            {
+                $condition=['parent_id','=',Auth::user()->gettingknow_parent_user];
+                $gettingKnow_child_list=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
+            }
+            else
+            {
+                $gettingKnow_child_list=NULL;
+            }
+
+            $condition=['parent_id','=','0'];
+            $gettingKnow_parent_list=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
+
+
+            return view('user.scholarship.new.Scholarship_new')
+                        ->with('cities',$cities)
+                        ->with('gettingKnow_child_list',$gettingKnow_child_list)
+                        ->with('gettingKnow_parent_list',$gettingKnow_parent_list)
+                        ->with('states',$states);
+        }
+
+
+
+        alert()->error('شما در بورسیه ثبت نام نکرده اید')->persistent('بستن');
+        return redirect('/');
+
     }
 
 
