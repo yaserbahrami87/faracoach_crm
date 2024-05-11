@@ -1448,7 +1448,8 @@ class ScholarshipController extends BaseController
     public function show_sch2024()
     {
 
-        if(!is_null(Auth::user()->sch2024))
+
+        if(Auth::user()->sch2024)
         {
             $states=state::get();
             if(!is_null(Auth::user()->city))
