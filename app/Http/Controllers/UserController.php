@@ -2451,7 +2451,7 @@ class UserController extends BaseController
                 'state'             =>'required|numeric',
                 'city'              =>'required|numeric',
                 'address'           =>'required|min:4|string',
-                'email'             =>'required|email|',
+                'email'             =>'required|email|unique:users,email,'.Auth::user()->id,
                 'telegram'          =>'required|max:50|regex:/^[a-zA-Z0-9._]+$/u',
                 'instagram'         =>'required|max:50|regex:/^[a-zA-Z0-9._]+$/u',
                 'linkedin'          =>'nullable|string|max:250',
