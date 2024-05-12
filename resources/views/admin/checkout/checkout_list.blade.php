@@ -68,7 +68,19 @@
                                     @elseif($item->type=='event')
                                         {{$item->event['event']}}
                                     @elseif($item->type=='reserve')
-                                        جلسه کوچینگ {{$item->reserve['booking']['coach']['user']['fname'].' '.$item->reserve['booking']['coach']['user']['lname'].' - '.$item->reserve['booking']['start_date']}}
+                                        @if(!is_null($item->reserve['booking']))
+                                            @if(!is_null($item->reserve['booking']['coach']))
+                                                @if(!is_null($item->reserve['booking']['coach']['user']))
+                                                جلسه کوچینگ {{$item->reserve['booking']['coach']['user']['fname'].' '.$item->reserve['booking']['coach']['user']['lname'].' - '.$item->reserve['booking']['start_date']}}
+                                                @else
+                                                    جلسه کوچینگ
+                                                @endif
+                                            @else
+                                                جلسه کوچینگ
+                                            @endif
+                                        @else
+                                            جلسه کوچینگ
+                                        @endif
                                     @elseif($item->type=='ghest')
                                         پرداخت قسط
                                     @endif
