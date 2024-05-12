@@ -163,6 +163,7 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function ()
     Route::Patch('/profile/update_sch2024_part2/{User}','UserController@update_sch2024_part2');
     Route::Patch('/profile/update_sch2024_part3/{User}','UserController@update_sch2024_part3');
     Route::Patch('/profile/update_sch2024_part4/{User}','UserController@update_sch2024_part4');
+    Route::Patch('/sch2024/answer_basicQuestion','ScholarshipController@answer_basicQuestion');
 
 
     //Certificates

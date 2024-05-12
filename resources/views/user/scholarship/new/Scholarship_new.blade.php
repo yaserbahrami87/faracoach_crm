@@ -173,27 +173,27 @@
                     </div>
                     <div id="step-5" class="tab-pane step-content">
                         <div class="row">
-                            @include('user.scholarship.new.training_course')
+
                         </div>
                     </div>
                     <div id="step-6" class="tab-pane step-content">
                         <div class="row">
-                            @include('user.scholarship.new.training_course')
+
                         </div>
                     </div>
                     <div id="step-7" class="tab-pane step-content">
                         <div class="row">
-                            @include('user.scholarship.new.training_course')
+
                         </div>
                     </div>
                     <div id="step-8" class="tab-pane step-content">
                         <div class="row">
-                            @include('user.scholarship.new.training_course')
+
                         </div>
                     </div>
                     <div id="step-9" class="tab-pane step-content">
                         <div class="row">
-                            @include('user.scholarship.new.training_course')
+
                         </div>
                     </div>
                 </div>

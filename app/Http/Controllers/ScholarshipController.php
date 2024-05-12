@@ -1494,11 +1494,32 @@ class ScholarshipController extends BaseController
             }
 
         }
+    }
 
+    public function answer_basicQuestion(Request $request)
+    {
 
+        $this->validate($request,[
+            'target'     =>'required|array',
+            'gettingknow'=>'required|between:1,3',
+            'cooperation'=>'nullable|string',
+        ]);
+        $status=Auth::user()->sch2024->update([
+            'target'        => implode(',', $request->target),
+            'gettingknow'   => $request->gettingknow,
+            'cooperation'   => $request->cooperation,
+        ]);
 
+        if($status)
+        {
+            alert()->success('سوالات با موفقیت در سیستم ثبت شد.')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در ثبت سوالات')->persistent('بستن');
+        }
 
-
+        return back();
     }
 
 

@@ -94,7 +94,7 @@ div.container
   color: darkgrey;
   text-transform: uppercase;
   font-size: 15px;
-  width: 24%;
+  width: 19%;
   float: right;
   position: relative;
 }
@@ -166,4 +166,23 @@ div.custom-file
 .custom-file-input:lang(fa) ~ .custom-file-label::after
 {
     content: 'انتخاب فایل';
+}
+#first-child
+{
+    text-align: right;
+}
+#first-child label
+{
+    width: 320px;
+    font-size: 13px;
+}
+#information div.form-check input[type=checkbox]
+{
+    margin-right: -9.25rem;
+}
+.colors
+{
+    color:#ea5455 ;
+    margin-left: 5px;
+    font-size: 16px;
 }

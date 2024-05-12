@@ -6,19 +6,120 @@
 
                 <!-- start progressbar -->
                 <ul id="progressbar">
-                    <li class="active">اطلاعات شخصی</li>
+                    <li class="active">فرم اولیه</li>
+                    <li >اطلاعات شخصی</li>
                     <li>اطلاعات تماس</li>
                     <li>اطلاعات تکمیلی</li>
                     <li>اطلاعات آشنایی</li>
                 </ul>
                 <!-- end progressbar -->
+
+                <fieldset>
+                    <h2 class="fs-title">فرم اولیه</h2>
+                    @if(is_null(Auth::user()->sch2024->target)||(is_null(Auth::user()->sch2024->gettingknow))||(is_null(Auth::user()->sch2024->cooperation)))
+                    <form method="post" action="/panel/sch2024/answer_basicQuestion" enctype="multipart/form-data">
+                        {{csrf_field()}}
+                        {{method_field('PATCH')}}
+                        <div class="col-12">
+                            <div class="card card-user">
+                                    <div class="" id="information">
+                                        <div class="row">
+                                            <div class="col-md-12 px-1">
+                                                <div class="form-group row">
+                                                    <label for="target" class="col-md-6 col-form-label text-md-right"> <i class="colors"> * </i> هدف شما از شرکت در دوره آموزش کوچینگ:  </label>
+                                                    <div class="col-md-6 border-darken-1">
+                                                        <div class="input-group " id="first-child">
+                                                            <div class="form-check">
+
+                                                                <label class="form-check-label" for="target1">
+                                                                    برای توسعه مهارت فردی در زندگی و کسب و کار (اثرگذار باشم)
+                                                                </label>
+                                                                <input class="form-check-input" type="checkbox" value="1" id="target1" name="target[]" />
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <label class="form-check-label" for="target2">
+                                                                    میخواهم کوچ حرفه ای شوم (بعنوان شغل دوم و یا اصلی)
+                                                                </label>
+                                                                <input class="form-check-input" type="checkbox" value="2" id="target2" name="target[]"  />
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <label class="form-check-label" for="target3">
+                                                                    در شغل و کسب و کار خودم از این مهارت استفاده کنم
+                                                                </label>
+                                                                <input class="form-check-input" type="checkbox" value="3" id="target3" name="target[]"  />
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <label class="form-check-label" for="target4">
+                                                                    مایلم بعد از گذراندن دوره آموزشی با موسسه همکاری کنم
+                                                                </label>
+                                                                <input class="form-check-input" type="checkbox" value="4" id="target4" name="target[]"  />
+                                                            </div>
+                                                        <!--
+                                                                <select id="target" class="form-control p-0  @error('target') is-invalid @enderror" name="target[]" multiple>
+                                                                    <option selected disabled>انتخاب کنید</option>
+                                                                    <option {{ old('target')==1 ? 'selected='.'"'.'selected'.'"' : '' }} value="1" >برای توسعه مهارت فردی در زندگی و کسب و کار (اثرگذار باشم)</option>
+                                                                    <option {{ old('target')==2 ? 'selected='.'"'.'selected'.'"' : '' }} value="2">میخواهم کوچ حرفه ای شوم (بعنوان شغل دوم و یا اصلی)</option>
+                                                                    <option {{ old('target')==3 ? 'selected='.'"'.'selected'.'"' : '' }} value="3">در شغل و کسب و کار خودم از این مهارت استفاده کنم</option>
+                                                                    <option {{ old('target')==4 ? 'selected='.'"'.'selected'.'"' : '' }} value="4">مایلم بعد از گذراندن دوره آموزشی با موسسه همکاری کنم</option>
+                                                                </select>
+                                                                -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 px-1">
+                                                <div class="form-group row">
+                                                    <label for="gettingknow" class="col-md-4 col-form-label text-md-right"><i class="colors"> * </i> میزان آشنایی شما با کوچینگ: </label>
+
+                                                    <div class="col-md-6">
+                                                        <div class="input-group">
+                                                            <select id="gettingknow" class="form-control p-0" name="gettingknow"  >
+                                                                <option selected disabled>انتخاب کنید</option>
+                                                                <option  value="1" {{old('gettingknow')==1?'selected':''}}  >اطلاعات کامل دارم </option>
+                                                                <option  value="2" {{old('gettingknow')==2?'selected':''}}>آگاهی مختصری دارم</option>
+                                                                <option  value="3" {{old('gettingknow')==3?'selected':''}}>آشنایی ندارم</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 px-1">
+                                                <div class="form-group row">
+                                                    <label for="cooperation" class="col-md-4 col-form-label text-md-right"><i class="colors"> * </i>در حوزه توسعه فردی و کسب و کار چه ظرفیت های ویژه ای جهت  همکاری    با  آکادمی بین المللی فراکوچ دارید؟</label>
+
+                                                    <div class="col-md-6">
+                                                    <!-- <input id="cooperation" type="text" class="form-control @error('cooperation') is-invalid @enderror"  name="cooperation"  required autocomplete="cooperation" autofocus  /> -->
+                                                        <textarea class="form-control" id="cooperation" rows="3" name="cooperation" >{{old('cooperation')}}</textarea>
+
+                                                        {{--                                        @error('cooperation')--}}
+                                                        <span class="invalid-feedback" role="alert">
+                                                                    <strong></strong>
+                                                                </span>
+                                                        {{--                                        @enderror--}}
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                        <input type="submit"   class="action-button" value="ثبت" />
+                    </form>
+                    @else
+                        <div class="alert alert-success">
+                            پاسخ های شما با موفقیت در سیستم ثبت شده است
+                        </div>
+                    @endif
+                    <input type="button" name="next" class="next action-button" value="بعدی" />
+                </fieldset>
                 <!-- start step one form -->
                 <fieldset>
                     <form method="post" action="/panel/profile/update_sch2024_part1/{{Auth::user()->id}}" enctype="multipart/form-data">
                         {{csrf_field()}}
                         {{method_field('PATCH')}}
                             <h2 class="fs-title">اطـلاعـات شخصـی</h2>
-
                             <div class="" id="infoProfile">
                                 <div class="row">
                                     <div class="col-md-4 px-1">
@@ -117,7 +218,11 @@
                                         <div class="form-group">
                                             <label>عکس پروفایل</label>
                                             <div class="custom-file">
-                                                <img src="{{asset('/images/ICF_scholarship_example.jpg')}}" class="img-fluid text-center" />
+                                                @if(is_null(Auth::user()->personal_image))
+                                                    <img src="{{asset('/images/default-avatar.png')}}" class="img-fluid text-center" />
+                                                @else
+                                                    <img src="{{'/documents/users/'.Auth::user()->personal_image}}" class="img-fluid text-center" />
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -137,9 +242,10 @@
                             </div>
 
 
-                            <input type="submit"  class="next action-button" value="ثبت" />
+                            <input type="submit"  class="next action-button btn-success rounded" value="ثبت" />
                     </form>
-                    <input type="button" name="next" class="next action-button" value="بعدی" />
+                    <input type="button" name="previous" class="previous action-button rounded" value="قبلی" />
+                    <input type="button" name="next" class="next action-button rounded" value="بعدی" />
                 </fieldset>
                 <!-- end step one form -->
                 <!-- start step two form -->
@@ -230,10 +336,10 @@
                                 </div>
                             </div>
                         </div>
-                        <input type="submit"  class=" action-button" value="ثبت" />
+                        <input type="submit"  class=" action-button btn-success rounded" value="ثبت" />
                     </form>
-                    <input type="button" name="previous" class="previous action-button" value="قبلی" />
-                    <input type="button" name="next" class="next action-button" value="بعدی" />
+                    <input type="button" name="previous" class="previous action-button rounded" value="قبلی" />
+                    <input type="button" name="next" class="next action-button rounded" value="بعدی" />
                 </fieldset>
                 <!-- end step two form -->
                 <!-- start step three form -->
@@ -351,10 +457,10 @@
                             </div>
 
                         </div>
-                        <input type="submit"   class=" action-button" value="ثبت" />
+                        <input type="submit"   class=" action-button btn-success rounded" value="ثبت" />
                     </form>
-                    <input type="button" name="previous" class="previous action-button" value="قبلی" />
-                    <input type="button" name="next" class="next action-button" value="بعدی" />
+                    <input type="button" name="previous" class="previous action-button rounded" value="قبلی" />
+                    <input type="button" name="next" class="next action-button rounded" value="بعدی" />
                 </fieldset>
                 <fieldset>
                     <form method="post" action="/panel/profile/update_sch2024_part4/{{Auth::user()->id}}" >
@@ -409,9 +515,9 @@
                                 </div>
                             </div>
                         </div>
-                        <input type="submit" class=" action-button" value="ثبت" />
+                        <input type="submit" class=" action-button btn-success rounded" value="ثبت" />
                     </form>
-                    <input type="button" name="previous" class="previous action-button" value="قبلی" />
+                    <input type="button" name="previous" class="previous action-button rounded" value="قبلی" />
 
                 </fieldset>
                 <!-- end step three form -->
