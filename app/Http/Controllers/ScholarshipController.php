@@ -1447,6 +1447,7 @@ class ScholarshipController extends BaseController
     //SHow
     public function show_sch2024()
     {
+
         if(!is_null(Auth::user()->sch2024))
         {
             $states=state::get();
@@ -1482,7 +1483,16 @@ class ScholarshipController extends BaseController
         else
         {
             alert()->error('شما در بورسیه ثبت نام نکرده اید')->persistent('بستن');
-            return redirect('/');
+            if(session()->has('introduce'))
+            {
+                $introduce=session('introduce');
+                return redirect('/sch2024/register?introduce='.$introduce);
+            }
+            else
+            {
+                return redirect('/sch2024/register');
+            }
+
         }
 
 
