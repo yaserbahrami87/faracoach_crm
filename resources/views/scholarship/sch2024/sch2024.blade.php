@@ -1,10 +1,15 @@
 @extends('master.index')
 @section('row1')
     <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8 m-auto" >
+                <img src="{{asset('/images/scholarship/banner.jpg')}}" class="img-fluid">
+            </div>
+
+        </div>
         <div class="row justify-content-center">
             <div class="col-md-8 text-center">
-                <h6 class="d-block text-dark" style="line-height: 2">فرم ورود به دوره آمــوزش رایــگان کوچیــنگ 1403</h6>
-                <h6 class="d-block text-dark" style="line-height: 3">(طرح اعطای بورسیه کوچینگ آکادمی بین المللی فراکوچ)</h6>
+
                 <div class="card text-left">
 
                     <div class="card-body" style="background-color: #eeeff0 !important">
