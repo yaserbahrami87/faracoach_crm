@@ -1579,37 +1579,38 @@ class BaseController extends Controller
     {
         if(Auth::user()->type==2)
             {
+
                 //لیست تعداد کاربرها
                 $statics['notfollowup'] = $this->get_user(NULL,NULL,1,NULL,NULL,NULL )->count();
-
-                $lead=$this->get_user(NULL,NULL,-1,NULL,NULL)->count();
-                $continuefollowup = $this->get_usersByType(11,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-                $cancelfollowup = $this->get_usersByType(12,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-                $waiting = $this->get_usersByType(13,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-                $noanswering = $this->get_usersByType(14,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-                $students = $this->get_usersByType(20,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
+                $statics['lead']=$this->get_user(NULL,NULL,-1,NULL,NULL)->count();
+                $statics['continuefollowup'] = $this->get_usersByType(11,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
+                $statics['cancelfollowup'] = $this->get_usersByType(12,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
+                $statics['waiting'] = $this->get_usersByType(13,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
+                $statics['noanswering'] = $this->get_usersByType(14,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
+                $statics['students'] = $this->get_usersByType(20,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
                 $condition=['nextfollowup_date_fa','=',$this->dateNow];
-                $todayFollowup = $this->get_followup_join_user(NULL,Auth::user()->id,NULL,1,$condition,NULL )->count();
+                $statics['todayFollowup'] = $this->get_followup_join_user(NULL,Auth::user()->id,NULL,1,$condition,NULL )->count();
                 $condition=['followups.nextfollowup_date_fa', '<', $this->dateNow];
-                $expireFollowup=$this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL )->count();
-                $myfollowup = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
+                $statics['expireFollowup']=$this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL )->count();
+                $statics['myfollowup'] = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
                 $condition=['date_fa','=',$this->dateNow];
-                $followedToday = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL )->count();
-                $scholarship=User::where('resource','=','بورسیه تحصیلی')
+                $statics['followedToday'] = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL )->count();
+                $statics['scholarship']=User::where('resource','=','بورسیه تحصیلی')
                     ->count();
-                $trashuser=$this->get_usersByType(0,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-                $marketing1=User::where('type','=','-1')
+                $statics['trashuser']=$this->get_usersByType(0,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
+                $statics['marketing1']=User::where('type','=','-1')
                     ->orderby('id','desc')
-                    ->get();
-                $marketing2=User::where('type','=','-2')
+                    ->count();
+                $statics['marketing2']=User::where('type','=','-2')
                     ->orderby('id','desc')
-                    ->get();
-                $marketing3=User::where('type','=','-3')
+                    ->count();
+                $statics['marketing3']=User::where('type','=','-3')
                     ->orderby('id','desc')
-                    ->get();
+                    ->count();
             }
         else
             {
+
                 $dateNow=$this->dateNow;
                 //لیست تعداد کاربرها
                 $statics['notfollowup'] = $this->get_user(NULL,NULL,1,NULL,NULL,NULL )->count();
@@ -1693,8 +1694,9 @@ class BaseController extends Controller
                         ->orderby('id','desc')
                         ->count();
 
-                return ($statics);
+
             }
+            return ($statics);
     }
 
     public function get_reserve($id=NULL,$user_id=NULL,$booking_id=NULL,$type_booking=NULL,$condition=NULL,$status=NULL,$paginate='get')
