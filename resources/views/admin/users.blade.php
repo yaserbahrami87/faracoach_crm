@@ -259,7 +259,7 @@
                         </tr>
                         </tfoot>
                     </table>
-                    {{$users->links()}}
+                    
 
                 </div>
             </div>
