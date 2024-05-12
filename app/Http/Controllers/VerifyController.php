@@ -1228,7 +1228,7 @@ class VerifyController extends BaseController
                             ]);
 
                         if ($status) {
-                            $msg = Auth::user()->fname . ' ' . Auth::user()->lname . " عزیز\nبه فراکوچ خوش آمدید\nمشاهده دوره:\n" . "my.faracoach.com/panel/sch2024/me";
+                            $msg = Auth::user()->fname . ' ' . Auth::user()->lname . " عزیز\nثبت نام اولیه بورسیه انجام شد\nپروفایل خود را کامل کنید:\n" . "my.faracoach.com/panel/sch2024/me";
                             $this->sendSms(Auth::user()->tel, $msg);
                             alert()->success("ثبت نام شما در سایت فراکوچ با موفقیت انجام شد \n")->persistent('بستن');
                             $request->session()->forget('scholarshipStatus');
@@ -1270,7 +1270,7 @@ class VerifyController extends BaseController
 
                     if ($status)
                     {
-                        $msg = Auth::user()->fname . ' ' . Auth::user()->lname . " عزیز\nبه فراکوچ خوش آمدید\nمشاهده دوره:\n" . "my.faracoach.com/panel/sch2024/me";
+                        $msg = Auth::user()->fname . ' ' . Auth::user()->lname . " عزیز\nثبت نام اولیه بورسیه انجام شد\nپروفایل خود را کامل کنید:\n" . "my.faracoach.com/panel/sch2024/me";
                         $this->sendSms(Auth::user()->tel, $msg);
 //                              $this->sendSms('09153159020', $status->id . ' بورسیه:' . Auth::user()->fname . ' ' . Auth::user()->lname );
                         alert()->success("ثبت نام شما در سایت فراکوچ با موفقیت انجام شد \n")->persistent('بستن');
