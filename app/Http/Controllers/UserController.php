@@ -2448,7 +2448,7 @@ class UserController extends BaseController
         Auth::user()->save();
         alert()->success('اطلاعات شخصی با موفقیت به روزرسانی شد','پیام')->persistent('بستن');
 
-        return redirect('/panel/sch2024/me#step-2');
+        return redirect('/panel/sch2024/me#step-1');
     }
 
     public function update_sch2024_part2(Request $request,User $user)
@@ -2479,7 +2479,7 @@ class UserController extends BaseController
         }
 
 
-        return redirect('/panel/sch2024/me#step-2');
+        return redirect('/panel/sch2024/me#step-1');
     }
 
     public function update_sch2024_part3(Request $request,User $user)
@@ -2543,7 +2543,7 @@ class UserController extends BaseController
         Auth::user()->save();
         alert()->success('اطلاعات تکمیلی با موفقیت به روزرسانی شد','پیام')->persistent('بستن');
 
-        return redirect('/panel/sch2024/me#step-2');
+        return redirect('/panel/sch2024/me#step-1');
     }
 
     public function update_sch2024_part4(Request $request,User $user)
@@ -2566,7 +2566,7 @@ class UserController extends BaseController
             alert()->error('خطا در بروزرسانی اطلاعات اشنایی')->persistent('بستن');
         }
 
-        return redirect('/panel/sch2024/me#step-2');
+        return redirect('/panel/sch2024/me#step-1');
     }
 
 

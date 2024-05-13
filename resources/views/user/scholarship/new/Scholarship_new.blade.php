@@ -87,88 +87,93 @@
             <h4 class="d-block text-dark text-center" style="line-height:2 ;margin-bottom: 30px">  طرح اعطای بورسیه کوچینگ آکادمی بین المللی فراکوچ </h4>
             <div id="smartwizard" class="sw-main sw-theme-dots">
                 <ul class="nav nav-tabs step-anchor">
-                    <li class="nav-item active">
-                        <a href="#step-1" class="nav-link">
-                            مرحله اول<br/>
-                            <small>توضیحات</small>
-                        </a>
-                    </li>
+{{--                    <li class="nav-item active">--}}
+{{--                        <a href="#step-1" class="nav-link">--}}
+{{--                            مرحله اول<br/>--}}
+{{--                            <small>توضیحات</small>--}}
+{{--                        </a>--}}
+{{--                    </li>--}}
                     <li class="nav-item">
                         <a href="#step-2" class="nav-link">
-                            مرحله دوم<br />
+                            مرحله اول<br />
                             <small>اطلاعات فردی</small>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="#step-3" class="nav-link">
-                            مرحله سوم<br />
+                            مرحله دوم<br />
                             <small>معرفی دوستان</small>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="#step-4" class="nav-link">
-                            مرحله چهارم<br />
+                            مرحله سوم<br />
                             <small>دوره اموزشی</small>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="#step-5" class="nav-link">
-                            مرحله پنجم<br />
+                            مرحله چهارم<br />
                             <small>آزمون وگواهینامه</small>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="#step-6" class="nav-link">
-                            مرحله ششم<br />
+                            مرحله پنجم<br />
                             <small>دوره فاندامنتال</small>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="#step-7" class="nav-link">
-                            مرحله هفتم<br />
+                            مرحله ششم<br />
                             <small>معرفی نامه </small>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="#step-8" class="nav-link">
-                            مرحله هشتم<br />
+                            مرحله هفتم<br />
                             <small>مصاحبه </small>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="#step-9" class="nav-link">
-                            مرحله نهم<br />
+                            مرحله هشتم<br />
                             <small>نتیجه و ثبت نام </small>
                         </a>
                     </li>
 
                 </ul>
                 <div class="sw-container tab-content" style="min-height: 0px;">
-                    <div id="step-1" class="tab-pane step-content" style="display: block;">
-                        <div class="row">
-                        </div>
-                        <div class="row mt-3">
-                            <div class="card">
-                                <div class="card-body shadow shadow-sm text-center">
-                                    <p style="line-height: 2" class="text-center">شناسایی و دعوت از افراد نخبه و با استعداد جهت حضور ویژه</p>
-                                    <p style="line-height: 2;text-align: justify">آکادمی بین المللی فراکوچ فرصت بی نظیری را به منظور ورود و پیوستن جمع بیشتری از افراد مستعد ، نخبه و فرهیخته جامعه - به ویژه اساتید ،  پژوهشگران، اندیشمندان، مدیران و دانشجویان برتر - به دنیای حرفه ای کوچینگ از طریق ایجاد شرایط ویژه حضور آنان در دوره های آموزش و تربیت کوچ حرفه ای ، فراهم کرده است.</p>
+{{--                    <div id="step-1" class="tab-pane step-content" style="display: block;">--}}
+{{--                        <div class="row">--}}
+{{--                        </div>--}}
+{{--                        <div class="row mt-3">--}}
+{{--                            <div class="card">--}}
+{{--                                <div class="card-body shadow shadow-sm text-center">--}}
+{{--                                    <p style="line-height: 2" class="text-center">شناسایی و دعوت از افراد نخبه و با استعداد جهت حضور ویژه</p>--}}
+{{--                                    <p style="line-height: 2;text-align: justify">آکادمی بین المللی فراکوچ فرصت بی نظیری را به منظور ورود و پیوستن جمع بیشتری از افراد مستعد ، نخبه و فرهیخته جامعه - به ویژه اساتید ،  پژوهشگران، اندیشمندان، مدیران و دانشجویان برتر - به دنیای حرفه ای کوچینگ از طریق ایجاد شرایط ویژه حضور آنان در دوره های آموزش و تربیت کوچ حرفه ای ، فراهم کرده است.</p>--}}
 
-                                    <img src="/images/scholarship/info_sch.jpg" class="img-fluid text-center" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="step-2" class="tab-pane step-content">
+{{--                                    <img src="/images/scholarship/info_sch.jpg" class="img-fluid text-center" />--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+                    <div id="step-1" class="tab-pane step-content">
                         <div class="row">
                             @include('user.scholarship.new.profiling')
                         </div>
                     </div>
-                    <div id="step-3" class="tab-pane step-content">
+                    <div id="step-2" class="tab-pane step-content">
                             @include('user.scholarship.new.introduced_friends')
+                    </div>
+                    <div id="step-3" class="tab-pane step-content">
+                        <div class="row">
+{{--                            @include('user.scholarship.new.training_course')--}}
+                        </div>
                     </div>
                     <div id="step-4" class="tab-pane step-content">
                         <div class="row">
-{{--                            @include('user.scholarship.new.training_course')--}}
+
                         </div>
                     </div>
                     <div id="step-5" class="tab-pane step-content">
@@ -187,11 +192,6 @@
                         </div>
                     </div>
                     <div id="step-8" class="tab-pane step-content">
-                        <div class="row">
-
-                        </div>
-                    </div>
-                    <div id="step-9" class="tab-pane step-content">
                         <div class="row">
 
                         </div>
