@@ -893,15 +893,15 @@ class VerifyController extends BaseController
                 $this->sendSms($request['tel'], $message);
 
 
-                if(is_null($status->user['email']))
-                {
+//                if(is_null($status->user))
+//                {
                     alert()->warning('رمز یکبار مصرف شما به شماره ' . $request['tel'] . " ارسال شد. ")->persistent('بستن');
-                }
-                else
-                {
-                    alert()->warning('رمز یکبار مصرف شما به شماره ' . $request['tel'] . " و ایمیل ".$status->user['email']." ارسال شد. ")->persistent('بستن');
-
-                }
+//                }
+//                else
+//                {
+//                    alert()->warning('رمز یکبار مصرف شما به شماره ' . $request['tel'] . " و ایمیل ".$status->user['email']." ارسال شد. ")->persistent('بستن');
+//
+//                }
 
                 return back();
             }
@@ -1192,7 +1192,7 @@ class VerifyController extends BaseController
                 ->first();
 
             $created_at=($verify['created_at']);
-            $created_at_add=$created_at->addMinutes(30);
+                $created_at_add=$created_at->addMinutes(30);
             if($created_at_add >Carbon::now())
             {
                 $user=$this->get_user($verify->tel,NULL,NULL,NULL,true);
@@ -1227,7 +1227,8 @@ class VerifyController extends BaseController
                                 'introduced'        =>$introduce,
                             ]);
 
-                        if ($status) {
+                        if ($status)
+                        {
                             $msg = Auth::user()->fname . ' ' . Auth::user()->lname . " عزیز\nثبت نام اولیه بورسیه انجام شد\nپروفایل خود را کامل کنید:\n" . "my.faracoach.com/panel/sch2024/me";
                             $this->sendSms(Auth::user()->tel, $msg);
                             alert()->success("ثبت نام شما در سایت فراکوچ با موفقیت انجام شد \n")->persistent('بستن');
