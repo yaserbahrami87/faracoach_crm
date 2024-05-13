@@ -1500,7 +1500,7 @@ class ScholarshipController extends BaseController
     {
 
         $this->validate($request,[
-            'target'     =>'nullable|array',
+            'target'     =>'required|array',
             'gettingknow'=>'nullable|between:1,3',
             'cooperation'=>'nullable|string',
         ]);
