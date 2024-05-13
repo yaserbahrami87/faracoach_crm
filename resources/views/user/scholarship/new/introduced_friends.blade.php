@@ -30,7 +30,7 @@
                     <div class="col-lg-6 mt-4 pt-2">
                         <div class="media align-items-center rounded shadow p-3">
                             <i class="bi bi-camera-video-fill text-custom  h4 mb-0"></i>
-                            <h6 class="ml-3 mb-0">  <a href="{{asset('/videos/بورسیه.mp4')}}" target="_blank">دانلود فیلم</a></h6>
+                            <h6 class="ml-3 mb-0">  <a href="/images/scholarship/video.mp4" target="_blank">دانلود فیلم</a></h6>
                         </div>
                     </div>
                     <div class="col-lg-6 mt-4 pt-2">
@@ -68,7 +68,7 @@
                         <div class="col-lg-12 col-md-12 mt-1 pt-1">
                             <div class="card work-desk rounded border-0 shadow-lg overflow-hidden">
                                 <video controls class="img-fluid "  height="">
-                                    <source src="{{asset('/videos/بورسیه.mp4')}}" >
+                                    <source src="/images/scholarship/video.mp4" >
                                 </video>
                                 {{--                                <img src="https://www.bootdey.com/image/600x401/FF7F50/000000" class="img-fluid" alt="Image" />--}}
                                 <div class="img-overlay bg-dark"></div>
