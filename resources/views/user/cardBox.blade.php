@@ -63,7 +63,7 @@
         </div>
         <div class="col-12 text-center mt-1">
             <a href="/panel/sch2024/me" class="btn btn-block btn-primary">
-                <p>ورود به بخش بورسیه فراکوچ</p>
+                <p>ورود به بخش بورسیه 2024 فراکوچ</p>
             </a>
         </div>
 
