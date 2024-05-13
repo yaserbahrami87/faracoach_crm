@@ -93,50 +93,50 @@
 {{--                            <small>توضیحات</small>--}}
 {{--                        </a>--}}
 {{--                    </li>--}}
-                    <li class="nav-item">
-                        <a href="#step-2" class="nav-link">
+                    <li class="nav-item active">
+                        <a href="#step-1" class="nav-link">
                             مرحله اول<br />
                             <small>اطلاعات فردی</small>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#step-3" class="nav-link">
+                        <a href="#step-2" class="nav-link">
                             مرحله دوم<br />
                             <small>معرفی دوستان</small>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#step-4" class="nav-link">
+                        <a href="#step-3" class="nav-link">
                             مرحله سوم<br />
                             <small>دوره اموزشی</small>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#step-5" class="nav-link">
+                        <a href="#step-4" class="nav-link">
                             مرحله چهارم<br />
                             <small>آزمون وگواهینامه</small>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#step-6" class="nav-link">
+                        <a href="#step-5" class="nav-link">
                             مرحله پنجم<br />
                             <small>دوره فاندامنتال</small>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#step-7" class="nav-link">
+                        <a href="#step-6" class="nav-link">
                             مرحله ششم<br />
                             <small>معرفی نامه </small>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#step-8" class="nav-link">
+                        <a href="#step-7" class="nav-link">
                             مرحله هفتم<br />
                             <small>مصاحبه </small>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#step-9" class="nav-link">
+                        <a href="#step-8" class="nav-link">
                             مرحله هشتم<br />
                             <small>نتیجه و ثبت نام </small>
                         </a>
