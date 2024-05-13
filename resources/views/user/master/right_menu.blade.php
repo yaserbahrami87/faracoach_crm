@@ -29,7 +29,7 @@
             <li class=" nav-item"><a href="/panel/profile"><span class="menu-title" > حساب کاربری </span></a> </li>
 
             <li class="nav-item">
-                <a href="/panel/scholarship/me">
+                <a href="/panel/sch2024/me">
                     @if(is_null(Auth::user()->scholarship))
                         <span class="menu-title" >آموزش رایگان </span>
                     @else
@@ -85,7 +85,7 @@
                     <li><a href="/panel/warrany" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >تعهدنامه</span></a></li>
                 </ul>
             </li>
-            <li class=" nav-item"><a href="/certificates"><span class="menu-title">مدارک صادرشده</span></a></li>
+            <li class=" nav-item"><a href="/panel/certificates"><span class="menu-title">مدارک صادرشده</span></a></li>
             <!--
             <li class=" nav-item has-sub "><a href="#"><span class="menu-title" >بلاگ</span></a>
                 <ul class="menu-content">

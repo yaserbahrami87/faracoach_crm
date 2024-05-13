@@ -577,8 +577,13 @@ class UserController extends BaseController
            for ($i=0;$i<count($arrayTags);$i++)
            {
                $temp=$this->get_tag_byID($arrayTags[$i]);
-               $tagName=$temp['tag'];
-               array_push($tmp, "$tagName");
+               if(!is_null($temp))
+               {
+                   $tagName=$temp['tag'];
+                   array_push($tmp, "$tagName");
+               }
+
+
            }
            //اضافه کردن آرایه تگها بجای آرایه آدی ها
            $item->tags=$tmp;
@@ -2386,7 +2391,7 @@ class UserController extends BaseController
                 'codemelli'         =>'nullable|numeric|unique:users,codemelli,'.Auth::user()->id,
                 'shenasname'        =>'nullable|numeric|',
                 'sex'               =>'nullable|boolean',
-                'personal_image'    =>'nullable|mimes:jpeg,jpg,bmp,png|max:600',
+                'personal_image'    =>'nullable|mimes:jpeg,jpg,bmp,png|max:1024',
                 'resume'            =>'nullable|mimes:docx,doc,pdf,jpg,png|max:1024',
             ]);
 
@@ -2395,7 +2400,8 @@ class UserController extends BaseController
         {
 
             $file = $request->file('personal_image');
-            $personal_image = "personal-" . $user->tel . "." . $request->file('personal_image')->extension();
+            $personal_image = "personal-" . time()."-".Auth::user()->id . "." . $request->file('personal_image')->extension();
+
             $path = public_path('documents/users/');
             $files = $request->file('personal_image')->move($path, $personal_image);
             $img=Image::make($files->getRealPath())
@@ -2414,30 +2420,32 @@ class UserController extends BaseController
 
         if ($request->has('resume') && $request->file('resume')->isValid()) {
             $file = $request->file('resume');
-            $resume = "resume-" . $user->tel . "." . $request->file('resume')->extension();
-            $path = public_path('/documents/users/');
+            $resume = "resume-" . time()."-".Auth::user()->id  . "." . $request->file('resume')->extension();
+            $path = public_path('/documents/scholarship/2024/');
             $files = $request->file('resume')->move($path, $resume);
             $request->resume = $resume;
         }
-        try
-        {
-            $user->update($request->all());
-        }
-        catch (Throwable $e)
-        {
-            alert()->error($e->errorInfo[2],'خطا')->persistent('بستن');
-            return back();
-        }
+
+        Auth::user()->update($request->all());
+//        try
+//        {
+//
+//        }
+//        catch (Throwable $e)
+//        {
+//            alert()->error($e->errorInfo[2],'خطا')->persistent('بستن');
+//            return back();
+//        }
 
         if (isset($personal_image)) {
-            $user->personal_image = $personal_image;
+            Auth::user()->personal_image = $personal_image;
         }
 
         if (isset($resume)) {
-            $user->resume = $resume;
+            Auth::user()->resume = $resume;
         }
 
-        $user->save();
+        Auth::user()->save();
         alert()->success('اطلاعات شخصی با موفقیت به روزرسانی شد','پیام')->persistent('بستن');
 
         return redirect('/panel/sch2024/me#step-2');
@@ -2491,7 +2499,7 @@ class UserController extends BaseController
 
         if ($request->has('shenasnameh_image') && $request->file('shenasnameh_image')->isValid()) {
             $file = $request->file('shenasnameh_image');
-            $shenasnameh_image = "shenasnameh-" . $user->tel . "." . $request->file('shenasnameh_image')->extension();
+            $shenasnameh_image = "shenasnameh-" . time()."-".Auth::user()->id . "." . $request->file('shenasnameh_image')->extension();
             $path = public_path('/documents/users/');
             $files = $request->file('shenasnameh_image')->move($path, $shenasnameh_image);
             $request->shenasnameh_image = $shenasnameh_image;
@@ -2500,7 +2508,7 @@ class UserController extends BaseController
 
         if ($request->has('cartmelli_image') && $request->file('cartmelli_image')->isValid()) {
             $file = $request->file('cartmelli_image');
-            $cartmelli_image = "cartmelli-" . $user->tel . "." . $request->file('cartmelli_image')->extension();
+            $cartmelli_image = "cartmelli-" . time()."-".Auth::user()->id . "." . $request->file('cartmelli_image')->extension();
             $path = public_path('/documents/users/');
             $files = $request->file('cartmelli_image')->move($path, $cartmelli_image);
             $request->cartmelli_image = $cartmelli_image;
@@ -2508,7 +2516,7 @@ class UserController extends BaseController
 
         if ($request->has('education_image') && $request->file('education_image')->isValid()) {
             $file = $request->file('education_image');
-            $education_image = "education-" . $user->tel . "." . $request->file('education_image')->extension();
+            $education_image = "education-" . time()."-".Auth::user()->id . "." . $request->file('education_image')->extension();
             $path = public_path('/documents/users/');
             $files = $request->file('education_image')->move($path, $education_image);
             $request->education_image = $education_image;

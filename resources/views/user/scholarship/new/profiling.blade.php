@@ -129,7 +129,7 @@
                                                 <span>*</span>
                                             </label>
 
-                                            <input type="text" class="form-control " placeholder="نام را وارد کنید" name="fname" value="{{old('fname',Auth::user()->fname)}}" required  />
+                                            <input type="text" class="form-control " placeholder="نام را وارد کنید" name="fname" value="{{old('fname',Auth::user()->fname)}}"   />
                                             @error('fname')
                                                 <p class="text-danger">
                                                     <strong>{{ $message }}</strong>
@@ -235,6 +235,9 @@
                                                 <input type="file" class="custom-file-input  " id="resume" aria-describedby="resume" name="resume" />
                                                 <label class="custom-file-label" for="resume">Choose file</label>
                                             </div>
+                                            @if(!is_null(Auth::user()->resume))
+                                                <a href="{{'/documents/scholarship/2024/'.Auth::user()->resume}}" target="_blank" >نمایش رزومه</a>
+                                            @endif
                                             <small class="text-muted">فرمت فایل:jpg , jpeg , PDF , DOC  -;حجم حداکثر 600 کیلوبایت</small>
                                         </div>
                                     </div>
@@ -260,7 +263,7 @@
                                     <label>استان:
                                         <span >*</span>
                                     </label>
-                                    <select class="custom-select"  name="state"  id="state" required>
+                                    <select class="custom-select"  name="state"  id="state" >
                                         <option selected disabled>استان را انتخاب کنید</option>
                                         @foreach($states as $item)
                                             <option value="{{$item->id}}"   {{ old('state',Auth::user()->state)==$item->id ? 'selected='.'"'.'selected'.'"' : '' }} >{{$item->name}}</option>
@@ -274,7 +277,7 @@
                                     <label>شهر:
                                         <span >*</span>
                                     </label>
-                                    <select class="custom-select "  name="city"  id="city" required>
+                                    <select class="custom-select "  name="city"  id="city" >
 
                                         <option disabled selected >انتخاب کنید</option>
                                         @foreach($cities as $item_city)
@@ -298,7 +301,7 @@
                                 <label>آدرس:
                                     <span >*</span>
                                 </label>
-                                <input type="text" class="form-" placeholder="آدرس را وارد کنید"  value='{{old('address',Auth::user()->address)}}' name="address"  required />
+                                <input type="text" class="form-" placeholder="آدرس را وارد کنید"  value='{{old('address',Auth::user()->address)}}' name="address"   />
                             </div>
                         </div>
                         <div class="row">
@@ -307,7 +310,7 @@
                                     <label for="email"><i class="bi bi-envelope-at-fill"></i>
                                         <span >*</span>
                                     </label>
-                                    <input type="email" class="form-control " placeholder="پست الکترونیکی را وارد کنید" value='{{old('email',Auth::user()->email)}}' name="email"  id="email"   required />
+                                    <input type="email" class="form-control " placeholder="پست الکترونیکی را وارد کنید" value='{{old('email',Auth::user()->email)}}' name="email"  id="email"    />
                                     <small class="text-muted">نمونه:faracoach@gmail.com</small>
                                 </div>
                             </div>
@@ -316,7 +319,7 @@
                                     <label><i class="bi bi-instagram"></i>
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" class="form-control " placeholder="صفحه اینستاگرام خود راوارد کنید"  value='{{old('instagram',Auth::user()->instagram)}}' name="instagram" required  />
+                                    <input type="text" class="form-control " placeholder="صفحه اینستاگرام خود راوارد کنید"  value='{{old('instagram',Auth::user()->instagram)}}' name="instagram"   />
                                 </div>
                             </div>
                             <div class="col-md-3 px-1">
@@ -324,7 +327,7 @@
                                     <label><i class="bi bi-telegram"></i>
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" class="form-control " placeholder="آیدی تلگرام خود را وارد کنید" value='{{old('telegram',Auth::user()->telegram)}}' name="telegram" required />
+                                    <input type="text" class="form-control " placeholder="آیدی تلگرام خود را وارد کنید" value='{{old('telegram',Auth::user()->telegram)}}' name="telegram"  />
 
                                 </div>
                             </div>
@@ -354,7 +357,7 @@
                                     <label>نام پدر:
                                         <span>*</span>
                                     </label>
-                                    <input type="text" class="form-control" placeholder=" نام پدر را وارد کنید"  value='{{old('father',Auth::user()->father)}}'  name="father" required />
+                                    <input type="text" class="form-control" placeholder=" نام پدر را وارد کنید"  value='{{old('father',Auth::user()->father)}}'  name="father"  />
                                 </div>
                             </div>
                             <div class="col-md-4 px-1">
@@ -363,7 +366,7 @@
                                         <span>*</span>
                                     </label>
                                     <div class="form-group">
-                                        <select class="form-control p-0 " id="exampleFormControlSelect1" name="married" required >
+                                        <select class="form-control p-0 " id="exampleFormControlSelect1" name="married"  >
                                             <option selected disabled>انتخاب کنید</option>
                                             <option value="0" {{old('married',Auth::user()->married)==0? 'selected':''}}  >مجرد</option>
                                             <option value="1" {{old('married',Auth::user()->married)==1? 'selected':''}} >متاهل</option>
@@ -376,7 +379,7 @@
                                     <label>شهر تولد:
                                         <span>*</span>
                                     </label>
-                                    <input type="text" class="form-control " placeholder="شهر تولد را وارد کنید"  value='{{old('born',Auth::user()->born)}}' name="born" required />
+                                    <input type="text" class="form-control " placeholder="شهر تولد را وارد کنید"  value='{{old('born',Auth::user()->born)}}' name="born"  />
                                 </div>
                             </div>
                         </div>
@@ -386,7 +389,7 @@
                                     <label>تحصیلات:
                                         <span>*</span>
                                     </label>
-                                    <select id="education" class="form-control p-0 "name="education" required >
+                                    <select id="education" class="form-control p-0 "name="education"  >
                                         <option selected disabled>انتخاب کنید</option>
                                         <option {{old('education',Auth::user()->education)=='زیردیپلم'? 'selected':''}} value="زیردیپلم" >زیردیپلم</option>
                                         <option {{old('education',Auth::user()->education)=='دیپلم'? 'selected':''}} value="دیپلم" >دیپلم</option>
@@ -402,7 +405,7 @@
                                         <span>*</span>
                                     </label>
                                     <div class="form-group">
-                                        <input type="text" class="form-control " placeholder="رشته را وارد کنید" value='{{old('reshteh',Auth::user()->reshteh)}}'  name="reshteh" required />
+                                        <input type="text" class="form-control " placeholder="رشته را وارد کنید" value='{{old('reshteh',Auth::user()->reshteh)}}'  name="reshteh"  />
                                     </div>
                                 </div>
                             </div>
@@ -412,7 +415,7 @@
                                         <span>*</span>
                                     </label>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="شغل را وارد کنید" value='{{old('job',Auth::user()->job)}}'  name="job" required />
+                                        <input type="text" class="form-control" placeholder="شغل را وارد کنید" value='{{old('job',Auth::user()->job)}}'  name="job"  />
                                     </div>
                                 </div>
                             </div>
@@ -473,7 +476,7 @@
                                     <label>نحوه آشنایی:
                                         <span class="text-danger">*</span>
                                     </label>
-                                    <select id="gettingknow_parent" class="form-control p-0 " name="gettingKnow_parent" required >
+                                    <select id="gettingknow_parent" class="form-control p-0 " name="gettingKnow_parent"  >
                                         <option selected disabled>انتخاب کنید</option>
                                         @if(!is_null(Auth::user()->get_gettingknow))
                                             @foreach($gettingKnow_parent_list as $item)
@@ -493,7 +496,7 @@
                                         <label>عنوان آشنایی:
                                             <span class="text-danger">*</span>
                                         </label>
-                                        <select id="gettingknow" class="form-control p-0 " name="gettingknow" required  >
+                                        <select id="gettingknow" class="form-control p-0 " name="gettingknow"   >
                                             <option selected disabled>انتخاب کنید</option>
                                             @if(!is_null(Auth::user()->get_gettingknow) && (!is_null(Auth::user()->get_gettingknow->parent)))
                                                 @foreach(Auth::user()->get_gettingknow->parent->child_lists as $item)
