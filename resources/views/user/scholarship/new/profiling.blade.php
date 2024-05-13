@@ -105,7 +105,7 @@
                                     </div>
                             </div>
                         </div>
-                        <input type="submit"   class="action-button" value="ثبت" />
+                        <input type="submit"   class="btn btn-success" value="ثبت" />
                     </form>
                     @else
                         <div class="alert alert-success">
@@ -167,13 +167,13 @@
                                     <div class="col-md-4 px-1">
                                         <div class="form-group">
                                             <label>نام انگلیسی<span class=" font-weight-bold">*</span></label>
-                                            <input type="text" class="form-control  " placeholder="نام انگلیسی را وارد کنید"   value="{{Auth::user()->fname_en}}"  {{is_null(Auth::user()->fname_en)? "name='fname_en' ": 'disabled'}}   autocomplete="autocomplete"  />
+                                            <input type="text" class="form-control  " placeholder="نام انگلیسی را وارد کنید"   value="{{Auth::user()->fname_en}}"  {{is_null(Auth::user()->fname_en)? "name=fname_en ": 'disabled'}}   autocomplete="autocomplete"  />
                                         </div>
                                     </div>
                                     <div class="col-md-4 px-1">
                                         <div class="form-group">
                                             <label>نام خانوادگی انگلیسی<span class=" font-weight-bold">*</span></label>
-                                            <input type="text" class="form-control " placeholder="نام خانوادگی انگلیسی را وارد کنید" value="{{Auth::user()->lname_en}}"  {{is_null(Auth::user()->lname_en)? "name='lname_en' ": 'disabled'}}   autocomplete="autocomplete"/>
+                                            <input type="text" class="form-control " placeholder="نام خانوادگی انگلیسی را وارد کنید" value="{{Auth::user()->lname_en}}"  {{is_null(Auth::user()->lname_en)? "name=lname_en ": 'disabled'}}   autocomplete="autocomplete"/>
                                         </div>
                                     </div>
                                     <div class="col-md-4 px-1">
@@ -432,6 +432,9 @@
                                         <label class="custom-file-label" for="inputshenasnameh_image">Choose file</label>
                                     </div>
                                     <small class="text-muted">فرمت فایل:jpg , jpeg , png  -;حجم حداکثر 600 کیلوبایت</small>
+                                    @if(!is_null(Auth::user()->shenasnameh_image))
+                                        <a href="{{'/documents/users/'.Auth::user()->shenasnameh_image}}" target="_blank" class="d-block">دانلود شناسنامه</a>
+                                    @endif
                                 </div>
                             </div>
                             <div class="col-md-4 px-1">
@@ -444,6 +447,9 @@
                                         <label class="custom-file-label" for="inputcartmelli_image">Choose file</label>
                                     </div>
                                     <small class="text-muted">فرمت فایل:jpg , jpeg , png  -;حجم حداکثر 600 کیلوبایت</small>
+                                    @if(!is_null(Auth::user()->cartmelli_image))
+                                        <a href="{{'/documents/users/'.Auth::user()->cartmelli_image}}" target="_blank" class="d-block">دانلود کارت ملی</a>
+                                    @endif
                                 </div>
                             </div>
                             <div class="col-md-4 px-1">
@@ -456,6 +462,9 @@
                                         <label class="custom-file-label" for="inputeducation_image">Choose file</label>
                                     </div>
                                     <small class="text-muted">فرمت فایل:jpg , jpeg , png  -;حجم حداکثر 600 کیلوبایت</small>
+                                    @if(!is_null(Auth::user()->education_image))
+                                        <a href="{{'/documents/users/'.Auth::user()->education_image}}" target="_blank" class="d-block">دانلود مدرک تحصیلی</a>
+                                    @endif
                                 </div>
                             </div>
 
@@ -513,7 +522,8 @@
                                 <div class="form-group">
                                     <label>معرف</label>
                                     <input type="hidden" class="form-control"  @if(!is_null(Auth::user()->getIntroduced))  value="{{Auth::user()->getIntroduced->fname.' '.Auth::user()->getIntroduced->lname }}" @endif  id="introduced" />
-                                    <input dir="ltr"  type="text" class="form-control @if(strlen(Auth::user()->introduced)==0) is-invalid  @else is-valid  @endif"  @if(!is_null(Auth::user()->getIntroduced)) disabled value="{{Auth::user()->getIntroduced->fname.' '.Auth::user()->getIntroduced->lname }}" @endif  id="introduced_profile" />
+                                    <input dir="ltr"  type="text" class="form-control @if(strlen(Auth::user()->introduced)==0) is-invalid  @else is-valid  @endif"  @if(!is_null(Auth::user()->getIntroduced)) disabled value="{{Auth::user()->getIntroduced->tel }}" @endif  id="introduced_profile" />
+                                    @if(!is_null(Auth::user()->getIntroduced)) <p> معرف شما:{{Auth::user()->getIntroduced->fname.' '.Auth::user()->getIntroduced->lname }}</p> @endif
                                     <span id="feedback_introduced" ></span>
                                 </div>
                             </div>

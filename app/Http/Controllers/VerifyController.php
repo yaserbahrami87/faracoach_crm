@@ -1193,8 +1193,8 @@ class VerifyController extends BaseController
 
             $created_at=($verify['created_at']);
                 $created_at_add=$created_at->addMinutes(30);
-            if($created_at_add >Carbon::now())
-            {
+//            if($created_at_add >Carbon::now())
+//            {
                 $user=$this->get_user($verify->tel,NULL,NULL,NULL,true);
 
                 if(session()->has('introduce'))
@@ -1280,13 +1280,13 @@ class VerifyController extends BaseController
 
                 }
 
-            }
-            else
-            {
-                alert()->error('رمز یکبار مصرف منقضی شده است')->persistent('بستن');
-                return back();
-
-            }
+//            }
+//            else
+//            {
+//                alert()->error('رمز یکبار مصرف منقضی شده است')->persistent('بستن');
+//                return back();
+//
+//            }
         }
         else
         {

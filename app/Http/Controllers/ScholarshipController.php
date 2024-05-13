@@ -1500,8 +1500,8 @@ class ScholarshipController extends BaseController
     {
 
         $this->validate($request,[
-            'target'     =>'required|array',
-            'gettingknow'=>'required|between:1,3',
+            'target'     =>'nullable|array',
+            'gettingknow'=>'nullable|between:1,3',
             'cooperation'=>'nullable|string',
         ]);
         $status=Auth::user()->sch2024->update([
