@@ -17,9 +17,9 @@
                         </div>
                         <select class="form-control" name="level"  >
                             <option disabled selected>انتخاب کنید</option>
-                            <option value="1" @if($scholarship->user->get_scholarshipInterview['level']==1) selected @endif >سطح 1</option>
-                            <option value="2" @if($scholarship->user->get_scholarshipInterview['level']==2) selected @endif>سطح 2</option>
-                            <option value="3" @if($scholarship->user->get_scholarshipInterview['level']==3) selected @endif>سطح 1 و 2</option>
+                            <option value="1" @if(!is_null($scholarship->user->get_scholarshipInterview))   @if($scholarship->user->get_scholarshipInterview['level']==1) selected @endif @endif >سطح 1</option>
+                            <option value="2" @if(!is_null($scholarship->user->get_scholarshipInterview))   @if($scholarship->user->get_scholarshipInterview['level']==2) selected @endif @endif>سطح 2</option>
+                            <option value="3" @if(!is_null($scholarship->user->get_scholarshipInterview))   @if($scholarship->user->get_scholarshipInterview['level']==3) selected @endif @endif>سطح 1 و 2</option>
                         </select>
                     </div>
                     <div class="input-group mb-2 mr-sm-2">
