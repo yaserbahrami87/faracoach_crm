@@ -4,6 +4,24 @@
 @endsection
 
 @section('content')
+    <div class="col-12 col-md-3 mb-3">
+        <form method="get" >
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <button class="btn btn-outline-secondary" type="submit">نمایش گروه</button>
+                </div>
+
+                <select class="custom-select" id="group" name="q">
+                    <option selected>انتخاب کنید</option>
+
+                    @foreach($group as $item)
+                        <option value="{{$item->resource}}">{{$item->resource}}</option>
+                    @endforeach
+                </select>
+
+            </div>
+        </form>
+    </div>
     <div class="col-12">
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">

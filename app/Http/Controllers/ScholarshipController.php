@@ -34,19 +34,33 @@ class ScholarshipController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //$scholarships=scholarship::wherein('status',[0,2,3,4])
-        $scholarships=scholarship::orwhere('resource','=','scholarship')
-                ->orwhere('resource','=','knot')
-                ->orderby('financial')
+
+        if($request->has('q'))
+        {
+            $scholarships=scholarship::orderby('id','desc')
+                ->where('resource',$request->q)
                 ->get();
+        }
+        else
+        {
+            $scholarships=scholarship::orderby('id','desc')
+                ->get();
+        }
+
+
         foreach ($scholarships as $scholarship)
         {
             $scholarship->created_at=$this->changeTimestampToShamsi($scholarship->created_at);
         }
 
+        $group= scholarship::groupby('resource')
+                                            ->get();
+
         return view('admin.scholarship.users')
+                    ->with('group',$group)
                     ->with('scholarships',$scholarships);
     }
 
