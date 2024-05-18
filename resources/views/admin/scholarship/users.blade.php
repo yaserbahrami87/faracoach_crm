@@ -53,6 +53,7 @@
                                 <th>وضعیت آموزش</th>
                                 <th class="d-none">وضعیت ثبت نام</th>
                                 <th >تاریخ ثبت نام</th>
+                                <th>نمایش پروفایل</th>
                             </tr>
                         </thead>
 
@@ -61,7 +62,8 @@
                                 <tr style="@if(!is_null($item->financial)) background-color: #9fff80; @elseif($item->resource=='knot') background-color: #cceeff!important   @endif">
                                     <td class="text-center">{{$loop->iteration}}</td>
                                     <td class="text-center">
-                                        <a href="/admin/scholarship/{{$item->id}}" target="_blank">{{$item->user->fname.' '.$item->user->lname}}</a>
+{{--                                        <a href="/admin/scholarship/{{$item->id}}" target="_blank">{{$item->user->fname.' '.$item->user->lname}}</a>--}}
+                                        <a href="#" target="_blank">{{$item->user->fname.' '.$item->user->lname}}</a>
                                     </td>
                                     <td class="text-center" dir="ltr">
 
@@ -114,6 +116,9 @@
                                     </td>
                                     <td>
                                         {{substr($item->created_at,0,10) }}
+                                    </td>
+                                    <td>
+                                        <a href="/admin/user/{{$item->user->id}}" class="btn btn-outline-primary">نمایش</a>
                                     </td>
                                 </tr>
                             @endforeach
