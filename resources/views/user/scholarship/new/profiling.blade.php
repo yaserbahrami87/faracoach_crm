@@ -106,8 +106,12 @@
                                         <div class="col-md-4 px-1 ">
                                             <div class="form-group">
                                                 <label>عکس پروفایل</label>
-                                                <div class="custom-file">
-                                                    <img src="{{asset('/images/ICF_scholarship_example.jpg')}}" class="img-fluid text-center" />
+                                                <div >
+                                                    @if(is_null(Auth::user()->personal_image))
+                                                          <img src="/documents/users/default-avatar.png" class="img-fluid text-center" />
+                                                    @else
+                                                          <img src="{{'/documents/users/'.Auth::user()->personal_image}}" width="200px" />
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
