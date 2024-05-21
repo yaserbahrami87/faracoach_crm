@@ -22,7 +22,7 @@
 {{--                            <div class="card card-user">--}}
                                 <div class="" id="infoProfile">
                                     <div class="row">
-                                        <div class="col-md-4 px-1">
+                                        <div class="col-md-4  ">
                                             <div class="form-group">
                                                 <label>
                                                     نام:
@@ -31,7 +31,7 @@
                                                 <input type="text" class="form-control " placeholder="نام را وارد کنید"  value=''  name="fname" required  />
                                             </div>
                                         </div>
-                                        <div class="col-md-4 px-1">
+                                        <div class="col-md-4  ">
                                             <div class="form-group">
                                                 <label>نام خانوادگی:
                                                     <span>*</span>
@@ -39,7 +39,7 @@
                                                 <input type="text" class="form-control " placeholder="نام خانوادگی را وارد کنید" value=''  name="lname"  required />
                                             </div>
                                         </div>
-                                        <div class="col-md-4 px-1">
+                                        <div class="col-md-4  ">
                                             <div class="form-group">
                                                 <label for="exampleFormControlSelect1">جنسیت:
                                                     <span >*</span>
@@ -53,19 +53,19 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-4 px-1">
+                                        <div class="col-md-4  ">
                                             <div class="form-group">
                                                 <label>نام انگلیسی<span class=" font-weight-bold">*</span></label>
                                                 <input type="text" class="form-control  " placeholder="نام انگلیسی را وارد کنید"   value=""  name="fname_en"  autocomplete="autocomplete"  />
                                             </div>
                                         </div>
-                                        <div class="col-md-4 px-1">
+                                        <div class="col-md-4  ">
                                             <div class="form-group">
                                                 <label>نام خانوادگی انگلیسی<span class=" font-weight-bold">*</span></label>
                                                 <input type="text" class="form-control " placeholder="نام خانوادگی انگلیسی را وارد کنید" value=""  name="lname_en"   autocomplete="autocomplete"/>
                                             </div>
                                         </div>
-                                        <div class="col-md-4 px-1">
+                                        <div class="col-md-4  ">
                                             <div class="form-group">
                                                 <label>تاریخ تولد:
                                                     <span>*</span><small > نمونه:1365/01/01</small>
@@ -74,7 +74,7 @@
 
                                             </div>
                                         </div>
-                                        <div class="col-md-4 px-1">
+                                        <div class="col-md-4  ">
                                             <div class="form-group">
                                                 <label for="codemelli">کد ملی:
                                                     <span>*</span>
@@ -82,7 +82,7 @@
                                                 <input type="text" class="form-control" placeholder="کد ملی را وارد کنید" value=''  id="codemelli" name="codemelli"  required />
                                             </div>
                                         </div>
-                                        <div class="col-md-4 px-1">
+                                        <div class="col-md-4  ">
                                             <div class="form-group">
                                                 <label>شماره شناسنامه:
                                                     <span >*</span>
@@ -91,7 +91,7 @@
 
                                             </div>
                                         </div>
-                                        <div class="col-md-6 px-1">
+                                        <div class="col-md-6  ">
                                             <div class="form-group">
                                                 <label>عکس پروفایل</label>
                                                 <div class="custom-file">
@@ -101,9 +101,9 @@
                                                 <small class="text-muted">فرمت فایل:jpg , jpeg , png  -;حجم حداکثر 600 کیلوبایت</small>
                                             </div>
                                         </div>
-                                        <div class="col-md-1 px-1">
+                                        <div class="col-md-1  ">
                                         </div>
-                                        <div class="col-md-4 px-1 ">
+                                        <div class="col-md-4   ">
                                             <div class="form-group">
                                                 <label>عکس پروفایل</label>
                                                 <div >
@@ -115,7 +115,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 px-1">
+                                        <div class="col-md-6  ">
                                             <div class="form-group">
                                                 <label>رزومه:
                                                     <span >*</span>
@@ -152,7 +152,7 @@
                             </select>
                         </div>
                     </div>
-                        <div class="col-md-4 px-1">
+                        <div class="col-md-4  ">
                         <div class="form-group">
                             <label>شهر:
                                 <span >*</span>
@@ -164,7 +164,7 @@
 
                         </div>
                     </div>
-                        <div class="col-md-4 px-1">
+                        <div class="col-md-4  ">
                             <div class="form-group">
                                 <label>تلفن تماس:
                                     <span>*</span>
@@ -174,7 +174,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12 px-1">
+                    <div class="col-md-12  ">
                         <div class="form-group">
                             <label>آدرس:
                                 <span >*</span>
@@ -192,7 +192,7 @@
                                 <small class="text-muted">نمونه:faracoach@gmail.com</small>
                             </div>
                         </div>
-                    <div class="col-md-3 px-1">
+                    <div class="col-md-3  ">
                         <div class="form-group">
                             <label><i class="bi bi-instagram"></i>
                                 <span class="text-danger">*</span>
@@ -200,7 +200,7 @@
                             <input type="text" class="form-control " placeholder="صفحه اینستاگرام خود راوارد کنید"  value='' name="instagram" required  />
                         </div>
                     </div>
-                    <div class="col-md-3 px-1">
+                    <div class="col-md-3  ">
                         <div class="form-group">
                             <label><i class="bi bi-telegram"></i>
                                 <span class="text-danger">*</span>
@@ -209,7 +209,7 @@
 
                         </div>
                     </div>
-                    <div class="col-md-3 px-1">
+                    <div class="col-md-3  ">
                         <div class="form-group">
                             <label><i class="bi bi-linkedin"></i>
                             </label>
@@ -225,7 +225,7 @@
                 <fieldset>
                     <h2 class="fs-title"> اطلاعات تکمیلی</h2>
                     <div class="row">
-                        <div class="col-md-4 px-1">
+                        <div class="col-md-4  ">
                             <div class="form-group">
                                 <label>نام پدر:
                                     <span>*</span>
@@ -233,7 +233,7 @@
                                 <input type="text" class="form-control" placeholder=" نام پدر را وارد کنید"  value=''  name="father" required />
                             </div>
                         </div>
-                        <div class="col-md-4 px-1">
+                        <div class="col-md-4  ">
                             <div class="form-group">
                                 <label>تاهل:
                                     <span>*</span>
@@ -257,7 +257,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4 px-1">
+                        <div class="col-md-4  ">
                             <div class="form-group">
                                 <label>تحصیلات:
                                     <span>*</span>
@@ -296,7 +296,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-4 px-1">
+                        <div class="col-md-4  ">
                             <div class="form-group">
                                 <label>عکس شناسنامه:
                                     <span class="text-danger">*</span>
@@ -308,7 +308,7 @@
                                 <small class="text-muted">فرمت فایل:jpg , jpeg , png  -;حجم حداکثر 600 کیلوبایت</small>
                             </div>
                         </div>
-                        <div class="col-md-4 px-1">
+                        <div class="col-md-4  ">
                             <div class="form-group">
                                 <label>عکس کارت ملی:
                                     <span class="text-danger">*</span>
@@ -320,7 +320,7 @@
                                 <small class="text-muted">فرمت فایل:jpg , jpeg , png  -;حجم حداکثر 600 کیلوبایت</small>
                             </div>
                         </div>
-                        <div class="col-md-4 px-1">
+                        <div class="col-md-4  ">
                             <div class="form-group">
                                 <label>عکس مدرک تحصیلی:
                                     <span class="text-danger">*</span>
@@ -332,7 +332,7 @@
                                 <small class="text-muted">فرمت فایل:jpg , jpeg , png  -;حجم حداکثر 600 کیلوبایت</small>
                             </div>
                         </div>
-{{--                        <div class="col-md-6 px-1">--}}
+{{--                        <div class="col-md-6  ">--}}
 {{--                            <div class="form-group">--}}
 {{--                                <label>نام کاربری:--}}
 {{--                                    <span class="text-danger">*</span>--}}
@@ -349,7 +349,7 @@
                 <fieldset>
                     <h2 class="fs-title"> اطلاعات آشنایی</h2>
                     <div class="row">
-                        <div class="col-md-6 px-1">
+                        <div class="col-md-6  ">
                             <div class="form-group">
                                 <label>نحوه آشنایی:
                                     <span class="text-danger">*</span>
@@ -360,7 +360,7 @@
                                 </select>
                             </div>
                         </div>
-                            <div class="col-md-6 px-1" id="gettingknow2" >
+                            <div class="col-md-6  " id="gettingknow2" >
                                 <div class="form-group">
                                     <label>عنوان آشنایی:
                                         <span class="text-danger">*</span>
@@ -373,7 +373,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6 px-1" id="gettingknow2">
+                            <div class="col-md-6  " id="gettingknow2">
                                 <div class="form-group">
                                     <label>عنوان آشنایی</label>
                                     <select id="gettingknow" class="form-control p-0 " name="gettingknow" required>
@@ -383,7 +383,7 @@
                                 </div>
                             </div>
 
-                        <div class="col-md-6 px-1">
+                        <div class="col-md-6  ">
                             <div class="form-group">
                                 <label>معرف</label>
                                 <input type="hidden" class="form-control"    id="introduced" />
