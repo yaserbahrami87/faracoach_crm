@@ -110,7 +110,7 @@
                                                     @if(is_null(Auth::user()->personal_image))
                                                           <img src="/documents/users/default-avatar.png" width="200px" />
                                                     @else
-                                                          <img src="{{'/documents/users/thumbnail-'.Auth::user()->personal_image}}" width="200px" />
+                                                          <img src="{{'/documents/users/'.Auth::user()->personal_image}}" width="200px" />
                                                     @endif
                                                 </div>
                                             </div>
