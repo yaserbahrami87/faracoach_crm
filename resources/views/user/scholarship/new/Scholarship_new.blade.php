@@ -22,6 +22,8 @@
 {{---------------introduced_css--}}
 <link type="text/css" href="{{asset('/css/scholarship/introduced_style.css')}}" rel="stylesheet" />
 <link href="/css/kamadatepicker.min.css" rel="stylesheet" />
+{{---------------news css--}}
+<link type="text/css" href="{{asset('/css/news/news_style.css')}}" rel="stylesheet" />
 
     <style>
         ::-webkit-scrollbar {
@@ -80,10 +82,29 @@
         }
     </style>
 @endslot
+<div class="container">
 
+{{--  ------  news   --}}
 
-        <div class="container">
+        <div id="scroll-container">
+            @if ($news->count()>0)
+                <div class="scroll-text">
+                        <ul>
+                            @foreach($news as $news)
+                                 <li style="margin-bottom: 20px"> {{$news->news}} <br></li>
+                                <hr style="width: 60% ;background-color:#9c2d2e " >
+                            @endforeach
+                        </ul>
+                </div>
+                    @else
+                <div class="scroll-default">
+                        <h5> طرح فراخوان از پژوهشگران ، دانشگاهیان ، نخبگان وکلیه علاقه مندان به حوضه توسعه فردی و کسب و کار</h5>
+                </div>
+            @endif
+        </div>
+
             <!-- Modal -->
+
             <h4 class="d-block text-dark text-center" style="line-height:2 ;margin-bottom: 30px">  طرح اعطای بورسیه کوچینگ آکادمی بین المللی فراکوچ </h4>
             <div id="smartwizard" class="sw-main sw-theme-dots">
                 <ul class="nav nav-tabs step-anchor">
@@ -169,6 +190,9 @@
                     <div id="step-3" class="tab-pane step-content">
                         <div class="row">
 {{--                            @include('user.scholarship.new.training_course')--}}
+                                <div class="col-md-6 m-auto text-center" >
+                                    <h5><mark>دوره آموزشی به صورت آنلاین در تاریخ 10 خرداد ماه 1403 برگزار میشود </mark></h5>
+                                </div>
                         </div>
                     </div>
                     <div id="step-4" class="tab-pane step-content">
@@ -198,12 +222,22 @@
                     </div>
                 </div>
             </div>
-        </div>
+</div>
 
 
 
 
 @slot('footerScript')
+{{-------------- news --}}
+<script src="{{asset('js/news/bootstrap_news.min.js')}}"></script>
+<script src="{{asset('js/news/popper.min.js')}}"></script>
+<script src="{{asset('js/news/jquery-3.5.1.min.js')}}"></script>
+<script>
+    / optional
+    $('#blogCarousel').carousel({
+        interval: 5000
+    });
+</script>
 {{-------------- profiling--}}
 
 <script src="{{asset('js/scholarship/profiling/jquery-3.1.1.min.js')}}"></script>

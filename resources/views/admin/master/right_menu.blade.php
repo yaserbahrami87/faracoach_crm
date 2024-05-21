@@ -108,6 +108,12 @@
                     @endif
                 @endforeach
             </li>
+            <li class=" nav-item"><a href="#"><span class="menu-title" >اخبار </span>  </a>
+                <ul class="menu-content">
+                    <li><a href="/admin/news"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >لیست اخبار</span></a></li>
+                    <li><a href="/admin/news/create"><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >ایجاد خبر جدید</span></a></li>
+                </ul>
+            </li>
             <li class="nav-item"><a href="#"><span class="menu-title">مالی</span></a>
                 <ul class="menu-content">
                     <li><a href="/admin/checkout" ><i class="bx bx-left-arrow-alt"></i><span class="menu-item" >پرداختی ها</span></a></li>
