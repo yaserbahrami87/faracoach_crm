@@ -24,7 +24,7 @@
                             <div class="card card-user">
                                 <div class="" id="information">
                                     <div class="row">
-                                        <div class="col-md-12 px-1">
+                                        <div class="col-md-12  ">
                                             <div class="form-group row">
                                                 <label for="target" class="col-md-6 col-form-label text-md-right"> <i class="colors"> * </i> هدف شما از شرکت در دوره آموزش کوچینگ:  </label>
                                                 <div class="col-md-6 border-darken-1">
@@ -67,7 +67,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-12 px-1">
+                                        <div class="col-md-12  ">
                                             <div class="form-group row">
                                                 <label for="gettingknow" class="col-md-4 col-form-label text-md-right"><i class="colors"> * </i> میزان آشنایی شما با کوچینگ: </label>
 
@@ -84,7 +84,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-12 px-1">
+                                        <div class="col-md-12  ">
                                             <div class="form-group row">
                                                 <label for="cooperation" class="col-md-4 col-form-label text-md-right"><i class="colors"> * </i>در حوزه توسعه فردی و کسب و کار چه ظرفیت های ویژه ای جهت  همکاری    با  آکادمی بین المللی فراکوچ دارید؟</label>
 
@@ -122,7 +122,7 @@
                     <h2 class="fs-title">اطـلاعـات شخصـی</h2>
                     <div class="" id="infoProfile">
                         <div class="row">
-                            <div class="col-md-4 px-1">
+                            <div class="col-md-4  ">
                                 <div class="form-group">
                                     <label>
                                         نام:
@@ -137,7 +137,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-4 px-1">
+                            <div class="col-md-4  ">
                                 <div class="form-group">
                                     <label>نام خانوادگی:
                                         <span>*</span>
@@ -150,7 +150,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-4 px-1">
+                            <div class="col-md-4  ">
                                 <div class="form-group">
                                     <label for="exampleFormControlSelect1">جنسیت:
                                         <span >*</span>
@@ -164,19 +164,19 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 px-1">
+                            <div class="col-md-4  ">
                                 <div class="form-group">
                                     <label>نام انگلیسی<span class=" font-weight-bold">*</span></label>
                                     <input type="text" class="form-control  " placeholder="نام انگلیسی را وارد کنید"   value="{{Auth::user()->fname_en}}"  {{is_null(Auth::user()->fname_en)? "name=fname_en ": 'disabled'}}   autocomplete="autocomplete"  />
                                 </div>
                             </div>
-                            <div class="col-md-4 px-1">
+                            <div class="col-md-4  ">
                                 <div class="form-group">
                                     <label>نام خانوادگی انگلیسی<span class=" font-weight-bold">*</span></label>
                                     <input type="text" class="form-control " placeholder="نام خانوادگی انگلیسی را وارد کنید" value="{{Auth::user()->lname_en}}"  {{is_null(Auth::user()->lname_en)? "name=lname_en ": 'disabled'}}   autocomplete="autocomplete"/>
                                 </div>
                             </div>
-                            <div class="col-md-4 px-1">
+                            <div class="col-md-4  ">
                                 <div class="form-group">
                                     <label>تاریخ تولد:
                                         <span>*</span><small > نمونه:1365/01/01</small>
@@ -185,7 +185,7 @@
 
                                 </div>
                             </div>
-                            <div class="col-md-4 px-1">
+                            <div class="col-md-4  ">
                                 <div class="form-group">
                                     <label for="codemelli">کد ملی:
                                         <span>*</span>
@@ -193,7 +193,7 @@
                                     <input type="text" class="form-control" placeholder="کد ملی را وارد کنید" value='{{old('codemelli',Auth::user()->codemelli)}}'  id="codemelli" name="codemelli"   />
                                 </div>
                             </div>
-                            <div class="col-md-4 px-1">
+                            <div class="col-md-4  ">
                                 <div class="form-group">
                                     <label>شماره شناسنامه:
                                         <span >*</span>
@@ -202,7 +202,7 @@
 
                                 </div>
                             </div>
-                            <div class="col-md-6 px-1">
+                            <div class="col-md-6  ">
                                 <div class="form-group">
                                     <label>عکس پروفایل</label>
                                     <div class="custom-file">
@@ -212,12 +212,12 @@
                                     <small class="text-muted">فرمت فایل:jpg , jpeg , png  -;حجم حداکثر 600 کیلوبایت</small>
                                 </div>
                             </div>
-                            <div class="col-md-1 px-1">
+                            <div class="col-md-1  ">
                             </div>
-                            <div class="col-md-4 px-1 ">
+                            <div class="col-md-4   ">
                                 <div class="form-group">
                                     <label>عکس پروفایل</label>
-                                    <div class="custom-file">
+                                    <div  >
                                         @if(is_null(Auth::user()->personal_image))
                                             <img src="{{asset('/images/default-avatar.png')}}" class="img-fluid text-center" />
                                         @else
@@ -226,12 +226,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6 px-1">
+                            <div class="col-md-6  ">
                                 <div class="form-group">
                                     <label>رزومه:
                                         <span >*</span>
                                     </label>
-                                    <div class="custom-file">
+                                    <div >
                                         <input type="file" class="custom-file-input  " id="resume" aria-describedby="resume" name="resume" />
                                         <label class="custom-file-label" for="resume">Choose file</label>
                                     </div>
@@ -272,7 +272,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-4 px-1">
+                        <div class="col-md-4  ">
                             <div class="form-group">
                                 <label>شهر:
                                     <span >*</span>
@@ -287,7 +287,7 @@
 
                             </div>
                         </div>
-                        <div class="col-md-4 px-1">
+                        <div class="col-md-4  ">
                             <div class="form-group">
                                 <label>تلفن تماس:
                                     <span>*</span>
@@ -296,7 +296,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12 px-1">
+                    <div class="col-md-12  ">
                         <div class="form-group">
                             <label>آدرس:
                                 <span >*</span>
@@ -314,7 +314,7 @@
                                 <small class="text-muted">نمونه:faracoach@gmail.com</small>
                             </div>
                         </div>
-                        <div class="col-md-3 px-1">
+                        <div class="col-md-3  ">
                             <div class="form-group">
                                 <label><i class="bi bi-instagram"></i>
                                     <span class="text-danger">*</span>
@@ -322,7 +322,7 @@
                                 <input type="text" class="form-control " placeholder="صفحه اینستاگرام خود راوارد کنید"  value='{{old('instagram',Auth::user()->instagram)}}' name="instagram"   />
                             </div>
                         </div>
-                        <div class="col-md-3 px-1">
+                        <div class="col-md-3  ">
                             <div class="form-group">
                                 <label><i class="bi bi-telegram"></i>
                                     <span class="text-danger">*</span>
@@ -331,7 +331,7 @@
 
                             </div>
                         </div>
-                        <div class="col-md-3 px-1">
+                        <div class="col-md-3  ">
                             <div class="form-group">
                                 <label><i class="bi bi-linkedin"></i>
                                 </label>
@@ -352,7 +352,7 @@
                     {{method_field('PATCH')}}
                     <h2 class="fs-title"> اطلاعات تکمیلی</h2>
                     <div class="row">
-                        <div class="col-md-4 px-1">
+                        <div class="col-md-4  ">
                             <div class="form-group">
                                 <label>نام پدر:
                                     <span>*</span>
@@ -360,7 +360,7 @@
                                 <input type="text" class="form-control" placeholder=" نام پدر را وارد کنید"  value='{{old('father',Auth::user()->father)}}'  name="father"  />
                             </div>
                         </div>
-                        <div class="col-md-4 px-1">
+                        <div class="col-md-4  ">
                             <div class="form-group">
                                 <label>تاهل:
                                     <span>*</span>
@@ -384,7 +384,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4 px-1">
+                        <div class="col-md-4  ">
                             <div class="form-group">
                                 <label>تحصیلات:
                                     <span>*</span>
@@ -422,7 +422,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-4 px-1">
+                        <div class="col-md-4  ">
                             <div class="form-group">
                                 <label>عکس شناسنامه:
                                     <span class="text-danger">*</span>
@@ -437,7 +437,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="col-md-4 px-1">
+                        <div class="col-md-4  ">
                             <div class="form-group">
                                 <label>عکس کارت ملی:
                                     <span class="text-danger">*</span>
@@ -452,7 +452,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="col-md-4 px-1">
+                        <div class="col-md-4  ">
                             <div class="form-group">
                                 <label>عکس مدرک تحصیلی:
                                     <span class="text-danger">*</span>
@@ -480,7 +480,7 @@
                     {{method_field('PATCH')}}
                     <h2 class="fs-title"> اطلاعات آشنایی</h2>
                     <div class="row">
-                        <div class="col-md-6 px-1">
+                        <div class="col-md-6  ">
                             <div class="form-group">
                                 <label>نحوه آشنایی:
                                     <span class="text-danger">*</span>
@@ -500,7 +500,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-6 px-1" id="gettingknow2" >
+                        <div class="col-md-6  " id="gettingknow2" >
                             <div class="form-group">
                                 <label>عنوان آشنایی:
                                     <span class="text-danger">*</span>
@@ -518,7 +518,7 @@
                         </div>
 
 
-                        <div class="col-md-6 px-1">
+                        <div class="col-md-6 ">
                             <div class="form-group">
                                 <label>معرف</label>
                                 <input type="hidden" class="form-control"  @if(!is_null(Auth::user()->getIntroduced))  value="{{Auth::user()->getIntroduced->fname.' '.Auth::user()->getIntroduced->lname }}" @endif  id="introduced" />
