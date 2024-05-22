@@ -1,8 +1,9 @@
+
 /*basic reset*/
 
 div.container
 {
-    min-height: 1850px;
+    min-height: 1000px;
     box-shadow: #eeeef2 31px 8px 52px 21px;
     background-color: rgba(208, 212, 217, 0.1);
 }
@@ -170,16 +171,25 @@ div.custom-file
 }
 #first-child label
 {
-    width: 320px;
+    /*width: 320px;*/
     font-size: 13px;
 }
 #information div.form-check input[type=checkbox]
 {
-    margin-right: -9.25rem;
+    /*margin-right: -9.25rem;*/
 }
 .colors
 {
     color:#ea5455 ;
     margin-left: 5px;
     font-size: 16px;
+}
+
+@media only screen and (max-width:480px )
+{
+
+    div.container
+    {
+        min-height: 1850px;
+    }
 }
