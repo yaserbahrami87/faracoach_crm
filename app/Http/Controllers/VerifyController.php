@@ -1200,10 +1200,14 @@ class VerifyController extends BaseController
                 if(session()->has('introduce'))
                 {
                     $introduce=session('introduce');
+                    $introduce_info=User::where('id',$introduce)
+                        ->first();
+                    $introduce_info=$introduce_info->fname.' '.$introduce_info->lname;
                 }
                 else
                 {
                     $introduce=NULL;
+                    $introduce_info="ندارد";
                 }
 
 
@@ -1215,8 +1219,6 @@ class VerifyController extends BaseController
                     $scholarship=scholarship::where('user_id','=',Auth::user()->id)
                         ->where('resource','sch2024')
                         ->first();
-
-
 
                     if(is_null($scholarship))
                     {
@@ -1231,6 +1233,25 @@ class VerifyController extends BaseController
                         {
                             $msg = Auth::user()->fname . ' ' . Auth::user()->lname . "کاربر عزیز\nثبت نام اولیه بورسیه انجام شد\nپروفایل خود را کامل کنید:\n" . "my.faracoach.com/panel/sch2024/me";
                             $this->sendSms(Auth::user()->tel, $msg);
+                            $count=scholarship::where('resource','sch2024')
+                                                ->count();
+                            $message="بورسیه\n"."ردیف:$count \n"."تلفن:".Auth::user()->tel."\n"."معرف:$introduce_info";
+                            $this->sendSms('09153159020', $message );
+                            if(session()->has('introduce'))
+                            {
+                                $info=User::where('id',$introduce)
+                                            ->first();
+
+                                $count_introduced=scholarship::where('resource','sch2024')
+                                                        ->where('introduced',$introduce)
+                                                        ->count();
+                                if(!is_null($info))
+                                {
+                                    $message=$info->fname." عزیز\n"."یک عضو جدید از طریق لینک شما به خانواده فراکوچ پیوست"."مجموع:$count_introduced نفر"."\n"."B2n.ir/e17263";
+                                    $this->sendSms($info->tel, $message );
+                                }
+                            }
+
                             alert()->success("ثبت نام شما در سایت فراکوچ با موفقیت انجام شد \n")->persistent('بستن');
                             $request->session()->forget('scholarshipStatus');
                             return redirect('/panel/sch2024/me');
@@ -1247,10 +1268,14 @@ class VerifyController extends BaseController
                     if(session()->has('introduce'))
                     {
                         $introduce=session('introduce');
+                        $introduce_info=User::where('id',$introduce)
+                                        ->first();
+                        $introduce_info=$introduce_info->fname.' '.$introduce_info->lname;
                     }
                     else
                     {
                         $introduce=NULL;
+                        $introduce_info="ندارد";
                     }
 
                     $user=User::create([
@@ -1273,7 +1298,26 @@ class VerifyController extends BaseController
                     {
                         $msg = Auth::user()->fname . ' ' . Auth::user()->lname . " کاربر عزیز\nثبت نام اولیه بورسیه انجام شد\nپروفایل خود را کامل و رمز خود را تغییر دهید:\n" ."\nنام کاربری:".Auth::user()->tel."\nرمز:1234"."\n" ."my.faracoach.com/panel/sch2024/me";
                         $this->sendSms(Auth::user()->tel, $msg);
-//                              $this->sendSms('09153159020', $status->id . ' بورسیه:' . Auth::user()->fname . ' ' . Auth::user()->lname );
+                        $count=scholarship::where('resource','sch2024')
+                                            ->count();
+                        $message="بورسیه\n"."ردیف:$count \n"."تلفن:".Auth::user()->tel."\n"."معرف:$introduce_info";
+                        $this->sendSms('09153159020', $message );
+
+                        if(session()->has('introduce'))
+                        {
+                            $info=User::where('id',$introduce)
+                                ->first();
+
+                            $count_introduced=scholarship::where('resource','sch2024')
+                                ->where('introduced',$introduce)
+                                ->count();
+                            if(!is_null($info))
+                            {
+                                $message=$info->fname." عزیز\n"."یک عضو جدید از طریق لینک شما به خانواده فراکوچ پیوست"."مجموع:$count_introduced نفر"."\n"."B2n.ir/e17263";
+                                $this->sendSms($info->tel, $message );
+                            }
+                        }
+
                         alert()->success("ثبت نام شما در سایت فراکوچ با موفقیت انجام شد \n")->persistent('بستن');
                         return redirect('/panel/sch2024/me');
                     }

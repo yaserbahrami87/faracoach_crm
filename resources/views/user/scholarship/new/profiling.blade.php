@@ -25,7 +25,7 @@
                                 <div class="" id="information">
                                     <div class="row">
                                         <div class="col-md-12  ">
-                                            <div class="form-group row">
+                                            <div class="form-group ">
                                                 <label for="target" class="col-md-6 col-form-label text-md-right"> <i class="colors"> * </i> هدف شما از شرکت در دوره آموزش کوچینگ:  </label>
                                                 <div class="col-md-6 border-darken-1">
                                                     <div class="input-group " id="first-child">
@@ -217,7 +217,7 @@
                             <div class="col-md-4   ">
                                 <div class="form-group">
                                     <label>عکس پروفایل</label>
-                                    <div  >
+                                    <div class="custom-file" >
                                         @if(is_null(Auth::user()->personal_image))
                                             <img src="{{asset('/images/default-avatar.png')}}" class="img-fluid text-center" />
                                         @else
