@@ -1231,7 +1231,7 @@ class VerifyController extends BaseController
 
                         if ($status)
                         {
-                            $msg = Auth::user()->fname . ' ' . Auth::user()->lname . "کاربر عزیز\nثبت نام اولیه بورسیه انجام شد\nپروفایل خود را کامل کنید:\n" . "my.faracoach.com/panel/sch2024/me";
+                            $msg = Auth::user()->fname . ' ' . Auth::user()->lname . "کاربر عزیز\nثبت نام اولیه بورسیه انجام شد\nپروفایل خود را کامل کنید:\n" . "B2n.ir/a31527";
                             $this->sendSms(Auth::user()->tel, $msg);
                             $count=scholarship::where('resource','sch2024')
                                                 ->count();
@@ -1247,7 +1247,7 @@ class VerifyController extends BaseController
                                                         ->count();
                                 if(!is_null($info))
                                 {
-                                    $message=$info->fname." عزیز\n"."یک عضو جدید از طریق لینک شما به خانواده فراکوچ پیوست"."مجموع:$count_introduced نفر"."\n"."B2n.ir/e17263";
+                                    $message=$info->fname." عزیز\n"."یک ثبت نام جدید از طریق لینک شما"." مجموع: $count_introduced نفر"."\n"."B2n.ir/e17263";
                                     $this->sendSms($info->tel, $message );
                                 }
                             }
