@@ -24,7 +24,11 @@
                             <div class="card card-user">
                                 <div class="" id="information">
                                     <div class="row">
+                                        <div class="col-12 mb-2">
+                                            <style>.h_iframe-aparat_embed_frame{position:relative;}.h_iframe-aparat_embed_frame .ratio{display:block;width:100%;height:auto;}.h_iframe-aparat_embed_frame iframe{position:absolute;top:0;left:0;width:100%;height:100%;}</style><div class="h_iframe-aparat_embed_frame"><span style="display: block;padding-top: 57%"></span><iframe src="https://www.aparat.com/video/video/embed/videohash/oyuu5a2/vt/frame"  allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe></div>
+                                        </div>
                                         <div class="col-md-12  ">
+
                                             <div class="form-group ">
                                                 <label for="target" class="col-md-6 col-form-label text-md-right"> <i class="colors"> * </i> هدف شما از شرکت در دوره آموزش کوچینگ:  </label>
                                                 <div class="col-md-6 border-darken-1">

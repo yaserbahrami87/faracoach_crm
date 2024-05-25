@@ -28,7 +28,7 @@ div.container
 
 
     /*stacking fieldsets above each other*/
-    position: absolute;
+    /*position: absolute;*/
 }
 /*Hide all except first fieldset*/
 #msform fieldset:not(:first-of-type) {
