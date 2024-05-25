@@ -28,6 +28,8 @@ class Kernel extends ConsoleKernel
     {
 //         $schedule->command('send:sms_debt_financial')->dailyAt('15:30');
          $schedule->command('sendSms:todayBirthday')->dailyAt('12:00');
+         $schedule->command('sendSms:linkInvitationScholarship')->dailyAt('11:00');
+         $schedule->command('sendSms:completeProfile')->dailyAt('10:00');
     }
 
     /**
