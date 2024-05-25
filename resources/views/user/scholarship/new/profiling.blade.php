@@ -350,12 +350,16 @@
                 <form method="post" action="/panel/profile/update_sch2024_part3/{{Auth::user()->id}}" enctype="multipart/form-data">
                     {{csrf_field()}}
                     {{method_field('PATCH')}}
-                    <h2 class="fs-title"> اطلاعات تکمیلی</h2>
+                    <h2 class="fs-title"> اطلاعات قرارداد</h2>
                     <div class="row">
+                        <div class="col-12">
+                            <div class="alert alert-warning" role="alert">
+                                <small class="text-dark">این اطلاعات صرفاجهت عقد قراردادهای آموزشی و ارائه خدمات کوچینگ مورد نیاز است</small>
+                            </div>
+                        </div>
                         <div class="col-md-4  ">
                             <div class="form-group">
                                 <label>نام پدر:
-                                    <span>*</span>
                                 </label>
                                 <input type="text" class="form-control" placeholder=" نام پدر را وارد کنید"  value='{{old('father',Auth::user()->father)}}'  name="father"  />
                             </div>
@@ -363,7 +367,6 @@
                         <div class="col-md-4  ">
                             <div class="form-group">
                                 <label>تاهل:
-                                    <span>*</span>
                                 </label>
                                 <div class="form-group">
                                     <select class="form-control p-0 " id="exampleFormControlSelect1" name="married"  >
@@ -377,7 +380,6 @@
                         <div class="col-md-4 pl-1">
                             <div class="form-group">
                                 <label>شهر تولد:
-                                    <span>*</span>
                                 </label>
                                 <input type="text" class="form-control " placeholder="شهر تولد را وارد کنید"  value='{{old('born',Auth::user()->born)}}' name="born"  />
                             </div>
@@ -387,7 +389,6 @@
                         <div class="col-md-4  ">
                             <div class="form-group">
                                 <label>تحصیلات:
-                                    <span>*</span>
                                 </label>
                                 <select id="education" class="form-control p-0 "name="education"  >
                                     <option selected disabled>انتخاب کنید</option>
@@ -402,7 +403,6 @@
                         <div class="col-md-4 pr-1">
                             <div class="form-group">
                                 <label>رشته:
-                                    <span>*</span>
                                 </label>
                                 <div class="form-group">
                                     <input type="text" class="form-control " placeholder="رشته را وارد کنید" value='{{old('reshteh',Auth::user()->reshteh)}}'  name="reshteh"  />
@@ -412,7 +412,6 @@
                         <div class="col-md-4 pr-1">
                             <div class="form-group">
                                 <label>شغل:
-                                    <span>*</span>
                                 </label>
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="شغل را وارد کنید" value='{{old('job',Auth::user()->job)}}'  name="job"  />

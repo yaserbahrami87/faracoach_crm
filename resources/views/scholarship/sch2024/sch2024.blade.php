@@ -10,7 +10,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8 text-center">
 
-                <div class="card text-left">
+                <div class="card text-left mb-4">
 
                     <div class="card-body" style="background-color: #eeeff0 !important">
                         @if($errors->any())
@@ -79,6 +79,15 @@
                             </form>
                         @endif
                     </div>
+                </div>
+                <div class="col-md-8 m-auto">
+                    <span class="text-center m-auto" style="color: #2c4059">
+                        <i class="bi bi-exclamation-circle" style="color:#ea5455 ;font-size: 18px"></i>
+                        کد شما از سرشماره : <mark>10004002002020</mark>  برای شما ارسال میگردد. حتما گوشی خود راچک کنید که این خط بلاک نباشد .
+                        فقط چنانچه در دریافت کد مشکلی داشتید، با این شماره تماس بگیرید: <mark>09197060068</mark>
+                        تلگرام -واتساپ - تماس
+
+                    </span>
                 </div>
             </div>
         </div>
