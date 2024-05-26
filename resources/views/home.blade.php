@@ -262,6 +262,15 @@
             </aside>
         </div>
         <div class="col-md-6" id="tweets">
+            <div class="row">
+                <div class="col-12">
+                    <a href="{{asset('/sch2024/register?introduce=5480')}}" target="_blank">
+                        <img src="/images/scholarship/banner_sch2024.jpg" class="img-fluid">
+                    </a>
+
+                </div>
+            </div>
+
         @if(Auth::check())
                 <div class="card-body p-0">
                     <div class="media pb-2 pt-2">
