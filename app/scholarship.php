@@ -190,6 +190,10 @@ class scholarship extends Model
         return $this->belongsTo('App\warrany');
     }
 
+    public function user_introduced()
+    {
+        return $this->belongsTo('App\User','introduced','id');
+    }
 
 }
 
