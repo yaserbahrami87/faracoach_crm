@@ -262,6 +262,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne('App\scholarship', 'user_id', 'id');
     }
 
+    public function scholarships()
+    {
+        return $this->hasMany('App\scholarship', 'user_id', 'id');
+    }
 
     public function get_recieveCodeUsers()
     {
@@ -396,4 +400,8 @@ class User extends Authenticatable implements MustVerifyEmail
                             ->where('resource','sch2024');
     }
 
+    public function news ()
+    {
+        return $this->hasMany('App\News');
+    }
 }
