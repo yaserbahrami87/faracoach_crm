@@ -59,7 +59,7 @@
                                 <td class="text-center">{{$loop->iteration}}</td>
                                 <td class="text-center">
                                     {{--                                        <a href="/admin/scholarship/{{$item->id}}" target="_blank">{{$item->user->fname.' '.$item->user->lname}}</a>--}}
-                                    <a href="#" target="_blank">{{($item->user->fname)? $item->user->fname.' '.$item->user->lname:$item->user->tel}}</a>
+                                    <a href="/admin/user/{{$item->user->id}}" target="_blank">{{($item->user->fname)? $item->user->fname.' '.$item->user->lname:$item->user->tel}}</a>
                                 </td>
                                 <td class="text-center" dir="ltr">
 
