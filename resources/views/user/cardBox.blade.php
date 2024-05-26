@@ -50,7 +50,12 @@
 
 <div class="container-fluid  " >
     <div class="row pt-3" id="board">
+        <div class="col-12">
+            <a href="{{asset('/sch2024/register?introduce=5480')}}" target="_blank">
+                <img src="/images/scholarship/banner_sch2024.jpg" class="img-fluid">
+            </a>
 
+        </div>
         <div class="col-12 border-bottom border-1">
             <h5>
                 <i class="bi bi-pen-fill"></i>
