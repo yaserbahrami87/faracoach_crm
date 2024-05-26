@@ -79,8 +79,9 @@
                                 </td>
                                 <td class="text-center" dir="ltr">{{$item->user->tel}}</td>
                                 <td>
-                                    @if((!is_null($item->user->getIntroduced)))
-                                        {{$item->user->getIntroduced->fname.' '.$item->user->getIntroduced->lname}}
+                                    @if((!is_null($item->user_introduced)))
+
+                                        {{$item->user_introduced->fname.' '.$item->user_introduced->lname}}
                                     @endif
                                 </td>
                                 <td class="text-center">{{$item->user->sch2024_introduced->count()}}</td>
