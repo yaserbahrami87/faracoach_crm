@@ -24,7 +24,7 @@
                         @endif
 
                         @if(session('scholarshipStatus')!=true)
-                            <form method="POST" action="/scholarship/storeCodewithoutPass" target="_blank">
+                            <form method="POST" action="/sch2024/storeTelsch2024" target="_blank">
                                 {{csrf_field()}}
                                 <input type="hidden" value="0" name="tel_verified" id="tel_verified"/>
 
@@ -53,6 +53,7 @@
                                 </div>
                             </form>
                         @else
+                                <p class="text-center">لطفا کد  <b><mark>{{session('code')}}</mark></b> را به عنوان کد یکبار مصرف در سیستم وارد کنید.</p>
                             <form method="POST" action="/sch2024/checkCode_sch2024" >
                                 {{csrf_field()}}
                                 <div class="form-group row">
