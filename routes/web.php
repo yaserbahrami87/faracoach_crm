@@ -396,7 +396,8 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function ()
     Route::resource('invoice','InvoiceController');
 
 
-
+    //News
+    Route::resource('news','NewsController');
 
 
 
@@ -730,6 +731,7 @@ Route::post('/knot/checkCode_knot','VerifyController@checkCode_knot');
 
 //scholarship 2024
 Route::get('/sch2024/register','ScholarshipController@create_sch2024');
+Route::post('/sch2024/storeTelsch2024','VerifyController@storeTelsch2024');
 Route::post('/sch2024/checkCode_sch2024','VerifyController@checkCode_sch2024');
 
 
@@ -854,6 +856,7 @@ Route::prefix('club')->group(function ()
 
 });
 
+
 Route::get('/exportexcel','UserController@export_excel');
 
 Route::resource('event','EventController');
@@ -875,8 +878,12 @@ Route::get('/test','UserController@ScoreAmbassador');
 //test User
 Route::get('/test1','UserController@test1');
 
-
-
+Route::get('/telegram','HomeController@telegram');
+Route::get('/schedule',function()
+{
+    \Artisan::call('sendSms:linkInvitationScholarship');
+    \Artisan::call('sendSms:completeProfile');
+});
 //blog
 Route::get('/{username}','PostController@blogHomePage');
 Route::get('/{username}/post/{post}','PostController@show');

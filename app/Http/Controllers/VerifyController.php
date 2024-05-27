@@ -320,7 +320,7 @@ class VerifyController extends BaseController
     {
 
        $this->validate($request,[
-            'tel'   =>'required|string|iran_mobile'
+            'tel'   =>'required|string'
         ]);
 
 //        if(preg_match('/^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}$/',$request['tel']))
@@ -872,7 +872,7 @@ class VerifyController extends BaseController
     {
 
         $this->validate($request,[
-            'tel'   =>'required|string|iran_mobile'
+            'tel'   =>'required|string|'
         ]);
 
         verify::where('tel','=',$request['tel'])
@@ -1174,6 +1174,47 @@ class VerifyController extends BaseController
             return back();
         }
     }
+
+
+    //Store Tel SCH2024
+    public function storeTelsch2024(Request $request)
+    {
+
+        $this->validate($request,[
+            'tel'   =>'required|string|min:11'
+        ]);
+
+        verify::where('tel','=',$request['tel'])
+            ->delete();
+        $six_digit_random_number = mt_rand(100000, 999999);
+        $verify=$this->get_user($request['tel'],NULL,NULL,NULL,true);
+        $status = verify::create(
+            [
+                'tel' => $request['tel'],
+                'code' => $six_digit_random_number,
+                'date_fa' => $this->dateNow,
+                'time_fa' => $this->timeNow
+            ]);
+
+        if ($status)
+        {
+            $request->session()->put('scholarshipStatus', 'true');
+//            $message = "رمز یکبار مصرف شما در سیستم فراکوچ : " . $six_digit_random_number;
+//            $this->sendSms($request['tel'], $message);
+
+
+            alert()->warning('لطفا کد ' . $six_digit_random_number . " را به عنوان کد یکبار مصرف وارد کنید. ")->persistent('بستن');
+            $request->session()->put('code', $six_digit_random_number);
+            return back();
+        }
+        else
+        {
+            return back()->with('msg', 'خطا در ارسال رمز یکبار مصرف')
+                ->with('errorStatus', 'danger');
+        }
+
+    }
+
 
 
 

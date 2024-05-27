@@ -117,6 +117,7 @@
                         <table class="table table-striped">
                             <thead>
                             <tr>
+                                <th>ردیف</th>
                                 <th></th>
                                 <th>نام و نام خانوادگی</th>
                                 <th>وضعیت</th>
@@ -128,11 +129,12 @@
                             @foreach(Auth::user()->sch2024_introduced as $item)
 
                                 <tr>
+                                    <td>{{$loop->iteration}}</td>
                                     <td class="table-img"><img src="https://bootdey.com/img/Content/avatar/avatar8.png" alt="">
                                     </td>
                                     <td>
-                                        <p class="m-0 font-12">
-                                            <span class="col-green font-weight-bold">{{$item->user->fname.' '.$item->user->lname}}</span>
+                                        <p class="m-0 font-12" dir="ltr">
+                                            <span class="col-green font-weight-bold">{{is_null($item->user->fname)?$item->user->tel:$item->user->fname.' '.$item->user->lname}}</span>
                                         </p>
                                     </td>
                                     <td class="align-middle">
