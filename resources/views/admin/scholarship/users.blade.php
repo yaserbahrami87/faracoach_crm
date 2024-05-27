@@ -50,6 +50,8 @@
                             <th>تلفن</th>
                             <th>معرف</th>
                             <th>تعداد معرفی</th>
+                            <th>تاریخ ورود</th>
+                            <th>کد معرفی</th>
 
                         </tr>
                         </thead>
@@ -85,6 +87,8 @@
                                     @endif
                                 </td>
                                 <td class="text-center">{{$item->user->sch2024_introduced->count()}}</td>
+                                <td>{{$item->user->last_login_at}}</td>
+                                <td>{{$item->user->id}}</td>
                             </tr>
                         @endforeach
                         </tbody>
