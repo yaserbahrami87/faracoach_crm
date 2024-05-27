@@ -191,7 +191,9 @@
                                 </td>
                                 <td class="p-0 text-center">
                                     @if(!is_null($item->last_followupUser))
-                                        {{$item->last_followupUser->course['course']}}
+                                        @if(!is_null($item->last_followupUser->course))
+                                            {{$item->last_followupUser->course['course']}}
+                                        @endif
                                     @endif
                                 </td>
                                 <td>
@@ -199,7 +201,9 @@
                                 </td>
                                 <td class="p-0 text-center">
                                     @if(!is_null($item->last_followupUser))
-                                        {{$item->last_followupUser['date_fa']}}
+                                        @if(!is_null($item->last_followupUser))
+                                            {{$item->last_followupUser['date_fa']}}
+                                        @endif
                                     @endif
                                 </td>
                                 <td class="p-0">
