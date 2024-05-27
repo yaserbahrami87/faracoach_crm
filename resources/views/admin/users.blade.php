@@ -205,7 +205,9 @@
                                 <td class="p-0">
                                     <a href="/admin/user/{{$item->id}}" class="text-dark d-block">
                                         @if(!is_null($item->last_followupUser))
-                                            {{$item->last_followupUser->course['course']}}
+                                            @if(!is_null($item->last_followupUser->course))
+                                                {{$item->last_followupUser->course['course']}}
+                                            @endif
                                         @endif
                                     </a>
                                 </td>
