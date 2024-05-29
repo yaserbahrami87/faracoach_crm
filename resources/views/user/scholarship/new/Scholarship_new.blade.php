@@ -106,6 +106,9 @@
             <!-- Modal -->
 
             <h4 class="d-block text-dark text-center" style="line-height:2 ;margin-bottom: 30px">  طرح اعطای بورسیه کوچینگ آکادمی بین المللی فراکوچ </h4>
+            <div class="alert alert-warning text-center">
+                برای سهولت استفاده از سایت و تکمیل فرم ها لطفا از کامپیوتر یا لپتاپ استفاده کنید .
+            </div>
             <div id="smartwizard" class="sw-main sw-theme-dots">
                 <ul class="nav nav-tabs step-anchor">
 {{--                    <li class="nav-item active">--}}
