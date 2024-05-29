@@ -1,10 +1,15 @@
 @extends('master.index')
 @section('row1')
     <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8 m-auto" >
+                <img src="{{asset('/images/scholarship/banner.jpg')}}" class="img-fluid">
+            </div>
+
+        </div>
         <div class="row justify-content-center">
             <div class="col-md-8 text-center">
-                <h6 class="d-block text-dark" style="line-height: 2">فرم ورود به دوره آمــوزش رایــگان کوچیــنگ</h6>
-                <h6 class="d-block text-dark" style="line-height: 3">(طرح اعطای بورسیه کوچینگ آکادمی بین المللی فراکوچ)</h6>
+{{--                <h4 class="d-block text-dark bold" style="line-height: 3">   ثبت نام در طرح بورسیه کوچینگ  2024</h4>--}}
                 <!-- <h6 class="text-dark mb-3">برای ورود به پورتال شماره تماس خود را وارد کنید</h6> -->
                 <div class="card text-left">
                     <!--
@@ -30,12 +35,12 @@
                         -->
 
                         @if(session('scholarshipStatus')!=true)
-                            <form method="POST" action="/scholarship/storeCodewithoutPass" target="_blank">
+                            <form method="POST" action="/scholarship/storeCodewithoutPass" target="_blank" class="mt-2">
                                 {{csrf_field()}}
                                 <input type="hidden" value="0" name="tel_verified" id="tel_verified"/>
 
                                 <div class="form-group row">
-                                    <label for="tel" class="col-md-4 col-form-label text-md-right">تلفن همراه: <span class="text-danger">*</span></label>
+                                    <label for="tel" class="col-md-4 col-form-label text-md-right">لطفا تلفن همراه خودرا وارد کنید: <span class="text-danger">*</span></label>
 
                                     <div class="col-md-6">
                                         <div class="input-group">
@@ -51,9 +56,9 @@
                                 </div>
 
                                 <div class="form-group row mb-0">
-                                    <div class="col-md-6 offset-md-4 text-center">
+                                    <div class="col-md-6 offset-md-3 text-center">
                                         <button type="submit" class="btn btn-primary">
-                                            {{ __('شروع دوره آموزشی') }}
+                                            {{ __('شروع ثبت نام') }}
                                         </button>
                                     </div>
                                 </div>

@@ -199,7 +199,7 @@
 @endsection
 @section('row2')
     <div class="row mt-5">
-        <div class="col-md-3 ">
+        <div class="col-md-3 d-none   d-sm-block">
             <!--
             <article class="card mb-3" >
                 <div class="card-header">
@@ -264,8 +264,12 @@
         <div class="col-md-6" id="tweets">
             <div class="row">
                 <div class="col-12">
-                    <a href="{{asset('/sch2024/register?introduce=5480')}}" target="_blank">
-                        <img src="/images/scholarship/banner_sch2024.jpg" class="img-fluid">
+                    <a href="{{asset('/sch2024/register?introduce=5480')}}" target="_blank"  >
+                        <img src="/images/scholarship/register.jpg" class="img-fluid mb-3">
+                    </a>
+
+                    <a href="/panel/sch2024/me" target="_blank" >
+                        <img src="/images/scholarship/enter.jpg" class="img-fluid">
                     </a>
 
                 </div>
