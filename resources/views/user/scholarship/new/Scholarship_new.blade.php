@@ -200,7 +200,7 @@
                     </div>
                     <div id="step-4" class="tab-pane step-content">
                         <div class="row">
-
+                            @include('user.scholarship.new.training_exam')
                         </div>
                     </div>
                     <div id="step-5" class="tab-pane step-content">

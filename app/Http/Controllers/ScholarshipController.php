@@ -12,6 +12,7 @@ use App\document;
 use App\faktor;
 use App\followup;
 use App\message;
+use App\news;
 use App\Notifications\sendMessageNotification;
 use App\scholarship;
 use App\scholarship_payment;
@@ -57,7 +58,7 @@ class ScholarshipController extends BaseController
         }
 
         $group= scholarship::groupby('resource')
-                                            ->get();
+                            ->get();
 
         return view('admin.scholarship.users')
                     ->with('group',$group)
@@ -1464,6 +1465,7 @@ class ScholarshipController extends BaseController
 
         if(!is_null(Auth::user()->sch2024))
         {
+            $scholarship=scholarship::where('resource','=','sch2024')->get();
             $states=state::get();
             if(!is_null(Auth::user()->city))
             {
@@ -1487,11 +1489,16 @@ class ScholarshipController extends BaseController
             $condition=['parent_id','=','0'];
             $gettingKnow_parent_list=$this->get_categoryGettingknow(NULL,NULL,1,NULL,'get',$condition);
 
+            $news=news::where('status',1)
+                        ->orderby('id','desc')
+                        ->get();
 
             return view('user.scholarship.new.Scholarship_new')
                         ->with('cities',$cities)
                         ->with('gettingKnow_child_list',$gettingKnow_child_list)
                         ->with('gettingKnow_parent_list',$gettingKnow_parent_list)
+                        ->with('news',$news)
+                        ->with('scholarship',$scholarship)
                         ->with('states',$states);
         }
         else
@@ -1535,7 +1542,4 @@ class ScholarshipController extends BaseController
 
         return back();
     }
-
-
-
 }

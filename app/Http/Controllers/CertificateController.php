@@ -452,7 +452,49 @@ class CertificateController extends Controller
     }
 
 
+    public function get_certificate_CCE_2hours()
+    {
 
+        if(Auth::user()->sch2024->confirm_exam==1  )
+        {
+
+            if (is_null(Auth::user()->fname_en) || is_null(Auth::user()->lname_en)) {
+                alert()->error('نام و نام خانوادگی خود را به انگلیسی در پروفایل وارد کنید')->persistent('بستن');
+                return redirect('/panel/profile');
+            }
+
+
+            ini_set('max_execution_time', 0);
+
+
+
+
+            $pdf=Pdf::loadView('user.blank-certificates.CCE_2Hours', [],[],[
+                'format'    =>[900,655],
+
+            ]);
+
+
+
+            $fileName=time().'_.pdf';
+
+            $pdf->allow_charset_conversion=false;  // Set by default to TRUE
+
+
+            $pdf->charset_in='UTF-8';
+
+            $pdf->save($fileName);
+
+            return response()->download(public_path($fileName))
+                ->deleteFileAfterSend(true);
+        }
+        else
+        {
+            alert()->error('برای شما مدرکی صادر نشده است')->persistent('بستن');
+            return back();
+        }
+
+    }
 
 
 }

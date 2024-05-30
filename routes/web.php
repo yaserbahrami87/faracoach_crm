@@ -165,6 +165,9 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function ()
     Route::Patch('/profile/update_sch2024_part4/{User}','UserController@update_sch2024_part4');
     Route::Patch('/sch2024/answer_basicQuestion','ScholarshipController@answer_basicQuestion');
 
+    //scholarship Exam sch 2024
+    Route::get('/sch2024/exam/create','ScholarshipExamController@ch_2024_create');
+    Route::post('/sch2024/exam','ScholarshipExamController@sch_2024_store');
 
     //Certificates
 
@@ -174,7 +177,7 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function ()
     Route::get('/certificates','CertificateController@certificates_all');
 //    Route::post('/certificates/acsth/{student}','CertificateController@get_certificate_acsth');
 //    Route::post('/certificates/fcc/{student}','CertificateController@get_fcc');
-//    Route::post('/certificates/fc1/{student}','CertificateController@get_fc1byAdmin');
+    Route::post('/certificates/get_certificate_CCE_2hours','CertificateController@get_certificate_CCE_2hours');
 //    Route::get('/certificates/attendance/{user}','CertificateController@attendance_certificate');
 
 
