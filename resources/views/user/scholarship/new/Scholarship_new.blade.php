@@ -205,7 +205,7 @@
                     </div>
                     <div id="step-5" class="tab-pane step-content">
                         <div class="row">
-
+                            @include('user.scholarship.new.fandamental')
                         </div>
                     </div>
                     <div id="step-6" class="tab-pane step-content">
