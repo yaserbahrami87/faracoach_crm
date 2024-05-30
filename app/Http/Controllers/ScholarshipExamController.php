@@ -106,6 +106,7 @@ class ScholarshipExamController extends BaseController
         if($sum>50)
         {
             $scholarship=scholarship::where('user_id','=',Auth::user()->id)
+                ->where('resource','sch2024')
                 ->first();
             $scholarship->confirm_exam=1;
             $scholarship->save();
