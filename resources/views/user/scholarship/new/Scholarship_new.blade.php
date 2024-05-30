@@ -192,10 +192,10 @@
                     </div>
                     <div id="step-3" class="tab-pane step-content">
                         <div class="row">
-{{--                            @include('user.scholarship.new.training_course')--}}
-                                <div class="col-md-6 m-auto text-center" >
-                                    <h5><mark>دوره آموزشی به صورت آنلاین در تاریخ 10 خرداد ماه 1403 برگزار میشود </mark></h5>
-                                </div>
+                            @include('user.scholarship.new.training_course')
+{{--                                <div class="col-md-6 m-auto text-center" >--}}
+{{--                                    <h5><mark>دوره آموزشی به صورت آنلاین در تاریخ 10 خرداد ماه 1403 برگزار میشود </mark></h5>--}}
+{{--                                </div>--}}
                         </div>
                     </div>
                     <div id="step-4" class="tab-pane step-content">
