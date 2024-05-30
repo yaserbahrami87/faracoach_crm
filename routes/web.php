@@ -168,6 +168,7 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function ()
     //scholarship Exam sch 2024
     Route::get('/sch2024/exam/create','ScholarshipExamController@ch_2024_create');
     Route::post('/sch2024/exam','ScholarshipExamController@sch_2024_store');
+    Route::post('/sch2024/store_webinarCode_sch2024','RecievecodeusersController@store_webinarCode_sch2024');
 
     //Certificates
 

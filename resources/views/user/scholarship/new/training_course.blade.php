@@ -44,30 +44,31 @@
                    <div>
                         <p class="text-center mt-3">کد حضور در دوره آموزشی</p>
                         <div id="result_checkCodeWebinar"></div>
-                        {{--       //     @if($scholarship->confirm_webinar==1)--}}
-                        <div class="alert alert-success">کد شرکت در دوره آموزشی با موفقیت ثبت شده است</div>
-                        {{--            @elseif($scholarship->user->get_recieveCodeUsers->count()>=3)--}}
-                        <div class="alert alert-danger">تعداد مجاز ورود دفعات کد دوره آموزشی  3 بار می باشد</div>
-                        {{--            @else--}}
-                        <form method="post" class="text-center"  id="frm_checkCodeWebinar">
-                            {{csrf_field()}}
-                            <div class="row">
-                                <div class="col-4 col-md-4">
-                                    <label for="code3">کد اول</label>
-                                    <input type="number" class="form-control code text-center" id="code1"   maxlength="2" name="code1"/>
+
+                        @if(Auth::user()->sch2024->confirm_webinar==1)
+                                <div class="alert alert-success">کد شرکت در دوره آموزشی با موفقیت ثبت شده است</div>
+                        @elseif(Auth::user()->get_recieveCodeUsers->where('type','sch2024')->count()>=3)
+                                <div class="alert alert-danger">تعداد مجاز ورود دفعات کد دوره آموزشی  3 بار می باشد</div>
+                        @else
+                            <form method="post" class="text-center"  id="frm_checkCodeWebinar">
+                                {{csrf_field()}}
+                                <div class="row">
+                                    <div class="col-12 col-md-4">
+                                        <label for="code3">کد اول</label>
+                                        <input type="number" class="form-control code text-center" id="code1" max="99"   maxlength="2" name="code1"/>
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                        <label for="code2">کد دوم</label>
+                                        <input type="number" class="form-control code text-center" id="code2"   maxlength="2" name="code2"/>
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                        <label for="code1">کد سوم</label>
+                                        <input type="number" class="form-control code text-center" id="code3"  maxlength="2" name="code3"/>
+                                    </div>
+                                    <button type="button" class="btn btn-primary mb-2 d-block btn-block mt-3 mb-1" onclick="checkCodeWebinar()">ورود کد کلاسی و کسب امتیاز</button>
                                 </div>
-                                <div class="col-4 col-md-4">
-                                    <label for="code2">کد دوم</label>
-                                    <input type="number" class="form-control code text-center" id="code2"   maxlength="2" name="code2"/>
-                                </div>
-                                <div class="col-4 col-md-4">
-                                    <label for="code1">کد سوم</label>
-                                    <input type="number" class="form-control code text-center" id="code3"  maxlength="2" name="code3"/>
-                                </div>
-                                <button type="button" class="btn btn-primary mb-2 d-block btn-block mt-3 mb-1" onclick="checkCodeWebinar()">ورود کد کلاسی و کسب امتیاز</button>
-                            </div>
-                        </form>
-                        {{--            @endif--}}
+                            </form>
+                        @endif
                 </div>
             </div>
         </div>

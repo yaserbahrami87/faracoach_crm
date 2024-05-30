@@ -371,6 +371,51 @@
             $("#feedback_introduced").html(data);
         }
     });
+
+
+
+
+    function checkCodeWebinar()
+    {
+        $('#result_checkCodeWebinar').html('<div class="spinner-border text-primary" role="status"><span class="sr-only">Loading...</span></div>');
+        var data=$('#frm_checkCodeWebinar').serialize();
+        data=
+            {
+                "_token": "{{ csrf_token() }}",
+                'code1':$('#code1').val(),
+                'code2':$('#code2').val(),
+                'code3':$('#code3').val(),
+            };
+        $.ajax(
+            {
+                data:data,
+                url:'/panel/sch2024/store_webinarCode_sch2024',
+                type:'POST',
+                success: function (data) {
+                    $('#result_checkCodeWebinar').html(data);
+
+                    // $('#result_checkCodeWebinar').html("<div class='alert alert-success'>کد صحیح وارد شد</div>");
+                },
+                error : function(data)
+                {
+                    $('#result_checkCodeWebinar').text(data.responseJSON.errors);
+                    errorsHtml='<div class="alert alert-danger text-left"><ul>';
+                    $.each( data.responseJSON.errors, function( key, value ) {
+                        errorsHtml += '<li>'+ value[0] + '</li>'; //showing only the first error.
+                    });
+                    errorsHtml += '</ul></div>';
+                    $( '#result_checkCodeWebinar' ).html( errorsHtml );
+                }
+            }
+        );
+    };
+</script>
+
+<script src="{{asset('/js/jquery.autotab.min.js')}}"></script>
+<script>
+    $(function () {
+        $('.code').autotab();
+    });
 </script>
 
 
