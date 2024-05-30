@@ -264,6 +264,9 @@
         <div class="col-md-6" id="tweets">
             <div class="row">
                 <div class="col-12">
+                    <a href="https://www.skyroom.online/ch/faracoach/sc2024"  target="_blank">
+                        <img src="/images/scholarship/banner-webinar.jpg" class="img-fluid mb-3">
+                    </a>
                     <a href="{{asset('/sch2024/register?introduce=5480')}}" target="_blank"  >
                         <img src="/images/scholarship/register.jpg" class="img-fluid mb-3">
                     </a>
@@ -272,11 +275,7 @@
                         <img src="/images/scholarship/enter.jpg" class="img-fluid mb-3">
                     </a>
 
-                    <div class="alert alert-warning text-center">
-                        <a href="https://www.skyroom.online/ch/faracoach/sc2024" class=" text-dark" target="_blank">
-                            لینک ورود به وبینار بورسیه 1403
-                        </a>
-                    </div>
+
 
                 </div>
             </div>
