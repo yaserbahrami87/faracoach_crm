@@ -103,7 +103,7 @@ class ScholarshipExamController extends BaseController
             'resource'  =>'sch2024',
         ]);
 
-        if($sum>60)
+        if($sum>50)
         {
             $scholarship=scholarship::where('user_id','=',Auth::user()->id)
                 ->first();
