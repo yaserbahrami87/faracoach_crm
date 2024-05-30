@@ -269,8 +269,14 @@
                     </a>
 
                     <a href="/panel/sch2024/me" target="_blank" >
-                        <img src="/images/scholarship/enter.jpg" class="img-fluid">
+                        <img src="/images/scholarship/enter.jpg" class="img-fluid mb-3">
                     </a>
+
+                    <div class="alert alert-warning text-center">
+                        <a href="https://www.skyroom.online/ch/faracoach/sc2024" class=" text-dark" target="_blank">
+                            لینک ورود به وبینار بورسیه 1403
+                        </a>
+                    </div>
 
                 </div>
             </div>

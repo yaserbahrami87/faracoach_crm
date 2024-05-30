@@ -46,15 +46,22 @@
         </div>
     </div>
 @endif
-
-
 <div class="container-fluid  " >
     <div class="row pt-3" id="board">
         <div class="col-12">
-            <a href="{{asset('/sch2024/register?introduce=5480')}}" target="_blank">
-                <img src="/images/scholarship/banner_sch2024.jpg" class="img-fluid">
+            <a href="{{asset('/sch2024/register?introduce=5480')}}" target="_blank"  >
+                <img src="/images/scholarship/register.jpg" class="img-fluid mb-3">
             </a>
 
+            <a href="/panel/sch2024/me" target="_blank" >
+                <img src="/images/scholarship/enter.jpg" class="img-fluid">
+            </a>
+
+            <div class="alert alert-warning text-center">
+                <a href="https://www.skyroom.online/ch/faracoach/sc2024" class=" text-dark" target="_blank">
+                    لینک ورود به وبینار بورسیه 1403
+                </a>
+            </div>
         </div>
         <div class="col-12 border-bottom border-1">
             <h5>
@@ -101,6 +108,7 @@
                 </a>
             </div>
         @endif
+        <!--
         <div class="col-lg-3 col-md-6 col-sm-6 text-center mt-1 items">
             <a href="/panel/integrity/files"  class="btn btn-success">
                 <i class="bi bi-camera-reels-fill" ></i>
@@ -128,17 +136,16 @@
             </a>
         </div>
 
-
+        -->
 
         <div class="col-12 mt-2 border-bottom border-1">
             <h5>آخرین دوره های ثبت نام شده</h5>
         </div>
+
         <div class="col-12">
             <ul type="none">
 
             </ul>
-
-
             <div class="list-group">
                 @if(Auth::user()->students->count()>0)
 
@@ -150,11 +157,7 @@
                         تا کنون دوره ای ثبت نام نکرده اید
                     </div>
                 @endif
-
             </div>
-
         </div>
-
-
     </div>
 </div>

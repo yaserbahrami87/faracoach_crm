@@ -40,6 +40,11 @@
                 </div>
                 <div class="ibox-content" style="margin-top: 10px">
 {{--                    <style>.h_iframe-aparat_embed_frame{position:relative;}.h_iframe-aparat_embed_frame .ratio{display:block;width:100%;height:auto;}.h_iframe-aparat_embed_frame iframe{position:absolute;top:0;left:0;width:100%;height:100%;}</style><div class="h_iframe-aparat_embed_frame"><span style="display: block;padding-top: 57%"></span><iframe src="https://www.aparat.com/video/video/embed/videohash/yCEac/vt/frame" allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe></div>--}}
+                    <div class="alert alert-warning text-center">
+                        <a href="https://www.skyroom.online/ch/faracoach/sc2024" class=" text-dark" target="_blank">
+                            لینک ورود به وبینار بورسیه 1403
+                        </a>
+                    </div>
 
                    <div>
                         <p class="text-center mt-3">کد حضور در دوره آموزشی</p>

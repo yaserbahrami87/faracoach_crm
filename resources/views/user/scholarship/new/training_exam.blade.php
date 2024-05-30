@@ -756,18 +756,9 @@
                             </section>
 
                             <section class="page">
-                                <!-- <a href="#">Terms of Service</a><br/>
-                                <input type="checkbox" id="ts" name="ts" value="1" required />
-                                <label for="ts"> I agree</label><br />
-                                -->
-                                <button type="button" class="page-prev btn btn-danger col-3">قبلی</button>
-                                <button type="submit" class="page-next btn btn-success col-3" id="sendForm">تکمیل شد</button>
+                                <button type="button" class="page-prev btn btn-danger col-5">سوال قبلی</button>
+                                <button type="submit" class="page-next btn btn-success col-5" id="sendForm">اتمام آزمون</button>
                             </section>
-                            <!--
-                            <section class="page" style="margin:auto;text-align:center">
-                                فرم شما تکمیل شد.
-                            </section>
-                            -->
                         </form>
                     </div>
                 </div>
