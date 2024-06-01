@@ -110,7 +110,7 @@
             <div class="card">
                 <div class="card-header">
                     <i class="bi bi-people-fill"></i>
-                    <h5>اسامی دعوت شدگان توسط شما</h5>
+                    <h5>لیست افراد دعوت شده توسط شما</h5>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive" id="proTeamScroll" tabindex="2" style="height: 400px; overflow: hidden; outline: none;">
