@@ -1,4 +1,4 @@
-
+<link href="/css/scholarship/videogallery.css" rel="stylesheet"/>
 <div class="container" style="text-align: right" id="training_main">
     <div class="row">
         <h4 class="m-auto p-3"> دوره رایگان آموزش مقدماتی کوچینگ با ارائه مدرک بین المللی معتبر CCE</h4>
@@ -39,12 +39,110 @@
                     <h5 class="float-right">ویدئو آموزشی</h5>
                 </div>
                 <div class="ibox-content" style="margin-top: 10px">
-{{--                    <style>.h_iframe-aparat_embed_frame{position:relative;}.h_iframe-aparat_embed_frame .ratio{display:block;width:100%;height:auto;}.h_iframe-aparat_embed_frame iframe{position:absolute;top:0;left:0;width:100%;height:100%;}</style><div class="h_iframe-aparat_embed_frame"><span style="display: block;padding-top: 57%"></span><iframe src="https://www.aparat.com/video/video/embed/videohash/yCEac/vt/frame" allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe></div>--}}
-                    <a href="https://www.skyroom.online/ch/faracoach/sc2024"   target="_blank">
-                        <img src="/images/scholarship/banner-webinar.jpg" class="img-fluid mb-3">
-                    </a>
+                    {{--                    <style>.h_iframe-aparat_embed_frame{position:relative;}.h_iframe-aparat_embed_frame .ratio{display:block;width:100%;height:auto;}.h_iframe-aparat_embed_frame iframe{position:absolute;top:0;left:0;width:100%;height:100%;}</style><div class="h_iframe-aparat_embed_frame"><span style="display: block;padding-top: 57%"></span><iframe src="https://www.aparat.com/video/video/embed/videohash/yCEac/vt/frame" allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe></div>--}}<div class="container">
+                        <div class="portfolioContainer">
+                            <div class="row">
+                                <div class="col-md-6 col-12 webdesign illustrator">
+                                    <div class="gal-detail thumb">
+                                        <video controls>
+                                            <source src="https://dll.faracoach.com/dl/webinar%20sch2024/part%201.mp4" />
+                                        </video>
+                                        <h6 class="text-center">فیلم اول</h6>
+                                        <div class="ga-border"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12 webdesign illustrator">
+                                    <div class="gal-detail thumb">
+                                        <video controls>
+                                            <source src="https://dll.faracoach.com/dl/webinar%20sch2024/part%202.mp4" />
+                                        </video>
+                                        <h6 class="text-center">فیلم دوم</h6>
+                                        <div class="ga-border"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12 webdesign illustrator">
+                                    <div class="gal-detail thumb">
+                                        <video controls>
+                                            <source src="http://dll.faracoach.com/dl/webinar%20sch2024/part%203.mp4" />
+                                        </video>
+                                        <h6 class="text-center">فیلم سوم</h6>
+                                        <div class="ga-border"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12 webdesign illustrator">
+                                    <div class="gal-detail thumb">
+                                        <video controls>
+                                            <source src="http://dll.faracoach.com/dl/webinar%20sch2024/part%204.mp4" />
+                                        </video>
+                                        <h6 class="text-center">فیلم چهارم</h6>
+                                        <div class="ga-border"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12 webdesign illustrator">
+                                    <div class="gal-detail thumb">
+                                        <video controls>
+                                            <source src="http://dll.faracoach.com/dl/webinar%20sch2024/part%205.mp4" />
+                                        </video>
+                                        <h6 class="text-center">فیلم پنجم</h6>
+                                        <div class="ga-border"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12 webdesign illustrator">
+                                    <div class="gal-detail thumb">
+                                        <video controls>
+                                            <source src="https://dll.faracoach.com/dl/webinar%20sch2024/part%206.mp4" />
+                                        </video>
+                                        <h6 class="text-center">فیلم ششم</h6>
+                                        <div class="ga-border"></div>
+                                    </div>
+                                </div><div class="col-md-6 col-12 webdesign illustrator">
+                                    <div class="gal-detail thumb">
+                                        <video controls>
+                                            <source src="https://dll.faracoach.com/dl/webinar%20sch2024/part%207.mp4" />
+                                        </video>
+                                        <h6 class="text-center">فیلم هفتم</h6>
+                                        <div class="ga-border"></div>
+                                    </div>
+                                </div><div class="col-md-6 col-12 webdesign illustrator">
+                                    <div class="gal-detail thumb">
+                                        <video controls>
+                                            <source src="https://dll.faracoach.com/dl/webinar%20sch2024/part%208.mp4" />
+                                        </video>
+                                        <h6 class="text-center">فیلم هشتم</h6>
+                                        <div class="ga-border"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12 webdesign illustrator">
+                                    <div class="gal-detail thumb">
+                                        <video controls>
+                                            <source src="https://dll.faracoach.com/dl/webinar%20sch2024/part%209.mp4" />
+                                        </video>
+                                        <h6 class="text-center">فیلم نهم</h6>
+                                        <div class="ga-border"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12 webdesign illustrator">
+                                    <div class="gal-detail thumb">
+                                        <video controls>
+                                            <source src="http://dll.faracoach.com/dl/webinar%20sch2024/part%2010.mp4" />
+                                        </video>
+                                        <h6 class="text-center">فیلم دهم</h6>
+                                        <div class="ga-border"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-12 webdesign illustrator">
+                                    <div class="gal-detail thumb">
+                                        <video controls>
+                                            <source src="http://dll.faracoach.com/dl/webinar%20sch2024/part%2011.mp4" />
+                                        </video>
+                                        <h6 class="text-center">فیلم یازدهم</h6>
+                                        <div class="ga-border"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                   <div>
+                        <div>
                         <p class="text-center mt-3">کد حضور در دوره آموزشی</p>
                         <div id="result_checkCodeWebinar"></div>
 
