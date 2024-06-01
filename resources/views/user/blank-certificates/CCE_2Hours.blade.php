@@ -44,11 +44,11 @@
 </head>
 <body class='cls_pdf container-fluid' style="background-image:url('{{public_path('images/blank-certificates/CCE_2.jpg')}}');background-size: 100% 100%;position: relative"     >
     @if(strlen(Auth::user()->fname_en.' '.Auth::user()->lname_en)>20 && strlen(Auth::user()->fname_en.' '.Auth::user()->lname_en)<26)
-        <h1 class='tag_h1' style='font-size: 250px'>{{Auth::user()->fname_en.' '.Auth::user()->lname_en}}</h1>
+        <h1 class='tag_h1' style='left:700px;font-size: 150px'>{{Auth::user()->fname_en.' '.Auth::user()->lname_en}}</h1>
     @elseif(strlen(Auth::user()->fname_en.' '.Auth::user()->lname_en)>=26)
         <h1 class='tag_h1' style='font-size: 100px'>{{Auth::user()->fname_en.' '.Auth::user()->lname_en}}</h1>
     @else
-        <h1 class='tag_h1'>{{Auth::user()->fname_en.' '.Auth::user()->lname_en}}</h1>
+        <h1 class='tag_h1' style="left:900px;">{{Auth::user()->fname_en.' '.Auth::user()->lname_en}}</h1>
     @endif
 </body>
 </html>
