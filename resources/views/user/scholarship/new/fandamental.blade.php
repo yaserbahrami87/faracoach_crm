@@ -25,6 +25,7 @@
     <div class="col-12 col-md-12 mt-4">
         <a href="https://my.faracoach.com/product/fundamental"><img src="{{asset('/images/scholarship/fandamental.jpg')}}" class="img-fluid"></a>
     </div>
+    <div class="col-12 col-md-9 mx-auto alert alert-warning text-center">شرکت در دوره فاندامنتال و قبولی در آزمون پایان دوره آن ، 050 امتیاز مستقیم برای بورسیه خواهد شد.</div>
     <div class="col-12 col-md-12 mt-4 text-right p-5">
         <h5> دانشپذیر عزیز سلام <br> شما تا این مرحله در دوره مقدماتی آموزش کوچینگ شرکت و آزمون آن را با موفقیت پشت سر گذاشته اید . اکنون شما مجاز به شرکت در دوره 20 ساعته فاندامنتال آموزش کوچینگ هستید . <br>
         لطفا جهت ثبت نام و مشاهده توضیحات بیشتر به صفحه ثبت نام این دوره مراجعه نماید. </h5>
