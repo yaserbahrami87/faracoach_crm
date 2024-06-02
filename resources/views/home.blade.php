@@ -264,9 +264,6 @@
         <div class="col-md-6" id="tweets">
             <div class="row">
                 <div class="col-12">
-                    <a href="https://www.skyroom.online/ch/faracoach/sc2024"  target="_blank">
-                        <img src="/images/scholarship/banner-webinar.jpg" class="img-fluid mb-3">
-                    </a>
                     <a href="{{asset('/sch2024/register?introduce=5480')}}" target="_blank"  >
                         <img src="/images/scholarship/register.jpg" class="img-fluid mb-3">
                     </a>
