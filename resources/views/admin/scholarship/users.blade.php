@@ -46,7 +46,7 @@
                             <th>ردیف</th>
                             <th>نام و نام خانوادگی</th>
                             <th> نوع کاربری</th>
-                            <th>وضعیت درخواست</th>
+                            <th>پروفایل</th>
                             <th>آموزش</th>
                             <th>آزمون</th>
                             <th>فاندامنتال</th>
@@ -80,7 +80,9 @@
 
                                 </td>
                                 <td class="text-center" dir="ltr" >
-
+                                    @if(!is_null($item->user->fname)&&!is_null($item->user->lname)&& (!is_null($item->user->datebirth))&&!is_null($item->user->father) && (!is_null($item->user->codemelli)) && (!is_null($item->user->sex)) && (!is_null($item->user->tel)) && !is_null($item->user->shenasname) && !is_null($item->user->born) && !is_null($item->user->education) && !is_null($item->user->reshteh) && !is_null($item->user->job) && !is_null($item->user->state) && !is_null($item->user->city) && !is_null($item->user->address) && !is_null($item->user->personal_image) && !is_null($item->user->shenasnameh_image) && !is_null($item->user->cartmelli_image) && !is_null($item->user->education_image) && !is_null($item->user->resume) && !is_null($item->user->married)  && !is_null($item->user->telegram) && !is_null($item->user->instagram)   && !is_null($item->user->fname_en) && !is_null($item->user->lname_en) )
+                                        پروفایل تکمیل
+                                    @endif
                                 </td>
                                 <td>
                                     @if($item->confirm_webinar==1)
