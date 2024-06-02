@@ -47,6 +47,9 @@
                             <th>نام و نام خانوادگی</th>
                             <th> نوع کاربری</th>
                             <th>وضعیت درخواست</th>
+                            <th>آموزش</th>
+                            <th>آزمون</th>
+                            <th>فاندامنتال</th>
                             <th>تلفن</th>
                             <th>معرف</th>
                             <th>تعداد معرفی</th>
@@ -77,6 +80,22 @@
 
                                 </td>
                                 <td class="text-center" dir="ltr" >
+
+                                </td>
+                                <td>
+                                    @if($item->confirm_webinar==1)
+                                        آموزش قبول شده
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($item->confirm_exam==1)
+                                        آزمون قبول شده
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($item->user->purchases->where('product_id',3)->first())
+                                        خرید کرده
+                                    @endif
 
                                 </td>
                                 <td class="text-center" dir="ltr">{{$item->user->tel}}</td>
