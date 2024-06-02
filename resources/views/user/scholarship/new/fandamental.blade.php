@@ -29,7 +29,7 @@
         <h5> دانشپذیر عزیز سلام <br> شما تا این مرحله در دوره مقدماتی آموزش کوچینگ شرکت و آزمون آن را با موفقیت پشت سر گذاشته اید . اکنون شما مجاز به شرکت در دوره 20 ساعته فاندامنتال آموزش کوچینگ هستید . <br>
         لطفا جهت ثبت نام و مشاهده توضیحات بیشتر به صفحه ثبت نام این دوره مراجعه نماید. </h5>
     </div>
-    @if(Auth::user()->purchases->where('id',3)->first())
+    @if(is_null(Auth::user()->purchases->where('id',3)->first()))
         <div class="col-12 col-md-12 mt-4 text-center" id="fundamental">
             <button class="btn"> <a href="https://my.faracoach.com/product/fundamental">برای ثبت نام دوره فاندامنتال کلیک کنید  </a></button>
         </div>
