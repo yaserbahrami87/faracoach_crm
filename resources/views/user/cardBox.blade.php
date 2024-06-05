@@ -56,8 +56,6 @@
             <a href="/panel/sch2024/me" target="_blank" >
                 <img src="/images/scholarship/enter.jpg" class="img-fluid">
             </a>
-
-
         </div>
         <div class="col-12 border-bottom border-1">
             <h5>
@@ -104,35 +102,35 @@
                 </a>
             </div>
         @endif
-        <!--
+
         <div class="col-lg-3 col-md-6 col-sm-6 text-center mt-1 items">
             <a href="/panel/integrity/files"  class="btn btn-success">
                 <i class="bi bi-camera-reels-fill" ></i>
                 <p> ویدئوی وبینار تمامیت</p>
             </a>
         </div>
+        <!--
+               <div class="col-lg-3 col-md-6 col-sm-6 text-center mt-1 items">
+                   <a href="/panel/scientific_support/create"  class="btn btn-success">
+                       <i class="bi bi-person-circle" ></i>
+                       <p>همکاری به عنوان پشتیبان علمی </p>
+                   </a>
+               </div>
+               <div class="col-lg-3 col-md-6 col-sm-6 text-center mt-1 items">
+                   <a href="/panel/integrityTest"  class="btn btn-success">
+                       <i class="bi bi-pentagon-half" ></i>
+                       <p> تست تمامیت شخصی</p>
+                   </a>
+               </div>
 
-        <div class="col-lg-3 col-md-6 col-sm-6 text-center mt-1 items">
-            <a href="/panel/scientific_support/create"  class="btn btn-success">
-                <i class="bi bi-person-circle" ></i>
-                <p>همکاری به عنوان پشتیبان علمی </p>
-            </a>
-        </div>
-        <div class="col-lg-3 col-md-6 col-sm-6 text-center mt-1 items">
-            <a href="/panel/integrityTest"  class="btn btn-success">
-                <i class="bi bi-pentagon-half" ></i>
-                <p> تست تمامیت شخصی</p>
-            </a>
-        </div>
+               <div class="col-lg-3 col-md-6 col-sm-6 text-center mt-1 items">
+                   <a href="/panel/effectiveListenings/create" class="btn btn-success">
+                       <i class="bi bi-ear-fill"></i>
+                       <p>ارزیابی گوش دادن موثر</p>
+                   </a>
+               </div>
 
-        <div class="col-lg-3 col-md-6 col-sm-6 text-center mt-1 items">
-            <a href="/panel/effectiveListenings/create" class="btn btn-success">
-                <i class="bi bi-ear-fill"></i>
-                <p>ارزیابی گوش دادن موثر</p>
-            </a>
-        </div>
-
-        -->
+               -->
 
         <div class="col-12 mt-2 border-bottom border-1">
             <h5>آخرین دوره های ثبت نام شده</h5>
