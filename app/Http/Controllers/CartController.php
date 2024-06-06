@@ -203,7 +203,7 @@ class CartController extends BaseController
                         'time_fa'           => $this->timeNow,
                         'fi'                =>$product->fi,
                         'capacity'          =>$request->capacity,
-                        'final_off'         =>$product->final_off*$product->capacity,
+                        'final_off'         =>$product->final_off,
                         'type_payment_id'   =>$product->type_peymant_id,
                     ]);
 
