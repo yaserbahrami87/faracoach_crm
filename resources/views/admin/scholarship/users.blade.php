@@ -96,9 +96,10 @@
                                 </td>
                                 <td>
                                     @if($item->user->purchases->where('product_id',3)->first())
-                                        خرید کرده
+                                        خرید نقدی
+                                    @elseif( $item->user->purchases->where('product_id',120)->first())
+                                        خرید قسطی
                                     @endif
-
                                 </td>
                                 <td class="text-center" dir="ltr">{{$item->user->tel}}</td>
                                 <td>
