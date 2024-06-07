@@ -31,9 +31,10 @@
         لطفا جهت ثبت نام و مشاهده توضیحات بیشتر به صفحه ثبت نام این دوره مراجعه نماید. </h5>
     </div>
 
-    @if(is_null(Auth::user()->purchases->where('product_id',3)->first()))
+    @if(is_null(Auth::user()->purchases->where('product_id',3)->first()) || is_null(Auth::user()->purchases->where('product_id',120)->first()))
         <div class="col-12 col-md-12 mt-4 text-center" id="fundamental">
-            <button class="btn"> <a href="https://my.faracoach.com/product/fundamental">برای ثبت نام دوره فاندامنتال کلیک کنید  </a></button>
+            <button class="btn"> <a href="https://my.faracoach.com/product/fundamental">برای ثبت نام نقدی دوره فاندامنتال کلیک کنید  </a></button>
+            <button class="btn"> <a href="asset('/courses/فاندامنتال%201')">برای ثبت نام قسطی دوره فاندامنتال کلیک کنید  </a></button>
         </div>
     @else
         <div class="col-12 col-md-6 mx-auto mx-auto alert alert-success text-center" >شما با موفقیت دوره را خریداری کردید</div>
