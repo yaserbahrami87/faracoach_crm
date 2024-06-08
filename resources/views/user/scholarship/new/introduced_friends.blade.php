@@ -121,7 +121,7 @@
                                 <th></th>
                                 <th>نام و نام خانوادگی</th>
                                 <th>وضعیت</th>
-                                <th>امتیاز شما</th>
+                                <th>امتیاز فاندامنتال</th>
                                 {{--                                        <th>Edit</th>--}}
                             </tr>
                             </thead>
@@ -173,7 +173,9 @@
 
                                     </td>
                                     <td>
-                                        <!-- 10 -->
+                                        @if(is_null($item->user->purchases->where('product_id',3)->first()) || is_null($item->user->purchases->where('product_id',120)->first()))
+                                            10 امتیاز
+                                        @endif
                                     </td>
                                     {{--                                        <td>--}}
                                     {{--                                            <a data-toggle="tooltip" title="" data-original-title="Edit"><i class="fas fa-pencil-alt"></i></a>--}}
