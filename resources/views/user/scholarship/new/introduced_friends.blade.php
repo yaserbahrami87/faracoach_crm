@@ -113,7 +113,7 @@
                     <h5>لیست افراد دعوت شده توسط شما</h5>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive" id="proTeamScroll" tabindex="2" style="height: 400px; overflow: hidden; outline: none;">
+                    <div class="table-responsive" id="proTeamScroll" tabindex="2" >
                         <table class="table table-striped">
                             <thead>
                             <tr>
@@ -134,16 +134,43 @@
                                     </td>
                                     <td>
                                         <p class="m-0 font-12" dir="ltr">
-                                            <span class="col-green font-weight-bold">{{is_null($item->user->fname)?$item->user->tel:$item->user->fname.' '.$item->user->lname}}</span>
+                                            <span class="col-green font-weight-bold">{{is_null($item->user->fname)?'بی نام':$item->user->fname.' '.$item->user->lname}}</span>
                                         </p>
                                     </td>
                                     <td class="align-middle">
-                                        <!--
-                                        <div class="progress-text">20%</div>
+                                        @php
+                                        $score=0;
+                                        @endphp
+
+                                            @if(is_null($item->user->sch2024->target)||(is_null(Auth::user()->sch2024->gettingknow))||(is_null(Auth::user()->sch2024->cooperation)))
+                                                @php
+                                                    $score+=12.5
+                                                @endphp
+                                            @endif
+
+                                            @if($item->user->sch2024->confirm_webinar==1)
+                                                @php
+                                                    $score+=12.5
+                                                @endphp
+                                            @endif
+
+                                            @if($item->user->get_scholarshipExam->where('resource','sch2024')->count()<2 && $item->user->sch2024->confirm_exam==1 )
+                                                @php
+                                                    $score+=12.5
+                                                @endphp
+                                            @endif
+
+                                            @if($item->user->sch2024_introduced->count()>0)
+                                                @php
+                                                    $score+=12.5
+                                                @endphp
+                                            @endif
+
+                                        <div class="progress-text">{{$score}}%</div>
                                         <div class="progress" data-height="6" style="height: 6px;">
-                                            <div class="progress-bar bg-red" data-width="50%" style="width: 20%;"></div>
+                                            <div class="progress-bar bg-red" data-width="{{$score}}%" style="width: {{$score}}%;"></div>
                                         </div>
-                                        -->
+
                                     </td>
                                     <td>
                                         <!-- 10 -->
