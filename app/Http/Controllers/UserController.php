@@ -1278,6 +1278,9 @@ class UserController extends BaseController
     //نمایش لیست دعوت شده ها
     public function listIntroducedUser(Request $request)
     {
+        alert()->warning('این صفحه در حال بروزرسانی می باشد')->persistent('بستن');
+        return back();
+
 
         ini_set('max_execution_time',3600);
         $user=Auth::user();
@@ -1874,21 +1877,6 @@ class UserController extends BaseController
             }
             else
             {
-                $check=followup::create(
-                    [
-                        'user_id'               =>$user->id,
-                        'insert_user_id'        =>1,
-                        'course_id'             =>3,
-                        'comment'               =>'حضور در آزمون تست ارزیابی',
-                        'talktime'              =>0,
-                        'problemfollowup_id'    =>6,
-                        'status_followups'      =>11,
-                        'date_fa'               =>$this->dateNow,
-                        'insert_user_id'        =>auth()->user()->id,
-                        'nextfollowup_date_fa'  =>$this->dateNow,
-                        'time_fa'               =>$this->dateNow,
-                        'datetime_fa'           =>$this->dateNow." ".$this->timeNow
-                    ]);
                     $user->type=11;
                     $user->tel_verified=1;
                     $user->save();
@@ -2567,6 +2555,59 @@ class UserController extends BaseController
         }
 
         return redirect('/panel/sch2024/me#step-1');
+    }
+
+
+    public function createExcel2024()
+    {
+        return view('admin.excelImportsch2024');
+    }
+
+    public function storeExcel2024(Request $request)
+    {
+        $this->validate($request, [
+            'excel'     =>['required','mimes:xlsx,csv'],
+        ]);
+
+        $collection = fastexcel()->import($request->file('excel'));
+        $i=0;
+
+
+        foreach ($collection as $item)
+        {
+            if(!strlen($item['email'])>0)
+            {
+                $item['email']=NULL;
+            }
+
+            $item['tel']="+98".$this->convertPersianNumber($item['tel']);
+            $user=user::orwhere('tel','=',$item['tel'])
+                ->when($item['email'],function($query,$item)
+                {
+                    return $query->orwhere('email', '=', $item);
+                })
+                ->first();
+
+            if(is_null($user))
+            {
+                $item['password']=Hash::make('1234');
+                $user=user::create($item);
+                if($user)
+                {
+                    $i++;
+                }
+            }
+            else
+            {
+                $user->type=11;
+                $user->tel_verified=1;
+                $user->save();
+
+
+            }
+        }
+        alert()->success("تعداد".$i."نفر وارد بانک اطلاعاتی شدند",'پیام')->persistent('بستن');
+        return back();
     }
 
 
