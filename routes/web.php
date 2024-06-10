@@ -721,7 +721,10 @@ Route::post('/register/land','UserController@register_landing');
 Route::resource('landPage','LandPageController');
 
 //scholarship
-Route::get('/scholarship/register','ScholarshipController@create');
+Route::get('/scholarship/register',function()
+{
+    return redirect('/sch2024/register?introduce=5480');
+});
 Route::post('/scholarship/storeCodewithoutPass','VerifyController@storeBeforeScholarship');
 Route::post('/scholarship/checkCode_Scholarship','VerifyController@checkCode_Scholarship');
 
@@ -739,10 +742,7 @@ Route::post('/knot/checkCode_knot','VerifyController@checkCode_knot');
 
 //scholarship 2024
 //Route::get('/sch2024/register','ScholarshipController@create_sch2024');
-Route::get('/sch2024/register',function()
-{
-    return redirect('/sch2024/register?introduce=5480');
-});
+Route::get('/sch2024/register','ScholarshipController@create_sch2024');
 Route::post('/sch2024/storeTelsch2024','VerifyController@storeTelsch2024');
 Route::post('/sch2024/checkCode_sch2024','VerifyController@checkCode_sch2024');
 
