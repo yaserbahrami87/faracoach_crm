@@ -64,7 +64,7 @@ class UserController extends BaseController
                         })
                         ->whereNotIn('users.type',[-3,-2,-1,2,3,0,30])
                         ->orderby('id','desc')
-                        ->get();
+                        ->paginate(25);
 
             $statics=$this->get_staticsCountUsers_admin();
 
@@ -81,7 +81,7 @@ class UserController extends BaseController
                 })
                 ->orderby('users.id','desc')
                 ->groupby('users.id')
-                ->get();
+                ->paginate(25);
         }
         //نیروی فروش
         else if(Auth::user()->type==3)
@@ -93,7 +93,7 @@ class UserController extends BaseController
             })
                 ->whereNotIn('users.type',[-3,-2,-1,2,3,0,30])
                 ->orderby('id','desc')
-                ->get();
+                ->paginate(25);
 
             $statics=$this->get_staticsCountUsers_admin();
 
@@ -110,7 +110,7 @@ class UserController extends BaseController
                 })
                 ->orderby('users.id','desc')
                 ->groupby('users.id')
-                ->get();
+                ->paginate(25);
         }
         //نیروی مسئول لیدهای صفر
         else if(Auth::user()->type==6 || Auth::user()->type==4)
@@ -131,7 +131,7 @@ class UserController extends BaseController
             })
             ->orderby('users.id','desc')
             ->groupby('users.id')
-            ->get();
+             ->paginate(25);
 
 
         }
@@ -150,7 +150,7 @@ class UserController extends BaseController
                     $query->where('resource','=',$request->resource);
                 })
                 ->orderby('id','desc')
-                ->get();
+                ->paginate(25);
         }
 
 
