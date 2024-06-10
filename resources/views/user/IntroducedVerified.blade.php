@@ -71,11 +71,16 @@
             width: 100px;
             margin-right: 5px;
         }
+        #btn_followup a
+        {
+            color: #fff0f0;
+        }
 
     </style>
     <link href="/trumbowyg-2.25.1/dist/ui/trumbowyg.min.css" rel="stylesheet" />
 @endsection
 @section('content')
+
     <div class="container">
         <div class="card">
             <div class="form">
@@ -85,6 +90,7 @@
                         <hr>
                     </div>
                     <div class="steps-content">
+
                         <i class="bi bi-caret-left"></i><h5> مـرحله<span class="step-number"> @if(Auth::user()->introduced_verified==2)3 @else 1 @endif </span></h5>
                         <p class="step-number-content active">عزیزانتان را به مسیر شکوفایی دعوت کنید.</p>
 
@@ -95,9 +101,14 @@
                         <li class="@if(Auth::user()->introduced_verified==2) active @endif" >داشبورد سفیر</li>
                     </ul>
                     @if(Auth::user()->introduced_verified==3)
-                        <h5 class="text-danger mt-2">
-                            درخواست سفیر شما رد شده است
+                        <h5 class="text-danger mt-2 text-align-center">
+                            درخواست سفیر شما رد شده است !
                         </h5>
+                        <form method="post" action="/panel/introduced/introduced_verified">
+                            {{csrf_field()}}
+                            <input type="hidden" value="1" name="introduced_verified"/>
+                            <button type="submit" class="btn btn-danger"> درخواست مجدد</button>
+                        </form>
                     @endif
 
                 </div>
@@ -175,6 +186,7 @@
                     <div class="main @if(Auth::user()->introduced_verified==2) active @endif">
 
                         <!------------------------------- CAPTION ----------------------------->
+
                         <!------------------------------- Form ----------------------------->
                         <div class="col-12 mt-1">
                             <div class="col-12 border mt-1">
@@ -182,7 +194,7 @@
                                 <nav>
                                     <div class="nav nav-tabs mt-1" id="nav-tab" role="tablist">
                                         <button class="nav-link active" id="nav-introduced-tab" data-toggle="tab" data-target="#nav-introduced" type="button" role="tab" aria-controls="nav-introduced" aria-selected="true">معرفی</button>
-                                        <button class="nav-link" id="nav-factors-tab" data-toggle="tab" data-target="#nav-factors" type="button" role="tab" aria-controls="nav-factors" aria-selected="false">فاکتور ها</button>
+                                        {{--                                        <button class="nav-link" id="nav-factors-tab" data-toggle="tab" data-target="#nav-factors" type="button" role="tab" aria-controls="nav-factors" aria-selected="false">فاکتور ها</button>--}}
                                         <button class="nav-link" id="nav-position-tab" data-toggle="tab" data-target="#nav-position" type="button" role="tab" aria-controls="nav-position" aria-selected="false">جایگاه شما</button>
                                     </div>
                                 </nav>
@@ -369,7 +381,7 @@
                                                                             </div>
                                                                         </td>
                                                                         <td>
-                                                                               {{$item->get_invitations->count()}}
+                                                                            {{$item->get_invitations->count()}}
                                                                         </td>
                                                                         <td>
                                                                             <div class="icons">
@@ -380,9 +392,9 @@
                                                                             <div class="icons">
                                                                                 <div class="box-title">
                                                                                     @if(! is_null($item->get_followbyExpert))
-
-
                                                                                         {{$item->get_followbyExpert->fname. ' '.$item->get_followbyExpert->lname}}
+                                                                                    @else
+                                                                                        {{Auth::user()->fname. ' '.Auth::user()->lname}}
                                                                                     @endif
                                                                                 </div>
                                                                             </div>
@@ -390,9 +402,7 @@
                                                                         <td>
                                                                             <div class="icons">
                                                                                 <div class="box-title">
-
-                                                                                    {{ceil(\App\Services\ScoreService::invitation($item)['totalscores'])}}
-
+                                                                                    {{ceil(\App\Services\ScoreService::score($item)['Score_final'])}}
                                                                                 </div>
                                                                             </div>
                                                                         </td>
@@ -404,7 +414,7 @@
                                                                             </form>
                                                                         </td>
                                                                         <td>
-                                                                            <button  class="btn btn-info " id="btn_followup"><a href="followup/{{$item->id}}" >ثبت پیگیری</a></button>
+                                                                            <button  class="btn btn-primary " id="btn_followup"><a href="followup/{{$item->id}}" >ثبت پیگیری</a></button>
                                                                         </td>
                                                                     </tr>
                                                                 @endforeach
@@ -470,7 +480,7 @@
                                                                         </td>
                                                                         <td>
                                                                             <div class="icons">
-                                                                                <div class="box-title">{{ceil(\App\Services\ScoreService::invitation($item)['totalscores'])}}</div>
+                                                                                <div class="box-title">{{ceil(\App\Services\ScoreService::score($item)['Score_final'])}}</div>
                                                                             </div>
 
                                                                         </td>
@@ -536,7 +546,7 @@
                                                                         </td>
                                                                         <td>
                                                                                 <span>
-                                                                                   {{ceil(\App\Services\ScoreService::invitation($item)['totalscores'])}}
+                                                                                      {{ceil(\App\Services\ScoreService::score($item)['Score_final'])}}
                                                                                 </span>
                                                                         </td>
                                                                         <td>
@@ -735,20 +745,17 @@
                                     </div>
 
                                     <!___________________________ فاکتور -------------------------->
-                                    <div class="tab-pane fade" id="nav-factors" role="tabpanel" aria-labelledby="nav-factors-tab">...</div>
+                                    {{--                                    <div class="tab-pane fade" id="nav-factors" role="tabpanel" aria-labelledby="nav-factors-tab">...</div>--}}
 
                                     <!___________________________ جایگاه شما  -------------------------->
                                     <div class="tab-pane fade" id="nav-position" role="tabpanel" aria-labelledby="nav-position-tab">
 
                                         <h5 style="color: #3a283d" class="m-2">
-                                            {{--
-                                              *  جایگاه شما در فصل اخیر نفر <mark><bold>{{$currentPosition}}</bold></mark> از {{$getAmbassador_tmp->count()}} نفر است  *
-                                              --}}
-                                             مجموع امتیاز به دست آماده شما
+                                            مجموع امتیاز به دست آماده شما
                                             <b>
-                                            {{ceil(\App\Services\ScoreService::invitation(Auth::user())['totalscores'])}}
+{{--                                                {{ceil(\App\Services\ScoreService::score(Auth::user())['Score_final'])}}--}}
                                             </b>
-                                             می باشد
+                                            می باشد
 
                                         </h5>
                                         <section class="col-12 table-responsive">
@@ -756,23 +763,20 @@
                                                 <thead>
                                                 <tr class="text-center">
                                                     <th scope="col">امتیاز معرفی</th>
-                                                    <th scope="col">امتیاز ورود به سایت </th>
-                                                    <th scope="col">امتیاز خرید</th>
+                                                    <th scope="col">امتیاز زیرمجموعه </th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr class="text-center">
-                                                        <td>
-                                                             {{\App\Services\ScoreService::invitation(Auth::user())['totalIntroduced']}}
-                                                        </td>
-                                                        <td>
-                                                            {{\App\Services\ScoreService::invitation(Auth::user())['totalre_entry']}}
-                                                        </td>
-                                                        <td>
-                                                            {{\App\Services\ScoreService::invitation(Auth::user())['Product_purchase']}}
-                                                        </td>
+                                                <tr class="text-center">
+                                                    <td>
+{{--                                                        {{ceil(\App\Services\ScoreService::score(Auth::user())['introduced'])}}--}}
+                                                    </td>
+                                                    <td>
+{{--                                                        {{ceil(\App\Services\ScoreService::score(Auth::user())['sub_total'])}}--}}
+                                                    </td>
 
-                                                    </tr>
+
+                                                </tr>
                                                 </tbody>
                                             </table>
                                         </section>
@@ -780,13 +784,13 @@
                                         <div class="table-responsive overflow-auto">
                                             <table id="example1" class="table table-striped table-bordered" style="width:100%">
                                                 <thead>
-                                                    <tr class="text-center">
-                                                        <th scope="col">ردیف</th>
-                                                        <th scope="col">  </th>
-                                                        <th scope="col">نام و نام خانوادگی </th>
-                                                        <th scope="col">تعداد معرفی</th>
-                                                        <th scope="col">امتیاز</th>
-                                                    </tr>
+                                                <tr class="text-center">
+                                                    <th scope="col">ردیف</th>
+                                                    <th scope="col">  </th>
+                                                    <th scope="col">نام و نام خانوادگی </th>
+                                                    <th scope="col">تعداد معرفی</th>
+                                                    <th scope="col">امتیاز</th>
+                                                </tr>
                                                 </thead>
                                                 <tbody>
                                                 @foreach ($getAmbassador as $items )
@@ -804,14 +808,14 @@
                                                             <div class="box-title"><b>{{($items->get_invitations->count())}}</b></div>
                                                         </td>
                                                         <td>
-                                                            <div class="box-title">{{ceil(\App\Services\ScoreService::invitation($items)['totalscores'])}}</div>
+{{--                                                            {{ceil(\App\Services\ScoreService::score($items)['Score_final'])}}--}}
                                                         </td>
                                                     </tr>
                                                 @endforeach
                                                 </tbody>
                                             </table>
 
-                                        <!------------------------------------------ Modal ------------------------->
+                                            <!------------------------------------------ Modal ------------------------->
                                             <div class="modal fade" id="modal_introduced_profile" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" dir="rtl">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
@@ -842,11 +846,11 @@
 
 
 
-                                    @if(Auth::user()->introduced_verified==2)
-                                        <div class="buttons button_space">
-                                            <button class="back_button">مرحله قبل</button>
-                                        </div>
-                                    @endif
+                                    {{--                                    @if(Auth::user()->introduced_verified==2)--}}
+                                    {{--                                        <div class="buttons button_space">--}}
+                                    {{--                                            <button class="back_button">مرحله قبل</button>--}}
+                                    {{--                                        </div>--}}
+                                    {{--                                    @endif--}}
                                 </div>
 
                             </div>
