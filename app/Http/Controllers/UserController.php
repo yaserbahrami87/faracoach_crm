@@ -1393,7 +1393,7 @@ class UserController extends BaseController
                         ->orderby('id','desc')
                         ->paginate(25);
 
-        $listIntroducedUser->appends(['q' => $request['q']]);
+        $users->appends(['q' => $request['q']]);
 
 
 
