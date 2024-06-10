@@ -402,7 +402,7 @@
                                                                         <td>
                                                                             <div class="icons">
                                                                                 <div class="box-title">
-                                                                                    {{ceil(\App\Services\ScoreService::score($item)['Score_final'])}}
+{{--                                                                                    {{ceil(\App\Services\ScoreService::score($item)['Score_final'])}}--}}
                                                                                 </div>
                                                                             </div>
                                                                         </td>
@@ -480,7 +480,7 @@
                                                                         </td>
                                                                         <td>
                                                                             <div class="icons">
-                                                                                <div class="box-title">{{ceil(\App\Services\ScoreService::score($item)['Score_final'])}}</div>
+{{--                                                                                <div class="box-title">{{ceil(\App\Services\ScoreService::score($item)['Score_final'])}}</div>--}}
                                                                             </div>
 
                                                                         </td>
@@ -546,7 +546,7 @@
                                                                         </td>
                                                                         <td>
                                                                                 <span>
-                                                                                      {{ceil(\App\Services\ScoreService::score($item)['Score_final'])}}
+{{--                                                                                      {{ceil(\App\Services\ScoreService::score($item)['Score_final'])}}--}}
                                                                                 </span>
                                                                         </td>
                                                                         <td>
