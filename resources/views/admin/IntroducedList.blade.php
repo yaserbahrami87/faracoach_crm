@@ -10,6 +10,25 @@
 
 @section('content')
     <div class="col-12">
+            <div id="app" style="width: 310px">
+                <form method="GET" action="/admin/introduced">
+                    <div class="form-group">
+                        <label for="start_date">بازه نمایش را وارد کنید</label>
+                        <date-picker
+                            type="date"
+                            v-model="dates"
+                            range
+                            format="jYYYY-jMM-jDD"
+                            display-format="jYYYY/jMM/jDD"
+                            name="start_date"
+                            id="start_date"
+                        ></date-picker>
+                        <button type="submit" class="btn btn-success btn-sm" name="range">نمایش بده</button>
+                    </div>
+                </form>
+            </div>
+
+
         <ul class="nav nav-tabs col-md-12 mt-3" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active btn-warning" id="pending-tab" data-toggle="tab" data-target="#pending" type="button" role="tab" aria-controls="pending" aria-selected="true">درانتظار تایید</button>
@@ -104,7 +123,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    {{ceil(\App\Services\ScoreService::invitation($user)['totalscores'])}}
+{{--                                    {{ceil(\App\Services\ScoreService::score($user)['Score_final'])}}--}}
                                 </td>
 
 
@@ -220,7 +239,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    {{ceil(\App\Services\ScoreService::invitation($user)['totalscores'])}}
+{{--                                    {{ceil(\App\Services\ScoreService::score($user)['Score_final'])}}--}}
                                 </td>
 
 
@@ -274,14 +293,12 @@
                                 <td >
                                     <a href="/admin/user/{{$user->id}}">{{$user->fname.' '.$user->lname}}</a>
                                 </td>
-
                                 <td>
                                     <b>{{$user->get_invitations->count()}}</b>
                                     <!-- Modal invitation -->
                                 </td>
                                 <td>{{$user->get_invitations->where('type',20)->count()}}</td>
                                 <td>
-
                                 </td>
                                 <td>
                                     @if(!is_null($user->get_invitations->last()))
@@ -297,45 +314,45 @@
 
                                         </a>
                                         <!-- Modal invitation -->
-                                        <div class="modal fade" id="courseModal{{$user->id}}" tabindex="-1" aria-labelledby="courseModalModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">دوره ها</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <table class="table table-bordered table-striped table-striped">
-                                                            <tr>
-                                                                <th>ردیف</th>
-                                                                <th>دوره</th>
+{{--                                        <div class="modal fade" id="courseModal{{$user->id}}" tabindex="-1" aria-labelledby="courseModalModalLabel" aria-hidden="true">--}}
+{{--                                            <div class="modal-dialog">--}}
+{{--                                                <div class="modal-content">--}}
+{{--                                                    <div class="modal-header">--}}
+{{--                                                        <h5 class="modal-title" id="exampleModalLabel">دوره ها</h5>--}}
+{{--                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">--}}
+{{--                                                            <span aria-hidden="true">&times;</span>--}}
+{{--                                                        </button>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div class="modal-body">--}}
+{{--                                                        <table class="table table-bordered table-striped table-striped">--}}
+{{--                                                            <tr>--}}
+{{--                                                                <th>ردیف</th>--}}
+{{--                                                                <th>دوره</th>--}}
 
-                                                            </tr>
+{{--                                                            </tr>--}}
 
-                                                            @foreach($user->students as $student)
-                                                                <tr>
-                                                                    <td>{{$loop->iteration}}</td>
-                                                                    <td>
-                                                                        {{$student->course->course}}
-                                                                    </td>
+{{--                                                            @foreach($user->students as $student)--}}
+{{--                                                                <tr>--}}
+{{--                                                                    <td>{{$loop->iteration}}</td>--}}
+{{--                                                                    <td>--}}
+{{--                                                                        {{$student->course->course}}--}}
+{{--                                                                    </td>--}}
 
-                                                                </tr>
-                                                            @endforeach
-                                                        </table>
+{{--                                                                </tr>--}}
+{{--                                                            @endforeach--}}
+{{--                                                        </table>--}}
 
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+{{--                                                    </div>--}}
+{{--                                                    <div class="modal-footer">--}}
+{{--                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
                                     @endif
                                 </td>
                                 <td>
-                                    {{ceil(\App\Services\ScoreService::invitation($user)['totalscores'])}}
+{{--                                    {{ceil(\App\Services\ScoreService::score($user)['Score_final'])}}--}}
                                 </td>
 
 
@@ -378,6 +395,27 @@
 
 
 @section('footerScript')
+
+    <script src="{{asset('/js/vue@2.js')}}"></script>
+    <script src="{{asset('/js/moment.js')}}"></script>
+    <script src="{{asset('/js/moment-jalaali.js')}}"></script>
+    <script src="{{asset('/js/vue-persian-datetime-picker-browser.js')}}"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            components: {
+                DatePicker: VuePersianDatetimePicker
+            },
+            data: {
+                dates: [],
+            }
+
+        });
+
+
+    </script>
+
+
     <script src="{{asset('/dashboard/assets/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('/dashboard/assets/js/dataTables.bootstrap4.min.js')}}"></script>
 
@@ -413,4 +451,5 @@
             } );
         } );
     </script>
+
 @endsection
