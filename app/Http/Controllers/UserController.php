@@ -1391,7 +1391,9 @@ class UserController extends BaseController
                         ->orwhere('tel','like','%'.$request['q'].'%')
                         ->orwhere('email','like','%'.$request['q'].'%')
                         ->orderby('id','desc')
-                        ->get();
+                        ->paginate(25);
+
+        $listIntroducedUser->appends(['q' => $request['q']]);
 
 
 

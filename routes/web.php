@@ -730,11 +730,19 @@ Route::post('/scholarship/register/final','ScholarshipController@store');
 Route::get('/scholarship/cleartel','ScholarshipController@cleartel');
 
 //Knot
-Route::get('/knot/register','ScholarshipController@create_knot');
+//Route::get('/knot/register','ScholarshipController@create_knot');
+Route::get('/knot/register',function()
+{
+    return redirect('/sch2024/register?introduce=5480');
+});
 Route::post('/knot/checkCode_knot','VerifyController@checkCode_knot');
 
 //scholarship 2024
-Route::get('/sch2024/register','ScholarshipController@create_sch2024');
+//Route::get('/sch2024/register','ScholarshipController@create_sch2024');
+Route::get('/sch2024/register',function()
+{
+    return redirect('/sch2024/register?introduce=5480');
+});
 Route::post('/sch2024/storeTelsch2024','VerifyController@storeTelsch2024');
 Route::post('/sch2024/checkCode_sch2024','VerifyController@checkCode_sch2024');
 
@@ -881,6 +889,9 @@ Route::get('/test','UserController@ScoreAmbassador');
 
 //test User
 Route::get('/test1','UserController@test1');
+
+Route::get('/users/excelsch2024','UserController@createExcel2024');
+Route::post('/users/storeExcel2024','UserController@storeExcel2024');
 
 Route::get('/telegram','HomeController@telegram');
 Route::get('/schedule',function()
