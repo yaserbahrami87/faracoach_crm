@@ -1071,7 +1071,7 @@ class UserController extends BaseController
                     ->orwhere('type','=',-2)
                     ->orwhere('type','=',-3)
                     ->orderby('id','desc')
-                    ->get();
+                    ->paginate(25);
                 break;
             case 'notfollowup':
                 $users = user::where('type','=',1)
@@ -1091,37 +1091,37 @@ class UserController extends BaseController
 
                             })
                             ->orderby('id','desc')
-                            ->get();
+                            ->paginate(25);
                 break;
             case 'continuefollowup':
                 $users=Auth::user()->get_followby_expert()
                             ->where('type','=',11)
-                            ->get();
+                            ->paginate(25);
                 break;
             case 'continuefollowup_all':
                 $users=user::where('type','=',11)
                     ->orderby('id','desc')
-                    ->paginate(20);
+                    ->paginate(25);
                 break;
             case 'cancelfollowup':
                 $users=Auth::user()->get_followby_expert()
                     ->where('type','=',12)
-                    ->get();
+                    ->paginate(25);
                 break;
             case 'waiting' :
                 $users=Auth::user()->get_followby_expert()
                             ->where('type','=',13)
-                            ->get();
+                            ->paginate(25);
                 break;
             case 'noanswering':
                 $users=Auth::user()->get_followby_expert()
                             ->where('type','=',14)
-                            ->get();
+                            ->paginate(25);
                 break;
             case 'students':
                 $users=Auth::user()->get_followby_expert()
                             ->where('type','=',20)
-                            ->get();
+                            ->paginate(25);
                 break;
             case 'todayFollowup':
                 $condition=['nextfollowup_date_fa','=',$this->dateNow];
@@ -1133,7 +1133,7 @@ class UserController extends BaseController
                                 ->where('flag', '=', 1);
 
                     })
-                    ->get();
+                    ->paginate(25);
 
                             //$this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL,1);
                 break;
@@ -1146,7 +1146,7 @@ class UserController extends BaseController
                             $query->where('flag','=',1)
                                     ->where('nextfollowup_date_fa','<',$dateNow);
                         })
-                        ->get();
+                        ->paginate(25);
                 break;
             case 'myfollowup':
                 $users =$this->get_usersByType(NULL,Auth::user()->id);
@@ -1156,13 +1156,13 @@ class UserController extends BaseController
                 break;
             case 'scholarship':$users=User::where('resource','=','بورسیه تحصیلی')
                                 ->orderby('id','desc')
-                                ->get();
+                                ->paginate(25);
                 break;
             default:
                 return redirect('/admin/users/');
                 break;
         }
-
+        $users->appends(['categoryUsers' => $request['categoryUsers']]);
         $statics=$this->get_staticsCountUsers_admin();
 
         $usersAdmin=user::orwhere('type','=',2)
