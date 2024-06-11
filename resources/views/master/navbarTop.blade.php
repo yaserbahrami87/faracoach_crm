@@ -3,6 +3,11 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
+    @if(Auth::check())
+        <a href="/panel" class="btn btn-primary d-block d-sm-none" role="button" aria-pressed="true" id="btnRegister">ورود به پورتال</a>
+    @else
+        <a href="/login" class="btn btn-primary d-block d-sm-none" role="button" aria-pressed="true" id="btnRegister">ورود / ثبت نام</a>
+    @endif
     <div class="collapse navbar-collapse" dir="rtl" id="navbarTogglerDemo01">
         <a class="navbar-brand" href="/">
             <img src="{{asset('images/white-logo.png')}}" alt="" />
