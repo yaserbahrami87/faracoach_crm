@@ -150,8 +150,7 @@
                                             <li class="list-group-item border-bottom text-justify" >
                                                 <div class="row">
                                                     <div class="col-xs-2 col-md-1">
-
-                                                        @if(is_null($item->user->personal_image))
+                                                        @if(is_null($item->user))
                                                             <img src="{{asset('/documents/users/default-avatar.png')}}" class="img-circle img-responsive"  width="50px" height="50px" />
                                                         @else
                                                             <img src="{{asset('/documents/users/'.$item->user->personal_image)}}" class="img-circle img-responsive" width="50px" height="50px" />
