@@ -150,11 +150,11 @@
                                             <li class="list-group-item border-bottom text-justify" >
                                                 <div class="row">
                                                     <div class="col-xs-2 col-md-1">
-                                                        <img src="{{asset('/documents/users/'.$item->personal_image)}}" class="img-circle img-responsive" width="50px" height="50px" />
+                                                        <img src="{{asset('/documents/users/'.$item->user->personal_image)}}" class="img-circle img-responsive" width="50px" height="50px" />
                                                     </div>
                                                     <div class="col-xs-10 col-md-11">
                                                         <div  class="mb-2">
-                                                            <a href="#">{{$item->fname.' '.$item->lname}}</a>
+                                                            <a href="#">{{$item->user->fname.' '.$item->user->lname}}</a>
                                                             <div class="mic-info ">
                                                             </div>
                                                         </div>
