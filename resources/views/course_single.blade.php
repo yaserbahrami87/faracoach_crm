@@ -158,7 +158,9 @@
                                                     </div>
                                                     <div class="col-xs-10 col-md-11">
                                                         <div  class="mb-2">
-                                                            <a href="#">{{$item->user->fname.' '.$item->user->lname}}</a>
+                                                            @if(!is_null($item->user))
+                                                                <a href="#">{{$item->user->fname.' '.$item->user->lname}}</a>
+                                                            @endif
                                                             <div class="mic-info ">
                                                             </div>
                                                         </div>
