@@ -110,7 +110,7 @@ class ScholarshipExamController extends BaseController
                 ->first();
             $scholarship->confirm_exam=1;
             $scholarship->save();
-            $msg="نتیجه آزمون شما:$sum \n"."تبریک\n شما در آزمون مقدماتی بورسیه کوچینگ قبول شده اید"."\nفراکوچ ";
+            $msg=Auth::user()->fname."عزیز\n"."نمره آزمون:$sum \n"."وضعیت:قبول"."\nمرحله بعد:فاندامنتال ";
             $this->sendSms(Auth::user()->tel,$msg);
             $msg=Auth::user()->fname.' '.Auth::user()->lname." در آزمون مقدماتی قبول شد."."\n امتیاز:$sum ";
 //            $this->sendSms('09153159020',$msg);
@@ -118,7 +118,7 @@ class ScholarshipExamController extends BaseController
         }
         else
         {
-            $msg="نتیجه آزمون شما:$sum \n"."متاسفانه امتیاز شما در آزمون مقدماتی به حد نصاب ممکن نرسید"."\nفراکوچ ";
+            $msg="نمره آزمون:$sum \n"."وضعیت:رد"."\nفراکوچ ";
             $this->sendSms(Auth::user()->tel,$msg);
             $msg=Auth::user()->fname.' '.Auth::user()->lname." در آزمون مقدماتی رد شد."."\n امتیاز:$sum ";
 //            $this->sendSms('09153159020',$msg);
