@@ -35,4 +35,9 @@ class course extends Model
         return $this->hasMany('App\invoice');
     }
 
+    public function comments()
+    {
+        return $this->hasMany('App\comment','post_id','id')->where('type','course');
+    }
+
 }
