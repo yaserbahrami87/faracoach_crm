@@ -98,11 +98,14 @@
                 <td>
                     @if($item->type=='course'||$item->type=='scholarship_payment')
                         {{($item->course['course'])}}
+                    @elseif($item->type=='product')
+                        {{($item->product->product)}}
                     @elseif($item->type=='event')
                         {{($item->event->event)}}
                     @elseif($item->type=='ghest')
                         پرداخت قسط
                     @elseif($item->type=='reserve')
+
                         جلسه {{$item->reserve->booking->coach->user['fname'].' '.$item->reserve->booking->coach->user['lname']}}
                     @endif
                 </td>
