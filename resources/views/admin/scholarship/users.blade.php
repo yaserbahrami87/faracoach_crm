@@ -96,7 +96,6 @@
                                 </td>
                                 <td>
                                     @if($item->user->purchases->where('product_id',3)->first())
-                                        خرید نقدی
                                         @if($item->user->purchases->where('product_id',3)->first())
                                             خرید نقدی
                                         @elseif( $item->user->checkouts->where('product_id',120)->where('status',1)->where('type','course')->first())
