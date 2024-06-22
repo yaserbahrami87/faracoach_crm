@@ -96,12 +96,11 @@
                                 </td>
                                 <td>
                                     @if($item->user->purchases->where('product_id',3)->first())
-                                        @if($item->user->purchases->where('product_id',3)->first())
                                             خرید نقدی
-                                        @elseif( $item->user->checkouts->where('product_id',120)->where('status',1)->where('type','course')->first())
-                                            خرید قسطی
-                                        @endif
+                                    @elseif($item->user->checkouts->where('product_id',120)->where('status',1)->where('type','course')->first())
+                                        خرید قسطی
                                     @endif
+
                                 </td>
                                 <td class="text-center" dir="ltr">{{$item->user->tel}}</td>
                                 <td>
