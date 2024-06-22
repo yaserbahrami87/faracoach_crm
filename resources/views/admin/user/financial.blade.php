@@ -132,7 +132,9 @@
 
                     @switch($item->type)
                         @case('reserve')
-                            {{number_format($item->reserve['final_off'])}}
+                                @if(!is_null($item->reserve))
+                                {{number_format($item->reserve['final_off'])}}
+                                @endif
                             @break
                         @default
                             {{number_format($item->price)}}
