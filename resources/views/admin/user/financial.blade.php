@@ -121,7 +121,9 @@
                                 {{$item->faktor['date_pardakht']}}
                                 @break
                         @case('reserve')
-                                {{substr($item->reserve->created_at,0,10)}}
+                                    @if(!is_null($item->reserve))
+                                    {{substr($item->reserve->created_at,0,10)}}
+                                    @endif
                                 @break
                     @endswitch
 
