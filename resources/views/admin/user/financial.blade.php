@@ -105,8 +105,11 @@
                     @elseif($item->type=='ghest')
                         پرداخت قسط
                     @elseif($item->type=='reserve')
-
-                        جلسه {{$item->reserve->booking->coach->user['fname'].' '.$item->reserve->booking->coach->user['lname']}}
+                        @if(!is_null($item->reserve))
+                            @if(!is_null($item->reserve->booking))
+                                جلسه {{$item->reserve->booking->coach->user['fname'].' '.$item->reserve->booking->coach->user['lname']}}
+                            @endif
+                        @endif
                     @endif
                 </td>
                 <td>

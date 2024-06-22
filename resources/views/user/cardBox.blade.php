@@ -120,6 +120,7 @@
                        <p>همکاری به عنوان پشتیبان علمی </p>
                    </a>
                </div>
+               -->
                <div class="col-lg-3 col-md-6 col-sm-6 text-center mt-1 items">
                    <a href="/panel/integrityTest"  class="btn btn-success">
                        <i class="bi bi-pentagon-half" ></i>
@@ -129,7 +130,7 @@
 
 
 
-               -->
+
         <div class="col-lg-3 col-md-6 col-sm-6 text-center mt-1 items">
             <a href="/panel/effectiveListenings/create" class="btn btn-success">
                 <i class="bi bi-ear-fill"></i>

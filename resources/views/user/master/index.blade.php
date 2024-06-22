@@ -81,6 +81,8 @@
     </style>
 
     @yield('headerScript')
+    <livewire:styles />
+
 </head>
 <!-- END: Head-->
 
@@ -174,8 +176,11 @@
 <!-- BEGIN: Vendor JS -->
 <script src="{{ asset('/panel_assets/js/jquery.min.js') }}"></script>
 <!--<script src="{{ asset('/panel_assets/js/bootstrap.min.js') }}"></script>-->
-<script src="{{ asset('/panel_assets/vendors/js/vendors.min.js') }}"></script>
+<script src="/panel_assets/vendors/js/vendors.min.js"></script>
 
+<!--
+<script src="/panel_assets/vendors/js/vendors.min.js"></script>
+-->
 <script src="{{ asset('/panel_assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.min.js') }}"></script>
 <script src="{{ asset('/panel_assets/fonts/LivIconsEvo/js/LivIconsEvo.defaults.js') }}"></script>
 <script src="{{ asset('/panel_assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js') }}"></script>
@@ -220,8 +225,11 @@
         $('[data-toggle="tooltip"]').tooltip()
     })
 </script>
-@yield('footerScript')
 
+
+
+@yield('footerScript')
+<livewire:scripts />
 </body>
 <!-- END: Body-->
 </html>
