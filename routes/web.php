@@ -393,6 +393,9 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function ()
     //warranty
     Route::resource('warrany','WarranyController');
 
+
+
+
     //invoice
     Route::get('/invoice/{user}/create','InvoiceController@create');
     Route::post('/invoice/{user}/store','InvoiceController@store');
@@ -650,6 +653,11 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function ()
 
     //clinic _ User route
 
+    //Wallet
+//    Route::get('/wallet','WalletController@wallet_users');
+    //Wallet
+    Route::get('/wallet','WalletController@wallet_admin');
+    Route::post('/wallet','WalletController@wallet_admin_store');
 
 
     //Landing
@@ -881,6 +889,9 @@ Route::resource('event','EventController');
 Route::get('/v2/home',function(){
     return view('v2.index-logout');
 });
+
+//temp score
+Route::get('tempscore','Usercontroller@tepmscore');
 
 
 // ScoreAmbassador

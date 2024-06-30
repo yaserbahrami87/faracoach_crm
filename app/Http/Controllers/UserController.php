@@ -153,6 +153,10 @@ class UserController extends BaseController
                 ->paginate(25);
         }
 
+            if($request->has('resource'))
+            {
+                $users->appends(['resource' => $request['resource']]);
+            }
 
             // دریافت تعداد کاربرها بر اساس دسته بندی ها
             $statics=$this->get_staticsCountUsers_admin();
@@ -1146,17 +1150,19 @@ class UserController extends BaseController
                             $query->where('flag','=',1)
                                     ->where('nextfollowup_date_fa','<',$dateNow);
                         })
-                        ->paginate(25);
+                        ->paginate(20);
                 break;
             case 'myfollowup':
-                $users =$this->get_usersByType(NULL,Auth::user()->id);
+                $users =User::where('followby_expert',Auth::user()->id)
+                                        ->paginate(20);
+                    //$this->get_usersByType(NULL,Auth::user()->id);
                 break;
             case 'followedToday':
                 $users = $this->get_followedToday();
                 break;
             case 'scholarship':$users=User::where('resource','=','بورسیه تحصیلی')
                                 ->orderby('id','desc')
-                                ->paginate(25);
+                                ->paginate(20);
                 break;
             default:
                 return redirect('/admin/users/');
@@ -1278,8 +1284,6 @@ class UserController extends BaseController
     //نمایش لیست دعوت شده ها
     public function listIntroducedUser(Request $request)
     {
-        alert()->warning('این صفحه در حال بروزرسانی می باشد')->persistent('بستن');
-        return back();
 
 
         ini_set('max_execution_time',3600);
@@ -2612,6 +2616,15 @@ class UserController extends BaseController
         return back();
     }
 
-
+    public function tepmscore()
+    {
+        ini_set('max_execution_time',3600);
+        $uscore=User::get();
+//        $uscore=User::where('id','7259')->get();
+        foreach ($uscore as $u)
+        {
+            ScoreService::new_score($u);
+        }
+    }
 
 }

@@ -109,6 +109,8 @@
                             <input type="hidden" value="1" name="introduced_verified"/>
                             <button type="submit" class="btn btn-danger"> درخواست مجدد</button>
                         </form>
+                    @elseif(Auth::user()->introduced_verified==2)
+                        <a href="/panel/certificate/ambassador" class="btn btn-success">دانلود مدرک سفیر فراکوچ</a>
                     @endif
 
                 </div>
@@ -402,6 +404,9 @@
                                                                         <td>
                                                                             <div class="icons">
                                                                                 <div class="box-title">
+
+                                                                                    {{($item->score->score_introduced+$item->score->score_purchase+$item->score->score_re_entry)}}
+
 {{--                                                                                    {{ceil(\App\Services\ScoreService::score($item)['Score_final'])}}--}}
                                                                                 </div>
                                                                             </div>
@@ -480,7 +485,7 @@
                                                                         </td>
                                                                         <td>
                                                                             <div class="icons">
-{{--                                                                                <div class="box-title">{{ceil(\App\Services\ScoreService::score($item)['Score_final'])}}</div>--}}
+                                                                                {{($item->score->score_introduced+$item->score->score_purchase+$item->score->score_re_entry)}}
                                                                             </div>
 
                                                                         </td>
@@ -546,7 +551,7 @@
                                                                         </td>
                                                                         <td>
                                                                                 <span>
-{{--                                                                                      {{ceil(\App\Services\ScoreService::score($item)['Score_final'])}}--}}
+                                                                                        {{($item->score->score_introduced+$item->score->score_purchase+$item->score->score_re_entry)}}
                                                                                 </span>
                                                                         </td>
                                                                         <td>
@@ -753,7 +758,7 @@
                                         <h5 style="color: #3a283d" class="m-2">
                                             مجموع امتیاز به دست آماده شما
                                             <b>
-{{--                                                {{ceil(\App\Services\ScoreService::score(Auth::user())['Score_final'])}}--}}
+                                                {{(Auth::user()->score->score_introduced+Auth::user()->score->score_purchase+Auth::user()->score->score_re_entry)}}
                                             </b>
                                             می باشد
 
@@ -808,7 +813,7 @@
                                                             <div class="box-title"><b>{{($items->get_invitations->count())}}</b></div>
                                                         </td>
                                                         <td>
-{{--                                                            {{ceil(\App\Services\ScoreService::score($items)['Score_final'])}}--}}
+                                                            {{($item->score->score_introduced+$item->score->score_purchase+$item->score->score_re_entry)}}
                                                         </td>
                                                     </tr>
                                                 @endforeach

@@ -404,4 +404,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany('App\News');
     }
+
+    public function score()
+    {
+        return $this->hasOne('App\score');
+    }
 }
