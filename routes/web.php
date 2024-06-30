@@ -891,7 +891,7 @@ Route::get('/v2/home',function(){
 });
 
 //temp score
-Route::get('tempscore','Usercontroller@tepmscore');
+Route::get('/tempscore','UserController@tepmscore');
 
 
 // ScoreAmbassador
