@@ -404,8 +404,9 @@
                                                                         <td>
                                                                             <div class="icons">
                                                                                 <div class="box-title">
-
-                                                                                    {{($item->score->score_introduced+$item->score->score_purchase+$item->score->score_re_entry)}}
+                                                                                    @if(!is_null($item->score))
+                                                                                        {{($item->score->score_introduced+$item->score->score_purchase+$item->score->score_re_entry)}}
+                                                                                    @endif
 
 {{--                                                                                    {{ceil(\App\Services\ScoreService::score($item)['Score_final'])}}--}}
                                                                                 </div>
@@ -485,7 +486,9 @@
                                                                         </td>
                                                                         <td>
                                                                             <div class="icons">
-                                                                                {{($item->score->score_introduced+$item->score->score_purchase+$item->score->score_re_entry)}}
+                                                                                @if(!is_null($item->score))
+                                                                                    {{($item->score->score_introduced+$item->score->score_purchase+$item->score->score_re_entry)}}
+                                                                                @endif
                                                                             </div>
 
                                                                         </td>
@@ -551,7 +554,9 @@
                                                                         </td>
                                                                         <td>
                                                                                 <span>
+                                                                                    @if(!is_null($item->score))
                                                                                         {{($item->score->score_introduced+$item->score->score_purchase+$item->score->score_re_entry)}}
+                                                                                    @endif
                                                                                 </span>
                                                                         </td>
                                                                         <td>
@@ -758,7 +763,9 @@
                                         <h5 style="color: #3a283d" class="m-2">
                                             مجموع امتیاز به دست آماده شما
                                             <b>
-                                                {{(Auth::user()->score->score_introduced+Auth::user()->score->score_purchase+Auth::user()->score->score_re_entry)}}
+                                                @if(!is_null($item->score))
+                                                    {{(Auth::user()->score->score_introduced+Auth::user()->score->score_purchase+Auth::user()->score->score_re_entry)}}
+                                                @endif
                                             </b>
                                             می باشد
 
@@ -813,7 +820,9 @@
                                                             <div class="box-title"><b>{{($items->get_invitations->count())}}</b></div>
                                                         </td>
                                                         <td>
-                                                            {{($item->score->score_introduced+$item->score->score_purchase+$item->score->score_re_entry)}}
+                                                            @if(!is_null($item->score))
+                                                                {{($item->score->score_introduced+$item->score->score_purchase+$item->score->score_re_entry)}}
+                                                            @endif
                                                         </td>
                                                     </tr>
                                                 @endforeach
