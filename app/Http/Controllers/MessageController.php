@@ -198,7 +198,8 @@ class MessageController extends BaseController
         ->when($request->personal, function ($query) use ($request)
         {
             return $query->orwhere('fname','like',"%".$request->personal."%")
-                            ->orwhere('lname','like',"%".$request->personal."%");
+                            ->orwhere('lname','like',"%".$request->personal."%")
+                            ->orwhere('tel','like',"%".$request->personal."%");
         })
         ->when($request->events_id, function ($query) use ($request)
         {
@@ -233,6 +234,7 @@ class MessageController extends BaseController
         {
             $filename=NULL;
         }
+
 
         if(!is_null($request->subject_ticket))
         {
