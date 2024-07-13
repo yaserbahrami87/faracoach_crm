@@ -153,9 +153,9 @@
             <div class="row" id="category">
                 <div class="col-12">
                     <label>
-                         جستجو بر اساس نام یا نام خانوادگی یا تلفن
+                         جستجو بر اساس نام یا نام خانوادگی یا تلفن (بدون صفراولیه)
                     </label>
-                    <input type="text" id="subject" name="personal" class="form-control text-left"  placeholder="نام یا نام خانوادگی " value="" dir="ltr" />
+                    <input type="text" id="subject" name="personal" class="form-control text-left"  placeholder="نام یا نام خانوادگی " value="{{old('personal')}}" dir="ltr"  />
                 </div>
                 <div class="col-4">
                     <div class="form-group">
@@ -206,16 +206,7 @@
                             </div>
                             <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne" aria-expanded="true">
                                 <div class="panel-body">
-                                        <input type="hidden" name="type" value="sms" />
                                         <div class="row">
-                                            <div class="col-4">
-                                                <div class="form-group">
-                                                    <div class="controls">
-                                                        <label>موضوع<span class="text-danger">*</span></label>
-                                                        <input type="text" id="subject" name="subject" class="form-control text-left" required placeholder="موضوع " value="" dir="ltr" />
-                                                    </div>
-                                                </div>
-                                            </div>
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <label>متن پیام<span class="text-danger">*</span></label>

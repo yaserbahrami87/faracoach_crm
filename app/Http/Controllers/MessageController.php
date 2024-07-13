@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\course;
+use App\event;
 use App\message;
 use App\notification;
 use App\Notifications\sendMessageNotification;
@@ -176,7 +177,6 @@ class MessageController extends BaseController
 
         $this->validate(request(),
         [
-            'subject'           =>'required|min:3|string',
             //'user_id_recieve'   =>'required|numeric',
 
             'comment'           =>'required|string|min:3|',
@@ -236,37 +236,46 @@ class MessageController extends BaseController
         }
 
 
-        if(!is_null($request->subject_ticket))
+        if($users->count()>0)
         {
-            foreach ($users as $item)
+            if(!is_null($request->subject_ticket))
             {
-                $status = message::create(
-                    [
-                        'subject' => $request['subject_ticket'],
-                        'user_id_recieve' => $item->id,
-                        'comment' => $request['comment_ticket'],
-                        'user_id_send' => Auth::user()->id,
-                        'attach' => $filename,
-                        'date_fa' => $this->dateNow,
-                        'time_fa' => $this->timeNow
+                foreach ($users as $item)
+                {
+                    $status = message::create(
+                        [
+                            'subject' => $request['subject_ticket'],
+                            'user_id_recieve' => $item->id,
+                            'comment' => $request['comment_ticket'],
+                            'user_id_send' => Auth::user()->id,
+                            'attach' => $filename,
+                            'date_fa' => $this->dateNow,
+                            'time_fa' => $this->timeNow
+                        ]);
+                    $item->notify(new sendMessageNotification($item->tel,'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\nنام کاربری شماره همراه شما"."\n my.faracoach.com"));
+                    notification::create([
+                        'user_id'           =>$item->id,
+                        'insert_user_id'    =>Auth::user()->id,
+                        'notification'      =>'یک پیام خصوصی دارید',
+                        'date_fa'           =>$this->dateNow,
+                        'time_fa'           =>$this->timeNow,
                     ]);
-                $item->notify(new sendMessageNotification($item->tel,'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\nنام کاربری شماره همراه شما"."\n my.faracoach.com"));
-                notification::create([
-                    'user_id'           =>$item->id,
-                    'insert_user_id'    =>Auth::user()->id,
-                    'notification'      =>'یک پیام خصوصی دارید',
-                    'date_fa'           =>$this->dateNow,
-                    'time_fa'           =>$this->timeNow,
-                ]);
+                }
             }
+
+            if(!is_null($request->subject))
+            {
+                foreach ($users as $item) {
+                    $this->sendSms($item->tel, $request->comment);
+                }
+            }
+        }
+        else
+        {
+            alert()->warning('کاربری یا کاربرانی با این مشخصات یافت نشد')->persistent('بستن');
+            return back();
         }
 
-        if(!is_null($request->subject))
-        {
-            foreach ($users as $item) {
-                $this->sendSms($item->tel, $request->comment);
-            }
-        }
 
 
 
@@ -374,7 +383,7 @@ class MessageController extends BaseController
 
         if($users)
         {
-            alert()->success("پیام با موفقیت ارسال شد")->persistent('بستن');
+            alert()->success(" پیام با موفقیت ارسال شد ".$users->count() )->persistent('بستن');
         }
         else
         {
@@ -570,7 +579,7 @@ class MessageController extends BaseController
 
     public function create_message ()
     {
-        $events = $this->get_events(NULL, NULL, NULL, NULL, NULL, 1, 'get');
+        $events =  event::get();//$this->get_events(NULL, NULL, NULL, NULL, NULL, 1, 'get');
         $courses = course::get();
         return view('admin.Message.Create_Message')
             ->with('courses', $courses)
