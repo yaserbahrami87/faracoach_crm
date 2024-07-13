@@ -390,6 +390,8 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function ()
     //scholarship collabration
     Route::get('/users/collabrations','ScholarshipController@collabrations');
 
+
+
     //warranty
     Route::resource('warrany','WarranyController');
 
@@ -462,6 +464,7 @@ Route::middleware('can:isAdmin')->prefix('admin')->group(function ()
     Route::post('/message/reply','MessageController@reply');
     Route::post('/message/send','MessageController@sendMessage');
     Route::resource('message','MessageController');
+    Route::get('/create_message','MessageController@create_message');
 
     // Route Admin Followup
     Route::post('/followup/create','FollowupController@store');
