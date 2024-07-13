@@ -173,14 +173,56 @@ class MessageController extends BaseController
      */
     public function store(Request $request)
     {
+
         $this->validate(request(),
         [
             'subject'           =>'required|min:3|string',
             //'user_id_recieve'   =>'required|numeric',
-            'events_id'         =>'nullable|array',
+
             'comment'           =>'required|string|min:3|',
-            'attach'            =>'nullable|mimes:jpeg,jpg,pdf|max:600',
+            //'attach'            =>'nullable|mimes:jpeg,jpg,pdf|max:600',
+            'subject_ticket'    =>'nullable|string|min:3|max:200',
+            'comment_ticket'    =>'nullable|string|max:200|min:3',
+            'subject_email'     =>'nullable|string|max:200|min:3',
+            'comment_email'     =>'nullable|string|max:200|min:3',
+
         ]);
+
+
+
+        $users = User::when($request->user_category, function ($query) use ($request)
+        {
+
+            return $query->orwherein('type', $request->user_category);
+        })
+        ->when($request->personal, function ($query) use ($request)
+        {
+            return $query->orwhere('fname','like',"%".$request->personal."%")
+                            ->orwhere('lname','like',"%".$request->personal."%");
+        })
+        ->when($request->events_id, function ($query) use ($request)
+        {
+            return $query->with('reserveEvent')
+                ->whereHas('reserveEvent', function($query) use ($request)
+                {
+
+                    return $query->wherein('event_id',$request->events_id);
+                });
+
+        })
+        ->when($request->course_id, function ($query) use ($request)
+        {
+            return $query->with('students')
+                ->whereHas('students', function($query) use ($request)
+                {
+
+                    return $query->wherein('course_id',$request->course_id);
+                });
+
+        })
+        ->get();
+
+
 
         if(isset($request['attach'])) {
             $filename = time() . "-" . Auth::user()->tel . "." . $request->file('attach')->extension();
@@ -192,110 +234,143 @@ class MessageController extends BaseController
             $filename=NULL;
         }
 
-
-        if($request->events_id)
+        if(!is_null($request->subject_ticket))
         {
-            foreach ($request->events_id as $item)
+            foreach ($users as $item)
             {
-                $users=User::join('eventreserves','users.id','=','eventreserves.user_id')
-                    ->where('eventreserves.event_id','=',$item)
-                    ->select('users.*')
-                    ->get();
-
-//                //باید حذف شود
-//                $users=user::orwhere('id','=',1)
-//                            ->orwhere('tel','=','+989339273736')
-//                            ->get();
-
-                foreach ($users as $item2)
-                {
-                    $status = message::create(
-                        [
-                            'subject' => $request['subject'],
-                            'user_id_recieve' => $item2->id,
-                            //'events_id' => $request['events_id'],
-                            'comment' => $request['comment'],
-                            'user_id_send' => Auth::user()->id,
-                            'attach' => $filename,
-                            'date_fa' => $this->dateNow,
-                            'time_fa' => $this->timeNow
-                        ]);
-                    $item2->notify(new sendMessageNotification($item2->tel,'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\nنام کاربری شماره همراه شما"."\n my.faracoach.com"));
-                    notification::create([
-                        'user_id'           =>$item2->id,
-                        'insert_user_id'    =>Auth::user()->id,
-                        'notification'      =>'یک پیام خصوصی دارید',
-                        'date_fa'           =>$this->dateNow,
-                        'time_fa'           =>$this->timeNow,
+                $status = message::create(
+                    [
+                        'subject' => $request['subject_ticket'],
+                        'user_id_recieve' => $item->id,
+                        'comment' => $request['comment_ticket'],
+                        'user_id_send' => Auth::user()->id,
+                        'attach' => $filename,
+                        'date_fa' => $this->dateNow,
+                        'time_fa' => $this->timeNow
                     ]);
-//                    $this->sendSms($item2->tel,'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\nنام کاربری شماره همراه شما"."\n my.faracoach.com");
-                }
+                $item->notify(new sendMessageNotification($item->tel,'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\nنام کاربری شماره همراه شما"."\n my.faracoach.com"));
+                notification::create([
+                    'user_id'           =>$item->id,
+                    'insert_user_id'    =>Auth::user()->id,
+                    'notification'      =>'یک پیام خصوصی دارید',
+                    'date_fa'           =>$this->dateNow,
+                    'time_fa'           =>$this->timeNow,
+                ]);
             }
-
         }
 
-        if($request->course_id)
+        if(!is_null($request->subject))
         {
-            foreach ($request->course_id as $item)
-            {
-                $users=User::join('students','users.id','=','students.user_id')
-                            ->where('students.course_id','=',$item)
-                            ->select('users.*')
-                            ->get();
-                foreach ($users as $item2)
-                {
-                    $status = message::create(
-                        [
-                            'subject' => $request['subject'],
-                            'user_id_recieve' => $item2->id,
-                            //'events_id' => $request['events_id'],
-                            'comment' => $request['comment'],
-                            'user_id_send' => Auth::user()->id,
-                            'attach' => $filename,
-                            'date_fa' => $this->dateNow,
-                            'time_fa' => $this->timeNow
-                        ]);
-                    $item2->id->notify(new sendMessageNotification($item2->tel,'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\nنام کاربری شماره همراه شما"."\n my.faracoach.com"));
-                   // $this->sendSms($item2->tel,'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\nنام کاربری شماره همراه شما"."\n my.faracoach.com");
-                }
+            foreach ($users as $item) {
+                $this->sendSms($item->tel, $request->comment);
             }
         }
 
-        if($request->user_category)
-        {
-            foreach ($request->user_category as $item)
-            {
-                foreach(explode(',',$item) as $item2)
-                {
-                    $users=user::where('type','=',$item2)
-                                ->get();
-                    foreach ($users as $item2)
-                    {
-                        $status = message::create(
-                            [
-                                'subject' => $request['subject'],
-                                'user_id_recieve' => $item2->id,
-                                //'events_id' => $request['events_id'],
-                                'comment' => $request['comment'],
-                                'user_id_send' => Auth::user()->id,
-                                'attach' => $filename,
-                                'date_fa' => $this->dateNow,
-                                'time_fa' => $this->timeNow
-                            ]);
-                        $item2->id->notify(new sendMessageNotification($item2->tel,'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\nنام کاربری شماره همراه شما"."\n my.faracoach.com"));
-                        //$this->sendSms($item2->tel,'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\nنام کاربری شماره همراه شما"."\n my.faracoach.com");
-                    }
-                }
 
-            }
 
-        }
+
+
+
+
+
+//        if($request->events_id)
+//        {
+//            foreach ($request->events_id as $item)
+//            {
+//                $users=User::join('eventreserves','users.id','=','eventreserves.user_id')
+//                    ->where('eventreserves.event_id','=',$item)
+//                    ->select('users.*')
+//                    ->get();
+//
+//                foreach ($users as $item2)
+//                {
+//                    $status = message::create(
+//                        [
+//                            'subject' => $request['subject'],
+//                            'user_id_recieve' => $item2->id,
+//                            //'events_id' => $request['events_id'],
+//                            'comment' => $request['comment'],
+//                            'user_id_send' => Auth::user()->id,
+//                            'attach' => $filename,
+//                            'date_fa' => $this->dateNow,
+//                            'time_fa' => $this->timeNow
+//                        ]);
+//                    $item2->notify(new sendMessageNotification($item2->tel,'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\nنام کاربری شماره همراه شما"."\n my.faracoach.com"));
+//                    notification::create([
+//                        'user_id'           =>$item2->id,
+//                        'insert_user_id'    =>Auth::user()->id,
+//                        'notification'      =>'یک پیام خصوصی دارید',
+//                        'date_fa'           =>$this->dateNow,
+//                        'time_fa'           =>$this->timeNow,
+//                    ]);
+////                    $this->sendSms($item2->tel,'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\nنام کاربری شماره همراه شما"."\n my.faracoach.com");
+//                }
+//            }
+//
+//        }
+//
+//        if($request->course_id)
+//        {
+//            foreach ($request->course_id as $item)
+//            {
+//                $users=User::join('students','users.id','=','students.user_id')
+//                            ->where('students.course_id','=',$item)
+//                            ->select('users.*')
+//                            ->get();
+//                foreach ($users as $item2)
+//                {
+//                    $status = message::create(
+//                        [
+//                            'subject' => $request['subject'],
+//                            'user_id_recieve' => $item2->id,
+//                            //'events_id' => $request['events_id'],
+//                            'comment' => $request['comment'],
+//                            'user_id_send' => Auth::user()->id,
+//                            'attach' => $filename,
+//                            'date_fa' => $this->dateNow,
+//                            'time_fa' => $this->timeNow
+//                        ]);
+//                    $item2->id->notify(new sendMessageNotification($item2->tel,'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\nنام کاربری شماره همراه شما"."\n my.faracoach.com"));
+//                   // $this->sendSms($item2->tel,'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\nنام کاربری شماره همراه شما"."\n my.faracoach.com");
+//                }
+//            }
+//        }
+//
+//        if($request->user_category)
+//        {
+//            foreach ($request->user_category as $item)
+//            {
+//                foreach(explode(',',$item) as $item2)
+//                {
+//                    $users=user::where('type','=',$item2)
+//                                ->get();
+//                    foreach ($users as $item2)
+//                    {
+//                        $status = message::create(
+//                            [
+//                                'subject' => $request['subject'],
+//                                'user_id_recieve' => $item2->id,
+//                                //'events_id' => $request['events_id'],
+//                                'comment' => $request['comment'],
+//                                'user_id_send' => Auth::user()->id,
+//                                'attach' => $filename,
+//                                'date_fa' => $this->dateNow,
+//                                'time_fa' => $this->timeNow
+//                            ]);
+//                        $item2->id->notify(new sendMessageNotification($item2->tel,'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\nنام کاربری شماره همراه شما"."\n my.faracoach.com"));
+//                        //$this->sendSms($item2->tel,'شما در پورتال فراکوچ یک پیام خصوصی دارید.'."\nنام کاربری شماره همراه شما"."\n my.faracoach.com");
+//                    }
+//                }
+//
+//            }
+//
+//        }
 
 //        $request['events_id']=implode(',',$request['events_id']);
 
 
 
-        if($status)
+        if($users)
         {
             alert()->success("پیام با موفقیت ارسال شد")->persistent('بستن');
         }
@@ -490,4 +565,14 @@ class MessageController extends BaseController
 
         return back();
     }
+
+    public function create_message ()
+    {
+        $events = $this->get_events(NULL, NULL, NULL, NULL, NULL, 1, 'get');
+        $courses = course::get();
+        return view('admin.Message.Create_Message')
+            ->with('courses', $courses)
+            ->with('events', $events);
+    }
+
 }
