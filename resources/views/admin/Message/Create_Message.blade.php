@@ -148,22 +148,24 @@
             ارسال پیام به مخاطبین
         </h5>
         <div class="div">
+            <form method="POST" action="/admin/message" >
+                {{ csrf_field() }}
             <div class="row" id="category">
                 <div class="col-12">
                     <label>
-                        جستجو بر اساس
+                         جستجو بر اساس نام یا نام خانوادگی یا تلفن
                     </label>
-                    <input type="text" id="subject" name="subject" class="form-control text-left" required placeholder="نام یا نام خانوادگی " value="" dir="ltr" />
+                    <input type="text" id="subject" name="personal" class="form-control text-left"  placeholder="نام یا نام خانوادگی " value="" dir="ltr" />
                 </div>
                 <div class="col-4">
                     <div class="form-group">
                         <label>کاربرها </label>
                         <select class="form-control" name="user_category[]" multiple>
-                            <option value="-1,-2,-3">مارکتینگ</option>
-                            <option value="1,11,12,13,14,20">فروش</option>
-                            <option value="">کاربر جدید</option>
-                            <option value="">دانشجو</option>
-                            <option value=""></option>
+                            <option value="-1">مارکتینگ 1</option>
+                            <option value="-2">مارکتینگ 2</option>
+                            <option value="-3">مارکتینگ 3</option>
+                            <option value="20">مشتری</option>
+                            <option value="11">تور پیگیری</option>
                         </select>
                     </div>
                 </div>
@@ -191,322 +193,178 @@
             </div>
 
             <div class="col-sm-9">
-                <div class="panel-group drop-accordion" id="accordion" role="tablist" aria-multiselectable="true">
-                    <div class="panel panel-default">
-                        <div class="panel-heading tab-collapsed" role="tab" id="headingOne">
-                            <h4 class="panel-title">
-                                <a class="collapse-controle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    <span>  ارسال پیام از طریق اس ام س </span>
-                                    <div class="panel-body-icon"><i class="bi bi-chat-left-text-fill"></i></div>
-                                    <span class="expand-icon-wrap"><i class="fa expand-icon"></i></span>
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne" aria-expanded="true">
-                            <div class="panel-body">
-                                <form method="POST" action="/admin/message" enctype="multipart/form-data">
-                                    {{ csrf_field() }}
-                                    <input type="hidden" name="type" value="sms" />
-                                    <div class="row">
-                                        <div class="col-4">
-                                            <div class="form-group">
-                                                <div class="controls">
-                                                    <label>موضوع<span class="text-danger">*</span></label>
-                                                    <input type="text" id="subject" name="subject" class="form-control text-left" required placeholder="موضوع " value="" dir="ltr" />
+                    <div class="panel-group drop-accordion" id="accordion" role="tablist" aria-multiselectable="true">
+                        <div class="panel panel-default">
+                            <div class="panel-heading tab-collapsed" role="tab" id="headingOne">
+                                <h4 class="panel-title">
+                                    <a class="collapse-controle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        <span>  ارسال پیام از طریق پیامک </span>
+                                        <div class="panel-body-icon"><i class="bi bi-chat-left-text-fill"></i></div>
+                                        <span class="expand-icon-wrap"><i class="fa expand-icon"></i></span>
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne" aria-expanded="true">
+                                <div class="panel-body">
+                                        <input type="hidden" name="type" value="sms" />
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <div class="controls">
+                                                        <label>موضوع<span class="text-danger">*</span></label>
+                                                        <input type="text" id="subject" name="subject" class="form-control text-left" required placeholder="موضوع " value="" dir="ltr" />
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <label>متن پیام<span class="text-danger">*</span></label>
-                                                <textarea class="form-control" id="comment" name="comment" required rows="3" placeholder="متن پیام خود را وارد کنید ..."></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
-                                            <button type="submit" class="btn btn-primary glow mr-sm-1 mb-1">ارسال پیام</button>
-                                            <button type="reset" class="btn btn-light mb-1">انصراف</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingTwo">
-                            <h4 class="panel-title">
-                                <a class="collapse-controle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    <span>ارسال پیام از طریق تیکت</span>
-                                    <div class="panel-body-icon"><i class="bi bi-chat-square-quote-fill"></i></div>
-                                    <span class="expand-icon-wrap"><i class="fa expand-icon"></i></span>
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo" aria-expanded="false" style="height: 0px;">
-                            <div class="panel-body">
-                                <form method="POST" action="/admin/message" enctype="multipart/form-data">
-                                    {{ csrf_field() }}
-                                    <input type="hidden" name="type" value="sms" />
-                                    <div class="row">
-                                        {{--                                        <div class="col-4">--}}
-                                        {{--                                            <div class="form-group">--}}
-                                        {{--                                                <label>کاربرها </label>--}}
-                                        {{--                                                <select class="form-control" name="user_category[]" multiple>--}}
-                                        {{--                                                    <option value="-1,-2,-3">مارکتینگ</option>--}}
-                                        {{--                                                    <option value="1,11,12,13,14,20">فروش</option>--}}
-                                        {{--                                                </select>--}}
-                                        {{--                                            </div>--}}
-                                        {{--                                        </div>--}}
-                                        {{--                                        <div class="col-4">--}}
-                                        {{--                                            <div class="form-group">--}}
-                                        {{--                                                <label>رویدادها </label>--}}
-                                        {{--                                                <select class="form-control" name="events_id[]" multiple>--}}
-                                        {{--                                                    @foreach($events as $item)--}}
-                                        {{--                                                        <option value="{{$item->id}}">{{$item->event}}</option>--}}
-                                        {{--                                                    @endforeach--}}
-                                        {{--                                                </select>--}}
-                                        {{--                                            </div>--}}
-                                        {{--                                        </div>--}}
-                                        {{--                                        <div class="col-4">--}}
-                                        {{--                                            <div class="form-group">--}}
-                                        {{--                                                <label>دوره ها </label>--}}
-                                        {{--                                                <select class="form-control" name="course_id[]" multiple>--}}
-                                        {{--                                                    @foreach($courses as $item)--}}
-                                        {{--                                                        <option value="{{$item->id}}">{{$item->course}}</option>--}}
-                                        {{--                                                    @endforeach--}}
-                                        {{--                                                </select>--}}
-                                        {{--                                            </div>--}}
-                                        {{--                                        </div>--}}
-                                        <div class="col-4">
-                                            <div class="form-group">
-                                                <div class="controls">
-                                                    <label>موضوع<span class="text-danger">*</span></label>
-                                                    <input type="text" id="subject" name="subject" class="form-control text-left" required placeholder="موضوع " value="" dir="ltr" />
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label>متن پیام<span class="text-danger">*</span></label>
+                                                    <textarea class="form-control" id="comment" name="comment" required rows="3" placeholder="متن پیام خود را وارد کنید ..."></textarea>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <label>متن پیام<span class="text-danger">*</span></label>
-                                                <textarea class="form-control" id="comment" name="comment" required rows="3" placeholder="متن پیام خود را وارد کنید ..."></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
-                                            <button type="submit" class="btn btn-primary glow mr-sm-1 mb-1">ارسال پیام</button>
-                                            <button type="reset" class="btn btn-light mb-1">انصراف</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingThree">
-                            <h4 class="panel-title">
-                                <a class="collapsed collapse-controle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                    <span>ارسال پیام از طریق ایمیل</span>
-                                    <div class="panel-body-icon"><i class="bi bi-envelope-fill"></i></div>
-                                    <span class="expand-icon-wrap"><i class="fa expand-icon"></i></span>
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree" aria-expanded="false">
-                            <div class="panel-body">
-                                <form method="POST" action="/admin/message" enctype="multipart/form-data">
-                                    {{ csrf_field() }}
-                                    <input type="hidden" name="type" value="sms" />
-                                    <div class="row">
-                                        {{--                                        <div class="col-4">--}}
-                                        {{--                                            <div class="form-group">--}}
-                                        {{--                                                <label>کاربرها </label>--}}
-                                        {{--                                                <select class="form-control" name="user_category[]" multiple>--}}
-                                        {{--                                                    <option value="-1,-2,-3">مارکتینگ</option>--}}
-                                        {{--                                                    <option value="1,11,12,13,14,20">فروش</option>--}}
-                                        {{--                                                </select>--}}
-                                        {{--                                            </div>--}}
-                                        {{--                                        </div>--}}
-                                        {{--                                        <div class="col-4">--}}
-                                        {{--                                            <div class="form-group">--}}
-                                        {{--                                                <label>رویدادها </label>--}}
-                                        {{--                                                <select class="form-control" name="events_id[]" multiple>--}}
-                                        {{--                                                    @foreach($events as $item)--}}
-                                        {{--                                                        <option value="{{$item->id}}">{{$item->event}}</option>--}}
-                                        {{--                                                    @endforeach--}}
-                                        {{--                                                </select>--}}
-                                        {{--                                            </div>--}}
-                                        {{--                                        </div>--}}
-                                        {{--                                        <div class="col-4">--}}
-                                        {{--                                            <div class="form-group">--}}
-                                        {{--                                                <label>دوره ها </label>--}}
-                                        {{--                                                <select class="form-control" name="course_id[]" multiple>--}}
-                                        {{--                                                    @foreach($courses as $item)--}}
-                                        {{--                                                        <option value="{{$item->id}}">{{$item->course}}</option>--}}
-                                        {{--                                                    @endforeach--}}
-                                        {{--                                                </select>--}}
-                                        {{--                                            </div>--}}
-                                        {{--                                        </div>--}}
-                                        <div class="col-4">
-                                            <div class="form-group">
-                                                <div class="controls">
-                                                    <label>موضوع<span class="text-danger">*</span></label>
-                                                    <input type="text" id="subject" name="subject" class="form-control text-left" required placeholder="موضوع " value="" dir="ltr" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <label>متن پیام<span class="text-danger">*</span></label>
-                                                <textarea class="form-control" id="comment" name="comment" required rows="3" placeholder="متن پیام خود را وارد کنید ..."></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
-                                            <button type="submit" class="btn btn-primary glow mr-sm-1 mb-1">ارسال پیام</button>
-                                            <button type="reset" class="btn btn-light mb-1">انصراف</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingFour">
-                            <h4 class="panel-title">
-                                <a class="collapsed collapse-controle" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
 
-                                    <span>ارسال پیام از طریق تلگرام</span>
-                                    <div class="panel-body-icon"><i class="bi bi-telegram"></i></div>
-                                    <span class="expand-icon-wrap"><i class="fa expand-icon"></i></span>
-                                </a>
-                            </h4>
+                                        </div>
+                                </div>
+                            </div>
                         </div>
-                        <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour" aria-expanded="false">
-                            <div class="panel-body">
-                                <form method="POST" action="/admin/message" enctype="multipart/form-data">
-                                    {{ csrf_field() }}
-                                    <input type="hidden" name="type" value="sms" />
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingTwo">
+                                <h4 class="panel-title">
+                                    <a class="collapse-controle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        <span>ارسال پیام از طریق تیکت</span>
+                                        <div class="panel-body-icon"><i class="bi bi-chat-square-quote-fill"></i></div>
+                                        <span class="expand-icon-wrap"><i class="fa expand-icon"></i></span>
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo" aria-expanded="false" style="height: 0px;">
+                                <div class="panel-body">
                                     <div class="row">
-                                        {{--                                        <div class="col-4">--}}
-                                        {{--                                            <div class="form-group">--}}
-                                        {{--                                                <label>کاربرها </label>--}}
-                                        {{--                                                <select class="form-control" name="user_category[]" multiple>--}}
-                                        {{--                                                    <option value="-1,-2,-3">مارکتینگ</option>--}}
-                                        {{--                                                    <option value="1,11,12,13,14,20">فروش</option>--}}
-                                        {{--                                                </select>--}}
-                                        {{--                                            </div>--}}
-                                        {{--                                        </div>--}}
-                                        {{--                                        <div class="col-4">--}}
-                                        {{--                                            <div class="form-group">--}}
-                                        {{--                                                <label>رویدادها </label>--}}
-                                        {{--                                                <select class="form-control" name="events_id[]" multiple>--}}
-                                        {{--                                                    @foreach($events as $item)--}}
-                                        {{--                                                        <option value="{{$item->id}}">{{$item->event}}</option>--}}
-                                        {{--                                                    @endforeach--}}
-                                        {{--                                                </select>--}}
-                                        {{--                                            </div>--}}
-                                        {{--                                        </div>--}}
-                                        {{--                                        <div class="col-4">--}}
-                                        {{--                                            <div class="form-group">--}}
-                                        {{--                                                <label>دوره ها </label>--}}
-                                        {{--                                                <select class="form-control" name="course_id[]" multiple>--}}
-                                        {{--                                                    @foreach($courses as $item)--}}
-                                        {{--                                                        <option value="{{$item->id}}">{{$item->course}}</option>--}}
-                                        {{--                                                    @endforeach--}}
-                                        {{--                                                </select>--}}
-                                        {{--                                            </div>--}}
-                                        {{--                                        </div>--}}
                                         <div class="col-4">
                                             <div class="form-group">
                                                 <div class="controls">
-                                                    <label>موضوع<span class="text-danger">*</span></label>
-                                                    <input type="text" id="subject" name="subject" class="form-control text-left" required placeholder="موضوع " value="" dir="ltr" />
+                                                    <label>موضوع</label>
+                                                    <input type="text" id="subject" name="subject_ticket" class="form-control text-left"  placeholder="موضوع " value="" dir="ltr" />
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="form-group">
-                                                <label>متن پیام<span class="text-danger">*</span></label>
-                                                <textarea class="form-control" id="comment" name="comment" required rows="3" placeholder="متن پیام خود را وارد کنید ..."></textarea>
+                                                <label>متن پیام</label>
+                                                <textarea class="form-control" id="comment" name="comment_ticket"  rows="3" placeholder="متن پیام خود را وارد کنید ..."></textarea>
                                             </div>
                                         </div>
-                                        <div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
-                                            <button type="submit" class="btn btn-primary glow mr-sm-1 mb-1">ارسال پیام</button>
-                                            <button type="reset" class="btn btn-light mb-1">انصراف</button>
-                                        </div>
                                     </div>
-                                </form>
+
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingFive">
-                            <h4 class="panel-title">
-                                <a class="collapsed collapse-controle" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                    <span>ارسال پیام از طریق واتساپ</span>
-                                    <div class="panel-body-icon"><i class="bi bi-whatsapp"></i></div>
-                                    <span class="expand-icon-wrap"><i class="fa expand-icon"></i></span>
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive" aria-expanded="false">
-                            <div class="panel-body">
-                                <form method="POST" action="/admin/message" enctype="multipart/form-data">
-                                    {{ csrf_field() }}
-                                    <input type="hidden" name="type" value="sms" />
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingThree">
+                                <h4 class="panel-title">
+                                    <a class="collapsed collapse-controle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        <span>ارسال پیام از طریق ایمیل</span>
+                                        <div class="panel-body-icon"><i class="bi bi-envelope-fill"></i></div>
+                                        <span class="expand-icon-wrap"><i class="fa expand-icon"></i></span>
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree" aria-expanded="false">
+                                <div class="panel-body">
                                     <div class="row">
-                                        {{--                                        <div class="col-4">--}}
-                                        {{--                                            <div class="form-group">--}}
-                                        {{--                                                <label>کاربرها </label>--}}
-                                        {{--                                                <select class="form-control" name="user_category[]" multiple>--}}
-                                        {{--                                                    <option value="-1,-2,-3">مارکتینگ</option>--}}
-                                        {{--                                                    <option value="1,11,12,13,14,20">فروش</option>--}}
-                                        {{--                                                </select>--}}
-                                        {{--                                            </div>--}}
-                                        {{--                                        </div>--}}
-                                        {{--                                        <div class="col-4">--}}
-                                        {{--                                            <div class="form-group">--}}
-                                        {{--                                                <label>رویدادها </label>--}}
-                                        {{--                                                <select class="form-control" name="events_id[]" multiple>--}}
-                                        {{--                                                    @foreach($events as $item)--}}
-                                        {{--                                                        <option value="{{$item->id}}">{{$item->event}}</option>--}}
-                                        {{--                                                    @endforeach--}}
-                                        {{--                                                </select>--}}
-                                        {{--                                            </div>--}}
-                                        {{--                                        </div>--}}
-                                        {{--                                        <div class="col-4">--}}
-                                        {{--                                            <div class="form-group">--}}
-                                        {{--                                                <label>دوره ها </label>--}}
-                                        {{--                                                <select class="form-control" name="course_id[]" multiple>--}}
-                                        {{--                                                    @foreach($courses as $item)--}}
-                                        {{--                                                        <option value="{{$item->id}}">{{$item->course}}</option>--}}
-                                        {{--                                                    @endforeach--}}
-                                        {{--                                                </select>--}}
-                                        {{--                                            </div>--}}
-                                        {{--                                        </div>--}}
                                         <div class="col-4">
                                             <div class="form-group">
                                                 <div class="controls">
-                                                    <label>موضوع<span class="text-danger">*</span></label>
-                                                    <input type="text" id="subject" name="subject" class="form-control text-left" required placeholder="موضوع " value="" dir="ltr" />
+                                                    <label>موضوع</label>
+                                                    <input type="text" id="subject" name="subject_email" class="form-control text-left"  placeholder="موضوع " value="" dir="ltr" disabled />
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="form-group">
-                                                <label>متن پیام<span class="text-danger">*</span></label>
-                                                <textarea class="form-control" id="comment" name="comment" required rows="3" placeholder="متن پیام خود را وارد کنید ..."></textarea>
+                                                <label>متن پیام</label>
+                                                <textarea class="form-control" id="comment" name="comment_email"  rows="3" placeholder="متن پیام خود را وارد کنید ..." disabled></textarea>
                                             </div>
                                         </div>
-                                        <div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
-                                            <button type="submit" class="btn btn-primary glow mr-sm-1 mb-1">ارسال پیام</button>
-                                            <button type="reset" class="btn btn-light mb-1">انصراف</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingFour">
+                                <h4 class="panel-title">
+                                    <a class="collapsed collapse-controle" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+
+                                        <span>ارسال پیام از طریق تلگرام</span>
+                                        <div class="panel-body-icon"><i class="bi bi-telegram"></i></div>
+                                        <span class="expand-icon-wrap"><i class="fa expand-icon"></i></span>
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour" aria-expanded="false">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <div class="controls">
+                                                    <label>موضوع</label>
+                                                    <input type="text" id="subject" name="subject_telegram" disabled class="form-control text-left"  placeholder="موضوع " value="" dir="ltr" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label>متن پیام</label>
+                                                <textarea class="form-control" id="comment" name="comment_telegram" disabled rows="3" placeholder="متن پیام خود را وارد کنید ..."></textarea>
+                                            </div>
                                         </div>
                                     </div>
-                                </form>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingFive">
+                                <h4 class="panel-title">
+                                    <a class="collapsed collapse-controle" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                        <span>ارسال پیام از طریق واتساپ</span>
+                                        <div class="panel-body-icon"><i class="bi bi-whatsapp"></i></div>
+                                        <span class="expand-icon-wrap"><i class="fa expand-icon"></i></span>
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive" aria-expanded="false">
+                                <div class="panel-body">
+                                    <input type="hidden" name="type" value="sms" />
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <div class="controls">
+                                                    <label>موضوع</label>
+                                                    <input type="text" id="subject" name="subject_whatsapp" disabled class="form-control text-left"  placeholder="موضوع " value="" dir="ltr" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label>متن پیام</label>
+                                                <textarea class="form-control" id="comment" name="comment_whatsapp" disabled  rows="3" placeholder="متن پیام خود را وارد کنید ..."></textarea>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+
+                        <button type="submit" class="btn btn-primary glow mr-sm-1 mb-1">ارسال پیام</button>
+
+
                 <!-- /#accordion -->
             </div>
+            </form>
         </div>
     </div>
 @endsection
