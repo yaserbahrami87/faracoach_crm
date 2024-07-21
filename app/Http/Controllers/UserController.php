@@ -1958,7 +1958,7 @@ class UserController extends BaseController
         }
         else
         {
-            $users=User::whereIn('introduced_verified',[1,2,3])
+            $users=User::whereIn('introduced_verified',[1,2,3,4])
                 ->get();
         }
         return view('admin.IntroducedList')
@@ -1969,10 +1969,11 @@ class UserController extends BaseController
     {
         ini_set('max_execution_time',3600);
         $request->validate([
-           'introduced_verified'    =>'required|numeric|between:1,3'
+            'introduced_verified'    =>'required|numeric|between:1,4',
+            'Validity_date'=>'string'
         ]);
-
         $User->introduced_verified=$request->introduced_verified;
+        $User->Validity_date=$request->Validity_date;
         $status=$User->save();
         if($status)
         {
@@ -1982,6 +1983,7 @@ class UserController extends BaseController
         {
             alert()->error('خطا در تغییر وضعیت')->persistent('بستن');
         }
+
 
         return back();
     }
@@ -2621,6 +2623,7 @@ class UserController extends BaseController
         ini_set('max_execution_time',3600);
         $uscore=User::get();
 //        $uscore=User::where('id','7259')->get();
+
         foreach ($uscore as $u)
         {
             ScoreService::new_score($u);

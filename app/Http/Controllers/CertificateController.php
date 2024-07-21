@@ -497,4 +497,28 @@ class CertificateController extends Controller
     }
 
 
+    public function ambassador_new()
+    {
+        if(!is_null(Auth::user()->fname)||!is_null(Auth::user()->lname)  )
+        {
+            ini_set('max_execution_time', 0);
+            $pdf=Pdf::loadView('user.blank-certificates.Ambassador_certificate', [],[],[
+                'format'    =>[285,510],
+
+            ]);
+            $fileName=time().'_.pdf';
+            $pdf->allow_charset_conversion=false;  // Set by default to TRUE
+            $pdf->charset_in='UTF-8';
+            $pdf->save($fileName);
+            return response()->download(public_path($fileName))
+                ->deleteFileAfterSend(true);
+        }
+        else
+        {
+            alert()->error('لطفا نام و نام خانوادگی خود را وارد کنید')->persistent('بستن');
+            return back();
+        }
+    }
+
+
 }

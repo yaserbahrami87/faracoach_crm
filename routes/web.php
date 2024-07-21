@@ -180,6 +180,7 @@ Route::middleware(['can:isUser'])->prefix('panel')->group(function ()
 //    Route::post('/certificates/fcc/{student}','CertificateController@get_fcc');
     Route::post('/certificates/get_certificate_CCE_2hours','CertificateController@get_certificate_CCE_2hours');
 //    Route::get('/certificates/attendance/{user}','CertificateController@attendance_certificate');
+    Route::get('/certificate/Ambassador_new','CertificateController@ambassador_new');
 
 
     //scientific supports

@@ -110,7 +110,7 @@
                             <button type="submit" class="btn btn-danger"> درخواست مجدد</button>
                         </form>
                     @elseif(Auth::user()->introduced_verified==2)
-                        <a href="/panel/certificate/ambassador" class="btn btn-success">دانلود مدرک سفیر فراکوچ</a>
+                        <a href="/panel/certificate/Ambassador_new" class="btn btn-primary">دانلود مدرک سفیر فراکوچ</a>
                     @endif
 
                 </div>
@@ -387,7 +387,12 @@
                                                                         </td>
                                                                         <td>
                                                                             <div class="icons">
-                                                                                <div class="box-title">@if ($item->logs->count()>0) {{$item->logs->count()}}  @endif</div>
+                                                                                <div class="box-title">
+
+                                                                                    @if ($item->logs->count()>0)
+
+                                                                                        {{substr($item->changeTimestampToShamsi($item->logs->where('log_type','=','login')->sortby('desc')->first()->log_date),5)}}
+                                                                                    @endif</div>
                                                                             </div>
                                                                         </td>
                                                                         <td>
@@ -781,10 +786,15 @@
                                                 <tbody>
                                                 <tr class="text-center">
                                                     <td>
-{{--                                                        {{ceil(\App\Services\ScoreService::score(Auth::user())['introduced'])}}--}}
+
+                                                        @if(!is_null(Auth::user()->score))
+                                                            {{Auth::user()->score->score_introduced}}
+                                                        @endif
                                                     </td>
                                                     <td>
-{{--                                                        {{ceil(\App\Services\ScoreService::score(Auth::user())['sub_total'])}}--}}
+                                                        @if(!is_null(Auth::user()->score))
+                                                            {{Auth::user()->score->score_purchase+Auth::user()->score->score_re_entry}}
+                                                        @endif
                                                     </td>
 
 
@@ -820,8 +830,8 @@
                                                             <div class="box-title"><b>{{($items->get_invitations->count())}}</b></div>
                                                         </td>
                                                         <td>
-                                                            @if(!is_null($item->score))
-                                                                {{($item->score->score_introduced+$item->score->score_purchase+$item->score->score_re_entry)}}
+                                                            @if(!is_null($items->score))
+                                                                {{($items->score->score_introduced+$items->score->score_purchase+$items->score->score_re_entry)}}
                                                             @endif
                                                         </td>
                                                     </tr>
@@ -892,7 +902,14 @@
     <!--   --------------------------data table -->
     <script>
 
-        $('#example1').DataTable();
+        $('#example1').DataTable(
+        {
+
+          "aoColumnDefs": [
+             { "borderable": false, "aTargets": 0 },
+            ]
+            });
+
 
     </script>
 
