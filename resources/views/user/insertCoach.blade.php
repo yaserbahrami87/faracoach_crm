@@ -87,6 +87,7 @@
         }
     </style>
 @endsection
+
 @section('content')
     <div class=" container col-xs-12 col-md-3 col-lg-3 col-xl-3">
         <div class="position-sticky " >

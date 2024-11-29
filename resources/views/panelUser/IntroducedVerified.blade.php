@@ -1,5 +1,6 @@
 @extends('panelUser.master.index')
 @section('rowcontent')
+
     <div class="col-12">
         {!! $options[0]->option_value !!}
     </div>

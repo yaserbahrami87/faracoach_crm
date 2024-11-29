@@ -1,0 +1,54 @@
+::-webkit-scrollbar {
+    width: 8px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+body {
+    background-color: #eee;
+}
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0rem rgba(0, 123, 255, 0.25);
+}
+.btn-secondary:focus {
+    box-shadow: 0 0 0 0rem rgba(108, 117, 125, 0.5);
+}
+.close:focus {
+    box-shadow: 0 0 0 0rem rgba(108, 117, 125, 0.5);
+}
+.mt-200 {
+    margin-top: 200px;
+}
+.sw-theme-dots > ul.step-anchor > li > a::after
+{
+    left:-32%!important;
+}
+@media screen and (max-width: 768px) {
+    .sw-theme-dots > ul.step-anchor > li > a::after
+    {
+        right: 110%;
+
+    }
+    @media screen and (max-width: 768px) {
+        .sw-theme-dots > ul.step-anchor > li
+        {
+            width:150px;
+
+        }
+    }
+}

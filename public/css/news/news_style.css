@@ -1,0 +1,97 @@
+#scroll-container {
+    background-image: url("../../images/scholarship/news.jpg");
+    background-size: auto ;
+    border-radius: 5px;
+    height: 80px;
+    overflow: hidden;
+    margin: 10px 5px;
+    font-size: 20px;
+    color: #FFFFFF;
+    font-family: SGKara-Regular!important;
+}
+#scroll-container h5
+{
+    margin: 20px 10px;
+    font-size: 18px;
+    color: #FFFFFF;
+    text-align: right;
+
+}
+.scroll-text {
+    padding: 0px 25px;
+    height: 150%;
+    text-align: right;
+    width: 80%;
+    float: left;
+    font-family: SGKara-bold!important;
+    /* animation properties */
+    -moz-transform: translateY(150%);
+    -webkit-transform: translateY(150%);
+    transform: translateY(150%);
+    -moz-animation: my-animation 20s linear infinite;
+    -webkit-animation: my-animation 20s linear infinite;
+    animation: my-animation 20s linear infinite;
+}
+.scroll-default {
+    padding: 0px 25px;
+    height: 150%;
+    text-align: right;
+    width: 80%;
+    float: left;
+    font-family: SGKara-bold!important;
+    /* animation properties */
+    -moz-transform: translateY(150%);
+    -webkit-transform: translateY(150%);
+    transform: translateY(150%);
+    -moz-animation: default-animation 5s linear infinite;
+    -webkit-animation: default-animation 5s linear infinite;
+    animation: default-animation 5s linear infinite;
+}
+
+/* for Firefox */
+@-moz-keyframes my-animation {
+    from { -moz-transform: translateY(100%); }
+    to { -moz-transform: translateY(-250%); }
+}
+
+/* for Chrome */
+@-webkit-keyframes my-animation {
+    from { -webkit-transform: translateY(100%); }
+    to { -webkit-transform: translateY(-250%); }
+}
+
+@keyframes my-animation {
+    from {
+        -moz-transform: translateY(100%);
+        -webkit-transform: translateY(100%);
+        transform: translateY(100%);
+    }
+    to {
+        -moz-transform: translateY(-250%);
+        -webkit-transform: translateY(-250%);
+        transform: translateY(-250%);
+    }
+}
+@-moz-keyframes default-animation {
+    from { -moz-transform: translateY(100%); }
+    to { -moz-transform: translateY(-250%); }
+}
+
+/* for Chrome */
+@-webkit-keyframes default-animation {
+    from { -webkit-transform: translateY(100%); }
+    to { -webkit-transform: translateY(-70%); }
+}
+
+@keyframes default-animation {
+    from {
+        -moz-transform: translateY(100%);
+        -webkit-transform: translateY(100%);
+        transform: translateY(100%);
+    }
+    to {
+        -moz-transform: translateY(-70%);
+        -webkit-transform: translateY(-70%);
+        transform: translateY(-70%);
+    }
+}

@@ -11,6 +11,8 @@ use Shetabit\Multipay\Exceptions\InvalidPaymentException;
 use Shetabit\Multipay\Drivers\Pasargad\Utils\RSAProcessor;
 use Shetabit\Multipay\RedirectionForm;
 use Shetabit\Multipay\Request;
+use DateTimeZone;
+use DateTime;
 
 class Pasargad extends Driver
 {
@@ -102,14 +104,18 @@ class Pasargad extends Driver
                 'TransactionReferenceID' => Request::input('tref')
             ]
         );
-
+        $amount = $this->invoice->getAmount() * ($this->settings->currency == 'T' ? 10 : 1); // convert to rial
+        if ($amount != $invoiceDetails['Amount']) {
+            throw new InvalidPaymentException('Invalid amount');
+        }
+        $iranTime = new DateTime('now', new DateTimeZone('Asia/Tehran'));
         $fields = [
             'MerchantCode' => $invoiceDetails['MerchantCode'],
             'TerminalCode' => $invoiceDetails['TerminalCode'],
             'InvoiceNumber' => $invoiceDetails['InvoiceNumber'],
             'InvoiceDate' => $invoiceDetails['InvoiceDate'],
             'Amount' => $invoiceDetails['Amount'],
-            'Timestamp' => date("Y/m/d H:i:s"),
+            'Timestamp' => $iranTime->format("Y/m/d H:i:s"),
         ];
 
         $verifyResult = $this->request($this->settings->apiVerificationUrl, $fields);
@@ -191,11 +197,13 @@ class Pasargad extends Driver
         $action = 1003; // 1003 : for buy request (bank standard)
         $merchantCode = $this->settings->merchantId;
         $terminalCode = $this->settings->terminalCode;
-        $amount = $this->invoice->getAmount(); //rial
+        $amount = $this->invoice->getAmount() * ($this->settings->currency == 'T' ? 10 : 1); // convert to rial
         $redirectAddress = $this->settings->callbackUrl;
         $invoiceNumber = crc32($this->invoice->getUuid()) . rand(0, time());
-        $timeStamp = date("Y/m/d H:i:s");
-        $invoiceDate = date("Y/m/d H:i:s");
+
+        $iranTime = new DateTime('now', new DateTimeZone('Asia/Tehran'));
+        $timeStamp = $iranTime->format("Y/m/d H:i:s");
+        $invoiceDate = $iranTime->format("Y/m/d H:i:s");
 
         if (!empty($this->invoice->getDetails()['date'])) {
             $invoiceDate = $this->invoice->getDetails()['date'];

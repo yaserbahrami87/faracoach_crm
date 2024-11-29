@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\comment;
+use App\course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -68,9 +69,12 @@ class CommentController extends BaseController
         switch ($request->type)
         {
             case 'coach':$post=$this->get_coach(NULL,$request->post_id);
-                            break;
+                                        break;
             case 'event':$post=$this->get_events($request->id,NULL,NULL,'event');
-                            break;
+                                        break;
+            case 'course':$post=course::where('id',$request->post_id)
+                                        ->first();
+                                        break;
 
         }
 

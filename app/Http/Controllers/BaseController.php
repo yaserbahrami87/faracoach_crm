@@ -46,6 +46,7 @@ use nusoap_client;
 
 
 
+
 class BaseController extends Controller
 {
     public function __construct() {
@@ -53,7 +54,9 @@ class BaseController extends Controller
         $this->dateNow = $dateNow->format('Y/m/d');
         $this->timeNow = $dateNow->format('H:i:s');
         //ایجاد لاگ در سیستم
-        visitor()->visit();
+//        visitor()->visit();
+
+
 
 
     }
@@ -103,7 +106,8 @@ class BaseController extends Controller
                 return $msg;
             }
 
-        } catch (\Kavenegar\Exceptions\ApiException $e) {
+        } catch (\Kavenegar\Exceptions\ApiException $e)
+        {
             // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
             if(Auth::check())
             {
@@ -1575,28 +1579,38 @@ class BaseController extends Controller
     {
         if(Auth::user()->type==2)
             {
+
                 //لیست تعداد کاربرها
                 $statics['notfollowup'] = $this->get_user(NULL,NULL,1,NULL,NULL,NULL )->count();
-
-                $lead=$this->get_user(NULL,NULL,-1,NULL,NULL)->count();
-                $continuefollowup = $this->get_usersByType(11,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-                $cancelfollowup = $this->get_usersByType(12,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-                $waiting = $this->get_usersByType(13,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-                $noanswering = $this->get_usersByType(14,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
-                $students = $this->get_usersByType(20,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
+                $statics['lead']=$this->get_user(NULL,NULL,-1,NULL,NULL)->count();
+                $statics['continuefollowup'] = $this->get_usersByType(11,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
+                $statics['cancelfollowup'] = $this->get_usersByType(12,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
+                $statics['waiting'] = $this->get_usersByType(13,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
+                $statics['noanswering'] = $this->get_usersByType(14,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
+                $statics['students'] = $this->get_usersByType(20,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
                 $condition=['nextfollowup_date_fa','=',$this->dateNow];
-                $todayFollowup = $this->get_followup_join_user(NULL,Auth::user()->id,NULL,1,$condition,NULL )->count();
+                $statics['todayFollowup'] = $this->get_followup_join_user(NULL,Auth::user()->id,NULL,1,$condition,NULL )->count();
                 $condition=['followups.nextfollowup_date_fa', '<', $this->dateNow];
-                $expireFollowup=$this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL )->count();
-                $myfollowup = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
+                $statics['expireFollowup']=$this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL )->count();
+                $statics['myfollowup'] = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
                 $condition=['date_fa','=',$this->dateNow];
-                $followedToday = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL )->count();
-                $scholarship=User::where('resource','=','بورسیه تحصیلی')
+                $statics['followedToday'] = $this->get_usersByType(NULL,Auth::user()->id,NULL,NULL,$condition,NULL )->count();
+                $statics['scholarship']=User::where('resource','=','بورسیه تحصیلی')
                     ->count();
-                $trashuser=$this->get_usersByType(0,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
+                $statics['trashuser']=$this->get_usersByType(0,Auth::user()->id,NULL,NULL,NULL,NULL )->count();
+                $statics['marketing1']=User::where('type','=','-1')
+                    ->orderby('id','desc')
+                    ->count();
+                $statics['marketing2']=User::where('type','=','-2')
+                    ->orderby('id','desc')
+                    ->count();
+                $statics['marketing3']=User::where('type','=','-3')
+                    ->orderby('id','desc')
+                    ->count();
             }
         else
             {
+
                 $dateNow=$this->dateNow;
                 //لیست تعداد کاربرها
                 $statics['notfollowup'] = $this->get_user(NULL,NULL,1,NULL,NULL,NULL )->count();
@@ -1669,8 +1683,20 @@ class BaseController extends Controller
                $statics['scholarship']=User::where('resource','=','بورسیه تحصیلی')
                     ->count();
 
-                return ($statics);
+
+                $statics['marketing1']=User::where('type','=','-1')
+                        ->orderby('id','desc')
+                        ->count();
+                $statics['marketing2']=User::where('type','=','-2')
+                        ->orderby('id','desc')
+                        ->count();
+                $statics['marketing3']=User::where('type','=','-3')
+                        ->orderby('id','desc')
+                        ->count();
+
+
             }
+            return ($statics);
     }
 
     public function get_reserve($id=NULL,$user_id=NULL,$booking_id=NULL,$type_booking=NULL,$condition=NULL,$status=NULL,$paginate='get')
@@ -2055,7 +2081,7 @@ class BaseController extends Controller
         }
     }
 
-    public function send_notification($user,$notification)
+    public function send_notification($user,$notification,$post_id=NULL,$type=NULL)
     {
         notification::create([
             'user_id'           =>$user,
@@ -2063,6 +2089,8 @@ class BaseController extends Controller
             'notification'      =>$notification,
             'date_fa'           =>$this->dateNow,
             'time_fa'           =>$this->timeNow,
+            'post_id'           =>$post_id,
+            'type'              =>$type,
         ]);
     }
 
@@ -2098,4 +2126,5 @@ class BaseController extends Controller
             return redirect('/');
         }
     }
+
 }

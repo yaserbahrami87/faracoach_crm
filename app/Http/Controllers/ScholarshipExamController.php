@@ -28,7 +28,10 @@ class ScholarshipExamController extends BaseController
     {
         return view('user.scholarship.examCoaching');
     }
-
+    public function sch_2024_create()
+    {
+        return view('user.scholarship.new.training_exam');
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -63,7 +66,7 @@ class ScholarshipExamController extends BaseController
             $msg="نتیجه آزمون شما:$sum \n"."تبریک\n شما در آزمون مقدماتی بورسیه کوچینگ قبول شده اید"."\nفراکوچ ";
             $this->sendSms(Auth::user()->tel,$msg);
             $msg=Auth::user()->fname.' '.Auth::user()->lname." در آزمون مقدماتی قبول شد."."\n امتیاز:$sum ";
-            $this->sendSms('09153159020',$msg);
+//            $this->sendSms('09153159020',$msg);
             alert()->success('شما در آزمون مقدماتی بورسیه کوچینگ قبول شده اید')->persistent('بستن');
         }
         else
@@ -71,7 +74,7 @@ class ScholarshipExamController extends BaseController
             $msg="نتیجه آزمون شما:$sum \n"."متاسفانه امتیاز شما در آزمون مقدماتی به حد نصاب ممکن نرسید"."\nفراکوچ ";
             $this->sendSms(Auth::user()->tel,$msg);
             $msg=Auth::user()->fname.' '.Auth::user()->lname." در آزمون مقدماتی رد شد."."\n امتیاز:$sum ";
-            $this->sendSms('09153159020',$msg);
+//            $this->sendSms('09153159020',$msg);
             alert()->error('متاسفانه امتیاز شما در آزمون مقدماتی به حد نصاب ممکن نرسید')->persistent('بستن');
         }
 
@@ -79,6 +82,52 @@ class ScholarshipExamController extends BaseController
 
     }
 
+    public function sch_2024_store(Request $request)
+    {
+
+        $sum=0;
+        $result=[];
+        for ($i=1;$i<=25;$i++)
+        {
+            $sum=$sum+($request['vehicle'.$i]);
+            array_push($result,$request['vehicle'.$i]);
+        }
+
+        $result=(implode(',',$result));
+        scholarshipExam::create([
+            'user_id'   =>Auth::user()->id,
+            'result'    =>$result,
+            'score'     =>$sum,
+            'date_fa'   =>$this->dateNow,
+            'time_fa'   =>$this->timeNow,
+            'resource'  =>'sch2024',
+        ]);
+
+        if($sum>50)
+        {
+            $scholarship=scholarship::where('user_id','=',Auth::user()->id)
+                ->where('resource','sch2024')
+                ->first();
+            $scholarship->confirm_exam=1;
+            $scholarship->save();
+            $msg=Auth::user()->fname."عزیز\n"."نمره آزمون:$sum \n"."وضعیت:قبول"."\nمرحله بعد:فاندامنتال ";
+            $this->sendSms(Auth::user()->tel,$msg);
+            $msg=Auth::user()->fname.' '.Auth::user()->lname." در آزمون مقدماتی قبول شد."."\n امتیاز:$sum ";
+//            $this->sendSms('09153159020',$msg);
+            alert()->success('شما در آزمون مقدماتی بورسیه کوچینگ قبول شده اید')->persistent('بستن');
+        }
+        else
+        {
+            $msg="نمره آزمون:$sum \n"."وضعیت:رد"."\nفراکوچ ";
+            $this->sendSms(Auth::user()->tel,$msg);
+            $msg=Auth::user()->fname.' '.Auth::user()->lname." در آزمون مقدماتی رد شد."."\n امتیاز:$sum ";
+//            $this->sendSms('09153159020',$msg);
+            alert()->error('متاسفانه امتیاز شما در آزمون مقدماتی به حد نصاب ممکن نرسید')->persistent('بستن');
+        }
+
+        return redirect('/panel/sch2024/me');
+
+    }
     /**
      * Display the specified resource.
      *

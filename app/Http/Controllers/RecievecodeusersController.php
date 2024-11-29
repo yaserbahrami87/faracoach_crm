@@ -139,4 +139,63 @@ class RecievecodeusersController extends BaseController
             echo "<script>location.reload()</script>";
         }
     }
+
+
+
+    //چک کردن و سیو کردن کد وبینار 2024
+    public function store_webinarCode_sch2024(Request $request)
+    {
+
+        $this->validate($request,[
+            'code1'   =>'required|numeric|max:99|min:10',
+            'code2'   =>'required|numeric|max:99|min:10',
+            'code3'   =>'required|numeric|max:99|min:10',
+        ]);
+
+        $codeWebinar=$request->code3.$request->code2.$request->code1;
+
+
+        $status = recievecodeusers::create(
+            [
+                'user_id'   => Auth::user()->id,
+                'code'      => $codeWebinar,
+                'date_fa'   => $this->dateNow,
+                'time_fa'   => $this->timeNow,
+                'type'      =>'sch2024'
+            ]);
+
+
+
+
+
+        if($codeWebinar=='961115')
+        {
+            $scholarship=scholarship::where('user_id','=',Auth::user()->id)
+                ->where('resource','sch2024')
+                ->first();
+            $scholarship->confirm_webinar=1;
+            $scholarship->save();
+            alert()->success('کد وبینار با موفقیت وارد شد')->persistent('بستن');
+            echo("<div class='alert alert-success'>کد با موفقیت وارد شد</div>");
+            echo "<script>location.reload()</script>";
+
+        }
+        else
+        {
+            echo("<div class='alert alert-danger'>کد اشتباه می باشد</div>");
+
+        }
+
+        $recieveCode=recievecodeusers::where('user_id','=',Auth::user()->id)
+                                        ->where('type','sch2024')
+                                        ->count();
+
+
+        if($recieveCode>2)
+        {
+            alert()->error('تعداد دفعات کد ورود وبینار بیش از حد مجاز می باشد')->persistent('بستن');
+            echo "<script>location.reload()</script>";
+        }
+    }
+
 }

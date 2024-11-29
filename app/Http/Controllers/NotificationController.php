@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\notification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NotificationController extends Controller
 {
@@ -46,7 +47,25 @@ class NotificationController extends Controller
      */
     public function show(notification $notification)
     {
-        //
+        if($notification->user_id==Auth::user()->id)
+        {
+            $notification->status=0;
+            $notification->save();
+            if($notification->type=='user')
+            {
+                return redirect('/admin/user/'.$notification->post_id);
+            }
+            else
+            {
+                return back();
+            }
+        }
+        else
+        {
+            alert()->error('این پیغام مربوط به شما نمی باشد')->persistent('بستن');
+            return back();
+        }
+
     }
 
     /**

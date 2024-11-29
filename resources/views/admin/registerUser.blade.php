@@ -208,6 +208,29 @@
                                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" value="1234">
                                 </div>
                             </div>
+
+                            <div class="form-group row">
+                                <label for="instagram" class="col-md-4 col-form-label text-md-right  text-dark">{{ __('اینستاگرام: ') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="instagram" type="text" class="form-control" name="instagram" >
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group row">
+                                <label for="description" class="col-md-4 col-form-label text-md-right  text-dark">{{ __('توضیحات اولیه: ') }}</label>
+
+                                <div class="col-md-6">
+                                    <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                                </div>
+                                @error('description')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                             <div class="form-group row">
                                 <label for="type1" class="col-md-4 col-form-label text-md-right text-dark">{{ __('دسته بندی: *') }}</label>
 

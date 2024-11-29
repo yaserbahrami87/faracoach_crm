@@ -1,0 +1,25 @@
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::prefix('exam')->group(function() {
+    Route::get('/', 'ExamController@index');
+
+
+//Exam_Register
+    Route::get('/register','ScholarshipController@create_exam');
+    Route::post('/checkCode_exam','VerifyController@checkCode_exam');
+
+//exam
+    Route::get('/register','ScholarshipController@create_exam');
+    Route::post('/checkCode_knot','VerifyController@checkCode_exam');
+});

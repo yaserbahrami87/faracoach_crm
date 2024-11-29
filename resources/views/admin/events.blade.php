@@ -19,6 +19,7 @@
                             <th>رویداد</th>
                             <th>تاریخ رویداد</th>
                             <th>ساعت رویداد</th>
+                            <th>برگزار کننده</th>
                             <th>فعال/غیرفعال</th>
                             <th>وضعیت</th>
                             <th>ویرایش</th>
@@ -50,6 +51,11 @@
                                 <a href="{{asset('/event/'.$item->shortlink)}}">
                                     {{$item->start_time}}
                                 </a>
+                            </td>
+                            <td>
+                                @if(!is_null($item->user))
+                                    {{$item->user->fname.' '.$item->user->lname}}
+                                @endif
                             </td>
                             <td>
                                 <div class="custom-control custom-switch">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\landPage;
+use App\Notifications\EmailLoginWithCode;
 use App\Notifications\LoginWithCode;
 use App\Notifications\SendEmailLoginCode;
 use App\scholarship;
@@ -14,7 +15,7 @@ use Hekmatinasser\Verta\Verta;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Facades\Redirect;
 
 
 class VerifyController extends BaseController
@@ -319,7 +320,7 @@ class VerifyController extends BaseController
     {
 
        $this->validate($request,[
-            'tel'   =>'required|string|iran_mobile'
+            'tel'   =>'required|string'
         ]);
 
 //        if(preg_match('/^09(1[0-9]|3[1-9]|2[1-9])-?[0-9]{3}-?[0-9]{4}$/',$request['tel']))
@@ -327,9 +328,14 @@ class VerifyController extends BaseController
 
 
             $six_digit_random_number = mt_rand(100000, 999999);
-            $verify=$this->get_user($request['tel'],NULL,NULL,NULL,true);    //verify::where('tel','=',$request['tel'])
+
+            $verify=User::where('tel','=',$request['tel'])
+                            ->first();
+//            $verify=$this->get_user($request['tel'],NULL,NULL,NULL,true);    //verify::where('tel','=',$request['tel'])
 //                        ->latest()
 //                        ->first();
+
+
 
             if($verify->count()==0)
             {
@@ -355,6 +361,7 @@ class VerifyController extends BaseController
                     {
                         $message = "رمز یکبار مصرف شما در سیستم فراکوچ : " . $six_digit_random_number;
                         $this->sendSms($request['tel'], $message);
+                        //$verify->notify(new EmailLoginWithCode($six_digit_random_number));
                         return back()->with('msg', 'رمز یکبار مصرف شما به شماره ' . $request['tel'] . ' ارسال شد')
                             ->with('errorStatus', 'success')
                             ->with('status', true);
@@ -376,6 +383,7 @@ class VerifyController extends BaseController
     //چک کردن کد ارسال شده به موبایل برای لاگین
     public function checkCodewithoutPass(Request $request)
     {
+
         $status=verify::where('code','=',$request['code'])
                     ->where('verify','=',0)
                     ->count();
@@ -630,6 +638,7 @@ class VerifyController extends BaseController
                 ->where('verify','=',0)
                 ->latest()
                 ->first();
+
         if($verify)
         {
             return $verify;
@@ -760,7 +769,7 @@ class VerifyController extends BaseController
                 ]);
             }
 
-            $user->notify(new LoginWithCode($email,$six_digit_random_number));
+            //$user->notify(new LoginWithCode($email,$six_digit_random_number));
             echo "<div class='alert alert-warning'>کد یکبار مصرف ارسال شد</div>";
         }
         else
@@ -781,6 +790,16 @@ class VerifyController extends BaseController
         $request->validate([
             'code'  =>'required|numeric|digits:6',
         ]);
+
+        if(session()->has('introduce'))
+        {
+            $introduce=session('introduce');
+        }
+        else
+        {
+            $introduce=NULL;
+        }
+
 
         $status=verify::where('code','=',$request->code)
                     ->where('type','=','login/store')
@@ -827,7 +846,8 @@ class VerifyController extends BaseController
                 $user=User::create([
                     'tel'           =>$tel,
                     'email'         =>$email,
-                    'tel_verified'  =>1
+                    'tel_verified'  =>1,
+                    'introduced'    =>$introduce
                 ]);
 
 
@@ -852,28 +872,13 @@ class VerifyController extends BaseController
     {
 
         $this->validate($request,[
-            'tel'   =>'required|string|iran_mobile'
+            'tel'   =>'required|string|'
         ]);
 
         verify::where('tel','=',$request['tel'])
                     ->delete();
         $six_digit_random_number = mt_rand(100000, 999999);
         $verify=$this->get_user($request['tel'],NULL,NULL,NULL,true);
-//        if($verify->count()!=0)
-//        {
-//            $scholarship=scholarship::where('user_id','=',$verify->id)
-//                ->first();
-//        }
-//        else
-//        {
-//            $scholarship=NULL;
-//        }
-
-
-
-
-//        if(is_null($scholarship))
-//        {
             $status = verify::create(
                 [
                     'tel' => $request['tel'],
@@ -881,34 +886,30 @@ class VerifyController extends BaseController
                     'date_fa' => $this->dateNow,
                     'time_fa' => $this->timeNow
                 ]);
-            if ($status) {
+            if ($status)
+            {
                 $request->session()->put('scholarshipStatus', 'true');
-                $message = "رمز یکبار مصرف شما در سیستم بورسیه فراکوچ : " . $six_digit_random_number;
+                $message = "رمز یکبار مصرف شما در سیستم فراکوچ : " . $six_digit_random_number;
                 $this->sendSms($request['tel'], $message);
 
 
-                if(is_null($status->user['email']))
-                {
+//                if(is_null($status->user))
+//                {
                     alert()->warning('رمز یکبار مصرف شما به شماره ' . $request['tel'] . " ارسال شد. ")->persistent('بستن');
-                }
-                else
-                {
-                    alert()->warning('رمز یکبار مصرف شما به شماره ' . $request['tel'] . " و ایمیل ".$status->user['email']." ارسال شد. ")->persistent('بستن');
-                    $status->user->notify(new SendEmailLoginCode($six_digit_random_number));
-                }
+//                }
+//                else
+//                {
+//                    alert()->warning('رمز یکبار مصرف شما به شماره ' . $request['tel'] . " و ایمیل ".$status->user['email']." ارسال شد. ")->persistent('بستن');
+//
+//                }
 
-//                    return view('scholarship.checkCode_scholarship');
                 return back();
-            } else {
+            }
+            else
+            {
                 return back()->with('msg', 'خطا در ارسال رمز یکبار مصرف')
                     ->with('errorStatus', 'danger');
             }
-//        }
-//        else
-//        {
-//            alert()->warning('شما قبلا در سیستم بورسیه فراکوچ ثبت نام کرده اید')->persistent('بستن');
-//            return back();
-//        }
 
     }
 
@@ -917,6 +918,85 @@ class VerifyController extends BaseController
 
     public function checkCode_Scholarship(Request $request)
     {
+
+        $status=verify::where('code','=',$request['code'])
+            ->where('verify','=',0)
+            ->count();
+
+        if($status==1)
+        {
+            $verify=verify::where('code','=',$request['code'])
+                ->where('verify','=',0)
+                ->first();
+
+            $created_at=($verify['created_at']);
+            $created_at_add=$created_at->addMinutes(30);
+            if($created_at_add >Carbon::now())
+            {
+                //$user=$this->get_user($verify->tel,NULL,NULL,NULL,true);
+                $user=User::where('tel','=',$verify->tel)
+                            ->first();
+                if(!is_null($user))
+                {
+//                    $user=$this->get_user($verify->tel,NULL,NULL,NULL,true);
+                    $user=User::where('tel','=',$verify->tel)
+                        ->first();
+
+                    $request->session()->put('scholarshipStatus','infoUser');
+                    Auth::loginUsingId($user->id);
+                    //Auth::login($user);
+                    $scholarship=scholarship::where('user_id','=',Auth::user()->id)
+                                ->first();
+                    return back();
+
+                }
+                else
+                {
+                    if(session()->has('introduce'))
+                    {
+                        $introduce=session('introduce');
+                    }
+                    else
+                    {
+                        $introduce=NULL;
+                    }
+
+                    $request->session()->put('scholarshipStatus','infoUser');
+
+                    $user=User::create([
+                        'tel'               =>$verify->tel,
+                        'resource'          =>'بورسیه تحصیلی',
+                        'introduced'        =>$introduce,
+                        'password'          =>Hash::make('1234'),
+                    ]);
+
+
+                    Auth::login($user);
+
+
+                    return back();
+
+                }
+
+            }
+            else
+            {
+                alert()->error('رمز یکبار مصرف منقضی شده است')->persistent('بستن');
+                return back();
+
+            }
+        }
+        else
+        {
+            alert()->error('رمز یکبار مصرف اشتباه است')->persistent('بستن');
+            return back();
+        }
+    }
+
+
+    public function checkCode_knot(Request $request)
+    {
+
         $status=verify::where('code','=',$request['code'])
             ->where('verify','=',0)
             ->count();
@@ -939,30 +1019,68 @@ class VerifyController extends BaseController
                     $request->session()->put('scholarshipStatus','infoUser');
                     Auth::login($user);
                     $scholarship=scholarship::where('user_id','=',Auth::user()->id)
-                                ->first();
+                        ->first();
+
+
                     if(is_null($scholarship))
                     {
-                        return back()
-                            ->with('user',$user)
-                            ->with('tel',$verify->tel);
+                        $status = scholarship::create(
+                            [
+                                'user_id' => Auth::user()->id,
+                                'resource'=>'knot',
+                            ]);
 
+                        if ($status) {
+                            $msg = Auth::user()->fname . ' ' . Auth::user()->lname . " عزیز\nبه فراکوچ خوش آمدید\nمشاهده دوره:\n" . "my.faracoach.com/panel/scholarship/me";
+                            $this->sendSms(Auth::user()->tel, $msg);
+//                            $this->sendSms('09153159020', $status->id . ' بورسیه:' . Auth::user()->fname . ' ' . Auth::user()->lname . "\n" );
+                            alert()->success("ثبت نام شما در سایت فراکوچ با موفقیت انجام شد \n")->persistent('بستن');
+                            $request->session()->forget('scholarshipStatus');
+                            return redirect('/panel/scholarship/me');
+                        }
                     }
                     else
                     {
-                        return redirect('/panel/scholarship/me');
+                        return redirect()->away('/panel/scholarship/me');
                     }
 
                 }
                 else
                 {
+                    if(session()->has('introduce'))
+                    {
+                        $introduce=session('introduce');
+                    }
+                    else
+                    {
+                        $introduce=NULL;
+                    }
 
                     $user=User::create([
                         'tel'               =>$verify->tel,
-                        'resource'   =>'بورسیه تحصیلی',
+                        'resource'          =>'کمپین گره',
+                        'password'          =>Hash::make('1234'),
+                        'introduced'        =>$introduce,
                     ]);
-                    $request->session()->put('scholarshipStatus','infoUser');
+
                     Auth::login($user);
-                    return back();
+
+                    $status = scholarship::create(
+                        [
+                            'user_id' => Auth::user()->id,
+                            'resource'=>'knot',
+
+                        ]);
+
+                        if ($status)
+                        {
+                              $msg = Auth::user()->fname . ' ' . Auth::user()->lname . " عزیز\nبه فراکوچ خوش آمدید\nمشاهده دوره:\n" . "my.faracoach.com/panel/scholarship/me";
+                              $this->sendSms(Auth::user()->tel, $msg);
+//                              $this->sendSms('09153159020', $status->id . ' بورسیه:' . Auth::user()->fname . ' ' . Auth::user()->lname );
+                              alert()->success("ثبت نام شما در سایت فراکوچ با موفقیت انجام شد \n")->persistent('بستن');
+                              return redirect('/panel/scholarship/me');
+                        }
+
                 }
 
             }
@@ -970,6 +1088,7 @@ class VerifyController extends BaseController
             {
                 alert()->error('رمز یکبار مصرف منقضی شده است')->persistent('بستن');
                 return back();
+
             }
         }
         else
@@ -981,5 +1100,283 @@ class VerifyController extends BaseController
 
 
 
+    public function checkCode_exam(Request $request)
+    {
 
+        $status=verify::where('code','=',$request['code'])
+            ->where('verify','=',0)
+            ->count();
+
+        if($status==1)
+        {
+            $verify=verify::where('code','=',$request['code'])
+                ->where('verify','=',0)
+                ->first();
+
+            $created_at=($verify['created_at']);
+            $created_at_add=$created_at->addMinutes(30);
+            if($created_at_add >Carbon::now())
+            {
+                $user=$this->get_user($verify->tel,NULL,NULL,NULL,true);
+
+                if($user->count()!=0)
+                {
+                    $user=$this->get_user($verify->tel,NULL,NULL,NULL,true);
+                    $request->session()->put('scholarshipStatus','infoUser');
+                    Auth::login($user);
+                    $msg = Auth::user()->fname . ' ' . Auth::user()->lname . " عزیز\nبه فراکوچ خوش آمدید\n";
+                    $this->sendSms(Auth::user()->tel, $msg);
+
+                    $request->session()->forget('scholarshipStatus');
+                    return redirect('/panel/exam/1');
+
+
+
+                }
+                else
+                {
+                    if(session()->has('introduce'))
+                    {
+                        $introduce=session('introduce');
+                    }
+                    else
+                    {
+                        $introduce=NULL;
+                    }
+
+                    $user=User::create([
+                        'tel'               =>$verify->tel,
+                        'resource'          =>'آزمون',
+                        'password'          =>Hash::make('1234'),
+                        'introduced'        =>$introduce,
+                    ]);
+
+                    Auth::login($user);
+                    $msg = Auth::user()->fname . ' ' . Auth::user()->lname . " عزیز\nبه فراکوچ خوش آمدید\n";
+                    $this->sendSms(Auth::user()->tel, $msg);
+
+                    return redirect('/panel/exam/1');
+
+
+                }
+
+            }
+            else
+            {
+                alert()->error('رمز یکبار مصرف منقضی شده است')->persistent('بستن');
+                return back();
+
+            }
+        }
+        else
+        {
+            alert()->error('رمز یکبار مصرف اشتباه است')->persistent('بستن');
+            return back();
+        }
+    }
+
+
+    //Store Tel SCH2024
+    public function storeTelsch2024(Request $request)
+    {
+
+        $this->validate($request,[
+            'tel'   =>'required|string|min:11'
+        ]);
+
+        verify::where('tel','=',$request['tel'])
+            ->delete();
+        $six_digit_random_number = mt_rand(100000, 999999);
+        $verify=$this->get_user($request['tel'],NULL,NULL,NULL,true);
+        $status = verify::create(
+            [
+                'tel' => $request['tel'],
+                'code' => $six_digit_random_number,
+                'date_fa' => $this->dateNow,
+                'time_fa' => $this->timeNow
+            ]);
+
+        if ($status)
+        {
+            $request->session()->put('scholarshipStatus', 'true');
+//            $message = "رمز یکبار مصرف شما در سیستم فراکوچ : " . $six_digit_random_number;
+//            $this->sendSms($request['tel'], $message);
+
+
+            alert()->warning('لطفا کد ' . $six_digit_random_number . " را به عنوان کد یکبار مصرف وارد کنید. ")->persistent('بستن');
+            $request->session()->put('code', $six_digit_random_number);
+            return back();
+        }
+        else
+        {
+            return back()->with('msg', 'خطا در ارسال رمز یکبار مصرف')
+                ->with('errorStatus', 'danger');
+        }
+
+    }
+
+
+
+
+    //scholarship 2024
+    public function checkCode_sch2024(Request $request)
+    {
+
+        $status=verify::where('code','=',$request['code'])
+            ->where('verify','=',0)
+            ->count();
+
+        if($status==1)
+        {
+            $verify=verify::where('code','=',$request['code'])
+                ->where('verify','=',0)
+                ->first();
+
+            $created_at=($verify['created_at']);
+                $created_at_add=$created_at->addMinutes(30);
+//            if($created_at_add >Carbon::now())
+//            {
+                $user=$this->get_user($verify->tel,NULL,NULL,NULL,true);
+
+                if(session()->has('introduce'))
+                {
+                    $introduce=session('introduce');
+                    $introduce_info=User::where('id',$introduce)
+                        ->first();
+                    $introduce_info=$introduce_info->fname.' '.$introduce_info->lname;
+                }
+                else
+                {
+                    $introduce=NULL;
+                    $introduce_info="ندارد";
+                }
+
+
+                if($user->count()!=0)
+                {
+                    $user=$this->get_user($verify->tel,NULL,NULL,NULL,true);
+                    $request->session()->put('scholarshipStatus','infoUser');
+                    Auth::login($user);
+                    $scholarship=scholarship::where('user_id','=',Auth::user()->id)
+                        ->where('resource','sch2024')
+                        ->first();
+
+                    if(is_null($scholarship))
+                    {
+                        $status = scholarship::create(
+                            [
+                                'user_id' => Auth::user()->id,
+                                'resource'=>'sch2024',
+                                'introduced'        =>$introduce,
+                            ]);
+
+                        if ($status)
+                        {
+                            $msg = Auth::user()->fname . "کاربر عزیز\nثبت نام اولیه بورسیه انجام شد\nپروفایل خود را کامل کنید:\n" . "B2n.ir/a31527";
+                            $this->sendSms(Auth::user()->tel, $msg);
+                            $count=scholarship::where('resource','sch2024')
+                                                ->count();
+                            $message="بورسیه\n"."ردیف:$count \n"."تلفن:".Auth::user()->tel."\n"."معرف:$introduce_info";
+                            $this->sendSms('09153159020', $message );
+                            if(session()->has('introduce'))
+                            {
+                                $info=User::where('id',$introduce)
+                                            ->first();
+
+                                $count_introduced=scholarship::where('resource','sch2024')
+                                                        ->where('introduced',$introduce)
+                                                        ->count();
+                                if(!is_null($info))
+                                {
+                                    $message=$info->fname." عزیز\n"."یک ثبت نام جدید از طریق لینک شما"." مجموع: $count_introduced نفر"."\n"."B2n.ir/e17263";
+                                    $this->sendSms($info->tel, $message );
+                                }
+                            }
+
+                            alert()->success("ثبت نام شما در سایت فراکوچ با موفقیت انجام شد \n")->persistent('بستن');
+                            $request->session()->forget('scholarshipStatus');
+                            return redirect('/panel/sch2024/me');
+                        }
+                    }
+                    else
+                    {
+                        return redirect()->away('/panel/sch2024/me');
+                    }
+
+                }
+                else
+                {
+                    if(session()->has('introduce'))
+                    {
+                        $introduce=session('introduce');
+                        $introduce_info=User::where('id',$introduce)
+                                        ->first();
+                        $introduce_info=$introduce_info->fname.' '.$introduce_info->lname;
+                    }
+                    else
+                    {
+                        $introduce=NULL;
+                        $introduce_info="ندارد";
+                    }
+
+                    $user=User::create([
+                        'tel'               =>$verify->tel,
+                        'resource'          =>'بورسیه 1403',
+                        'password'          =>Hash::make('1234'),
+                        'introduced'        =>$introduce,
+                    ]);
+
+                    Auth::login($user);
+
+                    $status = scholarship::create(
+                        [
+                            'user_id' => Auth::user()->id,
+                            'resource'=>'sch2024',
+                            'introduced'        =>$introduce,
+                        ]);
+
+                    if ($status)
+                    {
+                        $msg = Auth::user()->fname . " کاربر عزیز\nثبت نام اولیه بورسیه انجام شد\nپروفایل خود را کامل و رمز خود را تغییر دهید:\n" ."\nنام کاربری:".Auth::user()->tel."\nرمز:1234"."\n" ."B2n.ir/a31527";
+                        $this->sendSms(Auth::user()->tel, $msg);
+                        $count=scholarship::where('resource','sch2024')
+                                            ->count();
+                        $message="بورسیه\n"."ردیف:$count \n"."تلفن:".Auth::user()->tel."\n"."معرف:$introduce_info";
+                        $this->sendSms('09153159020', $message );
+
+                        if(session()->has('introduce'))
+                        {
+                            $info=User::where('id',$introduce)
+                                ->first();
+
+                            $count_introduced=scholarship::where('resource','sch2024')
+                                ->where('introduced',$introduce)
+                                ->count();
+                            if(!is_null($info))
+                            {
+                                $message=$info->fname." عزیز\n"."یک عضو جدید از طریق لینک شما به خانواده فراکوچ پیوست"."مجموع:$count_introduced نفر"."\n"."B2n.ir/e17263";
+                                $this->sendSms($info->tel, $message );
+                            }
+                        }
+
+                        alert()->success("ثبت نام شما در سایت فراکوچ با موفقیت انجام شد \n")->persistent('بستن');
+                        return redirect('/panel/sch2024/me');
+                    }
+
+                }
+
+//            }
+//            else
+//            {
+//                alert()->error('رمز یکبار مصرف منقضی شده است')->persistent('بستن');
+//                return back();
+//
+//            }
+        }
+        else
+        {
+            alert()->error('رمز یکبار مصرف اشتباه است')->persistent('بستن');
+            return back();
+        }
+    }
 }

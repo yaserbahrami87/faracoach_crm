@@ -41,6 +41,7 @@ return [
     |
     */
 
+
     'disks' => [
 
         'local' => [
@@ -71,6 +72,11 @@ return [
             'bucket' => env('AWS_BUCKET'),
             'url' => env('AWS_URL'),
             'endpoint' => env('AWS_ENDPOINT'),
+        ],
+        'documents' => [
+            'driver' => 'local',
+            'root' => public_path('/documents'),
+            'url' => '/documents/',
         ],
 
 

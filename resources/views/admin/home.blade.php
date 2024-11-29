@@ -77,6 +77,20 @@
 
         <div class="col-12">
             <div class="row">
+                <div class="col-12" >
+                    <small>جستجو اعضا</small>
+                    <form method="GET" action="/admin/users/search/">
+                        {{csrf_field()}}
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="جستجو..." name="q" lang="fa"/>
+                            <div class="input-group-prepend">
+                                <button class="btn btn-outline-secondary text-light" type="submit">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
                 <div class="col-xs-12 col-md-3 col-lg-3 col-xl-3 mb-3" id="app">
                     <form method="GET" action="/panel">
                         <div class="form-group">
@@ -103,19 +117,7 @@
                 <tr>
                     <th scope="col" >#</th>
                     <th scope="col">نام و نام خانوادگی</th>
-                    <th scope="col"  >پیگیری های امروز</th>
-                    <th scope="col">پیگیری های انجام شده</th>
-                    <th scope="col">تور پیگیری</th>
-                    <th scope="col">در انتظار تصمیم</th>
-                    <th scope="col">مشتری</th>
-                    <th scope="col">عدم پاسخ</th>
-                    <th scope="col">انصرافی ها</th>
-                    <th scope="col">مارکتینگ 1</th>
-                    <th scope="col">مارکتینگ 2</th>
-                    <th scope="col">مارکتینگ 3</th>
-                    <th scope="col">جلسات</th>
 
-                    <th scope="col">مدت مکالمه</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -129,35 +131,10 @@
                             <a href="/admin/reports/statistic/{{$item->id}}?start_date={{$rangeDate[0]}} ~ {{$rangeDate[1]}}&range=">{{$item->fname}} {{$item->lname}}</a>
 
                         </td>
-                        <td class="bg-warning text-center">{{number_format($item->followupsAdmin->where('nextfollowup_date_fa','=',$dateNow)->where('flag','=',1)->count())}}</td>
-                        <td class="bg-success text-center text-white">{{number_format($item->followupsAdmin->wherebetween('date_fa',$rangeDate)->count())}}</td>
-                        <td >{{number_format($item->followupsAdmin->where('status_followups','=',11)->wherebetween('date_fa',$rangeDate)->count())}}</td>
-                        <td >{{number_format($item->followupsAdmin->where('status_followups','=',13)->wherebetween('date_fa',$rangeDate)->count())}}</td>
-                        <td >{{number_format($item->followupsAdmin->where('status_followups','=',20)->wherebetween('date_fa',$rangeDate)->count())}}</td>
-                        <td >{{number_format($item->followupsAdmin->where('status_followups','=',14)->wherebetween('date_fa',$rangeDate)->count())}}</td>
-                        <td >{{number_format($item->followupsAdmin->where('status_followups','=',12)->wherebetween('date_fa',$rangeDate)->count())}}</td>
-                        <td >{{number_format($item->followupsAdmin->where('status_followups','=',-1)->wherebetween('date_fa',$rangeDate)->count())}}</td>
-                        <td >{{number_format($item->followupsAdmin->where('status_followups','=',-2)->wherebetween('date_fa',$rangeDate)->count())}}</td>
-                        <td >{{number_format($item->followupsAdmin->where('status_followups','=',-3)->wherebetween('date_fa',$rangeDate)->count())}}</td>
-                        <td >{{number_format($item->followupsAdmin->where('status_followups','=',30)->wherebetween('date_fa',$rangeDate)->count())}}</td>
-                        <td >{{number_format($item->talktime)}}</td>
+
                     </tr>
                 @endforeach
-                    <tr class="text-bold">
-                        <td>{{$i++}}</td>
-                        <td>جمع کل</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+
                 </tbody>
             </table>
         </div>
@@ -165,6 +142,7 @@
         <div class="col-12 mb-1">
             <i class="ficon bx bx-user"></i>گزارش بانک اطلاعاتی
         </div>
+
         <div class="col-md-3">
             <div class="card-counter primary">
                 <span class="count-numbers text-dark">{{$users->count()}} نفر </span>
@@ -232,7 +210,7 @@
             </div>
         </div>
 
-
+        {{--
         <div class="col-12">
             <div class="row">
                 <div class="col-4" >
@@ -296,7 +274,7 @@
                 <span class="count-name text-dark">تعداد ورود امروز</span>
             </div>
         </div>
-
+        --}}
 
 
         <!--
@@ -315,10 +293,10 @@
 
 @section('footerScript')
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-    <script src="https://cdn.jsdelivr.net/npm/moment"></script>
-    <script src="https://cdn.jsdelivr.net/npm/moment-jalaali@0.7.4/build/moment-jalaali.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue-persian-datetime-picker/dist/vue-persian-datetime-picker-browser.js"></script>
+    <script src="{{asset('/js/vue@2.js')}}"></script>
+    <script src="{{asset('/js/moment.js')}}"></script>
+    <script src="{{asset('/js/moment-jalaali.js')}}"></script>
+    <script src="{{asset('/js/vue-persian-datetime-picker-browser.js')}}"></script>
     <script>
         var app = new Vue({
             el: '#app',

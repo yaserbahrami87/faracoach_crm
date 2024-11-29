@@ -33,40 +33,39 @@
                         </div>
                     </li>
 
-                    <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i class="ficon bx bx-bell bx-tada bx-flip-horizontal"></i><span class="badge badge-pill badge-danger badge-up">5</span></a>
+                    <li class="dropdown dropdown-notification nav-item">
+                        <a class="nav-link nav-link-label" href="#" data-toggle="dropdown">
+                            <i class="ficon bx bx-bell bx-tada bx-flip-horizontal"></i>
+                            <span class="badge badge-pill badge-danger badge-up">{{Auth::user()->notifications->where('status','=',1)->count()}}</span>
+                        </a>
                         <ul class="dropdown-menu dropdown-menu-media">
                             <li class="dropdown-menu-header">
-                                <div class="dropdown-header px-1 py-75 d-flex justify-content-between"><span class="notification-title">3 اعلان جدید</span><span class="text-bold-400 cursor-pointer">علامت خوانده شده به همه</span></div>
+                                <div class="dropdown-header px-1 py-75 d-flex justify-content-between"><span class="notification-title">{{Auth::user()->notifications->where('status','=',1)->count()}} اعلان جدید</span><span class="text-bold-400 cursor-pointer">علامت خوانده شده به همه</span></div>
                             </li>
-                            <li class="scrollable-container media-list"><a class="d-flex justify-content-between" href="javascript:void(0)">
-                                <div class="media d-flex align-items-center">
-                                    <div class="media-left pr-0">
-                                        <div class="avatar bg-primary bg-lighten-5 mr-1 m-0 p-25"><span class="avatar-content text-primary font-medium-2">نازنین</span></div>
-                                    </div>
-                                    <div class="media-body">
-                                        <h6 class="media-heading"><span class="text-bold-500">تبریک بابت خرید </span>ایده شماره یک</h6><small class="notification-text">15 اردیبهشت 12:32 ب.ظ</small>
-                                    </div>
-                                </div></a>
-                                <div class="d-flex justify-content-between read-notification cursor-pointer">
-                                    <div class="media d-flex align-items-center">
-                                        <div class="media-left pr-0">
-                                            <div class="avatar bg-primary bg-lighten-5 mr-1 m-0 p-25"><span class="avatar-content text-primary font-medium-2">رحمان</span></div>
+                            <li class="scrollable-container media-list">
+
+                                @foreach(Auth::user()->notifications->where('status','=',1) as $notification)
+
+                                    <a class="d-flex justify-content-between" href="/admin/notification/{{$notification->id}}">
+
+                                        <div class="media d-flex align-items-center">
+                                            <div class="media-left pr-0">
+                                                <div class="avatar bg-primary bg-lighten-5 mr-1 m-0 p-25">
+                                                    <span class="avatar-content text-primary font-medium-2"> </span>
+                                                </div>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="media-heading">
+                                                   {{$notification->notification}}
+                                                </h6>
+                                                <small class="notification-text">{{$notification->date_fa.' '.$notification->time_fa}}</small>
+                                            </div>
                                         </div>
-                                        <div class="media-body">
-                                            <h6 class="media-heading"><span class="text-bold-500">پیام جدید</span> دریافت شد</h6><small class="notification-text">شما 18 پیام خوانده نشده دارید</small>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between cursor-pointer">
-                                    <div class="media d-flex align-items-center">
-                                        <div class="media-left pr-0">
-                                            <div class="avatar bg-primary bg-lighten-5 mr-1 m-0 p-25"><span class="avatar-content text-primary font-medium-2">رضا</span></div>
-                                        </div>
-                                        <div class="media-body">
-                                            <h6 class="media-heading"><span class="text-bold-500">نظر جدید برای </span> ایده شماره دو</h6><small class="notification-text">1 ساعت پیش</small>
-                                        </div>
-                                    </div>
-                                </div>
+                                    </a>
+                                @endforeach
+
+
+
                             </li>
                             <li class="dropdown-menu-footer"><a class="dropdown-item p-50 text-primary justify-content-center" href="javascript:void(0)">خواندن همه اعلان ها</a></li>
                         </ul>

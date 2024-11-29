@@ -134,7 +134,7 @@
             <input type="submit" value="ارسال" class="btn btn-success" />
         </form>
 
-        @foreach($messages as $item)
+        @foreach($messages->where('type','=','scholarship') as $item)
             <div class="form-group">
                 <label for="exampleFormControlTextarea1">{{$item->date_fa.' '.$item->time_fa}}</label>
                 <textarea class="form-control"  rows="3" disabled>{{$item->comment}}</textarea>

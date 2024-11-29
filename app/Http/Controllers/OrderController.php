@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\cart;
 use App\checkout;
 use App\course;
+use App\faktor;
 use App\lib\zarinpal;
 use App\order;
+use App\Purchase;
 use App\student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -42,15 +44,21 @@ class OrderController extends BaseController
     public function store(Request $request)
     {
 
-        $cart = cart::where('user_id', '=', Auth::user()->id)
-            ->get();
-        if($request->payment_type=='نقدی') {
-            $order = new zarinpal();
 
+        $cart = cart::where('user_id', '=', Auth::user()->id)
+                            ->get();
+
+
+
+        if($request->payment_type=='نقدی')
+        {
+
+            $order = new zarinpal();
             $sum_final_off = 0;
             $typeOrders = [];
 
-            foreach ($cart as $item) {
+            foreach ($cart as $item)
+            {
                 switch($item->type)
                 {
                     case 'course':$course=course::where('id','=',$item->product_id)
@@ -58,6 +66,8 @@ class OrderController extends BaseController
                             $item->final_off=$item->final_off-($item->final_off*$course->peymant_off)/100;
                             break;
                 }
+
+
                 $sum_final_off = $item->final_off + $sum_final_off;
                 array_push($typeOrders, $item->type);
             }
@@ -72,7 +82,7 @@ class OrderController extends BaseController
                     'capacity'      => $item->capacity,
                     'fi'            => $item->fi,
                     'off'           => $item->off,
-                    'coupon'        => $item->free,
+                    'coupon'        => $item->coupon,
                     'final_off'     => $item->final_off,
                     'type'          => $item->type,
                     'payment_type'  => $request->payment_type,
@@ -81,6 +91,9 @@ class OrderController extends BaseController
                     'description'   => 'انتقال به درگاه',
                     'authority'     => $res,
                 ]);
+
+
+
 
                 if($status) {
                     $status = checkout::create([
@@ -92,15 +105,20 @@ class OrderController extends BaseController
                         'authority'     => $res,
                         'description'   => 'انتقال به درگاه',
                     ]);
+
+                    $checkout=$status;
                 } else {
                     alert()->error('خطا')->persistent('بستن');
                     return back();
                 }
             }
 
-            if ($status) {
+            if ($status)
+            {
+
                 if($sum_final_off==0)
                 {
+
                     if ($item->type == 'course')
                     {
                         $status=student::create(
@@ -121,23 +139,46 @@ class OrderController extends BaseController
                             alert()->error('خطا در ثبت نام دانشجو')->persistent('بستن');
                         }
 
-                        return redirect('/');
+
+                    }elseif($item->type == 'product')
+                    {
+
+                        $status=Purchase::create([
+                            'user_id'       =>Auth::user()->id,
+                            'product_id'    =>$item->product_id,
+                            'type'          =>$item->type,
+                            'checkout_id'   =>$checkout->id,
+                            'date_fa'       =>$this->dateNow,
+                            'time_fa'       =>$this->timeNow,
+                        ]);
+
+                        if($status)
+                        {
+                            alert()->success('خرید با موفقیت انجام شد')->persistent('بستن');
+                        }
+                        else
+                        {
+                            alert()->error('خطا در خرید')->persistent('بستن');
+                        }
                     }
+                    return redirect('/');
+
                 }
                 else
                 {
                     return redirect('https://www.zarinpal.com/pg/StartPay/' . $res);
                 }
 
-            } else {
+            }
+            else {
                 return redirect('/');
             }
         }
         elseif ($request->payment_type=='اقساط')
         {
             $cart=cart::where('user_id', '=', Auth::user()->id)
-                    ->orwhere('type_payment_id','=',[2,3])
-                    ->first();
+                        ->orwhere('type_payment_id','=',[2,3])
+                        ->first();
 
             switch($cart->type)
             {
@@ -160,6 +201,51 @@ class OrderController extends BaseController
                         ->with('cart',$cart);
 
 
+        }
+        elseif ($request->payment_type=='کیف پول')
+        {
+            $order = new zarinpal();
+
+            $res = $order->pay($request->amount, Auth::user()->email, Auth::user()->tel, 'شارژ کیف پول');
+
+
+            if ($res) {
+                $status = order::create([
+                    'user_id'       => Auth::user()->id,
+                    'fi'            => $request->amount,
+                    'type'          => 'wallet',
+                    'payment_type'  => 'کیف پول',
+                    'date_fa'       => $this->dateNow,
+                    'time_fa'       => $this->timeNow,
+                    'description'   => 'انتقال به درگاه',
+                    'authority'     => $res,
+                ]);
+
+
+
+
+                if($status) {
+                    $status = checkout::create([
+                        'user_id'       => Auth::user()->id,
+                        'order_id'      => $status->id,
+                        'price'         => $request->amount,
+                        'type'          => 'wallet',
+                        'authority'     => $res,
+                        'description'   => 'انتقال به درگاه',
+                    ]);
+
+                    return redirect('https://www.zarinpal.com/pg/StartPay/' . $res);
+                } else
+                {
+                    alert()->error('خطا')->persistent('بستن');
+                    return back();
+                }
+
+            }
+
+        }
+        else {
+            return redirect('/');
         }
 
 

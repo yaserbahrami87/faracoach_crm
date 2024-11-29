@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\event;
+use App\User;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -46,7 +47,10 @@ class EventController extends BaseController
      */
     public function create()
     {
-        return view('admin.insertEvent');
+        $users=User::where('is_event','=',1)
+                ->get();
+        return view('admin.insertEvent')
+                    ->with('users',$users);
     }
 
     /**
@@ -59,25 +63,26 @@ class EventController extends BaseController
     {
 
         $this->validate($request, [
-            'event' => 'required|persian_alpha_num|min:3',
-            'shortlink' => 'required|string|min:3|unique:events',
-            'description' => 'required|string|min:3|',
-            'capacity' => 'required|numeric|',
-            'type' => 'required|numeric|',
-            'address' => 'required_with:type,1|string|',
-            'image' => 'required|mimes:jpeg,jpg,png,gif|max:600',
-            'video' => 'nullable|string|min:3|',
-            'start_date' => 'required|string|max:11|',
-            'start_time' => 'required|string|max:6|',
-            'end_date' => 'required|string|max:11|',
-            'end_time' => 'required|string|max:6|',
-            'duration' => 'required|string|min:3|',
-            'expire_date' => 'required|string|max:11|',
-            'event_text' => 'required|string|min:10|',
-            'heading' => 'nullable|string|min:10|',
-            'contacts' => 'nullable|string|min:10|',
-            'faq' => 'nullable|string|min:10|',
-            'links' => 'nullable|string|min:10|',
+            'event'         => 'required|persian_alpha_num|min:3',
+            'shortlink'     => 'required|string|min:3|unique:events',
+            'user_id'       => 'required|numeric',
+            'description'   => 'required|string|min:3|',
+            'capacity'      => 'required|numeric|',
+            'type'          => 'required|numeric|',
+            'address'       => 'required_with:type,1|string|',
+            'image'         => 'required|mimes:jpeg,jpg,png,gif|max:600',
+            'video'         => 'nullable|string|min:3|',
+            'start_date'    => 'required|string|max:11|',
+            'start_time'    => 'required|string|max:6|',
+            'end_date'      => 'required|string|max:11|',
+            'end_time'      => 'required|string|max:6|',
+            'duration'      => 'required|string|min:3|',
+            'expire_date'   => 'required|string|max:11|',
+            'event_text'    => 'required|string|min:10|',
+            'heading'       => 'nullable|string|min:10|',
+            'contacts'      => 'nullable|string|min:10|',
+            'faq'           => 'nullable|string|min:10|',
+            'links'         => 'nullable|string|min:10|',
         ]);
 
 
@@ -105,7 +110,6 @@ class EventController extends BaseController
             return back();
         }
 
-
     }
 
     /**
@@ -114,33 +118,49 @@ class EventController extends BaseController
      * @param \App\event $event
      * @return \Illuminate\Http\Response
      */
-    public function show(event $event)
+    public function show(event $event,Request $request)
     {
-        $d = explode('/', $event->start_date);
-        $t = explode(':', $event->start_time);
-        $v = (Verta::createJalali($d[0], $d[1], $d[2], $t[0], $t[1], 0));
-        $event->eventDate = ($v->format('%d %B Y  '));
+        if($event->start_date>=$this->dateNow)
+        {
+            if(isset($request->q))
+            {
+                $request->session()->put('introduce',$request->q);
+            }
 
-        $eventReserve = NULL;
-        if (Auth::check()) {
-            $eventReserve = $this->get_eventReserve(NULL, Auth::user()->id, $event->id, NULL, NULL, 'first');
+
+
+            $d = explode('/', $event->start_date);
+            $t = explode(':', $event->start_time);
+            $v = (Verta::createJalali($d[0], $d[1], $d[2], $t[0], $t[1], 0));
+            $event->eventDate = ($v->format('%d %B Y  '));
+
+            $eventReserve = NULL;
+            if (Auth::check()) {
+                $eventReserve = $this->get_eventReserve(NULL, Auth::user()->id, $event->id, NULL, NULL, 'first');
+            }
+
+
+            if ($event->start_date < $this->dateNow) {
+                $event->status_event = "برگزار شد";
+            } else if (($event->start_date >= $this->dateNow) && ($event->capacity > 0)) {
+                $event->status_event = "در حال ثبت نام";
+            } else if ($event->start_date >= $this->dateNow && ($event->capacity == 0)) {
+                $event->status_event = "تکمیل ظرفیت";
+            }
+
+            $comments=$this->get_comments(NULL,NULL,$event->id,NULL,'event');
+
+            return view('event')
+                ->with('event', $event)
+                ->with('comments', $comments)
+                ->with('eventReserve', $eventReserve);
+        }
+        else
+        {
+            alert()->error('زمان ثبت نام در این رویداد به اتمام رسیده است')->persistent('بستن');
+            return back();
         }
 
-
-        if ($event->start_date < $this->dateNow) {
-            $event->status_event = "برگزار شد";
-        } else if (($event->start_date >= $this->dateNow) && ($event->capacity > 0)) {
-            $event->status_event = "در حال ثبت نام";
-        } else if ($event->start_date >= $this->dateNow && ($event->capacity == 0)) {
-            $event->status_event = "تکمیل ظرفیت";
-        }
-
-        $comments=$this->get_comments(NULL,NULL,$event->id,NULL,'event');
-
-        return view('event')
-            ->with('event', $event)
-            ->with('comments', $comments)
-            ->with('eventReserve', $eventReserve);
     }
 
     /**
@@ -256,7 +276,7 @@ class EventController extends BaseController
     public function usersEvent(event $event)
     {
         $eventreserves=$event->eventreserves()
-                        ->paginate(25);
+                        ->get();
 
 //        $users = event::join('eventreserves', 'events.id', '=', 'eventreserves.event_id')
 //            ->join('users', 'eventreserves.user_id', '=', 'users.id')
@@ -312,6 +332,63 @@ class EventController extends BaseController
         {
             return back();
         }
+
+    }
+
+    public function organizers()
+    {
+        $users=User::where('is_event','=',1)
+                ->get();
+        return view('admin.events.organizers')
+                        ->with('users',$users);
+    }
+
+    public  function organizers_store(Request $request)
+    {
+        $this->validate($request,[
+            'user_id'   =>'required|numeric'
+        ]);
+
+        $user=User::where('id','=',$request->user_id)
+                    ->first();
+
+        if(is_null($user))
+        {
+            alert()->error('کاربر مورد نظر یافت نشد')->persistent('بستن');
+        }
+        else
+        {
+            $user->is_event=1;
+
+            $status=$user->save();
+
+            if($status)
+            {
+                alert()->success('کاربر به لیست برگزارکننده های رویداد اضافه شد')->persistent('بستن');
+            }
+            else
+            {
+                alert()->error('خطا در اضافه کردن برگزارکننده رویداد')->persistent('بستن');
+            }
+
+            return back();
+        }
+    }
+
+    public function organizers_destroy(User $user,Request $request)
+    {
+        $user->is_event=0;
+        $status=$user->save();
+
+        if($status)
+        {
+            alert()->success('کاربر از لیست برگزارکننده های دوره حذف شد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در حذف برگزارکننده')->persistent('بستن');
+        }
+        return back();
 
     }
 

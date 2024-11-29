@@ -25,6 +25,19 @@ class course extends Model
         return $this->belongsTo('App\teacher','teacher_id','id');
     }
 
+    public function scholarship_course()
+    {
+        return $this->hasOne('App\checkout','product','id')->where('type','=','scholarship_payment');
+    }
 
+    public function invoice()
+    {
+        return $this->hasMany('App\invoice');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany('App\comment','post_id','id')->where('type','course');
+    }
 
 }

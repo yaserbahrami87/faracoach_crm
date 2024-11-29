@@ -15,9 +15,9 @@ class CreateWalletsTable extends Migration
     {
         Schema::create('wallets', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->on('users')->references('id')->onDelete('cascade');
             $table->integer('amount')->default(0);
-            $table->integer('amount_coaching')->default(0);
             $table->timestamps();
         });
     }

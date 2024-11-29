@@ -27,7 +27,11 @@ class SettingsmsController extends Controller
                 $item->type="ثبت نام مدیران";
             }
         }
-        return view('panelAdmin.settingsSms')
+
+
+
+
+        return view('admin.settingsSms')
             ->with('settingsms',$setting);
     }
 

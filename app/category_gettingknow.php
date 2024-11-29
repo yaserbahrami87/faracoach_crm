@@ -14,4 +14,15 @@ class category_gettingknow extends Model
     {
         return 'id';
     }
+
+    public function parent()
+    {
+        return $this->belongsTo('App\category_gettingknow','parent_id','id');
+    }
+
+    public function child_lists()
+    {
+        return $this->hasMany('App\category_gettingknow','parent_id','id');
+    }
+
 }

@@ -267,8 +267,10 @@ class CourseController extends BaseController
         $courses=course::where('start','>',$this->dateNow)
                     ->where('id','<>',3)
                     ->where('id','<>',15)
+                    ->where('id','<>',65)
                     ->orderby('id','desc')
                     ->paginate(20);
+
         return view('courses')
                     ->with('courses',$courses);
     }
@@ -276,7 +278,6 @@ class CourseController extends BaseController
     public function showStudents(course $course)
     {
         return view('admin.education.course.courseStudents')
-//                    ->with('students',$course->students);
                     ->with('course',$course);
     }
 

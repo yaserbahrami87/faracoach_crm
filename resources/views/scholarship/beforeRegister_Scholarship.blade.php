@@ -1,16 +1,22 @@
 @extends('master.index')
 @section('row1')
     <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-8 m-auto" >
+                <img src="{{asset('/images/scholarship/banner.jpg')}}" class="img-fluid">
+            </div>
+
+        </div>
         <div class="row justify-content-center">
             <div class="col-md-8 text-center">
-                <h3 class="d-block text-dark" style="line-height: 2">طرح اعطای بورسیه کوچینگ آکادمی بین المللی فراکوچ</h3>
-                <u style="line-height: 2">شناسایی و دعوت از افراد نخبه و با استعداد جهت حضور ویژه</u>
-                <p style="line-height: 2;text-align: justify">آکادمی بین المللی فراکوچ فرصت بی نظیری را به منظور ورود و پیوستن جمع بیشتری از افراد مستعد ، نخبه و فرهیخته جامعه - به ویژه اساتید ،  پژوهشگران، اندیشمندان، مدیران و دانشجویان برتر - به دنیای حرفه ای کوچینگ از طریق ایجاد شرایط ویژه حضور آنان در دوره های آموزش و تربیت کوچ حرفه ای ، فراهم کرده است.</p>
-                <h5 class="text-dark mb-3">برای اطلاعات بیشتر و ثبت نام در طرح، فرم زیر را تکمیل کنید</h5>
+{{--                <h4 class="d-block text-dark bold" style="line-height: 3">   ثبت نام در طرح بورسیه کوچینگ  2024</h4>--}}
+                <!-- <h6 class="text-dark mb-3">برای ورود به پورتال شماره تماس خود را وارد کنید</h6> -->
                 <div class="card text-left">
+                    <!--
                     <div class="card-header bg-info text-light">{{ __('ثبت نام') }}</div>
+                    -->
 
-                    <div class="card-body">
+                    <div class="card-body" style="background-color: #eeeff0 !important">
                         @if($errors->any())
                             <div class="col-12">
                                 <div class="alert alert-danger" role="alert">
@@ -21,18 +27,20 @@
                             </div>
                         @endif
 
+                        <!--
                         <div class="alert alert-warning">
                             <i class="bi bi-exclamation-triangle-fill"></i>
                             فیلدهای ستاره دار اجباریست
                         </div>
+                        -->
 
                         @if(session('scholarshipStatus')!=true)
-                            <form method="POST" action="/scholarship/storeCodewithoutPass">
+                            <form method="POST" action="/scholarship/storeCodewithoutPass" target="_blank" class="mt-2">
                                 {{csrf_field()}}
                                 <input type="hidden" value="0" name="tel_verified" id="tel_verified"/>
 
                                 <div class="form-group row">
-                                    <label for="tel" class="col-md-4 col-form-label text-md-right">تلفن همراه: <span class="text-danger">*</span></label>
+                                    <label for="tel" class="col-md-4 col-form-label text-md-right">لطفا تلفن همراه خودرا وارد کنید: <span class="text-danger">*</span></label>
 
                                     <div class="col-md-6">
                                         <div class="input-group">
@@ -48,9 +56,9 @@
                                 </div>
 
                                 <div class="form-group row mb-0">
-                                    <div class="col-md-6 offset-md-4">
+                                    <div class="col-md-6 offset-md-3 text-center">
                                         <button type="submit" class="btn btn-primary">
-                                            {{ __('شروع') }}
+                                            {{ __('شروع ثبت نام') }}
                                         </button>
                                     </div>
                                 </div>
@@ -368,7 +376,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="resume" class="col-md-4 col-form-label text-md-right">رزومه  خورد را بارگزاری نمایید: <span class="text-danger">*</span></label>
+                                        <label for="resume" class="col-md-4 col-form-label text-md-right">رزومه  خورد را بارگزاری نمایید: </label>
                                         <div class="col-md-6">
                                             <input type="file" class="form-control-file" id="exampleFormControlFile1" name="resume">
                                             <small class="text-muted ">فایل های قابل قبول: PDF , JPG , JPEG , DOC , PNG</small>
@@ -400,7 +408,7 @@
                                 </form>
 
                         @else
-                            <form method="POST" action="/scholarship/checkCode_Scholarship">
+                            <form method="POST" action="/scholarship/checkCode_Scholarship" >
                                 {{csrf_field()}}
                                 <div class="form-group row">
                                     <label for="code" class="col-md-4 col-form-label text-md-right">{{ __('رمز یکبار مصرف:*') }}</label>

@@ -1,17 +1,13 @@
 <?php
 
-
 namespace Hekmatinasser\Verta\Traits;
-
 
 use DateTimeZone;
 use Hekmatinasser\Verta\Verta;
-use Hekmatinasser\Verta\VertaInterface;
 use InvalidArgumentException;
 
 trait Accessor
 {
-
     /**
      * Get a part of the Verta object
      *
@@ -23,7 +19,7 @@ trait Accessor
      */
     public function __get($name)
     {
-        static $formats = array(
+        static $formats = [
             'year' => 'Y',
             'month' => 'n',
             'day' => 'j',
@@ -36,14 +32,14 @@ trait Accessor
             'weekOfYear' => 'W',
             'daysInMonth' => 't',
             'timestamp' => 'U',
-        );
+        ];
 
         switch (true) {
             case isset($formats[$name]):
                 return (int) $this->format($formats[$name]);
 
             case $name === 'quarter':
-                return (int) ceil($this->month / VertaInterface::MONTHS_PER_QUARTER);
+                return (int) ceil($this->month / static::MONTHS_PER_QUARTER);
 
             case $name === 'timezone':
                 return $this->getTimezone()->getName();
@@ -91,15 +87,18 @@ trait Accessor
                 list($year, $month, $day, $hour, $minute, $second) = explode('-', $this->format('Y-n-j-G-i-s'));
                 $$name = $value;
                 $this->setDateTime($year, $month, $day, $hour, $minute, $second);
+
                 break;
 
             case 'timestamp':
                 $this->setTimestamp($value);
+
                 break;
 
             case 'timezone':
             case 'tz':
                 $this->setTimezone(new DateTimeZone($value));
+
                 break;
 
             default:
@@ -269,5 +268,4 @@ trait Accessor
 
         return $this->setTime($hour, $minute, $second, 0);
     }
-
 }

@@ -97,6 +97,86 @@
                 <div class="col-12 mt-5">
                     <p class="font-weight-bold">توضیحات:</p>
                     {!! $course->infocourse !!}
+                    @if(Auth::check())
+                        <form method="post" action="/panel/comments"class="pb-2 border-bottom">
+                            {{csrf_field()}}
+                            <input type="hidden" name="post_id" value="{{$course->id}}">
+                            <input type="hidden" name="type" value="course">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    @if(is_null(Auth::user()->personal_image))
+                                        <img src="{{asset('/documents/users/default-avatar.png')}}"  width="50px" height="50px" />
+                                    @else
+                                        <img src="{{asset('/documents/users/'.Auth::user()->personal_image)}}" width="50px" height="50px"/>
+                                    @endif
+                                    <span>{{Auth::user()->fname}} {{Auth::user()->lname}}</span>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label for="comment">ارسال دیدگاه:</label>
+                                    <textarea class="form-control" id="comment" name="comment" rows="5"></textarea>
+                                </div>
+                                <button class="btn btn-success">ارسال</button>
+                            </div>
+                        </form>
+                    @else
+                        <div class="col-12">
+                            <p class="p-0 m-0">برای درج دیدگاه باید وارد سایت شوید</p>
+                        </div>
+
+                        @include('loginAjax')
+
+                    @endif
+                    <div class="row mt-2">
+                        <div class="panel panel-default widget" >
+                            <div class="panel-heading">
+                                <span class="glyphicon glyphicon-comment"></span>
+                                <h5 class="panel-title">تعداد نظرات </h5>
+                                <span class="label label-info"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <nav>
+                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                    <a class="nav-link active" id="nav-comments-tab" data-toggle="tab" href="#nav-comments" role="tab" aria-controls="nav-comments" aria-selected="true">دیدگاه ها</a>
+                                </div>
+                            </nav>
+                            <div class="tab-content" id="nav-tabContent">
+                                <!-- TAB COMMENTS -->
+                                <div class="tab-pane fade show active" id="nav-comments" role="tabpanel" aria-labelledby="nav-home-tab">
+                                    <ul class="list-group pl-0">
+                                        @foreach($course->comments as $item)
+                                            <li class="list-group-item border-bottom text-justify" >
+                                                <div class="row">
+                                                    <div class="col-xs-2 col-md-1">
+                                                        @if(is_null($item->user))
+                                                            <img src="{{asset('/documents/users/default-avatar.png')}}" class="img-circle img-responsive"  width="50px" height="50px" />
+                                                        @else
+                                                            <img src="{{asset('/documents/users/'.$item->user->personal_image)}}" class="img-circle img-responsive" width="50px" height="50px" />
+                                                        @endif
+                                                    </div>
+                                                    <div class="col-xs-10 col-md-11">
+                                                        <div  class="mb-2">
+                                                            @if(!is_null($item->user))
+                                                                <a href="#">{{$item->user->fname.' '.$item->user->lname}}</a>
+                                                            @endif
+                                                            <div class="mic-info ">
+                                                            </div>
+                                                        </div>
+                                                        <div class="comment-text">
+                                                            {{$item->comment}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -101,6 +101,92 @@
         </form>
     </div>
     <div class="col-12 border border-bottom mt-2 mb-2"></div>
+    <div class="col-12 mb-3">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card-counter primary">
+                    <span class="count-numbers text-dark">{{$user->get_insertUsers->wherebetween('created_at',$date_en)->count()}} نفر </span>
+                    <span class="count-name text-dark"> تعداد ورودی ها</span>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card-counter primary">
+
+                        <span class="count-numbers text-dark">{{$user->followupsAdmin->wherebetween('date_fa',$date_fa)->count()}} پیگیری </span>
+                        <span class="count-name text-dark"> تعداد پیگیری ها
+                            <a href="#" data-toggle="modal" data-target="#detailFollowupModal">جزئیات</a>
+                        </span>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="detailFollowupModal" tabindex="-1" aria-labelledby="detailFollowupModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <table class="table">
+                                    <tr>
+                                        <th>دوره</th>
+                                        <th>تعداد</th>
+                                    </tr>
+                                    @foreach($user->followupsAdmin->wherebetween('date_fa',$date_fa)->groupby('course_id') as $item)
+                                        <tr>
+                                            <td>
+                                                @if(!is_null($item[0]->course))
+                                                    {{$item[0]->course->course}}
+                                                @else
+                                                    نامشخص
+                                                @endif
+                                            </td>
+                                            <td>{{count($item)}}</td>
+                                        </tr>
+                                    @endforeach
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card-counter primary">
+                    <span class="count-numbers text-dark">{{$user->followupsAdmin->wherebetween('date_fa',$date_fa)->groupby('user_id')->count()}} نفر </span>
+                    <span class="count-name text-dark">  تعداد نفر پیگیری</span>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card-counter primary">
+                    <span class="count-numbers text-dark">{{round($user->followupsAdmin->wherebetween('date_fa',$date_fa)->sum('talktime')/60)}} ساعت </span>
+                    <span class="count-name text-dark"> مدت مکالمه</span>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card-counter primary">
+                    <span class="count-numbers text-dark">{{$user->followupsAdmin->wherebetween('date_fa',$date_fa)->where('status_followups','=',20)->count()}} نفر </span>
+                    <span class="count-name text-dark"> تعداد مشتری</span>
+                </div>
+            </div>
+
+
+
+            <div class="collapse" id="collapseGroupFollowup">
+                <div class="card card-body">
+                    {{csrf_field()}}
+                    <div class="row">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
     <div class="col-12">
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -157,9 +243,9 @@
                     @foreach($user->followupsAdmin->wherebetween('date_fa',$date_fa)->groupby('course_id') as $item)
                         <div class="col-4">
                             <div class="card text-white border border-3 border-danger  p-1" style="min-height: 100px">
-                                        <span class="text-dark text-center">
-                                            {{$item[0]->course['course']}}
-                                        </span>
+                                <span class="text-dark text-center">
+                                    {{$item[0]->course['course']}}
+                                </span>
                                 <span class="text-dark"><i class="ficon bx bx-transfer-alt"></i>{{$item->count()}} پیگیری</span>
                                 <span class="text-dark"><i class="ficon bx bx-time"></i>{{$item->sum('talktime')}} دقیقه مکالمه</span>
 
@@ -167,46 +253,106 @@
                         </div>
                     @endforeach
                 </div>
+                <div class="row">
+                    <div class="col-12 col-md-3">
+                        <div class="card text-white border border-3 mb-3" >
+                            <div class="card-body text-center">
+                                <h5 class="card-title">مارکتینگ 3</h5>
+                                <span class="text-dark d-block"><i class="ficon bx bx-transfer-alt"></i>{{$user->followupsAdmin->wherebetween('date_fa',$date_fa)->where('status_followups','-3')->count()}} پیگیری</span>
+                                <span class="text-dark d-block"><i class="ficon bx bx-user"></i>{{$user->followupsAdmin->wherebetween('date_fa',$date_fa)->where('status_followups','-3')->groupby('user_id')->count()}} نفر پیگیری</span>
+                                <span class="text-dark d-block"><i class="ficon bx bx-time"></i>{{$user->followupsAdmin->wherebetween('date_fa',$date_fa)->where('status_followups','-3')->sum('talktime')}} دقیقه مکالمه</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <div class="card text-white border border-3 mb-3" >
+                            <div class="card-body text-center">
+                                <h5 class="card-title">مارکتینگ 2</h5>
+                                <span class="text-dark d-block"><i class="ficon bx bx-transfer-alt"></i>{{$user->followupsAdmin->wherebetween('date_fa',$date_fa)->where('status_followups','-2')->count()}} پیگیری</span>
+                                <span class="text-dark d-block"><i class="ficon bx bx-user"></i>{{$user->followupsAdmin->wherebetween('date_fa',$date_fa)->where('status_followups','-2')->groupby('user_id')->count()}} نفر پیگیری</span>
+                                <span class="text-dark d-block"><i class="ficon bx bx-time"></i>{{round($user->followupsAdmin->wherebetween('date_fa',$date_fa)->where('status_followups','-2')->sum('talktime')/60)}} ساعت مکالمه</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <div class="card text-white border border-3 mb-3" >
+                            <div class="card-body text-center">
+                                <h5 class="card-title">مارکتینگ 1</h5>
+                                <span class="text-dark d-block"><i class="ficon bx bx-transfer-alt"></i>{{$user->followupsAdmin->wherebetween('date_fa',$date_fa)->where('status_followups','-1')->count()}} پیگیری</span>
+                                <span class="text-dark d-block"><i class="ficon bx bx-user"></i>{{$user->followupsAdmin->wherebetween('date_fa',$date_fa)->where('status_followups','-21')->groupby('user_id')->count()}} نفر پیگیری</span>
+                                <span class="text-dark d-block"><i class="ficon bx bx-time"></i>{{round($user->followupsAdmin->wherebetween('date_fa',$date_fa)->where('status_followups','-1')->sum('talktime')/60)}} ساعت مکالمه</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <div class="card text-white border border-3 mb-3" >
+                            <div class="card-body text-center">
+                                <h5 class="card-title">مشتری</h5>
+                                <span class="text-dark d-block"><i class="ficon bx bx-transfer-alt"></i>{{$user->followupsAdmin->wherebetween('date_fa',$date_fa)->where('status_followups','20')->count()}} پیگیری</span>
+                                <span class="text-dark d-block"><i class="ficon bx bx-user"></i>{{$user->followupsAdmin->wherebetween('date_fa',$date_fa)->where('status_followups','20')->groupby('user_id')->count()}} نفر پیگیری</span>
+                                <span class="text-dark d-block"><i class="ficon bx bx-time"></i>{{round($user->followupsAdmin->wherebetween('date_fa',$date_fa)->where('status_followups','20')->sum('talktime')/60)}} ساعت مکالمه</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <div class="card text-white border border-3 mb-3" >
+                            <div class="card-body text-center">
+                                <h5 class="card-title">تور پیگیری</h5>
+                                <span class="text-dark d-block"><i class="ficon bx bx-transfer-alt"></i>{{$user->followupsAdmin->wherebetween('date_fa',$date_fa)->where('status_followups','11')->count()}} پیگیری</span>
+                                <span class="text-dark d-block"><i class="ficon bx bx-user"></i>{{$user->followupsAdmin->wherebetween('date_fa',$date_fa)->where('status_followups','11')->groupby('user_id')->count()}} نفر پیگیری</span>
+                                <span class="text-dark d-block"><i class="ficon bx bx-time"></i>{{round($user->followupsAdmin->wherebetween('date_fa',$date_fa)->where('status_followups','11')->sum('talktime')/60)}} ساعت مکالمه</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <div class="card text-white border border-3 mb-3" >
+                            <div class="card-body text-center">
+                                <h5 class="card-title">انصراف</h5>
+                                <span class="text-dark d-block"><i class="ficon bx bx-transfer-alt"></i>{{$user->followupsAdmin->wherebetween('date_fa',$date_fa)->where('status_followups','20')->count()}} پیگیری</span>
+                                <span class="text-dark d-block"><i class="ficon bx bx-user"></i>{{$user->followupsAdmin->wherebetween('date_fa',$date_fa)->where('status_followups','20')->groupby('user_id')->count()}} نفر پیگیری</span>
+                                <span class="text-dark d-block"><i class="ficon bx bx-time"></i>{{round($user->followupsAdmin->wherebetween('date_fa',$date_fa)->where('status_followups','20')->sum('talktime')/60)}} ساعت مکالمه</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <table class="dataTable table table-striped table-bordered" style="width:100%">
                     <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>مشخصات</th>
-                        <th>آخرین محصول پیگیری</th>
-                        <th>تعداد پیگیری</th>
-                        <th>تاریخ پیگیری </th>
-                    </tr>
+                        <tr>
+                            <th>#</th>
+                            <th>مشخصات</th>
+                            <th>آخرین محصول پیگیری</th>
+                            <th>تعداد پیگیری</th>
+                            <th>تاریخ پیگیری </th>
+                        </tr>
                     </thead>
                     <tbody>
-                    @foreach($user->followupsAdmin->wherebetween('date_fa',$date_fa) as $item)
 
-                        <tr class="" >
-                            <td>{{$loop->iteration}}</td>
-                            <td>
-                                <a href="{{route('showUserForAdmin',[$item->user->id])}}" target="_blank">
-                                    {{$item->user['fname']." ".$item->user['lname']}}
-                                </a>
-                            </td>
-                            <td>
+                        @foreach($user->followupsAdmin->wherebetween('date_fa',$date_fa) as $item)
+                            <tr >
+                                <td>{{$loop->iteration}}</td>
+                                <td>
+                                    <a href="{{route('showUserForAdmin',[$item->user->id])}}" target="_blank">
+                                        {{$item->user['fname']." ".$item->user['lname']}}
+                                    </a>
+                                </td>
+                                <td>
 
-                                @if(!is_null($item->user->last_followupUser['course_id']))
-                                    {{$item->user->last_followupUser->course['course']}}
-                                @endif
-                            </td>
-                            <td>
-                                @if(!is_null($item->user->followups))
-                                    {{$item->user->followups->count()}}
-                                @endif
-                            </td>
-                            <td>
-                                @if(!is_null($item->user->last_followupUser['date_fa']))
-                                    {{$item->user->last_followupUser['date_fa']}}
-                                @endif
-                            </td>
-
-
-                        </tr>
-                    @endforeach
+                                    @if(!is_null($item->user->last_followupUser['course_id']))
+                                        {{$item->user->last_followupUser->course['course']}}
+                                    @endif
+                                </td>
+                                <td>
+                                    @if(!is_null($item->user->followups->wherebetween('date_fa',$date_fa)))
+                                        {{$item->user->followups->wherebetween('date_fa',$date_fa)->count()}} پیگیری از {{$item->user->followups->count()}} پیگیری
+                                    @endif
+                                </td>
+                                <td>
+                                    @if(!is_null($item->user->last_followupUser['date_fa']))
+                                        {{$item->user->last_followupUser['date_fa']}}
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
 
                 </table>
@@ -226,10 +372,10 @@
             $('.dataTable').DataTable();
         } );
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-    <script src="https://cdn.jsdelivr.net/npm/moment"></script>
-    <script src="https://cdn.jsdelivr.net/npm/moment-jalaali@0.7.4/build/moment-jalaali.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue-persian-datetime-picker/dist/vue-persian-datetime-picker-browser.js"></script>
+    <script src="{{asset('/js/vue@2.js')}}"></script>
+    <script src="{{asset('/js/moment.js')}}"></script>
+    <script src="{{asset('/js/moment-jalaali.js')}}"></script>
+    <script src="{{asset('/js/vue-persian-datetime-picker-browser.js')}}"></script>
     <script>
         var app = new Vue({
             el: '#app',

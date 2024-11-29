@@ -13,7 +13,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        Commands\sendSms::class,
+        Commands\todayBirthday::class,
+        Commands\statistics::class,
     ];
 
     /**
@@ -24,7 +26,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+//         $schedule->command('send:sms_debt_financial')->dailyAt('15:30');
+         $schedule->command('sendSms:todayBirthday')->dailyAt('12:00');
+         $schedule->command('sendSms:linkInvitationScholarship')->dailyAt('12:08');
+         $schedule->command('sendSms:completeProfile')->dailyAt('12:08');
+         $schedule->command('sendSms:test')->everyMinute();
     }
 
     /**

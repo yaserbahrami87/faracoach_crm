@@ -1,5 +1,10 @@
 @extends('admin.master.index')
 
+@section('headerScript')
+    <link href="{{asset('/dashboard/assets/css/buttons.dataTables.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('/dashboard/assets/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
+@endsection
+
 @section('content')
 
     <div class="col-12">
@@ -33,21 +38,27 @@
             <li class="nav-item" role="presentation">
                 <a class="nav-link" id="pills-Appointments-tab" data-toggle="pill" href="#appointments_booking" role="tab" aria-controls="appointments_booking" aria-selected="false"> جلسات رزرو شده دراین تاریخ <span class="badge  badge-danger">{{$appointments_booking->count()}}</span></a>
             </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="absent-customer-booking-tab" data-toggle="pill" href="#absent-customer-booking" role="tab" aria-controls="absent-customer-booking" aria-selected="false"> جلسات غیبت مراجع <span class="badge  badge-danger">{{$absent_customer_booking->count()}}</span></a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="absent-coach-booking-tab" data-toggle="pill" href="#absent-coach-booking" role="tab" aria-controls="absent-coach-booking" aria-selected="false"> جلسات غیبت مراجع <span class="badge  badge-danger">{{$absent_coach_booking->count()}}</span></a>
+            </li>
         </ul>
         <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                <table class="table table-striped table-bordered table-warning">
+                <table class="datatable table table-striped table-bordered" style="width:100%">
+                    <thead>
                     <tr>
-                        <th>#</th>
                         <th>کوچ</th>
                         <th>تاریخ جلسه</th>
                         <th>ساعت جلسه</th>
                         <th>مراجع</th>
-
                     </tr>
+                    </thead>
+                    <tbody>
                     @foreach($reserveBooking as $item)
                         <tr>
-                            <th>{{$loop->iteration}}</th>
                             <td>
                                 <a href="/admin/booking/{{$item->coach->user->id}}/report" target="_blank">
                                     <img src="{{asset('/documents/users/'.$item->coach->user->personal_image)}}" width="50px" height="50px" class="rounded-circle" />
@@ -57,28 +68,36 @@
                             <td>{{$item->start_date}}</td>
                             <td>{{$item->start_time}}</td>
                             <td dir="ltr">
-                                <a href="/admin/user/{{$item->reserve->user->id}}" target="_blank">
-                                    @if(is_null($item->reserve->user->fname)&&is_null($item->reserve->user->lname))
-                                        {{$item->reserve->user->tel}}
-                                    @else
-                                        {{$item->reserve->user->fname." ".$item->reserve->user->lname}}
+                                @if(! is_null($item->reserve))
+                                    @if(! is_null($item->reserve->user))
+                                        <a href="/admin/user/{{$item->reserve->user->id}}" target="_blank">
+                                            @if(is_null($item->reserve->user->fname)&&is_null($item->reserve->user->lname))
+                                                {{$item->reserve->user->tel}}
+                                            @else
+                                                {{$item->reserve->user->fname." ".$item->reserve->user->lname}}
+                                            @endif
+                                        </a>
                                     @endif
-                                </a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach
+                    </tbody>
                 </table>
             </div>
             <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-                <table class="table table-striped table-bordered table-success">
-                    <tr>
-                        <th>#</th>
-                        <th>کوچ</th>
-                        <th>تاریخ جلسه</th>
-                        <th>ساعت جلسه</th>
-                        <th>مراجع</th>
+                <table class="datatable table table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>کوچ</th>
+                            <th>تاریخ جلسه</th>
+                            <th>ساعت جلسه</th>
+                            <th>مراجع</th>
 
-                    </tr>
+                        </tr>
+                    </thead>
+                    <tbody>
                     @foreach($successBooking as $item)
                         <tr>
                             <th>{{$loop->iteration}}</th>
@@ -101,11 +120,94 @@
                             </td>
                         </tr>
                     @endforeach
+                    </tbody>
                 </table>
             </div>
 
             <div class="tab-pane fade" id="appointments_booking" role="tabpanel" aria-labelledby="appointments_booking-tab">
-                <table class="table table-striped table-bordered table-danger">
+                <table class="datatable table table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>کوچ</th>
+                            <th>تاریخ جلسه</th>
+                            <th>ساعت جلسه</th>
+                            <th>مراجع</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($appointments_booking as $item)
+                            <tr>
+                                <th>{{$loop->iteration}}</th>
+                                <td>
+
+                                    <a href="/admin/booking/{{$item->booking->coach->user->id}}/report" target="_blank">
+                                        <img src="{{asset('/documents/users/'.$item->booking->coach->user->personal_image)}}" width="50px" height="50px" class="rounded-circle" />
+                                        {{$item->booking->coach->user->fname.' '.$item->booking->coach->user->lname}}
+                                    </a>
+                                </td>
+                                <td>{{$item->booking->start_date}}</td>
+                                <td>{{$item->booking->start_time}}</td>
+                                <td dir="ltr">
+                                    <a href="/admin/user/{{$item->user->id}}" target="_blank">
+
+                                        @if(is_null($item->user->fname)&&is_null($item->user->lname))
+                                            {{$item->user->tel}}
+                                        @else
+                                            {{$item->user->fname." ".$item->user->lname}}
+                                        @endif
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="tab-pane fade" id="cancel_reserve" role="tabpanel" aria-labelledby="cancel_reserve-tab">
+                <table class="datatable table table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>کوچ</th>
+                            <th>تاریخ جلسه</th>
+                            <th>ساعت جلسه</th>
+                            <th>مراجع</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($cancelBooking as $item)
+                            <tr>
+                                <th>{{$loop->iteration}}</th>
+                                <td>
+                                    <a href="/admin/booking/{{$item->coach->user->id}}/report" target="_blank">
+                                        <img src="{{asset('/documents/users/'.$item->coach->user->personal_image)}}" width="50px" height="50px" class="rounded-circle" />
+                                        {{$item->coach->user->fname.' '.$item->coach->user->lname}}
+                                    </a>
+                                </td>
+                                <td>{{$item->start_date}}</td>
+                                <td>{{$item->start_time}}</td>
+                                <td dir="ltr">
+                                    <a href="/admin/user/{{$item->reserve->user->id}}" target="_blank">
+
+                                        @if(is_null($item->reserve->user->fname)&&is_null($item->reserve->user->lname))
+                                            {{$item->reserve->user->tel}}
+                                        @else
+                                            {{$item->reserve->user->fname." ".$item->reserve->user->lname}}
+                                        @endif
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="tab-pane fade" id="absent-customer-booking" role="tabpanel" aria-labelledby="absent-customer-booking-tab">
+                <table class="datatable table table-striped table-bordered" style="width:100%">
+                    <thead>
                     <tr>
                         <th>#</th>
                         <th>کوچ</th>
@@ -114,7 +216,9 @@
                         <th>مراجع</th>
 
                     </tr>
-                    @foreach($appointments_booking as $item)
+                    </thead>
+                    <tbody>
+                    @foreach($absent_customer_booking as $item)
                         <tr>
                             <th>{{$loop->iteration}}</th>
                             <td>
@@ -138,11 +242,13 @@
                             </td>
                         </tr>
                     @endforeach
+                    </tbody>
                 </table>
             </div>
 
-            <div class="tab-pane fade" id="cancel_reserve" role="tabpanel" aria-labelledby="cancel_reserve-tab">
-                <table class="table table-striped table-bordered table-danger">
+            <div class="tab-pane fade" id="absent-coach-booking" role="tabpanel" aria-labelledby="absent-coach-booking-tab">
+                <table class="datatable table table-striped table-bordered" style="width:100%">
+                    <thead>
                     <tr>
                         <th>#</th>
                         <th>کوچ</th>
@@ -151,45 +257,47 @@
                         <th>مراجع</th>
 
                     </tr>
-                    @foreach($cancelBooking as $item)
+                    </thead>
+                    <tbody>
+                    @foreach($absent_coach_booking as $item)
                         <tr>
                             <th>{{$loop->iteration}}</th>
                             <td>
-                                <a href="/admin/booking/{{$item->coach->user->id}}/report" target="_blank">
-                                    <img src="{{asset('/documents/users/'.$item->coach->user->personal_image)}}" width="50px" height="50px" class="rounded-circle" />
-                                    {{$item->coach->user->fname.' '.$item->coach->user->lname}}
+
+                                <a href="/admin/booking/{{$item->booking->coach->user->id}}/report" target="_blank">
+                                    <img src="{{asset('/documents/users/'.$item->booking->coach->user->personal_image)}}" width="50px" height="50px" class="rounded-circle" />
+                                    {{$item->booking->coach->user->fname.' '.$item->booking->coach->user->lname}}
                                 </a>
                             </td>
-                            <td>{{$item->start_date}}</td>
-                            <td>{{$item->start_time}}</td>
+                            <td>{{$item->booking->start_date}}</td>
+                            <td>{{$item->booking->start_time}}</td>
                             <td dir="ltr">
-                                <a href="/admin/user/{{$item->reserve->user->id}}" target="_blank">
+                                <a href="/admin/user/{{$item->user->id}}" target="_blank">
 
-                                    @if(is_null($item->reserve->user->fname)&&is_null($item->reserve->user->lname))
-                                        {{$item->reserve->user->tel}}
+                                    @if(is_null($item->user->fname)&&is_null($item->user->lname))
+                                        {{$item->user->tel}}
                                     @else
-                                        {{$item->reserve->user->fname." ".$item->reserve->user->lname}}
+                                        {{$item->user->fname." ".$item->user->lname}}
                                     @endif
                                 </a>
                             </td>
                         </tr>
                     @endforeach
+                    </tbody>
                 </table>
             </div>
+
+
         </div>
-
-
-
-
     </div>
 @endsection
 
 
 @section('footerScript')
-    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-    <script src="https://cdn.jsdelivr.net/npm/moment"></script>
-    <script src="https://cdn.jsdelivr.net/npm/moment-jalaali@0.7.4/build/moment-jalaali.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue-persian-datetime-picker/dist/vue-persian-datetime-picker-browser.js"></script>
+    <script src="{{asset('/js/vue@2.js')}}"></script>
+    <script src="{{asset('/js/moment.js')}}"></script>
+    <script src="{{asset('/js/moment-jalaali.js')}}"></script>
+    <script src="{{asset('/js/vue-persian-datetime-picker-browser.js')}}"></script>
     <script>
         var app = new Vue({
             el: '#app',
@@ -203,7 +311,26 @@
             }
 
         });
+    </script>
 
+    <script src="{{asset('/dashboard/assets/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('/dashboard/assets/js/dataTables.bootstrap4.min.js')}}"></script>
 
+    <script src="{{asset('/panel_assets/js/scripts/datatables/dataTables.buttons.min.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/jszip.min.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/vfs_fonts.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/buttons.html5.min.js')}}"></script>
+    <script src="{{asset('/panel_assets/js/scripts/datatables/buttons.print.min.js')}}"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.datatable').DataTable({
+                order: [[ 1, "desc" ]],
+                dom: 'Bfrltip',
+                buttons: [
+                   'excel'
+                ]
+            } );
+        } );
     </script>
 @endsection

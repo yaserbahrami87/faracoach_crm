@@ -33,6 +33,7 @@
                         <label for="shortlink">لینک اختصاصی<span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="shortlink" name="shortlink" value="{{old('shortlink',$event->shortlink)}}" autocomplete="off" />
                         <small>لینک اختصاصی نباید تکراری باشد</small>
+                        <small>لینک اختصاصی باید انگلیسی باشد</small>
                     </div>
                     <div class="form-group">
                         <label for="description">توضیح کوتاه:<span class="text-danger">*</span></label>

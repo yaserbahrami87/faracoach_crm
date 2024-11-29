@@ -10,6 +10,7 @@ use App\landPage;
 use App\message;
 use App\problemfollowup;
 use App\reserve;
+use App\state;
 use App\student;
 use App\tag;
 use App\User;
@@ -59,7 +60,7 @@ class AdminController extends BaseController
         {
 
             $dateNow=$this->dateNow;
-
+            /*
             $followupToday=User::join('followups','users.id','=','followups.user_id')
                     ->where('nextfollowup_date_fa','=',$dateNow)
                     ->where('flag','=',1)
@@ -72,24 +73,16 @@ class AdminController extends BaseController
                     ->where('nextfollowup_date_fa','<',$dateNow)
                     ->where('flag','=',1)
                     ->where('followby_expert','=',Auth::user()->id)
-//                    ->wherenotIn('users.type',[2,12])
                     ->count();
+            */
 
             $usersEducation=user::orwhere('type','=',3)
                         ->orwhere('type','=',4)
+                        ->orwhere('type','=',2)
+                        ->orwhere('type','=',5)
+                        ->orwhere('type','=',6)
+                        ->orwhere('type','=',7)
                         ->get();
-
-//            $sumcancelfollowup=0;
-//            $sumallFollowups=0;
-//            $sumtodayFollowups=0;
-//            $sumfollowedTodaybyID=0;
-//            $sumcontinuefollowup=0;
-//            $sumwaiting=0;
-//            $sumstudents=0;
-//            $sumnoanswering=0;
-//            $suminsertuser=0;
-//            $sumtalktimeToday=0;
-//            $sumtalktime=0;
 
 
 
@@ -117,70 +110,7 @@ class AdminController extends BaseController
                 $date_en=[$this->changeTimestampToMilad($request['start_date'][0])." 00:00:00",$this->changeTimestampToMilad($request['start_date'][1])." 23:59:59"];
             }
 
-
-
-
-//            foreach ($usersEducation as $item)
-//            {
-//
-//                $condition=['followups.insert_user_id','=',$item->id];
-//                $item->cancelfollowup=$this->get_usersByType(NULL,NULL,NULL,$request['start_date'],$condition,12)->count();
-//
-//                $sumcancelfollowup=$sumcancelfollowup+$item->cancelfollowup;
-//
-//                //پیگیریهای انجام شده در بازه تاریخی
-//                $condition=['followups.insert_user_id','=',$item->id];
-//                $item->allFollowups=$this->get_usersByType(NULL,NULL,NULL,$request['start_date'],$condition)->count();
-//
-//                $sumallFollowups=$sumallFollowups+$item->allFollowups;
-//                $item->todayFollowups=count($this->get_todayFollowupbyID_withoutPaginate($item->id));
-//                $sumtodayFollowups=$sumtodayFollowups+$item->todayFollowups;
-//
-//                $condition=['followups.date_fa','=',$this->dateNow];
-//                $item->followedTodaybyID=$this->get_usersByType(NULL,$item->id,NULL,NULL, $condition)->count();
-//                $sumfollowedTodaybyID=$sumfollowedTodaybyID+$item->followedTodaybyID;
-//
-//                $condition=['followups.insert_user_id','=',$item->id];
-//                $item->continuefollowup=$this->get_usersByType(NULL,NULL,NULL,$request['start_date'],$condition,11)->count();
-//                $sumcontinuefollowup=$sumcontinuefollowup+$item->continuefollowup;
-//                $item->waiting=$this->get_usersByType(NULL,NULL,NULL,$request['start_date'],$condition,13)->count();
-//                $sumwaiting=$sumwaiting+$item->waiting;
-//
-//                $condition=['followups.insert_user_id','=',$item->id];
-//                $item->students=$this->get_usersByType(NULL,NULL,NULL,$request['start_date'],$condition,20)->count();                $sumstudents=$sumstudents+$item->students;
-//                $item->noanswering=$this->get_usersByType(NULL,NULL,NULL,$request['start_date'],$condition,14)->count();
-//                $sumnoanswering=$sumnoanswering+$item->noanswering;
-//                if(!is_null($item->last_login_at))
-//                {
-//                    $item->last_login_at = $this->changeTimestampToShamsi($item->last_login_at);
-//                }
-//                //تبدیل تاریخ شمسی  به میلادی برای نمایش کاربرهای براساس فیلد created_at
-//                if(isset($request['start_date']))
-//                {
-//
-//                    $date_en=[$this->changeTimestampToMilad($request['start_date'][0]),$this->changeTimestampToMilad($request['start_date'][1])];
-//                }
-//                else
-//                {
-//
-//                    $date_en=[$this->changeTimestampToMilad($request['start_date'][0]),$this->changeTimestampToMilad($request['start_date'][1])];
-//                }
-//
-//                $item->insertuser=$this->get_user(NULL,NULL,NULL,NULL,NULL,$date_en,$item->id)->count();
-//
-//                $suminsertuser=$suminsertuser+$item->insertuser;
-//                $item->talktimeToday=$this->get_talktimeTodayByID($item->id);
-//                $sumtalktimeToday=$sumtalktimeToday+$item->talktimeToday;
-//                $item->talktime=$this->get_talktimeByID($item->id,$request['start_date']);
-//
-//                //$item->talktime=$this->get_usersByType(NULL,$item->id,NULL,$request['start_date']);
-//                //dd($this->get_usersByType(NULL,315,NULL,$request['start_date'])->sum('followups.talktime'));
-//                $sumtalktime=$sumtalktime+$item->talktime;
-//            }
-
-
-//            $countSMSRecieve=$this->countSMSRecieve();
-
+            /*
             //جلسات رزرو شده در امروز
             $condition=['created_at','like',$this->changeTimestampToMilad($this->dateNow).'%'];
             $countBookingReserve=$this->get_reserve(NULL,NULL,NULL,NULL,$condition,NULL,'get');
@@ -207,125 +137,100 @@ class AdminController extends BaseController
                             ->whereNotIn('type',[2,3])
                             ->count();
 
+
+            */
             $users=User::get();
 
 
 
-
-
-
-
-
-
-
-
-
-
-//            $countUnreadMessages=$this->countUnreadMessages();
             return view('admin.home')
-//                        ->with('notFollowup',$notFollowup)
-//                        ->with('follow',$follow)
-//                        ->with('cancel',$cancel)
-//                        ->with('waiting',$waiting)
-//                        ->with('sumstudents',$sumstudents)
                         ->with('date_en',$date_en)
                         ->with('dateNow',$dateNow)
                         ->with('rangeDate',$request['start_date'])
-                        ->with('followupToday',$followupToday)
-                        ->with('expirefollowupToday',$expirefollowupToday)
-                        ->with('countBookingReserve',$countBookingReserve)
+//                        ->with('followupToday',$followupToday)
+//                        ->with('expirefollowupToday',$expirefollowupToday)
+//                        ->with('countBookingReserve',$countBookingReserve)
                         ->with('usersEducation',$usersEducation)
-//                        ->with('sumcancelfollowup',$sumcancelfollowup)
-//                        ->with('sumallFollowups',$sumallFollowups)
-//                        ->with('sumtodayFollowups',$sumtodayFollowups)
-//                        ->with('sumfollowedTodaybyID',$sumfollowedTodaybyID)
-//                        ->with('sumcontinuefollowup',$sumcontinuefollowup)
-//                        ->with('sumwaiting',$sumwaiting)
-//                        ->with('sumnoanswering',$sumnoanswering)
-//                        ->with('suminsertuser',$suminsertuser)
-//                        ->with('sumtalktimeToday',$sumtalktimeToday)
-                        ->with('countBookingReserve',$countBookingReserve)
-                        ->with('bookingsToday',$bookingsToday)
-                        ->with('checkoutToday',$checkoutToday)
-                        ->with('insertUserToday',$insertUserToday)
-                        ->with('loginUserToday',$loginUserToday)
+//                        ->with('countBookingReserve',$countBookingReserve)
+//                        ->with('bookingsToday',$bookingsToday)
+//                        ->with('checkoutToday',$checkoutToday)
+//                        ->with('insertUserToday',$insertUserToday)
+//                        ->with('loginUserToday',$loginUserToday)
                         ->with('users',$users);
-//                        ->with('sumtalktime',$sumtalktime);
-            //return redirect()->route('panelAdmin');
         }
         else if(Gate::allows('isUser'))
         {
 
-            $user=(Auth::user());
-            if(($user->status_coach==-2)||($user->status_coach==1))
-            {
-                $user=User::join('coaches','users.id','=','coaches.user_id')
-                            ->where('users.id','=',$user->id)
-                            ->select('users.*','coaches.id as id_coaches_table')
-                            ->first();
-            }
+            //$user=(Auth::user());
+//            if((Auth::user()->status_coach==-2)||(Auth::user()->status_coach==1))
+//            {
+//                $user=User::join('coaches','users.id','=','coaches.user_id')
+//                            ->where('users.id','=',$user->id)
+//                            ->select('users.*','coaches.id as id_coaches_table')
+//                            ->first();
+//            }
 
-            if(strlen($user->personal_image)==0)
-            {
-                $user->personal_image="default-avatar.png";
-            }
+
 
             //تعداد افراد دعوت شده
-            $countIntroducedUser=User::where('introduced','=',$user->id)
+            $countIntroducedUser=User::where('introduced','=',Auth::user()->id)
                 ->count();
 
             //یوزر توسط چه کسی معرفی شده است
-            $resourceIntroduce=User::where('id','=',$user->introduced)
+            $resourceIntroduce=User::where('id','=',Auth::user()->introduced)
                 ->first();
             //تعداد پیام های خوانده نشده
-            $unreadMessage=message::where('user_id_recieve','=',$user->id)
+            $unreadMessage=message::where('user_id_recieve','=',Auth::user()->id)
                     ->where('status','=',1)
                     ->count();
+
+
             //کسب امتیازات
-            $score=0;
-            $scoreIntroducedUser=$countIntroducedUser* ($this->get_scores()->introduced);
-            $score=$score+$scoreIntroducedUser;
+//            $score=0;
+//            $scoreIntroducedUser=$countIntroducedUser* ($this->get_scores()->introduced);
+//            $score=$score+$scoreIntroducedUser;
 
 
-            $verifyScore=$user->tel_verified;
-            if($verifyScore==1)
-            {
-                $scoreTelverify=$this->get_scores()->tel_verified;
-                $score=$score+$scoreTelverify;
-            }
-            else
-            {
-                $scoreTelverify=0;
-            }
-
-
-
-            $verifyScore=$user->email_verified_at;
-
-            if(!is_null($verifyScore))
-            {
-                $scoreEmailverify=$this->get_scores()->email_verified;
-                $score=$score+$scoreEmailverify;
-            }
-            else
-            {
-                $scoreEmailverify=0;
-            }
-
-
-            $SuccessIntroduced=User::where('introduced','=',$user->id)
-                    ->where('type','=',20)
-                    ->count();
+            $verifyScore=Auth::user()->tel_verified;
+//            if($verifyScore==1)
+//            {
+//                $scoreTelverify=$this->get_scores()->tel_verified;
+//                $score=$score+$scoreTelverify;
+//            }
+//            else
+//            {
+//                $scoreTelverify=0;
+//            }
 
 
 
-            $scoreSuccess=$SuccessIntroduced*($this->get_scores()->changeintroduced);
-            $score=$score+$scoreSuccess;
+            $verifyScore=Auth::user()->email_verified_at;
 
-            $checkTimeCode=verify::where('tel','=',$user['tel'])
+//            if(!is_null($verifyScore))
+//            {
+//                $scoreEmailverify=$this->get_scores()->email_verified;
+//                $score=$score+$scoreEmailverify;
+//            }
+//            else
+//            {
+//                $scoreEmailverify=0;
+//            }
+
+
+//            $SuccessIntroduced=User::where('introduced','=',Auth::user()->id)
+//                    ->where('type','=',20)
+//                    ->count();
+
+
+
+//            $scoreSuccess=$SuccessIntroduced*($this->get_scores()->changeintroduced);
+//            $score=$score+$scoreSuccess;
+
+            $checkTimeCode=verify::where('tel','=',Auth::user()->tel)
                             ->where('verify','=',0)
                             ->latest()
                             ->first();
+
             $verifyStatus=false;
             if(!is_null( $checkTimeCode))
             {
@@ -338,16 +243,16 @@ class AdminController extends BaseController
             }
 
             //تعداد جلسات رزرو شده تعیین تکلیف نشده
-            $condition=['start_date','<',$this->dateNow];
-            $undefind_booking=booking::where('user_id','=',Auth::user()->id)
-                                        ->where('status','=',0)
-                                        ->where('start_date','<',$this->dateNow)
-                                        ->get();
-//            $this->get_booking(NULL,Auth::user()->id,NULL,NULL,NULL,0,$condition,'get');
-            if($undefind_booking->count()>0)
-            {
-                alert()->warning(' تعداد '.$undefind_booking->count()." جلسه رزرو شده شما تعیین تکلیف نشده است.\n لطفا نسبت به برگزار شدن یا عدم برگزاری جلسه اقدام نمائید. ")->persistent('بستن');
-            }
+//            $condition=['start_date','<',$this->dateNow];
+//            $undefind_booking=booking::where('user_id','=',Auth::user()->id)
+//                                        ->where('status','=',0)
+//                                        ->where('start_date','<',$this->dateNow)
+//                                        ->get();
+//
+//            if($undefind_booking->count()>0)
+//            {
+//                alert()->warning(' تعداد '.$undefind_booking->count()." جلسه رزرو شده شما تعیین تکلیف نشده است.\n لطفا نسبت به برگزار شدن یا عدم برگزاری جلسه اقدام نمائید. ")->persistent('بستن');
+//            }
 
             //تعداد جلسات مراجعی که بازخورد ثبت نکرده است
             $reserve_notFeedback=reserve::leftjoin('feedback_coachings','reserves.booking_id','=','feedback_coachings.booking_id')
@@ -355,16 +260,16 @@ class AdminController extends BaseController
                         ->where('reserves.user_id','=',Auth::user()->id)
                         ->whereNull('feedback_coachings.created_at')
                         ->get();
-            if($reserve_notFeedback->count()>0)
-            {
-                alert()->warning(' برای تعداد '.$reserve_notFeedback->count()." جلسه برگزار شده بازخورد ثبت نشده است ")->persistent('بستن');
-            }
+//            if($reserve_notFeedback->count()>0)
+//            {
+//                alert()->warning(' برای تعداد '.$reserve_notFeedback->count()." جلسه برگزار شده بازخورد ثبت نشده است ")->persistent('بستن');
+//            }
 
-            $courses=student::join('courses','students.course_id','=','courses.id')
-                        ->where('students.user_id','=',Auth::user()->id)
-                        ->orderby('students.id','desc')
-                        ->select('courses.*')
-                        ->get();
+//            $courses=student::join('courses','students.course_id','=','courses.id')
+//                        ->where('students.user_id','=',Auth::user()->id)
+//                        ->orderby('students.id','desc')
+//                        ->select('courses.*')
+//                        ->get();
 
 
 
@@ -374,20 +279,23 @@ class AdminController extends BaseController
 //                alert()->warning('لطفا اطلاعات پروفایل خود را کامل کنید')->persistent('بستن');
 //            }
 
+            $states=state::get();
+
             return view('user.home')
-                ->with('user',$user)
+//                ->with('user',$user)
                 ->with('countIntroducedUser',$countIntroducedUser)
                 ->with('resourceIntroduce',$resourceIntroduce)
                 ->with('unreadMessage',$unreadMessage)
-                ->with('score',$score)
+                ->with('states',$states)
+//                ->with('score',$score)
                 ->with('verifyScore',$verifyScore)
-                ->with('scoreSuccess',$scoreSuccess)
-                ->with('verifyStatus',$verifyStatus)
-                ->with('scoreIntroducedUser',$scoreIntroducedUser)
-                ->with('SuccessIntroduced',$SuccessIntroduced)
-                ->with('courses',$courses)
-                ->with('scoreTelverify',$scoreTelverify)
-                ->with('scoreEmailverify',$scoreEmailverify);
+//                ->with('scoreSuccess',$scoreSuccess)
+                ->with('verifyStatus',$verifyStatus);
+//                ->with('scoreIntroducedUser',$scoreIntroducedUser)
+//                ->with('SuccessIntroduced',$SuccessIntroduced)
+//                ->with('courses',$courses)
+//                ->with('scoreTelverify',$scoreTelverify)
+//                ->with('scoreEmailverify',$scoreEmailverify);
 
         }
         else

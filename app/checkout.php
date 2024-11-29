@@ -15,6 +15,11 @@ class checkout extends Model
         return $this->belongsTo('App\User');
     }
 
+    public function coach_reserve()
+    {
+        return $this->belongsTo('App\User','product_id','id');
+    }
+
     public function course()
     {
         return $this->belongsTo('App\course','product_id','id');
@@ -30,8 +35,38 @@ class checkout extends Model
         return $this->belongsTo('App\order','order_id','id');
     }
 
+    public function invoice()
+    {
+        return $this->belongsTo('App\invoice','order_id','id');
+    }
+
     public function reserve()
     {
         return $this->belongsTo('App\reserve','product_id','id');
+    }
+
+    public function product()
+    {
+        return $this->belongsTo('App\Product','product_id','id');
+    }
+
+    public  function schoalrshipPayment()
+    {
+        return $this->hasOne('App\scholarship_payment','id','order_id');
+    }
+
+    public function scholarship_course()
+    {
+        return $this->belongsTo('App\course','product_id','id');
+    }
+
+    public function faktor()
+    {
+        return $this->hasOne('App\faktor','authority','authority');
+    }
+
+    public function get_faktors()
+    {
+        return $this->hasMany('App\faktor','checkout_id','id');
     }
 }

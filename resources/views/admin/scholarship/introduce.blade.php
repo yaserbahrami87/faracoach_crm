@@ -9,7 +9,7 @@
         <td>امتیاز شما</td>
 
     </tr>
-    @foreach($scholarship->user->get_invitations->where('resource','=','بورسیه تحصیلی') as $item)
+    @foreach($scholarship->user->get_invitations->wherein('resource',['بورسیه تحصیلی','کمپین گره']) as $item)
         <tr>
             <td>{{$loop->iteration}}</td>
             <td>
@@ -24,10 +24,10 @@
             <td dir="ltr">-</td>
             <td dir="ltr">-</td>
             <td dir="ltr">
-                @if(!is_null($item->scholarship))
-                    4
-                @else
+                @if(is_null($item->scholarship))
                     0
+                @else
+                    {{floor(($item->scholarship->get_score()*10)/100)}}
                 @endif
             </td>
         </tr>

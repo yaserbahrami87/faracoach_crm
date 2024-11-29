@@ -4,6 +4,24 @@
 @endsection
 
 @section('content')
+    <div class="col-12 col-md-3 mb-3">
+        <form method="get" >
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <button class="btn btn-outline-secondary" type="submit">نمایش گروه</button>
+                </div>
+
+                <select class="custom-select" id="group" name="q">
+                    <option selected>انتخاب کنید</option>
+
+                    @foreach($group as $item)
+                        <option value="{{$item->resource}}">{{$item->resource}}</option>
+                    @endforeach
+                </select>
+
+            </div>
+        </form>
+    </div>
     <div class="col-12">
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -13,7 +31,7 @@
             </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
-             <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">
+            <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">
                 <div class="col-12 table-responsive">
                     <form method="get" action="/admin/scholarship/exportExcel">
                         {{csrf_field()}}
@@ -24,109 +42,78 @@
                     </form>
                     <table  class="table_data table table-striped table-bordered" style="width:100%">
                         <thead>
-                            <tr class="text-center">
-                                <th>ردیف</th>
-                                <th>نام و نام خانوادگی</th>
-                                <th>وضعیت پروفایل</th>
-                                <th>وضعیت درخواست</th>
-                                <th class="d-none">کد ملی</th>
-                                <th>تلفن</th>
-                                <th>مسئول پیگیری</th>
-                                <th>تحصیلات</th>
-                                <th>استان</th>
-                                <th >تاریخ آزمون</th>
-                                <th >نتیجه آزمون</th>
-                                <th>معرفی نامه</th>
-                                <th>مصاحبه</th>
-                                <!--
-                                <th> افراد معرفی شده</th>
-                                <th> افراد ثبت نام بورسیه</th>
-                                -->
+                        <tr class="text-center">
+                            <th>ردیف</th>
+                            <th>نام و نام خانوادگی</th>
+                            <th> نوع کاربری</th>
+                            <th>پروفایل</th>
+                            <th>آموزش</th>
+                            <th>آزمون</th>
+                            <th>فاندامنتال</th>
+                            <th>تلفن</th>
+                            <th>معرف</th>
+                            <th>تعداد معرفی</th>
+                            <th>تاریخ ورود</th>
+                            <th>کد معرفی</th>
 
-                            </tr>
+                        </tr>
                         </thead>
-
                         <tbody>
-                            @foreach($scholarships as $item)
-                                <tr>
-                                    <td class="text-center">{{$loop->iteration}}</td>
-                                    <td class="text-center">
-                                        @if($item->user->created_at>'2022-07-20 00:00:00')
-                                            <span class="text-danger">*</span>
-                                        @endif
-                                        <a href="/admin/scholarship/{{$item->id}}" target="_blank">{{$item->user->fname.' '.$item->user->lname}}</a>
+                        @foreach($scholarships as $item)
+                            <tr style="@if(!is_null($item->financial)) background-color: #9fff80; @elseif($item->resource=='knot') background-color: #cceeff!important   @endif">
+                                <td class="text-center">{{$loop->iteration}}</td>
+                                <td class="text-center">
+                                    {{--                                        <a href="/admin/scholarship/{{$item->id}}" target="_blank">{{$item->user->fname.' '.$item->user->lname}}</a>--}}
+                                    <a href="/admin/user/{{$item->user->id}}" target="_blank">{{($item->user->fname)? $item->user->fname.' '.$item->user->lname:$item->user->tel}}</a>
+                                </td>
+                                <td class="text-center" dir="ltr">
 
-                                    </td>
-                                    <td class="text-center" dir="ltr">
+                                    @if($item->user->students->count()>0)
+                                         _ دانشجو _
+                                    @endif
 
-                                        @if(strlen($item->user->email)>0&&strlen($item->user->fname)>0&&strlen($item->user->lname)>0&&strlen($item->user->datebirth)>0&&strlen($item->user->father)>0&&strlen($item->user->codemelli)>0&&strlen($item->user->sex)>0&&strlen($item->user->tel)>0&&strlen($item->user->shenasname)>0&&strlen($item->user->born)>0&&strlen($item->user->education)>0&&strlen($item->user->reshteh)>0&&strlen($item->user->job)>0&&strlen($item->user->state)>0&&strlen($item->user->city)>0&&strlen($item->user->address)>0&&strlen($item->user->personal_image)>0&&strlen($item->user->resume)>0&&strlen($item->user->married)>0)
-                                            <p class=" text-success">تکمیل شده</p>
-                                        @else
-                                            <p class=" text-danger">ناقص </p>
-                                        @endif
-                                    </td>
-                                    <td class="text-center">
-                                        @switch($item->status)
-                                            @case(0)<span class="text-info"> بررسی نشده</span>
-                                            @break
-                                            @case(1)<span class="text-success"> تائید شده</span>
-                                            @break
-                                            @case(2)<span class="text-danger">رد درخواست</span>
-                                            @break
-                                            @case(3)<span class="text-dark">در حال بررسی</span>
-                                            @break
-                                            @case(4) <span class="text-primary">اصلاح درخواست</span>
-                                            @break
-                                            @case(5)<span class="text-warning">اصلاح شده</span>
-                                            @break
-                                            @default خطا
+                                    @if($item->user->scholarships->where('resource','<>','sch2024')->count()>0)
+                                         _ سابقه بورسیه _
+                                    @endif
 
-                                        @endswitch
-                                    </td>
-                                    <td class="text-center d-none" dir="ltr">{{$item->user->codemelli}}</td>
-                                    <td class="text-center" dir="ltr">{{$item->user->tel}}</td>
-                                    <td class="text-center" dir="ltr">
-                                        @if(!is_null($item->user->get_followbyExpert))
-                                            {{$item->user->get_followbyExpert->fname.' '.$item->user->get_followbyExpert->lname}}
-                                        @endif
-                                    </td>
-                                    <td class="text-center" dir="ltr">{{$item->user->education}}</td>
-                                    <td class="text-center" dir="ltr">
-                                        @if(!is_null($item->user->state))
-                                            {{$item->user->get_state->name}}
-                                        @endif
-                                    </td>
-                                    <td class="text-center" dir="ltr" >
-                                        @if(count($item->user->get_scholarshipexam)>0)
-                                            {{($item->user->get_scholarshipexam->last()->date_fa)}}
-                                        @endif
-                                    </td>
-                                    <td class="text-center" dir="ltr" >
-                                        @if(count($item->user->get_scholarshipexam)>0)
-                                            {{($item->user->get_scholarshipexam->last()->score)}}
-                                        @endif
-                                    </td>
-                                    <td class="text-center">
-                                        @if(!is_null($item->introductionletter))
-                                            ارسال شده
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if(!is_null($item->get_scholarshipInterview) )
-                                            انجام شده است
-                                        @endif
-                                    </td>
-                                    <!--
-                                    <td class="text-center" dir="ltr">
-                                        {{--($item->user->get_invitations->where('created_at','>','2022-07-20 00:00:00')->where('resource','=','بورسیه تحصیلی')->count())--}}
-                                    </td>
-                                    <td class="text-center" dir="ltr">
-                                        {{--$item->user->get_invitations->where('created_at','>','2022-07-20 00:00:00')->where('resource','=','بورسیه تحصیلی')->where('introduced','=',$item->user_id)->count()--}}
-                                    </td>
-                                    -->
+                                    _ {{$item->user->userType()}} _
 
-                                </tr>
-                            @endforeach
+                                </td>
+                                <td class="text-center" dir="ltr" >
+                                    @if(!is_null($item->user->fname)&&!is_null($item->user->lname)&& (!is_null($item->user->datebirth))&&!is_null($item->user->father) && (!is_null($item->user->codemelli)) && (!is_null($item->user->sex)) && (!is_null($item->user->tel)) && !is_null($item->user->shenasname) && !is_null($item->user->born) && !is_null($item->user->education) && !is_null($item->user->reshteh) && !is_null($item->user->job) && !is_null($item->user->state) && !is_null($item->user->city) && !is_null($item->user->address) && !is_null($item->user->personal_image) && !is_null($item->user->shenasnameh_image) && !is_null($item->user->cartmelli_image) && !is_null($item->user->education_image) && !is_null($item->user->resume) && !is_null($item->user->married)  && !is_null($item->user->telegram) && !is_null($item->user->instagram)   && !is_null($item->user->fname_en) && !is_null($item->user->lname_en) )
+                                        پروفایل تکمیل
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($item->confirm_webinar==1)
+                                        آموزش قبول شده
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($item->confirm_exam==1)
+                                        آزمون قبول شده
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($item->user->purchases->where('product_id',3)->first())
+                                            خرید نقدی
+                                    @elseif($item->user->checkouts->where('product_id',120)->where('status',1)->where('type','course')->first())
+                                        خرید قسطی
+                                    @endif
+
+                                </td>
+                                <td class="text-center" dir="ltr">{{$item->user->tel}}</td>
+                                <td>
+                                    @if((!is_null($item->user_introduced)))
+
+                                        {{$item->user_introduced->fname.' '.$item->user_introduced->lname}}
+                                    @endif
+                                </td>
+                                <td class="text-center">{{$item->user->sch2024_introduced->count()}}</td>
+                                <td>{{$item->user->last_login_at}}</td>
+                                <td>{{$item->user->id}}</td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -179,6 +166,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="tab-pane fade" id="nav-accept" role="tabpanel" aria-labelledby="nav-accept-tab">
                 <div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">
                     <div class="col-12 table-responsive">

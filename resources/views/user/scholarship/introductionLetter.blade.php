@@ -20,11 +20,11 @@
         <p  class="text-right">مهر وامضا</p>
     </div>
 
-    @if(is_null($scholarship->introductionletter))
+    @if(is_null($scholarship->introductionletter)||($scholarship->confirm_introductionletter==0)||($scholarship->confirm_introductionletter==2)||($scholarship->confirm_introductionletter==4))
         <form method="POST" action="/panel/scholarship/introductionletter" enctype="multipart/form-data">
             {{csrf_field()}}
             <div class="form-group">
-                <label for="introductionLetter_file">بارگذاری معرفی نامه:</label>
+                <label for="introductionLetter_file">بارگذاری معرفی نامه: <span class="text-danger">*</span></label>
                 <input type="file" class="form-control-file" id="introductionLetter_file" name="introductionletter">
                 <small>فرمت های معتبر:PDF , DOC , JPG , JPEG , BMP , PNG</small>
             </div>
@@ -35,4 +35,19 @@
             معرفی نامه شما بارگذاری شده است <a class="btn btn-primary" href="{{asset('/documents/scholarship/'.$scholarship->introductionletter)}}">دانلود</a>
         </div>
     @endif
+
+    <form method="POST" action="/panel/scholarship/introduction/answerstatus_introduction" enctype="multipart/form-data">
+        {{csrf_field()}}
+        <div class="form-group">
+            <label for="comment">توضیحات:<span class="text-danger">*</span></label>
+            <textarea class="form-control" id="comment" rows="3" name="comment"></textarea>
+        </div>
+        <input type="submit" value="ارسال" class="btn btn-success" />
+    </form>
+    @foreach($messages->where('type','=','scholarship_introductionletter') as $item)
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">{{$item->date_fa.' '.$item->time_fa}}</label>
+            <textarea class="form-control"  rows="3" disabled>{{$item->comment}}</textarea>
+        </div>
+    @endforeach
 </div>

@@ -12,7 +12,7 @@
                     <input type="text" class="form-control @error('course') is-invalid @enderror" id="course" name="course" value="{{old('course')}}"/>
                 </div>
                 <div class="form-group">
-                    <label for="shortlink">شورت لینک</label>
+                    <label for="shortlink">لینک کوتاه</label>
                     <input type="text" class="form-control @error('shortlink') is-invalid @enderror" id="shortlink" name="shortlink" value="{{old('shortlink')}}" />
                 </div>
                 <div class="form-group">

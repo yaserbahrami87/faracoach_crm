@@ -16,29 +16,25 @@
                     <th class="text-center">شماره همراه</th>
                     <th class="text-center">اینستاگرام</th>
                     <th class="text-center">تاریخ ثبت نام</th>
-                    <th class="text-center">واریزی(تومان)</th>
-                    <th class="text-center">تخفیف پرداخت نقدی(تومان)</th>
-                    <th class="text-center">تعداد اقساط</th>
-                    <th class="text-center">مبلغ قسط</th>
-
-                    <th class="text-center">قیمت ثبت نام شده</th>
-                    <th class="text-center">کدرهگیری</th>
-                    <th class="text-center"></th>
+                    <th class="text-center">مدرک شناسایی</th>
+                    <th class="text-center">مدرک</th>
+                    <th class="text-center">وضعیت</th>
+                    <th class="text-center">ویرایش</th>
+                    <th class="text-center">حذف</th>
                 </tr>
             </thead>
             <tbody>
             @foreach ($course->students as $item)
-
                 <tr>
                     <td>
-
-                        @if(is_null($item->user->personal_image))
-                            <img src="{{asset('/documents/users/default-avatar.png')}}"  width="50px" height="50px" class="rounded-circle "/>
-                        @else
-                            <img src="{{asset('/documents/users/'.$item->user->personal_image)}}"  width="50px" height="50px" class="rounded-circle "/>
-                        @endif
+                        <a  href="/admin/user/{{$item->user->id}}">
+                            @if(is_null($item->user->personal_image))
+                                <img src="{{asset('/documents/users/default-avatar.png')}}"  width="50px" height="50px" class="rounded-circle "/>
+                            @else
+                                <img src="{{asset('/documents/users/'.$item->user->personal_image)}}"  width="50px" height="50px" class="rounded-circle "/>
+                            @endif
+                        </a>
                     </td>
-
                     <td class="text-center">
                         {{$item->user->fname." ".$item->user->lname}}
                     </td>
@@ -54,47 +50,55 @@
                     <td class="text-center">
                         {{$item->date_fa}}
                     </td>
-                    <td class="text-center">
-                        @foreach($item->user->checkouts->where('status','=',1)->where('product_id','=',$item->course_id)->where('type','=','course') as $item2)
-                            {{number_format($item2->price) }}
-                        @endforeach
-                    </td>
-                    <td class="text-center">
-                        @foreach($item->user->checkouts->where('status','=',1)->where('product_id','=',$item->course_id)->where('type','=','course') as $item2)
-                            {{number_format($item2->order['takhfif_naghdi'])}}
-                        @endforeach
-                    </td>
-                    <td class="text-center">
-                        @foreach($item->user->checkouts->where('status','=',1)->where('product_id','=',$item->course_id)->where('type','=','course') as $item2)
-                            {{number_format($item2->order['tedad_ghest'])}}
-                        @endforeach
-                    </td>
-                    <td class="text-center">
-                        @foreach($item->user->checkouts->where('status','=',1)->where('product_id','=',$item->course_id)->where('type','=','course') as $item2)
-                            {{number_format($item2->order['fi_ghest'])}}
-                        @endforeach
-                    </td>
-
-
 
                     <td class="text-center">
-                        @foreach($item->user->checkouts->where('status','=',1)->where('product_id','=',$item->course_id)->where('type','=','course') as $item2)
-                            {{number_format($item2->order['fi'])}}
-                        @endforeach
-                    </td>
 
+                            <form method="post" action="/admin/certificates/fcc/{{$item->id}}">
+                                {{csrf_field()}}
+                                <input type="hidden" value="{{$item->id}}" name="student" />
+                                <button class="btn btn-success"> مدرک شناسایی</button>
+                            </form>
+
+                    </td>
                     <td class="text-center">
-                        @foreach($item->user->checkouts->where('status','=',1)->where('product_id','=',$item->course_id)->where('type','=','course') as $item2)
-                            {{$item2->authority}}
-                        @endforeach
+                        @if(!is_null($item->code) && !is_null($item->date_gratudate) && ($item->status==3) )
+                            <form method="post" action="/admin/certificates/acsth/{{$item->id}}">
+                                {{csrf_field()}}
+                                <input type="hidden" value="{{$item->id}}" name="student" />
+                                <button class="btn btn-success"> مدرک ACSTH</button>
+                            </form>
+                        @elseif(!is_null($item->code) && !is_null($item->date_gratudate) && ($item->status==31))
+                            <form method="post"  action="/admin/certificates/fc1/{{$item->id}}">
+                                {{csrf_field()}}
+                                <button class="btn btn-success" >مدرک FC1</button>
+                            </form>
+                        @endif
                     </td>
                     <td>
-                        <a href="" class="btn btn-primary" >ایجاد فاکتور</a>
+                        {{$item->get_status()}}
+                    </td>
+
+                    <td class="text-center">
+                        <a href="/admin/education/students/{{$item->id}}/edit" class="btn btn-warning" >
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <form method="post" action="/admin/education/students/{{$item->id}}" onsubmit="return window.confirm('آیا از حذف دانشجو از دوره اطمینان داری؟')">
+                            {{csrf_field()}}
+                            {{method_field('DELETE')}}
+                            <button class="btn btn-danger" type="submit">حذف از دوره</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach
             </tbody>
         </table>
+
+
+    </div>
+    <div class="col-12">
+
     </div>
 @endsection
 
@@ -112,13 +116,7 @@
     <script>
         $(document).ready(function() {
             $('.table_data').DataTable({
-                // columnDefs: [
-                //     {
-                //         target: 6,
-                //         visible: false,
-                //         searchable: false,
-                //     }
-                // ],
+                order: [[4, 'desc']],
                 dom: 'Bfrltip',
                 buttons: [
                     'excel',

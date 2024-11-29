@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\category_gettingknow;
 use App\categoryTag;
 use App\followup;
 use App\User;
@@ -50,15 +51,17 @@ class ReportAdminController extends BaseController
      */
     public function show(User $user, Request $request)
     {
-        if (isset($_GET['range'])) {
+
+        if (isset($_GET['range']))
+        {
             $this->validate($request, [
                 'start_date' => 'required|string',
             ]);
             $request['start_date'] = explode(' ~ ', $request['start_date']);
+
         } else {
             $dateNow = verta();
             $request['start_date'] = [$dateNow->startMonth()->format('Y/m/d'), $dateNow->endMonth()->format('Y/m/d')];
-
         }
 
         if (isset($request['start_date'])) {
@@ -110,6 +113,7 @@ class ReportAdminController extends BaseController
 
     public function allReportsUsers(Request $request)
     {
+
         if (isset($request['range'])) {
             $this->validate($request, [
                 'start_date' => 'required|string',
@@ -124,6 +128,16 @@ class ReportAdminController extends BaseController
             $followups = followup::wherebetween('date_fa', $date_fa)
                             ->get();
 
+
+//            $followups_compaign=followup::wherebetween('date_fa', $date_fa)
+////                ->where(function())
+////                $query->with('followups')
+////                    ->whereHas('followups', function($query) use ($request)
+////                    {
+////                        $query->wherebetween('date_fa', $request->range);
+////                    });
+//                ->get();
+
         } else
         {
             $v=verta();
@@ -134,6 +148,28 @@ class ReportAdminController extends BaseController
             $followups = followup::wherebetween('date_fa', [$v->now()->startMonth()->format('Y/m/d'),$v->now()->endMonth()->format('Y/m/d')])
                             ->get();
 
+
+
+//            $followups_compaign=followup::wherebetween('date_fa', [$v->now()->startMonth()->format('Y/m/d'),$v->now()->endMonth()->format('Y/m/d')])
+//                ->with('users')
+//                ->get();
+
+        }
+
+        $v=verta();
+
+
+
+        $campaign=($users->groupby('resource'));
+
+        foreach ($campaign as $item)
+        {
+
+            $item->count_followups=0;
+            for ($i=0;$i<$item->count();$i++)
+            {
+                $item->count_followups=$item->count_followups+($item[$i]->followups)->count();
+            }
         }
 
 
@@ -149,11 +185,14 @@ class ReportAdminController extends BaseController
         $ages = ['ageTo20' => $ageTo20->count(), 'age21to30' => $age21to30->count(), 'age31to40' => $age31to40->count(), 'age41to50' => $age41to50->count(), 'age51to60' => $age51to60->count(), 'age61to70' => $age61to70->count(), 'age71to80' => $age71to80->count()];
 
 
+
+
         return view('admin.reports.allDatabase')
             ->with('followups', $followups)
             ->with('date_jalali', $v->now())
             ->with('ages', $ages)
             ->with('date_fa', $date_fa)
+            ->with('campaign', $campaign)
             ->with('users', $users);
     }
 
@@ -295,8 +334,15 @@ class ReportAdminController extends BaseController
 
     public function advanceReport_create()
     {
+
+
         $states = $this->states();
         $userType = user_type::get();
+        $users=User::groupby('resource')
+            ->get();
+
+
+
 
         return view('admin.reports.report_advance')
             ->with('states', $states)
@@ -306,13 +352,13 @@ class ReportAdminController extends BaseController
     public function advanceReport(Request $request)
     {
 
-
         $this->validate($request, [
             'range_date' => 'nullable|string',
             'gender' => 'nullable|array',
             'married' => 'nullable|array',
             'state' => 'nullable|array',
             'education' => 'nullable|array',
+            'social' => 'nullable|array',
             'social' => 'nullable|array',
             'types' => 'nullable|array',
         ]);
@@ -328,17 +374,17 @@ class ReportAdminController extends BaseController
 
         $users = User::when($request->gender, function ($query) use ($request)
             {
+                // اگر در گزینه های اتخابی NUL وجود داشته باشد یک شرط فقط برای چک کردن NULL میذاریم
                 $query->where(function ($query) use ($request)
                 {
                     $query->wherein('sex', $request->gender)
                         ->when(in_array('NULL', $request->gender), function ($query) use ($request) {
                             $query->orwhereNull('sex');
                         });
-
                 });
-                if (in_array('NULL', $request->gender)) {
-                    $query->orwhereNull('sex');
-                }
+//                if (in_array('NULL', $request->gender)) {
+//                    $query->orwhereNull('sex');
+//                }
                 return $query;
             })
             ->when($request->married, function ($query) use ($request)
@@ -351,9 +397,9 @@ class ReportAdminController extends BaseController
                         });
 
                 });
-                if (in_array('NULL', $request->married)) {
-                    $query->orwhereNull('married');
-                }
+//                if (in_array('NULL', $request->married)) {
+//                    $query->orwhereNull('married');
+//                }
                 return $query;
             })
             ->when($request->state, function ($query) use ($request)
@@ -366,9 +412,9 @@ class ReportAdminController extends BaseController
                         });
 
                 });
-                if (in_array('NULL', $request->state)) {
-                    $query->orwhereNull('state');
-                }
+//                if (in_array('NULL', $request->state)) {
+//                    $query->orwhereNull('state');
+//                }
                 return $query;
             })
             ->when($request->education, function ($query) use ($request)
@@ -381,9 +427,9 @@ class ReportAdminController extends BaseController
                         });
 
                 });
-                if (in_array('NULL', $request->education)) {
-                    $query->orwhereNull('education');
-                }
+//                if (in_array('NULL', $request->education)) {
+//                    $query->orwhereNull('education');
+//                }
                 return $query;
             })
             ->when($request->types, function ($query) use ($request)
@@ -397,9 +443,9 @@ class ReportAdminController extends BaseController
                         });
 
                 });
-                if (in_array('NULL', $request->types)) {
-                    $query->orwhereNull('type');
-                }
+//                if (in_array('NULL', $request->types)) {
+//                    $query->orwhereNull('type');
+//                }
                 return $query;
             })
             ->when($request->tags,function ($query) use ($request)
@@ -407,50 +453,154 @@ class ReportAdminController extends BaseController
                 return $query->with('followups')
                     ->whereHas('followups', function($query) use ($request)
                     {
-                        $query->wherein('tags',$request->tags)
-                            ->where(function($query) use ($request)
+                        $query->wherebetween('date_fa', $request->range)
+                            ->where(function ($query)use ($request)
                             {
-                                for ($i=0;$i<count($request->tags);$i++)
+                                $query->orwherein('tags',$request->tags)
+                                ->orwhere(function($query) use ($request)
                                 {
-                                    $query//->wherebetween('date_fa', $request->range)
-                                        ->where(function ($query) use ($request,$i)
+                                    for ($i=0;$i<count($request->tags);$i++)
+                                    {
+                                        $query->where(function($query) use ($request,$i)
                                         {
-                                            return $query->orwhere('tags', 'like', $request->tags[$i] . ',%')
-                                                    ->orwhere('tags', 'like', '%,' . $request->tags[$i])
-                                                    ->orwhere('tags', 'like', '%,' . $request->tags[$i] . ',%');
-
+                                            $query->orwhere('tags', 'like', $request->tags[$i] . ',%')
+                                                ->orwhere('tags', 'like', '%,' . $request->tags[$i])
+                                                ->orwhere('tags', 'like', '%,' . $request->tags[$i] . ',%');
                                         });
-                                }
+                                    }
+                                });
                             });
-
                     });
+            })
 
+            ->when($request->social,function($query) use ($request)
+            {
+                $query->where(function($query) use ($request)
+                {
+                    foreach ($request->social as $item)
+                    {
+                        if($item=='instagram')
+                        {
+                            $query->orwherenotnull('instagram');
+                        }
+
+                        if($item=='telegram')
+                        {
+                            $query->orwherenotnull('telegram');
+                        }
+
+                        if($item=='telegram')
+                        {
+                            $query->orwherenotnull('telegram');
+                        }
+
+                        if($item=='linkedin')
+                        {
+                            $query->orwherenotnull('linkedin');
+                        }
+                    }
+                });
+
+
+//                  dd($request->wherein($request->social,['telegram']));
+//                  if($query->wherein($request->social,['telegram']))
+//                  {
+//                      $query->wherenotnull('telegram');
+//                  }
+            })
+            ->when($request->resource, function ($query) use ($request)
+            {
+                $query->where(function ($query) use ($request)
+                {
+                    $query->wherein('resource', $request->resource)
+                        ->when(in_array('NULL', $request->resource), function ($query) use ($request) {
+                            $query->orwhereNull('resource');
+                        });
+                });
+            })
+            ->when($request->gettingKnow, function ($query) use ($request)
+            {
+                $query->where(function ($query) use ($request)
+                {
+
+                    $query->wherein('gettingKnow', $request->gettingKnow)
+                        ->when(in_array('NULL', $request->gettingKnow), function ($query) use ($request) {
+                            $query->orwhereNull('gettingKnow');
+                        });
+
+                });
+//                if (in_array('NULL', $request->types)) {
+//                    $query->orwhereNull('type');
+//                }
+                return $query;
+            })
+            ->when($request->insert_user, function ($query) use ($request)
+            {
+                $query->where(function ($query) use ($request)
+                {
+                    $query->wherein('insert_user_id', $request->insert_user)
+                        ->when(in_array('NULL', $request->insert_user), function ($query) use ($request) {
+                            $query->orwhereNull('insert_user');
+                        });
+
+                });
+//                if (in_array('NULL', $request->types)) {
+//                    $query->orwhereNull('type');
+//                }
+                return $query;
             })
             ->when($request->kind == 'پیگیری', function ($query) use ($request)
             {
-               return $query->with('followups')
-                           ->whereHas('followups', function($q) use ($request) {
-                               $q//->where('status_followups', '13')
-                                    ->wherebetween('date_fa',$request->range);
-                           });
+                $query->with('followups')
+                    ->whereHas('followups', function($query) use ($request)
+                    {
+                        $query->wherebetween('date_fa', $request->range);
+                    });
             })
             ->when($request->kind == 'ثبت', function ($query) use ($request)
             {
                 return $query->wherebetween('created_at', $request->date_en);
             })
-
-
             ->get();
 
+
+            $gettingKnow=category_gettingknow::where('parent_id','<>',0)
+                ->get();
 
 
             $categoryTag=categoryTag::where('category','=','پیگیری')
                             ->first();
             $states = $this->states();
             $userType = user_type::get();
+            $insert_user=User::wherein('type',[2,3,4])
+                        ->get();
+
+
+        $v = verta();
+        $ageTo20 = $users->wherebetween('datebirth', [$v->subYears(20), $v->now()]);
+        $age21to30 = $users->wherebetween('datebirth', [$v->now()->subYears(30), $v->now()->subYears(21)]);
+        $age31to40 = $users->wherebetween('datebirth', [$v->now()->subYears(40), $v->now()->subYears(31)]);
+        $age41to50 = $users->wherebetween('datebirth', [$v->now()->subYears(50), $v->now()->subYears(41)]);
+        $age51to60 = $users->wherebetween('datebirth', [$v->now()->subYears(60), $v->now()->subYears(50)]);
+        $age61to70 = $users->wherebetween('datebirth', [$v->now()->subYears(70), $v->now()->subYears(61)]);
+        $age71to80 = $users->wherebetween('datebirth', [$v->now()->subYears(80), $v->now()->subYears(71)]);
+        $age901to81 = $users->wherebetween('datebirth', [$v->now()->subYears(90), $v->now()->subYears(81)]);
+        $ages = ['ageTo20' => $ageTo20->count(), 'age21to30' => $age21to30->count(), 'age31to40' => $age31to40->count(), 'age41to50' => $age41to50->count(), 'age51to60' => $age51to60->count(), 'age61to70' => $age61to70->count(), 'age71to80' => $age71to80->count()];
+
+        $resources=User::groupby('resource')
+                            ->get();
+
+
+
+
+
         return view('admin.reports.report_advance')
                             ->with('states',$states)
                             ->with('userType',$userType)
+                            ->with('gettingKnow',$gettingKnow)
+                            ->with('insert_user',$insert_user)
+                            ->with('ages',$ages)
+                            ->with('resources',$resources)
                             ->with('tagsParent',$categoryTag->get_subCategoryTags)
                             ->with('users',$users);
     }

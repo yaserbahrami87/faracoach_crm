@@ -36,14 +36,23 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('/panel_assets/css/pages/authentication.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/panel_assets/css/plugins/forms/wizard.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/panel_assets/css/pages/app-email.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/panel_assets/intl_tel/css/intlTelInput.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/panel_assets/css/pages/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/panel_assets/intl_tel/css/intlTelInput.css') }}" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lalezar">
-    <!-- END: Page CSS-->
-    <!--{% framework extras %}-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+
+    <style>
+        @font-face {
+            font-family: 'Lalezar';
+            font-style: normal;
+            font-weight: 400;
+            src: url('{{asset('/fonts/Lalezar.woff2')}}') format('woff2');
+
+        }
+    </style>
+
     <link rel="stylesheet" property="stylesheet" href="/modules/system/assets/css/framework.extras.css">
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="{{asset('/js/sweetalert.min.js')}}"></script>
 
     <style>
         .main-menu.menu-dark .navigation li a {
@@ -72,6 +81,8 @@
     </style>
 
     @yield('headerScript')
+    <livewire:styles />
+
 </head>
 <!-- END: Head-->
 
@@ -116,6 +127,10 @@
                                         <div class="card-body">
                                             <div class="tab-content">
                                                 <div role="tabpanel" class="tab-pane active" id="account-vertical-general" aria-labelledby="account-pill-general" aria-expanded="true">
+                                                    <div class="col-12" id="error_ajax">
+
+                                                    </div>
+
                                                     @if($errors->any())
                                                         <div class="col-12">
                                                             <div class="alert alert-danger" role="alert">
@@ -159,10 +174,13 @@
 
 
 <!-- BEGIN: Vendor JS -->
-<script src="{{ asset('/acckt/js/jquery.min.js') }}"></script>
-<!--<script src="{{ asset('/acckt/js/bootstrap.min.js') }}"></script>-->
-<script src="{{ asset('/panel_assets/vendors/js/vendors.min.js') }}"></script>
+<script src="{{ asset('/panel_assets/js/jquery.min.js') }}"></script>
+<!--<script src="{{ asset('/panel_assets/js/bootstrap.min.js') }}"></script>-->
+<script src="/panel_assets/vendors/js/vendors.min.js"></script>
 
+<!--
+<script src="/panel_assets/vendors/js/vendors.min.js"></script>
+-->
 <script src="{{ asset('/panel_assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.min.js') }}"></script>
 <script src="{{ asset('/panel_assets/fonts/LivIconsEvo/js/LivIconsEvo.defaults.js') }}"></script>
 <script src="{{ asset('/panel_assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js') }}"></script>
@@ -207,8 +225,11 @@
         $('[data-toggle="tooltip"]').tooltip()
     })
 </script>
-@yield('footerScript')
 
+
+
+@yield('footerScript')
+<livewire:scripts />
 </body>
 <!-- END: Body-->
 </html>

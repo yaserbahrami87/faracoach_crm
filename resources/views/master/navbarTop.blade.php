@@ -3,20 +3,28 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
+    @if(Auth::check())
+        <a href="/panel" class="btn btn-primary d-block d-sm-none" role="button" aria-pressed="true" id="btnRegister">ورود به پورتال</a>
+    @else
+        <a href="/login" class="btn btn-primary d-block d-sm-none" role="button" aria-pressed="true" id="btnRegister">ورود / ثبت نام</a>
+    @endif
     <div class="collapse navbar-collapse" dir="rtl" id="navbarTogglerDemo01">
         <a class="navbar-brand" href="/">
             <img src="{{asset('images/white-logo.png')}}" alt="" />
         </a>
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
             <li class="nav-item dropdown">
                 <a class="nav-link " href="/" id="navbarDropdownMenuLink1" >
                     صفحه اصلی
                 </a>
             </li>
             <li class="nav-item ">
+                <!--
                 <a class="nav-link" href="/blogs/newposts" id="navbarDropdownMenuLink" role="button">
                     بلاگ کوچ
                 </a>
+                -->
+
                 <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                   <a class="dropdown-item" href="#">پکیج رایگان آموزش کوچینگ</a>
                   <a class="dropdown-item" href="#">درخواست کوچینگ سازمانی</a>
@@ -39,11 +47,16 @@
                     دوره ها
                 </a>
             </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link " href="/products" id="navbarDropdownMenuLink1" >
+                    محصولات
+                </a>
+            </li>
 
             @if(request()->is('coach/*') &&(Auth::check()))
                 <li class="nav-item ">
                     <a class="nav-link"  href="/cart" >
-                        <span class="badge badge-light">{{$cart->count()}}</span>
+                        <span class="badge badge-light"></span>
                         <i class="bi bi-cart-fill"></i>
                     </a>
                 </li>
@@ -122,7 +135,7 @@
 
 
 
-<!--
+
 <div slass="row" dir="rtl">
     <div class="col-md-12">
         <div class="modal fade mt-5" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel-regester" aria-hidden="true">
@@ -221,4 +234,4 @@
         </div>
     </div>
 </div>
--->
+

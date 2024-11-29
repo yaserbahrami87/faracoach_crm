@@ -42,7 +42,7 @@
                                         <label for="ghest">تعداد اقساط باقیمانده</label>
                                         <select class="custom-select" id="ghest" name="tedadGhest">
                                             <option selected disabled>انتخاب کنید</option>
-                                            @for($i=1;$i<=$cart->tedadGhest;$i++)
+                                                @for($i=1;$i<=$cart->tedadGhest;$i++)
                                                 <option value="{{$i}}">{{$i}}</option>
                                             @endfor
                                         </select>

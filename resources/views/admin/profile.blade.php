@@ -29,7 +29,11 @@
                             <div class="media-body border border-1 p-1  shadow-lg">
                                 <div class="row ">
                                     <div class="col-12 col-md-12 col-sm-12 col-xl-12 col-lg-12 text-center mb-2 ">
-                                        <img src="{{asset('/documents/users/'.$user->personal_image)}}" class="border-2 border rounded-circle" width="124px" height="124px" />
+                                        @if(is_null($user->personal_image))
+                                            <img src="{{asset('/documents/users/default-avatar.png')}}" class="border-2 border rounded-circle" width="124px" height="124px" />
+                                        @else
+                                            <img src="{{asset('/documents/users/thumbnail-'.$user->personal_image)}}" class="border-2 border rounded-circle" width="124px" height="124px" />
+                                        @endif
                                     </div>
                                     <div class="col-12 col-md-12 col-sm-12 col-xl-12 col-lg-12 text-center">
                                         <h5 class="mt-0">{{$user->fname." ".$user->lname}}</h5>
@@ -51,7 +55,58 @@
                                         @if(!is_null($user->get_insertuserInfo))
                                             <p>ثبت شده توسط: {{$user->get_insertuserInfo->fname .' '.$user->get_insertuserInfo->lname }}</p>
                                         @endif
-                                        <p class="d-inline"> تعداد افراد معرفی شده:</p><b> {{$user->get_invitations->count()}} نفر</b>
+
+                                        @if(!is_null($user->followby_expert))
+                                            <p>مسئول پیگیری: {{$user->get_followbyExpert->fname .' '.$user->get_followbyExpert->lname }}</p>
+                                        @endif
+
+                                        <p>تاریخ ثبت نام:  <span dir="ltr">{{substr($user->created_at,0,10)}}</span></p>
+                                        <a href="#" data-toggle="modal" data-target="#invitationModal">
+
+                                            <p class="d-inline" > تعداد افراد معرفی شده:</p><b> {{$user->get_invitations->count()}} نفر</b>
+                                        </a>
+                                        <!-- Modal invitation -->
+                                        <div class="modal fade" id="invitationModal" tabindex="-1" aria-labelledby="invitationModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">دعوت شده ها</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <table class="table table-bordered table-striped table-striped">
+                                                            <tr>
+                                                                <th>ردیف</th>
+                                                                <th>عکس</th>
+                                                                <th>نام و نام خانوادگی</th>
+                                                                <th>تلفن</th>
+                                                            </tr>
+
+                                                            @foreach($user->get_invitations as $item)
+                                                                <tr>
+                                                                    <td>{{$loop->iteration}}</td>
+                                                                    <td>
+                                                                        <img src="{{asset('/documents/users/'.$item->personal_image)}}" width="50px" height="50px" class="rounded-circle" />
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="/admin/user/{{$item->id}}" target="_blank">
+                                                                            {{$item->fname.' '.$item->lname}}
+                                                                        </a>
+                                                                    </td>
+                                                                    <td dir="ltr">{{$item->tel}}</td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </table>
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div class="col-12 col-md-12 col-sm-12 col-xl-12 col-lg-12 pt-1 text-center" >
@@ -64,8 +119,11 @@
                                                     <select class="form-control p-0" name="type" >
                                                         <option selected disabled>یک گزینه را انتخاب کنید</option>
                                                         <option value="2" {{$user->type===2 ? "selected":""  }} >مدیر</option>
-                                                        <option value="3" {{$user->type===3 ? "selected":""  }}>آموزش</option>
+                                                        <option value="3" {{$user->type===3 ? "selected":""  }}>فروش</option>
                                                         <option value="4" {{$user->type===4 ? "selected":""  }}>کلینیک</option>
+                                                        <option value="5" {{$user->type===5 ? "selected":""  }}>آموزش</option>
+                                                        <option value="6" {{$user->type===6 ? "selected":""  }}>قبل فروش</option>
+                                                        <option value="7" {{$user->type===7 ? "selected":""  }}>سوشیال</option>
                                                         <option value="1" {{$user->type===1 ? "selected":""  }}>کاربر ساده</option>
                                                     </select>
                                                     <div class="col-12 text-center">
@@ -75,30 +133,43 @@
                                             @endif
                                         </form>
 
-                                        <form method="get" action="/admin/user/{{$user->id}}/login" onsubmit="return window.confirm('آیا میخواهید با اکانت کاربر وارد سایت شوید؟')">
-                                            {{csrf_field()}}
-                                            <div class="input-group mb-1 mt-1 border-bottom border-1 pb-1 ">
-                                                <input type="submit"  class="btn btn-primary" value="ورود با اکانت کاربر"  />
-                                            </div>
-                                        </form>
+                                        @if(Auth::user()->type==2)
+                                            <form method="get" action="/admin/user/{{$user->id}}/login" onsubmit="return window.confirm('آیا میخواهید با اکانت کاربر وارد سایت شوید؟')">
+                                                {{csrf_field()}}
+                                                <div class="input-group mb-1 mt-1 border-bottom border-1 pb-1 ">
+                                                    <input type="submit"  class="btn btn-primary" value="ورود با اکانت کاربر"  />
+                                                </div>
+                                            </form>
+                                        @elseif($user->type!=2 && $user->type!=3 && $user->type!=4 && $user->type!=5 && $user->type!=6 && $user->type!=7)
+                                            <form method="get" action="/admin/user/{{$user->id}}/login" onsubmit="return window.confirm('آیا میخواهید با اکانت کاربر وارد سایت شوید؟')">
+                                                {{csrf_field()}}
+                                                <div class="input-group mb-1 mt-1 border-bottom border-1 pb-1 ">
+                                                    <input type="submit"  class="btn btn-primary" value="ورود با اکانت کاربر"  />
+                                                </div>
+                                            </form>
+                                        @endif
 
-                                        <form method="post" action="/admin/user/{{$user->id}}/changeType">
-                                            {{csrf_field()}}
-                                            {{method_field('PATCH')}}
-                                            <input type="hidden" value="NULL" name="followby_expert">
-                                            <div class="input-group mt-1 ">
-                                                <select class="form-control p-0" name="type" >
-                                                    <option selected disabled>یک گزینه را انتخاب کنید</option>
-                                                    <option value="-1" {{$user->type===-1 ? "selected":"" }} >مارکتینگ 1</option>
-                                                    <option value="-2" {{$user->type===-2 ? "selected":"" }} >مارکتینگ 2</option>
-                                                    <option value="-3" {{$user->type===-3 ? "selected":"" }} >مارکتینگ 3</option>
-                                                    <option value="11" {{$user->type===1 ? "selected":"" }}>فروش</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-12 text-center">
-                                                <button class="btn btn-danger text-center mt-1" type="submit" id="button-addon1">تغییر دسته بندی</button>
-                                            </div>
-                                        </form>
+
+
+                                        @if((Auth::user()->id==$user->followby_expert||is_null($user->followby_expert)))
+                                            <form method="post" action="/admin/user/{{$user->id}}/changeType">
+                                                {{csrf_field()}}
+                                                {{method_field('PATCH')}}
+                                                <input type="hidden" value="NULL" name="followby_expert">
+                                                <div class="input-group mt-1 ">
+                                                    <select class="form-control p-0" name="type" >
+                                                        <option selected disabled>یک گزینه را انتخاب کنید</option>
+                                                        <option value="-1" {{$user->type===-1 ? "selected":"" }} >مارکتینگ 1</option>
+                                                        <option value="-2" {{$user->type===-2 ? "selected":"" }} >مارکتینگ 2</option>
+                                                        <option value="-3" {{$user->type===-3 ? "selected":"" }} >مارکتینگ 3</option>
+                                                        <option value="11" {{$user->type===1 ? "selected":"" }}>فروش</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-12 text-center">
+                                                    <button class="btn btn-danger text-center mt-1" type="submit" id="button-addon1">تغییر دسته بندی</button>
+                                                </div>
+                                            </form>
+                                        @endif
                                         <hr>
                                     </div>
                                 </div>
@@ -273,6 +344,7 @@
                         <div class="col-md-8">
                             <h6 class="card-title m-0">اطلاعات قرارداد</h6>
                         </div>
+
                         <div class="col-md-4 text-right">
                             <svg class="@if((strlen($user->father)>0)&&(strlen($user->married)>0)&&(strlen($user->born)>0)&& (strlen($user->education)>0)&& (strlen($user->reshteh)>0)&& (strlen($user->shenasnameh_image)>0)&& (strlen($user->cartmelli_image)>0)&& (strlen($user->education_image)>0)&& (strlen($user->job)>0)) text-muted @else  text-danger  @endif" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-text-fill" viewBox="0 0 16 16">
                                 <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM5 4h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1zm-.5 2.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zM5 8h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1zm0 2h3a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1z"/>
@@ -405,13 +477,24 @@
                     <div class="row">
                         <div class="col-md-6 px-1">
                             <div class="form-group">
+
                                 <label>نحوه آشنایی</label>
+
+
 
                                 <select id="gettingknow_parent" class="form-control p-0 @if(strlen($user->gettingknow)==0) is-invalid  @else is-valid  @endif  @error('gettingknow') is-invalid @enderror" name="gettingKnow_parent">
                                     <option selected disabled>انتخاب کنید</option>
-                                    @foreach($gettingKnow_parent_list as $item)
-                                        <option value="{{$item->id}}"  {{ old('gettingKnow_parent',$user->gettingknow_parent_user)==$item->id ? 'selected='.'"'.'selected'.'"' : '' }} >{{$item->category}}</option>
-                                    @endforeach
+
+                                    @if(!is_null($user->get_gettingknow))
+                                        @foreach($gettingKnow_parent_list as $item)
+                                            <option value="{{$item['id']}}"  {{ old('gettingKnow_parent',$user->get_gettingknow->parent['id'])==$item['id'] ? 'selected='.'"'.'selected'.'"' : '' }} >{{$item->category}}</option>
+                                        @endforeach
+                                    @else
+                                        @foreach($gettingKnow_parent_list as $item)
+                                            <option value="{{$item->id}}"  {{ old('gettingKnow_parent')==$item->id ? 'selected='.'"'.'selected'.'"' : '' }} >{{$item->category}}</option>
+                                        @endforeach
+                                    @endif
+
                                 </select>
                             </div>
                         </div>
@@ -423,11 +506,12 @@
                                     <label>عنوان آشنایی</label>
                                     <select id="gettingknow" class="form-control p-0 @if(strlen($user->gettingknow)==0) is-invalid  @else is-valid  @endif  @error('gettingknow') is-invalid @enderror" name="gettingknow">
                                         <option selected disabled>انتخاب کنید</option>
-                                        @foreach($gettingKnow_child_list as $item)
-                                            <option value="{{$item->id}}"  {{ old('gettingknow',$user->gettingknow)==$item->id ? 'selected='.'"'.'selected'.'"' : '' }}   >{{$item->category}}</option>
-                                        @endforeach
+                                        @if(!is_null($user->get_gettingknow) && (!is_null($user->get_gettingknow->parent)))
+                                            @foreach($user->get_gettingknow->parent->child_lists as $item)
+                                                <option value="{{$item->id}}"  {{ old('gettingknow',$user->gettingknow)==$item->id ? 'selected='.'"'.'selected'.'"' : '' }}   >{{$item->category}}</option>
+                                            @endforeach
+                                        @endif
                                     </select>
-
                                 </div>
                             </div>
                         @else
@@ -488,17 +572,25 @@
                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">مالی</a>
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">#</a>
+                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">جلسات</a>
             </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="events-tab" data-toggle="tab" href="#events" role="tab" aria-controls="events" aria-selected="false">رویدادها</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="courses-tab" data-toggle="tab" href="#courses" role="tab" aria-controls="courses" aria-selected="false">دوره ها</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="logs-tab" data-toggle="tab" href="#logs" role="tab" aria-controls="logs" aria-selected="false">تاریخچه</a>
+            </li>
+
         </ul>
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="followups" role="tabpanel" aria-labelledby="followups-tab">
 
                 <div class="row">
-
                     @if(!is_null($user->followups->groupby('course_id')))
                         @foreach($user->followups->groupby('course_id') as $item)
-
                             <div class="col-4">
                                 <div class="card text-white border border-3 border-danger  p-1" style="min-height: 70px">
                                     <span class="text-dark text-center">
@@ -512,20 +604,36 @@
                         @endforeach
                     @endif
                 </div>
-                @if((Auth::user()->id==$user->followby_expert||is_null($user->followby_expert))&& $user->type!=-1&&$user->type!=-2&&$user->type!=-3 )
+
+                @if((Auth::user()->type==2)||(Auth::user()->type==4))
+
+                    @include('admin.insertFollowUp')
+                     <hr/>
+                @elseif(((Auth::user()->type==3)||(Auth::user()->type==4)||(Auth::user()->type==5)||(Auth::user()->type==7)) &&(Auth::user()->id==$user->followby_expert))
+
+                    @include('admin.insertFollowUp')
+                    <hr/>
+                @elseif((Auth::user()->type==6)&&((Auth::user()->id==$user->followby_expert)||is_null($user->followby_expert)))
+
                     @include('admin.insertFollowUp')
                     <hr/>
                 @elseif((Auth::user()->id==$user->followby_expert||is_null($user->followby_expert))&& $user->type!=5)
+
                     <div class="alert alert-warning">
                         <i class="bi bi-exclamation-triangle-fill"></i>
-                        کاربر مربوط به بخش مارکتینگ می باشد
+                        کاربر مربوط به شما یا بخش شما نمی باشد
                     </div>
                     <hr/>
                 @endif
                 @include('admin.followups')
             </div>
+
+
             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                @if($user->faktors->count()==0)
+                <a href="/admin/faktor/{{$user->id}}/create" class="btn btn-primary">ایجاد فاکتور</a>
+                <a href="/admin/invoice/{{$user->id}}/create" class="btn btn-primary">ایجاد پیش فاکتور</a>
+
+                @if($user->faktors->count()==0 && ($user->checkouts->where('status','=',1)->count()==0) )
                     <div class="alert alert-warning">
                         فاکتور مالی وجود ندارد
                     </div>
@@ -534,7 +642,19 @@
                 @endif
 
             </div>
-            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                @include('admin.user.booking')
+            </div>
+            <div class="tab-pane fade" id="events" role="tabpanel" aria-labelledby="events-tab">
+                @include('admin.user.events')
+            </div>
+            <div class="tab-pane fade" id="courses" role="tabpanel" aria-labelledby="courses-tab">
+                @include('admin.user.courses')
+            </div>
+            <div class="tab-pane fade" id="logs" role="tabpanel" aria-labelledby="logs-tab">
+                @include('admin.user.logs')
+            </div>
+
         </div>
 
     </div>

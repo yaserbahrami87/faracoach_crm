@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\course;
 use App\followup;
+use App\problemfollowup;
+use App\User;
+use App\user_type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 
 class FollowupController extends BaseController
@@ -46,7 +51,6 @@ class FollowupController extends BaseController
      */
     public function store(Request $request)
     {
-
         $this->validate($request,[
             'insert_user_id'        =>'required|numeric',
             'course_id'             =>'required|numeric',
@@ -84,6 +88,14 @@ class FollowupController extends BaseController
 
         $data=$this->get_user_byID($request['user_id']);
         $data->type=$request['status_followups'];
+
+
+        if(($request['followby_expert']!=$data->followby_expert)&&(!is_null($data->followby_expert)))
+        {
+            $this->send_notification($request['followby_expert'],$data->fname." ".$data->lname." به شما توسط  ".Auth::user()->fname.' '.Auth::user()->lname." ارجاع داده شد ",$data->id,'user');
+        }
+
+
         $data->followby_expert=$request['followby_expert'];
         $data->tel_verified=1;
         $data->save();
@@ -119,25 +131,21 @@ class FollowupController extends BaseController
             $t['flag']="1";
             $t->update();
 
-            $msg="پیگیری با موفقیت ثبت شد";
-            $errorStatus="success";
+            alert()->success('پیگیری با موفقیت ثبت شد')->persistent('بستن');
         }
         else
         {
-            $msg="خطا در ثبت";
-            $errorStatus="danger";
+            alert()->error('خطا در ثبت')->persistent('بستن');
         }
 
 
         if($request['followby_expert']==Auth::user()->id)
         {
-            return back()->with('msg',$msg)
-                ->with('errorStatus',$errorStatus);
+            return back();
         }
         else
         {
-            return redirect('/admin/users')->with('msg',$msg)
-                ->with('errorStatus',$errorStatus);
+            return redirect('/admin/users');
         }
 
     }
@@ -252,28 +260,114 @@ class FollowupController extends BaseController
     }
 
 //    این بخش برای پیدا کردن و پیاده سازی آخرین پیگیری های انجام شده در جدول است
-    public function test()
+//    public function test()
+//    {
+//        $follow=followup::get();
+//        foreach ($follow as $item)
+//        {
+//            $t=followup::where('id','=',$item->id)   //    $this->get_followup($item->followups_id,NULL,NULL,NULL,"first");
+//                        ->first();
+//            $t->flag=0;
+//            $t->update();
+//        }
+//
+//        $follow=followup::get();
+//        foreach ($follow as $item)
+//        {
+//            $t=followup::where('user_id','=',$item->user_id)
+//                            ->orderby('id','desc')
+//                            ->first();
+//            $t->flag=1;
+//            $t->update();
+//        }
+//    }
+
+    public function createExcel()
     {
-        $follow=followup::get();
-        foreach ($follow as $item)
+        $userTypes=user_type::where('status','=',1)
+                        ->get();
+
+        $problemFollowup=problemfollowup::where('status','=',1)
+                        ->get();
+        $course=course::where('status','=',1)
+                        ->orderby('id','desc')
+                        ->get();
+        return view('admin.followups.importExcel')
+                            ->with('userTypes',$userTypes)
+                            ->with('course',$course)
+                            ->with('problemFollowup',$problemFollowup);
+    }
+
+    public function storeExcel(Request $request)
+    {
+        $this->validate($request, [
+            'excel'                 =>['required','mimes:xlsx,csv'],
+            'type'                  =>'required|numeric',
+            'problemfollowup_id'    =>'required|numeric',
+            'course_id'             =>'required|numeric',
+            'comment'               =>'required|string',
+            'date_fa'               =>'required|string',
+            'time_fa'               =>'required|string',
+            'nextfollowup_date_fa'  =>'nullable|string',
+        ]);
+        $collection = fastexcel()->import($request->file('excel'));
+        $i=0;
+        foreach ($collection as $item)
         {
-            $t=followup::where('id','=',$item->id)   //    $this->get_followup($item->followups_id,NULL,NULL,NULL,"first");
-                        ->first();
-            $t->flag=0;
-            $t->update();
+            $tel='+98'.substr($item['Sender'],1) ;
+            $user=User::where('tel','=',$tel)
+                            ->first();
+
+            if(is_null($user))
+            {
+                $user=User::create([
+                    'tel'   =>$tel,
+                ]);
+            }
+
+            $tmp=followup::where('user_id','=',$user->id)
+                                ->get();
+
+            if($tmp)
+            {
+                foreach ($tmp as $item_followups)
+                {
+                    $t=followup::where('id','=',$item_followups->id)
+                                ->first();
+                    $t->flag=0;
+                    $t->update();
+                }
+            }
+
+            $followup=followup::create([
+                'user_id'               =>$user->id,
+                'insert_user_id'        =>Auth::user()->id,
+                'course_id'             =>$request->course_id,
+                'comment'               =>$request->comment,
+                'talktime'              =>0,
+                'problemfollowup_id'    =>$request->problemfollowup_id,
+                'status_followups'      =>$request->type,
+                'nextfollowup_date_fa'  =>$request->nextfollowup_date_fa,
+                'flag'                  =>1,
+                'date_fa'               =>$request->date_fa,
+                'time_fa'               =>$request->time_fa,
+                'datetime_fa'           =>$request->date_fa.' '.$request->time_fa,
+            ]);
+
+            if($followup)
+            {
+                $user->type=$request->type;
+                if(is_null($user->followby_expert))
+                    {
+                        $array1=['315','316','317'];
+                        $user->followby_expert=Arr::random($array1);
+                    }
+                $user->save();
+            }
+            $i++;
         }
 
-        $follow=followup::get();
-        foreach ($follow as $item)
-        {
-            $t=followup::where('user_id','=',$item->user_id)
-                            ->orderby('id','desc')
-                            ->first();
-            $t->flag=1;
-            $t->update();
-//            //$this->get_followup_join_user(NULL,$item->user_id,NULL,NULL,'first',NULL);
-////            echo ("<script>console.log(".$t.")</script>");
-//
-        }
+        alert()->success('تعداد '.$i.' پیگیری در سیستم ثبت شد ')->persistent('بستن');
+        return back();
     }
 }

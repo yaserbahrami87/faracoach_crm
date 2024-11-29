@@ -5,11 +5,17 @@ namespace App\Http\Controllers;
 use App\booking;
 use App\cart;
 use App\checkout;
+use App\clinic_reserve;
+use App\course;
 use App\eventreserve;
 use App\faktor;
+use App\invoice;
 use App\lib\zarinpal;
+use App\Purchase;
 use App\reserve;
 use App\student;
+use App\wallet;
+use App\wallet_transaction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -140,6 +146,8 @@ class CheckoutController extends BaseController
             'description'   =>$Description,
         ]);
 
+
+
         if($status)
         {
             echo ($res);
@@ -208,6 +216,7 @@ class CheckoutController extends BaseController
 
 
 
+
         if(($checkout)->count()>0)
         {
             //ما در اینجا مبلغ مورد نظر را بصورت دستی نوشتیم اما در پروژه های واقعی باید از دیتابیس بخوانیم
@@ -239,17 +248,12 @@ class CheckoutController extends BaseController
 
                 if ($result['Status'] == 100)
                 {
-                    foreach ($checkout as $item) {
+                    foreach ($checkout as $item)
+                    {
 
                         $item->status = 1;
                         $item->description = 'خرید انجام شد';
                         $item->save();
-
-//                        $check = checkout::where('authority', '=', $request->get('Authority'))
-//                                        ->get();
-
-
-
                         if ($item->type == 'event')
                         {
                             $event = $this->get_events($item->product_id, NULL, NULL, NULL, NULL, NULL, 'first');
@@ -333,8 +337,64 @@ class CheckoutController extends BaseController
                             }
 
                         }
-                        else if ($item->type == 'reserve')
+                        else if($item->type=='invoice')
                         {
+                            $status=student::create(
+                                [
+                                    'user_id'       =>Auth::user()->id,
+                                    'course_id'     =>$item->product_id,
+                                    'date_fa'       =>$this->dateNow,
+                                    'time_fa'       =>$this->timeNow,
+                                ]
+                            );
+
+                            if(!is_null($item->invoice->count_installment))
+                            {
+                                $v=verta();
+                                for ($i=0;$i<$item->invoice->count_installment;$i++)
+                                {
+
+                                    $v=$v->addMonths(1);
+                                    $Date=$v->format('Y/m/d');
+                                    faktor::create([
+                                        'user_id'           =>Auth::user()->id,
+                                        'checkout_id'       =>$item->id,
+                                        'product_id'        =>$item->product_id,
+                                        'type'              =>'course',
+                                        'date_createfaktor' =>$this->dateNow,
+                                        'date_faktor'       =>$Date,
+                                        'fi'                =>$item->invoice->fi_installment,
+                                    ]);
+                                }
+
+                                $invoice=$item->invoice;
+                                $invoice->delete();
+                            }
+                        }
+                        else if ($item->type == 'reserve_introduction' || $item->type == 'reserve')
+                        {
+                            if($item->type == 'reserve_introduction')
+                            {
+                                $duration = 1;
+                            }
+                            else
+                            {
+                                $duration=2;
+                            }
+                            dd($item->coach_reserve);
+
+                            $reserve=reserve::create([
+                                'user_id'       =>Auth::user()->id,
+                                'duration_booking'  =>$duration,
+                                'fi'                =>$User->coach->fi,
+                                'off'               =>$off,
+                                'type_discount'     =>$type_discount,
+                                'coupon'            =>$coupon,
+                                'final_off'         =>$fi_final,
+                            ]);
+
+
+
                             $reserve=reserve::where('id','=',$item->product_id)
                                             ->first();
                             $reserve->update(
@@ -385,17 +445,176 @@ class CheckoutController extends BaseController
                                 ->with('alert',$alert);
 
                         }
+                        else if($item->type=='product')
+                        {
+                            $status=Purchase::create([
+                                'user_id'    =>Auth::user()->id,
+                                'product_id' =>$item->product_id,
+                                'type'       =>'product',
+                                'checkout_id'=>$item->id,
+                                'date_fa'    =>$this->dateNow,
+                                'time_fa'    =>$this->timeNow,
+                            ]);
+
+                            $msg="خرید دوره با موفقیت انجام شد\n فراکوچ";
+                            $this->sendSms(Auth::user()->tel,$msg);
+                            $msg=Auth::user()->fname.' '.Auth::user()->lname.' محصول خریداری کرد ';
+                            $this->sendSms('09153159020',$msg);
+
+
+                        }
+                        else if($item->type=='scholarship_payment')
+                        {
+                            $status=student::create(
+                                [
+                                    'user_id'       =>Auth::user()->id,
+                                    'course_id'     =>$item->product_id,
+                                    'date_fa'       =>$this->dateNow,
+                                    'time_fa'       =>$this->timeNow,
+                                ]
+                            );
+
+                            $v=verta();
+                            if($item->schoalrshipPayment->type_payment==0)
+                            {
+                                $v=$v->addMonths(1);
+                                $Date=$v->format('Y/m/d');
+                                faktor::create(
+                                    [
+                                        'user_id'           =>Auth::user()->id,
+                                        'checkout_id'       =>$item->id,
+                                        'product_id'        =>$item->product_id,
+                                        'type'              =>'course',
+                                        'date_createfaktor' =>$this->dateNow,
+                                        'date_faktor'       =>$Date,
+                                        'fi'                =>$item->schoalrshipPayment->remaining,
+                                    ]);
+                            }
+                            elseif($item->schoalrshipPayment->type_payment==1)
+                            {
+                                for ($i=1;$i<=2;$i++)
+                                {
+                                    $v=$v->addMonths(1);
+                                    $Date=$v->format('Y/m/d');
+                                    faktor::create(
+                                        [
+                                            'user_id'           =>Auth::user()->id,
+                                            'checkout_id'       =>$item->id,
+                                            'product_id'        =>$item->product_id,
+                                            'type'              =>'course',
+                                            'date_createfaktor' =>$this->dateNow,
+                                            'date_faktor'       =>$Date,
+                                            'fi'                =>($item->schoalrshipPayment->remaining)/2,
+                                        ]);
+                                }
+                            }
+                            elseif($item->schoalrshipPayment->type_payment==2)
+                            {
+                                for ($i=1;$i<=5;$i++)
+                                {
+                                    $v=$v->addMonths(1);
+                                    $Date=$v->format('Y/m/d');
+                                    faktor::create(
+                                        [
+                                            'user_id'           =>Auth::user()->id,
+                                            'checkout_id'       =>$item->id,
+                                            'product_id'        =>$item->product_id,
+                                            'type'              =>'course',
+                                            'date_createfaktor' =>$this->dateNow,
+                                            'date_faktor'       =>$Date,
+                                            'fi'                =>($item->schoalrshipPayment->remaining)/5,
+                                        ]);
+                                }
+                            }
+
+
+                            $scholarship=$item->user->scholarship;
+                            $scholarship->financial=$Authority;
+                            $scholarship->save();
+                            $course=course::where('id','=',$item->product_id)
+                                        ->first();
+
+                            $student=student::where('course_id','=',$item->product_id)
+                                        ->count();
+                            $msg=$item->user->fname.' '.$item->user->lname."\n"."دوره:".$course->course."\n نفر:$student ";
+                            $this->sendSms("09153159020",$msg);
+                            $this->sendSms("09198906540",$msg);
+                            if(!is_null($item->user->get_followbyExpert))
+                            {
+                                $this->sendSms($item->user->get_followbyExpert->tel,$msg);
+                            }
+
+                        }
+                        else if($item->type=='wallet')
+                        {
+                            if(is_null(Auth::user()->wallet))
+                            {
+                                $wallet=wallet::create([
+                                    'user_id'   =>Auth::user()->id,
+                                    'amount'    =>$item->price
+                                ]);
+                            }
+                            else
+                            {
+                                Auth::user()->wallet->amount=Auth::user()->wallet->amount+$item->price;
+                                Auth::user()->wallet->save();
+                                $wallet=Auth::user()->wallet;
+                            }
+
+                            wallet_transaction::create([
+                                    'wallet_id'     =>$wallet->id,
+                                    'user_id'       =>Auth::user()->id,
+                                    'amount'        =>$item->price,
+                                    'inventory'     =>($wallet->amount),
+                                    'type'          =>'شارژ کیف',
+                                    'description'   =>"کیف پول به مبلغ ".$item->price." شارژ شد ",
+                                    'date_fa'       =>$this->dateNow,
+                                    'time_fa'       =>$this->timeNow,
+                                    'authority'     =>$item->authority,
+                                    'status'        =>1,
+                                    'checkout_id'   =>$item->id,
+                            ]);
+                            alert()->success('کیف پول با موفقیت شارژ شد')->persistent('بستن');
+                            return redirect('/panel/wallet')
+                                ->with('msg',$msg);
+                        }
+                        else if($item->type=='booking_introduction')
+                        {
+                            for ($i=1;$i<=$item->order->capacity;$i++)
+                            {
+                                $clinic_reserve=clinic_reserve::create([
+                                    'user_id'       =>Auth::user()->id,
+                                    'coach_id'      =>$item->product_id,
+                                    'type'          =>2, //جلسات معارفه
+                                    'checkout_id'   =>$item->id,
+                                ]);
+
+
+                            }
+
+                            if($clinic_reserve)
+                            {
+                                alert()->success('رزرو جلسه معارفه با موفقیت انجام شد')->persistent('بستن');
+                            }
+                            else
+                            {
+                                alert()->error('خطا در ثبت رزرو')->persistent('بستن');
+                            }
+
+
+                        }
+
                     }
 
-                    cart::where('user_id','=',Auth::user()->id)
-                                    ->delete();
+
 
 
                     $msg='<p>پرداخت با موفقیت انجام شد</p><p>شماره پیگیری: '.$item->authority.'</p>';
                     $alert='success';
                     return view('callBackCheckout')
-                                ->with('msg',$msg)
-                                ->with('alert',$alert);
+                        ->with('msg',$msg)
+                        ->with('alert',$alert);
+
 
                 }
                 else
@@ -403,6 +622,7 @@ class CheckoutController extends BaseController
                     foreach ($checkout as $item) {
                         $item->description = 'خطا در انجام عملیات';
                         $item->save();
+
                     }
                     $msg='<p>خطا در انجام عملیات</p>';
                     $alert='danger';
@@ -452,30 +672,255 @@ class CheckoutController extends BaseController
         }
         else
         {
-            $order = new zarinpal();
-            $res = $order->pay($faktor->fi, Auth::user()->email, Auth::user()->tel,'پرداخت قسط');
-            $status=checkout::create([
-                'user_id'       =>Auth::user()->id,
-                //شماره آیدی فاکتور بجای order_id در اقساط ساب میشود
-                'order_id'      =>$faktor->id,
-                'product_id'    =>$faktor->product_id,
-                'price'         =>$faktor->fi,
-                'type'          =>'ghest',
-                'authority'     =>$res,
-                'description'   =>'انتقال به درگاه',
-            ]);
-
-            if($status)
+            if($request->has('wallet'))
             {
-                return redirect('https://www.zarinpal.com/pg/StartPay/' . $res);
+                if(is_null(Auth::user()->wallet))
+                {
+                    $wallet_amount=0;
+                }
+                else
+                {
+                    $wallet_amount=(Auth::user()->wallet->amount);
+                }
+
+
+
+                $faktor=faktor::where('id','=',$request->faktor_id)
+                                    ->where('user_id','=',Auth::user()->id)
+                                    ->first();
+                if(is_null($faktor))
+                {
+                    $msg='<p>خطا در بروزرسانی فاکتور اقساط</p>';
+                    $alert='danger';
+                    alert()->error('خطا در بروزرسانی فاکتور اقساط')->persistent('بستن');
+
+                    return back()
+                        ->with('msg',$msg)
+                        ->with('alert',$alert);
+                }
+                else
+                {
+
+                    if($wallet_amount<$faktor->fi)
+                    {
+                        alert()->error('موجودی کیف پول از مبلغ فاکتور کمتراست')->persistent('بستن');
+                        return back();
+                    }
+                    else
+                    {
+                        $authority=time();
+                        $checkout=checkout::create([
+                            'price'      =>$faktor->fi,
+                            'type'       =>'wallet',
+                            'authority'  =>$authority,
+                            'description'=>'خرید انجام شد',
+                            'status'     =>1,
+                        ]);
+
+
+                        $wallet_transaction=wallet_transaction::create([
+                            'wallet_id'     =>Auth::user()->wallet->id,
+                            'user_id'       =>Auth::user()->id,
+                            'amount'        =>$faktor->fi,
+                            'inventory'     =>(Auth::user()->wallet->amount-$faktor->fi),
+                            'type'          =>'پرداخت فاکتور',
+                            'checkout_id'   =>$checkout->id,
+                            'description'   =>'پرداخت فاکتور به شماره'.$faktor->id,
+                            'date_fa'       =>$this->dateNow,
+                            'time_fa'       =>$this->timeNow,
+                            'authority'     =>$authority,
+                            'status'        =>0,
+                        ]);
+
+                        Auth::user()->wallet->amount=Auth::user()->wallet->amount-$faktor->fi;
+                        Auth::user()->wallet->update();
+
+
+                        $faktor->description='پرداخت شده';
+                        $faktor->date_pardakht=$this->dateNow;
+                        $faktor->time_pardakht=$this->timeNow;
+                        $faktor->checkout_id_pardakht=$checkout->id;
+                        $faktor->status=1;
+                        $faktor->save();
+                    }
+
+                    $msg='<p>پرداخت با موفقیت انجام شد</p><p>شماره پیگیری: '.$checkout->authority.'</p>';
+                    $alert='success';
+
+                    alert()->success('فاکتور با مبلغ '.$faktor->fi.' پرداخت شد ')->persistent('بستن');
+                    return back()
+                        ->with('msg',$msg)
+                        ->with('alert',$alert);
+                }
+
+
+
             }
             else
             {
-                alert()->error('خطا در پرداخت فاکتور اقساط')->persistent('بستن');
-                return redirect('/');
+                $order = new zarinpal();
+                $res = $order->pay($faktor->fi, Auth::user()->email, Auth::user()->tel,'پرداخت قسط');
+                $status=checkout::create([
+                    'user_id'       =>Auth::user()->id,
+                    //شماره آیدی فاکتور بجای order_id در اقساط ساب میشود
+                    'order_id'      =>$faktor->id,
+                    'product_id'    =>$faktor->product_id,
+                    'price'         =>$faktor->fi,
+                    'type'          =>'ghest',
+                    'authority'     =>$res,
+                    'description'   =>'انتقال به درگاه',
+                ]);
+
+                if($status)
+                {
+                    return redirect('https://www.zarinpal.com/pg/StartPay/' . $res);
+                }
+                else
+                {
+                    alert()->error('خطا در پرداخت فاکتور اقساط')->persistent('بستن');
+                    return redirect('/');
+                }
+            }
+
+        }
+    }
+
+    //پرداخت ییش فاکتور
+    public function storeInvoice(invoice $invoice,Request $request)
+    {
+        if(Auth::user()->id==$invoice->user_id) {
+            if($request->has('wallet'))
+            {
+                if(is_null(Auth::user()->wallet))
+                {
+                    $wallet_amount=0;
+                }
+                else
+                {
+                    $wallet_amount=(Auth::user()->wallet->amount);
+                }
+
+
+
+
+                if(is_null($invoice))
+                {
+                    $msg='<p>خطا در بروزرسانی پیش فاکتور</p>';
+                    $alert='danger';
+                    alert()->error('خطا در بروزرسانی پیش فاکتور ')->persistent('بستن');
+
+                    return back()
+                        ->with('msg',$msg)
+                        ->with('alert',$alert);
+                }
+                else
+                {
+
+                    if($wallet_amount<$invoice->pre_payment)
+                    {
+                        alert()->error('موجودی کیف پول از مبلغ پیش فاکتور کمتراست')->persistent('بستن');
+                        return back();
+                    }
+                    else
+                    {
+                        $authority=time();
+                        $checkout=checkout::create([
+                            'price'      =>$invoice->pre_payment,
+                            'type'       =>'wallet',
+                            'authority'  =>$authority,
+                            'description'=>'خرید انجام شد',
+                            'status'     =>1,
+                        ]);
+
+
+                        $wallet_transaction=wallet_transaction::create([
+                            'wallet_id'     =>Auth::user()->wallet->id,
+                            'user_id'       =>Auth::user()->id,
+                            'amount'        =>$invoice->pre_payment,
+                            'inventory'     =>(Auth::user()->wallet->amount-$invoice->pre_payment),
+                            'type'          =>'پرداخت پیش فاکتور',
+                            'checkout_id'   =>$checkout->id,
+                            'description'   =>'پرداخت پیش فاکتور به شماره'.$invoice->id,
+                            'date_fa'       =>$this->dateNow,
+                            'time_fa'       =>$this->timeNow,
+                            'authority'     =>$authority,
+                            'status'        =>0,
+                        ]);
+
+                        Auth::user()->wallet->amount=Auth::user()->wallet->amount-$invoice->pre_payment;
+                        Auth::user()->wallet->update();
+
+                        $status=student::create(
+                            [
+                                'user_id'       =>Auth::user()->id,
+                                'course_id'     =>$invoice->course_id,
+                                'date_fa'       =>$this->dateNow,
+                                'time_fa'       =>$this->timeNow,
+                            ]
+                        );
+
+                        if(!is_null($invoice->count_installment))
+                        {
+                            $v=verta();
+                            for ($i=0;$i<$invoice->count_installment;$i++)
+                            {
+
+                                $v=$v->addMonths(1);
+                                $Date=$v->format('Y/m/d');
+                                faktor::create([
+                                    'user_id'           =>Auth::user()->id,
+                                    'checkout_id'       =>$checkout->id,
+                                    'product_id'        =>$invoice->course_id,
+                                    'type'              =>'course',
+                                    'date_createfaktor' =>$this->dateNow,
+                                    'date_faktor'       =>$Date,
+                                    'fi'                =>$invoice->fi_installment,
+                                ]);
+                            }
+                        }
+
+                        $invoice->status=1;
+                        $invoice->delete();
+
+
+                    }
+
+                    $msg='<p>پرداخت با موفقیت انجام شد</p><p>شماره پیگیری: '.$checkout->authority.'</p>';
+                    $alert='success';
+
+                    alert()->success('فاکتور با مبلغ '.number_format($invoice->pre_payment) .' پرداخت شد ')->persistent('بستن');
+                    return back()
+                        ->with('msg',$msg)
+                        ->with('alert',$alert);
+                }
+            }
+            else
+            {
+                $order = new zarinpal();
+                $res = $order->pay($invoice->pre_payment, Auth::user()->email, Auth::user()->tel, 'پرداخت پیش فاکتور');
+                $status = checkout::create([
+                    'user_id' => Auth::user()->id,
+                    'order_id' => $invoice->id,
+                    'product_id' => $invoice->course_id,
+                    'price' => $invoice->pre_payment,
+                    'type' => 'invoice',
+                    'authority' => $res,
+                    'description' => 'انتقال به درگاه',
+                ]);
+
+                if ($status) {
+                    return redirect('https://www.zarinpal.com/pg/StartPay/' . $res);
+                } else {
+                    alert()->error('خطا در پرداخت فاکتور اقساط')->persistent('بستن');
+                    return redirect('/');
+                }
             }
         }
-
+        else
+        {
+            alert()->error('فاکتور مربوط به شما نمیباشد')->persistent('بستن');
+            return back();
+        }
     }
 
 

@@ -199,6 +199,7 @@ class AnswerlineController extends Controller
     public function answerLine()
     {
         $response=$this->client->request('GET','receive.json?linenumber=10004002002020&isread=0');
+
         $response=json_decode($response->getBody()->getContents())->entries;
         if(!is_null($response)) {
             foreach ($response as $item) {
@@ -222,7 +223,7 @@ class AnswerlineController extends Controller
                         $user->type = $answerLine->user_type;
                         $user->save();
                         $v = verta();
-                        $tomorrow = $v->addDays(1);
+                        $tomorrow = $v->addDays(2);
                         $status = followup::create([
                             'user_id'               => $user->id,
                             'insert_user_id'        => $user->id,

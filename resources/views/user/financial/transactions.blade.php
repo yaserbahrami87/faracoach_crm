@@ -1,4 +1,4 @@
-@extends('admin.master.index')
+@extends('user.master.index')
 
 @section('headerScript')
     <link href="{{asset('/dashboard/assets/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />

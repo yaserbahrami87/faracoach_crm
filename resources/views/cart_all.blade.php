@@ -18,11 +18,8 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @php
-                                $sum_fi=0;
-                                $sum_final_off=0;
-                            @endphp
                             @foreach($cart as $item)
+
                                 <tr>
                                     <td class="col-sm-8 col-md-6">
                                         {{$item->product}}
@@ -38,10 +35,8 @@
                                     <td class="col-sm-1 col-md-1 text-center">
                                         <strong>{{number_format($item->final_off)}}</strong>
                                     </td>
-                                    @php
-                                        $sum_fi=$sum_fi+$item->fi;
-                                        $sum_final_off=$sum_final_off+$item->final_off;
-                                    @endphp
+
+
                                     <td class="col-sm-1 col-md-1">
                                         <form method="get" action="/cart/{{$item->id}}" onsubmit="return confirm('آیا از حذف زمان مطمئن هستید؟');">
                                             {{csrf_field()}}
@@ -57,14 +52,14 @@
                             <tr>
                                 <td colspan="3">   </td>
                                 <td><span>جمع قیمت</span></td>
-                                <td class="text-right"><h5><strong> {{number_format($sum_fi)}}</strong></h5></td>
+                                <td class="text-right"><h5><strong> {{number_format($item->final_off)}}</strong></h5></td>
                             </tr>
                             <tr>
                                 <td colspan="3">   </td>
                                 <td><span>قیمت نهایی</span></td>
                                 <td class="text-right">
                                     <h5>
-                                        <strong>{{number_format($sum_final_off)}}</strong>
+                                        <strong>{{number_format($item->final_off)}}</strong>
                                     </h5>
                                 </td>
                             </tr>
@@ -123,19 +118,33 @@
                                 </div>
 
                             </div>
+                            @if($cart[0]->type!='product')
+                                <div class="form-check mb-5">
+                                    <input class="form-check-input payment" type="radio" name="payment_type"  id="payment2" value="اقساط" />
+                                    <label class="form-check-label font-weight-bold" for="payment2" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">
+                                        <img src="{{asset('/images/payment2.png')}}" width="50px" />
+                                        پرداخت اقساط
+                                    </label>
+
+                                    <div class="collapse" id="collapseExample2">
+                                        <p>در صورت پرداخت نقدی میزان {{$cart[0]->peymant_off}}% تخفیف اعمال خواهد شد </p>
+                                    </div>
+                                </div>
+                            @endif
                             <div class="form-check mb-5">
-                                <input class="form-check-input payment" type="radio" name="payment_type"  id="payment2" value="اقساط" />
-                                <label class="form-check-label font-weight-bold" for="payment2" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">
-                                    <img src="{{asset('/images/payment2.png')}}" width="50px" />
-                                    پرداخت اقساط
+                                <input class="form-check-input payment" type="radio" name="payment_type"  id="payment3" value="wallet" />
+                                <label class="form-check-label font-weight-bold" for="payment3" data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample3">
+                                    <img src="{{asset('/images/wallet.png')}}" width="50px" />
+                                    کیف پول
                                 </label>
 
-                                <div class="collapse" id="collapseExample2">
+                                <div class="collapse" id="collapseExample3">
                                     <p>در صورت پرداخت نقدی میزان {{$cart[0]->peymant_off}}% تخفیف اعمال خواهد شد </p>
                                 </div>
                             </div>
 
                             <div class="collapse" id="payment_ghest">
+
 
                             </div>
                             <input type="submit" class="btn btn-success" id="btn_payment" value="ثبت و پرداخت نهایی">

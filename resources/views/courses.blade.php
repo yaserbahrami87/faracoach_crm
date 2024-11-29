@@ -33,7 +33,7 @@
                             <div class="col-12 col-sm-6 col-md-3 col-lg-3 col-xl-3 mb-5">
                                 <div class="card h-100">
                                     <!-- Product image-->
-                                    <img class="card-img-top" src="{{asset('/documents/'.$item->image)}}" alt="{{$item->shortlink}}" style="height: 200px"/>
+                                    <img class="card-img-top" src="{{asset('/documents/'.$item->image)}}" alt="{{$item->shortlink}}" style="height: 300px"/>
                                     <!-- Product details-->
                                     <div class="card-body p-4">
                                         <div class="text-center">

@@ -1,5 +1,7 @@
 @extends('master.index')
 @section('headerscript')
+
+
     <style>
         #img-403 {
             max-width:80%;

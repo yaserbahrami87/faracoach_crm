@@ -37,6 +37,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+
         $this->middleware('guest')->except('logout');
         $this->redirectTo = url()->previous();
     }
@@ -56,6 +57,8 @@ class LoginController extends Controller
 //          if(is_numeric($request->get('email'))){
 //            return ['tel'=>$request->get('email'),'password'=>$request->get('password')];
 //          }
+
+          $request->session()->put('complete_profile',true);
 
           if (filter_var($request->get('email'), FILTER_VALIDATE_EMAIL)) {
             return ['email' => $request->get('email'), 'password'=>$request->get('password')];

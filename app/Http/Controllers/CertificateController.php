@@ -3,10 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\certificate;
+use App\student;
 use App\User;
-use Barryvdh\DomPDF\Facade\Pdf;
+
+
+use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+
+use niklasravnsborg\LaravelPdf\Facades\Pdf;
+
 
 class CertificateController extends Controller
 {
@@ -17,7 +24,10 @@ class CertificateController extends Controller
      */
     public function index()
     {
+        $certificates=certificate::get();
 
+        return view('admin.Certificates.Certificates')
+                        ->with('certificates',$certificates);
     }
 
     /**
@@ -89,65 +99,45 @@ class CertificateController extends Controller
 
     public function get_certificate()
     {
-        if(Auth::user()->scholarship->confirm_exam==1 && Auth::user()->scholarship->confirm_webinar==1 )
-        {
 
+        if(Auth::user()->scholarship->confirm_exam==1  )
+        {
 
             if (is_null(Auth::user()->fname_en) || is_null(Auth::user()->lname_en)) {
                 alert()->error('نام و نام خانوادگی خود را به انگلیسی در پروفایل وارد کنید')->persistent('بستن');
                 return redirect('/panel/profile');
             }
 
+
             ini_set('max_execution_time', 0);
 
-//            $font=public_path('/fonts/BRUSHSCI.TTF');
-//
-//            $tmp="<!doctype html>
-//<html lang='fa'>
-//<head>
-//    <meta charset='UTF-8'>
-//    <link href='".public_path('/css/reset.css')." ' rel='stylesheet' />
-//    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Sofia'>
-//    <style>
-//
-//        .cls_pdf{
-//            background-image: url('".public_path('/images/blank-certificates/ICF_Scholarship.jpg')."');
-//            width: 100%;
-//            height: 100%;
-//            background-size: 100% 100%;
-//
-//        }
-//
-//        .tag_h1
-//        {
-//            position: relative;
-//            text-align: center;
-//            font-size: 160px;
-//            color: #000000;
-//            top: 1100px;
-//            text-transform: capitalize;
-//            font-family:'Sofia' !important;
-//        }
-//
-//
-//    </style>
-//</head>
-//<body>
-//<div class='cls_pdf'>
-//        <p>GOLNAZ GOLESTAni</p>
-//        <h1 class='tag_h1' style='font-size: 120px'>ALI Jafarkhani</h1>
-//</div>
-//</body>
-//</html>
-//";
 
 
 
-        Pdf::setOption(['dpi' => 300])->loadView('user.blank-certificates.icf_scholarship')->setPaper('a4', 'landscape')->save(Auth::user()->id.'.pdf');
-//            Pdf::setOption(['dpi' => 300, 'fontDir' => storage_path('/fonts'), 'font_cache' => storage_path('/fontsCache')])->loadHTML($tmp)->setPaper('a4', 'landscape')->save(Auth::user()->id . '.pdf');
-            return response()->download(public_path(Auth::user()->id.'.pdf'))
-                        ->deleteFileAfterSend(true);
-//            return view('user.blank-certificates.icf_scholarship');
+            $pdf=Pdf::loadView('user.blank-certificates.icf_scholarship', [],[],[
+                'format'    =>[900,655],
+
+            ]);
+
+
+
+            $fileName=time().'_.pdf';
+
+            $pdf->allow_charset_conversion=false;  // Set by default to TRUE
+
+
+            $pdf->charset_in='UTF-8';
+
+            $pdf->save($fileName);
+
+            return response()->download(public_path($fileName))
+                ->deleteFileAfterSend(true);
+
+
+
+
+
+
         }
         else
         {
@@ -255,4 +245,280 @@ class CertificateController extends Controller
         return view('user.blank-certificates.icf_scholarship');
 
     }
+
+    public function get_certificate_acsth(student $student)
+    {
+
+        $date_jalali=(Verta::parse(str_replace('/','-',$student->date_gratudate).' 00:00:00')->datetime()->format('Y/n/j'));
+        $student->date_jalali=$date_jalali;
+        if(is_null($student->user->fname_en)||is_null($student->user->lname_en))
+        {
+            alert()->error('نام و نام خانوادگی را به انگلیسی در پروفایل وارد کنید')->persistent('بستن');
+            return redirect('/panel/profile');
+        }
+
+        ini_set('max_execution_time', 0);
+
+
+
+
+        $pdf=Pdf::loadView('admin.blank-certificates.acsth', array('student' => $student),[],[
+            'format'    =>[900,655],
+            'dpi'       =>300
+
+        ]);
+
+
+
+        $fileName=time().'_.pdf';
+
+        $pdf->allow_charset_conversion=false;  // Set by default to TRUE
+
+
+        $pdf->charset_in='UTF-8';
+
+        $pdf->save($fileName);
+
+        return response()->download(public_path($fileName))
+                         ->deleteFileAfterSend(true);
+
+    }
+
+    public function get_fcc(student $student)
+    {
+
+//        if(is_null($student->user->instagram))
+//        {
+//            alert()->error(' اینستاگرام را به انگلیسی در پروفایل وارد کنید')->persistent('بستن');
+//            return redirect('/panel/profile');
+//        }
+        $customPaper = array(0,0,300,312);
+
+        ini_set('max_execution_time', 0);
+//
+//        Pdf::setOption([
+//            'dpi'                   => 300,
+////            'fontDir'               =>public_path('fonts/'),
+////            'defaultFont'           =>'Britannic Bold',
+//            'isRemoteEnabled'          =>false,
+//
+//        ])
+//            ->loadView('admin.blank-certificates.fcc_blank', array('student' => $student))
+//            ->setPaper($customPaper, 'landscape')
+//            ->save($student->id.'.pdf');
+        $data=[
+            'student' => $student
+        ];
+
+        $pdf=Pdf::loadView('admin.blank-certificates.fcc_blank',$data,[],[
+            'format'    =>[280,280],
+
+        ]);
+
+        $fileName=time().'_.pdf';
+
+        $pdf->allow_charset_conversion=false;  // Set by default to TRUE
+
+
+        $pdf->charset_in='UTF-8';
+        $pdf->format='A5-L';
+
+        $pdf->save($fileName);
+
+
+//        return view('admin.blank-certificates.fcc_blank')
+//                        ->with('student',$student);
+        return response()->download(public_path($fileName))
+            ->deleteFileAfterSend(true);
+
+
+
+    }
+
+    public function get_fc1byAdmin(student $student)
+    {
+
+        $date_jalali=(Verta::parse(str_replace('/','-',$student->date_gratudate).' 00:00:00')->datetime()->format('Y/n/j'));
+        $student->date_jalali=$date_jalali;
+        if(is_null($student->user->fname_en)||is_null($student->user->lname_en))
+        {
+            alert()->error('نام و نام خانوادگی را به انگلیسی در پروفایل وارد کنید')->persistent('بستن');
+            return redirect('/panel/profile');
+        }
+
+        ini_set('max_execution_time', 0);
+
+
+
+
+        $pdf=Pdf::loadView('admin.blank-certificates.FC1_logo', array('student' => $student),[],[
+            'format'    =>[900,655],
+
+        ]);
+
+
+
+        $fileName=time().'_.pdf';
+
+        $pdf->allow_charset_conversion=false;  // Set by default to TRUE
+
+
+        $pdf->charset_in='UTF-8';
+
+        $pdf->save($fileName);
+
+        return response()->download(public_path($fileName))
+            ->deleteFileAfterSend(true);
+    }
+
+
+
+    public function attendance_certificate($user)
+    {
+        $user=User::where('id',$user)
+                    ->first();
+        if(!is_null($user))
+        {
+            ini_set('max_execution_time', 0);
+            $pdf=Pdf::loadView('admin.blank-certificates.attendance_certificate', array('student' => $user),[],[
+                'format'    =>[900,655],
+
+            ]);
+            $fileName=time().'_.pdf';
+
+//            $pdf->allow_charset_conversion=false;  // Set by default to TRUE
+
+
+            //$pdf->charset_in='UTF-8';
+
+            $pdf->save($fileName);
+
+            return response()->download(public_path($fileName))
+                             ->deleteFileAfterSend(true);
+        }
+        else
+        {
+            alert()->error('کاربر مورد نظر یافت نشد')->persistent('بستن');
+        }
+    }
+
+    public function get_ambassador()
+    {
+
+        if(!is_null(Auth::user()->fname)||!is_null(Auth::user()->lname)  )
+        {
+
+            ini_set('max_execution_time', 0);
+
+
+
+
+            $pdf=Pdf::loadView('user.blank-certificates.ambassador', [],[],[
+                'format'    =>[285,510],
+
+            ]);
+
+
+
+            $fileName=time().'_.pdf';
+
+            $pdf->allow_charset_conversion=false;  // Set by default to TRUE
+
+
+            $pdf->charset_in='UTF-8';
+
+            $pdf->save($fileName);
+
+            return response()->download(public_path($fileName))
+                ->deleteFileAfterSend(true);
+
+
+
+
+
+
+        }
+        else
+        {
+            alert()->error('لطفا نام و نام خانوادگی خود را وارد کنید')->persistent('بستن');
+            return back();
+        }
+
+    }
+
+    public function certificates_all()
+    {
+         return view('user.certificates.certificates-all');
+    }
+
+
+    public function get_certificate_CCE_2hours()
+    {
+
+        if(Auth::user()->sch2024->confirm_exam==1  )
+        {
+
+            if (is_null(Auth::user()->fname_en) || is_null(Auth::user()->lname_en)) {
+                alert()->error('نام و نام خانوادگی خود را به انگلیسی در پروفایل وارد کنید')->persistent('بستن');
+                return redirect('/panel/profile');
+            }
+
+
+            ini_set('max_execution_time', 0);
+
+
+
+
+            $pdf=Pdf::loadView('user.blank-certificates.CCE_2Hours', [],[],[
+                'format'    =>[900,655],
+
+            ]);
+
+
+
+            $fileName=time().'_.pdf';
+
+            $pdf->allow_charset_conversion=false;  // Set by default to TRUE
+
+
+            $pdf->charset_in='UTF-8';
+
+            $pdf->save($fileName);
+
+            return response()->download(public_path($fileName))
+                ->deleteFileAfterSend(true);
+        }
+        else
+        {
+            alert()->error('برای شما مدرکی صادر نشده است')->persistent('بستن');
+            return back();
+        }
+
+    }
+
+
+    public function ambassador_new()
+    {
+        if(!is_null(Auth::user()->fname)||!is_null(Auth::user()->lname)  )
+        {
+            ini_set('max_execution_time', 0);
+            $pdf=Pdf::loadView('user.blank-certificates.Ambassador_certificate', [],[],[
+                'format'    =>[285,510],
+
+            ]);
+            $fileName=time().'_.pdf';
+            $pdf->allow_charset_conversion=false;  // Set by default to TRUE
+            $pdf->charset_in='UTF-8';
+            $pdf->save($fileName);
+            return response()->download(public_path($fileName))
+                ->deleteFileAfterSend(true);
+        }
+        else
+        {
+            alert()->error('لطفا نام و نام خانوادگی خود را وارد کنید')->persistent('بستن');
+            return back();
+        }
+    }
+
+
 }

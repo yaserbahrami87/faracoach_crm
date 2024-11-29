@@ -110,8 +110,9 @@
         $('#tel').change(function()
         {
 
-            document.querySelector("#tel_org_login").value=intl.getNumber();
-            console.log(document.querySelector("#tel_org_login").value);
+            document.querySelectorAll("#tel_org_login")[1].value=intl.getNumber();
+
+            console.log(document.querySelectorAll("#tel_org_login")[1]);
 
         });
 

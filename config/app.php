@@ -161,10 +161,15 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        Hekmatinasser\Verta\VertaServiceProvider::class,
+        Hekmatinasser\Verta\Laravel\VertaServiceProvider::class,
         Anetwork\Validation\PersianValidationServiceProvider::class,
         Kavenegar\Laravel\ServiceProvider::class,
         UxWeb\SweetAlert\SweetAlertServiceProvider::class,
+        Jorenvh\Share\Providers\ShareServiceProvider::class,
+
+
+
+
 
 
 
@@ -183,6 +188,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        App\Providers\JalaliDateServiceProvider::class,
+//        App\Providers\ScoreProvider::class,
+
 
     ],
 
@@ -235,11 +243,17 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Verta' => Hekmatinasser\Verta\Verta::class,
+        'Verta' => Hekmatinasser\Verta\Laravel\VertaServiceProvider::class,
         'FastExcel' => Rap2hpoutre\FastExcel\Facades\FastExcel::class,
         'Kavenegar' => Kavenegar\Laravel\Facade::class,
         'Alert' => UxWeb\SweetAlert\SweetAlert::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'Share' => Jorenvh\Share\ShareFacade::class,
+        'JalaliDate'=>App\Services\JalaliDate::class,
+        'Score'=>App\Services\ScoreService::class,
+
+
+
     ],
 
 ];

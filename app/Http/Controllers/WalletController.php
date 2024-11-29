@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\wallet;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class WalletController extends Controller
 {
@@ -14,7 +15,7 @@ class WalletController extends Controller
      */
     public function index()
     {
-        //
+        return view('user.financial.wallet.wallet');
     }
 
     /**
@@ -35,7 +36,28 @@ class WalletController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $this->validate($request,[
+            'amount'    =>'required|numeric',
+        ]);
+
+        if(is_null(Auth::user()->wallet))
+        {
+            $wallet=wallet::create($request->all()+[
+                    'user_id'   =>Auth::user()->id,
+                ]);
+            alert()->success('مبلغ با موفیت به کیف پول اضافه شد')->persistent('بستن');
+        }
+        else
+        {
+            $wallet=Auth::user()->wallet;
+            $wallet->amount=$wallet->amount+$request->amount;
+            $wallet->save();
+
+        }
+
+        return back();
+
     }
 
     /**

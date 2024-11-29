@@ -29,8 +29,6 @@ class HomeController extends BaseController
      */
     public function index()
     {
-        //redirect to LOGIN
-        return redirect('/panel');
 
         $posts=$this->get_post(NULL,1,'limit');
         if(Auth::check())
@@ -41,12 +39,9 @@ class HomeController extends BaseController
         {
             $tweets=$this->get_tweet(NULL,[1],'paginate');
         }
-
-
         foreach ($posts as $item)
         {
             $item->time=$this->diff($item->created_at_post,'Asia/Tehran');
-
         }
 
         foreach ($tweets as $item)
@@ -71,12 +66,10 @@ class HomeController extends BaseController
             ->get();
 
         //آخرین کوچ های فعال
-        $last_coaches=User::join('coaches','users.id','=','coaches.user_id')
-                //->wherenotin('users.type',['2','3','4'])
-                ->where('users.status_coach','=',1)
-                ->orderby('users.last_login_at','desc')
-                ->limit(12)
-                ->get();
+        $last_coaches=User::where('status_coach','=',1)
+                    ->orderby('last_login_at','desc')
+                    ->limit(12)
+                    ->get();
 
 
         //متولدین ای ماه
@@ -105,7 +98,9 @@ class HomeController extends BaseController
         $courses=course::where('start','>',$this->dateNow)
             ->where('id','<>',3)
             ->where('id','<>',15)
-            ->paginate(20);
+            ->where('id','<>',65)
+            ->limit(5)
+            ->get();
 
 
         return view('home')

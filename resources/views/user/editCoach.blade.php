@@ -110,7 +110,7 @@
                         <label for="certificates">گواهینامه ها *</label>
                         <textarea class="form-control textarea  @error('certificates') is-invalid @enderror " name="certificates" id="certificates" rows="3">{{old('certificates',$coach->certificates)}}</textarea>
                         <div id="btn">
-                            <button type=" " class="btn btn-primary btn-sm" >مشاهده گواهینامه</button>
+                            <!-- <button type=" " class="btn btn-primary btn-sm" >مشاهده گواهینامه</button> -->
                         </div>
                     </div>
                     <div class="form-group">
@@ -233,7 +233,7 @@
                 ['formatting'],
                 ['strong', 'em', 'del'],
                 ['superscript', 'subscript'],
-                //['link'],
+                ['link'],
                 ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
                 ['unorderedList', 'orderedList'],
                 ['horizontalRule'],

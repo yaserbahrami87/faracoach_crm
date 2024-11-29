@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\course;
+use App\Http\Requests\StudentRequest;
 use App\student;
 use App\User;
 use Illuminate\Http\Request;
@@ -16,13 +18,7 @@ class StudentController extends BaseController
     public function index()
     {
 
-        $students=User::join('followups','users.id','=','followups.user_id')
-            ->join('courses','followups.course_id','=','courses.id')
-            ->where('followups.status_followups','=','20')
-            ->select('users.*','courses.course')
-            ->orderby('followups.id','desc')
-            ->groupby('followups.user_id')
-            ->paginate(32);
+        $students=student::get();
 
         $course=$this->get_courses();
 
@@ -51,14 +47,22 @@ class StudentController extends BaseController
     public function store(Request $request)
     {
 
+
+        //$data=$request->validated();
         $this->validate($request,[
-            'course_id' =>'required|numeric',
-            'user_id'   =>'required|numeric',
-            'date_fa'   =>'nullable|string',
-            'status'    =>'required|numeric',
+            'course_id'         =>'required|numeric',
+            'user_id'           =>'required|numeric',
+            'date_fa'           =>'nullable|string',
+            'status'            =>'required|numeric',
+            //'code'              =>'required|unique:students,code,' . $this->id,
+            //'code'              =>['required_if:status,==,3|unique:students,code|',Rule::unique('students')->ignore($this->student)],
+            'date_gratudate'    =>'required_if:status,==,3|max:11',
         ]);
-        $student=student::where('user_id','=',$request->user_id)
-                        ->where('course_id','=',$request->course_id)
+
+
+
+        $student=student::where('user_id','=',$request['user_id'])
+                        ->where('course_id','=',$request['course_id'])
                         ->first();
 
         if(is_null($student)) {
@@ -94,9 +98,13 @@ class StudentController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(student $student)
     {
-        //
+        $course=course::orderby('id','desc')
+                ->get();
+        return view('admin.education.course.courseEditStudent')
+                    ->with('course',$course)
+                    ->with('student',$student);
     }
 
     /**
@@ -106,20 +114,59 @@ class StudentController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, student $student)
     {
-        //
+
+        $this->validate($request,[
+            'course_id'         =>'required|numeric',
+            'user_id'           =>'required|numeric',
+            'date_fa'           =>'nullable|string',
+            'status'            =>'required|numeric',
+            'code'              =>'nullable|unique:students,code,' . $student->id,
+            'identify_code'     =>'nullable|unique:students,identify_code,' . $student->id,
+            'date_gratudate'    =>'nullable|max:11',
+            //'date_gratudate'    =>'required_if:status,==,3|max:11',
+        ]);
+
+
+
+        //$data=$request->validated();
+
+        $student->update($request->all());
+        $student->status=$request['status'];
+        $check=$student->save();
+
+        if($check)
+        {
+            alert()->success('وضعیت دانشجو با موفقیت تغییر کرد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در تغییر وضعیت دانشچو')->persistent('بستن');
+        }
+
+        return back();
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int  $student
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(student $student)
     {
-        //
+        $status=$student->delete();
+        if($status)
+        {
+            alert()->success('دانشجو با موفقیت از دوره حذف شد')->persistent('بستن');
+        }
+        else
+        {
+            alert()->error('خطا در حذف دانشجو')->persistent('بستن');
+        }
+        return back();
     }
 
     public function search(Request $request)
